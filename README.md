@@ -1,0 +1,2 @@
+# scalqa
+Scala Quick API
