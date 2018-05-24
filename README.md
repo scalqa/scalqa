@@ -1,4 +1,4 @@
 # scalqa
 Scala Quick API
 
-Work in progress...
+[Work in progress...](http://scalqa.org/doc/)
