@@ -2,7 +2,7 @@ package scalqa; package Pro; package O
 
 trait _Trait[+A] extends Pro[A] with Any.O {
 
-  def onChange(f: () => Any): Concurrent.Control
+  def onChange(f: () => Any): App.Event
 
   protected def onObservableChange(f: () => Any) = onChange(f)
 
@@ -10,15 +10,16 @@ trait _Trait[+A] extends Pro[A] with Any.O {
 
 object _Trait {
 
-  import scala.language.implicitConversions
+  implicit def zzLibrary[A](v: O[A]) = new _library._Class(v)
 
-  implicit def zzLibrary[A](v: O[A]) = new _library(v)
-
-  implicit def zzGet[A](v: \/.type): O[Opt[A]] = TheVoid
+  implicit def zzMake[A](v: \/): O[Opt[A]] = VoidOpt.asInstanceOf[O[Opt[A]]]
 
 }
 
-private object TheVoid extends Pro.O.The.Constant(Opt.Void) with Void
+private object VoidOpt extends O[Any] with Void {
+  def apply: Any = Opt.Void
+  def onChange(pf: () => Any) = \/
+}
 /*___________________________________________________________________________
      __________ ____   __   ______  ____
     /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
@@ -26,19 +27,19 @@ private object TheVoid extends Pro.O.The.Constant(Opt.Void) with Void
  /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
- * @trait _Trait -> '''Read Only Observable Property'''
+ * @trait _Trait -> `Read Only Observable Property`
  *
- * @def onChange -> On change subscription
+ * @def onChange(f: -> On change subscription
  *
  *     Adds listener function to the property change event
  *     {{{
- *         val pro = Pro.WO.get[String]("abc")
+ *         val pro = Pro.OM.make[String]("abc")
  *
  *          // event subscription
- *         pro.onChange(() => Print.ln("Change Detected"))
+ *         pro.onChange(() => "Change Detected".lp)
  *
  *         // library based event subscription
- *         pro.onValueChangeWithOld((v, old) => Print.ls("Value changed from", old, "to", v))
+ *         pro.onValueChangeWithOld((v, old) => "Value changed from " + old + " to " + v lp))
  *
  *         pro() = "xyz"
  *

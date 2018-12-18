@@ -1,12 +1,12 @@
 package scalqa; package Any; package O
 
-class _library[A <: O] protected[O] (protected val _target: A) extends AnyVal {
+class _library[A <: O] protected[O] (protected val _this: A) extends AnyVal {
 
-  def onObservableChange(f: () => Any): Concurrent.Control = _Trait.onObservableChange(_target, f)
+  def onObservableChange(f: () => Any): App.Event = _Trait.onObservableChange(_this, f)
 
-  def onObservableChangeRun(f: => Any): Concurrent.Control = _target.onObservableChange(() => f)
+  def onObservableChangeRun(f: => Any): App.Event = _this.onObservableChange(() => f)
 
-  def onObservableChangeSelf(f: A => Any): Concurrent.Control = _target.onObservableChange(() => f(_target))
+  def onObservableChangeSelf(f: A => Any): App.Event = _this.onObservableChange(() => f(_this))
 
 }
 

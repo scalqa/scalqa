@@ -4,28 +4,23 @@ class _Class[A] private[scalqa] (val real: java.lang.Class[A]) extends AnyVal {
 
   def name: String = real.getName
 
-  def label: String = name.copyBefore("$$anon$").remove("._Trait").remove("._Class").?(_ endsWith "$", _ copyShort 1)
-    .I.to[String](s => s.split('.').I.to(sa => if (sa.size >= 2 && sa.last == sa(sa.size - 2)) sa.raw.dropRight(1).all.format(".") else s))
+  def label: String = {
+    val s = { val s = name.copyBefore("$$anon$").remove("._Trait").remove("._Class"); if (s endsWith "$") s copyShort 1 else s }
+    val sa = s.split('.')
+    if (sa.size >= 2 && sa.last == sa(sa.size - 2)) sa.array.dropRight(1).all.format(".") else s
+  }
 
   def lastName: String = label.copyAfterLast(".")
 
-  def configRootOpt: Opt[J.File.Directory] = App.Pro.ConfigRootOpt().map(_.path + label.replace(".", "_") directoryMake)
-
-  def tag: Tag[A] = Tag.get(this).cast
-
-  def isValue = Any.Value.Class.isAssignableFrom(real)
+  def ilk: Ilk = Ilk.make(this)
 
   def isSingleton: Boolean = real.getSimpleName.endsWith("$")
-
-  def url(name: String): J.Url = real.getResource(name)
 
   override def toString = name
 
 }
 
 object _Class {
-
-  import scala.language.implicitConversions
 
   implicit def zzClass[A](v: java.lang.Class[A]) = new Class(v)
 
@@ -40,7 +35,7 @@ ___________________________________________________________________________*/
 /**
  * @class _Class ->
  *
- *   [[Any.Class]] is a thing wrapper around ''java.lang.Class'', providing same and improved functionality in Scalqa style.
+ *   [[Any.Class]] is a thing wrapper around `java.lang.Class`, providing same and improved functionality in Scalqa style.
  *
  *   If some methods are not included, they can be called directly with the handle 'real'
  *
@@ -58,9 +53,9 @@ ___________________________________________________________________________*/
  *
  *     Name left after last 'dot' separator in the full name
  *
- * @def tag -> Tag type of this class
+ * @def ilk -> Ilk of this class
  *
- *     See [[Tag]] for details
+ *     See [[Ilk]] for details
  *
  * @def isSingleton -> Checks if object
  *

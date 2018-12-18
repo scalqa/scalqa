@@ -2,15 +2,13 @@ package scalqa; package Any; package O
 
 trait _Trait {
 
-  protected def onObservableChange(on: () => Any): Concurrent.Control
+  protected def onObservableChange(on: () => Any): App.Event
 
 }
 
-object _Trait extends Able.Void.Companion[O](new O with Void { def onObservableChange(f: () => Any) = \/ }) {
+object _Trait extends Util.Void.Setup[O](new O with Void { def onObservableChange(f: () => Any) = \/ }) {
 
-  @inline private[O] def onObservableChange(o: O, f: () => Any): Concurrent.Control = o.onObservableChange(f)
-
-  import scala.language.implicitConversions
+  @inline private[O] def onObservableChange(o: O, f: () => Any): App.Event = o.onObservableChange(f)
 
   implicit def zzLibrary[A <: O](a: A) = new _library[A](a)
 
@@ -23,16 +21,18 @@ object _Trait extends Able.Void.Companion[O](new O with Void { def onObservableC
  /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
- * @trait _Trait -> '''Any Observable'''
+ * @trait _Trait -> `Any Observable`
  *
- *     ''Any Observable'' is the root interface of all observable types.
+ *     `Any Observable` is the root interface of all observable types.
  *
  *     Note: Its only method is protected, but can be accessed through the 'library'
  *
  *     {{{
- *        val property = Pro.WO.get[Int](0)
- *        property.onObservableChange("Change detected".lp)
- *        property() = 1
+ *        val pro = Pro.OM.make[Int](0)
+ *
+ *        pro.onObservableChange("Change detected".lp)
+ *
+ *        pro() = 1
  *
  *        // Output
  *        Change detected
@@ -40,12 +40,11 @@ ___________________________________________________________________________*/
  *
  * @def onObservableChange(on -> On change event
  *
- *    This is the most general event indicating any change.
+ *    This is the most general event indicating a change
  *
- *    Usually an object will have other more usable events, but they will also trigger this one.
+ *    Usually an object will have other more usable events, but they will also trigger this one
  *
- *    The method is protected in order not to pollute application name space.
+ *    The method is protected in order not to pollute application name space
  *
  *    This event will likely be used by GUI controls, which will call it through the 'library'
- *
  */

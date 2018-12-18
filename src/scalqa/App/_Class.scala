@@ -10,25 +10,20 @@ class _Class(verbose: Boolean = ON) extends scala.DelayedInit {
 
   override def delayedInit(body: => Unit) { _delayed += (() => body) }
 
-  def main(args: Array.Raw[String]) = {
-    _args = args
-    if (verbose) Print.ln("App '", this.Class.label, "' started: ", startTime, " with ", args.length, " params\n", "_" * 80 + '\n');
-    val it = _delayed.all.iterator
-    var o = it.nextOpt
-    while (o) { // this dancing is to reduce root stacktrace
-      o.value.apply
-      o = it.nextOpt
-    }
+  def main(args: Array[String]): Unit = {
+    _args = args.toRefs
+    if (verbose) "App '" + this.Class.label + "' started: " + startTime + " with " + args.length + " params\n" + ("_" * 80) + '\n' lp
+    val it = _delayed.all
+    while (it.prime) it.pump.apply
     if (verbose) Runtime.getRuntime.addShutdownHook(new Thread(new Runnable {
-      def run = Print.ln('\n', "_" * 80, "\nApp '", _Class.this.Class.label, "' finished in ", startTime.age);
+      def run = "\n" + ("_" * 80) + "\nApp '" + _Class.this.Class.label + "' finished in " + startTime.age lp
     }));
-    ()
   }
 }
 
 private object _Class {
   // located here because class body is with DelayedInit
-  val _startTime = Time.get
+  val _startTime = Time.now
   var _args: Refs[String] = _
   var _delayed: Refs[() => Any] = \/
 }
@@ -54,7 +49,7 @@ ___________________________________________________________________________*/
  *
  *   Application arguments the JVM was started with
  *
- *   These are the arguments passed to {{{ def main(args: Array[String]) }}}
+ *   These are the arguments passed to {{{ def main(sa: Array[String]) }}}
  *
  * @def startTime -> Start time
  *
@@ -64,7 +59,7 @@ ___________________________________________________________________________*/
  *
  *   Implementation detail, it should not be used in code
  *
- * @def main(args: Array.Raw[String]) -> Main
+ * @def main(args: Array[String]) -> Main
  *
  *   Implementation detail, it should not be used in code
  */

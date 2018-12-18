@@ -1,19 +1,22 @@
 package scalqa; package App
 
-object Memory extends Able.Info {
+import Util.ByteSize
+
+object Memory extends Any.Able.ToInfo {
   private def rt = Runtime.getRuntime
 
-  def total: Byte.Size = rt.totalMemory
+  def total: ByteSize = ByteSize(rt.totalMemory)
 
-  def max: Byte.Size = rt.maxMemory
+  def max: ByteSize = ByteSize(rt.maxMemory)
 
-  def free: Byte.Size = rt.freeMemory
+  def free: ByteSize = ByteSize(rt.freeMemory)
 
-  def used: Byte.Size = total - free
+  def used: ByteSize = total - free
 
   def gc: Unit = java.lang.System.gc
 
-  protected def info = \/.info ~ ("max", max) ~ ("total", total) ~ ("free", free) ~ ("used", used)
+  def toInfo = new Pro.Info(this, "App.Memory") += ("max", max.toBrief) += ("total", total.toBrief) += ("free", free.toBrief) += ("used", used.toBrief)
+
 }
 /*___________________________________________________________________________
      __________ ____   __   ______  ____
@@ -26,26 +29,25 @@ ___________________________________________________________________________*/
  *
  *    [[App.Memory]] provides nicer access to 'java.lang.Runtime.getRuntime' memory values
  *
- *    @example
  *    {{{
- *       App.Memory.tp
+ *       App.Memory.lp
  *
  *       // Oputput
- *       Memory{max=15.2gB,
- *             total=1.0gB,
- *             free=990.1mB,
- *             used=39.0mB}
+ *
+ *       App.Memory{max=15.2gB,total=1.0gB,free=970.0mB,used=59.1mB}
  *     }}}
  *
  * @def total -> Total
  *
  *     Returns the total amount of memory in the Java virtual machine
  *
- *     The value returned by this method may vary over time, depending on the host environment.
+ *     This is a shortcut to Java 'Runtime.getRuntime.totalMemory'
  *
  * @def max -> Maximum
  *
  *     Returns the maximum amount of memory that the Java virtual machine will attempt to use
+ *
+ *     This is a shortcut to Java 'Runtime.getRuntime.maxMemory'
  *
  * @def free -> Free
  *
@@ -53,9 +55,13 @@ ___________________________________________________________________________*/
  *
  *     Calling the 'gc' method may result in increasing the value returned by free
  *
+ *     This is a shortcut to Java 'Runtime.getRuntime.freeMemory'
+ *
  * @def used -> Used
  *
  *     Returns (total - free)
+ *
+ *     This is a shortcut to Java 'Runtime.getRuntime.totalMemory - Runtime.getRuntime.freeMemory'
  *
  * @def gc -> Garbage collect
  *

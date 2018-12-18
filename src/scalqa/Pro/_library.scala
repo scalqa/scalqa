@@ -1,13 +1,21 @@
 package scalqa; package Pro
 
-class _library[A] private[Pro] (protected val This: Pro[A]) extends AnyVal with Z.LibraryBase[A] {
+trait _library[A] extends Any with Any.Wrap[Pro[A]] {
 
-  def asO(p: ~[Any.O]): O[A] = p.nonEmptyOpt.map(all => new O.Z.The.Multi.Dependent(This, p)) orElse asO
-
-  def asO: O[A] = new O.Z.The.NoEventsWrap[A](This())
+  def asMappedView[B](f: A => B): Pro[B] = new Z.A.Mapped(real, f)
 
 }
 
+object _library {
+
+  class _Class[A] private[Pro] (protected val real: Pro[A]) extends AnyVal with _library[A] {
+
+    def asObservableView(s: ~[Any.O]): O[A] = s.I.let(_.prime).map(all => new O.Z.A.Multi.Dependent(real, s)) orElse asObservableView
+
+    def asObservableView: O[A] = new O.Z.A.NoEventsWrap[A](real())
+
+  }
+}
 /*___________________________________________________________________________
      __________ ____   __   ______  ____
     /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API

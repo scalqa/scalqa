@@ -1,12 +1,12 @@
 package scalqa
 
 package object Pro {
-  type The[A] = The._Class[A]
-  type W[A] = W._Trait[A]
-  type WO[A] = WO._Trait[A]
+  type M[A] = M._Trait[A]
+  type OM[A] = OM._Trait[A]
   type O[A] = O._Trait[A]
+  type Info = Info._Class
 
-  def get[A](a: => A): Pro[A] = new Pro[A] { def apply = a }
+  def make[A](source: => A): Pro[A] = new Z.A.Sourced(source)
 
 }
 /*___________________________________________________________________________

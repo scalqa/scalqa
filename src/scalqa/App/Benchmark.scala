@@ -2,55 +2,17 @@ package scalqa; package App
 
 object Benchmark {
 
-  def apply(targets: (String, () => Int)*) { apply(10, 2.Seconds, targets: _*) }
-
-  def apply(runCount: Int, len: Time.Length, targets: (String, () => Int)*) {
-    val GcPause = 10.Millis
-    val trgts = targets.all.as[Index]
-    var runLen: Time.Length = \/
-    var runCnt = trgts.size + 1;
-    do {
-      runCnt *= 2
-      runLen = (len - (runCnt * GcPause).Millis) / trgts.size / runCnt
-    } while (runLen > 50.Millis)
-
-    def runTest: Index[Result] = (0 <>> (runCnt * trgts.size)).all
-      .map(j => {
-        val id = j % trgts.size
-        if (j % (trgts.size + 1) == 0) { App.Memory.gc; Pause(GcPause) }
-        val memBefore = App.Memory.used; val endTime: Time = Time.get + runLen; var count, value = 0L;
-        while (Time.get < endTime) { count += 1; value += trgts(id)._2() }
-        new Result(id, trgts(id)._1, count, if (count == 0) 0 else (App.Memory.used - memBefore) / count, value)
-      })
-      .sortBy(_.id).groupBy(_.id).map(a => a.fold(a.pumpOpt(EVERY).value, _ + _)).as[Index]
-
-    def printOut(l: Index[Result]) {
-      l.all.map(_.count).maxOpt.apply(v => l.all(_.baseCnt = v))
-      l.all.map(_.memory).maxOpt.apply(v => l.all(_.baseMem = v))
-      l.all.tp
+  def apply[A: Numeric](totalTime: Duration, targets: (String, () => A)*): Unit = {
+    val subTestMillis = { // Each run 2.5 or 3 seconds
+      val m = totalTime.totalMillis.real;
+      if (m % 3000 < m % 2500) 3000.Millis else 2500.Millis
     }
-
-    val details = "   (" + trgts.size + " targets each run " + runCnt + " times for " + runLen + ")"
-    Print.ln("\nWarm Up Run. Duration ", len, details)
-    printOut(runTest)
-
-    (1 <> runCount).all
-      .peek(Print.ln("\nStart: ", _, " (of ", runCount, ")  Duration ", len, details))
-      .swap(runTest)
-      .peek(printOut)
-      .foldOpt(_.all.zip(_).map(_.to(_ + _)).as[Index])
-      .run(Print.ln("\nGRAND TOTAL"))
-      .apply(printOut)
+    applySplit[A]((totalTime.totalMillis / subTestMillis).toInt, subTestMillis, 10.Millis, targets: _*)
   }
 
-  // *****************************************************************************************************************************
-  private class Result(val id: Int, val label: String, val count: Long, val memory: Long, val valueSum: Long, var baseCnt: Long = 0, var baseMem: Long = 0) extends Able.Info {
+  def applySplit[A: Numeric](subTestCount: Int, subTestLength: Duration, gcPause: Duration, targets: (String, () => A)*): Unit =
+    Z.Benchmark.apply(targets.all.to[Idx], subTestCount, subTestLength, gcPause)
 
-    def +(that: Result) = new Result(id, label, this.count + that.count, (this.memory + that.memory) / 2, this.valueSum + that.valueSum, this.baseCnt + that.baseCnt, (this.baseMem + that.baseMem) / 2)
-
-    protected def info = \/.info ~ ("Num", id + 1) ~ ("Target", label) ~ ("Run Count", count.brief) ~ ("%", Percent.getScaled(count, baseCnt).round(0).toInt) ~
-      ("Memory", memory.brief + "b") ~ ("%", Percent.getScaled(memory, baseMem).round(0).toInt) ~ ("Control Value Avg", if (count == 0) 0 else valueSum / count)
-  }
 }
 /*___________________________________________________________________________
      __________ ____   __   ______  ____
@@ -61,58 +23,63 @@ ___________________________________________________________________________*/
 /**
  * @object Benchmark ->
  *
- *     [[Benchmark]] is a simple comparison testing tool
+ *     [[App.Benchmark]] is a simple comparison testing tool
  *
- *     With today JVM technology, it is hard to get absolute performance data
+ *     JVM technology makes it difficult to get absolute performance data
  *
- *     [[Benchmark]] allows to run several targets side by side, comparing their performance against each other
+ *     [[App.Benchmark]] allows to run several targets side by side, comparing their performance against each other
  *
  *     The result presents three values:
  *
  *       - 'Run count' is the number of times the target executed. The time frame is equal for all targets
- *       - 'Memory' is the average memory increase for several executions.
+ *       - 'Memory' is the average memory increase for all executions.
  *          This is even less precise measurement, however for side by side comparison is somewhat valuable
  *       - 'Control Value Avg' is the average of target returns.
  *         This can be used for validity check. In best case, all targets should arrive to the same value in different ways
  *
- *      @example
+ *       Let's test folding performance for List, Vector and Array
+ *
  *      {{{
- *          // Test Int Plus vs. Long Plus vs. Float Plus
- *         var int  = 0
- *         var long = 0L
- *         var float = 0F
+ *         // Int values from 0 to 100 shuffled
  *
- *         App.Benchmark(100, 1.Second,
- *             ("Int  plus ", () => { int   += 1;  0 }),
- *             ("Long plus ", () => { long  += 1L; 0 }),
- *             ("Float plus", () => { float += 1F; 0 }))
+ *         val v: Vector[Int] = (1 <> 100).all.shuffle.to[Vector]
+ *         val l: List[Int] = v.toList
+ *         val a: Array[Int] = v.toArray
  *
- *         // Output end
+ *         App.Benchmark(10.Seconds,
+ *           ("List   ", () => l.fold(0)(_ + _)),
+ *           ("Vector ", () => v.fold(0)(_ + _)),
+ *           ("Array  ", () => a.fold(0)(_ + _)))
  *
- *         GRAND TOTAL
- *         --- ----------- --------- --- ------ --- -----------------
- *         Num Target      Run Count %   Memory %   Control Value Avg
- *         --- ----------- --------- --- ------ --- -----------------
- *         1   Int  plus   243.9m    100 137b   96  0
- *         2   Long plus   239.8m    98  142b   100 0
- *         3   Float plus  244.2m    100 142b   100 0
- *         --- ----------- --------- --- ------ --- -----------------
+ *         // Output
+ *         Final Result.  Total Duration 10 secs
+ *         --- ------- --------- --- ------ --- -----------------
+ *         Num Name    Run Count %   Memory %   Control Value Avg
+ *         --- ------- --------- --- ------ --- -----------------
+ *         1   List    2.5m      51  1.4kB  86  5050
+ *         2   Vector  2.0m      41  1.7kB  100 5050
+ *         3   Array   4.9m      100 1.5kB  90  5050
+ *         --- ------- --------- --- ------ --- -----------------
  *      }}}
  *
- *      Bigger example can be found in [[Pipe.Benchmarks]]
+ * @def apply[ -> Run test with defaults
  *
- * @def apply(targets -> Runs test with defaults
+ *      Runs test for the totalTime specified
  *
- *       Runs ''apply'' 10 times for 2.Seconds each
+ *      A number of sub-tests will be generated automatically
  *
- * @def apply(runCount -> Runs test
- *
- *      Runs several targets side by side (actually mixing runs on a single thread) and prints results for comparison
- *
- *      Note: Results within 3% difference should generally be considered equal
- *
- *      @param runCount number of times to run the test.  The result of each run will be accumulated into 'Grand Total' at the end
- *      @param len: length of each test
+ *      @param totalTime total time allowed for the test
  *      @param targets a list of tuples, each representing target name and target function to run.
- *                     The function return value is averaged and displayed in the results
+ *                     The function return will be converted to Long and average value will be displayed in the results
+ *
+ *
+ * @def applySplit -> Run test specialized
+ *
+ *      Runs test with specified number of subtests and GC time
+ *
+ *      @param subTestCount number of times to run the test.  The result of each run will be accumulated into 'Grand Total' at the end
+ *      @param subTestLength: length of each test
+ *      @param gcPause: Garbage collection pause, after each mini-run
+ *      @param targets a list of tuples, each representing target name and target function to run.
+ *                     The function return will be converted to Long and average value will be displayed in the results
  */

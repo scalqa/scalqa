@@ -1,9 +1,9 @@
 package scalqa; package Any
 
 package object Class {
-  type Tag[-A] = Tag._Class[A]
+  type Ilk = Ilk._Class
 
-  def get[A](v: java.lang.Class[A]) = new Class(v)
+  def make[A](v: java.lang.Class[A]) = new Class(v)
 
 }
 /*___________________________________________________________________________

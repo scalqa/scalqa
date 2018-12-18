@@ -1,20 +1,16 @@
 package scalqa; package Pro
 
-trait _Trait[+A] extends Able.Info {
+trait _Trait[@specialized(DATA) +A] {
 
   def apply(): A
-
-  protected def info = \/.info ~~ this.I.letAs(classOf[Able.Name]).map(n => ("name", n.name)) ~ ("value", apply)
 
 }
 
 object _Trait {
 
-  import scala.language.implicitConversions
-
   implicit def zzFunction0[A](v: Pro[A]): () => A = () => v()
 
-  implicit def zzLibrary[A](v: Pro[A]) = new _library(v)
+  implicit def zzLibrary[A](v: Pro[A]) = new _library._Class(v)
 
 }
 /*___________________________________________________________________________
@@ -24,47 +20,49 @@ object _Trait {
  /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
- * @trait _Trait -> '''Scalqa Properties Framework'''
+ * @trait _Trait -> `Properties Framework`
  *
- *     There are 4 types of standard properties:
+ *     Properties are needed for GUI programming and can be skipped in most cases
  *
- *     - '''[[scalqa.Pro    Pro]]'''    - read only
- *     - '''[[scalqa.Pro.W  Pro.W]]'''  - read, write
- *     - '''[[scalqa.Pro.O  Pro.O]]'''  - read only, observable
- *     - '''[[scalqa.Pro.WO Pro.WO]]''' - read, write, observable
+ *    There are 4 types of standard properties:
+ *
+ *     - `[[scalqa.Pro    Pro]]`    - view only
+ *     - `[[scalqa.Pro.M  Pro.M]]`  - mutable
+ *     - `[[scalqa.Pro.O  Pro.O]]`  - observable
+ *     - `[[scalqa.Pro.OM Pro.OM]]` - observable, mutable
  *
  *     and they are hierarchical:
  *     {{{
  *             Pro.O
  *           /       \
- *       Pro           Pro.WO
+ *       Pro           Pro.OM
  *           \       /
- *             Pro.W
+ *             Pro.M
  *     }}}
  *
  *     Here are the signature examples based on 'name' property
  *
  *     {{{
  *              // 'Read Only'
- *             trait MyPro{
+ *             trait MyObject{
  *                 def namePro: Pro[String]
  *                 def name: String = namePro()               // Required shortcut
  *             }
  *
  *             // 'Read Write'
- *             trait MyPro_W extends MyPro{
- *                 def namePro: Pro.W[String]
+ *             trait MyObject_Writable extends MyObject{
+ *                 def namePro: Pro.M[String]
  *                 def name_=(v :String):Unit = namePro() = v // Required shortcut
  *             }
  *
- *             // 'Read Only Observable'
- *             trait MyPro_O extends MyPro{
+ *             // 'Read Only, Observable'
+ *             trait MyObject_Observable extends MyObject{
  *                 def namePro: Pro.O[String]
  *             }
  *
  *             // 'Read Write Observable'
- *             trait MyPro_WO extends MyPro_W with MyPro_O{
- *                 def namePro: Pro.WO[String]
+ *             trait MyObject_OW extends MyObject_Observable with MyObject_Writable {
+ *                 def namePro: Pro.OM[String]
  *             }
  *     }}}
  *
@@ -75,7 +73,7 @@ ___________________________________________________________________________*/
  *     Returns property value
  *
  *     {{{
- *         val pro: Pro.W[String] = Pro.W.get[String]("abc")
+ *         val pro: Pro.M[String] = Pro.M.make[String]("abc")
  *
  *         val v1 = pro.apply() // Regular call
  *         val v2 = pro()       // Scala "syntactic sugar" call

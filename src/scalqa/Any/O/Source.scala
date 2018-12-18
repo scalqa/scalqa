@@ -1,12 +1,12 @@
 package scalqa; package Any; package O
 
-trait Source extends O with Able.Refresh with Any.Extra.Event0 {
+trait Source extends O with Any.Able.Refresh with Any.Ref.Extra.Event0 {
 
   protected def onObservableChange(f: () => Any) = _onEvent0(Source.ObservableChangeEventId, f)
 
   protected def fireObservableChangeEvent: Int = _fireEvent0(Source.ObservableChangeEventId)
 
-  protected def depend(dependencies: ~[O]): Unit = dependencies.apply(_.onObservableChange(() => fireObservableChangeEvent))
+  protected def depend(dependencies: ~[O]): Unit = dependencies.foreach(_.onObservableChange(() => fireObservableChangeEvent))
 
   def refresh: Any = fireObservableChangeEvent
 
@@ -26,7 +26,7 @@ ___________________________________________________________________________*/
  *
  *   Note. All methods are protected
  *
- *    Method ''refresh'' sends a generic event to all listeners.
+ *    Method `refresh` sends a generic event to all listeners.
  *
  *
  * @def fireObservableChangeEvent -> Event distribution

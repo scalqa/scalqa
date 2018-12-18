@@ -1,12 +1,16 @@
 package scalqa
 
 package object Lookup {
-  type The[A, B] = The._Class[A, B]
-  type W[A, B] = W._Trait[A, B]
-  type Val[A, B] = Val._Class[A, B]
+  type I[A, B] = I._Trait[A, B]
+  type M[A, B] = M._Trait[A, B]
+  type O[A, B] = O._Trait[A, B]
+  type OM[A, B] = OM._Trait[A, B]
 
-  def getAll[A, B](a: ~[(A, B)]): Lookup[A, B] = new The.Proxy[A, B](W.get(a))
+  def make[A, B](a: ~[(A, B)]): Lookup[A, B] = new Custom.Proxy.Lookup[A, B](M.make(a))
 
+  def makeSealable[A, B](lazySource: A => Opt[B]): Lookup[A, B] = new Z.A.Basic(lazySource)
+  
+  
 }
 /*___________________________________________________________________________
      __________ ____   __   ______  ____

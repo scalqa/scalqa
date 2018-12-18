@@ -1,21 +1,28 @@
 package scalqa
 
 package object Any {
-  type BiMap[A, B] = BiMap._Trait[A, B]
   type Class[A] = Class._Class[A]
-  type Enum[A <: Enum[A]] = Enum._Class[A]
-  type Event = Event._Trait
+  type Datum[A, B] = Datum._Trait[A, B]
   type Itself[A] = Itself._Class[A]
-  type Extra = Extra._Trait
   type O = O._Trait
-  type Value = Value._Trait
+  type Collection[+A] = Collection._Trait[A]
+  type Wrap[+A] = Wrap._Trait[A]
 
   def isVoid(v: Any): Boolean = v match {
-    case v: Able.Void => Able.Void._Trait.isVoid(v): @inline
+    case v: Able.Void => v.isVoid
     case null         => true
     case v: String    => v.length == 0
+    case v: Array[_]  => v.length == 0
+    case v: Int       => v == 0
+    case v: Long      => v == 0
+    case v: Double    => v == 0
+    case v: Float     => v == 0
+    case v: Short     => v == 0
     case _            => false
   }
+
+  private[scalqa] def toString(v: Any) = v.Class.label.copyAfter("scalqa.")
+
 }
 /*___________________________________________________________________________
      __________ ____   __   ______  ____
@@ -24,23 +31,29 @@ package object Any {
  /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
- * @object Any ->  Package for base '''scala.Any''' type
+ * @object Any ->  Package for base `scala.Any` type
  *
  *   Package [[Any]] is a natural extension of root functionality
  *
- *   All these types could logically be located in Scalqa root package, but moved to [[Any]] because of potential naming conflicts or to reduce root crowding
+ *   All included types could logically be located in the root package, but moved to [[Any]] because of potential naming conflicts or to reduce root crowding
  *
  * @def isVoid -> Void check
  *
  *     This is the central way to check an instance for voidness
  *
- *     There is only 3 types of void objects:
+ *     [[Any]] is void only in following cases:
  *
- *       - ''null'' is always void
- *       - [[String]] instance with 'length==0' is void
- *       - [[Any]] instance implementing [[Able.Void]] where 'isVoid==true' is void
+ *       - `null` is always void
+ *       - String instance with 'length==0' is void
+ *       - Array instance with 'length==0' is void
+ *       - Short == 0 is void
+ *       - Int == 0 is void
+ *       - Long == 0 is void
+ *       - Float == 0 is void
+ *       - Double == 0 is void
+ *       - [[Any]] instance implementing [[Any.Able.Void]] where 'isVoid==true' is void
  *
- *      Note. There is a better way to run this method. ''isVoid'' shortcut is universally available on any [[Any]] instance through library
+ *      Note. There is a better way to run this method. `isVoid` shortcut is universally available on every [[Any]] instance through library
  *
  *      {{{
  *        (null: String).isVoid lp  // Prints: true
@@ -49,6 +62,6 @@ ___________________________________________________________________________*/
  *
  *        (\/ : Percent).isVoid lp  // Prints: true
  *
- *        10.Percent.isVoid lp      // Prints: false
+ *        10.isVoid lp             // Prints: false
  *      }}}
  */

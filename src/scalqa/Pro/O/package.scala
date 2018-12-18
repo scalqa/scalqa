@@ -1,11 +1,16 @@
 package scalqa; package Pro
 
 package object O {
-  type The[A] = The._Class[A]
 
-  def get[A](v: => A, dependenciesOpt: Opt[~[Any.O]] = \/): O[A] = new The[A](v, dependenciesOpt)
+  def make[A](v: => A, dependencies: ~[Any.O] = \/): O[A] = new A.Basic[A](v, dependencies)
 
-  def getNamed[A](name: String, v: => A, dependenciesOpt: Opt[~[Any.O]] = \/): O[A] with Able.Name = new The.Named[A](name, v, dependenciesOpt)
+  def constant[A](v: A): O[A] = new Z.A.Constant(v)
+
+  def refreshable[A](v: => A, dependencies: ~[Any.O] = \/): O[A] with Any.Able.Refresh = new Z.A.Refreshable[A](v, dependencies)
+
+  def named[A](name: String, v: => A, dependencies: ~[Any.O] = \/): O[A] with Any.Able.Name = new Z.A.Named[A](name, v, dependencies)
+
+  def namedRefreshable[A](name: String, v: => A, dependencies: ~[Any.O] = \/): O[A] with Any.Able.Name with Any.Able.Refresh = new Z.A.Named.Refreshable[A](name, v, dependencies)
 
 }
 /*___________________________________________________________________________

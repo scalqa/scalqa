@@ -16,9 +16,9 @@ object Thread {
  /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
- * @object Thread -> '''Current Thread'''
+ * @object Thread -> `Current Thread`
  *
- *    Convenience access to ''java.lang.Thread.currentThread''
+ *    Convenience access to `java.lang.Thread.currentThread`
  *
  * @def id -> Identifier
  *
