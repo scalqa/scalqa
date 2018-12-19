@@ -1,13 +1,9 @@
 package scalqa; package Stream
 
-import Any.Class.Ilk.Z.Shift._
+import Any.Ilk.Z.Shift.{ RefRef, PrimPrim, PrimRef, RefPrim }
 
-abstract class _Class[@specialized(DATA) A] protected extends Interface[A] with Flow[A]
-    with _extend._Trait[A] with _consume._Trait[A] with _iterate._Trait[A] with _info._Trait[A]
-    //with Any.Able.Stream[A]
-    with Any.Able.Void { self =>
-
-  //  @inline final def all: Stream[A] = this // with Any.Able.All
+abstract class _Class[@specialized(DATA) A] protected extends Interface[A] with Flow[A] with Any.Able.Void
+  with _extend._Trait[A] with _consume._Trait[A] with _iterate._Trait[A] with _info._Trait[A] {
 
   // **********************************************************************************************
   // *                                    ITERATE                           specialized overrides *
@@ -154,7 +150,7 @@ abstract class _Class[@specialized(DATA) A] protected extends Interface[A] with 
   // convert  -------------------------------------------------------
   @inline override def toText: String = Z.consume.convert.toText(this, false)
   @inline override def format(s: Opt[String] = \/, pb: Opt[String] = \/, pa: Opt[String] = \/, c: Opt[A => String] = \/): String = Z.consume.convert.format(this, s, pb, pa, c)
-  @inline override def toLookup[KEY](f: Mapping[A, KEY]): Lookup[KEY, A] = Z.consume.convert.ToLookup(this, f)
+  @inline override def toLookup[KEY, VAL](implicit ev: A <:< (KEY, VAL)): Lookup[KEY, VAL] = Z.consume.convert.ToLookup(this)
   @inline override def copyTo(b: Idx.Array.Buffer.Loader[A]): Unit = Z.consume.convert.copyTo[A](this, b)
   override def toArray(implicit ct: ClassTag[A]): Array[A] = to[Idx.Array.Buffer].toArray
   override def to[TRGT[A]](implicit c: Interface.To.Converter[TRGT]): TRGT[A] = c.make(this)
@@ -188,7 +184,6 @@ abstract class _Class[@specialized(DATA) A] protected extends Interface[A] with 
   // -----------------------------------------------------------------------------------------------------------------------------
   @inline protected def _pumpIndexed = A.Specialized.Indexed.pump(asInstanceOf[A.Specialized.Indexed[A]])
   @inline protected def _consumeIndexed(f: Consumer[A]) = A.Specialized.Indexed.foreach(asInstanceOf[A.Specialized.Indexed[A]], f)
-
 }
 
 object _Class extends Util.Void.Setup.Typed[Stream with Any.Able.Stream](Z.A.Void)
@@ -203,19 +198,19 @@ ___________________________________________________________________________*/
  *
  *     [[Stream]] is a one time lazy channel to some source of elements
  *
- *     [[Stream]] can be [[_extend `extended`]] with a transformation operation, which can potentially add, remove or modify elements passing from original source.
+ *     [[Stream]] can be [[_extend._Trait `extended`]] with a transformation operation, which can potentially add, remove or modify elements passing from original source.
  *     From this moment we deal only with new transformed stream.
  *     Extension is lazy and does not request any elements to be delivered
  *
- *     [[Stream]] can be [[_iterate `iterated`]], delivering elements one by one. Even after iteration stream can still be extended
+ *     [[Stream]] can be [[_iterate._Trait `iterated`]], delivering elements one by one. Even after iteration stream can still be extended
  *
- *     At the end of life cycle [[Stream]] can be [[_consume `consumed`]].
+ *     At the end of life cycle [[Stream]] can be [[_consume._Trait `consumed`]].
  *     A consume operation may use all or some elements, nevertheless the [[Stream]] MUST be discarded, because its behavior is no longer predictable
  *
  *     {{{
  *       val stream = ('a' <> 'z')  // Range of Chars
- *         .all                     // A Stream of Chars from A to Z is created
- *         .dropNext(3)             // Extended loosing first 3 elements
+ *         .all                     // A Stream of Chars from 'a' to 'z' is created
+ *         .dropNext(3)             // Extended, loosing 'a', 'b', and 'c'
  *
  *       stream.next.lp             // Iterated, prints d
  *       stream.next.lp             // Iterated, prints e

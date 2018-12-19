@@ -35,7 +35,7 @@ ___________________________________________________________________________*/
  * @def flatten -> Converts a stream of streams into a flat stream
  *
  *   {{{
- *     val stream: ~[~[Char]] = *(
+ *     val stream: ~[~[Char]] = ~.*(
  *       'a' <> 'd',
  *       List('x', 'y', 'z'),
  *       Vector('v', 'e', 'c', 't', 'o', 'r'))

@@ -17,14 +17,14 @@ package object Idx {
 
   type Range = Range._Class
 
-  def make[A](vs: A*): Idx[A] = Refs.make(vs: _*)
+  @inline def *[A](vs: A*): Idx[A] = Refs.*(vs: _*)
 
   def wrap[A](v: java.util.List[A]): Idx[A] = v.I.as[Idx[A]](Idx.Z.A.JavaProxy[A](_))
 
   val Void: Idx[Nothing] with Idx.O[Nothing] = new O[Nothing] with Void {
     def size = 0
     def apply(i: Int) = App.Fail("Requesting element '" + i + "' on empty Idx")
-    def onChange(f: Idx[Change[Nothing]] => Any): App.Event = \/
+    def onChange(f: Idx[Change[Nothing]] => Any): EventControl = \/
   }
 }
 /*___________________________________________________________________________
@@ -34,7 +34,7 @@ package object Idx {
  /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
- * @def make[A] -> With values
+ * @def *[A] -> Vararg constructor
  *
  *    Creates [[Idx]] with specified values
  *    {{{

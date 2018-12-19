@@ -12,11 +12,11 @@ class _Class(verbose: Boolean = ON) extends scala.DelayedInit {
 
   def main(args: Array[String]): Unit = {
     _args = args.toRefs
-    if (verbose) "App '" + this.Class.label + "' started: " + startTime + " with " + args.length + " params\n" + ("_" * 80) + '\n' lp
+    if (verbose) "App '" + this.I.Class.label + "' started: " + startTime + " with " + args.length + " params\n" + ("_" * 80) + '\n' lp
     val it = _delayed.all
     while (it.prime) it.pump.apply
     if (verbose) Runtime.getRuntime.addShutdownHook(new Thread(new Runnable {
-      def run = "\n" + ("_" * 80) + "\nApp '" + _Class.this.Class.label + "' finished in " + startTime.age lp
+      def run = "\n" + ("_" * 80) + "\nApp '" + _Class.this.I.Class.label + "' finished in " + startTime.age lp
     }));
   }
 }

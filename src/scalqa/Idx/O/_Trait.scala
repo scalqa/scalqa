@@ -3,7 +3,7 @@ package scalqa; package Idx; package O
 trait _Trait[A] extends Idx[A] with Any.Collection.O[A] {
   protected type CHANGE[A] = Change[A]
 
-  def onChange(f: Idx[Change[A]] => Any): App.Event
+  def onChange(f: Idx[Change[A]] => Any): EventControl
 
 }
 

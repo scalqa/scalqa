@@ -6,7 +6,7 @@ private[Stream] final class zip[A, B](one: Stream[A], two: Stream[B]) extends St
 
   @inline def pump = (one.pump, two.pump)
 
-  @inline override def ilkOpt = Ilk.Objects
+  @inline override def ilkOpt = Ilk.Refs
 
   @inline override def sizeOpt = one.sizeOpt.letMix(two.sizeOpt)(_ min _)
 

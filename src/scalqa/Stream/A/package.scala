@@ -3,7 +3,7 @@ package scalqa; package Stream
 package object A {
   type Specialized[A] = Specialized._Trait[A]
 
-  def assertIlk[@specialized(DATA) A](s: Stream[A], ilk: Any.Class.Ilk): Stream[A] = new Stream[A] with Stream.Z.A.Extended.All[A] {
+  def assertIlk[@specialized(DATA) A](s: Stream[A], ilk: Any.Ilk): Stream[A] = new Stream[A] with Stream.Z.A.Extended.All[A] {
     @inline def prime = real.prime
     @inline def pump = real.pump
     @inline def foreach(f: Consumer[A]) = real.foreach(f)

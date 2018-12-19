@@ -2,11 +2,11 @@ package scalqa; package Pro; package O
 
 trait _library[A] extends Any with Pro._library[A] with Any.Wrap[O[A]] {
 
-  def onChangeRun(f: => Any): App.Event = real.onChange(() => f)
+  def onChangeRun(f: => Any): EventControl = real.onChange(() => f)
 
-  def onValueChange(f: A => Any): App.Event = real.onChange(App.Event.moveId0(f, () => f(real())))
+  def onValueChange(f: A => Any): EventControl = real.onChange(EventControl.moveId0(f, () => f(real())))
 
-  def onValueChangeWithOld(f: (A, A) => Any): App.Event = { var old = real.apply; real.onChange(App.Event.moveId0(f, () => real().I(v => { f(v, old); old = v }))) }
+  def onValueChangeWithOld(f: (A, A) => Any): EventControl = { var old = real.apply; real.onChange(EventControl.moveId0(f, () => real().I(v => { f(v, old); old = v }))) }
 
   override def asMappedView[B](f: A => B): O[B] = new Z.A.Mapped(real, f)
 

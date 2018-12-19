@@ -12,7 +12,7 @@ private[scalqa] object stream {
 
     override def foreach(c: Stream.Consumer[A]) = { var i = _position; while (i < _size) { c.accept(arr(i)); i += 1 }; _position = i }
 
-    override def ilkOpt = Ilk.make(arr)
+    override def ilkOpt = Ilk.fromArray(arr)
 
     override def copyTo(b: Idx.Array.Buffer.Loader[A]): Unit = b.addFromArray(arr, _position, _size - _position)
 

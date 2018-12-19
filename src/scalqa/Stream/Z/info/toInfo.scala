@@ -5,7 +5,7 @@ private[Stream] object toInfo {
   def apply[A](v: Flow[A]): Pro.Info = {
     val tg = new Pro.Info(v)
 
-    val id = v.Class.toString
+    val id = v.I.Class.toString
     if (id.startsWith("scalqa.")) tg.id = id.copyFrom(7)
 
     v.ilkOpt(tg += ("ilk", _))

@@ -1,4 +1,4 @@
-package scalqa; package Idx; package Range; package Reposition; package Z
+package scalqa; package Idx.Range; package Reposition; package Z
 
 private[Reposition] object validate {
 
@@ -6,7 +6,7 @@ private[Reposition] object validate {
     val ti = r.indexes
     if (r.range.size != ti.size)
       App.Fail.validate("size" + 's' + ':' + r.range.size + '<' + '>' + ti.size)
-    val a = new scala.Array[Boolean](ti.size)
+    val a = new Array[Boolean](ti.size)
     ti.all.foreach(i => {
       if (a(i)) App.Fail.validate("Idx map is inconsistent ", ti.all.zipIdx);
       a(i) = true

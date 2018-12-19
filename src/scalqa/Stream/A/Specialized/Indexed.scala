@@ -15,7 +15,7 @@ trait Indexed[@specialized(DATA) A] extends Specialized[A] with Preview[A] { sel
   // Buffer --------------------------------------------------------------------------
   def prime(cnt: Int) = _size - _position
 
-  def previewIlk: Any.Class.Ilk = ilkOpt or { if (_position < _size) _apply(_position).Class.ilk else Ilk.Objects }
+  def previewIlk: Any.Ilk = ilkOpt or { if (_position < _size) _apply(_position).I.ilk else Ilk.Refs }
 
   def preview(cnt: Int) = Z.preview[A](this, cnt)
 

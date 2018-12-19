@@ -1,4 +1,4 @@
-package scalqa
+package scalqa; package Any
 
 package object Able
 

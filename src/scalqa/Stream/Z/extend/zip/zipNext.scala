@@ -11,7 +11,7 @@ private[Stream] final class zipNext[A](s: Stream[A]) extends Stream[(A, Opt[A])]
 
   @inline override def sizeOpt = real.sizeOpt
 
-  @inline override def ilkOpt = Ilk.Objects
+  @inline override def ilkOpt = Ilk.Refs
 }
 /*___________________________________________________________________________
      __________ ____   __   ______  ____

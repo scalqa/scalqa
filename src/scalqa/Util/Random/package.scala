@@ -26,7 +26,7 @@ ___________________________________________________________________________*/
  *
  *   Default random source is java.util.Random
  *
- *   Custom source can be set in App.Setup
+ *   Custom source can be set in [[App.Setup]]
  *
  * @def int: -> Random Int
  *

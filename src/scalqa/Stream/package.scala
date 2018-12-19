@@ -10,6 +10,8 @@ package object Stream {
   type Mapping[-A, +B] = Stream.Interface.Function.Mapping[A, B]; val Mapping = Stream.Interface.Function.Mapping
   type Folding[A] = Stream.Interface.Function.Folding[A]; val Folding = Stream.Interface.Function.Folding
 
+  def *[@specialized(DATA) A](v: A*): Stream[A] = v match { case w: collection.mutable.WrappedArray[A] => Custom.Array.Z.stream(w.array); case _ => v.all }
+
   def make[@specialized(DATA) A](v: Idx[A]): Stream[A] = Idx.Z.stream(v)
 
   def make[@specialized(DATA) A: Ilk](v: java.lang.Iterable[A]): ~[A] = Z.A.Java.Iterable.toStream[A](v)
@@ -33,10 +35,10 @@ ___________________________________________________________________________*/
 /**
  * @object Stream ->
  *
- *    There are many ways to create [[Stream]] besides `get` constructors
+ *    There are many ways to create [[Stream]] besides `make` constructors
  *
  *     {{{
- *      val sf: ~[Float] = *(1, 2, 3)        // Global vararg constructor '*'
+ *      val sf: ~[Float] = ~.*(1, 2, 3)      // Vararg constructor '*'
  *      sf lp                                // Prints: ~(1.0, 2.0, 3.0)
  *
  *      val si: ~[Int] = 4 ~+ 5 + 6 + 7 + 8  // Create with '~+' operator and append
@@ -54,6 +56,10 @@ ___________________________________________________________________________*/
  *      val v2: ~[Int] = \/                  // Void stream with context type
  *      v2 lp                                // Prints: ~()
  *    }}}
+ *
+ * @def *[ -> Varagr Constructor
+ *
+ *     Creates stream with specified values
  *
  * @type Consumer -> Function alias
  *

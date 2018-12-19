@@ -14,7 +14,7 @@ private[Stream] class zipFoldAs[A, B](val real: Stream[A], var b: B, f: Folding.
     real.foreach(new Each)
   }
 
-  @inline override def ilkOpt = Ilk.Objects
+  @inline override def ilkOpt = Ilk.Refs
 
 }
 /*___________________________________________________________________________

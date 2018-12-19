@@ -6,11 +6,8 @@ package object Lookup {
   type O[A, B] = O._Trait[A, B]
   type OM[A, B] = OM._Trait[A, B]
 
-  def make[A, B](a: ~[(A, B)]): Lookup[A, B] = new Custom.Proxy.Lookup[A, B](M.make(a))
+  def make[A, B](lazySource: A => Opt[B]): Lookup[A, B] = new Z.A.Basic(lazySource)
 
-  def makeSealable[A, B](lazySource: A => Opt[B]): Lookup[A, B] = new Z.A.Basic(lazySource)
-  
-  
 }
 /*___________________________________________________________________________
      __________ ____   __   ______  ____

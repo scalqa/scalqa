@@ -2,7 +2,7 @@ package scalqa; package Any; package Ref; package Extra
 
 trait Event1 extends Event.Like {
 
-  protected def _onEvent1[P1](scope: AnyRef, f: P1 => Any): App.Event = _addOrRemoveEvent(scope, f)
+  protected def _onEvent1[P1](scope: AnyRef, f: P1 => Any): EventControl = _addOrRemoveEvent(scope, f)
 
   protected def _fireEvent1[P1](scope: AnyRef, p1: P1) = _fireEvent[P1 => Any](scope, _(p1))
 

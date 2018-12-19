@@ -3,7 +3,7 @@ package scalqa; package Idx
 package object Array {
   type Buffer[A] = Buffer._Class[A]
 
-  def fromClass[A](c: Any.Class[A], len: Int) = new Array[A](c.ilk.mkArray(len))
+  def fromClass[A](c: Class[A], len: Int) = new Array[A](Ilk.fromClass(c).mkArray(len))
 
   def make[A](sz: Int)(implicit i: Ilk[A]) = new Array[A](i.mkArray(sz))
 

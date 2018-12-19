@@ -2,7 +2,7 @@ package scalqa; package Pro; package O
 
 trait _Trait[+A] extends Pro[A] with Any.O {
 
-  def onChange(f: () => Any): App.Event
+  def onChange(f: () => Any): EventControl
 
   protected def onObservableChange(f: () => Any) = onChange(f)
 

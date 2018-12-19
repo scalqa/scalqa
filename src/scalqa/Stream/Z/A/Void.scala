@@ -7,12 +7,12 @@ private[scalqa] class Void extends Stream.A.Base[Any] with Preview[Any] with Uti
   @inline def pump = Stream.failEmpty
   @inline override def foreach(f: Consumer[Any]) = ()
   @inline override def take(i: Int) = this
-  @inline override def ilkOpt = Ilk.Objects
+  @inline override def ilkOpt = Ilk.Refs
   @inline override def sizeOpt = 0
 
   // Buffer ----------------------------------------------------------------
   @inline override def preview = this
-  @inline def previewIlk = Ilk.Objects
+  @inline def previewIlk = Ilk.Refs
   @inline def preview(cnt: Int) = this
   @inline def previewNextOpt = Opt.Void
   @inline def previewSize = 0

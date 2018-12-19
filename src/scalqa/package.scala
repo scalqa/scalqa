@@ -7,7 +7,7 @@ package object scalqa extends Util.Z.Include.Root {
 
   // Shortcuts ------------------------------------------------------------------------------
   type ~[+A] = Stream.Interface[A]; def ~ = Stream.Interface.This
-  type Ilk[-A] = Any.Class.Ilk.Tag[A]; val Ilk = Any.Class.Ilk.This
+  type Ilk[-A] = Any.Ilk.Tag[A]; val Ilk = Any.Ilk.This
   type Vals[A] = Any.Datum.Vals[A]; val Vals = Any.Datum.Vals.This
   type Percent = Util.Percent; val Percent = Util.Percent
   // type ByteSize = Util.ByteSize; val ByteSize = Util.ByteSize
@@ -22,6 +22,7 @@ package object scalqa extends Util.Z.Include.Root {
   type Day = Util.Calendar.Day; val Day = Util.Calendar.Day
 
   // Util   ---------------------------------------------------------------------------------
+  type EventControl = Util.EventControl._Trait; val EventControl = Util.EventControl.This
   type Range[A] = Util.Range._Trait[A]; val Range = Util.Range.This
   type Opt[+A] = Util.Opt._Class[A]; val Opt = Util.Opt.This
   type Out[+A] = Util.Out[A]; val Out = Util.Out.This
@@ -31,16 +32,12 @@ package object scalqa extends Util.Z.Include.Root {
   type OneOfTwo[+A, +B] = Util.OneOfTwo[A, B]; val OneOfTwo = Util.OneOfTwo
   type Void = Util.Void
 
-  def *[@specialized(DATA) A](v: A*): Stream[A] = v match { case w: collection.mutable.WrappedArray[A] => Custom.Array.Z.stream(w.array); case _ => v.all }
-
   implicit def any2stringadd = () // any2stringadd is globally disabled
   implicit def zzWarrant_ImplicitConversions = languageFeature.implicitConversions
   implicit def zzWarrant_HigherKinds = languageFeature.higherKinds
   implicit def zzWarrant_PostfixOps = scala.language.postfixOps
-  //  implicit def zzWarrantStreamConversion[A, B]: collection.generic.CanBuildFrom[Stream[A], B, Stream[B]] = null
-  //  implicit def zzWarrantRangeConversion[A, B]: collection.generic.CanBuildFrom[Range[A], B, Stream[B]] = null
 
-  private[scalqa]type ClassTag[A] = scala.reflect.ClassTag[A]
+  private[scalqa] type ClassTag[A] = scala.reflect.ClassTag[A]
   private[scalqa] val DATA = new Specializable.Group((scala.Byte, scala.Char, scala.Short, scala.Int, scala.Long, scala.Double, scala.Float))
 }
 /*___________________________________________________________________________
@@ -50,18 +47,6 @@ package object scalqa extends Util.Z.Include.Root {
  /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
- * @def * -> Global Stream Constructor
- *
- *   This is the easiest way to create a [[Stream]] of any type anywhere in code
- *
- *   {{{
- *       val ip: ~[Int]    = *(1, 4, 7, 9)
- *
- *       val sp: ~[String] = *("1", "4", "7", "9")
- *
- *       val ap: ~[Any]    = *(1, "4", 7, '9')
- *   }}}
- *
  * @def any2stringadd -> Disable any2stringadd
  *
  *      Disable "Any to String Add" functionality in Scalqa
@@ -102,6 +87,10 @@ ___________________________________________________________________________*/
  *
  *   Globally available alias to type and object [[Util.Future]]
  *
+ * @type EventControl -> Alias
+ *
+ *   Globally available alias to type and object [[Util.EventControl]]
+ *
  * @type BiMap -> Alias
  *
  *   Globally available alias to type and object [[Util.BiMap]]
@@ -116,7 +105,7 @@ ___________________________________________________________________________*/
  *
  * @type Ilk -> Alias
  *
- *   Globally available alias to type [[Any.Class.Ilk.Tag]] and object [[Any.Class.Ilk]]
+ *   Globally available alias to type [[Any.Ilk.Tag]] and object [[Any.Ilk]]
  *
  * @type Void -> Alias
  *
@@ -177,12 +166,4 @@ ___________________________________________________________________________*/
  * @def zzWarrant_PostfixOps -> Enable Postfix Operations
  *
  *     Postfix Operations are to be used in Scalqa with no restrictions
- *
- * @def zzWarrantStreamConversion -> Enables Stream in 'For Comprehensions'
- *
- *     Returns 'null'
- *
- * @def zzWarrantRangeConversion -> Enables Range in 'For Comprehensions'
- *
- *     Returns 'null'
  */

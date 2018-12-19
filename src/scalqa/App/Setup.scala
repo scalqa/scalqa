@@ -1,6 +1,6 @@
 package scalqa; package App
 
-package object Setup {
+object Setup {
 
   val SchedularPro = new Pro.A.Setup[java.util.concurrent.ScheduledExecutorService](java.util.concurrent.Executors.newScheduledThreadPool(Host.availableProcessors - 1 max 2))
 
@@ -8,7 +8,7 @@ package object Setup {
 
   val InitBufferSizePro = new Pro.A.Setup(16)
 
-  val RandomSourcePro = new Pro.A.Setup[Util.Random.Source](Util.Random.Source.TheJava)
+  val RandomSourcePro = new Pro.A.Setup[Util.Random.Source](Util.Random.Source.Z.JavaRandom)
 
   val CustomNumberScalePro = new Pro.A.Setup(64)
 
@@ -24,14 +24,8 @@ ___________________________________________________________________________*/
 /**
  *  @val ParallelFlowPro -> Stream parallel engine setup
  *
- *     Factory to create parallel [[Flow]]
+ *     Factory to create parallel [[Stream.Flow]]
  *
  *     Default creates parallel java.stream.Stream based implementation
- *
- *     The factory gets [[Stream]] of elements and Int parallel group size
- *
- *     Group size specifies how many consecutive elements should be sent together to each parallel thread for processing
- *
- *     @return Parallel [[Stream.Flow]]
  *
  */

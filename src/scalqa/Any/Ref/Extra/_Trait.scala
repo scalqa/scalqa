@@ -4,7 +4,7 @@ trait _Trait extends Like {
 
   protected[Extra] def _allEntries(scope: AnyRef): ~[Entry] = if (scope == null) \/ else _topEntry.all(scope)
 
-  protected[Extra] override def _addEntry(scope: AnyRef, value: Any): App.Event = super._addEntry(scope, value)
+  protected[Extra] override def _addEntry(scope: AnyRef, value: Any): EventControl = super._addEntry(scope, value)
 
   protected[Extra] def _isNoEntries: Boolean = _topEntry.isVoid
 
@@ -81,7 +81,7 @@ ___________________________________________________________________________*/
  *
  *     Adds new entry to the list
  *
- *     Returns [[App.Event]], a fancy interface to remove entry.
+ *     Returns [[EventControl]], a fancy interface to remove entry.
  *
  * @def _isNoEntries -> Empty check
  *

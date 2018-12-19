@@ -2,6 +2,8 @@ package scalqa; package Idx
 
 package object M {
 
+  def *[A](vs: A*)(implicit i: Ilk[A]): Idx[A] = makeSized[A](vs.size).I(_ +~= vs)
+
   def make[A](implicit i: Ilk[A]): M[A] = i.mkBuffer[A](\/)
 
   def makeSized[A](initSize: Int)(implicit i: Ilk[A]): M[A] = i.mkBuffer[A](initSize)
@@ -29,6 +31,10 @@ ___________________________________________________________________________*/
  *
  *       val s : Idx.M[String] = NEW
  *   }}}
+ *
+ * @def *[ -> Vararg constructor
+ *
+ *    Creates [[Idx.M]] with specified values
  *
  * @def makeSized[ -> With initial size
  *

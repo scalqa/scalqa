@@ -4,13 +4,13 @@ private[I] object Primitive {
 
   abstract class Setup[A: ClassTag, TYPE <: Idx.I[A]](create: Array[A] => TYPE, private val voidVal: Array[A]) extends Util.Void.Setup[TYPE](create(voidVal)) {
 
-    def make(vs: A*): TYPE = if (vs.isEmpty) Void else vs match {
+    def *(vs: A*): TYPE = if (vs.isEmpty) Void else vs match {
       case a: scala.collection.mutable.WrappedArray[_] => create(a.array.asInstanceOf[Array[A]])
       case _ => {
         val b = vs.all.preview
         val sz = b.previewSize
         val a = new Array[A](sz)
-        b.foreachIdx(a(_) = _)
+        b.foreachIdx(a(_)= _)
         create(a)
       }
     }
@@ -42,7 +42,7 @@ ___________________________________________________________________________*/
  *
  *     Array will be copied
  *
- * @def make( -> VarArg constructor
+ * @def *( -> VarArg constructor
  *
  *     Creates new instance with elements provided
  *

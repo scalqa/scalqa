@@ -3,15 +3,15 @@ package scalqa; package App
 object Benchmark {
 
   def apply[A: Numeric](totalTime: Duration, targets: (String, () => A)*): Unit = {
-    val subTestMillis = { // Each run 2.5 or 3 seconds
-      val m = totalTime.totalMillis.real;
+    val trialMillis = { // Each trial 2.5 or 3 seconds
+      val m = totalTime.totalMillis
       if (m % 3000 < m % 2500) 3000.Millis else 2500.Millis
     }
-    applySplit[A]((totalTime.totalMillis / subTestMillis).toInt, subTestMillis, 10.Millis, targets: _*)
+    trials[A]((totalTime.totalMillis / trialMillis).toInt, trialMillis, 10.Millis, targets: _*)
   }
 
-  def applySplit[A: Numeric](subTestCount: Int, subTestLength: Duration, gcPause: Duration, targets: (String, () => A)*): Unit =
-    Z.Benchmark.apply(targets.all.to[Idx], subTestCount, subTestLength, gcPause)
+  def trials[A: Numeric](trialCount: Int, trialLength: Duration, gcPause: Duration, targets: (String, () => A)*): Unit =
+    Z.Benchmark.main(targets.all.to[Idx], trialCount, trialLength, gcPause)
 
 }
 /*___________________________________________________________________________
@@ -62,24 +62,24 @@ ___________________________________________________________________________*/
  *         --- ------- --------- --- ------ --- -----------------
  *      }}}
  *
- * @def apply[ -> Run test with defaults
+ * @def apply[ -> Run with defaults
  *
  *      Runs test for the totalTime specified
  *
- *      A number of sub-tests will be generated automatically
+ *      A number of trials will be generated automatically
  *
  *      @param totalTime total time allowed for the test
  *      @param targets a list of tuples, each representing target name and target function to run.
  *                     The function return will be converted to Long and average value will be displayed in the results
  *
  *
- * @def applySplit -> Run test specialized
+ * @def trials -> Run specified number of trials
  *
- *      Runs test with specified number of subtests and GC time
+ *      All trials are accumulated into final result
  *
- *      @param subTestCount number of times to run the test.  The result of each run will be accumulated into 'Grand Total' at the end
- *      @param subTestLength: length of each test
- *      @param gcPause: Garbage collection pause, after each mini-run
+ *      @param trialCount number of trials to run
+ *      @param trialLength length of each trial
+ *      @param gcPause garbage collection pause, after each trial
  *      @param targets a list of tuples, each representing target name and target function to run.
  *                     The function return will be converted to Long and average value will be displayed in the results
  */

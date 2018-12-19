@@ -1,15 +1,15 @@
-package scalqa; package Idx; package Range; package Reposition; package Z
+package scalqa; package Idx.Range; package Reposition; package Z
 
 private[Reposition] object extend {
 
-  def apply(rep: Reposition, r: Range): Reposition = {
+  def apply(rep: Reposition, r: Idx.Range): Reposition = {
     val rr = rep.range
     if (rr.contains(r))
       rep
     else {
       val nr = rr join r
       make(nr, Ints.fromArray({
-        val a = new scala.Array[Int](nr.size)
+        val a = new Array[Int](nr.size)
         val from = rr.start - nr.start;
         rep.indexes.all.foreachIdx((i, v) => a(i) = v + from, from)
         a

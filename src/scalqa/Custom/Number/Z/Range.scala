@@ -6,7 +6,7 @@ private[scalqa] abstract class Range[@specialized(DATA) A] extends Util.Range[A]
 
   override def all(implicit n: math.Numeric[A]): Stream[A] = allStep(n.one)
 
-  def ilk: Any.Class.Ilk
+  def ilk: Any.Ilk
 
   override def allStep(iStep: A)(implicit n: math.Numeric[A]): Stream[A] = new Stream[A] with Stream.A.Specialized.Indexed[A] {
     private def _first = if (startExclusive) n.plus(start, n.one) else start

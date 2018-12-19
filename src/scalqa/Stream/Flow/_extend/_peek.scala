@@ -25,7 +25,7 @@ ___________________________________________________________________________*/
  *    This method does not change pipeline type or composition in any way
  *
  *    {{{
- *      ('A' <> 'C').all.peek(_.lp("Passing: ")).count.lp
+ *      ('A' <> 'C').all.peek("Passing: " + _ lp).count.lp
  *
  *      // Output
  *      Passing: A
@@ -38,7 +38,7 @@ ___________________________________________________________________________*/
  *
  *    Provides access to a passing pipeline elements with their index in sequence
  *
- *    @param start starting value for element indexing.
+ *    @param start starting value for element indexing
  *
  *    {{{
  *      ('A' <> 'C').all.peekIdx("Peek" + _ + " = " + _ lp).count.lp

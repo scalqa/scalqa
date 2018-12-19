@@ -2,7 +2,7 @@ package scalqa; package Custom
 
 package object Array {
 
-  def make[A: ClassTag](v: A*): Array[A] = v match {
+  def *[A: ClassTag](v: A*): Array[A] = v match {
     case w: collection.mutable.WrappedArray[A] => w.array
     case v => v.toArray
   }

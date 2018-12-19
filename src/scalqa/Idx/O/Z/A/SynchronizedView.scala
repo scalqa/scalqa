@@ -8,7 +8,7 @@ private[scalqa] object SynchronizedView {
 
     protected def real: O[A]
 
-    def onChange(f: Idx[Change[A]] => Any) = real.onChange(App.Event.moveId1(f, c => lock.synchronized { f(c) }))
+    def onChange(f: Idx[Change[A]] => Any) = real.onChange(EventControl.moveId1(f, c => lock.synchronized { f(c) }))
 
   }
 }

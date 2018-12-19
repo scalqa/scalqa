@@ -21,7 +21,7 @@ private[Stream] object group {
       })
     }
 
-    @inline override def ilkOpt = Ilk.Objects
+    @inline override def ilkOpt = Ilk.Refs
   }
 }
 /*___________________________________________________________________________

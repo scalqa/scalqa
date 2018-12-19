@@ -36,7 +36,7 @@ ___________________________________________________________________________*/
  *  {{{
  *     val intToChar: BiMap[Int, Char] = BiMap(i => ('A' + i).toChar, _ - 'A')
  *
- *     val coll: Idx.M[Int] = *(0, 2, 4).to[Idx.M]
+ *     val coll: Idx.M[Int]  = ~.*(0, 2, 4).to[Idx.M]
  *     val view: Idx.M[Char] = x.asBiMappedView(intToChar)
  *
  *     coll.all.lp   // Prints: ~(0, 2, 4)

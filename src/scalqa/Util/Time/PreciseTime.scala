@@ -52,7 +52,7 @@ ___________________________________________________________________________*/
  *       - [[PreciseDuration]] can be used instead of [[Duration]]
  *
  *     {{{
- *         val time = Time.get
+ *         val time = Time.now
  *         val precise = time.Precise
  *
  *         time lp                 // Prints: 2018-05-01 13:37:25.699
@@ -68,7 +68,7 @@ ___________________________________________________________________________*/
  *
  *   {{{
  *       // Tried
- *       PreciseTime.get.lp
+ *       PreciseTime.now.lp
  *       // Printed no micros or nanos
  *       2018-04-09 16:45:11.468.000.000
  *       // Apparently not every JVM supports precise clock.

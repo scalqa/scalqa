@@ -4,7 +4,7 @@ object To {
 
   abstract class Converter[CONTAINER[Any]] protected {
 
-    def make[A]: (A, Ilk[A]) => CONTAINER[A]
+    def make[A]: (A, Ilk.Tag[A]) => CONTAINER[A]
 
   }
 

@@ -4,7 +4,9 @@ trait _convert[A] extends Flow._consume._convert[A] { self: Stream[A] =>
 
   def toBuffer: Stream[A] = self.to[Idx.Array.Buffer].all
 
-  def toLookup[KEY](f: Mapping[A, KEY]): Lookup[KEY, A] = Z.consume.convert.ToLookup(this, f)
+  def toLookup[KEY, VAL](implicit ev: A <:< (KEY, VAL)): Lookup[KEY, VAL] = Z.consume.convert.ToLookup(this)
+
+  def toLookup[KEY](key: A => KEY): Lookup[KEY, A] = map(v => (key(v), v)).toLookup
 
 }
 /*___________________________________________________________________________
@@ -21,7 +23,11 @@ ___________________________________________________________________________*/
  *
  *     Buffers all elements from the source and returns them as new [[Stream]]
  *
- * @def toLookup -> New Lookup
+ * @def toLookup[KEY, VAL] -> New Lookup
+ *
+ *     This Stream must contain tuples of keys and values
+ *
+ * @def toLookup[KEY] -> New Lookup
  *
  *       Creates a [[Lookup]] collection out of [[Stream]] elements
  *

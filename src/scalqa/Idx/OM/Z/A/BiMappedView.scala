@@ -6,7 +6,7 @@ private[Idx] class BiMappedView[A, B](protected override val real: OM[A], bm: Bi
 
   def multiChange(ch: M[B] => Any): Unit = real.multiChange(l => ch(l.asBiMappedView(bm)))
 
-  def onChange(f: Idx[O.Change[B]] => Any): App.Event = real.onChange(App.Event.moveId1(f, _.asMappedView(_.asMappedView(bm))))
+  def onChange(f: Idx[O.Change[B]] => Any): EventControl = real.onChange(EventControl.moveId1(f, _.asMappedView(_.asMappedView(bm))))
 
 }
 /*___________________________________________________________________________

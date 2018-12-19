@@ -3,7 +3,7 @@ package scalqa; package Any; package Collection; package O
 trait _Trait[A] extends Any.Collection[A] with Any.O {
   protected type CHANGE[A] <: Change[A]
 
-  def onChange(f: Idx[CHANGE[A]] => Any): App.Event
+  def onChange(f: Idx[CHANGE[A]] => Any): EventControl
 
   protected def onObservableChange(f: () => Any) = onChange(_ => f())
 

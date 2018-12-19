@@ -2,9 +2,9 @@ package scalqa; package Any; package Ref; package Extra; package Event
 
 trait Like extends Extra.Like {
 
-  private[Extra] def _addOrRemoveEvent(scope: AnyRef, f: AnyRef): App.Event = f match {
-    case r: App.Event.WithId if r.isCancel => {
-      if (_topEntry.all(scope).let(_.value.I.letType[App.Event.WithId].let(_.id == r.id)).peek(_.cancel).count > 0) _topEntry.all(scope).drain
+  private[Extra] def _addOrRemoveEvent(scope: AnyRef, f: AnyRef): EventControl = f match {
+    case r: Util.EventControl.WithId if r.isCancel => {
+      if (_topEntry.all(scope).let(_.value.I.letType[Util.EventControl.WithId].let(_.id == r.id)).peek(_.cancel).count > 0) _topEntry.all(scope).drain
       \/
     }
     case _ => _addEntry(scope, f)

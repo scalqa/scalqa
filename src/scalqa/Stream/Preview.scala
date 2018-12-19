@@ -12,7 +12,7 @@ trait Preview[@specialized(DATA) A] { self: Stream[A] with Preview[A] =>
 
   def preview(cnt: Int): ~[A]
 
-  def previewIlk: Any.Class.Ilk
+  def previewIlk: Any.Ilk
 
   def previewSize: Int
 
@@ -54,7 +54,7 @@ ___________________________________________________________________________*/
  *
  *     Otherwise the first element is loaded and type is determined
  *
- *     Note. If [[Stream]] is empty and Ilk is undetermined, [[Any.Class.Ilk.Objects Ilk.Objects]] is returned. If this is unacceptable, check emptiness first
+ *     Note. If [[Stream]] is empty and Ilk is undetermined, [[Any.Ilk.Refs Ilk.Refs]] is returned. If this is unacceptable, check emptiness first
  *
  * @def previewSize: -> Preview element count
  *

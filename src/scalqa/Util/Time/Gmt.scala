@@ -41,7 +41,7 @@ ___________________________________________________________________________*/
  *    [[Time.Gmt]] is same as [[Time]] without localization
  *
  *    {{{
- *      val time = Time.get
+ *      val time = Time.now
  *      val gmt = time.Gmt
  *
  *      time.dayTime.brief lp // Prints: 13:34

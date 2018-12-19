@@ -2,7 +2,7 @@ package scalqa; package Idx; package O; package Z; package A
 
 private[scalqa] trait Unsupported[A] extends Idx.O[A] {
 
-  def onChange(on: Idx[Change[A]] => Any): App.Event = \/
+  def onChange(on: Idx[Change[A]] => Any): EventControl = \/
 
 }
 /*___________________________________________________________________________

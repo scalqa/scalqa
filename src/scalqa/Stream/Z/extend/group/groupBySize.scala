@@ -9,7 +9,7 @@ private[Stream] object groupBySize {
 
     @inline def pump = real.take(size)
 
-    @inline override def ilkOpt = Ilk.Objects
+    @inline override def ilkOpt = Ilk.Refs
 
     if (size <= 0) App.Fail.argument("size" + '=' + size)
   }

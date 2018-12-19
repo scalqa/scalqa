@@ -5,6 +5,8 @@ package object Interface {
 
   def apply[A]: Stream[A] = Z.A.Void.asInstanceOf[Stream[A]]
 
+  def *[@specialized(DATA) A](v: A*): Stream[A] = v match { case w: collection.mutable.WrappedArray[A] => Custom.Array.Z.stream(w.array); case _ => v.all }
+
   implicit def zzMake[A](v: \/): ~[A] = Z.A.Void.asInstanceOf[~[A]]
 
 }
@@ -15,6 +17,10 @@ package object Interface {
  /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
+ * @def *[ -> Varagr Constructor
+ *
+ *     Creates stream with specified values
+ *
  * @def apply[A] -> Get Void [[Stream]]
  *
  *     Returns a strongly typed void Stream

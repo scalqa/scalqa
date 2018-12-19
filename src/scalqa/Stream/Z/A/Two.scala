@@ -18,7 +18,7 @@ private[scalqa] object Two {
 
     override def sizeOpt = 2 - state max 0
 
-    override def ilkOpt = one.Class.ilk
+    override def ilkOpt = one.I.ilk
   }
 }
 

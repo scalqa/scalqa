@@ -9,7 +9,7 @@ private[scalqa] trait Void extends OM[Any] with scalqa.Void {
   def removeAt(i: Idx.Range) = App.Fail.unsupported()
   def addAt(i: Int, e: Any) = App.Fail.unsupported()
   def update(i: Int, e: Any) = App.Fail.unsupported()
-  def onChange(f: Idx[O.Change[Any]] => Any): App.Event = \/
+  def onChange(f: Idx[O.Change[Any]] => Any): EventControl = \/
 
   def multiChange(ch: M[Any] => Any) = App.Fail.unsupported()
 

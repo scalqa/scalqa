@@ -3,7 +3,7 @@ package scalqa; package Pro; package O; package Z; package A
 private[Pro] abstract class Multi[A](arrayVal: Refs[Any.O]) extends O[A] {
   def this(multi: ~[Any.O]) = this(multi.to[Refs])
 
-  def onChange(j: () => Any): App.Event = new App.Event.A.Base {
+  def onChange(j: () => Any): EventControl = new Util.EventControl.A.Base {
     val controls = arrayVal.all.map(_.onObservableChange(j)).to[Refs]
     onCancelRun(controls.all.foreach(_.cancel))
   }

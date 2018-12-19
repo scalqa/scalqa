@@ -10,12 +10,14 @@ trait Source {
 
 private[scalqa] object Source {
 
-  // *******************************************************************************************
-  object TheJava extends java.util.Random(Time.now.totalMillis % Util.Time.Z.MillisInOneDay toLong) with Source {
+  object Z {
 
-    def int = nextInt
+    object JavaRandom extends java.util.Random with Source {
 
-    def fractionOfOne = nextDouble
+      def int = nextInt
+
+      def fractionOfOne = nextDouble
+    }
   }
 }
 /*___________________________________________________________________________

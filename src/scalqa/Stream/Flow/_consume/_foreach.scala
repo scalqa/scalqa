@@ -6,7 +6,6 @@ trait _foreach[A] { self: Flow[A] =>
 
   def foreachSynchronized(c: Consumer[A]): Unit = foreach(v => synchronized { c.accept(v) })
 
-
   def drain: Unit = foreach(\/)
 
 }
@@ -26,19 +25,12 @@ ___________________________________________________________________________*/
  *   Applies given function for each element
  *
  *   {{{
- *     def all = (1 <> 3).all
- *
- *     all.apply("Element: " + _ lp)
- *
- *     var sum = 0
- *     all(sum += _)   // apply is implied
- *     sum.lp("Sum=")
+ *     (1 <> 3).all.foreach("Element: " + _ lp)
  *
  *     // Output
  *     Element: 1
  *     Element: 2
  *     Element: 3
- *     Sum=6
  *   }}}
  *
  * @def foreachSynchronized( -> Synchronized foreach

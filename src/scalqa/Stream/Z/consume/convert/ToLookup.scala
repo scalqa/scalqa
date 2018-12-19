@@ -2,7 +2,14 @@ package scalqa; package Stream; package Z; package consume; package convert
 
 private[Stream] object ToLookup {
 
-  @inline def apply[KEY, A](src: Flow[A], f: Mapping[A, KEY]): scalqa.Lookup[KEY, A] = Lookup.M.make[KEY, A].I(l => src.foreachSynchronized(v => l.put(f(v), v)))
+  @inline def apply[A, KEY, VAL](src: Flow[A])(implicit ev: A <:< (KEY, VAL)): Lookup[KEY, VAL] = {
+
+    val v = Lookup.M.make[KEY, VAL]
+
+    src.asInstanceOf[Flow[(KEY, VAL)]].foreachSynchronized(t => v.put(t._1, t._2))
+
+    v
+  }
 
 }
 /*___________________________________________________________________________

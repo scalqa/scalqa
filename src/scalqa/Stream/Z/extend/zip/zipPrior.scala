@@ -9,7 +9,7 @@ private[Stream] class zipPrior[A](val real: Stream[A]) extends Stream[(Opt[A], A
 
   def foreach(c: Consumer[(Opt[A], A)]) = real.foreach(v => { c.accept(o, v); o = v })
 
-  @inline override def ilkOpt = Ilk.Objects
+  @inline override def ilkOpt = Ilk.Refs
 }
 /*___________________________________________________________________________
      __________ ____   __   ______  ____

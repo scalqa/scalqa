@@ -16,7 +16,7 @@ private[Stream] class zipIdx[A](val real: Stream[A], var i: Int) extends Stream[
     real.foreach(new Each)
   }
 
-  @inline override def ilkOpt = Ilk.Objects
+  @inline override def ilkOpt = Ilk.Refs
 
 }
 /*___________________________________________________________________________

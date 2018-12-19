@@ -17,7 +17,7 @@ private[Stream] trait Base[@specialized(DATA) A] extends Preview[A] { self: Stre
 
   override def foreach(c: Consumer[A]) = { while (bufHas) c.accept(bufPop); real.foreach(c) }
 
-  override def previewIlk: Any.Class.Ilk = real.ilkOpt orOpt previewNextOpt.map(_.Class.ilk) or Ilk.Objects
+  override def previewIlk: Any.Ilk = real.ilkOpt orOpt previewNextOpt.map(_.I.ilk) or Ilk.Refs
 
   override def previewSize = if (allIn) bufSize else real.sizeOpt.map(_ + bufSize) or primeAll
 

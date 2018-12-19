@@ -12,13 +12,13 @@ class Refs[A] private[I] (protected val base: Array[A]) extends AnyVal with Idx.
 
   override def all: ~[A] =
     if (Array.emptyObjectArray.getClass.isInstance(base)) Custom.Array.Z.stream[A](base.asInstanceOf[Array[A]])
-    else Any.Class.Ilk.make(base).mkStream(base.asInstanceOf[Array[A]])
+    else Ilk.fromArray(base).mkStream(base.asInstanceOf[Array[A]])
 
 }
 
 object Refs {
 
-  def make[A](vs: A*): Refs[A] = vs match {
+  def *[A](vs: A*): Refs[A] = vs match {
     case a: scala.collection.mutable.WrappedArray[A] => new Refs[A](a.array)
     case _ => vs.all.to[Refs]
   }
@@ -62,4 +62,10 @@ ___________________________________________________________________________*/
  *   {{{
  *       (1 ~+ 2 + 3).to[Refs]
  *   }}}
+ *
+ * @def *[A] -> Vararg constructor
+ *
+ *    Creates [[Refs]] with specified values
+ *
+ *
  */

@@ -146,7 +146,7 @@ ___________________________________________________________________________*/
  *   Fails for empty stream
  *
  *   {{{
- *       *(4, 3, 12, 7).maxOpt.lp // Prints: 12
+ *       ~.*(4, 3, 12, 7).maxOpt.lp // Prints: 12
  *   }}}
  *
  * @def maxOpt -> Largest
@@ -154,7 +154,7 @@ ___________________________________________________________________________*/
  *  Selects maximum element, based on the Ordering
  *
  *   {{{
- *       *(4, 3, 12, 7).maxOpt.lp // Prints: Opt(12)
+ *       ~.*(4, 3, 12, 7).maxOpt.lp // Prints: Opt(12)
  *   }}}
  *
  * @def maxBy[ -> Largest by property

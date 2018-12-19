@@ -2,7 +2,7 @@ package scalqa; package Stream; package Flow; package _info
 
 trait _Trait[A] { self: Flow[A] =>
 
-  def ilkOpt: Opt[Any.Class.Ilk]
+  def ilkOpt: Opt[Any.Ilk]
 
   def sizeOpt: Opt.Int
 
@@ -10,7 +10,7 @@ trait _Trait[A] { self: Flow[A] =>
 
   def toInfo = Z.info.toInfo(this)
 
-  @inline private[scalqa] def ilkDefault: Any.Class.Ilk = { val o = ilkOpt; if (o.isVoid) Ilk.Objects else o.value }
+  @inline private[scalqa] def ilkDefault: Any.Ilk = { val o = ilkOpt; if (o.isVoid) Ilk.Refs else o.value }
 
 }
 /*___________________________________________________________________________
@@ -36,9 +36,9 @@ ___________________________________________________________________________*/
  *
  *     For example, if sizeOpt returns 0, processing logic should not even attempt to confirm that pipeline is empty
  *
- * @def ilkOpt -> Data [Ilk] if known
+ * @def ilkOpt -> Data [[Any.Ilk]] if known
  *
- *     Stream elements [Ilk] if known for granted
+ *     Stream elements [[Any.Ilk]] if known for granted
  *
  * @def toInfo -> Metadata as String
  *

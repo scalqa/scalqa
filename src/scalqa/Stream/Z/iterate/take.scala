@@ -6,7 +6,7 @@ private[Stream] object take {
     var i = 0
     val a = s.ilkOpt.map(_.mkArray[A](cnt)) or {
       val v = s.pump
-      val a = v.Class.ilk.mkArray[A](cnt)
+      val a = v.I.ilk.mkArray[A](cnt)
       a(0) = v
       i += 1
       a

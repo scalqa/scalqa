@@ -19,7 +19,7 @@ private[Stream] object letType {
       s.foreach(new Each)
     }
 
-    @inline override def ilkOpt = Ilk.make(t.runtimeClass)
+    @inline override def ilkOpt = Ilk.fromClass(t.runtimeClass)
 
     @inline override def real = s
   }

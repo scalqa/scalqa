@@ -36,7 +36,7 @@ object Fail {
   trait Exception extends java.lang.RuntimeException {
     setStackTrace(getStackTrace.drop(1))
 
-    override def toString = { val n = this.Class.lastName; val m = getLocalizedMessage(); if (m != null) n + ": " + m else n }
+    override def toString = { val n = this.I.Class.lastName; val m = getLocalizedMessage(); if (m != null) n + ": " + m else n }
   }
   class NoMessage extends Exception
   class Message(m: String) extends java.lang.RuntimeException(m \/ null) with Exception

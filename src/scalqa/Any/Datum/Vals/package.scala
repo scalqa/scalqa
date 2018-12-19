@@ -3,7 +3,7 @@ package scalqa; package Any; package Datum
 package object Vals {
   private[scalqa] def This = this
 
-  def make[A](vs: A*)(implicit setup: Any.Datum.Setup[A]): Vals[A] = {
+  def *[A](vs: A*)(implicit setup: Any.Datum.Setup[A]): Vals[A] = {
     val a = setup.ilk.mkArray[setup.VALUE](vs.size)
     a.updateAll(vs.all.map((v: A) => setup.Map.undo(v)))
     new Vals[A](a, setup)
@@ -24,3 +24,9 @@ package object Vals {
   __\  \/ /___/ __  |/ /__/ /_/ /_/ __  |   (c) 2018, Datamata Corporation
  /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
+/**
+ * @def *[A] -> Vararg constructor
+ *
+ *    Creates [[Vals]] with specified values
+ *
+ */

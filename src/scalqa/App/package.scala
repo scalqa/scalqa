@@ -3,18 +3,18 @@ package scalqa
 import Util.Time.PreciseDuration
 
 package object App {
-  type Event = Event._Trait
 
-  def pause(tl: Duration): Unit = scala.concurrent.blocking { 
-    if (tl.totalMillis > 0) { val o = new Object(); o.synchronized(o.wait(tl.totalMillis.toLong)) } }
+  def pause(tl: Duration): Unit = scala.concurrent.blocking {
+    if (tl.totalMillis > 0) { val o = new Object(); o.synchronized(o.wait(tl.totalMillis.toLong)) }
+  }
 
-  def runEvery(period: PreciseDuration, f: => Any): App.Event = runEveryIn(period, period, f)
+  def runEvery(period: PreciseDuration, f: => Any): EventControl = runEveryIn(period, period, f)
 
-  def runEveryIn(period: PreciseDuration, initDelay: PreciseDuration, f: => Any): App.Event = new Event.Z.Scheduled(() => f) {
+  def runEveryIn(period: PreciseDuration, initDelay: PreciseDuration, f: => Any): EventControl = new Util.EventControl.Z.Scheduled(() => f) {
     val future = Setup.SchedularPro().scheduleAtFixedRate(this, initDelay.totalNanos.toLong, period.totalNanos.toLong, java.util.concurrent.TimeUnit.NANOSECONDS)
   }
 
-  def runIn(delay: PreciseDuration, job: => Any): App.Event = new Event.Z.Scheduled(() => job) {
+  def runIn(delay: PreciseDuration, job: => Any): EventControl = new Util.EventControl.Z.Scheduled(() => job) {
     val future = Setup.SchedularPro().schedule(this, delay.totalNanos.toLong, java.util.concurrent.TimeUnit.NANOSECONDS)
   }
 
@@ -38,6 +38,18 @@ package object App {
  /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
+ * @def printStack -> Print current Stack Trace
+ *
+ * @def executionContext -> Default ExecutionContext
+ *
+ *     ExecutionContext used by default
+ *
+ *     It is defined in [[App.Setup]]
+ *
+ * @def exit -> Kills process
+ *
+ *     Calls System.exit(0)
+ *
  * @def pause -> Pauses current execution thread
  *
  *   {{{
@@ -63,7 +75,7 @@ ___________________________________________________________________________*/
  *     {{{
  *        // Prints time every 1 second for the rest of the day
  *
- *        val day = Day.get
+ *        val day = Day.now
  *
  *        App.runEvery(1.Seconds, Time.now lp).cancelIf(day != Day.make)
  *     }}}

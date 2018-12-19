@@ -16,9 +16,9 @@ private[Stream] object sum {
   def few[A, B](src: Stream[A], f: Seq[Mapping[A, B]])(implicit n: Numeric[B]): Idx[B] = {
     class Result extends Consumer[A] with Idx[B] with Any.Able.Void {
       val size = f.size
-      val c = n.zero.Class
-      val array = c.ilk.mkArray[B](size)
-      if (!c.real.isPrimitive) array.fill(n.zero)
+      val i = n.zero.I.ilk
+      val array = i.mkArray[B](size)
+      if (!i.isPrimitive) array.fill(n.zero)
       var _isVoid = true
       def accept(v: A) {
         _isVoid = false

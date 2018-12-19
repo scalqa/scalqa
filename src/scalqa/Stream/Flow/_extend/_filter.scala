@@ -20,9 +20,9 @@ ___________________________________________________________________________*/
 /**
  * @trait _filter -> `Filter Interface`
  *
- *    Base word `let` means 'allow only' certain objects trough the pipeline
+ *    Base word `let` means 'allow only' certain elements trough the pipeline
  *
- *    Base word `drop` means 'discard' certain objects from the pipeline
+ *    Base word `drop` means 'discard' certain elements from the pipeline
  *
  *
  * @def let( ->  Main filter

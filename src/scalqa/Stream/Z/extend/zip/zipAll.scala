@@ -22,7 +22,7 @@ private[Stream] object zipAll {
 
     override def sizeOpt = one.sizeOpt.letMix(two.sizeOpt)(_ max _)
 
-    override def ilkOpt = Ilk.Objects
+    override def ilkOpt = Ilk.Refs
 
     override def toInfoTree = new Pro.Info.Tree(toInfo, one.toInfoTree, two.toInfoTree)
 

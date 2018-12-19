@@ -2,7 +2,7 @@ package scalqa; package Idx
 
 package object I {
 
-  def make[A](vs: A*)(implicit i: Ilk[A]): I[A] = vs match {
+  def *[A](vs: A*)(implicit i: Ilk[A]): I[A] = vs match {
     case a: scala.collection.mutable.WrappedArray[A] => i.mkValue(a.array)
     case _ => i.mkValue(vs.all)
   }

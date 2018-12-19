@@ -6,6 +6,8 @@ import scalqa.Stream.Z
 
 private[scalqa] trait Streaming {
 
+  @inline implicit def zzStream_Array[@specialized(DATA) A](v: Array[A]): ~[A] with All[A] = Custom.Array.Z.stream(v)
+
   @inline implicit def zzStream_Interface[@specialized(DATA) A](v: ~[A]) = v.asInstanceOf[scalqa.Stream._Class[A]]
 
   @inline implicit def zzStream_Java_Iterable[@specialized(DATA) A: Ilk](v: java.lang.Iterable[A]): ~[A] with All[A] = Z.A.Java.Iterable.toStream[A](v)
@@ -13,8 +15,6 @@ private[scalqa] trait Streaming {
   @inline implicit def zzStream_Java_Iterator[@specialized(DATA) A: Ilk](v: java.util.Iterator[A]): ~[A] with All[A] = Z.A.Scala.Iterator.toStream[A](v)
 
   @inline implicit def zzStream_Java_Stream[@specialized(DATA) A](v: java.util.stream.Stream[A]): ~[A] with All[A] = zzStream_Java_Iterator(v.iterator)
-
-  @inline implicit def zzStream_Scala_Array[@specialized(DATA) A](v: scala.Array[A]): ~[A] with All[A] = Custom.Array.Z.stream(v)
 
   @inline implicit def zzStream_Scala_Traversable[@specialized(DATA) A: Ilk](v: collection.GenTraversableOnce[A]): ~[A] with All[A] = Z.A.Scala.GenTraversableOnce.toStream[A](v)
 
@@ -32,7 +32,7 @@ private[scalqa] trait Streaming {
  /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
- *  @def zzStream_Scala_Array -> Array to Stream
+ *  @def zzStream_Array -> Array to Stream
  *
  *       Globally provides implicit conversion from Array to [[Stream]]
  *

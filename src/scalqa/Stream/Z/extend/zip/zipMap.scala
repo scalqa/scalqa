@@ -8,7 +8,7 @@ private[Stream] class zipMap[A, B](val real: Stream[A], f: Mapping[A, B]) extend
 
   @inline def foreach(c: Consumer[(A, B)]) = real.foreach(v => c.accept((v, f(v))))
 
-  @inline override def ilkOpt = Ilk.Objects
+  @inline override def ilkOpt = Ilk.Refs
 
 }
 /*___________________________________________________________________________

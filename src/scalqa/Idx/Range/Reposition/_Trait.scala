@@ -30,7 +30,7 @@ ___________________________________________________________________________*/
  *      - First, based on some Ordering , we create a [[Reposition]] object, which captures all necessary position permutations
  *      - Second, apply reposition to the list
  *   {{{
- *       val buffer = (0 ~+ *(3, 1, 2) + 4).to[Idx.M]
+ *       val buffer = (0 ~+~ (3 ~+ 1 + 2) + 4).to[Idx.M]
  *
  *       buffer.all lp      // Prints:  ~(0, 3, 1, 2, 4)
  *

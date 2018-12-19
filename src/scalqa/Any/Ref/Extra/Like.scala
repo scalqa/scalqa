@@ -5,7 +5,7 @@ trait Like {
 
   @inline private[Extra] def _topEntry = { if (top.isCancelled) synchronized { top = top.child }; top }
 
-  private[Extra] def _addEntry(scope: AnyRef, _this: Any): App.Event = synchronized {
+  private[Extra] def _addEntry(scope: AnyRef, _this: Any): EventControl = synchronized {
     val te = _topEntry
     if (scope != Z.Entry.O.Scope && !te.isInstanceOf[Z.Entry.O])
       top = new Z.Entry(te, scope, _this)

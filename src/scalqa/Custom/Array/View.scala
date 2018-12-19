@@ -3,7 +3,7 @@ package scalqa; package Custom; package Array
 trait View[@specialized(DATA) A] extends Any with Any.Able.Void {
   protected type TYPE
   protected def base: Array[A]
-  protected def make: Array[A] => TYPE 
+  protected def make: Array[A] => TYPE
 
   def apply(i: Int): A
   def size: Int
@@ -115,7 +115,7 @@ ___________________________________________________________________________*/
  *
  *   {{{
  *     val a1: Refs[Char] = Refs.make('a', 'b', 'c')
- *     val a2: Refs[Char] = a1 +~ *('x', 'y', 'z') +~ ('x' <> 'z')
+ *     val a2: Refs[Char] = a1 +~ ~.*('x', 'y', 'z') +~ ('x' <> 'z')
  *
  *     a1.all.lp // Prints: ~(a, b, c)
  *     a2.all.lp // Prints: ~(a, b, c, x, y, z, x, y, z)

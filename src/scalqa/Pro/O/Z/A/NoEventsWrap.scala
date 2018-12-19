@@ -4,7 +4,7 @@ private[Pro] class NoEventsWrap[A](value: A) extends O[A] {
 
   def apply = value
 
-  def onChange(f: () => Any): App.Event = \/
+  def onChange(f: () => Any): EventControl = \/
 
 }
 /*___________________________________________________________________________

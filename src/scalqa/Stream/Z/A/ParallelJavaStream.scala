@@ -3,7 +3,7 @@ package scalqa; package Stream; package Z; package A
 import java.util.{ stream => J }
 import java.util.{ function => JF }
 
-private class ParallelJavaStream[A](private var java: J.Stream[A], var sizeOpt: Opt.Int, var ilkOpt: Opt[Any.Class.Ilk]) extends Flow[A] {
+private class ParallelJavaStream[A](private var java: J.Stream[A], var sizeOpt: Opt.Int, var ilkOpt: Opt[Any.Ilk]) extends Flow[A] {
 
   def isParallel = true
 

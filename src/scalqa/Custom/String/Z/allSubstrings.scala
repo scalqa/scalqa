@@ -9,7 +9,7 @@ private[String] class allSubstrings(val value: String, size: Int) extends Stream
 
   override def _size = value.length / size + (value.length % size).signum
 
-  override def ilkOpt = Ilk.Objects
+  override def ilkOpt = Ilk.Refs
 
 }
 /*___________________________________________________________________________

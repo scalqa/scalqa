@@ -3,7 +3,7 @@ package scalqa; package Idx; package O; package Z; package A; package OrderedPro
 private[scalqa] class Listener[A](r: Any.Ref.Weak[OrderedProxy[A]]) extends (Idx[Change[A]] => Any) {
 
   def apply(cc: Idx[Change[A]]) = synchronized {
-    val list = r.opt orElse { throw App.Event.CancelException }
+    val list = r.opt orElse { throw Util.EventControl.CancelException }
 
     def cnvrt(v: Change[A]): ~[Change[A]] = {
       val rng = v.range

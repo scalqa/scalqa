@@ -9,7 +9,7 @@ trait _Trait[@specialized(DATA) A] { self: Stream[A] =>
   def foreach(f: Consumer[A])
 
   // -----------------------------------------------------------------
-  def ilkOpt: Opt[Any.Class.Ilk] = Opt.Void
+  def ilkOpt: Opt[Any.Ilk] = Opt.Void
 
   def sizeOpt: Opt.Int = Opt.Int.Void
 

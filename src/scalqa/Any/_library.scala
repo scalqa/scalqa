@@ -10,8 +10,6 @@ class _library[A] private[scalqa] (protected val real: A) extends AnyVal {
   def ~+(value: A): ~[A] = Stream.Z.A.Two(real, value)
   def ~+~(that: ~[A]): ~[A] = if (that == null) real.I.~ else that.insertAt(0, real)
 
-  @inline def Class = new Any.Class[A](real.getClass.asInstanceOf[java.lang.Class[A]])
-
   @inline def isVoid: Boolean = Any.isVoid(real)
 
   @inline def I: Itself[A] = new Itself(real)
@@ -21,14 +19,14 @@ class _library[A] private[scalqa] (protected val real: A) extends AnyVal {
 
   def +-(v: Any): String = real.I.toString + " " + v
 
-  def <>(that: A)(implicit o: Ordering[A], i: Ilk[A]): Range[A] = Range.general(real, false, that, false)
-  def <>>(that: A)(implicit o: Ordering[A], i: Ilk[A]): Range[A] = Range.general(real, false, that, true)
-  def <<>(that: A)(implicit o: Ordering[A], i: Ilk[A]): Range[A] = Range.general(real, true, that, false)
-  def <<>>(that: A)(implicit o: Ordering[A], i: Ilk[A]): Range[A] = Range.general(real, true, that, true)
-  def <>+(intSize: Int)(implicit n: Numeric[A], i: Ilk[A]): Range[A] = Range.general(real, false, n.plus(real, n.fromInt(intSize)), false)
-  def <>>+(intSize: Int)(implicit n: Numeric[A], i: Ilk[A]): Range[A] = Range.general(real, false, n.plus(real, n.fromInt(intSize)), true)
-  def <>!(implicit o: Ordering[A], i: Ilk[A]): Range[A] = Range.one(real, false)
-  def <>>!(implicit o: Ordering[A], i: Ilk[A]): Range[A] = Range.one(real, true)
+  def <>(that: A)(implicit o: Ordering[A], i: scalqa.Ilk[A]): Range[A] = Range.general(real, false, that, false)
+  def <>>(that: A)(implicit o: Ordering[A], i: scalqa.Ilk[A]): Range[A] = Range.general(real, false, that, true)
+  def <<>(that: A)(implicit o: Ordering[A], i: scalqa.Ilk[A]): Range[A] = Range.general(real, true, that, false)
+  def <<>>(that: A)(implicit o: Ordering[A], i: scalqa.Ilk[A]): Range[A] = Range.general(real, true, that, true)
+  def <>+(intSize: Int)(implicit n: Numeric[A], i: scalqa.Ilk[A]): Range[A] = Range.general(real, false, n.plus(real, n.fromInt(intSize)), false)
+  def <>>+(intSize: Int)(implicit n: Numeric[A], i: scalqa.Ilk[A]): Range[A] = Range.general(real, false, n.plus(real, n.fromInt(intSize)), true)
+  def <>!(implicit o: Ordering[A], i: scalqa.Ilk[A]): Range[A] = Range.one(real, false)
+  def <>>!(implicit o: Ordering[A], i: scalqa.Ilk[A]): Range[A] = Range.one(real, true)
 }
 
 /*___________________________________________________________________________
@@ -54,14 +52,6 @@ ___________________________________________________________________________*/
  *        "".isVoid lp              // Prints: true
  *
  *        (\/ : Percent).isVoid lp  // Prints: true
- *     }}}
- *
- * @def Class -> Any.Class constractor
- *
- *     Built-in constructor for [[Any.Class]]
- *
- *     {{{
- *       "abc".Class lp  // Prints: java.lang.String
  *     }}}
  *
  * @def I: -> Any.Itself constractor
@@ -129,9 +119,9 @@ ___________________________________________________________________________*/
  *   Creates a [[Stream]] with `this` and elements of stream `that`
  *
  *   {{{
- *       1 ~+~ (2 <> 5) lp              // Prints: ~(1, 2, 3, 4, 5)
+ *       1 ~+~ (2 <> 5) lp                 // Prints: ~(1, 2, 3, 4, 5)
  *
- *       "aa" ~+~ *("bb","cc","dd") lp  // Prints: ~(aa, bb, cc, dd)
+ *       "aa" ~+~ ("bb" ~+ "cc" +"dd") lp  // Prints: ~(aa, bb, cc, dd)
  *   }}}
  *
  * @def Opt -> Opt Constructor

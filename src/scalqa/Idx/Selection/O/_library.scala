@@ -2,7 +2,7 @@ package scalqa; package Idx; package Selection; package O
 
 trait _library[A] extends Any with Selection._library[A] with Any.Wrap[Selection.O[A]] {
 
-  def onChange(f: => Any): App.Event = real.onChange(_ => f)
+  def onChange(f: => Any): EventControl = real.onChange(_ => f)
 
   override def asPro(dflt: A): Pro.O[A] = new Pro.O[A] { def apply = real.positions.getOpt(0).map(real(_)) or dflt; def onChange(f: () => Any) = real.onChange(_ => f()) }
 

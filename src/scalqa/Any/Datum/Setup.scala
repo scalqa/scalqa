@@ -1,7 +1,7 @@
 package scalqa; package Any; package Datum
 
 abstract class Setup[TYPE] private[scalqa] {
-  private[scalqa]type VALUE
+  private[scalqa] type VALUE
 
   protected def make(v: VALUE): TYPE
 
@@ -14,7 +14,7 @@ abstract class Setup[TYPE] private[scalqa] {
     @inline def undo(v: TYPE): VALUE = Setup.this.undo(v)
   }
 
-  private[scalqa] def ilk: Class.Ilk
+  private[scalqa] def ilk: Ilk
   @inline private[scalqa] def This: this.type = this
 }
 

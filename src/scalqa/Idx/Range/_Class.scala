@@ -1,18 +1,18 @@
-package scalqa; package Idx; package Range
+package scalqa; package Idx.Range
 
 class _Class private[Idx] (protected val value: Long) extends AnyVal with scalqa.Range[Int] {
-  protected override type this_type = Range
+  protected override type this_type = Idx.Range
 
   def size: Int = value << 32 >>> 32 toInt
 
-  def toArray: scala.Array[Int] = Z.array(this)
+  def toArray: Array[Int] = Z.array(this)
 
   def toInts: Ints = scalqa.Ints.make(this)
 
   // -------------------------------------------------------------------------------------------
-  def move(positions: Int): Range = (start + positions) <>>+ size
+  def move(positions: Int): Idx.Range = (start + positions) <>>+ size
 
-  def resizeBy(change: Int): Range = start <>> this.end + change
+  def resizeBy(change: Int): Idx.Range = start <>> this.end + change
 
   protected def ilk = Ilk.Ints
 
@@ -26,22 +26,22 @@ class _Class private[Idx] (protected val value: Long) extends AnyVal with scalqa
 
   override def ordering = Ordering.Int
 
-  override def all(implicit is: Numeric[Int]): ~[Int] = Z.stream(start,size)
+  override def all(implicit is: Numeric[Int]): ~[Int] = Z.stream(start, size)
 
   override def allStep(step: Int)(implicit is: Numeric[Int]): ~[Int] = if (step == 0) App.Fail("0 step") else Z.stream.step(this, step)
 
   // -------------------------------------------------------------------------------------------
   protected override def startContains(i: Int, x: Boolean = false): Boolean = start <= i
   protected override def endContains(i: Int, x: Boolean = false): Boolean = end > i || x && end == i
-  protected override def thisClass: Class[_] = classOf[Range]
-  protected def make(start: Int, startExcl: Boolean, end: Int, endExcl: Boolean): Range = make(start, startExcl, end, endExcl)
+  protected override def thisClass: Class[_] = classOf[Idx.Range]
+  protected def make(start: Int, startExcl: Boolean, end: Int, endExcl: Boolean): Idx.Range = make(start, startExcl, end, endExcl)
 }
 
 object _Class {
 
-  implicit def zzMake(or: scalqa.Range[Int]): Range = Range.make(or)
+  implicit def zzMake(or: scalqa.Range[Int]): Idx.Range = Idx.Range.make(or)
 
-  implicit def zzFilter(r: Range): Stream.Filter[Int] = r.contains
+  implicit def zzFilter(r: Idx.Range): Stream.Filter[Int] = r.contains
 }
 /*___________________________________________________________________________
      __________ ____   __   ______  ____
@@ -119,7 +119,7 @@ ___________________________________________________________________________*/
  *
  * @def toArray -> Array of indexes
  *
- *    Returns all indexes belonging to the range as [[Array  scala.Array[Int]]]
+ *    Returns all indexes belonging to the range as [[Array Array[Int]]]
  *    {{{
  *      (5 <> 10).toArray.all lp // Prints: ~(5, 6, 7, 8, 9, 10)
  *    }}}

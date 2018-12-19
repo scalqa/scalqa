@@ -36,7 +36,7 @@ class Period private[Time] (val start: Time, val end: Time) extends Range[Time] 
 
   protected def make(start: Time, startExcl: Boolean, end: Time, endExcl: Boolean) = Period.make(start, end)
   protected override def thisClass: Class[_] = classOf[Period]
-  protected def ilk = Ilk.Objects
+  protected def ilk = Ilk.Refs
 }
 
 object Period extends Util.Void.Setup[Period](new Period(\/, \/) with Void) {

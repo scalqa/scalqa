@@ -1,6 +1,6 @@
 package scalqa; package Util; package Opt
 
-final class _Class[+A] private[Opt] (protected[scalqa] val real: Any) extends AnyVal with Any.Able.Void with Any.Able.ToString {
+final class _Class[+A] private[Opt] (protected[scalqa] val real: Any) extends AnyVal with Any.Able.Void {
   @inline private def _is = !real.isInstanceOf[VoidValue]
   @inline private def _val: A = real.asInstanceOf[A]
 
@@ -24,7 +24,7 @@ final class _Class[+A] private[Opt] (protected[scalqa] val real: Any) extends An
 
   def orElse[B >: A](default: => B): B = if (_is) _val else default
 
-  def toOutcome(d: => Deficiency = "Value is not available"): Out[A] = if (isVoid) d else _val
+  def toOut(d: => Deficiency = "Value is not available"): Out[A] = if (isVoid) d else _val
 
   override def toString = if (isVoid) "Opt.Void" else "Opt(" + real + ")"
 
@@ -236,6 +236,9 @@ ___________________________________________________________________________*/
  *
  * @def toOut -> Convert to outcome
  *
- *    Convert this [Opt]] to outcome, optionally providing custom [[Deficiency]] for void case
+ *    Convert this [[Opt]] to outcome, optionally providing custom [[Deficiency]] for void case
  *
+ * @def toString -> Convert to String
+ *
+ *    Returns "Opt.Void" or "Opt(" + value + ")" String
  */

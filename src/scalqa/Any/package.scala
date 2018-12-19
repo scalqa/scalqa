@@ -1,8 +1,8 @@
 package scalqa
 
 package object Any {
-  type Class[A] = Class._Class[A]
   type Datum[A, B] = Datum._Trait[A, B]
+  type Ilk = Ilk._Class
   type Itself[A] = Itself._Class[A]
   type O = O._Trait
   type Collection[+A] = Collection._Trait[A]
@@ -21,7 +21,7 @@ package object Any {
     case _            => false
   }
 
-  private[scalqa] def toString(v: Any) = v.Class.label.copyAfter("scalqa.")
+  private[scalqa] def toString(v: Any) = v.I.Class.label.copyAfter("scalqa.")
 
 }
 /*___________________________________________________________________________

@@ -35,7 +35,7 @@ private[Stream] object sliding {
       @inline def prime = frame.load
       @inline def pump: Stream[A] = frame.deliver
       @inline def foreach(c: Consumer[~[A]]) = while (prime) c.accept(pump)
-      @inline override def ilkOpt = Ilk.Objects
+      @inline override def ilkOpt = Ilk.Refs
       @inline def real = s
     }
   }

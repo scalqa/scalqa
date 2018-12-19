@@ -2,11 +2,11 @@ package scalqa; package Any; package O
 
 class _library[A <: O] protected[O] (protected val _this: A) extends AnyVal {
 
-  def onObservableChange(f: () => Any): App.Event = _Trait.onObservableChange(_this, f)
+  def onObservableChange(f: () => Any): EventControl = _Trait.onObservableChange(_this, f)
 
-  def onObservableChangeRun(f: => Any): App.Event = _this.onObservableChange(() => f)
+  def onObservableChangeRun(f: => Any): EventControl = _this.onObservableChange(() => f)
 
-  def onObservableChangeSelf(f: A => Any): App.Event = _this.onObservableChange(() => f(_this))
+  def onObservableChangeSelf(f: A => Any): EventControl = _this.onObservableChange(() => f(_this))
 
 }
 

@@ -23,7 +23,7 @@ object _Trait extends Util.Void.Setup.Typed[Any.Collection](new Any.Collection[N
 ___________________________________________________________________________*/
 /**
  * @trait _Trait ->
- *     `Collection`
+ *    `Collection`
  *
  *    "Collection" is the root of  [[Features.Simple_Collections Scalqa Collections Framework]]
  *
@@ -37,7 +37,7 @@ ___________________________________________________________________________*/
  *    Readily available, not calculated element count
  *
  *    {{{
- *      *(1,3,5,7).to[Idx].size.lp  // Prints: 4
+ *      Idx.*(1,3,5,7).size.lp  // Prints: 4
  *    }}}
  *
  *

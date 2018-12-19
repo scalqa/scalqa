@@ -20,9 +20,9 @@ private[Stream] object average {
     class Result extends Consumer[A] with Idx[B] with Any.Able.Void {
       val n = m.custom
       val size = f.size
-      val c = n.zero.Class
-      val array = c.ilk.mkArray[B](size)
-      if (!c.real.isPrimitive) array.fill(n.zero)
+      val i = n.zero.I.ilk
+      val array = i.mkArray[B](size)
+      if (!i.isPrimitive) array.fill(n.zero)
       var cnt = 0
 
       override def isVoid = cnt == 0

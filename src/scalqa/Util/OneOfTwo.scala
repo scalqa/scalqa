@@ -19,6 +19,7 @@ class OneOfTwo[+A, +B] private (private val real: Any) extends AnyVal with Any.A
   def any: Any = real match { case v: Two[B] => v.value; case v => v }
 
   def apply(one: A => Any, two: B => Any): Unit = real match { case v: Two[B] => two(v.value); case v => one(v.asInstanceOf[A]) }
+  def convert[C](f1: A => C, f2: B => C): C = real match { case v: Two[B] => f2(v.value); case v => f1(v.asInstanceOf[A]) }
 
   override def toString = if (isOne) "One(" + real + ")" else "Two(" + twoOpt.value + ")"
 }
@@ -66,11 +67,11 @@ ___________________________________________________________________________*/
  *
  * @def mapOne -> Map one
  *
- *   Maps one value or returns [[OneOfTwo]] as is if it is two
+ *   Maps one value or returns [[OneOfTwo]] as is, if it is two
  *
  * @def mapTwo -> Map one
  *
- *   Maps two value or returns [[OneOfTwo]] as is if it is one
+ *   Maps two value or returns [[OneOfTwo]] as is, if it is one
  *
  * @def oneOpt -> One value
  *
@@ -92,7 +93,11 @@ ___________________________________________________________________________*/
  *
  *     Returns [[OneOfTwo]] value, whatever it is: one or two
  *
- * @def apply -> Process [[OneOfTwo]], both: one or two
+ * @def apply -> Process [[OneOfTwo]], either: one or two
  *
  *     Takes two functions, one to process one value, another - two value
+ *
+ * @def convert -> Convert [[OneOfTwo]]
+ *
+ *     Takes two functions, one to convert one value, another - two value
  */

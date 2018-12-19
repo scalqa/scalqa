@@ -2,7 +2,7 @@ package scalqa; package Any; package Itself
 
 class _Class[A] private[scalqa] (protected val real: A) extends AnyVal  {
 
-  def id: String = real.Class.label + '@' + hashIndex
+  def id: String = Class.label + '@' + hashIndex
 
   @inline def hashIndex: Int = Z.hashIndex(real)
 
@@ -17,13 +17,17 @@ class _Class[A] private[scalqa] (protected val real: A) extends AnyVal  {
 
   def toArray(implicit ct: ClassTag[A]): Array[A] = { val a = ct.newArray(1); a(0) = real; a }
 
-  def to[THIS[A]](implicit to: To.Converter[THIS], i: Ilk[A]): THIS[A] = to.make(real, i)
+  def to[THIS[A]](implicit to: To.Converter[THIS], i: Ilk.Tag[A]): THIS[A] = to.make(real, i)
 
   def ~ : ~[A] = Stream.Z.A.One(real)
 
   def repeat(times: Int): ~[A] = new Stream.A.Indexed[A] { val _size = times max 0; @inline def _apply(i: Int) = real }
 
   def unfold(f: Stream.Mapping[~[A], A]): Stream[A] = ~.unfold(f)
+
+  def ilk: Ilk = Ilk.fromClass(real.getClass)
+
+  @inline def Class = new Class[A](real.getClass.asInstanceOf[java.lang.Class[A]])
 
   // ------------------------------------------------------------------------------------------------------------
   @inline def apply(f: A => Any): A = { f(real); real }
@@ -55,6 +59,19 @@ ___________________________________________________________________________*/
  *
  *       txt.I.hashIndex lp           // Prints: 1
  *     }}}
+ *
+ * @def toArray -> Create single element array
+ *
+ * @def ~ : -> Create single element [[Stream]]
+ *
+ * @def Class -> Class constructor
+ *
+ *     Built-in constructor for [[Class]]
+ *
+ *     {{{
+ *       "abc".I.Class.name lp  // Prints: java.lang.String
+ *     }}}
+ *
  *
  * @def as[ -> Adapt
  *

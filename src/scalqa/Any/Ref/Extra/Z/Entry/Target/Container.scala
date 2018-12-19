@@ -13,7 +13,11 @@ private[Entry] trait Container {
 
   def fire[T](f: T => Any): Unit = _this match {
     case vc: Container => vc.fire(f)
-    case t             => try { f(t.asInstanceOf[T]) } catch { case App.Event.CancelException => entry.cancel }
+    case t =>
+      try { f(t.asInstanceOf[T]) }
+      catch {
+        case Util.EventControl.CancelException => entry.cancel
+      }
   }
 }
 /*___________________________________________________________________________

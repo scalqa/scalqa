@@ -11,7 +11,7 @@ private[scalqa] object One {
 
     override def sizeOpt = if (hot) 1 else 0
 
-    override def ilkOpt = v.Class.ilk
+    override def ilkOpt = v.I.ilk
   }
 }
 

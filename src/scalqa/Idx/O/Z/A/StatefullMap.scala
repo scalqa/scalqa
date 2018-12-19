@@ -25,7 +25,7 @@ private object StatefullMap {
     hardRef = null
 
     def apply(coll: Idx[Change[A]]) {
-      val real = weak.opt orElse { throw App.Event.CancelException }
+      val real = weak.opt orElse { throw Util.EventControl.CancelException }
 
       real.real.multiChange(l => coll.all.foreach({
         case c: Add[A]               => c.range.all.zip(c.items.all.map(real.mp(_))).foreach(_(l.addAt))

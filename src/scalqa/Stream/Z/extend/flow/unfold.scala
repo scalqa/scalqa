@@ -18,7 +18,7 @@ private[Stream] object unfold {
 
     override def foreach(f: Consumer[A]) = App.Fail.state("Cannot pump all of infinite Stream")
 
-    override def ilkOpt = buf.getOpt(0).map(_.Class.ilk)
+    override def ilkOpt = buf.getOpt(0).map(_.I.ilk)
   }
 }
 /*___________________________________________________________________________

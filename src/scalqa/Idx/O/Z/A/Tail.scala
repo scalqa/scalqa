@@ -2,7 +2,7 @@ package scalqa; package Idx; package O; package Z; package A
 
 private[scalqa] class Tail[A](protected override val real: O[A], start: Int) extends Idx.Z.A.Tail[A](real, start) with O[A] {
 
-  def onChange(f: Idx[Change[A]] => Any): App.Event = real.onChange(App.Event.moveId1(f, _.all.flatMap[Change[A]](c => {
+  def onChange(f: Idx[Change[A]] => Any): EventControl = real.onChange(EventControl.moveId1(f, _.all.flatMap[Change[A]](c => {
     c match {
       case c: Add[A] =>
         val r = c.range

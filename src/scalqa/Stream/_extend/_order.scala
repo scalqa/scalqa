@@ -47,7 +47,7 @@ ___________________________________________________________________________*/
  *   Sorts pipeline on element's property, which is provided by given function
  *
  *   {{{
- *      *("aaaa", "bb", "ccc", "d").sortBy(_.length).lp
+ *      ~.*("aaaa", "bb", "ccc", "d").sortBy(_.length).lp
  *
  *      // Output
  *      ~(d, bb, ccc, aaaa)

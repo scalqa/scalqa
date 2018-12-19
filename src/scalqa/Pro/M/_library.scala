@@ -6,9 +6,9 @@ trait _library[A] extends Any with Pro._library[A] with Any.Wrap[M[A]] {
 
   def asBiMappedView[B](bm: BiMap[A, B]): M[B] = new Z.A.AsBiMap(real, bm)
 
-  def bindTo(z: O[_ <: A]): App.Event = z.onChange(() => real() = z())
+  def bindTo(z: O[_ <: A]): EventControl = z.onChange(() => real() = z())
 
-  def bindTo[B <: A](z: Idx.Selection.O[B], dflt: A): App.Event = z.onChange(real() = z.positions.getOpt(0).map(z(_)) orElse dflt)
+  def bindTo[B <: A](z: Idx.Selection.O[B], dflt: A): EventControl = z.onChange(real() = z.positions.getOpt(0).map(z(_)) orElse dflt)
 
 }
 

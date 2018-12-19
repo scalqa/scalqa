@@ -17,17 +17,17 @@ abstract class Setup[ENUM <: Enum[ENUM]] protected extends Package[ENUM] {
       let(_.getParameterCount == 0).
       map(f => (f.getName, f.invoke(this).asInstanceOf[ENUM])).
       sortBy(_._2).
-      peekIdx((i, t) => assert(items(i) == t._2, "Reflected instances do not match created get instances for " + this.Class.label))
+      peekIdx((i, t) => assert(items(i) == t._2, "Reflected instances do not match created get instances for " + this.I.Class.label))
   }
 
   private[Enum] def register(v: ENUM): Int = {
     if (isSealed) App.Fail("Enum sealed and cannot be modified")
-    if (v.isVoid) { assert(!voidOpt, "Second Void value: " + v.Class + ", " + voidOpt.value.Class); voidOpt = v }
+    if (v.isVoid) { assert(!voidOpt, "Second Void value: " + v.I.Class + ", " + voidOpt.value.I.Class); voidOpt = v }
     _items += v
     _items.size - 1
   }
 
-  implicit def zzMake(v: \/): ENUM = voidOpt or App.Fail("No Void value setup for: ", this.Class.label)
+  implicit def zzMake(v: \/): ENUM = voidOpt or App.Fail("No Void value setup for: ", this.I.Class.label)
 
   implicit val Ordering: Ordering[ENUM] = _Ordering
 

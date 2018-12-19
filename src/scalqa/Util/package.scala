@@ -9,6 +9,7 @@ package object Util {
   type Future[+A] = Future._Trait[A]
   type Opt[+A] = Opt._Class[A]
   type Range[A] = Range._Trait[A]
+  type EventControl = EventControl._Trait
 
   private[scalqa] val One: Long = 1L
   private[scalqa] val OneThousand = One * 1000L

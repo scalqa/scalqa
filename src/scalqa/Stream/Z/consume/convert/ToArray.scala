@@ -22,7 +22,7 @@ private[Stream] object ToArray {
         var b = false
         var bin: Idx.Array.Buffer[A] = null
         def accept(v: A) = {
-          if (b) { b = false; bin = v.Class.ilk.mkBuffer[A](f.sizeOpt) }
+          if (b) { b = false; bin = v.I.ilk.mkBuffer[A](f.sizeOpt) }
           bin.add(v)
         }
       }

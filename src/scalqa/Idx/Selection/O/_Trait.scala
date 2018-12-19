@@ -2,9 +2,9 @@ package scalqa; package Idx; package Selection; package O
 
 trait _Trait[A] extends Selection[A] with Any.O {
 
-  def onChange(f: this.type => Any): App.Event
+  def onChange(f: this.type => Any): EventControl
 
-  def onChangeRun(f: => Any): App.Event = onChange(_ => f)
+  def onChangeRun(f: => Any): EventControl = onChange(_ => f)
 
   protected def onObservableChange(on: () => Any) = onChange(_ => on())
 }

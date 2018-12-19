@@ -7,7 +7,7 @@ abstract class Setup[TYPE <: Datum.Ref[TYPE, VAL], VAL] extends Any.Datum.Setup[
 
   protected def undo(v: TYPE): VALUE = _Trait.real(v)
 
-  private[scalqa] def ilk = Ilk.Objects
+  private[scalqa] def ilk = Ilk.Refs
 
 }
 
