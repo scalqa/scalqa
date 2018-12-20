@@ -21,12 +21,12 @@ package object Out {
  /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
- * @def apply[A](v -> 'get' overload
+ * @def apply[A](v -> 'make' overload
  *
- *     Same as 'get' for shorter expression where applicable
+ *     Same as 'make' for shorter expression where applicable
  *
- * @def apply[A](d -> 'get' overload
+ * @def apply[A](d -> 'make' overload
  *
- *     Same as 'get' for shorter expression where applicable
+ *     Same as 'make' for shorter expression where applicable
  *
  */

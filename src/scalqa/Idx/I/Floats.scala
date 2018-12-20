@@ -8,7 +8,6 @@ class Floats private[I] (protected val base: Array[Float]) extends AnyVal with I
 
   @inline def apply(i: Int) = base(i)
   @inline def size: Int = base.length
-  @inline def length: Int = base.length
   @inline override def all: ~[Float] = Custom.Array.Z.stream(base)
 
   @inline override def copy(r: Idx.Range) = new Floats(AZ.copy.range(base, r))
@@ -41,6 +40,6 @@ ___________________________________________________________________________*/
  *   [[Floats]] is often created from a [[Stream]]:
  *
  *   {{{
- *       (1.0F ~+ 2 + 3).toPrimitive[Floats]
+ *       (1.0F ~+ 2 + 3).toRaw[Floats]
  *   }}}
  */

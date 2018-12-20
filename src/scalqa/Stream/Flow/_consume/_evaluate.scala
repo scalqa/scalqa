@@ -34,9 +34,6 @@ ___________________________________________________________________________*/
 /**
  * @trait _evaluate -> `Evaluate Interface`
  *
- *    @define always This method always fully pumps all pipeline elements
- *
- *
  * @def lookupOpt -> Find first matching option
  *
  *     The found element may be converted as well
@@ -54,15 +51,9 @@ ___________________________________________________________________________*/
  *
  *    {{{ ('a' <> 'z').all.count.lp  // Prints: 26 }}}
  *
- *    @note $always
- *
- *
  * @def count( -> Element conditional count
  *
  *    Returns count of elements satisfying the filter function
- *
- *    @note $always
- *
  *
  * @def findOpt -> Find
  *
@@ -119,7 +110,6 @@ ___________________________________________________________________________*/
  *    {{{
  *      (1 <> 1000).all.peek(_ => App.pause(1.Millis)).countAndTime.lp // Prints: (1000,1.004 sec)
  *    }}}
- *    @note $always
  *
  * @def countFew ->  Element multi count
  *
@@ -133,11 +123,11 @@ ___________________________________________________________________________*/
  *
  *     @example
  *     {{{
- *       val (all, odd, even) = (1 <> 50).all.countFew(ANY, _ % 2 == 1, _ % 2 == 0).to3
+ *       val (all, odd, even) = (1 <> 50).all.countFew(ANY, _ % 2 == 1, _ % 2 == 0).toTuple3
  *
- *       all  lp "all="   // Prints: all=50
- *       odd  lp "odd="   // odd=25
- *       even lp "even="  // even=25
+ *       "all=" + all lp;    // Prints: all=50
+ *       "odd=" + odd lp;    // Prints: odd=25
+ *       "even=" + even lp;  // Prints: even=25
  *
  *        // ----------------------------------------------------------------------------------
  *
@@ -149,5 +139,4 @@ ___________________________________________________________________________*/
  *
  *       count(\/).Opt lp       // Prints: Opt.Void
  *     }}}
- *     @note $always
  */

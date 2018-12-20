@@ -44,7 +44,7 @@ ___________________________________________________________________________*/
  *     // vector stores 1,000,000 objects Percent
  *
  *
- *     val values: Vals[Percent] = (1 <> 1000000).all.map(_.Percent).toValues
+ *     val values: Vals[Percent] = (1 <> 1000000).all.map(_.Percent).toVals
  *
  *     // values stores a single Array[Double] object, holding 1,000,000 primitive values
  *   }}}

@@ -8,7 +8,6 @@ class Doubles private[I] (protected val base: Array[Double]) extends AnyVal with
 
   @inline def apply(i: Int) = base(i)
   @inline def size: Int = base.length
-  @inline def length: Int = base.length
   @inline override def all: ~[Double] = Custom.Array.Z.stream(base)
 
   @inline override def copy(r: Idx.Range) = new Doubles(AZ.copy.range(base, r))
@@ -41,6 +40,6 @@ ___________________________________________________________________________*/
  *   [[Doubles]] is often created from a [[Stream]]:
  *
  *   {{{
- *       (1.0 ~+ 2 + 3).toPrimitive[Doubles]
+ *       (1.0 ~+ 2 + 3).toRaw[Doubles]
  *   }}}
  */

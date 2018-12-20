@@ -59,7 +59,7 @@ ___________________________________________________________________________*/
  *      {{{
  *        // Repositioning range from 3 to 6 in reverse indexes = 6,5,4,3
  *
- *        val r = Idx.Reposition.make(3 <> 6, Ints.make(6, 5, 4, 3))
+ *        val r = Idx.Reposition.make(3 <> 6, Ints.*(6, 5, 4, 3))
  *
  *        r lp  // Prints: Reposition{range=3 <>> 7,(3,6)(4,5)(5,4)(6,3)}
  *      }}}

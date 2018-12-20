@@ -20,7 +20,7 @@ private[scalqa] class Tail[A](protected override val real: O[A], start: Int) ext
         else Remove.make(rmSize.Range, real.all.letAt(start - r.size <>>+ rmSize).to[Idx]).I.~
       case c: Change.Reposition[A] =>
         val r = c.range
-        if (r.start >= start) Change.Reposition.make(r move -start, c.indexes.all.map(_ - start).toPrimitive[Ints]).I.~
+        if (r.start >= start) Change.Reposition.make(r move -start, c.indexes.all.map(_ - start).toRaw[Ints]).I.~
         else if (r.end > start) {
           val nr = (r.end - start).Range
           ??? //~[Change[A]] + Remove.make(nr, c.indexes.all.dropNext(r.size - nr.size).map(real(_)).to[Idx]) + Add.make(nr, real.all.letAt(nr move start).to[Idx])

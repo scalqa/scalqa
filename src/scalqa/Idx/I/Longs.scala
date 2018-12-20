@@ -8,7 +8,6 @@ class Longs private[I] (protected val base: Array[Long]) extends AnyVal with Idx
 
   @inline def apply(i: Int) = base(i)
   @inline def size: Int = base.length
-  @inline def length: Int = base.length
   @inline override def all: ~[Long] = Custom.Array.Z.stream(base)
 
   @inline override def copy(r: Idx.Range) = new Longs(AZ.copy.range(base, r))
@@ -41,6 +40,6 @@ ___________________________________________________________________________*/
  *   [[Longs]] is often created from a [[Stream]]:
  *
  *   {{{
- *       (1L ~+ 2 + 3).toPrimitive[Longs]
+ *       (1L ~+ 2 + 3).toRaw[Longs]
  *   }}}
  */

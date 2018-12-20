@@ -6,9 +6,8 @@ class _library[A] private[scalqa] (protected val base: Array[A]) extends AnyVal 
 
   @inline def apply(i: Int): A = base(i)
   @inline def size = base.length
-  @inline def length = base.length
 
-  @inline def Idx: Idx[A] = new scalqa.Idx.Array(base)
+  @inline def Idx: scalqa.Idx.Array[A] = new scalqa.Idx.Array(base)
 
   @inline override def copy(r: scalqa.Idx.Range) = Z.copy.range(base, r)
   @inline override def copyDrop(r: scalqa.Idx.Range) = Z.copy.dropRange(base, r)
@@ -23,7 +22,6 @@ class _library[A] private[scalqa] (protected val base: Array[A]) extends AnyVal 
   @inline override def copyResize(newSize: Int) = Z.copy.resize(base, newSize)
 
 }
-
 /*___________________________________________________________________________
      __________ ____   __   ______  ____
     /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API

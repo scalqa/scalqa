@@ -1,17 +1,15 @@
 package scalqa; package Idx; package Z; package A
 
-private[scalqa] trait JavaProxy[A] extends Idx[A] with Any.Wrap[java.util.List[A]] {
-
-  def size = real.size
-
-  def apply(i: Int) = real.get(i)
-
-}
+private[scalqa] class JavaProxy[A](val real: java.util.List[A]) extends JavaProxy.Like[A]
 
 private[scalqa] object JavaProxy {
 
-  def apply[A](l: java.util.List[A]): Idx[A] = new JavaProxy[A] { def real = l }
+  trait Like[A] extends Idx[A] with Any.Wrap[java.util.List[A]] {
 
+    def size = real.size
+
+    def apply(i: Int) = real.get(i)
+  }
 }
 /*___________________________________________________________________________
      __________ ____   __   ______  ____

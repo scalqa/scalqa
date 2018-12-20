@@ -19,7 +19,7 @@ package object Idx {
 
   @inline def *[A](vs: A*): Idx[A] = Refs.*(vs: _*)
 
-  def wrap[A](v: java.util.List[A]): Idx[A] = v.I.as[Idx[A]](Idx.Z.A.JavaProxy[A](_))
+  def wrap[A](v: java.util.List[A]): Idx[A] = new Idx.Z.A.JavaProxy[A](v)
 
   val Void: Idx[Nothing] with Idx.O[Nothing] = new O[Nothing] with Void {
     def size = 0
@@ -38,11 +38,11 @@ ___________________________________________________________________________*/
  *
  *    Creates [[Idx]] with specified values
  *    {{{
- *       val x = Idx.make(3, 6, 9) // Creates Idx of Ints
+ *       val x = Idx.*(3, 6, 9) // Creates Idx of Ints
  *       x.all.lp                   // Prints: ~(3, 6, 9)
  *    }}}
  *
- * @def wrap -> Java List get
+ * @def wrap -> Java List wrap
  *
  *    Creates [[Idx]] view of given Java List
  */

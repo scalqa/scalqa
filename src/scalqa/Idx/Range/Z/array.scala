@@ -2,12 +2,12 @@ package scalqa; package Idx.Range; package Z
 
 private[Range] object array {
 
-  private val ints = 256.all.toPrimitive[Ints]
+  private val ints = 256.all.toRaw[Ints]
 
   def apply(r: Idx.Range): Array[Int] = {
     val a = new Array[Int](r.size)
     if (ints.size.Range.contains(r)) ints.copyTo(a, 0, r)
-    else r.all.foreachIdx(a(_) = _)
+    else r.all.foreachIdx(a(_)= _)
     a
   }
 }

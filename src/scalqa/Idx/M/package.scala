@@ -2,7 +2,7 @@ package scalqa; package Idx
 
 package object M {
 
-  def *[A](vs: A*)(implicit i: Ilk[A]): Idx[A] = makeSized[A](vs.size).I(_ +~= vs)
+  def *[A](vs: A*)(implicit i: Ilk[A]): M[A] = makeSized[A](vs.size).I(_ +~= vs)
 
   def make[A](implicit i: Ilk[A]): M[A] = i.mkBuffer[A](\/)
 
@@ -12,7 +12,7 @@ package object M {
 
   def sealable[A: Ilk](initSize: Int = \/): M[A] with Any.Able.Seal = new Z.A.Sealable(makeSized[A](initSize))
 
-  def wrap[A](v: java.util.List[A]): M[A] = v.I.as[Idx.M[A]](Idx.M.Z.A.JavaProxy.make[A](_))
+  def wrap[A](v: java.util.List[A]): M[A] = new Idx.M.Z.A.JavaProxy[A](v)
 
 }
 /*___________________________________________________________________________

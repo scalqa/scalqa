@@ -8,7 +8,6 @@ class Ints private[I] (protected val base: Array[Int]) extends AnyVal with Idx.I
 
   @inline def apply(i: Int) = base(i)
   @inline def size: Int = base.length
-  @inline def length: Int = base.length
   @inline override def all: ~[Int] = Custom.Array.Z.stream(base)
 
   @inline override def copy(r: Idx.Range) = new Ints(AZ.copy.range(base, r))
@@ -45,6 +44,6 @@ ___________________________________________________________________________*/
  *   [[Ints]] is often created from a [[Stream]]:
  *
  *   {{{
- *       (1 ~+ 2 + 3).toPrimitive[Ints]
+ *       (1 ~+ 2 + 3).toRaw[Ints]
  *   }}}
  */

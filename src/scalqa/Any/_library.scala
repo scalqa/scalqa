@@ -5,9 +5,8 @@ class _library[A] private[scalqa] (protected val real: A) extends AnyVal {
   @inline def \/(default: => A): A = if (Any.isVoid(real)) default else real
 
   @inline def Opt: Opt[A] = if (real == null) scalqa.Opt.Void else real
-  @inline def OPT: Opt[A] = if (real.isVoid) scalqa.Opt.Void else real
 
-  def ~+(value: A): ~[A] = Stream.Z.A.Two(real, value)
+  def ~+(that: A): ~[A] = Stream.Z.A.Two(real, that)
   def ~+~(that: ~[A]): ~[A] = if (that == null) real.I.~ else that.insertAt(0, real)
 
   @inline def isVoid: Boolean = Any.isVoid(real)
@@ -17,7 +16,7 @@ class _library[A] private[scalqa] (protected val real: A) extends AnyVal {
   def lp: Unit = println(real.I.toString)
   def tp: Unit = real match { case v: Able.ToText => println(v.toText); case _ => lp }
 
-  def +-(v: Any): String = real.I.toString + " " + v
+  def +-(that: Any): String = real.I.toString + " " + that
 
   def <>(that: A)(implicit o: Ordering[A], i: scalqa.Ilk[A]): Range[A] = Range.general(real, false, that, false)
   def <>>(that: A)(implicit o: Ordering[A], i: scalqa.Ilk[A]): Range[A] = Range.general(real, false, that, true)
@@ -39,6 +38,19 @@ ___________________________________________________________________________*/
  * @class _library -> `Any Library`
  *
  *     Defines operations universally attached to every single object in Scalqa
+ *
+ * @def +- -> Plus spaced to String
+ *
+ *     Creates a String concatenation of this, single space, and that
+ *
+ *     This is useful for debugging, consider:
+ *     {{{
+ *       '1' +- 2 +- "34" lp // Prints: 1 2 34
+ *
+ *       // vs.
+ *
+ *       '1' + 2 + "34" lp   // Prints: 5134
+ *     }}}
  *
  * @def isVoid -> Void check
  *
@@ -102,9 +114,11 @@ ___________________________________________________________________________*/
  *                        //         -
  *     }}}
  *
- * @def ~+(value: -> Stream of two elements
+ * @def ~+(value: -> Stream plus
  *
- *   Creates a [[Stream]] with two elements `this` and `value`
+ *   Creates a [[Stream]] out of this and appends that
+ *
+ *   Essentially: creates a Stream of two elements
  *
  *   {{{
  *        1 ~+ 2 lp                 // Prints: ~(1, 2)
@@ -114,9 +128,11 @@ ___________________________________________________________________________*/
  *       "aaa" ~+ "bbb" + "ccc" lp  // Prints: ~(aaa, bbb, ccc)
  *   }}}
  *
- * @def ~+~(that: -> Stream of `this` with `that`
+ * @def ~+~(that: -> Stream plus stream
  *
- *   Creates a [[Stream]] with `this` and elements of stream `that`
+ *   Creates a [[Stream]] out of this and appends that stream
+ *
+ *   Essentially: Prepends this to that stream
  *
  *   {{{
  *       1 ~+~ (2 <> 5) lp                 // Prints: ~(1, 2, 3, 4, 5)
@@ -129,28 +145,6 @@ ___________________________________________________________________________*/
  *     Creates an [[Opt]] with current value
  *
  *     'null' will create Opt.Void
- *
- * @def OPT -> Non void Opt Constructor
- *
- *     Creates an [[Opt]] with current value
- *
- *     'null' or void values will create Opt.Void
- *
- *     Voidness is tested with [[Any.isVoid]]
- *
- *     {{{
- *         var s: String  = null
- *         var p: Percent = \/
- *
- *         s.OPT lp    // Prints: Opt.Void
- *         p.OPT lp    // Prints: Opt.Void
- *
- *         s = "abc"
- *         p = 12
- *
- *         s.OPT lp    // Prints: Opt(abc)
- *         p.OPT lp    // Prints: Opt(12.0%)
- *     }}}
  *
  * @def \/ -> Non void default
  *

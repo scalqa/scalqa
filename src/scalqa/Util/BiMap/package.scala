@@ -24,9 +24,9 @@ package object BiMap {
  /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
- *  @def apply[ -> 'get' overload
+ *  @def apply[ -> 'make' overload
  *
- *     Same as 'get' for shorter expression where applicable
+ *     Same as 'make' for shorter expression where applicable
  *
  *  @def make[ -> By functions
  *

@@ -24,12 +24,12 @@ ___________________________________________________________________________*/
  *
  *  @object Deficiency ->
  *
- *  @def apply(m -> 'get' overload
+ *  @def apply(m -> 'make' overload
  *
- *       Same as 'get' for shorter expression where applicable
+ *       Same as 'make' for shorter expression where applicable
  *
- *  @def apply(t -> 'get' overload
+ *  @def apply(t -> 'make' overload
  *
- *       Same as 'get' for shorter expression where applicable
+ *       Same as 'make' for shorter expression where applicable
  *
  */

@@ -9,7 +9,7 @@ private[scalqa] class ReversedView[A] private (n: Unit, protected override val r
         c,
         r => (real.size - r.start - 1) <>>+ r.size,
         (l: Idx[A]) => l.asReversedView,
-        _.all.reverse.toPrimitive[Ints])
+        _.all.reverse.toRaw[Ints])
     }).cancelIf(() => !_hasListeners))
   }
 }

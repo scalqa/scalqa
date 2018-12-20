@@ -8,7 +8,6 @@ class Bytes private[I] (protected val base: Array[Byte]) extends AnyVal with Idx
 
   @inline def apply(i: Int) = base(i)
   @inline def size: Int = base.length
-  @inline def length: Int = base.length
   @inline override def all: ~[Byte] = Custom.Array.Z.stream(base)
 
   @inline override def copy(r: Idx.Range) = new Bytes(AZ.copy.range(base, r))
@@ -41,6 +40,6 @@ ___________________________________________________________________________*/
  *   [[Bytes]] is often created from a [[Stream]]:
  *
  *   {{{
- *       (0 <> 10).all.map(_.toByte).toPrimitive[Bytes]
+ *       (0 <> 10).all.map(_.toByte).toRaw[Bytes]
  *   }}}
  */

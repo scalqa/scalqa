@@ -8,7 +8,6 @@ class Chars private[I] (protected val base: Array[Char]) extends AnyVal with Idx
 
   @inline def apply(i: Int) = base(i)
   @inline def size: Int = base.length
-  @inline def length: Int = base.length
   @inline override def all: ~[Char] = Custom.Array.Z.stream(base)
 
   @inline override def copy(r: Idx.Range) = new Chars(AZ.copy.range(base, r))
@@ -41,6 +40,6 @@ ___________________________________________________________________________*/
  *   [[Chars]] is often created from a [[Stream]]:
  *
  *   {{{
- *       ('A' <> 'Z').all.toPrimitive[Chars]
+ *       ('A' <> 'Z').all.toRaw[Chars]
  *   }}}
  */

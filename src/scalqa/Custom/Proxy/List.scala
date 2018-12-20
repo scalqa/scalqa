@@ -1,6 +1,6 @@
 package scalqa; package Custom; package Proxy
 
-private[scalqa] trait List[A] extends Custom.List[A] with Any.Wrap[java.util.List[A]] {
+private[scalqa] trait List[A] extends java.util.AbstractList[A] with Any.Wrap[java.util.List[A]] {
 
   def make(i: Int) = real.get(i)
 

@@ -8,7 +8,7 @@ private[Universal] object VOID extends Void {
   object Function3 extends ((Any, Any, Any) => Unit) with Void { def apply(a: Any, b: Any, c: Any) = () }
   object Function4 extends ((Any, Any, Any, Any) => Unit) with Void { def apply(a: Any, b: Any, c: Any, d: Any) = () }
 
-  object JavaList extends Custom.List[Nothing] with Void { def get(i: Int) = App.Fail(); def size = 0 }
+  object JavaList extends java.util.AbstractList[Nothing] with Void { def get(i: Int) = App.Fail(); def size = 0 }
 
   object Exception extends Exception("void") with Void
 

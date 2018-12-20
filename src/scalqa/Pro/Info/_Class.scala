@@ -17,7 +17,7 @@ class _Class(protected val target: Any, private[scalqa] var customIdOpt: Opt[Str
   def labels: String = allLabels().format(",")
 
   def id: String = customIdOpt or target.I.id
-  def id_=(v: String): this.type = { customIdOpt = v.OPT; this }
+  def id_=(v: String): this.type = { customIdOpt = v.I.Opt; this }
 
   def toBrief: String = id + '{' + values + '}'
   def toText: String = (allLabels().format(",\n") + '}').indent(id + '{')

@@ -7,7 +7,6 @@ trait View[@specialized(DATA) A] extends Any with Any.Able.Void {
 
   def apply(i: Int): A
   def size: Int
-  def length: Int
 
   @inline def +(v: A) = make(Z.plus(base, v))
   @inline def +~(v: ~[A]) = make(Z.plus.stream(base, v))
@@ -29,6 +28,8 @@ trait View[@specialized(DATA) A] extends Any with Any.Able.Void {
 
   protected def contains(v: A): Boolean = Custom.Array.Z.contains(base, v)
 
+  def toArray(implicit t: ClassTag[A]) = { val a = new Array[A](size); System.arraycopy(base, 0, a, 0, size); a }
+
   override def isVoid = base.length == 0
 
   override def toString = this.I.id + "{size=" + size + ", array=" + Array.Z.toString(base) + "}"
@@ -41,17 +42,26 @@ trait View[@specialized(DATA) A] extends Any with Any.Able.Void {
  /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
+ *
+ * @def toString -> Description
+ *
+ *     Provides description of size and array type
+ *     
+ * @def toArray -> Copy to Array
+ *
+ *     Copies all elements to a new Array
+ *
  * @def contains -> Inclusion check
  *
  *     Returns true if specified value is contained within
  *
- * @def length -> Number of elements
- *
- *     Same as `size`
- *
  * @def copyFull -> Copy everything
  *
  *     Copies entire content
+ *
+ * @def copyTo( -> Copy to another array
+ *
+ *     Copies elements to target array
  *
  * @def copy( -> Copy range
  *
@@ -102,7 +112,7 @@ ___________________________________________________________________________*/
  *
  *   {{{
  *     // Generic Refs example
- *     val a1: Refs[Char] = Refs.make('a', 'b', 'c')
+ *     val a1: Refs[Char] = Refs.*('a', 'b', 'c')
  *     val a2: Refs[Char] = a1 + 'x' + 'y' + 'z'
  *
  *     a1.all.lp // Prints: ~(a, b, c)
@@ -114,7 +124,7 @@ ___________________________________________________________________________*/
  *   Creates a new instance with added stream values
  *
  *   {{{
- *     val a1: Refs[Char] = Refs.make('a', 'b', 'c')
+ *     val a1: Refs[Char] = Refs.*('a', 'b', 'c')
  *     val a2: Refs[Char] = a1 +~ ~.*('x', 'y', 'z') +~ ('x' <> 'z')
  *
  *     a1.all.lp // Prints: ~(a, b, c)
@@ -138,7 +148,7 @@ ___________________________________________________________________________*/
  *   Creates a new instance with stream values added at specified `position`
  *
  *   {{{
- *     val a1: Refs[Char] = Refs.make('a', 'b', 'c')
+ *     val a1: Refs[Char] = Refs.*('a', 'b', 'c')
  *     val a2: Refs[Char] = a1 +~@ (3, 'X' <> 'Z') +~@ (0, 'W' ~+ 'W' + 'W')
  *
  *     a1.all.lp // Prints: ~(a, b, c)

@@ -31,7 +31,7 @@ ___________________________________________________________________________*/
  *    @param idx element position, must be in range (0 <>> size)
  *
  *    {{{
- *      val index = Idx.make(1,4,7,10)
+ *      val index = Idx.*(1,4,7,10)
  *      index(1).lp  // Prints: 4
  *      index(3).lp  // Prints: 10
  *    }}}
@@ -41,7 +41,7 @@ ___________________________________________________________________________*/
  *    The element order is same as in the Idx.
  *
  *    {{{
- *      val index = Idx.make(1,3,5,7)
+ *      val index = Idx.*(1,3,5,7)
  *      index.all.lp
  *      // Output
  *      ~(1, 3, 5, 7)

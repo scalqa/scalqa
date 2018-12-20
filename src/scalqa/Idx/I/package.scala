@@ -17,6 +17,12 @@ package object I {
  /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
+ *   @def * -> VarArg constructor
  *
+ *     Create from values provided
+ *
+ *   @def make -> Create from array
+ *
+ *     Array will be copied
  *
  */

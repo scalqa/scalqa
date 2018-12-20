@@ -1,15 +1,12 @@
-package scalqa; package Custom; package List
+package scalqa; package Custom; package Array
 
-private[scalqa] abstract class _Class[A] extends java.util.AbstractList[A] with Any.Able.ToInfo {
+object Raw {
 
-  override def toString = this.I.id
+  abstract class Converter[A, TRGT <: Idx.I[A]] protected {
 
-  override def hashCode = lazyHashCode
+    def make: View[A] => TRGT
 
-  private lazy val lazyHashCode = new AnyRef().hashCode
-
-  def toInfo = new Pro.Info(this) += ("size", size)
-
+  }
 }
 
 /*___________________________________________________________________________

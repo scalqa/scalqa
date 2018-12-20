@@ -1,4 +1,4 @@
-package scalqa; package Idx
+ package scalqa; package Idx
 
 package object Array {
   type Buffer[A] = Buffer._Class[A]

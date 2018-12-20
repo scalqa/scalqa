@@ -21,7 +21,7 @@ sealed abstract class Rounding {
 }
 
 object Rounding extends {
-  private val Multiplier: Longs = 1L.I.unfold(_.last * 10L).letNext(12).toPrimitive[Longs]
+  private val Multiplier: Longs = 1L.I.unfold(_.last * 10L).letNext(12).toRaw[Longs]
 
   val Up: Rounding = A.Up
   val Down: Rounding = A.Down

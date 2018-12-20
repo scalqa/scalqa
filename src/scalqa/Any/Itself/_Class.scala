@@ -1,5 +1,7 @@
 package scalqa; package Any; package Itself
 
+import Opt.Void
+
 class _Class[A] private[scalqa] (protected val real: A) extends AnyVal  {
 
   def id: String = Class.label + '@' + hashIndex
@@ -9,11 +11,13 @@ class _Class[A] private[scalqa] (protected val real: A) extends AnyVal  {
   @inline override def toString: String = Z.toString(real)
 
   // ------------------------------------------------------------------------------------------------------------
-  def let(f: A=>Boolean): Opt[A] = if (f(real)) real else Opt.Void
+  def let(f: A=>Boolean): Opt[A] = if (f(real)) real else Void
 
-  def letType[B](implicit t: ClassTag[B]): Opt[B] = if (t.unapply(real).isEmpty) Opt.Void else real.asInstanceOf[B]
+  def letType[B](implicit t: ClassTag[B]): Opt[B] = if (t.unapply(real).isEmpty) Void else real.asInstanceOf[B]
 
-  def drop(f: A=>Boolean): Opt[A] = if (f(real)) Opt.Void else real
+  def drop(f: A=>Boolean): Opt[A] = if (f(real)) Void else real
+
+  def Opt: Opt[A] = if (Any.isVoid(real)) Void else real
 
   def toArray(implicit ct: ClassTag[A]): Array[A] = { val a = ct.newArray(1); a(0) = real; a }
 
@@ -60,6 +64,28 @@ ___________________________________________________________________________*/
  *       txt.I.hashIndex lp           // Prints: 1
  *     }}}
  *
+ * @def Opt -> Non void Opt Constructor
+ *
+ *     Creates an [[Opt]] with current value
+ *
+ *     'null' or void values will create Opt.Void
+ *
+ *     Voidness is tested with [[Any.isVoid]]
+ *
+ *     {{{
+ *         var s: String  = null
+ *         var p: Percent = \/
+ *
+ *         s.OPT lp    // Prints: Opt.Void
+ *         p.OPT lp    // Prints: Opt.Void
+ *
+ *         s = "abc"
+ *         p = 12
+ *
+ *         s.OPT lp    // Prints: Opt(abc)
+ *         p.OPT lp    // Prints: Opt(12.0%)
+ *     }}}
+ *
  * @def toArray -> Create single element array
  *
  * @def ~ : -> Create single element [[Stream]]
@@ -82,8 +108,8 @@ ___________________________________________________________________________*/
  *    Otherwise conversion function is used and the result is returned
  *
  *    {{{
- *       val x:  Idx[Int]   = Idx.make(1, 2, 3)
- *       val xw: Idx.M[Int] = x.I.as[Idx.M[Int]](x => Idx.M.make[Int](x.size).I(_ +~= x))
+ *       val x:  Idx[Int]   = Idx.*(1, 2, 3)
+ *       val xw: Idx.M[Int] = x.I.as[Idx.M[Int]](x => Idx.M.makeSized[Int](x.size).I(_ +~= x))
  *
  *       // check
  *       xw.isInstanceOf[Idx.M[Int]].lp  // Prints: true

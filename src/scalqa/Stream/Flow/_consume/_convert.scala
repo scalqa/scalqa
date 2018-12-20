@@ -4,7 +4,7 @@ trait _convert[A] extends Any.Able.ToText { self: Flow[A] =>
 
   def to[TRGT[A]](implicit cnv: Interface.To.Converter[TRGT]): TRGT[A] = cnv.make(this)
 
-  def toPrimitive[TRGT](implicit c: Interface.To.Primitive.Converter[A, TRGT]): TRGT = c.make(this)
+  def toRaw[TRGT](implicit c: Interface.To.Primitive.Converter[A, TRGT]): TRGT = c.make(this)
 
   def toVals(implicit c: Any.Datum.Setup[A]): Vals[A] = Vals.fromFlow(this)
 
@@ -70,7 +70,6 @@ ___________________________________________________________________________*/
  *          My Ints(1, 2, 3, 4, 5)
  *      }}}
  *
- *
  * @def toString: -> Elements as String
  *
  *      Returns String starting with "~(" and containing all elements separated by ", "
@@ -80,6 +79,12 @@ ___________________________________________________________________________*/
  *          // Output
  *          Stream(1, 2, 3, 4, 5)
  *      }}}
+ *
+ * @def toVals -> Convert to [[Vals]]
+ *
+ *      Stores all elements as [[Vals]] immutable collection
+ *
+ *      Only works if Stream holds [[Any.Datum]] type
  *
  * @def toText -> Elements as multi-line String
  *

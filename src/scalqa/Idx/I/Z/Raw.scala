@@ -1,6 +1,6 @@
 package scalqa; package Idx.I; package Z
 
-private[I] abstract class PrimitiveConverter[A, TRGT] protected {
+private[I] abstract class Raw[A, TRGT] protected {
 
   def make: Idx.I[A] => TRGT
 }

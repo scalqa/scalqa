@@ -58,9 +58,9 @@ ___________________________________________________________________________*/
  *
  *   Generally [[Opt]] is very fast, except for primitives, which are auto-boxed
  *
- * @def apply -> 'get' overload
+ * @def apply -> 'make' overload
  *
- *     Same as 'get' for shorter expression where applicable
+ *     Same as 'make' for shorter expression where applicable
  *
  *
  * @def make[T](value -> By value

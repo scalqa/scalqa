@@ -5,9 +5,7 @@ trait _Trait[@specialized(DATA) A] extends Any with Custom.Array.View[A] with Id
 
   override def contains(v: A): Boolean = Custom.Array.Z.contains(base, v)
 
-  def toArray(implicit t: ClassTag[A]) = { val a = new Array[A](size); System.arraycopy(base, 0, a, 0, size); a }
-
-  def toPrimitive[TRGT](implicit c: Z.PrimitiveConverter[A, TRGT]): TRGT = c.make(this)
+  def toRaw[TRGT <: Idx.I[A]](implicit c: Z.Raw[A, TRGT]): TRGT = c.make(this)
 }
 
 private object _Trait {
@@ -23,7 +21,7 @@ private object _Trait {
   implicit val Doubles = new Base(new Doubles(_))
   implicit val Booleans = new Base(new Booleans(_))
   // ***********************************************************************************************
-  class Base[A, TRGT](create: Array[A] => TRGT)(implicit i: Ilk[A]) extends Z.PrimitiveConverter[A, TRGT] {
+  class Base[A, TRGT](create: Array[A] => TRGT)(implicit i: Ilk[A]) extends Z.Raw[A, TRGT] {
 
     @inline def make = v => create(if (v.base.getClass == i.ArrayClass) v.base else i.mkArray[A](v.size).I(_.updateAll(v.base)))
   }
@@ -37,11 +35,11 @@ ___________________________________________________________________________*/
 /**
  * @trait _Trait -> `Immutable Trait`
  *
- * @def toPrimitive -> To Primitive Immutable
+ * @def toRaw -> To primitive immutable
  *
- *     Converts this Immutable to primitive Immutable
+ *     Converts this to primitive immutable
  *
- *     Supported primitive Values are:
+ *     Supported targets are:
  *
  *     -  [[Booleans]] for Boolean types
  *     -  [[Bytes]] for Byte types
@@ -55,6 +53,6 @@ ___________________________________________________________________________*/
  *     {{{
  *         val r : Refs[Int] = (1 <> 10).all.to[Refs]
  *
- *         val i : Ints = r.toPrimitive[Ints]
+ *         val i : Ints = r.toRaw[Ints]
  *     }}}
  */

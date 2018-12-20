@@ -19,7 +19,7 @@ private[scalqa] object toText {
       }
       first = false
     })
-  }).toString.OPT or "ALL_EMPTY"
+  }).toString.I.Opt or "ALL_EMPTY"
 }
 /*___________________________________________________________________________
      __________ ____   __   ______  ____

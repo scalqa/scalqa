@@ -154,7 +154,7 @@ abstract class _Class[@specialized(DATA) A] protected extends Interface[A] with 
   @inline override def copyTo(b: Idx.Array.Buffer.Loader[A]): Unit = Z.consume.convert.copyTo[A](this, b)
   override def toArray(implicit ct: ClassTag[A]): Array[A] = to[Idx.Array.Buffer].toArray
   override def to[TRGT[A]](implicit c: Interface.To.Converter[TRGT]): TRGT[A] = c.make(this)
-  override def toPrimitive[TRGT](implicit c: Interface.To.Primitive.Converter[A, TRGT]): TRGT = c.make(this)
+  override def toRaw[TRGT](implicit c: Interface.To.Primitive.Converter[A, TRGT]): TRGT = c.make(this)
   override def toVals(implicit c: Any.Datum.Setup[A]): Vals[A] = Vals.fromFlow(this)
   override def toString: String = toString("~")
   override def toBuffer: Stream[A] = to[Idx.Array.Buffer].all

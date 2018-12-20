@@ -1,6 +1,6 @@
 package scalqa; package Idx; package Z; package A
 
-private[scalqa] class JavaList[A](protected val real: Idx[A]) extends Custom.List[A] {
+private[scalqa] class JavaList[A](protected val real: Idx[A]) extends java.util.AbstractList[A] {
 
   def get(i: Int): A = real(i)
 

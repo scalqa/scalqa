@@ -8,7 +8,6 @@ class Shorts private[I] (protected val base: Array[Short]) extends AnyVal with I
 
   @inline def apply(i: Int) = base(i)
   @inline def size: Int = base.length
-  @inline def length: Int = base.length
   @inline override def all: ~[Short] = Custom.Array.Z.stream(base)
 
   @inline override def copy(r: Idx.Range) = new Shorts(AZ.copy.range(base, r))
@@ -41,6 +40,6 @@ ___________________________________________________________________________*/
  *   [[Shorts]] is often created from a [[Stream]]:
  *
  *   {{{
- *       (1.toShort ~+ 2.toShort + 3.toShort).toPrimitive[Shorts]
+ *       (1.toShort ~+ 2.toShort + 3.toShort).toRaw[Shorts]
  *   }}}
  */

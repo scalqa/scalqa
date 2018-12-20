@@ -2,8 +2,6 @@ package scalqa; package Idx
 
 trait _library[A] extends Any with Any.Wrap[Idx[A]] {
 
-  @inline def isEmpty = real.size == 0
-
   def getOpt(position: Int): Opt[A] = if (position < 0 || position >= real.size) \/ else real(position)
 
   def first: A = firstOpt.value
@@ -47,8 +45,6 @@ trait _library[A] extends Any with Any.Wrap[Idx[A]] {
 
   def toTuple4: (A, A, A, A) = (real(0), real(1), real(2), real(3))
 
-  def size = real.size
-
 }
 object _library {
 
@@ -62,6 +58,18 @@ object _library {
  /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
+ * @def toTuple2 -> As Tuple2
+ *
+ *    Returns first two elements as tuple
+ *
+ * @def toTuple3 -> As Tuple3
+ *
+ *    Returns first three elements as tuple
+ *
+ * @def toTuple4 -> As Tuple4
+ *
+ *    Returns first four elements as tuple
+ *
  * @def getOpt -> Element at position
  *
  *    Returns element at given `position` or Opt.Void if `position` is out of [[Idx]] range

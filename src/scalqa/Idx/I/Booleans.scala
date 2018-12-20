@@ -8,7 +8,6 @@ class Booleans private[I] (protected val base: Array[Boolean]) extends AnyVal wi
 
   @inline def apply(i: Int) = base(i)
   @inline def size: Int = base.length
-  @inline def length: Int = base.length
   @inline override def all: ~[Boolean] = Custom.Array.Z.stream(base)
 
   @inline override def copy(r: Idx.Range) = new Booleans(AZ.copy.range(base, r))
@@ -41,6 +40,6 @@ ___________________________________________________________________________*/
  *   [[Booleans]] is often created from a [[Stream]]:
  *
  *   {{{
- *       (true ~+ false + true + false).toPrimitive[Booleans]
+ *       (true ~+ false + true + false).toRaw[Booleans]
  *   }}}
  */

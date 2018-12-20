@@ -59,7 +59,7 @@ ___________________________________________________________________________*/
  *         new Object() +- "str"  // will compile
  *     }}}
  *
- * @type Vals -> Immutable collection alias
+ * @type Vals -> Alias
  *
  *   Globally available alias to type and object [[Any.Datum.Vals]]
  *

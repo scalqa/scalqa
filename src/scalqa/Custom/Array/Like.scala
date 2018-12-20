@@ -2,8 +2,8 @@ package scalqa; package Custom; package Array
 
 trait Like[@specialized(DATA) A] extends Any with View[A] {
 
-  def applyUpdateIf(position: Int, updateIf: A => Boolean, newValue: A => A): A = { var b = apply(position); if (updateIf(b)) { b = newValue(b); base.update(position, b) }; b }
-  def applyUpdateNull(position: Int, newValue: => A): A = applyUpdateIf(position, _ == null, _ => newValue)
+  def getUpdateIf(position: Int, updateIf: A => Boolean, newValue: A => A): A = { var b = apply(position); if (updateIf(b)) { b = newValue(b); base.update(position, b) }; b }
+  def getUpdateNull(position: Int, newValue: => A): A = getUpdateIf(position, _ == null, _ => newValue)
 
   def sort(implicit o: math.Ordering[A]): Unit = if (!o.isVoid) scala.util.Sorting.quickSort(base)(o.I.asInstanceOfTarget)
 
@@ -15,7 +15,6 @@ trait Like[@specialized(DATA) A] extends Any with View[A] {
 
   def copyResize(newSize: Int) = make(Z.copy.resize(base, newSize))
 
-  def toPrimitive(implicit i: Ilk[A]): scalqa.Idx.I[A] = i.mkValue(base)
   def toRefs: Refs[A] = Refs.copy(base)
 
 }

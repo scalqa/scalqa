@@ -49,7 +49,7 @@ ___________________________________________________________________________*/
  *       - Indexes must be within range -> indexes.all.isEvery(range.contains)
  *
  *     {{{
- *       Idx.Reposition.make(3 <> 6, Ints.make(6, 5, 4, 3)).lp
+ *       Idx.Reposition.make(3 <> 6, Ints.*(6, 5, 4, 3)).lp
  *       // Output
  *       Reposition{range=3 <>> 7,(3,6)(4,5)(5,4)(6,3)}
  *     }}}

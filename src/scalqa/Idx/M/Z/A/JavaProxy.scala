@@ -1,21 +1,20 @@
 package scalqa; package Idx; package M; package Z; package A
 
-private[scalqa] trait JavaProxy[A] extends Idx.Z.A.JavaProxy[A] with M[A] {
-
-  def addAt(i: Int, e: A): Unit = real.add(i, e)
-
-  def removeAt(r: Idx.Range): Unit = r.all.reverse.foreach(real.remove)
-
-  def update(i: Int, e: A): Unit = real.set(i, e)
-
-  def refreshAt(r: Idx.Range): Unit = real.all.letAt(r).letType[Any.Able.Refresh].foreach(_.refresh)
-
-}
+private[scalqa] class JavaProxy[A](val real: java.util.List[A]) extends JavaProxy.Like[A]
 
 private[scalqa] object JavaProxy {
 
-  def make[A](l: java.util.List[A]): M[A] = new JavaProxy[A] { def real = l }
+  trait Like[A] extends Idx.Z.A.JavaProxy.Like[A] with M[A] {
 
+    def addAt(i: Int, e: A): Unit = real.add(i, e)
+
+    def removeAt(r: Idx.Range): Unit = r.all.reverse.foreach(real.remove)
+
+    def update(i: Int, e: A): Unit = real.set(i, e)
+
+    def refreshAt(r: Idx.Range): Unit = real.all.letAt(r).letType[Any.Able.Refresh].foreach(_.refresh)
+
+  }
 }
 /*___________________________________________________________________________
      __________ ____   __   ______  ____
