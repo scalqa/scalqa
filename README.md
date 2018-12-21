@@ -2,11 +2,13 @@
 
 Scalqa stands for 'Scala Quick API'
 
-It is a performance optimized data modeling framework
+It is simple yet fast data processing framework
 
-[Scalqa API](http://scalqa.org/doc/scalqa/index.html)
+[Scalca.Fx](https://github.com/scalqa/scalqa/tree/master/fx) is optional GUI development API
 
 [Scalqa web site](http://scalqa.org/doc/)
 
-[Scalca.Fx](https://github.com/scalqa/scalqa.Fx) project is an extension for GUI development
+[Scalqa API](http://scalqa.org/doc/scalqa/index.html)
+
+
 
