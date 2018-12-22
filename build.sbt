@@ -1,5 +1,3 @@
-
-
 lazy val commonSettings = Seq(
   scalaVersion := "2.12.4",
   version := "0.23"
@@ -16,4 +14,4 @@ lazy val fx = project
   .settings(
      commonSettings,
      name := "scalqa-fx"
-  )
+)
