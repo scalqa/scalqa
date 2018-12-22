@@ -1,0 +1,14 @@
+
+# Ignore generated stuff
+
+*/target
+/target
+*/project/target
+*/project/project/target
+/docs
+*/logs
+
+*.zip
+*.class
+*.log
+
