@@ -18,27 +18,27 @@ abstract class Setup[TYPE <: Datum.BigInteger[TYPE]] protected extends Datum.Com
 
     def apply(v: \/) = make(Zero)
 
-    @inline def fromInt(x: Int) = make(java.math.BigInteger.valueOf(x))
+    @inline final def fromInt(x: Int) = make(java.math.BigInteger.valueOf(x))
 
-    @inline def minus(x: TYPE, y: TYPE) = make(undo(x).subtract(undo(y)))
+    @inline final def minus(x: TYPE, y: TYPE) = make(undo(x).subtract(undo(y)))
 
-    @inline def negate(x: TYPE) = make(undo(x).negate)
+    @inline final def negate(x: TYPE) = make(undo(x).negate)
 
-    @inline def plus(x: TYPE, y: TYPE) = make(undo(x).add(undo(y)))
+    @inline final def plus(x: TYPE, y: TYPE) = make(undo(x).add(undo(y)))
 
-    @inline def times(x: TYPE, y: TYPE) = make(undo(x).multiply(undo(y)))
+    @inline final def times(x: TYPE, y: TYPE) = make(undo(x).multiply(undo(y)))
 
-    @inline def quot(x: TYPE, y: TYPE) = make(undo(x).divide(undo(y)))
+    @inline final def quot(x: TYPE, y: TYPE) = make(undo(x).divide(undo(y)))
 
-    @inline def rem(x: TYPE, y: TYPE) = make(undo(x).remainder(undo(y)))
+    @inline final def rem(x: TYPE, y: TYPE) = make(undo(x).remainder(undo(y)))
 
-    @inline def toDouble(x: TYPE) = undo(x).toDouble
+    @inline final def toDouble(x: TYPE) = undo(x).toDouble
 
-    @inline def toFloat(x: TYPE) = undo(x).toFloat
+    @inline final def toFloat(x: TYPE) = undo(x).toFloat
 
-    @inline def toInt(x: TYPE) = undo(x).toInt
+    @inline final def toInt(x: TYPE) = undo(x).toInt
 
-    @inline def toLong(x: TYPE) = undo(x).toLong
+    @inline final def toLong(x: TYPE) = undo(x).toLong
   }
 }
 /*___________________________________________________________________________

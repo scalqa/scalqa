@@ -2,19 +2,19 @@ package scalqa; package Any; package Datum.Long; package Number
 
 trait _convert extends Any with Any.Datum.Z.Number.Convert {
 
-  @inline def toByte = real.toByte
+  @inline final def toByte = real.toByte
 
-  @inline def toShort = real.toShort
+  @inline final def toShort = real.toShort
 
-  @inline def toInt = real.toInt
+  @inline final def toInt = real.toInt
 
-  @inline def toLong = real.toLong
+  @inline final def toLong = real.toLong
 
-  @inline def toDouble = real.toDouble
+  @inline final def toDouble = real.toDouble
 
-  @inline def toFloat = real.toFloat
+  @inline final def toFloat = real.toFloat
 
-  @inline def toNumber = java.lang.Long.valueOf(real)
+  @inline final def toNumber = java.lang.Long.valueOf(real)
 
   protected def real: Long
 }

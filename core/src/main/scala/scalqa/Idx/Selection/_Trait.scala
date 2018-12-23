@@ -10,7 +10,7 @@ trait _Trait[A] extends Idx[A] with Any.Able.ToInfo {
 
   def apply(i: Int) = target(positions(i))
 
-  def toInfo = new Pro.Info(this) += ("positions", positions.all.format(","))
+  def toInfo = new Pro.Info(this) += (("positions", positions.all.format(",")))
 
 }
 

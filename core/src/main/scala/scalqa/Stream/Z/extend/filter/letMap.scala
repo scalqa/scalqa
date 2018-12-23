@@ -8,7 +8,7 @@ private[scalqa] object letMap {
       def prime = o || { while (!o && s.prime) o = f(s.pump); o }
       def pump = { val v = o.value; o = Opt.Void; v }
       def foreach(c: Consumer[B]) = real.foreach(new Consumer[A] { def accept(v: A) = f(v).apply(c.accept) })
-      override def ilkOpt = i.ilkOpt; @inline def real = s
+      override def ilkOpt = i.ilkOpt; @inline final def real = s
     }
     new primPrim
   }
@@ -18,7 +18,7 @@ private[scalqa] object letMap {
       def prime = o || { while (!o && s.prime) o = f(s.pump); o }
       def pump = { val v = o.value; o = Opt.Void; v }
       def foreach(c: Consumer[B]) = real.foreach(new Consumer[A] { def accept(v: A) = f(v).apply(c.accept) })
-      override def ilkOpt = i.ilkOpt; @inline def real = s
+      override def ilkOpt = i.ilkOpt; @inline final def real = s
     }
     new primRef
   }
@@ -28,7 +28,7 @@ private[scalqa] object letMap {
       def prime = o || { while (!o && s.prime) o = f(s.pump); o }
       def pump = { val v = o.value; o = Opt.Void; v }
       def foreach(c: Consumer[B]) = real.foreach(new Consumer[A] { def accept(v: A) = f(v).apply(c.accept) })
-      override def ilkOpt = i.ilkOpt; @inline def real = s
+      override def ilkOpt = i.ilkOpt; @inline final def real = s
     }
     new refPrim
   }
@@ -38,7 +38,7 @@ private[scalqa] object letMap {
       def prime = o || { while (!o && s.prime) o = f(s.pump); o }
       def pump = { val v = o.value; o = Opt.Void; v }
       def foreach(c: Consumer[B]) = real.foreach(new Consumer[A] { def accept(v: A) = f(v).apply(c.accept) })
-      override def ilkOpt = i.ilkOpt; @inline def real = s
+      override def ilkOpt = i.ilkOpt; @inline final def real = s
     }
     new refRef
   }

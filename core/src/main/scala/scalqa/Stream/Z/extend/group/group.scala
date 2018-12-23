@@ -2,12 +2,12 @@ package scalqa; package Stream; package Z; package extend; package group
 
 private[Stream] object group {
 
-  @inline def apply[@specialized(DATA) A](s: Stream[A], groupper: (A, A) => Boolean, peeker: (A, Boolean) => Any): Stream[~[A]] = new Stream.A.Base[~[A]] with A.Extended[~[A]] {
+  @inline final def apply[@specialized(DATA) A](s: Stream[A], groupper: (A, A) => Boolean, peeker: (A, Boolean) => Any): Stream[~[A]] = new Stream.A.Base[~[A]] with A.Extended[~[A]] {
     protected val real = s.preview
 
     protected var value: A = _
 
-    @inline def prime = real.prime
+    @inline final def prime = real.prime
 
     def pump = {
       var isFirst = true
@@ -21,7 +21,7 @@ private[Stream] object group {
       })
     }
 
-    @inline override def ilkOpt = Ilk.Refs
+    @inline final override def ilkOpt = Ilk.Refs
   }
 }
 /*___________________________________________________________________________

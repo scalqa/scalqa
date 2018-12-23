@@ -7,16 +7,16 @@ private[Buffer] object RangeLoader {
     var _size = r.start
     override val loadLimit = r.end
 
-    @inline def add(v: A) = {
+    @inline final def add(v: A) = {
       val c = _size
       if (c > loadLimit) failLimit
       real.update(c, v);
       _size += 1
     }
 
-    @inline def _array = real._array
+    @inline final def _array = real._array
 
-    @inline def _arrayResize(s: Int) = App.Fail()
+    @inline final def _arrayResize(s: Int) = App.Fail()
   }
 }
 

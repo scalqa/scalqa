@@ -3,13 +3,13 @@ package scalqa; package Util; package Time
 class Nanos private[scalqa] (val real: Long) extends AnyVal with Like.Unit[Nanos] with Time.Like.Core.A.Nanos {
   protected def setup = Nanos
 
-  @inline def totalNanos = real Nanos
+  @inline final def totalNanos = real Nanos
 
 }
 
 object Nanos extends Like.Unit.Setup[Nanos]("nanos", 3) {
 
-  @inline def make(v: Long) = new Nanos(v)
+  @inline final def make(v: Long) = new Nanos(v)
 
 }
 /*___________________________________________________________________________

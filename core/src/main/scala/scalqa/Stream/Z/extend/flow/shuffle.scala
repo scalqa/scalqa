@@ -2,7 +2,7 @@ package scalqa; package Stream; package Z; package extend; package flow
 
 private[Stream] object shuffle {
 
-  @inline def apply[@specialized(DATA) A](s: Stream[A]): Stream[A] = new Stream[A] with A.Extended.Ilk[A] with Stream.A.Specialized.Indexed[A] {
+  @inline final def apply[@specialized(DATA) A](s: Stream[A]): Stream[A] = new Stream[A] with A.Extended.Ilk[A] with Stream.A.Specialized.Indexed[A] {
 
     protected lazy val bin = real.to[Idx.Array.Buffer]
 
@@ -12,15 +12,15 @@ private[Stream] object shuffle {
       a
     }
 
-    @inline def real = s
+    @inline final def real = s
 
-    @inline def _size = bin.size
+    @inline final def _size = bin.size
 
-    @inline def _apply(i: Int) = bin(shffle(i))
+    @inline final def _apply(i: Int) = bin(shffle(i))
 
-    @inline def pump = _pumpIndexed
+    @inline final def pump = _pumpIndexed
 
-    @inline def foreach(f: Consumer[A]) = _consumeIndexed(f)
+    @inline final def foreach(f: Consumer[A]) = _consumeIndexed(f)
   }
 }
 /*___________________________________________________________________________

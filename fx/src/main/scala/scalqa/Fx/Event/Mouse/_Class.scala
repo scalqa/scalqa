@@ -9,7 +9,7 @@ class _Class(e: MouseEvent, node: A.Node) extends Event.Input(e, node) with Any.
 
   def button = Button(real.getButton)
 
-  def toInfo = new Pro.Info(this) += ("button", button)
+  def toInfo = new Pro.Info(this) += (("button", button))
 
 }
 /*___________________________________________________________________________

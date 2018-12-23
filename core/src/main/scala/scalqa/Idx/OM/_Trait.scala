@@ -2,11 +2,11 @@ package scalqa; package Idx; package OM
 
 trait _Trait[A] extends M[A] with O[A] {
 
-  def refreshAt(r: Idx.Range)
+  def refreshAt(r: Idx.Range): Unit
 
-  def multiChange(changeInterface: M[A] => Any)
+  def multiChange(changeInterface: M[A] => Any): Unit
 
-  def replaceAll(s: ~[A]) { multiChange(c => { c.clear; s(c.add) }) }
+  def replaceAll(s: ~[A]) = multiChange(c => { c.clear; s(c.add) })
 
 }
 

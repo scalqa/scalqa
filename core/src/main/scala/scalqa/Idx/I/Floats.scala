@@ -6,22 +6,22 @@ class Floats private[I] (protected val base: Array[Float]) extends AnyVal with I
   protected type TYPE = Floats
   @inline protected def make = new Floats(_)
 
-  @inline def apply(i: Int) = base(i)
-  @inline def size: Int = base.length
-  @inline override def all: ~[Float] = Custom.Array.Z.stream(base)
+  @inline final def apply(i: Int) = base(i)
+  @inline final def size: Int = base.length
+  @inline final override def all: ~[Float] = Custom.Array.Z.stream(base)
 
-  @inline override def copy(r: Idx.Range) = new Floats(AZ.copy.range(base, r))
-  @inline override def copyDrop(r: Idx.Range) = new Floats(AZ.copy.dropRange(base, r))
+  @inline final override def copy(r: Idx.Range) = new Floats(AZ.copy.range(base, r))
+  @inline final override def copyDrop(r: Idx.Range) = new Floats(AZ.copy.dropRange(base, r))
 
-  @inline override def +(v: Float) = new Floats(AZ.plus(base, v))
-  @inline override def +~(v: ~[Float]) = new Floats(AZ.plus.stream(base, v))
-  @inline override def +@(i: Int, v: Float) = new Floats(AZ.plus.at(base, i, v))
-  @inline override def +~@(i: Int, v: ~[Float]) = new Floats(AZ.plus.pipeAt(base, i, v))
+  @inline final override def +(v: Float) = new Floats(AZ.plus(base, v))
+  @inline final override def +~(v: ~[Float]) = new Floats(AZ.plus.stream(base, v))
+  @inline final override def +@(i: Int, v: Float) = new Floats(AZ.plus.at(base, i, v))
+  @inline final override def +~@(i: Int, v: ~[Float]) = new Floats(AZ.plus.pipeAt(base, i, v))
 
-  @inline override def -(v: Float) = new Floats(AZ.minus(base, v))
-  @inline override def -~(v: ~[Float]) = new Floats(AZ.minus.stream(base, v))
+  @inline final override def -(v: Float) = new Floats(AZ.minus(base, v))
+  @inline final override def -~(v: ~[Float]) = new Floats(AZ.minus.stream(base, v))
 
-  @inline override def toArray(implicit t: ClassTag[Float]) = base.copyFull
+  @inline final override def toArray(implicit t: ClassTag[Float]) = base.copyFull
 }
 
 object Floats extends Z.Primitive.Setup[Float, Floats](new Floats(_), Array.emptyFloatArray)

@@ -2,11 +2,11 @@ package scalqa; package Any; package Ilk; package Z; package A
 
 private[Ilk] abstract class Base[A] extends Ilk with Tag[A] {
 
-  @inline def ilkOpt = this
+  @inline final def ilkOpt = this
 
-  @inline def primitiveOpt = this
+  def primitiveOpt = this
 
-  @inline def isPrimitive = true
+  def isPrimitive = true
 
 }
 /*___________________________________________________________________________

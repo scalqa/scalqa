@@ -2,7 +2,7 @@ package scalqa; package Stream; package Z; package extend; package order
 
 private[Stream] object sortBy {
 
-  @inline def apply[@specialized(DATA) A, B](s: Stream[A], o: Ordering[B], f: Mapping[A, B]): Stream[A] = new Stream[A] with A.Extended.Ilk[A] with Stream.A.Specialized.Indexed[A] {
+  @inline final def apply[@specialized(DATA) A, B](s: Stream[A], o: Ordering[B], f: Mapping[A, B]): Stream[A] = new Stream[A] with A.Extended.Ilk[A] with Stream.A.Specialized.Indexed[A] {
 
     private var fresh = true
 
@@ -13,13 +13,13 @@ private[Stream] object sortBy {
       w
     }
 
-    @inline override def _apply(i: Int) = buf(i)
+    @inline final override def _apply(i: Int) = buf(i)
 
     override def _size = if (fresh) real.sizeOpt or buf.size else buf.size
 
-    @inline def pump = _pumpIndexed
+    @inline final def pump = _pumpIndexed
 
-    @inline def foreach(f: Consumer[A]) = _consumeIndexed(f)
+    @inline final def foreach(f: Consumer[A]) = _consumeIndexed(f)
 
     override def sortedByOpt[C] = (o, f).Opt.asInstanceOf[Opt[(Ordering[C], A => C)]]
 

@@ -6,22 +6,22 @@ class Longs private[I] (protected val base: Array[Long]) extends AnyVal with Idx
   protected type TYPE = Longs
   @inline protected def make = new Longs(_)
 
-  @inline def apply(i: Int) = base(i)
-  @inline def size: Int = base.length
-  @inline override def all: ~[Long] = Custom.Array.Z.stream(base)
+  @inline final def apply(i: Int) = base(i)
+  @inline final def size: Int = base.length
+  @inline final override def all: ~[Long] = Custom.Array.Z.stream(base)
 
-  @inline override def copy(r: Idx.Range) = new Longs(AZ.copy.range(base, r))
-  @inline override def copyDrop(r: Idx.Range) = new Longs(AZ.copy.dropRange(base, r))
+  @inline final override def copy(r: Idx.Range) = new Longs(AZ.copy.range(base, r))
+  @inline final override def copyDrop(r: Idx.Range) = new Longs(AZ.copy.dropRange(base, r))
 
-  @inline override def +(v: Long) = new Longs(AZ.plus(base, v))
-  @inline override def +~(v: ~[Long]) = new Longs(AZ.plus.stream(base, v))
-  @inline override def +@(i: Int, v: Long) = new Longs(AZ.plus.at(base, i, v))
-  @inline override def +~@(i: Int, v: ~[Long]) = new Longs(AZ.plus.pipeAt(base, i, v))
+  @inline final override def +(v: Long) = new Longs(AZ.plus(base, v))
+  @inline final override def +~(v: ~[Long]) = new Longs(AZ.plus.stream(base, v))
+  @inline final override def +@(i: Int, v: Long) = new Longs(AZ.plus.at(base, i, v))
+  @inline final override def +~@(i: Int, v: ~[Long]) = new Longs(AZ.plus.pipeAt(base, i, v))
 
-  @inline override def -(v: Long) = new Longs(AZ.minus(base, v))
-  @inline override def -~(v: ~[Long]) = new Longs(AZ.minus.stream(base, v))
+  @inline final override def -(v: Long) = new Longs(AZ.minus(base, v))
+  @inline final override def -~(v: ~[Long]) = new Longs(AZ.minus.stream(base, v))
 
-  @inline override def toArray(implicit t: ClassTag[Long]) = base.copyFull
+  @inline final override def toArray(implicit t: ClassTag[Long]) = base.copyFull
 }
 
 object Longs extends Z.Primitive.Setup[Long, Longs](new Longs(_), Array.emptyLongArray)

@@ -4,13 +4,11 @@ private[Extra] object Void extends _Class(null, null, null) with Void {
 
   override def child = this
 
-  override def isCancelled = false;
-
   override def cancel = App.Fail();
 
-  override def all(scope: AnyRef): ~[Entry] = \/;
+  override def all(scope: AnyRef): ~[Entry] = \/
 
-  override def toInfo = super.toInfo += (null, "void")
+  override def toInfo = super.toInfo += (("", "void"))
 
 }
 /*___________________________________________________________________________

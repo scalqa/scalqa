@@ -6,7 +6,7 @@ private[O] trait Change[A, B] extends Any.Collection.O.Change[B] {
 
   def items: Any.Collection[B] = pairs.asMappedView(_._2)
 
-  override def toInfo = super.toInfo += ("pairs", pairs.all.format(","))
+  override def toInfo = super.toInfo += (("pairs", pairs.all.format(",")))
 
 }
 

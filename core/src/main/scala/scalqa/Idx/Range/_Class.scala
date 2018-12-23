@@ -72,10 +72,6 @@ ___________________________________________________________________________*/
  *       "abcdef".substring(2, 5)  // Java way
  *
  *       "abcdef".copy(2 <>> 5)    // Scalqa way
- *
- *       new StringBuilder("abcdef").delete(2, 4)    // Java way
- *
- *       Util.StringBuilder.make("abcdef") -=@ (2 <>> 4)  // Scalqa way
  *   }}}
  *
  * @def toArray -> Idx collection

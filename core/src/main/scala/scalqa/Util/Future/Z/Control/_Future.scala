@@ -31,7 +31,7 @@ private[Control] trait _Future[A] { self: _Class[A] =>
 
     def onComplete(c: Out[A] => Unit)(implicit e: concurrent.ExecutionContext) = addEvent(new Event(e, c))
 
-    def linkTo(v: Control[_]): Unit = {
+    private[Z] override def linkTo(v: Control[_]): Unit = {
       val p = v.asInstanceOf[Control[A]]
       linkRoot(p.get() match { case v: Control[A] => p.rootControl(v); case _ => p })
     }

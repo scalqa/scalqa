@@ -11,7 +11,7 @@ class Circle(radiusOpt: Opt[Double]) extends Shape with Any.Able.ToInfo {
   def radiusPro: Pro.OM[Double] = Custom.ProWO(real.radiusProperty); def radius = real.getRadius; def radius_=(b: Double) = real.setRadius(b)
 
   // -----------------------------------------------------------------------------------------------------
-  def toInfo = new Pro.Info(this) += ("x", centerX) += ("y", centerY) += ("radius", radius)
+  def toInfo = new Pro.Info(this) += (("x", centerX)) += (("y", centerY)) += (("radius", radius))
 
 }
 /*___________________________________________________________________________

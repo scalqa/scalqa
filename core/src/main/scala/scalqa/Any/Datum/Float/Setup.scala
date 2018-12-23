@@ -1,15 +1,15 @@
 package scalqa; package Any; package Datum.Float
 
 abstract class Setup[TYPE <: Datum.Float[TYPE]] protected extends Any.Datum.Setup[TYPE] {
-  private[scalqa]type VALUE = Float
+  private[scalqa] type VALUE = Float
   private[scalqa] def ilk = Ilk.Floats
 
   protected def make(v: Float): TYPE
   protected def undo(v: TYPE): Float = _Trait.real(v)
 
   implicit override val Map: BiMap[Float, TYPE] = new BiMap[Float, TYPE] {
-    @inline def apply(v: Float) = make(v)
-    @inline def undo(v: TYPE) = _Trait.real(v)
+    @inline final def apply(v: Float) = make(v)
+    @inline final def undo(v: TYPE) = _Trait.real(v)
   }
 
   implicit val Ordering: Ordering[TYPE] = new Ordering[TYPE] { def compare(x: TYPE, y: TYPE) = java.lang.Float.compare(undo(x), undo(y)) }

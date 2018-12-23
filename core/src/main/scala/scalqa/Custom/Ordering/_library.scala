@@ -2,7 +2,7 @@ package scalqa; package Custom; package Ordering
 
 class _library[A] private[scalqa] (protected val real: math.Ordering[A]) extends AnyVal {
 
-  @inline def custom: Ordering[A] = real match {
+  @inline final def custom: Ordering[A] = real match {
     case o: Ordering[A] => o
     case _              => new Z.Wrap(real)
   }

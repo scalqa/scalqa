@@ -8,9 +8,9 @@ private[aggregate] abstract class Reducer[@specialized(DATA) A] extends Consumer
 
   def reduce(x: A, y: A): A
 
-  @inline def init(v: A) { fresh = false; value = v }
+  @inline final def init(v: A) = { fresh = false; value = v }
 
-  @inline def toOpt: Opt[A] = if (fresh) Opt.Void else value
+  @inline final def toOpt: Opt[A] = if (fresh) Opt.Void else value
 
 }
 /*___________________________________________________________________________

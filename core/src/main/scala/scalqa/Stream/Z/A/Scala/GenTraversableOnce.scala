@@ -11,17 +11,17 @@ private[scalqa] object GenTraversableOnce {
 
       new Stream[A] with Stream.A.Specialized[A] with Any.Able.Stream[A] {
 
-        @inline def prime = it.hasNext
+        @inline final def prime = it.hasNext
 
-        @inline def pump = it.next
+        @inline final def pump = it.next
 
-        @inline def foreach(c: Consumer[A]) = while (it.hasNext) c.accept(it.next)
+        @inline final def foreach(c: Consumer[A]) = while (it.hasNext) c.accept(it.next)
 
-        override def to[T[A]](implicit c: Stream.Interface.To.Converter[T]): T[A] = customTo(c, it, this)
+        override def to[T[_]](implicit c: Stream.Interface.To.Converter[T]): T[A] = customTo(c, it, this)
 
-        @inline override def ilkOpt = i.ilkOpt
+        @inline final override def ilkOpt = i.ilkOpt
 
-        @inline def all = this
+        @inline final def all = this
       }
     }
   }

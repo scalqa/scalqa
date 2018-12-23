@@ -3,11 +3,11 @@ package scalqa; package Any; package Datum; package String
 import Custom.String.{ _library => L }
 
 trait _Trait[TYPE <: _Trait[TYPE]] extends Any with Datum.Comparable[TYPE, java.lang.String]
-    with L._evaluate._Trait[TYPE] with L._modify[TYPE] with L._substring[TYPE] with L._transform[TYPE] {
+  with L._evaluate._Trait[TYPE] with L._modify[TYPE] with L._substring[TYPE] with L._transform[TYPE] {
 
   protected def setup: Setup[TYPE]
 
-  @inline def undo(v: TYPE) = v.real
+  @inline final def undo(v: TYPE) = v.real
 
   override def toString = real
 

@@ -2,7 +2,7 @@ package scalqa; package Idx; package OM; package Z; package A
 
 private[Idx] class BiMappedView[A, B](protected override val real: OM[A], bm: BiMap[A, B]) extends Idx.M.Z.A.BiMappedView[A, B](real, bm) with OM[B] {
 
-  def refreshAt(r: Idx.Range) { real.refreshAt(r) }
+  def refreshAt(r: Idx.Range) = real.refreshAt(r)
 
   def multiChange(ch: M[B] => Any): Unit = real.multiChange(l => ch(l.asBiMappedView(bm)))
 

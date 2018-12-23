@@ -4,13 +4,13 @@ private[scalqa] object stream {
 
   def apply[@specialized(DATA) A](v: Idx[A]): Stream[A] = new Stream[A] with Stream.A.Specialized.Indexed[A] {
 
-    @inline def _size = v.size
+    @inline final def _size = v.size
 
-    @inline def _apply(i: Int) = v(i)
+    @inline final def _apply(i: Int) = v(i)
 
-    @inline def pump = _pumpIndexed
+    @inline final def pump = _pumpIndexed
 
-    @inline def foreach(f: Stream.Consumer[A]) = _consumeIndexed(f)
+    @inline final def foreach(f: Stream.Consumer[A]) = _consumeIndexed(f)
   }
 }
 

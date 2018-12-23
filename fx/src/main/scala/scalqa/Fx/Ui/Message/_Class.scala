@@ -12,7 +12,7 @@ class _Class protected[Message] (val typ: Type, textOpt: Opt[String], val causeO
 
   val textPro = Pro.OM.make[String](textOpt orOpt causeOpt.letMap(c => c.getMessage.I.Opt orOpt c.I.Class.lastName.I.Opt) or ""); def text = textPro(); def text_=(v: String) = textPro() = v
 
-  def toInfo = new Pro.Info(this) += ("type", typ) += ("context", context) += ("text", text) += ("time", time.toBrief) += ("acknowledged", acknowledged)
+  def toInfo = new Pro.Info(this) += (("type", typ)) += (("context", context)) += (("text", text)) += (("time", time.toBrief)) += (("acknowledged", acknowledged))
 }
 /*___________________________________________________________________________
      __________ ____   __   ______  ____

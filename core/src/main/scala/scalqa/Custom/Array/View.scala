@@ -8,23 +8,23 @@ trait View[@specialized(DATA) A] extends Any with Any.Able.Void {
   def apply(i: Int): A
   def size: Int
 
-  @inline def +(v: A) = make(Z.plus(base, v))
-  @inline def +~(v: ~[A]) = make(Z.plus.stream(base, v))
-  @inline def +@(i: Int, v: A) = make(Z.plus.at(base, i, v))
-  @inline def +~@(i: Int, v: ~[A]) = make(Z.plus.pipeAt(base, i, v))
-  @inline def -(v: A) = make(Z.minus(base, v))
-  @inline def -~(v: ~[A]) = make(Z.minus.stream(base, v))
-  @inline def -@(r: Idx.Range) = make(Z.minus.At(base, r))
-  @inline def -@(position: Int) = make(Z.minus.At(base, position <>!))
+  def +(v: A) = make(Z.plus(base, v))
+  def +~(v: ~[A]) = make(Z.plus.stream(base, v))
+  def +@(i: Int, v: A) = make(Z.plus.at(base, i, v))
+  def +~@(i: Int, v: ~[A]) = make(Z.plus.pipeAt(base, i, v))
+  def -(v: A) = make(Z.minus(base, v))
+  def -~(v: ~[A]) = make(Z.minus.stream(base, v))
+  def -@(r: Idx.Range) = make(Z.minus.At(base, r))
+  def -@(position: Int) = make(Z.minus.At(base, position <>!))
 
-  @inline def copy(r: scalqa.Idx.Range) = make(Z.copy.range(base, r))
-  @inline def copyDrop(r: scalqa.Idx.Range) = make(Z.copy.dropRange(base, r))
-  @inline def copyTo(destArray: Array[_ >: A], destPos: Int = 0, srcRangeOpt: Opt[scalqa.Idx.Range] = \/): Int = Array.Z.copy.to(base, destArray, destPos, srcRangeOpt)
-  @inline def copyFull: TYPE = copy(size.Range)
-  @inline def copyFirst(number: Int): TYPE = copy(number.Range)
-  @inline def copyLast(number: Int): TYPE = copy(size - number <>> size)
-  @inline def copyFrom(position: Int): TYPE = copy(position <>> size)
-  @inline def copyShort(cnt: Int): TYPE = copy((size - cnt).Range)
+  def copy(r: scalqa.Idx.Range) = make(Z.copy.range(base, r))
+  def copyDrop(r: scalqa.Idx.Range) = make(Z.copy.dropRange(base, r))
+  def copyTo(destArray: Array[_ >: A], destPos: Int = 0, srcRangeOpt: Opt[scalqa.Idx.Range] = \/): Int = Array.Z.copy.to(base, destArray, destPos, srcRangeOpt)
+  def copyFull: TYPE = copy(size.Range)
+  def copyFirst(number: Int): TYPE = copy(number.Range)
+  def copyLast(number: Int): TYPE = copy(size - number <>> size)
+  def copyFrom(position: Int): TYPE = copy(position <>> size)
+  def copyShort(cnt: Int): TYPE = copy((size - cnt).Range)
 
   protected def contains(v: A): Boolean = Custom.Array.Z.contains(base, v)
 
@@ -46,7 +46,7 @@ ___________________________________________________________________________*/
  * @def toString -> Description
  *
  *     Provides description of size and array type
- *     
+ *
  * @def toArray -> Copy to Array
  *
  *     Copies all elements to a new Array

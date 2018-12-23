@@ -30,9 +30,9 @@ trait Indexed[@specialized(DATA) A] extends Specialized[A] with Preview[A] { sel
 
 private[scalqa] object Indexed {
 
-  @inline def size(v: Indexed[_]) = v._size
+  @inline final def size(v: Indexed[_]) = v._size
 
-  @inline def apply[@specialized(DATA) A](v: Indexed[A], i: Int): A = v._apply(i)
+  @inline final def apply[@specialized(DATA) A](v: Indexed[A], i: Int): A = v._apply(i)
 
   def pump[@specialized(DATA) A](x: Indexed[A]): A = {
     val v = x._apply(x._position)

@@ -32,7 +32,7 @@ package object scalqa extends Util.Z.Include.Root {
   type OneOfTwo[+A, +B] = Util.OneOfTwo[A, B]; val OneOfTwo = Util.OneOfTwo
   type Void = Util.Void
 
-  implicit def any2stringadd = () // any2stringadd is globally disabled
+  implicit def any2stringadd() = () // any2stringadd is globally disabled
   implicit def zzWarrant_ImplicitConversions = languageFeature.implicitConversions
   implicit def zzWarrant_HigherKinds = languageFeature.higherKinds
   implicit def zzWarrant_PostfixOps = scala.language.postfixOps

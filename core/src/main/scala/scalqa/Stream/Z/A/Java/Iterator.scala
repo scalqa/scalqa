@@ -1,18 +1,26 @@
 package scalqa; package Stream; package Z; package A; package Java
 
-private[scalqa] object List {
+private[scalqa] object Iterator {
 
-  def toStream[A](l: java.util.List[A])(implicit i: Ilk[A]): Stream[A] with Any.Able.Stream[A] = new Stream.A.Indexed[A] with Any.Able.Stream[A] {
+  def toStream[@specialized(DATA) A](it: java.util.Iterator[A])(implicit i: Ilk[A]): Stream[A] with Any.Able.Stream[A] = new Stream.A.Base[A] with Any.Able.Stream[A] {
 
-    @inline final override def _size = l.size;
+    @inline final def prime = it.hasNext
 
-    @inline final override def _apply(i: Int) = l.get(i)
+    @inline final def pump = it.next
 
     @inline final override def ilkOpt = i.ilkOpt
 
     @inline final def all = this
   }
+
+  def make[A](src: Stream[A]): java.util.Iterator[A] = new java.util.Iterator[A] {
+
+    @inline final def hasNext(): Boolean = src.prime
+
+    @inline final def next = if (src.prime) src.pump else Stream.failEmpty
+  }
 }
+
 /*___________________________________________________________________________
      __________ ____   __   ______  ____
     /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API

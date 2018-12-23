@@ -2,7 +2,7 @@ package scalqa; package Any; package Able
 
 trait Void extends Any {
 
-  @inline def isVoid: Boolean = false
+  def isVoid: Boolean = false
 
 }
 

@@ -3,13 +3,13 @@ package scalqa; package App; package Z; package Benchmark
 import Util.ByteSize
 
 private[Z] class Result(
-    val id: Int,
-    val label: String,
-    val count: Long,
-    var memory: ByteSize,
-    val valueSum: Long,
-    var maxCount: Long = \/,
-    var maxMemory: ByteSize = \/) extends Any.Able.ToInfo {
+  val id:        Int,
+  val label:     String,
+  val count:     Long,
+  var memory:    ByteSize,
+  val valueSum:  Long,
+  var maxCount:  Long     = \/,
+  var maxMemory: ByteSize = \/) extends Any.Able.ToInfo {
 
   def +(that: Result) = {
     def sum(m1: ByteSize, m2: ByteSize): ByteSize =
@@ -28,13 +28,13 @@ private[Z] class Result(
   }
 
   def toInfo = new Pro.Info(this) +=
-    ("Num", id + 1) +=
-    ("Name", label) +=
-    ("Run Count", count.toBrief) +=
-    ("%", count %@ maxCount toInt) +=
-    ("Memory", memory.toBrief) +=
-    ("%", memory %@ maxMemory toInt) +=
-    ("Control Value Avg", if (count == 0) 0 else valueSum / count)
+    (("Num", id + 1)) +=
+    (("Name", label)) +=
+    (("Run Count", count.toBrief)) +=
+    (("%", count %@ maxCount toInt)) +=
+    (("Memory", memory.toBrief)) +=
+    (("%", memory %@ maxMemory toInt)) +=
+    (("Control Value Avg", if (count == 0) 0 else valueSum / count))
 }
 /*___________________________________________________________________________
      __________ ____   __   ______  ____

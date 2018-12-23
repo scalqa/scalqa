@@ -2,15 +2,15 @@ package scalqa; package Custom; package String; package _library; package _evalu
 
 trait _check[TYPE] extends Any with Any.Datum[TYPE, String] {
 
-  @inline def isVoid = real == null || real.length == 0
+  @inline final def isVoid = real == null || real.length == 0
 
-  @inline def contains(sub: String): Boolean = real.contains(sub)
+  @inline final def contains(sub: String): Boolean = real.contains(sub)
 
-  @inline def startsWith(sub: String): Boolean = real.startsWith(sub)
+  @inline final def startsWith(sub: String): Boolean = real.startsWith(sub)
 
-  @inline def endsWith(sub: String): Boolean = real.endsWith(sub)
+  @inline final def endsWith(sub: String): Boolean = real.endsWith(sub)
 
-  @inline def equalsIgnoreCase(v: String): Boolean = real.equalsIgnoreCase(v)
+  @inline final def equalsIgnoreCase(v: String): Boolean = real.equalsIgnoreCase(v)
 
   def isLike(mask: String, ignoreCase: Boolean = false): Boolean = Z.isLike(real, mask, ignoreCase)
 

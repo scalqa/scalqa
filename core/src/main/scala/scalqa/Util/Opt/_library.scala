@@ -1,7 +1,7 @@
 package scalqa; package Util; package Opt
 
 class _library[A] private[Opt] (protected[Opt] val real: Any) extends AnyVal with Any.Able.Stream[A] {
-  @inline private[Opt] def _empty = real.isInstanceOf[VoidValue]
+  @inline private[Opt] def _empty = real.isInstanceOf[Z.VoidValue]
   @inline private def _val: A = real.asInstanceOf[A]
 
   def or(default: => A): A = if (_empty) default else _val

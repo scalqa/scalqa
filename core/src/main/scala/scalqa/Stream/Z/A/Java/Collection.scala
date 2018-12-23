@@ -6,17 +6,17 @@ private[scalqa] object Collection {
     protected val it = c.iterator
     protected var sz = c.size
 
-    @inline def prime = it.hasNext
+    @inline final def prime = it.hasNext
 
-    @inline def pump = { sz -= 1; it.next }
+    @inline final def pump = { sz -= 1; it.next }
 
     override def foreach(c: Consumer[A]) = { sz = 0; while (it.hasNext) c.accept(it.next) }
 
-    @inline override def sizeOpt = sz
+    @inline final override def sizeOpt = sz
 
-    @inline override def ilkOpt = i.ilkOpt
+    @inline final override def ilkOpt = i.ilkOpt
 
-    @inline def all = this
+    @inline final def all = this
   }
 }
 

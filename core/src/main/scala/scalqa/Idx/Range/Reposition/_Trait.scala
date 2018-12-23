@@ -6,7 +6,7 @@ trait _Trait extends Any.Able.ToInfo {
 
   def indexes: Ints
 
-  def toInfo = new Pro.Info(this, "Reposition") += ("range", range) += (\/, this.allPairs.format())
+  def toInfo = new Pro.Info(this, "Reposition") += (("range", range)) += (("", this.allPairs.format()))
 }
 
 object _Trait extends Util.Void.Setup[Reposition](Z.Void) {

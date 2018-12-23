@@ -15,8 +15,6 @@ package object Number {
     case _                  => \/
   }
 
-  val Ordering: Ordering[Number] = Z.Ordering
-
   def parseInt(ba: Array[Byte], r: Idx.Range): Int = parseLong(ba, r).toInt
 
   def parseLong(ba: Array[Byte], r: Idx.Range): Long = {
@@ -26,7 +24,7 @@ package object Number {
     return l
   }
 
-  @inline def get10Power(i: Int): Long = tenPowers(i); private lazy val tenPowers = new Array[Long](19).I(a => 19.all.foldAs(1L)((v, i) => { a(i) = v; v * 10L }))
+  @inline final def get10Power(i: Int): Long = tenPowers(i); private lazy val tenPowers = new Array[Long](19).I(a => 19.all.foldAs(1L)((v, i) => { a(i) = v; v * 10L }))
 
 }
 /*___________________________________________________________________________

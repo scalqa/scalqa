@@ -1,15 +1,15 @@
 package scalqa; package Any; package Datum.Int
 
 abstract class Setup[TYPE <: Datum.Int[TYPE]] protected extends Any.Datum.Setup[TYPE] {
-  private[scalqa]type VALUE = Int
+  private[scalqa] type VALUE = Int
   private[scalqa] def ilk = Ilk.Ints
 
   protected def make(v: Int): TYPE
   protected def undo(v: TYPE): Int = _Trait.real(v)
 
   implicit override val Map: BiMap[Int, TYPE] = new BiMap[Int, TYPE] {
-    @inline def apply(v: Int) = make(v)
-    @inline def undo(v: TYPE) = _Trait.real(v)
+    @inline final def apply(v: Int) = make(v)
+    @inline final def undo(v: TYPE) = _Trait.real(v)
   }
 
   implicit val Ordering: Ordering[TYPE] = new Ordering[TYPE] { def compare(x: TYPE, y: TYPE) = java.lang.Integer.compare(undo(x), undo(y)) }
@@ -26,27 +26,27 @@ abstract class Setup[TYPE <: Datum.Int[TYPE]] protected extends Any.Datum.Setup[
 
     def compare(x: TYPE, y: TYPE) = java.lang.Integer.compare(undo(x), undo(y))
 
-    @inline def fromInt(x: Int) = make(x)
+    @inline final def fromInt(x: Int) = make(x)
 
-    @inline def minus(x: TYPE, y: TYPE) = make(undo(x) - undo(y))
+    @inline final def minus(x: TYPE, y: TYPE) = make(undo(x) - undo(y))
 
-    @inline def negate(x: TYPE) = make(-undo(x))
+    @inline final def negate(x: TYPE) = make(-undo(x))
 
-    @inline def plus(x: TYPE, y: TYPE) = make(undo(x) + undo(y))
+    @inline final def plus(x: TYPE, y: TYPE) = make(undo(x) + undo(y))
 
-    @inline def times(x: TYPE, y: TYPE) = make(undo(x) * undo(y))
+    @inline final def times(x: TYPE, y: TYPE) = make(undo(x) * undo(y))
 
-    @inline def quot(x: TYPE, y: TYPE) = make(undo(x) / undo(y))
+    @inline final def quot(x: TYPE, y: TYPE) = make(undo(x) / undo(y))
 
-    @inline def rem(x: TYPE, y: TYPE) = make(undo(x) % undo(y))
+    @inline final def rem(x: TYPE, y: TYPE) = make(undo(x) % undo(y))
 
-    @inline def toDouble(x: TYPE) = undo(x).toDouble
+    @inline final def toDouble(x: TYPE) = undo(x).toDouble
 
-    @inline def toFloat(x: TYPE) = undo(x).toFloat
+    @inline final def toFloat(x: TYPE) = undo(x).toFloat
 
-    @inline def toInt(x: TYPE) = undo(x).toInt
+    @inline final def toInt(x: TYPE) = undo(x).toInt
 
-    @inline def toLong(x: TYPE) = undo(x).toLong
+    @inline final def toLong(x: TYPE) = undo(x).toLong
   }
 
 }

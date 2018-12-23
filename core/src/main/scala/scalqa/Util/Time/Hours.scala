@@ -3,13 +3,13 @@ package scalqa; package Util; package Time
 class Hours private[scalqa] (val real: Long) extends AnyVal with Like.Unit[Hours] with Time.Like.Core.A.Millis {
   protected def setup = Hours
 
-  @inline def totalMillis = Time.Z.MillisInOneHour * real Millis
+  @inline final def totalMillis = Time.Z.MillisInOneHour * real Millis
 
 }
 
 object Hours extends Like.Unit.Setup[Hours]("hour", 2) {
 
-  @inline def make(v: Long) = new Hours(v)
+  @inline final def make(v: Long) = new Hours(v)
 
 }
 /*___________________________________________________________________________

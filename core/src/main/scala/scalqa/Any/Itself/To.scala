@@ -2,7 +2,7 @@ package scalqa; package Any; package Itself
 
 object To {
 
-  abstract class Converter[CONTAINER[Any]] protected {
+  abstract class Converter[CONTAINER[_]] protected {
 
     def make[A]: (A, Ilk.Tag[A]) => CONTAINER[A]
 
@@ -23,11 +23,18 @@ object To {
   // Java ----------------------------------------------------------------------------------------------------------------
   implicit val JavaList: Converter[java.util.List] = new Converter[java.util.List] { def make[A] = (v, i) => new JavaList(v) }
   implicit val JavaCollection: Converter[java.util.Collection] = JavaList.asInstanceOf[Converter[java.util.Collection]]
-  implicit val JavaIterator: Converter[java.util.Iterator] = Iterator.asInstanceOf[Converter[java.util.Iterator]]
+  implicit val JavaIterator: Converter[java.util.Iterator] = new Converter[java.util.Iterator] { def make[A] = (v, i) => new JavaIterator(v) }
 
   // ******************************************************************************
   private class Idx[A](v: A) extends scalqa.Idx[A] { def size = 1; def apply(i: Int) = v }
   private class IndexedSeq[A](v: A) extends collection.AbstractSeq[A] with scala.IndexedSeq[A] { def length = 1; def apply(i: Int) = v }
-  private class Iterator[A](var o: Opt[A]) extends collection.AbstractIterator[A] with java.util.Iterator[A] { def hasNext = o; def next: A = { val v = o.value; o = \/; v } }
+  private class Iterator[A](var o: Opt[A]) extends collection.AbstractIterator[A] { def hasNext = o; def next: A = { val v = o.value; o = \/; v } }
+  private class JavaIterator[A](var o: Opt[A]) extends java.util.Iterator[A] { def hasNext() = o; def next: A = { val v = o.value; o = \/; v } }
   private class JavaList[A](v: A) extends java.util.AbstractList[A] { def size = 1; def get(i: Int) = v }
 }
+/*___________________________________________________________________________
+     __________ ____   __   ______  ____
+    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
+  __\  \/ /___/ __  |/ /__/ /_/ /_/ __  |   (c) 2018, Datamata Corporation
+ /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
+___________________________________________________________________________*/

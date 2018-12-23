@@ -10,12 +10,12 @@ abstract class Setup[TYPE] private[scalqa] {
   implicit val Setup: Setup[TYPE] = this
 
   val Map: BiMap[VALUE, TYPE] = new BiMap[VALUE, TYPE] {
-    @inline def apply(v: VALUE): TYPE = Setup.this.make(v)
-    @inline def undo(v: TYPE): VALUE = Setup.this.undo(v)
+    @inline final def apply(v: VALUE): TYPE = Setup.this.make(v)
+    @inline final def undo(v: TYPE): VALUE = Setup.this.undo(v)
   }
 
   private[scalqa] def ilk: Ilk
-  @inline private[scalqa] def This: this.type = this
+  private[scalqa] def This: this.type = this
 }
 
 /*___________________________________________________________________________

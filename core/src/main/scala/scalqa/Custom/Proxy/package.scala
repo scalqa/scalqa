@@ -2,6 +2,12 @@ package scalqa; package Custom
 
 package object Proxy {
   type Idx[A] = Idx._Class[A]
-  type Lookup[A,B] = Lookup._Class[A,B]
+  type Lookup[A, B] = Lookup._Class[A, B]
 
 }
+/*___________________________________________________________________________
+     __________ ____   __   ______  ____
+    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
+  __\  \/ /___/ __  |/ /__/ /_/ /_/ __  |   (c) 2018, Datamata Corporation
+ /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
+___________________________________________________________________________*/

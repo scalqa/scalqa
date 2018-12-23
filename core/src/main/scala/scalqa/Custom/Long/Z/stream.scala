@@ -5,11 +5,11 @@ private[Long] object stream {
   abstract class Base extends Stream[Long] with Stream.A.Specialized[Long] {
     protected var has = true
 
-    @inline def prime = has
+    @inline final def prime = has
 
-    @inline def foreach(c: Stream.Consumer[Long]) = while (prime) c.accept(pump)
+    @inline final def foreach(c: Stream.Consumer[Long]) = while (prime) c.accept(pump)
 
-    @inline override def ilkOpt = Ilk.Longs
+    @inline final override def ilkOpt = Ilk.Longs
 
   }
 
@@ -17,14 +17,14 @@ private[Long] object stream {
 
     def pump = { val v = cur; if (cur < scala.Long.MaxValue) cur += 1 else has = false; v }
 
-    @inline override def sortedOpt = Ordering.Long
+    @inline final override def sortedOpt = Ordering.Long
   }
 
   class Down(var cur: Long) extends Base {
 
     def pump = { val v = cur; if (cur > scala.Long.MinValue) cur -= 1 else has = false; v }
 
-    @inline override def sortedOpt = Ordering.Long.reverse
+    @inline final override def sortedOpt = Ordering.Long.reverse
   }
 }
 /*___________________________________________________________________________

@@ -2,22 +2,11 @@ package scalqa; package Stream; package Z; package A; package Scala
 
 private[scalqa] object Iterator {
 
-  def toStream[@specialized(DATA) A](it: java.util.Iterator[A])(implicit i: Ilk[A]): Stream[A] with Any.Able.Stream[A] = new Stream.A.Base[A] with Any.Able.Stream[A] {
+  def make[A](src: Stream[A]): Iterator[A] = new collection.AbstractIterator[A] {
 
-    @inline def prime = it.hasNext
+    @inline final def hasNext: Boolean = src.prime
 
-    @inline def pump = it.next
-
-    @inline override def ilkOpt = i.ilkOpt
-
-    @inline def all = this
-  }
-
-  def make[A](src: Stream[A]): scala.Iterator[A] with java.util.Iterator[A] = new collection.AbstractIterator[A] with java.util.Iterator[A] {
-
-    @inline def hasNext = src.prime
-
-    @inline def next = if (src.prime) src.pump else Stream.failEmpty
+    @inline final def next = if (src.prime) src.pump else Stream.failEmpty
   }
 }
 

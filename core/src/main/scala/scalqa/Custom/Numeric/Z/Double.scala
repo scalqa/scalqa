@@ -2,21 +2,21 @@ package scalqa; package Custom; package Numeric; package Z
 
 private[scalqa] object Double extends Numeric[Double] with math.Fractional[Double] {
 
-  @inline def negate(x: Double) = -x
-  @inline def minus(x: Double, y: Double) = x - y
-  @inline def plus(x: Double, y: Double) = x + y
-  @inline def times(x: Double, y: Double) = x * y
-  @inline def div(x: Double, y: Double) = x / y
-  @inline def rem(x: Double, y: Double) = x % y
+  @inline final def negate(x: Double) = -x
+  @inline final def minus(x: Double, y: Double) = x - y
+  @inline final def plus(x: Double, y: Double) = x + y
+  @inline final def times(x: Double, y: Double) = x * y
+  @inline final def div(x: Double, y: Double) = x / y
+  @inline final def rem(x: Double, y: Double) = x % y
 
-  @inline def fromInt(x: Int) = x toDouble
-  @inline def toDouble(x: Double) = x toDouble
-  @inline def toFloat(x: Double) = x toFloat
-  @inline def toInt(x: Double) = x toInt
-  @inline def toLong(x: Double) = x toLong
+  @inline final def fromInt(x: Int) = x toDouble
+  @inline final def toDouble(x: Double) = x toDouble
+  @inline final def toFloat(x: Double) = x toFloat
+  @inline final def toInt(x: Double) = x toInt
+  @inline final def toLong(x: Double) = x toLong
 
-  @inline override def zero = 0D
-  @inline override def one = 1D
+  @inline final override def zero = 0D
+  @inline final override def one = 1D
 
   override def abs(x: Double) = if (x < 0) negate(x) else x
   override def signum(x: Double): Int = if (x < 0) -1 else if (x > 0) 1 else 0

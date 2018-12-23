@@ -11,7 +11,7 @@ trait _Trait[CELL <: Fx.Cell] {
 
   def onCellContextMenu(f: (Event.ContextMenu, CELL) => Any): Unit = onCellContextMenuJobs += f
 
-  def onAlignmentOpt(on: CELL => Opt[Pos]): Unit = onCellUpdate(c => on(c).apply(c.alignment = _))
+  def onAlignmentOpt(on: CELL => Opt[Pos]): Unit = onCellUpdate(c => on(c).apply(c.alignment= _))
 
   def onAlignment(on: CELL => Pos): Unit = onAlignmentOpt(on(_).Opt)
 
@@ -19,7 +19,7 @@ trait _Trait[CELL <: Fx.Cell] {
 
   def onStyle(on: CELL => Style) { onStyleOpt(on(_).Opt) }
 
-  def onStyleClassOpt(on: CELL => Opt[Style.Class]) { onCellUpdate(c => on(c).apply(c.styleClass = _)) }
+  def onStyleClassOpt(on: CELL => Opt[Style.Class]) { onCellUpdate(c => on(c).apply(c.styleClass= _)) }
 
   def onStyleClass(on: CELL => Style.Class) { onStyleClassOpt(on(_).Opt) }
 
@@ -31,7 +31,7 @@ trait _Trait[CELL <: Fx.Cell] {
   def styleClass_=(s: Style.Class) = onStyleClass(c => s); def styleClass: Style.Class = App.Fail.unsupported()
 
   // -----------------------------------------------------------------------------------------
-  @inline private[Fx] def _cellFilter = cellFilter
+  private[Fx] def _cellFilter = cellFilter
   protected def cellFilter: CELL => Boolean
 }
 /*___________________________________________________________________________

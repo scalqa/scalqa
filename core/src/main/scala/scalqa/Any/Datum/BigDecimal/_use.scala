@@ -14,7 +14,7 @@ trait _use[TYPE <: _use[TYPE]] extends Any with Any.Datum.Comparable[TYPE, java.
   def *(v: Double): TYPE = make(real.multiply(JBig.valueOf(v)))
   def *(v: Long): TYPE = make(real.multiply(JBig.valueOf(v)))
 
-  def /(v: TYPE)(implicit s: Custom.Number.Scale, r: Custom.Rounding = \/): TYPE = make { real.divide(v.real, s.value, r.bigDecimalRound) }
+  def /(v: TYPE)(implicit r: Custom.Rounding = \/, s: Custom.Number.Scale = DEFAULT): TYPE = make { real.divide(v.real, s.value, r.bigDecimalRound) }
   def /(v: Double): TYPE = this./(make(JBig.valueOf(v)))
   def /(v: Long): TYPE = this./(make(JBig.valueOf(v)))
 

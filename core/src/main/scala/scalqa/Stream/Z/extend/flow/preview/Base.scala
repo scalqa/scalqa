@@ -11,9 +11,9 @@ private[Stream] trait Base[@specialized(DATA) A] extends Preview[A] { self: Stre
   protected def bufPop: A
   protected def real: Stream[A]
 
-  @inline def prime = bufHas || real.prime
+  @inline final def prime = bufHas || real.prime
 
-  @inline def pump = if (bufHas) bufPop else real.pump
+  @inline final def pump = if (bufHas) bufPop else real.pump
 
   override def foreach(c: Consumer[A]) = { while (bufHas) c.accept(bufPop); real.foreach(c) }
 

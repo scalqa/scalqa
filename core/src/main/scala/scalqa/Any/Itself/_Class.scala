@@ -6,9 +6,9 @@ class _Class[A] private[scalqa] (protected val real: A) extends AnyVal  {
 
   def id: String = Class.label + '@' + hashIndex
 
-  @inline def hashIndex: Int = Z.hashIndex(real)
+  @inline final def hashIndex: Int = Z.hashIndex(real)
 
-  @inline override def toString: String = Z.toString(real)
+  @inline final override def toString: String = Z.toString(real)
 
   // ------------------------------------------------------------------------------------------------------------
   def let(f: A=>Boolean): Opt[A] = if (f(real)) real else Void
@@ -21,24 +21,24 @@ class _Class[A] private[scalqa] (protected val real: A) extends AnyVal  {
 
   def toArray(implicit ct: ClassTag[A]): Array[A] = { val a = ct.newArray(1); a(0) = real; a }
 
-  def to[THIS[A]](implicit to: To.Converter[THIS], i: Ilk.Tag[A]): THIS[A] = to.make(real, i)
+  def to[THIS[_]](implicit to: To.Converter[THIS], i: Ilk.Tag[A]): THIS[A] = to.make(real, i)
 
   def ~ : ~[A] = Stream.Z.A.One(real)
 
-  def repeat(times: Int): ~[A] = new Stream.A.Indexed[A] { val _size = times max 0; @inline def _apply(i: Int) = real }
+  def repeat(times: Int): ~[A] = new Stream.A.Indexed[A] { val _size = times max 0; @inline final def _apply(i: Int) = real }
 
   def unfold(f: Stream.Mapping[~[A], A]): Stream[A] = ~.unfold(f)
 
   def ilk: Ilk = Ilk.fromClass(real.getClass)
 
-  @inline def Class = new Class[A](real.getClass.asInstanceOf[java.lang.Class[A]])
+  @inline final def Class = new Class[A](real.getClass.asInstanceOf[java.lang.Class[A]])
 
   // ------------------------------------------------------------------------------------------------------------
-  @inline def apply(f: A => Any): A = { f(real); real }
+  @inline final def apply(f: A => Any): A = { f(real); real }
 
   def as[B](f: A => B)(implicit t: ClassTag[B]): B = if (t.unapply(real).isEmpty) f(real) else real.asInstanceOf[B]
 
-  @inline def asInstanceOfTarget[T]: T = real.asInstanceOf[T]
+  @inline final def asInstanceOfTarget[T]: T = real.asInstanceOf[T]
 
 }
 /*___________________________________________________________________________
@@ -48,6 +48,9 @@ class _Class[A] private[scalqa] (protected val real: A) extends AnyVal  {
  /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
+ *
+ * g79yui4v7ra9dg7l
+ *
  * @class _Class ->
  *
  *     [[Any.Itself]] is a library available for `every` single object in Scalqa
@@ -76,14 +79,14 @@ ___________________________________________________________________________*/
  *         var s: String  = null
  *         var p: Percent = \/
  *
- *         s.OPT lp    // Prints: Opt.Void
- *         p.OPT lp    // Prints: Opt.Void
+ *         s.I.Opt lp    // Prints: Opt.Void
+ *         p.I.Opt lp    // Prints: Opt.Void
  *
  *         s = "abc"
  *         p = 12
  *
- *         s.OPT lp    // Prints: Opt(abc)
- *         p.OPT lp    // Prints: Opt(12.0%)
+ *         s.I.Opt lp    // Prints: Opt(abc)
+ *         p.I.Opt lp    // Prints: Opt(12.0%)
  *     }}}
  *
  * @def toArray -> Create single element array

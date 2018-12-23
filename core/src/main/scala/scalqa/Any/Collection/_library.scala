@@ -4,9 +4,9 @@ private[scalqa] trait _library[A] extends Any with Any.Wrap[Any.Collection[A]] {
 
   def ~ : Stream[A] = real.all
 
-  @inline def isEmpty = real.size == 0
+  @inline final def isEmpty = real.size == 0
 
-  @inline def asMappedView[B](f: A => B): Any.Collection[B] = new Z.MappedView[A, B](real, f)
+  @inline final def asMappedView[B](f: A => B): Any.Collection[B] = new Z.MappedView[A, B](real, f)
 
   def asJavaCollectionView: java.util.Collection[A] = new Z.JavaCollectionView(real)
 

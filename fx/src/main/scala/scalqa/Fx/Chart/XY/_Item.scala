@@ -17,7 +17,7 @@ trait _Item[X, Y] { self: XY[X, Y] =>
 
     def yPos: Double = axisY(y)
 
-    def toInfo = new Pro.Info(this) += ("x", x) += ("y", y)
+    def toInfo = new Pro.Info(this) += (("x", x)) += (("y", y))
 
     protected[Chart] lazy val real = new chart.J_ITEM().I(_.setExtraValue(this))
 

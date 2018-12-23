@@ -1,15 +1,15 @@
 package scalqa; package Any; package Datum.Byte
 
 abstract class Setup[TYPE <: Datum.Byte[TYPE]] protected extends Any.Datum.Setup[TYPE] {
-  private[scalqa]type VALUE = Byte
+  private[scalqa] type VALUE = Byte
   private[scalqa] def ilk = Ilk.Bytes
 
   protected def make(v: Byte): TYPE
   protected def undo(v: TYPE): Byte = _Trait.real(v)
 
   implicit override val Map: BiMap[Byte, TYPE] = new BiMap[Byte, TYPE] {
-    @inline def apply(v: Byte) = make(v)
-    @inline def undo(v: TYPE) = _Trait.real(v)
+    @inline final def apply(v: Byte) = make(v)
+    @inline final def undo(v: TYPE) = _Trait.real(v)
   }
 
   implicit val Ordering: Ordering[TYPE] = new Ordering[TYPE] { def compare(x: TYPE, y: TYPE) = java.lang.Integer.compare(undo(x), undo(y)) }
@@ -26,27 +26,27 @@ abstract class Setup[TYPE <: Datum.Byte[TYPE]] protected extends Any.Datum.Setup
 
     def compare(x: TYPE, y: TYPE) = java.lang.Byte.compare(undo(x), undo(y))
 
-    @inline def fromInt(x: Int) = make(x toByte)
+    @inline final def fromInt(x: Int) = make(x toByte)
 
-    @inline def minus(x: TYPE, y: TYPE) = make(undo(x) - undo(y) toByte)
+    @inline final def minus(x: TYPE, y: TYPE) = make(undo(x) - undo(y) toByte)
 
-    @inline def negate(x: TYPE) = make(-undo(x) toByte)
+    @inline final def negate(x: TYPE) = make(-undo(x) toByte)
 
-    @inline def plus(x: TYPE, y: TYPE) = make(undo(x) + undo(y) toByte)
+    @inline final def plus(x: TYPE, y: TYPE) = make(undo(x) + undo(y) toByte)
 
-    @inline def times(x: TYPE, y: TYPE) = make(undo(x) * undo(y) toByte)
+    @inline final def times(x: TYPE, y: TYPE) = make(undo(x) * undo(y) toByte)
 
-    @inline def quot(x: TYPE, y: TYPE) = make(undo(x) / undo(y) toByte)
+    @inline final def quot(x: TYPE, y: TYPE) = make(undo(x) / undo(y) toByte)
 
-    @inline def rem(x: TYPE, y: TYPE) = make(undo(x) % undo(y) toByte)
+    @inline final def rem(x: TYPE, y: TYPE) = make(undo(x) % undo(y) toByte)
 
-    @inline def toDouble(x: TYPE) = undo(x).toDouble
+    @inline final def toDouble(x: TYPE) = undo(x).toDouble
 
-    @inline def toFloat(x: TYPE) = undo(x).toFloat
+    @inline final def toFloat(x: TYPE) = undo(x).toFloat
 
-    @inline def toInt(x: TYPE) = undo(x).toInt
+    @inline final def toInt(x: TYPE) = undo(x).toInt
 
-    @inline def toLong(x: TYPE) = undo(x).toLong
+    @inline final def toLong(x: TYPE) = undo(x).toLong
   }
 }
 /*___________________________________________________________________________

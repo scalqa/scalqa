@@ -6,7 +6,7 @@ private[Stream] object ToJava {
 
   object List extends Interface.To.Converter[J.List] { def make[A] = f => ToArray.Buffer.make(f).asJavaListView }
 
-  object Iterator extends Interface.To.Converter[J.Iterator] { def make[A] = f => Z.A.Scala.Iterator.make(f.sequential) }
+  object Iterator extends Interface.To.Converter[J.Iterator] { def make[A] = f => Z.A.Java.Iterator.make(f.sequential) }
 
   object Stream extends Interface.To.Converter[J.stream.Stream] { def make[A] = f => J.stream.StreamSupport.stream(Spliterator.make(f), false) }
 

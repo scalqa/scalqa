@@ -1,16 +1,16 @@
-package scalqa; package Any; package Datum; package Ref 
+package scalqa; package Any; package Datum; package Ref
 
 trait _Trait[TYPE <: _Trait[TYPE, VALUE], VALUE] extends Any with Any.Datum[TYPE, VALUE] {
 
   protected def setup: Setup[TYPE, VALUE]
 
-  @inline protected def make(v: VALUE): TYPE = setup.Map(v)
+  @inline final protected def make(v: VALUE): TYPE = setup.Map(v)
 
 }
 
 private object _Trait {
 
-  @inline def real[B](v: _Trait[_, B]) = v.real
+  @inline final def real[B](v: _Trait[_, B]) = v.real
 
 }
 

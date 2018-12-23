@@ -2,21 +2,22 @@ package scalqa; package Any
 
 class _library[A] private[scalqa] (protected val real: A) extends AnyVal {
 
-  @inline def \/(default: => A): A = if (Any.isVoid(real)) default else real
-
-  @inline def Opt: Opt[A] = if (real == null) scalqa.Opt.Void else real
-
   def ~+(that: A): ~[A] = Stream.Z.A.Two(real, that)
+
   def ~+~(that: ~[A]): ~[A] = if (that == null) real.I.~ else that.insertAt(0, real)
 
-  @inline def isVoid: Boolean = Any.isVoid(real)
+  def +-(that: Any): String = real.I.toString + " " + that
 
-  @inline def I: Itself[A] = new Itself(real)
+  def \/(default: => A): A = if (Any.isVoid(real)) default else real
+
+  @inline final def Opt: Opt[A] = if (real == null) scalqa.Opt.Void else real
+
+  @inline final def isVoid: Boolean = Any.isVoid(real)
+
+  @inline final def I: Itself[A] = new Itself(real)
 
   def lp: Unit = println(real.I.toString)
   def tp: Unit = real match { case v: Able.ToText => println(v.toText); case _ => lp }
-
-  def +-(that: Any): String = real.I.toString + " " + that
 
   def <>(that: A)(implicit o: Ordering[A], i: scalqa.Ilk[A]): Range[A] = Range.general(real, false, that, false)
   def <>>(that: A)(implicit o: Ordering[A], i: scalqa.Ilk[A]): Range[A] = Range.general(real, false, that, true)
@@ -114,7 +115,7 @@ ___________________________________________________________________________*/
  *                        //         -
  *     }}}
  *
- * @def ~+(value: -> Stream plus
+ * @def ~+( -> Stream plus
  *
  *   Creates a [[Stream]] out of this and appends that
  *
@@ -128,7 +129,7 @@ ___________________________________________________________________________*/
  *       "aaa" ~+ "bbb" + "ccc" lp  // Prints: ~(aaa, bbb, ccc)
  *   }}}
  *
- * @def ~+~(that: -> Stream plus stream
+ * @def ~+~( -> Stream plus stream
  *
  *   Creates a [[Stream]] out of this and appends that stream
  *

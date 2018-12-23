@@ -21,17 +21,17 @@ trait _base[ENTRY] { self: Table[ENTRY] =>
   // ---------------------------------------------------------------------------
   def scrollTo(i: Int) = real.scrollTo(i)
 
-  def entriesPro: Pro.OM[Idx.OM[ENTRY]] = data.entriesPro: @inline; def entries = entriesPro()
+  def entriesPro: Pro.OM[Idx.OM[ENTRY]] = data.entriesPro; def entries = entriesPro()
 
-  def itemsPro: Pro.OM[Idx.OM[ENTRY]] = data.itemsPro: @inline; def items = itemsPro(); def items_=(l: Idx[ENTRY]): Unit = itemsPro() = l.asObservableMutableView
+  def itemsPro: Pro.OM[Idx.OM[ENTRY]] = data.itemsPro; def items = itemsPro(); def items_=(l: Idx[ENTRY]): Unit = itemsPro() = l.asObservableMutableView
 
-  def sortModePro: Pro.OM[SortMode] = data.sortModePro: @inline; def sortMode = sortModePro(); def sortMode_=(v: SortMode) = sortModePro() = v
+  def sortModePro: Pro.OM[SortMode] = data.sortModePro; def sortMode = sortModePro(); def sortMode_=(v: SortMode) = sortModePro() = v
 
-  def sortingPro: Pro.OM[Ordering[ENTRY]] = data.sortingPro: @inline; def ordering = sortingPro(); def ordering_=(v: Ordering[ENTRY]): Unit = sortingPro() = v
+  def sortingPro: Pro.OM[Ordering[ENTRY]] = data.sortingPro; def ordering = sortingPro(); def ordering_=(v: Ordering[ENTRY]): Unit = sortingPro() = v
 
-  def sortingBasePro: Pro.OM[Ordering[ENTRY]] = data.sortingBasePro: @inline; def sortingBase = sortingBasePro(); def sortingBase_=(v: Ordering[ENTRY]) = sortingBasePro() = v
+  def sortingBasePro: Pro.OM[Ordering[ENTRY]] = data.sortingBasePro; def sortingBase = sortingBasePro(); def sortingBase_=(v: Ordering[ENTRY]) = sortingBasePro() = v
 
-  val headerFooterPro: Pro.OM[(Idx[ENTRY], Idx[ENTRY])] = data.headerFooterPro: @inline; def headerFooter = headerFooterPro(); def headerFooter_=(hf: (~[ENTRY], ~[ENTRY])): Unit = headerFooterPro() = (hf._1.to[Idx], hf._2.to[Idx])
+  val headerFooterPro: Pro.OM[(Idx[ENTRY], Idx[ENTRY])] = data.headerFooterPro; def headerFooter = headerFooterPro(); def headerFooter_=(hf: (~[ENTRY], ~[ENTRY])): Unit = headerFooterPro() = (hf._1.to[Idx], hf._2.to[Idx])
 
   def editablePro: Pro.OM[Boolean] = Custom.ProWO(real.editableProperty); def editable = real.isEditable; def editable_=(b: Boolean) = real.setEditable(b)
 

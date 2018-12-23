@@ -16,7 +16,7 @@ package object Stream {
 
   def make[@specialized(DATA) A: Ilk](v: java.lang.Iterable[A]): ~[A] = Z.A.Java.Iterable.toStream[A](v)
 
-  def make[@specialized(DATA) A: Ilk](v: java.util.Iterator[A]): ~[A] = Z.A.Scala.Iterator.toStream[A](v)
+  def make[@specialized(DATA) A: Ilk](v: java.util.Iterator[A]): ~[A] = Z.A.Java.Iterator.toStream[A](v)
 
   def make[@specialized(DATA) A](v: Array[A]): ~[A] = Custom.Array.Z.stream(v)
 

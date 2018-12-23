@@ -2,7 +2,7 @@ package scalqa; package Stream; package Z; package consume; package convert
 
 private[Stream] object ToLookup {
 
-  @inline def apply[A, KEY, VAL](src: Flow[A])(implicit ev: A <:< (KEY, VAL)): Lookup[KEY, VAL] = {
+  @inline final def apply[A, KEY, VAL](src: Flow[A])(implicit ev: A <:< (KEY, VAL)): Lookup[KEY, VAL] = {
 
     val v = Lookup.M.make[KEY, VAL]
 

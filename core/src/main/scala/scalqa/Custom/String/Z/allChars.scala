@@ -2,15 +2,15 @@ package scalqa; package Custom; package String; package Z
 
 private[String] class allChars(val string: String) extends Stream[Char] with Stream.A.Specialized.Indexed[Char] {
 
-  @inline override def _apply(i: Int) = string.charAt(i)
+  @inline final override def _apply(i: Int) = string.charAt(i)
 
-  @inline override def _size = string.length
+  @inline final override def _size = string.length
 
-  @inline def pump = _pumpIndexed
+  @inline final def pump = _pumpIndexed
 
-  @inline def foreach(f: Stream.Consumer[Char]) = _consumeIndexed(f)
+  @inline final def foreach(f: Stream.Consumer[Char]) = _consumeIndexed(f)
 
-  @inline override def ilkOpt = Ilk.Chars
+  @inline final override def ilkOpt = Ilk.Chars
 
 }
 /*___________________________________________________________________________

@@ -13,7 +13,7 @@ trait _Trait[TYPE <: _Trait[TYPE]] extends Any with Any.Wrap[Byte] with Custom.N
 
 private object _Trait {
 
-  @inline def real(v: _Trait[_]) = v.real
+  @inline final def real(v: _Trait[_]) = v.real
 
 }
 /*___________________________________________________________________________

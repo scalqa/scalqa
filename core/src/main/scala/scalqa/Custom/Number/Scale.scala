@@ -10,8 +10,10 @@ object Scale {
 
   implicit def zzMake(scale: Int) = new Scale(scale)
 
-}
+  @inline implicit final def zzDefault(v: DEFAULT.type): Scale = dflt
 
+  private lazy val dflt = App.Setup.CustomNumberScalePro()
+}
 /*___________________________________________________________________________
      __________ ____   __   ______  ____
     /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API

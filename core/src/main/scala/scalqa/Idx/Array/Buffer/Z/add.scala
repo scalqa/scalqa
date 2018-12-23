@@ -2,7 +2,7 @@ package scalqa; package Idx.Array; package Buffer; package Z
 
 private[Buffer] object add {
 
-  def at[@specialized(DATA) A](i: Int, v: A, b: Buffer[A]) {
+  def at[@specialized(DATA) A](i: Int, v: A, b: Buffer[A]) = {
     val sz = b._size
     if (b._arrayLen <= sz) b.growArray(sz + 1)
     if (i >= sz)
@@ -30,3 +30,9 @@ private[Buffer] object add {
       }
     }
 }
+/*___________________________________________________________________________
+     __________ ____   __   ______  ____
+    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
+  __\  \/ /___/ __  |/ /__/ /_/ /_/ __  |   (c) 2018, Datamata Corporation
+ /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
+___________________________________________________________________________*/

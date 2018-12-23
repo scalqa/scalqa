@@ -2,21 +2,21 @@ package scalqa; package Custom; package Numeric; package Z
 
 private[scalqa] object Long extends Numeric[Long] with math.Integral[Long] {
 
-  @inline def negate(x: Long) = -x
-  @inline def minus(x: Long, y: Long) = x - y
-  @inline def plus(x: Long, y: Long) = x + y
-  @inline def times(x: Long, y: Long) = x * y
-  @inline def quot(x: Long, y: Long) = x / y
-  @inline def rem(x: Long, y: Long) = x % y
+  @inline final def negate(x: Long) = -x
+  @inline final def minus(x: Long, y: Long) = x - y
+  @inline final def plus(x: Long, y: Long) = x + y
+  @inline final def times(x: Long, y: Long) = x * y
+  @inline final def quot(x: Long, y: Long) = x / y
+  @inline final def rem(x: Long, y: Long) = x % y
 
-  @inline def fromInt(x: Int) = x toInt
-  @inline def toDouble(x: Long) = x toDouble
-  @inline def toFloat(x: Long) = x toFloat
-  @inline def toInt(x: Long) = x toInt
-  @inline def toLong(x: Long) = x toLong
+  @inline final def fromInt(x: Int) = x toInt
+  @inline final def toDouble(x: Long) = x toDouble
+  @inline final def toFloat(x: Long) = x toFloat
+  @inline final def toInt(x: Long) = x toInt
+  @inline final def toLong(x: Long) = x toLong
 
-  @inline override def zero = 0L
-  @inline override def one = 1L
+  @inline final override def zero = 0L
+  @inline final override def one = 1L
 
   override def abs(x: Long) = if (x < 0) negate(x) else x
   override def signum(x: Long): Int = if (x < 0) -1 else if (x > 0) 1 else 0

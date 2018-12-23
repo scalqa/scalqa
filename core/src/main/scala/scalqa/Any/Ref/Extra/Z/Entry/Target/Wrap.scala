@@ -20,14 +20,14 @@ private[Entry] object Wrap {
   // **************************************************************************************
   class CancelIf(e: Entry, b: () => Boolean) extends Wrap(e) {
 
-    override def fire[T](f: T => Any) { if (b()) entry.cancel else super.fire(f) }
+    override def fire[T](f: T => Any): Unit = if (b()) entry.cancel else super.fire(f)
 
   }
 
   // **************************************************************************************
   class AfterEventCancelIf(e: Entry, b: () => Boolean) extends Wrap(e) {
 
-    override def fire[T](f: T => Any) { super.fire(f); if (b()) entry.cancel }
+    override def fire[T](f: T => Any): Unit = { super.fire(f); if (b()) entry.cancel }
 
   }
 }

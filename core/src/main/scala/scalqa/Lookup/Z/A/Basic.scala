@@ -4,7 +4,7 @@ private[scalqa] class Basic[A, B] protected (protected val createOptFunOpt: Opt[
   def this(createOptFun: A => Opt[B]) = this(createOptFun.Opt)
   def this(s: ~[(A, B)]) = this(Opt.Void, I.Value.make(s))
 
-  override def getOpt(key: A) = real.getOpt(key) orOpt this.synchronized { real.getOpt(key) orOpt createOptFunOpt.letMap(_(key).apply(real += (key, _))) }
+  override def getOpt(key: A) = real.getOpt(key) orOpt this.synchronized { real.getOpt(key) orOpt createOptFunOpt.letMap(_(key).apply(v => real += ((key, v)))) }
 
   protected def put(s: ~[(A, B)]): Unit = this.synchronized { real +~= s }
 

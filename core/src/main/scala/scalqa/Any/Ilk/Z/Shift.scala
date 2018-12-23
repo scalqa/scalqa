@@ -12,9 +12,9 @@ private[scalqa] object Shift {
 
   def id(v: Like): Int = if (v.isPrimitive) Prim else Ref
 
-  @inline def shift(x: Int, y: Int): Int = x << y
+  @inline final def shift(x: Int, y: Int): Int = x << y
 
-  @inline def shift(x: Like, y: Like): Int = x.shiftId << y.shiftId
+  @inline final def shift(x: Like, y: Like): Int = x.shiftId << y.shiftId
 }
 /*___________________________________________________________________________
      __________ ____   __   ______  ____

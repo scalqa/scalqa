@@ -11,7 +11,7 @@ private[Stream] object letType {
 
     def prime = has || { while (!has && real.prime) { v = real.pump; has = check(v) }; has }
 
-    @inline def pump = { has = false; v.asInstanceOf[B] }
+    @inline final def pump = { has = false; v.asInstanceOf[B] }
 
     def foreach(c: Consumer[B]) = {
       if (has) c.accept(pump)
@@ -19,9 +19,9 @@ private[Stream] object letType {
       s.foreach(new Each)
     }
 
-    @inline override def ilkOpt = Ilk.fromClass(t.runtimeClass)
+    @inline final override def ilkOpt = Ilk.fromClass(t.runtimeClass)
 
-    @inline override def real = s
+    @inline final override def real = s
   }
 }
 /*___________________________________________________________________________

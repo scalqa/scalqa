@@ -5,10 +5,10 @@ class _Class[A](val real: scala.Array[_ >: A]) extends AnyVal with Idx[A] with C
   @inline protected def make = new Array[A](_)
   @inline protected def base = real.asInstanceOf[scala.Array[A]]
 
-  @inline def apply(i: Int): A = base(i)
-  @inline def update(i: Int, v: A): Unit = base(i) = v
-  @inline def size: Int = base.length
-  @inline def length: Int = base.length
+  @inline final def apply(i: Int): A = base(i)
+  @inline final def update(i: Int, v: A): Unit = base(i) = v
+  @inline final def size: Int = base.length
+  @inline final def length: Int = base.length
   override def contains(v: A): Boolean = Custom.Array.Z.contains(base, v)
 
 }

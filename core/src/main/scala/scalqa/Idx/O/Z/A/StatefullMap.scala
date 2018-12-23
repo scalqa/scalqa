@@ -20,11 +20,11 @@ private[scalqa] class StatefullMap[A, B](protected val _this: O[A], private[Z] v
 private object StatefullMap {
 
   // ********************************************************************************************************
-  class AListener[A, B](var hardRef: StatefullMap[A, B]) extends (Idx[Change[A]] => Any) {
+  class AListener[A, B](private[A] var hardRef: StatefullMap[A, B]) extends (Idx[Change[A]] => Any) {
     val weak = Any.Ref.Weak(hardRef)
     hardRef = null
 
-    def apply(coll: Idx[Change[A]]) {
+    def apply(coll: Idx[Change[A]]) = {
       val real = weak.opt orElse { throw Util.EventControl.CancelException }
 
       real.real.multiChange(l => coll.all.foreach({

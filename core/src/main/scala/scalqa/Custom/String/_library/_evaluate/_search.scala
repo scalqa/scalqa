@@ -4,7 +4,7 @@ trait _search[TYPE] extends Any with Any.Datum[TYPE, String] {
 
   protected def size: Int
 
-  @inline def charAt(i: Int): Char = real.charAt(i)
+  @inline final def charAt(i: Int): Char = real.charAt(i)
 
   def charAtOpt(i: Int): Opt[Char] = if (i < 0 || i >= real.length) \/ else charAt(i)
 

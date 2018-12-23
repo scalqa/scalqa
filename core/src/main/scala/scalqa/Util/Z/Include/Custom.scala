@@ -16,7 +16,7 @@ private[scalqa] trait Custom {
 
   implicit def zzNumeric_Double = Numeric.Double
 
-  //  implicit def zzOrdering_Comparable[A]( = Numeric.Double
+  implicit def zzNumber_Ordering = Ordering.Number
 
 }
 /*___________________________________________________________________________
@@ -26,6 +26,10 @@ private[scalqa] trait Custom {
  /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
+ * @def zzNumber_Ordering -> Number Ordering
+ *
+ *     Global Number Ordering
+ *
  * @def zzNumeric_Byte -> Default Numeric
  *
  *     Default Byte Custom.Numeric interface

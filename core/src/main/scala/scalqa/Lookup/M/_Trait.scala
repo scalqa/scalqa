@@ -2,7 +2,7 @@ package scalqa; package Lookup; package M
 
 trait _Trait[A, B] extends Lookup[A, B] {
 
-  def put(key: A, value: B)
+  def put(key: A, value: B): Unit
 
   def putAll(s: ~[(A, B)]) = s(t => put(t._1, t._2))
 

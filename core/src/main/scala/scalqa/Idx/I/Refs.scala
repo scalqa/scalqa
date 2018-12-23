@@ -6,8 +6,8 @@ class Refs[A] private[I] (protected val base: Array[A]) extends AnyVal with Idx.
   protected type TYPE = Refs[A]
   @inline protected def make = new Refs[A](_)
 
-  @inline def apply(i: Int) = base(i)
-  @inline def size: Int = base.length
+  @inline final def apply(i: Int) = base(i)
+  @inline final def size: Int = base.length
 
   override def all: ~[A] =
     if (Array.emptyObjectArray.getClass.isInstance(base)) Custom.Array.Z.stream[A](base.asInstanceOf[Array[A]])

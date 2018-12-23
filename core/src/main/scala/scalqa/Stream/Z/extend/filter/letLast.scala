@@ -27,13 +27,13 @@ private[Stream] object letLast {
         }.all
       }
 
-      @inline def prime = buf.prime
+      @inline final def prime = buf.prime
 
-      @inline def pump = buf.pump
+      @inline final def pump = buf.pump
 
       def foreach(f: Consumer[A]) = buf.foreach(f)
 
-      @inline override def sizeOpt = in.!.toOpt(real).letMap(_.sizeOpt) orOpt buf.sizeOpt
+      @inline final override def sizeOpt = in.!.toOpt(real).letMap(_.sizeOpt) orOpt buf.sizeOpt
     }
   }
 }

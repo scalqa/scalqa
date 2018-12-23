@@ -4,7 +4,7 @@ import Stream.A.Specialized.Indexed
 
 private[Stream] object dropNext {
 
-  @inline def apply[@specialized(DATA) A](s: Stream[A], sz: Int): Stream[A] = s match {
+  @inline final def apply[@specialized(DATA) A](s: Stream[A], sz: Int): Stream[A] = s match {
     case v: Indexed[_] =>
       v._position = v._position + sz min Indexed.size(v)
       v
@@ -12,19 +12,19 @@ private[Stream] object dropNext {
 
       protected var i = if (sz < 0) 0 else sz
 
-      @inline def prime = {
+      @inline final def prime = {
         def skip = while (i > 0 && real.prime) { i -= 1; real.pump }
         if (i > 0) skip
         real.prime
       }
 
-      @inline def pump = real.pump
+      @inline final def pump = real.pump
 
-      @inline def foreach(f: Consumer[A]) = if (prime) s.foreach(f)
+      @inline final def foreach(f: Consumer[A]) = if (prime) s.foreach(f)
 
-      @inline override def sizeOpt = real.sizeOpt.map(_ - i)
+      @inline final override def sizeOpt = real.sizeOpt.map(_ - i)
 
-      @inline def real = s
+      @inline final def real = s
     }
   }
 }

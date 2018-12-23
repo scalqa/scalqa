@@ -11,7 +11,7 @@ class Basic[A, B](protected val real: java.util.Map[A, B]) extends M[A, B] {
 
   def clear = (real.size > 0).I(if (_) real.clear)
 
-  def put(key: A, value: B) { real.put(key, value) }
+  def put(key: A, value: B) = { real.put(key, value) }
 
   def remove(key: A) = real.remove(key) != null
 

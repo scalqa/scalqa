@@ -4,16 +4,16 @@ trait Loader[@specialized(DATA) A] {
   private[Buffer] def _array: Array[_]
   private[Buffer] def _arrayResize(size: Int): Unit
   private[Buffer] def _size: Int
-  private[Buffer] def _size_=(v: Int)
+  private[Buffer] def _size_=(v: Int): Unit
 
   private[Buffer] def loadLimit = Int.MaxValue
   private[Buffer] def failLimit = App.Fail("Load limit of " + loadLimit + " is exceeded")
 
-  def add(v: A)
+  def add(v: A): Unit
 
   final def newArrayBase[B >: A](size: Int): Array[B] = Custom.Array.emptyAs(_array.asInstanceOf[Array[B]], size)
 
-  final def addFromArray(a: Array[A], from: Int, len: Int) {
+  final def addFromArray(a: Array[A], from: Int, len: Int): Unit = {
     val sz = _size + len
     if (sz > loadLimit) failLimit
     if (_array.length < sz) _arrayResize(sz)

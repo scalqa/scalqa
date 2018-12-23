@@ -2,7 +2,7 @@ package scalqa; package Stream; package Flow; package _consume
 
 trait _convert[A] extends Any.Able.ToText { self: Flow[A] =>
 
-  def to[TRGT[A]](implicit cnv: Interface.To.Converter[TRGT]): TRGT[A] = cnv.make(this)
+  def to[TRGT[_]](implicit cnv: Interface.To.Converter[TRGT]): TRGT[A] = cnv.make(this)
 
   def toRaw[TRGT](implicit c: Interface.To.Primitive.Converter[A, TRGT]): TRGT = c.make(this)
 

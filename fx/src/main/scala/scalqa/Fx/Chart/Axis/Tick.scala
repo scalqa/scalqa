@@ -10,7 +10,7 @@ abstract class Tick[A] extends Any.Able.ToInfo {
 
   def value: A
 
-  def toInfo = new Pro.Info(this) += ("label", label) += ("position", position) += ("value", value)
+  def toInfo = new Pro.Info(this) += (("label", label)) += (("position", position)) += (("value", value))
 }
 
 private[Axis] object Tick {

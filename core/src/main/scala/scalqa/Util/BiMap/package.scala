@@ -13,8 +13,8 @@ package object BiMap {
 
   // ********************************************
   private object Cast extends BiMap[Any, Any] {
-    @inline def apply(a: Any) = a
-    @inline def undo(b: Any) = b
+    @inline final def apply(a: Any) = a
+    @inline final def undo(b: Any) = b
   }
 }
 /*___________________________________________________________________________

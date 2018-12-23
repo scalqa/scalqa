@@ -14,13 +14,13 @@ trait _Trait[+A] {
 
   def apply[B](f: A => Any, d: Deficiency => Any = \/)(implicit e: ExecutionContext = DEFAULT): Future[A] = { onComplete(_.apply(f, d)); this }
 
-  @inline def zip[B](f: Future[B])(implicit e: ExecutionContext = DEFAULT): Future[(A, B)] = Z.zip(this, f)
+  def zip[B](f: Future[B])(implicit e: ExecutionContext = DEFAULT): Future[(A, B)] = Z.zip(this, f): @inline
 
-  @inline def mapResult[B](f: Out[A] => Out[B])(implicit e: concurrent.ExecutionContext): Future[B] = Z.mapResult(this, f)
+  def mapResult[B](f: Out[A] => Out[B])(implicit e: concurrent.ExecutionContext): Future[B] = Z.mapResult(this, f): @inline
 
-  @inline def await(v: Util.Time.PreciseDuration)(implicit e: ExecutionContext = DEFAULT): Out[A] = Z.await(this, v)
+  def await(v: Util.Time.PreciseDuration)(implicit e: ExecutionContext = DEFAULT): Out[A] = Z.await(this, v): @inline
 
-  @inline protected def _flatMap[B](m: A => Future[B])(implicit e: ExecutionContext = DEFAULT): Future[B] = Z.flatMap(this, m)
+  protected def _flatMap[B](m: A => Future[B])(implicit e: ExecutionContext = DEFAULT): Future[B] = Z.flatMap(this, m): @inline
 }
 
 object _Trait {

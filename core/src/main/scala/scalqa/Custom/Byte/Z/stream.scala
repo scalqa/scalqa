@@ -4,27 +4,27 @@ private[Byte] object stream {
 
   abstract class Base(val _size: Int) extends Stream[Byte] with Stream.A.Specialized.Indexed[Byte] {
 
-    @inline def pump = _pumpIndexed
+    @inline final def pump = _pumpIndexed
 
-    @inline def foreach(f: Stream.Consumer[Byte]) = _consumeIndexed(f)
+    @inline final def foreach(f: Stream.Consumer[Byte]) = _consumeIndexed(f)
 
-    @inline override def ilkOpt = Ilk.Bytes
+    @inline final override def ilkOpt = Ilk.Bytes
 
   }
 
   class Up(from: Byte) extends Base(scala.Byte.MaxValue - from + 1) {
 
-    @inline override def _apply(i: Int) = (from + i).toByte
+    @inline final override def _apply(i: Int) = (from + i).toByte
 
-    @inline override def sortedOpt = Ordering.Byte
+    @inline final override def sortedOpt = Ordering.Byte
 
   }
 
   class Down(from: Byte) extends Base(from - scala.Byte.MinValue + 1) {
 
-    @inline override def _apply(i: Int) = (from - i).toByte
+    @inline final override def _apply(i: Int) = (from - i).toByte
 
-    @inline override def sortedOpt = Ordering.Byte.reverse
+    @inline final override def sortedOpt = Ordering.Byte.reverse
 
   }
 }

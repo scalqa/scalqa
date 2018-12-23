@@ -2,15 +2,15 @@ package scalqa; package Stream; package Z; package extend; package peek
 
 private[Stream] object peek {
 
-  @inline def apply[@specialized(DATA) A](s: Stream[A], f: Consumer[A]): Stream[A] = new Stream[A] with A.Extended.All[A] {
+  @inline final def apply[@specialized(DATA) A](s: Stream[A], f: Consumer[A]): Stream[A] = new Stream[A] with A.Extended.All[A] {
 
-    @inline def real = s
+    @inline final def real = s
 
-    @inline def prime = real.prime
+    @inline final def prime = real.prime
 
-    @inline def pump = { val v = real.pump; f.accept(v); v }
+    @inline final def pump = { val v = real.pump; f.accept(v); v }
 
-    @inline def foreach(c: Consumer[A]) = s.foreach(new Consumer[A] { def accept(v: A) { f.accept(v); c.accept(v) } })
+    @inline final def foreach(c: Consumer[A]) = s.foreach(new Consumer[A] { def accept(v: A) = { f.accept(v); c.accept(v) } })
 
   }
 }

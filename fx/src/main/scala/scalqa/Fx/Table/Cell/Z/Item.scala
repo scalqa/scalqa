@@ -1,8 +1,8 @@
 package scalqa; package Fx; package Table; package Cell; package Z
 
 private[Table] class Item[ENTRY, VIEW, VAL](val entry: ENTRY, val ui: Cell.Ui[ENTRY, VIEW, VAL])
-    extends Custom.ObservableBase[Item[ENTRY, VIEW, VAL]]
-    with Any.Able.ToInfo with Comparable[Item[ENTRY, VIEW, VAL]] {
+  extends Custom.ObservableBase[Item[ENTRY, VIEW, VAL]]
+  with Any.Able.ToInfo with Comparable[Item[ENTRY, VIEW, VAL]] {
 
   // --------------------------------------------------------------------------------------------------------------------------------------------
   def this(ui: Cell.Ui[ENTRY, VIEW, VAL], v: VAL) = { this(().asInstanceOf[ENTRY], ui); _valueOpt = v }
@@ -13,7 +13,7 @@ private[Table] class Item[ENTRY, VIEW, VAL](val entry: ENTRY, val ui: Cell.Ui[EN
 
   def textOpt: Opt[String] = valueOpt.map(ui._onFormat) orOpt ui._onFormatVoid(entry).Opt
 
-  def toInfo = new Pro.Info(this) += ("text", textOpt) += ("value", valueOpt)
+  def toInfo = new Pro.Info(this) += (("text", textOpt)) += (("value", valueOpt))
 
   def compareTo(that: Item[ENTRY, VIEW, VAL]) = ui.column.ordering.optCompare(this.valueOpt, that.valueOpt)
 

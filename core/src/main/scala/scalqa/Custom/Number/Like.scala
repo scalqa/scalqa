@@ -8,7 +8,7 @@ trait Like extends Any {
 
 object Like {
 
-  @inline def number(v: Like): Number = v.realNumber
+  @inline final def number(v: Like): Number = v.realNumber
 
 }
 

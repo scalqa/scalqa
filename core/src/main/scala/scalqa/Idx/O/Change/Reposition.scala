@@ -4,7 +4,7 @@ trait Reposition[A] extends Change[A] with Idx.Range.Reposition {
 
   final def name = "Reposition"
 
-  override def toInfo = new Pro.Info(this, name) += ("range", range) += ("indexes", this.allPairs.format())
+  override def toInfo = new Pro.Info(this, name) += (("range", range)) += (("indexes", this.allPairs.format()))
 
 }
 

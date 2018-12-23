@@ -5,7 +5,7 @@ trait _Trait[@specialized(DATA) A] extends Any with Custom.Array.View[A] with Id
 
   override def contains(v: A): Boolean = Custom.Array.Z.contains(base, v)
 
-  def toRaw[TRGT <: Idx.I[A]](implicit c: Z.Raw[A, TRGT]): TRGT = c.make(this)
+  final def toRaw[TRGT <: Idx.I[A]](implicit c: Z.Raw[A, TRGT]): TRGT = c.make(this)
 }
 
 private object _Trait {
@@ -23,7 +23,7 @@ private object _Trait {
   // ***********************************************************************************************
   class Base[A, TRGT](create: Array[A] => TRGT)(implicit i: Ilk[A]) extends Z.Raw[A, TRGT] {
 
-    @inline def make = v => create(if (v.base.getClass == i.ArrayClass) v.base else i.mkArray[A](v.size).I(_.updateAll(v.base)))
+    @inline final def make = v => create(if (v.base.getClass == i.ArrayClass) v.base else i.mkArray[A](v.size).I(_.updateAll(v.base)))
   }
 }
 /*___________________________________________________________________________

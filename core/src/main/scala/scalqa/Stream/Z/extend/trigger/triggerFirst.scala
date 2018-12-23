@@ -2,7 +2,7 @@ package scalqa; package Stream; package Z; package extend; package trigger
 
 private[Stream] object triggerFirst {
 
-  @inline def apply[@specialized(DATA) A](s: Stream[A], fun: Time => Unit): Stream[A] = new Stream[A] with A.Extended.All[A] {
+  @inline final def apply[@specialized(DATA) A](s: Stream[A], fun: Time => Unit): Stream[A] = new Stream[A] with A.Extended.All[A] {
 
     protected var hot = true
 
@@ -15,11 +15,11 @@ private[Stream] object triggerFirst {
       b
     }
 
-    @inline def pump = real.pump
+    @inline final def pump = real.pump
 
     def foreach(f: Consumer[A]) = if (prime) s.foreach(f)
 
-    @inline override def real = s
+    @inline final override def real = s
   }
 }
 /*___________________________________________________________________________

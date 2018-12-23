@@ -1,6 +1,6 @@
 package scalqa; package Stream; package Interface; package To
 
-abstract class Converter[CONTAINER[Any]] protected {
+abstract class Converter[CONTAINER[_]] protected {
 
   def make[A]: Flow[A] => CONTAINER[A] // 'apply' would not be a better name, because method returns function which is to apply itself
 

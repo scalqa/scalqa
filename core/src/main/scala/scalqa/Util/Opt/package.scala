@@ -3,9 +3,9 @@ package scalqa; package Util
 package object Opt {
   private[scalqa] def This = this
 
-  val Void: Opt[Nothing] = new Opt[Nothing](VoidValue)
+  val Void: Opt[Nothing] = new Opt[Nothing](Z.VoidValue)
 
-  val VoidAlt: Opt[Nothing] = new Opt[Nothing](VoidValue.Alt)
+  val VoidAlt: Opt[Nothing] = new Opt[Nothing](Z.VoidValue.Alt)
 
   def apply[T](value: T): Opt[T] = if (value == null) Void else new Opt[T](value)
 
@@ -22,14 +22,6 @@ package object Opt {
 
   object Int extends Z.IntDef.Setup
 
-  // ***************************************************************
-  private[scalqa] class VoidValue
-
-  private[scalqa] object VoidValue extends VoidValue {
-
-    object Alt extends VoidValue
-
-  }
 }
 /*___________________________________________________________________________
      __________ ____   __   ______  ____

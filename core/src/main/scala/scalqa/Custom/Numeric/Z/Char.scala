@@ -2,18 +2,18 @@ package scalqa; package Custom; package Numeric; package Z
 
 private[scalqa] object Char extends Numeric[Char] with math.Integral[Char] {
 
-  @inline def negate(x: Char) = -x toChar
-  @inline def minus(x: Char, y: Char) = x - y toChar
-  @inline def plus(x: Char, y: Char) = x + y toChar
-  @inline def times(x: Char, y: Char) = x * y toChar
-  @inline def quot(x: Char, y: Char) = x / y toChar
-  @inline def rem(x: Char, y: Char) = x % y toChar
+  @inline final def negate(x: Char) = -x toChar
+  @inline final def minus(x: Char, y: Char) = x - y toChar
+  @inline final def plus(x: Char, y: Char) = x + y toChar
+  @inline final def times(x: Char, y: Char) = x * y toChar
+  @inline final def quot(x: Char, y: Char) = x / y toChar
+  @inline final def rem(x: Char, y: Char) = x % y toChar
 
-  @inline def fromInt(x: Int) = x toChar
-  @inline def toDouble(x: Char) = x toDouble
-  @inline def toFloat(x: Char) = x toFloat
-  @inline def toInt(x: Char) = x toInt
-  @inline def toLong(x: Char) = x toLong
+  @inline final def fromInt(x: Int) = x toChar
+  @inline final def toDouble(x: Char) = x toDouble
+  @inline final def toFloat(x: Char) = x toFloat
+  @inline final def toInt(x: Char) = x toInt
+  @inline final def toLong(x: Char) = x toLong
 
   override val zero = 0 toChar
   override val one = 1 toChar

@@ -9,7 +9,7 @@ class Span[A] private[Numeric] (val start: A, val end: A, val unit: Double, val 
 
   def isSingularity = start == end
 
-  def toInfo = new Pro.Info(this) += ("start", start) += ("end", end) += ("unit", unit) += ("format", format) += ("scale", scale) += ("class", start.getClass)
+  def toInfo = new Pro.Info(this) += (("start", start)) += (("end", end)) += (("unit", unit)) += (("format", format)) += (("scale", scale)) += (("class", start.getClass))
 
 }
 /*___________________________________________________________________________

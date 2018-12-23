@@ -2,7 +2,7 @@ package scalqa; package Any; package Ref; package Extra; package Z; package Entr
 
 private[Extra] class O(child: Entry, scope: AnyRef, value: Any) extends Entry(child, scope, value) {
 
-  def init {
+  def init: Unit = {
     this.onCancelRun(fire(O.Action.Remove))
     fire(O.Action.Add)
   }

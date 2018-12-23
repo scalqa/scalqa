@@ -13,23 +13,23 @@ private[Stream] object dropLast {
 
       val _size = Indexed.size(real) - from - cnt max 0
 
-      @inline def _apply(i: Int): A = Indexed.apply(real, from + i)
-      @inline def pump = _pumpIndexed
-      @inline def foreach(f: Consumer[A]) = _consumeIndexed(f)
-      @inline def real = v.asInstanceOf[Stream[A] with Indexed[A]]
+      @inline final def _apply(i: Int): A = Indexed.apply(real, from + i)
+      @inline final def pump = _pumpIndexed
+      @inline final def foreach(f: Consumer[A]) = _consumeIndexed(f)
+      @inline final def real = v.asInstanceOf[Stream[A] with Indexed[A]]
     }
     case v => new Stream[A] with A.Extended.Filter[A] {
       protected val real = s.preview
       protected val array = real.previewIlk.mkArray[A](cnt)
       protected var i = 0
 
-      @inline def prime = {
+      @inline final def prime = {
         def load = while (i < cnt && real.prime) { array(i) = real.pump; i += 1 }
         if (i == 0) load
         real.prime
       }
 
-      @inline def pump = {
+      @inline final def pump = {
         val v = array(i % cnt)
         array(i % cnt) = real.pump
         i += 1
@@ -50,7 +50,7 @@ private[Stream] object dropLast {
         if (prime) s.foreach(new Each)
       }
 
-      @inline override def sizeOpt = real.sizeOpt.map(_ - cnt)
+      @inline final override def sizeOpt = real.sizeOpt.map(_ - cnt)
     }
   }
 }

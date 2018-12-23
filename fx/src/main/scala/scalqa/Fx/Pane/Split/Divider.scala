@@ -4,7 +4,7 @@ class Divider(val real: javafx.scene.control.SplitPane.Divider) extends Any.Able
 
   lazy val positionPro: Pro.OM[Double] = Custom.ProWO(real.positionProperty); def position = real.getPosition; def position_=(b: Double) = real.setPosition(b)
 
-  def toInfo = new Pro.Info(this) += ("position", position)
+  def toInfo = new Pro.Info(this) += (("position", position))
 }
 /*___________________________________________________________________________
      __________ ____   __   ______  ____

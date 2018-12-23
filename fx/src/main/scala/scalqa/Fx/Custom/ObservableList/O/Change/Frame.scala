@@ -22,8 +22,8 @@ class Frame[A](val range: Idx.Range, change: Idx.Change[A], l: JAVA.ObservableLi
 
   def toInfo = {
     def all(a: ~[Any]) = a.I.let(_.prime).map(_.format(",")).or("empty")
-    new Pro.Info(this) += ("wasPermutated", wasPermutated) += ("wasAdded", wasAdded) += ("wasRemoved", wasRemoved) += ("wasUpdated", wasUpdated) += ("wasReplaced", wasReplaced) +=
-      ("from", getFrom) += ("to", getTo) += ("getPermutation", all(getPermutation.all)) += ("getRemoved", all(getRemoved)) += ("getAddedSubList", all(getAddedSubList))
+    new Pro.Info(this) += (("wasPermutated", wasPermutated)) += (("wasAdded", wasAdded)) += (("wasRemoved", wasRemoved)) += (("wasUpdated", wasUpdated)) += (("wasReplaced", wasReplaced)) +=
+      (("from", getFrom)) += (("to", getTo)) += (("getPermutation", all(getPermutation.all))) += (("getRemoved", all(getRemoved))) += (("getAddedSubList", all(getAddedSubList)))
   }
 }
 /*___________________________________________________________________________

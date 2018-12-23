@@ -4,7 +4,7 @@ private[scalqa] class Entry[A](var index: Int, val value: A) extends Any.Able.To
 
   override def equals(a: Any): Boolean = a.I.letType[Entry[A]].let(_.index == index).let(_.value == value)
 
-  def toInfo = new Pro.Info(this) += ("index", index) += ("value", value)
+  def toInfo = new Pro.Info(this) += (("index", index)) += (("value", value))
 }
 
 private[scalqa] object Entry {

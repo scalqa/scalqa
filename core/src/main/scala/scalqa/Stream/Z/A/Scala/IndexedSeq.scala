@@ -18,11 +18,11 @@ private[scalqa] object IndexedSeq {
       b.addFromArray(a)
     }
 
-    override def to[T[A]](implicit c: Stream.Interface.To.Converter[T]): T[A] = if (_position > 0) super.to(c) else GenTraversableOnce.customTo(c, v, this)
+    override def to[T[_]](implicit c: Stream.Interface.To.Converter[T]): T[A] = if (_position > 0) super.to(c) else GenTraversableOnce.customTo(c, v, this)
 
     override def ilkOpt = i.ilkOpt
 
-    @inline def all = this
+    @inline final def all = this
   }
 }
 /*___________________________________________________________________________

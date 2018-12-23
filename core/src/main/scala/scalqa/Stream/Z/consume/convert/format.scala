@@ -13,7 +13,7 @@ private[scalqa] object format {
 
     var first = true
 
-    def write(v: A) {
+    def write(v: A): Unit = {
       if (first) first = false else sep()
 
       val s = converterOpt.map(_(v)) or v.I.toString

@@ -4,9 +4,9 @@ private[Stream] class zipIdx[A](val real: Stream[A], var i: Int) extends Stream[
 
   i -= 1
 
-  @inline def prime = real.prime
+  @inline final def prime = real.prime
 
-  @inline def pump = { i += 1; (i, real.pump) }
+  @inline final def pump = { i += 1; (i, real.pump) }
 
   def foreach(c: Consumer[(Int, A)]) = {
     class Each extends Consumer[A] {
@@ -16,7 +16,7 @@ private[Stream] class zipIdx[A](val real: Stream[A], var i: Int) extends Stream[
     real.foreach(new Each)
   }
 
-  @inline override def ilkOpt = Ilk.Refs
+  @inline final override def ilkOpt = Ilk.Refs
 
 }
 /*___________________________________________________________________________

@@ -20,7 +20,7 @@ private[Stream] object sum {
       val array = i.mkArray[B](size)
       if (!i.isPrimitive) array.fill(n.zero)
       var _isVoid = true
-      def accept(v: A) {
+      def accept(v: A) = {
         _isVoid = false
         var i = 0
         while (i < size) { array(i) = n.plus(array(i), f(i)(v)); i += 1 }

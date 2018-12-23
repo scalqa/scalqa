@@ -2,7 +2,7 @@ package scalqa; package Stream; package Z; package extend; package group
 
 private[Stream] object partition {
 
-  @inline def apply[A](src: Stream[A], groups: Array[Filter[A]]): Stream[~[A]] = new Stream[~[A]] with A.Extended[~[A]] {
+  @inline final def apply[A](src: Stream[A], groups: Array[Filter[A]]): Stream[~[A]] = new Stream[~[A]] with A.Extended[~[A]] {
 
     def real = src
 

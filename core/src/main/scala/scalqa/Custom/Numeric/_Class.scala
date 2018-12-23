@@ -17,8 +17,8 @@ abstract class _Class[@specialized(DATA) A] extends math.Numeric[A] with Custom.
   def toNumber(v: A): Number
   def toBig(v: A): Util.BigDecimal
 
-  @inline override def zero = _zero; private val _zero = fromInt(0)
-  @inline override def one = _one; private val _one = fromInt(1)
+  override def zero = _zero; private val _zero = fromInt(0)
+  override def one = _one; private val _one = fromInt(1)
 
   override def abs(x: A): A = if (compare(x, zero) < 0) negate(x) else x
 

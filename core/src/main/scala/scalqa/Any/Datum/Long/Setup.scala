@@ -1,15 +1,15 @@
 package scalqa; package Any; package Datum.Long
 
 abstract class Setup[TYPE <: Datum.Long[TYPE]] protected extends Any.Datum.Setup[TYPE] {
-  private[scalqa]type VALUE = Long
+  private[scalqa] type VALUE = Long
   private[scalqa] def ilk = Ilk.Longs
 
   protected def make(v: Long): TYPE
   protected def undo(v: TYPE): Long = _Trait.real(v)
 
   implicit override val Map: BiMap[Long, TYPE] = new BiMap[Long, TYPE] {
-    @inline def apply(v: Long) = make(v)
-    @inline def undo(v: TYPE) = _Trait.real(v)
+    @inline final def apply(v: Long) = make(v)
+    @inline final def undo(v: TYPE) = _Trait.real(v)
   }
 
   implicit val Ordering: Ordering[TYPE] = new Ordering[TYPE] { def compare(x: TYPE, y: TYPE) = java.lang.Long.compare(undo(x), undo(y)) }

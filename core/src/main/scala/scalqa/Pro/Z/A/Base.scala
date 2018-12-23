@@ -2,7 +2,7 @@ package scalqa; package Pro; package Z; package A
 
 private[Pro] abstract class Base[A] extends Pro[A] with Any.Able.ToInfo {
 
-  def toInfo = new Pro.Info(this) +~= this.I.letType[Any.Able.Name].map(n => ("name", n.name)) += ("value", apply)
+  def toInfo = new Pro.Info(this) +~= this.I.letType[Any.Able.Name].map(n => ("name", n.name)) += (("value", apply))
 
 }
 

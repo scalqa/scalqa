@@ -8,16 +8,16 @@ private[Stream] object toInfo {
     val id = v.I.Class.toString
     if (id.startsWith("scalqa.")) tg.id = id.copyFrom(7)
 
-    v.ilkOpt(tg += ("ilk", _))
-    v.sizeOpt(tg += ("size", _))
+    v.ilkOpt(v => tg.add(("ilk", v)))
+    v.sizeOpt(v => tg.add(("size", v)))
 
-    if (v.isInstanceOf[Stream.A.Specialized.Indexed[_]]) tg += ("", "indexed")
+    if (v.isInstanceOf[Stream.A.Specialized.Indexed[_]]) tg add (("", "indexed"))
 
     v match {
       case v: Stream[A] =>
-        v.sortedOpt(v => tg += ("sorted", v.I.toString))
-        v.sortedByOpt((t: (Ordering[_], Any)) => tg += ("sortedBy", t._1) += ("sortedByFunction", t._2))
-        tg += ("chainDepth", v.chainDepth)
+        v.sortedOpt(v => tg.add(("sorted", v.I.toString)))
+        v.sortedByOpt((t: (Ordering[_], Any)) => tg += (("sortedBy", t._1)) += (("sortedByFunction", t._2)))
+        tg += (("chainDepth", v.chainDepth))
     }
     tg
   }

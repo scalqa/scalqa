@@ -5,16 +5,16 @@ private[Stream] object peekIdx {
   def apply[@specialized(DATA) A](s: Stream[A], c: Consumer.Idx[A], start: Int): Stream[A] = new Stream[A] with A.Extended.All[A] {
     protected var i = start
 
-    @inline def real = s
+    @inline final def real = s
 
-    @inline def prime = real.prime
+    @inline final def prime = real.prime
 
     def pump = { val v = real.pump; c.accept(i, v); i += 1; v }
 
     def foreach(ec: Consumer[A]) = {
       class Each extends Consumer[A] {
         var j = i
-        def accept(v: A) { c.accept(j, v); j += 1; ec.accept(v) }
+        def accept(v: A) = { c.accept(j, v); j += 1; ec.accept(v) }
       }
       s.foreach(new Each)
     }

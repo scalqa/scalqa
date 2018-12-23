@@ -20,7 +20,7 @@ private[Column] trait _pro[ENTRY, VIEW, VAL] extends Any.Able.ToInfo { self: Col
 
   def onHeaderContextMenu(actions: => ~[Action]): Unit = actions.I.Opt(a => real.setContextMenu(Popup.Menu.make(a).real))
 
-  def toInfo = new Pro.Info(this) += ("label", label) += ("width", width)
+  def toInfo = new Pro.Info(this) += (("label", label)) += (("width", width))
 
   val sortingPro = Pro.OM.make[Ordering[VAL]](\/); def ordering = sortingPro(); def ordering_=(o: Ordering[VAL]) { sortingPro() = o };
 

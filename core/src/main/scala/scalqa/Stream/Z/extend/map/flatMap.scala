@@ -6,7 +6,7 @@ private[scalqa] object flatMap {
     class primPrim extends Stream[B] with A.Extended[B] {
       protected var cp: Stream[B] = \/
       override def prime = cp.prime || { while (!cp.prime && s.prime) cp = f(s.pump); cp.prime }
-      @inline def pump = cp.pump
+      @inline final def pump = cp.pump
       override def foreach(c: Consumer[B]) = { cp.foreach(c); s.foreach(new Consumer[A] { def accept(v: A) = f(v).foreach(c) }) }
       override def ilkOpt = i.ilkOpt; def real = s
     }
@@ -17,7 +17,7 @@ private[scalqa] object flatMap {
     class primRef extends Stream[B] with A.Extended[B] {
       protected var cp: Stream[B] = \/
       override def prime = cp.prime || { while (!cp.prime && s.prime) cp = f(s.pump); cp.prime }
-      @inline def pump = cp.pump
+      @inline final def pump = cp.pump
       override def foreach(c: Consumer[B]) = { cp.foreach(c); s.foreach(new Consumer[A] { def accept(v: A) = f(v).foreach(c) }) }
       override def ilkOpt = i.ilkOpt; def real = s
     }
@@ -28,7 +28,7 @@ private[scalqa] object flatMap {
     class refPrim extends Stream[B] with A.Extended[B] {
       protected var cp: Stream[B] = \/
       override def prime = cp.prime || { while (!cp.prime && s.prime) cp = f(s.pump); cp.prime }
-      @inline def pump = cp.pump
+      @inline final def pump = cp.pump
       override def foreach(c: Consumer[B]) = { cp.foreach(c); s.foreach(new Consumer[A] { def accept(v: A) = f(v).foreach(c) }) }
       override def ilkOpt = i.ilkOpt; def real = s
     }
@@ -39,7 +39,7 @@ private[scalqa] object flatMap {
     class refRef extends Stream[B] with A.Extended[B] {
       protected var cp: Stream[B] = \/
       override def prime = cp.prime || { while (!cp.prime && s.prime) cp = f(s.pump); cp.prime }
-      @inline def pump = cp.pump
+      @inline final def pump = cp.pump
       override def foreach(c: Consumer[B]) = { cp.foreach(c); s.foreach(new Consumer[A] { def accept(v: A) = f(v).foreach(c) }) }
       override def ilkOpt = i.ilkOpt; def real = s
     }

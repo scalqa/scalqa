@@ -6,7 +6,7 @@ trait Add[A] extends Change[A] {
 
   def items: Any.Collection[A]
 
-  override def toInfo = super.toInfo += (if (items.size == 1) "item" else "items", items.all.format(","))
+  override def toInfo = super.toInfo += ((if (items.size == 1) "item" else "items", items.all.format(",")))
 
 }
 

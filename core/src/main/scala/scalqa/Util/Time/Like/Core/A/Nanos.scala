@@ -2,23 +2,23 @@ package scalqa; package Util; package Time; package Like; package Core; package 
 
 trait Nanos extends Any with Core {
 
-  @inline def totalNanos: Time.Nanos
+  def totalNanos: Time.Nanos
 
-  @inline def totalDays = totalNanos.real / Nanos.InOneDay Days
+  @inline final def totalDays = totalNanos.real / Nanos.InOneDay Days
 
-  @inline def totalHours = totalNanos.real / Nanos.InOneHour Hours
+  @inline final def totalHours = totalNanos.real / Nanos.InOneHour Hours
 
-  @inline def totalMinutes = totalNanos.real / Nanos.InOneMinute Minutes
+  @inline final def totalMinutes = totalNanos.real / Nanos.InOneMinute Minutes
 
-  @inline def totalSeconds = totalNanos.real / Nanos.InOneSecond Seconds
+  @inline final def totalSeconds = totalNanos.real / Nanos.InOneSecond Seconds
 
-  @inline def totalMillis = totalNanos.real / Util.OneMillion Millis
+  @inline final def totalMillis = totalNanos.real / Util.OneMillion Millis
 
-  @inline def totalMicros = totalNanos.real / Util.OneThousand Micros
+  @inline final def totalMicros = totalNanos.real / Util.OneThousand Micros
 
-  @inline override def subMicros = totalMicros % 1000
+  @inline final override def subMicros = totalMicros % 1000
 
-  @inline override def subNanos = totalNanos % 1000
+  @inline final override def subNanos = totalNanos % 1000
 
 }
 

@@ -6,19 +6,19 @@ private[scalqa] object LinearSeq {
     class stream extends Stream[A] with Stream.A.Specialized[A] with Any.Able.Stream[A] {
       protected var real: collection.LinearSeq[A] = v
 
-      @inline def prime = real.nonEmpty
+      @inline final def prime = real.nonEmpty
 
-      @inline def pump = { val v = real.head; real = real.tail; v }
+      @inline final def pump = { val v = real.head; real = real.tail; v }
 
       override def foreach(c: Consumer[A]) = { var v = real; real = Nil; while (v.nonEmpty) { c.accept(v.head); v = v.tail } }
 
-      override def to[T[A]](implicit c: Stream.Interface.To.Converter[T]): T[A] = GenTraversableOnce.customTo(c, real, this)
+      override def to[T[_]](implicit c: Stream.Interface.To.Converter[T]): T[A] = GenTraversableOnce.customTo(c, real, this)
 
       override def copyTo(b: scalqa.Idx.Array.Buffer.Loader[A]) = { var v = real; real = Nil; while (v.nonEmpty) { b.add(v.head); v = v.tail } }
 
       override def ilkOpt = i.ilkOpt
 
-      @inline def all = this
+      @inline final def all = this
     }
     new stream
   }

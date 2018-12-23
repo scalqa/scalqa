@@ -11,7 +11,7 @@ class _Class private (val real: JImage) extends AnyVal with A.Delegate.Data[_Cla
 
   def isError = real.isError
 
-  def toInfo = new Pro.Info(this) += ("width", width) += ("height", height)
+  def toInfo = new Pro.Info(this) += (("width", width)) += (("height", height))
 
 }
 

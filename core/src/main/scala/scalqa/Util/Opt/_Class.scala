@@ -1,7 +1,7 @@
 package scalqa; package Util; package Opt
 
 final class _Class[+A] private[Opt] (protected[scalqa] val real: Any) extends AnyVal with Any.Able.Void {
-  @inline private def _is = !real.isInstanceOf[VoidValue]
+  @inline private def _is = !real.isInstanceOf[Z.VoidValue]
   @inline private def _val: A = real.asInstanceOf[A]
 
   override def isVoid = !_is

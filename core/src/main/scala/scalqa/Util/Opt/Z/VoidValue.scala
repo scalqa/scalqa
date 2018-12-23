@@ -1,8 +1,10 @@
-package scalqa; package Custom; package Number; package Z
+package scalqa; package Util; package Opt; package Z
 
-private[Number] object Ordering extends Ordering[Number] {
+private[Opt] sealed class VoidValue
 
-  def compare(x: Number, y: Number) = java.lang.Double.compare(x.doubleValue, y.doubleValue)
+private[Opt] object VoidValue extends VoidValue {
+
+  object Alt extends VoidValue
 
 }
 /*___________________________________________________________________________

@@ -12,7 +12,7 @@ class Setup[@specialized(DATA) A](private var value: A) extends Pro[A] with Any.
     value = v
   }
 
-  def toInfo = new Pro.Info(this) += ("value", apply)
+  def toInfo = new Pro.Info(this) += (("value", apply))
 }
 /*___________________________________________________________________________
      __________ ____   __   ______  ____

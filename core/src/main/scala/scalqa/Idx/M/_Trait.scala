@@ -2,36 +2,26 @@ package scalqa; package Idx; package M
 
 trait _Trait[@specialized(DATA) A] extends Idx[A] with Any.Collection.M[A] {
 
-  def update(position: Int, e: A)
+  def update(position: Int, e: A): Unit
 
   def reposition(r: Idx.Range.Reposition): Unit = r(this)
-
   def order(o: Ordering[A]): Unit = if (isInstanceOf[O[A]]) reposition(Idx.Range.Reposition.fromOrdering(this)(o)) else this.asJavaListView.sort(o)
 
   def addAt(i: Int, v: A): Unit
-
   def addAllAt(i: Int, a: ~[A]): Unit = a.foreachIdx(addAt, i)
-
-  @inline def +=@(position: Int, element: A): this.type = { addAt(position, element); this }
-
-  @inline def +~=@(position: Int, a: ~[A]): this.type = { addAllAt(position, a); this }
-
-  @inline override def add(v: A) = addAt(size, v)
-
-  @inline override def addAll(a: ~[A]) = addAllAt(size, a)
+  override def add(v: A) = addAt(size, v)
+  override def addAll(a: ~[A]) = addAllAt(size, a)
 
   def clear: Unit = removeAt(size.Range)
-
   def remove(e: A): Unit = this.all.findIdxOpt(_ == e).map[Idx.Range](_ <>!).apply(removeAt)
-
   def removeAt(r: Idx.Range): Unit
-
   def removeAt(position: Int): Unit = removeAt(position <>!)
 
+  @inline final def +=@(position: Int, element: A): this.type = { addAt(position, element); this }
+  @inline final def +~=@(position: Int, a: ~[A]): this.type = { addAllAt(position, a); this }
+
   @inline final def -=@(position: Int): this.type = { removeAt(position); this }
-
   @inline final def -=@(range: Idx.Range): this.type = { removeAt(range); this }
-
 }
 
 object _Trait {

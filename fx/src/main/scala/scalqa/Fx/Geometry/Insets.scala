@@ -22,7 +22,7 @@ class Insets private (val real: JInsets) extends AnyVal with A.Delegate.Data[Ins
   def newLeft(n: Double) = Insets.make(top, right, bottom, n)
 
   // --------------------------------------------------------------------------------------------------
-  def toInfo = new Pro.Info(this) += ("top", top) += ("bottom", bottom) += ("left", left) += ("right", right)
+  def toInfo = new Pro.Info(this) += (("top", top)) += (("bottom", bottom)) += (("left", left)) += (("right", right))
 }
 
 object Insets extends A.Delegate.Data.Setup[Insets, JInsets] {

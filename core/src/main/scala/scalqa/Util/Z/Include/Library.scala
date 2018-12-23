@@ -1,5 +1,7 @@
 package scalqa.Util.Z.Include
 
+import scala.language.implicitConversions
+
 private[scalqa] trait Library extends _library.Secondary {
 
   implicit def zzLibrary_Byte(v: Byte) = new scalqa.Custom.Byte._library(v)
@@ -29,10 +31,6 @@ private[scalqa] object _library {
 
     implicit def zzLibrary_Any[A](v: A) = new scalqa.Any._library[A](v)
 
-    implicit def zzOrdering_Number = scalqa.Custom.Number.Ordering
-
-    implicit def zzDefaultCustomNumberScale: scalqa.Custom.Number.Scale = scalqa.App.Setup.CustomNumberScalePro()
-
   }
 }
 /*___________________________________________________________________________
@@ -47,10 +45,6 @@ ___________________________________________________________________________*/
  *     The value can be set at App.Setup.CustomNumberScalePro
  *
  *     Scale affects [[Util.BigDecimal BigDecimal]] and other [[Any.Datum.BigDecimal]] derivatives
- *
- * @def zzOrdering_Number -> Number Ordering
- *
- *      Low priority Number Ordering, when everything else fails
  *
  * @def zzLibrary_Any -> Attaches Universal library to every possible type
  *

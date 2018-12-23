@@ -7,7 +7,7 @@ private[Future] final class FilterMonadic[A] private[scalqa] (private val future
 
   def foreach(f: A => Unit)(implicit e: ExecutionContext = DEFAULT): Unit = future.onComplete(_(f))
 
-  @inline def flatMap[B](m: A => Future[B])(implicit e: ExecutionContext = DEFAULT): Util.Future[B] = _Trait.flatMap(future, m)
+  @inline final def flatMap[B](m: A => Future[B])(implicit e: ExecutionContext = DEFAULT): Util.Future[B] = _Trait.flatMap(future, m)
 
   def withFilter(f: A => Boolean)(implicit e: ExecutionContext = DEFAULT): Util.Future[A] =
     future.mapResult(_.letMap(v => if (f(v)) Out.make(v) else new Deficiency("For-Comprehension predicate is not satisfied")))

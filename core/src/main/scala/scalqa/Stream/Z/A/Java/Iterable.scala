@@ -6,7 +6,7 @@ private[scalqa] object Iterable {
     case c: java.util.Collection[A] if (c.isEmpty) => \/
     case l: java.util.List[A] => List.toStream(l)
     case c: java.util.Collection[A] => Collection.toStream(c)
-    case v => Scala.Iterator.toStream(v.iterator)
+    case v => Iterator.toStream(v.iterator)
   }
 }
 /*___________________________________________________________________________

@@ -15,7 +15,7 @@ object Memory extends Any.Able.ToInfo {
 
   def gc: Unit = java.lang.System.gc
 
-  def toInfo = new Pro.Info(this, "App.Memory") += ("max", max.toBrief) += ("total", total.toBrief) += ("free", free.toBrief) += ("used", used.toBrief)
+  def toInfo = new Pro.Info(this, "App.Memory") += (("max", max.toBrief)) += (("total", total.toBrief)) += (("free", free.toBrief)) += (("used", used.toBrief))
 
 }
 /*___________________________________________________________________________

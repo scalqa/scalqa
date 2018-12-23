@@ -6,7 +6,7 @@ trait _Trait[@specialized(DATA) A] { self: Stream[A] =>
 
   def pump: A
 
-  def foreach(f: Consumer[A])
+  def foreach(f: Consumer[A]): Unit
 
   // -----------------------------------------------------------------
   def ilkOpt: Opt[Any.Ilk] = Opt.Void

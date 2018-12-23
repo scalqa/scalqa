@@ -2,9 +2,9 @@ package scalqa; package Lookup; package OM
 
 trait _Trait[A, B] extends M[A, B] with O[A, B] {
 
-  def replaceAll(s: ~[(A, B)]) { multiChange(c => { c.clear; s(t => c.put(t._1, t._2)) }) }
+  def replaceAll(s: ~[(A, B)]): Unit = { multiChange(c => { c.clear; s(t => c.put(t._1, t._2)) }) }
 
-  def multiChange(ch: M[A, B] => Any)
+  def multiChange(ch: M[A, B] => Any): Unit
 
 }
 

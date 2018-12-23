@@ -13,7 +13,7 @@ trait _Trait[TYPE <: _Trait[TYPE]] extends Any with Any.Datum[TYPE, Float] with 
 
 private object _Trait {
 
-  @inline def real(v: _Trait[_]) = v.real
+  @inline final def real(v: _Trait[_]) = v.real
 
 }
 /*___________________________________________________________________________

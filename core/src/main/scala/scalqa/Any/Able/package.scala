@@ -9,5 +9,5 @@ package object Able
  /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
- * @object Able -> Package [[Able]] defines a set of highly generic interfaces
+ * @object Able -> Package [[Able]] defines a set of general interfaces
  */

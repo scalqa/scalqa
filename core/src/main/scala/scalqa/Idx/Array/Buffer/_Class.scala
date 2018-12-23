@@ -6,15 +6,14 @@ abstract class _Class[@specialized(DATA) A] private[Buffer] extends Loader[A] wi
 
   @inline protected def array = _array
 
-  @inline def size: Int = _size
-  @inline override def all: Stream[A] = Custom.Array.Z.stream[A](_array.asInstanceOf[Array[A]], _size)
+  @inline final def size: Int = _size
+  @inline final override def all: Stream[A] = Custom.Array.Z.stream[A](_array.asInstanceOf[Array[A]], _size)
 
-  @inline def loader: Loader[A] = Z.DefaultLoader(this)
+  @inline final def loader: Loader[A] = Z.DefaultLoader(this)
 
-  @inline override def addAt(i: Int, a: A) = Z.add.at(i, a, this)
-  @inline override def addAllAt(i: Int, all: ~[A]): Unit = Z.add.allAt(i, all, this)
-  @inline override def addAll(s: ~[A]) = s.copyTo(this)
-  @inline override def +=(v: A): this.type = { add(v); this }
+  @inline final override def addAt(i: Int, a: A) = Z.add.at(i, a, this)
+  @inline final override def addAllAt(i: Int, all: ~[A]): Unit = Z.add.allAt(i, all, this)
+  @inline final override def addAll(s: ~[A]) = s.copyTo(this)
   override def add(v: A): Unit = {
     val sz = _size
     if (_arrayLen <= sz) growArray(sz + 1)
@@ -22,7 +21,7 @@ abstract class _Class[@specialized(DATA) A] private[Buffer] extends Loader[A] wi
     _size = sz + 1
   }
 
-  @inline def removeAt(r: Idx.Range): Unit = Z.update.removeAt(r, this)
+  @inline final def removeAt(r: Idx.Range): Unit = Z.update.removeAt(r, this)
   def refreshAt(r: Idx.Range): Unit = r.all.letAt(size.Range).map(apply).letType[Any.Able.Refresh].foreach(_.refresh)
   override def reposition(r: Idx.Range.Reposition): Unit = r.apply(this, update)
 
@@ -30,9 +29,9 @@ abstract class _Class[@specialized(DATA) A] private[Buffer] extends Loader[A] wi
   def copyTo(a: Array[A]): Unit = System.arraycopy(_array, 0, a, 0, size min a.length)
   def arrayBase[B >: A]: Array[B] = { if (_size != _array.length) _arrayResize(size); _array.asInstanceOf[Array[B]] }
 
-  def toInfo = new Pro.Info(this) += ("size", _size)
+  def toInfo = new Pro.Info(this) += (("size", _size))
 
-  private[Buffer] def growArray(need: Long) {
+  private[Buffer] def growArray(need: Long): Unit = {
     var l = if (_arrayLen <= 1) 2L else _arrayLen * 2L
     while (l < need) l *= 2L
     _arrayLen = if (l > Int.MaxValue) Int.MaxValue else l.toInt

@@ -2,7 +2,7 @@ package scalqa; package Any; package Ilk; package Z; package A
 
 private[Ilk] object Refs extends Base[AnyRef] with Tag.ObjectLike[AnyRef] {
 
-  @inline override def primitiveOpt = Opt.Void
+  @inline final override def primitiveOpt = Opt.Void
 
   override def isPrimitive = false
 

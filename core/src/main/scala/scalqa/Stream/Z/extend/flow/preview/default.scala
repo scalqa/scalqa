@@ -9,7 +9,7 @@ private[Stream] object default {
 
     private def moveUp = { System.arraycopy(array, _strt, array, 0, bufSize); _end -= bufSize; _strt = 0 }
 
-    def add(v: A) {
+    def add(v: A) = {
       if (_end < 0) { _strt = 0; _end = 0; array = (s.ilkOpt or v.I.ilk).mkArray[A]() }
       else if (_end == array.length) { if (_strt > 0) moveUp else array = array.copyResize(_end * 2) }
       array(_end) = v;

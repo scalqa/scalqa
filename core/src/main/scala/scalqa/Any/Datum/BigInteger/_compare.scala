@@ -4,47 +4,47 @@ trait _compare[TYPE <: _compare[TYPE]] extends Any with Any.Datum.Comparable[TYP
 
   def compare(v: TYPE): Int = real.compareTo(v.real)
 
-  @inline def ==(v: Byte) = real.byteValue == v
-  @inline def ==(v: Short) = real.shortValue == v
-  @inline def ==(v: Int) = real.intValue == v
-  @inline def ==(v: Long) = real.longValue == v
-  @inline def ==(v: Float) = real.floatValue == v
-  @inline def ==(v: Double) = real.doubleValue == v
+  @inline final def ==(v: Byte) = real.byteValue == v
+  @inline final def ==(v: Short) = real.shortValue == v
+  @inline final def ==(v: Int) = real.intValue == v
+  @inline final def ==(v: Long) = real.longValue == v
+  @inline final def ==(v: Float) = real.floatValue == v
+  @inline final def ==(v: Double) = real.doubleValue == v
 
-  @inline def !=(v: Byte) = real.byteValue != v
-  @inline def !=(v: Short) = real.shortValue != v
-  @inline def !=(v: Int) = real.intValue != v
-  @inline def !=(v: Long) = real.longValue != v
-  @inline def !=(v: Float) = real.floatValue != v
-  @inline def !=(v: Double) = real.doubleValue != v
+  @inline final def !=(v: Byte) = real.byteValue != v
+  @inline final def !=(v: Short) = real.shortValue != v
+  @inline final def !=(v: Int) = real.intValue != v
+  @inline final def !=(v: Long) = real.longValue != v
+  @inline final def !=(v: Float) = real.floatValue != v
+  @inline final def !=(v: Double) = real.doubleValue != v
 
-  @inline def <(v: Byte) = real.byteValue < v
-  @inline def <(v: Short) = real.shortValue < v
-  @inline def <(v: Int) = real.intValue < v
-  @inline def <(v: Long) = real.longValue < v
-  @inline def <(v: Float) = real.floatValue < v
-  @inline def <(v: Double) = real.doubleValue < v
+  @inline final def <(v: Byte) = real.byteValue < v
+  @inline final def <(v: Short) = real.shortValue < v
+  @inline final def <(v: Int) = real.intValue < v
+  @inline final def <(v: Long) = real.longValue < v
+  @inline final def <(v: Float) = real.floatValue < v
+  @inline final def <(v: Double) = real.doubleValue < v
 
-  @inline def <=(v: Byte) = real.byteValue <= v
-  @inline def <=(v: Short) = real.shortValue <= v
-  @inline def <=(v: Int) = real.intValue <= v
-  @inline def <=(v: Long) = real.longValue <= v
-  @inline def <=(v: Float) = real.floatValue <= v
-  @inline def <=(v: Double) = real.doubleValue <= v
+  @inline final def <=(v: Byte) = real.byteValue <= v
+  @inline final def <=(v: Short) = real.shortValue <= v
+  @inline final def <=(v: Int) = real.intValue <= v
+  @inline final def <=(v: Long) = real.longValue <= v
+  @inline final def <=(v: Float) = real.floatValue <= v
+  @inline final def <=(v: Double) = real.doubleValue <= v
 
-  @inline def >(v: Byte) = real.byteValue > v
-  @inline def >(v: Short) = real.shortValue > v
-  @inline def >(v: Int) = real.intValue > v
-  @inline def >(v: Long) = real.longValue > v
-  @inline def >(v: Float) = real.floatValue > v
-  @inline def >(v: Double) = real.doubleValue > v
+  @inline final def >(v: Byte) = real.byteValue > v
+  @inline final def >(v: Short) = real.shortValue > v
+  @inline final def >(v: Int) = real.intValue > v
+  @inline final def >(v: Long) = real.longValue > v
+  @inline final def >(v: Float) = real.floatValue > v
+  @inline final def >(v: Double) = real.doubleValue > v
 
-  @inline def >=(v: Byte) = real.byteValue >= v
-  @inline def >=(v: Short) = real.shortValue >= v
-  @inline def >=(v: Int) = real.intValue >= v
-  @inline def >=(v: Long) = real.longValue >= v
-  @inline def >=(v: Float) = real.floatValue >= v
-  @inline def >=(v: Double) = real.doubleValue >= v
+  @inline final def >=(v: Byte) = real.byteValue >= v
+  @inline final def >=(v: Short) = real.shortValue >= v
+  @inline final def >=(v: Int) = real.intValue >= v
+  @inline final def >=(v: Long) = real.longValue >= v
+  @inline final def >=(v: Float) = real.floatValue >= v
+  @inline final def >=(v: Double) = real.doubleValue >= v
 
   def min(v: TYPE): TYPE = if (this <= v) make(real) else v
 

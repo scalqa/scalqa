@@ -8,7 +8,7 @@ private[scalqa] class Spliterator[A](protected val all: ~[A], protected val spli
 
   def estimateSize = all.sizeOpt.map(_.toLong) or scala.Long.MaxValue
 
-  @inline def tryAdvance(f: J.function.Consumer[_ >: A]): Boolean = if (all.prime) { f.accept(all.pump); true } else false
+  @inline final def tryAdvance(f: J.function.Consumer[_ >: A]): Boolean = if (all.prime) { f.accept(all.pump); true } else false
 
   def trySplit = if (splitSize <= 0) null else {
     val s = all.take(splitSize)
@@ -22,17 +22,17 @@ private[scalqa] object Spliterator {
     protected var has = false
     protected var value: A = _
 
-    @inline def prime = has || { has = src.tryAdvance(this); has }
+    @inline final def prime = has || { has = src.tryAdvance(this); has }
 
-    @inline def pump = { has = false; value }
+    @inline final def pump = { has = false; value }
 
     override def foreach(c: Consumer[A]) = if (prime) { c.accept(pump); while (src.tryAdvance(this)) c.accept(value) }
 
     override def ilkOpt = i.ilkOpt
 
-    @inline def accept(v: A): Unit = value = v
+    @inline final def accept(v: A): Unit = value = v
 
-    @inline def all = this
+    @inline final def all = this
   }
 }
 

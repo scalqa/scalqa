@@ -6,22 +6,22 @@ class Booleans private[I] (protected val base: Array[Boolean]) extends AnyVal wi
   protected type TYPE = Booleans
   @inline protected def make = new Booleans(_)
 
-  @inline def apply(i: Int) = base(i)
-  @inline def size: Int = base.length
-  @inline override def all: ~[Boolean] = Custom.Array.Z.stream(base)
+  @inline final def apply(i: Int) = base(i)
+  @inline final def size: Int = base.length
+  @inline final override def all: ~[Boolean] = Custom.Array.Z.stream(base)
 
-  @inline override def copy(r: Idx.Range) = new Booleans(AZ.copy.range(base, r))
-  @inline override def copyDrop(r: Idx.Range) = new Booleans(AZ.copy.dropRange(base, r))
+  @inline final override def copy(r: Idx.Range) = new Booleans(AZ.copy.range(base, r))
+  @inline final override def copyDrop(r: Idx.Range) = new Booleans(AZ.copy.dropRange(base, r))
 
-  @inline override def +(v: Boolean) = new Booleans(AZ.plus(base, v))
-  @inline override def +~(v: ~[Boolean]) = new Booleans(AZ.plus.stream(base, v))
-  @inline override def +@(i: Int, v: Boolean) = new Booleans(AZ.plus.at(base, i, v))
-  @inline override def +~@(i: Int, v: ~[Boolean]) = new Booleans(AZ.plus.pipeAt(base, i, v))
+  @inline final override def +(v: Boolean) = new Booleans(AZ.plus(base, v))
+  @inline final override def +~(v: ~[Boolean]) = new Booleans(AZ.plus.stream(base, v))
+  @inline final override def +@(i: Int, v: Boolean) = new Booleans(AZ.plus.at(base, i, v))
+  @inline final override def +~@(i: Int, v: ~[Boolean]) = new Booleans(AZ.plus.pipeAt(base, i, v))
 
-  @inline override def -(v: Boolean) = new Booleans(AZ.minus(base, v))
-  @inline override def -~(v: ~[Boolean]) = new Booleans(AZ.minus.stream(base, v))
+  @inline final override def -(v: Boolean) = new Booleans(AZ.minus(base, v))
+  @inline final override def -~(v: ~[Boolean]) = new Booleans(AZ.minus.stream(base, v))
 
-  @inline override def toArray(implicit t: ClassTag[Boolean]) = base.copyFull
+  @inline final override def toArray(implicit t: ClassTag[Boolean]) = base.copyFull
 }
 
 object Booleans extends Z.Primitive.Setup[Boolean, Booleans](new Booleans(_), Array.emptyBooleanArray)

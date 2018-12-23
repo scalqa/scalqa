@@ -3,11 +3,11 @@ package scalqa; package Any; package Ref; package Extra; package Z; package Entr
 private[Extra] class _Class(chld: Entry, private var _scope: AnyRef, protected[Entry] var _this: Any) extends java.util.concurrent.atomic.AtomicReference[_Class](chld)
   with Target.Container with Extra.Entry with EventControl with Any.Able.Void {
 
-  @inline def isCancelled = _scope == null
+  @inline final def isCancelled = _scope == null
 
-  @inline def scope = _scope
+  @inline final def scope = _scope
 
-  @inline def child: Entry = { val c = get; if (!c.isCancelled) c else { val cc = c.child; if (compareAndSet(c, cc)) cc else child } }
+  def child: Entry = { val c = get; if (!c.isCancelled) c else { val cc = c.child; if (compareAndSet(c, cc)) cc else child } }
 
   def cancelIf(b: () ⇒ Boolean) = { if (!isCancelled) _this = new Target.Wrap.CancelIf(this, b); this }
 
@@ -22,7 +22,7 @@ private[Extra] class _Class(chld: Entry, private var _scope: AnyRef, protected[E
 
   def all(scope: AnyRef): ~[Entry] = stream(this, scope)
 
-  def toInfo = new Pro.Info(this) += ("scope", if (scope.I.Class.isSingleton) scope.I.Class else scope) += ("value", value) +~= isCancelled.toOpt(("", "isCancelled")).all
+  def toInfo = new Pro.Info(this) += (("scope", if (scope.I.Class.isSingleton) scope.I.Class else scope)) += (("value", value)) +~= isCancelled.toOpt(("", "isCancelled")).all
 
   def entry = this
 

@@ -2,11 +2,11 @@ package scalqa; package Stream; package Z; package extend; package add
 
 private[Stream] object append {
 
-  @inline def apply[@specialized(DATA) A](s: Stream[A], value: A): Stream[A] = new Stream[A] with A.Extended.All[A] {
+  def apply[@specialized(DATA) A](s: Stream[A], value: A): Stream[A] = new Stream[A] with A.Extended.All[A] {
 
     protected var hot = true
 
-    @inline def prime = real.prime || hot
+    @inline final def prime = real.prime || hot
 
     def pump =
       if (real.prime) real.pump
@@ -18,9 +18,9 @@ private[Stream] object append {
       if (hot) { hot = false; c.accept(value) }
     }
 
-    @inline override def sizeOpt = real.sizeOpt.map(_ + (if (hot) 1 else 0))
+    @inline final override def sizeOpt = real.sizeOpt.map(_ + (if (hot) 1 else 0))
 
-    @inline def real = s
+    @inline final def real = s
   }
 }
 /*___________________________________________________________________________

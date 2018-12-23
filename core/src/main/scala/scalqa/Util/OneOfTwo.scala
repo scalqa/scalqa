@@ -26,8 +26,8 @@ class OneOfTwo[+A, +B] private (private val real: Any) extends AnyVal with Any.A
 
 object OneOfTwo {
 
-  @inline def one[A, B](v: A) = new OneOfTwo[A, B](v)
-  @inline def two[A, B](v: B) = new OneOfTwo[A, B](new Two(v))
+  @inline final def one[A, B](v: A) = new OneOfTwo[A, B](v)
+  @inline final def two[A, B](v: B) = new OneOfTwo[A, B](new Two(v))
 
   implicit def zzMakeOne[A, B](v: A) = one[A, B](v)
   implicit def zzMakeTwo[A, B](v: B) = two[A, B](v)

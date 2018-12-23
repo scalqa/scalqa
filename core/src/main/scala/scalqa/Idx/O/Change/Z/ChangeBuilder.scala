@@ -12,7 +12,7 @@ private[O] class ChangeBuilder[A](base: Idx[A]) extends Custom.Proxy.Idx.Like[Ch
 
   def removeAt(i: Int, elements: Idx[A]): Unit = add(new Entry(i <>>+ elements.size) with Change.Remove[A] { override def apply(i: Int) = elements(i) })
 
-  def update(r: Idx.Range) { removeAt(r); addAt(r) }
+  def update(r: Idx.Range) = { removeAt(r); addAt(r) }
 
   def reposition(r: Idx.Range.Reposition) = add(new Entry(r.range) with Change.Reposition[A] { def indexes = r.indexes })
 

@@ -6,7 +6,7 @@ private[scalqa] trait List[A] extends java.util.AbstractList[A] with Any.Wrap[ja
 
   def size = real.size
 
-  override def add(i: Int, v: A) { real.add(i, v) }
+  override def add(i: Int, v: A) = { real.add(i, v) }
 
   override def add(v: A): Boolean = real.add(v)
 
@@ -14,7 +14,7 @@ private[scalqa] trait List[A] extends java.util.AbstractList[A] with Any.Wrap[ja
 
   override def addAll(v: java.util.Collection[_ <: A]): Boolean = real.addAll(v)
 
-  override def clear { real.clear }
+  override def clear = real.clear 
 
   override def remove(i: Int): A = real.remove(i)
 

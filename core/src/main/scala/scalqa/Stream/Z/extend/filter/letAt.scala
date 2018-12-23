@@ -4,14 +4,14 @@ import Stream.A.Specialized.Indexed
 
 private[Stream] object letAt {
 
-  @inline def apply[@specialized(DATA) A](s: Stream[A], r: Idx.Range): Stream[A] = s match {
+  @inline final def apply[@specialized(DATA) A](s: Stream[A], r: Idx.Range): Stream[A] = s match {
     case v: Indexed[_] => new Stream[A] with A.Extended.All[A] with Indexed[A] {
       protected val from = r.start + real._position
       protected val _size = r.size min Indexed.size(real) - from
-      @inline def _apply(i: Int): A = Indexed(real, from + i)
-      @inline def pump = _pumpIndexed
-      @inline def foreach(f: Consumer[A]) = _consumeIndexed(f)
-      @inline def real = v.asInstanceOf[Stream[A] with Indexed[A]]
+      @inline final def _apply(i: Int): A = Indexed(real, from + i)
+      @inline final def pump = _pumpIndexed
+      @inline final def foreach(f: Consumer[A]) = _consumeIndexed(f)
+      @inline final def real = v.asInstanceOf[Stream[A] with Indexed[A]]
     }
     case v => new Stream[A] with A.Extended.Filter[A] {
       val start = r.start
@@ -27,7 +27,7 @@ private[Stream] object letAt {
 
       def foreach(c: Consumer[A]) = while (prime) c.accept(pump)
 
-      @inline def real = s
+      @inline final def real = s
     }
   }
 }

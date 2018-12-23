@@ -1,5 +1,6 @@
 package scalqa.Util.Z.Include
 
+import scala.language.implicitConversions
 import scalqa.{ DATA, Custom, Ilk, ~ }
 import scalqa.Any.Able.{ Stream => All }
 import scalqa.Stream.Z
@@ -12,7 +13,7 @@ private[scalqa] trait Streaming {
 
   @inline implicit def zzStream_Java_Iterable[@specialized(DATA) A: Ilk](v: java.lang.Iterable[A]): ~[A] with All[A] = Z.A.Java.Iterable.toStream[A](v)
 
-  @inline implicit def zzStream_Java_Iterator[@specialized(DATA) A: Ilk](v: java.util.Iterator[A]): ~[A] with All[A] = Z.A.Scala.Iterator.toStream[A](v)
+  @inline implicit def zzStream_Java_Iterator[@specialized(DATA) A: Ilk](v: java.util.Iterator[A]): ~[A] with All[A] = Z.A.Java.Iterator.toStream[A](v)
 
   @inline implicit def zzStream_Java_Stream[@specialized(DATA) A](v: java.util.stream.Stream[A]): ~[A] with All[A] = zzStream_Java_Iterator(v.iterator)
 

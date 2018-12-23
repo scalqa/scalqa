@@ -2,7 +2,7 @@ package scalqa; package Pro; package M
 
 trait _Trait[@specialized(DATA) A] extends Pro[A] {
 
-  def update(v: A)
+  def update(v: A): Unit
 
 }
 

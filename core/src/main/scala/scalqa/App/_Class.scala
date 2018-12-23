@@ -8,7 +8,7 @@ class _Class(verbose: Boolean = ON) extends scala.DelayedInit {
 
   def startTime = _startTime
 
-  override def delayedInit(body: => Unit) { _delayed += (() => body) }
+  override def delayedInit(body: => Unit) = _delayed += (() => body)
 
   def main(args: Array[String]): Unit = {
     _args = args.toRefs

@@ -2,7 +2,7 @@ package scalqa; package App; package Z; package Benchmark
 
 private[App] object main {
 
-  def apply[A: Numeric](targets: Idx[(String, () => A)], trialCount: Int, trialDuration: Duration, gcPause: Duration) {
+  def apply[A: Numeric](targets: Idx[(String, () => A)], trialCount: Int, trialDuration: Duration, gcPause: Duration) = {
 
     // testCount and testDuration within single trial
     val (testCount, testDuration) = {
@@ -13,7 +13,7 @@ private[App] object main {
 
     val about = "Duration " + trialDuration + " (" + targets.size + " targets each run " + testCount + " times for " + testDuration + ")"
 
-    def printOut(l: Idx[Result]) {
+    def printOut(l: Idx[Result]) = {
       l.all.map(_.count).maxOpt.apply(v => l.all.apply(_.maxCount = v))
       l.all.map(_.memory).maxOpt.apply(v => l.all.foreach(_.maxMemory = v))
       l.all.toText.lp

@@ -34,7 +34,7 @@ private[Stream] object count {
       protected val array = new Array[Int](size)
       def apply(i: Int) = array(i)
       override def isVoid = _void
-      def accept(v: A) {
+      def accept(v: A) = {
         _void = false
         var i = 0;
         while (i < size) { if (fun(i).allow(v)) array(i) += 1; i += 1 }

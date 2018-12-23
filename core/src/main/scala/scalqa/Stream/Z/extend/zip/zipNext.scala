@@ -9,9 +9,9 @@ private[Stream] final class zipNext[A](s: Stream[A]) extends Stream[(A, Opt[A])]
 
   def foreach(c: Consumer[(A, Opt[A])]) = while (prime) c.accept(pump)
 
-  @inline override def sizeOpt = real.sizeOpt
+  @inline final override def sizeOpt = real.sizeOpt
 
-  @inline override def ilkOpt = Ilk.Refs
+  @inline final override def ilkOpt = Ilk.Refs
 }
 /*___________________________________________________________________________
      __________ ____   __   ______  ____
