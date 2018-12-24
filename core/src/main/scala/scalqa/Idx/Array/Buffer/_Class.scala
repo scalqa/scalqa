@@ -14,6 +14,7 @@ abstract class _Class[@specialized(DATA) A] private[Buffer] extends Loader[A] wi
   @inline final override def addAt(i: Int, a: A) = Z.add.at(i, a, this)
   @inline final override def addAllAt(i: Int, all: ~[A]): Unit = Z.add.allAt(i, all, this)
   @inline final override def addAll(s: ~[A]) = s.copyTo(this)
+  @inline override def +=(v: A): this.type = { add(v); this }
   override def add(v: A): Unit = {
     val sz = _size
     if (_arrayLen <= sz) growArray(sz + 1)

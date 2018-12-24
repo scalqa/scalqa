@@ -25,8 +25,7 @@ private[scalqa] trait Library extends _library.Secondary {
 
 private[scalqa] object _library {
 
-  trait Secondary extends Tertiary
-  trait Tertiary extends DefaultWhenEverythingElseFails
+  trait Secondary extends DefaultWhenEverythingElseFails
   trait DefaultWhenEverythingElseFails {
 
     implicit def zzLibrary_Any[A](v: A) = new scalqa.Any._library[A](v)
@@ -40,12 +39,6 @@ private[scalqa] object _library {
  /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
- * @def zzDefaultCustomNumberScale -> Default Decimal Scale
- *
- *     The value can be set at App.Setup.CustomNumberScalePro
- *
- *     Scale affects [[Util.BigDecimal BigDecimal]] and other [[Any.Datum.BigDecimal]] derivatives
- *
  * @def zzLibrary_Any -> Attaches Universal library to every possible type
  *
  *       All library methods are implicitly attached and available on `Any` object
