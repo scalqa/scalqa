@@ -15,8 +15,6 @@ abstract class Setup[TYPE <: Datum.BigDecimal[TYPE]] protected extends Any.Datum
 
     def toBig(v: TYPE) = v match { case v: Util.BigDecimal => v; case v => Util.BigDecimal.make(undo(v)) }
 
-    def apply(v: \/) = make(Zero)
-
     def fromInt(x: Int) = make(java.math.BigDecimal.valueOf(x))
 
     def minus(x: TYPE, y: TYPE) = make(undo(x).subtract(undo(y)))
@@ -29,7 +27,7 @@ abstract class Setup[TYPE <: Datum.BigDecimal[TYPE]] protected extends Any.Datum
 
     def div(x: TYPE, y: TYPE) = make(undo(x).divide(undo(y)))
 
-    def rem(x: TYPE, y: TYPE) = make(undo(x).remainder(undo(y)))
+    //    def rem(x: TYPE, y: TYPE) = make(undo(x).remainder(undo(y)))
 
     def toDouble(x: TYPE) = undo(x).toDouble
 

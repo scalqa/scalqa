@@ -10,7 +10,7 @@ private[Stream] object copyTo {
       var i = v._position; val sz = Indexed.size(v)
       while (i < sz) { b.add(Indexed(v, i)); i += 1 }
       v._position = sz
-    case v =>
+    case _ =>
       s.foreach(new Consumer[A] { def accept(v: A) = b add v })
   }
 }

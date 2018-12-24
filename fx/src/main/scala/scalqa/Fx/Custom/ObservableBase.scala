@@ -12,8 +12,8 @@ trait ObservableBase[A] extends javafx.beans.value.ObservableValue[A] {
   def addListener(l: ChangeListener[_ >: A]): Unit = _add(l)
   def removeListener(l: ChangeListener[_ >: A]): Unit = _remove(l)
 
-  protected def fireInvalidate { _listeners.all.letType[InvalidationListener].foreach(_.invalidated(this)) }
-  protected def refresh(v: A, old: A) { _listeners.all.letType[ChangeListener[A]].foreach(_.changed(this, old, v)) }
+  protected def fireInvalidate: Unit = { _listeners.all.letType[InvalidationListener].foreach(_.invalidated(this)) }
+  protected def refresh(v: A, old: A): Unit = { _listeners.all.letType[ChangeListener[A]].foreach(_.changed(this, old, v)) }
 
   protected def listenerCount = _listeners.size
 

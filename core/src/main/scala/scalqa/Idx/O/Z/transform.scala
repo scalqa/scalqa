@@ -26,7 +26,7 @@ private[O] object transform {
         val i = v.indexes
         val ni = repositionIndexesFun(i)
         if (r == nr && i == ni) v else Change.Reposition.make(nr, ni)
-      case v => App.Fail()
+      case _ => App.Fail()
     }
 }
 /*___________________________________________________________________________

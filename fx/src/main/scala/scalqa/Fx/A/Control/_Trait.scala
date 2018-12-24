@@ -6,8 +6,8 @@ trait _Trait extends Region {
   def tooltipPro: Pro.OM[Tooltip] = Custom.ProWO(real.tooltipProperty).asBiMappedView(Tooltip.map);
 
   def tooltip: Tooltip = Tooltip.make(real.getTooltip);
-  def tooltip_=(t: Tooltip) { real.setTooltip(if(t.isVoid) null else  t.real) }
-  def tooltip_=(s: String) { tooltip = new Tooltip(s) }
+  def tooltip_=(t: Tooltip): Unit = real.setTooltip(if (t.isVoid) null else t.real)
+  def tooltip_=(s: String): Unit = tooltip = new Tooltip(s)
 
 }
 /*___________________________________________________________________________

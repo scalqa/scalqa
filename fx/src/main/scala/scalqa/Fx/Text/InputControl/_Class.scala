@@ -19,7 +19,7 @@ abstract class _Class(initialText: Opt[String]) extends A.Control {
 
   def +=(s: String) = real.appendText(s)
 
-  protected def onObservableChange(on: Change => Any) { _onChange += on; if (!real.getTextFormatter.isInstanceOf[Formatter[_]]) real.setTextFormatter(new Formatter) }
+  protected def onObservableChange(on: Change => Any): Unit = { _onChange += on; if (!real.getTextFormatter.isInstanceOf[Formatter[_]]) real.setTextFormatter(new Formatter) }
   private var _onChange: Refs[Change => Any] = \/
 
   /*

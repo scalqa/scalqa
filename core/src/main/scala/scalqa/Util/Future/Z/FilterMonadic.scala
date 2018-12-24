@@ -1,7 +1,6 @@
 package scalqa; package Util; package Future; package Z
 
 import concurrent.ExecutionContext
-import scala.util.control.NonFatal
 
 private[Future] final class FilterMonadic[A] private[scalqa] (private val future: Util.Future[A]) extends AnyVal {
 

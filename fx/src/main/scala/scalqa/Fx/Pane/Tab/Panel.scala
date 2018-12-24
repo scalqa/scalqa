@@ -1,7 +1,5 @@
 package scalqa; package Fx; package Pane; package Tab
 
-import javafx.scene.control.TabPane;
-
 class Panel extends Fx.A.Delegate.Gui {
   def this(label: String) = { this; text = label }
   def this(label: String, e: Fx.A.Node.Like) = { this(label); content = e }
@@ -20,7 +18,7 @@ class Panel extends Fx.A.Delegate.Gui {
 
   def disabledPro: Pro.O[Boolean] = Custom.ProO(real.disabledProperty); def disabled = real.disabledProperty.get
 
-  def contentPro: Pro.OM[Fx.A.Node.Like] = Custom.ProWO(real.contentProperty).asBiMappedView(Fx.A.Node.Like.Map); def content = contentPro(); def content_=(e: Fx.A.Node.Like) { contentPro() = e }
+  def contentPro: Pro.OM[Fx.A.Node.Like] = Custom.ProWO(real.contentProperty).asBiMappedView(Fx.A.Node.Like.Map); def content = contentPro(); def content_=(e: Fx.A.Node.Like): Unit =  contentPro() = e 
 
   private[Fx] override def _referencePropertyOpt = real.onClosedProperty.Opt
 

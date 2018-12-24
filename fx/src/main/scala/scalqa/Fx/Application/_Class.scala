@@ -1,6 +1,6 @@
 package scalqa; package Fx; package Application
 
-abstract class _Class(private val title: String = \/, private val show: Boolean = ON, verbose: Boolean = ON) extends App(verbose) {
+abstract class _Class(title: String = \/, show: Boolean = ON, verbose: Boolean = ON) extends App(verbose) {
 
   def stage: Stage = _Class
 
@@ -21,6 +21,8 @@ abstract class _Class(private val title: String = \/, private val show: Boolean 
   }
 
   private def superMain(sa: Array[String]): Unit = super.main(sa)
+  private def _title = title
+  private def _show = show
 }
 
 // *****************************************************************************************************
@@ -31,12 +33,12 @@ private object _Class extends Fx.Stage() {
 
   lazy val scene = _scene.I.Opt(s => real.setScene(s.real)) or App.Fail("Scene was not set yet")
 
-  def start(s: javafx.stage.Stage) {
+  def start(s: javafx.stage.Stage): Unit = {
     _onCreateGuiRun(s)
-    _app.title.I.Opt(s.setTitle)
+    _app._title.I.Opt(s.setTitle)
     _app.superMain(_args)
     this.scene
-    if (_app.show) show
+    if (_app._show) show
   }
 }
 

@@ -1,7 +1,6 @@
 package scalqa; package Fx; package ComboBox
 
 import javafx.scene.control.ListCell
-import javafx.scene.control.ListView
 
 class _Class[A] extends Like[A] {
 

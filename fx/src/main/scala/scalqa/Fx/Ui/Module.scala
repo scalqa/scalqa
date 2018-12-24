@@ -5,7 +5,7 @@ abstract class Module extends Fx.A.Module {
   private var parentOpt: Opt[Module] = \/
   private val children: Idx.M[Module] = NEW
 
-  protected def addChild(e: Module) {
+  protected def addChild(e: Module): Unit = {
     if (e.parentOpt) App.Fail()
     e.parentOpt = this
     children += e

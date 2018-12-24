@@ -4,7 +4,7 @@ private[Out] final class FilterMonadic[+A] private[scalqa] (private val real: An
   private def _failed = real.isInstanceOf[Deficiency]
   private def _val = real.asInstanceOf[A]
 
-  def foreach(f: A => Unit): Unit = real match { case v: Deficiency => (); case v => f(_val) }
+  def foreach(f: A => Unit): Unit = real match { case _: Deficiency => (); case _ => f(_val) }
 
   def flatMap[B](f: A => Out[B]): Out[B] = if (_failed) new Out(real) else f(_val)
 

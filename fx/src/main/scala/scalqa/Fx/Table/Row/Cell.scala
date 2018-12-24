@@ -6,7 +6,7 @@ class Cell[ENTRY, VIEW](table: Table[ENTRY]) extends Fx.Cell.Indexed {
 
   protected type REAL = javafx.scene.control.TableRow[ENTRY]
   protected override def _createGui: REAL = new REAL {
-    protected override def updateItem(row: ENTRY, empty: Boolean) {
+    protected override def updateItem(row: ENTRY, empty: Boolean): Unit = {
       super.updateItem(row, empty);
       try { refresh } catch { case e: RuntimeException => { throw e; } }
     }
@@ -20,7 +20,7 @@ class Cell[ENTRY, VIEW](table: Table[ENTRY]) extends Fx.Cell.Indexed {
 
   def view: VIEW = viewOpt.value
 
-  protected override def refresh {
+  protected override def refresh: Unit = {
     style = \/
     alignment = \/
 

@@ -20,7 +20,7 @@ object ProO {
   object A {
     abstract class ValueBase[A](real: javafx.beans.Observable) extends Pro.O.A.Base[A] {
       real.addListener(new javafx.beans.InvalidationListener {
-        def invalidated(o: javafx.beans.Observable) { fireChange }
+        def invalidated(o: javafx.beans.Observable): Unit = fireChange
       })
     }
 

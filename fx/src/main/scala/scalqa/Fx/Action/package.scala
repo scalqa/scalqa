@@ -1,7 +1,6 @@
 package scalqa; package Fx
 
-import javafx.scene.control.MenuItem;
-import javafx.event.ActionEvent;
+import javafx.scene.control.MenuItem
 
 package object Action {
 

@@ -13,7 +13,7 @@ private[Stream] object letAt {
       def foreach(f: Consumer[A]) = _consumeIndexed(f)
       def real = v.asInstanceOf[Stream[A] with Indexed[A]]
     }
-    case v => new Stream[A] with A.Extended.Filter[A] {
+    case _ => new Stream[A] with A.Extended.Filter[A] {
       val start = r.start
       val end = r.end
       var i = 0

@@ -8,7 +8,7 @@ private[Stream] object dropNext {
     case v: Indexed[_] =>
       v._position = v._position + sz min Indexed.size(v)
       v
-    case v => new Stream[A] with A.Extended.Filter[A] {
+    case _ => new Stream[A] with A.Extended.Filter[A] {
 
       protected var i = if (sz < 0) 0 else sz
 

@@ -1,7 +1,6 @@
 package scalqa; package Fx; package Event
 
 import javafx.scene.input.ContextMenuEvent
-import ContextMenu._
 
 class ContextMenu(e: ContextMenuEvent, node: A.Node) extends Input(e, node) {
   protected type REAL <: ContextMenuEvent
@@ -25,7 +24,7 @@ class ContextMenu(e: ContextMenuEvent, node: A.Node) extends Input(e, node) {
 object ContextMenu {
   private var allCurrentMenus: Stream[ContextMenu] = \/
 
-  def show(e: ContextMenu) {
+  def show(e: ContextMenu): Unit = {
     def toItems(a: ~[ContextMenu]): ~[Menu.Item] = {
       var l = a.flatMap(_.actions).group.map(_.next).to[Idx]
       if (l.getOpt(0).letType[Fx.Action.Z.Separator]) l = l.all.dropNext(1).to[Idx]

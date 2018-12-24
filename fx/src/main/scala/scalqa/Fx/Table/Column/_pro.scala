@@ -22,7 +22,7 @@ private[Column] trait _pro[ENTRY, VIEW, VAL] extends Any.Able.ToInfo { self: Col
 
   def toInfo = new Pro.Info(this) += (("label", label)) += (("width", width))
 
-  val sortingPro = Pro.OM.make[Ordering[VAL]](\/); def ordering = sortingPro(); def ordering_=(o: Ordering[VAL]) { sortingPro() = o };
+  val sortingPro = Pro.OM.make[Ordering[VAL]](\/); def ordering = sortingPro(); def ordering_=(o: Ordering[VAL]): Unit = sortingPro() = o
 
   lazy val sortablePro = Custom.ProWO(real.sortableProperty); def sortable = sortablePro(); def sortable_=(b: Boolean) = sortablePro() = b
 

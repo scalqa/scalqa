@@ -22,7 +22,7 @@ private[A] class XYChart[X, Y, XA <: Axis[X], YA <: Axis[Y], XV, YV](val chart: 
       it.setNode(n.real);
       try { getPlotChildren.add(n.real) }
       catch {
-        case t: Throwable => () // toDo - Fix "duplicate children added"
+        case _: Throwable => () // toDo - Fix "duplicate children added"
       }
     })
   }

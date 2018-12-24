@@ -4,15 +4,15 @@ private[Fx] abstract class Proxy[A] extends scalqa.Custom.Proxy.List[A] with jav
 
   protected def real: javafx.collections.ObservableList[A]
 
-  def addListener(l: javafx.beans.InvalidationListener) { real.addListener(l) }
-  def addListener(l: javafx.collections.ListChangeListener[_ >: A]) { real.addListener(l) }
+  def addListener(l: javafx.beans.InvalidationListener): Unit = real.addListener(l)
+  def addListener(l: javafx.collections.ListChangeListener[_ >: A]): Unit = real.addListener(l)
 
-  def removeListener(l: javafx.beans.InvalidationListener) { real.removeListener(l) }
-  def removeListener(l: javafx.collections.ListChangeListener[_ >: A]) { real.removeListener(l) }
+  def removeListener(l: javafx.beans.InvalidationListener): Unit = real.removeListener(l)
+  def removeListener(l: javafx.collections.ListChangeListener[_ >: A]): Unit = real.removeListener(l)
 
   def addAll(v: A*) = real.addAll(v: _*)
 
-  def remove(from: Int, till: Int) { real.remove(from, till) }
+  def remove(from: Int, till: Int): Unit = real.remove(from, till)
 
   def removeAll(v: A*) = real.removeAll(v: _*)
 

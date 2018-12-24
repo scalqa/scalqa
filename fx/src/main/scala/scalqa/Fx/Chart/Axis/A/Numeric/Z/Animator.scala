@@ -26,7 +26,7 @@ final class Animator(private var nodeToLayout: Parent) extends AnimationTimer wi
     handle(0l);
   }
 
-  def stop(animationID: AnyRef) {
+  def stop(animationID: AnyRef): Unit = {
     val t = activeTimeLines.remove(animationID);
     if (t != null) t.stop();
     if (activeTimeLines.isEmpty()) stop();

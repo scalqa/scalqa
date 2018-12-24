@@ -1,7 +1,5 @@
 package scalqa; package Idx; package M; package Z; package A
 
-import scala.collection.mutable.{ Buffer, ArrayBuffer }
-
 private[Idx] class Sealable[A](list: M[A]) extends Custom.Proxy.Idx.M.Like[A] with Any.Able.Seal {
 
   override def size = list.size

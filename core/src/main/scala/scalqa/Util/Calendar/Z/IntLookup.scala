@@ -1,7 +1,5 @@
 package scalqa; package Util; package Calendar; package Z
 
-import Lookup._
-
 private[Calendar] class IntLookup[A: ClassTag](provider: Int => A) {
   private var store = (0, new Array[A](0))
 

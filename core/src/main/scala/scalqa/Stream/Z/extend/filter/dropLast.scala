@@ -5,8 +5,8 @@ import Stream.A.Specialized.Indexed
 private[Stream] object dropLast {
 
   def apply[@specialized(DATA) A](s: Stream[A], cnt: Int): Stream[A] = s match {
-    case v if (cnt <= 0)                => s
-    case v if (s.sizeOpt.let(_ <= cnt)) => \/
+    case _ if (cnt <= 0)                => s
+    case _ if (s.sizeOpt.let(_ <= cnt)) => \/
     case v: Indexed[_] => new Stream[A] with A.Extended.All[A] with Indexed[A] {
 
       protected val from = real._position
@@ -18,7 +18,7 @@ private[Stream] object dropLast {
       def foreach(f: Consumer[A]) = _consumeIndexed(f)
       def real = v.asInstanceOf[Stream[A] with Indexed[A]]
     }
-    case v => new Stream[A] with A.Extended.Filter[A] {
+    case _ => new Stream[A] with A.Extended.Filter[A] {
       protected val real = s.preview
       protected val array = real.previewIlk.mkArray[A](cnt)
       protected var i = 0

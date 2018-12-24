@@ -12,7 +12,7 @@ class OneOfTwo[+A, +B] private (private val real: Any) extends AnyVal with Any.A
   // ----------------------------------------------------------------------------------------
   def isTwo = real.isInstanceOf[Two[B]]
   def two: Opt[B] = real.asInstanceOf[Two[B]].value
-  def twoOpt: Opt[B] = real match { case v: Two[B] => v.value; case v => Opt.Void }
+  def twoOpt: Opt[B] = real match { case v: Two[B] => v.value; case _ => Opt.Void }
   def mapTwo[C](f: B => C): OneOfTwo[A, C] = twoOpt.map(v => OneOfTwo.two[A, C](f(v))) or asInstanceOf[OneOfTwo[A, C]]
 
   // ----------------------------------------------------------------------------------------

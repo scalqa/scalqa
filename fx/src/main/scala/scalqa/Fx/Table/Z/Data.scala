@@ -2,7 +2,7 @@ package scalqa; package Fx; package Table; package Z
 
 private[Table] class Data[A](table: Table[A]) {
 
-  def init(real: javafx.scene.control.TableView[A]) {
+  def init(real: javafx.scene.control.TableView[A]): Unit = {
     real.setItems(new Custom.ObservableList.OM(entriesPro()))
     real.setSortPolicy(_ => true)
     Custom.ProO(real.comparatorProperty).I(p => {

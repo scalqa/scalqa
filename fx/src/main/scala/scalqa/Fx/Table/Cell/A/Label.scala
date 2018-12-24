@@ -3,7 +3,7 @@ package scalqa; package Fx; package Table; package Cell; package A
 class Label[ENTRY, VIEW, VAL](c: Column[ENTRY, VIEW, VAL]) extends Cell[ENTRY, VIEW, VAL](c) {
 
   protected override def _createGui: REAL = new javafx.scene.control.TableCell[ENTRY, ITEM] {
-    protected override def updateItem(slot: ITEM, empty: Boolean) {
+    protected override def updateItem(slot: ITEM, empty: Boolean): Unit = {
       super.updateItem(slot, empty);
       try {
         refresh

@@ -1,7 +1,6 @@
 package scalqa; package Fx; package Custom; package ObservableList
 
 import javafx.{ collections => JAVA }
-import javafx.collections.ListChangeListener.{ Change => CHANGE }
 
 private[Fx] abstract class Base[A] extends java.util.AbstractList[A] with JAVA.ObservableList[A] {
 

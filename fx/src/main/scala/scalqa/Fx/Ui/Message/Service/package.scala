@@ -4,7 +4,7 @@ package object Service {
 
   val Console: Service = console
 
-  private object console extends Service { def publish(m: Message) { System.out.println(m); m.causeOpt(System.out.println) } }
+  private object console extends Service { def publish(m: Message): Unit = { System.out.println(m); m.causeOpt(System.out.println) } }
 
 }
 /*___________________________________________________________________________

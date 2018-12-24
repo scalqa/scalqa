@@ -5,13 +5,13 @@ import Stream.A.Specialized.Indexed
 private[Stream] object letLast {
 
   def apply[@specialized(DATA) A](s: Stream[A], cnt: Int): Stream[A] = s match {
-    case v if (cnt <= 0) => \/
+    case _ if (cnt <= 0) => \/
     case v: Indexed[_] =>
       val sz = Indexed.size(v) - v._position
       if (sz > cnt) v._position += sz - cnt
       v
-    case v if (s.sizeOpt.let(_ <= cnt)) => s
-    case v => new Stream[A] with A.Extended.Filter[A] {
+    case _ if (s.sizeOpt.let(_ <= cnt)) => s
+    case _ => new Stream[A] with A.Extended.Filter[A] {
       val real = s.preview
       protected var in = false
 

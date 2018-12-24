@@ -1,10 +1,10 @@
 package scalqa; package Fx; package Table; package Column
 
 abstract class _Class[ENTRY, VIEW, VAL] private[Table] extends Cell.Ui[ENTRY, VIEW, VAL]
-    with _value_setup[ENTRY, VIEW, VAL]
-    with _edit_setup[ENTRY, VIEW, VAL]
-    with _pro[ENTRY, VIEW, VAL]
-    with _row_setup[ENTRY, VIEW, VAL] {
+  with _value_setup[ENTRY, VIEW, VAL]
+  with _edit_setup[ENTRY, VIEW, VAL]
+  with _pro[ENTRY, VIEW, VAL]
+  with _row_setup[ENTRY, VIEW, VAL] {
 
   protected type REAL = javafx.scene.control.TableColumn[ENTRY, Cell.Z.Item[ENTRY, VIEW, VAL]]
 
@@ -12,7 +12,7 @@ abstract class _Class[ENTRY, VIEW, VAL] private[Table] extends Cell.Ui[ENTRY, VI
 
   def setupCell(f: ⇒ Cell[ENTRY, VIEW, VAL]): Unit = real.cellFactoryProperty.set(p ⇒ f.real.asInstanceOf[javafx.scene.control.TableCell[ENTRY, Cell.Z.Item[ENTRY, VIEW, VAL]]])
 
-  def reposition(index: Int) { table.columns remove this.I.asInstanceOfTarget; table.columns.addAt(index max 0 min table.columns.size, this.I.asInstanceOfTarget) }
+  def reposition(index: Int): Unit = { table.columns remove this.I.asInstanceOfTarget; table.columns.addAt(index max 0 min table.columns.size, this.I.asInstanceOfTarget) }
 
   def refreshColumn: Unit = column.real.I(c => if (c.isVisible) { c.setVisible(false); c.setVisible(true) })
 
@@ -22,8 +22,8 @@ abstract class _Class[ENTRY, VIEW, VAL] private[Table] extends Cell.Ui[ENTRY, VI
 
   // ------------------------------------------------------------------------------------------------------------------------------------------------------
   private[Table] def entryOrdering: Ordering[ENTRY] = {
-    val o = ordering.asOptValueView(1).on[ENTRY](e => createOptPro(e).apply()) 
-    if(sortReversed)  o.reverse else o
+    val o = ordering.asOptValueView(1).on[ENTRY](e => createOptPro(e).apply())
+    if (sortReversed) o.reverse else o
   }
 
   private[Table] def column = this

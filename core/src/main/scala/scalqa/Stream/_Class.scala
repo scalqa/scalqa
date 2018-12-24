@@ -1,6 +1,6 @@
 package scalqa; package Stream
 
-import Any.Ilk.Z.Shift.{ RefRef, PrimPrim, PrimRef, RefPrim }
+import Any.Ilk.Z.Shift.{ PrimPrim, PrimRef, RefPrim }
 
 abstract class _Class[@specialized(DATA) A] protected extends Interface[A] with Flow[A] with Any.Able.Void
   with _extend._Trait[A] with _consume._Trait[A] with _iterate._Trait[A] with _info._Trait[A] {

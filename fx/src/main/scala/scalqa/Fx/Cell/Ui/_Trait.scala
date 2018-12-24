@@ -15,13 +15,13 @@ trait _Trait[CELL <: Fx.Cell] {
 
   def onAlignment(on: CELL => Pos): Unit = onAlignmentOpt(on(_).Opt)
 
-  def onStyleOpt(on: CELL => Opt[Style]) { onCellUpdate(c => on(c).apply(c.style += _)) }
+  def onStyleOpt(on: CELL => Opt[Style]): Unit = onCellUpdate(c => on(c).apply(c.style += _))
 
-  def onStyle(on: CELL => Style) { onStyleOpt(on(_).Opt) }
+  def onStyle(on: CELL => Style): Unit = onStyleOpt(on(_).Opt)
 
-  def onStyleClassOpt(on: CELL => Opt[Style.Class]) { onCellUpdate(c => on(c).apply(c.styleClass= _)) }
+  def onStyleClassOpt(on: CELL => Opt[Style.Class]): Unit = onCellUpdate(c => on(c).apply(c.styleClass= _))
 
-  def onStyleClass(on: CELL => Style.Class) { onStyleClassOpt(on(_).Opt) }
+  def onStyleClass(on: CELL => Style.Class): Unit = onStyleClassOpt(on(_).Opt)
 
   // -----------------------------------------------------------------------------------------
   def alignment_=(s: Pos) = onAlignment(r => s); def alignment: Pos = App.Fail.unsupported()

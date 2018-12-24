@@ -4,7 +4,7 @@ class TextField[ENTRY, VIEW, VAL](c: Column[ENTRY, VIEW, VAL], parser: String =>
   protected type REAL = javafx.scene.control.cell.TextFieldTableCell[ENTRY, ITEM]
 
   protected override def _createGui: REAL = new REAL {
-    protected override def updateItem(slot: ITEM, empty: Boolean) {
+    protected override def updateItem(slot: ITEM, empty: Boolean): Unit = {
       super.updateItem(slot, empty); refresh
     }
 

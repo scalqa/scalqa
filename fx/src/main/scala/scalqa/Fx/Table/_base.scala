@@ -2,7 +2,7 @@ package scalqa; package Fx; package Table
 
 trait _base[ENTRY] { self: Table[ENTRY] =>
   protected type REAL = javafx.scene.control.TableView[ENTRY]
-  private[Table]type Column[A] <: Table.Column[ENTRY, VIEW, A]
+  private[Table] type Column[A] <: Table.Column[ENTRY, VIEW, A]
 
   private[Table] val data = new Z.Data[ENTRY](This)
 
@@ -16,7 +16,7 @@ trait _base[ENTRY] { self: Table[ENTRY] =>
 
   lazy val selection = Selection.make[ENTRY](entries, real.getSelectionModel)
 
-  protected def onCreateRowCell(f: ⇒ Row.Cell[ENTRY, VIEW]) { real.rowFactoryProperty.set(prm ⇒ f.real.asInstanceOf[javafx.scene.control.TableRow[ENTRY]]) }
+  protected def onCreateRowCell(f: ⇒ Row.Cell[ENTRY, VIEW]): Unit = real.rowFactoryProperty.set(prm ⇒ f.real.asInstanceOf[javafx.scene.control.TableRow[ENTRY]])
 
   // ---------------------------------------------------------------------------
   def scrollTo(i: Int) = real.scrollTo(i)

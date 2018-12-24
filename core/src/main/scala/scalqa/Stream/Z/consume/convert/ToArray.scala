@@ -1,7 +1,5 @@
 package scalqa; package Stream; package Z; package consume; package convert
 
-import Stream.A.Specialized.Indexed
-
 private[Stream] object ToArray {
 
   object Buffer extends Interface.To.Converter[Idx.Array.Buffer] {

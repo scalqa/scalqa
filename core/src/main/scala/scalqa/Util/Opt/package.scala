@@ -2,6 +2,7 @@ package scalqa; package Util
 
 package object Opt {
   private[scalqa] def This = this
+  type Int = Int_; val Int = Int_
 
   val Void: Opt[Nothing] = new Opt[Nothing](Z.VoidValue)
 
@@ -16,11 +17,6 @@ package object Opt {
   def fromOption[T](v: scala.Option[T]): Opt[T] = if (v == null || v.isEmpty) Void else apply(v.get)
 
   def fromOptional[T](v: java.util.Optional[T]): Opt[T] = if (v != null && v.isPresent) apply(v.get) else Void
-
-  // ***************************************************************
-  class Int private[Opt] (private[Opt] val real: scala.Int) extends AnyVal with Z.IntDef
-
-  object Int extends Z.IntDef.Setup
 
 }
 /*___________________________________________________________________________
@@ -40,15 +36,6 @@ ___________________________________________________________________________*/
  *         val o2 = 12.Opt           // With built-in constructor attached to every object
  *     }}}
  *
- * @class Int -> `Int Value Option`
- *
- *   [[Opt.Int]] is functionally equivalent to [[scalqa.Opt Opt[Int]]]
- *
- *   The method sets are identical, so please refer to [[Opt]] for details
- *
- *   [[Opt.Int]] is specialized for Int primitive and provides performance boost where it is critical
- *
- *   Generally [[Opt]] is very fast, except for primitives, which are auto-boxed
  *
  * @def apply -> 'make' overload
  *

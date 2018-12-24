@@ -16,8 +16,6 @@ abstract class Setup[TYPE <: Datum.BigInteger[TYPE]] protected extends Datum.Com
 
     def compare(x: TYPE, y: TYPE) = undo(x).compareTo(undo(y))
 
-    def apply(v: \/) = make(Zero)
-
     def fromInt(x: Int) = make(java.math.BigInteger.valueOf(x))
 
     def minus(x: TYPE, y: TYPE) = make(undo(x).subtract(undo(y)))

@@ -1,7 +1,5 @@
 package scalqa; package Idx.I
 
-import Custom.Array.{ Z => AZ }
-
 class Refs[A] private[I] (protected val base: Array[A]) extends AnyVal with Idx.I[A] {
   protected type TYPE = Refs[A]
   def make = new Refs[A](_)

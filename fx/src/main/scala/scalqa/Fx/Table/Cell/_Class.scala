@@ -5,10 +5,10 @@ abstract class _Class[ENTRY, VIEW, VAL](val column: Column[ENTRY, VIEW, _]) exte
     column.uiSetup.events(this)
   }
 
-  protected override def refresh {
+  protected override def refresh: Unit = {
     editable = itemOpt.map(i => column._onEditEnabled(i.entry)).or(false)
 
-    itemOpt(_.initCell(this),psedoClasses.clear)
+    itemOpt(_.initCell(this), psedoClasses.clear)
     tooltip = itemOpt.letMap(_.ui._onTooltipOpt).map(_(valueOpt)) or \/
     style = \/
     text = \/

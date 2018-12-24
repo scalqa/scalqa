@@ -10,7 +10,7 @@ trait _Series[X, Y] extends _Item[X, Y] { self: XY[X, Y] =>
 
     def name: String = real.getName; def name_=(v: String) = real.setName(v)
 
-    def items: Idx.O[ITEM] = _items; def items_=(l: Idx.O[ITEM]) { _items = l; real.setData(new JFxList) }
+    def items: Idx.O[ITEM] = _items; def items_=(l: Idx.O[ITEM]): Unit = { _items = l; real.setData(new JFxList) }
 
     // ************************************
     private class JFxList extends Custom.ObservableList.O[chart.J_ITEM](items.asMappedView(_.real.asInstanceOf[chart.J_ITEM]).asSynchronizedView(self)) {

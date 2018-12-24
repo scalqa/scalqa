@@ -7,7 +7,7 @@ class _Class[A](override val real: Idx.OM[A]) extends O[A](real) {
   override def remove(i: Int) = { val v = real(i); real removeAt i; v }
 
   override def addAll(v: A*): Boolean = { real.multiChange(_ +~= v); v.nonEmpty }
-  override def remove(from: Int, end: Int) { real.removeAt(from <>> end) }
+  override def remove(from: Int, end: Int): Unit = { real.removeAt(from <>> end) }
   override def removeAll(c: A*) = { var r = false; real.multiChange(l => r = l.removeFor(c.all.contains) > 0); r }
   override def retainAll(c: A*) = { var r = false; real.multiChange(l => r = l.removeFor(!c.all.contains(_)) > 0); r }
   override def setAll(v: java.util.Collection[_ <: A]) = { real.replaceAll(v); !real.isEmpty }

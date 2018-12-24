@@ -4,7 +4,7 @@ trait _edit_setup[ENTRY, VIEW, VAL] { self: Column[ENTRY, VIEW, VAL] =>
   private[Table] var _onEditEnabled: ENTRY ⇒ Boolean = ANY
   private[Table] var _onEditCommit: (ENTRY, VAL) => Any = \/
 
-  def setupEdit(e: => Editor, commit: (ENTRY, VAL) => Any, enabled: ENTRY => Boolean = ANY) { setupCell(e); _onEditEnabled = enabled; _onEditCommit = commit }
+  def setupEdit(e: => Editor, commit: (ENTRY, VAL) => Any, enabled: ENTRY => Boolean = ANY): Unit = { setupCell(e); _onEditEnabled = enabled; _onEditCommit = commit }
 
   // *****************************************************************************************************************************
   trait Editor extends Table.Cell[ENTRY, VIEW, VAL]

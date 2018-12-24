@@ -15,7 +15,7 @@ private[Future] object await {
       f.resultOpt.value
 
     } catch {
-      case t: concurrent.TimeoutException => Out.make[A](Deficiency.Time("Not enough time: " + d))
+      case _: concurrent.TimeoutException => Out.make[A](Deficiency.Time("Not enough time: " + d))
       case t: Throwable                   => Out.make[A](Deficiency.Error(t))
     }
   }

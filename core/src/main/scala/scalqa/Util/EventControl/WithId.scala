@@ -7,11 +7,11 @@ trait WithId {
   def isCancel = false
 
   override def toString = "EventControl.Id" + (this match {
-    case f: (() => Any) => "0"
-    case f: ((_) => Any) => "1"
-    case f: ((_, _) => Any) => "2"
-    case f: ((_, _, _) => Any) => "3"
-    case f: ((_, _, _, _) => Any) => "4"
+    case _: (() => Any) => "0"
+    case _: ((_) => Any) => "1"
+    case _: ((_, _) => Any) => "2"
+    case _: ((_, _, _) => Any) => "3"
+    case _: ((_, _, _, _) => Any) => "4"
     case _ => "?"
   }) + '(' + id + (if (isCancel) ", cancel" else "") + ')'
 }

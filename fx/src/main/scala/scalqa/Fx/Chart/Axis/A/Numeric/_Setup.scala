@@ -4,7 +4,7 @@ trait _Setup[A] {
 
   protected[Numeric] object Setup {
 
-    def unit = _unit; def unit_=(d: Double) { _unit = d }; var _unit = 0D
+    def unit = _unit; def unit_=(d: Double): Unit = _unit = d; var _unit = 0D
 
     var forceZeroInRange = false
 

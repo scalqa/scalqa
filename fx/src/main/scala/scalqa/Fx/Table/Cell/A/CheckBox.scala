@@ -4,7 +4,7 @@ class CheckBox[ENTRY, VIEW, VAL](c: Column[ENTRY, VIEW, VAL]) extends Cell[ENTRY
 
   protected override def _createGui: REAL = new REAL {
 
-    protected override def updateItem(slot: ITEM, empty: Boolean) { super.updateItem(slot, empty); refresh; text = null }
+    protected override def updateItem(slot: ITEM, empty: Boolean): Unit = { super.updateItem(slot, empty); refresh; text = null }
 
     selectedStateCallbackProperty.set(v => {
       val pr: Pro.O[Opt[VAL]] = c.createOptPro(table.entries(v))

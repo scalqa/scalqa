@@ -28,8 +28,8 @@ private[Numeric] class ValueAxis[A](ax: Numeric[A]) extends javafx.scene.chart.V
     ax.Setup.unit = r.unit
     if (animate) {
       animator.stop(animationId);
-      val scalePro = new WV[Double] { def getValue = getScale; def setValue(v: Double) { setScale(v) } }
-      val boundPro = new WV[Double] { def getValue = currentLowerBound.get; def setValue(v: Double) { currentLowerBound.set(v) } }
+      val scalePro = new WV[Double] { def getValue = getScale; def setValue(v: Double): Unit = setScale(v) }
+      val boundPro = new WV[Double] { def getValue = currentLowerBound.get; def setValue(v: Double): Unit = currentLowerBound.set(v) }
       animationId = animator.animate(
         new KeyFrame(javafx.util.Duration.ZERO, new KeyValue(boundPro, oldLowerBound), new KeyValue(scalePro, getScale)),
         new KeyFrame(javafx.util.Duration.millis(700), new KeyValue(boundPro, getLowerBound), new KeyValue(scalePro, r.scale)))

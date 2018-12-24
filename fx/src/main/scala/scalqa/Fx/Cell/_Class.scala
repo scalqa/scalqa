@@ -10,10 +10,8 @@ abstract class _Class protected extends Label.Like {
 
   def onObservableChange(f: () => Any): Unit = updateJob += f
 
-  protected def refresh {
-
+  protected def refresh: Unit = {
     stylePro() = \/;
-
     updateJob.all(_())
   }
 

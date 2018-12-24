@@ -26,7 +26,7 @@ private[Stream] object reverse {
 
     s match {
       case v: Indexed[_] => new Idx(v.asInstanceOf[Indexed[A]])
-      case v             => new General
+      case _             => new General
     }
   }
 }

@@ -5,7 +5,7 @@ class Number(columns: Opt[Int] = \/, value: Opt[String] = \/) extends Field(colu
 
   var negativeAllowed = true;
 
-  onObservableChange(c => try { if (c.textAfter.toDouble < 0 && !negativeAllowed) c.text = \/ } catch { case e: Exception => c.text = \/ })
+  onObservableChange(c => try { if (c.textAfter.toDouble < 0 && !negativeAllowed) c.text = \/ } catch { case _: Exception => c.text = \/ })
 
   def intOut: Out[Int] = text.trim.toIntOut
 

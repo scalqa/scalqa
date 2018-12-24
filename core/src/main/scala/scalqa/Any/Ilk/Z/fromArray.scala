@@ -3,14 +3,14 @@ package scalqa; package Any; package Ilk; package Z
 private[Ilk] object fromArray {
 
   def apply(a: Array[_]): Ilk = a match {
-    case a: Array[Int]     => Ints
-    case a: Array[Double]  => Doubles
-    case a: Array[Long]    => Longs
-    case a: Array[Float]   => Floats
-    case a: Array[Byte]    => Bytes
-    case a: Array[Char]    => Chars
-    case a: Array[Boolean] => Booleans
-    case a: Array[Short]   => Shorts
+    case _: Array[Int]     => Ints
+    case _: Array[Double]  => Doubles
+    case _: Array[Long]    => Longs
+    case _: Array[Float]   => Floats
+    case _: Array[Byte]    => Bytes
+    case _: Array[Char]    => Chars
+    case _: Array[Boolean] => Booleans
+    case _: Array[Short]   => Shorts
     case _                 => Refs
   }
 }

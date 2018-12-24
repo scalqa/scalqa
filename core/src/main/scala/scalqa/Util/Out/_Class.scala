@@ -15,8 +15,8 @@ class _Class[+A] private[scalqa] (private val real: Any) extends AnyVal with Any
   def map[B](f: A => B): Out[B] = if (_is) new Out(f(real.asInstanceOf[A])) else asInstanceOf[Out[B]]
   def letMap[B](f: A => Out[B]): Out[B] = if (_is) f(_val) else asInstanceOf[Out[B]]
 
-  def apply(f: A => Any, df: Deficiency => Any = \/): Out[A] = { real match { case v: Deficiency => df(v); case v => f(_val) }; this }
-  def convert[B](f: A => B, df: Deficiency => B): B = real match { case v: Deficiency => df(v); case v => f(_val) }
+  def apply(f: A => Any, df: Deficiency => Any = \/): Out[A] = { real match { case v: Deficiency => df(v); case _ => f(_val) }; this }
+  def convert[B](f: A => B, df: Deficiency => B): B = real match { case v: Deficiency => df(v); case _ => f(_val) }
 
   override def toString = "Out(" + (if (_is) real.toString else "deficiency=" + deficiency.message) + ")"
 }

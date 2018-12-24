@@ -4,7 +4,7 @@ abstract class ComboBox[ENTRY, VIEW, VAL](c: Column[ENTRY, VIEW, VAL]) extends C
 
   protected override def _createGui: REAL = new REAL {
 
-    protected override def updateItem(slot: ITEM, empty: Boolean) { super.updateItem(slot, empty); refresh }
+    protected override def updateItem(slot: ITEM, empty: Boolean): Unit = { super.updateItem(slot, empty); refresh }
 
     converterProperty.set(Custom.StringConverter(BiMap.oneWay[ITEM, String](_.textOpt or \/)))
 

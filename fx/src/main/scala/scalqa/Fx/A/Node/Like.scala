@@ -7,7 +7,7 @@ abstract class Like protected[Fx] extends Delegate.Gui {
 object Like {
 
   def make(real: javafx.scene.Node): Like = real.onZoomFinishedProperty.get match {
-    case v: Delegate.Gui.Z.EventHandlerRef => Module.make(real)
+    case _: Delegate.Gui.Z.EventHandlerRef => Module.make(real)
     case _ => Node.Map(real)
   }
 

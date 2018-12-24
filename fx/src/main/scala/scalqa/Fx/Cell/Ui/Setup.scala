@@ -6,9 +6,9 @@ class Setup[CELL <: Fx.Cell] extends Idx[Ui[CELL]] with Any.Able.Seal {
   private lazy val mouseClickedIdx: Refs[Ui[CELL]] = refs.all.let(_.onCellMouseClickedJobs.isVoid !).to[Refs]
   private lazy val contextMenuIdx: Refs[Ui[CELL]] = refs.all.let(_.onCellContextMenuJobs.isVoid !).to[Refs]
 
-  def add(ui: Ui[CELL]) { _failIfSealed; refs +@= (0, ui) }
+  def add(ui: Ui[CELL]): Unit = { _failIfSealed; refs +@= (0, ui) }
 
-  def events(c: CELL) {
+  def events(c: CELL): Unit = {
     seal
     if (updateIdx.size > 0) c.onObservableChange(() => updateIdx.all.findOpt(_._cellFilter(c)).apply(_.onCellUpdateJobs.all(_(c))))
     if (mouseClickedIdx.size > 0) c.onMouseClicked(e => mouseClickedIdx.all.findOpt(_._cellFilter(c)).apply(_.onCellMouseClickedJobs.all(_(e, c))))

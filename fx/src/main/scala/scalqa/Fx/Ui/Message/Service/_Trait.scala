@@ -2,17 +2,17 @@ package scalqa; package Fx; package Ui; package Message; package Service
 
 trait _Trait {
 
-  def publish(m: Message)
+  def publish(m: Message): Unit
 
-  def publish(t: Type, text: Any*) { publish(Message.make(t, text: _*)) }
+  def publish(t: Type, text: Any*): Unit = publish(Message.make(t, text: _*))
 
-  def publishInfo(text: Any*) { publish(Message.make(Type.Info, text: _*)) }
+  def publishInfo(text: Any*): Unit = publish(Message.make(Type.Info, text: _*))
 
-  def publishWarning(text: Any*) { publish(Message.make(Type.Warning, text: _*)) }
+  def publishWarning(text: Any*): Unit = publish(Message.make(Type.Warning, text: _*))
 
-  def publishError(text: Any*) { publish(Message.make(Type.Error, text: _*)) }
+  def publishError(text: Any*): Unit = publish(Message.make(Type.Error, text: _*))
 
-  def publishException(t: Throwable) {
+  def publishException(t: Throwable): Unit = {
     t.printStackTrace
     publishError(t.getMessage.I.Opt or t.getClass.getName)
   }

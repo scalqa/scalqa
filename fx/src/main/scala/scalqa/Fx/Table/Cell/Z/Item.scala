@@ -9,7 +9,7 @@ private[Table] class Item[ENTRY, VIEW, VAL](val entry: ENTRY, val ui: Cell.Ui[EN
 
   private val pro: Pro.O[Opt[VAL]] = ui.createOptPro(entry)
 
-  def valueOpt: Opt[VAL] = _valueOpt orOpt pro(); def valueOpt_=(v: Opt[VAL]) { _valueOpt = v }; private var _valueOpt: Opt[VAL] = \/
+  def valueOpt: Opt[VAL] = _valueOpt orOpt pro(); def valueOpt_=(v: Opt[VAL]): Unit = _valueOpt = v; private var _valueOpt: Opt[VAL] = \/
 
   def textOpt: Opt[String] = valueOpt.map(ui._onFormat) orOpt ui._onFormatVoid(entry).Opt
 
@@ -22,7 +22,7 @@ private[Table] class Item[ENTRY, VIEW, VAL](val entry: ENTRY, val ui: Cell.Ui[EN
   // --------------------------------------------------------------------------------------------------------------------------------------------
   def initCell(cell: Table.Cell[ENTRY, VIEW, VAL]) = pro.onObservableChange(EventControl.id0(this, () => { ui.refresh(cell); fireInvalidate }))
 
-  override def removeListener(l: javafx.beans.InvalidationListener) { super.removeListener(l); if (listenerCount == 0) pro.onObservableChange(EventControl.cancelId0(this)) }
+  override def removeListener(l: javafx.beans.InvalidationListener): Unit = { super.removeListener(l); if (listenerCount == 0) pro.onObservableChange(EventControl.cancelId0(this)) }
 
 }
 /*___________________________________________________________________________

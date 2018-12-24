@@ -4,7 +4,7 @@ package object Ordering {
 
   def make[A](implicit o: scala.Ordering[A]): Ordering[A] = o match {
     case v: Ordering[A] => v
-    case v              => new Z.Wrap(o)
+    case _              => new Z.Wrap(o)
   }
 
   val Void: Ordering[Any] = Z.A.Void
