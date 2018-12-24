@@ -39,6 +39,8 @@ ___________________________________________________________________________*/
 /**
  * @class Ints -> `Immutable Int Array Wrap`
  *
+ * There is [[Ints]] alias at Scalqa root, so this class can be universally used without prefix
+ *
  * @object Ints ->
  *
  *   [[Ints]] is often created from a [[Stream]]:

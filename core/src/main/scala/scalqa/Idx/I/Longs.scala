@@ -35,6 +35,8 @@ ___________________________________________________________________________*/
 /**
  * @class Longs -> `Immutable Long Array Wrap`
  *
+ * There is [[Longs]] alias at Scalqa root, so this class can be universally used without prefix
+ *
  * @object Longs ->
  *
  *   [[Longs]] is often created from a [[Stream]]:

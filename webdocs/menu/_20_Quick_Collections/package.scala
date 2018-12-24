@@ -1,5 +1,5 @@
 /**
- *  Scalqa introduces a minimalistic collections framework with following main entities:
+ *  Scalqa introduces a basic collections framework with following main entities:
  *
  *  [[scalqa.Any.Collection Collection]]
  *  {{{

@@ -53,6 +53,8 @@ ___________________________________________________________________________*/
  *
  *     [[Refs]] is an immutable Array wrap of appropriate type
  *
+ * There is [[Refs]] alias at Scalqa root, so this class can be universally used without prefix
+ *
  * @object Refs ->
  *
  *   [[Refs]] can also be created from a [[Stream]]:

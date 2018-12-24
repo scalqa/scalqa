@@ -35,6 +35,8 @@ ___________________________________________________________________________*/
 /**
  * @class Bytes -> `Immutable Byte Array Wrap`
  *
+ * There is [[Bytes]] alias at Scalqa root, so this class can be universally used without prefix
+ *
  * @object Bytes ->
  *
  *   [[Bytes]] is often created from a [[Stream]]:

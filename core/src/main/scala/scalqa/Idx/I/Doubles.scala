@@ -35,6 +35,8 @@ ___________________________________________________________________________*/
 /**
  * @class Doubles -> `Immutable Double Array Wrap`
  *
+ * There is [[Doubles]] alias at Scalqa root, so this class can be universally used without prefix
+ *
  * @object Doubles ->
  *
  *   [[Doubles]] is often created from a [[Stream]]:

@@ -4,7 +4,7 @@ package Features.GUI_API
  *
  * There are two tables:
  *
- *   - First lists centuries from 1 to 30th
+ *   - First lists centuries from 1 to 21th
  *   - Second lists all Fri the 13th days, for the selected centuries
  *
  * This is a runnable Java class
@@ -18,8 +18,8 @@ package Features.GUI_API
  *     val centuries = new Table[Int] {                                       // Century Table Definition
  *       new Column[String]("Centuries", 100, _.toString + " Century")
  *
- *       items +~= 1 <> 30                                                    // Setting centuries Idx.Range
- *                                                                            //    from 1st to 30th
+ *       items +~= 1 <> 21                                                    // Setting centuries Range[Int]
+ *                                                                            //    from 1st to 21st
  *       sortMode = \/                                                        // Disallow sorting
  *
  *       selection.mode = Selection.Mode.Multiple                             // Allow multi selection

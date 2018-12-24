@@ -35,6 +35,8 @@ ___________________________________________________________________________*/
 /**
  * @class Chars -> `Immutable Char Array Wrap`
  *
+ * There is [[Chars]] alias at Scalqa root, so this class can be universally used without prefix
+ *
  * @object Chars ->
  *
  *   [[Chars]] is often created from a [[Stream]]:

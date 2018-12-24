@@ -35,6 +35,8 @@ ___________________________________________________________________________*/
 /**
  * @class Shorts -> `Immutable Short Array Wrap`
  *
+ * There is [[Shorts]] alias at Scalqa root, so this class can be universally used without prefix
+ *
  * @object Shorts ->
  *
  *   [[Shorts]] is often created from a [[Stream]]:

@@ -35,6 +35,8 @@ ___________________________________________________________________________*/
 /**
  * @class Floats -> `Immutable Float Array Wrap`
  *
+ * There is [[Floats]] alias at Scalqa root, so this class can be universally used without prefix
+ *
  * @object Floats ->
  *
  *   [[Floats]] is often created from a [[Stream]]:

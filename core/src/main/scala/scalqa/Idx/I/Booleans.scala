@@ -35,6 +35,8 @@ ___________________________________________________________________________*/
 /**
  * @class Booleans -> `Immutable Boolean Array Wrap`
  *
+ * There is [[Booleans]] alias at Scalqa root, so this class can be universally used without prefix
+ *
  * @object Booleans ->
  *
  *   [[Booleans]] is often created from a [[Stream]]:
