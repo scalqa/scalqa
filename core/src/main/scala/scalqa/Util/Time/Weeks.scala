@@ -3,13 +3,13 @@ package scalqa; package Util; package Time
 class Weeks private[scalqa] (val real: Long) extends AnyVal with Like.Unit[Weeks] with Time.Like.Core.A.Millis {
   protected def setup = Weeks
 
-  @inline final def totalMillis = Time.Z.MillisInOneWeek * real Millis
+  def totalMillis = Time.Z.MillisInOneWeek * real Millis
 
 }
 
 object Weeks extends Like.Unit.Setup[Weeks]("week", 2) {
 
-  @inline final def make(v: Long) = new Weeks(v)
+  def make(v: Long) = new Weeks(v)
 
 }
 /*___________________________________________________________________________

@@ -8,12 +8,12 @@ trait _Trait[TYPE <: _Trait[TYPE]] extends Any with Any.Datum[TYPE, Float] with 
 
   protected def setup: Setup[TYPE]
 
-  @inline protected def make(v: Float): TYPE = setup.Map(v)
+  def make(v: Float): TYPE = setup.Map(v)
 }
 
 private object _Trait {
 
-  @inline final def real(v: _Trait[_]) = v.real
+  def real(v: _Trait[_]) = v.real
 
 }
 /*___________________________________________________________________________

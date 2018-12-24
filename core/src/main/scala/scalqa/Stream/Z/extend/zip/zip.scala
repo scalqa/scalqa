@@ -2,13 +2,13 @@ package scalqa; package Stream; package Z; package extend; package zip
 
 private[Stream] final class zip[A, B](one: Stream[A], two: Stream[B]) extends Stream.A.Base[(A, B)] {
 
-  @inline final def prime = one.prime && two.prime
+  def prime = one.prime && two.prime
 
-  @inline final def pump = (one.pump, two.pump)
+  def pump = (one.pump, two.pump)
 
-  @inline final override def ilkOpt = Ilk.Refs
+  override def ilkOpt = Ilk.Refs
 
-  @inline final override def sizeOpt = one.sizeOpt.letMix(two.sizeOpt)(_ min _)
+  override def sizeOpt = one.sizeOpt.letMix(two.sizeOpt)(_ min _)
 
   override def toInfoTree = new Pro.Info.Tree(toInfo, one.toInfoTree, two.toInfoTree)
 

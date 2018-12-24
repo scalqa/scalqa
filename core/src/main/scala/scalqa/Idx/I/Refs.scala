@@ -4,10 +4,10 @@ import Custom.Array.{ Z => AZ }
 
 class Refs[A] private[I] (protected val base: Array[A]) extends AnyVal with Idx.I[A] {
   protected type TYPE = Refs[A]
-  @inline protected def make = new Refs[A](_)
+  def make = new Refs[A](_)
 
-  @inline final def apply(i: Int) = base(i)
-  @inline final def size: Int = base.length
+  def apply(i: Int) = base(i)
+  def size: Int = base.length
 
   override def all: ~[A] =
     if (Array.emptyObjectArray.getClass.isInstance(base)) Custom.Array.Z.stream[A](base.asInstanceOf[Array[A]])

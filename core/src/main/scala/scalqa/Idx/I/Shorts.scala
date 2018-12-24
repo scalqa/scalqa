@@ -4,24 +4,24 @@ import Custom.Array.{ Z => AZ }
 
 class Shorts private[I] (protected val base: Array[Short]) extends AnyVal with Idx.I[Short] {
   protected type TYPE = Shorts
-  @inline protected def make = new Shorts(_)
+  def make = new Shorts(_)
 
-  @inline final def apply(i: Int) = base(i)
-  @inline final def size: Int = base.length
-  @inline final override def all: ~[Short] = Custom.Array.Z.stream(base)
+  def apply(i: Int) = base(i)
+  def size: Int = base.length
+  override def all: ~[Short] = Custom.Array.Z.stream(base)
 
-  @inline final override def copy(r: Idx.Range) = new Shorts(AZ.copy.range(base, r))
-  @inline final override def copyDrop(r: Idx.Range) = new Shorts(AZ.copy.dropRange(base, r))
+  override def copy(r: Idx.Range) = new Shorts(AZ.copy.range(base, r))
+  override def copyDrop(r: Idx.Range) = new Shorts(AZ.copy.dropRange(base, r))
 
-  @inline final override def +(v: Short) = new Shorts(AZ.plus(base, v))
-  @inline final override def +~(v: ~[Short]) = new Shorts(AZ.plus.stream(base, v))
-  @inline final override def +@(i: Int, v: Short) = new Shorts(AZ.plus.at(base, i, v))
-  @inline final override def +~@(i: Int, v: ~[Short]) = new Shorts(AZ.plus.pipeAt(base, i, v))
+  override def +(v: Short) = new Shorts(AZ.plus(base, v))
+  override def +~(v: ~[Short]) = new Shorts(AZ.plus.stream(base, v))
+  override def +@(i: Int, v: Short) = new Shorts(AZ.plus.at(base, i, v))
+  override def +~@(i: Int, v: ~[Short]) = new Shorts(AZ.plus.pipeAt(base, i, v))
 
-  @inline final override def -(v: Short) = new Shorts(AZ.minus(base, v))
-  @inline final override def -~(v: ~[Short]) = new Shorts(AZ.minus.stream(base, v))
+  override def -(v: Short) = new Shorts(AZ.minus(base, v))
+  override def -~(v: ~[Short]) = new Shorts(AZ.minus.stream(base, v))
 
-  @inline final override def toArray(implicit t: ClassTag[Short]) = base.copyFull
+  override def toArray(implicit t: ClassTag[Short]) = base.copyFull
 }
 
 object Shorts extends Z.Primitive.Setup[Short, Shorts](new Shorts(_), Array.emptyShortArray)

@@ -20,7 +20,7 @@ object Percent extends Any.Datum.Double.Number.Setup[Percent] {
 
   private[scalqa] def make(bd: BD, base: BD): Percent = new Percent(bd.divide(base).multiply(Big100).doubleValue)
 
-  @inline final def make(v: Double): Percent = new Percent(v)
+  def make(v: Double): Percent = new Percent(v)
 
   val Hundred = new Percent(100)
 

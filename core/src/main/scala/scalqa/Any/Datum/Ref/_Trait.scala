@@ -4,13 +4,13 @@ trait _Trait[TYPE <: _Trait[TYPE, VALUE], VALUE] extends Any with Any.Datum[TYPE
 
   protected def setup: Setup[TYPE, VALUE]
 
-  @inline final protected def make(v: VALUE): TYPE = setup.Map(v)
+  protected def make(v: VALUE): TYPE = setup.Map(v)
 
 }
 
 private object _Trait {
 
-  @inline final def real[B](v: _Trait[_, B]) = v.real
+  def real[B](v: _Trait[_, B]) = v.real
 
 }
 

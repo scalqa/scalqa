@@ -27,10 +27,10 @@ private[Stream] object letAll {
         }
         c == 0
       }
-      @inline final def pump = { c = 1; a }
-      @inline final def foreach(c: Consumer[A]) = while (prime) c.accept(pump)
+      def pump = { c = 1; a }
+      def foreach(c: Consumer[A]) = while (prime) c.accept(pump)
       override def sortedOpt = src.sortedOpt
-      @inline final def real = src
+      def real = src
     }
     // *******************************************************************************
 

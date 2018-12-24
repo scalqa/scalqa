@@ -3,13 +3,13 @@ package scalqa; package Stream; package Z; package extend; package zip
 private[Stream] class zipPrior[A](val real: Stream[A]) extends Stream[(Opt[A], A)] with A.Extended.Size[(Opt[A], A)] {
   var o: Opt[A] = \/
 
-  @inline final def prime = real.prime
+  def prime = real.prime
 
   def pump = { val t = (o, real.pump); o = t._2; t }
 
   def foreach(c: Consumer[(Opt[A], A)]) = real.foreach(v => { c.accept((o, v)); o = v })
 
-  @inline final override def ilkOpt = Ilk.Refs
+  override def ilkOpt = Ilk.Refs
 }
 /*___________________________________________________________________________
      __________ ____   __   ______  ____

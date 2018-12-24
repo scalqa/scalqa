@@ -2,14 +2,14 @@ package scalqa; package Stream; package Z; package extend; package group
 
 private[Stream] object groupBySize {
 
-  @inline final def apply[@specialized(DATA) A](s: Stream[A], size: Int): Stream[~[A]] = new Stream.A.Base[~[A]] with A.Extended[~[A]] {
+  def apply[@specialized(DATA) A](s: Stream[A], size: Int): Stream[~[A]] = new Stream.A.Base[~[A]] with A.Extended[~[A]] {
     protected val real = s
 
-    @inline final def prime = real.prime
+    def prime = real.prime
 
-    @inline final def pump = real.take(size)
+    def pump = real.take(size)
 
-    @inline final override def ilkOpt = Ilk.Refs
+    override def ilkOpt = Ilk.Refs
 
     if (size <= 0) App.Fail.argument("size" + '=' + size)
   }

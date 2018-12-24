@@ -4,21 +4,21 @@ trait Nanos extends Any with Core {
 
   def totalNanos: Time.Nanos
 
-  @inline final def totalDays = totalNanos.real / Nanos.InOneDay Days
+  def totalDays = totalNanos.real / Nanos.InOneDay Days
 
-  @inline final def totalHours = totalNanos.real / Nanos.InOneHour Hours
+  def totalHours = totalNanos.real / Nanos.InOneHour Hours
 
-  @inline final def totalMinutes = totalNanos.real / Nanos.InOneMinute Minutes
+  def totalMinutes = totalNanos.real / Nanos.InOneMinute Minutes
 
-  @inline final def totalSeconds = totalNanos.real / Nanos.InOneSecond Seconds
+  def totalSeconds = totalNanos.real / Nanos.InOneSecond Seconds
 
-  @inline final def totalMillis = totalNanos.real / Util.OneMillion Millis
+  def totalMillis = totalNanos.real / Util.OneMillion Millis
 
-  @inline final def totalMicros = totalNanos.real / Util.OneThousand Micros
+  def totalMicros = totalNanos.real / Util.OneThousand Micros
 
-  @inline final override def subMicros = totalMicros % 1000
+  override def subMicros = totalMicros % 1000
 
-  @inline final override def subNanos = totalNanos % 1000
+  override def subNanos = totalNanos % 1000
 
 }
 

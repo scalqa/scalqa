@@ -5,7 +5,7 @@ class Floats protected (private[Buffer] var _array: Array[Float]) extends Buffer
 
   def apply(i: Int) = _array(i)
 
-  def update(i: Int, v: Float) = _array(i) = v: @inline
+  def update(i: Int, v: Float) = _array(i) = v
 
   private[Buffer] def _arrayResize(sz: Int) = {
     val a = new Array[Float](sz)

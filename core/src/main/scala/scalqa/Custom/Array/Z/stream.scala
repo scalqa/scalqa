@@ -2,13 +2,13 @@ package scalqa; package Custom; package Array; package Z
 
 private[scalqa] object stream {
 
-  @inline final def apply[@specialized(DATA) A](arr: Array[A], len: Int = -1): Stream[A] with Any.Able.Stream[A] = new Stream[A] with Stream.A.Specialized.Indexed[A] with Any.Able.Stream[A] {
+  def apply[@specialized(DATA) A](arr: Array[A], len: Int = -1): Stream[A] with Any.Able.Stream[A] = new Stream[A] with Stream.A.Specialized.Indexed[A] with Any.Able.Stream[A] {
 
-    @inline val _size = if (len >= 0) len else arr.length
+    val _size = if (len >= 0) len else arr.length
 
-    @inline final def _apply(i: Int): A = arr(i)
+    def _apply(i: Int): A = arr(i)
 
-    @inline final def pump = _pumpIndexed
+    def pump = _pumpIndexed
 
     override def foreach(c: Stream.Consumer[A]) = { var i = _position; while (i < _size) { c.accept(arr(i)); i += 1 }; _position = i }
 
@@ -16,7 +16,7 @@ private[scalqa] object stream {
 
     override def copyTo(b: Idx.Array.Buffer.Loader[A]): Unit = b.addFromArray(arr, _position, _size - _position)
 
-    @inline final def all = this
+    def all = this
   }
 }
 /*___________________________________________________________________________

@@ -1,8 +1,8 @@
 package scalqa; package Util; package Opt
 
 final class _Class[+A] private[Opt] (protected[scalqa] val real: Any) extends AnyVal with Any.Able.Void {
-  @inline private def _is = !real.isInstanceOf[Z.VoidValue]
-  @inline private def _val: A = real.asInstanceOf[A]
+  private def _is = !real.isInstanceOf[Z.VoidValue]
+  private def _val: A = real.asInstanceOf[A]
 
   override def isVoid = !_is
   def isValue: Boolean = _is
@@ -32,17 +32,17 @@ final class _Class[+A] private[Opt] (protected[scalqa] val real: Any) extends An
 
 object _Class {
 
-  @inline implicit def zzLibrary[A](o: Opt[A]) = new _library[A](o.real)
+  implicit def zzLibrary[A](o: Opt[A]) = new _library[A](o.real)
 
-  @inline implicit def zzBoolean[A](o: Opt[A]): Boolean = o.isValue
+  implicit def zzBoolean[A](o: Opt[A]): Boolean = o.isValue
 
-  @inline implicit def zzFilterMonadic[A](o: Opt[A]) = new Z.FilterMonadic[A](o.real)
+  implicit def zzFilterMonadic[A](o: Opt[A]) = new Z.FilterMonadic[A](o.real)
 
-  @inline implicit def zzStream[A](o: Opt[A]): ~[A] = if (o._is) o._val.I.~ else \/
+  implicit def zzStream[A](o: Opt[A]): ~[A] = if (o._is) o._val.I.~ else \/
 
-  @inline implicit def zzMakeValue[A](a: A): Opt[A] = if (a == null) Void else new Opt[A](a)
+  implicit def zzMakeValue[A](a: A): Opt[A] = if (a == null) Void else new Opt[A](a)
 
-  @inline implicit def zzMake[A](v: \/): Opt[A] = Void
+  implicit def zzMake[A](v: \/): Opt[A] = Void
 
   implicit def zzMake[A](v: scala.Option[A]): Opt[A] = Opt.fromOption(v)
 

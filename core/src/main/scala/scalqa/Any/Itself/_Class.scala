@@ -6,9 +6,9 @@ class _Class[A] private[scalqa] (protected val real: A) extends AnyVal  {
 
   def id: String = Class.label + '@' + hashIndex
 
-  @inline final def hashIndex: Int = Z.hashIndex(real)
+  def hashIndex: Int = Z.hashIndex(real)
 
-  @inline final override def toString: String = Z.toString(real)
+  override def toString: String = Z.toString(real)
 
   // ------------------------------------------------------------------------------------------------------------
   def let(f: A=>Boolean): Opt[A] = if (f(real)) real else Void
@@ -25,20 +25,20 @@ class _Class[A] private[scalqa] (protected val real: A) extends AnyVal  {
 
   def ~ : ~[A] = Stream.Z.A.One(real)
 
-  def repeat(times: Int): ~[A] = new Stream.A.Indexed[A] { val _size = times max 0; @inline final def _apply(i: Int) = real }
+  def repeat(times: Int): ~[A] = new Stream.A.Indexed[A] { val _size = times max 0; def _apply(i: Int) = real }
 
   def unfold(f: Stream.Mapping[~[A], A]): Stream[A] = ~.unfold(f)
 
   def ilk: Ilk = Ilk.fromClass(real.getClass)
 
-  @inline final def Class = new Class[A](real.getClass.asInstanceOf[java.lang.Class[A]])
+  def Class = new Class[A](real.getClass.asInstanceOf[java.lang.Class[A]])
 
   // ------------------------------------------------------------------------------------------------------------
-  @inline final def apply(f: A => Any): A = { f(real); real }
+  def apply(f: A => Any): A = { f(real); real }
 
   def as[B](f: A => B)(implicit t: ClassTag[B]): B = if (t.unapply(real).isEmpty) f(real) else real.asInstanceOf[B]
 
-  @inline final def asInstanceOfTarget[T]: T = real.asInstanceOf[T]
+  def asInstanceOfTarget[T]: T = real.asInstanceOf[T]
 
 }
 /*___________________________________________________________________________

@@ -2,7 +2,7 @@ package scalqa; package Stream; package Z; package extend; package group
 
 private[Stream] object sliding {
 
-  @inline final def apply[@specialized(DATA) A](s: Stream[A], frameSize: Int, step: Int): Stream[~[A]] = {
+  def apply[@specialized(DATA) A](s: Stream[A], frameSize: Int, step: Int): Stream[~[A]] = {
 
     class Frame extends Stream[A] with Stream.A.Specialized.Indexed[A] {
       val array: Array[A] = s.ilkDefault.mkArray[A](frameSize)
@@ -23,20 +23,20 @@ private[Stream] object sliding {
         ready
       }
       def deliver = { _position = 0; ready = false; this }
-      @inline final def _apply(i: Int): A = array((from + i) % frameSize)
-      @inline final def _size = sz
-      @inline final def foreach(f: Consumer[A]) = _consumeIndexed(f)
-      @inline final def pump = _pumpIndexed
+      def _apply(i: Int): A = array((from + i) % frameSize)
+      def _size = sz
+      def foreach(f: Consumer[A]) = _consumeIndexed(f)
+      def pump = _pumpIndexed
     }
 
     new Stream[~[A]] with A.Extended[~[A]] {
       protected val frame = new Frame
 
-      @inline final def prime = frame.load
-      @inline final def pump: Stream[A] = frame.deliver
-      @inline final def foreach(c: Consumer[~[A]]) = while (prime) c.accept(pump)
-      @inline final override def ilkOpt = Ilk.Refs
-      @inline final def real = s
+      def prime = frame.load
+      def pump: Stream[A] = frame.deliver
+      def foreach(c: Consumer[~[A]]) = while (prime) c.accept(pump)
+      override def ilkOpt = Ilk.Refs
+      def real = s
     }
   }
 }

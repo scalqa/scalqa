@@ -2,7 +2,7 @@ package scalqa; package Stream; package Z; package extend; package add
 
 private[Stream] object appendAll {
 
-  @inline final def apply[@specialized(DATA) A](p1: Stream[A], p2: Stream[A]): Stream[A] = new Stream[A] with Stream.A.Specialized[A] {
+  def apply[@specialized(DATA) A](p1: Stream[A], p2: Stream[A]): Stream[A] = new Stream[A] with Stream.A.Specialized[A] {
     private var state = 0
 
     def prime = {

@@ -2,18 +2,18 @@ package scalqa; package Custom; package Numeric; package Z
 
 private[scalqa] object Byte extends Numeric[Byte] with math.Integral[Byte] {
 
-  @inline final def negate(x: Byte) = -x toByte
-  @inline final def minus(x: Byte, y: Byte) = x - y toByte
-  @inline final def plus(x: Byte, y: Byte) = x + y toByte
-  @inline final def times(x: Byte, y: Byte) = x * y toByte
-  @inline final def quot(x: Byte, y: Byte) = x / y toByte
-  @inline final def rem(x: Byte, y: Byte) = x % y toByte
+  def negate(x: Byte) = -x toByte
+  def minus(x: Byte, y: Byte) = x - y toByte
+  def plus(x: Byte, y: Byte) = x + y toByte
+  def times(x: Byte, y: Byte) = x * y toByte
+  def quot(x: Byte, y: Byte) = x / y toByte
+  def rem(x: Byte, y: Byte) = x % y toByte
 
-  @inline final def fromInt(x: Int) = x toByte
-  @inline final def toDouble(x: Byte) = x toDouble
-  @inline final def toFloat(x: Byte) = x toFloat
-  @inline final def toInt(x: Byte) = x toInt
-  @inline final def toLong(x: Byte) = x toLong
+  def fromInt(x: Int) = x toByte
+  def toDouble(x: Byte) = x toDouble
+  def toFloat(x: Byte) = x toFloat
+  def toInt(x: Byte) = x toInt
+  def toLong(x: Byte) = x toLong
 
   override val zero = 0 toByte
   override val one = 1 toByte

@@ -4,24 +4,24 @@ import Stream.A.Specialized.Indexed
 
 private[Stream] object reverse {
 
-  @inline final def apply[@specialized(DATA) A](s: Stream[A]): Stream[A] = {
+  def apply[@specialized(DATA) A](s: Stream[A]): Stream[A] = {
 
     abstract class Base extends Stream[A] with A.Extended.All[A] with Indexed[A] {
-      @inline final def real = s
-      @inline final def pump = _pumpIndexed
-      @inline final def foreach(f: Consumer[A]) = _consumeIndexed(f)
+      def real = s
+      def pump = _pumpIndexed
+      def foreach(f: Consumer[A]) = _consumeIndexed(f)
       override def sortedOpt: Opt[Ordering[A]] = real.sortedOpt.map(_.reverse)
     }
 
     class Idx(s: Indexed[A]) extends Base {
-      @inline val _size = Indexed.size(s)
-      @inline final def _apply(i: Int): A = Indexed(s, _size - 1 - i)
+      val _size = Indexed.size(s)
+      def _apply(i: Int): A = Indexed(s, _size - 1 - i)
     }
 
     class General extends Base {
       lazy val bin = s.to[Idx.Array.Buffer]
-      @inline final def _size = bin.size
-      @inline final def _apply(i: Int): A = bin(_size - 1 - i)
+      def _size = bin.size
+      def _apply(i: Int): A = bin(_size - 1 - i)
     }
 
     s match {

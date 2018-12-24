@@ -4,20 +4,20 @@ private[scalqa] object Iterator {
 
   def toStream[@specialized(DATA) A](it: java.util.Iterator[A])(implicit i: Ilk[A]): Stream[A] with Any.Able.Stream[A] = new Stream.A.Base[A] with Any.Able.Stream[A] {
 
-    @inline final def prime = it.hasNext
+    def prime = it.hasNext
 
-    @inline final def pump = it.next
+    def pump = it.next
 
-    @inline final override def ilkOpt = i.ilkOpt
+    override def ilkOpt = i.ilkOpt
 
-    @inline final def all = this
+    def all = this
   }
 
   def make[A](src: Stream[A]): java.util.Iterator[A] = new java.util.Iterator[A] {
 
-    @inline final def hasNext(): Boolean = src.prime
+    def hasNext(): Boolean = src.prime
 
-    @inline final def next = if (src.prime) src.pump else Stream.failEmpty
+    def next = if (src.prime) src.pump else Stream.failEmpty
   }
 }
 

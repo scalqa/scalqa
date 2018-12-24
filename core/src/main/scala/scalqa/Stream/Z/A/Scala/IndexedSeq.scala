@@ -22,7 +22,7 @@ private[scalqa] object IndexedSeq {
 
     override def ilkOpt = i.ilkOpt
 
-    @inline final def all = this
+    def all = this
   }
 }
 /*___________________________________________________________________________

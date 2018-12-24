@@ -17,11 +17,11 @@ trait _Trait[@specialized(DATA) A] extends Idx[A] with Any.Collection.M[A] {
   def removeAt(r: Idx.Range): Unit
   def removeAt(position: Int): Unit = removeAt(position <>!)
 
-  @inline final def +=@(position: Int, element: A): this.type = { addAt(position, element); this }
-  @inline final def +~=@(position: Int, a: ~[A]): this.type = { addAllAt(position, a); this }
+  def +=@(position: Int, element: A): this.type = { addAt(position, element); this }
+  def +~=@(position: Int, a: ~[A]): this.type = { addAllAt(position, a); this }
 
-  @inline final def -=@(position: Int): this.type = { removeAt(position); this }
-  @inline final def -=@(range: Idx.Range): this.type = { removeAt(range); this }
+  def -=@(position: Int): this.type = { removeAt(position); this }
+  def -=@(range: Idx.Range): this.type = { removeAt(range); this }
 }
 
 object _Trait {

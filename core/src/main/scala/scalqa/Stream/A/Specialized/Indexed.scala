@@ -8,9 +8,9 @@ trait Indexed[@specialized(DATA) A] extends Specialized[A] with Preview[A] { sel
 
   protected def _apply(i: Int): A
 
-  @inline final def prime = _position < _size
+  def prime = _position < _size
 
-  @inline final override def sizeOpt: Opt.Int = _size - _position max 0
+  override def sizeOpt: Opt.Int = _size - _position max 0
 
   // Buffer --------------------------------------------------------------------------
   def prime(cnt: Int) = _size - _position
@@ -30,9 +30,9 @@ trait Indexed[@specialized(DATA) A] extends Specialized[A] with Preview[A] { sel
 
 private[scalqa] object Indexed {
 
-  @inline final def size(v: Indexed[_]) = v._size
+  def size(v: Indexed[_]) = v._size
 
-  @inline final def apply[@specialized(DATA) A](v: Indexed[A], i: Int): A = v._apply(i)
+  def apply[@specialized(DATA) A](v: Indexed[A], i: Int): A = v._apply(i)
 
   def pump[@specialized(DATA) A](x: Indexed[A]): A = {
     val v = x._apply(x._position)

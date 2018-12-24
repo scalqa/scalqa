@@ -17,27 +17,27 @@ abstract class Setup[TYPE <: Datum.BigDecimal[TYPE]] protected extends Any.Datum
 
     def apply(v: \/) = make(Zero)
 
-    @inline final def fromInt(x: Int) = make(java.math.BigDecimal.valueOf(x))
+    def fromInt(x: Int) = make(java.math.BigDecimal.valueOf(x))
 
-    @inline final def minus(x: TYPE, y: TYPE) = make(undo(x).subtract(undo(y)))
+    def minus(x: TYPE, y: TYPE) = make(undo(x).subtract(undo(y)))
 
-    @inline final def negate(x: TYPE) = make(undo(x).negate)
+    def negate(x: TYPE) = make(undo(x).negate)
 
-    @inline final def plus(x: TYPE, y: TYPE) = make(undo(x).add(undo(y)))
+    def plus(x: TYPE, y: TYPE) = make(undo(x).add(undo(y)))
 
-    @inline final def times(x: TYPE, y: TYPE) = make(undo(x).multiply(undo(y)))
+    def times(x: TYPE, y: TYPE) = make(undo(x).multiply(undo(y)))
 
-    @inline final def div(x: TYPE, y: TYPE) = make(undo(x).divide(undo(y)))
+    def div(x: TYPE, y: TYPE) = make(undo(x).divide(undo(y)))
 
-    @inline final def rem(x: TYPE, y: TYPE) = make(undo(x).remainder(undo(y)))
+    def rem(x: TYPE, y: TYPE) = make(undo(x).remainder(undo(y)))
 
-    @inline final def toDouble(x: TYPE) = undo(x).toDouble
+    def toDouble(x: TYPE) = undo(x).toDouble
 
-    @inline final def toFloat(x: TYPE) = undo(x).toFloat
+    def toFloat(x: TYPE) = undo(x).toFloat
 
-    @inline final def toInt(x: TYPE) = undo(x).toInt
+    def toInt(x: TYPE) = undo(x).toInt
 
-    @inline final def toLong(x: TYPE) = undo(x).toLong
+    def toLong(x: TYPE) = undo(x).toLong
   }
 }
 /*___________________________________________________________________________

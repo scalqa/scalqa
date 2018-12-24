@@ -3,7 +3,7 @@ package scalqa; package Util; package Void
 trait _Trait extends Any.Able.Void {
 
   /** Always void, returns true */
-  @inline final override def isVoid = true
+  override def isVoid = true
 
 }
 /*___________________________________________________________________________

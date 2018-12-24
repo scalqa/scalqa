@@ -12,27 +12,27 @@ abstract class Setup[TYPE <: Computable[TYPE]] protected extends Ordered.Setup[T
 
     def compare(x: TYPE, y: TYPE) = java.lang.Long.compare(undo(x), undo(y))
 
-    @inline final def fromInt(x: Int) = make(x.toLong)
+    def fromInt(x: Int) = make(x.toLong)
 
-    @inline final def minus(x: TYPE, y: TYPE) = make(undo(x) - undo(y))
+    def minus(x: TYPE, y: TYPE) = make(undo(x) - undo(y))
 
-    @inline final def negate(x: TYPE) = make(-undo(x))
+    def negate(x: TYPE) = make(-undo(x))
 
-    @inline final def plus(x: TYPE, y: TYPE) = make(undo(x) + undo(y))
+    def plus(x: TYPE, y: TYPE) = make(undo(x) + undo(y))
 
-    @inline final def times(x: TYPE, y: TYPE) = make(undo(x) * undo(y))
+    def times(x: TYPE, y: TYPE) = make(undo(x) * undo(y))
 
-    @inline final def quot(x: TYPE, y: TYPE) = make(undo(x) / undo(y))
+    def quot(x: TYPE, y: TYPE) = make(undo(x) / undo(y))
 
-    @inline final def rem(x: TYPE, y: TYPE) = make(undo(x) % undo(y))
+    def rem(x: TYPE, y: TYPE) = make(undo(x) % undo(y))
 
-    @inline final def toDouble(x: TYPE) = undo(x).toDouble
+    def toDouble(x: TYPE) = undo(x).toDouble
 
-    @inline final def toFloat(x: TYPE) = undo(x).toFloat
+    def toFloat(x: TYPE) = undo(x).toFloat
 
-    @inline final def toInt(x: TYPE) = undo(x).toInt
+    def toInt(x: TYPE) = undo(x).toInt
 
-    @inline final def toLong(x: TYPE) = undo(x).toLong
+    def toLong(x: TYPE) = undo(x).toLong
   }
 }
 /*___________________________________________________________________________

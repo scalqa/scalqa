@@ -28,10 +28,10 @@ private[Stream] object dropAll {
         }
         c > 0
       }
-      @inline final def pump = if (done) src.pump else { if (c < 0) done = true else c = 0; a }
-      @inline final def foreach(c: Consumer[A]) = while (prime) c.accept(pump)
+      def pump = if (done) src.pump else { if (c < 0) done = true else c = 0; a }
+      def foreach(c: Consumer[A]) = while (prime) c.accept(pump)
       override def sortedOpt = src.sortedOpt
-      @inline final def real = src
+      def real = src
     }
     // *******************************************************************************
 

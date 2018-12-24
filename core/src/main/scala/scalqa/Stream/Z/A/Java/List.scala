@@ -4,13 +4,13 @@ private[scalqa] object List {
 
   def toStream[A](l: java.util.List[A])(implicit i: Ilk[A]): Stream[A] with Any.Able.Stream[A] = new Stream.A.Indexed[A] with Any.Able.Stream[A] {
 
-    @inline final override def _size = l.size;
+    override def _size = l.size;
 
-    @inline final override def _apply(i: Int) = l.get(i)
+    override def _apply(i: Int) = l.get(i)
 
-    @inline final override def ilkOpt = i.ilkOpt
+    override def ilkOpt = i.ilkOpt
 
-    @inline final def all = this
+    def all = this
   }
 }
 /*___________________________________________________________________________

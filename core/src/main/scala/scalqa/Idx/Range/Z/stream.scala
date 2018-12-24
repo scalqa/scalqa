@@ -4,9 +4,9 @@ private[scalqa] object stream {
 
   def apply(start: Int, sz: Int): Stream[Int] with Any.Able.Stream[Int] = new Base(start, sz) {
 
-    @inline final def _apply(i: Int) = start + i
+    def _apply(i: Int) = start + i
 
-    @inline final override def foreach(c: Stream.Consumer[Int]) = { var i = _position; while (i < _size) { c.accept(start + i); i += 1 }; _position = i }
+    override def foreach(c: Stream.Consumer[Int]) = { var i = _position; while (i < _size) { c.accept(start + i); i += 1 }; _position = i }
 
     override def to[TRGT[_]](implicit c: Stream.Interface.To.Converter[TRGT]): TRGT[Int] = c match {
       case Stream.Interface.To.ArrayBuffer => Array.Buffer.loaded[Int](array(start + _position <>> start + _size)).asInstanceOf[TRGT[Int]]
@@ -21,15 +21,15 @@ private[scalqa] object stream {
 
   def step(start: Int, sz: Int, step: Int): Stream[Int] with Any.Able.Stream[Int] = new Base(start, sz) {
 
-    @inline protected override def _apply(i: Int) = start + i * step
+    protected override def _apply(i: Int) = start + i * step
   }
 
   abstract class Base(val start: Int, val _size: Int) extends Stream[Int] with Stream.A.Specialized.Indexed[Int] with Any.Able.Stream[Int] {
-    @inline final def pump = _pumpIndexed
+    def pump = _pumpIndexed
     def foreach(f: Stream.Consumer[Int]) = _consumeIndexed(f)
-    @inline final override def sortedOpt = Ordering.Int
-    @inline final override def ilkOpt = Ilk.Ints
-    @inline final def all = this
+    override def sortedOpt = Ordering.Int
+    override def ilkOpt = Ilk.Ints
+    def all = this
     override def toInfo = super.toInfo.I(_.addAt(0, ("start", start)))
   }
 }

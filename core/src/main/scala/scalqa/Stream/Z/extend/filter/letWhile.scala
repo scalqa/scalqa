@@ -2,18 +2,18 @@ package scalqa; package Stream; package Z; package extend; package filter
 
 private[Stream] object letWhile {
 
-  @inline final def apply[@specialized(DATA) A](s: Stream[A], f: Filter[A]): Stream[A] = new Stream[A] with A.Extended.Filter[A] {
+  def apply[@specialized(DATA) A](s: Stream[A], f: Filter[A]): Stream[A] = new Stream[A] with A.Extended.Filter[A] {
     protected var open = true
     protected var has = false
     protected var v: A = _
 
     def prime = has || open && { has = real.prime && { v = real.pump; f.allow(v) }; open = has; has }
 
-    @inline final def pump = { has = false; v }
+    def pump = { has = false; v }
 
     def foreach(c: Consumer[A]) = while (prime) c.accept(pump)
 
-    @inline final def real = s
+    def real = s
   }
 }
 /*___________________________________________________________________________

@@ -3,11 +3,11 @@ package scalqa; package Util; package Time
 class DayTime private[scalqa] (val real: Int) extends AnyVal with Time.Like.Core.A.Millis with Any.Datum.Int.Computable[DayTime] {
   protected def setup = DayTime
 
-  @inline final def hours = super.totalHours
+  def hours = super.totalHours
 
-  @inline final def duration = Duration.fromMillis(real)
+  def duration = Duration.fromMillis(real)
 
-  @inline final def totalMillis = real Millis
+  def totalMillis = real Millis
 
   def round(l: Duration, r: Custom.Rounding = \/) = make(r.remainder(real, l.real).toInt)
 

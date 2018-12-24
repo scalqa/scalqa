@@ -12,8 +12,8 @@ package object Range {
   def general[A](start: A, startEx: Boolean, end: A, endEx: Boolean)(implicit o: Ordering[A], i: Ilk[A]): Range[A] =
     i.ilkOpt.map(_.mkRange(start, startEx, end, endEx, o)) or new Z.A.Any[A](start, startEx, end, endEx, o)
 
-  @inline final def startContains[A](r: Range[A], v: A, x: Boolean = false) = Z.Base.startContains(r, v, x)
-  @inline final def endContains[A](r: Range[A], v: A, x: Boolean = false) = Z.Base.endContains(r, v, x)
+  def startContains[A](r: Range[A], v: A, x: Boolean = false) = Z.Base.startContains(r, v, x)
+  def endContains[A](r: Range[A], v: A, x: Boolean = false) = Z.Base.endContains(r, v, x)
 }
 /*___________________________________________________________________________
      __________ ____   __   ______  ____

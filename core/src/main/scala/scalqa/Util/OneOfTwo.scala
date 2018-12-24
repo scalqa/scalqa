@@ -4,9 +4,9 @@ import OneOfTwo._
 
 class OneOfTwo[+A, +B] private (private val real: Any) extends AnyVal with Any.Able.ToString {
 
-  def isOne = !isTwo: @inline
+  def isOne = !isTwo
   def one: A = real.asInstanceOf[A]
-  def oneOpt: Opt[A] = if (isTwo: @inline) Opt.Void else real.asInstanceOf[A]
+  def oneOpt: Opt[A] = if (isTwo) Opt.Void else real.asInstanceOf[A]
   def mapOne[C](f: A => C): OneOfTwo[C, B] = oneOpt.map(v => OneOfTwo.one[C, B](f(v))) or asInstanceOf[OneOfTwo[C, B]]
 
   // ----------------------------------------------------------------------------------------
@@ -26,8 +26,8 @@ class OneOfTwo[+A, +B] private (private val real: Any) extends AnyVal with Any.A
 
 object OneOfTwo {
 
-  @inline final def one[A, B](v: A) = new OneOfTwo[A, B](v)
-  @inline final def two[A, B](v: B) = new OneOfTwo[A, B](new Two(v))
+  def one[A, B](v: A) = new OneOfTwo[A, B](v)
+  def two[A, B](v: B) = new OneOfTwo[A, B](new Two(v))
 
   implicit def zzMakeOne[A, B](v: A) = one[A, B](v)
   implicit def zzMakeTwo[A, B](v: B) = two[A, B](v)

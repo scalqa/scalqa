@@ -5,15 +5,15 @@ private[Stream] trait Base[@specialized(DATA) A] extends Preview[A] { self: Stre
   protected var allIn = false
   protected var _strt, _end = -1
 
-  @inline protected def bufHas = _strt < _end
-  @inline protected def bufClear = _strt = _end
-  @inline protected def bufSize = _end - _strt
+  def bufHas = _strt < _end
+  def bufClear = _strt = _end
+  def bufSize = _end - _strt
   protected def bufPop: A
   protected def real: Stream[A]
 
-  @inline final def prime = bufHas || real.prime
+  def prime = bufHas || real.prime
 
-  @inline final def pump = if (bufHas) bufPop else real.pump
+  def pump = if (bufHas) bufPop else real.pump
 
   override def foreach(c: Consumer[A]) = { while (bufHas) c.accept(bufPop); real.foreach(c) }
 

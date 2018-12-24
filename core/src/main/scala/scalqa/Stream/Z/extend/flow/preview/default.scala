@@ -4,8 +4,8 @@ private[Stream] object default {
 
   def apply[@specialized(DATA) A](s: Stream[A]): Stream[A] with Preview[A] = new Stream[A] with Base[A] with Stream.A.Specialized[A] {
     protected var array: Array[A] = null
-    @inline protected def real = s
-    @inline protected def bufPop = { _strt += 1; array(_strt - 1) }
+    def real = s
+    def bufPop = { _strt += 1; array(_strt - 1) }
 
     private def moveUp = { System.arraycopy(array, _strt, array, 0, bufSize); _end -= bufSize; _strt = 0 }
 

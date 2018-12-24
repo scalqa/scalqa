@@ -10,7 +10,7 @@ trait _Trait[TYPE <: _Trait[TYPE]] extends Any with _compare[TYPE] with _convert
 
 private object _Trait {
 
-  @inline final def real(v: _Trait[_]) = v.real
+  def real(v: _Trait[_]) = v.real
 
 }
 /*___________________________________________________________________________

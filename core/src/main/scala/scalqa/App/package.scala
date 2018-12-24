@@ -27,8 +27,8 @@ package object App {
     if (lines > 0) setStackTrace(getStackTrace.take(lines))
   }.printStackTrace
 
-  @inline private[scalqa] def initSize: Int = Setup.InitBufferSizePro()
-  @inline private[scalqa] def initSize(v: Int): Int = if (v >= 0) v else initSize
+  private[scalqa] def initSize: Int = Setup.InitBufferSizePro()
+  private[scalqa] def initSize(v: Int): Int = if (v >= 0) v else initSize
 
 }
 /*___________________________________________________________________________

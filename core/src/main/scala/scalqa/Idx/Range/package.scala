@@ -3,7 +3,7 @@ package scalqa; package Idx
 package object Range {
   type Reposition = Reposition._Trait
 
-  @inline private[scalqa] def fromStartAndSize(start: Int, size: Int) = new Range((start.toLong << 32) + (if (size < 0) 0 else size))
+  private[scalqa] def fromStartAndSize(start: Int, size: Int) = new Range((start.toLong << 32) + (if (size < 0) 0 else size))
 
   def make(r: scalqa.Range[Int]): Range =
     if (!r.startExclusive) if (r.endExclusive) r.start <>> r.end else r.start <> r.end

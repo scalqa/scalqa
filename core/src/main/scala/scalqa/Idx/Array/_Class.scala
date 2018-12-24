@@ -2,13 +2,13 @@ package scalqa; package Idx; package Array
 
 class _Class[A](val real: scala.Array[_ >: A]) extends AnyVal with Idx[A] with Custom.Array.Like[A] {
   protected type TYPE = Idx[A]
-  @inline protected def make = new Array[A](_)
-  @inline protected def base = real.asInstanceOf[scala.Array[A]]
+  protected def make = new Array[A](_)
+  protected def base = real.asInstanceOf[scala.Array[A]]
 
-  @inline final def apply(i: Int): A = base(i)
-  @inline final def update(i: Int, v: A): Unit = base(i) = v
-  @inline final def size: Int = base.length
-  @inline final def length: Int = base.length
+  def apply(i: Int): A = base(i)
+  def update(i: Int, v: A): Unit = base(i) = v
+  def size: Int = base.length
+  def length: Int = base.length
   override def contains(v: A): Boolean = Custom.Array.Z.contains(base, v)
 
 }

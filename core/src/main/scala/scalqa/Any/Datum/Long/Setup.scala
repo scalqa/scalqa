@@ -8,8 +8,8 @@ abstract class Setup[TYPE <: Datum.Long[TYPE]] protected extends Any.Datum.Setup
   protected def undo(v: TYPE): Long = _Trait.real(v)
 
   implicit override val Map: BiMap[Long, TYPE] = new BiMap[Long, TYPE] {
-    @inline final def apply(v: Long) = make(v)
-    @inline final def undo(v: TYPE) = _Trait.real(v)
+    def apply(v: Long) = make(v)
+    def undo(v: TYPE) = _Trait.real(v)
   }
 
   implicit val Ordering: Ordering[TYPE] = new Ordering[TYPE] { def compare(x: TYPE, y: TYPE) = java.lang.Long.compare(undo(x), undo(y)) }

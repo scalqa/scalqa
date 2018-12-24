@@ -2,16 +2,16 @@ package scalqa; package Custom; package Numeric; package Z
 
 private[scalqa] class Wrap[A](val real: math.Numeric[A]) extends Numeric[A] {
 
-  @inline final def negate(x: A) = real.negate(x)
-  @inline final def minus(x: A, y: A) = real.minus(x, y)
-  @inline final def plus(x: A, y: A) = real.plus(x, y)
-  @inline final def times(x: A, y: A) = real.times(x, y)
+  def negate(x: A) = real.negate(x)
+  def minus(x: A, y: A) = real.minus(x, y)
+  def plus(x: A, y: A) = real.plus(x, y)
+  def times(x: A, y: A) = real.times(x, y)
 
-  @inline final def fromInt(x: Int) = real.fromInt(x)
-  @inline final def toDouble(x: A) = real.toDouble(x)
-  @inline final def toFloat(x: A) = real.toFloat(x)
-  @inline final def toInt(x: A) = real.toInt(x)
-  @inline final def toLong(x: A) = real.toLong(x)
+  def fromInt(x: Int) = real.fromInt(x)
+  def toDouble(x: A) = real.toDouble(x)
+  def toFloat(x: A) = real.toFloat(x)
+  def toInt(x: A) = real.toInt(x)
+  def toLong(x: A) = real.toLong(x)
 
   def compare(x: A, y: A) = real.compare(x, y)
   def divByInt(v: A, int: Int) = real.divByInt(v, int)

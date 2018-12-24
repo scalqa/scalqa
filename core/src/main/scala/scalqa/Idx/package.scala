@@ -17,7 +17,7 @@ package object Idx {
 
   type Range = Range._Class
 
-  @inline final def *[A](vs: A*): Idx[A] = Refs.*(vs: _*)
+  def *[A](vs: A*): Idx[A] = Refs.*(vs: _*)
 
   def wrap[A](v: java.util.List[A]): Idx[A] = new Idx.Z.A.JavaProxy[A](v)
 

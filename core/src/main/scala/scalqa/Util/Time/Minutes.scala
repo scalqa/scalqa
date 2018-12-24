@@ -3,12 +3,12 @@ package scalqa; package Util; package Time
 class Minutes private[scalqa] (val real: Long) extends AnyVal with Like.Unit[Minutes] with Time.Like.Core.A.Millis {
   protected def setup = Minutes
 
-  @inline final def totalMillis = Time.Z.MillisInOneMinute * real Millis
+  def totalMillis = Time.Z.MillisInOneMinute * real Millis
 
 }
 object Minutes extends Like.Unit.Setup[Minutes]("min", 2) {
 
-  @inline final def make(v: Long) = new Minutes(v)
+  def make(v: Long) = new Minutes(v)
 
 }
 /*___________________________________________________________________________

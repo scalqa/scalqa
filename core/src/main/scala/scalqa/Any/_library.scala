@@ -10,11 +10,11 @@ class _library[A] private[scalqa] (protected val real: A) extends AnyVal {
 
   def \/(default: => A): A = if (Any.isVoid(real)) default else real
 
-  @inline final def Opt: Opt[A] = if (real == null) scalqa.Opt.Void else real
+  def Opt: Opt[A] = if (real == null) scalqa.Opt.Void else real
 
-  @inline final def isVoid: Boolean = Any.isVoid(real)
+  def isVoid: Boolean = Any.isVoid(real)
 
-  @inline final def I: Itself[A] = new Itself(real)
+  def I: Itself[A] = new Itself(real)
 
   def lp: Unit = println(real.I.toString)
   def tp: Unit = real match { case v: Able.ToText => println(v.toText); case _ => lp }

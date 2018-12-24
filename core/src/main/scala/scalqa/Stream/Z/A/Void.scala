@@ -3,31 +3,31 @@ package scalqa; package Stream; package Z; package A
 private[scalqa] class Void extends Stream.A.Base[Any] with Preview[Any] with Util.Void with Any.Able.Stream[Any] {
 
   // -----------------------------------------------------------------------
-  @inline final def prime = false
-  @inline final def pump = Stream.failEmpty
-  @inline final override def foreach(f: Consumer[Any]) = ()
-  @inline final override def take(i: Int) = this
-  @inline final override def ilkOpt = Ilk.Refs
-  @inline final override def sizeOpt = 0
+  def prime = false
+  def pump = Stream.failEmpty
+  override def foreach(f: Consumer[Any]) = ()
+  override def take(i: Int) = this
+  override def ilkOpt = Ilk.Refs
+  override def sizeOpt = 0
 
   // Buffer ----------------------------------------------------------------
-  @inline final override def preview = this
-  @inline final def previewIlk = Ilk.Refs
-  @inline final def preview(cnt: Int) = this
-  @inline final def previewNextOpt = Opt.Void
-  @inline final def previewSize = 0
-  @inline final def previewSizeAtLeast(cnt: Int) = cnt <= 0
-  @inline final def takeWhile(f: Filter[Any]) = this
-  @inline final def prime(cnt: Int) = 0
+  override def preview = this
+  def previewIlk = Ilk.Refs
+  def preview(cnt: Int) = this
+  def previewNextOpt = Opt.Void
+  def previewSize = 0
+  def previewSizeAtLeast(cnt: Int) = cnt <= 0
+  def takeWhile(f: Filter[Any]) = this
+  def prime(cnt: Int) = 0
 
   // add --------------------------------------------------------------------
-  @inline final override def +(element: Any): Stream[Any] = One(element)
-  @inline final override def +~(that: ~[Any]) = that
-  @inline final override def insertAt(index: Int, element: Any) = this + element
-  @inline final override def insertAllAt(index: Int, that: ~[Any]) = that
-  @inline final override def default(element: => Any) = element.I.~
+  override def +(element: Any): Stream[Any] = One(element)
+  override def +~(that: ~[Any]) = that
+  override def insertAt(index: Int, element: Any) = this + element
+  override def insertAllAt(index: Int, that: ~[Any]) = that
+  override def default(element: => Any) = element.I.~
 
-  @inline final def all = this
+  def all = this
 
 }
 

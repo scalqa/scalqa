@@ -4,9 +4,9 @@ private[scalqa] object Iterator {
 
   def make[A](src: Stream[A]): Iterator[A] = new collection.AbstractIterator[A] {
 
-    @inline final def hasNext: Boolean = src.prime
+    def hasNext: Boolean = src.prime
 
-    @inline final def next = if (src.prime) src.pump else Stream.failEmpty
+    def next = if (src.prime) src.pump else Stream.failEmpty
   }
 }
 

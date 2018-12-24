@@ -4,7 +4,7 @@ package object preview {
 
   def apply[@specialized(DATA) A](s: Stream[A]): Stream[A] with Preview[A] = s match {
     case v: Stream[_] with Preview[_] => v.asInstanceOf[Stream[A] with Preview[A]]
-    case v => default(v): @inline
+    case v => default(v)
   }
 
 }

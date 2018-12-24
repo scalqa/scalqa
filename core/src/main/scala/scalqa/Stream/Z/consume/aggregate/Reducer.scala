@@ -4,13 +4,13 @@ private[aggregate] abstract class Reducer[@specialized(DATA) A] extends Consumer
   var fresh = true
   var value: A = _
 
-  def accept(v: A) = if (fresh) init(v) else value = reduce(value, v): @inline
+  def accept(v: A) = if (fresh) init(v) else value = reduce(value, v)
 
   def reduce(x: A, y: A): A
 
-  @inline final def init(v: A) = { fresh = false; value = v }
+  def init(v: A) = { fresh = false; value = v }
 
-  @inline final def toOpt: Opt[A] = if (fresh) Opt.Void else value
+  def toOpt: Opt[A] = if (fresh) Opt.Void else value
 
 }
 /*___________________________________________________________________________

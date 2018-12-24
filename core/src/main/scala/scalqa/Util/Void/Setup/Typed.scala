@@ -2,7 +2,7 @@ package scalqa; package Util; package Void; package Setup
 
 class Typed[T[_]](v: T[_]) extends Like[T[_]](v) {
 
-  @inline implicit def zzMake[A](v: \/): T[A] = Void.asInstanceOf[T[A]]
+  implicit def zzMake[A](v: \/): T[A] = Void.asInstanceOf[T[A]]
 
 }
 

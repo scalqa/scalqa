@@ -18,7 +18,7 @@ object Trilean {
   val True = new Trilean(1)
   val False = new Trilean(-1)
 
-  @inline final def make(v: Boolean): Trilean = if (v) True else False
+  def make(v: Boolean): Trilean = if (v) True else False
 
   implicit def zzMake(v: Boolean) = make(v)
   implicit def zzMake(v: \/) = Void

@@ -9,7 +9,7 @@ private[Stream] object letIdx {
 
     def prime = has || { while (!has && real.prime) { v = real.pump; has = f.allow(i, v); i += 1 }; has }
 
-    @inline final def pump = { has = false; v }
+    def pump = { has = false; v }
 
     def foreach(c: Consumer[A]) = {
       if (has) c.accept(pump)
@@ -23,7 +23,7 @@ private[Stream] object letIdx {
       s.foreach(new Each)
     }
 
-    @inline final override def real = s
+    override def real = s
   }
 }
 /*___________________________________________________________________________

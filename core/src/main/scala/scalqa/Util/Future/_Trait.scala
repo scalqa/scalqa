@@ -14,20 +14,20 @@ trait _Trait[+A] {
 
   def apply[B](f: A => Any, d: Deficiency => Any = \/)(implicit e: ExecutionContext = DEFAULT): Future[A] = { onComplete(_.apply(f, d)); this }
 
-  def zip[B](f: Future[B])(implicit e: ExecutionContext = DEFAULT): Future[(A, B)] = Z.zip(this, f): @inline
+  def zip[B](f: Future[B])(implicit e: ExecutionContext = DEFAULT): Future[(A, B)] = Z.zip(this, f)
 
-  def mapResult[B](f: Out[A] => Out[B])(implicit e: concurrent.ExecutionContext): Future[B] = Z.mapResult(this, f): @inline
+  def mapResult[B](f: Out[A] => Out[B])(implicit e: concurrent.ExecutionContext): Future[B] = Z.mapResult(this, f)
 
-  def await(v: Util.Time.PreciseDuration)(implicit e: ExecutionContext = DEFAULT): Out[A] = Z.await(this, v): @inline
+  def await(v: Util.Time.PreciseDuration)(implicit e: ExecutionContext = DEFAULT): Out[A] = Z.await(this, v)
 
-  protected def _flatMap[B](m: A => Future[B])(implicit e: ExecutionContext = DEFAULT): Future[B] = Z.flatMap(this, m): @inline
+  protected def _flatMap[B](m: A => Future[B])(implicit e: ExecutionContext = DEFAULT): Future[B] = Z.flatMap(this, m)
 }
 
 object _Trait {
 
   implicit def zzFilterMonadic[A](f: Future[A]): Z.FilterMonadic[A] = new Z.FilterMonadic[A](f)
 
-  @inline private[Future] def flatMap[A, B](f: Future[A], m: A => Future[B])(implicit e: ExecutionContext): Future[B] = f._flatMap(m)
+  private[Future] def flatMap[A, B](f: Future[A], m: A => Future[B])(implicit e: ExecutionContext): Future[B] = f._flatMap(m)
 
 }
 

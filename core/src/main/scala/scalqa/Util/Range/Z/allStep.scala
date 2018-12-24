@@ -4,7 +4,7 @@ private class allStep[A](up: Boolean, r: Range[A], private var cur: A, step: A =
 
   var has = true
 
-  @inline final override def prime = has
+  override def prime = has
 
   override def pump = {
     val v = cur;

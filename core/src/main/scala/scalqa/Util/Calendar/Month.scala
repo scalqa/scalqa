@@ -23,11 +23,11 @@ class Month private[scalqa] (protected val real: Int) extends AnyVal with Any.Da
 
 object Month extends Any.Datum.Int.Sequential.Setup[Month] {
 
-  @inline protected[Month] def make(v: Int) = new Month(v)
+  protected[Month] def make(v: Int) = new Month(v)
 
-  @inline final def now: Month = Day.now.month
+  def now: Month = Day.now.month
 
-  @inline final def make(year: Int, month: Int): Month = make(year * 12 + month - 1)
+  def make(year: Int, month: Int): Month = make(year * 12 + month - 1)
 
   def make(s: String): Month = make(s.copyFirst(4).toInt, s.copy(5 <> 6).toInt)
 

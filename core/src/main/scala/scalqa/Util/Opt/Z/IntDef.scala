@@ -6,7 +6,7 @@ private[Opt] trait IntDef extends Any with Any.Able.Void {
   private def This = this.asInstanceOf[Opt.Int]
   private[Opt] def real: Int
 
-  @inline private def _is = real != Opt.Int.VoidVal
+  private def _is = real != Opt.Int.VoidVal
 
   override def isVoid = real == Opt.Int.VoidVal
   def isValue: Boolean = _is
@@ -42,15 +42,15 @@ private[Opt] object IntDef {
 
     def make(v: Int) = new Opt.Int(v)
 
-    @inline implicit def zzBoolean(o: Opt.Int): Boolean = o.isValue
+    implicit def zzBoolean(o: Opt.Int): Boolean = o.isValue
 
-    @inline implicit def zzFilterMonadic(o: Opt.Int) = new FilterMonadic[Int](o.real)
+    implicit def zzFilterMonadic(o: Opt.Int) = new FilterMonadic[Int](o.real)
 
-    @inline implicit def zzStream(o: Opt.Int): ~[Int] = o.all
+    implicit def zzStream(o: Opt.Int): ~[Int] = o.all
 
-    @inline implicit def zzMakeValue(v: Int): Opt.Int = if (v == VoidVal) Void else new Opt.Int(v)
+    implicit def zzMakeValue(v: Int): Opt.Int = if (v == VoidVal) Void else new Opt.Int(v)
 
-    @inline implicit def zzMake[A](v: \/): Opt.Int = Void
+    implicit def zzMake[A](v: \/): Opt.Int = Void
 
     implicit def zzMake(v: Opt[Int]): Opt.Int = if (v.isValue) new Opt.Int(v.value) else Void
 

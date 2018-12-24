@@ -8,9 +8,9 @@ trait Remove[A] {
 
   def clear: Unit
 
-  @inline final def -=(element: A): this.type = { remove(element); this }
+  def -=(element: A): this.type = { remove(element); this }
 
-  @inline final def -~=(stream: ~[A]): this.type = { removeAll(stream); this }
+  def -~=(stream: ~[A]): this.type = { removeAll(stream); this }
 
 }
 /*___________________________________________________________________________

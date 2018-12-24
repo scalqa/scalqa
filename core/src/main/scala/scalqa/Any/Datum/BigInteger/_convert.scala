@@ -4,21 +4,21 @@ trait _convert extends Any with Any.Datum.Z.Number.Convert {
 
   protected def real: java.math.BigInteger
 
-  @inline final def toByte = real.byteValue
+  def toByte = real.byteValue
 
-  @inline final def toShort = real.shortValue
+  def toShort = real.shortValue
 
-  @inline final def toInt = real.intValue
+  def toInt = real.intValue
 
-  @inline final def toLong = real.longValue
+  def toLong = real.longValue
 
-  @inline final def toDouble = real.doubleValue
+  def toDouble = real.doubleValue
 
-  @inline final def toFloat = real.floatValue
+  def toFloat = real.floatValue
 
-  @inline final def toBig = Util.BigDecimal.make(new java.math.BigDecimal(real))
+  def toBig = Util.BigDecimal.make(new java.math.BigDecimal(real))
 
-  @inline final def toNumber = real
+  def toNumber = real
 
 }
 /*___________________________________________________________________________

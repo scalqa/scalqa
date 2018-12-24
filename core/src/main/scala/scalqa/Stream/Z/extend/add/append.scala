@@ -6,7 +6,7 @@ private[Stream] object append {
 
     protected var hot = true
 
-    @inline final def prime = real.prime || hot
+    def prime = real.prime || hot
 
     def pump =
       if (real.prime) real.pump
@@ -18,9 +18,9 @@ private[Stream] object append {
       if (hot) { hot = false; c.accept(value) }
     }
 
-    @inline final override def sizeOpt = real.sizeOpt.map(_ + (if (hot) 1 else 0))
+    override def sizeOpt = real.sizeOpt.map(_ + (if (hot) 1 else 0))
 
-    @inline final def real = s
+    def real = s
   }
 }
 /*___________________________________________________________________________

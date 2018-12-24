@@ -2,24 +2,24 @@ package scalqa; package Custom; package Numeric
 
 class _library[A] private[scalqa] (protected val real: math.Numeric[A]) extends AnyVal {
 
-  @inline final def custom: Numeric[A] = real match {
+  def custom: Numeric[A] = real match {
     case n: Numeric[A] => n
     case _             => new Z.Wrap(real)
   }
 
-  @inline final def divByInt(v: A, int: Int): A = real match {
+  def divByInt(v: A, int: Int): A = real match {
     case n: Numeric[A]         => n.divByInt(v, int)
     case n: math.Integral[A]   => n.quot(v, n.fromInt(int))
     case n: math.Fractional[A] => n.div(v, n.fromInt(int))
     case _                     => App.Fail.state
   }
 
-  @inline final def toNumber(v: A): Number = real match {
+  def toNumber(v: A): Number = real match {
     case n: Numeric[A] => n.toNumber(v)
     case n             => n.toDouble(v)
   }
 
-  @inline final def toBig(v: A): Util.BigDecimal = real match {
+  def toBig(v: A): Util.BigDecimal = real match {
     case n: Numeric[A]       => n.toBig(v)
     case n: math.Integral[A] => Util.BigDecimal.make(n.toLong(v))
     case n                   => Util.BigDecimal.make(n.toDouble(v))

@@ -8,7 +8,7 @@ private[Stream] object unfold {
 
     lazy val buf = s.to[Idx.Array.Buffer]
 
-    @inline final def prime = true
+    def prime = true
 
     override def pump: A = {
       if (i == buf.size) buf += f(buf)

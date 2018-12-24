@@ -4,15 +4,15 @@ private[Buffer] object DefaultLoader {
 
   def apply[@specialized(DATA) A](real: Buffer[A]): Loader[A] = new Loader[A] {
 
-    @inline final def add(v: A) = real.add(v)
+    def add(v: A) = real.add(v)
 
-    @inline final def _array = real._array
+    def _array = real._array
 
-    @inline final def _arrayResize(s: Int) = real._arrayResize(s)
+    def _arrayResize(s: Int) = real._arrayResize(s)
 
-    @inline final def _size = real._size
+    def _size = real._size
 
-    @inline final def _size_=(v: Int) = real._size = v
+    def _size_=(v: Int) = real._size = v
   }
 }
 

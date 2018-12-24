@@ -1,8 +1,8 @@
 package scalqa; package Util; package Out
 
 class _library[A] private[Out] (protected[Out] val real: Any) extends AnyVal {
-  @inline private def _is = !real.isInstanceOf[Deficiency]
-  @inline private def _val: A = real.asInstanceOf[A]
+  private def _is = !real.isInstanceOf[Deficiency]
+  private def _val: A = real.asInstanceOf[A]
 
   def or(default: => A): A = if (_is) _val else default
 

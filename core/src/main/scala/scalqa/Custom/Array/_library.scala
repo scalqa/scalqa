@@ -2,24 +2,24 @@ package scalqa; package Custom; package Array
 
 class _library[A] private[scalqa] (protected val base: Array[A]) extends AnyVal with Like[A] {
   protected type TYPE = Array[A]
-  @inline protected def make = AS_IS
+  def make = AS_IS
 
-  @inline final def apply(i: Int): A = base(i)
-  @inline final def size = base.length
+  def apply(i: Int): A = base(i)
+  def size = base.length
 
-  @inline final def Idx: scalqa.Idx.Array[A] = new scalqa.Idx.Array(base)
+  def Idx: scalqa.Idx.Array[A] = new scalqa.Idx.Array(base)
 
-  @inline final override def copy(r: scalqa.Idx.Range) = Z.copy.range(base, r)
-  @inline final override def copyDrop(r: scalqa.Idx.Range) = Z.copy.dropRange(base, r)
+  override def copy(r: scalqa.Idx.Range) = Z.copy.range(base, r)
+  override def copyDrop(r: scalqa.Idx.Range) = Z.copy.dropRange(base, r)
 
-  @inline final override def +(v: A) = Z.plus(base, v)
-  @inline final override def +~(v: ~[A]) = Z.plus.stream(base, v)
-  @inline final override def +@(i: Int, v: A) = Z.plus.at(base, i, v)
-  @inline final override def +~@(i: Int, v: ~[A]) = Z.plus.pipeAt(base, i, v)
-  @inline final override def -(v: A) = Z.minus(base, v)
-  @inline final override def -~(v: ~[A]) = Z.minus.stream(base, v)
+  override def +(v: A) = Z.plus(base, v)
+  override def +~(v: ~[A]) = Z.plus.stream(base, v)
+  override def +@(i: Int, v: A) = Z.plus.at(base, i, v)
+  override def +~@(i: Int, v: ~[A]) = Z.plus.pipeAt(base, i, v)
+  override def -(v: A) = Z.minus(base, v)
+  override def -~(v: ~[A]) = Z.minus.stream(base, v)
 
-  @inline final override def copyResize(newSize: Int) = Z.copy.resize(base, newSize)
+  override def copyResize(newSize: Int) = Z.copy.resize(base, newSize)
 
 }
 /*___________________________________________________________________________

@@ -5,7 +5,7 @@ private[Stream] object zipAll {
   def apply[A, B](one: Stream[A], two: Stream[B], ao: Opt[A], bo: Opt[B]) = new Stream.A.Base[(A, B)] {
     private var state = 0
 
-    @inline final def prime = {
+    def prime = {
       if (state == 0) state =
         if (one.prime) if (two.prime) 3 else 1
         else if (two.prime) 2

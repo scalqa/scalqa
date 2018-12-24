@@ -2,33 +2,33 @@ package scalqa; package Custom; package Int; package Z
 
 private[Int] object stream {
 
-  @inline final def up(from: Int): ~[Int] = {
+  def up(from: Int): ~[Int] = {
     val sz = scala.Int.MaxValue - from.toLong
     if (sz <= scala.Int.MaxValue) new Stream[Int] with UpBase with Stream.A.Specialized.Indexed[Int] {
-      @inline val _size = sz.toInt
-      @inline final def _apply(i: Int) = from + i
-      @inline final def pump = _pumpIndexed
+      val _size = sz.toInt
+      def _apply(i: Int) = from + i
+      def pump = _pumpIndexed
       override def foreach(f: Stream.Consumer[Int]) = _consumeIndexed(f)
     }
     else new UpBase {
       var l = from.toLong
-      @inline final def prime = l <= scala.Int.MaxValue
-      @inline final def pump = { val v = l.toInt; l += 1; v }
+      def prime = l <= scala.Int.MaxValue
+      def pump = { val v = l.toInt; l += 1; v }
     }
   }
 
-  @inline final def down(from: Int): ~[Int] = {
+  def down(from: Int): ~[Int] = {
     val sz = from.toLong - scala.Int.MinValue
     if (sz <= scala.Int.MaxValue) new Stream[Int] with DownBase with Stream.A.Specialized.Indexed[Int] {
-      @inline val _size = sz.toInt
-      @inline final def _apply(i: Int) = from - i
-      @inline final def pump = _pumpIndexed
+      val _size = sz.toInt
+      def _apply(i: Int) = from - i
+      def pump = _pumpIndexed
       override def foreach(f: Stream.Consumer[Int]) = _consumeIndexed(f)
     }
     else new DownBase {
       var l = from.toLong
-      @inline final def prime = l >= scala.Int.MinValue
-      @inline final def pump = { val v = l.toInt; l -= 1; v }
+      def prime = l >= scala.Int.MinValue
+      def pump = { val v = l.toInt; l -= 1; v }
     }
   }
 

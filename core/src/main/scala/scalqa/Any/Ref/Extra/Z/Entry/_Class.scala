@@ -3,9 +3,9 @@ package scalqa; package Any; package Ref; package Extra; package Z; package Entr
 private[Extra] class _Class(chld: Entry, private var _scope: AnyRef, protected[Entry] var _this: Any) extends java.util.concurrent.atomic.AtomicReference[_Class](chld)
   with Target.Container with Extra.Entry with EventControl with Any.Able.Void {
 
-  @inline final def isCancelled = _scope == null
+  def isCancelled = _scope == null
 
-  @inline final def scope = _scope
+  def scope = _scope
 
   def child: Entry = { val c = get; if (!c.isCancelled) c else { val cc = c.child; if (compareAndSet(c, cc)) cc else child } }
 

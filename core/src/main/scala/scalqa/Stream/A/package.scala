@@ -4,36 +4,36 @@ package object A {
   type Specialized[A] = Specialized._Trait[A]
 
   def assertIlk[@specialized(DATA) A](s: Stream[A], ilk: Any.Ilk): Stream[A] = new Stream[A] with Stream.Z.A.Extended.All[A] {
-    @inline final def prime = real.prime
-    @inline final def pump = real.pump
-    @inline final def foreach(f: Consumer[A]) = real.foreach(f)
-    @inline final override def ilkOpt = ilk
-    @inline final override def real = s
+    def prime = real.prime
+    def pump = real.pump
+    def foreach(f: Consumer[A]) = real.foreach(f)
+    override def ilkOpt = ilk
+    override def real = s
   }
 
   def assertSize[@specialized(DATA) A](s: Stream[A], sz: Int): Stream[A] = new Stream[A] with Stream.Z.A.Extended.All[A] {
-    @inline final def prime = real.prime
-    @inline final def pump = real.pump
-    @inline final def foreach(f: Consumer[A]) = real.foreach(f)
-    @inline final override def sizeOpt = sz
-    @inline final override def real = s
+    def prime = real.prime
+    def pump = real.pump
+    def foreach(f: Consumer[A]) = real.foreach(f)
+    override def sizeOpt = sz
+    override def real = s
   }
 
   def assertSorted[@specialized(DATA) A](s: Stream[A], o: Ordering[A]): Stream[A] = new Stream[A] with Stream.Z.A.Extended.All[A] {
-    @inline final def prime = real.prime
-    @inline final def pump = real.pump
-    @inline final def foreach(f: Consumer[A]) = real.foreach(f)
-    @inline final override def sortedOpt = o
-    @inline final override def real = s
+    def prime = real.prime
+    def pump = real.pump
+    def foreach(f: Consumer[A]) = real.foreach(f)
+    override def sortedOpt = o
+    override def real = s
   }
 
   def assertSortedBy[@specialized(DATA) A, B](s: Stream[A], o: Ordering[B], f: A => B): Stream[A] = new Stream[A] with Stream.Z.A.Extended.All[A] {
-    @inline final def prime = real.prime
-    @inline final def pump = real.pump
-    @inline final def foreach(f: Consumer[A]) = real.foreach(f)
-    @inline final override val sortedOpt = o.on(f)
-    @inline final override def sortedByOpt[C] = (o, f).Opt.I.asInstanceOfTarget
-    @inline final override def real = s
+    def prime = real.prime
+    def pump = real.pump
+    def foreach(f: Consumer[A]) = real.foreach(f)
+    override val sortedOpt = o.on(f)
+    override def sortedByOpt[C] = (o, f).Opt.I.asInstanceOfTarget
+    override def real = s
   }
 }
 /*___________________________________________________________________________

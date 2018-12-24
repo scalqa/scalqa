@@ -8,8 +8,8 @@ abstract class Setup[TYPE <: Datum.Byte[TYPE]] protected extends Any.Datum.Setup
   protected def undo(v: TYPE): Byte = _Trait.real(v)
 
   implicit override val Map: BiMap[Byte, TYPE] = new BiMap[Byte, TYPE] {
-    @inline final def apply(v: Byte) = make(v)
-    @inline final def undo(v: TYPE) = _Trait.real(v)
+    def apply(v: Byte) = make(v)
+    def undo(v: TYPE) = _Trait.real(v)
   }
 
   implicit val Ordering: Ordering[TYPE] = new Ordering[TYPE] { def compare(x: TYPE, y: TYPE) = java.lang.Integer.compare(undo(x), undo(y)) }
@@ -26,27 +26,27 @@ abstract class Setup[TYPE <: Datum.Byte[TYPE]] protected extends Any.Datum.Setup
 
     def compare(x: TYPE, y: TYPE) = java.lang.Byte.compare(undo(x), undo(y))
 
-    @inline final def fromInt(x: Int) = make(x toByte)
+    def fromInt(x: Int) = make(x toByte)
 
-    @inline final def minus(x: TYPE, y: TYPE) = make(undo(x) - undo(y) toByte)
+    def minus(x: TYPE, y: TYPE) = make(undo(x) - undo(y) toByte)
 
-    @inline final def negate(x: TYPE) = make(-undo(x) toByte)
+    def negate(x: TYPE) = make(-undo(x) toByte)
 
-    @inline final def plus(x: TYPE, y: TYPE) = make(undo(x) + undo(y) toByte)
+    def plus(x: TYPE, y: TYPE) = make(undo(x) + undo(y) toByte)
 
-    @inline final def times(x: TYPE, y: TYPE) = make(undo(x) * undo(y) toByte)
+    def times(x: TYPE, y: TYPE) = make(undo(x) * undo(y) toByte)
 
-    @inline final def quot(x: TYPE, y: TYPE) = make(undo(x) / undo(y) toByte)
+    def quot(x: TYPE, y: TYPE) = make(undo(x) / undo(y) toByte)
 
-    @inline final def rem(x: TYPE, y: TYPE) = make(undo(x) % undo(y) toByte)
+    def rem(x: TYPE, y: TYPE) = make(undo(x) % undo(y) toByte)
 
-    @inline final def toDouble(x: TYPE) = undo(x).toDouble
+    def toDouble(x: TYPE) = undo(x).toDouble
 
-    @inline final def toFloat(x: TYPE) = undo(x).toFloat
+    def toFloat(x: TYPE) = undo(x).toFloat
 
-    @inline final def toInt(x: TYPE) = undo(x).toInt
+    def toInt(x: TYPE) = undo(x).toInt
 
-    @inline final def toLong(x: TYPE) = undo(x).toLong
+    def toLong(x: TYPE) = undo(x).toLong
   }
 }
 /*___________________________________________________________________________

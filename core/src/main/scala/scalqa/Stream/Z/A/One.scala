@@ -5,7 +5,7 @@ private[scalqa] object One {
   def apply[A](v: A): Stream[A] = new Stream.A.Base[A] {
     protected var hot = true
 
-    @inline final def prime = hot
+    def prime = hot
 
     def pump = { hot = false; v }
 

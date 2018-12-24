@@ -1,8 +1,8 @@
 package scalqa; package Util; package Out
 
 class _Class[+A] private[scalqa] (private val real: Any) extends AnyVal with Any.Able.ToString {
-  @inline private def _is = !real.isInstanceOf[Deficiency]
-  @inline private def _val: A = real.asInstanceOf[A]
+  private def _is = !real.isInstanceOf[Deficiency]
+  private def _val: A = real.asInstanceOf[A]
 
   def isValue = _is
   def value: A = if (_is) _val else App.Fail.state("Called 'value' on failed Outcome")
@@ -23,7 +23,7 @@ class _Class[+A] private[scalqa] (private val real: Any) extends AnyVal with Any
 
 object _Class {
 
-  @inline implicit def zzLibrary[A](o: Out[A]) = new _library[A](o.real)
+  implicit def zzLibrary[A](o: Out[A]) = new _library[A](o.real)
 
   implicit def zzMake[A](v: A): Out[A] = apply(v)
   implicit def zzMake[A](v: Deficiency): Out[A] = apply(v)

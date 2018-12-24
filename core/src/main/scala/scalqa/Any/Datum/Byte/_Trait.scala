@@ -8,12 +8,12 @@ trait _Trait[TYPE <: _Trait[TYPE]] extends Any with Any.Wrap[Byte] with Custom.N
 
   protected def setup: Setup[TYPE]
 
-  @inline protected def make(v: Byte): TYPE = setup.Map(v)
+  def make(v: Byte): TYPE = setup.Map(v)
 }
 
 private object _Trait {
 
-  @inline final def real(v: _Trait[_]) = v.real
+  def real(v: _Trait[_]) = v.real
 
 }
 /*___________________________________________________________________________

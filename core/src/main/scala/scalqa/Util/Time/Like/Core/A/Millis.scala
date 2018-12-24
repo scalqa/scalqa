@@ -4,17 +4,17 @@ trait Millis extends Any with Core {
 
   def totalMillis: Time.Millis
 
-  @inline final def totalDays = totalMillis.real / Z.MillisInOneDay Days
+  def totalDays = totalMillis.real / Z.MillisInOneDay Days
 
-  @inline final def totalHours = totalMillis.real / Z.MillisInOneHour Hours
+  def totalHours = totalMillis.real / Z.MillisInOneHour Hours
 
-  @inline final def totalMinutes = totalMillis.real / Z.MillisInOneMinute Minutes
+  def totalMinutes = totalMillis.real / Z.MillisInOneMinute Minutes
 
-  @inline final def totalSeconds = totalMillis.real / Z.MillisInOneSecond Seconds
+  def totalSeconds = totalMillis.real / Z.MillisInOneSecond Seconds
 
-  @inline private[Time] def totalMicros = totalMillis.real * 1000 Micros
+  private[Time] def totalMicros = totalMillis.real * 1000 Micros
 
-  @inline private[Time] def totalNanos = totalMillis.real * 1000000 Nanos
+  private[Time] def totalNanos = totalMillis.real * 1000000 Nanos
 
 }
 /*___________________________________________________________________________

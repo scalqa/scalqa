@@ -21,7 +21,7 @@ class Year private[scalqa] (protected val real: Int) extends AnyVal with Any.Dat
 object Year extends Any.Datum.Int.Sequential.Setup[Year] {
   def now: Year = Time.now.year
 
-  @inline final def make(v: Int): Year = new Year(v)
+  def make(v: Int): Year = new Year(v)
 
   implicit def zzYear(v: NOW.type): Year = Year.now
 

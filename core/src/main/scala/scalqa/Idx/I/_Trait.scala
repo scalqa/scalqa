@@ -23,7 +23,7 @@ private object _Trait {
   // ***********************************************************************************************
   class Base[A, TRGT](create: Array[A] => TRGT)(implicit i: Ilk[A]) extends Z.Raw[A, TRGT] {
 
-    @inline final def make = v => create(if (v.base.getClass == i.ArrayClass) v.base else i.mkArray[A](v.size).I(_.updateAll(v.base)))
+    def make = v => create(if (v.base.getClass == i.ArrayClass) v.base else i.mkArray[A](v.size).I(_.updateAll(v.base)))
   }
 }
 /*___________________________________________________________________________

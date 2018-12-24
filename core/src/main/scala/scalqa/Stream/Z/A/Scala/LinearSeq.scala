@@ -6,9 +6,9 @@ private[scalqa] object LinearSeq {
     class stream extends Stream[A] with Stream.A.Specialized[A] with Any.Able.Stream[A] {
       protected var real: collection.LinearSeq[A] = v
 
-      @inline final def prime = real.nonEmpty
+      def prime = real.nonEmpty
 
-      @inline final def pump = { val v = real.head; real = real.tail; v }
+      def pump = { val v = real.head; real = real.tail; v }
 
       override def foreach(c: Consumer[A]) = { var v = real; real = Nil; while (v.nonEmpty) { c.accept(v.head); v = v.tail } }
 
@@ -18,7 +18,7 @@ private[scalqa] object LinearSeq {
 
       override def ilkOpt = i.ilkOpt
 
-      @inline final def all = this
+      def all = this
     }
     new stream
   }

@@ -2,18 +2,18 @@ package scalqa; package Custom; package Numeric; package Z
 
 private[scalqa] object Short extends Numeric[Short] with math.Integral[Short] {
 
-  @inline final def negate(x: Short) = -x toShort
-  @inline final def minus(x: Short, y: Short) = x - y toShort
-  @inline final def plus(x: Short, y: Short) = x + y toShort
-  @inline final def times(x: Short, y: Short) = x * y toShort
-  @inline final def quot(x: Short, y: Short) = x / y toShort
-  @inline final def rem(x: Short, y: Short) = x % y toShort
+  def negate(x: Short) = -x toShort
+  def minus(x: Short, y: Short) = x - y toShort
+  def plus(x: Short, y: Short) = x + y toShort
+  def times(x: Short, y: Short) = x * y toShort
+  def quot(x: Short, y: Short) = x / y toShort
+  def rem(x: Short, y: Short) = x % y toShort
 
-  @inline final def fromInt(x: Int) = x toShort
-  @inline final def toDouble(x: Short) = x toDouble
-  @inline final def toFloat(x: Short) = x toFloat
-  @inline final def toInt(x: Short) = x toInt
-  @inline final def toLong(x: Short) = x toLong
+  def fromInt(x: Int) = x toShort
+  def toDouble(x: Short) = x toDouble
+  def toFloat(x: Short) = x toFloat
+  def toInt(x: Short) = x toInt
+  def toLong(x: Short) = x toLong
 
   override val zero = 0 toShort
   override val one = 1 toShort

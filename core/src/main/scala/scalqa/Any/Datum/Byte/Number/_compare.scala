@@ -2,47 +2,47 @@ package scalqa; package Any; package Datum.Byte; package Number
 
 trait _compare extends Any with Any.Datum.Z.Number.Compare {
 
-  @inline final def ==(v: Byte) = real == v
-  @inline final def ==(v: Short) = real == v
-  @inline final def ==(v: Int) = real == v
-  @inline final def ==(v: Long) = real == v
-  @inline final def ==(v: Float) = real == v
-  @inline final def ==(v: Double) = real == v
+  def ==(v: Byte) = real == v
+  def ==(v: Short) = real == v
+  def ==(v: Int) = real == v
+  def ==(v: Long) = real == v
+  def ==(v: Float) = real == v
+  def ==(v: Double) = real == v
 
-  @inline final def !=(v: Byte) = real != v
-  @inline final def !=(v: Short) = real != v
-  @inline final def !=(v: Int) = real != v
-  @inline final def !=(v: Long) = real != v
-  @inline final def !=(v: Float) = real != v
-  @inline final def !=(v: Double) = real != v
+  def !=(v: Byte) = real != v
+  def !=(v: Short) = real != v
+  def !=(v: Int) = real != v
+  def !=(v: Long) = real != v
+  def !=(v: Float) = real != v
+  def !=(v: Double) = real != v
 
-  @inline final def <(v: Byte) = real < v
-  @inline final def <(v: Short) = real < v
-  @inline final def <(v: Int) = real < v
-  @inline final def <(v: Long) = real < v
-  @inline final def <(v: Float) = real < v
-  @inline final def <(v: Double) = real < v
+  def <(v: Byte) = real < v
+  def <(v: Short) = real < v
+  def <(v: Int) = real < v
+  def <(v: Long) = real < v
+  def <(v: Float) = real < v
+  def <(v: Double) = real < v
 
-  @inline final def <=(v: Byte) = real <= v
-  @inline final def <=(v: Short) = real <= v
-  @inline final def <=(v: Int) = real <= v
-  @inline final def <=(v: Long) = real <= v
-  @inline final def <=(v: Float) = real <= v
-  @inline final def <=(v: Double) = real <= v
+  def <=(v: Byte) = real <= v
+  def <=(v: Short) = real <= v
+  def <=(v: Int) = real <= v
+  def <=(v: Long) = real <= v
+  def <=(v: Float) = real <= v
+  def <=(v: Double) = real <= v
 
-  @inline final def >(v: Byte) = real > v
-  @inline final def >(v: Short) = real > v
-  @inline final def >(v: Int) = real > v
-  @inline final def >(v: Long) = real > v
-  @inline final def >(v: Float) = real > v
-  @inline final def >(v: Double) = real > v
+  def >(v: Byte) = real > v
+  def >(v: Short) = real > v
+  def >(v: Int) = real > v
+  def >(v: Long) = real > v
+  def >(v: Float) = real > v
+  def >(v: Double) = real > v
 
-  @inline final def >=(v: Byte) = real >= v
-  @inline final def >=(v: Short) = real >= v
-  @inline final def >=(v: Int) = real >= v
-  @inline final def >=(v: Long) = real >= v
-  @inline final def >=(v: Float) = real >= v
-  @inline final def >=(v: Double) = real >= v
+  def >=(v: Byte) = real >= v
+  def >=(v: Short) = real >= v
+  def >=(v: Int) = real >= v
+  def >=(v: Long) = real >= v
+  def >=(v: Float) = real >= v
+  def >=(v: Double) = real >= v
 
   protected def real: Byte
 }

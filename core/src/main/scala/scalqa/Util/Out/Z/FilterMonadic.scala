@@ -1,8 +1,8 @@
 package scalqa; package Util; package Out; package Z
 
 private[Out] final class FilterMonadic[+A] private[scalqa] (private val real: Any) extends AnyVal {
-  @inline private def _failed = real.isInstanceOf[Deficiency]
-  @inline private def _val = real.asInstanceOf[A]
+  private def _failed = real.isInstanceOf[Deficiency]
+  private def _val = real.asInstanceOf[A]
 
   def foreach(f: A => Unit): Unit = real match { case v: Deficiency => (); case v => f(_val) }
 

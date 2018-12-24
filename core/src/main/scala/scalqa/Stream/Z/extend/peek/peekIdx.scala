@@ -5,9 +5,9 @@ private[Stream] object peekIdx {
   def apply[@specialized(DATA) A](s: Stream[A], c: Consumer.Idx[A], start: Int): Stream[A] = new Stream[A] with A.Extended.All[A] {
     protected var i = start
 
-    @inline final def real = s
+    def real = s
 
-    @inline final def prime = real.prime
+    def prime = real.prime
 
     def pump = { val v = real.pump; c.accept(i, v); i += 1; v }
 

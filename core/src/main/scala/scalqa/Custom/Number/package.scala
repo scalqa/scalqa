@@ -24,7 +24,7 @@ package object Number {
     return l
   }
 
-  @inline final def get10Power(i: Int): Long = tenPowers(i); private lazy val tenPowers = new Array[Long](19).I(a => 19.all.foldAs(1L)((v, i) => { a(i) = v; v * 10L }))
+  def get10Power(i: Int): Long = tenPowers(i); private lazy val tenPowers = new Array[Long](19).I(a => 19.all.foldAs(1L)((v, i) => { a(i) = v; v * 10L }))
 
 }
 /*___________________________________________________________________________

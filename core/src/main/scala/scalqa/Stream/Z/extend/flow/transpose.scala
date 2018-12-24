@@ -8,12 +8,12 @@ private[Stream] object transpose {
 
     var o: Opt[Stream[B]] = \/
 
-    @inline final def prime: Boolean = o || {
+    def prime: Boolean = o || {
       def load = if (idx.all.isAny((v: ~[B]) => v.prime)) o = idx.all.map(_.nextOpt or App.Fail("Converted streams are of different size"))
       o || { load; o }
     }
 
-    @inline final def pump: Stream[B] = { val v = o.value; o = \/; v }
+    def pump: Stream[B] = { val v = o.value; o = \/; v }
   }
 }
 

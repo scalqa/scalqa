@@ -4,24 +4,24 @@ import Custom.Array.{ Z => AZ }
 
 class Chars private[I] (protected val base: Array[Char]) extends AnyVal with Idx.I[Char] {
   protected type TYPE = Chars
-  @inline protected def make = new Chars(_)
+  def make = new Chars(_)
 
-  @inline final def apply(i: Int) = base(i)
-  @inline final def size: Int = base.length
-  @inline final override def all: ~[Char] = Custom.Array.Z.stream(base)
+  def apply(i: Int) = base(i)
+  def size: Int = base.length
+  override def all: ~[Char] = Custom.Array.Z.stream(base)
 
-  @inline final override def copy(r: Idx.Range) = new Chars(AZ.copy.range(base, r))
-  @inline final override def copyDrop(r: Idx.Range) = new Chars(AZ.copy.dropRange(base, r))
+  override def copy(r: Idx.Range) = new Chars(AZ.copy.range(base, r))
+  override def copyDrop(r: Idx.Range) = new Chars(AZ.copy.dropRange(base, r))
 
-  @inline final override def +(v: Char) = new Chars(AZ.plus(base, v))
-  @inline final override def +~(v: ~[Char]) = new Chars(AZ.plus.stream(base, v))
-  @inline final override def +@(i: Int, v: Char) = new Chars(AZ.plus.at(base, i, v))
-  @inline final override def +~@(i: Int, v: ~[Char]) = new Chars(AZ.plus.pipeAt(base, i, v))
+  override def +(v: Char) = new Chars(AZ.plus(base, v))
+  override def +~(v: ~[Char]) = new Chars(AZ.plus.stream(base, v))
+  override def +@(i: Int, v: Char) = new Chars(AZ.plus.at(base, i, v))
+  override def +~@(i: Int, v: ~[Char]) = new Chars(AZ.plus.pipeAt(base, i, v))
 
-  @inline final override def -(v: Char) = new Chars(AZ.minus(base, v))
-  @inline final override def -~(v: ~[Char]) = new Chars(AZ.minus.stream(base, v))
+  override def -(v: Char) = new Chars(AZ.minus(base, v))
+  override def -~(v: ~[Char]) = new Chars(AZ.minus.stream(base, v))
 
-  @inline final override def toArray(implicit t: ClassTag[Char]) = base.copyFull
+  override def toArray(implicit t: ClassTag[Char]) = base.copyFull
 }
 
 object Chars extends Z.Primitive.Setup[Char, Chars](new Chars(_), Array.emptyCharArray)

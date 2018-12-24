@@ -8,9 +8,9 @@ final class _Class[A] private[Vals] (a: Array[_], val setup: Any.Datum.Setup[A])
 
   protected def base = real.asInstanceOf[Array[A]]
 
-  @inline final def apply(i: Int) = setup.Map(real(i))
-  @inline final def size: Int = real.length
-  @inline final def length: Int = real.length
+  def apply(i: Int) = setup.Map(real(i))
+  def size: Int = real.length
+  def length: Int = real.length
 
   def allReal = real.all
 

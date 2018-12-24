@@ -2,11 +2,11 @@ package scalqa; package Stream; package Z; package extend; package zip
 
 private[Stream] class zipFoldAs[A, B](val real: Stream[A], var b: B, f: Folding.As[B, A]) extends Stream[(A, B)] with A.Extended.Size[(A, B)] {
 
-  @inline final def prime = real.prime
+  def prime = real.prime
 
-  @inline final def pump = { val a = real.pump; b = f(b, a); (a, b) }
+  def pump = { val a = real.pump; b = f(b, a); (a, b) }
 
-  @inline final def foreach(c: Consumer[(A, B)]) = {
+  def foreach(c: Consumer[(A, B)]) = {
     class Each extends Consumer[A] {
       var vb = b
       def accept(v: A) = { vb = f(vb, v); c.accept((v, vb)) }
@@ -14,7 +14,7 @@ private[Stream] class zipFoldAs[A, B](val real: Stream[A], var b: B, f: Folding.
     real.foreach(new Each)
   }
 
-  @inline final override def ilkOpt = Ilk.Refs
+  override def ilkOpt = Ilk.Refs
 
 }
 /*___________________________________________________________________________

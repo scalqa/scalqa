@@ -2,7 +2,7 @@ package scalqa; package Any; package Ilk
 
 abstract class _Class private[Ilk] extends Any.Able.Void with Like {
 
-  @inline private[scalqa] def shift(v: Like) = Z.Shift.shift(shiftId, v.shiftId)
+  private[scalqa] def shift(v: Like) = Z.Shift.shift(shiftId, v.shiftId)
 
   override def toString = this.I.Class.name.copyAfter(".A.").copyBefore("$")
 }

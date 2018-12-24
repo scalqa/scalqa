@@ -8,7 +8,7 @@ trait Consumer[@specialized(DATA) -A] {
 
 object Consumer {
 
-  private object Void extends Consumer[Any] { @inline final def accept(v: Any) = () }
+  private object Void extends Consumer[Any] { def accept(v: Any) = () }
 
   implicit def zzMakeVoid[@specialized(DATA) A](v: \/): Consumer[A] = Void.asInstanceOf[Consumer[A]]
 

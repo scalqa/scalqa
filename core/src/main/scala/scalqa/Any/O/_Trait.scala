@@ -8,7 +8,7 @@ trait _Trait {
 
 object _Trait extends Util.Void.Setup[O](new O with Void { def onObservableChange(f: () => Any) = \/ }) {
 
-  @inline private[O] def onObservableChange(o: O, f: () => Any): EventControl = o.onObservableChange(f)
+  private[O] def onObservableChange(o: O, f: () => Any): EventControl = o.onObservableChange(f)
 
   implicit def zzLibrary[A <: O](a: A) = new _library[A](a)
 

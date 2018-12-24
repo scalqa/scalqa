@@ -2,21 +2,21 @@ package scalqa; package Custom; package Numeric; package Z
 
 private[scalqa] object Long extends Numeric[Long] with math.Integral[Long] {
 
-  @inline final def negate(x: Long) = -x
-  @inline final def minus(x: Long, y: Long) = x - y
-  @inline final def plus(x: Long, y: Long) = x + y
-  @inline final def times(x: Long, y: Long) = x * y
-  @inline final def quot(x: Long, y: Long) = x / y
-  @inline final def rem(x: Long, y: Long) = x % y
+  def negate(x: Long) = -x
+  def minus(x: Long, y: Long) = x - y
+  def plus(x: Long, y: Long) = x + y
+  def times(x: Long, y: Long) = x * y
+  def quot(x: Long, y: Long) = x / y
+  def rem(x: Long, y: Long) = x % y
 
-  @inline final def fromInt(x: Int) = x toInt
-  @inline final def toDouble(x: Long) = x toDouble
-  @inline final def toFloat(x: Long) = x toFloat
-  @inline final def toInt(x: Long) = x toInt
-  @inline final def toLong(x: Long) = x toLong
+  def fromInt(x: Int) = x toInt
+  def toDouble(x: Long) = x toDouble
+  def toFloat(x: Long) = x toFloat
+  def toInt(x: Long) = x toInt
+  def toLong(x: Long) = x toLong
 
-  @inline final override def zero = 0L
-  @inline final override def one = 1L
+  override def zero = 0L
+  override def one = 1L
 
   override def abs(x: Long) = if (x < 0) negate(x) else x
   override def signum(x: Long): Int = if (x < 0) -1 else if (x > 0) 1 else 0

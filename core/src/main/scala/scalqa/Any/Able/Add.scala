@@ -6,9 +6,9 @@ trait Add[@specialized(DATA) A] {
 
   def addAll(stream: ~[A]): Unit = stream(add)
 
-  @inline def +=(v: A): this.type = { add(v); this }
+  def +=(v: A): this.type = { add(v); this }
 
-  @inline final def +~=(stream: ~[A]): this.type = { addAll(stream); this }
+  def +~=(stream: ~[A]): this.type = { addAll(stream); this }
 
 }
 /*___________________________________________________________________________

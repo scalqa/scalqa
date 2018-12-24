@@ -2,8 +2,8 @@ package scalqa; package Custom; package String; package _library
 
 class _Class private[scalqa] (protected val real: String) extends AnyVal with _evaluate._Trait[String] with _modify[String] with _substring[String] with _transform[String] {
 
-  @inline protected def make(v: String) = v
-  @inline private[String] def undo(v: String) = v
+  def make(v: String) = v
+  private[String] def undo(v: String) = v
 
 }
 /*___________________________________________________________________________

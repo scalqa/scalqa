@@ -7,23 +7,23 @@ import scalqa.Stream.Z
 
 private[scalqa] trait Streaming {
 
-  @inline implicit def zzStream_Array[@specialized(DATA) A](v: Array[A]): ~[A] with All[A] = Custom.Array.Z.stream(v)
+  implicit def zzStream_Array[@specialized(DATA) A](v: Array[A]): ~[A] with All[A] = Custom.Array.Z.stream(v)
 
-  @inline implicit def zzStream_Interface[@specialized(DATA) A](v: ~[A]) = v.asInstanceOf[scalqa.Stream._Class[A]]
+  implicit def zzStream_Interface[@specialized(DATA) A](v: ~[A]) = v.asInstanceOf[scalqa.Stream._Class[A]]
 
-  @inline implicit def zzStream_Java_Iterable[@specialized(DATA) A: Ilk](v: java.lang.Iterable[A]): ~[A] with All[A] = Z.A.Java.Iterable.toStream[A](v)
+  implicit def zzStream_Java_Iterable[@specialized(DATA) A: Ilk](v: java.lang.Iterable[A]): ~[A] with All[A] = Z.A.Java.Iterable.toStream[A](v)
 
-  @inline implicit def zzStream_Java_Iterator[@specialized(DATA) A: Ilk](v: java.util.Iterator[A]): ~[A] with All[A] = Z.A.Java.Iterator.toStream[A](v)
+  implicit def zzStream_Java_Iterator[@specialized(DATA) A: Ilk](v: java.util.Iterator[A]): ~[A] with All[A] = Z.A.Java.Iterator.toStream[A](v)
 
-  @inline implicit def zzStream_Java_Stream[@specialized(DATA) A](v: java.util.stream.Stream[A]): ~[A] with All[A] = zzStream_Java_Iterator(v.iterator)
+  implicit def zzStream_Java_Stream[@specialized(DATA) A](v: java.util.stream.Stream[A]): ~[A] with All[A] = zzStream_Java_Iterator(v.iterator)
 
-  @inline implicit def zzStream_Scala_Traversable[@specialized(DATA) A: Ilk](v: collection.GenTraversableOnce[A]): ~[A] with All[A] = Z.A.Scala.GenTraversableOnce.toStream[A](v)
+  implicit def zzStream_Scala_Traversable[@specialized(DATA) A: Ilk](v: collection.GenTraversableOnce[A]): ~[A] with All[A] = Z.A.Scala.GenTraversableOnce.toStream[A](v)
 
-  @inline implicit def zzStream_Scala_IndexedSeq[@specialized(DATA) A: Ilk](v: collection.IndexedSeq[A]): ~[A] with All[A] = Z.A.Scala.IndexedSeq.toStream[A](v)
+  implicit def zzStream_Scala_IndexedSeq[@specialized(DATA) A: Ilk](v: collection.IndexedSeq[A]): ~[A] with All[A] = Z.A.Scala.IndexedSeq.toStream[A](v)
 
-  @inline implicit def zzStream_Scala_LinearSeq[@specialized(DATA) A: Ilk](v: collection.LinearSeq[A]): ~[A] with All[A] = Z.A.Scala.LinearSeq.toStream[A](v)
+  implicit def zzStream_Scala_LinearSeq[@specialized(DATA) A: Ilk](v: collection.LinearSeq[A]): ~[A] with All[A] = Z.A.Scala.LinearSeq.toStream[A](v)
 
-  @inline implicit def zzStream_Scala_Range(v: scala.Range): ~[Int] with All[Int] = scalqa.Idx.Range.Z.stream(v.start, v.size)
+  implicit def zzStream_Scala_Range(v: scala.Range): ~[Int] with All[Int] = scalqa.Idx.Range.Z.stream(v.start, v.size)
 
 }
 /*___________________________________________________________________________

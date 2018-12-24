@@ -7,7 +7,7 @@ trait _Trait[TYPE <: _Trait[TYPE]] extends Any with Datum.Comparable[TYPE, java.
 
   protected def setup: Setup[TYPE]
 
-  @inline final def undo(v: TYPE) = v.real
+  def undo(v: TYPE) = v.real
 
   override def toString = real
 

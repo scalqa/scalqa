@@ -3,7 +3,7 @@ package scalqa; package Any; package Ref; package Extra
 trait Like {
   private var top: Z.Entry = \/
 
-  @inline private[Extra] def _topEntry = { if (top.isCancelled) synchronized { top = top.child }; top }
+  private[Extra] def _topEntry = { if (top.isCancelled) synchronized { top = top.child }; top }
 
   private[Extra] def _addEntry(scope: AnyRef, _this: Any): EventControl = synchronized {
     val te = _topEntry

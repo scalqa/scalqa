@@ -13,7 +13,7 @@ sealed abstract class Rounding {
       remainder(l, m)
     } else {
       val f = (d - l) * m
-      l.toDouble + (f.toLong + extra(f % 1d): @inline) / m.toDouble
+      l.toDouble + (f.toLong + extra(f % 1d)) / m.toDouble
     }
   }
 

@@ -10,7 +10,7 @@ trait _Trait[A] { self: Flow[A] =>
 
   def toInfo = Z.info.toInfo(this)
 
-  @inline private[scalqa] def ilkDefault: Any.Ilk = { val o = ilkOpt; if (o.isVoid) Ilk.Refs else o.value }
+  private[scalqa] def ilkDefault: Any.Ilk = { val o = ilkOpt; if (o.isVoid) Ilk.Refs else o.value }
 
 }
 /*___________________________________________________________________________

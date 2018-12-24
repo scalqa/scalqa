@@ -2,7 +2,7 @@ package scalqa; package Stream; package Z; package extend; package filter
 
 private[Stream] object dropAt {
 
-  @inline final def apply[@specialized(DATA) A](s: Stream[A], r: Idx.Range): Stream[A] = new Stream[A] with A.Extended.Filter[A] {
+  def apply[@specialized(DATA) A](s: Stream[A], r: Idx.Range): Stream[A] = new Stream[A] with A.Extended.Filter[A] {
     protected var i = 0
 
     def prime = {
@@ -18,7 +18,7 @@ private[Stream] object dropAt {
       s.foreach(c)
     }
 
-    @inline final def real = s
+    def real = s
   }
 }
 /*___________________________________________________________________________

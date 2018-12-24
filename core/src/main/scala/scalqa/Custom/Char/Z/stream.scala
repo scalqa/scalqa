@@ -4,26 +4,26 @@ private[Char] object stream {
 
   abstract class Base(override val _size: Int) extends Stream[Char] with Stream.A.Specialized.Indexed[Char] {
 
-    @inline final def pump = _pumpIndexed
+    def pump = _pumpIndexed
 
-    @inline final def foreach(f: Stream.Consumer[Char]) = _consumeIndexed(f)
+    def foreach(f: Stream.Consumer[Char]) = _consumeIndexed(f)
 
-    @inline final override def ilkOpt = Ilk.Chars
+    override def ilkOpt = Ilk.Chars
 
   }
 
   class Up(from: Char) extends Base(scala.Char.MaxValue - from + 1) {
 
-    @inline final override def _apply(i: Int) = (from + i).toChar
+    override def _apply(i: Int) = (from + i).toChar
 
-    @inline final override def sortedOpt = Ordering.Char
+    override def sortedOpt = Ordering.Char
   }
 
   class Down(from: Char) extends Base(from - scala.Char.MinValue + 1) {
 
-    @inline final override def _apply(i: Int) = (from - i).toChar
+    override def _apply(i: Int) = (from - i).toChar
 
-    @inline final override def sortedOpt = Ordering.Char.reverse
+    override def sortedOpt = Ordering.Char.reverse
   }
 }
 /*___________________________________________________________________________

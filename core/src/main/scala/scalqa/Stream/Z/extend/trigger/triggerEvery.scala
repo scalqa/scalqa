@@ -2,17 +2,17 @@ package scalqa; package Stream; package Z; package extend; package trigger
 
 private[Stream] object triggerEvery {
 
-  @inline final def apply[@specialized(DATA) A](s: Stream[A], tl: Duration, f: (Int, Duration) => Unit): Stream[A] = new Stream[A] with A.Extended.All[A] {
+  def apply[@specialized(DATA) A](s: Stream[A], tl: Duration, f: (Int, Duration) => Unit): Stream[A] = new Stream[A] with A.Extended.All[A] {
     protected var i = 0
     protected var start, time: Time = \/
 
-    @inline final def prime = {
+    def prime = {
       def init = { time = Time.now; start = time }
       if (i == 0) init
       real.prime
     }
 
-    @inline final def pump = { check; real.pump }
+    def pump = { check; real.pump }
 
     def foreach(c: Consumer[A]) = if (prime) s.foreach(v => { check; c.accept(v) })
 
@@ -24,7 +24,7 @@ private[Stream] object triggerEvery {
       i += 1
     }
 
-    @inline final override def real = s
+    override def real = s
   }
 }
 /*___________________________________________________________________________

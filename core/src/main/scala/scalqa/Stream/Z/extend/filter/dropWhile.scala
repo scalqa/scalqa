@@ -2,7 +2,7 @@ package scalqa; package Stream; package Z; package extend; package filter
 
 private[Stream] object dropWhile {
 
-  @inline final def apply[@specialized(DATA) A](s: Stream[A], f: Filter[A]): Stream[A] = new Stream[A] with A.Extended.Filter[A] {
+  def apply[@specialized(DATA) A](s: Stream[A], f: Filter[A]): Stream[A] = new Stream[A] with A.Extended.Filter[A] {
     protected var first: A = _
     protected var dropped, isFirst = false
 
@@ -17,7 +17,7 @@ private[Stream] object dropWhile {
 
     def foreach(c: Consumer[A]) = if (prime) { c.accept(pump); s.foreach(c) }
 
-    @inline final def real = s
+    def real = s
   }
 }
 /*___________________________________________________________________________

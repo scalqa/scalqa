@@ -4,7 +4,7 @@ class _library private[scalqa] (private val real: Boolean) extends AnyVal {
 
   def toOpt[A](value: => A): Opt[A] = if (real) value else Opt.Void
 
-  @inline final def ! : Boolean = !real
+  def ! : Boolean = !real
 
 }
 

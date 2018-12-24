@@ -9,7 +9,7 @@ object AS_IS {
   // ***********************************************************************
   private object Mapping extends (Any => Any) with Stream.Mapping[Any, Any] {
 
-    @inline final def apply(v: Any) = v
+    def apply(v: Any) = v
 
   }
 }
