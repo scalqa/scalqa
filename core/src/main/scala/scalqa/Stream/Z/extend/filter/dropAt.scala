@@ -14,7 +14,7 @@ private[Stream] object dropAt {
 
     def foreach(c: Consumer[A]) = {
       val st = r.start; val e = r.end
-      while (i < e && prime) { if (i >= st) c.accept(pump); i += 1 }
+      while (i < e && s.prime) { val v = s.pump; if (i < st) c.accept(v); i += 1 }
       s.foreach(c)
     }
 
