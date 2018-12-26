@@ -22,11 +22,11 @@ ___________________________________________________________________________*/
  *
  *    Note, the result is mapped to the specified type
  *    {{{
- *       def all:  ~[Any]    = "1" ~+ 2 + 3.0 + 4l + "5"
+ *       def all = ~[Any] + "1" + 2 + 3.0 + 4l + "5"
  *
- *       def allS: ~[String] = all.letAs[String]
+ *       all.lp                  // Prints ~(1, 2, 3.0, 4, 5)
  *
- *       allS.lp // prints '~(1, 5)'
+ *       all.letType[String].lp  // Prints ~(1, 5)
  *    }}}
  *
  * @def letMap -> Filter and converter
@@ -42,13 +42,13 @@ ___________________________________________________________________________*/
  *
  *         all.letMap({
  *           case s if (s.length >= 2) => s
- *           case _                    => ()
+ *           case _                    => \/
  *         }).lp                                           // Prints: ~(ABC, 22, 333)
  *
- *         all.letMap(_.toIntOpt).lp                       // Prints: ~(1, 22, 333)
+ *         all.letMap(_.toIntOut.valueOpt).lp              // Prints: ~(1, 22, 333)
  *     }}}
  *
- *     @note 'letMap' is a better alternative to PartialFunction, because it is evaluated just once for each element
+ *     Note: 'letMap' is a better alternative to letLookup with PartialFunction, because it is evaluated just once for each element
  *
  * @def letLookup -> Filter and converter
  *
@@ -57,7 +57,7 @@ ___________________________________________________________________________*/
  *     The elements are converted to the new type
  *
  *     {{{
- *        def all = ~[Any] ~+ "ABC" + 1 + 22.0 + "DE" + 333F + "F"
+ *        def all = ~[Any] + "ABC" + 1 + 22.0 + "DE" + 333F + "F"
  *
  *        all.letLookup({ case s: String if (s.length > 1) => s }).lp
  *

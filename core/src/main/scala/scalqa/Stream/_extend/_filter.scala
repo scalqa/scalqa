@@ -60,9 +60,9 @@ ___________________________________________________________________________*/
  *
  * @def letIdx -> Indexed filter
  *
- *    Only lets elements satisfying the filtering function
+ *    Only lets elements satisfying the filter
  *
- *    @param f filtering function, which also takes element index in the sequence
+ *    @param f filter
  *    @param start the starting index value
  *
  *     {{{
@@ -74,7 +74,9 @@ ___________________________________________________________________________*/
  *
  * @def letNext -> Sequence head filter
  *
- *    Only lets first `number` of elements
+ *    Only lets `first` number of elements
+ *
+ *    Note: This might look like `take`, but it is more efficient (`take` immediately iterates the elements creating a new stream)
  *    {{{
  *       (1 <> 10).all.letNext(3).lp
  *
@@ -84,7 +86,7 @@ ___________________________________________________________________________*/
  *
  * @def letLast -> Sequence tail filter
  *
- *    Only lets last `number` of elements
+ *    Only lets `last` number of elements
  *    {{{
  *       (1 <> 10).all.letLast(3).lp
  *
@@ -94,7 +96,7 @@ ___________________________________________________________________________*/
  *
  * @def letAt -> Sequence range filter
  *
- *    Only lets elements within given sequence range
+ *    Only lets elements within given index range
  *
  *    {{{
  *       ('a' <> 'z').all.letAt(1 <> 7).lp
@@ -103,19 +105,19 @@ ___________________________________________________________________________*/
  *       ~(b, c, d, e, f, g, h)
  *    }}}
  *
- * @def letWhile -> Sequence head filter.
+ * @def letWhile -> Sequence head filter
  *
- *    Only lets first consecutive elements satisfying the filtering function
+ *    Only lets first consecutive elements satisfying the filter
  *
  *    Note, everything starting from the first non compliant element will be discarded (including later compliant elements)
  *
  *    {{{
- *      (1 <> 10).all +~ (1 <> 10) letWhile (_ <= 5) lp
+ *       def all = (1 <> 5).all +~ (1 <> 5)
  *
- *      // Output
- *      ~(1, 2, 3, 4, 5)
+ *       all.lp                     // Prints ~(1, 2, 3, 4, 5, 1, 2, 3, 4, 5)
+ *
+ *       all.letWhile(_ <= 3).lp    // Prints ~(1, 2, 3)
  *    }}}
- *
  *
  * @def letAll( -> Group filter
  *
@@ -124,16 +126,16 @@ ___________________________________________________________________________*/
  *    {{{
  *       val idx = (1 <> 5).all.flatMap(_.I repeat 3).to[Idx]
  *
- *       idx.all.lp                    // Prints: ~(1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5)
+ *       idx.all.lp                     // Prints: ~(1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5)
  *
- *       idx.all.letAll(3 <> 7).lp     // Prints: ~(3, 3, 3, 4, 4, 4, 5, 5, 5)
+ *       idx.all.letAll(3 <> 7).lp      // Prints: ~(3, 3, 3, 4, 4, 4, 5, 5, 5)
  *
  *       idx.all.letAll(2 ~+ 5 + 11).lp // Prints: ~(2, 2, 2, 5, 5, 5)
  *    }}}
  *
  *    @note  The operation is very efficient if streams are sorted
  *
- * @def letAllBy -> Property group filter.
+ * @def letAllBy -> Property group filter
  *
  *    Only lets elements, which produce property value equal to the found in `that` stream
  *
@@ -180,15 +182,16 @@ ___________________________________________________________________________*/
  *
  * @def dropWhile -> Sequence head reversed filter
  *
- *    Discards first consecutive elements satisfying the filtering function
+ *    Discards first consecutive elements satisfying the filter
  *
  *    Note, everything starting from the first non compliant element will be allowed (including later compliant elements)
  *
  *    {{{
- *      (1 <> 10).all +~ (1 <> 10) dropWhile (_ <= 5) lp
+ *       def all = (1 <> 5).all +~ (1 <> 5)
  *
- *      // Output
- *      ~(6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+ *       all.lp                     // Prints ~(1, 2, 3, 4, 5, 1, 2, 3, 4, 5)
+ *
+ *       all.dropWhile(_ <= 3).lp   // Prints ~(4, 5, 1, 2, 3, 4, 5)
  *    }}}
  *
  * @def dropAll( -> Group reversed filter
@@ -198,9 +201,9 @@ ___________________________________________________________________________*/
  *    {{{
  *       val idx = (1 <> 5).all.flatMap(_.I repeat 3).to[Idx]
  *
- *       idx.all.lp                     // Prints: ~(1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5)
+ *       idx.all.lp                      // Prints: ~(1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5)
  *
- *       idx.all.dropAll(3 <> 7).lp     // Prints: ~(1, 1, 1, 2, 2, 2)
+ *       idx.all.dropAll(3 <> 7).lp      // Prints: ~(1, 1, 1, 2, 2, 2)
  *
  *       idx.all.dropAll(2 ~+ 5 + 11).lp // Prints: ~(1, 1, 1, 3, 3, 3, 4, 4, 4)
  *    }}}

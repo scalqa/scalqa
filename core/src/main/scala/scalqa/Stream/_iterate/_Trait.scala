@@ -38,7 +38,7 @@ ___________________________________________________________________________*/
  *
  *     `pump` is a faster `next`
  *
- *     The Stream MUST be successfully 'primed' before 'pump' is called
+ *     The Stream MUST be successfully 'primed' before `pump` is called
  *
  *     {{{
  *         val s : ~[Int] = 1 <> 3
@@ -53,7 +53,7 @@ ___________________________________________________________________________*/
  *
  * @def findNextOpt -> Find next element
  *
- *     Iterates elements till the first satisfying the filter is found
+ *     Iterates elements until the first satisfying the filter is found
  *
  * @def nextOpt -> Next element
  *
@@ -63,7 +63,7 @@ ___________________________________________________________________________*/
  *
  *     Delivers next element
  *
- *     Fails if no data
+ *     Fails if no elements
  *
  *     Implemented as:
  *     {{{

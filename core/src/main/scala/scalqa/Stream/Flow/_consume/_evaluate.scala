@@ -36,13 +36,15 @@ ___________________________________________________________________________*/
  *
  * @def lookupOpt -> Find first matching option
  *
- *     The found element may be converted as well
+ *     The matching element is mapped with the functions
  *
  *     {{{
  *       def stream = ~[Any] + "ABC" + 1 + 22.0 + "DE" + 333F + "F"
  *
  *       // Find length of the first matching string
- *       stream.lookupOpt{ case s: String if (s.length > 1) => s.length }.lp // Prints: Opt(3)
+ *       stream.lookupOpt{
+ *         case s: String if (s.length > 1) => s.length
+ *       }.lp    // Prints: Opt(3)
  *     }}}
  *
  * @def count: -> All elements count
@@ -53,17 +55,17 @@ ___________________________________________________________________________*/
  *
  * @def count( -> Element conditional count
  *
- *    Returns count of elements satisfying the filter function
+ *    Returns count of elements satisfying the filter
  *
  * @def findOpt -> Find
  *
- *     Optionally returns the first element satisfying the given filter function
+ *     Optionally returns the first element satisfying the given filter
  *
  *     {{{ (1 <> 1000).all.findOpt(_ > 100).lp  // Prints: Opt(101) }}}
  *
  * @def find( -> Find
  *
- *     Returns the first element satisfying the given filter function
+ *     Returns the first element satisfying the given filter
  *
  *     Fails if none found
  *
@@ -71,7 +73,7 @@ ___________________________________________________________________________*/
  *
  * @def isAny -> Any check
  *
- *     Returns `true` if there is an element satisfying the filter function
+ *     Returns `true` if there is an element satisfying the filter
  *
  *     {{{
  *         def all = (1 <> 100).all
@@ -83,7 +85,7 @@ ___________________________________________________________________________*/
  *
  * @def isEvery ->  Every check
  *
- *     Returns `true` if every element is satisfying the filter function
+ *     Returns `true` if every element is satisfying the filter
  *
  *     {{{
  *         def all = (1 <> 100).all
@@ -113,13 +115,13 @@ ___________________________________________________________________________*/
  *
  * @def countFew ->  Element multi count
  *
- *     Counts elements for several filter functions at once
+ *     Counts elements for several filters at once
  *
- *     Returns [[Idx Idx[Int]]], where each Int corresponds to the given filter function count
+ *     Returns [[Idx Idx[Int]]], where each Int corresponds to the given filter index
  *
  *     If the pipeline is empty, the resulting Idx will still hold 0 in each position, but will test isVoid positive
  *
- *     @param  f  several filter functions
+ *     @param  f  several filters
  *
  *     @example
  *     {{{

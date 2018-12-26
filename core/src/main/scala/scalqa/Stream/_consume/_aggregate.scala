@@ -31,10 +31,9 @@ trait _aggregate[A] extends Flow._consume._aggregate[A] { self: Stream[A] =>
  /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
- * @trait _aggregate ->  `Reduce Interface`
+ * @trait _aggregate ->  `Aggregate Interface`
  *
  *   All methods fully pump the pipeline
- *
  *
  * @def foldFlowAs -> foldAs
  *
@@ -67,18 +66,18 @@ ___________________________________________________________________________*/
  *
  *   Simultaneously computes multiple average values for properties specified by several functions
  *
- *   Returns [[Idx Idx[Number]]], each corresponding to the given function
+ *   Returns [[Idx]] with values corresponding to the given mappings
  *
  *   For empty pipelines returned [[Idx]] will still hold zero numerics, but will test `isVoid` positive
  *
  *   {{{
- *     def average3(stream: ~[Int]): Idx[Number] = stream.averageFew(AS_IS, _ * 10, _ * 100)
+ *     def average3(stream: ~[Int]): Idx[Int] = stream.averageFew(AS_IS, _ * 10, _ * 100)
  *
- *     average3(1 <> 10).all lp  // Prints: ~(5, 55, 550)
+ *     average3(1 <> 10).all lp   // Prints: ~(5, 55, 550)
  *
- *     average3(\/).all lp       // Prints: ~(0, 0, 0)
+ *     average3(\/).all lp        // Prints: ~(0, 0, 0)
  *
- *     average3(\/).Opt lp       // Prints: Opt.Void
+ *     average3(\/).I.Opt lp      // Prints: Opt.Void
  *   }}}
  *
  *    Note: Currently this method is not specialized and will auto box primitives
@@ -87,18 +86,18 @@ ___________________________________________________________________________*/
  *
  *   Simultaneously computes multiple sum values for properties specified by several functions
  *
- *   Returns [[Idx Idx[Number]]], each corresponding to the given function
+ *   Returns [[Idx]], with values corresponding to the given mappings
  *
  *   For empty pipelines returned [[Idx]] will still hold zero numerics, but will test `isVoid` positive
  *
  *   {{{
- *       def sum3(stream: ~[Int]): Idx[Number] = stream.sumFew(AS_IS, _ * 10, _ * 100)
+ *     def sum3(stream: ~[Int]): Idx[Int] = stream.sumFew(AS_IS, _ * 10, _ * 100)
  *
- *       sum3((1 <> 10).all.swap(1)).all lp  // Prints: ~(10, 100, 1000)
+ *     sum3(1.I repeat 10).all lp  // Prints: ~(10, 100, 1000)
  *
- *       sum3(\/).all lp                     // Prints: ~(0, 0, 0)
+ *     sum3(\/).all lp             // Prints: ~(0, 0, 0)
  *
- *       sum3(\/).Opt lp                     // Prints: Opt.Void
+ *     sum3(\/).I.Opt lp           // Prints: Opt.Void
  *   }}}
  *
  *    Note: Currently this method is not specialized and will auto box primitives

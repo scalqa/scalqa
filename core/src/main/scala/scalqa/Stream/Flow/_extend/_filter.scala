@@ -4,7 +4,7 @@ trait _filter[A] extends Z.Shared[A] { self: Flow[A] =>
 
   def let(f: Filter[A]): Flow[A]
 
-  def letBy[T](pc: Mapping[A, T], f: Filter[T]): Flow[A] = let(a => f.allow(pc(a)))
+  def letBy[T](property: Mapping[A, T], f: Filter[T]): Flow[A] = let(a => f.allow(property(a)))
 
   def drop(f: Filter[A]): Flow[A] = let(!f.allow(_))
 
@@ -27,28 +27,27 @@ ___________________________________________________________________________*/
  *
  * @def let( ->  Main filter
  *
- *    Only lets elements satisfying the filtering function
+ *    Only lets elements satisfying the filter
  *
- *    'let' is the main filtering method. It's equivalent in Java and Scala is called 'filter'
+ *    `let` is the main filtering method. It's equivalent in Java and Scala is called `filter`
  *
  *    {{{  (1 <> 10).all.let(_ % 2 == 0).lp // Prints: ~(2, 4, 6, 8, 10) }}}
  *
  * @def letBy -> Property filter
  *
- *    Only lets elements satisfying the filtering function
+ *    Only lets elements satisfying the filter on given property
  *
- *    @param pc the property conversion function
- *    @param f the property filtering function to be invoked for each element in the pipeline
- *    @example
  *    {{{
- *        ("ABC" ~+ "D" + "E" + "FG").letBy[Int](_.length, _ >= 2).lp // Prints: ~(ABC, FG)
+ *       val filter: Stream.Filter[Int] = _ >= 2
+ *
+ *       ("ABC" ~+ "D" + "E" + "FG").letBy(_.length, filter).lp // Prints: ~(ABC, FG)
  *    }}}
  *
- *    @note This might not be useful in simple cases, but is very expressive when standard filters are reused
+ *    Note: This might be useful when existing filters are reused
  *
  * @def drop( ->  Reversed filter
  *
- *    Discards all the objects satisfying the filtering function from the pipeline
+ *    Discards all the elements satisfying the filter
  *
  *    {{{ (1 <> 10).all.drop(_ % 2 == 0).lp // Prints: ~(1, 3, 5, 7, 9) }}}
  *
@@ -56,8 +55,10 @@ ___________________________________________________________________________*/
  *
  *    Discards all the objects which test [[Any.isVoid]] positive from the pipeline
  *    {{{
- *       ("A" ~+ null + "B" + "" + "C").lp          // Prints: ~(A, null, B, void, C)
+ *       def all = ("A" ~+ null + "B" + "" + "C")
  *
- *       ("A" ~+ null + "B" + "" + "C").dropVoid.lp // Prints: ~(A, B, C)
+ *       all.lp              // Prints: ~(A, null, B, void, C)
+ *
+ *       all.dropVoid.lp     // Prints: ~(A, B, C)
  *    }}}
  */

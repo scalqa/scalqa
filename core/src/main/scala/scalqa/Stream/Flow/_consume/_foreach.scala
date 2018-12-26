@@ -39,7 +39,7 @@ ___________________________________________________________________________*/
  *
  * @def drain -> Discharge everything
  *
- *   Calls foreach discarding all elements
+ *   Calls foreach, discarding all retrieved elements
  *
  *   Even though nothing is done at this point, this method can be run for the benefit of other functions in the pipeline
  *

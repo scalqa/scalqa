@@ -24,7 +24,7 @@ ___________________________________________________________________________*/
  *
  * @def sort( -> Sort
  *
- *   Sorts stream elements on provided Ordering
+ *   Sorts stream elements with provided Ordering
  *
  *   {{{
  *      (5 ~+ 1 + 4 + 2 + 3).sort.lp
@@ -34,7 +34,7 @@ ___________________________________________________________________________*/
  *
  * @def sortReversed( -> Sort reversed
  *
- *   Sorts pipeline elements on provided Ordering , which is used in reverse order
+ *   Sorts pipeline elements with provided Ordering, which is reversed
  *
  *   {{{
  *      (5 ~+ 1 + 4 + 2 + 3).sortReversed.lp
@@ -55,10 +55,10 @@ ___________________________________________________________________________*/
  *
  * @def sortBy[B: Ordering, C: Ordering] -> Sort by two properties
  *
- *   Sorts pipeline on first property, and then, if indeterminate, on second
+ *   Sorts pipeline on first property, and then, if indeterminate on second
  *
  * @def sortBy[B: Ordering, C: Ordering, D: Ordering] -> Sort by three properties
  *
- *   Sorts pipeline on first property, then if, if indeterminate, on second, etc...
+ *   Sorts pipeline on first property, then if indeterminate on second, etc...
  *
  */

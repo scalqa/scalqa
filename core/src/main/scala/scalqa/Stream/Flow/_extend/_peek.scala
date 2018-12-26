@@ -18,9 +18,9 @@ ___________________________________________________________________________*/
  *
  *    'peek' methods do not change [[Flow]] type or composition.
  *
- * @def peek( -> Element access.
+ * @def peek( -> Element access
  *
- *    Provides access to a passing pipeline element
+ *    Provides access to passing pipeline elements
  *
  *    This method does not change pipeline type or composition in any way
  *
@@ -36,7 +36,7 @@ ___________________________________________________________________________*/
  *
  * @def peekIdx -> Indexed element access
  *
- *    Provides access to a passing pipeline elements with their index in sequence
+ *    Provides access to passing pipeline elements with their index in sequence
  *
  *    @param start starting value for element indexing
  *

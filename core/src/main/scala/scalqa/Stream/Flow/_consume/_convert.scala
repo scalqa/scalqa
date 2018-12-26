@@ -29,6 +29,12 @@ trait _convert[A] extends Any.Able.ToText { self: Flow[A] =>
  /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
+ * @def toArray -> Convert to Array
+ *
+ *      Concert stream to array
+ *
+ *      {{{val a : Array[Int] =  (1<>10).all.toArray}}}
+ *
  * @def format -> Elements as String
  *
  *       All elements are converted toString
@@ -77,7 +83,7 @@ ___________________________________________________________________________*/
  *          (1 <> 5).all.toString.lp
  *
  *          // Output
- *          Stream(1, 2, 3, 4, 5)
+ *          ~(1, 2, 3, 4, 5)
  *      }}}
  *
  * @def toVals -> Convert to [[Vals]]
@@ -90,7 +96,7 @@ ___________________________________________________________________________*/
  *
  *    Returns all elements as String formatted table
  *
- *    If elements implement [[Any.Able.ToInfo]], each 'info' tag value is placed in a different column
+ *    If elements implement [[Any.Able.ToInfo]], each 'info' property value is placed in a different column
  *
  *    If elements implement `scala.Product` (like all Tuples), each Product element is placed in a different column
  *
@@ -141,4 +147,26 @@ ___________________________________________________________________________*/
  *
  *     New target conversions can be implemented by creating implicit object extending [[Stream.Interface.To$.Converter]]
  *
+ * @def toRaw -> Convert to immutable collection
+ *
+ *     Converts pipeline to the specified immutable collection
+ *
+ *     The types of collection and Stream must match
+ *
+ *     Available targets are:
+ *
+ *        - [[Booleans]]
+ *        - [[Bytes]]
+ *        - [[Chars]]
+ *        - [[Shorts]]
+ *        - [[Ints]]
+ *        - [[Longs]]
+ *        - [[Floats]]
+ *        - [[Doubles]]
+ *
+ *      {{{
+ *         (1 <> 10).all.toRaw[Ints]
+ *
+ *         ('A' <> 'D').all.toRaw[Chars]
+ *      }}}
  */

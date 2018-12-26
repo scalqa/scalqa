@@ -33,20 +33,22 @@ ___________________________________________________________________________*/
  *    Creates a new [[Stream]] with given `element` appended to `this` [[Stream]]
  *
  *    {{{
- *       (1 <> 5).all + 99 + 100.lp
+ *       (1 <> 5).all.append(99).append(100) lp
  *
  *       // Output
  *       ~(1, 2, 3, 4, 5, 99, 100)
  *    }}}
  *
+ *    Note. Append has operator alias `+`
+ *
  * @def +( -> Append
  *
- *     Same as `append`
+ *    Same as `append`
  *
  *    Creates a new [[Stream]] with given `element` appended to `this` [[Stream]]
  *
  *    {{{
- *       (1 <> 5).all + 99 + 100.lp
+ *       (1 <> 5).all + 99 + 100 lp
  *
  *       // Output
  *       ~(1, 2, 3, 4, 5, 99, 100)
@@ -57,7 +59,7 @@ ___________________________________________________________________________*/
  *    Creates a new [[Stream]] with `that` [[Stream]] appended to `this` [[Stream]]
  *
  *    {{{
- *       ('1' <> '9').all +~ ('a' <> 'd')  +~ ('A' <> 'D').lp
+ *       ('1' <> '9').all.appendAll('a' <> 'd').appendAll('A' <> 'D').lp
  *
  *       // Output
  *       ~(1, 2, 3, 4, 5, 6, 7, 8, 9, a, b, c, d, A, B, C, D)
@@ -70,7 +72,7 @@ ___________________________________________________________________________*/
  *    Creates a new [[Stream]] with `that` [[Stream]] appended to `this` [[Stream]]
  *
  *    {{{
- *       ('1' <> '9').all +~ ('a' <> 'd') +~ ('A' <> 'D').lp
+ *       ('1' <> '9').all +~ ('a' <> 'd') +~ ('A' <> 'D') lp
  *
  *       // Output
  *       ~(1, 2, 3, 4, 5, 6, 7, 8, 9, a, b, c, d, A, B, C, D)
@@ -80,10 +82,10 @@ ___________________________________________________________________________*/
  *
  *    Creates a new [[Stream]] with given `element` inserted into `this` [[Stream]]
  *
- *    @param index position in the current stream to insert element at. If index is out of range (including -1), the element is appended
+ *    @param index position in the current stream to insert element at. If index is out of range, the element is prepended or appended
  *
  *    {{{
- *      ('a' <> 'd').all insertAt (2, 'X').lp
+ *      ('a' <> 'd').all.insertAt(2, 'X').lp
  *
  *       // Output
  *       ~(a, b, X, c, d)
@@ -93,11 +95,11 @@ ___________________________________________________________________________*/
  *
  *   Creates a new [[Stream]] with `that` [[Stream]] inserted into `this` [[Stream]]
  *
- *   @param index position in the current stream to insert elements at. If index is out of range (including -1), the elements are appended
+ *   @param index position in the current stream to insert elements at. If index is out of range, the elements are prepended or appended
  *
  *   @example
  *   {{{
- *       ('a' <> 'f').all insertAllAt (3, 'X' <> 'Z').lp
+ *       ('a' <> 'f').all.insertAllAt(3, 'X' <> 'Z').lp
  *
  *       // Output
  *       ~(a, b, c, X, Y, Z, d, e, f)
@@ -122,7 +124,7 @@ ___________________________________________________________________________*/
  *
  *      // Unfoldifg Fibonacci Sequence
  *
- *     (0 ~+ 1).unfold(_.letLast(2).sum).letNext(20).lp
+ *      (0 ~+ 1).unfold(_.letLast(2).sum).take(20).lp
  *
  *      // Output
  *      ~(0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181)

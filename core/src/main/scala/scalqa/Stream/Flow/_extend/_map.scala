@@ -45,15 +45,15 @@ ___________________________________________________________________________*/
  *
  * @def flatMap -> Map multiplier
  *
- *   For every existing element, a mapped group of elements is inserted into the pipeline
+ *   For every existing element, a mapped stream of elements is inserted into the pipeline
  *
- *   Note. The function can return an empty group, in which case total number of elements might even be reduced
+ *   Note. The mapping can return an empty stream, in which case total number of elements might even be reduced
  *
- *   @param f function to provide a group of elements for each existing element
+ *   @param f function to provide a stream of elements for each existing element
  *
  *   @example
  *   {{{
- *      (1 ~+ 2 + 3).flatMap(i => (i * 10) ~+ (i * 100) + (i * 1000)).lp
+ *      ~.*(1, 2, 3).flatMap(i => ~.*(i * 10, i * 100, i * 1000)).lp
  *
  *      // Output
  *      ~(10, 100, 1000, 20, 200, 2000, 30, 300, 3000)
