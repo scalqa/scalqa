@@ -7,7 +7,7 @@ package Design_Patterns
  *
  *  If `apply` is used today for a simple class, and the class gets promoted to a [[POP.Package_Type package type]] later, this will break existing code
  *
- *  By default 'apply' method is replaced with 'make' or something else, if it is more appropriate
+ *  By default 'apply' method is replaced with 'make' or something else more appropriate
  *
  *  Compare:
  *

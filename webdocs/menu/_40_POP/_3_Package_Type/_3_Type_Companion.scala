@@ -11,37 +11,39 @@ package POP.Package_Type
  *      - `package object` logically becomes type companion with all static definitions
  *      - implicit conversions will remain in the real companion object with unusable name `_Class` or `_Trait`
  *
- *  Here are code fragments of how Ordering is defined
+ *  Here are code fragments of how [[scalqa.Pro Pro]] (property) is defined
  *
  *  {{{
  *    package scalqa {
  *
- *       package object scalqa {
- *         type Ordering[-A] = Ordering._Trait[A]  // The name to be used
- *       }
+ *      package object scalqa {
  *
- *       package Ordering {
+ *        type Pro[+A] = Pro._Trait[A]           // The name to be used
  *
- *         trait _Trait[-A] {                    // Type definition
- *           // Methods
- *         }
+ *      }
  *
- *         object _Trait {                       // Implicit definitions
+ *      package Pro {
  *
+ *        trait _Trait[@specialized(DATA) +A] {  // Type definition
  *
- *           implicit def zzLibrary[A](v: Ordering[A]) = new _library[A](v)
- *           implicit def zzMake[A](v: \/) = A.Void.asInstanceOf[Ordering[A]]
- *           implicit def zzMake[A](v: java.util.Comparator[A]): Ordering[A] = make(v)
- *           // More methods
- *         }
+ *          def apply(): A
  *
- *         package object Ordering {              // Static definitions
+ *        }
  *
- *           def make[A](implicit o: Ordering[A]): Ordering[A] = o
- *           def from[A, B](f: A => B)(implicit o: Ordering[B]): Ordering[A] = o.asMappedView(f)
- *         }
- *       }
- *     }
+ *        object _Trait {                        // Implicit definitions
+ *
+ *          implicit def zzFunction0[A](v: Pro[A]): () => A = () => v()
+ *
+ *          implicit def zzLibrary[A](v: Pro[A]) = new _library._Class(v)
+ *
+ *        }
+ *      }
+ *      package object Pro {                     // Static definitions
+ *
+ *        def make[A](source: => A): Pro[A] = new Z.A.Sourced(source)
+ *
+ *      }
+ *    }
  *  }}}
  */
 class Type_Companion { val sort_3 = () }
