@@ -39,7 +39,7 @@ scalacOptions in ThisBuild ++= Seq(
 
 lazy val commonSettings = Seq(
   scalaVersion := "2.12.4",
-  version := "0.24"
+  version := "0.25"
 )
 
 lazy val core = project
