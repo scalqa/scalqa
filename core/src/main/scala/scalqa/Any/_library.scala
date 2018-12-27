@@ -74,7 +74,7 @@ ___________________________________________________________________________*/
  *     [[Any.Itself]] becomes another library attached to every single object in Scalqa, but it has to be accessed over ".I" notation
  *
  *     {{{
- *       val txt = "abc".Text.I(_ lp) // Prints: "abc"
+ *       val txt = "abc".I(_ lp)      // Prints: "abc"
  *
  *       txt.I.id lp                  // Prints: scalqa.String@1
  *

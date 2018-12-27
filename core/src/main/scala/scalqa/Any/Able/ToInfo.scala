@@ -52,4 +52,8 @@ ___________________________________________________________________________*/
  * @def toString -> Custom single line description
  *
  *     If not overridden further, toString returns toInfo.toString
+ *
+ * @def toText -> Custom multi line description
+ *
+ *     If not overridden further, toText returns toInfo.toText
  */

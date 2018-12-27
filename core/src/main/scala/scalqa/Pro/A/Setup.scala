@@ -23,6 +23,6 @@ ___________________________________________________________________________*/
 /**
  * @class Setup ->
  *
- *     Special setup property, which is once used (applied), cannot be update anymore
+ *     Special setup property, which if used (applied) cannot be updated anymore
  *
  */

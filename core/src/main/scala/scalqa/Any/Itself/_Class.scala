@@ -48,9 +48,6 @@ class _Class[A] private[scalqa] (protected val real: A) extends AnyVal  {
  /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
- *
- * g79yui4v7ra9dg7l
- *
  * @class _Class ->
  *
  *     [[Any.Itself]] is a library available for `every` single object in Scalqa
@@ -60,11 +57,11 @@ ___________________________________________________________________________*/
  *     Because, of <any>.I access [[Any.Itself]] has luxury of providing diverse functionality on every object with no naming conflicts with application methods
  *
  *     {{{
- *       val txt = "abc".Text.I(_ lp) // Prints: "abc"
+ *       val txt = "abc".I(_ lp)     // Prints: "abc"
  *
- *       txt.I.id lp                  // Prints: scalqa.String@1
+ *       txt.I.id lp                 // Prints: scalqa.String@1
  *
- *       txt.I.hashIndex lp           // Prints: 1
+ *       txt.I.hashIndex lp          // Prints: 1
  *     }}}
  *
  * @def Opt -> Non void Opt Constructor

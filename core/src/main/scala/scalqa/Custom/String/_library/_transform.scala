@@ -35,7 +35,7 @@ ___________________________________________________________________________*/
  *   Prefixes first line with the tag, other lines with tag equal space
  *
  *   {{{
- *      "abc\nde\nxyz".Text.indent("Lines: ").lp
+ *      "abc\nde\nxyz".indent("Lines: ").lp
  *      // Output
  *      Lines: abc
  *             de
@@ -46,7 +46,7 @@ ___________________________________________________________________________*/
  *
  *   Creates a [[Stream]] of Strings representing lines (delimited by '\n') of this text
  *
- *   {{{  "abc\n def\n xyz".Text.allLines.lp // Prints: ~(abc,  def,  xyz) }}}
+ *   {{{  "abc\n def\n xyz".allLines.lp // Prints: ~(abc,  def,  xyz) }}}
  *
  *
  * @def allTokenized -> Stream of tokens
@@ -64,7 +64,7 @@ ___________________________________________________________________________*/
  *       "Text to Tokenize:".lp.lp
  *       str.lp.lp
  *       ("Token", "Range", "String").lp
- *       str.replaceAll("\n", "_").Text.allTokenized("000" ~+ "111" + "222" + "333" + "444").tp
+ *       str.replaceAll("\n", "_").allTokenized("000" ~+ "111" + "222" + "333" + "444").tp
  *
  *       // Output
  *
