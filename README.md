@@ -10,5 +10,5 @@ It is fast and simple data processing framework
 
 [Scalqa API](http://scalqa.org/doc/scalqa/index.html)
 
-Note: *Scalqa* will soon be rewritten to use [Scalqa/Steam](https://github.com/scalqa/stream) in order to separate basic collection processing from everything else
+Note: *Scalqa* next release will introduce major binary incompatible changes, which will drastically symplify API
 
