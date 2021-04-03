@@ -7,6 +7,9 @@
 */project/project/target
 */logs
 
+/make/doc/target
+/make/release
+
 *.zip
 *.tasty
 *.class
