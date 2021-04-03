@@ -5,10 +5,10 @@
 /target
 */project/target
 */project/project/target
-/docs
 */logs
 
 *.zip
+*.tasty
 *.class
 *.log
 
