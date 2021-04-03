@@ -1,0 +1,31 @@
+sidebar:
+  - title: Guide
+    subsection:
+    - title: Introduction
+      subsection:
+        - title: About
+          url: guide/introduction/About.html
+        - title: Download and Setup
+          url: guide/introduction/Download_and_Setup.html
+        - title: H2O Structure
+          url: guide/introduction/H2O_Structure.html
+        - title: Do Not Use toString
+          url: guide/introduction/Do_Not_Use_toString.html
+    - title: Features
+      subsection:
+        - title: Stream
+          url: guide/features/Stream.html
+        - title: Option
+          url: guide/features/Option.html
+        - title: Specialized
+          url: guide/features/Specialized.html
+        - title: Data
+          url: guide/features/Data.html
+    - title: Internals
+      subsection:
+        - title: SLIM Codding
+          url: guide/internals/SLIM_Coding.html
+        - title: Private Packages
+          url: guide/internals/Private_Packages.html
+
+

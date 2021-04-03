@@ -1,0 +1,406 @@
+1613833135861:compile
+1613833576493:reload
+1613833580350:compile
+1613833637261:reload
+1613833640189:compile
+1613833666861:reload
+1613833668965:compile
+1613840585384:runMain scalqa.doc.Main
+1613840606598:compile
+1613840730159:runMain scalqa.doc.Main
+1613841524799:compile
+1613841528078:reload
+1613841534823:compile
+1613841549694:runMain scalqa.doc.Main
+1613842102728:compile
+1613843100488:clean
+1613843102040:compile
+1613843132096:runMain scalqa.doc.Main
+1613843199712:project core
+1613843309056:compile
+1613843312776:runMain scalqa.doc.Main
+1613843643376:compile
+1613844395392:clean
+1613844396871:compile
+1613844635496:runMain scalqa.doc.Main
+1613844786663:compile
+1613845012664:runMain scalqa.doc.Main
+1613845385608:compile
+1613846033528:project core
+1613846915633:compile
+1613848226074:project core
+1613851699563:compile
+1613851757554:runMain scalqa.doc.Main
+1613855434219:project market
+1613915560300:compile
+1613917968781:runMain scalqa.doc.Main
+1613918090996:compile
+1613918095363:runMain scalqa.doc.Main
+1613919642101:compile
+1613919850252:runMain scalqa.doc.Main
+1613920939764:compile
+1613920965716:runMain scalqa.doc.Main
+1613923098166:compile
+1613923740406:clean
+1613923741829:compile
+1613924955845:project core
+1613925556302:compile
+1613925756431:clean
+1613925757766:compile
+1613926157575:project core
+1613926206847:compile
+1613926953542:runMain scalqa.doc.Main
+1613927506039:compile
+1613927591839:runMain scalqa.doc.Main
+1613927835934:compile
+1613928932359:project core
+1613929070808:compile
+1613929119223:runMain scalqa.doc.Main
+1613930180057:compile
+1613932588449:runMain scalqa.doc.Main
+1613934931633:compile
+1613941283340:runMain scalqa.doc.Main
+1613941419532:project core
+1613941487964:clean
+1613941490316:runMain scalqa.doc.Main
+1613941612684:clean
+1613941615052:runMain scalqa.doc.Main
+1613942597068:clean
+1613942601452:compile
+1613942932427:runMain scalqa.doc.Main
+1613943108533:compile
+1613943150019:runMain scalqa.doc.Main
+1613944058813:compile
+1613945715461:runMain scalqa.doc.Main
+1613948020413:project core
+1613948252333:runMain scalqa.doc.Main
+1613948626782:project core
+1613948810845:compile
+1613953783426:project core
+1614106425724:compile
+1614108323299:clean
+1614108324723:compile
+1614110089757:clean
+1614110090947:compile
+1614110790445:clean
+1614110791741:compile
+1614111100461:clean
+1614111101389:compile
+1614113436589:runMain scalqa.doc.Main
+1614113492300:runMain scalqa.doc.DocMain
+1614113503718:runMain scalqa.DocMain
+1614113559445:runMain scalqa.doc.DocMain
+1614113565653:runMain scalqa.DocMain
+1614114022262:runMain scalqa.doc.DocMain
+1614114102470:clean
+1614114105398:compile
+1614118052455:runMain scalqa.doc.Main
+1614118433727:
+1614118435679:runMain scalqa.doc.Main
+1614119202711:compile
+1614120484711:project core
+1614124885713:compile
+1614168012593:project core
+1614170307866:compile
+1614170791155:project core
+1614171045442:compile
+1614176994381:project core
+1614177040629:compile
+1614180502076:project core
+1614180504548:compile
+1614261082325:project core
+1614265904231:compile
+1614269924039:project core
+1614272793721:compile
+1614272974105:project core
+1614288282294:runMain scalqa.doc.Main
+1614288702885:compile
+1614288760703:runMain scalqa.doc.Main
+1614290132773:project core
+1614290796911:compile
+1614291280765:clean
+1614291282087:compile
+1614291826622:runMain scalqa.doc.Main
+1614293140295:project core
+1614293266071:runMain scalqa.doc.Main
+1614293791183:project core
+1614293905119:runMain scalqa.doc.Main
+1614294335279:project core
+1614337475301:runMain scalqa.doc.Main
+1614339629119:compile
+1614340102598:runMain scalqa.doc.Main
+1614340641623:compile
+1614341450415:runMain scalqa.doc.Main
+1614342197880:clean
+1614342199895:runMain scalqa.doc.Main
+1614347066601:compile
+1614347286569:runMain scalqa.doc.Main
+1614363044246:project core
+1614366233742:compile
+1614366246542:project core
+1614366909302:compile
+1614367037150:runMain scalqa.doc.Main
+1614368335704:compile
+1614368960760:runMain scalqa.doc.Main
+1614369566551:compile
+1614370238750:runMain scalqa.doc.Main
+1614370513960:compile
+1614371246344:project core
+1614377943611:compile
+1614378111826:project core
+1614379828795:compile
+1614380570859:project core
+1614380794963:compile
+1614380797667:project core
+1614382711156:compile
+1614430525813:runMain scalqa.doc.Main
+1614432917598:project core
+1614435359704:compile
+1614435365519:project test
+1614435604183:runMain scalqa.doc.Main
+1614444517713:compile
+1614444539057:runMain scalqa.doc.Main
+1614445367074:compile
+1614446105890:compile/
+1614446107794:compile
+1614446951514:runMain scalqa.doc.Main
+1614447803634:project core
+1614448086291:runMain scalqa.doc.Main
+1614448392474:compile
+1614448574306:runMain scalqa.doc.Main
+1614448797195:compile
+1614448986730:runMain scalqa.doc.Main
+1614453344253:compile
+1614453539221:runMain scalqa.doc.Main
+1614458290046:project core
+1614458392669:runMain scalqa.doc.Main
+1614458953262:compile
+1614459184861:runMain scalqa.doc.Main
+1614459247126:compile
+1614459340903:runMain scalqa.doc.Main
+1614459482863:runMain scalqa.doc.Test
+1614459855263:compile
+1614459956254:runMain scalqa.doc.Main
+1614530702205:project core
+1614695293218:runMain scalqa.doc.Main
+1614717952881:project core
+1614717955961:runMain scalqa.doc.Main
+1614718943371:project core
+1614719021178:runMain scalqa.doc.Main
+1614719129195:project core
+1614719359067:runMain scalqa.doc.Main
+1614722957866:project core
+1614723156641:runMain scalqa.doc.Main
+1614726664490:clean
+1614726666505:runMain scalqa.doc.Main
+1614726687889:project core
+1614727033730:runMain scalqa.doc.Main
+1614778031285:project core
+1614779517973:runMain scalqa.doc.Main
+1614784255906:compile
+1614785582178:runMain scalqa.doc.Main
+1614787540588:compile
+1614787685963:runMain scalqa.doc.Main
+1614788928675:compile
+1614788967268:runMain scalqa.doc.Main
+1614790464940:compile
+1614790880524:runMain scalqa.doc.Main
+1614793106653:compile
+1614793172230:runMain scalqa.doc.Main
+1614793384222:compile
+1614793476055:runMain scalqa.doc.Main
+1614794763205:compile
+1614794907495:runMain scalqa.doc.Main
+1614795992784:compile
+1614796046032:runMain scalqa.doc.Main
+1614809965962:compile
+1614810265323:runMain scalqa.doc.Main
+1614813712462:project core
+1614813919509:compile
+1614814052326:runMain scalqa.doc.Test
+1614814137295:compile
+1614814139671:runMain scalqa.doc.Test
+1614814198078:runMain scalqa.doc.Main
+1614815957759:compile
+1614815966224:project core
+1614816020319:compile
+1614816881120:runMain scalqa.doc.Main
+1614866669232:project core
+1614871627396:runMain scalqa.doc.Main
+1614874147678:project core
+1614874152661:runMain scalqa.doc.Main
+1614878531783:compile
+1614879031920:clean
+1614879033415:compile
+1614879039863:clean
+1614879040991:compile
+1614879057694:project core
+1614879100568:compile
+1614879483191:project core
+1614893173800:runMain scalqa.doc.Main
+1614893586153:project core
+1614893927135:runMain scalqa.doc.Main
+1614894111704:project core
+1614894230256:runMain scalqa.doc.Main
+1614894372201:project core
+1614895520209:runMain scalqa.doc.Main
+1614896295194:project core
+1615039869667:runMain scalqa.doc.Main
+1615039905811:clean
+1615039907588:runMain scalqa.doc.Main
+1615039919523:project core
+1615040018723:runMain scalqa.doc.Main
+1615041243668:project core
+1615041598003:runMain scalqa.doc.Main
+1615041780156:project core
+1615042480220:runMain scalqa.doc.Main
+1615042823932:project core
+1615044135349:runMain scalqa.doc.Main
+1615044674355:project core
+1615213934257:compile
+1615213951986:runMain scalqa.doc.Main
+1615214876769:compile
+1615214914426:runMain scalqa.doc.Main
+1615223640683:project make
+1615236313296:runMain scalqa.doc.Main
+1615236417720:compile
+1615236428215:runMain scalqa.doc.Main
+1615236492383:runMain scalqa.doc.Main0
+1615236661376:runMain scalqa.doc.Main
+1615236805014:
+1615236806896:runMain scalqa.doc.Main
+1615301058749:runMain scalqa.doc.Main0
+1615302671454:project core
+1615303707605:runMain scalqa.doc.Main0
+1615304063630:project core
+1615307612152:runMain scalqa.doc.Main0
+1615307929823:project core
+1615309582703:runMain scalqa.doc.Main0
+1615309586847:clean
+1615309588408:runMain scalqa.doc.Main0
+1615309594984:project core
+1615309636103:runMain scalqa.doc.Main0
+1615317913858:project core
+1615318175322:runMain scalqa.doc.Main0
+1615318658106:project core
+1615320522306:runMain scalqa.doc.Main0
+1615393613425:project core
+1615393648913:compile
+1615394478722:project core
+1615556266529:compile
+1615556283249:runMain scalqa.doc.Main0
+1615556419289:project core
+1615556512817:runMain scalqa.doc.Main0
+1615556643753:project core
+1615556685442:runMain scalqa.doc.Main0
+1615558451714:compile
+1615558559233:clean
+1615558560738:compile
+1615558570571:project core
+1615558614353:compile
+1615558632945:runMain scalqa.doc.Main0
+1615559254770:project core
+1615560665226:runMain scalqa.doc.Main0
+1615560775545:project core
+1615560958642:compile
+1615561010226:runMain scalqa.doc.Main0
+1615561015610:project core
+1615561457291:runMain scalqa.doc.Main0
+1615582057800:compile
+1615582287920:runMain scalqa.doc.Main0
+1615582456944:compile
+1615582461537:project core
+1615582871464:runMain scalqa.doc.Main0
+1615583244537:project core
+1615583298113:runMain scalqa.doc.Main0
+1615583669352:project core
+1615583737512:runMain scalqa.doc.Main0
+1615584049497:project core
+1615584058097:runMain scalqa.doc.Main0
+1615586445186:project core
+1615587428698:runMain scalqa.doc.Main0
+1615588580338:project core
+1615589270204:runMain scalqa.doc.Main0
+1615644559975:project core
+1615644747672:runMain scalqa.doc.Main0
+1615731541708:runMain scalqa.doc.Main
+1615731623699:runMain scalqa.doc.Main0
+1615731878155:project core
+1615731929156:runMain scalqa.doc.Main0
+1615732362236:project core
+1615733637684:runMain scalqa.doc.Main0
+1617033135843:compile
+1617033140129:clean
+1617033142433:compile
+1617033156953:project test
+1617034699552:compile
+1617034773688:clean
+1617034775528:compile
+1617035313672:clean
+1617035315001:compile
+1617036762249:runMain scalqa.doc.Main0
+1617039625000:runMain scalqa.doc.Main
+1617039693617:project make
+1617040417880:runMain scalqa.doc.Main
+1617046099584:asdf
+1617046102609:jar
+1617046246136:project release
+1617048509540:compile
+1617048588574:clean
+1617048590669:compile
+1617048796565:runMain scalqa.doc.Main0
+1617049254966:compile
+1617049328061:runMain scalqa.doc.Main0
+1617050816045:clean
+1617050817446:runMain scalqa.doc.Main0
+1617051176574:runMain scalqa.doc.Main
+1617056015258:compile
+1617056997643:runMain scalqa.doc.Main
+1617111073312:compile
+1617111157440:runMain scalqa.doc.Main
+1617114664967:runMain scalqa.doc.Main0
+1617119102554:runMain scalqa.doc.Main
+1617123982542:runMain scalqa.doc.Main0
+1617124059485:runMain scalqa.doc.Main
+1617124514605:project core
+1617124661134:bld2
+1617124812060:reload
+1617124816773:run
+1617125096334:relaod
+1617125098244:reload
+1617125202973:buildDoc
+1617125288550:run
+1617126915094:buildDoc
+1617126994997:run
+1617127217450:buildRelease
+1617127244234:project core
+1617127308780:buildRelease
+1617128065268:project core
+1617128107698:buildRelease
+1617128350986:rebuildRelease
+1617224431041:reload
+1617224686096:project release
+1617226495948:compile
+1617226656021:reload
+1617226661060:run
+1617226762357:project merged
+1617226872981:run
+1617226908196:merge
+1617226948173:reload
+1617226952461:merge
+1617226976077:reload
+1617226987533:project merged
+1617227047196:runMain scalqa.doc.Main
+1617227326949:project core
+1617227491590:cleanMerge
+1617227868797:runMain scalqa.doc.Main
+1617229592172:merge
+1617229649828:reload
+1617229653405:merge
+1617230425780:runMain scalqa.doc.Main
+1617231639773:merge
+1617231667005:reload
+1617231672822:merge
+1617231942045:project release
+1617232791485:merge
+1617232872141:project make
