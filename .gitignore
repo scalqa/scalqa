@@ -7,8 +7,11 @@
 */project/project/target
 */logs
 
-/make/doc/target
-/make/release
+/merge/doc/target
+/merge/doc/lib
+/merge/release
+
+/core/src/scalqa/Test*.scala
 
 *.zip
 *.tasty
