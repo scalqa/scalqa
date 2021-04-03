@@ -1,0 +1,64 @@
+package scalqa; package `val`; import stream.*; import language.implicitConversions
+
+trait Stream[+A]:
+  @tn("read_Opt") def read_? : Opt[A]
+
+object Stream extends z.util._default with _build with _info with _use :
+  /**/           inline def apply[A](inline v: A)                   : ~[A]             = z.a.VarArg.Stream_ofOne[A](v)
+  /**/           inline def apply[A](inline v1: A, inline v2: A)    : ~[A]             = z.a.VarArg.Stream_ofTwo[A](v1, v2)
+  /**/                  def apply[A](v1: A, v2: A, v3: A, vs: A*)   : ~[A]             = if (vs.isEmpty) z.a.VarArg.Stream_ofThree[A](v1,v2,v3) else z.a.VarArg.Stream_ofMany[A](v1,v2,v3,vs)
+  @tn("getVoid") inline def void[A]                                 : ~[A]             = ZZ.voidStream
+  /**/                  def unapplySeq[A](v: ~[A])                  : Option[Seq[A]]   = Some(v.toSeq)
+
+  implicit       inline def xxAbleStream[A](inline v:Able.~[A]): ~[A]             = v.~
+
+  given xxCanEqual[A,B](using CanEqual[A,B]) : CanEqual[~[A],~[B]] = CanEqual.derived
+  given xxTagDoc[A:Info.Tag.Doc]             : Info.Tag.Doc[~[A]]  = z.util.DocTag()
+
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  type _build     = stream._build;      inline def _build   = stream._build
+  type _info      = stream._info
+  type _use       = stream._use;        inline def _use     = stream._use
+  type Flow[A]    = stream.Flow[A];     inline def Flow     = stream.Flow
+  type Preview[A] = stream.Preview[A];  inline def Preview  = stream.Preview
+  /**/                                  val Custom   = stream.Custom
+
+/*___________________________________________________________________________
+    __________ ____   __   ______  ____
+   /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
+ __\  \/ /___/ __  |/ /__/ /_/ /_/ __  |   (c) 2021, Scalqa.org Inc
+/_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
+___________________________________________________________________________*/
+/**
+@trait Stream -> ###
+
+      [[Stream]] has global alias `~` (tilde), which is used in many cases
+
+      By Scalqa convention, method names, which return [[Stream]] type, are ended with '_~' instead of word 'Stream'
+
+      ```
+      val s: ~[Char] = "ABCD".char_~
+
+      s.TP  // Prints ~(A, B, C, D)
+      ```
+
+      Stream has just one method to be implemented, but it has large attached libraries for stream:
+        - [building](stream/_build.html)
+        - [using](stream/_use.html)
+        - and [metadata](stream/_info.html)
+
+      Read more in the [Guide](../../../guide/reference/Stream.html).
+
+@def read_?  -> Read next option
+
+      Optionally returns next element or void option
+
+      If void option is returned, the [[Stream]] is considered exhasted and should be discarded
+
+      This is the only real method of [[Stream]] interface, the rest of [[Stream]] functionality is provided with extension methods
+
+@def apply            -> Single element consructor
+@def apply            -> Double element consructor
+@def apply            -> Multi element consructor
+@def void             -> Get void instance
+*/

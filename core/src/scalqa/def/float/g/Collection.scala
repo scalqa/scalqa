@@ -1,0 +1,24 @@
+package scalqa; package `def`; package float; package g; import language.implicitConversions
+
+trait Collection[A<:RAW] extends Val.Collection[A] with Able.Contain[A] with any.self.info.Specialized.OnFloat:
+  @tn("stream") def ~             : Stream[A]
+  /**/          def contains(v: A): Boolean   = this.~.takeOnly(v).readRaw_?
+
+object Collection:
+
+  trait Mutable[A<:RAW] extends Collection[A] with Val.Collection.M[A]:
+    def add(v: A): Unit
+
+  // ------------------------------------------------------------------------------------------------------------------------------------------
+  extension[A<:RAW,T,STM<: Shape.OfStream.Any[T]](inline x: Collection[A])
+    /**/                                       inline def map    [B>:T](inline f: A=> B)   (using inline s: Shape.OfStream.Tag[B,STM]): STM       = g.Stream.map[A,T,STM](x.~)[B](f)(using s)
+    /**/                                       inline def flatMap[B>:T](inline f: A=> ~[B])(using inline s: Shape.OfStream.Tag[B,STM]): STM       = g.Stream.flatMap[A,T,STM](x.~)[B](f)(using s)
+  extension[A<:RAW]  (inline x: Collection[A]) inline def withFilter(inline f: Fun.Filter[A])                                       : Stream[A] = x.~.filter(f)
+  extension[A<:RAW,U](inline x: Collection[A]) inline def foreach(   inline f: Fun.Consume[A,U])                                    : Unit      = x.~.foreach(f)
+
+/*___________________________________________________________________________
+    __________ ____   __   ______  ____
+   /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
+ __\  \/ /___/ __  |/ /__/ /_/ /_/ __  |   (c) 2021, Scalqa.org Inc
+/_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
+___________________________________________________________________________*/
