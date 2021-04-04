@@ -1,7 +1,5 @@
 package scalqa; package `def`; package string; package _Extension; import language.implicitConversions
 
-import Info.Tag.Doc
-
 transparent trait _modify[A<: String | Opaque.String]:
   self: z.Lib[A] =>
 

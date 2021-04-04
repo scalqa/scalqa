@@ -1,6 +1,6 @@
 package scalqa; package `def`; package any; package self; package info; package tag; package z; import language.implicitConversions
 
-class DefaultTag[A] extends Doc[A] with Void[A] with Empty[A] :
+class DefaultTag[A] extends Tag[A] with Void[A] with Empty[A] :
 
   override def tag(v: A): String =
     v match

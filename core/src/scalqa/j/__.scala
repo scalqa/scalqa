@@ -11,7 +11,7 @@ object J:
   /**/    var debug                                                                 : Boolean       = false
   inline  def debugOn                                                               : Unit          = debug = true
   inline  def debugOff                                                              : Unit          = debug = false
-  /**/    def debug[A:Info.Tag.Doc](v: A)                                           : Unit          = if(debug) println(v.tag)
+  /**/    def debug[A:Info.Tag](v: A)                                               : Unit          = if(debug) println(v.tag)
 
   inline  def initSize                                                       : Int           = ZZ.initSize
   inline  def toDo(                inline message: String = "On toDo list")  : Nothing       = throw new UnsupportedOperationException("toDo: "+message)

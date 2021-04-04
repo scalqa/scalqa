@@ -9,8 +9,8 @@ abstract class _base:
   given xxCanEqual[A<:RAW,B<:RAW](using CanEqual[A,B]) : CanEqual[Opt[A],Opt[B]] = CanEqual.derived
   given xxTagVoid [A<:RAW]                             : Tag.Void[Opt[A]]        with { def isVoid( v:Opt[A]) = v.isEmpty }
   given xxTagEmpty[A<:RAW]                             : Tag.Empty[Opt[A]]       with { def isEmpty(v:Opt[A]) = v.isEmpty }
-  given xxTagType  [A<:RAW]        (using t:Tag.Type[A]): Tag.Type[Opt[A]]        with { def name              = t.name + ".Opt"}
-  given xxTagDoc  [A<:RAW:Tag.Doc](using t:Tag.Type[A]): Tag.Doc[Opt[A]]         with { def tag( v: Opt[A])   = t.name + ".Opt(" + v.map(_.tag).or("\\/") + ")"
+  given xxTagType  [A<:RAW]       (using t:Tag.Type[A]): Tag.Type[Opt[A]]        with { def name              = t.name + ".Opt"}
+  given xxInfoTag  [A<:RAW:Tag]    (using t:Tag.Type[A]): Tag[Opt[A]]             with { def tag( v: Opt[A])   = t.name + ".Opt(" + v.map(_.tag).or("\\/") + ")"
                                                                                         def info(v: Opt[A])   = Info(t.name + ".Opt") += ("value", v.map(_.tag).or("\\/"))}
 
 /*___________________________________________________________________________

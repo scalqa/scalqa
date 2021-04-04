@@ -28,7 +28,7 @@ object Promise:
     inline def flatMap[B](f: A => Promise[B])  (using inline c:Context): Promise[B] = Z.flatMap(x,f)
     inline def foreach[U](inline f: A=>U)      (using inline c:Context): Unit       = x.onResult(_.forval(f))
 
-  given xxTagDoc[A](using t: Info.Tag.Doc[A]): Info.Tag.Doc[Promise[A]] with
+  given xxInfoTag[A](using t: Info.Tag[A]): Info.Tag[Promise[A]] with
     def tag (v: Promise[A]) : String = v.result_?.map(v => "Promise("+v.tag+")") or "Promise(NOT_READY)"
     def info(v: Promise[A]) : Info   = Info(v)
 

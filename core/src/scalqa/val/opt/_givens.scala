@@ -12,7 +12,7 @@ abstract class _givens extends givenDefailts:
   given xxTagType [A]: Tag.Type[Opt[A]] = Tag.Type("Opt")
   given xxTagVoid[A]: Tag.Void[Opt[A]] with { inline def isVoid(v: Opt[A]) = v eq ZZ.None }
 
-  given xxTagDoc[A](using t: Tag.Doc[A]) : Tag.Doc[Opt[A]] with
+  given xxInfoTag[A](using t: Tag[A]) : Tag[Opt[A]] with
     def tag(v: Opt[A]) : String = if(v eq ZZ.None) "Opt(\\/)" else "Opt("+t.tag(v.cast[A])+")"
     def info(v: Opt[A]): Info   = Info("Opt@"+v.self_^.hash)
 

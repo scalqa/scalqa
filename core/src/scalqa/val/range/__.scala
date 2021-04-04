@@ -30,7 +30,7 @@ object Range:
 
   given xxCanEqual[A,B](using CanEqual[A,B]): CanEqual[<>[A],<>[B]]  = CanEqual.derived
   given xxFor                               : range.z.For            = new range.z.For{}
-  given xxTagDoc[A:Info.Tag.Doc]            : Info.Tag.Doc[Range[A]] = new range.z.DocTag[A]
+  given xxInfoTag[A:Info.Tag]               : Info.Tag[Range[A]] = new range.z.InfoTag[A]
 
   // ~~~~~~~~~~~~~~~~~~~~~~
   inline def X = range.X

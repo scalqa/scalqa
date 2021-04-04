@@ -25,7 +25,7 @@ transparent trait _value[ROW, VIEW, A]:
   @tn("valueView_SetupProOpt") def valueView_:*?(f: VIEW => Pro.O[Opt[A]])                  : Unit   = value_:*?(ZValueView(f))
 
   /**/                         def voidTag                                                  : Info.Tag.Void[A]
-  /**/                         def docTag                                                   : Info.Tag.Doc[A]
+  /**/                         def docTag                                                   : Info.Tag[A]
   @tn("format_Setup")          def format_:(f: A => String.Opt)                             : Unit   = funFormat = f
   @tn("format_Setup")          def format_:(f: A => String.Opt, voidVal: ROW => String.Opt) : Unit   = { funFormat = f; funFormatVoid = voidVal }
   @tn("tooltip_Setup")         def tooltip_:(f: Opt[A] => Any)                              : Unit   = optFunTooltip = f.?.map(f => (v:Opt[A]) => f(v) match { case v: Tooltip => v; case _ => Tooltip(v.toString) })

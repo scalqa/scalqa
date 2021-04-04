@@ -5,9 +5,9 @@ transparent trait _customCell[ROW,V,A]:
   private[table] var emptyCellSetup   : control.Cell.Setup[control.Cell]      = \/
   private[table] var customCellSetups : ><[Cell.Setup[ROW, V, A]] = \/
 
-  class CustomCell[T]private (override val rowFilter: ROW => Boolean, empty: Boolean, val voidTag: Info.Tag.Void[T], val docTag: Info.Tag.Doc[T]) extends Cell.Setup[ROW, V, T]:
-    def this(rowFilter: ROW => Boolean)(using voidTag: Info.Tag.Void[T], docTag: Info.Tag.Doc[T]) = this(rowFilter,false,voidTag,docTag)
-    def this(v: EMPTY) = this(null, true, self.voidTag.cast[Info.Tag.Void[T]], self.docTag.cast[Info.Tag.Doc[T]])
+  class CustomCell[T]private (override val rowFilter: ROW => Boolean, empty: Boolean, val voidTag: Info.Tag.Void[T], val docTag: Info.Tag[T]) extends Cell.Setup[ROW, V, T]:
+    def this(rowFilter: ROW => Boolean)(using voidTag: Info.Tag.Void[T], docTag: Info.Tag[T]) = this(rowFilter,false,voidTag,docTag)
+    def this(v: EMPTY) = this(null, true, self.voidTag.cast[Info.Tag.Void[T]], self.docTag.cast[Info.Tag[T]])
     private[table] def column   = self
 
     if(empty) emptyCellSetup    = this.cast[control.Cell.Setup[control.Cell]]

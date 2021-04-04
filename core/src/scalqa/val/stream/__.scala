@@ -13,7 +13,7 @@ object Stream extends z.util._default with _build with _info with _use :
   implicit       inline def xxAbleStream[A](inline v:Able.~[A]): ~[A]             = v.~
 
   given xxCanEqual[A,B](using CanEqual[A,B]) : CanEqual[~[A],~[B]] = CanEqual.derived
-  given xxTagDoc[A:Info.Tag.Doc]             : Info.Tag.Doc[~[A]]  = z.util.DocTag()
+  given xxInfoTag[A:Info.Tag]                : Info.Tag[~[A]]  = z.util.InfoTag()
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type _build     = stream._build;      inline def _build   = stream._build

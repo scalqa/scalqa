@@ -1,7 +1,5 @@
 package scalqa; package `def`; package any; package self; import info.*; import language.implicitConversions
 
-import info.tag.Doc
-
 class Info protected(owner: Any) extends Any.Ref.Buffer[(String, String)] with Able.Tag with Product:
   /**/                   var id                                                                      : String    = owner match{case null => "null"; case s:String => s; case v => v.^.id}
   /**/                   def tag                                                                     : String    = id + '{' + pair_~().makeString(",") + '}'
@@ -10,13 +8,13 @@ class Info protected(owner: Any) extends Any.Ref.Buffer[(String, String)] with A
   @tn("value_Stream")    def value_~                                                                 : ~[String] = this.~.map(_._2)
   @tn("pair_Stream")     def pair_~(sep: String = "=")                                               : ~[String] = this.~.map((n,v) => if (n == null || n.length == 0) Info.toString(v) else n + sep + Info.toString(v))
 
-  /**/                   def add[A](name: String, value: A)                        (using t: Doc[A]) : Unit      = super.add((name, t.tag(value)))
-  /**/                   def add[A](value: A)                                      (using t: Doc[A]) : Unit      = add("",value)
-  /**/                   def addAt[A](pos: Int, name: String, value: A)            (using t: Doc[A]) : Unit      = addAt(pos,(name, t.tag(value)))
+  /**/                   def add[A](name: String, value: A)                        (using t: Tag[A]) : Unit      = super.add((name, t.tag(value)))
+  /**/                   def add[A](value: A)                                      (using t: Tag[A]) : Unit      = add("",value)
+  /**/                   def addAt[A](pos: Int, name: String, value: A)            (using t: Tag[A]) : Unit      = addAt(pos,(name, t.tag(value)))
 
-  @tn("add_Op")   inline def +=[A] (inline name: String, inline value: A)(using inline t: Doc[A])    : Info      = { add(name,value); this }
+  @tn("add_Op")   inline def +=[A] (inline name: String, inline value: A)(using inline t: Tag[A])    : Info      = { add(name,value); this }
   @tn("add_Op")   inline def +=    (inline value: String)                                            : Info      = { add(value);      this }
-  @tn("addAt_Op") inline def +=@[A](inline p:Int, inline n:String, inline v:A)(using inline t:Doc[A]): Info      = { addAt(p,n,v);    this }
+  @tn("addAt_Op") inline def +=@[A](inline p:Int, inline n:String, inline v:A)(using inline t:Tag[A]): Info      = { addAt(p,n,v);    this }
 
   // -------------------------- Product AbstractTrait ------------------------------------------------------------------------------
   /**/          override def productPrefix                                                           : String    = id
@@ -37,7 +35,7 @@ object Info:
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   @fast lazy val Specialized = info.Specialized; type Specialized = info.Specialized
   inline     def Tree        = info.Tree;        type Tree        = info.Tree
-  /**/       val Tag         = info.Tag
+  /**/       val Tag         = info.Tag;         type Tag[-A]     = info.Tag[A]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

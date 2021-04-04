@@ -7,7 +7,7 @@ class _givens:
   given xxTagClass[A]  (using t: ClassTag[A]): ClassTag[Result[A]]            = t.cast[ClassTag[Result[A]]]
   given xxCanEqual[A,B](using CanEqual[A,B]) : CanEqual[Result[A], Result[B]] = CanEqual.derived
 
-  given xxTagDoc[A](using t: Info.Tag.Doc[A]) : Info.Tag.Doc[Result[A]] with
+  given xxInfoTag[A](using t: Info.Tag[A]) : Info.Tag[Result[A]] with
     def tag(v: Result[A]) : String = if(v.isValue) "Result("+t.tag(v.cast[A])+")" else "Result(Problem("+v.problem.message+"))"
     def info(v: Result[A]): Info   = Info("Result@"+v.self_^.hash)
 

@@ -1,6 +1,7 @@
 package scalqa; package `def`; package any; import language.implicitConversions
 
-import self.info.tag. { Doc, Void, Empty, In }
+import self.info.Tag
+import self.info.tag. { Void, Empty, In }
 import self.shape.{ OfOpt, OfRange as R }
 import scala.{ Ordering as O }
 
@@ -13,10 +14,10 @@ transparent trait _extension:
     @tn("range")     inline def <> [RNG<:R.Any[A]](inline to: A)(using inline c:O[A])(using inline t:R.Tag[A,RNG]) : RNG          = z.range(x,to,c,t)
     @tn("rangeX")    inline def <>>[RNG<:R.Any[A]](inline to: A)(using inline c:O[A])(using inline t:R.Tag[A,RNG]) : RNG          = z.range.exclusive(x,to,c,t)
     infix            inline def in   [CONTAINER](inline c: CONTAINER)             (using inline t:In[A,CONTAINER]) : Boolean      = t.in(x,c)
-    /**/             inline def info                                                      (using inline dt:Doc[A]) : Info         = dt.info(x)
-    /**/             inline def tag                                                       (using inline dt:Doc[A]) : String       = dt.tag(x)
-    /**/             inline def tp                                                        (using inline dt:Doc[A]) : Unit         = ZZ.tp(x,dt)
-    @tn("plusSpaced")inline def +- [B](v: B)                             (using inline ta:Doc[A],inline tb:Doc[B]) : String       = ta.tag(x) + ' ' + tb.tag(v)
+    /**/             inline def info                                                      (using inline dt:Tag[A]) : Info         = dt.info(x)
+    /**/             inline def tag                                                       (using inline dt:Tag[A]) : String       = dt.tag(x)
+    /**/             inline def tp                                                        (using inline dt:Tag[A]) : Unit         = ZZ.tp(x,dt)
+    @tn("plusSpaced")inline def +- [B](v: B)                             (using inline ta:Tag[A],inline tb:Tag[B]) : String       = ta.tag(x) + ' ' + tb.tag(v)
     @tn("selfView")  inline def ^                                                                                  : Any.Self[A]  = x.cast[Any.Self[A]]
     @tn("self_View") inline def self_^                                                                             : Any.Self[A]  = x.cast[Any.Self[A]]
 
@@ -86,7 +87,7 @@ ___________________________________________________________________________*/
 
     Returns [[scalqa.gen.Info Info]] object describing current instance
 
-    Referance types can implement [[scalqa.def.able.Info Able.Info]], opaque types can provide implicit [[scalqa.gen.Doc Doc]],
+    Referance types can implement [[scalqa.def.able.Info Able.Info]], opaque types can provide implicit [[scalqa.gen.Tag Tag]],
     in any case this operation will retrieve [[scalqa.gen.Info Info]] or will create a basic one, if none is found.
 
 @def tag -> To String

@@ -5,7 +5,7 @@ import scala.Tuple3;
 import scalqa.val.Stream;
 import scala.math.Ordering;
 import scala.concurrent.ExecutionContext;
-import scalqa.def.any.self.info.tag.Doc;
+import scalqa.def.any.self.info.Tag;
 import scalqa.def.any.self.info.tag.z.DefaultTag;
 import scalqa.def.any.self.info.tag.z.PrimitiveTag;
 import scalqa.def.any.self.info.tag.z.ReferenceType;
@@ -50,15 +50,15 @@ public final class ZZ{
     public  static       void tp(double v)           { tp(String.valueOf(v));  }
     public  static       void tp(String v)           { Access.Console().println(v); }
     public  static <A>   void tp(A v)                { tp(DefaultTag.tag(v)); }
-    public  static <A>   void tp(A v,       Doc<A> t){ tp(t.tag(v)); }
-    public  static <A>   void tp(boolean v, Doc<A> t){ tp(((Doc<Boolean>)  t).tag(Boolean  .valueOf(v)));}
-    public  static <A>   void tp(byte    v, Doc<A> t){ tp(((Doc<Byte>)     t).tag(Byte     .valueOf(v)));}
-    public  static <A>   void tp(char    v, Doc<A> t){ tp(((Doc<Character>)t).tag(Character.valueOf(v)));}
-    public  static <A>   void tp(short   v, Doc<A> t){ tp(((Doc<Short>)    t).tag(Short    .valueOf(v)));}
-    public  static <A>   void tp(int     v, Doc<A> t){ tp(((Doc<Integer>)  t).tag(Integer  .valueOf(v)));}
-    public  static <A>   void tp(long    v, Doc<A> t){ tp(((Doc<Long>)     t).tag(Long     .valueOf(v)));}
-    public  static <A>   void tp(float   v, Doc<A> t){ tp(((Doc<Float>)    t).tag(Float    .valueOf(v)));}
-    public  static <A>   void tp(double  v, Doc<A> t){ tp(((Doc<Double>)   t).tag(Double   .valueOf(v)));}
+    public  static <A>   void tp(A v,       Tag<A> t){ tp(t.tag(v)); }
+    public  static <A>   void tp(boolean v, Tag<A> t){ tp(((Tag<Boolean>)  t).tag(Boolean  .valueOf(v)));}
+    public  static <A>   void tp(byte    v, Tag<A> t){ tp(((Tag<Byte>)     t).tag(Byte     .valueOf(v)));}
+    public  static <A>   void tp(char    v, Tag<A> t){ tp(((Tag<Character>)t).tag(Character.valueOf(v)));}
+    public  static <A>   void tp(short   v, Tag<A> t){ tp(((Tag<Short>)    t).tag(Short    .valueOf(v)));}
+    public  static <A>   void tp(int     v, Tag<A> t){ tp(((Tag<Integer>)  t).tag(Integer  .valueOf(v)));}
+    public  static <A>   void tp(long    v, Tag<A> t){ tp(((Tag<Long>)     t).tag(Long     .valueOf(v)));}
+    public  static <A>   void tp(float   v, Tag<A> t){ tp(((Tag<Float>)    t).tag(Float    .valueOf(v)));}
+    public  static <A>   void tp(double  v, Tag<A> t){ tp(((Tag<Double>)   t).tag(Double   .valueOf(v)));}
 
     // *********************** Arrays **************************
     public  static final Object[]  emptyObjectArray  = Access.emptyObjectArray();
@@ -70,17 +70,17 @@ public final class ZZ{
     public  static final long[]    emptyLongArray    = Access.emptyLongArray();
     public  static final float[]   emptyFloatArray   = Access.emptyFloatArray();
     public  static final double[]  emptyDoubleArray  = Access.emptyDoubleArray();
-    // *********************** Docs **************************
-    public  static final Doc BooleanTag = new PrimitiveTag("Boolean");
-    public  static final Doc ByteTag    = new PrimitiveTag("Byte");
-    public  static final Doc CharTag    = new PrimitiveTag("Char");
-    public  static final Doc ShortTag   = new PrimitiveTag("Short");
-    public  static final Doc IntTag     = new PrimitiveTag("Int");
-    public  static final Doc LongTag    = new PrimitiveTag("Long");
-    public  static final Doc FloatTag   = new PrimitiveTag("Float");
-    public  static final Doc DoubleTag  = new PrimitiveTag("Double");
-    public  static final Doc ArrayTag   = new scalqa.def.any.self.info.tag.z.ArrayDoc();
-    public  static final Doc MathTag    = new scalqa.def.any.self.info.tag.z.MathDoc();
+    // *********************** Tags **************************
+    public  static final Tag BooleanTag = new PrimitiveTag("Boolean");
+    public  static final Tag ByteTag    = new PrimitiveTag("Byte");
+    public  static final Tag CharTag    = new PrimitiveTag("Char");
+    public  static final Tag ShortTag   = new PrimitiveTag("Short");
+    public  static final Tag IntTag     = new PrimitiveTag("Int");
+    public  static final Tag LongTag    = new PrimitiveTag("Long");
+    public  static final Tag FloatTag   = new PrimitiveTag("Float");
+    public  static final Tag DoubleTag  = new PrimitiveTag("Double");
+    public  static final Tag ArrayTag   = new scalqa.def.any.self.info.tag.z.ArrayTag();
+    public  static final Tag MathTag    = new scalqa.def.any.self.info.tag.z.MathTag();
 
     public  static final ReferenceType RefType = new scalqa.def.any.self.info.tag.z.ReferenceType();
 }

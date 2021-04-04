@@ -1,8 +1,8 @@
-package scalqa; package `val`; package stream; package z; package util; import language.implicitConversions
+package scalqa; package `def`; package any; package self; package info; package tag; package z; import language.implicitConversions
 
-class DocTag[A](using t: Info.Tag.Doc[A]) extends Info.Tag.Doc[~[A]]:
-  def tag(v: ~[A]) : String = "~(" + v.makeString(", ") + ")"
-  def info(v: ~[A]) : Info   = Able.Info.doc_?(v) or z.util.MultiDoc(v)
+class PrimitiveTag[A <: Any.Raw | Opaque](val name: String) extends Type[A] with Tag[A]:
+  def tag(v: A): String = v.toString
+  def info(v: A): Info   = Info(name) += ("value",v.toString)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

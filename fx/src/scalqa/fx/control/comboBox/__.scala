@@ -2,7 +2,7 @@ package scalqa; package fx; package control; import language.implicitConversions
 
 import javafx.scene.control.ListCell
 
-class ComboBox[A](using val docTag: Info.Tag.Doc[A]) extends comboBox.Base[A]:
+class ComboBox[A](using val docTag: Info.Tag[A]) extends comboBox.Base[A]:
   protected type REAL = javafx.scene.control.ComboBox[A];  protected override def _createReal = new REAL
 
   /**/                 lazy  val items                     : Idx.M[A]     =  Idx.M.javaList_^(real.getItems)
@@ -19,9 +19,9 @@ class ComboBox[A](using val docTag: Info.Tag.Doc[A]) extends comboBox.Base[A]:
   format_:(_.tag(using docTag))
 
 object ComboBox:
-  def apply[A]()                          (using t: Info.Tag.Doc[A]) : ComboBox[A] = new ComboBox[A]
-  def apply[A](v: ~[A])                   (using t: Info.Tag.Doc[A]) : ComboBox[A] = apply[A]().^(_.items ++= v)
-  def apply[A](v: ~[A], selected: Opt[A]) (using t: Info.Tag.Doc[A]) : ComboBox[A] = apply[A](v).^(v => selected.forval(v.selection.select(_)))
+  def apply[A]()                          (using t: Info.Tag[A]) : ComboBox[A] = new ComboBox[A]
+  def apply[A](v: ~[A])                   (using t: Info.Tag[A]) : ComboBox[A] = apply[A]().^(_.items ++= v)
+  def apply[A](v: ~[A], selected: Opt[A]) (using t: Info.Tag[A]) : ComboBox[A] = apply[A](v).^(v => selected.forval(v.selection.select(_)))
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Base[A] = comboBox.Base[A]

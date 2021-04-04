@@ -1,6 +1,6 @@
 package scalqa; package `def`; package any; package self; package info; package tag; package z; import language.implicitConversions
 
-class ArrayDoc extends Doc[Object]:
+class ArrayTag extends Tag[Object]:
   def tag(v: Object) = info(v).tag
   def info(v: Object): Info =
     val (name,b,len) = v match

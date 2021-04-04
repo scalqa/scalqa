@@ -3,7 +3,7 @@ package scalqa; package api
 trait _String:
 
   extension (x: String)
-    def docLabel  : String = if(x.length>2 && x.charAt(0)=='_') x.takeFirst(2).toLowerCase + x.dropFirst(2) else x.takeFirst(1).toUpperCase + x.dropFirst(1)
+    def docLabel  : String = if(x.length>2 && x.charAt(0)=='_') x.takeFirst(2).toLowerCase + x.dropFirst(2) else if(x.length>1) x.takeFirst(1).toUpperCase + x.dropFirst(1) else x.toUpperCase
     def nameToId  : String = x match{case "~"=>"stream"; case "~~"=>"stream";  case "<>"=>"range";  case "><"=>"pack";    case v => v.toLowerCase }
     def nameToOp  : String = x match{case "Stream"=>"~"; case "Range" => "<>"; case "Pack" => "><"; case "VOID" => "\\/"; case _ => x }
 

@@ -1,6 +1,6 @@
 package scalqa; package `def`; package any; package self; package info; package tag; package z; import language.implicitConversions
 
-class MathDoc extends Doc[Math[Any]]:
+class MathTag extends Tag[Math[Any]]:
     def tag (v: Math[Any]) = info(v).tag
     def info(v: Math[Any]) = Info(v match
                                      case null                      => "null"

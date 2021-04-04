@@ -12,7 +12,7 @@ object WeakRef:
   given xxTagType [A]: Tag.Type[WeakRef[A]]  = Tag.Type("WeakRef")
   given xxTagVoid [A]: Tag.Void[WeakRef[A]]  with { inline def isVoid(v: WeakRef[A]) = false }
 
-  given xxTagDoc[A](using t: Tag.Doc[A]) : Tag.Doc[WeakRef[A]] with
+  given xxInfoTag[A](using t: Tag[A]) : Tag[WeakRef[A]] with
     def tag(v: WeakRef[A]) : String = "WeakRef("+ v.get_?.map(v => t.tag(v)).or("\\/") + ")"
     def info(v: WeakRef[A]) : Info   = Info("WeakRef@"+v.self_^.hash)
 

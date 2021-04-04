@@ -1,7 +1,7 @@
 package scalqa; package `def`; package string; import language.implicitConversions
 
 import String.Builder
-import Info.Tag.Doc
+import Info.Tag
 
 object Builder extends Any.Ref.Custom.Type[Builder,StringBuilder]("String.Builder"):
   inline def apply()              : Builder = new StringBuilder().asOpaque[Builder]
@@ -33,8 +33,8 @@ object Builder extends Any.Ref.Custom.Type[Builder,StringBuilder]("String.Builde
     @tn("addAt") infix inline def +=@(off: Int, inline v: Double)            : Builder = x.real.insert(off,v).asOpaque[Builder]
     @tn("addAt") infix inline def +=@(off: Int, inline v: CharSequence)      : Builder = x.real.insert(off,v).asOpaque[Builder]
   extension[A](inline x: Builder)
-    @tn("add")   infix inline def += (inline v: A)(using tg:Doc[A])          : Builder = x.real.append(tg.tag(v)).asOpaque[Builder]
-    @tn("addAt") infix inline def +=@(off: Int, inline v: A)(using tg:Doc[A]): Builder = x.real.insert(off,tg.tag(v)).asOpaque[Builder]
+    @tn("add")   infix inline def += (inline v: A)(using tg:Tag[A])          : Builder = x.real.append(tg.tag(v)).asOpaque[Builder]
+    @tn("addAt") infix inline def +=@(off: Int, inline v: A)(using tg:Tag[A]): Builder = x.real.insert(off,tg.tag(v)).asOpaque[Builder]
 
   object opaque:
     opaque type `type` <: Opaque.Ref & CharSequence  = StringBuilder & Opaque.Ref

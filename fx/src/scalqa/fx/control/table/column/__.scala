@@ -1,6 +1,6 @@
 package scalqa; package fx; package control; package table; import column.*; import language.implicitConversions
 
-abstract class Column[ROW,V,A] private[control](val voidTag: Info.Tag.Void[A], val docTag: Info.Tag.Doc[A]) extends cell.Setup[ROW,V,A] with _value[ROW,V,A] with _edit[ROW,V,A] with _properties[ROW,V,A] with _customCell[ROW,V,A]:
+abstract class Column[ROW,V,A] private[control](val voidTag: Info.Tag.Void[A], val docTag: Info.Tag[A]) extends cell.Setup[ROW,V,A] with _value[ROW,V,A] with _edit[ROW,V,A] with _properties[ROW,V,A] with _customCell[ROW,V,A]:
   protected type REAL = javafx.scene.control.TableColumn[ROW, Cell.Item[ROW, V, A]]
   val real = new REAL {
     setSortable(false)

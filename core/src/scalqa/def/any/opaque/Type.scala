@@ -1,9 +1,9 @@
 package scalqa; package `def`; package any; package opaque; import language.implicitConversions
 
-abstract class Type[A<:Opaque]private[`def`](ct: ClassTag[A]) extends self.info.tag.Type[A] with self.info.tag.Void[A] with self.info.tag.Doc[A]:
+abstract class Type[A<:Opaque]private[`def`](ct: ClassTag[A]) extends self.info.tag.Type[A] with self.info.tag.Void[A] with self.info.Tag[A]:
   self =>
   given xxTagType  : Info.Tag.Type[A] = self
-  given xxTagDoc  : Info.Tag.Doc[A]  = self
+  given xxInfoTag  : Info.Tag[A]  = self
   given xxTagClass: ClassTag[A]      = ct
   given xxCanEqual: CanEqual[A,A]    = CanEqual.derived
 

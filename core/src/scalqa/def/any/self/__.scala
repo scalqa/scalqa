@@ -22,7 +22,7 @@ object Self:
     /**/               inline def nonEmpty                (using inline t:Tag.Empty[A]) : Boolean  = !t.isEmpty(x.real)
     @tn("pack")        inline def ><                                                    : ><[A]    = Val.><[A](x.real)
 
-  given xxTagDoc[A](using t: Info.Tag.Doc[A]) : Info.Tag.Doc[Self[A]] with
+  given xxInfoTag[A](using t: Info.Tag[A]) : Info.Tag[Self[A]] with
     def tag (v: Self[A]) = info(v).tag
     def info(v: Self[A]) = t.info(v.real)
 

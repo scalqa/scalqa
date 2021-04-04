@@ -38,7 +38,7 @@ object Buffer:
   private[scalqa] def accessible[A](use: Array[A], usedSize: Int)   : Buffer[A] & Able.Access[Array[A]] = buffer.Z.accessible(use,usedSize)
   private[scalqa] def accessible[A:ClassTag](initSize: Int.Opt = \/): Buffer[A] & Able.Access[Array[A]] = accessible(new Array[A](initSize or J.initSize),0)
 
-  given xxTagDoc[A](using t: Info.Tag.Doc[A]) : Info.Tag.Doc[Buffer[A]] with
+  given xxInfoTag[A](using t: Info.Tag[A]) : Info.Tag[Buffer[A]] with
     def tag(v: Buffer[A]) = info(v).tag
     def info(v: Buffer[A]) = Info(v) += ("size", v.size) += v.array.tag
 

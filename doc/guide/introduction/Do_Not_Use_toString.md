@@ -30,8 +30,8 @@ Same as [`.tag`](../../api/scalqa/def/any/_extension.html#tag), [`.tp`](../../ap
 available for all types: 
 
 ```scala
-    tl.tp           // Prints: 12 secs
     t.tp            // Prints: 2020-10-28 16:23:08.888
+    tl.tp           // Prints: 12 secs
 ```
 
 Note, [`.tp`](../../api/scalqa/def/any/_extension.html#tp) must not appear in production code, 
