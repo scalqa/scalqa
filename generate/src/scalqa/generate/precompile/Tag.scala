@@ -1,4 +1,4 @@
-package scalqa; package make; package precompile; import language.implicitConversions
+package scalqa; package generate; package precompile; import language.implicitConversions
 
 class Tag(val id: String, val index: Int, t: String) extends Able.Info:
   val text   : String    = { val v = convertTags(t.trim); if (v.endsWith("*/")) v.dropLast(2) else v }

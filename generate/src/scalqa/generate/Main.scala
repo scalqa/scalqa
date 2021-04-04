@@ -1,6 +1,6 @@
-package scalqa; package make
+package scalqa; package generate
 
-object Main:
+object Merge:
 
   def main(sa: Array[String]): Unit =
     "------------------------------------------------------------------".tp
@@ -13,7 +13,7 @@ object Main:
     root.tp
     isDoc.tp
 
-    val to = root + "make" + "release" + "src"
+    val to = root + "generate" + "release" + "src"
     to.delete
     to.make
 

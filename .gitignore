@@ -7,9 +7,10 @@
 */project/project/target
 */logs
 
-/merge/doc/target
-/merge/doc/lib
-/merge/release
+/generate/doc/target
+/generate/doc/lib/*.jar
+/generate/release/target
+/generate/release/src
 
 /core/src/scalqa/Test*.scala
 

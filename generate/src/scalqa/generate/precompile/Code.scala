@@ -1,4 +1,4 @@
-package scalqa; package make; package precompile; import language.implicitConversions
+package scalqa; package generate; package precompile; import language.implicitConversions
 
 object Code:
 
