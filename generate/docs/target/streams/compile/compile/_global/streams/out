@@ -1,6 +1,0 @@
-[0m[[0m[31merror[0m] [0m[0m[31m-- [E050] Type Error: C:\#DM\_sbt\dev\scalqa\generate\docs\src\dotty\tools\scaladoc\renderers\MemberRenderer.scala:73:47 [0m[0m
-[0m[[0m[31merror[0m] [0m[0m[31m73 |[0m      tableRow([31m"Source"[0m, a(href := scalqa.docs.Path(link))(m.sources.fold([31m"(source)"[0m)(_.path.getFileName().toString())))[0m
-[0m[[0m[31merror[0m] [0m[0m   |                                   [31m^^^^^^^^^^^^^^^^[0m[0m
-[0m[[0m[31merror[0m] [0m[0m   |             [33mobject[0m [35mPath[0m in [33mpackage[0m [35mscalqa.docs[0m does not take parameters[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
