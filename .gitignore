@@ -1,14 +1,15 @@
 
 # Ignore generated stuff
 
-*/target
+/.bsp
 /target
+*/target
 */project/target
 */project/project/target
 */logs
 
-/generate/doc/target
-/generate/doc/lib/*.jar
+/generate/docs/target
+/generate/docs/lib/*.jar
 /generate/release/target
 /generate/release/src
 
