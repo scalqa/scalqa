@@ -49,7 +49,7 @@ ___________________________________________________________________________*/
     val v: Percent     = ?_?_?
     ```
 
-@val Able             ->  Object alias    \n\n Shortcut to [[scalqa.def.any.Able$ Def.Any.Able]]
+@val Able             ->  Object alias    \n\n Shortcut to [[scalqa.lang.any.Able$ Lang.Any.Able]]
 @type Request         ->  Type alias      \n\n Shortcut to [[scalqa.gen.Request                   Gen.Request]]
 @val  Request         ->  Companion alias \n\n Shortcut to [[scalqa.gen.Request$                  Gen.Request]]
 @val  Event           ->  Object alias    \n\n Shortcut to [[scalqa.gen.Event$                    Gen.Event]]
@@ -81,7 +81,7 @@ ___________________________________________________________________________*/
 @val  ByteCount       ->  Companion alias \n\n Shortcut to [[scalqa.gen.util.ByteCount$           Gen.Number.ByteCount]]
 @type Percent         ->  Type alias      \n\n Shortcut to [[scalqa.gen.util.Percent$.opaque      Gen.Number.Percent]]
 @val  Percent         ->  Companion alias \n\n Shortcut to [[scalqa.gen.util.Percent$             Gen.Number.Percent]]
-@type TwoWayFun       ->  Type alias      \n\n Shortcut to [[scalqa.def.any.type.TwoWayFun Any.Self.TwoWayFun]]
-@val  TwoWayFun       ->  Companion alias \n\n Shortcut to [[scalqa.def.any.type.BiFunction$ Any.Self.TwoWayFun]]
+@type TwoWayFun       ->  Type alias      \n\n Shortcut to [[scalqa.lang.any.type.TwoWayFun Any.Self.TwoWayFun]]
+@val  TwoWayFun       ->  Companion alias \n\n Shortcut to [[scalqa.lang.any.type.BiFunction$ Any.Self.TwoWayFun]]
 
 */

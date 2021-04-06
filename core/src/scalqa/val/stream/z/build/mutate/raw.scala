@@ -1,28 +1,29 @@
 package scalqa; package `val`; package stream; package z; package build; package mutate; import language.implicitConversions
 
-import Shape.OfStream.*
+import Any.{Raw as RAW}
+import Shape.OfStream.Raw
 import z.a.Map
 
 object raw:
-  class Booleans[A<:Raw.Boolean](x: ~[A]) extends Map.ToBoolean[A](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
-  class Bytes   [A<:Raw.Byte]   (x: ~[A]) extends Map.ToByte   [A](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
-  class Chars   [A<:Raw.Char]   (x: ~[A]) extends Map.ToChar   [A](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
-  class Shorts  [A<:Raw.Short]  (x: ~[A]) extends Map.ToShort  [A](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
-  class Ints    [A<:Raw.Int]    (x: ~[A]) extends Map.ToInt    [A](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
-  class Longs   [A<:Raw.Long]   (x: ~[A]) extends Map.ToLong   [A](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
-  class Floats  [A<:Raw.Float]  (x: ~[A]) extends Map.ToFloat  [A](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
-  class Doubles [A<:Raw.Double] (x: ~[A]) extends Map.ToDouble [A](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
+  class Booleans[A<:RAW.Boolean](x: ~[A]) extends Map.ToBoolean[A](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
+  class Bytes   [A<:RAW.Byte]   (x: ~[A]) extends Map.ToByte   [A](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
+  class Chars   [A<:RAW.Char]   (x: ~[A]) extends Map.ToChar   [A](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
+  class Shorts  [A<:RAW.Short]  (x: ~[A]) extends Map.ToShort  [A](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
+  class Ints    [A<:RAW.Int]    (x: ~[A]) extends Map.ToInt    [A](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
+  class Longs   [A<:RAW.Long]   (x: ~[A]) extends Map.ToLong   [A](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
+  class Floats  [A<:RAW.Float]  (x: ~[A]) extends Map.ToFloat  [A](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
+  class Doubles [A<:RAW.Double] (x: ~[A]) extends Map.ToDouble [A](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
 
-  def boolean[A<:Raw.Boolean](x: ~[A]): Boolean.G.~[A] = x match{case v: Boolean.G.~[_] => v.cast[Boolean.G.~[A]]; case v => Booleans(v)}
-  def byte   [A<:Raw.Byte   ](x: ~[A]): Byte   .G.~[A] = x match{case v: Byte   .G.~[_] => v.cast[Byte   .G.~[A]]; case v => Bytes(v)}
-  def char   [A<:Raw.Char   ](x: ~[A]): Char   .G.~[A] = x match{case v: Char   .G.~[_] => v.cast[Char   .G.~[A]]; case v => Chars(v)}
-  def short  [A<:Raw.Short  ](x: ~[A]): Short  .G.~[A] = x match{case v: Short  .G.~[_] => v.cast[Short  .G.~[A]]; case v => Shorts(v)}
-  def int    [A<:Raw.Int    ](x: ~[A]): Int    .G.~[A] = x match{case v: Int    .G.~[_] => v.cast[Int    .G.~[A]]; case v => Ints(v)}
-  def long   [A<:Raw.Long   ](x: ~[A]): Long   .G.~[A] = x match{case v: Long   .G.~[_] => v.cast[Long   .G.~[A]]; case v => Longs(v)}
-  def float  [A<:Raw.Float  ](x: ~[A]): Float  .G.~[A] = x match{case v: Float  .G.~[_] => v.cast[Float  .G.~[A]]; case v => Floats(v)}
-  def double [A<:Raw.Double ](x: ~[A]): Double .G.~[A] = x match{case v: Double .G.~[_] => v.cast[Double .G.~[A]]; case v => Doubles(v)}
+  def boolean[A<:RAW.Boolean](x: ~[A]): Boolean.G.~[A] = x match{case v: Boolean.G.~[_] => v.cast[Boolean.G.~[A]]; case v => Booleans(v)}
+  def byte   [A<:RAW.Byte   ](x: ~[A]): Byte   .G.~[A] = x match{case v: Byte   .G.~[_] => v.cast[Byte   .G.~[A]]; case v => Bytes(v)}
+  def char   [A<:RAW.Char   ](x: ~[A]): Char   .G.~[A] = x match{case v: Char   .G.~[_] => v.cast[Char   .G.~[A]]; case v => Chars(v)}
+  def short  [A<:RAW.Short  ](x: ~[A]): Short  .G.~[A] = x match{case v: Short  .G.~[_] => v.cast[Short  .G.~[A]]; case v => Shorts(v)}
+  def int    [A<:RAW.Int    ](x: ~[A]): Int    .G.~[A] = x match{case v: Int    .G.~[_] => v.cast[Int    .G.~[A]]; case v => Ints(v)}
+  def long   [A<:RAW.Long   ](x: ~[A]): Long   .G.~[A] = x match{case v: Long   .G.~[_] => v.cast[Long   .G.~[A]]; case v => Longs(v)}
+  def float  [A<:RAW.Float  ](x: ~[A]): Float  .G.~[A] = x match{case v: Float  .G.~[_] => v.cast[Float  .G.~[A]]; case v => Floats(v)}
+  def double [A<:RAW.Double ](x: ~[A]): Double .G.~[A] = x match{case v: Double .G.~[_] => v.cast[Double .G.~[A]]; case v => Doubles(v)}
 
-  inline def apply[A,RAW<:Raw[A]](inline x:Stream[A], inline s: Tag.Raw[A,RAW]): RAW  =
+  inline def apply[A,RAW<:Raw[A]](inline x:Stream[A], inline s: Raw.Def[A,RAW]): RAW  =
     inline x match
       case _ : Boolean.G.~[A] => x.cast[RAW]
       case _ : Byte   .G.~[A] => x.cast[RAW]
@@ -33,14 +34,14 @@ object raw:
       case _ : Float  .G.~[A] => x.cast[RAW]
       case _ : Double .G.~[A] => x.cast[RAW]
       case _ => inline s match
-          case _ : Tag.Raw[A,Boolean.G.~[A & Raw.Boolean]] => boolean[A & Raw.Boolean](x.cast[~[A & Raw.Boolean]])
-          case _ : Tag.Raw[A,Byte   .G.~[A & Raw.Byte   ]] => byte   (x.cast[~[A & Raw.Byte   ]])
-          case _ : Tag.Raw[A,Char   .G.~[A & Raw.Char   ]] => char   (x.cast[~[A & Raw.Char   ]])
-          case _ : Tag.Raw[A,Short  .G.~[A & Raw.Short  ]] => short  (x.cast[~[A & Raw.Short  ]])
-          case _ : Tag.Raw[A,Int    .G.~[A & Raw.Int    ]] => int    (x.cast[~[A & Raw.Int    ]])
-          case _ : Tag.Raw[A,Long   .G.~[A & Raw.Long   ]] => long   (x.cast[~[A & Raw.Long   ]])
-          case _ : Tag.Raw[A,Float  .G.~[A & Raw.Float  ]] => float  (x.cast[~[A & Raw.Float  ]])
-          case _ : Tag.Raw[A,Double .G.~[A & Raw.Double ]] => double (x.cast[~[A & Raw.Double ]])
+          case _ : Raw.Def[A,Boolean.G.~[A & RAW.Boolean]] => boolean[A & RAW.Boolean](x.cast[~[A & RAW.Boolean]])
+          case _ : Raw.Def[A,Byte   .G.~[A & RAW.Byte   ]] => byte   (x.cast[~[A & RAW.Byte   ]])
+          case _ : Raw.Def[A,Char   .G.~[A & RAW.Char   ]] => char   (x.cast[~[A & RAW.Char   ]])
+          case _ : Raw.Def[A,Short  .G.~[A & RAW.Short  ]] => short  (x.cast[~[A & RAW.Short  ]])
+          case _ : Raw.Def[A,Int    .G.~[A & RAW.Int    ]] => int    (x.cast[~[A & RAW.Int    ]])
+          case _ : Raw.Def[A,Long   .G.~[A & RAW.Long   ]] => long   (x.cast[~[A & RAW.Long   ]])
+          case _ : Raw.Def[A,Float  .G.~[A & RAW.Float  ]] => float  (x.cast[~[A & RAW.Float  ]])
+          case _ : Raw.Def[A,Double .G.~[A & RAW.Double ]] => double (x.cast[~[A & RAW.Double ]])
           case _                                              => J.illegalState()
 
 /*___________________________________________________________________________

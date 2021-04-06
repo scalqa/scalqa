@@ -4,7 +4,7 @@ private[`val`] class Convert_View[A,B](protected val real: Pro[A], f: A => B) ex
 
   def apply() = f(real())
 
-  override def info = super.info += ("real", real)
+  override def doc = super.doc += ("real", real)
 
 private[pro] object Convert_View:
 

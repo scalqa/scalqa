@@ -1,6 +1,6 @@
 package scalqa; package `val`; import range.*; import language.implicitConversions
 
-import Shape.OfRange. { Raw, Tag }
+import Shape.OfRange.Raw
 
 abstract class Range[A] extends Able.Contain[A]:
   type THIS_TYPE <: Range[A]
@@ -18,7 +18,7 @@ abstract class Range[A] extends Able.Contain[A]:
   /**/              def contains(v: A)                                   : Boolean             = z.Ops.contains(this,v)
   /**/              def isEmpty                                          : Boolean             = z.Ops.isEmpty(this)
   override          def equals(v: Any)                                   : Boolean             = v.isInstanceOf[Range[_]] && {val r=v.cast[Range[A]]; this.contains(r) && r.contains(this)}
-  inline            def raw[RAW<:Raw[A]] (using inline s:Tag.Raw[A,RAW]) : RAW                 = z.raw(this,s)
+  inline            def raw[RAW<:Raw[A]] (using inline s:Raw.Def[A,RAW]) : RAW                 = z.raw(this,s)
 
 object Range:
   def apply[A:Ordering  ](start:A,end:A, endIn:Boolean=true): Range[A] = if(endIn) Z.EndInclsive(start,end)  else Z.EndExclusive(start,end)
@@ -30,7 +30,7 @@ object Range:
 
   given xxCanEqual[A,B](using CanEqual[A,B]): CanEqual[<>[A],<>[B]]  = CanEqual.derived
   given xxFor                               : range.z.For            = new range.z.For{}
-  given xxInfoTag[A:Info.Tag]               : Info.Tag[Range[A]] = new range.z.InfoTag[A]
+  given xxDefDoc[A:Lang.Def.Doc]           : Lang.Def.Doc[Range[A]] = new range.z.DefDoc[A]
 
   // ~~~~~~~~~~~~~~~~~~~~~~
   inline def X = range.X
@@ -44,19 +44,17 @@ ___________________________________________________________________________*/
 /**
 @class Range -> ### Value Range
 
-      Scala provided range structures (Range and NumericRange) are implemented more as collections and this class is designed to close this void focusing on generic range operations
-
-      [[Range]] is defined with the following defs:
+      Range is defined with the following defs:
 
           - `start`
           - `end`,
-          - and `ordering`, which mks the above meaningful
+          - and `ordering`, which makes the above meaningful
 
-      [[Range]] has a notion that an element can be within the range, i.e. between start and end, or outside
+      Range has a notion that an element can be within the range, i.e. between start and end, or outside
 
-      Note. [[Range]] is implicitly converted to a let function, returning `true` if an element is within [[Range]] and `false` otherwise
+      Note. [[Range]] is implicitly converted to a filter function, returning `true` if an element is within [[Range]] and `false` otherwise
 
-
+      Note. Scala provided range structures (Range and NumericRange) are implemented more as collections and this class is designed to close this void focusing on generic range operations
 
 @def ordering -> Ordering
 

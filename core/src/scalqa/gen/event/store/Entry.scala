@@ -1,6 +1,6 @@
 package scalqa; package gen; package event; package store; import language.implicitConversions
 
-trait Entry extends Able.Info with Able.Void:
+trait Entry extends Able.Doc with Able.Void:
   def `type`      : Any
   def next_?      : Opt[Entry]
   def value       : Any

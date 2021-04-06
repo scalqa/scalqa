@@ -1,6 +1,6 @@
 package scalqa; package `val`; package pack; package z; import language.implicitConversions
 
-import Shape.OfPack.*
+import Shape.OfPack.{ Raw as RAW }
 
 object raw:
 
@@ -13,25 +13,25 @@ object raw:
   def float  [A<:Raw.Float  ](x: ><[A]): Float  .G.><[A] = x match{case v: Float  .G.><[A] => v; case v => Float  .G.><.fromStream(x)}
   def double [A<:Raw.Double ](x: ><[A]): Double .G.><[A] = x match{case v: Double .G.><[A] => v; case v => Double .G.><.fromStream(x)}
 
-  inline def apply[A,RAW<:Raw[A]](inline x: ><[A], inline s: Tag.Raw[A,RAW]): RAW  =
+  inline def apply[A,PACK<:RAW[A]](inline x: ><[A], inline s: RAW.Def[A,PACK]): PACK  =
     inline x match
-      case _ : Boolean.G.><[A] => x.cast[RAW]
-      case _ : Byte   .G.><[A] => x.cast[RAW]
-      case _ : Char   .G.><[A] => x.cast[RAW]
-      case _ : Short  .G.><[A] => x.cast[RAW]
-      case _ : Int    .G.><[A] => x.cast[RAW]
-      case _ : Long   .G.><[A] => x.cast[RAW]
-      case _ : Float  .G.><[A] => x.cast[RAW]
-      case _ : Double .G.><[A] => x.cast[RAW]
+      case _ : Boolean.G.><[A] => x.cast[PACK]
+      case _ : Byte   .G.><[A] => x.cast[PACK]
+      case _ : Char   .G.><[A] => x.cast[PACK]
+      case _ : Short  .G.><[A] => x.cast[PACK]
+      case _ : Int    .G.><[A] => x.cast[PACK]
+      case _ : Long   .G.><[A] => x.cast[PACK]
+      case _ : Float  .G.><[A] => x.cast[PACK]
+      case _ : Double .G.><[A] => x.cast[PACK]
       case _ => inline s match
-          case _ : Tag.Raw[A,Boolean.G.><[A & Raw.Boolean]] => boolean[A & Raw.Boolean](x.cast[><[A & Raw.Boolean]])
-          case _ : Tag.Raw[A,Byte   .G.><[A & Raw.Byte   ]] => byte   [A & Raw.Byte   ](x.cast[><[A & Raw.Byte   ]])
-          case _ : Tag.Raw[A,Char   .G.><[A & Raw.Char   ]] => char   [A & Raw.Char   ](x.cast[><[A & Raw.Char   ]])
-          case _ : Tag.Raw[A,Short  .G.><[A & Raw.Short  ]] => short  [A & Raw.Short  ](x.cast[><[A & Raw.Short  ]])
-          case _ : Tag.Raw[A,Int    .G.><[A & Raw.Int    ]] => int    [A & Raw.Int    ](x.cast[><[A & Raw.Int    ]])
-          case _ : Tag.Raw[A,Long   .G.><[A & Raw.Long   ]] => long   [A & Raw.Long   ](x.cast[><[A & Raw.Long   ]])
-          case _ : Tag.Raw[A,Float  .G.><[A & Raw.Float  ]] => float  [A & Raw.Float  ](x.cast[><[A & Raw.Float  ]])
-          case _ : Tag.Raw[A,Double .G.><[A & Raw.Double ]] => double [A & Raw.Double ](x.cast[><[A & Raw.Double ]])
+          case _ : RAW.Def[A,Boolean.G.><[A & Raw.Boolean]] => boolean[A & Raw.Boolean](x.cast[><[A & Raw.Boolean]])
+          case _ : RAW.Def[A,Byte   .G.><[A & Raw.Byte   ]] => byte   [A & Raw.Byte   ](x.cast[><[A & Raw.Byte   ]])
+          case _ : RAW.Def[A,Char   .G.><[A & Raw.Char   ]] => char   [A & Raw.Char   ](x.cast[><[A & Raw.Char   ]])
+          case _ : RAW.Def[A,Short  .G.><[A & Raw.Short  ]] => short  [A & Raw.Short  ](x.cast[><[A & Raw.Short  ]])
+          case _ : RAW.Def[A,Int    .G.><[A & Raw.Int    ]] => int    [A & Raw.Int    ](x.cast[><[A & Raw.Int    ]])
+          case _ : RAW.Def[A,Long   .G.><[A & Raw.Long   ]] => long   [A & Raw.Long   ](x.cast[><[A & Raw.Long   ]])
+          case _ : RAW.Def[A,Float  .G.><[A & Raw.Float  ]] => float  [A & Raw.Float  ](x.cast[><[A & Raw.Float  ]])
+          case _ : RAW.Def[A,Double .G.><[A & Raw.Double ]] => double [A & Raw.Double ](x.cast[><[A & Raw.Double ]])
           case _                                               => J.illegalState()
 
 /*___________________________________________________________________________

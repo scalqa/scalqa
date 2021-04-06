@@ -22,7 +22,6 @@ ___________________________________________________________________________*/
 /**
 @class Stable -> Stable is an immutable lookup collection
 
-      [[Stable]] has global alias and can be called without parent prefix [[Lookup.Stable]]
 
 @def void  -> Get void instance
 

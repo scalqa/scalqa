@@ -1,11 +1,11 @@
 package scalqa; package `val`; package stream; package z; package use; import language.implicitConversions
 
-import `def`.string.z.Table
+import lang.string.z.Table
 
 object print:
   private def EMPTY  = "EMPTY_STREAM"
 
-  def apply[A](v: ~[A], id: Boolean, num: Boolean)(using t: Info.Tag[A]): Unit =
+  def apply[A](v: ~[A], id: Boolean, num: Boolean)(using t: Def.Doc[A]): Unit =
     val ps      = v.map(toProduct)
     val tbl     = Table()
     val TAKE_SZ = 10
@@ -22,16 +22,16 @@ object print:
     else
       println(EMPTY)
 
-  def toText[A](v: ~[A], id: Boolean)(using t: Info.Tag[A]): String = Table().^(fillRows(_,v.map(toProduct),id)).^.convert(t => if (t.Rows.size == 0) EMPTY else t.toString)
+  def toText[A](v: ~[A], id: Boolean)(using t: Def.Doc[A]): String = Table().^(fillRows(_,v.map(toProduct),id)).^.convert(t => if (t.Rows.size == 0) EMPTY else t.toString)
 
   // ------------------------------------------------------------------------------------------------------------
-  private def toProduct[A](v: A)(using t: Info.Tag[A]): Product =
-    import `def`.any.self.info.tag.z.ProductTag
+  private def toProduct[A](v: A)(using t: Def.Doc[A]): Product =
+    import lang.any.self.`def`.z.ProductDoc
     v match
       case v : Stream[Any]                               => Tuple1(t.tag(v))
-      case v : Product if(t.isInstanceOf[ProductTag[_]]) => t.info(v)
+      case v : Product if(t.isInstanceOf[ProductDoc[_]]) => t.doc(v)
       case v : Product                                   => v
-      case v                                             => Able.Info.doc_?(v) or Tuple1(t.tag(v))
+      case v                                             => Able.Doc.doc_?(v) or Tuple1(t.tag(v))
 
   private def fillRows(tbl: Table, s: ~[Product], id: Boolean, num : Boolean = false, from: Int=0) =
     s.foreachIndexed((i,v) => {

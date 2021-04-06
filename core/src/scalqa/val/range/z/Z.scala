@@ -22,7 +22,7 @@ object Z:
     override def contains(v:A) = false
 
   // **********************************************************************************************************************
-  class Void[A](using val ordering: Ordering  [A]) extends Base[A] with Def.Void:
+  class Void[A](using val ordering: Ordering  [A]) extends Base[A] with Lang.Void:
     override def start                   : A       = J.unsupportedOperation("Void range does not have a start")
     override def end                     : A       = J.unsupportedOperation("Void range does not have an end")
     override def endIsIn                 : Boolean = false

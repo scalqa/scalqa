@@ -1,7 +1,7 @@
 package scalqa; package fx; import language.implicitConversions
 
 import javafx.{ scene as JFX}
-import Abstract.Parent
+import ui.`abstract`.Parent
 
 class Scene(width: Int.Opt = \/, height: Int.Opt = \/, e: Opt[Node.Like] = \/) extends Abstract.Delegate.Gui:
   protected type REAL = JFX.Scene
@@ -12,9 +12,9 @@ class Scene(width: Int.Opt = \/, height: Int.Opt = \/, e: Opt[Node.Like] = \/) e
   def scene_?                             : Opt[Scene]      = this
   def window                              : Window          = Window(real.getWindow)
   def root                                : Parent          = Node.FxConverter(real.getRoot).cast[Parent]; def root_=(p: Parent) = real.setRoot(p.real)
-  def onKeyPressed [U](l: Event.Key => U) : Unit            = Event.Key.subscribe(this, l, real.onKeyPressedProperty)
-  def onKeyReleased[U](l: Event.Key => U) : Unit            = Event.Key.subscribe(this, l, real.onKeyReleasedProperty)
-  def onKeyTyped   [U](l: Event.Key => U) : Unit            = Event.Key.subscribe(this, l, real.onKeyTypedProperty)
+  def onKeyPressed [U](l: Ui.Event.Key => U) : Unit            = Ui.Event.Key.subscribe(this, l, real.onKeyPressedProperty)
+  def onKeyReleased[U](l: Ui.Event.Key => U) : Unit            = Ui.Event.Key.subscribe(this, l, real.onKeyReleasedProperty)
+  def onKeyTyped   [U](l: Ui.Event.Key => U) : Unit            = Ui.Event.Key.subscribe(this, l, real.onKeyTypedProperty)
   val styleSheets                         : Idx.OM[J.Url]   = Fx.JavaFx.As.idx_OM(real.getStylesheets).twoWay_^(J.Url(_), _.toString)
 
 object Scene extends Void.Setup[Scene](new Scene(\/, \/, Control.Label("void")) with Void):
@@ -25,11 +25,9 @@ object Scene extends Void.Setup[Scene](new Scene(\/, \/, Control.Label("void")) 
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   @fast lazy val Application = scene.Application;          type Application  = scene.Application
   @fast lazy val Chart       = scene.Chart;                type Chart        = scene.Chart
-  @fast lazy val Event       = scene.Event;                type Event        = scene.Event
   @fast lazy val Image       = scene.Image;                type Image        = scene.Image.opaque.`type`
   @fast lazy val Paint       = scene.Paint;                type Paint        = scene.Paint.opaque.`type`
   @fast lazy val Pane        = scene.Pane;                 type Pane         = scene.Pane
-  @fast lazy val Popup       = scene.Popup;                type Popup        = scene.Popup
   @fast lazy val Shape       = scene.Shape;                type Shape        = scene.Shape
   @fast lazy val Stage       = scene.Stage;                type Stage        = scene.Stage
   @fast lazy val Window      = scene.Window;               type Window       = scene.Window
@@ -42,7 +40,7 @@ object Scene extends Void.Setup[Scene](new Scene(\/, \/, Control.Label("void")) 
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@class Scene -> ###
+@class Scene -> ### GUI Layout
 
    [[Scene]] object also contains types responsible for building GUI layout, except for widgets (which are defined in [[scalqa.fx.Control Fx.Control]])
 

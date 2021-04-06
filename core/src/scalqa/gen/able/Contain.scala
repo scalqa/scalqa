@@ -1,7 +1,5 @@
 package scalqa; package gen; package able
 
-import Any.Self.Info.Specialized
-
 trait Contain[A]:
 
   def contains(v: A): Boolean

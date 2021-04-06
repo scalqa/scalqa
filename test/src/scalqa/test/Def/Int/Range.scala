@@ -1,4 +1,4 @@
-package scalqa; package test.Def.Int; import language.implicitConversions
+package scalqa; package test.Core.Int; import language.implicitConversions
 
 object Range extends J.Test:
 

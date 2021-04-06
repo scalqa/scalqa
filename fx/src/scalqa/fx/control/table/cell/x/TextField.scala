@@ -14,7 +14,7 @@ class TextField[ROW,V,A](c: Column[ROW,V,A], parser: String => Result[A]) extend
            item.make(o.value_?)
     }
 
-    converterProperty.set(Util.JavaFx.stringConverter(FxConverter))
+    converterProperty.set(Ui.JavaFx.stringConverter(FxConverter))
 
     override def updateItem(slot: ITEM, empty: Boolean): Unit =
       super.updateItem(slot, empty)

@@ -12,7 +12,7 @@ abstract class _extension extends _givens:
     /**/               inline def takeType[B](using inline t:ClassTag[B])     : Opt[B]     = {var o:Opt[B]= \/; if(t.unapply(x).isEmpty.not) o=x.cast[Opt[B]]; o}
     /**/               inline def drop(inline f: A => Boolean)                : Opt[A]     = {var o=x; if(o.nonEmpty &&  f(o.`val`)) o= \/; o}
     /**/               inline def dropOnly(inline v: A)                       : Opt[A]     = {val o=x; if(o == v.?) \/ else x }
-    /**/               inline def dropVoid(using inline t: Info.Tag.Void[A])  : Opt[A]     = {var o=x; if(o != null && o.nonEmpty && t.isVoid(o.`val`)) o= \/; o}
+    /**/               inline def dropVoid(using inline t: Def.Void[A])  : Opt[A]     = {var o=x; if(o != null && o.nonEmpty && t.isVoid(o.`val`)) o= \/; o}
     /**/               inline def default(inline dv: => A)                    : Opt[A]     = {val o=x; if(o.isEmpty)  dv  else o}
     @tn("or_Opt")infix inline def or_?(inline that: => Opt[A])                : Opt[A]     = {val o=x; if(o.isEmpty) that else o}
     /**/         infix inline def or(inline default: => A)                    : A          = z.Macro.or(x,default)
@@ -31,17 +31,17 @@ abstract class _extension extends _givens:
     /**/               inline def foldAs[B](inline v: =>B)(inline f: A=>B)    : B          = x.map(f) or v
 
 //------------ Mapping ---------------------------------------------------------------------------------------------------------------------------------
-  import Shape.OfOpt.*
+  import Shape.OfOpt.{Any, Raw}
 
   extension[A,T,OPT<:Any[T]](inline x:Opt[A])
-    /**/               inline def map    [B>:T](inline f: A => B)                    (using inline s: Tag[B,OPT]) : OPT    = z.map(x,f,s)
+    /**/               inline def map    [B>:T](inline f: A => B)                    (using inline s: Any.Def[B,OPT]) : OPT    = z.map(x,f,s)
   extension[A,T](inline x:Opt[A])
-    @tn("map_Opt")     inline def map_?  [OPT<:Any[T]](inline f: A=>OPT)             (using inline s: Tag[T,OPT]) : OPT    = z.mapOpt(x,f,s)
-    /**/               inline def flatMap[OPT<:Any[T]](inline f: A=>OPT)             (using inline s: Tag[T,OPT]) : OPT    = z.mapOpt(x,f,s)
+    @tn("map_Opt")     inline def map_?  [OPT<:Any[T]](inline f: A=>OPT)             (using inline s: Any.Def[T,OPT]) : OPT    = z.mapOpt(x,f,s)
+    /**/               inline def flatMap[OPT<:Any[T]](inline f: A=>OPT)             (using inline s: Any.Def[T,OPT]) : OPT    = z.mapOpt(x,f,s)
   extension[A, OPT<:Raw[A]](inline x:Opt[A])
-    /**/               inline def raw                                            (using inline s: Tag.Raw[A,OPT]) : OPT    = z.raw(x,s)
+    /**/               inline def raw                                                (using inline s: Raw.Def[A,OPT]) : OPT    = z.raw(x,s)
   extension[A,B,C](inline x:Opt[A])
-    /**/               inline def mix[OPT<:Any[C]](inline o:Any[B],inline f:(A,B)=>C)(using inline s: Tag[C,OPT]) : OPT    = z.mixOpt(x,o,f,s)
+    /**/               inline def mix[OPT<:Any[C]](inline o:Any[B],inline f:(A,B)=>C)(using inline s: Any.Def[C,OPT]) : OPT    = z.mixOpt(x,o,f,s)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

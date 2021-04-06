@@ -1,6 +1,6 @@
 package scalqa; package `val`; package stream; package z; package build; package filter; import scala.language.implicitConversions
 
-class dropVoid[A:Info.Tag.Void](x: ~[A]) extends a.Pipe[A](x):
+class dropVoid[A:Def.Void](x: ~[A]) extends a.Pipe[A](x):
 
   @tn("read_Opt") def read_? =
     var o = x.read_?

@@ -4,11 +4,11 @@ class Tab extends Control:
   protected type REAL = javafx.scene.control.TabPane
   protected override def _createReal = new REAL
 
-  /**/       lazy val tabs            : Idx.M[Tab.Panel]     = Idx.M.javaList_^(real.getTabs).twoWay_^[Tab.Panel]
-  /**/       lazy val selection       : Selection[Tab.Panel] = Selection(Idx.javaList_^(real.getTabs), real.getSelectionModel).fun_^(Tab.Panel.FxConverter.apply)
-  @tn("size_Pro") def side_*          : Pro.OM[Side]         = Fx.JavaFx.As.pro_OM(real.sideProperty).twoWay_^[Side]
-  /**/            def side            : Side                 = real.getSide
-  /**/            def side_=(s: Side) : Unit                 = real.setSide(s)
+  /**/       lazy val tabs            : Idx.M[Tab.Panel]        = Idx.M.javaList_^(real.getTabs).twoWay_^[Tab.Panel]
+  /**/       lazy val selection       : Fx.Selection[Tab.Panel] = Fx.Selection(Idx.javaList_^(real.getTabs), real.getSelectionModel).fun_^(Tab.Panel.FxConverter.apply)
+  @tn("size_Pro") def side_*          : Pro.OM[Side]            = Fx.JavaFx.As.pro_OM(real.sideProperty).twoWay_^[Side]
+  /**/            def side            : Side                    = real.getSide
+  /**/            def side_=(s: Side) : Unit                    = real.setSide(s)
 
   // ------------------------------------------------------------------------------------------------------
   def add(pos: Int, t: Tab.Panel)                    : Unit = tabs.addAt(pos, t)

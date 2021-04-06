@@ -1,6 +1,6 @@
 package scalqa; package fx; package scene; package pane; import language.implicitConversions
 
-import fx.`abstract`.Node
+import ui.`abstract`.Node
 
 class Border extends Pane:
   protected type REAL = javafx.scene.layout.BorderPane

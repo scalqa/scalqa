@@ -1,23 +1,23 @@
 package scalqa; package `val`; package stream; package _Build; import language.implicitConversions
 
 import z.build.{ map => M }
-import Shape.OfStream.*
-import Shape.OfOpt.{ Any as AnyOpt }
+import Shape.OfStream.Any
+import Shape.OfOpt.{Any as AnyOpt}
 
 transparent trait _map:
   self: Stream.type =>
 
   extension[A,T,STM<:Any[T]](inline x: ~[A])
-    /**/            inline def map     [B>:T](inline f: A => B)              (using inline s:Tag[B,STM]): STM  = M.map(x,f,s)
-    /**/            inline def MAP     [B>:T](inline f: A => B)              (using inline s:Tag[B,STM]): STM  = M.map.APPLY(x,f,s)
-    /**/            inline def flatMap [B>:T](inline f: A => ~[B])           (using inline s:Tag[B,STM]): STM  = M.flatMap(x,f,s)
-    /**/            inline def FLAT_MAP[B>:T](inline f: A => ~[B])           (using inline s:Tag[B,STM]): STM  = M.flatMap.APPLY(x,f,s)
-    /**/            inline def flatten           (using inline f:A=>Able.~[T], inline s:Tag[T,STM]): STM  = M.flatMap(x,f(_).~,s)
-    @tn("map_Opt")  inline def map_?   [OPT<:AnyOpt[T]](inline f:A=>OPT) (using inline s:Tag.Opt[T,OPT,STM]): STM  = M.mapOpt(x,f,s)
-    @tn("MAP_Opt")  inline def MAP_?   [OPT<:AnyOpt[T]](inline f:A=>OPT) (using inline s:Tag.Opt[T,OPT,STM]): STM  = M.mapOpt.APPLY(x,f,s)
+    /**/            inline def map     [B>:T](inline f: A => B)                 (using inline s:Any.Def[B,STM]): STM  = M.map(x,f,s)
+    /**/            inline def MAP     [B>:T](inline f: A => B)                 (using inline s:Any.Def[B,STM]): STM  = M.map.APPLY(x,f,s)
+    /**/            inline def flatMap [B>:T](inline f: A => ~[B])              (using inline s:Any.Def[B,STM]): STM  = M.flatMap(x,f,s)
+    /**/            inline def FLAT_MAP[B>:T](inline f: A => ~[B])              (using inline s:Any.Def[B,STM]): STM  = M.flatMap.APPLY(x,f,s)
+    /**/            inline def flatten                   (using inline f:A=>Able.~[T], inline s:Any.Def[T,STM]): STM  = M.flatMap(x,f(_).~,s)
+    @tn("map_Opt")  inline def map_?   [OPT<:AnyOpt[T]](inline f:A=>OPT) (using inline s:Any.OptDef[T,OPT,STM]): STM  = M.mapOpt(x,f,s)
+    @tn("MAP_Opt")  inline def MAP_?   [OPT<:AnyOpt[T]](inline f:A=>OPT) (using inline s:Any.OptDef[T,OPT,STM]): STM  = M.mapOpt.APPLY(x,f,s)
 
   extension[A](inline x: ~[A])
-    /**/            inline def collect[B](inline f: PartialFunction[A,B])                                 : ~[B] = new M.collect(x,f)
+    /**/            inline def collect[B](inline f: PartialFunction[A,B])                                      : ~[B] = new M.collect(x,f)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

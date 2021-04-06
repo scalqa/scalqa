@@ -13,7 +13,7 @@ object Time extends Long.Custom.Data.Ordered[Time]("Time") with time.x.Base[Time
   implicit       inline def xxRequest(inline v: CURRENT)            : Time        = apply()
   implicit       inline def xxRequest(inline v: \/)                 : Time        = -62167201438000L.asOpaque[Time]
 
-  //given xxTagVoid: Info.Tag.Void[Time]=this
+  //given xxDefVoid: Def.Void[Time]=this
 
   extension(x: Time)
     /**/    inline def millisTotal             : Long        = x.real

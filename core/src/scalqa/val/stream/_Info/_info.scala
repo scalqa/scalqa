@@ -3,7 +3,7 @@ package scalqa; package `val`; package stream; import language.implicitConversio
 transparent trait _info :
 
   extension[A](inline x: ~[A])
-    /**/                inline def defaultDoc : Info      = z.util.MultiDoc(x)
+    /**/                inline def defaultDoc : Doc      = z.util.MultiDoc(x)
     /**/                inline def describe   : String    = Custom.Pipeline.infoTree(x).text
     @tn("size_Opt")     inline def size_?     : Int.Opt   = Able.Size.size_?(x)
     @tn("sizeLong_Opt") inline def sizeLong_? : Long.Opt  = Able.Size.sizeLong_?(x)
@@ -22,18 +22,18 @@ ___________________________________________________________________________*/
       Metadata methods can be called many times, they do not trigger any data movements
 
 
-@def defaultDoc -> Default info
+@def defaultDoc -> Default doc
 
-      Creates default [[scalqa.gen.Info Info]] object describing current stream
+      Creates default [[scalqa.gen.Doc Doc]] object describing current stream
 
      ```
        ('a' <> 'z').~.defaultDoc.TP
 
        // Output
-      scalqa.def.char.g.stream.Z$Stream_fromRange@8bm3{raw=Char,size=26}
+      scalqa.lang.char.g.stream.Z$Stream_fromRange@8bm3{raw=Char,size=26}
 
      ```
-     Note.  Streams may provide custom [[scalqa.def.able.Info Able.Info]] implementations, extending [[defaultDoc]]
+     Note.  Streams may provide custom [[scalqa.lang.able.Doc Able.Doc]] implementations, extending [[defaultDoc]]
 
 @def describe -> Text description
 
@@ -46,9 +46,9 @@ ___________________________________________________________________________*/
        .describe.TP
 
      // Output
-     scalqa.def.int.g.Stream$TakeStream$2@4ds1{raw=Int}
-       scalqa.def.char.z.stream.map$Ints@j38c{raw=Int,fromRaw=Char,size=26}
-         scalqa.def.char.Z$Stream_fromRange@gw1k{raw=Char,size=26,from=a,step=1}
+     scalqa.lang.int.g.Stream$TakeStream$2@4ds1{raw=Int}
+       scalqa.lang.char.z.stream.map$Ints@j38c{raw=Int,fromRaw=Char,size=26}
+         scalqa.lang.char.Z$Stream_fromRange@gw1k{raw=Char,size=26,from=a,step=1}
      ```
 
 @def size_? -> Optional size

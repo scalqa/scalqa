@@ -2,7 +2,7 @@ package scalqa; package test
 
 object Main extends scalqa.J.Test("scalqa.test"):
 
-  include(Def.Main, Gen.Main, Val.Main)
+  include(Core.Main, Gen.Main, Val.Main)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -19,13 +19,13 @@ abstract class XY[X, Y] protected (val axisX: Chart.Axis[X], val axisY: Chart.Ax
     /**/             def name : String            = real.getName; def name_=(v: String) = real.setName(v)
     /**/             def items: Idx.O[ITEM]       = _items;       def items_=(l:  Idx.O[ITEM]): Unit = { _items = l; real.setData(zObservableList()) }
     // ***************************
-    private class zObservableList extends util.javaFx.z.list.Observable[self.REAL_ITEM](items.fun_^(_.real.cast[self.REAL_ITEM])){ def series = SeriesBase.this}
+    private class zObservableList extends ui.javaFx.z.list.Observable[self.REAL_ITEM](items.fun_^(_.real.cast[self.REAL_ITEM])){ def series = SeriesBase.this}
 
   object SeriesBase:
     def apply(s: J.XYChart.Series[_, _]): SERIES = s.getData.cast[SeriesBase#zObservableList].series.cast[SERIES]
 
   // **************************************************************************************************************
-  class ItemBase extends Able.Info:
+  class ItemBase extends Able.Doc:
     def this(xPar: X, yPar: Y) = { this(); x = xPar; y = yPar }
     def this(p: (X, Y))        = { this(p._1, p._2) }
     protected[chart] val real       : self.REAL_ITEM  = new self.REAL_ITEM().^(_.setExtraValue(this))
@@ -35,7 +35,7 @@ abstract class XY[X, Y] protected (val axisX: Chart.Axis[X], val axisY: Chart.Ax
     /**/             def setY(v: Y) : Unit            = real.setYValue(self.axisY.valueMap(v))
     /**/             def xPos       : Double          = axisX(x)
     /**/             def yPos       : Double          = axisY(y)
-    /**/             def info       : Info            = Info(this) += ("x", x) += ("y", y)
+    /**/             def doc       : Doc            = Doc(this) += ("x", x) += ("y", y)
 
   object ItemBase:
     def apply(d: J.XYChart.Data[_, _]): ITEM = d.getExtraValue.cast[ITEM]

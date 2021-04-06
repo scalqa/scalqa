@@ -5,8 +5,8 @@ object X:
   abstract class Abstract[A] extends AbstractTrait[A]
 
   // ***************************************************
-  trait AbstractTrait[A] extends Pro[A] with Able.Info:
-    def info = Info(this) ++= this.?.takeType[Able.Name].map(n => ("name", n.name)).~ += ("value", apply())
+  trait AbstractTrait[A] extends Pro[A] with Able.Doc:
+    def doc = Doc(this) ++= this.?.takeType[Able.Name].map(n => ("name", n.name)).~ += ("value", apply())
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

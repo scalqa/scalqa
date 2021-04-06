@@ -9,7 +9,7 @@ object Test0:
 //
 //    val array: Array[String] = (1 <> CNT).~.map(_.toString).toArray
 //
-//    array.~       .map(_.length % 256).flatMap(_ => 1 <> 12).map(_.Char).map(_.Byte).map(_.Int.Percent).map(_.real.Long.Nanos).info.tp
+//    array.~       .map(_.length % 256).flatMap(_ => 1 <> 12).map(_.Char).map(_.Byte).map(_.Int.Percent).map(_.real.Long.Nanos).doc.tp
 //
 //    J.Benchmark(
 //      ("Stream",       () =>{var i=0L; array.~       .map(_.length % 256).flatMap(_ => 1 <> 12).map(_.Char).map(_.Byte).map(_.Int.Percent).map(_.real.Long.Nanos).foreach(i += _.nanosTotal); i}),

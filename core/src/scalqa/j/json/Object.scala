@@ -1,6 +1,6 @@
 package scalqa; package j; package json; import language.implicitConversions
 
-trait Object extends `val`.Lookup[String, Any] with Able.Info:
+trait Object extends `val`.Lookup[String, Any] with Able.Doc:
   /**/              def jObject  (name: String) : J.Object       = jObject_?(name).get
   @tn("object_Opt") def jObject_?(name: String) : Opt[J.Object]  = get_?(name).takeType[J.Object]
   /**/              def jArray(   name: String) : J.Array        = jArray_?(name).get
@@ -16,7 +16,7 @@ trait Object extends `val`.Lookup[String, Any] with Able.Info:
   @tn("double_Opt") def double_?( name: String) : Double.Opt     = get_?(name).map_?[Double.Opt]{case v:Double=> v; case s:String => s.toDouble_?; case v:Number => v.doubleValue; case _ => \/ }
   /**/              def boolean(  name: String) : Boolean        = string(name).toBoolean
 
-  /**/              def info                   : Info           = Info(this) ++= pair_~.map(t => (t._1,t._2.tag))
+  /**/              def doc                   : Doc           = Doc(this) ++= pair_~.map(t => (t._1,t._2.tag))
   override          def tag                    : String         = Json.format(this)
 
 object Object extends Void.Setup[Ref](z.Void.Object):

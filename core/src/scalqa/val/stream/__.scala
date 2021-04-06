@@ -13,7 +13,7 @@ object Stream extends z.util._default with _build with _info with _use :
   implicit       inline def xxAbleStream[A](inline v:Able.~[A]): ~[A]             = v.~
 
   given xxCanEqual[A,B](using CanEqual[A,B]) : CanEqual[~[A],~[B]] = CanEqual.derived
-  given xxInfoTag[A:Info.Tag]                : Info.Tag[~[A]]  = z.util.InfoTag()
+  given xxDefDoc[A:Def.Doc]                : Def.Doc[~[A]]  = z.util.DefDoc()
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type _build     = stream._build;      inline def _build   = stream._build
@@ -30,11 +30,9 @@ object Stream extends z.util._default with _build with _info with _use :
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait Stream -> ###
+@trait Stream -> ### Value Stream
 
-      [[Stream]] has global alias `~` (tilde), which is used in many cases
-
-      By Scalqa convention, method names, which return [[Stream]] type, are ended with '_~' instead of word 'Stream'
+      By Scalqa convention, method names, which return [[~]], are ended with '_~'
 
       ```
       val s: ~[Char] = "ABCD".char_~
@@ -42,20 +40,20 @@ ___________________________________________________________________________*/
       s.TP  // Prints ~(A, B, C, D)
       ```
 
-      Stream has just one method to be implemented, but it has large attached libraries for stream:
-        - [building](stream/_build.html)
-        - [using](stream/_use.html)
-        - and [metadata](stream/_info.html)
+      Stream has just one method to be implemented, but it has large attached libraries for:
+        - [building](stream/_build.html) stream pipeline
+        - [using](stream/_use.html) streams
+        - and accessing stream [metadata](stream/_info.html)
 
-      Read more in the [Guide](../../../guide/reference/Stream.html).
+      Read more in the [Guide](../../../guide/features/Stream.html).
 
 @def read_?  -> Read next option
 
-      Optionally returns next element or void option
+      Optionally returns next element or empty option
 
-      If void option is returned, the [[Stream]] is considered exhasted and should be discarded
+      If empty option is returned, the stream is considered exhasted and should be discarded
 
-      This is the only real method of [[Stream]] interface, the rest of [[Stream]] functionality is provided with extension methods
+      This is the only real method of stream interface, the rest of functionality is provided with extension methods
 
 @def apply            -> Single element consructor
 @def apply            -> Double element consructor

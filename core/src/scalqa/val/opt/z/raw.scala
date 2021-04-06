@@ -1,19 +1,19 @@
 package scalqa; package `val`; package opt; package z; import language.implicitConversions;
 
-import Shape.OfOpt.*
+import Shape.OfOpt.Raw
 
 object raw:
 
-  inline def apply[A,RAW<:Raw[A]](x:Opt[A], inline s: Tag.Raw[A,RAW]): RAW  =
+  inline def apply[A,RAW<:Raw[A]](x:Opt[A], inline s: Raw.Def[A,RAW]): RAW  =
     inline s match
-              case _ : Tag.Raw[A,Boolean.G.Opt[A]] => (if(x.isEmpty) Boolean.G.Opt.void[Boolean] else Boolean.G.Opt(x.cast[java.lang.Boolean].booleanValue)).cast[RAW]
-              case _ : Tag.Raw[A,Byte   .G.Opt[A]] => (if(x.isEmpty) Byte   .G.Opt.void[Byte]    else x.cast[java.lang.Byte     ].shortValue).cast[RAW]
-              case _ : Tag.Raw[A,Char   .G.Opt[A]] => (if(x.isEmpty) Char   .G.Opt.void[Char]    else x.cast[java.lang.Character].charValue.Int).cast[RAW]
-              case _ : Tag.Raw[A,Short  .G.Opt[A]] => (if(x.isEmpty) Short  .G.Opt.void[Short]   else x.cast[java.lang.Short    ].intValue).cast[RAW]
-              case _ : Tag.Raw[A,Int    .G.Opt[A]] => (if(x.isEmpty) Int    .G.Opt.void[Int]     else x.cast[java.lang.Integer  ].longValue).cast[RAW]
-              case _ : Tag.Raw[A,Long   .G.Opt[A]] => (if(x.isEmpty) Long   .G.Opt.void[Long]    else x.cast[java.lang.Long     ].longValue).cast[RAW]
-              case _ : Tag.Raw[A,Float  .G.Opt[A]] => (if(x.isEmpty) Float  .G.Opt.void[Float]   else x.cast[java.lang.Float    ].floatValue).cast[RAW]
-              case _ : Tag.Raw[A,Double .G.Opt[A]] => (if(x.isEmpty) Double .G.Opt.void[Double]  else x.cast[java.lang.Double   ].doubleValue).cast[RAW]
+              case _ : Raw.Def[A,Boolean.G.Opt[A]] => (if(x.isEmpty) Boolean.G.Opt.void[Boolean] else Boolean.G.Opt(x.cast[java.lang.Boolean].booleanValue)).cast[RAW]
+              case _ : Raw.Def[A,Byte   .G.Opt[A]] => (if(x.isEmpty) Byte   .G.Opt.void[Byte]    else x.cast[java.lang.Byte     ].shortValue).cast[RAW]
+              case _ : Raw.Def[A,Char   .G.Opt[A]] => (if(x.isEmpty) Char   .G.Opt.void[Char]    else x.cast[java.lang.Character].charValue.Int).cast[RAW]
+              case _ : Raw.Def[A,Short  .G.Opt[A]] => (if(x.isEmpty) Short  .G.Opt.void[Short]   else x.cast[java.lang.Short    ].intValue).cast[RAW]
+              case _ : Raw.Def[A,Int    .G.Opt[A]] => (if(x.isEmpty) Int    .G.Opt.void[Int]     else x.cast[java.lang.Integer  ].longValue).cast[RAW]
+              case _ : Raw.Def[A,Long   .G.Opt[A]] => (if(x.isEmpty) Long   .G.Opt.void[Long]    else x.cast[java.lang.Long     ].longValue).cast[RAW]
+              case _ : Raw.Def[A,Float  .G.Opt[A]] => (if(x.isEmpty) Float  .G.Opt.void[Float]   else x.cast[java.lang.Float    ].floatValue).cast[RAW]
+              case _ : Raw.Def[A,Double .G.Opt[A]] => (if(x.isEmpty) Double .G.Opt.void[Double]  else x.cast[java.lang.Double   ].doubleValue).cast[RAW]
               case _                               => J.illegalState()
 
 /*___________________________________________________________________________

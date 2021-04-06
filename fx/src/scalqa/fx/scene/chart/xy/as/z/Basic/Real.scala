@@ -4,7 +4,7 @@ import javafx.scene.{ chart => J }
 import J.XYChart.{ Series => JSeries, Data => JItem }
 
 private[as] class Real[X, Y, XA <: Chart.Axis[X], YA <: Chart.Axis[Y], XV, YV](val chart: Basic[X, Y, XA, YA], xa: J.Axis[XV], ya: J.Axis[YV]) extends J.XYChart[XV, YV](xa, ya) with Real_Base:
-  private val list =  Idx.OM[JSeries[XV, YV]]().^(l => setData(Util.JavaFx.list(l)))
+  private val list =  Idx.OM[JSeries[XV, YV]]().^(l => setData(Ui.JavaFx.list(l)))
 
   protected def seriesAdded(s: JSeries[XV, YV], i: Int) = runFx {
     val n = chart.SeriesBase(s).node

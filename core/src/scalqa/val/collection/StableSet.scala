@@ -6,6 +6,7 @@ abstract class StableSet[A] private[scalqa]() extends Collection[A] with gen.abl
   /**/                   def joinAll(v: ~[A])   : THIS_TYPE
   @tn("_join")    inline def + (inline v: A)    : THIS_TYPE = join(v)
   @tn("_joinAll") inline def ++(inline v: ~[A]) : THIS_TYPE = joinAll(v)
+  /**/                   def contains(v: A)     : Boolean
 
 object StableSet:
   /**/            def apply[A](v: ~[A])         : StableSet[A] = Z.Ref(v.iterator)
@@ -50,8 +51,8 @@ ___________________________________________________________________________*/
        When an elements is [[join]]ed to [[StableSet]], it is evaluated for uniqueness and the operation is ignored in case of duplicates.
 
        Note: [[scalqa.val.collection.StableSet StableSet]] is a concrete single implementation of unique collection.
-       General "Set" interface cannot be justified due to limited use. If there is a rare need for more efficient "Set",
-       use [[scalqa.val.collection.Mutable$.uniqueElementSet Collection.Mutable.uniqueElementSet]]
+       There is no deneral "Set" interface, because its use is rare. If there is a need for more efficient "Set",
+       create one with [[scalqa.val.collection.Mutable$.uniqueElementSet Collection.Mutable.uniqueElementSet]]. The result is faster, but not thread safe.
 
 @def join -> Join element
 

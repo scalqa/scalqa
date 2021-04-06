@@ -40,9 +40,9 @@ ___________________________________________________________________________*/
 
        // Output
         scalqa.val.stream.z.flow.parallel.Flow_asJavaStream@ncwo{}
-          scalqa.def.char.g.stream.z.map$Chars@uru4{raw=Char,fromRaw=Char}
-            scalqa.def.char.g.Stream$TakeStream$2@56u4{raw=Char,fromRaw=Char}
-              scalqa.def.char.g.stream.Z$Stream_fromRange@cq06{raw=Char,size=26,from=a,step=1}
+          scalqa.lang.char.g.stream.z.map$Chars@uru4{raw=Char,fromRaw=Char}
+            scalqa.lang.char.g.Stream$TakeStream$2@56u4{raw=Char,fromRaw=Char}
+              scalqa.lang.char.g.stream.Z$Stream_fromRange@cq06{raw=Char,size=26,from=a,step=1}
      ```
 
 @def size_? -> Optional size

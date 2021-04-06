@@ -1,6 +1,6 @@
 package scalqa; package j; package vm; import language.implicitConversions
 
-object Memory extends Able.Info:
+object Memory extends Able.Doc:
 
   /**/            def total : ByteCount = rt.totalMemory.ByteCount
   /**/            def max   : ByteCount = rt.maxMemory.ByteCount
@@ -8,7 +8,7 @@ object Memory extends Able.Info:
   /**/            def used  : ByteCount = total - free
   inline          def gc    : Unit      = System.gc
 
-  /**/            def info  : Info      = Info(this) += ("max", max.toBrief) += ("total", total.toBrief) += ("free", free.toBrief) += ("used", used.toBrief)
+  /**/            def doc  : Doc      = Doc(this) += ("max", max.toBrief) += ("total", total.toBrief) += ("free", free.toBrief) += ("used", used.toBrief)
   private inline  def rt    : Runtime   = Runtime.getRuntime
 
 

@@ -1,4 +1,4 @@
-package scalqa; package test.Def.Int
+package scalqa; package test.Core.Int
 
 object Main extends J.Test:
 

@@ -38,9 +38,9 @@ object Buffer:
   private[scalqa] def accessible[A](use: Array[A], usedSize: Int)   : Buffer[A] & Able.Access[Array[A]] = buffer.Z.accessible(use,usedSize)
   private[scalqa] def accessible[A:ClassTag](initSize: Int.Opt = \/): Buffer[A] & Able.Access[Array[A]] = accessible(new Array[A](initSize or J.initSize),0)
 
-  given xxInfoTag[A](using t: Info.Tag[A]) : Info.Tag[Buffer[A]] with
-    def tag(v: Buffer[A]) = info(v).tag
-    def info(v: Buffer[A]) = Info(v) += ("size", v.size) += v.array.tag
+  given xxDefDoc[A](using t: Def.Doc[A]) : Def.Doc[Buffer[A]] with
+    def tag(v: Buffer[A]) = doc(v).tag
+    def doc(v: Buffer[A]) = Doc(v) += ("size", v.size) += v.array.tag
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -87,8 +87,8 @@ ___________________________________________________________________________*/
         x.~.TP // Prints ~(0, 1, 5, 6, 9, 10)
       ```
 
-@def >< -> Buffer elements as Pack
+@def >< -> Pack Buffer elements
 
-     Both Buffer and Pack are mostly Array based, so the convertions between them are very efficient
+     Both Buffer and Pack are mostly Array based, so the direct convertions between them are very efficient
 
 */

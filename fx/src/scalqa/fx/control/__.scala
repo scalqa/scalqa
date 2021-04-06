@@ -9,7 +9,6 @@ trait Control extends Abstract.Region:
   /**/               def tooltip_=(s: String)          : Unit                     = tooltip = Control.Tooltip(s)
 
 object Control:
-  @fast lazy val Action      = control.Action;               type Action       = control.Action
   @fast lazy val Button      = control.Button;               type Button       = control.Button
   @fast lazy val Cell        = control.Cell;                 type Cell         = control.Cell
   @fast lazy val CheckBox    = control.CheckBox;             type CheckBox     = control.CheckBox
@@ -17,7 +16,7 @@ object Control:
   @fast lazy val Label       = control.Label;                type Label        = control.Label
   @fast lazy val List        = control.List;                 type List[A]      = control.List[A]
   @fast lazy val Menu        = control.Menu;                 type Menu         = control.Menu
-  @fast lazy val Selection   = control.Selection;            type Selection[A] = control.Selection[A]
+  @fast lazy val Popup       = control.Popup;                type Popup        = control.Popup
   @fast lazy val Table       = control.Table;                type Table[A]     = control.Table[A]
   @fast lazy val Text        = control.Text;                 type Text         = control.Text
   @fast lazy val Tooltip     = control.Tooltip;              type Tooltip      = control.Tooltip
@@ -31,7 +30,7 @@ object Control:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait Control -> ### Parent of GUI Widgets
+@trait Control -> ### GUI Widgets
 
    [[Control]] object also contains most of the available controls, which are aliased in [[Fx]] root and can be called without `Control.` prefix
 

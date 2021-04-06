@@ -10,13 +10,13 @@ abstract class Table[ROW] extends Control with _properties[ROW] with _Column[ROW
   // ----------------------------------------------------------------------------------------------------------------------------------------
   def columns                      : Idx[Table.Column[ROW,_,_]] = columnData
   def rows                         : Idx.OM[ROW]                = rowData
-  lazy val selection               : Selection[ROW]             = Selection[ROW](rows, real.getSelectionModel)
+  lazy val selection               : Fx.Selection[ROW]          = Fx.Selection[ROW](rows, real.getSelectionModel)
   def sortOrder                    : ><[Column[_]]              = real.getSortOrder.~.map(_.getUserData.cast[Column[_]]).><
   def sortOrder_=(a: ~[Column[_]]) : Unit                       = real.getSortOrder.setAll(a.map(_.real).toJavaList)
   def scrollTo(i: Int)             : Unit                       = real.scrollTo(i)
 
   ({
-    _createRealOverride(new REAL().^(r => { r.setEditable(true); r.setItems(Util.JavaFx.list(rowData))}))
+    _createRealOverride(new REAL().^(r => { r.setEditable(true); r.setItems(Ui.JavaFx.list(rowData))}))
     _onRealCreated(real => {
       columnData.seal.~.foreach(c => { real.getColumns.add(c.real); c.sortable = c.ordering.nonVoid && sortMode.nonVoid})
       onCreateRowCell(new RowCell[ROW, VIEW](this))

@@ -1,11 +1,11 @@
 package scalqa; package fx; package scene; package pane; package split; import language.implicitConversions
 
-class Divider(val real: javafx.scene.control.SplitPane.Divider) extends Able.Info:
+class Divider(val real: javafx.scene.control.SplitPane.Divider) extends Able.Doc:
 
   @tn("position_Pro") lazy  val position_*            : Double.Pro.OM  = Fx.JavaFx.As.pro_OM(real.positionProperty)
   /**/                      def position              : Double         = real.getPosition
   /**/                      def position_=(b: Double) : Unit           = real.setPosition(b)
-  /**/                      def info                  : Info           = Info(this) += ("position", position)
+  /**/                      def doc                  : Doc           = Doc(this) += ("position", position)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

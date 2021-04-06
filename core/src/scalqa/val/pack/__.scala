@@ -1,6 +1,6 @@
 package scalqa; package `val`; import pack.*; import language.implicitConversions
 
-import Shape.OfPack.*
+import Shape.OfPack.Raw
 
 abstract class Pack[A] extends Idx[A]:
   type THIS_TYPE <: Pack[A]
@@ -27,7 +27,7 @@ abstract class Pack[A] extends Idx[A]:
   @tn("drop_Range")        def drop_<>(from: Int, size: Int)                      : THIS_TYPE
   @tn("drop_Range") inline def drop_<>(r: Int.<>)                                 : THIS_TYPE  = take_<>(r.start,r.size)
   /**/                     def toBuffer                                           : Buffer[A]
-  /**/              inline def raw[PACK<:Raw[A]] (using inline s:Tag.Raw[A,PACK]) : PACK       = z.raw(this,s)
+  /**/              inline def raw[PACK<:Raw[A]] (using inline s:Raw.Def[A,PACK]) : PACK       = z.raw(this,s)
   /**/                     def compact                                            : this.type
 
 object Pack:

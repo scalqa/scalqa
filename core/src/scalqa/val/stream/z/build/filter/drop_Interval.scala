@@ -9,7 +9,7 @@ class drop_Interval[A](x: ~[A], in: Int.<>) extends a.Pipe[A](x):
     i += 1
     o
 
-  override def info = super.info +=@ (0, "", in)
+  override def doc = super.doc +=@ (0, "", in)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

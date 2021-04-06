@@ -1,9 +1,9 @@
 package scalqa; package fx; package control; package table; package z; package idxProxy; import language.implicitConversions
 
-private[fx] class Entry[A](var index: Int, val value: A) extends Able.Info:
+private[fx] class Entry[A](var index: Int, val value: A) extends Able.Doc:
 
   override def equals(a: Any) : Boolean = a match{ case v: Entry[_] => v.index == index && v.value == value; case _ => false }
-  /**/     def info           : Info    = Info(this) += ("index", index) += ("value", value)
+  /**/     def doc           : Doc    = Doc(this) += ("index", index) += ("value", value)
 
 private[scalqa] object Entry:
 

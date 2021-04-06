@@ -27,15 +27,15 @@ object Z:
 
   def accessible[A](a: Array[A], sz: Int): Buffer[A] & Able.Access[Array[A]] =
     { a match
-      case a: Array[Ref]      => `def`.any.ref.  Buffer.accessible[A](a,sz)
-      case a: Array[Int]      => `def`.int    .g.Buffer.accessible(a,sz)
-      case a: Array[Long]     => `def`.long   .g.Buffer.accessible(a,sz)
-      case a: Array[Double]   => `def`.double .g.Buffer.accessible(a,sz)
-      case a: Array[Boolean]  => `def`.boolean.g.Buffer.accessible(a,sz)
-      case a: Array[Byte]     => `def`.byte   .g.Buffer.accessible(a,sz)
-      case a: Array[Char]     => `def`.char   .g.Buffer.accessible(a,sz)
-      case a: Array[Float]    => `def`.float  .g.Buffer.accessible(a,sz)
-      case a: Array[Short]    => `def`.short  .g.Buffer.accessible(a,sz)
+      case a: Array[Ref]      => lang.any.ref.  Buffer.accessible[A](a,sz)
+      case a: Array[Int]      => lang.int    .g.Buffer.accessible(a,sz)
+      case a: Array[Long]     => lang.long   .g.Buffer.accessible(a,sz)
+      case a: Array[Double]   => lang.double .g.Buffer.accessible(a,sz)
+      case a: Array[Boolean]  => lang.boolean.g.Buffer.accessible(a,sz)
+      case a: Array[Byte]     => lang.byte   .g.Buffer.accessible(a,sz)
+      case a: Array[Char]     => lang.char   .g.Buffer.accessible(a,sz)
+      case a: Array[Float]    => lang.float  .g.Buffer.accessible(a,sz)
+      case a: Array[Short]    => lang.short  .g.Buffer.accessible(a,sz)
       case _                  => J.illegalState()
     }.cast[Buffer[A] & Able.Access[Array[A]]]
 

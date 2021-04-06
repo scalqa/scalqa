@@ -13,7 +13,7 @@ private[parallel] class Flow_inCustomPool[A](priority: J.Vm.Priority, parallelis
   /**/                def foldAs[B](start: B)(op: (B,A) => B, f: (B,B) => B) : B                    = runWithinPool{ base.foldAs(start)(op,f) }
   @tn("findAny_Opt")  def findAny_?                                          : Opt[A]               = runWithinPool{ base.findAny_? }
   override            def count                                              : Int                  = runWithinPool{ base.count }
-  override            def info                                               : Info                 = super.info += ("priority",priority) += ("parallelism",parallelism)
+  override            def doc                                               : Doc                 = super.doc += ("priority",priority) += ("parallelism",parallelism)
 
   private def runWithinPool[A](f: => A): A = {
     import java.util.concurrent.ForkJoinPool

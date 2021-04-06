@@ -2,7 +2,7 @@ package scalqa; package `val`; package stream; package z; package use; import la
 
 object read:
 
-  private class stream[A](val base: ~[A], v: Array[Ref], sz: Int) extends `def`.array.z.stream.Refs[A](v,sz)
+  private class stream[A](val base: ~[A], v: Array[Ref], sz: Int) extends lang.array.z.stream.Refs[A](v,sz)
 
   def stream[A](s: ~[A], cnt: Int): ~[A] & Able.Size = if (cnt <= 0) \/ else
     var o = s.read_?

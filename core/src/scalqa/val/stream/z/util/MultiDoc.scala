@@ -2,7 +2,7 @@ package scalqa; package `val`; package stream; package z; package util; import l
 
 import Custom.Pipeline
 
-class MultiDoc private(target: Ref/* expected Pipeline | ~[_] | Flow[_]*/, v: \/) extends Info(target.^.id):
+class MultiDoc private(target: Ref/* expected Pipeline | ~[_] | Flow[_]*/, v: \/) extends Doc(target.^.id):
   def this(v: Ref) = {
     this(v,\/)
 
@@ -10,7 +10,7 @@ class MultiDoc private(target: Ref/* expected Pipeline | ~[_] | Flow[_]*/, v: \/
 
     if(id.lower.contains("stream").not) this += "Stream"
 
-    Info.Specialized.get_?(v).forval(name => {
+    Raw.Specialized.get_?(v).forval(name => {
       this += ("raw",name)
       this += v.?.takeType[Pipeline].map_?(Pipeline.baseDoc_?).map_?(_.~.find_?(_._1 == "raw").map(_._2)).drop(_ == name).map(n => ("fromRaw",n))
     })

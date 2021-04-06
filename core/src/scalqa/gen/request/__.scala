@@ -81,11 +81,11 @@ ___________________________________________________________________________*/
 
          Time().roundTo(1.Second, UP)
          // vs.
-         Time().roundTo(1.Second, Def.Rounding.Up)
+         Time().roundTo(1.Second, Lang.Rounding.Up)
 
          Time().roundTo(1.Minute)(using DOWN)
          // vs.
-         Time().roundTo(1.Minute, Def.Rounding.Down)
+         Time().roundTo(1.Minute, Lang.Rounding.Down)
 
          val l: Long = MAX
          // vs.

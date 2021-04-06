@@ -1,4 +1,4 @@
-package scalqa; package test.Def.Array; import language.implicitConversions
+package scalqa; package test.Core.Array; import language.implicitConversions
 
 object Extension extends J.Test:
 

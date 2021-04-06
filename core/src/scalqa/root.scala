@@ -1,7 +1,7 @@
 import language.implicitConversions
 
 package object scalqa:
-  export scalqa.Def.*
+  export scalqa.Lang.*
   export scalqa.Gen.*
   export scalqa.gen.Request.*
   export scalqa.j.vm.Predef.{ given }
@@ -23,11 +23,11 @@ ___________________________________________________________________________*/
 /**
 @object scalqa -> ### \n\n Root package [[scalqa]] defines 5 members:
 
-  -- [[scalqa.Def$ Def]] holds language level extentions to Java and Scala functionality
-  -- [[scalqa.Gen$ Gen]] holds core language utilities
-  -- [[scalqa.Fx$ Fx]]   holds GUI API
-  -- [[scalqa.J$ J]]     holds second tier language utilities
-  -- [[scalqa.Val$ Val]] holds generic containers framework
+  -- [[scalqa.Lang$ Lang]] holds language level extentions to Java and Scala functionality
+  -- [[scalqa.Gen$ Gen]]   holds core language utilities
+  -- [[scalqa.Fx$ Fx]]     holds GUI API
+  -- [[scalqa.J$ J]]       holds second tier language utilities
+  -- [[scalqa.Val$ Val]]   holds generic containers framework
 
   [[scalqa]] also contains many aliases,
   so the types and objects defined deeper in the hierarchy can be accessed without prefixes

@@ -9,7 +9,7 @@ class zipAll[A,B](one: ~[A], two: ~[B], ao: Opt[A], bo: Opt[B]) extends ~[(A, B)
     if(done1 && done2) \/ else (o1 or_? ao or fail("first"), o2 or_? bo or fail("second"))
 
   @tn("sizeLong_Opt") def sizeLong_?      = one.sizeLong_?.mix(two.sizeLong_?, _ max _)
-  override            def infoTree        = Info.Tree(this.info, Custom.Pipeline.infoTree(one), Custom.Pipeline.infoTree(two))
+  override            def infoTree        = Doc.Tree(this.doc, Custom.Pipeline.infoTree(one), Custom.Pipeline.infoTree(two))
   private             def fail(x: String) = J.illegalState("~.zip '" + x + "' default ? is not provided, but is required to match other [[Stream]]'s length")
 
 /*___________________________________________________________________________

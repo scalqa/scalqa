@@ -1,13 +1,13 @@
 package scalqa; package fx; package control; package cell; import language.implicitConversions
 
-trait Setup[CELL <: control.Cell] extends Able.Info:
+trait Setup[CELL <: control.Cell] extends Able.Doc:
   private                    var updateJobs                                           : ><[CELL => Unit]                      = \/
-  private                    var clickJobs                                            : ><[(Event.Mouse, CELL) => Unit]       = \/
-  private                    var menuJobs                                             : ><[(Event.ContextMenu, CELL) => Unit] = \/
+  private                    var clickJobs                                            : ><[(Ui.Event.Mouse, CELL) => Unit]       = \/
+  private                    var menuJobs                                             : ><[(Ui.Event.ContextMenu, CELL) => Unit] = \/
 
   @tn("cell_Setup")          def cell_:        (f: CELL => Unit)                      : Unit        = updateJobs += f
-  @tn("mouseClicked_Setup")  def mouseClicked_:(f: (Event.Mouse, CELL) => Unit)       : Unit        = clickJobs += f
-  @tn("contextMenu_Setup")   def contextMenu_: (f: (Event.ContextMenu, CELL) => Unit) : Unit        = menuJobs  += f
+  @tn("mouseClicked_Setup")  def mouseClicked_:(f: (Ui.Event.Mouse, CELL) => Unit)       : Unit        = clickJobs += f
+  @tn("contextMenu_Setup")   def contextMenu_: (f: (Ui.Event.ContextMenu, CELL) => Unit) : Unit        = menuJobs  += f
   @tn("alignment_SetupOpt")  def alignment_:?  (f: CELL => Opt[Pos])                  : Unit        = cell_:(c => f(c).forval(c.alignment= _))
   @tn("style_SetupOpt")      def style_:?      (f: CELL => Opt[Style])                : Unit        = cell_:(c => f(c).forval(c.style += _))
   @tn("styleClass_SetupOpt") def styleClass_:? (f: CELL => Opt[Style.Class])          : Unit        = cell_:(c => f(c).forval(c.styleClass= _))
@@ -30,7 +30,7 @@ trait Setup[CELL <: control.Cell] extends Able.Info:
       if (clickJobs.size > 0) c.onMouseClicked(Event.Id.make1(clickJobs, e => clickJobs.~.foreach(_(e, c))))
       if (menuJobs.size  > 0) c.onContextMenu( Event.Id.make1(menuJobs,  e => menuJobs.~.foreach(_(e, c))))
 
-  def info = Info(this) += ("updateJobs", updateJobs.size) ++= clickJobs.size.?.take(_ > 0).map(_.tag).map(("MouseClickedJobs", _)).~ ++= menuJobs.size.?.take(_ > 0).map(_.tag).map(("contextMenuJobs", _)).~
+  def doc = Doc(this) += ("updateJobs", updateJobs.size) ++= clickJobs.size.?.take(_ > 0).map(_.tag).map(("MouseClickedJobs", _)).~ ++= menuJobs.size.?.take(_ > 0).map(_.tag).map(("contextMenuJobs", _)).~
 
 object Setup:
   implicit def xxRequest[CELL <: control.Cell](v: \/) : Setup[CELL] = Z.Void.cast[Setup[CELL]]

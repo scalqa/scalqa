@@ -1,7 +1,7 @@
 package scalqa.j.vm; import language.implicitConversions
 
-import scalqa.`def`
-import `def`.*
+import scalqa.lang
+import lang.*
 
 object Predef:
 

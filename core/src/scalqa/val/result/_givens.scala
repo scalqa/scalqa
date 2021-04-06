@@ -3,13 +3,13 @@ package scalqa; package `val`; package result; import language.implicitConversio
 class _givens:
   self: Result.type =>
 
-  given xxTagType[A]                         : Info.Tag.Type[Result[A]]       = Info.Tag.Type("Result")
-  given xxTagClass[A]  (using t: ClassTag[A]): ClassTag[Result[A]]            = t.cast[ClassTag[Result[A]]]
+  given xxDefName[A]                         : Def.Name[Result[A]]       = Def.Name("Result")
+  given xxClassTag[A]  (using t: ClassTag[A]): ClassTag[Result[A]]            = t.cast[ClassTag[Result[A]]]
   given xxCanEqual[A,B](using CanEqual[A,B]) : CanEqual[Result[A], Result[B]] = CanEqual.derived
 
-  given xxInfoTag[A](using t: Info.Tag[A]) : Info.Tag[Result[A]] with
+  given xxDefDoc[A](using t: Def.Doc[A]) : Def.Doc[Result[A]] with
     def tag(v: Result[A]) : String = if(v.isValue) "Result("+t.tag(v.cast[A])+")" else "Result(Problem("+v.problem.message+"))"
-    def info(v: Result[A]): Info   = Info("Result@"+v.self_^.hash)
+    def doc(v: Result[A]): Doc   = Doc("Result@"+v.self_^.hash)
 
   given xxFilter : Ref with
     extension[A](x: Result[A])

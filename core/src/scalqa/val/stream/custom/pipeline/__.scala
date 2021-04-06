@@ -2,20 +2,20 @@ package scalqa; package `val`; package stream; package custom; import language.i
 
 trait Pipeline extends Pipeline.Tree:
   protected def base     : Ref
-  /**/      def infoTree : Info.Tree = Info.Tree.apply(info, base.?.takeType[Pipeline.Tree].map(_.infoTree) or Info.Tree(Able.Info.doc_?(base) or z.util.MultiDoc(base)))
+  /**/      def infoTree : Doc.Tree = Doc.Tree.apply(doc, base.?.takeType[Pipeline.Tree].map(_.infoTree) or Doc.Tree(Able.Doc.doc_?(base) or z.util.MultiDoc(base)))
 
 object Pipeline:
-  def infoTree[A](v: Pipeline.Tree | ~[A] | Flow[A]) : Info.Tree = v match
+  def infoTree[A](v: Pipeline.Tree | ~[A] | Flow[A]) : Doc.Tree = v match
     case v: Tree    => v.infoTree
-    case v: ~[_]    => Info.Tree(z.util.MultiDoc(v))
-    case v: Flow[_] => Info.Tree(z.util.MultiDoc(v))
+    case v: ~[_]    => Doc.Tree(z.util.MultiDoc(v))
+    case v: Flow[_] => Doc.Tree(z.util.MultiDoc(v))
 
-  private[stream] def baseDoc_?(v: Pipeline): Opt[Info] = Able.Info.doc_?(v.base) // needed by z.util.MultiDoc only
+  private[stream] def baseDoc_?(v: Pipeline): Opt[Doc] = Able.Doc.doc_?(v.base) // needed by z.util.MultiDoc only
 
   // ************************************************************************************************************
-  trait Tree extends gen.able.Info :
-    def infoTree : Info.Tree
-    def info     : Info     = z.util.MultiDoc(this)
+  trait Tree extends gen.able.Doc :
+    def infoTree : Doc.Tree
+    def doc     : Doc     = z.util.MultiDoc(this)
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type ParallelFlow[A] = pipeline.ParallelFlow[A]

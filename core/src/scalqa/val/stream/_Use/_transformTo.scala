@@ -2,14 +2,13 @@ package scalqa; package `val`; package stream; package _Use; import language.imp
 
 import scala.{ collection as SC }
 import java.{ util as JU }
-import Info.Tag
 
 transparent trait _transformTo:
 
   extension[A] (x: ~[A])
     @tn("pack") def ><                                        : ><[A]                = pack.z.ArrayPack.fromStream[A](x)
     /**/        def iterator                                  : Iterator[A]          = z.use.transformTo.Iterator(x)
-    /**/        def makeString(sep:String= \/)(using t:Tag[A]): String               = String.Builder(256).^(b => x.foreachIndexed((i,v) =>{ if (i>0) b +=sep; b +=t.tag(v)})).tag
+    /**/        def makeString(sep:String= \/)(using t:Def.Doc[A]): String               = String.Builder(256).^(b => x.foreachIndexed((i,v) =>{ if (i>0) b +=sep; b +=t.tag(v)})).tag
     /**/        def toIdx                                     : Idx[A]               = pack.z.ArrayPack.fromStream[A](x)
     /**/        def toBuffer                                  : Buffer[A]            = new Any.Ref.Buffer[A](x)
     /**/        def toSet                                     : StableSet[A]         = StableSet(x)
@@ -22,7 +21,7 @@ transparent trait _transformTo:
     /**/ inline def toJavaIterator                            : JU.Iterator[A]       = z.use.transformTo.JavaIterator(x)
     /**/ inline def toJavaSpliterator(inline splitSize: Int)  : JU.Spliterator[A]    = z.use.transformTo.JavaSpliterator(x,splitSize)
     /**/        def toJavaStream(parallel: Boolean = false)   : JU.stream.Stream[A]  = JU.stream.StreamSupport.stream(x.toJavaSpliterator(1), parallel)
-    /**/        def toText                    (using t:Tag[A]): String               = z.use.print.toText(x,false)
+    /**/        def toText                    (using t:Def.Doc[A]): String               = z.use.print.toText(x,false)
     /**/        def toLookupBy[K](f: A => K)                  : Lookup[K,A]          = {val l=Lookup.Mutable[K,A](); x.FOREACH(v => l.put(f(v),v)); l}
     /**/        def toMapBy[K](f: A => K)                     : Map[K,A]             = x.zipKey(f).toMap
 
@@ -128,7 +127,7 @@ ___________________________________________________________________________*/
 
       Returns all elements as String formatted table
 
-      If elements implement [[Able.Info]], each 'info' property value is placed in a different column
+      If elements implement [[Able.Doc]], each 'doc' property value is placed in a different column
 
       If elements implement `scala.Product` (like all Tuples), each Product element is placed in a different column
 

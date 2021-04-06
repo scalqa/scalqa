@@ -6,12 +6,12 @@ object J:
   /**/    def scheduleIn[U](delay: Time.Length, job: => U)                          : Event.Control = j.vm.z.Schedule.in(delay, () => job)
   /**/    def schedule[U](f: => U)                                                  : Unit          = j.vm.z.Schedule(() => f)
   /**/    def sleep(tl: Time.Length)                                                : Unit          = java.lang.Thread.sleep(tl.millisTotal, (tl.micros * 1000 + tl.nanos).Int)
-  /**/    def first[U](v: Int)(f: => U)                                             : Unit          = { cnt += 1;  if(v>=cnt) f }; private var cnt=0
+  /**/    def count                                                                 : Long          = cnt.next; private val cnt=j.Util.Concurrent.Counter(0)
 
   /**/    var debug                                                                 : Boolean       = false
   inline  def debugOn                                                               : Unit          = debug = true
   inline  def debugOff                                                              : Unit          = debug = false
-  /**/    def debug[A:Info.Tag](v: A)                                               : Unit          = if(debug) println(v.tag)
+  /**/    def debug[A:Def.Doc](v: A)                                               : Unit          = if(debug) println(v.tag)
 
   inline  def initSize                                                       : Int           = ZZ.initSize
   inline  def toDo(                inline message: String = "On toDo list")  : Nothing       = throw new UnsupportedOperationException("toDo: "+message)

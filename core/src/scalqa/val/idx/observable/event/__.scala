@@ -1,10 +1,10 @@
 package scalqa; package `val`; package idx; package observable; import language.implicitConversions
 
-abstract class Event[A] private[observable](final val name: String) extends Able.Info:
+abstract class Event[A] private[observable](final val name: String) extends Able.Doc:
   /**/               def range                : Int.<>
   /**/               def convert[B](f: A => B): Event[B]
   @tn("project_Opt") def project_?(i: Int.<>) : Opt[Event[A]]
-  override           def info                 : Info              = Info("IdxChange") += ("type", name) += ("range", range.tag)
+  override           def doc                 : Doc              = Doc("IdxChange") += ("type", name) += ("range", range.tag)
 
 object Event:
 

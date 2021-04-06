@@ -5,7 +5,7 @@ abstract class ComboBox[ROW,V,A](c: Column[ROW,V,A]) extends Cell[ROW,V,A](c):
   protected type REAL = javafx.scene.control.cell.ComboBoxTableCell[ROW, ITEM]
 
   protected override def _createReal: REAL = new REAL {
-    converterProperty.set(Util.JavaFx.stringConverter(TwoWayFun.oneWay[ITEM, String](_.text_? or "")))
+    converterProperty.set(Ui.JavaFx.stringConverter(TwoWayFun.oneWay[ITEM, String](_.text_? or "")))
     override def updateItem(slot: ITEM, empty: Boolean): Unit =
       super.updateItem(slot, empty)
       afterItemUpdated

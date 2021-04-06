@@ -2,12 +2,12 @@ package scalqa; package fx; package scene; package chart; package axis; import l
 
 import javafx.scene.chart.Axis.{ TickMark => JTick }
 
-abstract class Tick[A] extends Able.Info:
+abstract class Tick[A] extends Able.Doc:
   def label    : String
   def position : Double
   def visible  : Boolean
   def value    : A
-  def info     : Info          = Info(this) += ("label", label) += ("position", position) += ("value", value)
+  def doc     : Doc          = Doc(this) += ("label", label) += ("position", position) += ("value", value)
 
 private[chart] object Tick:
   def apply[A,B](tm: JTick[B], bm: TwoWayFun[A,B]): Tick[A] = new Z(tm, bm)

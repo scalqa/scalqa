@@ -1,6 +1,6 @@
 package scalqa; package `val`; package range; package z; import language.implicitConversions
 
-import Shape.OfRange.*
+import Shape.OfRange.{ Raw as RAW }
 
 object raw:
 
@@ -14,23 +14,23 @@ object raw:
 
   private def fail(r: Range[_]) = J.unsupportedOperation("Range.ordering is not instance of Ordering  .Ordering  , so convertion to Raw.Range is not supported. Current ordering: "+r.ordering)
 
-  inline def apply[A,RAW<:Raw[A]](inline x: Range[A], inline s: Tag.Raw[A,RAW]): RAW  =
+  inline def apply[A,RNG<:RAW[A]](inline x: Range[A], inline s: RAW.Def[A,RNG]): RNG  =
     inline x match
-      case _ : Byte   .G.<>[A] => x.cast[RAW]
-      case _ : Char   .G.<>[A] => x.cast[RAW]
-      case _ : Short  .G.<>[A] => x.cast[RAW]
-      case _ : Int    .G.<>[A] => x.cast[RAW]
-      case _ : Long   .G.<>[A] => x.cast[RAW]
-      case _ : Float  .G.<>[A] => x.cast[RAW]
-      case _ : Double .G.<>[A] => x.cast[RAW]
+      case _ : Byte   .G.<>[A] => x.cast[RNG]
+      case _ : Char   .G.<>[A] => x.cast[RNG]
+      case _ : Short  .G.<>[A] => x.cast[RNG]
+      case _ : Int    .G.<>[A] => x.cast[RNG]
+      case _ : Long   .G.<>[A] => x.cast[RNG]
+      case _ : Float  .G.<>[A] => x.cast[RNG]
+      case _ : Double .G.<>[A] => x.cast[RNG]
       case _ => inline s match
-          case _ : Tag.Raw[A,Byte   .G.<>[A & Raw.Byte   ]] => byte   [A & Raw.Byte   ](x.cast[Range[A & Raw.Byte   ]])
-          case _ : Tag.Raw[A,Char   .G.<>[A & Raw.Char   ]] => char   [A & Raw.Char   ](x.cast[Range[A & Raw.Char   ]])
-          case _ : Tag.Raw[A,Short  .G.<>[A & Raw.Short  ]] => short  [A & Raw.Short  ](x.cast[Range[A & Raw.Short  ]])
-          case _ : Tag.Raw[A,Int    .G.<>[A & Raw.Int    ]] => int    [A & Raw.Int    ](x.cast[Range[A & Raw.Int    ]])
-          case _ : Tag.Raw[A,Long   .G.<>[A & Raw.Long   ]] => long   [A & Raw.Long   ](x.cast[Range[A & Raw.Long   ]])
-          case _ : Tag.Raw[A,Float  .G.<>[A & Raw.Float  ]] => float  [A & Raw.Float  ](x.cast[Range[A & Raw.Float  ]])
-          case _ : Tag.Raw[A,Double .G.<>[A & Raw.Double ]] => double [A & Raw.Double ](x.cast[Range[A & Raw.Double ]])
+          case _ : RAW.Def[A,Byte   .G.<>[A & Raw.Byte   ]] => byte   [A & Raw.Byte   ](x.cast[Range[A & Raw.Byte   ]])
+          case _ : RAW.Def[A,Char   .G.<>[A & Raw.Char   ]] => char   [A & Raw.Char   ](x.cast[Range[A & Raw.Char   ]])
+          case _ : RAW.Def[A,Short  .G.<>[A & Raw.Short  ]] => short  [A & Raw.Short  ](x.cast[Range[A & Raw.Short  ]])
+          case _ : RAW.Def[A,Int    .G.<>[A & Raw.Int    ]] => int    [A & Raw.Int    ](x.cast[Range[A & Raw.Int    ]])
+          case _ : RAW.Def[A,Long   .G.<>[A & Raw.Long   ]] => long   [A & Raw.Long   ](x.cast[Range[A & Raw.Long   ]])
+          case _ : RAW.Def[A,Float  .G.<>[A & Raw.Float  ]] => float  [A & Raw.Float  ](x.cast[Range[A & Raw.Float  ]])
+          case _ : RAW.Def[A,Double .G.<>[A & Raw.Double ]] => double [A & Raw.Double ](x.cast[Range[A & Raw.Double ]])
           case _                                            => J.illegalState()
 
 /*___________________________________________________________________________

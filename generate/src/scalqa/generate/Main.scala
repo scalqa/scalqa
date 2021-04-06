@@ -7,7 +7,7 @@ object Merge:
     if(sa.length == 0) J.illegalArgument("No project root passed")
 
     val p     = J.Path(sa(0))
-    val isDoc = p.lastName == "doc"
+    val isDoc = p.lastName == "docs"
     val root  = if(isDoc) p.parent.parent else p.parent
 
     root.tp
@@ -37,7 +37,7 @@ object Merge:
         println()
      })
 
-  private def acceptable(v: J.Path) =  v.contains("scalqa","root.scala") || v.contains("ZZ.java") || v.contains("scalqa","def") || v.contains("scalqa","gen")
+  private def acceptable(v: J.Path) =  v.contains("scalqa","root.scala") || v.contains("ZZ.java") || v.contains("scalqa","lang") || v.contains("scalqa","gen")
                               || v.contains("scalqa","val") || v.contains("scalqa","j") || v.contains("scalqa","fx")
 
 /*___________________________________________________________________________

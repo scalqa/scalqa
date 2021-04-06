@@ -1,13 +1,13 @@
 package scalqa; package `val`; package stream; package _Build; import language.implicitConversions
 
-import Shape.OfStream.*
+import Shape.OfStream.Raw
 import z.build.{ mutate => M }
 
 transparent trait _mutate:
   self: Stream.type =>
 
   extension[A,STM<:Raw[A]](inline x: ~[A])
-    /**/          inline def raw    (using inline s:Tag.Raw[A,STM]) : STM                = M.raw(x,s)
+    /**/          inline def raw    (using inline s:Raw.Def[A,STM]) : STM               = M.raw(x,s)
   extension[A](inline x: ~[A])
     /**/          inline def ref                                    : ~[A]              = x
     /**/          inline def reverse                                : ~[A]              = new M.reverse(x)
@@ -41,7 +41,7 @@ ___________________________________________________________________________*/
 
         val general : ><[Int] = (1 <> 10).~.ref.><
 
-        special.getClass.TP // Prints class scalqa.def.int.g.Pack
+        special.getClass.TP // Prints class scalqa.lang.int.g.Pack
 
         general.getClass.TP // Prints class scalqa.val.pack.z.ArrayPack
      ```

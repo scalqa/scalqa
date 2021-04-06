@@ -1,4 +1,4 @@
-package scalqa; package test.Def
+package scalqa; package test.Core
 
 object Main extends J.Test:
 

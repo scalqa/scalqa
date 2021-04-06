@@ -14,10 +14,9 @@ object Able:
   type Seal        = able.Seal;         @fast lazy val Seal       = able.Seal
   type Sequence[A] = able.Sequence[A];  @fast lazy val Sequence   = able.Sequence
   type Size        = able.Size;         @fast lazy val Size       = able.Size
-  type Info        = able.Info;         @fast lazy val Info        = able.Info
+  type Doc         = able.Doc;          @fast lazy val Doc        = able.Doc
   type Tag         = able.Tag
   type Void        = able.Void
-
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

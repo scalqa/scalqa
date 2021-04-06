@@ -2,19 +2,18 @@ package scalqa; package j; package util; import language.implicitConversions
 
 import java.lang.ref.WeakReference
 import J.WeakRef
-import Info.Tag
 
 object WeakRef:
   /**/     inline def apply[A](inline v: A)       : WeakRef[A] = new WeakReference[A](v).asOpaque[WeakRef[A]]
   implicit inline def xx_Boolean[A](v: WeakRef[A]): Boolean    = v.get_?
 
-  given xxTagClass[A](using t: ClassTag[A]): ClassTag[WeakRef[A]] = t.cast[ClassTag[WeakRef[A]]]
-  given xxTagType [A]: Tag.Type[WeakRef[A]]  = Tag.Type("WeakRef")
-  given xxTagVoid [A]: Tag.Void[WeakRef[A]]  with { inline def isVoid(v: WeakRef[A]) = false }
+  given xxClassTag[A](using t: ClassTag[A]): ClassTag[WeakRef[A]] = t.cast[ClassTag[WeakRef[A]]]
+  given xxDefName [A]: Def.Name[WeakRef[A]]  = Def.Name("WeakRef")
+  given xxDefVoid [A]: Def.Void[WeakRef[A]]  with { inline def isVoid(v: WeakRef[A]) = false }
 
-  given xxInfoTag[A](using t: Tag[A]) : Tag[WeakRef[A]] with
+  given xxDefDoc[A](using t: Def.Doc[A]) : Def.Doc[WeakRef[A]] with
     def tag(v: WeakRef[A]) : String = "WeakRef("+ v.get_?.map(v => t.tag(v)).or("\\/") + ")"
-    def info(v: WeakRef[A]) : Info   = Info("WeakRef@"+v.self_^.hash)
+    def doc(v: WeakRef[A]) : Doc   = Doc("WeakRef@"+v.self_^.hash)
 
   extension[A](x: WeakRef[A])
      @tn("get_Opt") def get_? : Opt[A] = { val v = x.cast[WeakReference[A]].get; if (v == null) \/ else v }
