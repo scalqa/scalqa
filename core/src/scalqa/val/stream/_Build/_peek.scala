@@ -99,7 +99,7 @@ ___________________________________________________________________________*/
 
 @def peekEvents -> Custom events
 
-    Allows to setup [[scalqa.val.stream.custom.Event Stream.Custom.Events]] multiple monitoring events
+    Allows to setup [[scalqa.val.stream.custom.Event ~~.Custom.Events]] multiple monitoring events
 
     ```
       (1 <> 1000).~
@@ -124,7 +124,7 @@ ___________________________________________________________________________*/
 
 @def peekMonitor -> Custom monitor
 
-    Adds pre-build [[scalqa.val.stream.custom.event.Monitor Stream.Custom.Event.Monitor ]]
+    Adds pre-build [[scalqa.val.stream.custom.event.Monitor ~~.Custom.Event.Monitor ]]
 
   	If passed monitor tests to be void (`.isEmpty`), the operation is ignored
 */

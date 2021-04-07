@@ -63,10 +63,10 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
       list("Example", d.example)
     )
 
-  def companion(m: Member): Seq[AppliedTag] = m.companion.fold(Nil){dri =>
+  def companion(m: Member): Seq[AppliedTag] = Nil /* scalqa  m.companion.fold(Nil){dri =>
     val kindName = if m.kind == Kind.Object then "class" else "object"
     tableRow("Companion", signatureRenderer.renderLink(kindName, dri))
-  }
+  }*/
 
   def source(m: Member): Seq[AppliedTag] =
     summon[DocContext].sourceLinks.pathTo(m).fold(Nil){ link =>
@@ -147,9 +147,11 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
   def memberIcon(member: Member) = member.kind match {
     case Kind.Package => Nil
     case _ =>
-      val withCompanion = member.companion.fold("")(_ => "-wc")
+      val co = member.companion_? // scalqa
+      val withCompanion = co.foldAs("")(_ => "-wc")
       val iconSpan = span(cls := s"micon ${member.kind.name.head}$withCompanion")()
-      Seq(member.companion.flatMap(link(_)).fold(iconSpan)(link => a(href := link)(iconSpan)))
+      //Seq(member.companion.flatMap(link(_)).fold(iconSpan)(link => a(href := link)(iconSpan)))
+      Seq(co.map(dri => a(href := dri.normalizedTag.takeAfterLast(".") + ".html" )(iconSpan)) or iconSpan)
   }
 
   def annotations(member: Member) =
@@ -389,7 +391,7 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
         Seq(
           div(cls := "cover-header")(
             memberIcon(m),
-            h1(m.dri.scalqaName)
+            h1(m.scalqaName)
           ),
           div(cls := "signature monospace")(
             annotations(m),

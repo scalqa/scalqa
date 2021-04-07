@@ -26,6 +26,10 @@ object View:
       val yr = rank(y)
       if (xr < yr) -1 else if (xr > yr) 1 else c.compare(x, y)
 
+  class Reversed[A](c: Ordering[A]) extends math.Ordering[A]:
+    /**/     def compare(x:A,y:A): Int         = c.compare(y,x)
+    override def reverse         : Ordering[A] = c
+
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API

@@ -47,13 +47,11 @@ object Pack:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@class Pack -> ### List for Processing
+@class Pack -> ### Value Pack
 
-   [[scalqa.val.Pack Pack]] is the most ubiquitous immutable collection, like scala.List
+   Pack is the most ubiquitous immutable collection, like List in Scala
 
-   Unlike List, [[scalqa.val.Pack Pack]] is mostly backed by Array and can be specialized
-
-   Usually [[scalqa.val.Pack Pack]] has smaller memory footprint and in most cases is faster to manipulate data
+   Unlike List, [[scalqa.val.Pack ><]] is mostly backed by Array and can be specialized. It usually has smaller memory footprint and in most cases is faster to manipulate data.
 
 @def raw -> Specialize
 
@@ -152,10 +150,10 @@ ___________________________________________________________________________*/
     Pack is mostly backed by Array. When created from an unknown size stream, Array within Pack can end up with larger capacity than required.
     Because most Packs are short lived, it is wastfull to copy by default this potentially big array to proper size, but operation [[compact]] does exactly this on reqest.
 
-    So, when assigning Pack to a longer term variable, it might be usefull to run [[compact]] if memory is a concern
+    So, when assigning >< to a longer term variable, it might be usefull to run [[compact]] if memory is a concern
 
     ```
-    val list = (1 <> 1_000_000).~.drop(_ % 100 == 0).><.compact
+    val pack = (1 <> 1_000_000).~.drop(_ % 100 == 0).><.compact
     ```
 
     Note. [[compact]] can be called multiple times, but will do anything only if Pack is not compacted

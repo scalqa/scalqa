@@ -24,6 +24,8 @@ ___________________________________________________________________________*/
 /**
 @trait _build -> ### Build Interface
 
-   Build methods extend stream pipeline creating functionality which will add, remove or modify stream elements, when they finally start moving throught the pipeline
+  Build methods extend stream pipeline creating functionality which will add, remove or modify stream elements, when they finally start moving throught the pipeline.
+
+  Once a single stream build method is invoked, the original stream object must not be used, all further processing must be done with the newly created stream.
 
 */

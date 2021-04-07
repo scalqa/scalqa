@@ -1,16 +1,17 @@
 package scalqa; package `val`; package stream; import _Use.*; import language.implicitConversions
 
-transparent trait _use extends _aggregate with _calculate with _evaluate with _print with _process with _read with _transformTo:
+transparent trait _use extends _aggregate with _calculate with _evaluate with _metadata with _print with _process with _read with _transformTo:
   self =>
 
 object _use:
-  type _calculate   =  _Use._calculate
   type _aggregate   =  _Use._aggregate
-  type _process     =  _Use._process
+  type _calculate   =  _Use._calculate
   type _evaluate    =  _Use._evaluate
-  type _transformTo =  _Use._transformTo
-  type _read        =  _Use._read
+  type _metadata    =  _Use._metadata
   type _print       =  _Use._print
+  type _process     =  _Use._process
+  type _read        =  _Use._read
+  type _transformTo =  _Use._transformTo
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -20,5 +21,8 @@ object _use:
 ___________________________________________________________________________*/
 /**
 @trait _use -> ### Consumption Interface
+
+  Once a single stream consumption method is invoked, the stream object should generally be discarded.
+  The only exceptions are methods defined in [_metadata](stream/_metadata.html) and [_read](stream/_read.html) interfaces.
 
 */

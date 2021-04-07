@@ -3,12 +3,12 @@ package scalqa; package `val`; import language.implicitConversions;
 object Opt extends opt._extension:
   /**/              def apply[A](v: A)                                              : Opt[A]    = v.cast[AnyRef].cast[Opt[A]]
   ///**/       inline def apply[A](inline v: A)                                       : Opt[A]    = v.cast[AnyRef].cast[Opt[A]]
-  /**/       inline def option[A]  (v: scala.Option[A])                             : Opt[A]    = if (v.isEmpty) \/ else v.get
-  /**/       inline def optional[A](v: java.util.Optional[A])                       : Opt[A]    = if (v.isPresent) v.get else \/
+  /**/       inline def fromScala[A](v: scala.Option[A])                            : Opt[A]    = if (v.isEmpty) \/ else v.get
+  /**/       inline def fromJava [A](v: java.util.Optional[A])                      : Opt[A]    = if (v.isPresent) v.get else \/
   @tn("getVoid")    def void[A]                                                     : Opt[A]    = ZZ.None.cast[Opt[A]]
 
-  implicit   inline def xxFromOption[A]  (v: scala.Option[A])                       : Opt[A]    = option[A](v)
-  implicit   inline def xxFromOptional[A](v: java.util.Optional[A])                 : Opt[A]    = optional[A](v)
+  implicit   inline def xxFromScala[A](v: scala.Option[A])                          : Opt[A]    = fromScala[A](v)
+  implicit   inline def xxFromJava [A](v: java.util.Optional[A])                    : Opt[A]    = fromJava[A](v)
   implicit   inline def xxFromResult[A](inline v: Result[A])                        : Opt[A]    = v.value_?
   implicit   inline def xx_Boolean[A]( inline v: Opt[A])                            : Boolean   = v.nonEmpty
   implicit   inline def xxRequest[A](inline v: \/)                                  : Opt[A]    = ZZ.None.cast[Opt[A]]

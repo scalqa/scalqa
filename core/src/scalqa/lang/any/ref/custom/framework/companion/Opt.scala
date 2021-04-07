@@ -2,8 +2,8 @@ package scalqa; package lang; package any; package ref; package custom; package 
 
 class Opt[A]:
   def apply[A](v: A)                        : Val.Opt[A]  = Val.Opt(v)
-  def option[A]  (v: scala.Option[A])       : Val.Opt[A]  = Val.Opt.option(v)
-  def optional[A](v: java.util.Optional[A]) : Val.Opt[A]  = Val.Opt.optional(v)
+  def option[A]  (v: scala.Option[A])       : Val.Opt[A]  = Val.Opt.fromScala(v)
+  def optional[A](v: java.util.Optional[A]) : Val.Opt[A]  = Val.Opt.fromJava(v)
 
 private[scalqa] object Opt extends Opt[AnyRef]
 

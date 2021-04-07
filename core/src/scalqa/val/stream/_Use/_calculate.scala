@@ -131,7 +131,7 @@ ___________________________________________________________________________*/
           second.TP    // Prints 5005
           third.TP     // Prints 5005
      ```
-     Note: Averages areavailable for types providing given [[scalqa.val.stream.custom.Average Stream.Custom.Average]] implementations,
+     Note: Averages areavailable for types providing given [[scalqa.val.stream.custom.Average ~~.Custom.Average]] implementations,
      which are by default Double, Float and opaque numerics based on Double and Float
 
 @def sum -> Sum

@@ -3,25 +3,24 @@ package scalqa; package `val`; import stream.*; import language.implicitConversi
 trait Stream[+A]:
   @tn("read_Opt") def read_? : Opt[A]
 
-object Stream extends z.util._default with _build with _info with _use :
-  /**/           inline def apply[A](inline v: A)                   : ~[A]             = z.a.VarArg.Stream_ofOne[A](v)
-  /**/           inline def apply[A](inline v1: A, inline v2: A)    : ~[A]             = z.a.VarArg.Stream_ofTwo[A](v1, v2)
-  /**/                  def apply[A](v1: A, v2: A, v3: A, vs: A*)   : ~[A]             = if (vs.isEmpty) z.a.VarArg.Stream_ofThree[A](v1,v2,v3) else z.a.VarArg.Stream_ofMany[A](v1,v2,v3,vs)
-  @tn("getVoid") inline def void[A]                                 : ~[A]             = ZZ.voidStream
-  /**/                  def unapplySeq[A](v: ~[A])                  : Option[Seq[A]]   = Some(v.toSeq)
+object Stream extends z.util._default with _build with _use :
+  /**/           inline def apply[A](inline v: A)                 : ~[A]             = z.a.VarArg.Stream_ofOne[A](v)
+  /**/           inline def apply[A](inline v1: A, inline v2: A)  : ~[A]             = z.a.VarArg.Stream_ofTwo[A](v1, v2)
+  /**/                  def apply[A](v1: A, v2: A, v3: A, vs: A*) : ~[A]             = if (vs.isEmpty) z.a.VarArg.Stream_ofThree[A](v1,v2,v3) else z.a.VarArg.Stream_ofMany[A](v1,v2,v3,vs)
+  @tn("getVoid") inline def void[A]                               : ~[A]             = ZZ.voidStream
+  /**/                  def unapplySeq[A](v: ~[A])                : Option[Seq[A]]   = Some(v.toSeq)
 
   implicit       inline def xxAbleStream[A](inline v:Able.~[A]): ~[A]             = v.~
 
-  given xxCanEqual[A,B](using CanEqual[A,B]) : CanEqual[~[A],~[B]] = CanEqual.derived
-  given xxDefDoc[A:Def.Doc]                : Def.Doc[~[A]]  = z.util.DefDoc()
+  given xxCanEqual[A,B](using CanEqual[A,B]): CanEqual[~[A],~[B]] = CanEqual.derived
+  given xxDefDoc[A:Def.Doc]                 : Def.Doc[~[A]]       = z.util.DefDoc()
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type _build     = stream._build;      inline def _build   = stream._build
-  type _info      = stream._info
-  type _use       = stream._use;        inline def _use     = stream._use
-  type Flow[A]    = stream.Flow[A];     inline def Flow     = stream.Flow
-  type Preview[A] = stream.Preview[A];  inline def Preview  = stream.Preview
-  /**/                                  val Custom   = stream.Custom
+  inline def _build  = stream._build;   type _build     = stream._build
+  inline def _use    = stream._use;     type _use       = stream._use
+  inline def Flow    = stream.Flow;     type Flow[A]    = stream.Flow[A]
+  inline def Preview = stream.Preview;  type Preview[A] = stream.Preview[A]
+  /**/   val Custom  = stream.Custom
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -32,6 +31,12 @@ ___________________________________________________________________________*/
 /**
 @trait Stream -> ### Value Stream
 
+      Note. Stream companion object is [[scalqa.val.stream.Stream$ Val.~]], but when called without prefix it is [[scalqa.val.stream.Stream$ ~~]] (double tilde).
+
+      Stream has just one method to be implemented, but it has large attached libraries for:
+        - [building](stream/_build.html) stream pipeline
+        - [using](stream/_use.html) stream data
+
       By Scalqa convention, method names, which return [[~]], are ended with '_~'
 
       ```
@@ -40,12 +45,11 @@ ___________________________________________________________________________*/
       s.TP  // Prints ~(A, B, C, D)
       ```
 
-      Stream has just one method to be implemented, but it has large attached libraries for:
-        - [building](stream/_build.html) stream pipeline
-        - [using](stream/_use.html) streams
-        - and accessing stream [metadata](stream/_info.html)
-
       Read more in the [Guide](../../../guide/features/Stream.html).
+
+@object Stream -> ### Value Stream Companion
+
+      Note. Stream companion object is [[scalqa.val.stream.Stream$ Val.~]], but when called without prefix it is [[scalqa.val.stream.Stream$ ~~]] (double tilde).
 
 @def read_?  -> Read next option
 

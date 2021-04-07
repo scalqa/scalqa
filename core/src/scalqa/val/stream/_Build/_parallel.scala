@@ -20,7 +20,7 @@ ___________________________________________________________________________*/
 
 @def parallel -> Parallel
 
-      Returns [[scalqa.val.stream.Flow Stream.Flow]] with parallel execution
+      Returns [[scalqa.val.stream.Flow ~~.Flow]] with parallel execution
 
       Each consecutive element will be sent to a new thread for processing
 
@@ -40,7 +40,7 @@ ___________________________________________________________________________*/
 
 @def parallelIf ->  Conditionally parallel
 
-       Returns [[scalqa.val.stream.Flow Stream.Flow]] with parallel or sequential implementation, depending on given parameter
+       Returns [[scalqa.val.stream.Flow ~~.Flow]] with parallel or sequential implementation, depending on given parameter
 
        ```
            (1 <> 50).~.parallelIf(true).isParallel   // Returns true
@@ -50,7 +50,7 @@ ___________________________________________________________________________*/
 
 @def parallelIfOver -> Conditionally parallel
 
-      Returns [[scalqa.val.stream.Flow Stream.Flow]] with parallel or sequential implementation, depending on stream having element count equal or greater than given ''threshold''
+      Returns [[scalqa.val.stream.Flow ~~.Flow]] with parallel or sequential implementation, depending on stream having element count equal or greater than given ''threshold''
 
        ```
          (1 <> 50).~.parallelIfOver(100).isParallel   // Returns false

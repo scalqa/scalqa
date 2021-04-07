@@ -24,7 +24,7 @@ ___________________________________________________________________________*/
     It allows to pre-load and inspect elements before they are read from stream
     ```
     val s  : ~[Int]              =  1 <> 10
-    val ps : Stream.Preview[Int] = s.enablePreview
+    val ps : ~~.Preview[Int] = s.enablePreview
 
     ps.preview.TP            // Prints  1
 
@@ -61,7 +61,7 @@ ___________________________________________________________________________*/
        ```
        def s : ~[String] = ?_?_?
 
-       def p : Stream.Preview[String] = s.preview
+       def p : ~~.Preview[String] = s.preview
 
        p.previewSize >= 10 // This will pre-load no more than 10 elements
 

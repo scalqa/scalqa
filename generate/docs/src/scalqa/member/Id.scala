@@ -6,23 +6,17 @@ object Id extends String.Custom.Type[Id]("Member.Id"):
 
   def apply(x: String): Id =
     var v = x.toLowerCase
-    if(v.contains("opaque") && !v.contains("any.opaque") && !v.contains("delegate.opaque"))
-      if(v.endsWith( ".opaque$.type")) v = v.dropLast(13)
-      if(v.endsWith("$$opaque$.type")) v = v.dropLast(14)
+    if(x.contains("opaque"))
+      if(x.endsWith( ".opaque$.type")) v = v.dropLast(13)
+      if(x.endsWith("$$opaque$.type")) v = v.dropLast(14)
     v.asOpaque[Id]
 
   def apply(x: Signature): Id =
     val id = x.collect{
       case v: String => v
-      case v: Link   => apply(v.dri).toString
+      case v: Link   => apply(v.dri.tag).toString
     }.takeWhile(_ != "[").mkString
     apply(id)
-
-  def apply(x: DRI): Id =
-    var v = x.location
-    val e = x.anchor.takeBefore("-")
-    if(e!=null && e.length>0) v = v+"."+e
-    apply(v)
 
   extension(x: Id)
     def isOpaqueBase: Boolean = x.toString.endsWith("$$opaque$")

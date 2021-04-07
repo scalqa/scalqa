@@ -1,7 +1,7 @@
 package scalqa; package lang; package any; package self; package `def`; package z; import language.implicitConversions
 
 class MathDoc extends Def.Doc[Math[Any]]:
-    def tag (v: Math[Any]) = doc(v).tag
+    def tag(v: Math[Any]) = doc(v).tag
     def doc(v: Math[Any]) = Self.Doc(v match
                                      case null                      => "null"
                                      case v if v eq Lang.Byte.math   => "Byte.math"

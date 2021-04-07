@@ -19,17 +19,17 @@ object Lookup:
       class Basic[A<:RAW,B](iSz: Int) extends Lookup.Mutable[A,B]:
         private val real = new collection.mutable.LongMap[B](iSz)
         /**/               def size           : Int          = real.size
-        @tn("get_Opt")     def get_?(key: A)  : Val.Opt[B]   = Val.Opt.option(real.get(key.real))
+        @tn("get_Opt")     def get_?(key: A)  : Val.Opt[B]   = Val.Opt.fromScala(real.get(key.real))
         @tn("pair_Stream") def pair_~         : ~[(A, B)]    = real.iterator.~.map((k,v)=>(k.cast[A],v))
         /**/               def put(k: A, v: B): Unit         = real.update(k.real,v)
         /**/               def clear          : Unit         = real.clear
-        /**/               def remove(k: A)   : Val.Opt[B]   = Val.Opt.option(real.remove(k.real))
+        /**/               def remove(k: A)   : Val.Opt[B]   = Val.Opt.fromScala(real.remove(k.real))
 
   // ************************************************************************************************************
   class Stable[A<:RAW,B] private(real: IntMap[B]) extends Val.Lookup.Stable[A,B] with Lookup[A,B]:
     type THIS_TYPE = Stable[A,B]
     /**/                       def size                  : Int            = real.size
-    @tn("get_Opt")             def get_?(key: A)         : Val.Opt[B]     = Val.Opt.option(real.get(key.real))
+    @tn("get_Opt")             def get_?(key: A)         : Val.Opt[B]     = Val.Opt.fromScala(real.get(key.real))
     @tn("key_Stream") override def key_~                 : Stream[A]      = real.keysIterator.~.raw.map(_.Char.cast[A])
     @tn("pair_Stream")         def pair_~                : ~[(A, B)]      = real.~.map(v => (v._1.Char.cast[A],v._2))
     /**/                       def join(k: A, v: B)      : Stable[A,B] = new Stable(real.updated(k.real.Int, v))

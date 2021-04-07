@@ -6,7 +6,7 @@ private[`val`] final class Ref[A,B] private[stable](private[stable] val real: RE
   def this(v : Iterator[(A,B)]) = this(REAL.from(v))
   type THIS_TYPE = Stable[A,B]
 
-  @tn("get_Opt")     def get_?(key: A)         : Opt[B]         = Val.Opt.option(real.get(key))
+  @tn("get_Opt")     def get_?(key: A)         : Opt[B]         = Val.Opt.fromScala(real.get(key))
   /**/               def size                  : Int            = real.size
   @tn("pair_Stream") def pair_~                : ~[(A, B)]      = real.iterator
   /**/               def join(k: A, v: B)      : Stable[A,B] = new Ref(real.updated(k,v))

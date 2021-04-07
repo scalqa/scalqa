@@ -3,7 +3,23 @@ package scalqa; package api
 trait _DRI:
 
   extension (x: DRI)
-    def memberId          : Member.Id   = Member.Id(x)
+    def tag               : String      =
+      var t = x.location
+      val a=x.anchor.takeBefore("-")
+      if(a!=null && a.length>0) t = t + "." + a
+      t
+    def normalizedTag      : String      =
+      var t = x.tag
+      if(t.contains("opaque"))
+        //print("=>> " + t)
+        if     (t.endsWith("$$opaque$.type")) t = t.dropLast(14)
+        //else if(t.endsWith( ".opaque$.type")) t = t.dropLast(13)
+        else if(t.endsWith(".opaque"))        t = t.dropLast(7)
+        else if(t.endsWith("$$opaque$"))      t = t.dropLast(9)
+        //println(" ---> " + t)
+      t
+
+    def memberId          : Member.Id   = Member.Id(x.tag)
     def moduleId          : Module.Id   = x.memberId.moduleId
     def member_?          : Opt[Member] = Docs.member_?(x.memberId)
     def module_?          : Opt[Module] = Docs.module_?(x.moduleId)
@@ -29,9 +45,7 @@ trait _DRI:
     def scalqaName        : String      = name
 
     def scalqaName(base: String): String =
-
-
-      if(!x.location.startsWith("scalqa.") || x.anchor.isEmpty.not && base != "`type`") base
+      if(!x.location.startsWith("scalqa.")/* || x.anchor.isEmpty.not && base != "`type`"*/) x.tag.^.reviseIf(!_.endsWith(base),_ + "." + base).simpleName
       else if(x.anchor.isEmpty) x.name.^.convert(v => v.lastIndexOf_?("._").map(i => v.dropFirst(i + 1)) or v)
       else
         var v = x.anchor.takeBefore("-").replace("THIS_TYPE","this.type")

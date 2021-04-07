@@ -29,7 +29,7 @@ object Promise:
     inline def foreach[U](inline f: A=>U)      (using inline c:Context): Unit       = x.onResult(_.forval(f))
 
   given xxDefDoc[A](using t: Def.Doc[A]): Def.Doc[Promise[A]] with
-    def tag (v: Promise[A]) : String = v.result_?.map(v => "Promise("+v.tag+")") or "Promise(NOT_READY)"
+    def tag(v: Promise[A]) : String = v.result_?.map(v => "Promise("+v.tag+")") or "Promise(NOT_READY)"
     def doc(v: Promise[A]) : Doc   = Doc(v)
 
   given xxCanEqual[A,B](using CanEqual[A,B]) : CanEqual[Promise[A], Promise[B]] = CanEqual.derived

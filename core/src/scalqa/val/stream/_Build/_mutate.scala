@@ -49,7 +49,7 @@ ___________________________________________________________________________*/
 
 @def enableSize -> Adds sizing information
 
-      If Stream already has sizing, this method is a simple cas t, otherwise, the elements might be buffered and counted.
+      If Stream already has sizing, this method is a simple cast, otherwise, the elements might be buffered and counted.
 
 @def hideSizeData -> Loose size information
 
@@ -80,7 +80,7 @@ ___________________________________________________________________________*/
 
 @def enablePreview -> Enables preview capabilities
 
-     Returns [[scalqa.val.stream.Preview Stream.Preview]], which allows to pre-load and inspect elements, even before they are read
+     Returns [[scalqa.val.stream.Preview ~~.Preview]], which allows to pre-load and inspect elements, even before they are read
 
      ```
         def strm : ~[String] = ?_?_?

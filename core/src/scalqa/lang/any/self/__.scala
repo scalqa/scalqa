@@ -23,7 +23,7 @@ object Self:
     @tn("pack")        inline def ><                                                    : ><[A]    = Val.><[A](x.real)
 
   given xxDefDoc[A](using t: Def.Doc[A]) : Def.Doc[Self[A]] with
-    def tag (v: Self[A]) = doc(v).tag
+    def tag(v: Self[A]) = doc(v).tag
     def doc(v: Self[A]) = t.doc(v.real)
 
   object opaque { opaque type `type`[+A] <: Ref = Ref }

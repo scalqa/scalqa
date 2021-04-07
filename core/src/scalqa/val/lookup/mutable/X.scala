@@ -26,7 +26,7 @@ object X:
     @tn("pair_Stream") def pair_~ : ~[(A, B)]    = real
     /**/               def clear                 = real.clear
     /**/               def put(key: A, value: B) = real.put(key, value)
-    /**/               def remove(key: A)        = Opt.option(real.remove(key))
+    /**/               def remove(key: A)        = Opt.fromScala(real.remove(key))
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

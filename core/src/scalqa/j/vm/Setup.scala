@@ -42,8 +42,8 @@ ___________________________________________________________________________*/
 
 @val parallelFlowSetup_* -> [[scalqa.val.Stream Stream]] parallel engine setup
 
-      Defines factory to create parallel [[scalqa.val.stream.Flow Stream.Flow]].
+      Defines factory to create parallel [[scalqa.val.stream.Flow ~~.Flow]].
 
-      Default factory creates [[scalqa.val.stream.Flow Stream.Flow]] based on parallel java.stream.Stream implementation.
+      Default factory creates [[scalqa.val.stream.Flow ~~.Flow]] based on parallel java.stream.Stream implementation.
 
 */

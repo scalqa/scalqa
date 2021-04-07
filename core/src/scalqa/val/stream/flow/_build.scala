@@ -26,14 +26,14 @@ ___________________________________________________________________________*/
 
 @def ~ -> Convert to stream
 
-    Wraps [[scalqa.val.stream.Flow Stream.Flow]] into regular [[scalqa.val.Stream Stream]].
+    Wraps [[scalqa.val.stream.Flow ~~.Flow]] into regular [[scalqa.val.Stream Stream]].
 
-    If [[scalqa.val.stream.Flow Stream.Flow]] is parallel, then this convertion can be very costly,
-    and it is always prefferable to consume [[scalqa.val.stream.Flow Stream.Flow]] without going back to [[scalqa.val.Stream Stream]]
+    If [[scalqa.val.stream.Flow ~~.Flow]] is parallel, then this convertion can be very costly,
+    and it is always prefferable to consume [[scalqa.val.stream.Flow ~~.Flow]] without going back to [[scalqa.val.Stream Stream]]
 
 @def take -> Filter
 
-    Only allow [[scalqa.val.stream.Flow Stream.Flow]] elements satisfying the given function
+    Only allow [[scalqa.val.stream.Flow ~~.Flow]] elements satisfying the given function
 
 @def takeType -> Type filter
 
@@ -41,26 +41,26 @@ ___________________________________________________________________________*/
 
 @def drop -> Reverse filter
 
-    Disallows [[scalqa.val.stream.Flow Stream.Flow]] elements satisfying the given function
+    Disallows [[scalqa.val.stream.Flow ~~.Flow]] elements satisfying the given function
 
 
 @def map -> Simple map
 
-      Creates a new [[scalqa.val.stream.Flow Stream.Flow]] where each element is a result of applying given function to current [[scalqa.val.stream.Flow Stream.Flow]] elements
+      Creates a new [[scalqa.val.stream.Flow ~~.Flow]] where each element is a result of applying given function to current [[scalqa.val.stream.Flow ~~.Flow]] elements
 
 @def map_? -> Optional map
 
-      Creates a new [[scalqa.val.stream.Flow Stream.Flow]] where each element is a result of applying given function to current [[scalqa.val.stream.Flow Stream.Flow]] elements
+      Creates a new [[scalqa.val.stream.Flow ~~.Flow]] where each element is a result of applying given function to current [[scalqa.val.stream.Flow ~~.Flow]] elements
 
       It the function returns void option, the elements are dropped
 
 @def flatMap -> Flat map
 
-      Creates a new [[scalqa.val.stream.Flow Stream.Flow]] by applying given function to all elements of current [[scalqa.val.stream.Flow Stream.Flow]] and concatenating the results
+      Creates a new [[scalqa.val.stream.Flow ~~.Flow]] by applying given function to all elements of current [[scalqa.val.stream.Flow ~~.Flow]] and concatenating the results
 
 @def collect -> Partial map
 
-    Creates a new [[scalqa.val.stream.Flow Stream.Flow]] by applying a partial function to all elements of current [[scalqa.val.stream.Flow Stream.Flow]] on which the function is defined.
+    Creates a new [[scalqa.val.stream.Flow ~~.Flow]] by applying a partial function to all elements of current [[scalqa.val.stream.Flow ~~.Flow]] on which the function is defined.
 
 @def peek -> Inspect
 

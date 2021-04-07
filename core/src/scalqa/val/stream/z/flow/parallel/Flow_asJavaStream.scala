@@ -11,7 +11,7 @@ class Flow_asJavaStream[A] private (val name: String, jStream: java.util.stream.
   /**/                def foreach[U](c: A => U)                              : Unit                 = jStream.forEach(c(_))
   @tn("reduce_Opt")   def reduce_?(f: (A,A) => A)                            : Opt[A]               = jStream.reduce(f(_, _))
   /**/                def foldAs[B](start: B)(op: (B,A) => B, f: (B,B) => B) : B                    = jStream.reduce(start, op(_, _), f(_, _))
-  @tn("findAny_Opt")  def findAny_?                                          : Opt[A]               = Opt.optional(jStream.findAny)
+  @tn("findAny_Opt")  def findAny_?                                          : Opt[A]               = Opt.fromJava(jStream.findAny)
   override            def count                                              : Int                  = jStream.count.toInt
 
 /*___________________________________________________________________________
