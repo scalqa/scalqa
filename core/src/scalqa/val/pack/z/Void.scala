@@ -1,6 +1,6 @@
 package scalqa; package `val`; package pack; package z; import language.implicitConversions
 
-private[scalqa] final class Void[A] extends ><[A] with Lang.Void:
+private[scalqa] final class Void[A] extends ><[A] with Self.Void:
   type THIS_TYPE = Pack[A]
   @tn("stream")     override def ~                           : ~[A]      = ZZ.voidStream
   /**/                       def apply(i: Int)               : A         = J.illegalState()

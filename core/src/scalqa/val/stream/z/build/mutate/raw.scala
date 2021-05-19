@@ -1,7 +1,7 @@
 package scalqa; package `val`; package stream; package z; package build; package mutate; import language.implicitConversions
 
 import Any.{Raw as RAW}
-import Shape.OfStream.Raw
+import Self.Given.StreamTag
 import z.a.Map
 
 object raw:
@@ -23,7 +23,7 @@ object raw:
   def float  [A<:RAW.Float  ](x: ~[A]): Float  .G.~[A] = x match{case v: Float  .G.~[_] => v.cast[Float  .G.~[A]]; case v => Floats(v)}
   def double [A<:RAW.Double ](x: ~[A]): Double .G.~[A] = x match{case v: Double .G.~[_] => v.cast[Double .G.~[A]]; case v => Doubles(v)}
 
-  inline def apply[A,RAW<:Raw[A]](inline x:Stream[A], inline s: Raw.Def[A,RAW]): RAW  =
+  inline def apply[A,RAW<: ~~.RawType[A]](inline x:Stream[A], inline s: StreamTag.Raw[A,RAW]): RAW  =
     inline x match
       case _ : Boolean.G.~[A] => x.cast[RAW]
       case _ : Byte   .G.~[A] => x.cast[RAW]
@@ -34,14 +34,14 @@ object raw:
       case _ : Float  .G.~[A] => x.cast[RAW]
       case _ : Double .G.~[A] => x.cast[RAW]
       case _ => inline s match
-          case _ : Raw.Def[A,Boolean.G.~[A & RAW.Boolean]] => boolean[A & RAW.Boolean](x.cast[~[A & RAW.Boolean]])
-          case _ : Raw.Def[A,Byte   .G.~[A & RAW.Byte   ]] => byte   (x.cast[~[A & RAW.Byte   ]])
-          case _ : Raw.Def[A,Char   .G.~[A & RAW.Char   ]] => char   (x.cast[~[A & RAW.Char   ]])
-          case _ : Raw.Def[A,Short  .G.~[A & RAW.Short  ]] => short  (x.cast[~[A & RAW.Short  ]])
-          case _ : Raw.Def[A,Int    .G.~[A & RAW.Int    ]] => int    (x.cast[~[A & RAW.Int    ]])
-          case _ : Raw.Def[A,Long   .G.~[A & RAW.Long   ]] => long   (x.cast[~[A & RAW.Long   ]])
-          case _ : Raw.Def[A,Float  .G.~[A & RAW.Float  ]] => float  (x.cast[~[A & RAW.Float  ]])
-          case _ : Raw.Def[A,Double .G.~[A & RAW.Double ]] => double (x.cast[~[A & RAW.Double ]])
+          case _ : StreamTag.Raw[A,Boolean.G.~[A & RAW.Boolean]] => boolean[A & RAW.Boolean](x.cast[~[A & RAW.Boolean]])
+          case _ : StreamTag.Raw[A,Byte   .G.~[A & RAW.Byte   ]] => byte   (x.cast[~[A & RAW.Byte   ]])
+          case _ : StreamTag.Raw[A,Char   .G.~[A & RAW.Char   ]] => char   (x.cast[~[A & RAW.Char   ]])
+          case _ : StreamTag.Raw[A,Short  .G.~[A & RAW.Short  ]] => short  (x.cast[~[A & RAW.Short  ]])
+          case _ : StreamTag.Raw[A,Int    .G.~[A & RAW.Int    ]] => int    (x.cast[~[A & RAW.Int    ]])
+          case _ : StreamTag.Raw[A,Long   .G.~[A & RAW.Long   ]] => long   (x.cast[~[A & RAW.Long   ]])
+          case _ : StreamTag.Raw[A,Float  .G.~[A & RAW.Float  ]] => float  (x.cast[~[A & RAW.Float  ]])
+          case _ : StreamTag.Raw[A,Double .G.~[A & RAW.Double ]] => double (x.cast[~[A & RAW.Double ]])
           case _                                              => J.illegalState()
 
 /*___________________________________________________________________________

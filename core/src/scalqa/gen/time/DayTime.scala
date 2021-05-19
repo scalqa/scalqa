@@ -14,9 +14,9 @@ object DayTime extends Long.Custom.Data.Ordered[DayTime]("DayTime"):
   /**/     inline def seconds(inline v: Long)                    : DayTime = millis(v * 1000)
   override        def isVoid(v: DayTime)                         : Boolean = v.real == 0L
   override        def tag(v: DayTime)                            : String  = z.formatDayTime(v, true)
-  implicit inline def xxLength(inline v: Length)                 : DayTime = v.nanosTotal.asOpaque[DayTime]
-  implicit inline def xxRequest(inline v: \/)                    : DayTime = 0L.asOpaque[DayTime]
-  implicit inline def xx_Length(inline v: DayTime)               : Length  = v.length
+  implicit inline def implicitFromLength(inline v: Length)       : DayTime = v.nanosTotal.asOpaque[DayTime]
+  implicit inline def implicitRequestVoid(inline v: \/)          : DayTime = 0L.asOpaque[DayTime]
+  implicit inline def implicitToLength(inline v: DayTime)        : Length  = v.length
 
   given x: time.x.Nanos[opaque.`type`] with
     extension(x: DayTime)

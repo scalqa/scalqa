@@ -16,20 +16,17 @@ object Lang:
   /**/       val Ref        = lang.any.Ref;             type Ref             = scala.AnyRef
   /**/       val Raw        = lang.any.Raw;             type Raw             = scala.AnyVal
   /**/       val Opaque     = lang.any.Opaque;          type Opaque          = lang.Any.Opaque
-  @fast lazy val Shape      = lang.any.self.Shape
-  @fast lazy val Doc        = lang.any.self.Doc;        type Doc             = lang.any.self.Doc
-  @fast lazy val Def       = lang.any.self.Def
-  @fast lazy val Void       = lang.any.self.Void;       type Void            = lang.any.self.Void
+  /**/       val Self       = lang.any.Self
 
 package lang:
-  inline implicit def xx(inline v: Raw.Boolean): Boolean = v.cast[Boolean]
-  inline implicit def xx(inline v: Raw.Byte)   : Byte    = v.cast[Byte]
-  inline implicit def xx(inline v: Raw.Char)   : Char    = v.cast[Char]
-  inline implicit def xx(inline v: Raw.Short)  : Short   = v.cast[Short]
-  inline implicit def xx(inline v: Raw.Int)    : Int     = v.cast[Int]
-  inline implicit def xx(inline v: Raw.Long)   : Long    = v.cast[Long]
-  inline implicit def xx(inline v: Raw.Float)  : Float   = v.cast[Float]
-  inline implicit def xx(inline v: Raw.Double) : Double  = v.cast[Double]
+  inline implicit def implicitFromRaw(inline v: Raw.Boolean): Boolean = v.cast[Boolean]
+  inline implicit def implicitFromRaw(inline v: Raw.Byte)   : Byte    = v.cast[Byte]
+  inline implicit def implicitFromRaw(inline v: Raw.Char)   : Char    = v.cast[Char]
+  inline implicit def implicitFromRaw(inline v: Raw.Short)  : Short   = v.cast[Short]
+  inline implicit def implicitFromRaw(inline v: Raw.Int)    : Int     = v.cast[Int]
+  inline implicit def implicitFromRaw(inline v: Raw.Long)   : Long    = v.cast[Long]
+  inline implicit def implicitFromRaw(inline v: Raw.Float)  : Float   = v.cast[Float]
+  inline implicit def implicitFromRaw(inline v: Raw.Double) : Double  = v.cast[Double]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -40,7 +37,7 @@ ___________________________________________________________________________*/
 /**
 @object Lang -> ### Language Extensions
 
-    [[Lang]] is fully exported to scalqa root, thus all members and aliases of [[Core]] can be called with or without "Lang." prefix.
+    [[Lang]] is fully exported to scalqa root, thus all members and aliases of [[Lang]] can be called with or without "Lang." prefix.
 
     For example:
     ```

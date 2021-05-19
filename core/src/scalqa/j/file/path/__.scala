@@ -12,12 +12,12 @@ object Path extends Any.Ref.Custom.Type[Path,PATH]("J.Path"):
   private[j]      def any(v: Any)                   : Path    = v match { case v: PATH => apply(v); case v => apply(v.toString) }
   override        def isVoid(v: Path)               : Boolean = v.real.startsWith("")
   override        def tag(v: Path)                  : String  = v.real.toString
-  override        def doc(v: Path)                  : Doc    = super.doc(v) += ("size",v.size)
+  override        def doc(v: Path)                  : Self.Doc= super.doc(v) += ("size",v.size)
 
-  implicit inline def xxReal(v: PATH)               : Path    = v.asOpaque[Path]
-  implicit inline def xxString(v: String)           : Path    = apply(v)
-  implicit inline def xxFile(v: J.File)             : Path    = v.path
-  implicit inline def xxRequest(inline v: \/)       : Path    = void
+  implicit inline def implicitFromReal(v: PATH)        : Path = v.asOpaque[Path]
+  implicit inline def implicitFromString(v: String)    : Path = apply(v)
+  implicit inline def implicitFromFile(v: J.File)      : Path = v.path
+  implicit inline def implicitRequestVoid(inline v: \/): Path = void
 
   given x : path.Extension = new path.Extension
 
@@ -36,6 +36,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def xxRequest -> General void instance request \n\n It is possible to use general request \/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequestVoid -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

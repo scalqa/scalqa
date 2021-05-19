@@ -2,8 +2,8 @@ package scalqa; package fx; package control; package table; package z; package i
 
 private[fx] class Entry[A](var index: Int, val value: A) extends Able.Doc:
 
-  override def equals(a: Any) : Boolean = a match{ case v: Entry[_] => v.index == index && v.value == value; case _ => false }
-  /**/     def doc           : Doc    = Doc(this) += ("index", index) += ("value", value)
+  override def equals(a: Any): Boolean  = a match{ case v: Entry[_] => v.index == index && v.value == value; case _ => false }
+  /**/     def doc           : Self.Doc = Self.Doc(this) += ("index", index) += ("value", value)
 
 private[scalqa] object Entry:
 

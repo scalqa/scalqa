@@ -17,7 +17,7 @@ transparent trait _process:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait _process -> ### Process Interface
+@trait _process -> ### Stream Processing Interface
 
 @def drain -> Pump stream out
 

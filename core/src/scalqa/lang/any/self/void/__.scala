@@ -18,10 +18,10 @@ ___________________________________________________________________________*/
 /**
 @trait Void -> ###
 
-Scalqa/Source supports a concept of "void object" ("empty object"), which can be defined for any type.
+    Scalqa supports a concept of "void object" ("empty object"), which can be defined for any type.
     This is similar to [[https://en.wikipedia.org/wiki/Null_object_pattern 'Null Object Pattern']]
 
-    Unlike 'null', void object can have X invoked, getting some behavior pertinent to 'voidness'
+    Unlike 'null', void object can have methods invoked, getting some behavior pertinent to 'voidness'
 
     Examples:
 
@@ -37,9 +37,9 @@ Scalqa/Source supports a concept of "void object" ("empty object"), which can be
         class Foo
 
         object Foo{
-          val void = new Foo with Void
+          val void = new Foo with Self.Void
 
-          implicit def xxRequest(inline v: \/) = void
+          implicit def implicitRequestVoid(inline v: \/) = void
         }
 
         var v: Foo = \/   // Standard void assignment

@@ -14,7 +14,7 @@ private[z] object Event:
 
   @tn("getVoid") def void[A] = Void.cast[Event[A]]
 
-  private object Void extends Event[Any](null,null) with Void:
+  private object Void extends Event[Any](null,null) with Self.Void:
     override def fire(v: Result[Any])               = ()
     override def add(f:Result[Any]=>Any, c:Context) = new Event(f,c)
     override def join(e: Event[Any])                = e

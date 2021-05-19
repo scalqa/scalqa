@@ -1,6 +1,6 @@
 package scalqa
 
-object Docs extends docs._registry:
+object Docs:
 
   def fail(v: Any): Nothing = throw new RuntimeException(""+v)
 
@@ -10,16 +10,14 @@ object Docs extends docs._registry:
     case "Opt"                               => name == "withFilter" || name == "foreach" || name == "flatMap"
     case "Result"                            => name == "withFilter" || name == "foreach" || name == "flatMap"
     case "Promise"                           => name == "withFilter" || name == "foreach" || name == "flatMap"
-    case "TwoWayFun"                         => name == "andThen"    || name == "compose"
+    case "Collection"                        => name == "withFilter" || name == "foreach" || name == "flatMap" || name == "map"
+    case "ReversibleFunction"                         => name == "andThen"    || name == "compose"
     case "Ordering" if owner.kind.isTypeLike => name.startsWith("thenComparing") || !name.in("compare","reverse","on","join","+") && !name.contains("^")
     case _                                   => name == "withFilter" || name == "toString" || name.startsWith("thenComparing")
 
   def isTypeLikeAlias(m: Member): Boolean =
-    val s = m.signature
-    if(!m.kind.isTypeLike || s.isEmpty) return false
-    s.head match
-      case v: String  => v.trim == "<:"
-      case _          => false
+    if(!m.kind.isTypeLike) false
+    else m.signature.map(_.toString.trim()).exists(s => s=="<:" || s=="|")
 
   def isMakerMethod(owner: String, name: String) = owner match
     case "Gen"    => false

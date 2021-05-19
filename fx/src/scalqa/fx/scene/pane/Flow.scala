@@ -10,7 +10,7 @@ class Flow extends Pane:
   @tn("vGap_Pro")      def vGap_*              : Double.Pro.OM  = Fx.JavaFx.As.pro_OM(real.vgapProperty)
   /**/                 def vGap                : Double         = real.getVgap
   /**/                 def vGap_=(b: Double)   : Unit           = real.setVgap(b)
-  @tn("alignment_Pro") def alignment_*         : Pro.OM[Pos]    = Fx.JavaFx.As.pro_OM(real.alignmentProperty).twoWay_^[Pos]
+  @tn("alignment_Pro") def alignment_*         : Pro.OM[Pos]    = Fx.JavaFx.As.pro_OM(real.alignmentProperty).mutableMap_^[Pos]
   /**/                 def alignment           : Pos            = real.getAlignment
   /**/                 def alignment_=(v: Pos) : Unit           = real.setAlignment(v)
 

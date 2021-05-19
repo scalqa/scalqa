@@ -28,14 +28,14 @@ class Panel extends Abstract.Delegate.Gui:
   /**/                def disable_=(v: Boolean)             : Unit                   = real.setDisable(v)
   @tn("disabled_Pro") def disabled_*                        : Boolean.Pro.O          = Fx.JavaFx.As.pro_O(real.disabledProperty)
   /**/                def disabled                          : Boolean                = real.disabledProperty.get
-  @tn("content_Pro")  def content_*                         : Pro.OM[Node.Like]    = Fx.JavaFx.As.pro_OM(real.contentProperty).twoWay_^[Node.Like]
+  @tn("content_Pro")  def content_*                         : Pro.OM[Node.Like]    = Fx.JavaFx.As.pro_OM(real.contentProperty).mutableMap_^[Node.Like]
   /**/                def content                           : Node.Like            = content_*()
   /**/                def content_=(e: Node.Like)         : Unit                   = content_*() = e
 
 object Panel:
   def apply(r: javafx.scene.control.Tab): Panel = Abstract.Delegate.Gui(r.onClosedProperty)
 
-  given FxConverter: TwoWayFun[javafx.scene.control.Tab, Panel] = TwoWayFun(apply, _.real)
+  given FxConverter: ReversibleFunction[javafx.scene.control.Tab, Panel] = ReversibleFunction(apply, _.real)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -3,9 +3,10 @@ package scalqa; package `val`; import language.implicitConversions;
 object Result extends result._givens:
   /**/     inline def apply[A](inline v: A | Problem)    : Result[A]   = v.cast[Result[A]]
   /**/            def fail [A](message: String)          : Result[A]   = (if(message eq null) Problem.noMessage else message.Problem).cast[Result[A]]
-  implicit inline def xxValue   [A](inline v: A)         : Result[A]   = apply(v)
-  implicit inline def xxProblem [A](inline v: Problem)   : Result[A]   = apply(v)
-  implicit inline def xx_Boolean[A](inline v: Result[A]) : Boolean     = v.isValue
+
+  implicit inline def implicitFromValue   [A](inline v: A)      : Result[A]   = apply(v)
+  implicit inline def implicitFromProblem [A](inline v: Problem): Result[A]   = apply(v)
+  implicit inline def implicitToBoolean[A](inline v: Result[A]) : Boolean     = v.isValue
 
   object opaque:
     opaque type `type`[+A]<: Opaque.Ref = Opaque.Ref
@@ -182,7 +183,7 @@ ___________________________________________________________________________*/
 
      Given function is run with problem and optional value is returned. If option is not void, result value is restored
 
-@def toTry -> To Scala Try
+@def toTry -> Make Scala Try
 
      Result is converted to scala.util.Try, which is a natural fit
 

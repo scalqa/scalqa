@@ -35,10 +35,10 @@ We can setup project specific Scalqa root, which will be shared by all program u
 Consider the following package, which has all necessary Scalqa elements exported within:
 ```
 package myProjectsRoot:
-  export scalqa.Def._
-  export scalqa.Gen._
-  export scalqa.Val._
-  export scalqa.Gen.Request._
+  export scalqa.Lang.*
+  export scalqa.Val.*
+  export scalqa.Gen.*
+  export scalqa.Gen.Request.*
   export scalqa.j.vm.Predef.given
   @tn("RootStream") val ~~ = scalqa.`val`.Stream
 ```      

@@ -285,7 +285,7 @@ trait ClassLikeSupport:
 
 
   def parseClasslike(classDef: ClassDef, signatureOnly: Boolean = false): Member =
-    scalqa.Docs.register {
+    scalqa.Registry.register {
       classDef match
         case c: ClassDef if classDef.symbol.flags.is(Flags.Module) => parseObject(c, signatureOnly)
         case c: ClassDef if classDef.symbol.flags.is(Flags.Enum) && !classDef.symbol.flags.is(Flags.Case) => parseEnum(c, signatureOnly)
@@ -330,7 +330,7 @@ trait ClassLikeSupport:
       methodSymbol: Symbol,
       emptyParamsList: Boolean = false,
       paramPrefix: Symbol => String = _ => "",
-      specificKind: (Kind.Core => Kind) = identity
+      specificKind: (Kind.Def => Kind) = identity
     ): Member =
     val method = methodSymbol.tree.asInstanceOf[DefDef]
     val paramLists: List[TermParamClause] =
@@ -344,7 +344,7 @@ trait ClassLikeSupport:
 
     val memberInfo = unwrapMemberInfo(c, methodSymbol)
 
-    val basicKind: Kind.Core = Kind.Core(
+    val basicKind: Kind.Def = Kind.Def(
       genericTypes.map(mkTypeArgument(_, memberInfo.genericTypes)),
       paramLists.zipWithIndex.map { (pList, index) =>
         ParametersList(pList.params.map(mkParameter(_, paramPrefix, memberInfo = memberInfo.paramLists(index))), if isUsingModifier(pList.params) then "using " else "")

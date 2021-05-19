@@ -14,4 +14,4 @@ object Lines extends Fx.Application(1000, 500, "Chart Test"):
     val Now = Gen.Time()
     data += new Line("Seconds", (0 <>> 100).~.map(i => (Now + i.Seconds, i)))
     data += new Line("Minutes", (0 <>> 100).~.map(i => (Now + i.Minutes, i)))
-    data += new Line("Hours",   Ints.twoWay_^(i => new ItemBase(Now + i.Hours, i), (it: ItemBase) => it.y))
+    data += new Line("Hours",   Ints.mutableMap_^(i => new ItemBase(Now + i.Hours, i), (it: ItemBase) => it.y))

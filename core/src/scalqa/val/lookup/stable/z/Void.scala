@@ -1,6 +1,6 @@
 package scalqa; package `val`; package lookup; package stable; package z; import language.implicitConversions
 
-object Void extends Stable[Any,Any] with Void:
+object Void extends Stable[Any,Any] with Self.Void:
   type THIS_TYPE = Stable[Any,Any]
   @tn("get_Opt")     def get_?(key: Any)           : Opt[Any]           = \/
   @tn("pair_Stream") def pair_~                    : ~[(Any,Any)]       = \/

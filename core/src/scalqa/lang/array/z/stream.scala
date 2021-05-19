@@ -1,6 +1,6 @@
 package scalqa; package lang; package array; package z; import language.implicitConversions
 
-import Shape.OfArray.Any
+import Self.Given.ArrayTag
 
 object stream:
 

@@ -13,12 +13,12 @@ object Value:
 
     protected def apply(v: BASE) : TYPE
 
-    given FxConverter: TwoWayFun[BASE,TYPE] = new TwoWayFun[BASE,TYPE] {
+    given FxConverter: ReversibleFunction[BASE,TYPE] = new ReversibleFunction[BASE,TYPE] {
       def apply(v: BASE): TYPE = self(v)
       def undo(v: TYPE) : BASE = v.real
     }
 
-    implicit def xx(v: BASE): TYPE = apply(v)
+    implicit def implicitFromBase(v: BASE): TYPE = apply(v)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

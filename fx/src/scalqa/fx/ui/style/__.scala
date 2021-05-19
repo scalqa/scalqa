@@ -2,10 +2,10 @@ package scalqa; package fx; package ui; import language.implicitConversions
 
 object Style extends String.Custom.Data[Style]("Fx.Style"):
   val Default : Idx                  = \/
-  given FxConverter: TwoWayFun[String,Style] = \/
+  given FxConverter: ReversibleFunction[String,Style] = \/
 
-  /**/     inline def apply   (inline v: String): Style = v.asOpaque[Style]
-  implicit inline def xxString(inline v: String): Style = apply(v)
+  /**/     inline def apply(inline v: String)             : Style = v.asOpaque[Style]
+  implicit inline def implicitFromString(inline v: String): Style = apply(v)
 
   extension(x: Style)
     override def join(v: Style|String) : Style = apply(if(x.isVoid) v.real else if(v.real.isVoid) x.real else x.real + ';' + v.real)

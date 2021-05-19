@@ -5,16 +5,16 @@ import z. {Unsupported_View => UV}
 
 trait Idx[+A] extends Collection[A]:
   /**/          def apply(i: Int) : A
-  /**/          def size          : Int
+  override      def size          : Int
   @tn("stream") def ~             : ~[A] = z.DefaultStream(this)
 
 object Idx:
-  /**/                    def apply[A](v: A)                       : Idx[A]            = Pack(v)
-  /**/                    def apply[A](v1:A, v2:A)                 : Idx[A]            = Pack(v1,v2)
-  /**/                    def apply[A](v1:A, v2:A, v3:A, vs:A*)    : Idx[A]            = Pack(v1,v2,v3,vs *)
-  @tn("javaList_View")    def javaList_^[A](v: java.util.List[A])  : Idx[A]            = z.as.JavaListWrap[A](v)
-  @tn("getVoid")   inline def void[A]                              : Idx[A]            = ZZ.voidPack[A]
-  implicit         inline def xxRequest[A](inline v: \/)           : Idx[A]            = void
+  /**/                 def apply[A](v: A)                      : Idx[A]  = Pack(v)
+  /**/                 def apply[A](v1:A, v2:A)                : Idx[A]  = Pack(v1,v2)
+  /**/                 def apply[A](v1:A, v2:A, v3:A, vs:A*)   : Idx[A]  = Pack(v1,v2,v3,vs *)
+  /**/                 def wrap[A](v: java.util.List[A])       : Idx[A]  = z.as.JavaListWrap[A](v)
+  @tn("getVoid")inline def void[A]                             : Idx[A]  = ZZ.voidPack[A]
+  implicit      inline def implicitRequestVoid[A](inline v: \/): Idx[A]  = void
 
   extension[A] (x: Idx[A])
     /**/                         def contains(v:A)                 : Boolean           = {var i=0; val sz=x.size; while(i<sz){if(x(i) == v) return true; i+=1}; false}
@@ -25,15 +25,12 @@ object Idx:
     /**/                         def last                          : A                 = x.last_?.get
     @tn("last_Opt")              def last_?                        : Opt[A]            = x.at_?(x.size - 1)
     @tn("readOnly_View")         def readOnly_^                    : Idx[A]            = z.View.ReadOnly(x)
-    @tn("observable_View")       def observable_^                  : Idx.O[A]          = x match{case v:Idx.O[_] => v.cast[Idx.O[A]];  case v => new UV.O[A](v) }
-    @tn("mutable_View")          def mutable_^                     : Idx.M[A]          = x match{case v:Idx.M[_] => v.cast[Idx.M[A]];  case v => new UV.M[A](v) }
-    @tn("observableMutable_View")def observableMutable_^           : Idx.OM[A]         = x match{case v:Idx.OM[_]=> v.cast[Idx.OM[A]]; case v:Idx.M[_] => new UV.M.OM[A](v.cast[Idx.M[A]]); case v:Idx.O[_] => new UV.O.OM[A](v.cast[Idx.O[A]]); case v => new UV.OM[A](v)}
     @tn("range_View")            def range_^(r: Int.<>)            : Idx[A]            = z.View.Range(x, r.start, r.size)
-    @tn("javaList_View")         def javaList_^                    : java.util.List[A] = z.JavaList_View(x)
-    @tn("seq_View")              def seq_^  : scala.collection.immutable.IndexedSeq[A] = z.View.IndexedSeq(x)
-    @tn("product_View")          def product_^                     : Product           = z.Product_View(x)
     @tn("reversed_View")         def reversed_^                    : Idx[A]            = z.Reversed_View(x)
-    @tn("fun_View")              def fun_^[B](f: A => B)           : Idx[B]            = z.Convert_View(x, f)
+    @tn("map_View")              def map_^[B](f: A => B)           : Idx[B]            = z.Convert_View(x, f)
+    @tn("toJavaList_View")       def toJavaList_^                  : java.util.List[A] = z.JavaList_View(x)
+    @tn("toSeq_View")            def toSeq_^ :scala.collection.immutable.IndexedSeq[A] = z.View.IndexedSeq(x)
+    @tn("toProduct_View")        def toProduct_^                   : Product           = z.Product_View(x)
     def orderedContains(v: A)                  (using Ordering[A]) : Boolean           = z.Ordered.contains[A](x,v)
     def orderedSearch(v:A,max:Int=1)           (using Ordering[A]) : Int.<>            = z.Ordered.search(x,v,max)
     def orderedSearchBy[B](map:A=>B,v:B,max:Int=1,
@@ -101,7 +98,7 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def xxRequest -> General void instance request \n\n It is possible to use general request \/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequestVoid -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 @def  M      -> Alias \n\n Shortcut to [[scalqa.val.idx.Mutable$ Idx.Mutable]]
 @type M      -> Alias \n\n Shortcut to [[scalqa.val.idx.Mutable Idx.Mutable]]

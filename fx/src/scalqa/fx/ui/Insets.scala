@@ -5,7 +5,7 @@ import javafx.geometry.{ Insets => JInsets }
 object Insets extends Abstract.Delegate.Opaque[Ui.Insets, JInsets]("Fx.Insets"):
   inline   def apply(inline top: Double, inline right: Double, inline bottom: Double, inline left: Double) : Insets = new JInsets(top, right, bottom, left).cast[Insets]
   inline   def apply(all: Double)                                                                          : Insets = apply(all, all, all, all)
-  override def doc(v: Insets) = Doc(name) += ("top", v.top) += ("bottom", v.bottom) += ("left", v.left) += ("right", v.right)
+  override def doc(v: Insets) = Self.Doc(name) += ("top", v.top) += ("bottom", v.bottom) += ("left", v.left) += ("right", v.right)
 
   extension (x: Insets)
     inline def top                  : Double = x.real.getTop

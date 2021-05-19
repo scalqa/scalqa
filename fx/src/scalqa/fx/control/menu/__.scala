@@ -7,7 +7,7 @@ class Menu extends Menu.Item with Able.Add[ui.Action]:
   protected type REAL <: FxMenu
   protected override def _createReal: REAL = new FxMenu().cast[REAL]
 
-  lazy val items             : Idx.M[Menu.Item] = Idx.M.javaList_^(real.getItems).twoWay_^[Menu.Item]
+  lazy val items             : Idx.M[Menu.Item] = Idx.M.wrap(real.getItems).mutableMap_^[Menu.Item]
   /**/ def add(a: ui.Action) : Unit             = items += Menu.Item(a)
 
 

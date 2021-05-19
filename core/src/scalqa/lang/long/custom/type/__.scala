@@ -1,10 +1,10 @@
 package scalqa;  package lang; package long; package custom; import language.implicitConversions
 
-abstract class Type[A<:Opaque.Long](val name:String) extends Opaque.Companion[A](ClassTag.Long.cast[ClassTag[A]]) with Def.Void.Longs[A]:
+abstract class Type[A<:Opaque.Long](val name:String) extends Opaque.Companion[A](ClassTag.Long.cast[ClassTag[A]]) with Self.VoidTag.Longs[A]:
 
   override def isVoid(v: A): Boolean=false
 
-  given xxDefVoid: Def.Void.Longs[A]=this
+  given givenVoidTag: Self.VoidTag.Longs[A]=this
 
   extension(inline x: A)
     inline def real: Long = x.cast[Long]

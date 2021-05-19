@@ -10,10 +10,11 @@ object Time extends Long.Custom.Data.Ordered[Time]("Time") with time.x.Base[Time
   @tn("current_Pro")    def current_*(changeEvery: Length)          : Time.Pro.O  = z.CurrentProperty(changeEvery)
   override              def isVoid(v: Time)                         : Boolean     = v.real == -62167201438000L
   override              def tag(v: Time)                            : String      = v.day.tag + ' ' + v.dayTime.tag
-  implicit       inline def xxRequest(inline v: CURRENT)            : Time        = apply()
-  implicit       inline def xxRequest(inline v: \/)                 : Time        = -62167201438000L.asOpaque[Time]
 
-  //given xxDefVoid: Def.Void[Time]=this
+  implicit       inline def implicitRequestCurrent(inline v: CURRENT): Time       = apply()
+  implicit       inline def implicitRequestVoid(inline v: \/)        : Time       = -62167201438000L.asOpaque[Time]
+
+  //given givenVoidTag: Self.VoidTag[Time]=this
 
   extension(x: Time)
     /**/    inline def millisTotal             : Long        = x.real

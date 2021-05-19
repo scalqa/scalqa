@@ -23,7 +23,7 @@ ___________________________________________________________________________*/
 /**
 @object Val -> ### Value Container Framework
 
-    Note: Half the members are collections: Buffer, Collection, Idx, Pack, and Lookup
+    Note: Half the members are collections: Buffer, Collection, Idx, ><, and Lookup
 
     [[Val]] is fully exported to scalqa root, thus all members and aliases of [[Val]] can be called with or without "Val." prefix.
 
@@ -31,11 +31,7 @@ ___________________________________________________________________________*/
     ```
     val v:  Val.~[Int]  = ?_?_?
     // is same as
-    val v: Stream[Int]      = ?_?_?
-    // is same as
-    val v: Val.~[Int]       = ?_?_?
-    // is same as
-    val v: ~[Int]           = ?_?_?
+    val v: ~[Int]       = ?_?_?
     ```
 
 @type Buffer      ->  Type alias      \n\n Shortcut to [[scalqa.val.Buffer  Val.Buffer]]

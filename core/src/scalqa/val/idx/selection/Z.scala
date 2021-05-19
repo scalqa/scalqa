@@ -4,7 +4,7 @@ private[idx] object Z:
 
   class Basic[A](targetIndex: Idx[A], idx: Idx[Int]) extends Selection[A] { def target = targetIndex; def indexes = idx }
 
-  object Void extends Selection[Any] with Lang.Void { def target = \/; def indexes = \/ }
+  object Void extends Selection[Any] with Self.Void { def target = \/; def indexes = \/ }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

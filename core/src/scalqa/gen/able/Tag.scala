@@ -11,7 +11,7 @@ trait Tag:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait Def -> Explicit tag
+@trait Tag -> Explicit tag
 
 @def tag -> String tag
 

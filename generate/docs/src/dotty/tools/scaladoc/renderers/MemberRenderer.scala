@@ -95,11 +95,20 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
   }
 
   def memberInfo(m: Member): Seq[AppliedTag] =
-    val comment = m.docs
-    val bodyContents = m.docs.fold(Nil)(e => renderDocPart(e.body) :: Nil)
+    var comment = m.deepDocs
+
+//    if(m.name == "clear" && m.dri.tag.contains("idx.Mutable"))
+//      "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%".tp
+//      m.dri.tag.tp
+//      comment.tp
+//      m.kind.tp
+//      m.origin.tp
+//      m.origin.override_?.map_?(_.overridenMembers.~.read_?).map(_.dri).map_?(Registry.member_?).map_?(_.members.~.find_?(_.name == m.name)).map(_.docs).tp
+
+    val bodyContents = comment.fold(Nil)(e => renderDocPart(e.body) :: Nil)
 
     Seq(
-      div(cls := "documentableBrief doc")(comment.filterNot(_ => m.kind.isClassLike).flatMap(_.short).fold("")(renderDocPart)),
+      div(cls := "documentableBrief doc")(comment.filterNot(_ => m.kind.isClassLike || m.dri.isOpaqueDef /*scalqa*/).flatMap(_.short).fold("")(renderDocPart)),
       div(cls := "cover")(
         div(cls := "doc")(bodyContents),
         dl(cls := "attributes")(
@@ -117,7 +126,8 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
     case Origin.ImplicitlyAddedBy(name, dri) =>
       Seq("Implicitly added by ", renderLink(name, dri))
     case Origin.ExtensionFrom(name, dri) =>
-      Seq("Extension method from ", renderLink(name, dri))
+      Nil // scalqa
+      //Seq("Extension method from ", renderLink(name, dri))
     case Origin.ExportedFrom(name, dri) =>
       val signatureName: TagArg = dri match
         case Some(dri: DRI) => renderLink(name, dri)
@@ -140,7 +150,7 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
         span(cls := "other-modifiers")(modifiersRevered.reverse.map(renderElement)),
         span(cls := "kind")(renderElement(kind)),
       ),
-      renderLink(member.name, member.dri, nameClasses),
+      renderLink(member.name.nameToOp, member.dri, nameClasses),
       span(cls := "signature")(signature.map(renderElement)),
     )
 
@@ -151,7 +161,7 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
       val withCompanion = co.foldAs("")(_ => "-wc")
       val iconSpan = span(cls := s"micon ${member.kind.name.head}$withCompanion")()
       //Seq(member.companion.flatMap(link(_)).fold(iconSpan)(link => a(href := link)(iconSpan)))
-      Seq(co.map(dri => a(href := dri.normalizedTag.takeAfterLast(".") + ".html" )(iconSpan)) or iconSpan)
+      Seq(co.map(dri => a(href := dri.tag.takeAfterLast(".") + ".html" )(iconSpan)) or iconSpan)
   }
 
   def annotations(member: Member) =
@@ -199,17 +209,17 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
       }
     ) :: Nil
 
-  private def isDeprecated(m: Member | MGroup): Boolean = m match
+  private def isDeprecated(m: Member | MGroup): Boolean = false /* scalqa m match
     case m: Member => m.deprecated.nonEmpty
-    case g: MGroup => g.members.exists(isDeprecated)
+    case g: MGroup => g.members.exists(isDeprecated)*/
 
-  private def isInherited(m: Member | MGroup): Boolean = m match
+  private def isInherited(m: Member | MGroup): Boolean = false /* scalqa m match
     case m: Member => m.inheritedFrom.nonEmpty
-    case g: MGroup => g.members.exists(isInherited)
+    case g: MGroup => g.members.exists(isInherited)*/
 
-  private def isAbstract(m: Member | MGroup): Boolean = m match
+  private def isAbstract(m: Member | MGroup): Boolean = false /* scalqa m match
     case m: Member => m.modifiers.exists(Set(Modifier.Abstract, Modifier.Deferred).contains)
-    case g: MGroup => g.members.exists(isAbstract)
+    case g: MGroup => g.members.exists(isAbstract)*/
 
   private type SubGroup = (String, Seq[Member | MGroup])
   private def buildGroup(name: String, subgroups: Seq[SubGroup]): Tab =
@@ -228,9 +238,9 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
           Seq(actualGroup(name, defined))
 
       definedWithGroup ++ List(
-        actualGroup(s"Deprecated ${normalizedName}", depDefined),
-        actualGroup(s"Inherited ${normalizedName}", inherited),
-        actualGroup(s"Deprecated and Inherited ${normalizedName}", depInherited)
+        actualGroup(s"Deprecated1 ${normalizedName}", depDefined),
+        actualGroup(s"Inherited1 ${normalizedName}", inherited),
+        actualGroup(s"Deprecated and Inherited1 ${normalizedName}", depInherited)
       )
     }
 
@@ -298,25 +308,29 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
       )),
       buildGroup("Def", Seq(
           ("Constructor", GET.constructors),
-          (if(GET.constructors.isEmpty) "" else "Body", if(GET.localDefs.nonEmpty || GET.inheritedDefs.nonEmpty) Nil else GET.defs),
-          ("Local", GET.localDefs),
-          ("Inherited", GET.inheritedDefs)
+          (if(GET.constructors.isEmpty) "" else "Body", GET.defs)
       )),
-      buildGroup("To", Seq(
+      buildGroup("Make", Seq(
         ("", GET.makers),
       )),
       buildGroup("Extension", Seq(
           ("", GET.extended),
       )),
+      buildGroup("Given", Seq(
+          ("", rest.filter(_.kind.isGiven))
+      )),
+      buildGroup("Implicit", Seq(
+        ("", rest.filter(_.kind.isImplicit))
+      )),
 //      buildGroup("Implied", Seq[SubGroup](
-//          ("Implicit", rest.filter(_.kind.isInstanceOf[Kind.Implicit])),
-//          ("Given",    rest.filter(_.kind.isInstanceOf[Kind.Given])),
-//        ) ++ GET.extensions.map((t,s) => (t,s)).map[SubGroup]((on:ExtensionTarget,m:Seq[Member]) => {
+//          ("Given",    rest.filter(_.kind.isGiven)),
+//          ("Implicit", rest.filter(_.kind.isImplicit)),
+//        )/* ++ GET.extensions.map((t,s) => (t,s)).map[SubGroup]((on:ExtensionTarget,m:Seq[Member]) => {
 //            val sig = Signature(s"extension (${on.name}: ") ++ on.signature ++ Signature(")")
 //            val mg  = MGroup(span(sig.map(renderElement)),m)
 //            val sg : SubGroup = ("",Seq(mg))
 //            sg
-//          })
+//          })*/
 //      ),
       buildGroup("Export", Seq(
         ("Defined exports", GET.exports),
@@ -391,7 +405,7 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
         Seq(
           div(cls := "cover-header")(
             memberIcon(m),
-            h1(m.scalqaName)
+            h1(m.dri.scalqaLabel())
           ),
           div(cls := "signature monospace")(
             annotations(m),

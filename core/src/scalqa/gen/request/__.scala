@@ -73,7 +73,7 @@ ___________________________________________________________________________*/
 
      Type Request objects establish some concept
 
-     Application classes and traits can have implicit conversions from Type Request type to local definitions
+     Application classes and traits can have implicit conversions from Request type to local definitions
 
      Using universal instead of local values can reduce and clarify code
 
@@ -81,11 +81,11 @@ ___________________________________________________________________________*/
 
          Time().roundTo(1.Second, UP)
          // vs.
-         Time().roundTo(1.Second, Lang.Rounding.Up)
+         Time().roundTo(1.Second, Gen.Rounding.Up)
 
          Time().roundTo(1.Minute)(using DOWN)
          // vs.
-         Time().roundTo(1.Minute, Lang.Rounding.Down)
+         Time().roundTo(1.Minute, Gen.Rounding.Down)
 
          val l: Long = MAX
          // vs.

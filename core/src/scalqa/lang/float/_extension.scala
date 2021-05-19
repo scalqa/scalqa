@@ -104,97 +104,97 @@ ___________________________________________________________________________*/
       91F.roundTo(5)(using UP).TP  // Prints 95.0
     ```
 
-@def Byte    -> To Byte
+@def Byte    -> Make Byte
 
                 Byte constructor attached to Float
 
-@def Char    -> To Char
+@def Char    -> Make Char
 
                 Char constructor attached to Float
 
-@def Short   -> To Short
+@def Short   -> Make Short
 
                 Short constructor attached to Float
 
-@def Int     -> To Int
+@def Int     -> Make Int
 
                 Int constructor attached to Float
 
-@def Long    -> To Long
+@def Long    -> Make Long
 
                 Long constructor attached to Float
 
-@def Float   -> To Float
+@def Float   -> Make Float
 
                 Returns itself
 
                 Operation provided for consistency
 
-@def Double  -> To Double
+@def Double  -> Make Double
 
                 Double constructor attached to Float
 
-@def Number  -> To Number
+@def Number  -> Make Number
 
                 Number constructor attached to Float
 
-@def Big       -> To BigDecimal
+@def Big       -> Make BigDecimal
 
                 [[scalqa.gen.number.BigDecimal$.opaque BigDecimal]] constructor attached to Float
 
-@def Percent   -> To Percent
+@def Percent   -> Make Percent
 
                 [[scalqa.gen.number.Percent$.opaque Percent]] constructor attached to Float
 
-@def Week      -> To Time.Length
+@def Week      -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
 
-@def Weeks     -> To Time.Length
+@def Weeks     -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
 
-@def Day       -> To Time.Length
+@def Day       -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
 
-@def Days      -> To Time.Length
+@def Days      -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
 
-@def Hour      -> To Time.Length
+@def Hour      -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
 
-@def Hours     -> To Time.Length
+@def Hours     -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
 
-@def Minute    -> To Time.Length
+@def Minute    -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
 
-@def Minutes   -> To Time.Length
+@def Minutes   -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
 
-@def Second    -> To Time.Length
+@def Second    -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
 
-@def Seconds   -> To Time.Length
+@def Seconds   -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
 
-@def Millis    -> To Time.Length
+@def Millis    -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
 
-@def Micros    -> To Time.Length
+@def Micros    -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
 
-@def Nanos     -> To Time.Length
+@def Nanos     -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
 

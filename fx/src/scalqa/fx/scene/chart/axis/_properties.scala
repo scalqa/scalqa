@@ -21,10 +21,10 @@ transparent trait _properties:
   @tn("ticksMarkVisible_Pro") def ticksMarkVisible_*              : Boolean.Pro.OM  = Fx.JavaFx.As.pro_OM(real.tickMarkVisibleProperty)
   /**/                        def ticksMarkVisible                : Boolean         = real.isTickMarkVisible
   /**/                        def ticksMarkVisible_=(b: Boolean)  : Unit            = real.setTickMarkVisible(b)
-  @tn("ticksFill_Pro")        def ticksFill_*                     : Pro.OM[Paint]   = Fx.JavaFx.As.pro_OM(real.tickLabelFillProperty).twoWay_^[Paint]
+  @tn("ticksFill_Pro")        def ticksFill_*                     : Pro.OM[Paint]   = Fx.JavaFx.As.pro_OM(real.tickLabelFillProperty).mutableMap_^[Paint]
   /**/                        def ticksFill                       : Paint           = Paint(real.getTickLabelFill)
   /**/                        def ticksFill_=(v: Paint)           : Unit            = real.setTickLabelFill(v.real)
-  @tn("ticksFont_Pro")        def ticksFont_*                     : Pro.OM[Font]    = Fx.JavaFx.As.pro_OM(real.tickLabelFontProperty).twoWay_^[Font]
+  @tn("ticksFont_Pro")        def ticksFont_*                     : Pro.OM[Font]    = Fx.JavaFx.As.pro_OM(real.tickLabelFontProperty).mutableMap_^[Font]
   /**/                        def ticksFont                       : Font            = Font(real.getTickLabelFont)
   /**/                        def ticksFont_=(v: Font)            : Unit            = real.setTickLabelFont(v.real)
 

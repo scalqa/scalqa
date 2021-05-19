@@ -11,16 +11,16 @@ trait Permutation:
   /**/                   def reposition[T](l: Idx[T], update: (Int,T) => Unit) : Unit         = { val il = l.~.take_<>(range).><; rangeMutated.~.foreachIndexed((i, j) => update(j, il(i))) }
   /**/                   def validate                                          : Unit         = Z.validate(this)
 
-object Permutation extends Void.Setup[Permutation](Z.Void):
+object Permutation extends Self.Void.Setup[Permutation](Z.Void):
   def apply(r: Int.<>, rangeMutated: Int.><)                          : Permutation = Z.Basic(r, rangeMutated)
   def empty(i: Int.<>)                                                : Permutation = apply(i, i.><)
   def pairs(s: (Int, Int)*)                                           : Permutation = Z.pairs(s.~.><)
   def random(r: Int.<>)                                               : Permutation = Z.random(r)
   def sorting[A](idx:Idx[A], full:Boolean=false)(using c: Ordering[A]): Permutation = Z.sorting(idx, full, c)
 
-  given xxDefDoc: Def.Doc[Permutation] with
+  given givenDocTag: Self.DocTag[Permutation] with
     def tag(v: Permutation) = doc(v).tag
-    def doc(v: Permutation) = Doc("Permutation") += ("range", v.range) += v.mutation_~.makeString()
+    def doc(v: Permutation) = Self.Doc("Permutation") += ("range", v.range) += v.mutation_~.makeString()
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

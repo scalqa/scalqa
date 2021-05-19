@@ -10,14 +10,14 @@ class _default:
   inline def fromIterableOnce[A](inline v: scala.collection.IterableOnce[A])        : ~[A]             = z.a.Scala[A](v)
   inline def fromProduct        (inline v: Product)                                 : ~[(String,Any)]  = new z.a.Scala.Stream_fromProduct(v)
 
-  implicit inline def xxRequest[A](inline v: \/)                                    : ~[A] & Able.Size = void.cast[~[A] & Able.Size]
-  implicit inline def xxRange[A:Able.Sequence](inline v: Range[A])                  : ~[A]             = v.~
-  implicit inline def xxIterable[A](inline v: java.lang.Iterable[A])                : ~[A]             = z.a.Java.Stream_fromIterable(v)
-  implicit inline def xxJavaIterator[A](inline v: java.util.Iterator[A])            : ~[A]             = new z.a.Java.Stream_fromIterator(v)
-  implicit inline def xxIterableOnce[A](inline v: scala.collection.IterableOnce[A]) : ~[A]             = z.a.Scala[A](v)
-  implicit inline def xxOpt[A](inline v: Opt[A])                                    : ~[A]             = {val o=v; o.~ }
-  implicit inline def xxResult[A](inline v: Result[A])                              : ~[A]             = {val o=v; o.~ }
-  implicit inline def xx_Array[A](inline v: Array[A])                               : ~[A]             = v.~
+  implicit inline def implicitRequestVoid[A](inline v: \/)                                    : ~[A] & Able.Size = void.cast[~[A] & Able.Size]
+  implicit inline def implicitFromRange[A:Able.Sequence](inline v: Range[A])                  : ~[A]             = v.~
+  implicit inline def implicitFromIterable[A](inline v: java.lang.Iterable[A])                : ~[A]             = z.a.Java.Stream_fromIterable(v)
+  implicit inline def implicitFromIterator[A](inline v: java.util.Iterator[A])                : ~[A]             = new z.a.Java.Stream_fromIterator(v)
+  implicit inline def implicitFromIterableOnce[A](inline v: scala.collection.IterableOnce[A]) : ~[A]             = z.a.Scala[A](v)
+  implicit inline def implicitFromOpt[A](inline v: Opt[A])                                    : ~[A]             = {val o=v; o.~ }
+  implicit inline def implicitFromResult[A](inline v: Result[A])                              : ~[A]             = {val o=v; o.~ }
+  implicit inline def implicitFromArray[A](inline v: Array[A])                                : ~[A]             = v.~
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

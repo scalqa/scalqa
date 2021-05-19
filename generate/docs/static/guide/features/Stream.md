@@ -12,13 +12,13 @@ Whenever there is a need to pass multiple values of the same type, the preferred
 In Scalqa all collections, arrays, ranges, and other multi-value objects are implicitly and explicitly convertible to [Stream](../../api/scalqa/val/Stream.html). 
 This also applies to all Java and Scala collections, which are also extended with streaming features. 
 
-Let's consider [Buffer](../../api/scalqa/val/Buffer.html) method `=+~` (alias for `addAll`),
+Let's consider [Buffer](../../api/scalqa/val/Buffer.html) method `++=` (alias for `addAll`),
 which takes [Stream](../../api/scalqa/val/Stream.html) as an input. The following example is a valid code:
 
 ```
 val buf: Buffer[Int] = Buffer()
 
-buf =+~ (1 <> 100) =+~ idx =+~ array =+~ scalaSeq =+~ scalaVector =+~ javaList =+~ javaIterator
+buf ++= (1 <> 100) ++= idx ++= array ++= scalaSeq ++= scalaVector ++= javaList ++= javaIterator
 
 def idx         : Val.Idx[Int]               = ???
 def array       : Array[Int]                 = ???
@@ -104,9 +104,9 @@ so the streams of primitive or opaque primitive values can be processed without
 value boxing. 
 
 Each primitive type has a generic implementation:
-[Byte.G.Stream](../../api/scalqa/def/byte/g/Stream.html),
-[Int.G.Stream](../../api/scalqa/def/int/g/Stream.html),
-[Double.G.Stream](../../api/scalqa/def/double/g/Stream.html), etc, where specialized methods are defined. The defined
+[Byte.G.Stream](../../api/scalqa/lang/byte/g/Stream.html),
+[Int.G.Stream](../../api/scalqa/lang/int/g/Stream.html),
+[Double.G.Stream](../../api/scalqa/lang/double/g/Stream.html), etc, where specialized methods are defined. The defined
 specialized operation overrides same name generic operation, providing all the unboxed processing benefits.
 If specialized operation is not available, the execution will fall back on generic implementation.
 

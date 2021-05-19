@@ -25,7 +25,7 @@ private[scalqa] object Ordered:
         i <>= ((j - i) min trgtSize)
 
   def searchBy[A,B](l: Idx[A], v: B, mp: A => B, trgtSize: Int = 1, extraFilter: A => Boolean)(using o: Ordering[B]): Int.<> =
-    val r = search(l.fun_^(mp), v, 1)
+    val r = search(l.map_^(mp), v, 1)
     if (r.size == 0) r else
       var i = r.start
       var ok = true

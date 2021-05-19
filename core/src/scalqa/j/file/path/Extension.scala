@@ -91,9 +91,9 @@ ___________________________________________________________________________*/
        ```
          val p = J.Path("aaa" , "bbb").rootMake
 
-         p.root_? TP          // May print: ?(C:\)
+         p.root_? TP           // May print: Opt(C:\)
 
-         p.rootDrop.root_? TP //    Prints: \/
+         p.rootDrop.root_? TP //     prints: Opt(\/)
        ```
 
 
@@ -153,9 +153,9 @@ ___________________________________________________________________________*/
       ```
          val path: J.Path = "aaa" , "bbb" + "ccc" + "ddd" + "eee"
 
-         path index_? "ccc" , "ddd" TP  // Prints: ?(2)
+         path index_? "ccc" , "ddd" TP  // Prints: Opt(2)
 
-         path index_? "ddd" , "ccc" TP  // Prints: \/
+         path index_? "ddd" , "ccc" TP  // Prints: Opt(\/)
       ```
 
 

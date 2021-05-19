@@ -5,13 +5,13 @@ title: H2O Structure
 ### Hierarchical Objects Organization Structure
 
 From a user prospective Scalqa does not have packages. There is just one single root package 'scalqa' 
-(always fully imported as `import scalqa._`), which contains 5 root member objects:
+(always fully imported as `import scalqa.*`), which contains 5 root member objects:
 
-- [`Def`](../../api/scalqa/Def$.html) holds language extensions
-- [`Gen`](../../api/scalqa/Gen$.html) holds general utilities
-- [`Fx`](../../api/scalqa/Fx$.html)   holds GUI API
-- [`J`](../../api/scalqa/J$.html)     holds Java utilities
-- [`Val`](../../api/scalqa/Val$.html) holds generic containers framework
+- [`Lang`](../../api/scalqa/Lang$.html) holds language extensions
+- [`Val`](../../api/scalqa/Val$.html)   holds generic containers framework
+- [`Gen`](../../api/scalqa/Gen$.html)   holds general utilities
+- [`J`](../../api/scalqa/J$.html)       holds Java utilities
+- [`Fx`](../../api/scalqa/Fx$.html)     holds GUI API
   
 These root objects also contain members of their own. Those members can have their members and so it goes as deep as required.
 
@@ -19,14 +19,14 @@ The trick is that parent name is an essential part of member name and this membe
 without any imports.
 For example:
 
-- [`Def.Int.G.Buffer`](../../api/scalqa/def/int/g/Buffer.html) is a generic buffer specialized for Int primitives  
+- [`Lang.Int.G.Buffer`](../../api/scalqa/lang/int/g/Buffer.html) is a generic buffer specialized for Int primitives  
 - [`Val.Collection.Mutable`](../../api/scalqa/val/collection/Mutable.html) is a mutable collection interface   
 
 Some hierarchy members can also have 'aliases' (shortcuts), so they can also be called 
 with shorter names. For instance, all root object members (except for [scalqa.J](../../api/scalqa/J$.html)) have aliases in 'scalqa' package and the above 
 example can be accessed as:
  
-- [`Int.G.Buffer`](../../api/scalqa/def/int/g/Buffer.html) 
+- [`Int.G.Buffer`](../../api/scalqa/lang/int/g/Buffer.html) 
 - [`Collection.Mutable`](../../api/scalqa/val/collection/Mutable.html)    
 
 ### Justification

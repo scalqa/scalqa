@@ -36,7 +36,7 @@ transparent trait _calculate:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait _calculate -> ### Calculate Interface
+@trait _calculate -> ### Stream Calculation Interface
 
 
 @def min -> Minimum

@@ -20,9 +20,9 @@ object _use:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait _use -> ### Consumption Interface
+@trait _use -> ### Stream Consumption Interface
 
   Once a single stream consumption method is invoked, the stream object should generally be discarded.
-  The only exceptions are methods defined in [_metadata](stream/_metadata.html) and [_read](stream/_read.html) interfaces.
+  The only exceptions are methods defined in [_metadata](_Use/_metadata.html) and [_read](_Use/_read.html) interfaces.
 
 */

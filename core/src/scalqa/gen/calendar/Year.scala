@@ -7,8 +7,9 @@ object Year extends Int.Custom.Data.Sequential[Year]("Year"):
   /**/     def apply()                           : Year    = Time().year
   override def tag(v: Year)                      : String  = v.toString
   override def isVoid(v: Year)                   : Boolean = v.real == Int.min
-  implicit inline def xxRequest(inline v: \/)    : Year    = Int.min.asOpaque[Year]
-  implicit inline def xxRequest(inline v:CURRENT): Year    = apply()
+
+  implicit inline def implicitRequestVoid(inline v: \/)       : Year = Int.min.asOpaque[Year]
+  implicit inline def implicitRequestCurrent(inline v:CURRENT): Year = apply()
 
   extension (x: Year)
     inline def number    : Int       = x.real

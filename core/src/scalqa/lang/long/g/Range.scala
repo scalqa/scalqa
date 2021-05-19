@@ -29,12 +29,12 @@ class Range[A<:RAW](s: A, e: A, eIn: Boolean) extends Val.<>[A] with Able.~[A] w
     private inline def *>(inline xIn: Boolean, v:A, inline vIn:Boolean): Boolean = x > v || ( xIn && !vIn) && x==v
 
 object Range:
-  implicit inline def xx_Stream[A<:RAW](inline v: Range[A]) : ~[A] = v.~
+  implicit inline def implicitToStream[A<:RAW](inline v: Range[A]) : ~[A] = v.~
 
   // ------------------------------------------------------------------------------------------------------------------------------------------
-  extension[A<:RAW,T,STM<: Shape.OfStream.Any[T]](inline x: Range[A])
-    /**/                                  inline def map    [B>:T](inline f:A=> B)   (using inline s: Shape.OfStream.Any.Def[B,STM]): STM       = g.Stream.map[A,T,STM](x.~)[B](f)(using s)
-    /**/                                  inline def flatMap[B>:T](inline f:A=> ~[T])(using inline s: Shape.OfStream.Any.Def[B,STM]): STM       = g.Stream.flatMap[A,T,STM](x.~)[B](f)(using s)
+  extension[A<:RAW,T,STM<: ~~.AnyType[T]](inline x: Range[A])
+    /**/                                  inline def map    [B>:T](inline f:A=> B)   (using inline s: Self.StreamTag[B,STM]): STM       = g.Stream.map[A,T,STM](x.~)[B](f)(using s)
+    /**/                                  inline def flatMap[B>:T](inline f:A=> ~[T])(using inline s: Self.StreamTag[B,STM]): STM       = g.Stream.flatMap[A,T,STM](x.~)[B](f)(using s)
   extension[A<:RAW]  (inline x: Range[A]) inline def withFilter(inline f: Fun.Filter[A])                                      : Stream[A] = x.~.take(f)
   extension[A<:RAW,U](inline x: Range[A]) inline def foreach(   inline f: Fun.Consume[A,U])                                   : Unit      = {var i=x.start.real; val e=x.end.real+x.endIsIn.Int; while(i<e){f(i.cast[A]); i+=1L}}
 

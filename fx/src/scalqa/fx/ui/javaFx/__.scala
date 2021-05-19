@@ -20,14 +20,14 @@ object JavaFx:
 
   def booleanPropertry(p: scalqa.Boolean.Pro.OM ): javafx.beans.property.BooleanProperty = new javafx.beans.property.BooleanPropertyBase {
     {
-      bind(observableValue(p.fun_^((b: Boolean) => b: java.lang.Boolean)))
+      bind(observableValue(p.map_^((b: Boolean) => b: java.lang.Boolean)))
     }
     def getBean(): AnyRef = "NoBean"
     def getName: String = "NoName"
     override def set(v: Boolean) = p() = v;
   }
 
-  def stringConverter[A](bm: TwoWayFun[A, String]): javafx.util.StringConverter[A] = new javafx.util.StringConverter[A] {
+  def stringConverter[A](bm: ReversibleFunction[A, String]): javafx.util.StringConverter[A] = new javafx.util.StringConverter[A] {
     def toString(a: A) = bm(a); def fromString(s: String) = bm.undo(s)
   }
 

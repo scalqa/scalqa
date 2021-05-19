@@ -15,9 +15,9 @@ class Scene(width: Int.Opt = \/, height: Int.Opt = \/, e: Opt[Node.Like] = \/) e
   def onKeyPressed [U](l: Ui.Event.Key => U) : Unit            = Ui.Event.Key.subscribe(this, l, real.onKeyPressedProperty)
   def onKeyReleased[U](l: Ui.Event.Key => U) : Unit            = Ui.Event.Key.subscribe(this, l, real.onKeyReleasedProperty)
   def onKeyTyped   [U](l: Ui.Event.Key => U) : Unit            = Ui.Event.Key.subscribe(this, l, real.onKeyTypedProperty)
-  val styleSheets                         : Idx.OM[J.Url]   = Fx.JavaFx.As.idx_OM(real.getStylesheets).twoWay_^(J.Url(_), _.toString)
+  val styleSheets                         : Idx.OM[J.Url]   = Fx.JavaFx.As.idx_OM(real.getStylesheets).mutableMap_^(J.Url(_), _.toString)
 
-object Scene extends Void.Setup[Scene](new Scene(\/, \/, Control.Label("void")) with Void):
+object Scene extends Self.Void.Setup[Scene](new Scene(\/, \/, Control.Label("void")) with Self.Void):
   def apply(r: JFX.Scene)                                                      : Scene = Abstract.Delegate.Gui(r.onZoomFinishedProperty)
   def apply(width: Int.Opt = \/, height: Int.Opt = \/, e: Opt[Node.Like] = \/) : Scene = new Scene(width, height, e)
   def apply(e: Opt[Node.Like])                                                 : Scene = apply(\/,\/, e)

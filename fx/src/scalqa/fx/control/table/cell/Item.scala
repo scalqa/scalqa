@@ -4,7 +4,7 @@ class Item[ROW,V,A](val row: ROW, val setup: Cell.Setup[ROW,V,A], @tn("valueOpt"
   /**/           def value            : A             = value_?.get
   @tn("textOpt") def text_?           : String.Opt    = value_?.map(v => if (!setup.voidDef.isVoid(v)) setup.funFormat(v) else setup.funFormatVoid(row)) or setup.funFormatVoid(row)
   /**/           def make(v: Opt[A])  : Item[ROW,V,A] = new Item(row, setup, v)
-  /**/           def doc             : Doc          = Doc(this) += ("text", text_?) += ("value", value_?)
+  /**/           def doc             : Self.Doc     = Self.Doc(this) += ("text", text_?) += ("value", value_?)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

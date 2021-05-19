@@ -11,9 +11,9 @@ object Custom:
 
     override def isVoid(v: A)                   : Boolean = v.real.length==0
     override def tag(v: A)                      : String  = name+":"+v
-    implicit inline def xxRequest(inline v: \/) : A       = "".cast[A]
+    implicit inline def implicitRequestVoid(inline v: \/) : A       = "".cast[A]
 
-    given xxCanEqual_String: CanEqual[A,String] = CanEqual.derived
+    given givenCanEqual_String: CanEqual[A,String] = CanEqual.derived
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -1,16 +1,16 @@
 package scalqa; package fx; package scene; package chart; package axis; package as; import language.implicitConversions
 
-abstract class Value[A](val map: TwoWayFun[A, Double]) extends Chart.Axis[A]:
+abstract class Value[A](val map: ReversibleFunction[A, Double]) extends Chart.Axis[A]:
   type VALUE = Number
   override protected type REAL <: javafx.scene.chart.ValueAxis[Number]
 
-  lazy  val valueMap : TwoWayFun[A, Number] = TwoWayFun(map(_), n => map.undo(n.doubleValue))
+  lazy  val valueMap : ReversibleFunction[A, Number] = ReversibleFunction(map(_), n => map.undo(n.doubleValue))
   /**/  val ordering : Ordering[A]          = Double.ordering.on(map(_))
 
-  @tn("lowerBound_Pro")       def lowerBound_*                   : Pro.OM[A]       = Fx.JavaFx.As.pro_OM(real.lowerBoundProperty).twoWay_^(using map.reverse)
+  @tn("lowerBound_Pro")       def lowerBound_*                   : Pro.OM[A]       = Fx.JavaFx.As.pro_OM(real.lowerBoundProperty).mutableMap_^(using map.reverse)
   /**/                        def lowerBound                     : A               = map.undo(real.getLowerBound)
   /**/                        def lowerBound_=(v: A)             : Unit            = real.setLowerBound(map(v))
-  @tn("upperBound_Pro")       def upperBound_*                   : Pro.OM[A]       = Fx.JavaFx.As.pro_OM(real.upperBoundProperty).twoWay_^(using map.reverse)
+  @tn("upperBound_Pro")       def upperBound_*                   : Pro.OM[A]       = Fx.JavaFx.As.pro_OM(real.upperBoundProperty).mutableMap_^(using map.reverse)
   /**/                        def upperBound                     : A               = map.undo(real.getUpperBound)
   /**/                        def upperBound_=(v: A)             : Unit            = real.setUpperBound(map(v))
   @tn("minorTickCount_Pro")   def minorTickCount_*               : Int.Pro.OM      = Fx.JavaFx.As.pro_OM(real.minorTickCountProperty)

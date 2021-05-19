@@ -72,14 +72,14 @@ ___________________________________________________________________________*/
 @def indexOf_? -> Value position
 
      Optionally returns position of the specified `x`
-     ``` "abcd_abcd_".indexOf_?("d_a") TP // Prints: ?(3) ```
+     ``` "abcd_abcd_".indexOf_?("d_a") TP // Prints: Opt(3) ```
      @param from position to start looking from
 
 
 @def lastIndexOf_? -> Value position
 
      Optionally returns last position of the specified `x`
-     ``` "abcd_abcd_abcd_".lastIndexOf_?("d_a") TP // Prints: ?(8) ```
+     ``` "abcd_abcd_abcd_".lastIndexOf_?("d_a") TP // Prints: Opt(8) ```
      @param from last position to start looking from end to start
 
 
@@ -87,8 +87,8 @@ ___________________________________________________________________________*/
 
      Optionally returns index of the first Char passing the let function
      ```
-         "abcd_abcd_".charIndex_?(_ >= 'd', 4) TP // Prints: ?(8)
-         "abcd_abcd_".charIndex_?('x' <> 'z') TP  // Prints: \/
+         "abcd_abcd_".charIndex_?(_ >= 'd', 4) TP // Prints: Opt(8)
+         "abcd_abcd_".charIndex_?('x' <> 'z') TP  // Prints: Opt(\/)
      ```
      @param from position to start looking from
 
@@ -97,8 +97,8 @@ ___________________________________________________________________________*/
 
      Optionally returns index of the last Char passing the let function
      ```
-         "abcd_abcd_".lastCharIndex_?(_ >= 'd', 4) TP // Prints: ?(3)
-         "abcd_abcd_".lastCharIndex_?('x' <> 'z') TP  // Prints: \/
+         "abcd_abcd_".lastCharIndex_?(_ >= 'd', 4) TP // Prints: Opt(3)
+         "abcd_abcd_".lastCharIndex_?('x' <> 'z') TP  // Prints: Opt(\/)
      ```
      @param from last position to start looking from end to start
 

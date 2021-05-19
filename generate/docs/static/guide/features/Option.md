@@ -3,7 +3,7 @@ layout: doc-page
 title: Option
 ---
 
-Value option type [Opt](../../api/scalqa/val/Opt.html) is the second most important Scalqa feature.
+Value option (type [Opt](../../api/scalqa/val/Opt.html)) is the second most important Scalqa feature.
 
 [Opt](../../api/scalqa/val/Opt.html) either contains a value or is empty (void), thus it 
 naturally solves the problem of 'null' pointer exception. The large processing library attached to [Opt](../../api/scalqa/val/Opt.html)
@@ -52,9 +52,9 @@ Most notably [Opt](../../api/scalqa/val/Opt.html) is the key mechanism for readi
 Regular [Opt](../../api/scalqa/val/Opt.html) with its zero cost processing is extremely fast and sufficient
 for most usage scenarios. But since Scalqa is focused on ultimate performance, 
 each primitive type has a generic option implementation:
-[Byte.G.Opt](../../api/scalqa/def/byte/g/Opt.html),
-[Int.G.Opt](../../api/scalqa/def/int/g/Opt.html),
-[Double.G.Opt](../../api/scalqa/def/double/g/Opt.html), etc, where option is an opaque primitive value.
+[Byte.G.Opt](../../api/scalqa/lang/byte/g/Opt.html),
+[Int.G.Opt](../../api/scalqa/lang/int/g/Opt.html),
+[Double.G.Opt](../../api/scalqa/lang/double/g/Opt.html), etc, where option is an opaque primitive value.
 
 Let's benchmark heavy option processing for regular, specialized and Scala options:
 ```

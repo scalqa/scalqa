@@ -3,19 +3,19 @@ package scalqa; package `val`; package opt; import language.implicitConversions;
 abstract class _givens extends givenDefailts:
   self: Opt.type =>
 
-  inline given xxUsingOpt[A[B],B](using v: A[B]) : Opt[A[B]]                = v.cast[Opt[A[B]]]
-  given xxCanEqual[A,B](using CanEqual[A,B])     : CanEqual[Opt[A], Opt[B]] = CanEqual.derived
-  given xxClassTag[A]  (using t: ClassTag[A])    : ClassTag[Opt[A]]         = t.cast[ClassTag[Opt[A]]]
-  given xxDefName [A]                            : Def.Name[Opt[A]]         = Def.Name("Opt")
-  given xxDefVoid [A]                            : Def.Void[Opt[A]]         with { inline def isVoid(v: Opt[A]) = v eq ZZ.None }
+  inline given givenUsingOpt[A[B],B](using v: A[B]) : Opt[A[B]]                = v.cast[Opt[A[B]]]
+  given givenCanEqualOpt[A,B](using CanEqual[A,B])  : CanEqual[Opt[A], Opt[B]] = CanEqual.derived
+  given givenClassTag[A]  (using t: ClassTag[A])    : ClassTag[Opt[A]]         = t.cast[ClassTag[Opt[A]]]
+  given givenNameTag [A]                            : Self.NameTag[Opt[A]]         = Self.NameTag("Opt")
+  given givenVoidTag [A]                            : Self.VoidTag[Opt[A]]         with { inline def isVoid(v: Opt[A]) = v eq ZZ.None }
 
-  given xxDefDoc[A](using t: Def.Doc[A]) : Def.Doc[Opt[A]] with
-    def tag(v: Opt[A]): String = if(v eq ZZ.None) "Opt(\\/)" else "Opt("+t.tag(v.cast[A])+")"
-    def doc(v: Opt[A]): Doc   = Doc("Opt@"+v.self_^.hash)
+  given givenDocTag[A](using t: Self.DocTag[A]) : Self.DocTag[Opt[A]] with
+    def tag(v: Opt[A]): String   = if(v eq ZZ.None) "Opt(\\/)" else "Opt("+t.tag(v.cast[A])+")"
+    def doc(v: Opt[A]): Self.Doc = Self.Doc("Opt@"+v.self_^.hash)
 
 // ******************************************************
 class givenDefailts:
-  inline given xxUsingOptNone[A[B],B] : Val.Opt[A[B]] = \/
+  inline given givenUsingOptNone[A[B],B] : Val.Opt[A[B]] = \/
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

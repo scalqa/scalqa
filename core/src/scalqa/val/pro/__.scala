@@ -5,10 +5,10 @@ trait Pro[+A]:
 
 object Pro:
   /**/            def apply[A](source: => A)     : Pro[A]   = Z.Function0(source)
-  implicit inline def xx_Function[A](v: Pro[A]) : () => A  = () => v()
+  implicit inline def implicitToFunction[A](v: Pro[A]) : () => A  = () => v()
 
   extension[A]  (x: Pro[A])
-    @tn("fun_View")        def fun_^[B](f: A => B)                                            : Pro[B]   = new z.Convert_View(x, f)
+    @tn("map_View")        def map_^[B](f: A => B)                                            : Pro[B]   = new z.Convert_View(x, f)
     @tn("observable_View") def observable_^(v1: Gen.Observable, v2: Opt[Gen.Observable] = \/) : Pro.O[A] = z.Observable_View(x, v1, v2)
     /**/            inline def contains(inline v: A)                                          : Boolean  = x() == v
 

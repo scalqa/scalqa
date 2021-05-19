@@ -22,7 +22,7 @@ transparent trait _group:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait _group -> ### Element Grouping Interface
+@trait _group -> ### Stream Element Grouping Interface
 
 @def group -> Simple grouping
 

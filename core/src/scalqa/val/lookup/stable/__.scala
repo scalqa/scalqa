@@ -4,14 +4,14 @@ abstract class Stable[A,B] private[scalqa]() extends Lookup[A,B]:
   type THIS_TYPE <: Stable[A,B]
   /**/                   def join(key: A, v: B)            : THIS_TYPE
   /**/                   def joinAll(v: ~[(A, B)])         : THIS_TYPE
-  @tn("_join")    inline def + (inline key: A, inline v: B): THIS_TYPE = join(key,v)
-  @tn("_joinAll") inline def ++(inline v: ~[(A, B)])       : THIS_TYPE = joinAll(v)
+  @tn("_join")    inline def + (inline key: A, inline v: B): THIS_TYPE   = join(key,v)
+  @tn("_joinAll") inline def ++(inline v: ~[(A, B)])       : THIS_TYPE   = joinAll(v)
 
 object Stable :
-  /**/                 def apply[A,B](v: ~[(A, B)]) : Stable[A,B] = stable.z.Ref(v.iterator)
-  /**/                 def apply[A,B](v: (A, B)*)   : Stable[A,B] = stable.z.Ref(v.iterator)
-  @tn("getVoid")inline def void[A,B]                : Stable[A,B] = stable.z.Void.cast[Stable[A,B]]
-  implicit      inline def xxRequest[A,B](v: \/)    : Stable[A,B] = void[A,B]
+  /**/                 def apply[A,B](v: ~[(A, B)])        : Stable[A,B] = stable.z.Ref(v.iterator)
+  /**/                 def apply[A,B](v: (A, B)*)          : Stable[A,B] = stable.z.Ref(v.iterator)
+  @tn("getVoid")inline def void[A,B]                       : Stable[A,B] = stable.z.Void.cast[Stable[A,B]]
+  implicit      inline def implicitRequestVoid[A,B](v: \/) : Stable[A,B] = void[A,B]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -25,7 +25,7 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def xxRequest -> General void instance request \n\n It is possible to use general request \/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequestVoid -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 @def join -> Join key/value association
 

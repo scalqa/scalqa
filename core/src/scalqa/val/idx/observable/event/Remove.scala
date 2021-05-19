@@ -2,9 +2,9 @@ package scalqa; package `val`; package idx; package observable; package event; i
 
 abstract class Remove[A] extends Event[A]("Remove"):
   /**/               def items                : Idx[A]
-  /**/               def convert[B](f: A => B): Remove[B]      = Remove(range, items.fun_^(f))
+  /**/               def convert[B](f: A => B): Remove[B]      = Remove(range, items.map_^(f))
   @tn("project_Opt") def project_?(i: Int.<>) : Opt[Remove[A]] = i.overlap_?(range).map(oi => Remove[A](oi, items.range_^(oi << range.start)))
-  override           def doc                 : Doc           = super.doc += ("item" ++ (items.size != 1) ? "s", items.~.makeString(","))
+  override           def doc                 : Self.Doc      = super.doc += ("item" ++ (items.size != 1) ? "s", items.~.makeString(","))
 
 object Remove:
   def apply[A](i: Int, items: Idx[A])     : Remove[A] = Z.Remove[A](i <>= items.size, items)

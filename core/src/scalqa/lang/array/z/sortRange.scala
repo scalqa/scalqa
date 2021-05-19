@@ -1,21 +1,21 @@
 package scalqa; package lang; package array; package z; import language.implicitConversions
 
-import Shape.OfArray.Any
+import Self.Given.ArrayTag
 import java.util.{ Arrays, Collections}
 
 object sortRange:
 
-  inline def apply[A,ARRAY<:Any[A]](inline x: ARRAY, inline p: Int, inline sz: Int, inline c:Ordering[A], inline t: Any.Def[A,ARRAY]): Unit =
+  inline def apply[A,ARRAY<:Array.AnyType[A]](inline x: ARRAY, inline p: Int, inline sz: Int, inline c:Ordering[A], inline t: ArrayTag[A,ARRAY]): Unit =
     inline t match
-              case _ : Any.Def[A&Raw.Boolean,Array[A&Raw.Boolean]] => boolean(x.cast[Array[Boolean]],p,sz,c.cast[Ordering[Boolean]])
-              case _ : Any.Def[A&Raw.Byte,   Array[A&Raw.Byte   ]] => byte   (x.cast[Array[Byte   ]],p,sz,c.cast[Ordering[Byte   ]])
-              case _ : Any.Def[A&Raw.Char,   Array[A&Raw.Char   ]] => char   (x.cast[Array[Char   ]],p,sz,c.cast[Ordering[Char   ]])
-              case _ : Any.Def[A&Raw.Short,  Array[A&Raw.Short  ]] => short  (x.cast[Array[Short  ]],p,sz,c.cast[Ordering[Short  ]])
-              case _ : Any.Def[A&Raw.Int,    Array[A&Raw.Int    ]] => int    (x.cast[Array[Int    ]],p,sz,c.cast[Ordering[Int    ]])
-              case _ : Any.Def[A&Raw.Long,   Array[A&Raw.Long   ]] => long   (x.cast[Array[Long   ]],p,sz,c.cast[Ordering[Long   ]])
-              case _ : Any.Def[A&Raw.Float,  Array[A&Raw.Float  ]] => float  (x.cast[Array[Float  ]],p,sz,c.cast[Ordering[Float  ]])
-              case _ : Any.Def[A&Raw.Double, Array[A&Raw.Double ]] => double (x.cast[Array[Double ]],p,sz,c.cast[Ordering[Double ]])
-              case _ : Any.Def[A&Ref,        Array[A&Ref        ]] => ref    (x.cast[Array[Ref    ]],p,sz,c.cast[Ordering[Ref    ]])
+              case _ : ArrayTag[A&Raw.Boolean,Array[A&Raw.Boolean]] => boolean(x.cast[Array[Boolean]],p,sz,c.cast[Ordering[Boolean]])
+              case _ : ArrayTag[A&Raw.Byte,   Array[A&Raw.Byte   ]] => byte   (x.cast[Array[Byte   ]],p,sz,c.cast[Ordering[Byte   ]])
+              case _ : ArrayTag[A&Raw.Char,   Array[A&Raw.Char   ]] => char   (x.cast[Array[Char   ]],p,sz,c.cast[Ordering[Char   ]])
+              case _ : ArrayTag[A&Raw.Short,  Array[A&Raw.Short  ]] => short  (x.cast[Array[Short  ]],p,sz,c.cast[Ordering[Short  ]])
+              case _ : ArrayTag[A&Raw.Int,    Array[A&Raw.Int    ]] => int    (x.cast[Array[Int    ]],p,sz,c.cast[Ordering[Int    ]])
+              case _ : ArrayTag[A&Raw.Long,   Array[A&Raw.Long   ]] => long   (x.cast[Array[Long   ]],p,sz,c.cast[Ordering[Long   ]])
+              case _ : ArrayTag[A&Raw.Float,  Array[A&Raw.Float  ]] => float  (x.cast[Array[Float  ]],p,sz,c.cast[Ordering[Float  ]])
+              case _ : ArrayTag[A&Raw.Double, Array[A&Raw.Double ]] => double (x.cast[Array[Double ]],p,sz,c.cast[Ordering[Double ]])
+              case _ : ArrayTag[A&Ref,        Array[A&Ref        ]] => ref    (x.cast[Array[Ref    ]],p,sz,c.cast[Ordering[Ref    ]])
               case _                                               => any    (x.cast[Array[A      ]],p,sz,c                          )
 
   def any[A](x: Array[A], p:Int, sz:Int, c:Ordering[A]): Unit =

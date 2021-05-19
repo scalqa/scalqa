@@ -4,7 +4,7 @@ class Menu extends Control:
   protected type REAL = javafx.scene.control.ContextMenu
   protected override def _createReal = new REAL
 
-  val items                                          : Idx.M[fx.Menu.Item] = Idx.M.javaList_^(real.getItems).twoWay_^[fx.Menu.Item]
+  val items                                          : Idx.M[fx.Menu.Item] = Idx.M.wrap(real.getItems).mutableMap_^[fx.Menu.Item]
   def show(n: Node, s: Side, x: Double, y: Double) : Unit                = real.show(n.real, s.real, x, y)
   def show(n: Node)                                : Unit                = show(n, RIGHT, 0, 0)
 

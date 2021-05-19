@@ -1,6 +1,7 @@
 package scalqa; package `val`; import pack.*; import language.implicitConversions
 
-import Shape.OfPack.Raw
+import Pack.RawType
+import Self.Given.PackTag.{ Raw as TAG }
 
 abstract class Pack[A] extends Idx[A]:
   type THIS_TYPE <: Pack[A]
@@ -27,16 +28,19 @@ abstract class Pack[A] extends Idx[A]:
   @tn("drop_Range")        def drop_<>(from: Int, size: Int)                      : THIS_TYPE
   @tn("drop_Range") inline def drop_<>(r: Int.<>)                                 : THIS_TYPE  = take_<>(r.start,r.size)
   /**/                     def toBuffer                                           : Buffer[A]
-  /**/              inline def raw[PACK<:Raw[A]] (using inline s:Raw.Def[A,PACK]) : PACK       = z.raw(this,s)
+  /**/              inline def raw[PACK<:RawType[A]] (using inline s:TAG[A,PACK]) : PACK       = z.raw(this,s)
   /**/                     def compact                                            : this.type
 
 object Pack:
+  type RawType[A] = lang.boolean.G.><[A & Raw.Boolean] | lang.byte.G.><[A & Raw.Byte] | lang.char .G.><[A & Raw.Char]  | lang.short .G.><[A & Raw.Short]
+                  | lang.int    .G.><[A & Raw.Int]     | lang.long.G.><[A & Raw.Long] | lang.float.G.><[A & Raw.Float] | lang.double.G.><[A & Raw.Double]
+
   /**/                 def apply[A](v: A)                        : ><[A] = z.Few.Pack_ofOne(v)
   /**/                 def apply[A](v1: A, v2: A)                : ><[A] = z.Few.Pack_ofTwo(v1, v2)
   /**/                 def apply[A](v1: A, v2: A, v3: A, vs: A*) : ><[A] = if (vs.isEmpty) z.Few.Pack_ofThree(v1, v2, v3) else z.ArrayPack(v1, v2, v3, vs)
   @tn("getVoid")inline def void[A]                               : ><[A] = ZZ.voidPack[A]
-  implicit      inline def xxRequest[A](inline v: \/)            : ><[A] = void[A]
-  implicit      inline def xxStream [A](inline v: ~[A])          : ><[A] = v.><
+  implicit      inline def implicitRequestVoid[A](inline v: \/)  : ><[A] = void[A]
+  implicit      inline def implicitFromStream [A](inline v: ~[A]): ><[A] = v.><
 
   private[scalqa]      def fromArray[A](a: Array[Ref], sz: Int)  : ><[A] = new z.ArrayPack(a.copySize(sz),sz)
 
@@ -51,7 +55,7 @@ ___________________________________________________________________________*/
 
    Pack is the most ubiquitous immutable collection, like List in Scala
 
-   Unlike List, [[scalqa.val.Pack ><]] is mostly backed by Array and can be specialized. It usually has smaller memory footprint and in most cases is faster to manipulate data.
+   Unlike List, [[scalqa.val.Pack pack]] is mostly backed by Array and can be specialized. It usually has smaller memory footprint and in most cases is faster to manipulate data.
 
 @def raw -> Specialize
 
@@ -139,7 +143,7 @@ ___________________________________________________________________________*/
 
     Creates a new Pack with given stream values inserted into current Pack at given position
 
-@def toBuffer -> To Buffer
+@def toBuffer -> Make Buffer
 
     Creates a [[scalqa.val.Buffer Buffer]] collection filled with Pack elements
 
@@ -160,6 +164,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def xxRequest -> General void instance request \n\n It is possible to use general request \/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequestVoid -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

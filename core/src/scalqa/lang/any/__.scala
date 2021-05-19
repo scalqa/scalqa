@@ -5,7 +5,7 @@ object Any:
   type Enum        = scala.reflect.Enum;        @fast lazy val Enum        = any.Enum
   type Ref         = scala.AnyRef;              @fast lazy val Ref         = any.Ref
   type Raw         = scala.AnyVal;              @fast lazy val Raw         = any.Raw
-  type Self[+A]    = any.Self.opaque.`type`[A]; @fast lazy val Self        = any.Self
+  /**/                                                     val Self        = any.Self
   type _extension  = any._extension
 
 /*___________________________________________________________________________
@@ -15,6 +15,6 @@ object Any:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object Any -> Companion scala.Any
+@object Any -> Companion to scala.Any
 
 */

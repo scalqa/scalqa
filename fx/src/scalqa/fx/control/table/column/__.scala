@@ -1,6 +1,6 @@
 package scalqa; package fx; package control; package table; import column.*; import language.implicitConversions
 
-abstract class Column[ROW,V,A] private[control](val voidDef: Def.Void[A], val docDef: Def.Doc[A]) extends cell.Setup[ROW,V,A] with _value[ROW,V,A] with _edit[ROW,V,A] with _properties[ROW,V,A] with _customCell[ROW,V,A]:
+abstract class Column[ROW,V,A] private[control](val voidDef: Self.VoidTag[A], val docDef: Self.DocTag[A]) extends cell.Setup[ROW,V,A] with _value[ROW,V,A] with _edit[ROW,V,A] with _properties[ROW,V,A] with _customCell[ROW,V,A]:
   protected type REAL = javafx.scene.control.TableColumn[ROW, Cell.Item[ROW, V, A]]
   val real = new REAL {
     setSortable(false)
@@ -25,7 +25,7 @@ abstract class Column[ROW,V,A] private[control](val voidDef: Def.Void[A], val do
   /**/                     def refreshRow(c: Cell[ROW,V,A])       : Unit             = refreshAt(c.index)
   /**/                     def refreshAt(i: Int)                  : Unit             = column.table.rows.refreshAt(i)
   @tn("refresh_Range")     def refresh_<>(r: Int.<>)              : Unit             = column.table.rows.refresh_<>(r)
-  override                 def doc                               : Doc             = super.doc +=@ (0, "label", label) +=@ (1, "width", width)
+  override                 def doc                               : Self.Doc        = super.doc +=@ (0, "label", label) +=@ (1, "width", width)
   private[table]           def column                             : Column[ROW,V,A]  = this
   private[table]           def rowOrdering                        : Ordering[ROW]    = { val o = ordering.opt_^(1).on[ROW](e => mkProOpt(e)()); if (real.getSortType == javafx.scene.control.TableColumn.SortType.DESCENDING) o.reverse else o }
   // As of RC-0.21, Lazy vals have problem in _properties trait, and have to be defined here

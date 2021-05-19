@@ -11,7 +11,7 @@ object J:
   /**/    var debug                                                                 : Boolean       = false
   inline  def debugOn                                                               : Unit          = debug = true
   inline  def debugOff                                                              : Unit          = debug = false
-  /**/    def debug[A:Def.Doc](v: A)                                               : Unit          = if(debug) println(v.tag)
+  /**/    def debug[A :Self.DocTag](v: A)                                               : Unit          = if(debug) println(v.tag)
 
   inline  def initSize                                                       : Int           = ZZ.initSize
   inline  def toDo(                inline message: String = "On toDo list")  : Nothing       = throw new UnsupportedOperationException("toDo: "+message)
@@ -76,7 +76,7 @@ ___________________________________________________________________________*/
 
     The only benefit is reducing boilerplate code
 
-@def toDo -> To Do tag
+@def toDo -> Make Do tag
 
     Inlines `throw new UnsupportedOperationException()`
 

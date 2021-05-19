@@ -9,7 +9,7 @@ abstract class Sequential[A<:Opaque.Int](typeName:String) extends Ordered[A](typ
     /**/         inline def next             : A = (x.real + 1).cast[A]
     /**/         inline def prior            : A = (x.real - 1).cast[A]
 
-  @fast given xxAbleSequence : Able.Sequence[A] = Able.Sequence.int.cast[Able.Sequence[A]]
+  @fast given givenAbleSequence : Able.Sequence[A] = Able.Sequence.int.cast[Able.Sequence[A]]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

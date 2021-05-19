@@ -6,7 +6,7 @@ abstract class Module extends Node.Like:
 object Module:
   def apply[T <: Module](r: javafx.scene.Node) : T                                 = Delegate.Gui(r.onZoomFinishedProperty)
 
-  given FxConverter: TwoWayFun[javafx.scene.Node, Module]  = TwoWayFun(apply, _.real)
+  given FxConverter: ReversibleFunction[javafx.scene.Node, Module]  = ReversibleFunction(apply, _.real)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

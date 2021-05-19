@@ -4,14 +4,14 @@ import javafx.scene.control.{ MultipleSelectionModel => MSM, SelectionModel, Sel
 
 sealed class Selection[A](val target: Idx[A], val real: SelectionModel[_ <: Any]) extends Idx.Selection.Observable[A]:
   type THIS_TYPE = Selection[A]
-  /**/     lazy  val indexes                    : Idx[Int]          = real match { case v: MSM[_] => Idx.javaList_^(v.getSelectedIndices).fun_^(_.intValue); case v => zIndexes}
+  /**/     lazy  val indexes                    : Idx[Int]          = real match { case v: MSM[_] => Idx.wrap(v.getSelectedIndices).map_^(_.intValue); case v => zIndexes}
   /**/           def mode                       : Selection.Mode    = real match { case v: MSM[_] if v.getSelectionMode == SelectionMode.MULTIPLE => Selection.Mode.Multiple; case _ => Selection.Mode.Single}
   /**/           def mode_=(v: Selection.Mode)  : Unit              = real match { case m: MSM[_] => m.setSelectionMode(v.real); case _ => () }
   /**/           def onChange[U](f:THIS_TYPE=>U): Gen.Event.Control = zEvent(f)
   /**/           def clear                      : Unit              = real.clearSelection
   /**/           def set(i: Int)                : Unit              = real.select(i)
   /**/           def select(a: A)               : Unit              = target.~.findPosition_?(_ == a).forval(set(_))
-  @tn("fun_View")def fun_^[B](f: A => B)        : Selection[B]      = new Selection[B](target.fun_^(f), real)
+  @tn("map_View")def map_^[B](f: A => B)        : Selection[B]      = new Selection[B](target.map_^(f), real)
 
   // *********************************************************************************************************************************
   private object zIndexes extends Idx[Int]:

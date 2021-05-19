@@ -7,8 +7,9 @@ object Month extends Int.Custom.Data.Sequential[Month]("Month"):
   /**/     def apply()                            : Month   = Day().month
   override def tag(v: Month)                      : String  = v.year.tag + "-" + { if (v.number > 9) v.number else "0" + v.number }
   override def isVoid(v: Month)                   : Boolean = v.real == Int.min
-  implicit inline def xxRequest(inline v: \/)     : Month   = Int.min.asOpaque[Month]
-  implicit inline def xxRequest(inline v: CURRENT): Month   = apply()
+
+  implicit inline def implicitRequestVoid(inline v: \/)        : Month = Int.min.asOpaque[Month]
+  implicit inline def implicitRequestCurrent(inline v: CURRENT): Month = apply()
 
   extension (x: Month)
     inline def index     : Int      = x.real

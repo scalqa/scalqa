@@ -13,7 +13,7 @@ trait Array extends `val`.Idx[Any]:
   override def toString        : String   = Json.format(this)
 
 
-object Array extends Void.Setup[Array](z.Void.Array):
+object Array extends Self.Void.Setup[Array](z.Void.Array):
   type M = Mutable; inline def M = Mutable
 
   trait Mutable extends Array with `val`.idx.Mutable[Any]

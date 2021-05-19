@@ -21,7 +21,7 @@ transparent trait _peek:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait _peek -> ### Inspection Interface
+@trait _peek -> ### Stream Inspection Interface
 
       The below methods do not change stream data, but allow to inspect it in a variety of ways
 

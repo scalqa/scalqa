@@ -63,7 +63,7 @@ ___________________________________________________________________________*/
 
     Note: This operation is inlined and can be used without performance worries
 
-@def Int -> To Int
+@def Int -> Make Int
 
          Int constructor attached to Boolean
 

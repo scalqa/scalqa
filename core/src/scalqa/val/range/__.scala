@@ -1,6 +1,6 @@
 package scalqa; package `val`; import range.*; import language.implicitConversions
 
-import Shape.OfRange.Raw
+import lang.any.self.`given`.RangeTag
 
 abstract class Range[A] extends Able.Contain[A]:
   type THIS_TYPE <: Range[A]
@@ -18,9 +18,13 @@ abstract class Range[A] extends Able.Contain[A]:
   /**/              def contains(v: A)                                   : Boolean             = z.Ops.contains(this,v)
   /**/              def isEmpty                                          : Boolean             = z.Ops.isEmpty(this)
   override          def equals(v: Any)                                   : Boolean             = v.isInstanceOf[Range[_]] && {val r=v.cast[Range[A]]; this.contains(r) && r.contains(this)}
-  inline            def raw[RAW<:Raw[A]] (using inline s:Raw.Def[A,RAW]) : RAW                 = z.raw(this,s)
+  inline            def raw[RAW<:Range.RawType[A]](using inline s:RangeTag.Raw[A,RAW]) : RAW     = z.raw(this,s)
 
 object Range:
+  type AnyType[A] = <>[A] | RawType[A]
+  type RawType[A] = lang.byte.g.Range[A & Raw.Byte] | lang.char.g.Range[A & Raw.Char] | lang.short.g.Range[A & Raw.Short]
+                  | lang.int .g.Range[A & Raw.Int]  | lang.long.g.Range[A & Raw.Long] | lang.float.g.Range[A & Raw.Float] | lang.double.g.Range[A & Raw.Double]
+
   def apply[A:Ordering  ](start:A,end:A, endIn:Boolean=true): Range[A] = if(endIn) Z.EndInclsive(start,end)  else Z.EndExclusive(start,end)
   def singleValue[A:Ordering  ](v:A,  endIn: Boolean = true): Range[A] = if(endIn) Z.SingleValueInclusive(v) else Z.SingleValueExclusive(v)
 
@@ -28,9 +32,9 @@ object Range:
     @tn("stream")     def ~ (using Able.Sequence[A])             : ~[A]          = x match{ case v:Able.~[_] => v.cast[Able.~[A]].~; case _ => x.step_~(1) }
     /**/              def convert[B](f:A=>B)(using s:Ordering[B]): Range[B]      = Range(f(x.start),f(x.end),x.endIsIn)
 
-  given xxCanEqual[A,B](using CanEqual[A,B]): CanEqual[<>[A],<>[B]]  = CanEqual.derived
-  given xxFor                               : range.z.For            = new range.z.For{}
-  given xxDefDoc[A:Lang.Def.Doc]            : Lang.Def.Doc[Range[A]] = new range.z.DefDoc[A]
+  given givenCanEqualRange[A,B](using CanEqual[A,B]): CanEqual[<>[A],<>[B]] = CanEqual.derived
+  given givenFor                                    : range.z.For           = new range.z.For{}
+  given givenDocTag[A:Self.DocTag]                  : Self.DocTag[Range[A]] = new range.z.DocTag[A]
 
   // ~~~~~~~~~~~~~~~~~~~~~~
   inline def X = range.X
@@ -56,6 +60,13 @@ ___________________________________________________________________________*/
 
       Note. Scala provided range structures (Range and NumericRange) are implemented more as collections and this class is designed to close this void focusing on generic range operations
 
+
+@def raw -> Raw range
+
+     Returns primitive specialized range implementation.
+
+     The method would not compile for a non specializable range.
+
 @def ordering -> Ordering
 
       Ordering   defining range
@@ -68,7 +79,7 @@ ___________________________________________________________________________*/
       Start value of the range
 
 
-@def end -> To value
+@def end -> Make value
 
       End value of the range
 
@@ -100,13 +111,17 @@ ___________________________________________________________________________*/
        (1 <> 5) contains (3 <> 7)  // Returns: false
        ```
 
+@def overlaps -> Overlap check
+
+    Returns true if two ranges overlap
+
 @def overlap_? -> Optional intersection
 
     Optionally returns common intersection of `this` and `that`
     ```
-      1 <> 6 overlap_? 3 <> 9  // Returns: ?(3 <> 6)
+      1 <> 6 overlap_? 3 <> 9  // Returns: Opt(3 <> 6)
 
-      1 <> 3 overlap_? 6 <> 9  // Returns: \/
+      1 <> 3 overlap_? 6 <> 9  // Returns: Opt(\/)
     ```
 
 
@@ -125,5 +140,22 @@ ___________________________________________________________________________*/
       'A' <> 'C' extendTo 'G' // Returns: A <> G
 
       'A' <> 'C' extendTo 'B' // Returns: A <> C
+    ```
+
+@def step_~ -> Mapped stream
+
+    Returns a stream containing the first range value and the result of applying given function to this value and the produced results.
+    The stream ends when the function result is no longer within range.
+
+    ```
+      (1 <> 10).step_~( _ + 3).TP  // Prints: ~(1, 4, 7, 10)
+    ```
+
+@def step_~ -> Stepped stream
+
+    For sequential types, the method returns a stream of values with given step.
+
+    ```
+      (1 <> 10).step_~(2).TP  // Prints: ~(1, 3, 5, 7, 9)
     ```
 */

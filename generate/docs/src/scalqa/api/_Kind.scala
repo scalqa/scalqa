@@ -13,7 +13,7 @@ trait _Kind:
     def isObject      : Boolean     = x == Kind.Object
     def isEnum        : Boolean     = x.isInstanceOf[Kind.Enum]
     def isPackage     : Boolean     = x == Kind.Package || x == Kind.RootPackage
-    def isDef         : Boolean     = x.isInstanceOf[Kind.Core]
+    def isDef         : Boolean     = x.isInstanceOf[Kind.Def]
     def isVal         : Boolean     = x == Kind.Var
     def isVar         : Boolean     = x == Kind.Var
     def isConstructor : Boolean     = x.isInstanceOf[Kind.Constructor]

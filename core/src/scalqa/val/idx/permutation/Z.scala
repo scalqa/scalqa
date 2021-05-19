@@ -41,7 +41,7 @@ private[scalqa] object Z:
   class Basic(val range: Int.<>, val rangeMutated: Int.><) extends Permutation:
     assert(range.size == rangeMutated.size)
 
-  object Void extends Permutation with Lang.Void { def range = 0 <>> 0;  def rangeMutated: Int.>< = \/}
+  object Void extends Permutation with Self.Void { def range = 0 <>> 0;  def rangeMutated: Int.>< = \/}
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -29,12 +29,12 @@ abstract class Number[A<:Opaque.Int](typeName:String) extends Ordered[A](typeNam
     /**/                        inline def sign                                               : Int         = { val v=x.real; if(v>0) 1 else if(v<0) -1 else 0 }
     /**/                        inline def roundTo(inline size:A)    (using inline r:Rounding): A           = r(x.real,size.real).cast[A]
 
-  given xxCanEqual_Byte  : CanEqual[A,Byte]   = CanEqual.derived
-  given xxCanEqual_Short : CanEqual[A,Short]  = CanEqual.derived
-  given xxCanEqual_Int   : CanEqual[A,Int]    = CanEqual.derived
-  given xxCanEqual_Long  : CanEqual[A,Long]   = CanEqual.derived
-  given xxCanEqual_Float : CanEqual[A,Float]  = CanEqual.derived
-  given xxCanEqual_Double: CanEqual[A,Double] = CanEqual.derived
+  given givenCanEqual_Byte  : CanEqual[A,Byte]   = CanEqual.derived
+  given givenCanEqual_Short : CanEqual[A,Short]  = CanEqual.derived
+  given givenCanEqual_Int   : CanEqual[A,Int]    = CanEqual.derived
+  given givenCanEqual_Long  : CanEqual[A,Long]   = CanEqual.derived
+  given givenCanEqual_Float : CanEqual[A,Float]  = CanEqual.derived
+  given givenCanEqual_Double: CanEqual[A,Double] = CanEqual.derived
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -55,13 +55,13 @@ ___________________________________________________________________________*/
 @def <=          -> Less or equal    \n\n  Returns `true` if current value is less or equal to given, `false` - otherwise
 @def >           -> Greater          \n\n  Returns `true` if current value is greater than given, `false` - otherwise
 @def >=          -> Greater or equal \n\n  Returns `true` if current value is greater or equal to given, `false` - otherwise
-@def Byte        -> To Byte          \n\n  Byte constructor as a conversion from this value
-@def Short       -> To Short         \n\n  Short constructor as a conversion from this value
-@def Int         -> To Int           \n\n  Int constructor as a conversion from this value
-@def Long        -> To Long          \n\n  Long constructor as a conversion from this value
-@def Float       -> To Float         \n\n  Float constructor as a conversion from this value
-@def Double      -> To Double        \n\n  Double constructor as a conversion from this value
-@def Number      -> To Number        \n\n  Number constructor as a conversion from this value
+@def Byte        -> Make Byte        \n\n  Byte constructor as a conversion from this value
+@def Short       -> Make Short       \n\n  Short constructor as a conversion from this value
+@def Int         -> Make Int         \n\n  Int constructor as a conversion from this value
+@def Long        -> Make Long        \n\n  Long constructor as a conversion from this value
+@def Float       -> Make Float       \n\n  Float constructor as a conversion from this value
+@def Double      -> Make Double      \n\n  Double constructor as a conversion from this value
+@def Number      -> Make Number      \n\n  Number constructor as a conversion from this value
 @def sign        -> Sign             \n\n  Returns -1 if this is negative, 0 - if this value equals to 0, and 1 otherwise
 @def roundTo     -> Round to size    \n\n  Rounds current value to specified size
 */

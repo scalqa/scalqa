@@ -8,7 +8,7 @@ object Percent extends Double.Custom.Data.Number[Percent]("Percent"):
   /**/     inline def apply(value: Number, base: Number): Percent = apply(value.doubleValue, base.doubleValue)
   override        def isVoid(v: Percent)                : Boolean = v.real == 0D
   override        def tag(v: Percent)                   : String  = {val l = v.Long; if(v.real==l) l.toString + "%" else v.toString + "%"}
-  implicit inline def xxRequest(inline v: \/)           : Percent = apply(0D)
+  implicit inline def implicitRequestVoid(inline v: \/)           : Percent = apply(0D)
 
   extension(inline x: Percent)
     inline def apply(inline nv: Int)                                         : Int    = (x.real * nv / 100.0).toInt

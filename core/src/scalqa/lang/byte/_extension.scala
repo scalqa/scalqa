@@ -95,37 +95,37 @@ ___________________________________________________________________________*/
       91.Byte.roundTo(5)(using UP).TP  // Prints 95
     ```
 
-@def Byte    -> To Byte
+@def Byte    -> Make Byte
 
                 Returns itself
 
                 Operation provided for consistency
 
-@def Char    -> To Char
+@def Char    -> Make Char
 
                 Char constructor attached to Byte
 
-@def Short   -> To Short
+@def Short   -> Make Short
 
                 Short constructor attached to Byte
 
-@def Int     -> To Int
+@def Int     -> Make Int
 
                 Int constructor attached to Byte
 
-@def Long    -> To Long
+@def Long    -> Make Long
 
                 Long constructor attached to Byte
 
-@def Float   -> To Float
+@def Float   -> Make Float
 
                 Float constructor attached to Byte
 
-@def Double  -> To Double
+@def Double  -> Make Double
 
                 Double constructor attached to Byte
 
-@def Number  -> To Number
+@def Number  -> Make Number
 
                 Number constructor attached to Byte
 */

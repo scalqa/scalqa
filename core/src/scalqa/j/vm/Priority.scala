@@ -5,10 +5,10 @@ import Vm.Priority
 object Priority extends Int.Custom.Type[Priority]("Vm.Priority"):
   def apply(v: Int) : Priority = { assert(v in (1 <> 10), "Value " + v + " not in 1 <> 10");  v.asOpaque[Priority] }
 
-  implicit inline def xxInt(v: Int)         : Priority = apply(v)
-  implicit inline def xxRequest(v: MIN)     : Priority = 1.asOpaque[Priority]
-  implicit inline def xxRequest(v: MAX)     : Priority = 10.asOpaque[Priority]
-  implicit inline def xxRequest(v: DEFAULT) : Priority = 5.asOpaque[Priority]
+  implicit inline def implicitFromInt(v: Int)            : Priority = apply(v)
+  implicit inline def implicitRequestMin(v: MIN)         : Priority = 1.asOpaque[Priority]
+  implicit inline def implicitRequestMax(v: MAX)         : Priority = 10.asOpaque[Priority]
+  implicit inline def implicitRequestDefault(v: DEFAULT) : Priority = 5.asOpaque[Priority]
 
   object opaque:
     opaque type `type` <: Opaque.Int = Opaque.Int

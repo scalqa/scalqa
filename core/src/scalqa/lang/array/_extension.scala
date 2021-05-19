@@ -1,6 +1,6 @@
 package scalqa; package lang; package array; import language.implicitConversions
 
-import Shape.OfArray.Any
+import Self.Given.ArrayTag
 
 transparent trait _extension:
 
@@ -11,34 +11,34 @@ transparent trait _extension:
     /**/              inline def copyTo(a:Array[A], pos: Int)                                                       : Unit    = {val v=x; val sz=(v.length min a.length) - pos; v.copyTo(a,pos,0,sz)}
     /**/              inline def copyTo(inline a:Array[A], inline pos:Int, inline from:Int, inline size:Int)        : Unit    = System.arraycopy(x,from,a,pos,size)
 
-  extension[A,ARR<:Any[A]](inline x: ARR)
-    /**/              inline def newArray(inline size: Int)                        (using inline t: Any.Def[A,ARR]) : ARR     = z.newArray(x,size,t)
-    /**/              inline def copySize(inline size: Int)                        (using inline t: Any.Def[A,ARR]) : ARR     = z.copySize(x,size,t)
-    /**/              inline def contains(inline v: A)                             (using inline t: Any.Def[A,ARR]) : Boolean = z.contains(x,v,t)
+  extension[A,ARR<:Array.AnyType[A]](inline x: ARR)
+    /**/              inline def newArray(inline size: Int)                        (using inline t: ArrayTag[A,ARR]) : ARR     = z.newArray(x,size,t)
+    /**/              inline def copySize(inline size: Int)                        (using inline t: ArrayTag[A,ARR]) : ARR     = z.copySize(x,size,t)
+    /**/              inline def contains(inline v: A)                             (using inline t: ArrayTag[A,ARR]) : Boolean = z.contains(x,v,t)
 
-    @tn("_join")      inline def + ( inline v: A)                                  (using inline t: Any.Def[A,ARR]) : ARR     = z.join(x,v,t)
-    @tn("_joinAll")   inline def ++( inline v: ~[A])                               (using inline t: Any.Def[A,ARR]) : ARR     = z.joinAll(x,v,t)
-    @tn("_joinAt")    inline def +@( inline i: Int, inline v: A)                   (using inline t: Any.Def[A,ARR]) : ARR     = z.joinAt(x,i,v,t)
-    @tn("_joinAllAt") inline def ++@(inline i: Int, inline v: ~[A])                (using inline t: Any.Def[A,ARR]) : ARR     = z.joinAllAt(x,i,v,t)
+    @tn("_join")      inline def + ( inline v: A)                                  (using inline t: ArrayTag[A,ARR]) : ARR     = z.join(x,v,t)
+    @tn("_joinAll")   inline def ++( inline v: ~[A])                               (using inline t: ArrayTag[A,ARR]) : ARR     = z.joinAll(x,v,t)
+    @tn("_joinAt")    inline def +@( inline i: Int, inline v: A)                   (using inline t: ArrayTag[A,ARR]) : ARR     = z.joinAt(x,i,v,t)
+    @tn("_joinAllAt") inline def ++@(inline i: Int, inline v: ~[A])                (using inline t: ArrayTag[A,ARR]) : ARR     = z.joinAllAt(x,i,v,t)
 
-    /**/              inline def join(inline v: A)                                 (using inline t: Any.Def[A,ARR]) : ARR     = z.join(x,v,t)
-    /**/              inline def joinAll(inline v: ~[A])                           (using inline t: Any.Def[A,ARR]) : ARR     = z.joinAll(x,v,t)
-    /**/              inline def joinAt(inline i:Int, inline v: A)                 (using inline t: Any.Def[A,ARR]) : ARR     = z.joinAt(x,i,v,t)
-    /**/              inline def joinAllAt(inline i:Int, inline v: ~[A])           (using inline t: Any.Def[A,ARR]) : ARR     = z.joinAllAt(x,i,v,t)
+    /**/              inline def join(inline v: A)                                 (using inline t: ArrayTag[A,ARR]) : ARR     = z.join(x,v,t)
+    /**/              inline def joinAll(inline v: ~[A])                           (using inline t: ArrayTag[A,ARR]) : ARR     = z.joinAll(x,v,t)
+    /**/              inline def joinAt(inline i:Int, inline v: A)                 (using inline t: ArrayTag[A,ARR]) : ARR     = z.joinAt(x,i,v,t)
+    /**/              inline def joinAllAt(inline i:Int, inline v: ~[A])           (using inline t: ArrayTag[A,ARR]) : ARR     = z.joinAllAt(x,i,v,t)
 
-    /**/              inline def sort                  (using inline c:Ordering[A])(using inline t: Any.Def[A,ARR]) : Unit    = z.sort(x,c,t)
+    /**/              inline def sort                  (using inline c:Ordering[A])(using inline t: ArrayTag[A,ARR]) : Unit    = z.sort(x,c,t)
     @tn("sort_Range") inline def sort_<>(inline start:Int, inline size: Int)
-                                                       (using inline c:Ordering[A])(using inline t: Any.Def[A,ARR]) : Unit    = z.sortRange(x,start,size,c,t)
-    @tn("sort_Range") inline def sort_<>(r :Int.<>)    (using inline c:Ordering[A])(using inline t: Any.Def[A,ARR]) : Unit    = z.sortRange(x,r.start,r.size,c,t)
+                                                       (using inline c:Ordering[A])(using inline t: ArrayTag[A,ARR]) : Unit    = z.sortRange(x,start,size,c,t)
+    @tn("sort_Range") inline def sort_<>(r :Int.<>)    (using inline c:Ordering[A])(using inline t: ArrayTag[A,ARR]) : Unit    = z.sortRange(x,r.start,r.size,c,t)
 
-    /**/              inline def fill(inline v: A)                                 (using inline t: Any.Def[A,ARR]) : Unit    = {val a=x; z.fill(a,0,x.length,v,t)}
-    @tn("fill_Range") inline def fill_<>(inline start:Int,inline sz:Int,inline v:A)(using inline t: Any.Def[A,ARR]) : Unit    = z.fill(x,start,sz,v,t)
-    @tn("fill_Range") inline def fill_<>(r: Int.<>, inline v: A)                   (using inline t: Any.Def[A,ARR]) : Unit    = z.fill(x,r.start,r.size,v,t)
+    /**/              inline def fill(inline v: A)                                 (using inline t: ArrayTag[A,ARR]) : Unit    = {val a=x; z.fill(a,0,x.length,v,t)}
+    @tn("fill_Range") inline def fill_<>(inline start:Int,inline sz:Int,inline v:A)(using inline t: ArrayTag[A,ARR]) : Unit    = z.fill(x,start,sz,v,t)
+    @tn("fill_Range") inline def fill_<>(r: Int.<>, inline v: A)                   (using inline t: ArrayTag[A,ARR]) : Unit    = z.fill(x,r.start,r.size,v,t)
 
-    @tn("take_Range") inline def take_<>(inline start: Int, inline size: Int)      (using inline t: Any.Def[A,ARR]) : ARR     = z.range.take(x,start,size,t)
-    @tn("take_Range") inline def take_<>(r: Int.<>)                                (using inline t: Any.Def[A,ARR]) : ARR     = z.range.take(x,r.start,r.size,t)
-    @tn("drop_Range") inline def drop_<>(inline start: Int, inline size: Int)      (using inline t: Any.Def[A,ARR]) : ARR     = z.range.drop(x,start,size)
-    @tn("drop_Range") inline def drop_<>(r: Int.<>)                                (using inline t: Any.Def[A,ARR]) : ARR     = z.range.drop(x,r.start,r.size)
+    @tn("take_Range") inline def take_<>(inline start: Int, inline size: Int)      (using inline t: ArrayTag[A,ARR]) : ARR     = z.range.take(x,start,size,t)
+    @tn("take_Range") inline def take_<>(r: Int.<>)                                (using inline t: ArrayTag[A,ARR]) : ARR     = z.range.take(x,r.start,r.size,t)
+    @tn("drop_Range") inline def drop_<>(inline start: Int, inline size: Int)      (using inline t: ArrayTag[A,ARR]) : ARR     = z.range.drop(x,start,size)
+    @tn("drop_Range") inline def drop_<>(r: Int.<>)                                (using inline t: ArrayTag[A,ARR]) : ARR     = z.range.drop(x,r.start,r.size)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

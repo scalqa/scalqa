@@ -6,7 +6,7 @@ object ByteCount extends Long.Custom.Data.Number[ByteCount]("ByteCount"):
   /**/     inline def apply(inline v: Long)  : ByteCount = v.asOpaque[ByteCount]
   override        def isVoid(v: ByteCount)   : Boolean   = v.real == 0L
   override        def tag(v: ByteCount)      : String    = v.toString + " ByteCount"
-  implicit inline def xxRequest(inline v: \/): ByteCount = 0L.asOpaque[ByteCount]
+  implicit inline def implicitRequestVoid(inline v: \/): ByteCount = 0L.asOpaque[ByteCount]
 
   extension(inline x: ByteCount)
     inline def toBrief : String = x.real.toBrief + 'B'

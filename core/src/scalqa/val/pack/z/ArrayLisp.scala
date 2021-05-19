@@ -16,7 +16,7 @@ private[`val`] class ArrayPack[A](_a: Array[Ref], sz: Int) extends ><[A] with Ab
   /**/                   def joinAllAt(i: Int, v: ~[A])  : ><[A]            = new ArrayPack(lang.array.z.joinAllAt.ref(ar,i,v.cast[~[Ref]],sz))
   @tn("take_Range")      def take_<>(s: Int, sz: Int)    : ><[A]            = new ArrayPack(ar.take_<>(s,sz))
   @tn("drop_Range")      def drop_<>(s: Int, sz: Int)    : ><[A]            = new ArrayPack(ar.drop_<>(s,sz))
-  /**/                   def doc                        : Doc             = Doc(this) += ("size", size) += (ar.length != sz) ? ("","Unpacked") += ar.tag
+  /**/                   def doc                        : Self.Doc        = Self.Doc(this) += ("size", size) += (ar.length != sz) ? ("","Unpacked") += ar.tag
   override               def compact                     : this.type        = {if(ar.length > sz) ar=ar.copySize(sz); this}
   /**/                   def toBuffer                    : Buffer[A]        = new Any.Ref.Buffer(ar.copySize(sz),sz)
   /**/                   def joinAll(vs: ~[A])           : ><[A]            = vs.read_?.map(v => ArrayPack.Buf(ar,sz+1,v,vs).mk) or this

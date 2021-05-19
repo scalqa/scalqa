@@ -4,10 +4,10 @@ abstract class Axis[A] extends Abstract.Region with _properties:
   type VALUE
   protected type REAL <: javafx.scene.chart.Axis[VALUE]
 
-  def valueMap    : TwoWayFun[A, VALUE]
+  def valueMap    : ReversibleFunction[A, VALUE]
   val ordering    : Ordering[A]
   def apply(v: A) : Double            = real.getDisplayPosition(valueMap(v))
-  def ticks       : Idx[Tick[A]]      = Idx.javaList_^(real.getTickMarks).fun_^(axis.Tick(_, valueMap))
+  def ticks       : Idx[Tick[A]]      = Idx.wrap(real.getTickMarks).map_^(axis.Tick(_, valueMap))
 
 object Axis:
   inline def As = axis.As

@@ -7,7 +7,7 @@ class HorizontalBox extends Pane:
   @tn("spacing_Pro")   def spacing_*            : Double.Pro.OM  = Fx.JavaFx.As.pro_OM(real.spacingProperty)
   /**/                 def spacing              : Double         = real.getSpacing
   /**/                 def spacing_=(b: Double) : Unit           = real.setSpacing(b)
-  @tn("alignment_Pro") def alignment_*          : Pro.OM[Pos]    = Fx.JavaFx.As.pro_OM(real.alignmentProperty).twoWay_^[Pos]
+  @tn("alignment_Pro") def alignment_*          : Pro.OM[Pos]    = Fx.JavaFx.As.pro_OM(real.alignmentProperty).mutableMap_^[Pos]
   /**/                 def alignment            : Pos            = real.getAlignment
   /**/                 def alignment_=(v: Pos)  : Unit           = real.setAlignment(v)
 

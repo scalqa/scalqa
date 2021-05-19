@@ -10,7 +10,7 @@ abstract class XY[X, Y] protected (val axisX: Chart.Axis[X], val axisY: Chart.Ax
   /**/           type SERIES     <: SeriesBase
   /**/           type ITEM       <: ItemBase
 
-  val data:  Idx.M[SERIES] =  Idx.M.javaList_^(real.getData).twoWay_^(SeriesBase.apply, _.real.cast[REAL_SERIES])
+  val data:  Idx.M[SERIES] =  Idx.M.wrap(real.getData).mutableMap_^(SeriesBase.apply, _.real.cast[REAL_SERIES])
 
   // **************************************************************************************************************
   class SeriesBase protected (nameO: String.Opt = \/, private var _items:  Idx.O[ITEM] = \/):
@@ -19,7 +19,7 @@ abstract class XY[X, Y] protected (val axisX: Chart.Axis[X], val axisY: Chart.Ax
     /**/             def name : String            = real.getName; def name_=(v: String) = real.setName(v)
     /**/             def items: Idx.O[ITEM]       = _items;       def items_=(l:  Idx.O[ITEM]): Unit = { _items = l; real.setData(zObservableList()) }
     // ***************************
-    private class zObservableList extends ui.javaFx.z.list.Observable[self.REAL_ITEM](items.fun_^(_.real.cast[self.REAL_ITEM])){ def series = SeriesBase.this}
+    private class zObservableList extends ui.javaFx.z.list.Observable[self.REAL_ITEM](items.map_^(_.real.cast[self.REAL_ITEM])){ def series = SeriesBase.this}
 
   object SeriesBase:
     def apply(s: J.XYChart.Series[_, _]): SERIES = s.getData.cast[SeriesBase#zObservableList].series.cast[SERIES]
@@ -35,7 +35,7 @@ abstract class XY[X, Y] protected (val axisX: Chart.Axis[X], val axisY: Chart.Ax
     /**/             def setY(v: Y) : Unit            = real.setYValue(self.axisY.valueMap(v))
     /**/             def xPos       : Double          = axisX(x)
     /**/             def yPos       : Double          = axisY(y)
-    /**/             def doc       : Doc            = Doc(this) += ("x", x) += ("y", y)
+    /**/             def doc       : Self.Doc       = Self.Doc(this) += ("x", x) += ("y", y)
 
   object ItemBase:
     def apply(d: J.XYChart.Data[_, _]): ITEM = d.getExtraValue.cast[ITEM]

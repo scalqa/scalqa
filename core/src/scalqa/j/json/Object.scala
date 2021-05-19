@@ -16,10 +16,10 @@ trait Object extends `val`.Lookup[String, Any] with Able.Doc:
   @tn("double_Opt") def double_?( name: String) : Double.Opt     = get_?(name).map_?[Double.Opt]{case v:Double=> v; case s:String => s.toDouble_?; case v:Number => v.doubleValue; case _ => \/ }
   /**/              def boolean(  name: String) : Boolean        = string(name).toBoolean
 
-  /**/              def doc                   : Doc           = Doc(this) ++= pair_~.map(t => (t._1,t._2.tag))
+  /**/              def doc                   : Self.Doc      = Self.Doc(this) ++= pair_~.map(t => (t._1,t._2.tag))
   override          def tag                    : String         = Json.format(this)
 
-object Object extends Void.Setup[Ref](z.Void.Object):
+object Object extends Self.Void.Setup[Ref](z.Void.Object):
   type M = Mutable; inline def M = Mutable
 
   trait Mutable extends Object with Lookup.Mutable[String, Any]:

@@ -16,7 +16,7 @@ transparent trait _parallel:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait _parallel -> ### Parallel Interface
+@trait _parallel -> ### Stream Parallel Execution Interface
 
 @def parallel -> Parallel
 

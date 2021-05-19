@@ -61,7 +61,7 @@ transparent trait _properties:
   @tn("visible_Pro")          def visible_*                      : Boolean.Pro.OM  = Fx.JavaFx.As.pro_OM(real.visibleProperty)
   /**/                        def visible                        : Boolean         = real.isVisible;
   /**/                        def visible_=(b: Boolean)          : Unit            = real.setVisible(b)
-  @tn("style_Pro")            def style_*                        : Style.Pro.OM    = Fx.JavaFx.As.pro_OM(real.styleProperty).twoWay_^[Style]
+  @tn("style_Pro")            def style_*                        : Style.Pro.OM    = Fx.JavaFx.As.pro_OM(real.styleProperty).mutableMap_^[Style]
   /**/                        def style                          : Style           = real.getStyle;
   /**/                        def style_=(s: Style)              : Unit            = real.setStyle(s.^.?.map(_.toString) or "")
 /*___________________________________________________________________________

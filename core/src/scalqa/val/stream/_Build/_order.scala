@@ -18,7 +18,7 @@ transparent trait _order:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait _order -> ### Ordering Interface
+@trait _order -> ### Stream Ordering Interface
 
 @def sort -> Sort
 

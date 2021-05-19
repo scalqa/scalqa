@@ -7,7 +7,7 @@ class Mouse(e: MouseEvent, node: Node) extends Event.Input(e, node) with Able.Do
 
   def clickCount : Int          = real.getClickCount
   def button     : Mouse.Button = Mouse.Button(real.getButton)
-  def doc       : Doc         = Doc(this) += ("button", button)
+  def doc       : Self.Doc    = Self.Doc(this) += ("button", button)
 
 object Mouse:
   type Button = mouse.Button; val Button = mouse.Button;

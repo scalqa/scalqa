@@ -8,7 +8,7 @@ trait Lookup[A<:RAW,+B] extends Val.Lookup[A,B]:
   @tn("key_Stream") override def key_~         : Stream[A]   = super.key_~.raw
 
 object Lookup:
-  implicit def xxRequest[A<:RAW,B](v: \/): Lookup[A,B] = Stable.void
+  implicit def implicitRequestVoid[A<:RAW,B](v: \/): Lookup[A,B] = Stable.void
 
   trait Mutable[A<:RAW,B] extends Lookup[A,B] with Val.Lookup.Mutable[A,B]:
     def put(key: A, value: B) : Unit
@@ -38,8 +38,8 @@ object Lookup:
   object Stable:
     /**/            def apply[A<:RAW,B](v: (A,B) *)      : Stable[A,B] = apply(v.~)
     /**/            def apply[A<:RAW,B](v: ~[(A,B)])     : Stable[A,B] = new Stable(IntMap.from(v.map(v => (v._1.real.Int,v._2)).iterator))
-    @tn("getVoid")  def void[A<:RAW,B]                   : Stable[A,B] = zVoid.cast[Stable[A,B]]; private object zVoid extends Stable(IntMap.empty) with Void
-    implicit inline def xxRequest[A<:RAW,B](inline v: \/): Stable[A,B] = void
+    @tn("getVoid")  def void[A<:RAW,B]                   : Stable[A,B] = zVoid.cast[Stable[A,B]]; private object zVoid extends Stable(IntMap.empty) with Self.Void
+    implicit inline def implicitRequestVoid[A<:RAW,B](inline v: \/): Stable[A,B] = void
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -50,7 +50,7 @@ ___________________________________________________________________________*/
 /**
 @def void  -> Get void instance
 
-@def xxRequest -> General void instance request \n\n It is possible to use general request \/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequestVoid -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 @object X -> ###  \n\n Object [[X]] defines standard parent type extensions
 */

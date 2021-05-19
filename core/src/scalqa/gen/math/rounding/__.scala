@@ -22,9 +22,9 @@ object Rounding:
 
   given default : Rounding = HalfUp
 
-  implicit inline def xxRequest(v: DEFAULT): Rounding = HalfUp
-  implicit inline def xxRequest(v: UP)     : Rounding = Up
-  implicit inline def xxRequest(v: DOWN)   : Rounding = Down
+  implicit inline def implicitDefaultRequest(v: DEFAULT): Rounding = HalfUp
+  implicit inline def implicitUpRequest(v: UP)          : Rounding = Up
+  implicit inline def implicitDownRequest(v: DOWN)      : Rounding = Down
 
   private val Multiplier: Array[Int] = ~~(1).unfold(_.last * 10).takeFirst(12).toArray
 /*___________________________________________________________________________

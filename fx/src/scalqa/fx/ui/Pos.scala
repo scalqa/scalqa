@@ -3,7 +3,7 @@ package scalqa; package fx; package ui; import language.implicitConversions
 import javafx.geometry.{ Pos => JPos }
 
 enum Pos(val real: JPos) extends Fx.JavaFx.Enum[JPos]:
-  case Void           extends Pos(JPos.CENTER) with Void
+  case Void           extends Pos(JPos.CENTER) with Self.Void
   case TopLeft        extends Pos(JPos.TOP_LEFT)
   case TopCenter      extends Pos(JPos.TOP_CENTER)
   case TopRight       extends Pos(JPos.TOP_RIGHT)
@@ -21,18 +21,18 @@ enum Pos(val real: JPos) extends Fx.JavaFx.Enum[JPos]:
   def horizontal : HPos = HPos(real.getHpos)
 
 object Pos extends Fx.JavaFx.Enum.Companion[Pos, JPos]:
-  implicit inline def xxRequest(inline v: \/)    : Pos = Void
-  implicit inline def xxRequest(inline v: CENTER): Pos = Center
-  implicit inline def xxRequest(inline v: TOP)   : Pos = TopCenter
-  implicit inline def xxRequest(inline v: BOTTOM): Pos = BottomCenter
-  implicit inline def xxRequest(inline v: LEFT)  : Pos = CenterLeft
-  implicit inline def xxRequest(inline v: RIGHT) : Pos = CenterRight
-  implicit        def xxRequest(v: HPos)  : Pos = v match
+  implicit inline def implicitVoidRequest(inline v: \/)    : Pos = Void
+  implicit inline def implicitRequest(inline v: CENTER): Pos = Center
+  implicit inline def implicitRequest(inline v: TOP)   : Pos = TopCenter
+  implicit inline def implicitRequest(inline v: BOTTOM): Pos = BottomCenter
+  implicit inline def implicitRequest(inline v: LEFT)  : Pos = CenterLeft
+  implicit inline def implicitRequest(inline v: RIGHT) : Pos = CenterRight
+  implicit        def implicitRequest(v: HPos)  : Pos = v match
     case HPos.Left   => BaselineLeft
     case HPos.Center => BaselineCenter
     case HPos.Right  => BaselineRight
 
-  implicit        def xxRequest(v: VPos)  : Pos = v match
+  implicit        def implicitRequest(v: VPos)  : Pos = v match
     case VPos.Top      => TopCenter
     case VPos.Center   => Center
     case VPos.Baseline => BaselineCenter

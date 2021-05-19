@@ -13,7 +13,7 @@ object _extension:
   type _transform = X._transform[String]
 
 package _Extension:
-  private[_Extension] implicit inline def xx_String[A<: String | Opaque.String](inline v: A): String = v.cast[String]
+  private[_Extension] implicit inline def implicitToString[A<: String | Opaque.String](inline v: A): String = v.cast[String]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

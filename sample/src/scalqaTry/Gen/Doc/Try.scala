@@ -11,7 +11,7 @@ object Try:
     def multiple10   = i * 10
     def multiple100  = i * 100
     def multiple1000 = i * 1000
-    def doc         = Doc(this) += ("name", name) += ("index", index) += ("multiple10", multiple10) += ("multiple100", multiple100) += ("multiple1000", multiple1000)
+    def doc         = Self.Doc(this) += ("name", name) += ("index", index) += ("multiple10", multiple10) += ("multiple100", multiple100) += ("multiple1000", multiple1000)
 
   def main(sa:  Array[String]): Unit =
     val v = new Object(5)

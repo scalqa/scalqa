@@ -2,10 +2,10 @@ package scalqa; package `val`; package pro; package z
 
 private[pro] object TwoWay_View:
 
-  class M[A,B](protected override val real: Mutable[A], bm: TwoWayFun[A,B]) extends Convert_View[A,B](real, bm) with Mutable[B]:
+  class M[A,B](protected override val real: Mutable[A], bm: ReversibleFunction[A,B]) extends Convert_View[A,B](real, bm) with Mutable[B]:
     def update(v: B) = real.update(bm.undo(v))
 
-  class ObservableMutable[A,B]( protected override val real: Pro.ObservableMutable[A], bm: TwoWayFun[A,B]) extends Convert_View.O[A,B](real, bm) with Pro.ObservableMutable[B]:
+  class ObservableMutable[A,B]( protected override val real: Pro.ObservableMutable[A], bm: ReversibleFunction[A,B]) extends Convert_View.O[A,B](real, bm) with Pro.ObservableMutable[B]:
     def update(v: B) = real.update(bm.undo(v))
 
 /*___________________________________________________________________________

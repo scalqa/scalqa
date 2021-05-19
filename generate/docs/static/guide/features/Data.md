@@ -8,16 +8,16 @@ specialized framework of collections for efficient unboxed data processing.
 
 Defining data elements is quite easy, one just needs to select one of the following data roots and follow certain conventions:
 
-- [Boolean.Custom.Data](../../api/scalqa/def/boolean/custom/Data.html)
-- [Byte.Custom.Data](../../api/scalqa/def/byte/custom/Data.html) 
-- [Char.Custom.Data](../../api/scalqa/def/char/custom/Data.html) 
-- [Short.Custom.Data](../../api/scalqa/def/short/custom/Data.html) 
-- [Int.Custom.Data](../../api/scalqa/def/int/custom/Data.html) 
-- [Long.Custom.Data](../../api/scalqa/def/long/custom/Data.html) 
-- [Float.Custom.Data](../../api/scalqa/def/float/custom/Data.html) 
-- [Double.Custom.Data](../../api/scalqa/def/double/custom/Data.html) 
-- [Any.Ref.Custom.Data](../../api/scalqa/def/any/ref/custom/Data.html) 
-- [String.Custom.Data](../../api/scalqa/def/string/custom/Data.html) 
+- [Boolean.Custom.Data](../../api/scalqa/lang/boolean/custom/Data.html)
+- [Byte.Custom.Data](../../api/scalqa/lang/byte/custom/Data.html) 
+- [Char.Custom.Data](../../api/scalqa/lang/char/custom/Data.html) 
+- [Short.Custom.Data](../../api/scalqa/lang/short/custom/Data.html) 
+- [Int.Custom.Data](../../api/scalqa/lang/int/custom/Data.html) 
+- [Long.Custom.Data](../../api/scalqa/lang/long/custom/Data.html) 
+- [Float.Custom.Data](../../api/scalqa/lang/float/custom/Data.html) 
+- [Double.Custom.Data](../../api/scalqa/lang/double/custom/Data.html) 
+- [Any.Ref.Custom.Data](../../api/scalqa/lang/any/ref/custom/Data.html) 
+- [String.Custom.Data](../../api/scalqa/lang/string/custom/Data.html) 
 
 ## Define
 
@@ -85,7 +85,7 @@ The type definition must be inside another object to allow `inline` definitions 
 ## Use
 
 The Price object already contains specialized collections. 
-To see what they are, look at [Double](../../api/scalqa/def/Double$.html), the 'Alias' section contains same containers 
+To see what they are, look at [Double](../../api/scalqa/lang/Double$.html), the 'Alias' section contains same containers 
 (but parameterized for Double)
   
 Here are some usage examples:

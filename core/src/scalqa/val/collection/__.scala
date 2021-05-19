@@ -2,21 +2,21 @@ package scalqa; package `val`; import collection.*; import language.implicitConv
 
 trait Collection[+A] extends gen.able.Stream[A] with gen.able.Size:
   @tn("stream") def ~    : ~[A]
-  /**/          def size : Int
+  override      def size : Int
 
 object Collection:
   /**/            def apply[A](v: A)                        : Collection[A]  = Pack(v)
   /**/            def apply[A](v1: A, v2: A)                : Collection[A]  = Pack(v1, v2)
   /**/            def apply[A](v1: A, v2: A, v3: A, vs: A*) : Collection[A]  = Pack(v1, v2, v3, vs *)
   @tn("getVoid")  def void[A]                               : Collection[A]  = Z.Void
-  implicit inline def xxRequest[A](inline v: \/)            : Collection[A]  = void[A]
+  implicit inline def implicitRequestVoid[A](inline v: \/)  : Collection[A]  = void[A]
   /**/            def unapplySeq[A](v: Collection[A])       : Option[Seq[A]] = Some(v.~.toSeq)
 
   extension [A] (inline x: Collection[A])
     /**/                 inline def contains(inline v: A)          : Boolean       = Z.contains(x,v)
     @tn("readOnly_View") inline def readOnly_^                     : Collection[A] = Z.ReadOnly_View(x)
     /**/                 inline def withFilter(inline f:A=>Boolean): ~[A]          = x.~.take(f)
-    @tn("fun_View")      inline def fun_^[B](inline f: A => B)     : Collection[B] = Z.ValueMap_View(x, f)
+    @tn("map_View")      inline def map_^[B](inline f: A => B)     : Collection[B] = Z.ValueMap_View(x, f)
     /**/                 inline def map[B](inline f:A=>B)          : ~[B]          = x.~.map(f)
     /**/                 inline def flatMap[B](inline f:A=> ~[B])  : ~[B]          = x.~.flatMap(f)
     /**/                 inline def foreach[U](inline f: A=>U)     : Unit          = x.~.foreach(f)
@@ -38,7 +38,7 @@ object Collection:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait Collection -> ### General Value Collection
+@trait Collection -> ### Value Collection
 
       Collection is the root of collections framework
 
@@ -64,6 +64,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def xxRequest -> General void instance request \n\n It is possible to use general request \/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequestVoid -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

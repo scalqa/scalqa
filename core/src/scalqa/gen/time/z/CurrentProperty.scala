@@ -1,12 +1,12 @@
 package scalqa; package gen; package time; package z; import language.implicitConversions
 
 private class CurrentProperty(length: Time.Length) extends Long.Pro.O.X.Abstract:
-  override def doc    : Doc = Doc("Time.current_*@" + this.##) += ("length", length)
-  private  val nanos   : Long = length.nanosTotal
-  private  var nextRun : Long = { val t = System.nanoTime; t - (t % nanos) + nanos }
-  private  var emptyRun: Int  = 0
-  private  var value   : Long = System.currentTimeMillis
-  /**/     def apply() : Long = value
+  override def doc     : Self.Doc = Self.Doc("Time.current_*@" + this.##) += ("length", length)
+  private  val nanos   : Long     = length.nanosTotal
+  private  var nextRun : Long     = { val t = System.nanoTime; t - (t % nanos) + nanos }
+  private  var emptyRun: Int      = 0
+  private  var value   : Long     = System.currentTimeMillis
+  /**/     def apply() : Long     = value
   /**/     def update(t: Long, cur: Long) = if (cur >= nextRun) {
     nextRun += nanos
     value = t

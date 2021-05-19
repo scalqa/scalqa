@@ -1,6 +1,6 @@
 package scalqa; package gen; package event; package control; package z; import language.implicitConversions
 
-private[event] object Void extends Control with Void:
+private[event] object Void extends Control with Self.Void:
   def cancel                      = true
   def isCancelled                 = true
   def cancelIf(b: () => Boolean)  = this

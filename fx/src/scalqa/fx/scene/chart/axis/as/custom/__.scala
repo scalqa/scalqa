@@ -2,8 +2,8 @@ package scalqa; package fx; package scene; package chart; package axis; package 
 
 import javafx.geometry.Dimension2D
 
-class Custom[A](m: TwoWayFun[A, Double]) extends Value[A](m):
-  def this(name: String, m: TwoWayFun[A, Double]) = { this(m); name.^.?.forval(label = _) }
+class Custom[A](m: ReversibleFunction[A, Double]) extends Value[A](m):
+  def this(name: String, m: ReversibleFunction[A, Double]) = { this(m); name.^.?.forval(label = _) }
 
   override protected type REAL = z.Real[A]; protected override def _createReal = new REAL(this)
 

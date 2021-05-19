@@ -8,10 +8,11 @@ object Input extends Any.Ref.Custom.Type[Input, java.io.InputStream]("Io.Input")
   def apply(ba: Array[Byte], offs: Int, length: Int)    : Input = apply(java.io.ByteArrayInputStream(ba, offs, length))
   def apply(text: String)                               : Input = apply(text.getBytes)
   def apply(f: File.Path)                               : Input = apply(java.io.FileInputStream(f.real.toFile))
-  implicit inline def xxJava(v: java.io.InputStream)    : Input = apply(v)
+
+  implicit inline def implicitFromJava(v: java.io.InputStream): Input = apply(v)
 
   @tn("getVoid") inline def void                        : Input = Z.Void
-  implicit       inline def xxRequest(inline v: \/)     : Input = void
+  implicit       inline def implicitRequestVoid(inline v: \/)     : Input = void
 
   extension (x: Input)
     def asBytes : Input.Bytes = Input.Bytes(x.real)
@@ -40,6 +41,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def xxRequest -> General void instance request \n\n It is possible to use general request \/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequestVoid -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

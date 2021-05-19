@@ -1,18 +1,20 @@
 package scalqa; package `val`; package idx; import observable.*; import language.implicitConversions
 
 trait Observable[A] extends Idx[A] with Val.Collection.Observable[A]:
-  /**/  def onChange[U](l: ><[Event[A]] => U) : Gen.Event.Control
-  final def onAdd   [U](l: A => U)              : Gen.Event.Control = z.observable.onAdd(this, l)
-  final def onRemove[U](l: A => U)              : Gen.Event.Control = z.observable.onRemove(this, l)
+  /**/           def onChange[U](l: ><[Event[A]] => U) : Gen.Event.Control
+  final override def onAdd   [U](l: A => U)            : Gen.Event.Control = z.observable.onAdd(this, l)
+  final override def onRemove[U](l: A => U)            : Gen.Event.Control = z.observable.onRemove(this, l)
 
 object Observable:
-  @tn("getVoid")inline def void[A]                   : Observable[A] = z.Void.OM.cast[Observable[A]]
-  implicit      inline def xxRequest[A](inline v: \/): Observable[A] = void[A]
+  @tn("getVoid")inline def void[A]            : Observable[A] = z.Void.OM.cast[Observable[A]]
+  /**/                 def wrap[A](v: Idx[A]) : Observable[A] = v match{ case v:Idx.O[_] => v.cast[Idx.O[A]]; case v  => new z.Unsupported_View.O[A](v) }
+
+  implicit      inline def implicitRequestVoid[A](inline v: \/): Observable[A] = void[A]
 
   extension[A]  (x: Observable[A])
     @tn("reversed_View")     def reversed_^                 : Idx.O[A] = z.Reversed_View.O(x)
     @tn("statefulMap_View")  def statefulMap_^[B](f: A => B): Idx.O[B] = z.Convert_View.O.Stateful(x, f)
-    @tn("fun_View")          def fun_^[B](f: A => B)        : Idx.O[B] = z.Convert_View.O(x, f)
+    @tn("map_View")          def map_^[B](f: A => B)        : Idx.O[B] = z.Convert_View.O(x, f)
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def Event = observable.Event;  type Event[A] = observable.Event[A]
@@ -56,6 +58,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def xxRequest -> General void instance request \n\n It is possible to use general request \/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequestVoid -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

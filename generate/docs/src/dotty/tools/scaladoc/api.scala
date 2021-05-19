@@ -56,18 +56,18 @@ enum Kind(val name: String){
     extends Kind("trait") with Classlike
   case Enum(typeParams: Seq[TypeParameter], argsLists: Seq[ParametersList]) extends Kind("enum") with Classlike
   case EnumCase(kind: Object.type | Type | Val.type | Class) extends Kind("case")
-  case Core(typeParams: Seq[TypeParameter], argsLists: Seq[ParametersList])
+  case Def(typeParams: Seq[TypeParameter], argsLists: Seq[ParametersList])
     extends Kind("def")
-  case Extension(on: ExtensionTarget, m: Kind.Core) extends Kind("def")
-  case Constructor(base: Kind.Core) extends Kind("def")
+  case Extension(on: ExtensionTarget, m: Kind.Def) extends Kind("def")
+  case Constructor(base: Kind.Def) extends Kind("def")
   case Var extends Kind("var")
   case Val extends Kind("val")
-  case Exported(m: Kind.Core) extends Kind("export")
+  case Exported(m: Kind.Def) extends Kind("export")
   case Type(concreate: Boolean, opaque: Boolean, typeParams: Seq[TypeParameter])
     extends Kind("type") // should we handle opaque as modifier?
-  case Given(kind: Core | Class, as: Option[Signature], conversion: Option[ImplicitConversion])
+  case Given(kind: Def | Class, as: Option[Signature], conversion: Option[ImplicitConversion])
     extends Kind("given") with ImplicitConversionProvider
-  case Implicit(kind: Kind.Core | Kind.Val.type, conversion: Option[ImplicitConversion])
+  case Implicit(kind: Kind.Def | Kind.Val.type, conversion: Option[ImplicitConversion])
     extends Kind(kind.name)  with ImplicitConversionProvider
   case Unknown extends Kind("Unknown")
 }

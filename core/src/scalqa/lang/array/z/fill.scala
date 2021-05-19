@@ -1,20 +1,20 @@
 package scalqa; package lang; package array; package z; import language.implicitConversions
 
-import Shape.OfArray.Any
+import Self.Given.ArrayTag
 
 object fill:
 
-  inline def apply[A,ARRAY<:Any[A]](inline x: ARRAY, inline p: Int, inline sz: Int, inline v: A, inline t: Any.Def[A,ARRAY]) : Unit =
+  inline def apply[A,ARRAY<:Array.AnyType[A]](inline x: ARRAY, inline p: Int, inline sz: Int, inline v: A, inline t: ArrayTag[A,ARRAY]) : Unit =
     inline t match
-              case _ : Any.Def[A&Raw.Boolean,Array[A&Raw.Boolean]] => boolean(x.cast[Array[Boolean]],p, sz, v.cast[Boolean])
-              case _ : Any.Def[A&Raw.Byte,   Array[A&Raw.Byte   ]] => byte   (x.cast[Array[Byte]],   p, sz, v.cast[Byte])
-              case _ : Any.Def[A&Raw.Char,   Array[A&Raw.Char   ]] => char   (x.cast[Array[Char]],   p, sz, v.cast[Char])
-              case _ : Any.Def[A&Raw.Short,  Array[A&Raw.Short  ]] => short  (x.cast[Array[Short]],  p, sz, v.cast[Short])
-              case _ : Any.Def[A&Raw.Int,    Array[A&Raw.Int    ]] => int    (x.cast[Array[Int]],    p, sz, v.cast[Int])
-              case _ : Any.Def[A&Raw.Long,   Array[A&Raw.Long   ]] => long   (x.cast[Array[Long]],   p, sz, v.cast[Long])
-              case _ : Any.Def[A&Raw.Float,  Array[A&Raw.Float  ]] => float  (x.cast[Array[Float]],  p, sz, v.cast[Float])
-              case _ : Any.Def[A&Raw.Double, Array[A&Raw.Double ]] => double (x.cast[Array[Double]], p, sz, v.cast[Double])
-              case _ : Any.Def[A&Ref,        Array[A&Ref        ]] => ref    (x.cast[Array[Ref]],    p, sz, v.cast[Ref])
+              case _ : ArrayTag[A&Raw.Boolean,Array[A&Raw.Boolean]] => boolean(x.cast[Array[Boolean]],p, sz, v.cast[Boolean])
+              case _ : ArrayTag[A&Raw.Byte,   Array[A&Raw.Byte   ]] => byte   (x.cast[Array[Byte]],   p, sz, v.cast[Byte])
+              case _ : ArrayTag[A&Raw.Char,   Array[A&Raw.Char   ]] => char   (x.cast[Array[Char]],   p, sz, v.cast[Char])
+              case _ : ArrayTag[A&Raw.Short,  Array[A&Raw.Short  ]] => short  (x.cast[Array[Short]],  p, sz, v.cast[Short])
+              case _ : ArrayTag[A&Raw.Int,    Array[A&Raw.Int    ]] => int    (x.cast[Array[Int]],    p, sz, v.cast[Int])
+              case _ : ArrayTag[A&Raw.Long,   Array[A&Raw.Long   ]] => long   (x.cast[Array[Long]],   p, sz, v.cast[Long])
+              case _ : ArrayTag[A&Raw.Float,  Array[A&Raw.Float  ]] => float  (x.cast[Array[Float]],  p, sz, v.cast[Float])
+              case _ : ArrayTag[A&Raw.Double, Array[A&Raw.Double ]] => double (x.cast[Array[Double]], p, sz, v.cast[Double])
+              case _ : ArrayTag[A&Ref,        Array[A&Ref        ]] => ref    (x.cast[Array[Ref]],    p, sz, v.cast[Ref])
               case _                                               => any    (x.cast[Array[A]],      p, sz, v)
 
   def any[A](x: Array[A], p:Int, sz:Int, v: A): Unit =

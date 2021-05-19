@@ -24,7 +24,7 @@ transparent trait _zip:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait _zip -> ### Zip Interface
+@trait _zip -> ### Paired Elements Interface
 
 @def unzip -> Unzips stream in two
 

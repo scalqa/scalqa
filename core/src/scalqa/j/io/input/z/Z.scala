@@ -10,7 +10,7 @@ object Z:
       if(v >= 0) o = v.Char
       o
 
-  object Void extends java.io.InputStream with Void:
+  object Void extends java.io.InputStream with Self.Void:
     def read = -1
 
 /*___________________________________________________________________________

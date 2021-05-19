@@ -1,15 +1,15 @@
 package scalqa; package gen; package able; import language.implicitConversions
 
 trait Size extends Empty:
-  def size   : Int
-  def isEmpty: Boolean = size == 0
+  /**/     def size   : Int
+  override def isEmpty: Boolean = size == 0
 
 object Size:
 
   // ************************************************************************************
   trait Long extends Empty:
-    def sizeLong: scala.Long
-    def isEmpty : Boolean      = sizeLong == 0L
+    /**/     def sizeLong: scala.Long
+    override def isEmpty : Boolean      = sizeLong == 0L
 
   // ************************************************************************************
   trait Zero extends Size:
@@ -47,7 +47,6 @@ object Size:
 ___________________________________________________________________________*/
 /**
 @trait Size -> Able of providing size
-
 
 @def size -> Element count
 

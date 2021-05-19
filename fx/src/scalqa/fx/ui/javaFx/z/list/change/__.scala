@@ -37,7 +37,7 @@ object Change:
       override def wasUpdated      = current.wasUpdated
       override def wasReplaced     = current.wasReplaced
 
-      def doc = new Doc(this){ override def text = frames.~.toText }
+      def doc = new Self.Doc(this){ override def text = frames.~.toText }
     }
 
 /*___________________________________________________________________________

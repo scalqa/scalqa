@@ -114,105 +114,105 @@ ___________________________________________________________________________*/
       91.roundTo(5)(using UP).TP  // Prints 95
     ```
 
-@def Byte    -> To Byte
+@def Byte    -> Make Byte
 
                 Byte constructor attached to Int
 
-@def Char    -> To Char
+@def Char    -> Make Char
 
                 Char constructor attached to Int
 
-@def Short   -> To Short
+@def Short   -> Make Short
 
                 Short constructor attached to Int
 
-@def Int     -> To Int
+@def Int     -> Make Int
 
                 Returns itself
 
                 Operation provided for consistency
 
-@def Long    -> To Long
+@def Long    -> Make Long
 
                 Long constructor attached to Int
 
-@def Float   -> To Float
+@def Float   -> Make Float
 
                 Float constructor attached to Int
 
-@def Double  -> To Double
+@def Double  -> Make Double
 
                 Double constructor attached to Int
 
-@def Number  -> To Number
+@def Number  -> Make Number
 
                 Number constructor attached to Int
 
-@def ByteCount -> To ByteCount
+@def ByteCount -> Make ByteCount
 
                 [[scalqa.gen.number.ByteCount$.opaque ByteCount]] constructor attached to Int
 
-@def Year      -> To Year
+@def Year      -> Make Year
 
                 [[scalqa.gen.calendar.Year$.opaque Year]] constructor attached to Int
 
-@def Big       -> To BigInteger
+@def Big       -> Make BigInteger
 
                 [[scalqa.gen.number.BigInteger$.opaque BigInteger]] constructor attached to Int
 
-@def Percent   -> To Percent
+@def Percent   -> Make Percent
 
                 [[scalqa.gen.number.Percent$.opaque Percent]] constructor attached to Int
 
-@def Week      -> To Time.Length
+@def Week      -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
 
-@def Weeks     -> To Time.Length
+@def Weeks     -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
 
-@def Day       -> To Time.Length
+@def Day       -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
 
-@def Days      -> To Time.Length
+@def Days      -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
 
-@def Hour      -> To Time.Length
+@def Hour      -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
 
-@def Hours     -> To Time.Length
+@def Hours     -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
 
-@def Minute    -> To Time.Length
+@def Minute    -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
 
-@def Minutes   -> To Time.Length
+@def Minutes   -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
 
-@def Second    -> To Time.Length
+@def Second    -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
 
-@def Seconds   -> To Time.Length
+@def Seconds   -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
 
-@def Millis    -> To Time.Length
+@def Millis    -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
 
-@def Micros    -> To Time.Length
+@def Micros    -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
 
-@def Nanos     -> To Time.Length
+@def Nanos     -> Make Time.Length
 
                 [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
 

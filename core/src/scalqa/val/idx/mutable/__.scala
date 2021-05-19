@@ -16,24 +16,25 @@ trait Mutable[A] extends Idx[A] with Val.Collection.Mutable[A] with Able.Contain
   /**/                    def remove(v: A)                             : Int        = (0 <>> size).~.reverse.take(apply(_) == v).peek(removeAt).count
   /**/                    def removeAt(position: Int)                  : Unit       = remove_<>(position <> position)
   @tn("remove_Range")     def remove_<>(range: Int.<>)                 : Unit
-  /**/                    def clear                                    : Unit       = remove_<>(0 <>> size)
+  /**/           override def clear                                    : Unit       = remove_<>(0 <>> size)
 
 object Mutable:
-  /**/                 def apply[A](initSize: Int = J.initSize)   : Mutable[A]             = Buffer[A](initSize)
-  @tn("javaList_View") def javaList_^[A](v: java.util.List[A])    : Mutable[A]             = z.as.JavaListWrap.Mutable[A](v)
-  /**/                 def sealable[A](initSize: Int = J.initSize): Mutable[A] & Able.Seal = new z.mutable.AsSealable(apply[A](initSize))
+  /**/                    def apply[A](initSize: Int = J.initSize)     : Mutable[A]             = Buffer[A](initSize)
+  /**/                    def sealable[A](initSize: Int = J.initSize)  : Mutable[A] & Able.Seal = new z.mutable.AsSealable(apply[A](initSize))
+  /**/                    def wrap[A](v: java.util.List[A])            : Mutable[A]             = z.as.JavaListWrap.Mutable[A](v)
+  /**/                    def wrap[A](v:  Idx[A])                      : Mutable[A]             = v match{ case v:Idx.M[_] => v.cast[Idx.M[A]]; case v => new z.Unsupported_View.M[A](v)}
 
   extension[A](x: Mutable[A])
-    /**/                     def updateFor(let: A => Boolean, value: A)          : Int            = { var c = 0; x.~.foreachIndexed((i, v) => if (let(v)) { c += 1; x.update(i, value) }); c }
-    /**/                     def removeFor(let: A => Boolean)                    : Int            = { var c = 0; (0 <>> x.size).~.reverse.foreach(i => if (let(x(i))) { c += 1; x.removeAt(i) }); c }
-    /**/                     def sortReversed                    (using o: O[A]) : Unit           = x.sort(using o.reverse)
-    @tn("twoWay_View")       def twoWay_^[B](m: A=>B, r: B => A)                 : Mutable[B]     = twoWay_^(using TwoWayFun(m,r))
-    @tn("twoWay_View")       def twoWay_^[B](using m: TwoWayFun[A,B])            : Mutable[B]     = z.TwoWay_View.M[A,B](x, m)
-    /**/                     def sortBy[B](f:  A=>B)             (using o: O[B]) : Unit           = x.sort(using o.on(f))
-    /**/                     def sortBy[B,C](f1:A=>B,f2:A=>C)  (using O[B],O[C]) : Unit           = x.sortBy(a => (f1(a), f2(a)))
-    /**/                     def sortBy[B,C,D](f1:A=>B,f2:A=>C,f3:A=>D)(using O[B],O[C],O[D]):Unit= x.sortBy(a => (f1(a), f2(a), f3(a)))
+    /**/                  def updateFor(f: A => Boolean, value: A)            : Int             = { var c = 0; x.~.foreachIndexed((i, v) => if (f(v)) { c += 1; x.update(i, value) }); c }
+    /**/                  def removeFor(f: A => Boolean)                      : Int             = { var c = 0; (0 <>> x.size).~.reverse.foreach(i => if (f(x(i))) { c += 1; x.removeAt(i) }); c }
+    /**/                  def sortReversed                    (using o: O[A]) : Unit            = x.sort(using o.reverse)
+    @tn("mutableMap_View")def mutableMap_^[B](m: A=>B, r: B => A)             : Mutable[B]      = mutableMap_^(using ReversibleFunction(m,r))
+    @tn("mutableMap_View")def mutableMap_^[B](using m:ReversibleFunction[A,B]): Mutable[B]      = z.TwoWay_View.M[A,B](x, m)
+    /**/                  def sortBy[B](f:  A=>B)             (using o: O[B]) : Unit            = x.sort(using o.on(f))
+    /**/                  def sortBy[B,C](f1:A=>B,f2:A=>C)  (using O[B],O[C]) : Unit            = x.sortBy(a => (f1(a), f2(a)))
+    /**/                  def sortBy[B,C,D](f1:A=>B,f2:A=>C,f3:A=>D)(using O[B],O[C],O[D]):Unit = x.sortBy(a => (f1(a), f2(a), f3(a)))
   extension[SELF <: Mutable[A], A](x: SELF)
-    /**/              inline def update(inline position:Int, inline v: A)        : Unit           = x.updateAt(position, v)
+    /**/           inline def update(inline position:Int, inline v: A)        : Unit            = x.updateAt(position, v)
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def X = mutable.X

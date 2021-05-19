@@ -85,7 +85,7 @@ package fx:
   inline def Font        = control.Text.Font;      type Font         = control.Text.Font
   inline def Thread      = Application.Thread
 
-  implicit inline def xxStringToLabel(v: String): control.Label = control.Label(v)
+  implicit inline def implicitStringToLabel(v: String): control.Label = control.Label(v)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

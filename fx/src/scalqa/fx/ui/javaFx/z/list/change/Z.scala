@@ -5,16 +5,16 @@ import javafx.{ collections as JFX }
 private object Z:
 
   class InsertFrame[A](val change:  Idx.Event.Add[A], l: JFX.ObservableList[A]) extends zFrame[A](l):
-    override lazy  val getAddedSubList: java.util.List[A] = change.items.javaList_^
+    override lazy  val getAddedSubList: java.util.List[A] = change.items.toJavaList_^
     override       def wasAdded = true
 
   class DeleteFrame[A](val change:  Idx.Event.Remove[A], l: JFX.ObservableList[A]) extends zFrame[A](l):
-    override lazy  val getRemoved: java.util.List[A] = change.items.javaList_^
+    override lazy  val getRemoved: java.util.List[A] = change.items.toJavaList_^
     override       def wasRemoved = true
 
   class ReplaceFrame[A](val change:  Idx.Event.Update[A], l: JFX.ObservableList[A]) extends zFrame[A](l):
-    override lazy  val getAddedSubList: java.util.List[A] = change.items.javaList_^
-    override lazy  val getRemoved: java.util.List[A] = change.oldItems.javaList_^
+    override lazy  val getAddedSubList: java.util.List[A] = change.items.toJavaList_^
+    override lazy  val getRemoved: java.util.List[A] = change.oldItems.toJavaList_^
     override       def wasAdded = true
     override       def wasRemoved = true
     override       def wasReplaced = true

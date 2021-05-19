@@ -5,12 +5,12 @@ trait Observable:
 
 object Observable:
   /**/            val \/                     : Observable = zVoid
-  implicit inline def xxRequest(inline v: \/): Observable = \/
+  implicit inline def implicitRequestVoid(inline v: \/): Observable = \/
 
   def onObservableChange[U](v: Observable)(l: () => U): Event.Control = v.onObservableChange(l)
 
   // **************************************************************************************
-  private object zVoid extends Observable with Void { def onObservableChange[U](v: () => U) = Event.Control.void }
+  private object zVoid extends Observable with Self.Void { def onObservableChange[U](v: () => U) = Event.Control.void }
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~
   inline def X = observable.X

@@ -13,19 +13,19 @@ transparent trait _value[ROW, VIEW, A]:
 
   @tn("value_Setup")           def value_:    (f: ROW => A)                                 : Unit   = value_:?(f(_))
   @tn("value_SetupOpt")        def value_:?   (f: ROW => Opt[A])                            : Unit   = value_:*?(r => Pro.O.constant(f(r)))
-  @tn("value_SetupPro")        def value_:*   (f: ROW => Pro.O[A])                          : Unit   = value_:*?(f(_).fun_^(Opt(_)))
-  @tn("value_SetupOptPro")     def value_:?*  (f: ROW => Opt[Pro.O[A]])                     : Unit   = value_:*?(f(_).map(_.fun_^(Opt(_))) or Z.voidPro)
+  @tn("value_SetupPro")        def value_:*   (f: ROW => Pro.O[A])                          : Unit   = value_:*?(f(_).map_^(Opt(_)))
+  @tn("value_SetupOptPro")     def value_:?*  (f: ROW => Opt[Pro.O[A]])                     : Unit   = value_:*?(f(_).map(_.map_^(Opt(_))) or Z.voidPro)
   @tn("value_SetupProOpt")     def value_:*?  (f: ROW => Pro.O[Opt[A]])                     : Unit   = proSetup = f
   @tn("enhance_SetupProOpt")   def enhance_:*?(f: (ROW, Pro.O[Opt[A]]) => Pro.O[Opt[A]])    : Unit   = enhance += f
 
   @tn("valueView_Setup")       def valueView_:  (f: VIEW => A)                              : Unit   = valueView_:?(f(_))
   @tn("valueView_SetupOpt")    def valueView_:? (f: VIEW => Opt[A])                         : Unit   = valueView_:*?(v => Pro.O.constant(f(v)))
-  @tn("valueView_SetupPro")    def valueView_:* (f: VIEW => Pro.O[A])                       : Unit   = valueView_:*?(f(_).fun_^(Opt(_)))
-  @tn("valueView_SetupOptPro") def valueView_:?*(f: VIEW => Opt[Pro.O[A]])                  : Unit   = self.valueView_:*?(f(_).map(_.fun_^(Opt(_))) or Z.voidPro)
+  @tn("valueView_SetupPro")    def valueView_:* (f: VIEW => Pro.O[A])                       : Unit   = valueView_:*?(f(_).map_^(Opt(_)))
+  @tn("valueView_SetupOptPro") def valueView_:?*(f: VIEW => Opt[Pro.O[A]])                  : Unit   = self.valueView_:*?(f(_).map(_.map_^(Opt(_))) or Z.voidPro)
   @tn("valueView_SetupProOpt") def valueView_:*?(f: VIEW => Pro.O[Opt[A]])                  : Unit   = value_:*?(ZValueView(f))
 
-  /**/                         def voidDef                                                  : Def.Void[A]
-  /**/                         def docDef                                                   : Def.Doc[A]
+  /**/                         def voidDef                                                  : Self.VoidTag[A]
+  /**/                         def docDef                                                   : Self.DocTag[A]
   @tn("format_Setup")          def format_:(f: A => String.Opt)                             : Unit   = funFormat = f
   @tn("format_Setup")          def format_:(f: A => String.Opt, voidVal: ROW => String.Opt) : Unit   = { funFormat = f; funFormatVoid = voidVal }
   @tn("tooltip_Setup")         def tooltip_:(f: Opt[A] => Any)                              : Unit   = optFunTooltip = f.?.map(f => (v:Opt[A]) => f(v) match { case v: Tooltip => v; case _ => Tooltip(v.toString) })
@@ -34,7 +34,7 @@ transparent trait _value[ROW, VIEW, A]:
   // ************************************************************************************************************************************
   private class ZValueView(f: VIEW => Pro.O[Opt[A]]) extends (ROW => Pro.O[Opt[A]]):
     def apply(v: ROW) : Pro.O[Opt[A]] = try self.column.table.mkViewOpt[VIEW](v).map(f(_)) or Z.voidPro
-                                        catch case v: ClassCastException => J.illegalState("Table 'view_:' is (most likely) not specified for table: " + self.column.table.^.kind)
+                                        catch case v: ClassCastException => J.illegalState("Table 'view_:' is (most likely) not specified for table: " + self.column.table.^.typeName)
 
 
 /*___________________________________________________________________________

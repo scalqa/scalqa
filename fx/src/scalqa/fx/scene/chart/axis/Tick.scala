@@ -7,13 +7,13 @@ abstract class Tick[A] extends Able.Doc:
   def position : Double
   def visible  : Boolean
   def value    : A
-  def doc     : Doc          = Doc(this) += ("label", label) += ("position", position) += ("value", value)
+  def doc     : Self.Doc     = Self.Doc(this) += ("label", label) += ("position", position) += ("value", value)
 
 private[chart] object Tick:
-  def apply[A,B](tm: JTick[B], bm: TwoWayFun[A,B]): Tick[A] = new Z(tm, bm)
+  def apply[A,B](tm: JTick[B], bm: ReversibleFunction[A,B]): Tick[A] = new Z(tm, bm)
 
   // **************************************************************************************************************
-  private class Z[A,B](val real: JTick[B], bm: TwoWayFun[A,B]) extends Tick[A]:
+  private class Z[A,B](val real: JTick[B], bm: ReversibleFunction[A,B]) extends Tick[A]:
     def label    : String  = real.getLabel; def label_=(v: String) = real.setLabel(v)
     def position : Double  = real.getPosition; def position_=(v: Double) = real.setPosition(v)
     def visible  : Boolean = real.isTextVisible

@@ -3,7 +3,7 @@ package scalqa; package fx; package control; package text; package inputControl;
 import javafx.scene.control.TextFormatter.{ Change => JChange }
 
 object Change extends Abstract.Delegate.Opaque[Change, JChange]("Fx.Text.InputControl.Change"):
-  //implicit def xxJava(v: JChange) : Change  = apply(v)
+  //implicit def implicitFromJava(v: JChange) : Change  = apply(v)
 
   extension (x: Change)
     inline def anchor                 : Int     = x.real.getAnchor

@@ -9,10 +9,10 @@ object Day extends Int.Custom.Data.Sequential[Day]("Day"):
   /**/     def apply(m: Month, day: Int)              : Day                   = apply(m.year.number, m.number, day)
   /**/     def unapply(v: Day)                        : Option[(Int,Int,Int)] = Some((v.year.number,v.month.number,v.number))
   override def tag(v:Day)                             : String                = v.month.tag + "-" + { val s = v.number.toString; if (s.length < 2) "0" + s else s }
-
   override def isVoid(v: Day)                         : Boolean               = v.real == Int.min
-  implicit inline def xxRequest(inline v: \/)         : Day                   = Int.min.asOpaque[Day]
-  implicit inline def xxRequest(inline v: CURRENT)    : Day                   = apply()
+
+  implicit inline def implicitRequestVoid(inline v: \/)        : Day          = Int.min.asOpaque[Day]
+  implicit inline def implicitRequestCurrent(inline v: CURRENT): Day          = apply()
 
   extension (x: Day)
     /**/      inline def index             : Int      = x.real

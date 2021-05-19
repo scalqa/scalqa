@@ -5,7 +5,7 @@ transparent trait _properties[ROW]:
 
   @tn("items_Pro")            def items_*                             : Pro.OM[Idx.OM[ROW]]            = rowData.items_*
   /**/                        def items                               : Idx.OM[ROW]                    = items_*()
-  /**/                        def items_=(l: Idx[ROW])                : Unit = items_*()               = l.observableMutable_^
+  /**/                        def items_=(l: Idx[ROW])                : Unit = items_*()               = Idx.OM.wrap(l)
   @tn("sortMode_Pro")         def sortMode_*                          : Pro.OM[SortMode]               = rowData.sortMode_*
   /**/                        def sortMode                            : SortMode                       = sortMode_*()
   /**/                        def sortMode_=(v: SortMode)             : Unit                           = sortMode_*() = v
@@ -21,7 +21,7 @@ transparent trait _properties[ROW]:
   @tn("editable_Pro")         def editable_*                          : Boolean.Pro.OM                 = Fx.JavaFx.As.pro_OM(real.editableProperty)
   /**/                        def editable                            : Boolean                        = real.isEditable
   /**/                        def editable_=(b: Boolean)              : Unit                           = real.setEditable(b)
-  @tn("placeholder_Pro")      def placeholder_*                       : Pro.OM[Node]                   = Fx.JavaFx.As.pro_OM(real.placeholderProperty).twoWay_^[Node]
+  @tn("placeholder_Pro")      def placeholder_*                       : Pro.OM[Node]                   = Fx.JavaFx.As.pro_OM(real.placeholderProperty).mutableMap_^[Node]
   /**/                        def placeholder                         : Node                           = placeholder_*()
   /**/                        def placeholder_=(v: Node)              : Unit                             = real.setPlaceholder(v.real)
 

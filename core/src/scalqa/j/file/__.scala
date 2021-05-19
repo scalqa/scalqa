@@ -3,9 +3,9 @@ package scalqa; package j; import file.*; import language.implicitConversions
 import J.File
 
 object File extends Any.Ref.Custom.Type[J.File,java.io.File]("File"):
-  inline          def apply(inline v: java.io.File)  : File   = v.asOpaque[File]
-  implicit inline def xxJava(inline v: java.io.File) : File   = v.asOpaque[File]
-  override        def tag(v: File)                   : String = v.path.toString
+  inline          def apply(inline v: java.io.File)            : File   = v.asOpaque[File]
+  implicit inline def implicitFromJava(inline v: java.io.File) : File   = v.asOpaque[File]
+  override        def tag(v: File)                             : String = v.path.toString
 
   extension (x: File)
     def name                                   : String    = x.real.getName

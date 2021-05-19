@@ -8,7 +8,7 @@ class Item extends Action:
   protected type REAL <: JItem
   protected override def _createReal: REAL = new JItem().cast[REAL]
 
-  @tn("graphic_Pro") def graphic_*                 : Pro.OM[Node.Like] = Fx.JavaFx.As.pro_OM(real.graphicProperty).twoWay_^[Node.Like]
+  @tn("graphic_Pro") def graphic_*                 : Pro.OM[Node.Like] = Fx.JavaFx.As.pro_OM(real.graphicProperty).mutableMap_^[Node.Like]
   /**/               def graphic                   : Node.Like         = graphic_*()
   /**/               def graphic_=(g: Node.Like) : Unit                = real.setGraphic(g.real)
   @tn("id_Pro")      def id_*                      : String.Pro.OM       = Fx.JavaFx.As.pro_OM(real.idProperty)
@@ -26,12 +26,12 @@ object Item:
   def apply(real: JItem)                                             : Item              = real.getUserData.cast[Item]
   def separator                                                      : Item              = new z.Separator
 
-  given FxConverter: TwoWayFun[JItem,Item] = zTwoWay;
+  given FxConverter: ReversibleFunction[JItem,Item] = zTwoWay;
 
-  implicit inline def xxRequest(inline v: SEPARATOR): Item = separator
+  implicit inline def implicitRequest(inline v: SEPARATOR): Item = separator
 
   // *************************************************************
-  private object zTwoWay extends TwoWayFun[JItem,Item] { def apply(real: JItem) = Item.apply(real); def undo(i: Item): JItem = i.real }
+  private object zTwoWay extends ReversibleFunction[JItem,Item] { def apply(real: JItem) = Item.apply(real); def undo(i: Item): JItem = i.real }
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API

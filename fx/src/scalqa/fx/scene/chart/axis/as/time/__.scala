@@ -1,7 +1,7 @@
 package scalqa; package fx; package scene; package chart; package axis; package as; import time.*; import language.implicitConversions
 
-class Time protected (name: String, bm: TwoWayFun[Gen.Time, Double]) extends As.Custom[Gen.Time](name, bm):
-  def this(name: String = "Time") = this(name, TwoWayFun(_.millisTotal.Double, d => Gen.Time.fromMillis(d.toLong)))
+class Time protected (name: String, bm: ReversibleFunction[Gen.Time, Double]) extends As.Custom[Gen.Time](name, bm):
+  def this(name: String = "Time") = this(name, ReversibleFunction(_.millisTotal.Double, d => Gen.Time.fromMillis(d.toLong)))
 
   override lazy  val setup: TimeSetup = new TimeSetup
 

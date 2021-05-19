@@ -6,7 +6,7 @@ class TextField[ROW,V,A](c: Column[ROW,V,A], parser: String => Result[A]) extend
   @tn("error_pro") val error_* : String.Pro.OM = String.Pro.OM("")
 
   protected override def _createReal: REAL = new REAL {
-    given FxConverter: TwoWayFun[ITEM, String] = new TwoWayFun[ITEM, String](){
+    given FxConverter: ReversibleFunction[ITEM, String] = new ReversibleFunction[ITEM, String](){
         def apply(v: ITEM)  = v.text_? or ""
         def undo(v: String) =
            val o =  parser(v)

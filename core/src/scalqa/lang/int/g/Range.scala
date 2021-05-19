@@ -41,10 +41,10 @@ object Range:
     @tn("checkIn")  inline def checkIn(size:Int): Range[Int] = {if(x.start<0 || x.endX>size) J.illegalArgument(""+x.start+" <>> "+x.endX+" is out of range 0 <>> "+size); x}
     @tn("default")  inline def default(size:Int): Range[Int] = {var v=x; if(v.isInstanceOf[Void]) v = 0 <>> size; v }
   // ------------------------------------------------------------------------------------------------------------------------------------------
-  implicit inline def xxRequest(inline v: \/)   : Range[Int] = z.Range.Void
-  extension[A<:RAW,T,STM<: Shape.OfStream.Any[T]](inline x: Range[A])
-    /**/                                  inline def map    [B>:T](inline f:A=> B)   (using inline s: Shape.OfStream.Any.Def[B,STM]): STM       = g.Stream.map[A,T,STM](x.~)[B](f)(using s)
-    /**/                                  inline def flatMap[B>:T](inline f:A=> ~[T])(using inline s: Shape.OfStream.Any.Def[B,STM]): STM       = g.Stream.flatMap[A,T,STM](x.~)[B](f)(using s)
+  implicit inline def implicitRequestVoid(inline v: \/)   : Range[Int] = z.Range.Void
+  extension[A<:RAW,T,STM<: ~~.AnyType[T]](inline x: Range[A])
+    /**/                                  inline def map    [B>:T](inline f:A=> B)   (using inline s: Self.StreamTag[B,STM]): STM       = g.Stream.map[A,T,STM](x.~)[B](f)(using s)
+    /**/                                  inline def flatMap[B>:T](inline f:A=> ~[T])(using inline s: Self.StreamTag[B,STM]): STM       = g.Stream.flatMap[A,T,STM](x.~)[B](f)(using s)
   extension[A<:RAW]  (inline x: Range[A]) inline def withFilter(inline f: Fun.Filter[A])                                      : Stream[A] = x.~.take(f)
   extension[A<:RAW,U](inline x: Range[A]) inline def foreach(   inline f: A=>U)                                               : Unit      = z.range.Macro.foreach(x,f)
 

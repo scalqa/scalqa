@@ -7,7 +7,7 @@ abstract class Gauge(val length: Time.Length, val minorCount: Int) extends Able.
   def label(t: Time, first: Boolean) : String
   def labelSize                      : Int           = 30
 
-object Gauge extends Void.Setup[Gauge](new z.Gauge(1.Day, 4) with Void):
+object Gauge extends Self.Void.Setup[Gauge](new z.Gauge(1.Day, 4) with Self.Void):
   def apply(tl: Time.Length, minorCount: Int) : Gauge    = new z.Gauge(tl, minorCount)
   def months(months: Int, minorCount: Int)    : Gauge    = new z.Gauge.Month(months, minorCount)
   def years(years: Int, minorCount: Int)      : Gauge    = new z.Gauge.Year(years, minorCount)

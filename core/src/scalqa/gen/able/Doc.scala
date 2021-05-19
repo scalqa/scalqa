@@ -1,13 +1,11 @@
 package scalqa; package gen; package able
 
-import lang.any.self.{ Doc as DOC }
-
 trait Doc extends Tag:
-  def tag : String  = doc.tag
-  def doc : DOC
+  def tag : String   = doc.tag
+  def doc : Self.Doc
 
 object Doc:
-  @tn("doc_Opt") def doc_?(v: Any): Opt[DOC] = v match{ case v: Doc => v.doc; case _ => \/ }
+  @tn("doc_Opt") def doc_?(v: Any): Opt[Self.Doc] = v match{ case v: Able.Doc => v.doc; case _ => \/ }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -18,14 +16,13 @@ ___________________________________________________________________________*/
 /**
 @trait Doc -> ###
 
-Allows any object to provide self description
-
+              Allows any object to provide self description
 
 @def doc -> Doc
 
    Returns [[scalqa.gen.Doc Doc]] object, loaded with property names and values describing this instance
 
-@def tag -> To String
+@def tag -> Make String
 
    [[tag]] returns this instance String representation, which should be used insted of [[toString]]
 

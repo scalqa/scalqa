@@ -10,12 +10,12 @@ object Stream:
     self : ~[A] =>
     @tn("stream") def ~ : ~[A] = self
 
-  given xxStream      [A<: ~[B],B]                           : Conversion[A,Stream[B]] = v => new Stream[B]{@tn("stream") def ~ = v }
-  given xxIterableOnce[A<:scala.collection.IterableOnce[B],B]: Conversion[A,Stream[B]] = v => new Stream[B]{@tn("stream") def ~ = ~~.fromIterableOnce(v) }
-  given xxIterator    [A<:java.lang.Iterable[B],B]           : Conversion[A,Stream[B]] = v => new Stream[B]{@tn("stream") def ~ = ~~.fromIterable(v) }
-  given xxIterable    [A<:java.util.Iterator[B],B]           : Conversion[A,Stream[B]] = v => new Stream[B]{@tn("stream") def ~ = ~~.fromIterator(v) }
-  given xxSpliterator [A<:java.util.Spliterator[B],B]        : Conversion[A,Stream[B]] = v => new Stream[B]{@tn("stream") def ~ = ~~.fromSpliterator(v) }
-  given xxEnumeration [A<:java.util.Enumeration[B],B]        : Conversion[A,Stream[B]] = v => new Stream[B]{@tn("stream") def ~ = ~~.fromEnumeration(v) }
+  given givenStream      [A<: ~[B],B]                           : Conversion[A,Stream[B]] = v => new Stream[B]{@tn("stream") def ~ = v }
+  given givenIterableOnce[A<:scala.collection.IterableOnce[B],B]: Conversion[A,Stream[B]] = v => new Stream[B]{@tn("stream") def ~ = ~~.fromIterableOnce(v) }
+  given givenIterator    [A<:java.lang.Iterable[B],B]           : Conversion[A,Stream[B]] = v => new Stream[B]{@tn("stream") def ~ = ~~.fromIterable(v) }
+  given givenIterable    [A<:java.util.Iterator[B],B]           : Conversion[A,Stream[B]] = v => new Stream[B]{@tn("stream") def ~ = ~~.fromIterator(v) }
+  given givenSpliterator [A<:java.util.Spliterator[B],B]        : Conversion[A,Stream[B]] = v => new Stream[B]{@tn("stream") def ~ = ~~.fromSpliterator(v) }
+  given givenEnumeration [A<:java.util.Enumeration[B],B]        : Conversion[A,Stream[B]] = v => new Stream[B]{@tn("stream") def ~ = ~~.fromEnumeration(v) }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

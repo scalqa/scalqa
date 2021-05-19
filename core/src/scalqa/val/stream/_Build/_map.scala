@@ -1,20 +1,19 @@
 package scalqa; package `val`; package stream; package _Build; import language.implicitConversions
 
 import z.build.{ map => M }
-import Shape.OfStream.Any
-import Shape.OfOpt.{Any as AnyOpt}
+import Self.Given.StreamTag
 
 transparent trait _map:
   self: Stream.type =>
 
-  extension[A,T,STM<:Any[T]](inline x: ~[A])
-    /**/            inline def map     [B>:T](inline f: A => B)                 (using inline s:Any.Def[B,STM]): STM  = M.map(x,f,s)
-    /**/            inline def MAP     [B>:T](inline f: A => B)                 (using inline s:Any.Def[B,STM]): STM  = M.map.APPLY(x,f,s)
-    /**/            inline def flatMap [B>:T](inline f: A => ~[B])              (using inline s:Any.Def[B,STM]): STM  = M.flatMap(x,f,s)
-    /**/            inline def FLAT_MAP[B>:T](inline f: A => ~[B])              (using inline s:Any.Def[B,STM]): STM  = M.flatMap.APPLY(x,f,s)
-    /**/            inline def flatten                   (using inline f:A=>Able.~[T], inline s:Any.Def[T,STM]): STM  = M.flatMap(x,f(_).~,s)
-    @tn("map_Opt")  inline def map_?   [OPT<:AnyOpt[T]](inline f:A=>OPT) (using inline s:Any.OptDef[T,OPT,STM]): STM  = M.mapOpt(x,f,s)
-    @tn("MAP_Opt")  inline def MAP_?   [OPT<:AnyOpt[T]](inline f:A=>OPT) (using inline s:Any.OptDef[T,OPT,STM]): STM  = M.mapOpt.APPLY(x,f,s)
+  extension[A,T,STM<: ~~.AnyType[T]](inline x: ~[A])
+    /**/            inline def map     [B>:T](inline f: A => B)                 (using inline s:StreamTag[B,STM]): STM  = M.map(x,f,s)
+    /**/            inline def MAP     [B>:T](inline f: A => B)                 (using inline s:StreamTag[B,STM]): STM  = M.map.APPLY(x,f,s)
+    /**/            inline def flatMap [B>:T](inline f: A => ~[B])              (using inline s:StreamTag[B,STM]): STM  = M.flatMap(x,f,s)
+    /**/            inline def FLAT_MAP[B>:T](inline f: A => ~[B])              (using inline s:StreamTag[B,STM]): STM  = M.flatMap.APPLY(x,f,s)
+    /**/            inline def flatten                   (using inline f:A=>Able.~[T], inline s:StreamTag[T,STM]): STM  = M.flatMap(x,f(_).~,s)
+    @tn("map_Opt")  inline def map_?   [OPT<:Opt.AnyType[T]](inline f:A=>OPT) (using inline s:StreamTag.Opt[T,OPT,STM]): STM  = M.mapOpt(x,f,s)
+    @tn("MAP_Opt")  inline def MAP_?   [OPT<:Opt.AnyType[T]](inline f:A=>OPT) (using inline s:StreamTag.Opt[T,OPT,STM]): STM  = M.mapOpt.APPLY(x,f,s)
 
   extension[A](inline x: ~[A])
     /**/            inline def collect[B](inline f: PartialFunction[A,B])                                      : ~[B] = new M.collect(x,f)
@@ -26,7 +25,7 @@ transparent trait _map:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait _map -> ### Element Mapping Interface
+@trait _map -> ### Stream Element Mapping Interface
 
 @def map -> Simple map
 
@@ -97,7 +96,7 @@ ___________________________________________________________________________*/
      ```
       val vs: ~[~[Char]] = ~~(
         'a' <> 'd',
-        Pack('x', 'y', 'z'),
+        ><('x', 'y', 'z'),
         Vector('v', 'e', 'c', 't', 'o', 'r'))
 
       vs.flatten.TP // Prints ~(a, b, c, d, x, y, z, v, e, c, t, o, r)

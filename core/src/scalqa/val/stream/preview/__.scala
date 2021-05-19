@@ -21,9 +21,9 @@ ___________________________________________________________________________*/
 
     [[Preview]] is an extension of [[Stream]] with preview capabilities
 
-    It allows to pre-load and inspect elements before they are read from stream
+    It allows to pre-load and inspect elements before they are read from the stream
     ```
-    val s  : ~[Int]              =  1 <> 10
+    val s  : ~[Int]          = 1 <> 10
     val ps : ~~.Preview[Int] = s.enablePreview
 
     ps.preview.TP            // Prints  1

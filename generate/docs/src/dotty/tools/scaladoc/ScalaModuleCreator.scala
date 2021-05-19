@@ -18,7 +18,7 @@ object ScalaModuleProvider:
     val topLevelPackage =
       Member("API", site.apiPageDRI, Kind.RootPackage, members = packageMembers, docs = rootDoc)
 
-    scalqa.Docs.registerRoot(topLevelPackage)
+    scalqa.Registry.registerRoot(topLevelPackage)
 
     val original = Module(topLevelPackage, flattenMember(topLevelPackage).toMap)
 

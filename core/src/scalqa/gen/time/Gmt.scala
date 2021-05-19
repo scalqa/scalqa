@@ -6,7 +6,8 @@ object Gmt extends Long.Custom.Data[Gmt]("Time.Gmt") with time.x.Base[Gmt] with 
   inline   def fromMillis(inline v: Long): Gmt     = v.asOpaque[Gmt]
   inline   def apply()                   : Gmt     = System.currentTimeMillis.asOpaque[Gmt]
   override def tag(v: Gmt)               : String  = v.day.tag + ' ' + v.dayTime.tag
-  implicit   inline def xxRequest(inline v: CURRENT) : Gmt        = apply()
+
+  implicit inline def implicitRequestCurrent(inline v: CURRENT) : Gmt     = apply()
 
   extension(x: Gmt) @tn("millisTotal") inline    def millisTotal: Long    = x.real
   extension(x: Gmt) @tn("day")         override  def day        : Day     = Day.byIndex((x.millisTotal / X.Millis.InOneDay).Int)

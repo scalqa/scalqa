@@ -10,12 +10,12 @@ trait Selection[A] extends Idx[A] with Able.Doc:
 //  /**/            inline def get               : A         = get_?.get
   @tn("stream") override def ~                 : ~[A]      = indexes.~.map_?(target.at_?(_))
   /**/                   def property(dflt: A) : Pro[A]    = new Pro[A] { def apply() = indexes.at_?(0).map(self.apply) or dflt }
-  /**/                   def doc              : Doc      = Doc(this) += ("indexes", indexes.~.makeString(","))
+  /**/                   def doc              : Self.Doc = Self.Doc(this) += ("indexes", indexes.~.makeString(","))
 
 object Selection:
   /**/            def apply[A](targetIndex: Idx[A], idx: Idx[Int]) : Selection[A]  = selection.Z.Basic(targetIndex,idx)
   @tn("getVoid")  def void[A]                                      : Selection[A]  = selection.Z.Void.cast[Selection[A]]
-  implicit inline def xxRequest[A](inline v: \/)                   : Selection[A]  = void
+  implicit inline def implicitRequestVoid[A](inline v: \/)         : Selection[A]  = void
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Observable[A] = selection.Observable[A]
@@ -61,6 +61,6 @@ Lists selected values for some target indexed collection
 
 @def void  -> Get void instance
 
-@def xxRequest -> General void instance request \n\n It is possible to use general request \/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequestVoid -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

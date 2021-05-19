@@ -5,16 +5,23 @@ import scalqa.{*,given}
 
 object ScalaSignatureProvider:
   def rawSignature(documentable: Member, builder: SignatureBuilder): SignatureBuilder =
+
+    documentable.origin match // Derived extension methods lose parameters, so we get the original definition
+      case v: Origin.ExtensionFrom =>
+        val o: Opt[Kind.Def] = Registry.member_?(v.dri).map_?(_.members.find(_.dri == documentable.dri)).map(_.kind).takeType[Kind.Extension].map(_.m)
+        if(o) return methodSignature(documentable, o.get, builder)
+      case _                       => ()
+
     documentable.kind match
       case Kind.Extension(_, m) =>
         extensionSignature(documentable, m, builder)
       case Kind.Exported(d) =>
          methodSignature(documentable, d, builder)
-      case d: Kind.Core =>
+      case d: Kind.Def =>
         methodSignature(documentable, d, builder)
       case Kind.Constructor(d) =>
         methodSignature(documentable, d, builder)
-      case Kind.Implicit(d: Kind.Core, _) =>
+      case Kind.Implicit(d: Kind.Def, _) =>
         methodSignature(documentable, d, builder)
       case Kind.EnumCase(cls: Kind.Class) =>
         enumEntrySignature(documentable, cls, builder)
@@ -22,7 +29,7 @@ object ScalaSignatureProvider:
        enumPropertySignature(documentable, builder)
       case Kind.Given(cls: Kind.Class, _, _) =>
         givenClassSignature(documentable, cls, builder)
-      case Kind.Given(d: Kind.Core, _, _) =>
+      case Kind.Given(d: Kind.Def, _, _) =>
         givenMethodSignature(documentable, d, builder)
       case cls: Kind.Class =>
         classSignature(documentable, cls, builder)
@@ -74,7 +81,7 @@ object ScalaSignatureProvider:
   private def givenClassSignature(member: Member, cls: Kind.Class, builder: SignatureBuilder): SignatureBuilder =
     val prefixes = builder
       .modifiersAndVisibility(member, "given")
-      .name(member.dri.scalqaName, member.dri)
+      .name(member.dri.scalqaLabel(), member.dri)
       .generics(cls.typeParams)
       .functionParameters(cls.argsLists)
 
@@ -87,7 +94,7 @@ object ScalaSignatureProvider:
   private def classSignature(clazz: Member, cls: Kind.Class, builder: SignatureBuilder): SignatureBuilder =
     val selfSignature = builder
       .modifiersAndVisibility(clazz, clazz.kind.name)
-      .name(clazz.dri.scalqaName, clazz.dri)
+      .name(clazz.dri.scalqaLabel(), clazz.dri)
       .generics(cls.typeParams)
       .functionParameters(cls.argsLists)
 
@@ -118,7 +125,7 @@ object ScalaSignatureProvider:
 
     parentsSignature(clazz, selfSignature)
 
-  private def extensionSignature(extension: Member, fun: Kind.Core, builder: SignatureBuilder): SignatureBuilder =
+  private def extensionSignature(extension: Member, fun: Kind.Def, builder: SignatureBuilder): SignatureBuilder =
     val withSignature = builder
       .modifiersAndVisibility(extension, "def")
       .name(extension.name, extension.dri)
@@ -127,7 +134,7 @@ object ScalaSignatureProvider:
 
       withSignature.text(":").text(" ").signature(extension.signature)
 
-  private def givenMethodSignature(method: Member, body: Kind.Core, builder: SignatureBuilder): SignatureBuilder = method.kind match
+  private def givenMethodSignature(method: Member, body: Kind.Def, builder: SignatureBuilder): SignatureBuilder = method.kind match
     case Kind.Given(_, Some(instance), _) =>
       builder.text("given ")
         .name(method.name, method.dri)
@@ -136,7 +143,7 @@ object ScalaSignatureProvider:
     case _ =>
       builder.text("given ").name(method.name, method.dri)
 
-  private def methodSignature(method: Member, cls: Kind.Core, builder: SignatureBuilder): SignatureBuilder =
+  private def methodSignature(method: Member, cls: Kind.Def, builder: SignatureBuilder): SignatureBuilder =
     val bdr = builder
     .modifiersAndVisibility(method, "def")
     .name(method.name, method.dri)

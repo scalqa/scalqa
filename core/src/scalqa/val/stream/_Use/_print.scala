@@ -3,9 +3,9 @@ package scalqa; package `val`; package stream; package _Use; import language.imp
 transparent trait _print:
 
   extension[A](x: ~[A])
-    /**/                def print   (using Def.Doc[A]) : Unit = z.use.print(x, false,false)
-    /**/                def printId (using Def.Doc[A]) : Unit = z.use.print(x, true,false)
-    @tn("print_Number") def print_# (using Def.Doc[A]) : Unit = z.use.print(x, false,true)
+    /**/                def print   (using Self.DocTag[A]) : Unit = z.use.print(x, false,false)
+    /**/                def printId (using Self.DocTag[A]) : Unit = z.use.print(x, true,false)
+    @tn("print_Number") def print_# (using Self.DocTag[A]) : Unit = z.use.print(x, false,true)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -14,13 +14,13 @@ transparent trait _print:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait _print -> ### Print Interface
+@trait _print -> ### Stream Printing Interface
 
 @def print -> Print to console
 
     Prints stream elements in a table like structure
 
-    Tuples, case classes, products, and [[scalqa.lang.able.Doc Able.Doc]] object properties are formatted as table columns
+    Tuples, case classes, products, and [[scalqa.gen.able.Doc Able.Doc]] object properties are formatted as table columns
 
     ```
 

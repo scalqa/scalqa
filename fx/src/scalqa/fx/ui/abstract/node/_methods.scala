@@ -5,7 +5,7 @@ transparent trait _methods:
 
   @tn("parent_Opt") def parent_?                                    : Opt[Parent]                           = real.getParent.?.map(Node.FxConverter(_).cast[Parent])
   /**/              def scene                                       : Scene                                 = Scene(real.getScene)
-  /**/              def styleClasses                                : Idx.M[Style.Class]                    = Idx.M.javaList_^(real.getStyleClass).twoWay_^[Style.Class]
+  /**/              def styleClasses                                : Idx.M[Style.Class]                    = Idx.M.wrap(real.getStyleClass).mutableMap_^[Style.Class]
   /**/              def psedoClasses                                : Collection.Mutable[Style.PseudoClass] = PseudoCollection
   /**/              def resizeRelocate(x: Double, y: Double,
                                      width: Double, height: Double) : Unit                                  = real.resizeRelocate(x, y, width, height)

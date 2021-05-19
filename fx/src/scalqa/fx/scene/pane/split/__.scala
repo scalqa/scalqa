@@ -7,10 +7,10 @@ class Split extends Control:
   protected override def _createReal = new REAL
   protected type REAL = SplitPane
 
-  /**/                   val items                         : Idx.M[Node.Like]  = Idx.M.javaList_^(real.getItems).twoWay_^[Node.Like]
-  /**/             lazy  val dividers                      : Idx[Split.Divider]  = Idx.javaList_^(real.getDividers).fun_^(new Split.Divider(_))
+  /**/                   val items                         : Idx.M[Node.Like]  = Idx.M.wrap(real.getItems).mutableMap_^[Node.Like]
+  /**/             lazy  val dividers                      : Idx[Split.Divider]  = Idx.wrap(real.getDividers).map_^(new Split.Divider(_))
 
-  @tn("orientation_Pro") def orientation_*                 : Pro.OM[Orientation] = Fx.JavaFx.As.pro_OM(real.orientationProperty).twoWay_^[Orientation]
+  @tn("orientation_Pro") def orientation_*                 : Pro.OM[Orientation] = Fx.JavaFx.As.pro_OM(real.orientationProperty).mutableMap_^[Orientation]
   /**/                   def orientation                   : Orientation         = orientation_*()
   /**/                   def orientation_=(o: Orientation) : Unit                = orientation_*() = o
 

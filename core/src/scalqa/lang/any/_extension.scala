@@ -1,25 +1,24 @@
 package scalqa; package lang; package any; import language.implicitConversions
 
-import self.Def
-import self.`def`. { Void, Empty, In, Doc }
-import self.shape.{ OfOpt, OfRange as R }
+import self.Given
+import self.`given`. { VoidTag, InTag, DocTag, RangeTag, OptTag }
 import scala.{ Ordering as O }
 
 transparent trait _extension:
   extension[A](inline x:A)
-    /**/             inline def isVoid                                                      (using inline t: Void[A]) : Boolean      = t.isVoid(x)
-    /**/             inline def nonVoid                                                     (using inline t: Void[A]) : Boolean      = !t.isVoid(x)
-    @tn("opt")       inline def ?[OPT<:OfOpt.Any[A]]                            (using inline t:OfOpt.Any.Def[A,OPT]) : OPT          = z.opt(x,t)
-    @tn("result")    inline def ??                                                                                    : Result[A]    = Result(x)
-    @tn("range")     inline def <> [RNG<:R.Any[A]](inline to: A)(using inline c:O[A])(using inline t:R.Any.Def[A,RNG]): RNG          = z.range(x,to,c,t)
-    @tn("rangeX")    inline def <>>[RNG<:R.Any[A]](inline to: A)(using inline c:O[A])(using inline t:R.Any.Def[A,RNG]): RNG          = z.range.exclusive(x,to,c,t)
-    infix            inline def in   [CONTAINER](inline c: CONTAINER)                (using inline t:In[A,CONTAINER]) : Boolean      = t.in(x,c)
-    /**/             inline def doc                                                          (using inline dt:Doc[A]) : Self.Doc     = dt.doc(x)
-    /**/             inline def tag                                                          (using inline dt:Doc[A]) : String       = dt.tag(x)
-    /**/             inline def tp                                                           (using inline dt:Doc[A]) : Unit         = ZZ.tp(x,dt)
-    @tn("plusSpaced")inline def +- [B](v: B)                                (using inline ta:Doc[A],inline tb:Doc[B]) : String       = ta.tag(x) + ' ' + tb.tag(v)
-    @tn("selfView")  inline def ^                                                                                     : Any.Self[A]  = x.cast[Any.Self[A]]
-    @tn("self_View") inline def self_^                                                                                : Any.Self[A]  = x.cast[Any.Self[A]]
+    /**/             inline def isVoid                                                     (using inline t: VoidTag[A]) : Boolean      = t.isVoid(x)
+    /**/             inline def nonVoid                                                    (using inline t: VoidTag[A]) : Boolean      = !t.isVoid(x)
+    @tn("opt")       inline def ?[OPT<:Opt.AnyType[A]]                                   (using inline t:OptTag[A,OPT]) : OPT          = z.opt(x,t)
+    @tn("result")    inline def ??                                                                                      : Result[A]    = Result(x)
+    @tn("range")     inline def <> [RNG<: Val.<>.AnyType[A]](inline to:A)(using inline o:O[A], inline t:RangeTag[A,RNG]): RNG          = z.range(x,to,o,t)
+    @tn("rangeX")    inline def <>>[RNG<: Val.<>.AnyType[A]](inline to:A)(using inline o:O[A], inline t:RangeTag[A,RNG]): RNG          = z.range.exclusive(x,to,o,t)
+    infix            inline def in   [CONTAINER](inline c: CONTAINER)               (using inline t:InTag[A,CONTAINER]) : Boolean      = t.in(x,c)
+    /**/             inline def doc                                                         (using inline dd:DocTag[A]) : Self.Doc     = dd.doc(x)
+    /**/             inline def tag                                                         (using inline dd:DocTag[A]) : String       = dd.tag(x)
+    /**/             inline def tp                                                          (using inline dd:DocTag[A]) : Unit         = ZZ.tp(x,dd)
+    @tn("addSpaced") inline def +- [B](v: B)                            (using inline ta:DocTag[A],inline tb:DocTag[B]) : String       = ta.tag(x) + ' ' + tb.tag(v)
+    @tn("selfView")  inline def ^                                                                                       : Self.View[A] = x.cast[Self.View[A]]
+    @tn("self_View") inline def self_^                                                                                  : Self.View[A] = x.cast[Self.View[A]]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -32,9 +31,17 @@ ___________________________________________________________________________*/
 
     Extension methods universaly avaialble for all types
 
-    Note. SELF based types often override these general implementations for efficiency
+    Note. These methods are often efficiently overridden for primitive based types
 
-@def tp -> Def print
+@def isVoid -> Void check
+
+    Returns true if target is void
+
+@def notVoid -> Not void check
+
+    Returns true if target is non void
+
+@def tp -> Tag print
 
     `tp` should be pronounced as "tip"
 
@@ -85,12 +92,12 @@ ___________________________________________________________________________*/
 
 @def doc -> Get Doc
 
-    Returns [[scalqa.gen.Doc Doc]] object describing current instance
+    Returns [[scalqa.any.self.Doc Doc]] object describing current instance
 
-    Referance types can implement [[scalqa.lang.able.Doc Able.Doc]], opaque types can provide implicit [[scalqa.gen.Def Def]],
-    in any case this operation will retrieve [[scalqa.gen.Doc Doc]] or will create a basic one, if none is found.
+    Reference types can implement [[scalqa.gen.able.Doc Able.Doc]], opaque types can provide implicit [[scalqa.any.self.given.DocTag DocTag]],
+    in any case this operation will retrieve [[scalqa.any.self.Doc Doc]] or will create a basic one, if none is found.
 
-@def tag -> To String
+@def tag -> Make String
 
     Returns String representation of base type value.
 
@@ -165,7 +172,7 @@ ___________________________________________________________________________*/
     Note. A type comparator must be implicitly available
 
 
-def +- -> Any to String add with space
+@def +- -> Any to String add with space
 
     Concatenates this and given object string tags with one space in between
 
@@ -174,12 +181,9 @@ def +- -> Any to String add with space
     ```
 
     Note. Java supports AnyRef + AnyRef, resulting in their String representation concatenation.
-    Scala 2 also used to support this, which was a huge mistake, because this not importent `+` operation, due to it global nature,
+    Scala 2 also used to support this, which was a huge mistake, because this not important `+` operation, due to it global nature,
     would interfere with all attempts to use `+` for anything else.
     Scala 3 got rid of this for good.
     Scalqa re-introduces this usefull functionality with such a weired name "+-", hoping it will not pose naming conflits
-
-
-
 
 */

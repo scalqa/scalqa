@@ -9,7 +9,8 @@ object Length extends Long.Custom.Data.Numerical[Length]("Time.Length") with tim
 
   override def isVoid(v: Length)                : Boolean = v.real==0L
   override def tag(v: Length)                   : String  = z.formatLength(v,false)
-  implicit inline def xxRequest(inline q: \/)   : Length  = fromNanos(0L)
+
+  implicit inline def implicitRequestVoid(inline q: \/): Length  = fromNanos(0L)
 
   extension(x: Length)
     inline def nanosTotal: Long   = x.real

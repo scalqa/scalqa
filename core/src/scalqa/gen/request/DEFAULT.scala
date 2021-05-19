@@ -2,8 +2,8 @@ package scalqa; package gen; package request; import language.implicitConversion
 
 object DEFAULT extends Request:
 
-  implicit inline def xx_ExecutionContext (inline v: DEFAULT) : concurrent.ExecutionContext = ZZ.Context
-  implicit inline def xx_StringFunction[A](inline v: DEFAULT) : A => String                 = ToString.cast[A => String]
+  implicit inline def implicitToExecutionContext (inline v: DEFAULT) : concurrent.ExecutionContext = ZZ.Context
+  implicit inline def implicitToStringFunction[A](inline v: DEFAULT) : A => String                 = ToString.cast[A => String]
 
 
   // *********************************************************************************************************

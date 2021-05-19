@@ -9,7 +9,7 @@ private object Z:
   private object VoidFunction extends (Any => Pro.O[Opt[Any]]):
     def apply(v: Any) = voidPro
 
-  private object VoidPro extends Pro.O[Any] with Void:
+  private object VoidPro extends Pro.O[Any] with Self.Void:
     def apply()                  = Any.Self.Void
     def onChange[U](el: () => U) = \/
 

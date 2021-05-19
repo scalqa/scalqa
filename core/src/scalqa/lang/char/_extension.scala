@@ -92,33 +92,33 @@ ___________________________________________________________________________*/
     v.atMost('F').TP   // Prints D
     ```
 
-@def Byte    -> To Byte
+@def Byte    -> Make Byte
 
                 Byte constructor attached to Char
 
-@def Char    -> To Char
+@def Char    -> Make Char
 
                 Returns itself
 
                 Operation provided for consistency
 
-@def Short   -> To Short
+@def Short   -> Make Short
 
                 Short constructor attached to Char
 
-@def Int     -> To Int
+@def Int     -> Make Int
 
                 Int constructor attached to Char
 
-@def Long    -> To Long
+@def Long    -> Make Long
 
                 Long constructor attached to Char
 
-@def Float   -> To Float
+@def Float   -> Make Float
 
                 Float constructor attached to Char
 
-@def Double  -> To Double
+@def Double  -> Make Double
 
                 Double constructor attached to Char
 
@@ -131,8 +131,8 @@ ___________________________________________________________________________*/
 @def isLowerCase     -> Lower case check         \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#isLowerCase(int) java.lang.Character.isLowerCase]]
 @def isUpperCase     -> Upper case check         \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#isUpperCase(int) java.lang.Character.isUpperCase]]
 @def isWhitespace    -> Whitespace check         \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#isWhitespace(int) java.lang.Character.isWhitespace]]
-@def toTitleCase     -> To title case            \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#toTitleCase(int) java.lang.Character.toTitleCase]]
-@def toLowerCase     -> To lower case            \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#toLowerCase(int) java.lang.Character.toLowerCase]]
-@def toUpperCase     -> To upper case            \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#toUpperCase(int) java.lang.Character.toUpperCase]]
+@def toTitleCase     -> Make title case            \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#toTitleCase(int) java.lang.Character.toTitleCase]]
+@def toLowerCase     -> Make lower case            \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#toLowerCase(int) java.lang.Character.toLowerCase]]
+@def toUpperCase     -> Make upper case            \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#toUpperCase(int) java.lang.Character.toUpperCase]]
 
 */

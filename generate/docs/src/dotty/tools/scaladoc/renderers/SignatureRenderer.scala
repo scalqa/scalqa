@@ -31,7 +31,7 @@ trait SignatureRenderer:
   import scalqa.given
 
   def renderElementWith(e: String | (String, DRI) | Link, modifiers: AppliedAttr*) = e match
-    case (name, dri) => renderLink("!!"+dri.scalqaName(name), dri, modifiers *)
+    case (name, dri) => renderLink("!!"+dri.scalqaLabel(name), dri, modifiers *)
     case name: String => raw(name)
     case Link(name, dri) =>
-      renderLink(dri.scalqaName(name), dri, modifiers *)
+      renderLink(dri.scalqaLabel(name), dri, modifiers *)

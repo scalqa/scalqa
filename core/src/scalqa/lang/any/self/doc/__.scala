@@ -8,13 +8,13 @@ class Doc protected(owner: Any) extends Any.Ref.Buffer[(String, String)] with Ab
   @tn("value_Stream")    def value_~                                                                 : ~[String] = this.~.map(_._2)
   @tn("pair_Stream")     def pair_~(sep: String = "=")                                               : ~[String] = this.~.map((n,v) => if (n == null || n.length == 0) Doc.toString(v) else n + sep + Doc.toString(v))
 
-  /**/                   def add[A](name: String, value: A)                        (using t: Def.Doc[A]) : Unit      = super.add((name, t.tag(value)))
-  /**/                   def add[A](value: A)                                      (using t: Def.Doc[A]) : Unit      = add("",value)
-  /**/                   def addAt[A](pos: Int, name: String, value: A)            (using t: Def.Doc[A]) : Unit      = addAt(pos,(name, t.tag(value)))
+  /**/                   def add[A](name: String, value: A)                        (using t: Self.DocTag[A]) : Unit      = super.add((name, t.tag(value)))
+  /**/                   def add[A](value: A)                                      (using t: Self.DocTag[A]) : Unit      = add("",value)
+  /**/                   def addAt[A](pos: Int, name: String, value: A)            (using t: Self.DocTag[A]) : Unit      = addAt(pos,(name, t.tag(value)))
 
-  @tn("add_Op")   inline def +=[A] (inline name: String, inline value: A)(using inline t: Def.Doc[A])    : Doc      = { add(name,value); this }
-  @tn("add_Op")   inline def +=    (inline value: String)                                            : Doc      = { add(value);      this }
-  @tn("addAt_Op") inline def +=@[A](inline p:Int, inline n:String, inline v:A)(using inline t:Def.Doc[A]): Doc      = { addAt(p,n,v);    this }
+  @tn("add_Op")   inline def +=[A] (inline name: String, inline value: A)(using inline t: Self.DocTag[A])    : Self.Doc = { add(name,value); this }
+  @tn("add_Op")   inline def +=    (inline value: String)                                            : Self.Doc = { add(value);      this }
+  @tn("addAt_Op") inline def +=@[A](inline p:Int, inline n:String, inline v:A)(using inline t :Self.DocTag[A]): Self.Doc = { addAt(p,n,v);    this }
 
   // -------------------------- Product AbstractTrait ------------------------------------------------------------------------------
   /**/          override def productPrefix                                                           : String    = id

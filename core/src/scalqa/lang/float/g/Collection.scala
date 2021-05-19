@@ -10,9 +10,9 @@ object Collection:
     def add(v: A): Unit
 
   // ------------------------------------------------------------------------------------------------------------------------------------------
-  extension[A<:RAW,T,STM<: Shape.OfStream.Any[T]](inline x: Collection[A])
-    /**/                                       inline def map    [B>:T](inline f: A=> B)   (using inline s: Shape.OfStream.Any.Def[B,STM]): STM       = g.Stream.map[A,T,STM](x.~)[B](f)(using s)
-    /**/                                       inline def flatMap[B>:T](inline f: A=> ~[B])(using inline s: Shape.OfStream.Any.Def[B,STM]): STM       = g.Stream.flatMap[A,T,STM](x.~)[B](f)(using s)
+  extension[A<:RAW,T,STM<: ~~.AnyType[T]](inline x: Collection[A])
+    /**/                                       inline def map    [B>:T](inline f: A=> B)   (using inline s: Self.StreamTag[B,STM]): STM       = g.Stream.map[A,T,STM](x.~)[B](f)(using s)
+    /**/                                       inline def flatMap[B>:T](inline f: A=> ~[B])(using inline s: Self.StreamTag[B,STM]): STM       = g.Stream.flatMap[A,T,STM](x.~)[B](f)(using s)
   extension[A<:RAW]  (inline x: Collection[A]) inline def withFilter(inline f: Fun.Filter[A])                                       : Stream[A] = x.~.filter(f)
   extension[A<:RAW,U](inline x: Collection[A]) inline def foreach(   inline f: Fun.Consume[A,U])                                    : Unit      = x.~.foreach(f)
 

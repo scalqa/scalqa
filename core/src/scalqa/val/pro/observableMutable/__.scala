@@ -7,8 +7,8 @@ object ObservableMutable:
   def named[A](pName: String, v: A) : ObservableMutable[A] & Able.Name = new X.Basic(v) with Able.Name { def name = pName }
 
   extension[A](x: ObservableMutable[A])
-    @tn("twoWay_View") def twoWay_^[B](m: A=>B, r: B => A)      : Pro.OM[B] = twoWay_^(using TwoWayFun(m,r))
-    @tn("twoWay_View") def twoWay_^[B](using m: TwoWayFun[A,B]) : Pro.OM[B] = z.TwoWay_View.ObservableMutable[A,B](x, m)
+    @tn("mutableMap_View") def mutableMap_^[B](m: A=>B, r: B => A)      : Pro.OM[B] = mutableMap_^(using ReversibleFunction(m,r))
+    @tn("mutableMap_View") def mutableMap_^[B](using m: ReversibleFunction[A,B]) : Pro.OM[B] = z.TwoWay_View.ObservableMutable[A,B](x, m)
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def X = observableMutable.X

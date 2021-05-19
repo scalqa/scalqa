@@ -9,13 +9,13 @@ trait Toggle:
   @tn("selected_Pro")    def selected_*                    : Boolean.Pro.OM       = Fx.JavaFx.As.pro_OM(real.selectedProperty)
   /**/                   def selected                      : Boolean              = real.isSelected
   /**/                   def selected_=(b: Boolean)        : Unit                 = real.setSelected(b)
-  @tn("toggleGroup_Pro") def toggleGroup_*                 : Pro.OM[Toggle.Group] = Fx.JavaFx.As.pro_OM(real.toggleGroupProperty).twoWay_^[Toggle.Group]
+  @tn("toggleGroup_Pro") def toggleGroup_*                 : Pro.OM[Toggle.Group] = Fx.JavaFx.As.pro_OM(real.toggleGroupProperty).mutableMap_^[Toggle.Group]
   /**/                   def toggleGroup                   : Toggle.Group         = Toggle.Group.FxConverter(real.getToggleGroup)
   /**/                   def toggleGroup_=(v:Toggle.Group) : Unit                 = real.setToggleGroup(v.real)
 
 object Toggle:
 
-  given FxConverter: TwoWayFun[JToggle, Toggle] with
+  given FxConverter: ReversibleFunction[JToggle, Toggle] with
     def apply(v: JToggle) = v.getUserData.cast[Toggle]
     def undo (v: Toggle)  = v.real
 

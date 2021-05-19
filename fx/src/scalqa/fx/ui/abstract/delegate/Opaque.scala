@@ -3,9 +3,9 @@ package scalqa; package fx; package ui; package `abstract`; package delegate; im
 abstract class Opaque[TYPE<:Opaque.Ref, BASE<: AnyRef: ClassTag](name: String) extends Any.Ref.Custom.Type[TYPE,BASE](name):
   def apply(v: BASE) : TYPE = v.cast[TYPE]
 
-  given FxConverter: TwoWayFun[BASE,TYPE] = \/
+  given FxConverter: ReversibleFunction[BASE,TYPE] = \/
 
-  implicit inline def xxBaseToType(v: BASE): TYPE = v.cast[TYPE]
+  implicit inline def implicitBaseToType(v: BASE): TYPE = v.cast[TYPE]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

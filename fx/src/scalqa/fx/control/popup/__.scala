@@ -4,7 +4,7 @@ class Popup extends Popup.Window:
   protected type REAL = javafx.stage.Popup
   protected override def _createReal: REAL = new REAL
 
-  @fast lazy val children: Idx.M[Node.Like] =  Idx.M.javaList_^(real.getContent).twoWay_^[Node.Like]
+  @fast lazy val children: Idx.M[Node.Like] =  Idx.M.wrap(real.getContent).mutableMap_^[Node.Like]
 
 object Popup:
 

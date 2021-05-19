@@ -26,6 +26,9 @@ case class Page(link: Link, content: Member | ResolvedTemplate | String, childre
 
 class HtmlRenderer(rootPackage: Member, val members: Map[DRI, Member])(using ctx: DocContext)
   extends SiteRenderer, Resources, Locations, Writer:
+  "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW".tp
+  scalqa.Registry.register(this)
+
   private val args = summon[DocContext].args
   val staticSite = summon[DocContext].staticSiteContext
 
@@ -89,7 +92,7 @@ class HtmlRenderer(rootPackage: Member, val members: Map[DRI, Member])(using ctx
       def run: Unit = page.content match
         case v: Member if v.kind.isPackage && v.name != "scalqa" => ()
         case _ =>
-          val pg = page.^.reviseIf(_.link.dri.isOpaqueBase, p => { val d = p.link.dri.trimOpaqueBase; Page(Link(d.lastName + "!",d),Docs.member_?(d.memberId).get, Nil) })
+          val pg = page.^.reviseIf(_.link.dri.isOpaqueDef, p => { val d = p.link.dri; Page(Link(d.scalqaLabel().takeAfterLast("."),d),Registry.member_?(d.id) or {"\n@@@ "+d.id +"   " + d.tag tp(); ???} , Nil) })
           write(pg.link.dri, html( mkHead(pg), body( if !pg.hasFrame then renderContent(pg) else mkFrame(pg.link, newParents, renderContent(pg)))))
       (absolutePath(page.link.dri),() => run) +: page.children.flatMap(prepare(_, newParents))
     allPages.flatMap(prepare(_, Vector.empty)).~.parallel.foreach(_._2())
@@ -199,7 +202,7 @@ class HtmlRenderer(rootPackage: Member, val members: Map[DRI, Member])(using ctx
       }.toSeq
 
     val parentsHtml =
-      val innerTags = link.dri.memberId.navigation.flatMap[TagArg](t => Seq(t._1, a(href := t._3)(t._2))) // scalqa
+      val innerTags = scalqa.docs.Navigation.build(link.dri).flatMap[TagArg](t => Seq(t._1, a(href := t._3)(t._2))) // scalqa
       div(cls := "breadcrumbs")(innerTags:_*)
 
     div(id := "container")(

@@ -1,7 +1,7 @@
 package scalqa; package fx; package control; package table; import language.implicitConversions
 
 enum SortMode:
-  case Void extends SortMode with Void
+  case Void extends SortMode with Self.Void
   case Direct, ProxyWithUnsorted, ProxyNoUnsorted
 
   def isDirect            : Boolean = this == SortMode.Direct
@@ -10,7 +10,7 @@ enum SortMode:
   def isProxy             : Boolean = isProxyWithUnsorted || isProxyNoUnsorted
 
 object SortMode extends Any.Enum.Companion[SortMode]:
-  implicit inline def xxRequest(inline v: \/): SortMode = SortMode.Void
+  implicit inline def implicitVoidRequest(inline v: \/): SortMode = SortMode.Void
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

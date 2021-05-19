@@ -16,7 +16,7 @@ object Observable:
     /**/            def onChangeRun[U](f: => U)                 : Event.Control = x.onChange(() => f)
     /**/            def onValueChange[U](l: A => U)             : Event.Control = x.onChange(Event.Id.map0(l, () => l(x())))
     /**/            def onValueChangeWithOld[U](l: (A,A) => U)  : Event.Control = { var old = x.apply(); x.onChange(Event.Id.map0(l, () => { val v = x(); l.apply(v, old); old = v }))  }
-    @tn("fun_View") def fun_^[B](f: A => B)                     : Pro.O[B]      = z.Convert_View.O(x, f)
+    @tn("map_View") def map_^[B](f: A => B)                     : Pro.O[B]      = z.Convert_View.O(x, f)
     @tn("mix_View") def mix_^[B,C](v:Observable[B],mix:(A,B)=>C): Pro.O[C]      = z.Mix_View(x, v, mix)
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~

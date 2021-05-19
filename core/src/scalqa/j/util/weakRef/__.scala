@@ -4,16 +4,17 @@ import java.lang.ref.WeakReference
 import J.WeakRef
 
 object WeakRef:
-  /**/     inline def apply[A](inline v: A)       : WeakRef[A] = new WeakReference[A](v).asOpaque[WeakRef[A]]
-  implicit inline def xx_Boolean[A](v: WeakRef[A]): Boolean    = v.get_?
+  /**/     inline def apply[A](inline v: A): WeakRef[A] = new WeakReference[A](v).asOpaque[WeakRef[A]]
 
-  given xxClassTag[A](using t: ClassTag[A]): ClassTag[WeakRef[A]] = t.cast[ClassTag[WeakRef[A]]]
-  given xxDefName [A]: Def.Name[WeakRef[A]]  = Def.Name("WeakRef")
-  given xxDefVoid [A]: Def.Void[WeakRef[A]]  with { inline def isVoid(v: WeakRef[A]) = false }
+  implicit inline def implicitToBoolean[A](v: WeakRef[A]): Boolean    = v.get_?
 
-  given xxDefDoc[A](using t: Def.Doc[A]) : Def.Doc[WeakRef[A]] with
-    def tag(v: WeakRef[A]) : String = "WeakRef("+ v.get_?.map(v => t.tag(v)).or("\\/") + ")"
-    def doc(v: WeakRef[A]) : Doc   = Doc("WeakRef@"+v.self_^.hash)
+  given givenClassTag[A](using t: ClassTag[A]): ClassTag[WeakRef[A]] = t.cast[ClassTag[WeakRef[A]]]
+  given givenNameTag [A]: Self.NameTag[WeakRef[A]]  = Self.NameTag("WeakRef")
+  given givenVoidTag [A]: Self.VoidTag[WeakRef[A]]  with { inline def isVoid(v: WeakRef[A]) = false }
+
+  given givenDocTag[A](using t: Self.DocTag[A]) : Self.DocTag[WeakRef[A]] with
+    def tag(v: WeakRef[A]) : String   = "WeakRef("+ v.get_?.map(v => t.tag(v)).or("\\/") + ")"
+    def doc(v: WeakRef[A]) : Self.Doc = Self.Doc("WeakRef@"+v.self_^.hash)
 
   extension[A](x: WeakRef[A])
      @tn("get_Opt") def get_? : Opt[A] = { val v = x.cast[WeakReference[A]].get; if (v == null) \/ else v }

@@ -7,7 +7,7 @@ object Url extends Any.Ref.Custom.Type[Url,java.net.URL]("Url"):
   /**/     inline def apply(inline v: String)                  : Url    = apply(java.net.URL(v))
   /**/            def apply(c: Class[_], resourceName: String) : Url    = { val v = c.getResource(resourceName); if(v != null) apply(v) else J.illegalState("Resourse: '" + resourceName +"' is no available within class: " + c.getName)}
   override        def tag(v:Url)                               : String = v.real.toExternalForm
-  implicit inline def xxJava(inline v: java.net.URL)           : Url    = apply(v)
+  implicit inline def implicitFromReal(inline v: java.net.URL) : Url    = apply(v)
 
   extension (x: Url)
     def host                            : String         = x.real.getHost

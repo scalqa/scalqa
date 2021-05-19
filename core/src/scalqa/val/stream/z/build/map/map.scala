@@ -1,6 +1,6 @@
 package scalqa; package `val`; package stream; package z; package build; package map; import language.implicitConversions
 
-import Shape.OfStream.Any
+import Self.Given.StreamTag
 
 object map:
   class Booleans[A,B<:Raw.Boolean](x:Stream[A], f: Boolean.G.Fun.FromAny[A,B]) extends a.Map.ToBoolean[B](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.map(f(_))}
@@ -13,27 +13,27 @@ object map:
   class Doubles [A,B<:Raw.Double] (x:Stream[A], f: Double .G.Fun.FromAny[A,B]) extends a.Map.ToDouble [B](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.map(f(_))}
   class Refs    [A,B]             (x:Stream[A], f: A => B)                     extends a.Map.ToRef    [B](x){ @tn("read_Opt")    def read_?    = x.read_?.map(f(_))}
 
-  inline def apply[A,B,STM<:Any[B]](inline x:Stream[A], inline f: A=>B, inline s:Any.Def[B,STM] ): STM = inline s match
-    case _ : Any.Def[B,Boolean.G.~[B & Raw.Boolean]] => Booleans(x,f(_).cast[B & Raw.Boolean])
-    case _ : Any.Def[B,Byte   .G.~[B & Raw.Byte   ]] => Bytes   (x,f(_).cast[B & Raw.Byte   ])
-    case _ : Any.Def[B,Char   .G.~[B & Raw.Char   ]] => Chars   (x,f(_).cast[B & Raw.Char   ])
-    case _ : Any.Def[B,Short  .G.~[B & Raw.Short  ]] => Shorts  (x,f(_).cast[B & Raw.Short  ])
-    case _ : Any.Def[B,Int    .G.~[B & Raw.Int    ]] => Ints    (x,f(_).cast[B & Raw.Int    ])
-    case _ : Any.Def[B,Long   .G.~[B & Raw.Long   ]] => Longs   (x,f(_).cast[B & Raw.Long   ])
-    case _ : Any.Def[B,Float  .G.~[B & Raw.Float  ]] => Floats  (x,f(_).cast[B & Raw.Float  ])
-    case _ : Any.Def[B,Double .G.~[B & Raw.Double ]] => Doubles (x,f(_).cast[B & Raw.Double ])
-    case _ : Any.Def[B,      Val.~[B]]               => Refs    (x,f(_))
+  inline def apply[A,B,STM<: ~~.AnyType[B]](inline x:Stream[A], inline f: A=>B, inline s:StreamTag[B,STM] ): STM = inline s match
+    case _ : StreamTag[B,Boolean.G.~[B & Raw.Boolean]] => Booleans(x,f(_).cast[B & Raw.Boolean])
+    case _ : StreamTag[B,Byte   .G.~[B & Raw.Byte   ]] => Bytes   (x,f(_).cast[B & Raw.Byte   ])
+    case _ : StreamTag[B,Char   .G.~[B & Raw.Char   ]] => Chars   (x,f(_).cast[B & Raw.Char   ])
+    case _ : StreamTag[B,Short  .G.~[B & Raw.Short  ]] => Shorts  (x,f(_).cast[B & Raw.Short  ])
+    case _ : StreamTag[B,Int    .G.~[B & Raw.Int    ]] => Ints    (x,f(_).cast[B & Raw.Int    ])
+    case _ : StreamTag[B,Long   .G.~[B & Raw.Long   ]] => Longs   (x,f(_).cast[B & Raw.Long   ])
+    case _ : StreamTag[B,Float  .G.~[B & Raw.Float  ]] => Floats  (x,f(_).cast[B & Raw.Float  ])
+    case _ : StreamTag[B,Double .G.~[B & Raw.Double ]] => Doubles (x,f(_).cast[B & Raw.Double ])
+    case _ : StreamTag[B,      Val.~[B]]               => Refs    (x,f(_))
 
-  inline def APPLY[A,B,STM<:Any[B]](inline x: Stream[A], inline f: A=>B, inline s:Any.Def[B,STM]): STM = inline s match
-    case _ : Any.Def[B,Boolean.G.~[B & Raw.Boolean]] => {class Booleans(x: Stream[A]) extends a.Map.ToBoolean[B & Raw.Boolean](x){ @tn("readRaw_Opt") def readRaw_? =x.read_?.map(f(_).cast[B & Raw.Boolean])}; Booleans(x)}
-    case _ : Any.Def[B,Byte   .G.~[B & Raw.Byte   ]] => {class Bytes   (x: Stream[A]) extends a.Map.ToByte   [B & Raw.Byte   ](x){ @tn("readRaw_Opt") def readRaw_? =x.read_?.map(f(_).cast[B & Raw.Byte   ])}; Bytes(x)   }
-    case _ : Any.Def[B,Char   .G.~[B & Raw.Char   ]] => {class Chars   (x: Stream[A]) extends a.Map.ToChar   [B & Raw.Char   ](x){ @tn("readRaw_Opt") def readRaw_? =x.read_?.map(f(_).cast[B & Raw.Char   ])}; Chars(x)   }
-    case _ : Any.Def[B,Short  .G.~[B & Raw.Short  ]] => {class Shorts  (x: Stream[A]) extends a.Map.ToShort  [B & Raw.Short  ](x){ @tn("readRaw_Opt") def readRaw_? =x.read_?.map(f(_).cast[B & Raw.Short  ])}; Shorts(x)  }
-    case _ : Any.Def[B,Int    .G.~[B & Raw.Int    ]] => {class Ints    (x: Stream[A]) extends a.Map.ToInt    [B & Raw.Int    ](x){ @tn("readRaw_Opt") def readRaw_? =x.read_?.map(f(_).cast[B & Raw.Int    ])}; Ints(x)    }
-    case _ : Any.Def[B,Long   .G.~[B & Raw.Long   ]] => {class Longs   (x: Stream[A]) extends a.Map.ToLong   [B & Raw.Long   ](x){ @tn("readRaw_Opt") def readRaw_? =x.read_?.map(f(_).cast[B & Raw.Long   ])}; Longs(x)   }
-    case _ : Any.Def[B,Float  .G.~[B & Raw.Float  ]] => {class Floats  (x: Stream[A]) extends a.Map.ToFloat  [B & Raw.Float  ](x){ @tn("readRaw_Opt") def readRaw_? =x.read_?.map(f(_).cast[B & Raw.Float  ])}; Floats(x)  }
-    case _ : Any.Def[B,Double .G.~[B & Raw.Double ]] => {class Doubles (x: Stream[A]) extends a.Map.ToDouble [B & Raw.Double ](x){ @tn("readRaw_Opt") def readRaw_? =x.read_?.map(f(_).cast[B & Raw.Double ])}; Doubles(x) }
-    case _ : Any.Def[B,      Val.~[B]]               => {class Refs    (x: Stream[A]) extends a.Map.ToRef    [B              ](x){ @tn("read_Opt")    def read_?    =x.read_?.map(f(_))};                       Refs(x)    }
+  inline def APPLY[A,B,STM<: ~~.AnyType[B]](inline x: Stream[A], inline f: A=>B, inline s:StreamTag[B,STM]): STM = inline s match
+    case _ : StreamTag[B,Boolean.G.~[B & Raw.Boolean]] => {class Booleans(x: Stream[A]) extends a.Map.ToBoolean[B & Raw.Boolean](x){ @tn("readRaw_Opt") def readRaw_? =x.read_?.map(f(_).cast[B & Raw.Boolean])}; Booleans(x)}
+    case _ : StreamTag[B,Byte   .G.~[B & Raw.Byte   ]] => {class Bytes   (x: Stream[A]) extends a.Map.ToByte   [B & Raw.Byte   ](x){ @tn("readRaw_Opt") def readRaw_? =x.read_?.map(f(_).cast[B & Raw.Byte   ])}; Bytes(x)   }
+    case _ : StreamTag[B,Char   .G.~[B & Raw.Char   ]] => {class Chars   (x: Stream[A]) extends a.Map.ToChar   [B & Raw.Char   ](x){ @tn("readRaw_Opt") def readRaw_? =x.read_?.map(f(_).cast[B & Raw.Char   ])}; Chars(x)   }
+    case _ : StreamTag[B,Short  .G.~[B & Raw.Short  ]] => {class Shorts  (x: Stream[A]) extends a.Map.ToShort  [B & Raw.Short  ](x){ @tn("readRaw_Opt") def readRaw_? =x.read_?.map(f(_).cast[B & Raw.Short  ])}; Shorts(x)  }
+    case _ : StreamTag[B,Int    .G.~[B & Raw.Int    ]] => {class Ints    (x: Stream[A]) extends a.Map.ToInt    [B & Raw.Int    ](x){ @tn("readRaw_Opt") def readRaw_? =x.read_?.map(f(_).cast[B & Raw.Int    ])}; Ints(x)    }
+    case _ : StreamTag[B,Long   .G.~[B & Raw.Long   ]] => {class Longs   (x: Stream[A]) extends a.Map.ToLong   [B & Raw.Long   ](x){ @tn("readRaw_Opt") def readRaw_? =x.read_?.map(f(_).cast[B & Raw.Long   ])}; Longs(x)   }
+    case _ : StreamTag[B,Float  .G.~[B & Raw.Float  ]] => {class Floats  (x: Stream[A]) extends a.Map.ToFloat  [B & Raw.Float  ](x){ @tn("readRaw_Opt") def readRaw_? =x.read_?.map(f(_).cast[B & Raw.Float  ])}; Floats(x)  }
+    case _ : StreamTag[B,Double .G.~[B & Raw.Double ]] => {class Doubles (x: Stream[A]) extends a.Map.ToDouble [B & Raw.Double ](x){ @tn("readRaw_Opt") def readRaw_? =x.read_?.map(f(_).cast[B & Raw.Double ])}; Doubles(x) }
+    case _ : StreamTag[B,      Val.~[B]]               => {class Refs    (x: Stream[A]) extends a.Map.ToRef    [B              ](x){ @tn("read_Opt")    def read_?    =x.read_?.map(f(_))};                       Refs(x)    }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

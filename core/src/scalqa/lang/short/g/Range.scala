@@ -30,9 +30,9 @@ class Range[A<:RAW](s: A, sz: Int) extends Val.<>[A] with Able.Size with Able.~[
   private    inline def _mk (f:A, inline to:A) : Range[A]      = Range(f,to-f)
 
 object Range:
-  extension[A<:RAW,T,STM<: Shape.OfStream.Any[T]](inline x: Range[A])
-    /**/                                  inline def map    [B>:T](inline f:A=> B)   (using inline s: Shape.OfStream.Any.Def[B,STM]): STM       = g.Stream.map[A,T,STM](x.~)[B](f)(using s)
-    /**/                                  inline def flatMap[B>:T](inline f:A=> ~[T])(using inline s: Shape.OfStream.Any.Def[B,STM]): STM       = g.Stream.flatMap[A,T,STM](x.~)[B](f)(using s)
+  extension[A<:RAW,T,STM<: ~~.AnyType[T]](inline x: Range[A])
+    /**/                                  inline def map    [B>:T](inline f:A=> B)   (using inline s: Self.StreamTag[B,STM]): STM       = g.Stream.map[A,T,STM](x.~)[B](f)(using s)
+    /**/                                  inline def flatMap[B>:T](inline f:A=> ~[T])(using inline s: Self.StreamTag[B,STM]): STM       = g.Stream.flatMap[A,T,STM](x.~)[B](f)(using s)
   extension[A<:RAW]  (inline x: Range[A]) inline def withFilter(inline f: Fun.Filter[A])                                      : Stream[A] = x.~.take(f)
   extension[A<:RAW,U](inline x: Range[A]) inline def foreach(   inline f: A=>U)                                               : Unit      = for(i <- x.start.real.Int <>> x.endX.real.Int) f(i.cast[A])
 

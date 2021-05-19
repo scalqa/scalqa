@@ -4,7 +4,7 @@ abstract class Pane extends Abstract.Region:
   protected type REAL <: javafx.scene.layout.Pane
   protected override def _createReal: REAL = new javafx.scene.layout.Pane().cast[REAL]
 
-  val children               : Idx.M[Node.Like] = Idx.M.javaList_^(real.getChildren).twoWay_^[Node.Like]
+  val children               : Idx.M[Node.Like] = Idx.M.wrap(real.getChildren).mutableMap_^[Node.Like]
   def add(n: Node.Like) : Unit                  = children += n
 
 object Pane:

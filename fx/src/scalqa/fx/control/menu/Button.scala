@@ -5,7 +5,7 @@ class Button extends control.Button.Base:
   protected type REAL = javafx.scene.control.MenuButton
   protected override def _createReal = new REAL
 
-  def items: Idx.M[Item] = Idx.M.javaList_^(real.getItems).twoWay_^[Item]
+  def items: Idx.M[Item] = Idx.M.wrap(real.getItems).mutableMap_^[Item]
 
 object Button:
   def apply()                                        : Button = new Button

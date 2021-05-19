@@ -22,7 +22,7 @@ object _build:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait _build -> ### Build Interface
+@trait _build -> ### Build Stream Interface
 
   Build methods extend stream pipeline creating functionality which will add, remove or modify stream elements, when they finally start moving throught the pipeline.
 

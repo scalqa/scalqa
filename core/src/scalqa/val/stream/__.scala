@@ -3,17 +3,21 @@ package scalqa; package `val`; import stream.*; import language.implicitConversi
 trait Stream[+A]:
   @tn("read_Opt") def read_? : Opt[A]
 
-object Stream extends z.util._default with _build with _use :
+object Stream extends z.util._default with _build with _use:
+  type AnyType[A] = Stream[A] | RawType[A]
+  type RawType[A] = lang.boolean.g.Stream[A & Raw.Boolean] | lang.byte.g.Stream[A & Raw.Byte] | lang.char .g.Stream[A & Raw.Char]  | lang.short .g.Stream[A & Raw.Short]
+                  | lang.int    .g.Stream[A & Raw.Int]     | lang.long.g.Stream[A & Raw.Long] | lang.float.g.Stream[A & Raw.Float] | lang.double.g.Stream[A & Raw.Double]
+
   /**/           inline def apply[A](inline v: A)                 : ~[A]             = z.a.VarArg.Stream_ofOne[A](v)
   /**/           inline def apply[A](inline v1: A, inline v2: A)  : ~[A]             = z.a.VarArg.Stream_ofTwo[A](v1, v2)
   /**/                  def apply[A](v1: A, v2: A, v3: A, vs: A*) : ~[A]             = if (vs.isEmpty) z.a.VarArg.Stream_ofThree[A](v1,v2,v3) else z.a.VarArg.Stream_ofMany[A](v1,v2,v3,vs)
   @tn("getVoid") inline def void[A]                               : ~[A]             = ZZ.voidStream
   /**/                  def unapplySeq[A](v: ~[A])                : Option[Seq[A]]   = Some(v.toSeq)
 
-  implicit       inline def xxAbleStream[A](inline v:Able.~[A]): ~[A]             = v.~
+  implicit       inline def implicitFromAbleStream[A](inline v:Able.~[A]): ~[A]      = v.~
 
-  given xxCanEqual[A,B](using CanEqual[A,B]): CanEqual[~[A],~[B]] = CanEqual.derived
-  given xxDefDoc[A:Def.Doc]                 : Def.Doc[~[A]]       = z.util.DefDoc()
+  given givenCanEqualStream[A,B](using CanEqual[A,B]): CanEqual[~[A],~[B]] = CanEqual.derived
+  given givenDocTag[A :Self.DocTag]                  : Self.DocTag[~[A]]  = z.util.DocTag()
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def _build  = stream._build;   type _build     = stream._build

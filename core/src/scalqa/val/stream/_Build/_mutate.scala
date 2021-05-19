@@ -1,13 +1,13 @@
 package scalqa; package `val`; package stream; package _Build; import language.implicitConversions
 
-import Shape.OfStream.Raw
+import Self.Given.StreamTag
 import z.build.{ mutate => M }
 
 transparent trait _mutate:
   self: Stream.type =>
 
-  extension[A,STM<:Raw[A]](inline x: ~[A])
-    /**/          inline def raw    (using inline s:Raw.Def[A,STM]) : STM               = M.raw(x,s)
+  extension[A,STM<: ~~.RawType[A]](inline x: ~[A])
+    /**/          inline def raw(using inline s:StreamTag.Raw[A,STM]) : STM               = M.raw(x,s)
   extension[A](inline x: ~[A])
     /**/          inline def ref                                    : ~[A]              = x
     /**/          inline def reverse                                : ~[A]              = new M.reverse(x)
@@ -30,11 +30,11 @@ transparent trait _mutate:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait _mutate -> ### Various Mutations Interface
+@trait _mutate -> ### Various Stream Mutation Interface
 
 @def ref -> Generalize
 
-     If stream is specialized it will be up-ca st to general Val.Stream type, so further operations will be general (unless they are specialized, like [[map]])
+     If stream is specialized it will be up-cast to general Val.Stream type, and further operations will be general (unless they are specialized, like [[map]])
 
      ```
         val special : Int.><  = (1 <> 10).~.><

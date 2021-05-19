@@ -1,20 +1,20 @@
 package scalqa; package lang; package array; package z; import language.implicitConversions
 
-import Shape.OfArray.Any
+import Self.Given.ArrayTag
 
 object joinAll:
 
-  inline def apply[A,ARRAY<:Any[A]](inline x: ARRAY, inline v: ~[A], inline t: Any.Def[A,ARRAY]) : ARRAY =
+  inline def apply[A,ARRAY<:Array.AnyType[A]](inline x: ARRAY, inline v: ~[A], inline t: ArrayTag[A,ARRAY]) : ARRAY =
     inline t match
-      case _ : Any.Def[A&Raw.Boolean,Array[A&Raw.Boolean]] => boolean(x.cast[Array[Boolean]],v.cast[~[Boolean]]).cast[ARRAY]
-      case _ : Any.Def[A&Raw.Byte,   Array[A&Raw.Byte   ]] => byte   (x.cast[Array[Byte   ]],v.cast[~[Byte   ]]).cast[ARRAY]
-      case _ : Any.Def[A&Raw.Char,   Array[A&Raw.Char   ]] => char   (x.cast[Array[Char   ]],v.cast[~[Char   ]]).cast[ARRAY]
-      case _ : Any.Def[A&Raw.Short,  Array[A&Raw.Short  ]] => short  (x.cast[Array[Short  ]],v.cast[~[Short  ]]).cast[ARRAY]
-      case _ : Any.Def[A&Raw.Int,    Array[A&Raw.Int    ]] => int    (x.cast[Array[Int    ]],v.cast[~[Int    ]]).cast[ARRAY]
-      case _ : Any.Def[A&Raw.Long,   Array[A&Raw.Long   ]] => long   (x.cast[Array[Long   ]],v.cast[~[Long   ]]).cast[ARRAY]
-      case _ : Any.Def[A&Raw.Float,  Array[A&Raw.Float  ]] => float  (x.cast[Array[Float  ]],v.cast[~[Float  ]]).cast[ARRAY]
-      case _ : Any.Def[A&Raw.Double, Array[A&Raw.Double ]] => double (x.cast[Array[Double ]],v.cast[~[Double ]]).cast[ARRAY]
-      case _ : Any.Def[A&Ref,        Array[A&Ref        ]] => ref    (x.cast[Array[Ref    ]],v.cast[~[Ref    ]]).cast[ARRAY]
+      case _ : ArrayTag[A&Raw.Boolean,Array[A&Raw.Boolean]] => boolean(x.cast[Array[Boolean]],v.cast[~[Boolean]]).cast[ARRAY]
+      case _ : ArrayTag[A&Raw.Byte,   Array[A&Raw.Byte   ]] => byte   (x.cast[Array[Byte   ]],v.cast[~[Byte   ]]).cast[ARRAY]
+      case _ : ArrayTag[A&Raw.Char,   Array[A&Raw.Char   ]] => char   (x.cast[Array[Char   ]],v.cast[~[Char   ]]).cast[ARRAY]
+      case _ : ArrayTag[A&Raw.Short,  Array[A&Raw.Short  ]] => short  (x.cast[Array[Short  ]],v.cast[~[Short  ]]).cast[ARRAY]
+      case _ : ArrayTag[A&Raw.Int,    Array[A&Raw.Int    ]] => int    (x.cast[Array[Int    ]],v.cast[~[Int    ]]).cast[ARRAY]
+      case _ : ArrayTag[A&Raw.Long,   Array[A&Raw.Long   ]] => long   (x.cast[Array[Long   ]],v.cast[~[Long   ]]).cast[ARRAY]
+      case _ : ArrayTag[A&Raw.Float,  Array[A&Raw.Float  ]] => float  (x.cast[Array[Float  ]],v.cast[~[Float  ]]).cast[ARRAY]
+      case _ : ArrayTag[A&Raw.Double, Array[A&Raw.Double ]] => double (x.cast[Array[Double ]],v.cast[~[Double ]]).cast[ARRAY]
+      case _ : ArrayTag[A&Ref,        Array[A&Ref        ]] => ref    (x.cast[Array[Ref    ]],v.cast[~[Ref    ]]).cast[ARRAY]
       case _                                               => any    (x.cast[Array[A      ]],v                 ).cast[ARRAY]
 
   def any[A](x: Array[A], v: ~[A]): Array[A] =

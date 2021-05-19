@@ -5,13 +5,13 @@ abstract class Enum[J_ENUM <: java.lang.Enum[J_ENUM]] extends scala.reflect.Enum
 
 object Enum:
 
-  abstract class Companion[ENUM <: Enum[J_ENUM], J_ENUM <: java.lang.Enum[J_ENUM]] extends Any.Enum.Companion[ENUM] with TwoWayFun[J_ENUM, ENUM]:
-    /**/            def apply(v: J_ENUM)  : ENUM   = ><(v.ordinal)
-    /**/            def undo(v: ENUM)     : J_ENUM = v.real
-    implicit inline def xxJava(v: J_ENUM) : ENUM   = ><(v.ordinal)
-    implicit inline def xx_Java(v: ENUM)  : J_ENUM = v.real
+  abstract class Companion[ENUM <: Enum[J_ENUM], J_ENUM <: java.lang.Enum[J_ENUM]] extends Any.Enum.Companion[ENUM] with ReversibleFunction[J_ENUM, ENUM]:
+    /**/            def apply(v: J_ENUM)           : ENUM   = ><(v.ordinal)
+    /**/            def undo(v: ENUM)              : J_ENUM = v.real
+    implicit inline def implicitFromJava(v: J_ENUM): ENUM   = ><(v.ordinal)
+    implicit inline def implicitToJava(v: ENUM)    : J_ENUM = v.real
 
-    inline given FxConverter: TwoWayFun[J_ENUM, ENUM] = this
+    inline given FxConverter: ReversibleFunction[J_ENUM, ENUM] = this
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

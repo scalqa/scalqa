@@ -20,7 +20,7 @@ object _filter:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait _filter -> ### Filtering Interface
+@trait _filter -> ### Stream Filtering Interface
 
 @def filter ->  Legacy filter
 

@@ -6,7 +6,7 @@ transparent trait _metadata :
     /**/                inline def describe   : String    = Custom.Pipeline.infoTree(x).text
     @tn("size_Opt")     inline def size_?     : Int.Opt   = Able.Size.size_?(x)
     @tn("sizeLong_Opt") inline def sizeLong_? : Long.Opt  = Able.Size.sizeLong_?(x)
-    private[scalqa]     inline def defaultDoc : Doc       = z.util.MultiDoc(x)
+    private[scalqa]     inline def defaultDoc : Self.Doc  = z.util.MultiDoc(x)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -15,7 +15,7 @@ transparent trait _metadata :
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait _metadata -> ### Metadata Interface
+@trait _metadata -> ### Stream Metadata Interface
 
       Metadata is a static knowledge about stream elements to be delivered
 

@@ -4,7 +4,7 @@ abstract class Stage(stage: Opt[javafx.stage.Stage] = \/) extends Window:
   protected type REAL = javafx.stage.Stage;
   protected override def _createReal = stage.or(new javafx.stage.Stage).^(_.setScene(scene.real))
 
-  /**/       lazy  val icons              : Idx.M[Image]   =  Idx.M.javaList_^(real.getIcons).twoWay_^[Image]
+  /**/       lazy  val icons              : Idx.M[Image]   =  Idx.M.wrap(real.getIcons).mutableMap_^[Image]
   /**/             def show               : Unit           = real.show
   @tn("title_Pro") def title_*            : String.Pro.OM  = Fx.JavaFx.As.pro_OM(real.titleProperty)
   /**/             def title              : String         = real.getTitle

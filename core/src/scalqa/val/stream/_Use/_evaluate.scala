@@ -29,7 +29,7 @@ transparent trait _evaluate:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait _evaluate -> ### Evaluate Interface
+@trait _evaluate -> ### Stream Evaluation Interface
 
 @def find -> Find value
 

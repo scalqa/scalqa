@@ -14,7 +14,7 @@ transparent trait _read:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait _read -> ### Read Interface
+@trait _read -> ### Stream Iteration Interface
 
   The methods below are special. Unlike most others, they can be called on the same stream many times.
 

@@ -10,15 +10,15 @@ object Predef:
                       with int._extension     with long._extension    with float._extension   with double._extension
                       with scalqa.gen.math.ordering.z._extension
 
-  given xx: Extension.type = Extension
+  given givenExtension: Extension.type = Extension
 
-  inline given xxByteMath   : Byte  .G.Math[Byte  ] = Byte  .math
-  inline given xxCharMath   : Char  .G.Math[Char  ] = Char  .math
-  inline given xxShortMath  : Short .G.Math[Short ] = Short .math
-  inline given xxFloatMath  : Float .G.Math[Float ] = Float .math
-  inline given xxIntMath    : Int   .G.Math[Int   ] = Int   .math
-  inline given xxLongMath   : Long  .G.Math[Long  ] = Long  .math
-  inline given xxDoubleMath : Double.G.Math[Double] = Double.math
+  inline given givenByteMath   : Byte  .G.Math[Byte  ] = Byte  .math
+  inline given givenCharMath   : Char  .G.Math[Char  ] = Char  .math
+  inline given givenShortMath  : Short .G.Math[Short ] = Short .math
+  inline given givenFloatMath  : Float .G.Math[Float ] = Float .math
+  inline given givenIntMath    : Int   .G.Math[Int   ] = Int   .math
+  inline given givenLongMath   : Long  .G.Math[Long  ] = Long  .math
+  inline given givenDoubleMath : Double.G.Math[Double] = Double.math
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

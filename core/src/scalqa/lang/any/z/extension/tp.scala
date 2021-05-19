@@ -1,6 +1,6 @@
 package scalqa; package lang; package any; package z; package extension; import language.implicitConversions
 
-import self.Def
+import self.Given
 
 transparent private[z] trait tp :
 
@@ -28,16 +28,16 @@ transparent private[z] trait tp :
   extension(inline x: gen.able.Tag)         inline def tp                         : Unit   = ZZ.tp(x.tag)
   extension(inline x: Unit)                 inline def tp                         : Unit   = {val v=x; /*need to realize x*/ ZZ.tp("")}
 
-  extension[A<:Any.Raw.Boolean](inline x:A) inline def tp (using inline t:Def.Doc[A]) : Unit   = ZZ.tp(x.real,t)
-  extension[A<:Any.Raw.Byte]   (inline x:A) inline def tp (using inline t:Def.Doc[A]) : Unit   = ZZ.tp(x.real,t)
-  extension[A<:Any.Raw.Char]   (inline x:A) inline def tp (using inline t:Def.Doc[A]) : Unit   = ZZ.tp(x.real,t)
-  extension[A<:Any.Raw.Short]  (inline x:A) inline def tp (using inline t:Def.Doc[A]) : Unit   = ZZ.tp(x.real,t)
-  extension[A<:Any.Raw.Int]    (inline x:A) inline def tp (using inline t:Def.Doc[A]) : Unit   = ZZ.tp(x.real,t)
-  extension[A<:Any.Raw.Long]   (inline x:A) inline def tp (using inline t:Def.Doc[A]) : Unit   = ZZ.tp(x.real,t)
-  extension[A<:Any.Raw.Float]  (inline x:A) inline def tp (using inline t:Def.Doc[A]) : Unit   = ZZ.tp(x.real,t)
-  extension[A<:Any.Raw.Double] (inline x:A) inline def tp (using inline t:Def.Doc[A]) : Unit   = ZZ.tp(x.real,t)
+  extension[A<:Any.Raw.Boolean](inline x:A) inline def tp (using inline t :Self.DocTag[A]) : Unit   = ZZ.tp(x.real,t)
+  extension[A<:Any.Raw.Byte]   (inline x:A) inline def tp (using inline t :Self.DocTag[A]) : Unit   = ZZ.tp(x.real,t)
+  extension[A<:Any.Raw.Char]   (inline x:A) inline def tp (using inline t :Self.DocTag[A]) : Unit   = ZZ.tp(x.real,t)
+  extension[A<:Any.Raw.Short]  (inline x:A) inline def tp (using inline t :Self.DocTag[A]) : Unit   = ZZ.tp(x.real,t)
+  extension[A<:Any.Raw.Int]    (inline x:A) inline def tp (using inline t :Self.DocTag[A]) : Unit   = ZZ.tp(x.real,t)
+  extension[A<:Any.Raw.Long]   (inline x:A) inline def tp (using inline t :Self.DocTag[A]) : Unit   = ZZ.tp(x.real,t)
+  extension[A<:Any.Raw.Float]  (inline x:A) inline def tp (using inline t :Self.DocTag[A]) : Unit   = ZZ.tp(x.real,t)
+  extension[A<:Any.Raw.Double] (inline x:A) inline def tp (using inline t :Self.DocTag[A]) : Unit   = ZZ.tp(x.real,t)
 
-  extension[A]                 (inline x:A) inline def TP(using inline dt:Def.Doc[A]) : Unit   = ZZ.tp(x,dt)
+  extension[A]                 (inline x:A) inline def TP(using inline dt :Self.DocTag[A]) : Unit   = ZZ.tp(x,dt)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

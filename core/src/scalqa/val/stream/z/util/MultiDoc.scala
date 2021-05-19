@@ -2,7 +2,7 @@ package scalqa; package `val`; package stream; package z; package util; import l
 
 import Custom.Pipeline
 
-class MultiDoc private(target: Ref/* expected Pipeline | ~[_] | Flow[_]*/, v: \/) extends Doc(target.^.id):
+class MultiDoc private(target: Ref/* expected Pipeline | ~[_] | Flow[_]*/, v: \/) extends Self.Doc(target.^.id):
   def this(v: Ref) = {
     this(v,\/)
 

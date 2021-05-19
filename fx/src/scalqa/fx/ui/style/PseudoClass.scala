@@ -3,8 +3,8 @@ package scalqa; package fx; package ui; package style; import language.implicitC
 import javafx.css.{ PseudoClass => JPseudoClass }
 
 object PseudoClass extends Abstract.Delegate.Opaque[PseudoClass,JPseudoClass]("Fx.Style.PseudoClass"):
-  inline   def apply(s: String)    : PseudoClass = JPseudoClass.getPseudoClass(s).cast[PseudoClass]
-  implicit def xxString(v: String) : PseudoClass = apply(v)
+  inline   def apply(s: String)             : PseudoClass = JPseudoClass.getPseudoClass(s).cast[PseudoClass]
+  implicit def implicitFromString(v: String): PseudoClass = apply(v)
 
   extension (x: PseudoClass) inline def name: String = x.real.getPseudoClassName
 

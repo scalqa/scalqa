@@ -3,12 +3,12 @@ package scalqa; package fx; package ui; package `abstract`; package region; impo
 import javafx.scene.layout.{ Background => JBackground, BackgroundFill => JFill, BackgroundImage => JImage }
 
 object Background extends Delegate.Opaque[Background, JBackground]("Fx.Abstract.Region.Background"):
-  implicit def xxJava(v: JBackground) : Background  = apply(v)
-  implicit def xx_Java  (v: Background)  : JBackground = apply(v)
+  implicit def implicitFromxxJava(v: JBackground) : Background  = apply(v)
+  implicit def implicitToJava    (v: Background)  : JBackground = apply(v)
 
   extension(x: Background)
-    def images : Idx[Image] = Val.Idx.javaList_^(x.getImages).fun_^(Image(_))
-    def fills  : Idx[Fill]  = Val.Idx.javaList_^(x.getFills).fun_^(Fill(_))
+    def images : Idx[Image] = Val.Idx.wrap(x.getImages).map_^(Image(_))
+    def fills  : Idx[Fill]  = Val.Idx.wrap(x.getFills).map_^(Fill(_))
 
   object opaque:
     opaque type `type` <: Any.Opaque.Ref = JBackground & Any.Opaque.Ref

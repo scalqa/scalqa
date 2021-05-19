@@ -2,7 +2,7 @@ package scalqa; package lang; package any; package ref; package custom; import l
 
 abstract class Type[A<:Opaque.Ref, BASE<:Any.Ref](val name: String)(using ct: ClassTag[BASE]) extends Opaque.Companion[A](ct.cast[ClassTag[A]]):
 
-  given xxDefVoid  : Def.Void[A]  = this
+  given givenVoidTag  : Self.VoidTag[A]  = this
 
   extension(inline x: A)
     inline def real: BASE = x.cast[BASE]

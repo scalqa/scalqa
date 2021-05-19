@@ -10,10 +10,10 @@ object View:
   class Joined[A](o1: Comparator[A], o2: Comparator[A]) extends Ordering[A]:
     def compare(x: A, y: A) = { val i = o1.compare(x, y); if (i == 0) o2.compare(x, y) else i }
 
-  class VoidPositionFirst[A:Def.Void](val real: Comparator[A]) extends Ordering[A]:
+  class VoidPositionFirst[A :Self.VoidTag](val real: Comparator[A]) extends Ordering[A]:
     def compare(x: A, y: A): Int = if (x.^.isVoid) { if (y.^.isVoid) 0 else 1 } else if (y.^.isVoid) -1 else real.compare(x, y)
 
-  class VoidPositionLast[A:Def.Void](val real: Comparator[A]) extends Ordering[A]:
+  class VoidPositionLast[A :Self.VoidTag](val real: Comparator[A]) extends Ordering[A]:
     def compare(x: A, y: A): Int = if (x.^.isVoid) { if (y.^.isVoid) 0 else -1 } else if (y.^.isVoid) 1 else real.compare(x, y)
 
   class Option[A](c: Comparator[A], nonePosition: Int) extends Ordering[Opt[A]]  /*Compiler issues if defined as Opt[A]*/ :

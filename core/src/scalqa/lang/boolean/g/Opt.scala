@@ -5,11 +5,11 @@ object Opt extends z.opt._base:
   @tn("getVoid") inline def void[A<:RAW]                        : Opt[A]  = -1.toByte.cast[Opt[A]]
   /**/           inline def TRUE      [A<:RAW]                  : Opt[A]  =  1.toByte.cast[Opt[A]]
   /**/           inline def FALSE     [A<:RAW]                  : Opt[A]  =  0.toByte.cast[Opt[A]]
-  implicit       inline def xxOfTrue  [A<:RAW](inline v: true)  : Opt[A]  = TRUE[A]
-  implicit       inline def xxOfFalse [A<:RAW](inline v: false) : Opt[A]  = FALSE[A]
-  implicit       inline def xxRequest [A<:RAW](inline v: \/)    : Opt[A]  = void[A]
-  implicit       inline def xxOfValue [A<:RAW](inline v: A)     : Opt[A]  = apply(v)
-  implicit       inline def xx_Boolean[A<:RAW](inline v: Opt[A]): Boolean = v.real != void.real
+  implicit       inline def implicitFromTrue [A<:RAW](inline v: true)   : Opt[A]  = TRUE[A]
+  implicit       inline def implicitFromFalse[A<:RAW](inline v: false)  : Opt[A]  = FALSE[A]
+  implicit       inline def implicitRequestVoid[A<:RAW](inline v: \/)   : Opt[A]  = void[A]
+  implicit       inline def implicitFromValue [A<:RAW](inline v: A)     : Opt[A]  = apply(v)
+  implicit       inline def implicitToBoolean [A<:RAW](inline v: Opt[A]): Boolean = v.real != void.real
   extension[A<:RAW](inline x: Opt[A])
     /**/               inline def real                                       : Byte       = x.cast[Byte]
     @tn("is_Void")     inline def isEmpty                                     : Boolean    = x.real == void.real
@@ -23,7 +23,7 @@ object Opt extends z.opt._base:
     /**/               inline def takeOnly(inline v: A)                       : Opt[A]     = x.take(_.real == v.real)
     /**/               inline def drop(  inline f: A => Boolean)              : Opt[A]     = {var o:Opt[A]= \/; if(x!=o && !f(x.`val`)) o=x; o}
     /**/               inline def dropOnly(inline v: A)                       : Opt[A]     = x.drop(_.real == v.real)
-    /**/               inline def dropVoid(using inline t: Def.Void[A])       : Opt[A]     = if(x.nonEmpty && t.isVoid(x.`val`)) \/ else x
+    /**/               inline def dropVoid(using inline t: Self.VoidTag[A])       : Opt[A]     = if(x.nonEmpty && t.isVoid(x.`val`)) \/ else x
     /**/               inline def default(inline v: => A)                     : Opt[A]     = if(x.isEmpty) v       else x
     @tn("or_Opt")infix inline def or_?(inline that: => Opt[A])                : Opt[A]     = if(x.isEmpty) that    else x
     /**/         infix inline def or(inline default: => A)                    : A          = if(x.isEmpty) default else x.`val`
@@ -35,14 +35,14 @@ object Opt extends z.opt._base:
     /**/         infix inline def fornil[U]( inline f: => U)                  : Opt[A]     = { if(x.isEmpty){var u:U=f }; x}
     /**/               inline def process[U,W](inline f:A=>U,inline fNil: =>W): Opt[A]     = { if(x.isEmpty){ val w:W=fNil} else f(x.`val`); x}
   //------------ Mapping ---------------------------------------------------------------------------------------------------------------------------------
-  import Shape.OfOpt.Any
-  extension[A<:RAW,T,OPT<:Any[T]](inline x:Opt[A])
-    /**/               inline def map    [B>:T](inline f: A => B)                    (using inline s: Any.Def[B,OPT]) : OPT    = z.opt.map(x,f,s)
+  import Val.Opt.AnyType
+  extension[A<:RAW,T,OPT<:AnyType[T]](inline x:Opt[A])
+    /**/               inline def map    [B>:T](inline f: A => B)                    (using inline s: Self.OptTag[B,OPT]) : OPT    = z.opt.map(x,f,s)
   extension[A<:RAW,T](inline x:Opt[A])
-    @tn("map_Opt")     inline def map_?  [OPT<:Any[T]](inline f: A=>OPT)             (using inline s: Any.Def[T,OPT]) : OPT    = z.opt.mapOpt(x,f,s)
-    /**/               inline def flatMap[OPT<:Any[T]](inline f: A=>OPT)             (using inline s: Any.Def[T,OPT]) : OPT    = z.opt.mapOpt(x,f,s)
+    @tn("map_Opt")     inline def map_?  [OPT<:AnyType[T]](inline f: A=>OPT)             (using inline s: Self.OptTag[T,OPT]) : OPT    = z.opt.mapOpt(x,f,s)
+    /**/               inline def flatMap[OPT<:AnyType[T]](inline f: A=>OPT)             (using inline s: Self.OptTag[T,OPT]) : OPT    = z.opt.mapOpt(x,f,s)
   extension[A<:RAW,B,C](inline x:Opt[A])
-    /**/               inline def mix[OPT<:Any[C]](inline o:Any[B],inline f:(A,B)=>C)(using inline s: Any.Def[C,OPT]) : OPT    = z.opt.mixOpt(x,o,f,s)
+    /**/               inline def mix[OPT<:AnyType[C]](inline o:AnyType[B],inline f:(A,B)=>C)(using inline s: Self.OptTag[C,OPT]) : OPT    = z.opt.mixOpt(x,o,f,s)
 
   object opaque { opaque type `type`[+A<:RAW] <: Opaque.Byte = Byte & Opaque.Byte }
 
@@ -54,6 +54,6 @@ object Opt extends z.opt._base:
 ___________________________________________________________________________*/
 /**
 @def void      -> Get void instance
-@def xxRequest -> General void instance request \n\n It is possible to use general request \/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequestVoid -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

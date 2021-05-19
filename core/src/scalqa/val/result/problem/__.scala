@@ -10,11 +10,11 @@ object Problem:
   inline def noMessage  : Problem = ZZ.DefaultProblem
   inline def withFilter : Problem = ZZ.WithFilterProblem
 
-  /**/     inline def apply(inline message: String = \/) : Problem        = ZZ.problem(message)
-  /**/            def apply(t: Throwable)                : Problem        = t match{ case v: Problem => v; case v: z.ExceptionProblem.Wrap => v.deficiency; case v => z.ExceptionProblem(v)}
-  implicit inline def xxString(inline v: String)         : Problem        = ZZ.problem(v)
-  implicit inline def xx_Throwable(inline v: Problem)    : Throwable      = z.ExceptionProblem.Wrap(v)
-  /**/            def unapply(v: Problem)                : Option[String] = Some(v.message)
+  /**/     inline def apply(inline message: String = \/)    : Problem        = ZZ.problem(message)
+  /**/            def apply(t: Throwable)                   : Problem        = t match{ case v: Problem => v; case v: z.ExceptionProblem.Wrap => v.deficiency; case v => z.ExceptionProblem(v)}
+  implicit inline def implicitFromString(inline v: String)  : Problem        = ZZ.problem(v)
+  implicit inline def implicitToThrowable(inline v: Problem): Throwable      = z.ExceptionProblem.Wrap(v)
+  /**/            def unapply(v: Problem)                   : Option[String] = Some(v.message)
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Timeout              = problem.Timeout

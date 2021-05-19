@@ -1,6 +1,6 @@
 package scalqa; package fx; package ui; package javaFx; package z; package list
 
-private[fx] object Void extends Base[Nothing] with Void:
+private[fx] object Void extends Base[Nothing] with Self.Void:
 
   def get(i: Int) = J.illegalState()
   def size = 0

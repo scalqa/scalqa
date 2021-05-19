@@ -35,22 +35,23 @@ abstract class Stream[A<:RAW] extends Val.~[A] with ~~.Custom.Discharge[A] with 
   @tn("REDUCE_Opt")inline def REDUCE_?(  inline f: (A,A) => A)            : G.Opt[A]      = { var o = readRaw_?; if(o.nonEmpty) o=FOLD(o.`val`)(f); o}
 
 object Stream:
-  import Shape.OfStream.Any
-  extension[A<:RAW,T,STM<:Any[T]](inline x: g.Stream[A])
-    /**/           inline def map      [B>:T](inline f: A => B)                  (using inline t:Any.Def[B,       STM]): STM  = z.stream.map(x,f,t)
-    /**/           inline def MAP      [B>:T](inline f: A => B)                  (using inline t:Any.Def[B,       STM]): STM  = z.stream.map.APPLY(x,f,t)
-    /**/           inline def flatMap  [B>:T](inline f: A => ~[B])               (using inline t:Any.Def[B,       STM]): STM  = z.stream.flatMap(x,f,t)
-    /**/           inline def FLAT_MAP [B>:T](inline f: A => ~[B])               (using inline t:Any.Def[B,       STM]): STM  = z.stream.flatMap.APPLY(x,f,t)
-    @tn("map_Opt") inline def map_?    [OPT<:Shape.OfOpt.Any[T]](inline f:A=>OPT)(using inline t:Any.OptDef[T,OPT,STM]): STM  = z.stream.mapOpt(x,f,t)
-    @tn("MAP_Opt") inline def MAP_?    [OPT<:Shape.OfOpt.Any[T]](inline f:A=>OPT)(using inline t:Any.OptDef[T,OPT,STM]): STM  = z.stream.mapOpt.APPLY(x,f,t)
+  import Self.Given.StreamTag
+  extension[A<:RAW,T,STM<: ~~.AnyType[T]](inline x: g.Stream[A])
+    /**/           inline def map      [B>:T](inline f: A => B)                  (using inline t:StreamTag[B,       STM]): STM  = z.stream.map(x,f,t)
+    /**/           inline def MAP      [B>:T](inline f: A => B)                  (using inline t:StreamTag[B,       STM]): STM  = z.stream.map.APPLY(x,f,t)
+    /**/           inline def flatMap  [B>:T](inline f: A => ~[B])               (using inline t:StreamTag[B,       STM]): STM  = z.stream.flatMap(x,f,t)
+    /**/           inline def FLAT_MAP [B>:T](inline f: A => ~[B])               (using inline t:StreamTag[B,       STM]): STM  = z.stream.flatMap.APPLY(x,f,t)
+    @tn("map_Opt") inline def map_?    [OPT<:Val.Opt.AnyType[T]](inline f:A=>OPT)(using inline t:StreamTag.Opt[T,OPT,STM]): STM  = z.stream.mapOpt(x,f,t)
+    @tn("MAP_Opt") inline def MAP_?    [OPT<:Val.Opt.AnyType[T]](inline f:A=>OPT)(using inline t:StreamTag.Opt[T,OPT,STM]): STM  = z.stream.mapOpt.APPLY(x,f,t)
   // -------------------------------------------------------------------------------------------------------------------------------------------------------
   /**/             inline def apply    [A<:RAW](inline v:A)               : Stream[A]     = Z.Stream_ofOne(v)
   /**/                    def apply    [A<:RAW](v: A*)                    : Stream[A]     = v match{ case v: scala.collection.immutable.ArraySeq.ofBoolean => v.unsafeArray.~.cast[Stream[A]]; case v => v.~.raw}
   @tn("getVoid")          def void     [A<:RAW]                           : Stream[A]     = Z.VoidStream.cast[Stream[A]]
-  implicit         inline def xxRequest[A<:RAW](inline v: \/)             : Stream[A]     = void
-  implicit         inline def xxArray  [A<:RAW](inline v: Array[A])       : Stream[A]     = v.~
-  implicit         inline def xxOpt    [A<:RAW](inline v: G.Opt[A])       : Stream[A]     = v.~
-  implicit         inline def xxColl   [A<:RAW](inline v: g.Collection[A]): Stream[A]     = v.~
+
+  implicit         inline def implicitRequestVoid[A<:RAW](inline v: \/)             : Stream[A]     = void
+  implicit         inline def implicitFromArray  [A<:RAW](inline v: Array[A])       : Stream[A]     = v.~
+  implicit         inline def implicitFromOpt    [A<:RAW](inline v: G.Opt[A])       : Stream[A]     = v.~
+  implicit         inline def implicitFromColl   [A<:RAW](inline v: g.Collection[A]): Stream[A]     = v.~
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -61,6 +62,6 @@ ___________________________________________________________________________*/
 /**
 @def void  -> Get void instance
 
-@def xxRequest -> General void instance request \n\n It is possible to use general request \/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequestVoid -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

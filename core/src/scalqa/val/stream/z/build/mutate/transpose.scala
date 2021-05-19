@@ -4,7 +4,7 @@ class transpose[A](x: ~[A], f: A => ~[Ref]) extends a.Pipe[~[Ref]](x):
 
   lazy val idx: Idx[~[Ref]] =
     val l = x.map(f(_)).><
-    if(l.isEmpty) Pack(Stream.void[Ref]) else l
+    if(l.isEmpty) ><(Stream.void[Ref]) else l
 
   @tn("read_Opt") def read_? = idx(0).read_?.map(v =>{
     val a = new Array[Ref](idx.size)

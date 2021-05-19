@@ -27,10 +27,10 @@ class Region extends Parent:
   /**/                  def width_=(v: Double)                 : Unit                       = { maxWidth = v; minWidth = v; prefWidth = v; }
   @tn("height_Pro")     def height_*                           : Double.Pro.O               = Fx.JavaFx.As.pro_O(real.heightProperty)
   /**/                  def height                             : Unit                       = real.getHeight
-  @tn("padding_Pro")    def padding_*                          : Pro.OM[Insets]             = Fx.JavaFx.As.pro_OM(real.paddingProperty).twoWay_^[Insets]
+  @tn("padding_Pro")    def padding_*                          : Pro.OM[Insets]             = Fx.JavaFx.As.pro_OM(real.paddingProperty).mutableMap_^[Insets]
   /**/                  def padding                            : Insets                     = Insets(real.getPadding)
   /**/                  def padding_=(v: Insets)               : Unit                       = real.setPadding(v.real)
-  @tn("background_Pro") def background_*                       : Pro.OM[Region.Background]  = Fx.JavaFx.As.pro_OM(real.backgroundProperty).twoWay_^[Region.Background]
+  @tn("background_Pro") def background_*                       : Pro.OM[Region.Background]  = Fx.JavaFx.As.pro_OM(real.backgroundProperty).mutableMap_^[Region.Background]
   /**/                  def background                         : Region.Background          = real.getBackground
   /**/                  def background_=(b: Region.Background) : Unit                       = real.setBackground(b)
 

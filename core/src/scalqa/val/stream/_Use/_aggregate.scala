@@ -19,7 +19,7 @@ transparent trait _aggregate:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait _aggregate -> ### Aggregate Interface
+@trait _aggregate -> ### Stream Aggregation Interface
 
 @def reduce -> Reduce
 

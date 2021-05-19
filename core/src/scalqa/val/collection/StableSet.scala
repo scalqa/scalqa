@@ -12,7 +12,8 @@ object StableSet:
   /**/            def apply[A](v: ~[A])         : StableSet[A] = Z.Ref(v.iterator)
   /**/            def apply[A](v: A*)           : StableSet[A] = Z.Ref(v.iterator)
   @tn("getVoid")  def void[A]                   : StableSet[A] = Z.Void.cast[StableSet[A]]
-  implicit inline def xxRequest[A](inline v: \/): StableSet[A]  = void[A]
+
+  implicit inline def implicitRequestVoid[A](inline v: \/): StableSet[A] = void[A]
 
   // *****************************************************************************************************
   private object Z:
@@ -27,7 +28,7 @@ object StableSet:
         /**/          def join(v: A)       : StableSet[A] = new Ref(real + v)
         /**/          def joinAll(v: ~[A]) : StableSet[A] = new Ref(real ++ v.iterator)
 
-    object Void extends StableSet[Any] with Void:
+    object Void extends StableSet[Any] with Self.Void:
       type THIS_TYPE = StableSet[Any]
       /**/            def contains(v: Any)  : Boolean      = false
       /**/            def size              : Int          = 0
@@ -51,7 +52,7 @@ ___________________________________________________________________________*/
        When an elements is [[join]]ed to [[StableSet]], it is evaluated for uniqueness and the operation is ignored in case of duplicates.
 
        Note: [[scalqa.val.collection.StableSet StableSet]] is a concrete single implementation of unique collection.
-       There is no deneral "Set" interface, because its use is rare. If there is a need for more efficient "Set",
+       There is no general "Set" interface, because its use is rare. If there is a need for more efficient "Set",
        create one with [[scalqa.val.collection.Mutable$.uniqueElementSet Collection.Mutable.uniqueElementSet]]. The result is faster, but not thread safe.
 
 @def join -> Join element

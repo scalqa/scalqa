@@ -25,12 +25,12 @@ private abstract class zFrame[A](l: JFX.ObservableList[A]) extends JFX.ListChang
 
 object zFrame:
 
-  object Void extends zFrame[Nothing](null) with Void:
+  object Void extends zFrame[Nothing](null) with Self.Void:
     def change = J.unsupportedOperation()
     override lazy  val getFrom = 0
     override lazy  val getTo = 0
 
-  object BeforeFirst extends zFrame[Nothing](null) with Void:
+  object BeforeFirst extends zFrame[Nothing](null) with Self.Void:
     def fail = J.illegalState("Was not fetched")
     def change = fail
     override lazy  val getFrom = fail

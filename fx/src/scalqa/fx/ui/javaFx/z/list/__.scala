@@ -12,17 +12,17 @@ object List:
     val fx = v.cast[javafx.collections.ListChangeListener.Change[A]]
     fx.reset
     while (fx.next)
-      if (fx.wasPermutated)   l = l +  Idx.Event.Reposition.apply { val r = fx.getFrom <>> fx.getTo; Idx.Permutation(r, r.~.raw.map(fx.getPermutation(_)).><) }
-      else if (fx.wasUpdated) l +=  Idx.Event.Update(fx.getFrom, Idx.javaList_^[A](fx.getRemoved), Idx.javaList_^[A](fx.getAddedSubList))
+      if (fx.wasPermutated)   l += Idx.Event.Reposition.apply { val r = fx.getFrom <>> fx.getTo; Idx.Permutation(r, r.~.raw.map(fx.getPermutation(_)).><) }
+      else if (fx.wasUpdated) l += Idx.Event.Update(fx.getFrom, Idx.wrap[A](fx.getRemoved), Idx.wrap[A](fx.getAddedSubList))
       else
-        if (fx.wasRemoved) l +=  Idx.Event.Remove(fx.getFrom, Idx.javaList_^[A](fx.getRemoved))
-        if (fx.wasAdded)   l +=  Idx.Event.Add(fx.getFrom, Idx.javaList_^[A](fx.getAddedSubList))
+        if (fx.wasRemoved) l +=  Idx.Event.Remove(fx.getFrom, Idx.wrap[A](fx.getRemoved))
+        if (fx.wasAdded)   l +=  Idx.Event.Add(fx.getFrom, Idx.wrap[A](fx.getAddedSubList))
     l
 
   // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-  def singleChangeDoc[A](c: JFX.ListChangeListener.Change[A]): Doc =
+  def singleChangeDoc[A](c: JFX.ListChangeListener.Change[A]): Self.Doc =
     def fun(a: ~[Any]) = a.nonEmpty_?.map(_.makeString(",")) or "empty"
-    Doc(c)
+    Self.Doc(c)
       += ("was", "" ++ c.wasPermutated ? "permutated " ++ c.wasAdded ? "added " ++ c.wasRemoved ? "removed " ++ c.wasUpdated ? "updated " ++ c.wasReplaced ? "replaced")
       += ("interval", (c.getFrom <>> c.getTo).tag)
       += ("getRemoved", fun(c.getRemoved))

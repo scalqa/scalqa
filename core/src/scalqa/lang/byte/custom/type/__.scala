@@ -1,10 +1,10 @@
 package scalqa;  package lang; package byte; package custom; import language.implicitConversions
 
-abstract class Type[A<:Opaque.Byte](val name:String) extends Opaque.Companion[A](ClassTag.Byte.cast[ClassTag[A]]) with Def.Void.Bytes[A]:
+abstract class Type[A<:Opaque.Byte](val name:String) extends Opaque.Companion[A](ClassTag.Byte.cast[ClassTag[A]]) with Self.VoidTag.Bytes[A]:
 
   override def isVoid(v: A): Boolean=false
 
-  given xxDefVoid: Def.Void.Bytes[A]=this
+  given givenVoidTag: Self.VoidTag.Bytes[A]=this
 
   extension(inline x: A)
     inline def real: Byte = x.cast[Byte]

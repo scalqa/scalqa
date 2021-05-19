@@ -1,15 +1,16 @@
 package scalqa; package j; package util; package benchmark; package z; import language.implicitConversions
 
 private[j] class Result(
-  val number           : Int,
-  val label            : String,
-  val count            : Int,
-  val time             : Time.Length,
-  val totalMemory      : ByteCount,
-  val lastOpt          : Opt[Ref],
-  val sumOpt           : Double.Opt,
-  var maxOpsPerSec     : Long  = 0,
-  var maxMemoryAverage : ByteCount = 0.ByteCount ) extends Able.Doc:
+    val number           : Int,
+    val label            : String,
+    val count            : Int,
+    val time             : Time.Length,
+    val totalMemory      : ByteCount,
+    val lastOpt          : Opt[Ref],
+    val sumOpt           : Double.Opt,
+    var maxOpsPerSec     : Long  = 0,
+    var maxMemoryAverage : ByteCount = 0.ByteCount
+  ) extends Able.Doc:
 
   def +(that: Result): Result     = new Result(number, label, count + that.count, time + that.time, totalMemory + that.totalMemory, that.lastOpt, sumOpt.mix(that.sumOpt, _ + _))
   def opsPerSec      : Long       = time.^.?.map(count * 1_000_000_000L / _.nanosTotal) or 0L
@@ -17,7 +18,7 @@ private[j] class Result(
 
   def doc =
     def percent(v: Long, t: Long) = if (t == 0) 0 else (v * 100D / t).Int
-    Doc(this)
+    Self.Doc(this)
       += ("Num", number)
       += (label != number.toString) ? ("Name", label)
       += ("Ops/Sec", if (time <= \/) "Too many" else opsPerSec.toBrief)

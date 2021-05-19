@@ -4,7 +4,7 @@ class List[A] extends Control:
   protected type REAL <: javafx.scene.control.ListView[A]
   protected override def _createReal: REAL = new javafx.scene.control.ListView[A]().cast[REAL]
 
-  lazy  val items     : Idx.M[A]        = Idx.M.javaList_^(real.getItems)
+  lazy  val items     : Idx.M[A]        = Idx.M.wrap(real.getItems)
   lazy  val selection : Fx.Selection[A] = Fx.Selection(items, real.getSelectionModel)
 
 object List:

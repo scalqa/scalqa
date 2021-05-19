@@ -12,7 +12,7 @@ trait Control:
   def expireIn(tl: Time.Length)     : Control     = { val t = System.nanoTime + tl.nanosTotal; cancelIf(() => System.nanoTime > t) }
   def limitRunsTo(maxRunCount: Int) : Control     = { if (maxRunCount <= 0) { cancel; this } else { var c = 0; cancelIf(() => maxRunCount < { c += 1; c }) }}
 
-object Control extends Void.Setup[Control](z.Void):
+object Control extends Self.Void.Setup[Control](z.Void):
   def join(c1: Control, c2: Control, c3: Opt[Control] = \/): Control = c3.map(v => new z.Join.Three(c1, c2, v)) or new z.Join.Two(c1, c2)
 
   // ~~~~~~~~~~~~~~~~~~~~~

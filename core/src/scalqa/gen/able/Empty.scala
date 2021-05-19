@@ -1,11 +1,11 @@
 package scalqa; package gen; package able
 
 trait Empty:
-  /**/   def isEmpty : Boolean
+  def isEmpty: Boolean
 
 object Empty:
 
-  extension(x: Empty)
+  extension(inline x: Empty)
     inline def nonEmpty: Boolean = !x.isEmpty
 
 
@@ -18,6 +18,12 @@ ___________________________________________________________________________*/
 /**
 @trait Empty ->
 
+@def isEmpty -> Empty check
 
+   Returns true if instance is empty.
+
+@def nonEmpty -> Not empty check
+
+   Returns true if instance is not empty.
 
 */

@@ -8,7 +8,7 @@ object Instant extends Long.Custom.Data[Instant]("Time.Instant") with time.x.Bas
   /**/     def apply(i: java.time.Instant) : Instant = (i.getEpochSecond * 1_000_000_000L + i.getNano).asOpaque[Instant]
   override def tag(v: Instant)             : String  = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new java.util.Date(v.real / 1_000_000)) + "." + Z.pad(v.micros, 3) + "." + Z.pad(v.nanos, 3)
 
-  implicit inline def xxRequest(inline v: CURRENT): Instant   = apply()
+  implicit inline def implicitRequestCurrent(inline v: CURRENT): Instant = apply()
 
   extension(x: Instant)
     @tn("nanosTotal")        def nanosTotal : Long    = x.real
