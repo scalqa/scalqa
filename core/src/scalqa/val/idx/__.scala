@@ -57,7 +57,7 @@ ___________________________________________________________________________*/
 
    Elements in [[scalqa.val.Idx Idx]] can be efficiently accessed with Int index starting from 0
 
-   The immutable implementation of [[scalqa.val.Idx Idx]] is [[scalqa.val.Pack Pack]]
+   The immutable implementation of [[scalqa.val.Idx Idx]] is [[scalqa.val.Pack >< (pack)]]
 
 @def apply -> Returns element at specified position
 

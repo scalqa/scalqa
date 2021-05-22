@@ -70,7 +70,7 @@ ___________________________________________________________________________*/
     \\/ is a shortcut to assign empty implementations for many types
 
     ```
-    var s: ~[Int]       = \/     // Assigning empty [[Stream]] of Ints
+    var s: ~[Int]       = \/     // Assigning empty stream of Ints
     var o: Opt[String]  = \/     // Assigning empty optional value of String
     var i: Long.Idx     = \/     // Assigning empty indexed collection of Long
     ```

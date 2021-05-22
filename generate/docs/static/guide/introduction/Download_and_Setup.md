@@ -3,19 +3,20 @@ layout: doc-page
 title: Download and Setup
 ---
 
+A natural pre-requisite for Scalqa is the installed Scala3 environment.
+
+
 ## Download
 
+SBT users should add following library dependency:
 
-Scalqa is available on Maven central repository for open source projects
+libraryDependencies += "org.scalqa" % "scalqa_3" % "0.9"
 
-SBT users can add library dependencies:
-
-libraryDependencies += "org.scalqa" % "scalqa-stream_2.12" % "0.1"
-
+Everyone else can download single JAR file from the [latest release](https://github.com/scalqa/scalqa/releases)
 
 ## Simple Use
 
-In basic case Scalqa root must always be imported into each program unit. 
+In basic case Scalqa root must always be imported into each program unit. This sounds a lot, but this is the only import to be done. 
 Implicit conversions also must be enabled. 
 
 ```
@@ -30,7 +31,7 @@ Note. It is suggested to use single line (as above) for package and static repea
 
 ## Project Use
 
-We can setup project specific Scalqa root, which will be shared by all program units.
+It is possible to setup project specific Scalqa root, which will be shared by all program units.
 
 Consider the following package, which has all necessary Scalqa elements exported within:
 ```
@@ -40,10 +41,10 @@ package myProjectsRoot:
   export scalqa.Gen.*
   export scalqa.Gen.Request.*
   export scalqa.j.vm.Predef.given
-  @tn("RootStream") val ~~ = scalqa.`val`.Stream
+  @scala.annotation.targetName("RootStream") val ~~ = scalqa.`val`.Stream
 ```      
 
-Now we can re-write the above `object Test`, taking advantage of root definitions:
+Now there is no need to import scalqa.
 ```
 package myProjectsRoot; package tests; import language.implicitConversions
  
@@ -51,6 +52,6 @@ object Test:
 
   def main(sa: Array[String]): Unit = println("Hellow world")
 ```
-Note. There is no need to import Scalqa anymore, but the root package must be open (`myProjectsRoot` followed by word `package`, not period)
+Note. The root package must be open (`myProjectsRoot` followed by word `package`, not period)
 
-Also `import language.implicitConversions` is still required in each file, unless implicits are enabled on configuration level.
+Note. `import language.implicitConversions` is still required in each file, unless implicits are enabled on configuration level.

@@ -9,7 +9,7 @@ object EMPTY extends Request
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object EMPTY -> ### Any Type Request EMPTY
+    @object EMPTY -> ### General Request EMPTY
 
        See [[Request]] for usage
 

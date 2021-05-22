@@ -30,7 +30,7 @@ object ObservableMutable:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait ObservableMutable -> ### Observable Mutable Idx Collection
+@trait ObservableMutable -> ### Observable Mutable Indexed Collection
 
 @def void  -> Get void instance
 

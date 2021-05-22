@@ -9,7 +9,7 @@ object VERTICAL extends Request
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object VERTICAL -> ### Any Type Request  VERTICAL
+    @object VERTICAL -> ### General Request  VERTICAL
 
        See [[Request]] for usage
 

@@ -6,20 +6,14 @@ object J:
   /**/    def scheduleIn[U](delay: Time.Length, job: => U)                          : Event.Control = j.vm.z.Schedule.in(delay, () => job)
   /**/    def schedule[U](f: => U)                                                  : Unit          = j.vm.z.Schedule(() => f)
   /**/    def sleep(tl: Time.Length)                                                : Unit          = java.lang.Thread.sleep(tl.millisTotal, (tl.micros * 1000 + tl.nanos).Int)
-  /**/    def count                                                                 : Long          = cnt.next; private val cnt=j.Util.Concurrent.Counter(0)
 
-  /**/    var debug                                                                 : Boolean       = false
-  inline  def debugOn                                                               : Unit          = debug = true
-  inline  def debugOff                                                              : Unit          = debug = false
-  /**/    def debug[A :Self.DocTag](v: A)                                               : Unit          = if(debug) println(v.tag)
-
-  inline  def initSize                                                       : Int           = ZZ.initSize
-  inline  def toDo(                inline message: String = "On toDo list")  : Nothing       = throw new UnsupportedOperationException("toDo: "+message)
-  inline  def unsupportedOperation(inline message: String = \/)              : Nothing       = throw new UnsupportedOperationException(message)
-  inline  def illegalState(        inline message: String = \/)              : Nothing       = throw new IllegalStateException(message)
-  inline  def illegalArgument(     inline message: String = \/)              : Nothing       = throw new IllegalArgumentException(message)
-  /**/    def printStack(sizeLimit: Int.Opt = \/, label: String.Opt = \/)    : Unit          = { new Exception().getStackTrace().~.take_<>(1 <> sizeLimit.or(5000)).zipIndex(1)
-    /**/                                                                                          .map("\t" + _.toString.padEndTo(3) + " " + _).joinAt(0,label or "J.printStack").foreach(println) }
+  inline  def initSize                                                    : Int         = ZZ.initSize
+  inline  def toDo(                inline message: String = \/)           : Nothing     = throw new UnsupportedOperationException("J.toDo. "+message)
+  inline  def unsupportedOperation(inline message: String = \/)           : Nothing     = throw new UnsupportedOperationException(message)
+  inline  def illegalState(        inline message: String = \/)           : Nothing     = throw new IllegalStateException(message)
+  inline  def illegalArgument(     inline message: String = \/)           : Nothing     = throw new IllegalArgumentException(message)
+  /**/    def printStack(sizeLimit: Int.Opt = \/, label: String.Opt = \/) : Unit        = { new Exception().getStackTrace().~.take_<>(1 <> sizeLimit.or(5000)).zipIndex(1)
+    /**/                                                                                    .map("\t" + _.toString.padEndTo(3) + " " + _).joinAt(0,label or "J.printStack").foreach(println) }
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   @fast lazy val File          = j.File;                          type File             = j.File.opaque.`type`
   @fast lazy val Path          = j.file.Path;                     type Path             = j.file.Path.opaque.`type`
@@ -76,7 +70,7 @@ ___________________________________________________________________________*/
 
     The only benefit is reducing boilerplate code
 
-@def toDo -> Make Do tag
+@def toDo -> To Do tag
 
     Inlines `throw new UnsupportedOperationException()`
 

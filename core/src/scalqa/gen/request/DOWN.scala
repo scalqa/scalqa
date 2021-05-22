@@ -9,7 +9,7 @@ object DOWN extends Request
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object DOWN -> ### Any Type Request DOWN
+    @object DOWN -> ### General Request DOWN
 
      See [[Request]] for usage
 

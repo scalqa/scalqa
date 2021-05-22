@@ -27,7 +27,7 @@ object Observable:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait Observable -> ### Observable Idx Collection
+@trait Observable -> ### Observable Indexed Collection
 
        Observable Idx collection allows to track all the changes by subscribing to `onChange` event
 

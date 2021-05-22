@@ -6,7 +6,6 @@ class Request:
 
 object Request:
   @tn("VOID")    type \/         = request.VOID      .type;    @tn("VOID")  inline def \/          = request.VOID
-  /**/           type VOID       = request.VOID      .type;                 inline def VOID        = request.VOID
   /**/           type DEFAULT    = request.DEFAULT   .type;                 inline def DEFAULT     = request.DEFAULT
   /**/           type ALL        = request.ALL       .type;                 inline def ALL         = request.ALL
   /**/           type EMPTY      = request.EMPTY     .type;                 inline def EMPTY       = request.EMPTY
@@ -31,11 +30,9 @@ object Request:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@type \/          ->  Type alias      \n\n Shortcut to [[scalqa.gen.request.VOID$       Gen.Request.VOID]]
-@def  \/          ->  Singleton alias \n\n Shortcut to [[scalqa.gen.request.VOID$       Gen.Request.VOID]]
+@type \/          ->  Type alias      \n\n Shortcut to [[scalqa.gen.request.VOID$       Gen.Request.\/]]
+@def  \/          ->  Singleton alias \n\n Shortcut to [[scalqa.gen.request.VOID$       Gen.Request.\/]]
 
-@type VOID        ->  Type alias      \n\n Shortcut to [[scalqa.gen.request.VOID$       Gen.Request.VOID]]
-@def  VOID        ->  Singleton alias \n\n Shortcut to [[scalqa.gen.request.VOID$       Gen.Request.VOID]]
 @type DEFAULT     ->  Type alias      \n\n Shortcut to [[scalqa.gen.request.DEFAULT$    Gen.Request.DEFAULT]]
 @def  DEFAULT     ->  Singleton alias \n\n Shortcut to [[scalqa.gen.request.DEFAULT$    Gen.Request.DEFAULT]]
 @type ALL         ->  Type alias      \n\n Shortcut to [[scalqa.gen.request.ALL$        Gen.Request.ALL]]

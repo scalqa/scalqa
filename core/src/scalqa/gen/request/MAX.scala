@@ -16,7 +16,7 @@ object MAX extends Request:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object MAX -> ### Any Type Request  MAX
+    @object MAX -> ### General Request  MAX
 
      See [[Request]] for usage
 

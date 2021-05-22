@@ -7,7 +7,7 @@ object Build {
 
   lazy val commonSettings = Seq(
     scalaVersion           := "3.0.0",
-    version                := "0.99",
+    version                := "0.9",
     organization           := "org.scalqa",
     scalaSource in Compile := baseDirectory.value / "src",
     javaSource  in Compile := baseDirectory.value / "src"
@@ -19,9 +19,9 @@ object Build {
   lazy val sample  : Project = project.in(file("sample"))       .dependsOn(fx)  .settings(commonSettings,fork in run := true)
   lazy val generate: Project = project.in(file("generate"))     .dependsOn(core).settings(commonSettings,fork in run := true).settings(merge:= _merge.value)
   lazy val docs    : Project = project.in(file("generate/docs")).dependsOn(core).settings(commonSettings,fork in run := true).settings(merge:= _merge.value)
-  lazy val release : Project = project.in(file("generate/release"))             .settings(commonSettings)
+  lazy val scalqa  : Project = project.in(file("generate/scalqa"))              .settings(commonSettings)
 
   def  _copy   = Def.taskDyn{ ( generate / Compile / run).toTask(" "+baseDirectory.value.toString) }
-  def  _merge  = Def.taskDyn{ _copy.value; ( release / Compile / clean ).value; ( release / Compile / compile )}
+  def  _merge  = Def.taskDyn{ _copy.value; ( scalqa / Compile / clean ).value; ( scalqa / Compile / compile )}
 
 }

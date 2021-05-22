@@ -5,5 +5,5 @@ val test     = Build.test
 val sample   = Build.sample
 val generate = Build.generate
 val docs     = Build.docs
-val release  = Build.release
+val scalqa   = Build.scalqa
 

@@ -13,7 +13,7 @@ object Merge:
     root.tp
     isDoc.tp
 
-    val to = root + "generate" + "release" + "src"
+    val to = root + "generate" + "scalqa" + "src"
     to.delete
     to.make
 

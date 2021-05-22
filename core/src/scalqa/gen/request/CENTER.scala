@@ -9,7 +9,7 @@ object CENTER extends Request
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object CENTER -> ### Any Type Request CENTER
+    @object CENTER -> ### General Request CENTER
 
        See [[Request]] for usage
 

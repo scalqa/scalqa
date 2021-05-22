@@ -9,7 +9,7 @@ object CURRENT extends Request
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object CURRENT -> ### Any Type Request CURRENT
+    @object CURRENT -> ### General Request CURRENT
 
        See [[Request]] for usage
 

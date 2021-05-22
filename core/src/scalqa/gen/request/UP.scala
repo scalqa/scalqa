@@ -9,7 +9,7 @@ object UP extends Request
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object UP -> ### Any Type Request  UP
+    @object UP -> ### General Request  UP
 
      See [[Request]] for usage
 

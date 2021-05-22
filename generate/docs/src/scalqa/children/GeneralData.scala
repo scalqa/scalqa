@@ -14,7 +14,7 @@ class GeneralData(m: Member) extends Data(m):
   this.types    = aliases.~.take(Docs.isTypeLikeAlias)
   this.types    = {types.~ ++ aliases.~.drop(_.kind.isTypeLike)._takeIfIn(types)}.sort
 
-  this.aliases  = aliases.~._dropIfIn(types)/*.dropOnlyBy(_.name,"~","<>","><","\\/")*/.sort
+  this.aliases  = aliases.~._dropIfIn(types)
 
   this.extended = DefValVar.~.take(_.origin.isExtension)
 
@@ -36,3 +36,5 @@ class GeneralData(m: Member) extends Data(m):
   extension(x: Member)    private def _isLocal               : Boolean     = x.inheritedFrom.filterNot(_.dri.id.startsWith(owner.id + "._")).isEmpty
   extension(x: Member)    private def _child_?               : Opt[Member] = x.signature.?.drop(v => v.isEmpty || !v.head.isInstanceOf[Link]).map(_.head.asInstanceOf[Link].dri.id.mid.lower)
                                                                               .takeOnly((owner.id.mid.lower + "." + x.name.nameToId.lower).lower).map_?(Registry.module_?).map(_.main)
+
+  if(m.name in ("Val","G")) this.aliases  = aliases.~.dropOnlyBy(_.name,"~","<>","><")

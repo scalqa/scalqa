@@ -10,8 +10,9 @@
 
 /generate/docs/target
 /generate/docs/lib/*.jar
-/generate/release/target
-/generate/release/src
+/generate/scalqa/target
+/generate/scalqa/src
+/generate/scalqa/sonatype-staging
 
 /core/src/scalqa/Test*.scala
 /core/src/scalqa/Example*.scala

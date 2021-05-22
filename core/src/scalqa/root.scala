@@ -37,14 +37,14 @@ ___________________________________________________________________________*/
 
     `Note.`
 
-    The [[Stream]] companion alias is a double tilde (`~~`) instead of a single (`~`).
+    The stream companion alias is a double tilde (`~~`) instead of a single (`~`).
     This exception is made only for root object scalqa.~~ , `scalqa.Val.~` companion is stil single tilde.
     ```
     val s1 : ~[String] = ~~("a","b","c")
-    val s2 : ~[String] = Stream("a","b","c")
-    val s3 : ~[String] = Val.~("a","b","c")
+    val s2 : ~[String] = Val.~("a","b","c")
     ```
     The reason for the exception is twofold:
+
       1. `~` is universally used as a method name, which would conflict with unprefixed companion inside some classes
       2. Simple expression ~("a","b","c") compiles in Scala as a prefix method on Tuple3, but ~~("a","b","c") works fine as ~~.apply("a","b","c")
 */

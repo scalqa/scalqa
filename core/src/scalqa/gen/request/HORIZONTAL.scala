@@ -9,7 +9,7 @@ object HORIZONTAL extends Request
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object HORIZONTAL -> ### Any Type Request HORIZONTAL
+    @object HORIZONTAL -> ### General Request HORIZONTAL
 
        See [[Request]] for usage
 

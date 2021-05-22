@@ -16,7 +16,7 @@ object MIN extends Request:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object MIN -> ### Any Type Request  MIN
+    @object MIN -> ### General Request  MIN
 
      See [[Request]] for usage
 

@@ -9,7 +9,7 @@ object SEPARATOR extends Request
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object SEPARATOR -> ### Any Type Request  SEPARATOR
+    @object SEPARATOR -> ### General Request  SEPARATOR
 
        See [[Request]] for usage
 

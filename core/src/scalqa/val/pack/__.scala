@@ -61,19 +61,19 @@ ___________________________________________________________________________*/
 
    This operation will not compile for reference types
 
-   Returns specialized List for undelying primitive type
+   Returns specialized pack for undelying primitive type
 
-   Note: If this instance is already specialized, it is returned as as
+   Note: If this instance is already specialized, it is returned as is
 
 @def head -> First element
 
-    Returns first elements or fails for empty Pack
+    Returns first elements or fails for empty ><
 
     Use [[head_?]] for safer access
 
 @def head_? -> First optional element
 
-    Returns first elements or empty option for empty Pack
+    Returns first elements or empty option for empty ><
 
 @def tail -> Pack without first element
 
@@ -81,77 +81,77 @@ ___________________________________________________________________________*/
 
 @def takeFirst -> Head filter
 
-    Creates a new Pack from current Pack, taking only given number of first elements
+    Creates a new >< from current ><, taking only given number of first elements
 
 @def dropFirst -> Head reversed filter
 
-    Creates a new Pack from current Pack, skipping given number of first elements
+    Creates a new >< from current ><, skipping given number of first elements
 
 @def takeLast -> Tail filter
 
-    Creates a new Pack from current Pack, taking only given number of last elements
+    Creates a new >< from current ><, taking only given number of last elements
 
 @def dropLast -> Tail reversed filter
 
-    Creates a new Pack from current Pack, skipping given number of last elements
+    Creates a new >< from current ><, skipping given number of last elements
 
 @def take_<> -> Range filter
 
-    Creates a new Pack from current Pack, taking only elements within given range
+    Creates a new >< from current ><, taking only elements within given range
 
 @def take_<> -> Range filter
 
-    Creates a new Pack from current Pack, taking only elements within given range
+    Creates a new >< from current ><, taking only elements within given range
 
 @def drop_<> -> Range reversed filter
 
-    Creates a new Pack from current Pack, skipping elements within given range
+    Creates a new >< from current ><, skipping elements within given range
 
 @def drop_<> -> Range reversed filter
 
-    Creates a new Pack from current Pack, skipping elements within given range
+    Creates a new >< from current ><, skipping elements within given range
 
 @def join -> Join value
 
-    Creates a new Pack with given value appended to the end of current Pack
+    Creates a new >< with given value appended to the end of current ><
 
 @def + -> Alias for [[join]]
 
-    Creates a new Pack with given value appended to the end of current Pack
+    Creates a new >< with given value appended to the end of current ><
 
 @def joinAll -> Join stream
 
-    Creates a new Pack with given stream values appended to the end of current Pack
+    Creates a new >< with given stream values appended to the end of current ><
 
 @def ++ -> Alias for [[joinAll]]
 
-    Creates a new Pack with given stream values appended to the end of current Pack
+    Creates a new >< with given stream values appended to the end of current ><
 
 @def joinAt -> Join value at position
 
-    Creates a new Pack with given value inserted into current Pack at given position
+    Creates a new >< with given value inserted into current >< at given position
 
 @def +@ -> Alias for [[joinAt]]
 
-    Creates a new Pack with given value inserted into current Pack at given position
+    Creates a new >< with given value inserted into current >< at given position
 
 @def joinAllAt -> Join stream at position
 
-    Creates a new Pack with given stream values inserted into current Pack at given position
+    Creates a new >< with given stream values inserted into current >< at given position
 
 @def ++@ -> Alias for [[joinAllAt]]
 
-    Creates a new Pack with given stream values inserted into current Pack at given position
+    Creates a new >< with given stream values inserted into current >< at given position
 
 @def toBuffer -> Make Buffer
 
-    Creates a [[scalqa.val.Buffer Buffer]] collection filled with Pack elements
+    Creates a [[scalqa.val.Buffer Buffer]] collection filled with >< elements
 
-    Both Buffer and Pack are mostly Array based, so the convertions between them are very efficient
+    Both Buffer and >< are mostly Array based, so the convertions between them are very efficient
 
 @def compact -> Optimize storage
 
-    Pack is mostly backed by Array. When created from an unknown size stream, Array within Pack can end up with larger capacity than required.
+    Pack is mostly backed by Array. When created from an unknown size stream, Array within pack can end up with larger capacity than required.
     Because most Packs are short lived, it is wastfull to copy by default this potentially big array to proper size, but operation [[compact]] does exactly this on reqest.
 
     So, when assigning >< to a longer term variable, it might be usefull to run [[compact]] if memory is a concern
@@ -160,7 +160,7 @@ ___________________________________________________________________________*/
     val pack = (1 <> 1_000_000).~.drop(_ % 100 == 0).><.compact
     ```
 
-    Note. [[compact]] can be called multiple times, but will do anything only if Pack is not compacted
+    Note. [[compact]] can be called multiple times, but will do anything only if >< is not compacted
 
 @def void  -> Get void instance
 

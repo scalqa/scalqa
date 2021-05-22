@@ -9,7 +9,7 @@ object LEFT extends Request
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object LEFT -> ### Any Type Request  LEFT
+    @object LEFT -> ### General Request  LEFT
 
        See [[Request]] for usage
 

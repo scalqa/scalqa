@@ -9,7 +9,7 @@ object TOP extends Request
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object TOP -> ### Any Type Request  TOP
+    @object TOP -> ### General Request  TOP
 
        See [[Request]] for usage
 

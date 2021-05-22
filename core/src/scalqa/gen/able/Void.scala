@@ -25,8 +25,7 @@ ___________________________________________________________________________*/
 
       ```
 
-
-@def isVoid  -> Is void check
+@def isVoid -> Is void check
 
       Returns `true` if this instance is void, false othervise
 

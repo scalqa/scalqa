@@ -9,7 +9,7 @@ object BOTTOM extends Request
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object BOTTOM -> ### Any Type Request BOTTOM
+    @object BOTTOM -> ### General Request BOTTOM
 
        See [[Request]] for usage
 
