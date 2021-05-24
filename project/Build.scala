@@ -7,7 +7,7 @@ object Build {
 
   lazy val commonSettings = Seq(
     scalaVersion           := "3.0.0",
-    version                := "0.9",
+    version                := "0.91",
     organization           := "org.scalqa",
     scalaSource in Compile := baseDirectory.value / "src",
     javaSource  in Compile := baseDirectory.value / "src"

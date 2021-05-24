@@ -3,10 +3,10 @@ package scalqa; package `val`; package stream; package _Use; import language.imp
 transparent trait _metadata :
 
   extension[A](inline x: ~[A])
-    /**/                inline def describe   : String    = Custom.Pipeline.infoTree(x).text
-    @tn("size_Opt")     inline def size_?     : Int.Opt   = Able.Size.size_?(x)
-    @tn("sizeLong_Opt") inline def sizeLong_? : Long.Opt  = Able.Size.sizeLong_?(x)
-    private[scalqa]     inline def defaultDoc : Self.Doc  = z.util.MultiDoc(x)
+    /**/                inline def docTree    : Self.Doc.Tree = Custom.Pipeline.infoTree(x)
+    @tn("size_Opt")     inline def size_?     : Int.Opt       = Able.Size.size_?(x)
+    @tn("sizeLong_Opt") inline def sizeLong_? : Long.Opt      = Able.Size.sizeLong_?(x)
+    private[scalqa]     inline def defaultDoc : Self.Doc      = z.util.MultiDoc(x)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -22,15 +22,15 @@ ___________________________________________________________________________*/
       Metadata methods can be called many times, they do not trigger any data movements
 
 
-@def describe -> Text description
+@def docTree -> Doc Tree description
 
-      Returns a tree formatted text describing all stream trasformations
+      Returns a tree describing all stream trasformations
 
      ```
      ('a' <> 'z').~
        .map(_.Int)
        .take(_ % 2 == 0)
-       .describe.TP
+       .docTree.TP
 
      // Output
      scalqa.lang.int.g.Stream$TakeStream$2@4ds1{raw=Int}

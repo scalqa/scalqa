@@ -55,7 +55,7 @@ ___________________________________________________________________________*/
 
    Pack is the most ubiquitous immutable collection, like List in Scala
 
-   Unlike List, [[scalqa.val.Pack pack]] is mostly backed by Array and can be specialized. It usually has smaller memory footprint and in most cases is faster to manipulate data.
+   Unlike List, [[scalqa.val.Pack ><]] is mostly backed by Array and can be specialized. It usually has smaller memory footprint and in most cases is faster to manipulate data.
 
 @def raw -> Specialize
 

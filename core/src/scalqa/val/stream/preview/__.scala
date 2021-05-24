@@ -19,7 +19,7 @@ ___________________________________________________________________________*/
 /**
 @trait Preview -> ###
 
-    [[Preview]] is an extension of [[Stream]] with preview capabilities
+    [[Preview]] is an extension of stream with preview capabilities
 
     It allows to pre-load and inspect elements before they are read from the stream
     ```

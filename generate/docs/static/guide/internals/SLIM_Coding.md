@@ -4,7 +4,7 @@ title: SLIM Coding
 ---
 ### Single LIne Methods Coding
 
-Most methods in Scalqa are written as a single line of code and program units never exceed one screen (read no scrolling)
+Most methods in Scalqa are written as a single line of code and program units never exceed one screen (no need for scrolling down)
 
 For example, this is the definition of [Lookup](../../api/scalqa/val/Lookup.html) collection trait
 

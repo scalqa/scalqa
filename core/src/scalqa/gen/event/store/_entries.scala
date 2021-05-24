@@ -3,12 +3,12 @@ package scalqa; package gen; package event; package store; import language.impli
 transparent trait _entries:
   self: Store =>
 
-  def add(typ:Ref, v:Any)               : Event.Control
-  def find_?(typ: Ref)                  : Opt[Entry]    = top.find(typ).?.drop(_.isVoid)
-  def ~(typ: Ref)                       : ~[Entry]      = new All().TAKE(_.`type` == typ)
-  def isEmpty                           : Boolean       = top.isVoid
-  def count                             : Int           = new All().count
-  def describe(label: Opt[String] = \/) : String        = new All().nonEmpty_?.map(_.zipIndex.makeString("\n")).or("empty").indent((label or "Event.Store")+": ")
+  def add(typ:Ref, v:Any)             : Event.Control
+  def find_?(typ: Ref)                : Opt[Entry]    = top.find(typ).?.drop(_.isVoid)
+  def ~(typ: Ref)                     : ~[Entry]      = new All().TAKE(_.`type` == typ)
+  def isEmpty                         : Boolean       = top.isVoid
+  def count                           : Int           = new All().count
+  def toText(label: Opt[String] = \/) : String        = new All().nonEmpty_?.map(_.zipIndex.makeString("\n")).or("empty").indent((label or "Event.Store")+": ")
 
   // *******************************************************************
   private class All extends ~[Entry]:

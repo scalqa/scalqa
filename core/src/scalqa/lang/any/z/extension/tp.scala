@@ -26,7 +26,7 @@ transparent private[z] trait tp :
   extension(inline x: Float)                inline def tp                         : Unit   = ZZ.tp(x)
   extension(inline x: Double)               inline def tp                         : Unit   = ZZ.tp(x)
   extension(inline x: gen.able.Tag)         inline def tp                         : Unit   = ZZ.tp(x.tag)
-  extension(inline x: Unit)                 inline def tp                         : Unit   = {val v=x; /*need to realize x*/ ZZ.tp("")}
+  extension(inline x: Unit)                 inline def tp                         : Unit   = {val v=x /*need to realize x for side effects*/; ZZ.tp(" ") /*keep one space*/}
 
   extension[A<:Any.Raw.Boolean](inline x:A) inline def tp (using inline t :Self.DocTag[A]) : Unit   = ZZ.tp(x.real,t)
   extension[A<:Any.Raw.Byte]   (inline x:A) inline def tp (using inline t :Self.DocTag[A]) : Unit   = ZZ.tp(x.real,t)

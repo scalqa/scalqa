@@ -23,7 +23,7 @@ Defining data elements is quite easy, one just needs to select one of the follow
 
 Let's create an example of data element 'Price', which would be based on a Double, behave like a Double, but be distinct from a Double.
 
-He is the definition part:
+He is the definition part (available in [samples](https://github.com/scalqa/scalqa/blob/master/sample/src/example/data)):
 ```
 type  Price = Price.opaque.`type`
 
@@ -35,7 +35,7 @@ object Price extends Double.Custom.Data.Number[Price]("Price"):
 
   extension (x: Price)
     def discount(p: Percent): Price   = x - p(x)
-    def isExpensive         : Boolean = x >= 100
+    def isNotExpensive      : Boolean = x < 100
 
   object opaque:
     opaque type `type` <: Any.Opaque.Double = Any.Opaque.Double
@@ -101,21 +101,21 @@ Let's find out how efficient those specialized containers are.
 To do so, we will benchmark them to Scala non-specialized collections: 
 ```
 J.Benchmark(
-  ("Scala ",      () => (1 to 10_000).iterator.map(v => (v % 200 + 0.99).Dollars).toList.iterator.map(_.discount(5.Percent)).filter(! _.isExpensive).sum),
-  ("Scalqa",      () => (1 <> 10_000).~       .map(v => (v % 200 + 0.99).Dollars).><    .~       .map(_.discount(5.Percent)).filter(! _.isExpensive).sum),
-  ("Scalqa Heavy",() => (1 <> 10_000).~       .MAP(v => (v % 200 + 0.99).Dollars).><    .~       .MAP(_.discount(5.Percent)).FILTER(! _.isExpensive).sum)
+  ("Scala ",      () => (1 to 1000).iterator.map(v => (v % 200 + 0.99).Dollars).filter(_.isNotExpensive).map(_.discount(5.Percent)).sum),
+  ("Scalqa",      () => (1 <> 1000).~       .map(v => (v % 200 + 0.99).Dollars).filter(_.isNotExpensive).map(_.discount(5.Percent)).sum),
+  ("Scalqa Heavy",() => (1 <> 1000).~       .MAP(v => (v % 200 + 0.99).Dollars).FILTER(_.isNotExpensive).MAP(_.discount(5.Percent)).sum),
 )
 ```
 ```
 // Output
 Final Result. Total length is about 12 secs
---- ------------ ------- --- ------- --- -----------------
-Num Name         Ops/Sec %   Memory  %   Last Value
---- ------------ ------- --- ------- --- -----------------
-1   Scala        1.8k    9   908.2kB 100 2607.750000000001
-2   Scalqa       5.3k    27  74.0kB  8   2607.750000000001
-3   Scalqa Heavy 19.2k   100 78.4kB  8   2607.750000000001
---- ------------ ------- --- ------- --- -----------------
+--- ------------ ------- --- ------ --- -----------------
+Num Name         Ops/Sec %   Memory %   Last Value
+--- ------------ ------- --- ------ --- -----------------
+1   Scala        32.6k   11  59.1kB 100 23982.74999999997
+2   Scalqa       77.1k   27  251B   0   23982.74999999997
+3   Scalqa Heavy 279.2k  100 171B   0   23982.74999999997
+--- ------------ ------- --- ------ --- -----------------
 ```
 
 

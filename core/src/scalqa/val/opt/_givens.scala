@@ -6,8 +6,8 @@ abstract class _givens extends givenDefailts:
   inline given givenUsingOpt[A[B],B](using v: A[B]) : Opt[A[B]]                = v.cast[Opt[A[B]]]
   given givenCanEqualOpt[A,B](using CanEqual[A,B])  : CanEqual[Opt[A], Opt[B]] = CanEqual.derived
   given givenClassTag[A]  (using t: ClassTag[A])    : ClassTag[Opt[A]]         = t.cast[ClassTag[Opt[A]]]
-  given givenNameTag [A]                            : Self.NameTag[Opt[A]]         = Self.NameTag("Opt")
-  given givenVoidTag [A]                            : Self.VoidTag[Opt[A]]         with { inline def isVoid(v: Opt[A]) = v eq ZZ.None }
+  given givenNameTag [A]                            : Self.NameTag[Opt[A]]     = Self.NameTag("Opt")
+  given givenVoidTag [A]                            : Self.VoidTag[Opt[A]]     with { inline def isVoid(v: Opt[A]) = v eq ZZ.None }
 
   given givenDocTag[A](using t: Self.DocTag[A]) : Self.DocTag[Opt[A]] with
     def tag(v: Opt[A]): String   = if(v eq ZZ.None) "Opt(\\/)" else "Opt("+t.tag(v.cast[A])+")"
@@ -15,7 +15,8 @@ abstract class _givens extends givenDefailts:
 
 // ******************************************************
 class givenDefailts:
-  inline given givenUsingOptNone[A[B],B] : Val.Opt[A[B]] = \/
+  inline given givenUsingOptNone[A[B],B]      : Val.Opt[A[B]]    = \/
+  inline given givenOrdering[T<:Comparable[T]]: Opt[Ordering[T]] = gen.math.ordering.Z.OrderingForComparable.cast[Ordering[T]]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

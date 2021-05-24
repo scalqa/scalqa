@@ -12,7 +12,7 @@ object Main:
        "-project",         "Scalqa",
                            "-source-links:github://scalqa/scalqa",
        "-revision",        "master",
-       "-project-version", "0.9",
+       "-project-version", "0.92",
        "-siteroot",        "C:\\#DM\\_sbt\\dev\\scalqa_org\\generate\\docs\\static",
 //       "-project-logo",    "scala3doc/documentation/logo.svg",
 //                           "-external-mappings:.*scala.*::scala3doc::http://dotty.epfl.ch/api/,.*java.*::javadoc::https://docs.oracle.com/javase/8/docs/api/",

@@ -3,9 +3,9 @@ layout: doc-page
 title: About
 ---
 
-**Scalqa** stands for 'Scala Quick API'. It is an alternative library for Scala3, which would allow development without using most of native language API.
+**Scalqa** stands for 'Scala Quick API'. 
 
-Scalqa features a proprietary, greatly simplified, but significantly faster collections framework.
+It is a simplified API for Scala3 language, built around fast proprietary collections framework.
 
 Scalqa also provides a standardized way to define opaque data types, 
 based on Java primitives, which naturally inherit specialized collections, taking processing speed on entire new level.

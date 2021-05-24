@@ -10,7 +10,7 @@ A natural pre-requisite for Scalqa is the installed Scala3 environment.
 
 SBT users should add following library dependency:
 
-libraryDependencies += "org.scalqa" % "scalqa_3" % "0.9"
+libraryDependencies += "org.scalqa" % "scalqa_3" % "0.92"
 
 Everyone else can download single JAR file from the [latest release](https://github.com/scalqa/scalqa/releases)
 

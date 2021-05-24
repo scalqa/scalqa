@@ -5,11 +5,11 @@ title: Option
 
 Value option (type [Opt](../../api/scalqa/val/Opt.html)) is the second most important Scalqa feature.
 
-[Opt](../../api/scalqa/val/Opt.html) either contains a value or is empty (void), thus it 
+[Opt](../../api/scalqa/val/Opt.html) either contains a value or is empty, thus it 
 naturally solves the problem of 'null' pointer exception. The large processing library attached to [Opt](../../api/scalqa/val/Opt.html)
 allows to define complex value manipulations without the need to check if value is present, because this is constantly done by the library.
 
-[Opt](../../api/scalqa/val/Opt.html) has implementation with zero runtime costs. It creates no object,  [Opt](../../api/scalqa/val/Opt.html)
+[Opt](../../api/scalqa/val/Opt.html) has implementation with zero runtime costs. It creates no object: [Opt](../../api/scalqa/val/Opt.html)
 is an opaque type of the value itself. Moreover, the option methods a fully inlined, so the resulting Java code will simply manipulate value, 
 without any mention of option type.
 
@@ -28,9 +28,9 @@ def triple(v: String): String = {
 }
 ```
 
-and here is the first program compiled to Java, doing the same thing:
+and here is the first program de-compiled into Java, doing the same thing:
 ```
-public Object length(Object v) {
+public Object triple(Object v) {
     Object o = ZZ.None;
     if (v != ZZ.None) {
         String v = (String)v;
@@ -45,7 +45,7 @@ execution cost.
 The use of [Opt](../../api/scalqa/val/Opt.html) in Scalqa is ubiquitous, there are very few program 
 units without options.
 Most notably [Opt](../../api/scalqa/val/Opt.html) is the key mechanism for reading 
-[Stream](../../api/scalqa/val/Stream.html) values.
+[stream](../../api/scalqa/val/Stream.html) values.
 
 ## Specialized for Primitives
 
@@ -56,7 +56,7 @@ each primitive type has a generic option implementation:
 [Int.G.Opt](../../api/scalqa/lang/int/g/Opt.html),
 [Double.G.Opt](../../api/scalqa/lang/double/g/Opt.html), etc, where option is an opaque primitive value.
 
-Let's benchmark heavy option processing for regular, specialized and Scala options:
+Let's benchmark option processing for regular, specialized and Scala options:
 ```
 val CNT = 100000
 val array: Array[Int] = (0 <> CNT).~.toArray

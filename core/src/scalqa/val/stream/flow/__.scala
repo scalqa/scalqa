@@ -14,9 +14,9 @@ object Flow:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@class Flow -> ###
+@class Flow -> ### Stream Flow
 
-   [[scalqa.val.stream.Flow ~~.Flow]] is similar to [[scalqa.val.Stream Stream]], but without sequence specific methods.
+   [[scalqa.val.stream.Flow ~~.Flow]] is similar to [[scalqa.val.Stream stream]], but without sequence specific methods.
 
    Elements of [[scalqa.val.stream.Flow ~~.Flow]] can be processed either in parallel or sequentially
 

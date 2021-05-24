@@ -3,7 +3,7 @@
 sonatypeBundleDirectory := (ThisBuild / baseDirectory).value / "generate" / "scalqa" / "sonatype-staging"
 publishTo               := sonatypePublishToBundle.value
 
-credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", "edolgy", "0XsX2NP%5pMf")
+credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", "?login?", "?password?")
 
 licenses := Seq("APL2" -> url("http://www.apache.org/licenses/LICENSE-2.0.txt"))
 

@@ -26,10 +26,10 @@ ___________________________________________________________________________*/
 
 @def ~ -> Convert to stream
 
-    Wraps [[scalqa.val.stream.Flow ~~.Flow]] into regular [[scalqa.val.Stream Stream]].
+    Wraps [[scalqa.val.stream.Flow ~~.Flow]] into regular [[scalqa.val.Stream stream]].
 
     If [[scalqa.val.stream.Flow ~~.Flow]] is parallel, then this convertion can be very costly,
-    and it is always prefferable to consume [[scalqa.val.stream.Flow ~~.Flow]] without going back to [[scalqa.val.Stream Stream]]
+    and it is always prefferable to consume [[scalqa.val.stream.Flow ~~.Flow]] without going back to [[scalqa.val.Stream ~]]
 
 @def take -> Filter
 

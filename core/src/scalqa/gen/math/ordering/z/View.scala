@@ -18,7 +18,7 @@ object View:
 
   class Option[A](c: Comparator[A], nonePosition: Int) extends Ordering[Opt[A]]  /*Compiler issues if defined as Opt[A]*/ :
     assert(nonePosition != 0, "nonePosition cannot be 0");
-    def compare(v: Opt[A], w: Opt[A]): Int = if (v.isEmpty) if (w.nonEmpty) nonePosition else 0 else if (w.isEmpty) nonePosition * -1 else this.compare(v.cast[A], w.cast[A])
+    def compare(v: Opt[A], w: Opt[A]): Int = if (v.isEmpty) if (w.nonEmpty) nonePosition else 0 else if (w.isEmpty) nonePosition * -1 else c.compare(v.cast[A], w.cast[A])
 
   class ByRank[A](c: Comparator[A], rank: A => Int) extends Ordering[A]:
     def compare(x: A, y: A) =

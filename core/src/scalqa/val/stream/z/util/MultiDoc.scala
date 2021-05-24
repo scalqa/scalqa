@@ -18,8 +18,6 @@ class MultiDoc private(target: Ref/* expected Pipeline | ~[_] | Flow[_]*/, v: \/
     this += v.?.map_?(Able.Size.sizeLong_?).map(s => ("size", s.toString))
   }
 
-  override def text = target.?.takeType[Custom.Pipeline.Tree].map(Pipeline.infoTree(_).text) or super.text
-
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
