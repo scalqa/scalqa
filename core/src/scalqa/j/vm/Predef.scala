@@ -1,16 +1,16 @@
 package scalqa.j.vm; import language.implicitConversions
 
-import scalqa.lang
-import lang.*
+import scalqa.lang.*
 
 object Predef:
 
-  object Extension extends any.z.Extension    with array.z._extension with string._extension  with scalqa.`val`.stream.custom._extension
-                      with boolean._extension with byte._extension    with char._extension    with short._extension
-                      with int._extension     with long._extension    with float._extension   with double._extension
-                      with scalqa.gen.math.ordering.z._extension
+  object GlobalExtensionLibrary
+      extends any.z.Extension    with array.z._extension with string._extension  with scalqa.`val`.stream.custom._extension
+         with boolean._extension with byte._extension    with char._extension    with short._extension
+         with int._extension     with long._extension    with float._extension   with double._extension
+         with scalqa.gen.math.ordering.z._extension
 
-  given givenExtension: Extension.type = Extension
+  given givenLib: GlobalExtensionLibrary.type = GlobalExtensionLibrary
 
   inline given givenByteMath   : Byte  .G.Math[Byte  ] = Byte  .math
   inline given givenCharMath   : Char  .G.Math[Char  ] = Char  .math

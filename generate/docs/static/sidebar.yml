@@ -11,6 +11,8 @@ sidebar:
           url: guide/introduction/H2O_Structure.html
         - title: Do Not Use toString
           url: guide/introduction/Do_Not_Use_toString.html
+        - title: Samples
+          url: guide/introduction/Samples.html
     - title: Features
       subsection:
         - title: Stream

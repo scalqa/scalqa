@@ -37,11 +37,12 @@ Consider the following package, which has all necessary Scalqa elements exported
 ```
 package myProjectsRoot:
   export scalqa.Lang.*
-  export scalqa.Val.*
   export scalqa.Gen.*
   export scalqa.Gen.Request.*
   export scalqa.j.vm.Predef.given
-  @scala.annotation.targetName("RootStream") val ~~ = scalqa.`val`.Stream
+  export scalqa.Val.{ ~ as _, * }
+  @scala.annotation.targetName("Stream") type ~[+A] = Val.~[A]
+  @scala.annotation.targetName("Stream") val  ~~    = Val.~
 ```      
 
 Now there is no need to import scalqa.
