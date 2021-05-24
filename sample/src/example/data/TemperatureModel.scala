@@ -1,6 +1,6 @@
 package example.data;  import scalqa.{*, given};  import language.implicitConversions
 
-object Temperature:
+object TemperatureModel:
   // ----------------------------------------------------------------------------------------
   type  Fahrenheit = Fahrenheit.opaque.`type`
 

@@ -1,6 +1,6 @@
 package example.data;  import scalqa.{*, given};  import language.implicitConversions
 
-object TryPrice:
+object PriceModel:
 
   extension (inline x: Double) inline def Dollars : Price = x.asOpaque[Price]
 
