@@ -52,7 +52,7 @@ ___________________________________________________________________________*/
 
     [[Result]] is a container, which holds either 'value' or 'problem', which explains why value is not available.
 
-    Unlike [[scalqa.val.Opt$.opaque Opt]], [[Result]] is never void, even if there is no value, then, there must be a problem
+    Unlike [[scalqa.val.Opt Opt]], [[Result]] is never void, even if there is no value, then, there must be a problem
 
     By Scalqa convention, method names, which return [[Result]] type, are ended with '_??' instead of word 'Result'
 

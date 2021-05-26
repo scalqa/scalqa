@@ -41,7 +41,6 @@ transparent trait _extension:
     /**/              inline def Micros                    : Time.Length   = x.Long.Micros
     /**/              inline def Nanos                     : Time.Length   = x.Long.Nanos
 
-
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
@@ -150,70 +149,70 @@ ___________________________________________________________________________*/
 
 @def ByteCount -> Make ByteCount
 
-                [[scalqa.gen.number.ByteCount$.opaque ByteCount]] constructor attached to Int
+                [[scalqa.gen.number.ByteCount ByteCount]] constructor attached to Int
 
 @def Year      -> Make Year
 
-                [[scalqa.gen.calendar.Year$.opaque Year]] constructor attached to Int
+                [[scalqa.gen.calendar.Year Year]] constructor attached to Int
 
 @def Big       -> Make BigInteger
 
-                [[scalqa.gen.number.BigInteger$.opaque BigInteger]] constructor attached to Int
+                [[scalqa.gen.number.BigInteger BigInteger]] constructor attached to Int
 
 @def Percent   -> Make Percent
 
-                [[scalqa.gen.number.Percent$.opaque Percent]] constructor attached to Int
+                [[scalqa.gen.number.Percent Percent]] constructor attached to Int
 
 @def Week      -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Int
 
 @def Weeks     -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Int
 
 @def Day       -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Int
 
 @def Days      -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Int
 
 @def Hour      -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Int
 
 @def Hours     -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Int
 
 @def Minute    -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Int
 
 @def Minutes   -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Int
 
 @def Second    -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Int
 
 @def Seconds   -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Int
 
 @def Millis    -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Int
 
 @def Micros    -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Int
 
 @def Nanos     -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Int
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Int
 
 */

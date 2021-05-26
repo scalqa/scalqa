@@ -20,6 +20,7 @@ object Docs:
     else m.signature.map(_.toString.trim()).exists(s => s=="<:" || s=="|")
 
   def isMakerMethod(owner: String, name: String) = owner match
+    case "Lang"   => false
     case "Gen"    => false
     case "Opaque" => false
     case _        => makerNameSet.contains(name)

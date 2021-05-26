@@ -22,6 +22,6 @@ ___________________________________________________________________________*/
 /**
 @object Raw -> ###
 
-  [[Any.Raw]] contains all root raw types, which are based on Java primitive values
+  Raw object contains all root raw types, which are based on Java primitive values
 
 */

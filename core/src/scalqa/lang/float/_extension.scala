@@ -140,62 +140,62 @@ ___________________________________________________________________________*/
 
 @def Big       -> Make BigDecimal
 
-                [[scalqa.gen.number.BigDecimal$.opaque BigDecimal]] constructor attached to Float
+                [[scalqa.gen.number.BigDecimal BigDecimal]] constructor attached to Float
 
 @def Percent   -> Make Percent
 
-                [[scalqa.gen.number.Percent$.opaque Percent]] constructor attached to Float
+                [[scalqa.gen.number.Percent Percent]] constructor attached to Float
 
 @def Week      -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Float
 
 @def Weeks     -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Float
 
 @def Day       -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Float
 
 @def Days      -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Float
 
 @def Hour      -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Float
 
 @def Hours     -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Float
 
 @def Minute    -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Float
 
 @def Minutes   -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Float
 
 @def Second    -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Float
 
 @def Seconds   -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Float
 
 @def Millis    -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Float
 
 @def Micros    -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Float
 
 @def Nanos     -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Float
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Float
 
 */

@@ -19,17 +19,17 @@ ___________________________________________________________________________*/
 @trait Void -> ###
 
     Scalqa supports a concept of "void object" ("empty object"), which can be defined for any type.
-    This is similar to [[https://en.wikipedia.org/wiki/Null_object_pattern 'Null Object Pattern']]
+    This is similar to [[https://en.wikipedia.org/wiki/Null_object_pattern Null Object Pattern]]
 
     Unlike 'null', void object can have methods invoked, getting some behavior pertinent to 'voidness'
 
     Examples:
 
-      - Void [[~.AbstractTrait]] is a singleton object of empty stream, which can be re-used for any type
-      - Void [[?]], is a singleton optional value with no value, which can be re-used for any type
+      - Void ~ is a singleton object of empty stream, which can be re-used for any type
+      - Void Opt, is a singleton optional value with no value, which can be re-used for any type
       - Void String, is a string of zero length, which can be re-used for String type instead of null
 
-    Void objects have standard way to declare their voidness mixing this trait. Alternatively, [[Able.Void]] trait can be mixed and isVoid test added explicitly
+    Void objects have a standard way to declare their voidness by mixing this trait. Alternatively, [[Able.Void]] trait can be mixed and isVoid test added explicitly
 
     Types with void values have to define implicit conversions from `\/`
 
@@ -45,7 +45,6 @@ ___________________________________________________________________________*/
         var v: Foo = \/   // Standard void assignment
     ```
 
-    A standard way to test for non voidness is [[Any.^]] method
-
+    A standard way to test for non voidness is [[<any>.^.isVoid]] method
 
 */

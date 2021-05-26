@@ -26,8 +26,8 @@ ___________________________________________________________________________*/
 /**
 @object Opaque -> ###
 
-  [[Any.Opaque]] contains all root opaque types.
+  Opaque object contains all root opaque types.
 
-  All properly defined Scalqa opaque types must derive from one of those roots.
+  All properly defined Scalqa opaque types must extend one of those roots.
 
 */

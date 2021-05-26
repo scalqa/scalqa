@@ -90,7 +90,7 @@ ___________________________________________________________________________*/
 
 @def >< -> Pack elements
 
-        Returns stream elements as [[scalqa.val.Pack ><]]
+        Returns stream elements as ><
 
 @def toSet -> Convert to unique collection
 

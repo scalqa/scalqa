@@ -124,7 +124,7 @@ ___________________________________________________________________________*/
 
 @def ^ -> Self view
 
-    Returns additional [[scalqa.lang.any.type.SelfView$.opaque Self]] library available to this instance
+    Returns additional [[scalqa.lang.any.self.View Self.View]] library available to this instance
 
     The most popular feature is doing some processing within context of an anonimous function
 
@@ -147,7 +147,7 @@ ___________________________________________________________________________*/
 
 @def ?? ->  To result
 
-    Returns [[scalqa.val.Result$.opaque Result]] for current value
+    Returns [[scalqa.val.Result Result]] for current value
     ```
       val o : Result[String] = "Foo".??
     ```

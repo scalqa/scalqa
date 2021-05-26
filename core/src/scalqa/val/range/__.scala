@@ -46,17 +46,17 @@ object Range:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@class Range -> ### Value Range
+@class Range -> ### <> is Value Range
 
-      Range is defined with the following defs:
+      <> is defined with the following defs:
 
           - `start`
           - `end`,
           - and `ordering`, which makes the above meaningful
 
-      Range has a notion that an element can be within the range, i.e. between start and end, or outside
+      <> has a notion that an element can be within the range, i.e. between start and end, or outside
 
-      Note. [[Range]] is implicitly converted to a filter function, returning `true` if an element is within [[Range]] and `false` otherwise
+      Note. <> is implicitly converted to a filter function, returning `true` if an element is within <> and `false` otherwise
 
       Note. Scala provided range structures (Range and NumericRange) are implemented more as collections and this class is designed to close this void focusing on generic range operations
 
@@ -158,4 +158,12 @@ ___________________________________________________________________________*/
     ```
       (1 <> 10).step_~(2).TP  // Prints: ~(1, 3, 5, 7, 9)
     ```
+
+@def isEmpty -> Empty check
+
+    Checks if the range is able contain anything.
+
+    For empty range the start and end values are the same and the end value is not inclusive
+
+
 */

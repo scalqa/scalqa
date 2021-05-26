@@ -157,70 +157,70 @@ ___________________________________________________________________________*/
 
 @def ByteCount -> Make ByteCount
 
-                [[scalqa.gen.number.ByteCount$.opaque ByteCount]] constructor attached to Long
+                [[scalqa.gen.number.ByteCount ByteCount]] constructor attached to Long
 
 @def Year      -> Make Year
 
-                [[scalqa.gen.calendar.Year$.opaque Year]] constructor attached to Long
+                [[scalqa.gen.calendar.Year Year]] constructor attached to Long
 
 @def Big       -> Make BigInteger
 
-                [[scalqa.gen.number.BigInteger$.opaque BigInteger]] constructor attached to Long
+                [[scalqa.gen.number.BigInteger BigInteger]] constructor attached to Long
 
 @def Percent   -> Make Percent
 
-                [[scalqa.gen.number.Percent$.opaque Percent]] constructor attached to Long
+                [[scalqa.gen.number.Percent Percent]] constructor attached to Long
 
 @def Week      -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Long
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Long
 
 @def Weeks     -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Long
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Long
 
 @def Day       -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Long
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Long
 
 @def Days      -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Long
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Long
 
 @def Hour      -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Long
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Long
 
 @def Hours     -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Long
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Long
 
 @def Minute    -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Long
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Long
 
 @def Minutes   -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Long
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Long
 
 @def Second    -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Long
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Long
 
 @def Seconds   -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Long
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Long
 
 @def Millis    -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Long
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Long
 
 @def Micros    -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Long
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Long
 
 @def Nanos     -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Long
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Long
 
 */

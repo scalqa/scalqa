@@ -98,6 +98,7 @@ ___________________________________________________________________________*/
 
    [[Fx]] is an easy to use wrapper of JavaFx technology
 
+   Some use examples can be found in [samples](https://github.com/scalqa/scalqa/tree/master/sample/src/example/fx).
 
 */
 

@@ -33,7 +33,7 @@ object Stream extends z.util._default with _build with _use:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait Stream -> ### Value Stream
+@trait Stream -> ### ~ is Value Stream
 
       Note. Stream companion object is [[scalqa.val.stream.Stream$ Val.~]], but when called without prefix it is [[scalqa.val.stream.Stream$ ~~]] (double tilde).
 

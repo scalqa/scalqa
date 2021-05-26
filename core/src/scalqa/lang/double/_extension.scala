@@ -143,61 +143,61 @@ ___________________________________________________________________________*/
 
 @def Big       -> Make BigDecimal
 
-                [[scalqa.gen.number.BigDecimal$.opaque BigDecimal]] constructor attached to Double
+                [[scalqa.gen.number.BigDecimal BigDecimal]] constructor attached to Double
 
 @def Percent   -> Make Percent
 
-                [[scalqa.gen.number.Percent$.opaque Percent]] constructor attached to Double
+                [[scalqa.gen.number.Percent Percent]] constructor attached to Double
 
 @def Week      -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Double
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Double
 
 @def Weeks     -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Double
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Double
 
 @def Day       -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Double
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Double
 
 @def Days      -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Double
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Double
 
 @def Hour      -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Double
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Double
 
 @def Hours     -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Double
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Double
 
 @def Minute    -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Double
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Double
 
 @def Minutes   -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Double
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Double
 
 @def Second    -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Double
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Double
 
 @def Seconds   -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Double
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Double
 
 @def Millis    -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Double
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Double
 
 @def Micros    -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Double
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Double
 
 @def Nanos     -> Make Time.Length
 
-                [[scalqa.gen.time.Length$.opaque Time.Length]] constructor attached to Double
+                [[scalqa.gen.time.Length Time.Length]] constructor attached to Double
 */

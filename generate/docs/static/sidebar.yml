@@ -11,6 +11,8 @@ sidebar:
           url: guide/introduction/H2O_Structure.html
         - title: Do Not Use toString
           url: guide/introduction/Do_Not_Use_toString.html
+        - title: Do Not Use toString
+          url: guide/introduction/Operator_Types.html
         - title: Samples
           url: guide/introduction/Samples.html
     - title: Features
@@ -29,5 +31,3 @@ sidebar:
           url: guide/internals/SLIM_Coding.html
         - title: Private Packages
           url: guide/internals/Private_Packages.html
-
-

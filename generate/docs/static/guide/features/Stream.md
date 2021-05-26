@@ -3,7 +3,7 @@ layout: doc-page
 title: Stream
 ---
 
-Stream is an operator type represented as [~](../../api/scalqa/val/Stream.html)(tilde). It is the most important feature of Scalqa, 
+Stream is a type defined as [~](../../api/scalqa/val/Stream.html)(tilde). It is the most important feature of Scalqa, 
 responsible for universal data exchange and processing.
 
 ## Data Exchange
@@ -26,7 +26,6 @@ def scalaSeq    : scala.Seq[Int]             = ???
 def scalaVector : scala.Vector[Int]          = ???
 def javaList    : java.util.List[Int]        = ???
 def javaIterator: java.util.Iterator[Int]    = ???
-
 ```
 
 [~](../../api/scalqa/val/Stream.html) is not only a collection iterator, it is more general and can be implemented 

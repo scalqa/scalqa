@@ -37,7 +37,9 @@ object View:
 ___________________________________________________________________________*/
 
 /**
-@object opaque -> Self view is a universal library available for all types.  It is activated by calling a universal ".^" or (".self_^") method, which has zero cost, because self view is an opaque type.
+@object opaque -> Self view is a universal library available for all types.
+
+    Self.View is activated by calling a universal ".^" or (".self_^") method, which has zero cost, because Self.View is an opaque type.
 
     ```
       val a : Array[String] = new Array[String](2).^(a => { a(0)="A"; a(1)="B" })
@@ -99,23 +101,23 @@ ___________________________________________________________________________*/
 
 @def >< -> Pack
 
-    Cretes a pack with this sigle value
+    Creates a pack with this sigle value
 
 @def isVoid -> Void check
 
-    Returns `true`` if value is void, `false` - otherwise
+    Returns `true` if value is void, `false` - otherwise
 
 @def nonVoid -> Non void check
 
-    Returns `true`` if value is not void, `false` - otherwise
+    Returns `true` if value is not void, `false` - otherwise
 
 
 @def isEmpty -> Empty check
 
-    Returns `true`` if value is empty, `false` - otherwise
+    Returns `true` if value is empty, `false` - otherwise
 
 @def nonEmpty -> Non empty check
 
-    Returns `true`` if value is not empty, `false` - otherwise
+    Returns `true` if value is not empty, `false` - otherwise
 
 */
