@@ -1,11 +1,13 @@
 **Scalqa** stands for 'Scala Quick API'. 
 
-It is a simplified API for Scala3 language, built around fast proprietary collections framework.
+It is a simplified library for Scala3, designed to replace use of more complex language native API. 
 
-Scalqa also provides a standardized way to define [opaque data types](https://scalqa.org/doc/guide/features/Data.html), 
-based on Java primitives, which naturally inherit specialized collections, taking processing speed on entire new level.
+Scalqa is built around fast proprietary collections framework, which supports unboxed processing of primitive types.
+
+Scalqa also provides a standardized way to define [opaque data](https://scalqa.org/doc/guide/features/Data.html) based on Java primitives. 
+Data elements naturally inherit built-in specialized collections.
 
 [scalqa.Fx](https://scalqa.org/doc/api/scalqa/Fx$.html) provides GUI functionality, based on JavaFx.
 
-See also Scalqa [guide and API documentation](https://scalqa.org/doc/)
+See also Scalqa [guide](https://scalqa.org/doc/docs/Guide/index.html) and [API](https://scalqa.org/doc/api/scalqa.html) documentation.
 
