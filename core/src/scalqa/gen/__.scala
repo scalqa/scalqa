@@ -1,5 +1,7 @@
 package scalqa; import language.implicitConversions
 
+import scala.reflect.Enum
+
 object Gen:
   @fast lazy val Able               = gen.Able
 
@@ -28,6 +30,7 @@ object Gen:
   @fast lazy val ByteCount          = gen.util.ByteCount;             type ByteCount               = gen.util.ByteCount.opaque.`type`
   @fast lazy val Percent            = gen.util.Percent;               type Percent                 = gen.util.Percent.opaque.`type`
   @fast lazy val ReversibleFunction = gen.util.ReversibleFunction;    type ReversibleFunction[A,B] = gen.util.ReversibleFunction[A,B]
+  /**/                                                                type EnumCompanion[A<:Enum]  = gen.util.EnumCompanion[A]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

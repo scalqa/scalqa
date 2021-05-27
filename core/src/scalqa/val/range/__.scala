@@ -56,8 +56,6 @@ ___________________________________________________________________________*/
 
       <> has a notion that an element can be within the range, i.e. between start and end, or outside
 
-      Note. <> is implicitly converted to a filter function, returning `true` if an element is within <> and `false` otherwise
-
       Note. Scala provided range structures (Range and NumericRange) are implemented more as collections and this class is designed to close this void focusing on generic range operations
 
 

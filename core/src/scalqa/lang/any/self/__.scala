@@ -24,4 +24,10 @@ object Self:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
+@object Self -> ###
+
+  Specialized object provides a set of tags to indicate special implementations.
+
+  It is used primarily for documentation purposes.  Processing logic does not depend on it.
+
 */

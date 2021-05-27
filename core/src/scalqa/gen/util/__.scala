@@ -2,9 +2,10 @@ package scalqa; package gen; import language.implicitConversions
 
 object Util:
 
-  inline def ByteCount          = util.ByteCount;           type ByteCount               = util.ByteCount.opaque.`type`
-  inline def Percent            = util.Percent;             type Percent                 = util.Percent.opaque.`type`
-  inline def ReversibleFunction = util.ReversibleFunction;  type ReversibleFunction[A,B] = util.ReversibleFunction[A,B];
+  inline def ByteCount          = util.ByteCount;           type ByteCount                              = util.ByteCount.opaque.`type`
+  inline def Percent            = util.Percent;             type Percent                                = util.Percent.opaque.`type`
+  inline def ReversibleFunction = util.ReversibleFunction;  type ReversibleFunction[A,B]                = util.ReversibleFunction[A,B]
+  /**/                                                      type EnumCompanion[A <: scala.reflect.Enum] = util.EnumCompanion[A]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

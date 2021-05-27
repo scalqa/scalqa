@@ -1,6 +1,6 @@
-package scalqa; package lang; package any; package `enum`; import language.implicitConversions
+package scalqa; package gen; package util; import language.implicitConversions
 
-abstract class Companion[A <: scala.reflect.Enum] extends Able.~[A]:
+abstract class EnumCompanion[A <: scala.reflect.Enum] extends Able.~[A]:
   protected def values: Array[A]
 
   @tn("pack") @fast lazy val >< : ><[A] = values.~.sortBy(_.ordinal).><
@@ -13,9 +13,9 @@ abstract class Companion[A <: scala.reflect.Enum] extends Able.~[A]:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@class Companion -> ###
+@class EnumCompanion -> ###
 
-   [[Companion]] is a type to be extended by all `enum` companion objects to integrate them with Scalqa containers.
+   [[EnumCompanion]] is a type to be extended by all `enum` companion objects to integrate them with Scalqa containers.
 
    This is a recommended step, which might not be nessesasy in simple cases
 
@@ -23,7 +23,7 @@ ___________________________________________________________________________*/
     enum Direction:
       case Up,Down,Left,Right
 
-    object Direction extends Any.Enum.Companion[Direction]
+    object Direction extends EnumCompanion[Direction]
 
     Direction.~.TP
 

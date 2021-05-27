@@ -53,7 +53,7 @@ ___________________________________________________________________________*/
 @def label -> Capitalize
 
      Capitalizes first character of every word (separated by white spaces)
-     ``` "all string ops".tag TP // Prints: All String Ops ```
+     ``` "all string ops".label TP // Prints: All String Ops ```
 
 
 @def replace -> Replace range with x
@@ -102,11 +102,10 @@ ___________________________________________________________________________*/
       Trims start of String from Chars defined by let function
 
      ```
-         "yyxxxxABC".trimBoth('x' <> 'z') TP                // Prints: ABC
+         "yyxxxxABC".trimStart(_ in 'x' <> 'z') TP           // Prints: ABC
 
-         "yyxxxxABC".trimBoth(c => c == 'x' || c == 'y') TP // Prints: xxxxABC
+         "yyxxxxABC".trimStart(c => c == 'x' || c == 'y') TP // Prints: ABC
      ```
-
 
 @def trimEnd -> Trim end
 
@@ -118,25 +117,22 @@ ___________________________________________________________________________*/
       Trims end of String from Chars defined by let function
 
      ```
-         "ABCxxyyxx".trimEnd('x' <> 'z') TP                // Prints: ABC
+         "ABCxxyyxx".trimEnd(_ in 'x' <> 'z') TP           // Prints: ABC
 
-         "ABCxxyyxx".trimEnd(c => c == 'x' || c == 'y') TP // Prints: ABCxx
+         "ABCxxyyxx".trimEnd(c => c == 'x' || c == 'y') TP // Prints: ABC
      ```
-
 
 @def trim -> Trim both ends
 
      Trims both ends of String from space Chars
-
 
 @def trimBoth -> Trim both ends
 
       Trims both ends of String from Chars defined by let function
 
      ```
-         "yyxxxxABCxxyyxx".trimBoth('x' <> 'z') TP                // Prints: ABC
+         "yyxxxxABCxxyyxx".trimBoth(_ in 'x' <> 'z') TP           // Prints: ABC
 
-         "yyxxxxABCxxyyxx".trimBoth(c => c == 'x' || c == 'y') TP // Prints: xxxxABCxx
+         "yyxxxxABCxxyyxx".trimBoth(c => c == 'x' || c == 'y') TP // Prints: ABC
      ```
-
 */

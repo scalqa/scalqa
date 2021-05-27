@@ -34,7 +34,7 @@ object Week extends Int.Custom.Data.Sequential[Week]("Calendar.Week"):
     def isFri = this eq Day.Fri
     def isSat = this eq Day.Sat
 
-  object Day extends Any.Enum.Companion[Day]
+  object Day extends EnumCompanion[Day]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

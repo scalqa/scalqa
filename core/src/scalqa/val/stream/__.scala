@@ -61,7 +61,11 @@ ___________________________________________________________________________*/
 
       If empty option is returned, the stream is considered exhasted and should be discarded
 
-      This is the only real method of stream interface, the rest of functionality is provided with extension methods
+      This is the only real method of stream interface, the rest of functionality is provided with extension methods for:
+
+        - [building](stream/_build.html) stream pipeline
+        - [using](stream/_use.html) stream data
+
 
 @def apply            -> Single element consructor
 @def apply            -> Double element consructor

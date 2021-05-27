@@ -24,7 +24,7 @@ ___________________________________________________________________________*/
 
 @def filter ->  Legacy filter
 
-    Filters [[scalqa.val.Stream Stream]] elements according to given function
+    Filters [[scalqa.val.Stream ~]] elements according to given function
 
     ```
        (0 <>> 10).~.filter(_ > 5).TP

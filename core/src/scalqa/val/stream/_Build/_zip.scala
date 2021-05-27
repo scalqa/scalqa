@@ -69,8 +69,8 @@ ___________________________________________________________________________*/
      ```
 
      @param  that the stream to merge with **this**
-     @param  thisDflt if **this** [[scalqa.val.Stream Stream]] has fewer elements,  ''thisDflt'' will be used to fill the voids. Fails if ''thisDflt'' is required, but not available
-     @param  thatDflt if **that** [[scalqa.val.Stream Stream]] has fewer elements,  ''thatDflt'' will be used to fill the voids. Fails if ''thatDflt'' is required, but not available
+     @param  thisDflt if **this** [[scalqa.val.Stream ~]] has fewer elements,  ''thisDflt'' will be used to fill the voids. Fails if ''thisDflt'' is required, but not available
+     @param  thatDflt if **that** [[scalqa.val.Stream ~]] has fewer elements,  ''thatDflt'' will be used to fill the voids. Fails if ''thatDflt'' is required, but not available
 
 
 @def zipFoldAs -> Merges current folding value
@@ -93,7 +93,7 @@ ___________________________________________________________________________*/
 
 @def zipIndex  -> Merge index
 
-     Creates a new [[scalqa.val.Stream Stream]] with elements paired with their sequential position, starting at 0
+     Creates a new [[scalqa.val.Stream ~]] with elements paired with their sequential position, starting at 0
 
      ```
         ('A' <> 'F').~.zipIndex.TP
@@ -107,7 +107,7 @@ ___________________________________________________________________________*/
 
 
 @def zipIndex ->  Merge number
-     Creates a new [[scalqa.val.Stream Stream]] with elements paired with their sequential position
+     Creates a new [[scalqa.val.Stream ~]] with elements paired with their sequential position
      Note:  Index is the first element in the resulting tuples.
 
      ```
@@ -118,7 +118,7 @@ ___________________________________________________________________________*/
 
 @def zipKey -> Merge property first
 
-     Creates a new [[scalqa.val.Stream Stream]] with elements paired with their property, defined by given function
+     Creates a new [[scalqa.val.Stream ~]] with elements paired with their property, defined by given function
 
      The paired value is in the first tuple position
 
@@ -128,7 +128,7 @@ ___________________________________________________________________________*/
 
 @def zipValue -> Merge property
 
-     Creates a new [[scalqa.val.Stream Stream]] with elements paired with their property, defined by given function
+     Creates a new [[scalqa.val.Stream ~]] with elements paired with their property, defined by given function
 
      The paired value is in the second tuple position
 
@@ -139,7 +139,7 @@ ___________________________________________________________________________*/
 
 @def zipPrior -> Merge with prior
 
-     Creates new [[scalqa.val.Stream Stream]] with elements paired with the optional prior element
+     Creates new [[scalqa.val.Stream ~]] with elements paired with the optional prior element
 
      ```
         (1 <> 5).~.zipPrior.TP  // Prints ~((Opt(\/),1), (Opt(1),2), (Opt(2),3), (Opt(3),4), (Opt(4),5))
@@ -148,7 +148,7 @@ ___________________________________________________________________________*/
 
 @def zipNext -> Merge with next
 
-     Creates new [[scalqa.val.Stream Stream]] with elements paired with the optional next element
+     Creates new [[scalqa.val.Stream ~]] with elements paired with the optional next element
 
      ```
         (1 <> 5).~.zipNext.TP  // Prints ~((1,Opt(2)), (2,Opt(3)), (3,Opt(4)), (4,Opt(5)), (5,Opt(\/)))

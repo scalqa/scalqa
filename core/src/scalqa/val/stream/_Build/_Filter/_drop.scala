@@ -30,7 +30,7 @@ ___________________________________________________________________________*/
 /**
 @def drop -> Reverse filter
 
-    Disallows [[scalqa.val.Stream Stream]] elements satisfying the given function
+    Disallows [[scalqa.val.Stream ~]] elements satisfying the given function
 
     ```
        (0 <>> 10).~.drop(_ > 5).TP
@@ -43,7 +43,7 @@ ___________________________________________________________________________*/
 
 @def DROP -> Heavy reversed filter
 
-    Disallows [[scalqa.val.Stream Stream]] elements satisfying the given function
+    Disallows [[scalqa.val.Stream ~]] elements satisfying the given function
 
     [[DROP]] is functionally equivalent to [[drop]], but is fully inlined. It makes compiled code larger, but guarantees the best possible performance on large streams.
 

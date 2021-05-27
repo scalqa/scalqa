@@ -142,7 +142,7 @@ ___________________________________________________________________________*/
 
 @def splitAt -> Positional split
 
-      Splits [[scalqa.val.Stream Stream]] at specified positions
+      Splits [[scalqa.val.Stream ~]] at specified positions
 
       ```
       val ~~(s1, s2, s3) = (0 <> 20).~.splitAt(5, 15)

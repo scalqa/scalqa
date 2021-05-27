@@ -29,7 +29,7 @@ ___________________________________________________________________________*/
 
 @def map -> Simple map
 
-     Creates a new [[scalqa.val.Stream Stream]] where each element is a result of applying given function to current [[scalqa.val.Stream Stream]] elements
+     Creates a new [[scalqa.val.Stream ~]] where each element is a result of applying given function to current [[scalqa.val.Stream ~]] elements
 
      ```
       (0 <>> 26).~.map(i => ('a' + i).Char).TP
@@ -44,7 +44,7 @@ ___________________________________________________________________________*/
 
 @def map_? -> Optional map
 
-     Creates a new [[scalqa.val.Stream Stream]] where each element is a result of applying given function to [[scalqa.val.Stream Stream]] elements.
+     Creates a new [[scalqa.val.Stream ~]] where each element is a result of applying given function to [[scalqa.val.Stream ~]] elements.
      If the function returns void option, the element is dropped.
 
      ```
@@ -69,7 +69,6 @@ ___________________________________________________________________________*/
 
      - [[map_?]] is functionally similar to [[collect]], but is faster (PartialFunction has to be evaluated twice)
      - [[map_?]] can return specialized stream result, but boxing might happen during mapping
-     - [[mapRaw_?]] is trully unboxed for raw types
 
 @def MAP_? -> Heavy optional map
 
@@ -77,7 +76,7 @@ ___________________________________________________________________________*/
 
 @def flatMap -> Flat map
 
-      Creates a new [[scalqa.val.Stream Stream]] by applying given function to all elements of current [[scalqa.val.Stream Stream]] and concatenating the results
+      Creates a new [[scalqa.val.Stream ~]] by applying given function to all elements of current [[scalqa.val.Stream ~]] and concatenating the results
 
 
      ```
@@ -104,7 +103,7 @@ ___________________________________________________________________________*/
 
 @def collect -> Partial map
 
-    Creates a new [[scalqa.val.Stream Stream]] by applying a partial function to all elements of current [[scalqa.val.Stream Stream]] on which the function is defined.
+    Creates a new [[scalqa.val.Stream ~]] by applying a partial function to all elements of current [[scalqa.val.Stream ~]] on which the function is defined.
 
     ```
     (0 <>> 26).~.collect{

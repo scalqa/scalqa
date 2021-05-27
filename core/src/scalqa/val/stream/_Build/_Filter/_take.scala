@@ -30,7 +30,7 @@ ___________________________________________________________________________*/
 /**
 @def take -> Main filter
 
-    Only takes [[scalqa.val.Stream Stream]] elements satisfying the given function
+    Only takes [[scalqa.val.Stream ~]] elements satisfying the given function
 
     ```
        (0 <>> 10).~.take(_ > 5).TP
@@ -43,7 +43,7 @@ ___________________________________________________________________________*/
 
 @def TAKE -> Heavy filter
 
-    Filters [[scalqa.val.Stream Stream]] elements according to given function
+    Filters [[scalqa.val.Stream ~]] elements according to given function
 
     [[TAKE]] is functionally equivalent to [[take]], but is fully inlined. It makes compiled code larger, but guarantees the best possible performance on large streams.
 

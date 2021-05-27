@@ -124,7 +124,7 @@ ___________________________________________________________________________*/
 
 @def ^ -> Self view
 
-    Returns additional [[scalqa.lang.any.self.View Self.View]] library available to this instance
+    Returns additional [Self.View](self/View.html) library available to this instance
 
     The most popular feature is doing some processing within context of an anonimous function
 
@@ -145,6 +145,9 @@ ___________________________________________________________________________*/
       val o : Opt[String] = "Foo".?
     ```
 
+    Note. Option will be empty if value is 'null'
+
+
 @def ?? ->  To result
 
     Returns [[scalqa.val.Result Result]] for current value
@@ -160,7 +163,7 @@ ___________________________________________________________________________*/
       ("AAA" <> "BBB").TP  // Prints  AAA <> BBB
     ```
 
-    Note. A type comparator must be implicitly available
+    Note. An Ordering be implicitly available
 
 @def <>> ->  Exclusive end range
 
@@ -169,7 +172,7 @@ ___________________________________________________________________________*/
       ("AAA" <>> "BBB").TP  // Prints  AAA <>> BBB
     ```
 
-    Note. A type comparator must be implicitly available
+    Note. An Ordering must be implicitly available
 
 
 @def +- -> Any to String add with space

@@ -118,7 +118,8 @@ Num Name         Ops/Sec %   Memory %   Last Value
 --- ------------ ------- --- ------ --- -----------------
 ```
 
-
+The conclusion is: boxing in Scala is quite efficient, it is only few times slower. The biggest difference is the memory consumption, 
+which on heavy calculations could slow down the entire JVM. 
     
   
  

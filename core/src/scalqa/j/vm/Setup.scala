@@ -40,7 +40,7 @@ ___________________________________________________________________________*/
       - Once the property value was accessed, it cannot be chaged anymore
       - If method `J.Vm.Setup.seal` is executed, all properties become immutable
 
-@val parallelFlowSetup_* -> [[scalqa.val.Stream Stream]] parallel engine setup
+@val parallelFlowSetup_* -> [[scalqa.val.Stream ~]] parallel engine setup
 
       Defines factory to create parallel [[scalqa.val.stream.Flow ~~.Flow]].
 

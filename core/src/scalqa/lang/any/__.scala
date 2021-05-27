@@ -2,7 +2,6 @@ package scalqa; package lang; import language.implicitConversions
 
 object Any:
   type Opaque;                                  @fast lazy val Opaque      = any.Opaque
-  type Enum        = scala.reflect.Enum;        @fast lazy val Enum        = any.Enum
   type Ref         = scala.AnyRef;              @fast lazy val Ref         = any.Ref
   type Raw         = scala.AnyVal;              @fast lazy val Raw         = any.Raw
   /**/                                                     val Self        = any.Self

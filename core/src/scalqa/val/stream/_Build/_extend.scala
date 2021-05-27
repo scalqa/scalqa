@@ -31,7 +31,7 @@ ___________________________________________________________________________*/
 
 @def + -> Alias for [[join]]
 
-      Creates a new [[scalqa.val.Stream Stream]] with given element appended to current [[scalqa.val.Stream Stream]]
+      Creates a new [[scalqa.val.Stream ~]] with given element appended to current [[scalqa.val.Stream ~]]
 
       ```
          ((1 <> 5).~ + 99 + 100).TP
@@ -42,7 +42,7 @@ ___________________________________________________________________________*/
 
 @def join -> Join element
 
-      Creates a new [[scalqa.val.Stream Stream]] with given element appended to current [[scalqa.val.Stream Stream]]
+      Creates a new [[scalqa.val.Stream ~]] with given element appended to current [[scalqa.val.Stream ~]]
 
       ```
          (1 <> 5).~.join(99).join(100).TP
@@ -53,7 +53,7 @@ ___________________________________________________________________________*/
 
 @def ++ -> Alias for [[joinAll]]
 
-      Creates a new [[scalqa.val.Stream Stream]] with given elements appended to current [[scalqa.val.Stream Stream]]
+      Creates a new [[scalqa.val.Stream ~]] with given elements appended to current [[scalqa.val.Stream ~]]
 
       ```
          (('1' <> '9').~ ++ ('a' <> 'd') ++ ('A' <> 'D')).TP
@@ -64,7 +64,7 @@ ___________________________________________________________________________*/
 
 @def joinAll -> Join all
 
-      Creates a new [[scalqa.val.Stream Stream]] with given elements appended to current [[scalqa.val.Stream Stream]]
+      Creates a new [[scalqa.val.Stream ~]] with given elements appended to current [[scalqa.val.Stream ~]]
 
       ```
          ('1' <> '9').~.joinAll('a' <> 'd').joinAll('A' <> 'D').TP
@@ -75,7 +75,7 @@ ___________________________________________________________________________*/
 
 @def +@ -> Alias for [[joinAt]]
 
-      Creates a new [[scalqa.val.Stream Stream]] with given element inserted into current [[scalqa.val.Stream Stream]] at given index
+      Creates a new [[scalqa.val.Stream ~]] with given element inserted into current [[scalqa.val.Stream ~]] at given index
 
       If index is out of range, the element is prepended or appended
 
@@ -88,7 +88,7 @@ ___________________________________________________________________________*/
 
 @def joinAt -> Join element at position
 
-      Creates a new [[scalqa.val.Stream Stream]] with given element inserted into current [[scalqa.val.Stream Stream]] at given index
+      Creates a new [[scalqa.val.Stream ~]] with given element inserted into current [[scalqa.val.Stream ~]] at given index
 
       If index is out of range, the element is prepended or appended
 
@@ -101,7 +101,7 @@ ___________________________________________________________________________*/
 
 @def ++@ -> Alias for [[joinAllAt]]
 
-     Creates a new [[scalqa.val.Stream Stream]] with given elements inserted into current [[Stream]] at given index
+     Creates a new [[scalqa.val.Stream ~]] with given elements inserted into current [[Stream]] at given index
 
      If index is out of range, the elements are prepended or appended
 
@@ -114,7 +114,7 @@ ___________________________________________________________________________*/
 
 @def joinAllAt -> Join all at position
 
-     Creates a new [[scalqa.val.Stream Stream]] with given elements inserted into current [[Stream]] at given index
+     Creates a new [[scalqa.val.Stream ~]] with given elements inserted into current [[Stream]] at given index
 
      If index is out of range, the elements are prepended or appended
 
@@ -127,9 +127,9 @@ ___________________________________________________________________________*/
 
 @def default -> Default element
 
-       If current [[scalqa.val.Stream Stream]] is empty, the given element will be appended
+       If current [[scalqa.val.Stream ~]] is empty, the given element will be appended
 
-       Otherwise current [[scalqa.val.Stream Stream]] will not change
+       Otherwise current [[scalqa.val.Stream ~]] will not change
        ```
          (1 <>> 1).~.default(99).TP // Prints ~(99)
 
@@ -138,7 +138,7 @@ ___________________________________________________________________________*/
 
 @def repeat -> Repeat elements
 
-      Creates a new [[scalqa.val.Stream Stream]] where each elements from current [[scalqa.val.Stream Stream]] is repeated given number of times
+      Creates a new [[scalqa.val.Stream ~]] where each elements from current [[scalqa.val.Stream ~]] is repeated given number of times
 
       ```
         (0 <> 2).~.repeat(3).TP
