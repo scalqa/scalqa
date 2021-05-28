@@ -18,7 +18,7 @@ object Opt extends z.opt._base:
     /**/               inline def takeOnly(inline v: A)                       : Opt[A]     = x.take(_.real == v.real)
     /**/               inline def drop(  inline f: A => Boolean)              : Opt[A]     = {var o:Opt[A]= \/; if(x!=o && !f(x.`val`)) o=x; o}
     /**/               inline def dropOnly(inline v: A)                       : Opt[A]     = x.drop(_.real == v.real)
-    /**/               inline def dropVoid(using inline t: Self.VoidTag[A])       : Opt[A]     = if(x.nonEmpty && t.isVoid(x.`val`)) \/ else x
+    /**/               inline def dropVoid(using inline t: Self.VoidTag[A])   : Opt[A]     = if(x.nonEmpty && t.isVoid(x.`val`)) \/ else x
     /**/               inline def default(inline v: => A)                     : Opt[A]     = if(x.isEmpty) v       else x
     @tn("or_Opt")infix inline def or_?(inline that: => Opt[A])                : Opt[A]     = if(x.isEmpty) that    else x
     /**/         infix inline def or(inline default: => A)                    : A          = if(x.isEmpty) default else x.`val`

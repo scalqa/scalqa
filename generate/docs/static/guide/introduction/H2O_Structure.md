@@ -23,22 +23,22 @@ For example:
 - [`Val.Collection.Mutable`](../../api/scalqa/val/collection/Mutable.html) is a mutable collection interface   
 
 Some hierarchy members can also have 'aliases' (shortcuts), so they can also be called 
-with shorter names. For instance, all root object members (except for [scalqa.J](../../api/scalqa/J$.html)) have aliases in 'scalqa' package and the above 
-example can be accessed as:
+with shorter names. For instance, when calling members of [Lang](../../api/scalqa/Lang$.html), [Val](../../api/scalqa/Val$.html), and [Gen](../../api/scalqa/Gen$.html)
+prefix is not required:
  
 - [`Int.G.Buffer`](../../api/scalqa/lang/int/g/Buffer.html) 
 - [`Collection.Mutable`](../../api/scalqa/val/collection/Mutable.html)    
 
 ### Justification
 
-One of the most precious resources in todays programming is name space. Every imaginable piece of functionality, we might need, 
+One of the most precious resources in today's programming is name space. Every imaginable piece of functionality, we might need, 
 already exists somewhere. The challenge is to make accessing it cheaper, then the potential benefits. 
-Often times 'import' statements are not justified to bring in trivial functionality
+Often times 'import' statements are not justified to bring in trivial functionality.
 
 In Scalqa code there are practically no imports (except for rare conflict resolutions). All the functionality is available from the root,
-but few levels of hierarchy provide unlimited naming opportunities for even the most trivial methods
+but few levels of hierarchy provide unlimited naming opportunities for even the most trivial methods.
 
 ### Implementation        
 
-Of cause there are packages on implementation level, but they are not a part of public API and should not be called directly. 
-All public functionality is exposed as objects, which can be imported (if required) the same way packages are 
+Of course there are packages on implementation level, but they are not a part of public API and should not be called directly. 
+All public functionality is exposed as objects, which can be imported (if required) the same way packages are.

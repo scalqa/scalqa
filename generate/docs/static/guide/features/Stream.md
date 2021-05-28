@@ -81,19 +81,21 @@ Heavy methods generally make sense on streams with over 1000 elements. Here is a
 val array : Array[String] = (1 <> 300).~.map(_.toString).toArray
 
 J.Benchmark(
-  () => array.~.take(_.length%2==0).flatMap (_ => array.~).map(_.length).fold(0)(_ + _),
-  () => array.~.TAKE(_.length%2==0).FLAT_MAP(_ => array.~).MAP(_.length).FOLD(0)(_ + _),
+  ("Iterator", () => array.iterator.filter(_.length%2==0).flatMap (_ => array).map(_.length).fold(0)(_ + _)),
+  ("~",        () => array.~       .filter(_.length%2==0).flatMap (_ => array).map(_.length).fold(0)(_ + _)),
+  ("Heavy ~",  () => array.~       .FILTER(_.length%2==0).FLAT_MAP(_ => array).MAP(_.length).FOLD(0)(_ + _)),
 )
 ```
 ```
 // Output
 Final Result. Total length is about 12 secs
---- ------- --- ------ --- ---------
-Num Ops/Sec %   Memory %   Avg Value
---- ------- --- ------ --- ---------
-1   3.5k    35  1.7kB  74  71280.0
-2   9.9k    100 2.3kB  100 71280.0
---- ------- --- ------ --- ---------
+--- -------- ------- --- ------- --- ---------
+Num Name     Ops/Sec %   Memory  %   Avg Value
+--- -------- ------- --- ------- --- ---------
+1   Iterator 2.1k    21  429.8kB 100 71280.0
+2   ~        3.6k    36  351B    0   71280.0
+3   Heavy ~  9.8k    100 3.2kB   0   71280.0
+--- -------- ------- --- ------- --- ---------
 ```  
 
 ## Specialized for Primitives
@@ -116,8 +118,8 @@ which are based on primitive Double:
    s.docTree.tp
 
    // Prints  
-   scalqa.def.int.z.stream.map$Doubles@nj1f{raw=Double,fromRaw=Int,size=100}
-      scalqa.def.int.z.Range$Stream@9yoq{raw=Int,size=100,from=1}
+   scalqa.lang.int.z.stream.map$Doubles@3ge6{raw=Double,fromRaw=Int,size=1000}
+     scalqa.lang.int.z.Range$Stream@nvp{raw=Int,size=1000,from=1}
 
 ```
 Notice that printout suggests some customized implementation involving Int and Double  

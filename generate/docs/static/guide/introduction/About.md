@@ -2,6 +2,7 @@
 layout: doc-page
 title: About
 ---
+**Scalqa** stands for 'Scala Quick API'. 
 
 It is a simplified library for Scala3, designed to replace use of more complex language native API. 
 

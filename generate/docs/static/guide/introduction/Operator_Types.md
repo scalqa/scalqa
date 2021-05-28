@@ -28,7 +28,7 @@ Range can be converted to a ~ (stream) of elements.
     val stringStream: ~[String]  = stringRange.step_~(_ + "a")    // Creating stream of Strings with a step function
 ```
 
-Stream elements can be packed into immutable collection. 
+Stream elements can be packed into an immutable collection. 
 
 ```
     val charPack    : ><[Char]   = charStream.><                
