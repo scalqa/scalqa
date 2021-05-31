@@ -10,7 +10,7 @@
 
 /project/release/docs/target
 /project/release/docs/lib/*.jar
-/project/release/release/scalqa/target
+/project/release/scalqa/target
 /project/release/scalqa/src
 /project/release/scalqa/sonatype-staging
 
