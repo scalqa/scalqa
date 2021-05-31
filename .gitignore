@@ -8,6 +8,7 @@
 */project/project/target
 */logs
 
+/project/release/target
 /project/release/docs/target
 /project/release/docs/lib/*.jar
 /project/release/scalqa/target
