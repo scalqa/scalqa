@@ -8,11 +8,11 @@
 */project/project/target
 */logs
 
-/generate/docs/target
-/generate/docs/lib/*.jar
-/generate/scalqa/target
-/generate/scalqa/src
-/generate/scalqa/sonatype-staging
+/project/release/docs/target
+/project/release/docs/lib/*.jar
+/project/release/release/scalqa/target
+/project/release/scalqa/src
+/project/release/scalqa/sonatype-staging
 
 /core/src/scalqa/Test*.scala
 /core/src/scalqa/Example*.scala
