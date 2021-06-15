@@ -18,7 +18,7 @@ private[calendar] object day:
   class Setup(val year: Year, val month: Month, val number: Int, val start: Time):
     def this(d: java.time.LocalDate) = this(Year(d.getYear), Month(d.getYear, d.getMonthValue), d.getDayOfMonth, Time.fromMillis(d.atStartOfDay(Time.Zone.Id).toInstant.toEpochMilli))
 
-  private object Void extends Setup(\/, \/, 0, \/) with Self.Void
+  private object Void extends Setup(\/, \/, 0, \/) with Gen.Void
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

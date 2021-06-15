@@ -1,6 +1,6 @@
 package scalqa; package `val`; import range.*; import language.implicitConversions
 
-import lang.any.self.`given`.RangeTag
+import gen.`given`.RangeTag
 
 abstract class Range[A] extends Able.Contain[A]:
   type THIS_TYPE <: Range[A]
@@ -34,7 +34,7 @@ object Range:
 
   given givenCanEqualRange[A,B](using CanEqual[A,B]): CanEqual[<>[A],<>[B]] = CanEqual.derived
   given givenFor                                    : range.z.For           = new range.z.For{}
-  given givenDocTag[A:Self.DocTag]                  : Self.DocTag[Range[A]] = new range.z.DocTag[A]
+  given givenDocTag[A:Given.DocTag]                  : Given.DocTag[Range[A]] = new range.z.DocTag[A]
 
   // ~~~~~~~~~~~~~~~~~~~~~~
   inline def X = range.X

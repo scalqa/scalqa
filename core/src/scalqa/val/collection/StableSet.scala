@@ -28,7 +28,7 @@ object StableSet:
         /**/          def join(v: A)       : StableSet[A] = new Ref(real + v)
         /**/          def joinAll(v: ~[A]) : StableSet[A] = new Ref(real ++ v.iterator)
 
-    object Void extends StableSet[Any] with Self.Void:
+    object Void extends StableSet[Any] with Gen.Void:
       type THIS_TYPE = StableSet[Any]
       /**/            def contains(v: Any)  : Boolean      = false
       /**/            def size              : Int          = 0

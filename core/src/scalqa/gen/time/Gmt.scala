@@ -9,10 +9,11 @@ object Gmt extends Long.Custom.Data[Gmt]("Time.Gmt") with time.x.Base[Gmt] with 
 
   implicit inline def implicitRequestCurrent(inline v: CURRENT) : Gmt     = apply()
 
-  extension(x: Gmt) @tn("millisTotal") inline    def millisTotal: Long    = x.real
-  extension(x: Gmt) @tn("day")         override  def day        : Day     = Day.byIndex((x.millisTotal / X.Millis.InOneDay).Int)
-  extension(x: Gmt) @tn("dayTime")     override  def dayTime    : DayTime = (x.millisTotal % X.Millis.InOneDay).Int.Millis
-  extension(x: Gmt) @tn("general")        inline def general    : Time    = Time.fromMillis(x.real)
+  extension(x: Gmt)
+    @tn("millisTotal") inline    def millisTotal: Long    = x.real
+    @tn("day")         override  def day        : Day     = Day.byIndex((x.millisTotal / X.Millis.InOneDay).Int)
+    @tn("dayTime")     override  def dayTime    : DayTime = (x.millisTotal % X.Millis.InOneDay).Int.Millis
+    @tn("general")        inline def general    : Time    = Time.fromMillis(x.real)
 
   object opaque:
     opaque type `type` <: Opaque.Long = Opaque.Long

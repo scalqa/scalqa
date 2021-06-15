@@ -17,6 +17,8 @@ sidebar:
           url: guide/introduction/Samples.html
     - title: Features
       subsection:
+        - title: Containers
+          url: guide/features/Containers.html
         - title: Stream
           url: guide/features/Stream.html
         - title: Option

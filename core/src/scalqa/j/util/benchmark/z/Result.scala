@@ -18,14 +18,14 @@ private[j] class Result(
 
   def doc =
     def percent(v: Long, t: Long) = if (t == 0) 0 else (v * 100D / t).Int
-    Self.Doc(this)
-      += ("Num", number)
-      += (label != number.toString) ? ("Name", label)
-      += ("Ops/Sec", if (time <= \/) "Too many" else opsPerSec.toBrief)
-      += ("%",        percent(opsPerSec, maxOpsPerSec))
-      += ("Memory",   memoryAverage.toBrief)
-      += ("%",        percent(memoryAverage.Long, maxMemoryAverage.Long))
-      += ( sumOpt.drop(_ => count == 0).map(v => ("Avg Value",(v / count).tag)) or_? lastOpt.map(v => ("Last Value" , v.tag)))
+    Doc(this)
+      +=  ("Num", number)
+      ++= (label != number.toString) ? ("Name", label)
+      +=  ("Ops/Sec", if (time <= \/) "Too many" else opsPerSec.toBrief)
+      +=  ("%",        percent(opsPerSec, maxOpsPerSec))
+      +=  ("Memory",   memoryAverage.toBrief)
+      +=  ("%",        percent(memoryAverage.Long, maxMemoryAverage.Long))
+      ++= ( sumOpt.drop(_ => count == 0).map(v => ("Avg Value",(v / count).tag)) or_? lastOpt.map(v => ("Last Value" , v.tag)))
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API

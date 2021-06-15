@@ -6,14 +6,15 @@ trait Collection[A<:RAW] extends Val.Collection[A] with Able.Contain[A] with any
 
 object Collection:
   extension[A<:RAW,T,STM<: ~~.AnyType[T]](inline x: Collection[A])
-    /**/                                       inline def map    [B>:T](inline f: A=> B)   (using inline s: Self.StreamTag[B,STM]): STM       = g.Stream.map[A,T,STM](x.~)[B](f)(using s)
-    /**/                                       inline def flatMap[B>:T](inline f: A=> ~[B])(using inline s: Self.StreamTag[B,STM]): STM       = g.Stream.flatMap[A,T,STM](x.~)[B](f)(using s)
+    /**/                                       inline def map    [B>:T](inline f: A=> B)   (using inline s: Given.StreamTag[B,STM]): STM       = g.Stream.map[A,T,STM](x.~)[B](f)(using s)
+    /**/                                       inline def flatMap[B>:T](inline f: A=> ~[B])(using inline s: Given.StreamTag[B,STM]): STM       = g.Stream.flatMap[A,T,STM](x.~)[B](f)(using s)
   extension[A<:RAW]  (inline x: Collection[A]) inline def withFilter(inline f: Fun.Filter[A])                                       : Stream[A] = x.~.filter(f)
   extension[A<:RAW,U](inline x: Collection[A]) inline def foreach(   inline f: Fun.Consume[A,U])                                    : Unit      = x.~.foreach(f)
 
   // ******************************************************************************************************************************************
   trait Mutable[A<:RAW] extends Collection[A] with Val.Collection.M[A]:
-    def add(v: A): Unit
+    /**/                 def add(v: A): Unit
+    @tn("_add") override def += (v: A): this.type = { add(v); this }
 
   // ******************************************************************************************************************************************
   import scala.collection.immutable.IntMap
@@ -28,7 +29,7 @@ object Collection:
 
   object StableSet:
     /**/            def apply[A<:RAW](v: ~[A])         : StableSet[A] = new StableSet(IntMap.from(v.map(v => (v.real.Int,())).iterator))
-    @tn("getVoid")  def void[A<:RAW]                   : StableSet[A] = zVoid.cast[StableSet[A]]; private[g] object zVoid extends StableSet(IntMap.empty) with Self.Void
+    @tn("getVoid")  def void[A<:RAW]                   : StableSet[A] = zVoid.cast[StableSet[A]]; private[g] object zVoid extends StableSet(IntMap.empty) with Gen.Void
     implicit inline def implicitRequestVoid[A<:RAW](inline v: \/): StableSet[A] = zVoid.cast[StableSet[A]]
 
 /*___________________________________________________________________________

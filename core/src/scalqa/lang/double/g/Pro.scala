@@ -16,13 +16,13 @@ object Pro:
   trait  Observable[A<:RAW] extends Pro[A] with Val.Pro.O[A]
   object Observable:
     object X:
-      abstract class Abstract[A<:RAW] extends Val.Pro.Observable.X.Abstract[A] with Observable[A]
+      abstract class Base[A<:RAW] extends Val.Pro.Observable.X.Base[A] with Observable[A]
 
   trait  ObservableMutable[A<:RAW] extends Mutable[A] with Observable[A] with Val.Pro.OM[A]
   object ObservableMutable:
     object X:
-      abstract class Abstract[A<:RAW] extends Observable.X.Abstract[A] with ObservableMutable[A]
-      class Basic[A<:RAW](v: A) extends Mutable.X.Basic[A](v) with Val.Pro.Observable.X.AbstractTrait[A] with ObservableMutable[A]:
+      abstract class Base[A<:RAW] extends Observable.X.Base[A] with ObservableMutable[A]
+      class Basic[A<:RAW](v: A) extends Mutable.X.Basic[A](v) with Val.Pro.Observable.X.Basis[A] with ObservableMutable[A]:
         override def update(v: A) = if(apply() != v) { super.update(v); fireChange }
 
 /*___________________________________________________________________________

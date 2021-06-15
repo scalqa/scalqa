@@ -1,15 +1,15 @@
 package scalqa; package lang; package any; package raw; import language.implicitConversions
 
 object Specialized:
-  trait OnSomething
-  trait OnBoolean extends OnSomething
-  trait OnByte    extends OnSomething
-  trait OnChar    extends OnSomething
-  trait OnShort   extends OnSomething
-  trait OnInt     extends OnSomething
-  trait OnLong    extends OnSomething
-  trait OnFloat   extends OnSomething
-  trait OnDouble  extends OnSomething
+  trait OnAnyRaw
+  trait OnBoolean extends OnAnyRaw
+  trait OnByte    extends OnAnyRaw
+  trait OnChar    extends OnAnyRaw
+  trait OnShort   extends OnAnyRaw
+  trait OnInt     extends OnAnyRaw
+  trait OnLong    extends OnAnyRaw
+  trait OnFloat   extends OnAnyRaw
+  trait OnDouble  extends OnAnyRaw
 
   @tn("get_Opt") def get_?(v: Any) : Opt[String] = v match
     case v: OnBoolean    => "Boolean"
@@ -20,7 +20,7 @@ object Specialized:
     case v: OnLong       => "Long"
     case v: OnFloat      => "Float"
     case v: OnDouble     => "Double"
-    case v: OnSomething  => "Something"
+    case v: OnAnyRaw     => "AnyRaw"
     case _               => \/
 
 

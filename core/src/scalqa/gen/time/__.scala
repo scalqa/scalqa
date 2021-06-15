@@ -14,7 +14,7 @@ object Time extends Long.Custom.Data.Ordered[Time]("Time") with time.x.Base[Time
   implicit       inline def implicitRequestCurrent(inline v: CURRENT): Time       = apply()
   implicit       inline def implicitRequestVoid(inline v: \/)        : Time       = -62167201438000L.asOpaque[Time]
 
-  //given givenVoidTag: Self.VoidTag[Time]=this
+  //given givenVoidTag: Given.VoidTag[Time]=this
 
   extension(x: Time)
     /**/    inline def millisTotal             : Long        = x.real
@@ -37,7 +37,7 @@ object Time extends Long.Custom.Data.Ordered[Time]("Time") with time.x.Base[Time
   inline def Length   = time.Length;              type Length  = time.Length.opaque.`type`
   inline def Period   = time.Period;              type Period  = time.Period
   inline def Zone     = time.Zone
-  inline def X        = time.X
+  @fast lazy val X    = time.X
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

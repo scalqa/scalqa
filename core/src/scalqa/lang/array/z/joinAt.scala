@@ -1,6 +1,6 @@
 package scalqa; package lang; package array; package z; import language.implicitConversions
 
-import Self.Given.ArrayTag
+import Gen.Given.ArrayTag
 
 object joinAt:
 

@@ -4,7 +4,7 @@ import javafx.scene.shape.{ VLineTo => JVLineTo }
 
 class VLineTo(val real: JVLineTo) extends AnyVal with Z.Base[VLineTo,JVLineTo]:
   protected    def setup                             = VLineTo
-  @tn("y_Pro") def y_*            : Double.Pro.OM    = Fx.JavaFx.As.pro_OM(real.yProperty)
+  @tn("y_Pro") def y_*            : Double.Pro.OM    = Fx.JavaFx.To.pro_OM(real.yProperty)
   /**/         def y              : Double           = real.getY
   /**/         def y_=(v: Double) : Unit             = real.setY(v)
 

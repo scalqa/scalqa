@@ -16,7 +16,7 @@ abstract class Table[ROW] extends Control with _properties[ROW] with _Column[ROW
   def scrollTo(i: Int)             : Unit                       = real.scrollTo(i)
 
   ({
-    _createRealOverride(new REAL().^(r => { r.setEditable(true); r.setItems(Ui.JavaFx.list(rowData))}))
+    _createRealOverride(new REAL().^(r => { r.setEditable(true); r.setItems(Fx.JavaFx.list(rowData))}))
     _onRealCreated(real => {
       columnData.seal.~.foreach(c => { real.getColumns.add(c.real); c.sortable = c.ordering.nonVoid && sortMode.nonVoid})
       onCreateRowCell(new RowCell[ROW, VIEW](this))

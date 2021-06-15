@@ -6,7 +6,7 @@ class Field(columnsO: Opt[Int] = \/, value: String.Opt = \/) extends Text.InputC
 
   /**/                   def onAction[U](l: () => U) : Event.Control = _onFxEvent[javafx.event.ActionEvent,U](real.onActionProperty(), Event.Id.map1(l,(ae: javafx.event.ActionEvent) => l()))
   /**/                   def onActionRun[U](l: => U) : Event.Control = onAction(() => l)
-  @tn("columnCount_Pro") def columnCount_*           : Int.Pro.OM    = Fx.JavaFx.As.pro_OM(real.prefColumnCountProperty)
+  @tn("columnCount_Pro") def columnCount_*           : Int.Pro.OM    = Fx.JavaFx.To.pro_OM(real.prefColumnCountProperty)
   /**/                   def columnCount             : Int           = real.getPrefColumnCount
   /**/                   def columnCount_=(b: Int)   : Unit          = real.setPrefColumnCount(b)
 

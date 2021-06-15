@@ -3,7 +3,7 @@ package scalqa; package `val`; package idx; package observable; package event; i
 import recorder.Z
 import observable.{ event as C }
 
-class Recorder[A](protected val real: Idx.Mutable[A]) extends Idx.M.X.Abstract[A] with J.Util.Proxy.Idx.AbstractTrait[A]:
+class Recorder[A](protected val real: Idx.Mutable[A]) extends Idx.M.X.Base[A] with J.Util.Proxy.Idx.Basis[A]:
   protected   var list                           : ><[Event[A]]    = \/
   protected   var last                           : Event[A]        = null
   protected   def add(v: Event[A])               : Unit            = { if(last != null) list += last; last = v}

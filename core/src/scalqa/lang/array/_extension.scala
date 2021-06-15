@@ -1,6 +1,6 @@
 package scalqa; package lang; package array; import language.implicitConversions
 
-import Self.Given.ArrayTag
+import Gen.Given.ArrayTag
 
 transparent trait _extension:
 
@@ -49,7 +49,7 @@ ___________________________________________________________________________*/
 /**
 @trait _extension -> ### Array Extension Methods
 
-    The below extension methods are universaly avaialble for Array types.
+    Extension methods are universaly avaialble for all Array types.
 
     The methods are heavily overloaded to work efficiently when array type is explicit, but they fall back on slower inmpementations when array is generic.
 

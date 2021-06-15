@@ -7,9 +7,10 @@ trait Idx[A<:RAW] extends Val.Idx[A] with Collection[A]:
 
 object Idx:
 
-  trait Mutable[A<:RAW] extends Idx[A] with Collection.Mutable[A] with Val.Idx.M[A] :
-    def addAt(i: Int, v: A)   : Unit
-    def updateAt(i: Int, v: A): Unit
+  trait Mutable[A<:RAW] extends Idx[A] with Collection.Mutable[A] with Val.Idx.M[A]:
+    @tn("_addAt") override def +=@ (position:Int, v: A): this.type = { addAt(position, v); this }
+    /**/                   def addAt(i: Int, v: A)     : Unit
+    /**/                   def updateAt(i: Int, v: A)  : Unit
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

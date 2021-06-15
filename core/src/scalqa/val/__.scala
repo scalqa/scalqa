@@ -23,7 +23,7 @@ ___________________________________________________________________________*/
 /**
 @object Val -> ### Value Container Framework
 
-    Note: Half the members are collections: Buffer, Collection, Idx, ><, and Lookup
+    Read more in the [Guide](../../../guide/features/Containers.html).
 
     [[Val]] is fully exported to scalqa root, thus all members and aliases of [[Val]] can be called with or without "Val." prefix.
 

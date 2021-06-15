@@ -23,7 +23,7 @@ trait Nanos[A<:Any.Raw.Long]:
     /**/            inline def nanos                              : Long = x.nanosTotal   % 1000
 
     @tn("plus")     inline def  +(inline l: Length)               : A    = (x.nanosTotal + l.nanosTotal).cast[A]
-    @tn("minus")    inline def  -(inline l: Length)               : A    = (x.nanosTotal + l.nanosTotal).cast[A]
+    @tn("minus")    inline def  -(inline l: Length)               : A    = (x.nanosTotal - l.nanosTotal).cast[A]
     @tn("plusAll")  inline def ++(inline s: ~[Length])            : A    = (s.foldAs(x.nanosTotal)(_ + _.nanosTotal)).cast[A]
     @tn("minusAll") inline def --(inline s: ~[Length])            : A    = (s.foldAs(x.nanosTotal)(_ - _.nanosTotal)).cast[A]
 

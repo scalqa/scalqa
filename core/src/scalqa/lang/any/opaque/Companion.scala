@@ -1,11 +1,9 @@
 package scalqa; package lang; package any; package opaque; import language.implicitConversions
 
-import self.Given
-
-abstract class Companion[A<:Opaque]private[lang](ct: ClassTag[A]) extends Self.NameTag[A] with Self.DocTag[A] with Self.VoidTag[A]:
+abstract class Companion[A<:Opaque]private[lang](ct: ClassTag[A]) extends gen.`given`.NameTag[A] with gen.`given`.DocTag[A] with gen.`given`.VoidTag[A]:
   self =>
-  given givenNameTag : Self.NameTag[A]  = self
-  given givenDocTag  : Self.DocTag[A]   = self
+  given givenNameTag : Given.NameTag[A]  = self
+  given givenDocTag  : Given.DocTag[A]   = self
   given givenClassTag: ClassTag[A]   = ct
   given givenCanEqual: CanEqual[A,A] = CanEqual.derived
 
@@ -13,10 +11,10 @@ abstract class Companion[A<:Opaque]private[lang](ct: ClassTag[A]) extends Self.N
   def tag(v: A)   : String  = doc(v).tag
 
   private var ck = -1 // Checking if `doc` is called from `tag` (it may be overridden), if not, `tag` value is included in doc
-  def doc(v: A): Self.Doc =
+  def doc(v: A): Doc      =
      if(ck<0) self.synchronized{ if(ck<0){ if(ck== -1){ ck= -2; tag(v); if(ck!=1) ck=0} else ck=1 }}
      val dt = ZZ.Tag.tag(v)
-     Self.Doc(name+"@"+v.self_^.hash) += isVoid(v) ? ("","Void") += ("opaque",(v:Any).^.typeName+"("+dt+")") ++= ((ck==0) ? tag(v)).dropOnly(dt).map(v=>("tag",v)).~
+     Doc(name+"@"+v.self_^.hash) ++= isVoid(v) ? ("","Void") += ("opaque",(v:Any).^.typeName+"("+dt+")") ++= ((ck==0) ? tag(v)).dropOnly(dt).map(v=>("tag",v))
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -25,6 +23,11 @@ abstract class Companion[A<:Opaque]private[lang](ct: ClassTag[A]) extends Self.N
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
+@class Companion -> Base type for all Opaque companion objects.
+
+    This class cannot be used directly, but rather through it's children like
+    [Int.Custom.Type](../../int.custom.Type.html), [Char.Custom.Data](../../char.custom.Data.html), etc.
+
 @def tag -> Type to String
 
     Override this method to provide type standard convertion to String

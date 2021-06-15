@@ -1,7 +1,7 @@
 package scalqa; package `val`; package stream; package z; package build; package mutate; import language.implicitConversions
 
 import Any.{Raw as RAW}
-import Self.Given.StreamTag
+import Gen.Given.StreamTag
 import z.a.Map
 
 object raw:

@@ -1,10 +1,10 @@
 package scalqa;  package lang; package char; package custom; import language.implicitConversions
 
-abstract class Type[A<:Opaque.Char](val name:String) extends Opaque.Companion[A](ClassTag.Char.cast[ClassTag[A]]) with Self.VoidTag.Chars[A]:
+abstract class Type[A<:Opaque.Char](val name:String) extends Opaque.Companion[A](ClassTag.Char.cast[ClassTag[A]]) with gen.`given`.VoidTag.RawChar[A]:
 
   override def isVoid(v: A): Boolean=false
 
-  given givenVoidTag: Self.VoidTag.Chars[A]=this
+  given givenVoidTag: Given.VoidTag.RawChar[A]=this
 
   extension(inline x: A)
     inline def real: Char = x.cast[Char]

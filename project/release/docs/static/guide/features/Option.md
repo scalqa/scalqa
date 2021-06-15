@@ -10,7 +10,7 @@ naturally solves the problem of 'null' pointer exception. The large processing l
 allows to define complex value manipulations without the need to check if value is present, because this is constantly done by the library.
 
 [Opt](../../api/scalqa/val/Opt.html) has implementation with zero runtime costs. It creates no object: [Opt](../../api/scalqa/val/Opt.html)
-is an opaque type of the value itself. Moreover, the option methods a fully inlined, so the resulting Java code will simply manipulate value, 
+is an opaque type of the value itself. Moreover, the option methods are fully inlined, so the resulting Java code will simply manipulate value 
 without any mention of option type.
 
 Consider a method which optionally takes a String, and triples it by simple concatenation:
@@ -18,7 +18,7 @@ Consider a method which optionally takes a String, and triples it by simple conc
 ```
 def triple(v: Opt[String]): Opt[String] = v.map(s => s + s + s)
 ```
-If we do the same without option, we will have to check for emptiness: 
+If we do the same without option, we will have to check for null: 
 ```
 def triple(v: String): String = {
    var r: String = null
@@ -62,8 +62,8 @@ val CNT = 100000
 val array: Array[Int] = (0 <> CNT).~.toArray
 
 J.Benchmark(
-  ("Int.Opt",           () => { var sum=0.Percent; for(i <- 0<>CNT){ val o: Int.Opt     = array(i);       o.filter(_ % 2 == 0).map(_.Percent).foreach(sum += _)}; sum}),
   ("Opt[Int]",          () => { var sum=0.Percent; for(i <- 0<>CNT){ val o: Opt[Int]    = array(i);       o.filter(_ % 2 == 0).map(_.Percent).foreach(sum += _)}; sum}),
+  ("Int.Opt",           () => { var sum=0.Percent; for(i <- 0<>CNT){ val o: Int.Opt     = array(i);       o.filter(_ % 2 == 0).map(_.Percent).foreach(sum += _)}; sum}),
   ("scala.Option[Int]", () => { var sum=0.Percent; for(i <- 0<>CNT){ val o: Option[Int] = Some(array(i)); o.filter(_ % 2 == 0).map(_.Percent).foreach(sum += _)}; sum}),
 )
 ```
@@ -73,8 +73,8 @@ Final Result. Total length is about 12 secs
 --- ----------------- ------- --- ------ --- -------------
 Num Name              Ops/Sec %   Memory %   Last Value
 --- ----------------- ------- --- ------ --- -------------
-1   Int.Opt           15.5k   100 66B    0   2.499984464E9
 2   Opt[Int]          1.5k    9   1.5mB  14  2.499984464E9
+1   Int.Opt           15.5k   100 66B    0   2.499984464E9
 3   scala.Option[Int] 276     1   10.7mB 100 2.50005E9
 --- ----------------- ------- --- ------ --- -------------
 ```

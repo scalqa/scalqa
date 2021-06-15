@@ -33,8 +33,8 @@ object Range:
 
   // ------------------------------------------------------------------------------------------------------------------------------------------
   extension[A<:RAW,T,STM<: ~~.AnyType[T]](inline x: Range[A])
-    /**/                                  inline def map    [B>:T](inline f:A=> B)   (using inline t: Self.StreamTag[B,STM]): STM       = g.Stream.map[A,T,STM](x.~)[B](f)(using t)
-    /**/                                  inline def flatMap[B>:T](inline f:A=> ~[T])(using inline t: Self.StreamTag[B,STM]): STM       = g.Stream.flatMap[A,T,STM](x.~)[B](f)(using t)
+    /**/                                  inline def map    [B>:T](inline f:A=> B)   (using inline t: Given.StreamTag[B,STM]): STM       = g.Stream.map[A,T,STM](x.~)[B](f)(using t)
+    /**/                                  inline def flatMap[B>:T](inline f:A=> ~[T])(using inline t: Given.StreamTag[B,STM]): STM       = g.Stream.flatMap[A,T,STM](x.~)[B](f)(using t)
   extension[A<:RAW]  (inline x: Range[A]) inline def withFilter(inline f: Fun.Filter[A])                                    : Stream[A] = x.~.take(f)
   extension[A<:RAW,U](inline x: Range[A]) inline def foreach(   inline f: Fun.Consume[A,U])                                 : Unit      = {var i=x.start.real; val e=x.end.real+x.endIsIn.Int; while(i<e){f(i.cast[A]); i+=1L}}
 

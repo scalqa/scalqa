@@ -1,6 +1,6 @@
 package scalqa; package `val`; package pro; package z; import language.implicitConversions
 
-private[`val`] class Convert_View[A,B](protected val real: Pro[A], f: A => B) extends pro.X.Abstract[B]:
+private[`val`] class Convert_View[A,B](protected val real: Pro[A], f: A => B) extends pro.X.Base[B]:
 
   def apply() = f(real())
 

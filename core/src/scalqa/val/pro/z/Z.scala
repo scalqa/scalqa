@@ -2,7 +2,7 @@ package scalqa; package `val`; package pro; import language.implicitConversions
 
 private[`val`] object Z:
 
-  class Function0[A](source: => A) extends pro.X.Abstract[A] { def apply() = source }
+  class Function0[A](source: => A) extends pro.X.Base[A] { def apply() = source }
 
   class Named[A](val name: String, source: => A, dependencies: ~[Gen.Observable]) extends observable.X.Basic(source, dependencies) with Able.Name
 

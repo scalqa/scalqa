@@ -24,7 +24,7 @@ object ReversibleFunction:
       def apply(v: A)  = original.undo(v)
       def undo(v: B)   = original.apply(v)
 
-    object Void extends ReversibleFunction[Any, Any] with Self.Void:
+    object Void extends ReversibleFunction[Any, Any] with Gen.Void:
       def apply(v: Any) = v
       def undo(v: Any)  = v
 

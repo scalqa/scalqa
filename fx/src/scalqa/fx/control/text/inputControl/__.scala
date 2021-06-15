@@ -14,12 +14,12 @@ abstract class InputControl(initialTextO: String.Opt = \/) extends Control:
   /**/                     def +=(s: String)               : Unit            = real.appendText(s)
   /**/                     def onChange[U](l: Change => U) : Unit            = { _onChange += l; if (!real.getTextFormatter.isInstanceOf[Formatter[_]]) real.setTextFormatter(new Formatter) }
 
-  @tn("editable_Pro")      def editable_*                  : Boolean.Pro.OM  = Fx.JavaFx.As.pro_OM(real.editableProperty)
+  @tn("editable_Pro")      def editable_*                  : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.editableProperty)
   /**/                     def editable                    : Boolean         = real.isEditable
   /**/                     def editable_=(b: Boolean)      : Unit            = real.setEditable(b)
-  @tn("caretPosition_Pro") def caretPosition_*             : Int.Pro.O       = Fx.JavaFx.As.pro_O(real.caretPositionProperty)
+  @tn("caretPosition_Pro") def caretPosition_*             : Int.Pro.O       = Fx.JavaFx.To.pro_O(real.caretPositionProperty)
   /**/                     def caretPosition               : Int             = real.getCaretPosition
-  @tn("text_Pro")          def text_*                      : String.Pro.OM   = Fx.JavaFx.As.pro_OM(real.textProperty)
+  @tn("text_Pro")          def text_*                      : String.Pro.OM   = Fx.JavaFx.To.pro_OM(real.textProperty)
   /**/                     def text                        : String          = real.getText
   /**/                     def text_=(v: String)           : Unit            = real.setText(v)
 

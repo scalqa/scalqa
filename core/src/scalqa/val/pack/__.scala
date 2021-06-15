@@ -1,7 +1,7 @@
 package scalqa; package `val`; import pack.*; import language.implicitConversions
 
 import Pack.RawType
-import Self.Given.PackTag.{ Raw as TAG }
+import Gen.Given.PackTag.{ Raw as TAG }
 
 abstract class Pack[A] extends Idx[A]:
   type THIS_TYPE <: Pack[A]

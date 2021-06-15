@@ -12,7 +12,7 @@ object Path extends Any.Ref.Custom.Type[Path,PATH]("J.Path"):
   private[j]      def any(v: Any)                   : Path    = v match { case v: PATH => apply(v); case v => apply(v.toString) }
   override        def isVoid(v: Path)               : Boolean = v.real.startsWith("")
   override        def tag(v: Path)                  : String  = v.real.toString
-  override        def doc(v: Path)                  : Self.Doc= super.doc(v) += ("size",v.size)
+  override        def doc(v: Path)                  : Doc     = super.doc(v) += ("size",v.size)
 
   implicit inline def implicitFromReal(v: PATH)        : Path = v.asOpaque[Path]
   implicit inline def implicitFromString(v: String)    : Path = apply(v)

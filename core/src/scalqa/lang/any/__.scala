@@ -1,11 +1,10 @@
 package scalqa; package lang; import language.implicitConversions
 
 object Any:
+  type _extension  = any._extension
   type Opaque;                                  @fast lazy val Opaque      = any.Opaque
   type Ref         = scala.AnyRef;              @fast lazy val Ref         = any.Ref
   type Raw         = scala.AnyVal;              @fast lazy val Raw         = any.Raw
-  /**/                                                     val Self        = any.Self
-  type _extension  = any._extension
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -1,10 +1,10 @@
 package scalqa;  package lang; package double; package custom; import language.implicitConversions
 
-abstract class Type[A<:Opaque.Double](val name:String) extends Opaque.Companion[A](ClassTag.Double.cast[ClassTag[A]]) with Self.VoidTag.Doubles[A]:
+abstract class Type[A<:Opaque.Double](val name:String) extends Opaque.Companion[A](ClassTag.Double.cast[ClassTag[A]]) with gen.`given`.VoidTag.RawDouble[A]:
 
   override def isVoid(v: A): Boolean=false
 
-  given givenVoidTag: Self.VoidTag.Doubles[A]=this
+  given givenVoidTag: Given.VoidTag.RawDouble[A]=this
 
   extension(inline x: A)
     inline def real: Double = x.cast[Double]

@@ -1,7 +1,7 @@
 package scalqa; package `val`; package stream; package z; package build; package map; import language.implicitConversions
 
 import a.{ FlatMap as FM }
-import Self.Given.StreamTag
+import Gen.Given.StreamTag
 
 object flatMap:
   class Booleans[A,B<:Raw.Boolean](x:Stream[A], f: A => ~[B]) extends FM.ToBoolean[B](x){ def fewOpt = x.read_?.map(f(_))}

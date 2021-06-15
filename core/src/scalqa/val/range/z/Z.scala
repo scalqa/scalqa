@@ -3,7 +3,7 @@ package scalqa; package `val`; package range
 object Z:
 
   abstract class Base[A] extends X.Base[A,Range[A]]:
-    def make(s:A, e:A, in:Boolean)(using Ordering[A]): Range[A] = ???
+    def make(s:A, e:A, in:Boolean)(using Ordering[A]): Range[A] = if(in) new EndInclsive(s,e) else new EndExclusive(s,e)
 
   class EndInclsive[A:Ordering  ](val start: A, val end: A)(using val ordering: Ordering  [A]) extends Base[A]:
     /**/     def endIsIn       = true
@@ -22,7 +22,7 @@ object Z:
     override def contains(v:A) = false
 
   // **********************************************************************************************************************
-  class Void[A](using val ordering: Ordering  [A]) extends Base[A] with Self.Void:
+  class Void[A](using val ordering: Ordering  [A]) extends Base[A] with Gen.Void:
     override def start                   : A       = J.unsupportedOperation("Void range does not have a start")
     override def end                     : A       = J.unsupportedOperation("Void range does not have an end")
     override def endIsIn                 : Boolean = false

@@ -21,7 +21,7 @@ object Z:
     @tn("stream") def ~    = real.~.map(m(_))
     /**/          def size = real.size
 
-  object Void extends Collection[Nothing] with Self.Void:
+  object Void extends Collection[Nothing] with Gen.Void:
     @tn("stream") def ~    = \/
     /**/          def size = 0
 

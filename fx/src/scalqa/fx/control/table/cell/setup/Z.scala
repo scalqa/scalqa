@@ -6,11 +6,13 @@ private object Z:
 
   def voidPro[A] : Pro.O[Opt[A]] = VoidPro.cast[Pro.O[Opt[A]]]
 
+  // ******************************************************************
   private object VoidFunction extends (Any => Pro.O[Opt[Any]]):
     def apply(v: Any) = voidPro
 
-  private object VoidPro extends Pro.O[Any] with Self.Void:
-    def apply()                  = Any.Self.Void
+  // ******************************************************************
+  private object VoidPro extends Pro.O[Any] with Gen.Void:
+    def apply()                  = Opt.void
     def onChange[U](el: () => U) = \/
 
 /*___________________________________________________________________________

@@ -17,7 +17,7 @@ object Stream extends z.util._default with _build with _use:
   implicit       inline def implicitFromAbleStream[A](inline v:Able.~[A]): ~[A]      = v.~
 
   given givenCanEqualStream[A,B](using CanEqual[A,B]): CanEqual[~[A],~[B]] = CanEqual.derived
-  given givenDocTag[A :Self.DocTag]                  : Self.DocTag[~[A]]  = z.util.DocTag()
+  given givenDocTag[A :Given.DocTag]                  : Given.DocTag[~[A]]  = z.util.DocTag()
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def _build  = stream._build;   type _build     = stream._build

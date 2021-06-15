@@ -1,6 +1,6 @@
 package scalqa; package `val`; package range; package z; import language.implicitConversions
 
-import lang.any.self.`given`.RangeTag
+import gen.`given`.RangeTag
 
 object raw:
 

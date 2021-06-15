@@ -1,10 +1,10 @@
 package scalqa;  package lang; package boolean; package custom; import language.implicitConversions
 
-abstract class Type[A<:Opaque.Boolean](val name:String) extends Opaque.Companion[A](ClassTag.Boolean.cast[ClassTag[A]]) with Self.VoidTag.Booleans[A]:
+abstract class Type[A<:Opaque.Boolean](val name:String) extends Opaque.Companion[A](ClassTag.Boolean.cast[ClassTag[A]]) with gen.`given`.VoidTag.RawBoolean[A]:
 
   override def isVoid(v: A): Boolean=false
 
-  given givenVoidTag: Self.VoidTag.Booleans[A]=this
+  given givenVoidTag: Given.VoidTag.RawBoolean[A]=this
 
   extension(inline x: A)
     inline def real: Boolean = x.cast[Boolean]

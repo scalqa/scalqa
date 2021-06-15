@@ -3,9 +3,9 @@ package scalqa; package gen; package event; package observable; import language.
 object X:
   private object AnyChangeEvent
 
-  abstract class Abstract extends AbstractTrait
+  abstract class Base extends Basis
 
-  trait AbstractTrait extends Observable with Event.Store.Provider:
+  trait Basis extends Observable with Event.Store.Provider:
     protected def onObservableChange[U](f: () => U): Event.Control = eventStore.onEvent0(AnyChangeEvent, f)
     protected def fireAnyChange                    : Int           = eventStore.fireEvent0(AnyChangeEvent)
 

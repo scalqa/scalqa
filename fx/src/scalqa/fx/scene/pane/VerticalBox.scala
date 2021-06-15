@@ -4,10 +4,10 @@ class VerticalBox extends Pane:
   protected type REAL = javafx.scene.layout.VBox
   protected override def _createReal = new REAL
 
-  @tn("spacing_Pro")   def spacing_*            : Double.Pro.OM  = Fx.JavaFx.As.pro_OM(real.spacingProperty)
+  @tn("spacing_Pro")   def spacing_*            : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.spacingProperty)
   /**/                 def spacing              : Double         = real.getSpacing
   /**/                 def spacing_=(b: Double) : Unit           = real.setSpacing(b)
-  @tn("alignment_Pro") def alignment_*          : Pro.OM[Pos]    = Fx.JavaFx.As.pro_OM(real.alignmentProperty).mutableMap_^[Pos]
+  @tn("alignment_Pro") def alignment_*          : Pro.OM[Pos]    = Fx.JavaFx.To.pro_OM(real.alignmentProperty).mutableMap_^[Pos]
   /**/                 def alignment            : Pos            = real.getAlignment
   /**/                 def alignment_=(v: Pos)  : Unit           = real.setAlignment(v)
 

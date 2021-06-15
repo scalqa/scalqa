@@ -3,16 +3,16 @@ package scalqa; package `val`; package pro; package observable; import language.
 object X:
   private object ChangeEvent
 
-  abstract class Abstract[A] extends pro.X.Abstract[A] with AbstractTrait[A]
+  abstract class Base[A] extends pro.X.Base[A] with Basis[A]
 
   // *****************************************************************************************************************
-  trait AbstractTrait[A] extends pro.X.AbstractTrait[A] with Observable[A] with Event.Store.Provider:
+  trait Basis[A] extends pro.X.Basis[A] with Observable[A] with Event.Store.Provider:
     private[observable] def count                     = eventStore.count
     override            def onChange[U](f: () => U)   = eventStore.onEvent0(ChangeEvent, f)
     protected           def fireChange: Int           = eventStore.fireEvent0(ChangeEvent)
 
   // *****************************************************************************************************************
-  trait ActivationAbstractTrait[A] extends AbstractTrait[A]:
+  trait ActivationBasis[A] extends Basis[A]:
     private             var active                    = false
     private             def cnhg(v: Boolean): Unit    = { active = v; if (v) _afterFirstListenerAdded else _afterLastListenerRemoved }
     override            def onChange[U](f: () => U)   = super.onChange(f).^(_ => if (f.isInstanceOf[Event.Id.Cancel]) { if (active && count == 0) cnhg(false) } else if (!active && count > 0) cnhg(true))
@@ -21,7 +21,7 @@ object X:
     protected           def _afterLastListenerRemoved = ()
 
   // *****************************************************************************************************************
-  class Basic[A](source: => A) extends observable.X.Abstract[A]:
+  class Basic[A](source: => A) extends observable.X.Base[A]:
     def this(source: => A, dependencies: ~[Gen.Observable] = \/) =
       this(source)
       dependencies.foreach(v => Gen.Observable.onObservableChange(v)(() => fireChange))

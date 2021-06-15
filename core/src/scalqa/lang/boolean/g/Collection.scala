@@ -7,12 +7,13 @@ trait Collection[A<:RAW] extends Val.Collection[A] with Able.Contain[A] with any
 object Collection:
 
   trait Mutable[A<:RAW] extends Collection[A] with Val.Collection.M[A]:
-    def add(v: A): Unit
+    /**/                 def add(v: A): Unit
+    @tn("_add") override def += (v: A): this.type = { add(v); this }
 
   // ------------------------------------------------------------------------------------------------------------------------------------------
   extension[A<:RAW,T,STM<: ~~.AnyType[T]](inline x: Collection[A])
-    /**/                                       inline def map    [B>:T](inline f: A=> B)   (using inline s: Self.StreamTag[B,STM]): STM       = g.Stream.map[A,T,STM](x.~)[B](f)(using s)
-    /**/                                       inline def flatMap[B>:T](inline f: A=> ~[B])(using inline s: Self.StreamTag[B,STM]): STM       = g.Stream.flatMap[A,T,STM](x.~)[B](f)(using s)
+    /**/                                       inline def map    [B>:T](inline f: A=> B)   (using inline s: Given.StreamTag[B,STM]): STM       = g.Stream.map[A,T,STM](x.~)[B](f)(using s)
+    /**/                                       inline def flatMap[B>:T](inline f: A=> ~[B])(using inline s: Given.StreamTag[B,STM]): STM       = g.Stream.flatMap[A,T,STM](x.~)[B](f)(using s)
   extension[A<:RAW]  (inline x: Collection[A]) inline def withFilter(inline f: Fun.Filter[A])                                        : Stream[A] = x.~.filter(f)
   extension[A<:RAW,U](inline x: Collection[A]) inline def foreach(   inline f: Fun.Consume[A,U])                                     : Unit      = x.~.foreach(f)
 

@@ -35,7 +35,7 @@ abstract class Stream[A<:RAW] extends Val.~[A] with ~~.Custom.Discharge[A] with 
   @tn("REDUCE_Opt")inline def REDUCE_?(  inline f: (A,A) => A)            : G.Opt[A]      = { var o = readRaw_?; if(o.nonEmpty) o=FOLD(o.`val`)(f); o}
 
 object Stream:
-  import Self.Given.StreamTag
+  import Gen.Given.StreamTag
   extension[A<:RAW,T,STM<: ~~.AnyType[T]](inline x: g.Stream[A])
     /**/           inline def map      [B>:T](inline f: A => B)                  (using inline t:StreamTag[B,       STM]): STM  = z.stream.map(x,f,t)
     /**/           inline def MAP      [B>:T](inline f: A => B)                  (using inline t:StreamTag[B,       STM]): STM  = z.stream.map.APPLY(x,f,t)

@@ -1,7 +1,7 @@
 package scalqa; package lang; package array; package z; import language.implicitConversions
 
 import java.util.Arrays
-import Self.Given.ArrayTag
+import Gen.Given.ArrayTag
 
 object copySize:
 

@@ -3,19 +3,19 @@ package scalqa; package fx; package control; package label; import language.impl
 abstract class Like extends Control:
   protected type REAL <: javafx.scene.control.Labeled
 
-  @tn("text_Pro")      def text_*               : String.Pro.OM  = Fx.JavaFx.As.pro_OM(real.textProperty)
+  @tn("text_Pro")      def text_*               : String.Pro.OM  = Fx.JavaFx.To.pro_OM(real.textProperty)
   /**/                 def text                 : String         = real.getText
   /**/                 def text_=(v: String)    : Unit           = real.setText(v)
 
-  @tn("alignment_Pro") def alignment_*          : Pro.OM[Pos]    = Fx.JavaFx.As.pro_OM(real.alignmentProperty).mutableMap_^[Pos]
+  @tn("alignment_Pro") def alignment_*          : Pro.OM[Pos]    = Fx.JavaFx.To.pro_OM(real.alignmentProperty).mutableMap_^[Pos]
   /**/                 def alignment            : Pos            = real.getAlignment
   /**/                 def alignment_=(v: Pos)  : Unit           = real.setAlignment(v)
 
-  @tn("font_Pro")      def font_*               : Pro.OM[Font]   = Fx.JavaFx.As.pro_OM(real.fontProperty).mutableMap_^[Font]
+  @tn("font_Pro")      def font_*               : Pro.OM[Font]   = Fx.JavaFx.To.pro_OM(real.fontProperty).mutableMap_^[Font]
   /**/                 def font                 : Font           = Font(real.getFont)
   /**/                 def font_=(v: Font)      : Unit           = real.setFont(v.real)
 
-  @tn("textFill_Pro")  def textFill_*           : Pro.OM[Paint]  = Fx.JavaFx.As.pro_OM(real.textFillProperty).mutableMap_^[Paint]
+  @tn("textFill_Pro")  def textFill_*           : Pro.OM[Paint]  = Fx.JavaFx.To.pro_OM(real.textFillProperty).mutableMap_^[Paint]
   /**/                 def textFill             : Paint          = Paint(real.getTextFill)
   /**/                 def textFill_=(v: Paint) : Unit           = real.setTextFill(v.real)
 

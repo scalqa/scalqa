@@ -1,6 +1,6 @@
 package scalqa; package lang; package float; package z; package opt; import language.implicitConversions
 
-import Self.Given.OptTag
+import Gen.Given.OptTag
 import `val`.opt.z.AnyTypeOps.*
 
 object mixOpt:

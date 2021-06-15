@@ -3,13 +3,13 @@ package scalqa; package fx; package control; package table; package z; package i
 private[fx] class Entry[A](var index: Int, val value: A) extends Able.Doc:
 
   override def equals(a: Any): Boolean  = a match{ case v: Entry[_] => v.index == index && v.value == value; case _ => false }
-  /**/     def doc           : Self.Doc = Self.Doc(this) += ("index", index) += ("value", value)
+  /**/     def doc           : Doc      = Doc(this) += ("index", index) += ("value", value)
 
 private[scalqa] object Entry:
 
   def indexSorting[A]: Ordering[Entry[A]] = zIndexOrdering.cast[Ordering[Entry[A]]]; private val zIndexOrdering = Int.ordering.on[Entry[Any]](_.index)
 
-  trait IndexBase[A] extends Idx.M.X.Abstract[A]:
+  trait IndexBase[A] extends Idx.M.X.Base[A]:
     /**/                def target                 : Idx.M[A]
     /**/                def entries                : Idx.M[Entry[A]]
     /**/                def apply(i: Int)          : A                = entries(i).value

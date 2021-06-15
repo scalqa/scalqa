@@ -1,6 +1,7 @@
 package scalqa; package lang; package double; package custom; package framework; package companion; import language.implicitConversions
 
 class Idx[A<:RAW] extends Pack.zBased[A,G.Idx[A]]:
+  type M = G.Idx.Mutable[A]; inline def M = Mutable
 
   type Mutable = G.Idx.Mutable[A]
   object Mutable:

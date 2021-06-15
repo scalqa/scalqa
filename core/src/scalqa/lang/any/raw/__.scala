@@ -22,6 +22,8 @@ ___________________________________________________________________________*/
 /**
 @object Raw -> ###
 
+  Raw type is an alias for scala.AnyVal
+
   Raw object contains all root raw types, which are based on Java primitive values
 
 */

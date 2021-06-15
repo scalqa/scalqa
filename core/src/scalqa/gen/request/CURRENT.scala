@@ -1,6 +1,8 @@
 package scalqa; package gen; package request
 
-object CURRENT extends Request
+class CURRENT private() extends Request
+
+object CURRENT extends CURRENT
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -9,8 +11,12 @@ object CURRENT extends Request
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object CURRENT -> ### General Request CURRENT
+@class  CURRENT -> ### CURRENT Request Type
 
        See [[Request]] for usage
+
+@object CURRENT -> ### CURRENT Object
+
+       Singleton implementation of [[CURRENT]] request type
 
 */

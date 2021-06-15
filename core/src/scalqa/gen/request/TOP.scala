@@ -1,6 +1,8 @@
 package scalqa; package gen; package request
 
-object TOP extends Request
+class TOP private() extends Request
+
+object TOP extends TOP
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -9,8 +11,12 @@ object TOP extends Request
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object TOP -> ### General Request  TOP
+@class  TOP -> ### TOP Request Type
 
        See [[Request]] for usage
+
+@object TOP -> ### TOP Object
+
+       Singleton implementation of [[TOP]] request type
 
 */

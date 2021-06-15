@@ -5,23 +5,24 @@ class Request:
   override def toString = super.toString.takeBefore("$").takeAfterLast(".")
 
 object Request:
-  @tn("VOID")    type \/         = request.VOID      .type;    @tn("VOID")  inline def \/          = request.VOID
-  /**/           type DEFAULT    = request.DEFAULT   .type;                 inline def DEFAULT     = request.DEFAULT
-  /**/           type ALL        = request.ALL       .type;                 inline def ALL         = request.ALL
-  /**/           type EMPTY      = request.EMPTY     .type;                 inline def EMPTY       = request.EMPTY
-  /**/           type CURRENT    = request.CURRENT   .type;                 inline def CURRENT     = request.CURRENT
-  /**/           type LEFT       = request.LEFT      .type;                 inline def LEFT        = request.LEFT
-  /**/           type RIGHT      = request.RIGHT     .type;                 inline def RIGHT       = request.RIGHT
-  /**/           type CENTER     = request.CENTER    .type;                 inline def CENTER      = request.CENTER
-  /**/           type TOP        = request.TOP       .type;                 inline def TOP         = request.TOP
-  /**/           type BOTTOM     = request.BOTTOM    .type;                 inline def BOTTOM      = request.BOTTOM
-  /**/           type HORIZONTAL = request.HORIZONTAL.type;                 inline def HORIZONTAL  = request.HORIZONTAL
-  /**/           type VERTICAL   = request.VERTICAL  .type;                 inline def VERTICAL    = request.VERTICAL
-  /**/           type UP         = request.UP        .type;                 inline def UP          = request.UP
-  /**/           type DOWN       = request.DOWN      .type;                 inline def DOWN        = request.DOWN
-  /**/           type SEPARATOR  = request.SEPARATOR .type;                 inline def SEPARATOR   = request.SEPARATOR
-  /**/           type MAX        = request.MAX       .type;                 inline def MAX         = request.MAX
-  /**/           type MIN        = request.MIN       .type;                 inline def MIN         = request.MIN
+  @tn("VOID")    type \/         = request.VOID;     @tn("VOID") inline def \/          = request.VOID
+  // /**/           type VOID1      = request.VOID;     @tn("VOID") inline def \/          = request.VOID
+  /**/           type DEFAULT    = request.DEFAULT;              inline def DEFAULT     = request.DEFAULT
+  /**/           type ALL        = request.ALL;                  inline def ALL         = request.ALL
+  /**/           type EMPTY      = request.EMPTY;                inline def EMPTY       = request.EMPTY
+  /**/           type CURRENT    = request.CURRENT;              inline def CURRENT     = request.CURRENT
+  /**/           type LEFT       = request.LEFT;                 inline def LEFT        = request.LEFT
+  /**/           type RIGHT      = request.RIGHT;                inline def RIGHT       = request.RIGHT
+  /**/           type CENTER     = request.CENTER;               inline def CENTER      = request.CENTER
+  /**/           type TOP        = request.TOP;                  inline def TOP         = request.TOP
+  /**/           type BOTTOM     = request.BOTTOM;               inline def BOTTOM      = request.BOTTOM
+  /**/           type HORIZONTAL = request.HORIZONTAL;           inline def HORIZONTAL  = request.HORIZONTAL
+  /**/           type VERTICAL   = request.VERTICAL;             inline def VERTICAL    = request.VERTICAL
+  /**/           type UP         = request.UP;                   inline def UP          = request.UP
+  /**/           type DOWN       = request.DOWN;                 inline def DOWN        = request.DOWN
+  /**/           type SEPARATOR  = request.SEPARATOR;            inline def SEPARATOR   = request.SEPARATOR
+  /**/           type MAX        = request.MAX;                  inline def MAX         = request.MAX
+  /**/           type MIN        = request.MIN;                  inline def MIN         = request.MIN
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -66,9 +67,9 @@ ___________________________________________________________________________*/
 @type MIN         ->  Type alias      \n\n Shortcut to [[scalqa.gen.request.MIN$        Gen.Request.MIN]]
 @def  MIN         ->  Singleton alias \n\n Shortcut to [[scalqa.gen.request.MIN$        Gen.Request.MIN]]
 
-@class Request -> ###
+@class Request -> ### General Request
 
-     Type Request objects establish some concept
+     Request objects establish some concept
 
      Application classes and traits can have implicit conversions from Request type to local definitions
 
@@ -76,17 +77,17 @@ ___________________________________________________________________________*/
 
      ```
 
-         Time().roundTo(1.Second, UP)
+         Time().roundTo(1.Second)(using UP)
          // vs.
-         Time().roundTo(1.Second, Gen.Rounding.Up)
+         Time().roundTo(1.Second)(using Gen.Rounding.Up)
 
          Time().roundTo(1.Minute)(using DOWN)
          // vs.
-         Time().roundTo(1.Minute, Gen.Rounding.Down)
+         Time().roundTo(1.Minute)(using Gen.Rounding.Down)
 
          val l: Long = MAX
          // vs.
-         val l: Long = Long.MaxValue
+         val l: Long = Long.max
 
          new Fx.Label("XYZ") {
             alignment = RIGHT
@@ -103,7 +104,7 @@ ___________________________________________________________________________*/
          new Fx.Menu {
             items += SEPARATOR
             // vs.
-            items += Fx.Menu.Item.separator_*
+            items += Fx.Menu.Item.separator
          }
      ```
 */

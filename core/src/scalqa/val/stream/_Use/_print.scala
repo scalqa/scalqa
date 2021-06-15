@@ -3,9 +3,9 @@ package scalqa; package `val`; package stream; package _Use; import language.imp
 transparent trait _print:
 
   extension[A](x: ~[A])
-    /**/                def print   (using Self.DocTag[A]) : Unit = z.use.print(x, false,false)
-    /**/                def printId (using Self.DocTag[A]) : Unit = z.use.print(x, true,false)
-    @tn("print_Number") def print_# (using Self.DocTag[A]) : Unit = z.use.print(x, false,true)
+    /**/                def print   (using Given.DocTag[A]) : Unit = z.use.print(x, false,false)
+    /**/                def printId (using Given.DocTag[A]) : Unit = z.use.print(x, true,false)
+    @tn("print_Number") def print_# (using Given.DocTag[A]) : Unit = z.use.print(x, false,true)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

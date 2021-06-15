@@ -2,11 +2,11 @@ package scalqa; package `val`; package pro; import language.implicitConversions
 
 object X:
 
-  abstract class Abstract[A] extends AbstractTrait[A]
+  abstract class Base[A] extends Basis[A]
 
   // ***************************************************
-  trait AbstractTrait[A] extends Pro[A] with Able.Doc:
-    def doc = Self.Doc(this) ++= this.?.takeType[Able.Name].map(n => ("name", n.name)).~ += ("value", apply())
+  trait Basis[A] extends Pro[A] with Able.Doc:
+    def doc = Doc(this) ++= this.?.takeType[Able.Name].map(n => ("name", n.name)).~ += ("value", apply())
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

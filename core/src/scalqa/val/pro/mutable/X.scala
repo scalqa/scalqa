@@ -2,7 +2,7 @@ package scalqa; package `val`; package pro; package mutable
 
 object X:
 
-  abstract class Abstract[A] extends pro.X.Abstract[A] with Mutable[A]
+  abstract class Base[A] extends pro.X.Base[A] with Mutable[A]
 
   // *************************************************************
   class Basic[A](_value: A) extends Mutable[A]:

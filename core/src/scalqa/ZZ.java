@@ -5,10 +5,10 @@ import scala.Tuple3;
 import scalqa.val.Stream;
 import scala.math.Ordering;
 import scala.concurrent.ExecutionContext;
-import scalqa.lang.any.self.given.DocTag;
-import scalqa.lang.any.self.given.z.DefaultTag;
-import scalqa.lang.any.self.given.z.PrimitiveTag;
-import scalqa.lang.any.self.given.z.ReferenceNameTag;
+import scalqa.gen.given.DocTag;
+import scalqa.gen.given.z.DefaultTag;
+import scalqa.gen.given.z.PrimitiveTag;
+import scalqa.gen.given.z.ReferenceNameTag;
 
 public final class ZZ{
     private ZZ(){};
@@ -79,8 +79,8 @@ public final class ZZ{
     public  static final DocTag LongTag    = new PrimitiveTag("Long");
     public  static final DocTag FloatTag   = new PrimitiveTag("Float");
     public  static final DocTag DoubleTag  = new PrimitiveTag("Double");
-    public  static final DocTag ArrayTag   = new scalqa.lang.any.self.given.z.ArrayTag();
-    public  static final DocTag MathTag    = new scalqa.lang.any.self.given.z.MathTag();
+    public  static final DocTag ArrayTag   = new scalqa.gen.given.z.ArrayTag();
+    public  static final DocTag MathTag    = new scalqa.gen.given.z.MathTag();
 
     public  static final ReferenceNameTag RefNameTag = new ReferenceNameTag();
 }

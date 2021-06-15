@@ -28,7 +28,11 @@ object Pro:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait Pro -> ### Properties Framework
+@trait Pro -> ### Value Provider
+
+      Whenever value provider belongs to an object, it effectively becomes a property holder for this object.
+
+      #### Properties Framework
 
       There are 4 types of standard properties:
 

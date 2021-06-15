@@ -1,25 +1,23 @@
 package scalqa; package `val`; package lookup; import mutable.*; import language.implicitConversions
 
 trait Mutable[A,B] extends Lookup[A,B]:
-  def getOrPut(key: A, v: => B): B         = get_?(key) or { val b = v; put(key, b); b }
-  def put(key: A, value: B)    : Unit
-  def putAll(s: ~[(A, B)])     : Unit      = s.foreach(put)
-  def update(key: A, value: B) : Opt[B]    = get_?(key).^(_ => put(key,value))
-  def updateAll(s: ~[(A, B)])  : ~[B]      = s.map_?(update).load
-  def remove(v: A)             : Opt[B]
-  def removeAll(keys: ~[A])    : ~[B]      = keys.map_?(remove).load
-  def clear                    : Unit
+  /**/              def getOrPut(key: A, v: => B): B         = get_?(key) or { val b = v; put(key, b); b }
+  /**/              def put(key: A, value: B)    : Unit
+  /**/              def putAll(s: ~[(A, B)])     : Unit      = s.foreach(put)
+  /**/              def update(key: A, value: B) : Opt[B]    = get_?(key).^(_ => put(key,value))
+  /**/              def updateAll(s: ~[(A, B)])  : ~[B]      = s.map_?(update).load
+  /**/              def remove(v: A)             : Opt[B]
+  /**/              def removeAll(keys: ~[A])    : ~[B]      = keys.map_?(remove).load
+  /**/              def clear                    : Unit
+  @tn("_put")       def +=(v: (A,B))             : this.type = { put(v._1,v._2);  this }
+  @tn("_putAll")    def ++=(s: ~[(A, B)])        : this.type = { putAll(s);       this }
+  @tn("_remove")    def -= (key: A)              : this.type = { remove(key);     this }
+  @tn("_removeAll") def --=(keys: ~[A])          : this.type = { removeAll(keys); this }
 
 object Mutable:
   def apply[A,B]()             : Mutable[A,B] = X.Basic[A,B]
   def apply[A,B](v: ~[(A, B)]) : Mutable[A,B] = apply().self_^(_.putAll(v))
   def concurrent[A,B]()        : Mutable[A,B] = new X.Concurrent[A,B]()
-
-  extension[SELF <: Mutable[A,B],A,B](x: SELF)
-    @tn("put")        inline def +=(v: (A,B))             : SELF         = { x.put(v._1,v._2);  x }
-    @tn("putAll")     inline def ++=(inline s: ~[(A, B)]) : SELF         = { x.putAll(s);       x }
-    @tn("remove")     inline def -= (inline key: A)       : SELF         = { x.remove(key);     x }
-    @tn("removeAll")  inline def --=(inline keys: ~[A])   : SELF         = { x.removeAll(keys); x }
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def X = mutable.X
@@ -35,7 +33,12 @@ ___________________________________________________________________________*/
 
       Mutable lookup collection provides methods to modify its content
 
-      Note. [[Lookup.Mutable]] DOES NOT extend [[Collection.Mutable]], as it if impossible to reconsile these operations.
+      Note. [[Lookup.Mutable]] DOES NOT extend [[Collection.Mutable]], as it if impossible to reconsile operations.
+
+@def +=  -> Alias for [[put]]
+@def ++= -> Alias for [[putAll]]
+@def -=  -> Alias for [[remove]]
+@def --= -> Alias for [[removeAll]]
 
 @def getOrPut -> Get or create key/value association
 

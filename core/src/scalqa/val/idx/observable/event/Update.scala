@@ -7,7 +7,7 @@ abstract class Update[A] extends Event[A]("Update"):
   /**/               def convert[B](f: A => B): Update[B]      = if (isRefresh) { val it = items.map_^(f); Update.refresh(range, it) }  else Update(range, items.map_^(f), oldItems.map_^(f))
   @tn("project_Opt") def project_?(r: Int.<>) : Opt[Update[A]] = r.overlap_?(range).map(i =>  if (isRefresh) Update.refresh[A](i, items.range_^(i << range.start))
     /**/                                                                                      else Update(i, items.range_^(i << range.start), oldItems.range_^(i << range.start)))
-  override           def doc                 : Self.Doc      = super.doc += ("items", items.~.makeString(",")) += ("oldItems", if (isRefresh) "Refresh" else oldItems.~.makeString(","))
+  override           def doc                 : Doc           = super.doc += ("items", items.~.makeString(",")) += ("oldItems", if (isRefresh) "Refresh" else oldItems.~.makeString(","))
 
 object Update:
   def refresh[A](r: Int.<>,  items: Idx[A])                   : Update[A] = Z.Update[A](r, items, items)

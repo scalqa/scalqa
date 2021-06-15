@@ -2,7 +2,7 @@ package scalqa; package release; package precompile; import language.implicitCon
 
 class Tag(val id: String, val index: Int, t: String) extends Able.Doc:
   val text   : String    = { val v = convertTags(t.trim); if (v.endsWith("*/")) v.dropLast(2) else v }
-  def doc   : Self.Doc = Self.Doc(this) += ("id", id) += ("index", index) += ("text", text.takeBefore("\n"))
+  def doc   : Doc      = Doc(this) += ("id", id) += ("index", index) += ("text", text.takeBefore("\n"))
 
   def insertInto(program: String): String =
     var txt = program

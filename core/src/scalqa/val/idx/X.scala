@@ -2,7 +2,7 @@ package scalqa; package `val`; package idx
 
 object X:
 
-  abstract class Abstract[A] extends Idx[A] with Able.Contain[A]:
+  abstract class Base[A] extends Idx[A] with Able.Contain[A]:
     def contains(v:A) : Boolean = (this:Idx[A]).contains(v)
 
 /*___________________________________________________________________________

@@ -4,13 +4,13 @@ class Flow extends Pane:
   protected type REAL = javafx.scene.layout.FlowPane
   protected override def _createReal = new REAL
 
-  @tn("hGap_Pro")      def hGap_*              : Double.Pro.OM  = Fx.JavaFx.As.pro_OM(real.hgapProperty)
+  @tn("hGap_Pro")      def hGap_*              : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.hgapProperty)
   /**/                 def hGap                : Double         = real.getHgap
   /**/                 def hGap_=(b: Double)   : Unit           = real.setHgap(b)
-  @tn("vGap_Pro")      def vGap_*              : Double.Pro.OM  = Fx.JavaFx.As.pro_OM(real.vgapProperty)
+  @tn("vGap_Pro")      def vGap_*              : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.vgapProperty)
   /**/                 def vGap                : Double         = real.getVgap
   /**/                 def vGap_=(b: Double)   : Unit           = real.setVgap(b)
-  @tn("alignment_Pro") def alignment_*         : Pro.OM[Pos]    = Fx.JavaFx.As.pro_OM(real.alignmentProperty).mutableMap_^[Pos]
+  @tn("alignment_Pro") def alignment_*         : Pro.OM[Pos]    = Fx.JavaFx.To.pro_OM(real.alignmentProperty).mutableMap_^[Pos]
   /**/                 def alignment           : Pos            = real.getAlignment
   /**/                 def alignment_=(v: Pos) : Unit           = real.setAlignment(v)
 

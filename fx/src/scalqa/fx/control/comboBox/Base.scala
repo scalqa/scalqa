@@ -6,7 +6,7 @@ import javafx.event.ActionEvent;
 abstract class Base[A] extends Control:
   protected type REAL <: ComboBoxBase[A]
 
-  @tn("value_Pro") def value_*                           : Pro.OM[A]     = Fx.JavaFx.As.pro_OM(real.valueProperty)
+  @tn("value_Pro") def value_*                           : Pro.OM[A]     = Fx.JavaFx.To.pro_OM(real.valueProperty)
   /**/             def value                             : A             = real.getValue
   /**/             def value_=(v: A)                     : Unit          = real.setValue(v)
 

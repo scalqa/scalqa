@@ -1,18 +1,18 @@
 package scalqa; package j; package util; package proxy
 
-abstract class Idx[A] extends Collection[A] with Idx.AbstractTrait[A]:
+abstract class Idx[A] extends Collection[A] with Idx.Basis[A]:
   @tn("stream") override def ~ = real.~
 
 object Idx:
 
-  trait AbstractTrait[A] extends Val.Idx[A] with Collection.AbstractTrait[A] with J.Util.Proxy[Val.Idx[A]]:
+  trait Basis[A] extends Val.Idx[A] with Collection.Basis[A] with J.Util.Proxy[Val.Idx[A]]:
     override def apply(i: Int) = real.apply(i)
     @tn("stream") override def ~ = real.~ // Needed to resolve conflict
 
   // ******************************************************************************************************
-  abstract class M[A] extends Idx[A] with M.AbstractTrait[A]
+  abstract class M[A] extends Idx[A] with M.Basis[A]
   object M:
-    trait AbstractTrait[A] extends Idx.AbstractTrait[A] with Val.Idx.M[A] with Collection.M.AbstractTrait[A] with J.Util.Proxy[Val.Idx.M[A]]:
+    trait Basis[A] extends Idx.Basis[A] with Val.Idx.M[A] with Collection.M.Basis[A] with J.Util.Proxy[Val.Idx.M[A]]:
       /**/                override def contains(v: A)                   = real.contains(v)
       /**/                override def add(v: A): Unit                  = real.add(v)
       /**/                override def addAll(v: ~[A]): Unit            = real.addAll(v)
@@ -27,15 +27,15 @@ object Idx:
       override                     def sort         (using Ordering[A]) = real.sort
 
   // ******************************************************************************************************
-  abstract class O[A] extends Idx[A] with O.AbstractTrait[A]
+  abstract class O[A] extends Idx[A] with O.Basis[A]
   object O:
-    trait AbstractTrait[A] extends Idx.AbstractTrait[A] with Val.Idx.O[A] with J.Util.Proxy[Val.Idx.O[A]]:
+    trait Basis[A] extends Idx.Basis[A] with Val.Idx.O[A] with J.Util.Proxy[Val.Idx.O[A]]:
       override def onChange[U](l: ><[Val.Idx.O.Event[A]] => U) = real.onChange(l)
 
   // ******************************************************************************************************
-  abstract class OM[A] extends M[A] with OM.AbstractTrait[A]
+  abstract class OM[A] extends M[A] with OM.Basis[A]
   object OM:
-    trait AbstractTrait[A] extends Val.Idx.OM[A] with M.AbstractTrait[A] with O.AbstractTrait[A] with J.Util.Proxy[Val.Idx.OM[A]]:
+    trait Basis[A] extends Val.Idx.OM[A] with M.Basis[A] with O.Basis[A] with J.Util.Proxy[Val.Idx.OM[A]]:
       @tn("refresh_Range") def refresh_<>(i: Int.<>)             = real.refresh_<>(i)
       /**/                 def modify(ch:  Val.Idx.M[A] => Unit) = real.modify(ch)
 

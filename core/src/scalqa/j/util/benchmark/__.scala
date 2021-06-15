@@ -67,6 +67,14 @@ ___________________________________________________________________________*/
           - `List` is twice and `Vector` is five times slower than `Buffer`
           - `Vector` is seriously heavier on memory
 
+
+       ### Comparison to JMH
+
+       [JMH](https://github.com/openjdk/jmh) targets absolute precision benchmarking, where plus/minus 1 percent is a big deal.
+
+       J.Benchmark is used to compare targets, with performance differences in tens and hundreds percent, where 1-2 percent is a margin of error.
+       In the example above, we do not care about 2 percent error, when establishing that scala.List is 400% faster than scala.Vector.
+
 @def apply -> Run with defaults
 
         Runs 4 trials 3 seconds each

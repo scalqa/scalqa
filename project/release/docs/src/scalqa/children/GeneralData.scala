@@ -35,6 +35,7 @@ class GeneralData(m: Member) extends Data(m):
   extension(x: ~[Member]) private def _dropIfIn(s: ~[Member]): ~[Member]   = x.dropAllBy(_.name, s.map(_.name))
   extension(x: Member)    private def _isLocal               : Boolean     = x.inheritedFrom.filterNot(_.dri.id.startsWith(owner.id + "._")).isEmpty
   extension(x: Member)    private def _child_?               : Opt[Member] = x.signature.?.drop(v => v.isEmpty || !v.head.isInstanceOf[Link]).map(_.head.asInstanceOf[Link].dri.id.mid.lower)
-                                                                              .takeOnly((owner.id.mid.lower + "." + x.name.nameToId.lower).lower).map_?(Registry.module_?).map(_.main)
+                                                                              .takeOnly(owner.id.mid.lower + "." + x.name.nameToId.lower)
+                                                                              .map_?(Registry.module_?).map(_.main)
 
-  if(m.name in ("Val","G")) this.aliases  = aliases.~.dropOnlyBy(_.name,"~","<>","><")
+  if(m.name in ("Val","G","Request")) this.aliases  = aliases.~.dropOnlyBy(_.name,"~","<>","><","\\/")

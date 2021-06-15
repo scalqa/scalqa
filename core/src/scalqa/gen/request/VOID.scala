@@ -1,6 +1,8 @@
 package scalqa; package gen; package request; import language.implicitConversions
 
-object VOID extends Request with zVoidDefaults:
+class VOID private() extends Request
+
+object VOID extends VOID with zVoidDefaults:
   inline given givenSelf : VOID.type = this
 
   implicit def implicitToString                (v: \/) : String            = ""
@@ -40,8 +42,13 @@ private trait zVoidDefaults2:
  __\  \/ /___/ __  |/ /__/ /_/ /_/ __  |   (c) 2021, Scalqa.org Inc
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
+
 /**
-    @object VOID -> ###
+@object VOID -> ### VOID Object
+
+       Singleton implementation of [[VOID]] request type
+
+@class VOID -> ### VOID Request Type
 
     Scalqa supports a concept of "void object" ("empty object"), which can be defined for many types.
     This is similar to [Null Object Pattern](https://en.wikipedia.org/wiki/Null_object_pattern)
@@ -50,7 +57,7 @@ ___________________________________________________________________________*/
 
     Examples:
 
-    - Void ~ can be a singleton empty stream, which can be re-used for any type
+    - Void stream can be a singleton empty stream, which can be re-used for any type
     - Void String is a string of zero length, which can be re-used for String type instead of null
 
     Types with void values have to define implicit conversions from `\/`
@@ -59,7 +66,7 @@ ___________________________________________________________________________*/
     class Foo
 
     object Foo{
-      val void = new Foo with Self.Void
+      val void = new Foo with Gen.Void
 
       implicit inline def implicitRequestVoid(inline v: \/): Foo = void
     }
@@ -75,7 +82,7 @@ ___________________________________________________________________________*/
     var i: Long.Idx     = \/     // Assigning empty indexed collection of Long
     ```
 
-    Also see [[Any.Self.Void]]
+    Also see [[scalqa.lang.any.self.Void Any.Gen.Void]]
 
-    A standard way to test for voidness is universal `.isEmpty` method.
+    A standard way to test for voidness is universal `.isVoid` method.
 */

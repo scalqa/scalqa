@@ -1,6 +1,6 @@
 package scalqa; package lang; package any; package z; import extension.*; import language.implicitConversions
 
-transparent trait Extension extends self.z.extension with extra with tp with any._extension
+transparent trait Extension extends selfView with extra with tp with any._extension
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

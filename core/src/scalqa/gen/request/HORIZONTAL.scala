@@ -1,6 +1,8 @@
 package scalqa; package gen; package request
 
-object HORIZONTAL extends Request
+class HORIZONTAL private() extends Request
+
+object HORIZONTAL extends HORIZONTAL
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -9,8 +11,12 @@ object HORIZONTAL extends Request
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object HORIZONTAL -> ### General Request HORIZONTAL
+@class  HORIZONTAL -> ### HORIZONTAL Request Type
 
        See [[Request]] for usage
+
+@object HORIZONTAL -> ### HORIZONTAL Object
+
+       Singleton implementation of [[HORIZONTAL]] request type
 
 */

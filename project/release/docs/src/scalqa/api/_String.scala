@@ -5,8 +5,8 @@ trait _String:
   extension (x: String)
     def docLabel  : String = if(x.length>2 && x.charAt(0)=='_') x.takeFirst(2).toLowerCase + x.dropFirst(2) else if(x.length>1) x.takeFirst(1).toUpperCase + x.dropFirst(1) else x.toUpperCase
 
-    def nameToId         : String = x match{case "~"=>"stream"; case "~~"=>"stream";  case "<>"=>"range";  case "><"=>"pack";    case v => v.toLowerCase }
-    def nameToOp         : String = x match{case "Stream"=>"~"; case "Range" => "<>"; case "Pack" => "><"; case "VOID" => "\\/"; case _ => x }
+    def nameToId         : String = x match{case "~"=>"stream"; case "~~"=>"stream";  case "<>"=>"range";   case "><"=>"pack";   case "\\/"=>"void";   case v => v.toLowerCase }
+    def nameToOp         : String = x match{case "Stream"=>"~";                       case "Range" => "<>"; case "Pack" => "><"; case "VOID" => "\\/"; case _ => x }
     def dropDuplicateEnd : String = x.lastIndexOf_?(".").map_?(i => {
                                         val len = x.length - i - 1
                                         x.lastIndexOf_?(".",i-1).default(-1).take(j => i - j - 1 == len && x.take_<>(i+1,len) == x.take_<>(j+1,len)).map(_ => len+1)

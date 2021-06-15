@@ -1,9 +1,9 @@
 package scalqa; package `val`; package range; package z; import language.implicitConversions
 
-class DocTag[A: Self.DocTag] extends Self.DocTag[Range[A]] :
+class DocTag[A: Given.DocTag] extends Given.DocTag[Range[A]] :
 
   def tag(v: Range[A]) : String   = String.Builder(20).^(b => { b += v.start += " <>"; if(!v.endIsIn) b += ">"; b += " " += v.end }).tag
-  def doc(v: Range[A]) : Self.Doc = Self.Doc(v) += ("start", v.start) += (if(v.endIsIn) "endIn" else "endX", v.end)
+  def doc(v: Range[A]) : Doc      = Doc(v) += ("start", v.start) += (if(v.endIsIn) "endIn" else "endX", v.end)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

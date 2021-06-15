@@ -18,10 +18,10 @@ transparent trait _properties[ROW]:
   @tn("headerFooter_Pro")     def headerFooter_*                      : Pro.OM[(><[ROW], ><[ROW])]     = rowData.headerFooter_*
   /**/                        def headerFooter                        : (><[ROW], ><[ROW])             = headerFooter_*()
   /**/                        def headerFooter_=(hf: (~[ROW], ~[ROW])): Unit = headerFooter_*()        = (hf._1.><, hf._2.><)
-  @tn("editable_Pro")         def editable_*                          : Boolean.Pro.OM                 = Fx.JavaFx.As.pro_OM(real.editableProperty)
+  @tn("editable_Pro")         def editable_*                          : Boolean.Pro.OM                 = Fx.JavaFx.To.pro_OM(real.editableProperty)
   /**/                        def editable                            : Boolean                        = real.isEditable
   /**/                        def editable_=(b: Boolean)              : Unit                           = real.setEditable(b)
-  @tn("placeholder_Pro")      def placeholder_*                       : Pro.OM[Node]                   = Fx.JavaFx.As.pro_OM(real.placeholderProperty).mutableMap_^[Node]
+  @tn("placeholder_Pro")      def placeholder_*                       : Pro.OM[Node]                   = Fx.JavaFx.To.pro_OM(real.placeholderProperty).mutableMap_^[Node]
   /**/                        def placeholder                         : Node                           = placeholder_*()
   /**/                        def placeholder_=(v: Node)              : Unit                             = real.setPlaceholder(v.real)
 

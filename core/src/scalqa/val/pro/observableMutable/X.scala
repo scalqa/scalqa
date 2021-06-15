@@ -2,20 +2,20 @@ package scalqa; package `val`; package pro; package observableMutable
 
 object X:
 
-  class Abstract[A] extends pro.X.Abstract[A] with observable.X.AbstractTrait[A] with ObservableMutable[A]:
+  class Base[A] extends pro.X.Base[A] with observable.X.Basis[A] with ObservableMutable[A]:
     private var value: A = _
 
     def apply()      : A    = value
     def update(v: A) : Unit = if (value != v) { value = v; fireChange }
 
   // ************************************************************************************************************
-  trait AbstractTrait[A] extends observable.X.AbstractTrait[A] with ObservableMutable[A]:
+  trait Basis[A] extends observable.X.Basis[A] with ObservableMutable[A]:
       private var value: A = _
       def apply()      = value
       def update(v: A) = if (value != v){ value = v; fireChange }
 
   // ************************************************************************************************************
-  class Basic[A] private() extends Abstract[A]:
+  class Basic[A] private() extends Base[A]:
     def this(v: A) = { this(); super.update(v) }
 
 /*___________________________________________________________________________

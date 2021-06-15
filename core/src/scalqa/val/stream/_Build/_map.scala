@@ -1,7 +1,7 @@
 package scalqa; package `val`; package stream; package _Build; import language.implicitConversions
 
 import z.build.{ map => M }
-import Self.Given.StreamTag
+import Gen.Given.StreamTag
 
 transparent trait _map:
   self: Stream.type =>
@@ -48,7 +48,7 @@ ___________________________________________________________________________*/
      If the function returns void option, the element is dropped.
 
      ```
-     (1 <> 10).~.map_?(i => if(i>5) "Str_"+i else \/).TP
+     (1 <> 10).~.map_?[Opt[String]](i => if(i>5) "Str_"+i else \/).TP
 
      // Output
      ~(Str_6, Str_7, Str_8, Str_9, Str_10)
@@ -56,7 +56,7 @@ ___________________________________________________________________________*/
 
      Pattern matching can be used, but the last void case must always be present:
      ```
-     (0 <>> 26).~.map_?{
+     (0 <>> 26).~.map_?[Char.Opt]{
        case i if(i%2==0) => ('a' + i).Char
        case _            => \/
      }.TP

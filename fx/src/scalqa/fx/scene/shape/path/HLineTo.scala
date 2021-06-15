@@ -4,7 +4,7 @@ import javafx.scene.shape.{ HLineTo => JHLineTo }
 
 class HLineTo(val real: JHLineTo) extends AnyVal with Z.Base[HLineTo,JHLineTo]:
   protected    def setup                             = HLineTo
-  @tn("x_Pro") def x_*            : Double.Pro.OM    = Fx.JavaFx.As.pro_OM(real.xProperty)
+  @tn("x_Pro") def x_*            : Double.Pro.OM    = Fx.JavaFx.To.pro_OM(real.xProperty)
   /**/         def x              : Double           = real.getX
   /**/         def x_=(v: Double) : Unit             = real.setX(v)
 

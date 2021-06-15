@@ -2,10 +2,10 @@ package scalqa; package gen; package able
 
 trait Doc extends Tag:
   def tag : String   = doc.tag
-  def doc : Self.Doc
+  def doc : Gen.Doc
 
 object Doc:
-  @tn("doc_Opt") def doc_?(v: Any): Opt[Self.Doc] = v match{ case v: Able.Doc => v.doc; case _ => \/ }
+  @tn("doc_Opt") def doc_?(v: Any): Opt[Gen.Doc] = v match{ case v: Able.Doc => v.doc; case _ => \/ }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

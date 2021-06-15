@@ -1,6 +1,8 @@
 package scalqa; package gen; package request
 
-object SEPARATOR extends Request
+class SEPARATOR private() extends Request
+
+object SEPARATOR extends SEPARATOR
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -9,8 +11,12 @@ object SEPARATOR extends Request
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object SEPARATOR -> ### General Request  SEPARATOR
+@class  SEPARATOR -> ### SEPARATOR Request Type
 
        See [[Request]] for usage
+
+@object SEPARATOR -> ### SEPARATOR Object
+
+       Singleton implementation of [[SEPARATOR]] request type
 
 */

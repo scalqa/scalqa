@@ -15,20 +15,20 @@ class Panel extends Abstract.Delegate.Gui:
   /**/                def onSelectionChanged[U](l: () => U) : Event.Control          = _onFxEvent(real.onSelectionChangedProperty, l)
   /**/                def onSelection       [U](l: () => U) : Event.Control          = onSelectionChanged(() => if (selected) l())
 
-  @tn("selected_Pro") def selected_*                        : Boolean.Pro.O          = Fx.JavaFx.As.pro_O(real.selectedProperty);
+  @tn("selected_Pro") def selected_*                        : Boolean.Pro.O          = Fx.JavaFx.To.pro_O(real.selectedProperty);
   /**/                def selected                          : Boolean                = real.selectedProperty.get
-  @tn("text_Pro")     def text_*                            : String.Pro.OM          = Fx.JavaFx.As.pro_OM(real.textProperty);
+  @tn("text_Pro")     def text_*                            : String.Pro.OM          = Fx.JavaFx.To.pro_OM(real.textProperty);
   /**/                def text                              : String                 = real.getText
   /**/                def text_=(v: String)                 : Unit                   = real.setText(v)
-  @tn("closable_Pro") def closable_*                        : Boolean.Pro.OM         = Fx.JavaFx.As.pro_OM(real.closableProperty)
+  @tn("closable_Pro") def closable_*                        : Boolean.Pro.OM         = Fx.JavaFx.To.pro_OM(real.closableProperty)
   /**/                def closable                          : Boolean                = real.closableProperty.get
   /**/                def closable_=(v: Boolean)            : Unit                   = real.setClosable(v)
-  @tn("disable_Pro")  def disable_*                         : Boolean.Pro.OM         = Fx.JavaFx.As.pro_OM(real.disableProperty)
+  @tn("disable_Pro")  def disable_*                         : Boolean.Pro.OM         = Fx.JavaFx.To.pro_OM(real.disableProperty)
   /**/                def disable                           : Boolean                = real.disableProperty.get
   /**/                def disable_=(v: Boolean)             : Unit                   = real.setDisable(v)
-  @tn("disabled_Pro") def disabled_*                        : Boolean.Pro.O          = Fx.JavaFx.As.pro_O(real.disabledProperty)
+  @tn("disabled_Pro") def disabled_*                        : Boolean.Pro.O          = Fx.JavaFx.To.pro_O(real.disabledProperty)
   /**/                def disabled                          : Boolean                = real.disabledProperty.get
-  @tn("content_Pro")  def content_*                         : Pro.OM[Node.Like]    = Fx.JavaFx.As.pro_OM(real.contentProperty).mutableMap_^[Node.Like]
+  @tn("content_Pro")  def content_*                         : Pro.OM[Node.Like]    = Fx.JavaFx.To.pro_OM(real.contentProperty).mutableMap_^[Node.Like]
   /**/                def content                           : Node.Like            = content_*()
   /**/                def content_=(e: Node.Like)         : Unit                   = content_*() = e
 

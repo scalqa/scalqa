@@ -2,12 +2,12 @@ package scalqa; package fx; package control; import language.implicitConversions
 
 import javafx.scene.control.ListCell
 
-class ComboBox[A](using val docDef: Self.DocTag[A]) extends comboBox.Base[A]:
+class ComboBox[A](using val docTag: Given.DocTag[A]) extends comboBox.Base[A]:
   protected type REAL = javafx.scene.control.ComboBox[A];  protected override def _createReal = new REAL
 
   /**/                 lazy  val items                     : Idx.M[A]        = Idx.M.wrap(real.getItems)
   /**/                 lazy  val selection                 : Fx.Selection[A] = Fx.Selection(items, real.getSelectionModel)
-  @tn("visibleRowCount_Pro") def visibleRowCount_*         : Int.Pro.OM      = Fx.JavaFx.As.pro_OM(real.visibleRowCountProperty);
+  @tn("visibleRowCount_Pro") def visibleRowCount_*         : Int.Pro.OM      = Fx.JavaFx.To.pro_OM(real.visibleRowCountProperty);
   /**/                       def visibleRowCount           : Int             = real.getVisibleRowCount;
   /**/                       def visibleRowCount_=(v: Int) : Unit            = real.setVisibleRowCount(v)
 
@@ -16,12 +16,12 @@ class ComboBox[A](using val docDef: Self.DocTag[A]) extends comboBox.Base[A]:
     real.setCellFactory(l => new Cell)
     real.setButtonCell(new Cell)
 
-  format_:(_.tag(using docDef))
+  format_:(_.tag(using docTag))
 
 object ComboBox:
-  def apply[A]()                          (using t: Self.DocTag[A]) : ComboBox[A] = new ComboBox[A]
-  def apply[A](v: ~[A])                   (using t: Self.DocTag[A]) : ComboBox[A] = apply[A]().^(_.items ++= v)
-  def apply[A](v: ~[A], selected: Opt[A]) (using t: Self.DocTag[A]) : ComboBox[A] = apply[A](v).^(v => selected.forval(v.selection.select(_)))
+  def apply[A]()                          (using t: Given.DocTag[A]) : ComboBox[A] = new ComboBox[A]
+  def apply[A](v: ~[A])                   (using t: Given.DocTag[A]) : ComboBox[A] = apply[A]().^(_.items ++= v)
+  def apply[A](v: ~[A], selected: Opt[A]) (using t: Given.DocTag[A]) : ComboBox[A] = apply[A](v).^(v => selected.forval(v.selection.select(_)))
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Base[A] = comboBox.Base[A]

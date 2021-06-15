@@ -23,7 +23,7 @@ Defining data elements is quite easy, one just needs to select one of the follow
 
 Let's create an example of data element 'Price', which would be based on a Double, behave like a Double, but be distinct from a Double.
 
-He is the definition part (available in [samples](https://github.com/scalqa/scalqa/blob/master/sample/src/example/data/PriceModel.scala)):
+He is the definition part (available in [samples](https://github.com/scalqa/samples/blob/master/src/example/data/PriceModel.scala)):
 ```
 type  Price = Price.opaque.`type`
 

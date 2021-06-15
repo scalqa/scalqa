@@ -25,19 +25,19 @@ object Fx:
   @fast lazy val Stage       = fx.scene.Stage;         type Stage        = fx.scene.Stage
   @fast lazy val Window      = fx.scene.Window;        type Window       = fx.scene.Window
 
-  /**/       val Ui          = fx.Ui
-  /**/       val Abstract    = fx.ui.Abstract
-  @fast lazy val Action      = fx.ui.Action;           type Action       = fx.ui.Action
-  @fast lazy val Orientation = fx.ui.Orientation;      type Orientation  = fx.ui.Orientation
-  @fast lazy val Insets      = fx.ui.Insets;           type Insets       = fx.ui.Insets.opaque.`type`
-  @fast lazy val Side        = fx.ui.Side;             type Side         = fx.ui.Side
-  @fast lazy val Pos         = fx.ui.Pos;              type Pos          = fx.ui.Pos
-  @fast lazy val VPos        = fx.ui.VPos;             type VPos         = fx.ui.VPos
-  @fast lazy val HPos        = fx.ui.HPos;             type HPos         = fx.ui.HPos
-  @fast lazy val Style       = fx.ui.Style;            type Style        = fx.ui.Style.opaque.`type`
-  @fast lazy val JavaFx      = fx.ui.JavaFx
-  @fast lazy val Selection   = fx.ui.Selection;        type Selection[A] = fx.ui.Selection[A]
-  @fast lazy val Event       = fx.ui.Event;            type Event        = fx.ui.Event
+  /**/       val Base        = fx.Base
+  /**/       val Abstract    = fx.base.Abstract
+  @fast lazy val Action      = fx.base.Action;         type Action       = fx.base.Action
+  @fast lazy val Orientation = fx.base.Orientation;    type Orientation  = fx.base.Orientation
+  @fast lazy val Insets      = fx.base.Insets;         type Insets       = fx.base.Insets.opaque.`type`
+  @fast lazy val Side        = fx.base.Side;           type Side         = fx.base.Side
+  @fast lazy val Pos         = fx.base.Pos;            type Pos          = fx.base.Pos
+  @fast lazy val VPos        = fx.base.VPos;           type VPos         = fx.base.VPos
+  @fast lazy val HPos        = fx.base.HPos;           type HPos         = fx.base.HPos
+  @fast lazy val Style       = fx.base.Style;          type Style        = fx.base.Style.opaque.`type`
+  @fast lazy val JavaFx      = fx.base.JavaFx
+  @fast lazy val Selection   = fx.base.Selection;      type Selection[A] = fx.base.Selection[A]
+  @fast lazy val Event       = fx.base.Event;          type Event        = fx.base.Event
 
   // Shortcuts
   @fast lazy val Node        = Abstract.Node;          type Node         = Abstract.Node
@@ -46,8 +46,8 @@ object Fx:
   @fast lazy val Thread      = Application.Thread
 
 package fx:
-  inline def Abstract    = ui.Abstract
-  inline def Style       = ui.Style;               type Style        = ui.Style.opaque.`type`;
+  inline def Abstract    = base.Abstract
+  inline def Style       = base.Style;             type Style        = base.Style.opaque.`type`;
   inline def Node        = Abstract.Node;          type Node         = Abstract.Node
 
   inline def Button      = control.Button;         type Button       = control.Button
@@ -72,13 +72,13 @@ package fx:
   inline def Stage       = scene.Stage;            type Stage        = scene.Stage
   inline def Window      = scene.Window;           type Window       = scene.Window
 
-  inline def Action      = ui.Action;              type Action       = ui.Action
-  inline def Orientation = ui.Orientation;         type Orientation  = ui.Orientation
-  inline def Insets      = ui.Insets;              type Insets       = ui.Insets.opaque.`type`
-  inline def Side        = ui.Side;                type Side         = ui.Side
-  inline def Pos         = ui.Pos;                 type Pos          = ui.Pos
-  inline def VPos        = ui.VPos;                type VPos         = ui.VPos
-  inline def HPos        = ui.HPos;                type HPos         = ui.HPos
+  inline def Action      = base.Action;            type Action       = base.Action
+  inline def Orientation = base.Orientation;       type Orientation  = base.Orientation
+  inline def Insets      = base.Insets;            type Insets       = base.Insets.opaque.`type`
+  inline def Side        = base.Side;              type Side         = base.Side
+  inline def Pos         = base.Pos;               type Pos          = base.Pos
+  inline def VPos        = base.VPos;              type VPos         = base.VPos
+  inline def HPos        = base.HPos;              type HPos         = base.HPos
 
   // Shortcuts
   inline def Color       = Paint.Color;            type Color        = Paint.Color
@@ -98,7 +98,7 @@ ___________________________________________________________________________*/
 
    [[Fx]] is an easy to use wrapper of JavaFx technology
 
-   Some use examples can be found in [samples](https://github.com/scalqa/scalqa/tree/master/sample/src/example/fx).
+   Some use examples can be found in [samples](https://github.com/scalqa/samples/tree/master/src/example/fx).
 
 */
 

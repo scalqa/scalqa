@@ -3,8 +3,8 @@ package scalqa; package `val`; package idx; import language.implicitConversions
 import scala.{ Ordering as O }
 
 trait Mutable[A] extends Idx[A] with Val.Collection.Mutable[A] with Able.Contain[A]:
-  @tn("_addAt")    inline def +=@ (inline position:Int, inline v: A)   : this.type  = { addAt(position, v);    this }
-  @tn("_addAllAt") inline def ++=@(inline position:Int, inline v: ~[A]): this.type  = { addAllAt(position, v); this }
+  @tn("_addAt")           def +=@ (position:Int, v: A)                 : this.type  = { addAt(position, v);    this }
+  @tn("_addAllAt")        def ++=@(position:Int, v: ~[A])              : this.type  = { addAllAt(position, v); this }
   /**/                    def add(v: A)                                : Unit       = addAt(size, v)
   /**/                    def addAt(position: Int, v: A)               : Unit
   /**/           override def addAll(v: ~[A])                          : Unit       = v.foreach(add)

@@ -2,7 +2,7 @@ package scalqa; package lang; package boolean; package z; package stream; import
 
 import `val`.stream.z.a.Pipe
 import Any.{Raw as RAW}
-import Self.Given.StreamTag
+import Gen.Given.StreamTag
 
 object mapOpt:
   class Booleans[A<:RAW,B<:RAW.Boolean](x: ~[A], f:Byte  .G.Fun.FromAny[A,Boolean.G.Opt[B]]) extends Pipe.Booleans[B](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){ val r=f(o.`val`); if(r.nonEmpty) return r; o=x.read_? }; \/}}

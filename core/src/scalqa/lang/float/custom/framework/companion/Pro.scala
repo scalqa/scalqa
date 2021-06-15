@@ -14,13 +14,13 @@ class Pro[A<:RAW]:
   type   Observable = G.Pro.Observable[A];
   object Observable:
     object X:
-      type Abstract = G.Pro.Observable.X.Abstract[A]
+      type Base = G.Pro.Observable.X.Base[A]
 
   type   ObservableMutable = G.Pro.ObservableMutable[A];
   object ObservableMutable:
     def apply(v: A): ObservableMutable = new G.Pro.ObservableMutable.X.Basic(v)
     object X:
-      type Abstract    = G.Pro.ObservableMutable.X.Abstract[A]
+      type Base    = G.Pro.ObservableMutable.X.Base[A]
       type Basic = G.Pro.ObservableMutable.X.Basic[A]
 
 object Pro extends Pro[SELF]

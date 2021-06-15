@@ -1,6 +1,8 @@
 package scalqa; package gen; package request; import language.implicitConversions
 
-object MAX extends Request:
+class MAX private() extends Request
+
+object MAX extends MAX:
   implicit inline def implicitToChar  (v: MAX.type): Char   = Char.max
   implicit inline def implicitToByte  (v: MAX.type): Byte   = Byte.max
   implicit inline def implicitToShort (v: MAX.type): Short  = Short.max
@@ -16,9 +18,12 @@ object MAX extends Request:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object MAX -> ### General Request  MAX
+@class  MAX -> ### MAX Request Type
 
-     See [[Request]] for usage
+       See [[Request]] for usage
 
+@object MAX -> ### MAX Object
+
+       Singleton implementation of [[MAX]] request type
 
 */

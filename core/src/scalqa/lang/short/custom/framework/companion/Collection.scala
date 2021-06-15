@@ -1,6 +1,7 @@
 package scalqa; package lang; package short; package custom; package framework; package companion; import language.implicitConversions
 
 class Collection[A<:RAW] extends Pack.zBased[A,G.Collection[A]]:
+  type M = G.Collection.Mutable[A]; inline def M = Mutable
 
   type Mutable = G.Collection.Mutable[A]
   object Mutable:

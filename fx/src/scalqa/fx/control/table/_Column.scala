@@ -1,6 +1,6 @@
 package scalqa; package fx; package control; package table; import language.implicitConversions
 
-import Self.{ DocTag, VoidTag }
+import Given.{ DocTag, VoidTag }
 
 transparent trait _Column[ROW]:
   self: Table[ROW] =>

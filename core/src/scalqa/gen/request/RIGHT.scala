@@ -1,6 +1,8 @@
 package scalqa; package gen; package request
 
-object RIGHT extends Request
+class RIGHT private() extends Request
+
+object RIGHT extends RIGHT
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -9,8 +11,12 @@ object RIGHT extends Request
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object RIGHT -> ### General Request  RIGHT
+@class  RIGHT -> ### RIGHT Request Type
 
        See [[Request]] for usage
+
+@object RIGHT -> ### RIGHT Object
+
+       Singleton implementation of [[RIGHT]] request type
 
 */

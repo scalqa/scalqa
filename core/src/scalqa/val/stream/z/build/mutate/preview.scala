@@ -9,7 +9,7 @@ class preview[A](src: ~[A]) extends a.Pipe[A](src) with ~~.Preview[A] with Able.
   // ---------------------------------------------------------------------------------------------------------------------------
   private                   def preload(cnt: Int)         : Int              = src.size_?.map(_ + stack.size) or (if (stack.size >= cnt) stack.size else load(cnt))
   private                   def load(cnt: Int)            : Int              = { while (!allIn && stack.size < cnt) { src.read_?.forval(stack.add(_)).fornil({ allIn = true }) }; stack.size }
-  override                  def doc                      : Self.Doc        = super.doc += ("buffered", stack.size)
+  override                  def doc                      : Doc             = super.doc += ("buffered", stack.size)
   // ---------------------------------------------------------------------------------------------------------------------------
   @tn("read_Opt")           def read_?                    : Opt[A]           = if (!stack.isEmpty) stack.pop else src.read_?
   @tn("size_Opt")           def size_?                    : Int.Opt          = src.size_?.map(_ + stack.size)
@@ -30,7 +30,7 @@ class preview[A](src: ~[A]) extends a.Pipe[A](src) with ~~.Preview[A] with Able.
   // **********************************************************************************************************
   object previewSize extends Preview.LazySize with Able.Doc:
     def preload(i: Int): Int      = self.preload(i)
-    def doc            : Self.Doc = Self.Doc(this) += size_?.map(v=>("size",v.tag)) += ("buffered",stack.size)
+    def doc            : Doc      = Doc(this) ++= size_?.map(v=>("size",v.tag)) += ("buffered",stack.size)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

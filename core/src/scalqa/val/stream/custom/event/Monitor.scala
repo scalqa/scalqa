@@ -16,7 +16,7 @@ object Monitor:
   implicit def implicitRequestDefault(v: DEFAULT): Monitor = new zDefault
 
 // *******************************************************************************
-private object zVoid extends Monitor with Self.Void:
+private object zVoid extends Monitor with Gen.Void:
   def runOnBeforeFirst                          = ()
   def runOnEvery(    cnt: Int, tm: Time.Length) = ()
   def runOnAfterLast(cnt: Int, tm: Time.Length) = ()

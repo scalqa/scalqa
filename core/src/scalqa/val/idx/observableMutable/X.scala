@@ -2,10 +2,10 @@ package scalqa; package `val`; package idx; package observableMutable; import la
 
 object X:
 
-  abstract class Abstract[A] extends Idx.M.X.Abstract[A] with ObservableMutable[A]
+  abstract class Base[A] extends Idx.M.X.Base[A] with ObservableMutable[A]
 
   // ***************************************************************************************************************************************************************************
-  class Basic[A](target: Mutable[A]) extends X.Abstract[A]:
+  class Basic[A](target: Mutable[A]) extends X.Base[A]:
     def this(initSize: Int = 0) = this(Mutable[A](initSize))
 
     protected val eventStore = Event.Store()

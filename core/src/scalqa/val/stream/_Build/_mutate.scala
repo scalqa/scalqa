@@ -1,6 +1,6 @@
 package scalqa; package `val`; package stream; package _Build; import language.implicitConversions
 
-import Self.Given.StreamTag
+import Gen.Given.StreamTag
 import z.build.{ mutate => M }
 
 transparent trait _mutate:

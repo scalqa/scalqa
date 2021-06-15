@@ -1,6 +1,6 @@
 package scalqa; package lang; package any; package z; import language.implicitConversions
 
-import Self.Given.OptTag
+import Gen.Given.OptTag
 
 object opt:
 

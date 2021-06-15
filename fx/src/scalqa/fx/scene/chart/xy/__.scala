@@ -15,11 +15,11 @@ abstract class XY[X, Y] protected (val axisX: Chart.Axis[X], val axisY: Chart.Ax
   // **************************************************************************************************************
   class SeriesBase protected (nameO: String.Opt = \/, private var _items:  Idx.O[ITEM] = \/):
     protected[chart] val real : self.REAL_SERIES = new self.REAL_SERIES(zObservableList()).^(s => nameO.forval(s.setName))
-    /**/             def chart: Chart.XY[X, Y]    = self
-    /**/             def name : String            = real.getName; def name_=(v: String) = real.setName(v)
-    /**/             def items: Idx.O[ITEM]       = _items;       def items_=(l:  Idx.O[ITEM]): Unit = { _items = l; real.setData(zObservableList()) }
+    /**/             def chart: Chart.XY[X, Y]   = self
+    /**/             def name : String           = real.getName; def name_=(v: String) = real.setName(v)
+    /**/             def items: Idx.O[ITEM]      = _items;       def items_=(l:  Idx.O[ITEM]): Unit = { _items = l; real.setData(zObservableList()) }
     // ***************************
-    private class zObservableList extends ui.javaFx.z.list.Observable[self.REAL_ITEM](items.map_^(_.real.cast[self.REAL_ITEM])){ def series = SeriesBase.this}
+    private class zObservableList extends base.javaFx.z.list.Observable[self.REAL_ITEM](items.map_^(_.real.cast[self.REAL_ITEM])){ def series = SeriesBase.this}
 
   object SeriesBase:
     def apply(s: J.XYChart.Series[_, _]): SERIES = s.getData.cast[SeriesBase#zObservableList].series.cast[SERIES]
@@ -32,16 +32,15 @@ abstract class XY[X, Y] protected (val axisX: Chart.Axis[X], val axisY: Chart.Ax
     /**/             def chart      : Chart.XY[X, Y]  = self
     /**/             def x          : X               = self.axisX.valueMap.undo(real.getXValue); def x_=(v: X) = real.setXValue(self.axisX.valueMap(v))
     /**/             def y          : Y               = self.axisY.valueMap.undo(real.getYValue); def y_=(v: Y) = real.setYValue(self.axisY.valueMap(v))
-    /**/             def setY(v: Y) : Unit            = real.setYValue(self.axisY.valueMap(v))
     /**/             def xPos       : Double          = axisX(x)
     /**/             def yPos       : Double          = axisY(y)
-    /**/             def doc       : Self.Doc       = Self.Doc(this) += ("x", x) += ("y", y)
+    /**/             def doc        : Doc             = Doc(this) += ("x", x) += ("y", y)
 
   object ItemBase:
     def apply(d: J.XYChart.Data[_, _]): ITEM = d.getExtraValue.cast[ITEM]
 
 object XY:
-  val As = xy.As
+  val X = xy.X
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

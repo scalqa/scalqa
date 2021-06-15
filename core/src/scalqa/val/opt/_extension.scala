@@ -1,6 +1,6 @@
 package scalqa; package `val`; package opt; import language.implicitConversions;
 
-import Self.Given.OptTag
+import Gen.Given.OptTag
 
 abstract class _extension extends _givens:
   self: Opt.type =>
@@ -14,7 +14,7 @@ abstract class _extension extends _givens:
     /**/               inline def takeType[B](using inline t:ClassTag[B])     : Opt[B]     = {var o:Opt[B]= \/; if(t.unapply(x).isEmpty.not) o=x.cast[Opt[B]]; o}
     /**/               inline def drop(inline f: A => Boolean)                : Opt[A]     = {var o=x; if(o.nonEmpty &&  f(o.`val`)) o= \/; o}
     /**/               inline def dropOnly(inline v: A)                       : Opt[A]     = {val o=x; if(o == v.?) \/ else x }
-    /**/               inline def dropVoid(using inline t: Self.VoidTag[A])  : Opt[A]     = {var o=x; if(o != null && o.nonEmpty && t.isVoid(o.`val`)) o= \/; o}
+    /**/               inline def dropVoid(using inline t: Given.VoidTag[A])  : Opt[A]     = {var o=x; if(o != null && o.nonEmpty && t.isVoid(o.`val`)) o= \/; o}
     /**/               inline def default(inline dv: => A)                    : Opt[A]     = {val o=x; if(o.isEmpty)  dv  else o}
     @tn("or_Opt")infix inline def or_?(inline that: => Opt[A])                : Opt[A]     = {val o=x; if(o.isEmpty) that else o}
     /**/         infix inline def or(inline default: => A)                    : A          = z.Macro.or(x,default)

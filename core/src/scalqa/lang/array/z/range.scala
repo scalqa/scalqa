@@ -1,7 +1,7 @@
 package scalqa; package lang; package array; package z; import language.implicitConversions
 
 import java.util.{ Arrays }
-import Self.Given.ArrayTag
+import Gen.Given.ArrayTag
 
 object range:
 
@@ -33,11 +33,10 @@ object range:
   def drop[A,ARRAY<:Array.AnyType[A]](x: ARRAY, start:Int, sz:Int)(using t: ArrayTag[A,ARRAY]): ARRAY =
     val len = x.length
     val end = start+sz
-    ???
-//    val a   = x.newArray(len - sz)
-//    System.arraycopy(x,0,a,0,start)
-//    System.arraycopy(x,end,a,start,len-end)
-//    a.cast[ARRAY]
+    val a   = x.newArray(len - sz)
+    System.arraycopy(x,0,a,0,start)
+    System.arraycopy(x,end,a,start,len-end)
+    a.cast[ARRAY]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

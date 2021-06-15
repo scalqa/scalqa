@@ -1,6 +1,8 @@
 package scalqa; package gen; package request
 
-object UP extends Request
+class UP private() extends Request
+
+object UP extends UP
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -9,9 +11,12 @@ object UP extends Request
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object UP -> ### General Request  UP
+@class  UP -> ### UP Request Type
 
-     See [[Request]] for usage
+       See [[Request]] for usage
 
+@object UP -> ### UP Object
+
+       Singleton implementation of [[UP]] request type
 
 */

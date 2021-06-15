@@ -16,7 +16,6 @@ object Lang:
   /**/       val Ref        = lang.any.Ref;             type Ref             = scala.AnyRef
   /**/       val Raw        = lang.any.Raw;             type Raw             = scala.AnyVal
   /**/       val Opaque     = lang.any.Opaque;          type Opaque          = lang.Any.Opaque
-  /**/       val Self       = lang.any.Self
 
 package lang:
   inline implicit def implicitFromRaw(inline v: Raw.Boolean): Boolean = v.cast[Boolean]
@@ -72,7 +71,7 @@ ___________________________________________________________________________*/
 @type Doc   ->  Type alias      \n\n Shortcut to [[scalqa.gen.Doc                       Lang.Doc]]
 @val  Doc   ->  Companion alias \n\n Shortcut to [[scalqa.gen.Doc$                      Lang.Doc]]
 
-@type Void   ->  Type alias \n\n Shortcut to [[scalqa.lang.any.type.Void Any.Self.Void]]
-@val  Void   ->  Companion alias \n\n Shortcut to [[scalqa.lang.any.type.Void$ Any.Self.Void]]
+@type Void   ->  Type alias \n\n Shortcut to [[scalqa.lang.any.type.Void Any.Gen.Void]]
+@val  Void   ->  Companion alias \n\n Shortcut to [[scalqa.lang.any.type.Void$ Any.Gen.Void]]
 
 */

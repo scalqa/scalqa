@@ -8,7 +8,7 @@ object Memory extends Able.Doc:
   /**/            def used  : ByteCount = total - free
   inline          def gc    : Unit      = System.gc
 
-  /**/            def doc  : Self.Doc = Self.Doc(this) += ("max", max.toBrief) += ("total", total.toBrief) += ("free", free.toBrief) += ("used", used.toBrief)
+  /**/            def doc  : Doc      = Doc(this) += ("max", max.toBrief) += ("total", total.toBrief) += ("free", free.toBrief) += ("used", used.toBrief)
   private inline  def rt    : Runtime   = Runtime.getRuntime
 
 

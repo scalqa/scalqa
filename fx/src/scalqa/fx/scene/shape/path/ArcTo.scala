@@ -4,25 +4,25 @@ import javafx.scene.shape.{ ArcTo => JArcTo }
 
 class ArcTo(val real: JArcTo) extends AnyVal with Z.Base[ArcTo,JArcTo]:
   protected                def setup                                        = ArcTo
-  @tn("x_Pro")             def x_*                        : Double.Pro.OM   = Fx.JavaFx.As.pro_OM(real.xProperty)
+  @tn("x_Pro")             def x_*                        : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.xProperty)
   /**/                     def x                          : Double          = real.getX
   /**/                     def x_=(v: Double)             : Unit            = real.setX(v)
-  @tn("y_Pro")             def y_*                        : Double.Pro.OM   = Fx.JavaFx.As.pro_OM(real.yProperty)
+  @tn("y_Pro")             def y_*                        : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.yProperty)
   /**/                     def y                          : Double          = real.getY
   /**/                     def y_=(v: Double)             : Unit            = real.setY(v)
-  @tn("radiusX_Pro")       def radiusX_*                  : Double.Pro.OM   = Fx.JavaFx.As.pro_OM(real.radiusXProperty)
+  @tn("radiusX_Pro")       def radiusX_*                  : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.radiusXProperty)
   /**/                     def radiusX                    : Double          = real.getRadiusX
   /**/                     def radiusX_=(v: Double)       : Unit            = real.setRadiusX(v)
-  @tn("radiusY_Pro")       def radiusY_*                  : Double.Pro.OM   = Fx.JavaFx.As.pro_OM(real.radiusYProperty)
+  @tn("radiusY_Pro")       def radiusY_*                  : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.radiusYProperty)
   /**/                     def radiusY                    : Double          = real.getRadiusY
   /**/                     def radiusY_=(v: Double)       : Unit            = real.setRadiusY(v)
-  @tn("xAxisRotation_Pro") def xAxisRotation_*            : Double.Pro.OM   = Fx.JavaFx.As.pro_OM(real.XAxisRotationProperty)
+  @tn("xAxisRotation_Pro") def xAxisRotation_*            : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.XAxisRotationProperty)
   /**/                     def xAxisRotation              : Double          = real.getXAxisRotation
   /**/                     def xAxisRotation_=(v: Double) : Unit            = real.setXAxisRotation(v)
-  @tn("sweepFlag_Pro")     def sweepFlag_*                : Boolean.Pro.OM  = Fx.JavaFx.As.pro_OM(real.sweepFlagProperty)
+  @tn("sweepFlag_Pro")     def sweepFlag_*                : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.sweepFlagProperty)
   /**/                     def sweepFlag                  : Boolean         = real.isSweepFlag
   /**/                     def sweepFlag_=(b: Boolean)    : Unit            = real.setSweepFlag(b)
-  @tn("largeArcFlag_Pro")  def largeArcFlag_*             : Boolean.Pro.OM  = Fx.JavaFx.As.pro_OM(real.largeArcFlagProperty)
+  @tn("largeArcFlag_Pro")  def largeArcFlag_*             : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.largeArcFlagProperty)
   /**/                     def largeArcFlag               : Boolean         = real.isLargeArcFlag
   /**/                     def largeArcFlag_=(b: Boolean) : Unit            = real.setLargeArcFlag(b)
 

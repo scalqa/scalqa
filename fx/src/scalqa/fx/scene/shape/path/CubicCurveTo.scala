@@ -4,22 +4,22 @@ import javafx.scene.shape.{ CubicCurveTo => JCubicCurveTo }
 
 class CubicCurveTo(val real: JCubicCurveTo) extends AnyVal with Z.Base[CubicCurveTo,JCubicCurveTo]:
   protected            def setup                                   = CubicCurveTo
-  @tn("x_Pro")         def x_*                    : Double.Pro.OM  = Fx.JavaFx.As.pro_OM(real.xProperty)
+  @tn("x_Pro")         def x_*                    : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.xProperty)
   /**/                 def x                      : Double         = real.getX
   /**/                 def x_=(v: Double)         : Unit           = real.setX(v)
-  @tn("y_Pro")         def y_*                    : Double.Pro.OM  = Fx.JavaFx.As.pro_OM(real.yProperty)
+  @tn("y_Pro")         def y_*                    : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.yProperty)
   /**/                 def y                      : Double         = real.getY
   /**/                 def y_=(v: Double)         : Unit           = real.setY(v)
-  @tn("controlX1_Pro") def controlX1_*            : Double.Pro.OM  = Fx.JavaFx.As.pro_OM(real.controlX1Property)
+  @tn("controlX1_Pro") def controlX1_*            : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.controlX1Property)
   /**/                 def controlX1              : Double         = real.getControlX1
   /**/                 def controlX1_=(v: Double) : Unit           = real.setControlX1(v)
-  @tn("controlX2_Pro") def controlX2_*            : Double.Pro.OM  = Fx.JavaFx.As.pro_OM(real.controlX2Property)
+  @tn("controlX2_Pro") def controlX2_*            : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.controlX2Property)
   /**/                 def controlX2              : Double         = real.getControlX2
   /**/                 def controlX2_=(v: Double) : Unit           = real.setControlX2(v)
-  @tn("controlY1_Pro") def controlY1_*            : Double.Pro.OM  = Fx.JavaFx.As.pro_OM(real.controlY1Property)
+  @tn("controlY1_Pro") def controlY1_*            : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.controlY1Property)
   /**/                 def controlY1              : Double         = real.getControlY1
   /**/                 def controlY1_=(v: Double) : Unit           = real.setControlY1(v)
-  @tn("controlY2_Pro") def controlY2_*            : Double.Pro.OM  = Fx.JavaFx.As.pro_OM(real.controlY2Property)
+  @tn("controlY2_Pro") def controlY2_*            : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.controlY2Property)
   /**/                 def controlY2              : Double         = real.getControlY2
   /**/                 def controlY2_=(v: Double) : Unit           = real.setControlY2(v)
 

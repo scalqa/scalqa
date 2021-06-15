@@ -15,5 +15,12 @@ object Ref:
 ___________________________________________________________________________*/
 /**
 @object Ref -> ###
+   Ref type is an alias for scala.AnyRef or java.lang.Object.
+
+   Ref object contains reference type implementations.
+
+@val emptyArray -> Empty object array
+
+    Holds singleton Array[AnyRef] object
 
 */

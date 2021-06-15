@@ -1,10 +1,10 @@
 package scalqa;  package lang; package float; package custom; import language.implicitConversions
 
-abstract class Type[A<:Opaque.Float](val name:String) extends Opaque.Companion[A](ClassTag.Float.cast[ClassTag[A]]) with Self.VoidTag.Floats[A]:
+abstract class Type[A<:Opaque.Float](val name:String) extends Opaque.Companion[A](ClassTag.Float.cast[ClassTag[A]]) with gen.`given`.VoidTag.RawFloat[A]:
 
   override def isVoid(v: A): Boolean=false
 
-  given givenVoidTag: Self.VoidTag.Floats[A]=this
+  given givenVoidTag: Given.VoidTag.RawFloat[A]=this
 
   extension(inline x: A)
     inline def real: Float = x.cast[Float]

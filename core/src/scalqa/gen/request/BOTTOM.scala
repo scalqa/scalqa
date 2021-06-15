@@ -1,6 +1,8 @@
 package scalqa; package gen; package request
 
-object BOTTOM extends Request
+class BOTTOM private() extends Request
+
+object BOTTOM extends BOTTOM
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -9,8 +11,12 @@ object BOTTOM extends Request
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object BOTTOM -> ### General Request BOTTOM
+@class  BOTTOM -> ### BOTTOM Request Type
 
        See [[Request]] for usage
+
+@object BOTTOM -> ### BOTTOM Object
+
+       Singleton implementation of [[BOTTOM]] request type
 
 */

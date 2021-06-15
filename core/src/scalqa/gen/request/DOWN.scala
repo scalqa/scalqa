@@ -1,6 +1,8 @@
 package scalqa; package gen; package request
 
-object DOWN extends Request
+class DOWN private() extends Request
+
+object DOWN extends DOWN
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -9,9 +11,12 @@ object DOWN extends Request
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object DOWN -> ### General Request DOWN
+@class  DOWN -> ### DOWN Request Type
 
-     See [[Request]] for usage
+       See [[Request]] for usage
 
+@object DOWN -> ### DOWN Object
+
+       Singleton implementation of [[DOWN]] request type
 
 */

@@ -4,13 +4,13 @@ class Circle(radiusO: Opt[Double]) extends Shape:
   protected def _createReal = radiusO.map(new REAL(_)) or new REAL
   protected type REAL = javafx.scene.shape.Circle
 
-  @tn("centerX_Pro") def centerX_*            : Double.Pro.OM  = Fx.JavaFx.As.pro_OM(real.centerXProperty)
+  @tn("centerX_Pro") def centerX_*            : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.centerXProperty)
   /**/               def centerX              : Double         = real.getCenterX
   /**/               def centerX_=(b: Double) : Unit           = real.setCenterX(b)
-  @tn("centerY_Pro") def centerY_*            : Double.Pro.OM  = Fx.JavaFx.As.pro_OM(real.centerYProperty)
+  @tn("centerY_Pro") def centerY_*            : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.centerYProperty)
   /**/               def centerY              : Double         = real.getCenterY
   /**/               def centerY_=(b: Double) : Unit           = real.setCenterY(b)
-  @tn("radius_Pro")  def radius_*             : Double.Pro.OM  = Fx.JavaFx.As.pro_OM(real.radiusProperty)
+  @tn("radius_Pro")  def radius_*             : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.radiusProperty)
   /**/               def radius               : Double         = real.getRadius
   /**/               def radius_=(b: Double)  : Unit           = real.setRadius(b)
 

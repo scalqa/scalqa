@@ -1,6 +1,9 @@
 package scalqa; package gen; package request
 
-object CENTER extends Request
+
+class CENTER private() extends Request
+
+object CENTER extends CENTER
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -9,8 +12,12 @@ object CENTER extends Request
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object CENTER -> ### General Request CENTER
+@class  CENTER -> ### CENTER Request Type
 
        See [[Request]] for usage
+
+@object CENTER -> ### CENTER Object
+
+       Singleton implementation of [[CENTER]] request type
 
 */

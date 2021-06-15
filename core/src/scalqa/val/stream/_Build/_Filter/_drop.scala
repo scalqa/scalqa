@@ -17,7 +17,7 @@ transparent trait _drop :
     /**/                     def dropAllBy[B](f: A=>B,v: ~[B])           : ~[A] = { val set=v.toSet;  if(set.isEmpty) x else x.DROP(v => set.contains(f(v)))}
     /**/                     def dropOnly(v: A, vs: A*)                  : ~[A] = if(vs.isEmpty) x.DROP(_ == v) else dropAll(vs.~ + v)
     /**/                     def dropOnlyBy[B](f:A=>B,vs: B*)            : ~[A] = dropAllBy(f,vs.~)
-    /**/                     def dropVoid       (using Self.VoidTag[A]) : ~[A] = new F.dropVoid(x) // do not inline, there is same method in Opt - trouble when Opt[~[_]]
+    /**/                     def dropVoid       (using Given.VoidTag[A]) : ~[A] = new F.dropVoid(x) // do not inline, there is same method in Opt - trouble when Opt[~[_]]
   extension[A](inline x: ~[A])
     /**/              inline def DROP(inline f: A => Boolean)            : ~[A] = { class DROP(x: ~[A]) extends z.a.Pipe[A](x){@tn("read_Opt") def read_? ={var o=x.read_?; while(o.nonEmpty){ if(!f(o.cast[A])) return o; o=x.read_?}; o}}; new DROP(x)}
 

@@ -8,10 +8,10 @@ class Item extends Action:
   protected type REAL <: JItem
   protected override def _createReal: REAL = new JItem().cast[REAL]
 
-  @tn("graphic_Pro") def graphic_*                 : Pro.OM[Node.Like] = Fx.JavaFx.As.pro_OM(real.graphicProperty).mutableMap_^[Node.Like]
+  @tn("graphic_Pro") def graphic_*                 : Pro.OM[Node.Like] = Fx.JavaFx.To.pro_OM(real.graphicProperty).mutableMap_^[Node.Like]
   /**/               def graphic                   : Node.Like         = graphic_*()
   /**/               def graphic_=(g: Node.Like) : Unit                = real.setGraphic(g.real)
-  @tn("id_Pro")      def id_*                      : String.Pro.OM       = Fx.JavaFx.As.pro_OM(real.idProperty)
+  @tn("id_Pro")      def id_*                      : String.Pro.OM       = Fx.JavaFx.To.pro_OM(real.idProperty)
   /**/               def id                        : String              = real.getId
   /**/               def id_=(v: String)           : Unit                = real.setId(v)
 

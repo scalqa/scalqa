@@ -8,10 +8,10 @@ private[scalqa] object Unsupported_View:
     trait Like[A] extends Idx.Observable[A]:
       def onChange[U](l: ><[Observable.Event[A]] => U): Event.Control = \/
 
-    class OM[A](protected val real: Idx.Observable[A]) extends Idx.OM.X.Abstract[A] with J.Util.Proxy.Idx.O.AbstractTrait[A] with Unsupported_View.OM.Like[A]:
+    class OM[A](protected val real: Idx.Observable[A]) extends Idx.OM.X.Base[A] with J.Util.Proxy.Idx.O.Basis[A] with Unsupported_View.OM.Like[A]:
       override def onChange[U](l: ><[Observable.Event[A]] => U): Event.Control = real.onChange(l)
 
-  class M[A](protected val real: Idx[A]) extends Idx.Mutable.X.Abstract[A] with J.Util.Proxy.Idx.AbstractTrait[A] with M.Like[A]
+  class M[A](protected val real: Idx[A]) extends Idx.Mutable.X.Base[A] with J.Util.Proxy.Idx.Basis[A] with M.Like[A]
 
   object M:
     trait Like[A] extends Idx.Mutable[A]:
@@ -26,7 +26,7 @@ private[scalqa] object Unsupported_View:
       /**/                override def modify(ch: Idx.Mutable[A] => Unit)              : Unit          = ch(this)
       /**/                override def onChange[U](l: ><[Observable.Event[A]] => U) : Event.Control = \/
 
-  class OM[A](protected val real: Idx[A]) extends Idx.OM.X.Abstract[A] with J.Util.Proxy.Idx.AbstractTrait[A] with OM.Like[A]
+  class OM[A](protected val real: Idx[A]) extends Idx.OM.X.Base[A] with J.Util.Proxy.Idx.Basis[A] with OM.Like[A]
 
   object OM:
     trait Like[A] extends Idx.ObservableMutable[A] with M.Like[A] with O.Like[A]:

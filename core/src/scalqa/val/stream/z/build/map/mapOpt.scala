@@ -1,6 +1,6 @@
 package scalqa; package `val`; package stream; package z; package build; package map; import language.implicitConversions;
 
-import Self.Given.StreamTag
+import Gen.Given.StreamTag
 
 object mapOpt:
   class Booleans[A,B<:Raw.Boolean](x: ~[A], f:Byte  .G.Fun.FromAny[A,Boolean.G.Opt[B]]) extends a.Pipe.Booleans[B](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){ val r=f(o.`val`); if(r.nonEmpty) return r; o=x.read_? }; \/}}

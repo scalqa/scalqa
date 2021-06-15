@@ -4,10 +4,10 @@ import javafx.scene.shape.{ MoveTo => JMoveTo }
 
 class MoveTo(val real: JMoveTo) extends AnyVal with Z.Base[MoveTo,JMoveTo]:
   protected    def setup                           = MoveTo
-  @tn("x_Pro") def x_*            : Double.Pro.OM  = Fx.JavaFx.As.pro_OM(real.xProperty)
+  @tn("x_Pro") def x_*            : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.xProperty)
   /**/         def x              : Double         = real.getX
   /**/         def x_=(v: Double) : Unit           = real.setX(v)
-  @tn("y_Pro") def y_*            : Double.Pro.OM  = Fx.JavaFx.As.pro_OM(real.yProperty)
+  @tn("y_Pro") def y_*            : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.yProperty)
   /**/         def y              : Double         = real.getY
   /**/         def y_=(v: Double) : Unit           = real.setY(v)
 

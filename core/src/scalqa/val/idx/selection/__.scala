@@ -10,7 +10,7 @@ trait Selection[A] extends Idx[A] with Able.Doc:
 //  /**/            inline def get               : A         = get_?.get
   @tn("stream") override def ~                 : ~[A]      = indexes.~.map_?(target.at_?(_))
   /**/                   def property(dflt: A) : Pro[A]    = new Pro[A] { def apply() = indexes.at_?(0).map(self.apply) or dflt }
-  /**/                   def doc              : Self.Doc = Self.Doc(this) += ("indexes", indexes.~.makeString(","))
+  /**/                   def doc              : Doc      = Doc(this) += ("indexes", indexes.~.makeString(","))
 
 object Selection:
   /**/            def apply[A](targetIndex: Idx[A], idx: Idx[Int]) : Selection[A]  = selection.Z.Basic(targetIndex,idx)

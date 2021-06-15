@@ -1,12 +1,12 @@
 package scalqa; package `val`; package collection
 
 trait Mutable[A] extends Collection[A] with Able.Add[A]:
-  /**/                     def remove(v: A)       : Int
-  /**/                     def removeAll(v: ~[A]) : Int       = v.map(remove).sum
-  /**/                     def clear              : Unit
-  /**/                     def replaceAll(v: ~[A]): Unit      = { clear; addAll(v) }
-  @tn("_remove")    inline def -= (inline v: A)   : this.type = { remove(v);    this }
-  @tn("_removeAll") inline def --=(inline v: ~[A]): this.type = { removeAll(v); this }
+  /**/              def remove(v: A)       : Int
+  /**/              def removeAll(v: ~[A]) : Int       = v.map(remove).sum
+  /**/              def clear              : Unit
+  /**/              def replaceAll(v: ~[A]): Unit      = { clear; addAll(v) }
+  @tn("_remove")    def -= (v: A)          : this.type = { this.remove(v);    this }
+  @tn("_removeAll") def --=(v: ~[A])       : this.type = { this.removeAll(v); this }
 
 object Mutable:
   def apply[A](initSize: Int = J.initSize)           : Collection[A] = Buffer[A](initSize)
@@ -31,7 +31,7 @@ ___________________________________________________________________________*/
 
     Removes all collection elements, which are equal to the given value
 
-    Returns count of removed elements, which can be 0, 1, or many
+    Returns the collection itself
 
 @def removeAll -> Remove all streamed
 
@@ -43,7 +43,7 @@ ___________________________________________________________________________*/
 
     Removes all collection elements, which are equal to those in given stream
 
-    Returns count of removed elements, which can be 0, 1, or many
+    Returns the collection itself
 
 @def clear -> Remove everything
 

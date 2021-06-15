@@ -4,10 +4,10 @@ class Text(s: String.Opt = \/) extends Shape:
   protected def _createReal: REAL = s.map(new REAL(_)) or new REAL
   protected type REAL = javafx.scene.text.Text
 
-  @tn("text_Pro") def text_*            : String.Pro.OM  = Fx.JavaFx.As.pro_OM(real.textProperty)
+  @tn("text_Pro") def text_*            : String.Pro.OM  = Fx.JavaFx.To.pro_OM(real.textProperty)
   /**/            def text              : String         = real.getText
   /**/            def text_=(v: String) : Unit           = real.setText(v)
-  @tn("font_Pro") def font_*            : Pro.OM[Font]   = Fx.JavaFx.As.pro_OM(real.fontProperty).mutableMap_^[Font]
+  @tn("font_Pro") def font_*            : Pro.OM[Font]   = Fx.JavaFx.To.pro_OM(real.fontProperty).mutableMap_^[Font]
 
 object Text:
   def apply() = new Text()

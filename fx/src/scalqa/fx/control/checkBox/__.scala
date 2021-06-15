@@ -4,7 +4,7 @@ class CheckBox extends Button.Base:
   protected type REAL = javafx.scene.control.CheckBox
   protected override def _createReal = new REAL
 
-  @tn("selected_Pro") def selected_*                        : Boolean.Pro.OM  = Fx.JavaFx.As.pro_OM(real.selectedProperty)
+  @tn("selected_Pro") def selected_*                        : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.selectedProperty)
   /**/                def selected                          : Boolean         = real.isSelected
   /**/                def selected_=(b: Boolean)            : Unit            = real.setSelected(b)
 

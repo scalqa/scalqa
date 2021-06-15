@@ -10,7 +10,7 @@ abstract class Axis[A] extends Abstract.Region with _properties:
   def ticks       : Idx[Tick[A]]      = Idx.wrap(real.getTickMarks).map_^(axis.Tick(_, valueMap))
 
 object Axis:
-  inline def As = axis.As
+  inline def X = axis.X
   type Tick[A]  = axis.Tick[A]
 
 /*___________________________________________________________________________

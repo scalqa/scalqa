@@ -5,9 +5,9 @@ object Ops:
   inline def contains[A](x: Range[A], v: A)         : Boolean       = !(v <* x) && !(v *> x)
   inline def isEmpty [A](x: Range[A])               : Boolean       = x.start *> x
   inline def join    [A](x: Range[A], v: A)
-                              (mk: X.Base[A,_]): Range[A]      = if(v <* x) mk(v,x.end,x.endIsIn,x.ordering) else if(v *> x) mk(x.start,v,true,x.ordering) else x
+                                   (mk: X.Base[A,_]): Range[A]      = if(v <* x) mk(v,x.end,x.endIsIn,x.ordering) else if(v *> x) mk(x.start,v,true,x.ordering) else x
   inline def join    [A](x: Range[A], r: Range[A])
-                              (mk: X.Base[A,_]): Range[A]      = if(r.start <* x){ if(r.end.*>(r.endIsIn,x)) mk(r.start,r.end,r.endIsIn,x.ordering) else mk(r.start,x.end,x.endIsIn,x.ordering)}
+                                   (mk: X.Base[A,_]): Range[A]      = if(r.start <* x){ if(r.end.*>(r.endIsIn,x)) mk(r.start,r.end,r.endIsIn,x.ordering) else mk(r.start,x.end,x.endIsIn,x.ordering)}
                                                                       else if(r.end.*>(r.endIsIn,x)) mk(x.start,r.end,r.endIsIn,x.ordering) else x
   inline def overlaps  [A](x: Range[A], r: Range[A]): Boolean       = if(r.start <* x) !(x.start *> r) else !(r.start *> x)
   /**/   def overlapOpt[A](x: Range[A], r: Range[A])

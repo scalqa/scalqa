@@ -2,9 +2,9 @@ package scalqa; package fx; package control; package cell; import language.impli
 
 private object Z:
 
-  object Void extends Setup[control.Cell] with Self.Void:
-    @tn("mouseClicked_Setup")  override def mouseClicked_:(f: (Ui.Event.Mouse, control.Cell) => Unit)      = ()
-    @tn("contextMenu_Setup")   override def contextMenu_:(f: (Ui.Event.ContextMenu, control.Cell) => Unit) = ()
+  object Void extends Setup[control.Cell] with Gen.Void:
+    @tn("mouseClicked_Setup")  override def mouseClicked_:(f: (Fx.Event.Mouse, control.Cell) => Unit)      = ()
+    @tn("contextMenu_Setup")   override def contextMenu_:(f: (Fx.Event.ContextMenu, control.Cell) => Unit) = ()
     @tn("alignment_SetupOpt")  override def alignment_:?(f: control.Cell => Opt[Pos])                   = ()
     @tn("style_SetupOpt")      override def style_:?(f: control.Cell => Opt[Style])                     = ()
     @tn("styleClass_SetupOpt") override def styleClass_:?(f: control.Cell => Opt[Style.Class])          = ()

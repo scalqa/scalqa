@@ -5,6 +5,8 @@ class Lookup[A<:RAW]:
   /**/           inline def apply[B](inline v: ~[(A, B)]): G.Lookup[A,B] = Stable(v)
   @tn("getVoid") inline def void[B]                      : G.Lookup[A,B] = Stable.void[B]
 
+  type M[B] = G.Lookup.Mutable[A,B]; inline def M = Mutable
+
   type Mutable[B] = G.Lookup.Mutable[A,B]
   object Mutable:
     def apply[B](initSize: Int = J.initSize): Mutable[B] = new G.Lookup.Mutable.X.Basic(initSize)

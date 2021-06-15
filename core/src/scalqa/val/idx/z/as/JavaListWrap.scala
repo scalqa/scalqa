@@ -1,12 +1,12 @@
 package scalqa; package `val`; package idx; package z; package as; import language.implicitConversions
 
-private[scalqa] class JavaListWrap[A](val real: java.util.List[A]) extends idx.X.Abstract[A]:
+private[scalqa] class JavaListWrap[A](val real: java.util.List[A]) extends idx.X.Base[A]:
   def size = real.size
   def apply(i: Int) = real.get(i)
 
 private[scalqa] object JavaListWrap:
 
-  class Mutable[A](val real: java.util.List[A]) extends Idx.Mutable.X.Abstract[A]:
+  class Mutable[A](val real: java.util.List[A]) extends Idx.Mutable.X.Base[A]:
     /**/                def size                  : Int  = real.size
     /**/                def apply(i: Int)         : A    = real.get(i)
     /**/                def addAt(i: Int, e: A)   : Unit = real.add(i, e)

@@ -10,10 +10,10 @@ class CheckBox[ROW,V,A](c: Column[ROW,V,A]) extends Cell[ROW,V,A](c):
 
     selectedStateCallbackProperty.set(v => {
       val pr: Pro.O[Opt[A]] = c.mkProOpt(table.rows(v))
-      Ui.JavaFx.booleanPropertry(
-        new Val.Pro.O.X.Abstract[Boolean] with Boolean.Pro.OM  {
+      Fx.JavaFx.booleanPropertry(
+        new Val.Pro.O.X.Base[Boolean] with Boolean.Pro.OM  {
           override def apply(): Boolean = pr().map(twoWay).or(false)
-          def update(b: Boolean) = { val r = table.rows(v); column.editCommitFun(r, ??? /*b.cast[A]*/) }
+          def update(b: Boolean) = { val r = table.rows(v); column.editCommitFun.cast[(ROW,Boolean)=> Unit].apply(r, b) }
         })
     })
   }

@@ -38,7 +38,7 @@ object Lookup:
   object Stable:
     /**/            def apply[A<:RAW,B](v: (A,B) *)      : Stable[A,B] = apply(v.~)
     /**/            def apply[A<:RAW,B](v: ~[(A,B)])     : Stable[A,B] = new Stable(IntMap.from(v.map(v => (v._1.real.Int,v._2)).iterator))
-    @tn("getVoid")  def void[A<:RAW,B]                   : Stable[A,B] = zVoid.cast[Stable[A,B]]; private object zVoid extends Stable(IntMap.empty) with Self.Void
+    @tn("getVoid")  def void[A<:RAW,B]                   : Stable[A,B] = zVoid.cast[Stable[A,B]]; private object zVoid extends Stable(IntMap.empty) with Gen.Void
     implicit inline def implicitRequestVoid[A<:RAW,B](inline v: \/): Stable[A,B] = void
 
 /*___________________________________________________________________________

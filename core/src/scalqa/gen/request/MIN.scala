@@ -1,6 +1,8 @@
 package scalqa; package gen; package request; import language.implicitConversions
 
-object MIN extends Request:
+class MIN private() extends Request
+
+object MIN extends MIN:
   implicit inline def implicitToChar  (v: MIN.type): Char   = Char.min
   implicit inline def implicitToByte  (v: MIN.type): Byte   = Byte.min
   implicit inline def implicitToShort (v: MIN.type): Short  = Short.min
@@ -16,9 +18,12 @@ object MIN extends Request:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object MIN -> ### General Request  MIN
+@class  MIN -> ### MIN Request Type
 
-     See [[Request]] for usage
+       See [[Request]] for usage
 
+@object MIN -> ### MIN Object
+
+       Singleton implementation of [[MIN]] request type
 
 */

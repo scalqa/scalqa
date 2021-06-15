@@ -11,11 +11,11 @@ abstract class Cell extends Label.Like:
   // --------------------------------------------------------------------------------------------------
   /**/                def item                          : ITEM             = item_?.get
   @tn("itemOpt")      def item_?                        : Opt[ITEM]        = if (real.isEmpty) \/ else real.getItem
-  @tn("empty_Pro")    def empty_*                       : Boolean.Pro.O    = Fx.JavaFx.As.pro_O(real.emptyProperty)
+  @tn("empty_Pro")    def empty_*                       : Boolean.Pro.O    = Fx.JavaFx.To.pro_O(real.emptyProperty)
   /**/                def empty                         : Boolean          = real.isEmpty
-  @tn("editing_Pro")  def editing_*                     : Boolean.Pro.O    = Fx.JavaFx.As.pro_O(real.editingProperty)
+  @tn("editing_Pro")  def editing_*                     : Boolean.Pro.O    = Fx.JavaFx.To.pro_O(real.editingProperty)
   /**/                def editing                       : Boolean          = real.isEditing
-  @tn("editable_Pro") def editable_*                    : Boolean.Pro.OM   = Fx.JavaFx.As.pro_OM(real.editableProperty)
+  @tn("editable_Pro") def editable_*                    : Boolean.Pro.OM   = Fx.JavaFx.To.pro_OM(real.editableProperty)
   /**/                def editable                      : Boolean          = real.isEditable
   /**/                def editable_=(b: Boolean)        : Unit             = real.setEditable(b)
 

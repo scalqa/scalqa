@@ -11,3 +11,9 @@ object Concurrent:
  __\  \/ /___/ __  |/ /__/ /_/ /_/ __  |   (c) 2021, Scalqa.org Inc
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
+/**
+@object Concurrent -> ###
+
+   A set of concurrent utility implementations which do not use synchronization, but rather more finely grained java.util.concurrent.atomic technology.
+
+*/

@@ -1,13 +1,16 @@
 package scalqa; package gen; package able; import language.implicitConversions
 
 trait Add[A]:
+  self =>
 
-  /**/                  def add(v: A)                 : Unit
-  /**/                  def addAll(v: ~[A])           : Unit      = v.foreach(add)
-  @tn("add_Opt")        def add_?(o: Opt[A])          : Unit      = o.forval(add)
+  /**/           def add(v: A)      : Unit
+  /**/           def addAll(v: ~[A]): Unit      = v.foreach(add)
 
-  @tn("add")     inline def += (inline v: A | Opt[A]) : this.type = { inline v match{ case v: Opt[A] => add_?(v); case v:A => add(v)}; this}
-  @tn("addAll")  inline def ++=(inline v: ~[A])       : this.type = { addAll(v); this }
+  @tn("_add")    def += (v: A)      : this.type = { add(v); this }
+  @tn("_addAll") def ++=(v: ~[A])   : this.type = { addAll(v); this }
+  @tn("_addOpt") def ++= (v: Opt[A]): this.type = { v.forval(add); this }
+
+
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -71,8 +74,10 @@ ___________________________________________________________________________*/
         x.~.TP // ~~(1, 2, 3, 4, 5, 6, 7, 8, 9)
       ```
 
-@def add_? -> Optional add
+@def ++= -> Alias for [[addAll]]
 
-    Adds element if option has value, does nothing for void option
+      Generally Opt could be added as a stream.
+
+      This overload is sligtly more efficient, but it also required for mapped Opt expressions, where Opt type is harder to resolve and it would not compile.
 
 */

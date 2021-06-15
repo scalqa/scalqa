@@ -1,6 +1,8 @@
 package scalqa; package gen; package request
 
-object LEFT extends Request
+class LEFT private() extends Request
+
+object LEFT extends LEFT
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -9,8 +11,12 @@ object LEFT extends Request
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object LEFT -> ### General Request  LEFT
+@class  LEFT -> ### LEFT Request Type
 
        See [[Request]] for usage
+
+@object LEFT -> ### LEFT Object
+
+       Singleton implementation of [[LEFT]] request type
 
 */

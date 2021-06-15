@@ -9,12 +9,12 @@ object WeakRef:
   implicit inline def implicitToBoolean[A](v: WeakRef[A]): Boolean    = v.get_?
 
   given givenClassTag[A](using t: ClassTag[A]): ClassTag[WeakRef[A]] = t.cast[ClassTag[WeakRef[A]]]
-  given givenNameTag [A]: Self.NameTag[WeakRef[A]]  = Self.NameTag("WeakRef")
-  given givenVoidTag [A]: Self.VoidTag[WeakRef[A]]  with { inline def isVoid(v: WeakRef[A]) = false }
+  given givenNameTag [A]: Given.NameTag[WeakRef[A]]  = Given.NameTag("WeakRef")
+  given givenVoidTag [A]: Given.VoidTag[WeakRef[A]]  with { inline def isVoid(v: WeakRef[A]) = false }
 
-  given givenDocTag[A](using t: Self.DocTag[A]) : Self.DocTag[WeakRef[A]] with
+  given givenDocTag[A](using t: Given.DocTag[A]) : Given.DocTag[WeakRef[A]] with
     def tag(v: WeakRef[A]) : String   = "WeakRef("+ v.get_?.map(v => t.tag(v)).or("\\/") + ")"
-    def doc(v: WeakRef[A]) : Self.Doc = Self.Doc("WeakRef@"+v.self_^.hash)
+    def doc(v: WeakRef[A]) : Doc      = Doc("WeakRef@"+v.self_^.hash)
 
   extension[A](x: WeakRef[A])
      @tn("get_Opt") def get_? : Opt[A] = { val v = x.cast[WeakReference[A]].get; if (v == null) \/ else v }
@@ -42,12 +42,12 @@ ___________________________________________________________________________*/
 
          val wr = J.WeakRef(hr)    // weak reference
 
-         wr.get_?.isEmpty.TP         // Prints: false
+         wr.get_?.isEmpty.TP       // Prints: false
 
          hr = null                 // Clearing hard refference
          System.gc                 // Run garbage collection
 
-         wr.get_?.isEmpty.TP         // Prints: true
+         wr.get_?.isEmpty.TP       // Prints: true
        ```
 
 

@@ -28,9 +28,9 @@ object Promise:
     inline def flatMap[B](f: A => Promise[B])  (using inline c:Context): Promise[B] = Z.flatMap(x,f)
     inline def foreach[U](inline f: A=>U)      (using inline c:Context): Unit       = x.onResult(_.forval(f))
 
-  given givenDocTag[A](using t: Self.DocTag[A]): Self.DocTag[Promise[A]] with
+  given givenDocTag[A](using t: Given.DocTag[A]): Given.DocTag[Promise[A]] with
     def tag(v: Promise[A]) : String   = v.result_?.map(v => "Promise("+v.tag+")") or "Promise(NOT_READY)"
-    def doc(v: Promise[A]) : Self.Doc = Self.Doc(v)
+    def doc(v: Promise[A]) : Doc      = Doc(v)
 
   given givenCanEqualPromise[A,B](using CanEqual[A,B]) : CanEqual[Promise[A], Promise[B]] = CanEqual.derived
 

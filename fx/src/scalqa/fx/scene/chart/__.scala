@@ -3,13 +3,13 @@ package scalqa; package fx; package scene
 abstract class Chart extends Abstract.Region:
   protected type REAL <: javafx.scene.chart.Chart
 
-  @tn("animated_Pro")      def animated_*                  : Boolean.Pro.OM  = Fx.JavaFx.As.pro_OM(real.animatedProperty)
+  @tn("animated_Pro")      def animated_*                  : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.animatedProperty)
   /**/                     def animated                    : Boolean         = real.getAnimated
   /**/                     def animated_=(v: Boolean)      : Unit            = real.setAnimated(v)
-  @tn("legendVisible_Pro") def legendVisible_*             : Boolean.Pro.OM  = Fx.JavaFx.As.pro_OM(real.legendVisibleProperty)
+  @tn("legendVisible_Pro") def legendVisible_*             : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.legendVisibleProperty)
   /**/                     def legendVisible               : Boolean         = real.isLegendVisible
   /**/                     def legendVisible_=(v: Boolean) : Unit            = real.setLegendVisible(v)
-  @tn("title_Pro")         def title_*                     : String.Pro.OM   = Fx.JavaFx.As.pro_OM(real.titleProperty)
+  @tn("title_Pro")         def title_*                     : String.Pro.OM   = Fx.JavaFx.To.pro_OM(real.titleProperty)
   /**/                     def title                       : String          = real.getTitle
   /**/                     def title_=(v: String)          : Unit            = real.setTitle(v)
 

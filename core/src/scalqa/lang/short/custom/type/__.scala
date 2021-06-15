@@ -1,10 +1,10 @@
 package scalqa;  package lang; package short; package custom; import language.implicitConversions
 
-abstract class Type[A<:Opaque.Short](val name:String) extends Opaque.Companion[A](ClassTag.Short.cast[ClassTag[A]]) with Self.VoidTag.Shorts[A]:
+abstract class Type[A<:Opaque.Short](val name:String) extends Opaque.Companion[A](ClassTag.Short.cast[ClassTag[A]]) with gen.`given`.VoidTag.RawShort[A]:
 
   override def isVoid(v: A): Boolean=false
 
-  given givenVoidTag: Self.VoidTag.Shorts[A]=this
+  given givenVoidTag: Given.VoidTag.RawShort[A]=this
 
   extension(inline x: A)
     inline def real: Short = x.cast[Short]

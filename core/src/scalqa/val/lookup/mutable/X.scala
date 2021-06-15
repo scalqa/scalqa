@@ -5,10 +5,10 @@ import scala.collection.immutable.{ Map as IMap, HashMap as IHash }
 
 object X:
 
-  abstract class Abstract[A,B] extends Mutable[A,B]
+  abstract class Base[A,B] extends Mutable[A,B]
 
   // ************************************************************************
-  class Concurrent[A,B](root: IMap[A,B] = IHash.empty[A,B]) extends Abstract[A,B] :
+  class Concurrent[A,B](root: IMap[A,B] = IHash.empty[A,B]) extends Base[A,B] :
     private val cRef = J.Concurrent.Ref[IMap[A,B]](root)
     /**/               def size                  = cRef.get.size
     @tn("get_Opt")     def get_?(key: A): Opt[B] = cRef.get.get(key)
@@ -18,7 +18,7 @@ object X:
     /**/               def remove(k: A) : Opt[B] = {while(true){ val m=cRef.get; val o:Opt[B]=m.get(k); if(o.isEmpty || cRef.change(m,m.removed(k))) return o }; \/ }
 
   // ************************************************************************
-  class Basic[A,B](protected val real: HashMap[A,B]) extends Abstract[A,B]:
+  class Basic[A,B](protected val real: HashMap[A,B]) extends Base[A,B]:
     def this() = this(HashMap.empty[A,B])
 
     /**/               def size                  = real.size

@@ -3,28 +3,28 @@ package scalqa; package fx; package scene; package chart; package axis; import l
 transparent trait _properties:
   self: Chart.Axis[_] =>
 
-  @tn("animated_Pro")         def animated_*                      : Boolean.Pro.OM  = Fx.JavaFx.As.pro_OM(real.animatedProperty)
+  @tn("animated_Pro")         def animated_*                      : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.animatedProperty)
   /**/                        def animated                        : Boolean         = real.getAnimated
   /**/                        def animated_=(b: Boolean)          : Unit            = real.setAnimated(b)
-  @tn("label_Pro")            def label_*                         : String.Pro.OM   = Fx.JavaFx.As.pro_OM(real.labelProperty)
+  @tn("label_Pro")            def label_*                         : String.Pro.OM   = Fx.JavaFx.To.pro_OM(real.labelProperty)
   /**/                        def label                           : String          = real.getLabel
   /**/                        def label_=(v: String)              : Unit            = real.setLabel(v)
-  @tn("ticksGap_Pro")         def ticksGap_*                      : Double.Pro.OM   = Fx.JavaFx.As.pro_OM(real.tickLabelGapProperty)
+  @tn("ticksGap_Pro")         def ticksGap_*                      : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.tickLabelGapProperty)
   /**/                        def ticksGap                        : Double          = real.getTickLabelGap
   /**/                        def ticksGap_=(v: Double)           : Unit            = real.setTickLabelGap(v)
-  @tn("ticksRotation_Pro")    def ticksRotation_*                 : Double.Pro.OM   = Fx.JavaFx.As.pro_OM(real.tickLabelRotationProperty)
+  @tn("ticksRotation_Pro")    def ticksRotation_*                 : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.tickLabelRotationProperty)
   /**/                        def ticksRotation                   : Double          = real.getTickLabelRotation
   /**/                        def ticksRotation_=(v: Double)      : Unit            = real.setTickLabelRotation(v)
-  @tn("ticksVisible_Pro")     def ticksVisible_*                  : Boolean.Pro.OM  = Fx.JavaFx.As.pro_OM(real.tickLabelsVisibleProperty)
+  @tn("ticksVisible_Pro")     def ticksVisible_*                  : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.tickLabelsVisibleProperty)
   /**/                        def ticksVisible                    : Boolean         = real.isTickLabelsVisible
   /**/                        def ticksVisible_=(b: Boolean)      : Unit            = real.setTickLabelsVisible(b)
-  @tn("ticksMarkVisible_Pro") def ticksMarkVisible_*              : Boolean.Pro.OM  = Fx.JavaFx.As.pro_OM(real.tickMarkVisibleProperty)
+  @tn("ticksMarkVisible_Pro") def ticksMarkVisible_*              : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.tickMarkVisibleProperty)
   /**/                        def ticksMarkVisible                : Boolean         = real.isTickMarkVisible
   /**/                        def ticksMarkVisible_=(b: Boolean)  : Unit            = real.setTickMarkVisible(b)
-  @tn("ticksFill_Pro")        def ticksFill_*                     : Pro.OM[Paint]   = Fx.JavaFx.As.pro_OM(real.tickLabelFillProperty).mutableMap_^[Paint]
+  @tn("ticksFill_Pro")        def ticksFill_*                     : Pro.OM[Paint]   = Fx.JavaFx.To.pro_OM(real.tickLabelFillProperty).mutableMap_^[Paint]
   /**/                        def ticksFill                       : Paint           = Paint(real.getTickLabelFill)
   /**/                        def ticksFill_=(v: Paint)           : Unit            = real.setTickLabelFill(v.real)
-  @tn("ticksFont_Pro")        def ticksFont_*                     : Pro.OM[Font]    = Fx.JavaFx.As.pro_OM(real.tickLabelFontProperty).mutableMap_^[Font]
+  @tn("ticksFont_Pro")        def ticksFont_*                     : Pro.OM[Font]    = Fx.JavaFx.To.pro_OM(real.tickLabelFontProperty).mutableMap_^[Font]
   /**/                        def ticksFont                       : Font            = Font(real.getTickLabelFont)
   /**/                        def ticksFont_=(v: Font)            : Unit            = real.setTickLabelFont(v.real)
 

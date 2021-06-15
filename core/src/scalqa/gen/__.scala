@@ -4,12 +4,15 @@ import scala.reflect.Enum
 
 object Gen:
   @fast lazy val Able               = gen.Able
+  @fast lazy val Given              = gen.Given
 
   @fast lazy val Calendar           = gen.Calendar
   @fast lazy val Day                = gen.calendar.Day;               type Day                     = gen.calendar.Day.opaque.`type`
   @fast lazy val Week               = gen.calendar.Week;              type Week                    = gen.calendar.Week.opaque.`type`
   @fast lazy val Month              = gen.calendar.Month;             type Month                   = gen.calendar.Month.opaque.`type`
   @fast lazy val Year               = gen.calendar.Year;              type Year                    = gen.calendar.Year.opaque.`type`
+
+  @fast lazy val Doc                = gen.Doc;                        type Doc                     = gen.Doc
 
   @fast lazy val Event              = gen.Event
   @fast lazy val Observable         = gen.event.Observable;           type Observable              = gen.event.Observable
@@ -31,6 +34,7 @@ object Gen:
   @fast lazy val Percent            = gen.util.Percent;               type Percent                 = gen.util.Percent.opaque.`type`
   @fast lazy val ReversibleFunction = gen.util.ReversibleFunction;    type ReversibleFunction[A,B] = gen.util.ReversibleFunction[A,B]
   /**/                                                                type EnumCompanion[A<:Enum]  = gen.util.EnumCompanion[A]
+  @fast lazy val Void               = gen.Void;                       type Void                    = gen.Void
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -84,7 +88,7 @@ ___________________________________________________________________________*/
 @val  ByteCount          ->  Companion alias \n\n Shortcut to [[scalqa.gen.util.ByteCount$           Gen.Number.ByteCount]]
 @type Percent            ->  Type alias      \n\n Shortcut to [[scalqa.gen.util.Percent      Gen.Number.Percent]]
 @val  Percent            ->  Companion alias \n\n Shortcut to [[scalqa.gen.util.Percent$             Gen.Number.Percent]]
-@type ReversibleFunction ->  Type alias      \n\n Shortcut to [[scalqa.lang.any.type.ReversibleFunction Any.Self.ReversibleFunction]]
+@type ReversibleFunction ->  Type alias     \n\n Shortcut to [[scalqa.lang.any.type.ReversibleFunction Any.Self.ReversibleFunction]]
 @val  ReversibleFunction ->  Companion alias \n\n Shortcut to [[scalqa.lang.any.type.BiFunction$ Any.Self.ReversibleFunction]]
 
 */

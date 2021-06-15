@@ -7,6 +7,7 @@ object Docs:
   def generate(v: String): Nothing = ???
 
   def isHiddenName(owner: Member, name: String): Boolean = owner.name match
+    case "Doc"                               => name.startsWith("product")
     case "Opt"                               => name == "withFilter" || name == "foreach" || name == "flatMap"
     case "Result"                            => name == "withFilter" || name == "foreach" || name == "flatMap"
     case "Promise"                           => name == "withFilter" || name == "foreach" || name == "flatMap"

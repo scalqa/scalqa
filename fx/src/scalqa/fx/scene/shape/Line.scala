@@ -5,16 +5,16 @@ class Line extends Shape:
   protected def _createReal = new REAL
   protected type REAL = javafx.scene.shape.Line
 
-  @tn("startX_Pro") def startX_*                        : Double.Pro.OM   = Fx.JavaFx.As.pro_OM(real.startXProperty)
+  @tn("startX_Pro") def startX_*                        : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.startXProperty)
   /**/              def startX                          : Double          = real.getStartX
   /**/              def startX_=(b: Double)             : Unit            = real.setStartX(b)
-  @tn("startY_Pro") def startY_*                        : Double.Pro.OM   = Fx.JavaFx.As.pro_OM(real.startYProperty)
+  @tn("startY_Pro") def startY_*                        : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.startYProperty)
   /**/              def startY                          : Double          = real.getStartY
   /**/              def startY_=(b: Double)             : Unit            = real.setStartY(b)
-  @tn("endX_Pro")   def endX_*                          : Double.Pro.OM   = Fx.JavaFx.As.pro_OM(real.endXProperty)
+  @tn("endX_Pro")   def endX_*                          : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.endXProperty)
   /**/              def endX                            : Double          = real.getEndX
   /**/              def endX_=(b: Double)               : Unit            = real.setEndX(b)
-  @tn("endY_Pro")   def endY_*                          : Double.Pro.OM   = Fx.JavaFx.As.pro_OM(real.endYProperty)
+  @tn("endY_Pro")   def endY_*                          : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.endYProperty)
   /**/              def endY                            : Double          = real.getEndY
   /**/              def endY_=(b: Double)               : Unit            = real.setEndY(b)
 

@@ -9,7 +9,7 @@ private[event] object Void extends Entry(null, null, null):
   override def cancelIf(b: () => Boolean) = J.illegalState()
   override def onCancel[U](l: () => U)    = J.illegalState()
   override def removeHardReference: Ref = J.illegalState()
-  override def doc                       = Self.Doc("Entry") += "void"
+  override def doc                       = Doc("Entry") += "void"
   override def isVoid                     = true
 
 /*___________________________________________________________________________

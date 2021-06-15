@@ -1,6 +1,8 @@
 package scalqa; package gen; package request
 
-object EMPTY extends Request
+class EMPTY private() extends Request
+
+object EMPTY extends EMPTY
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -9,8 +11,12 @@ object EMPTY extends Request
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-    @object EMPTY -> ### General Request EMPTY
+@class  EMPTY -> ### EMPTY Request Type
 
        See [[Request]] for usage
+
+@object EMPTY -> ### EMPTY Object
+
+       Singleton implementation of [[EMPTY]] request type
 
 */

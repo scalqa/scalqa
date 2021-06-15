@@ -19,7 +19,7 @@ object Deque:
     def last     : Entry    = { var e=this; while(e.next.ok) e=e.next; e }
     def size     : Int      = { var e=this; var i=0; while(e.ok){ i+=1; e=e.next}; i }
     def popOpt[A]: Opt[A]   = ok ? { ok = false; value.cast[A]}
-    def doc      : Self.Doc = Self.Doc("Entry:"+this.^.hash) += ("thisOk",ok) += ("nextOk",next.ok) += ("priorOk",prior.ok) += ("size",size) += ("value",value.toString)
+    def doc      : Doc      = Doc("Entry:"+this.^.hash) += ("thisOk",ok) += ("nextOk",next.ok) += ("priorOk",prior.ok) += ("size",size) += ("value",value.toString)
 
   object Root extends Entry(null, null):
     override val next  = this
@@ -28,7 +28,7 @@ object Deque:
     override def last  = this
     override def size  = 0
     override def popOpt[A]: Opt[A] = \/
-    override def doc  = Self.Doc("Entry:Void")
+    override def doc  = Doc("Entry:Void")
 
   class Stream[A](v: Entry) extends ~[A]:
     private         var e      : Entry  = v

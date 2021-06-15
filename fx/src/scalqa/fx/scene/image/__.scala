@@ -5,12 +5,12 @@ import javafx.scene.image.{ Image => JImage }
 object Image extends Abstract.Delegate.Opaque[Image, JImage]("Fx.Image"):
   /**/     def apply(v: J.Url) : Image = new JImage(v.toString)
   implicit def implicitFromJava(v: JImage) : Image = this(v)
-  override def doc(v: Image) = Self.Doc(name) += ("width", v.width) += ("height", v.height)
+  override def doc(v: Image) = Doc(name) += ("width", v.width) += ("height", v.height)
 
   extension (x: Image)
-    @tn("width_Pro")  def width_*  : Double.Pro.O  = Fx.JavaFx.As.pro_O(x.real.widthProperty)
+    @tn("width_Pro")  def width_*  : Double.Pro.O  = Fx.JavaFx.To.pro_O(x.real.widthProperty)
     /**/              def width    : Double        = x.real.getWidth
-    @tn("height_Pro") def height_* : Double.Pro.O  = Fx.JavaFx.As.pro_O(x.real.heightProperty)
+    @tn("height_Pro") def height_* : Double.Pro.O  = Fx.JavaFx.To.pro_O(x.real.heightProperty)
     /**/              def height   : Double        = x.real.getHeight
     /**/              def isError  : Boolean       = x.real.isError
 

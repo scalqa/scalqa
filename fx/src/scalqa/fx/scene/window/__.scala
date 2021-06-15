@@ -10,16 +10,16 @@ abstract class Window extends Abstract.Delegate.Gui:
   /**/                    def hide                     : Unit          = real.hide
   /**/                    def centerOnScreen           : Unit          = real.centerOnScreen
 
-  @tn("width_Pro")  lazy  val width_*                  : Double.Pro.O  = Fx.JavaFx.As.pro_O(real.widthProperty)
+  @tn("width_Pro")  lazy  val width_*                  : Double.Pro.O  = Fx.JavaFx.To.pro_O(real.widthProperty)
   /**/                    def width                    : Double        = real.getWidth
   /**/                    def width_=(b: Double)       : Unit          = real.setWidth(b)
-  @tn("height_Pro") lazy  val height_*                 : Double.Pro.O  = Fx.JavaFx.As.pro_O(real.heightProperty)
+  @tn("height_Pro") lazy  val height_*                 : Double.Pro.O  = Fx.JavaFx.To.pro_O(real.heightProperty)
   /**/                    def height                   : Double        = real.getHeight
   /**/                    def height_=(b: Double)      : Unit          = real.setHeight(b)
-  @tn("x_Pro")      lazy  val x_*                      : Double.Pro.O  = Fx.JavaFx.As.pro_O(real.xProperty)
+  @tn("x_Pro")      lazy  val x_*                      : Double.Pro.O  = Fx.JavaFx.To.pro_O(real.xProperty)
   /**/                    def x                        : Double        = real.getX
   /**/                    def x_=(b: Double)           : Unit          = real.setX(b)
-  @tn("y_Pro")      lazy  val y_*                      : Double.Pro.O  = Fx.JavaFx.As.pro_O(real.yProperty)
+  @tn("y_Pro")      lazy  val y_*                      : Double.Pro.O  = Fx.JavaFx.To.pro_O(real.yProperty)
   /**/                    def y                        : Double        = real.getY
   /**/                    def y_=(b: Double)           : Unit          = real.setY(b)
 

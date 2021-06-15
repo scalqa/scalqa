@@ -8,7 +8,7 @@ class Group:
   /**/                val items             : Idx.M[Toggle] = Idx.M.wrap(real.getToggles).mutableMap_^[Toggle]
   /**/                def add(v: Toggle)    : Unit          = items add v
   /**/                def select(v: Toggle) : Unit          = real.selectToggle(v.real)
-  @tn("selected_Pro") def selected_*        : Pro.O[Toggle] = Fx.JavaFx.As.pro_O(real.selectedToggleProperty).map_^(Toggle.FxConverter)
+  @tn("selected_Pro") def selected_*        : Pro.O[Toggle] = Fx.JavaFx.To.pro_O(real.selectedToggleProperty).map_^(Toggle.FxConverter)
   /**/                def selected          : Toggle        = Toggle.FxConverter(real.getSelectedToggle)
 
 object Group:

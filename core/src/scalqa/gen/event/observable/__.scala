@@ -10,7 +10,7 @@ object Observable:
   def onObservableChange[U](v: Observable)(l: () => U): Event.Control = v.onObservableChange(l)
 
   // **************************************************************************************
-  private object zVoid extends Observable with Self.Void { def onObservableChange[U](v: () => U) = Event.Control.void }
+  private object zVoid extends Observable with Gen.Void { def onObservableChange[U](v: () => U) = Event.Control.void }
 
   // ~~~~~~~~~~~~~~~~~~~~~~~~
   inline def X = observable.X

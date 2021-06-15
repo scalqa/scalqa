@@ -5,7 +5,7 @@ import File.Store
 
 object Store extends Any.Ref.Custom.Type[Store,JStore]("File.Store"):
   /**/     def apply(v: JStore): Store    = v.asOpaque[Store]
-  override def doc(v: Store)   : Self.Doc = Self.Doc(this) += ("name", v.name) += ("label", v.label) += ("totalSpace", v.totalSpace.toBrief)
+  override def doc(v: Store)   : Doc      = Doc(this) += ("name", v.name) += ("label", v.label) += ("totalSpace", v.totalSpace.toBrief)
   /**/                                                     += ("unallocatedSpace", v.unallocatedSpace.toBrief) += ("usableSpace", v.usableSpace.toBrief)
 
   extension (x: Store)

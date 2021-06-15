@@ -13,7 +13,7 @@ private[scalqa] class Entry(chld: Entry, val `type`: Ref, protected[z] var cargo
   def cancelIf(b: ()=>Boolean): this.type        = { if (!isCancelled) synchronized { cargo = Trigger.CancelIf(this, cargo, b)}; this }
   def onCancel[U](l: () => U) : this.type        = { if (!isCancelled) synchronized { cargo = Trigger.OnCancel(cargo, l);     }; this }
   def removeHardReference     : Ref              = if (isCancelled) null else synchronized { new HardRef(this) }
-  def doc                    : Self.Doc        = Self.Doc("Entry") += ("type", `type`.^.id ) += ("value", value.?.takeType[Event.Id].map(_.tag) or value.^.id ) ++= (isCancelled ? (("", "isCancelled")))
+  def doc                    : Doc             = Doc("Entry") += ("type", `type`.^.id ) += ("value", value.?.takeType[Event.Id].map(_.tag) or value.^.id ) ++= (isCancelled ? (("", "isCancelled")))
 
   private def fire(v: Any)    : Unit             = v match { case v: Trigger.OnCancel => v.code(); fire(v.cargo); case v: Trigger => fire(v.cargo); case _ => () }
 

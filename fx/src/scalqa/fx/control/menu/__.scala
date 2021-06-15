@@ -2,13 +2,13 @@ package scalqa; package fx; package control; import language.implicitConversions
 
 import javafx.scene.control.{ Menu => FxMenu }
 
-class Menu extends Menu.Item with Able.Add[ui.Action]:
+class Menu extends Menu.Item with Able.Add[base.Action]:
   def this(text: String, enabled: Boolean = true) = { this(); _createRealOverride(new FxMenu(text).cast[REAL]); this.enable = enabled }
   protected type REAL <: FxMenu
   protected override def _createReal: REAL = new FxMenu().cast[REAL]
 
-  lazy val items             : Idx.M[Menu.Item] = Idx.M.wrap(real.getItems).mutableMap_^[Menu.Item]
-  /**/ def add(a: ui.Action) : Unit             = items += Menu.Item(a)
+  lazy val items               : Idx.M[Menu.Item] = Idx.M.wrap(real.getItems).mutableMap_^[Menu.Item]
+  /**/ def add(a: base.Action) : Unit             = items += Menu.Item(a)
 
 
 object Menu:
