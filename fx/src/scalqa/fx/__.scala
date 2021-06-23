@@ -96,11 +96,13 @@ ___________________________________________________________________________*/
 /**
 @object Fx -> ### GUI API
 
-   [[Fx]] is an easy to use wrapper of JavaFx technology.
+   [[Fx]] is an easy to use wrapper of [JavaFx](https://openjfx.io) technology.
+   Scalqa observable containers like [[scalqa.val.idx.ObservableMutable Idx.OM]] and [[scalqa.val.pro.ObservableMutable Pro.OM]] serve as a simple to use data model.
+   All the GUI controlls are wrapped into Scala style classes.
 
-   Some use examples can be found in [samplesFx](https://github.com/scalqa/samplesFx).
+   Some use examples can be found in [samplesFx](https://github.com/scalqa/samplesFx/tree/master/src/example/fx).
 
-   There is also a [larger example](https://github.com/scalqa/TradingStationExample) as a stand alone project.
+   There is also a ["Trading Station"](https://github.com/scalqa/TradingStationExample) example as a stand alone project.
 
 */
 
