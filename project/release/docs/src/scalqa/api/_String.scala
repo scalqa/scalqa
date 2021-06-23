@@ -17,7 +17,7 @@ trait _String:
       if(v.endsWith("THIS_TYPE")) v = "this.type"
       v = v.d("scalqa.").d("Lang.").d("Gen.").d("Val.")
            .d("Any.Ref",4).d("Any.Raw",4).d("Any.Opaque",4).d("Any.Self.",4).r("Self.Given.","Self.")
-           .d("Calendar.",9).d("Request.",8).d("Util.").d("Number.BigDecimal",7).d("Number.BigInteger",7).d("Number.Rounding",7).d("Time.DayTime",5).d("Time.Period",5)
+           .d("Calendar.",9).d("Request.",8).d("Util.").d("Math.BigDecimal",5).d("Math.BigInteger",5).d("Number.Rounding",7).d("Time.DayTime",5).d("Time.Period",5)
            .d("J.Json.Array",    2<>6).d("J.Json.Object",2<>6).d("J.File.Path",      2<>6).d("J.Io.",         2<>4)
            .d("J.Util.Benchmark",2<>6).d("J.Util.Random",2<>6).d("J.Util.Concurrent",2<>6).d("J.Util.WeakRef",2<>6)
            .d("J.Vm.Priority",   2<>4).d("J.Vm.Setup",   2<>4).d("J.Vm.Memory",      2<>4).d("J.Vm.Host",     2<>4)

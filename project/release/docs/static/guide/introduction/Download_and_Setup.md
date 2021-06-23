@@ -10,7 +10,7 @@ If in doubt, take a look at project [Samples](https://github.com/scalqa/samples)
 
 SBT users should add following library dependency:
 
-libraryDependencies += "org.scalqa" % "scalqa_3" % "0.92"
+libraryDependencies += "org.scalqa" % "scalqa_3" % "0.93"
 
 Everyone else can download single JAR file from the [latest release](https://github.com/scalqa/scalqa/releases)
 
@@ -21,7 +21,7 @@ Implicit conversions also must be enabled.
 ```
 package Foo; import scalqa.{*, given}; import language.implicitConversions
 ```
-Note. It is suggested to use single line (as above) for package and static repeating definitions.
+Note. It is suggested to use single line (as above) for package and static definitions, which will repeat in each program.
 
 ### Project Use
 

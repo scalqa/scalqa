@@ -13,7 +13,7 @@ All containers are designed with a single vision, have consistent naming, are in
 Top level collections include:
 
 - [Collection](../../api/scalqa/val/Collection.html) is the framework root trait
-- [Idx](../../api/scalqa/val/Idx.html) is indexed collection of values (trait)
+- [Idx](../../api/scalqa/val/Idx.html) is index accessible collection of values (trait)
 - [Lookup](../../api/scalqa/val/Lookup.html) is key accessible collection of values (trait) 
 - [Buffer](../../api/scalqa/val/Buffer.html) is growable indexed collection (class)
 - [><](../../api/scalqa/val/Pack.html) is immutable pack of values, indexed collection (class)

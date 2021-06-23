@@ -21,24 +21,24 @@ Defining data elements is quite easy, one just needs to select one of the follow
 
 ## Define
 
-Let's create an example of data element 'Price', which would be based on a Double, behave like a Double, but be distinct from a Double.
+Let's create an example of data element 'Price', which would be based on a Float, behave like a Float, but be distinct from a Float.
 
-He is the definition part (available in [samples](https://github.com/scalqa/samples/blob/master/src/example/data/PriceModel.scala)):
+He is the definition part (available in [samples](https://github.com/scalqa/samples/blob/master/src/example/data/PriceData.scala)):
 ```
 type  Price = Price.opaque.`type`
 
-extension (inline x: Double) inline def Dollars : Price = x.asOpaque[Price]
+extension (inline x: Double) inline def Dollars : Price = Price(x.Float)
 
-object Price extends Double.Custom.Data.Number[Price]("Price"):
-  inline   def apply(inline v: Double): Price  = v.asOpaque[Price]
-  override def tag(v:Price)           : String =  "$"+v.roundTo(0.01.Dollars).toString
+object Price extends Float.Custom.Data.Number[Price]("Price"):
+  inline   def apply(inline v: Float): Price  = v.asOpaque[Price]
+  override def tag(v:Price)          : String =  "$"+v.roundTo(0.01.Dollars).toString
 
   extension (x: Price)
     def discount(p: Percent): Price   = x - p(x)
     def isNotExpensive      : Boolean = x < 100
 
   object opaque:
-    opaque type `type` <: Any.Opaque.Double = Any.Opaque.Double
+    opaque type `type` <: Any.Opaque.Float = Any.Opaque.Float
 
 ```
 Let's explain the above line by line.  
@@ -49,27 +49,37 @@ The `Price` alias is the public name to be used. This definition can be next to 
 more accessible place, like a root package (it is for developer to decide).
 
 ```  
-extension (inline x: Double) inline def Dollars : Price = x.asOpaque[Price]
+extension (inline x: Double) inline def Dollars : Price = Price(x.Float)
 ```  
 Extension creates a Double method Price constructor. This is an optional convenience pattern, but it is widely used in Scalqa. 
+Double constructor will cover all primitives. 
 
 ```  
-object Price extends Double.Custom.Data.Number[Price]("Price"):
+object Price extends Float.Custom.Data.Number[Price]("Price"):
 ```  
-Object Price extends not only `Double.Custom.Data`, which would be sufficient to create a data element.
-Price extends `Double.Custom.Data.Number`, which adds Double like behaviour. For example:
+Object Price extends not only `Float.Custom.Data`, which would be sufficient to create a data element.
+Price extends `Float.Custom.Data.Number`, which adds Float like behaviour. For example:
 ```
 var p: Price = 19.99.Dollars
 
-if(p > 10 && p <= 100.0) ???  // Like Double, Price can be compared to primitives   
+if(p > 10 && p <= 100.0) ()   // Like Float, Price can be compared to primitives   
 
-p = p / 2 * 1.5 + 10 - 2      // Like Double, Price supports arithmetics with primitives
+p = p / 2 * 1.5F + 10 - 2     // Like Float, Price supports arithmetics with primitives
 
-p = 12.0                      // Assignment Fails, Price is NOT Double
+p = 12.0F                     // FAILS to compile, Price is NOT a Float
 ```
+All the above operations are inlined and are as efficient, as if they were performed on Float value.
 
-`override def tag` is the new `.toString`. Here we define what the universal `.tag` method on type Price will return. If this method is
-not overridden, the default behavior would convert Double toString.  
+```
+inline   def apply(inline v: Float): Price  = v.asOpaque[Price]
+```
+This is a standard constructor, which is inlined and does not have any overhead.
+
+```
+override def tag(v:Price)           : String =  "$"+v.roundTo(0.01.Dollars).toString
+```
+The `tag` is the new `.toString`. Here we define what the universal `.tag` method on type Price will return. If this method is
+not overridden, the default behavior would convert Float toString.  
 
 ```
 extension (x: Price)    
@@ -85,8 +95,8 @@ The type definition must be inside another object to allow `inline` definitions 
 ## Use
 
 The Price object already contains specialized collections. 
-To see what they are, look at [Double](../../api/scalqa/lang/Double$.html), the 'Alias' section contains same containers 
-(but parameterized for Double)
+To see what they are, look at [Float](../../api/scalqa/lang/Float$.html), the 'Alias' section contains same containers 
+(but parameterized for Float)
   
 Here are some usage examples:
 ```

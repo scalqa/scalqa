@@ -107,4 +107,12 @@ ___________________________________________________________________________*/
             items += Fx.Menu.Item.separator
          }
      ```
+
+     By far the most common request is `\/`, which is request for void object
+
+     ```
+     var s: ~[Int]       = \/     // Assigning empty stream of Ints
+     var o: Opt[String]  = \/     // Assigning empty optional value of String
+     var i: Long.Idx     = \/     // Assigning empty indexed collection of Long
+     ```
 */

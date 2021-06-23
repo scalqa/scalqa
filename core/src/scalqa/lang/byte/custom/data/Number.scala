@@ -1,6 +1,5 @@
 package scalqa; package lang; package byte; package custom; package data; import language.implicitConversions
 
-import scala.{ Byte as REAL }
 import java.lang.{ Byte as NUMBER }
 
 abstract class Number[A<:Opaque.Byte](typeName:String) extends Ordered[A](typeName):
@@ -10,15 +9,15 @@ abstract class Number[A<:Opaque.Byte](typeName:String) extends Ordered[A](typeNa
   extension[A<:RAW](inline x: A)
     /**/                        inline def abs                                                : A           = {val v=x; if(v.real >= 0) v else (-v.real).cast[A]}
     /**/                        inline def unary_-                                            : A           = (- x.real).cast[A]
-    @tn("numberMultiply")       inline def * (inline v: A | REAL)                             : A           = (x.real * v.cast[REAL]).cast[A]
-    @tn("numberDivide")         inline def / (inline v: A | REAL)                             : A           = (x.real / v.cast[REAL]).cast[A]
-    @tn("numberPlus")           inline def + (inline v: A | REAL)                             : A           = (x.real + v.cast[REAL]).cast[A]
-    @tn("numberMinus")          inline def - (inline v: A | REAL)                             : A           = (x.real - v.cast[REAL]).cast[A]
-    @tn("numberRemainder")      inline def % (inline v: A | REAL)                             : A           = (x.real % v.cast[REAL]).cast[A]
-    @tn("numberGreater")        inline def > (inline v: A | REAL)                             : Boolean     = x.real >  v.cast[REAL]
-    @tn("numberGreaterOrEqual") inline def >=(inline v: A | REAL)                             : Boolean     = x.real >= v.cast[REAL]
-    @tn("numberLess")           inline def < (inline v: A | REAL)                             : Boolean     = x.real <  v.cast[REAL]
-    @tn("numberLessOrEqual")    inline def <=(inline v: A | REAL)                             : Boolean     = x.real <= v.cast[REAL]
+    @tn("numberMultiply")       inline def * (inline v: A|Byte)                               : A           = (x.real * v.cast[Byte]).cast[A]
+    @tn("numberDivide")         inline def / (inline v: A|Byte)                               : A           = (x.real / v.cast[Byte]).cast[A]
+    @tn("numberPlus")           inline def + (inline v: A|Byte)                               : A           = (x.real + v.cast[Byte]).cast[A]
+    @tn("numberMinus")          inline def - (inline v: A|Byte)                               : A           = (x.real - v.cast[Byte]).cast[A]
+    @tn("numberRemainder")      inline def % (inline v: A|Byte)                               : A           = (x.real % v.cast[Byte]).cast[A]
+    @tn("numberGreater")        inline def > (inline v: A|Byte|Short|Int|Long|Float|Double)   : Boolean     = inline v match{ case _ :Double => x.real >  v.cast[Double]; case _ :Float => x.real >  v.cast[Float]; case _ :Long => x.real >  v.cast[Long]; case _ :Int => x.real >  v.cast[Int]; case _ :Short => x.real >  v.cast[Short]; case _ => x.real >  v.cast[Byte] }
+    @tn("numberGreaterOrEqual") inline def >=(inline v: A|Byte|Short|Int|Long|Float|Double)   : Boolean     = inline v match{ case _ :Double => x.real >= v.cast[Double]; case _ :Float => x.real >= v.cast[Float]; case _ :Long => x.real >= v.cast[Long]; case _ :Int => x.real >= v.cast[Int]; case _ :Short => x.real >= v.cast[Short]; case _ => x.real >= v.cast[Byte] }
+    @tn("numberLess")           inline def < (inline v: A|Byte|Short|Int|Long|Float|Double)   : Boolean     = inline v match{ case _ :Double => x.real <  v.cast[Double]; case _ :Float => x.real <  v.cast[Float]; case _ :Long => x.real <  v.cast[Long]; case _ :Int => x.real <  v.cast[Int]; case _ :Short => x.real <  v.cast[Short]; case _ => x.real <  v.cast[Byte] }
+    @tn("numberLessOrEqual")    inline def <=(inline v: A|Byte|Short|Int|Long|Float|Double)   : Boolean     = inline v match{ case _ :Double => x.real <= v.cast[Double]; case _ :Float => x.real <= v.cast[Float]; case _ :Long => x.real <= v.cast[Long]; case _ :Int => x.real <= v.cast[Int]; case _ :Short => x.real <= v.cast[Short]; case _ => x.real <= v.cast[Byte] }
     /**/                        inline def Byte                                               : Byte        = x.cast[Byte]
     /**/                        inline def Short                                              : Short       = x.cast[Short]
     /**/                        inline def Int                                                : Int         = x.cast[Int]

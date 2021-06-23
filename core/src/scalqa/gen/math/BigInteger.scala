@@ -53,7 +53,7 @@ ___________________________________________________________________________*/
       val TenB = 10.Big * 1000 * 1000 * 1000
       val YearSecs = 60.Big * 60 * 24 * 365
 
-      "Suppose, there is 10 billion computers in the world capable counting 10 billion numbers x second each" TP()
+      "Suppose, there is 10 billion computers in the world capable counting 10 billion numbers per second each" TP()
       "  Together they will count " + (TenB * TenB) + " in a second" TP()
       "  Together they will count " + (TenB * TenB * YearSecs) + " in a year" TP()
       "  Together they will count " + (TenB * TenB * YearSecs * TenB) + " in 10 billions years - the 'Age of Universe'" TP()
@@ -62,7 +62,7 @@ ___________________________________________________________________________*/
 
       // Output ****************************************************************************************************************
       Largest Bitcoin address= 52478302028992644968172978478148648556151605660894866578604032, digits=62
-      Suppose, there is 10 billion computers in the world capable counting 10 billion numbers x second each
+      Suppose, there is 10 billion computers in the world capable counting 10 billion numbers per second each
         Together they will count 100000000000000000000 in a second
         Together they will count 3153600000000000000000000000 in a year
         Together they will count 31536000000000000000000000000000000000 in 10 billions years - the 'Age of Universe'

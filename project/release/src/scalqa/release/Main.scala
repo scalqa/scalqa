@@ -7,11 +7,9 @@ object Merge:
     if(sa.length == 0) J.illegalArgument("No project root passed")
 
     val p     = J.Path(sa(0))
-    val isDoc = p.lastName == "docs"
-    val root  = if(isDoc) p.parent.parent.parent else p.parent.parent
+    val root  = if(p.lastName == "docs") p.parent.parent.parent else p.parent.parent
 
     root.tp
-    isDoc.tp
 
     val to = root + "project"+ "release" + "scalqa" + "src"
     to.delete
@@ -28,12 +26,8 @@ object Merge:
       .foreach(f => {
         val dest = to + f.path.takeAfter("src")
         print(dest)
-
-        var txt  = f.readString
-        if(isDoc) txt = precompile.Code(txt)
-
         dest.parent.make
-        dest.file.writeString(txt)
+        dest.file.writeString(precompile.Code(f.readString))
         println()
      })
 

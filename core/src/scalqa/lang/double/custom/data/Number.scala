@@ -1,6 +1,5 @@
 package scalqa; package lang; package double; package custom; package data; import language.implicitConversions
 
-import scala. { Double => REAL }
 import java.lang.{ Double => NUMBER }
 
 abstract class Number[A<:Opaque.Double](typeName:String) extends Ordered[A](typeName):
@@ -10,15 +9,15 @@ abstract class Number[A<:Opaque.Double](typeName:String) extends Ordered[A](type
   extension[A<:RAW](inline x: A)
     /**/                        inline def abs                                                : A           = {val v=x; if(v.real >= 0) v else (-v.real).cast[A]}
     /**/                        inline def unary_-                                            : A           = (- x.real).cast[A]
-    @tn("numberMultiply")       inline def * (inline v: A | REAL)                             : A           = (x.real * v.cast[REAL]).cast[A]
-    @tn("numberDivide")         inline def / (inline v: A | REAL)                             : A           = (x.real / v.cast[REAL]).cast[A]
-    @tn("numberPlus")           inline def + (inline v: A | REAL)                             : A           = (x.real + v.cast[REAL]).cast[A]
-    @tn("numberMinus")          inline def - (inline v: A | REAL)                             : A           = (x.real - v.cast[REAL]).cast[A]
-    @tn("numberRemainder")      inline def % (inline v: A | REAL)                             : A           = (x.real % v.cast[REAL]).cast[A]
-    @tn("numberGreater")        inline def > (inline v: A | REAL)                             : Boolean     = x.real >  v.cast[REAL]
-    @tn("numberGreaterOrEqual") inline def >=(inline v: A | REAL)                             : Boolean     = x.real >= v.cast[REAL]
-    @tn("numberLess")           inline def < (inline v: A | REAL)                             : Boolean     = x.real <  v.cast[REAL]
-    @tn("numberLessOrEqual")    inline def <=(inline v: A | REAL)                             : Boolean     = x.real <= v.cast[REAL]
+    @tn("numberMultiply")       inline def * (inline v: A|Byte|Short|Int|Long|Float|Double)   : A           = (x.real * v.cast[Double]).cast[A]
+    @tn("numberDivide")         inline def / (inline v: A|Byte|Short|Int|Long|Float|Double)   : A           = (x.real / v.cast[Double]).cast[A]
+    @tn("numberPlus")           inline def + (inline v: A|Byte|Short|Int|Long|Float|Double)   : A           = (x.real + v.cast[Double]).cast[A]
+    @tn("numberMinus")          inline def - (inline v: A|Byte|Short|Int|Long|Float|Double)   : A           = (x.real - v.cast[Double]).cast[A]
+    @tn("numberRemainder")      inline def % (inline v: A|Byte|Short|Int|Long|Float|Double)   : A           = (x.real % v.cast[Double]).cast[A]
+    @tn("numberGreater")        inline def > (inline v: A|Byte|Short|Int|Long|Float|Double)   : Boolean     = x.real >  v.cast[Double]
+    @tn("numberGreaterOrEqual") inline def >=(inline v: A|Byte|Short|Int|Long|Float|Double)   : Boolean     = x.real >= v.cast[Double]
+    @tn("numberLess")           inline def < (inline v: A|Byte|Short|Int|Long|Float|Double)   : Boolean     = x.real <  v.cast[Double]
+    @tn("numberLessOrEqual")    inline def <=(inline v: A|Byte|Short|Int|Long|Float|Double)   : Boolean     = x.real <= v.cast[Double]
     /**/                        inline def Byte                                               : Byte        = x.cast[Byte]
     /**/                        inline def Short                                              : Short       = x.cast[Short]
     /**/                        inline def Int                                                : Int         = x.cast[Int]

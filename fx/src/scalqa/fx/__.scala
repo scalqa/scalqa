@@ -96,9 +96,11 @@ ___________________________________________________________________________*/
 /**
 @object Fx -> ### GUI API
 
-   [[Fx]] is an easy to use wrapper of JavaFx technology
+   [[Fx]] is an easy to use wrapper of JavaFx technology.
 
-   Some use examples can be found in [samples](https://github.com/scalqa/samples/tree/master/src/example/fx).
+   Some use examples can be found in [samplesFx](https://github.com/scalqa/samplesFx).
+
+   There is also a [larger example](https://github.com/scalqa/TradingStationExample) as a stand alone project.
 
 */
 

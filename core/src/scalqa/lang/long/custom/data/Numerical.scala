@@ -1,17 +1,14 @@
 package scalqa; package lang; package long; package custom; package data; import language.implicitConversions
 
-import scala.{ Long as REAL }
-
 abstract class Numerical[A<:Opaque.Long](typeName:String) extends Ordered[A](typeName):
 
   @fast given math: G.Math[A] = Long.math.cast[G.Math[A]]
 
   extension[A<:RAW](inline x: A)
-    /**/            inline def abs        : A  = {val v=x; if(v.real >= 0) v else (-v.real).cast[A]}
-    @tn("plus")     inline def +(v: A)    : A  = (x.real + v.real).cast[A]
-    @tn("minus")    inline def -(v: A)    : A  = (x.real - v.real).cast[A]
-    @tn("multiply") inline def *(v: REAL) : A  = (x.real * v).cast[A]
-    @tn("divide")   inline def /(v: REAL) : A  = (x.real / v).cast[A]
+    @tn("plus")     inline def +(inline v: A)                   : A  = (x.real + v.real).cast[A]
+    @tn("minus")    inline def -(inline v: A)                   : A  = (x.real - v.real).cast[A]
+    @tn("multiply") inline def *(inline v: Byte|Short|Int|Long) : A  = (x.real * v.cast[Long]).cast[A]
+    @tn("divide")   inline def /(inline v: Byte|Short|Int|Long) : A  = (x.real / v.cast[Long]).cast[A]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

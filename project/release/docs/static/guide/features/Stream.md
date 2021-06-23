@@ -48,7 +48,8 @@ i = i.~.filter(_ % 2 == 0).toIdx
 i.~.tp  // Prints ~(2,4,6)
 ```
 
-[~](../../api/scalqa/val/Stream.html) already has a large number of data processing methods attached to it and this library will only grow. 
+[~](../../api/scalqa/val/Stream.html) already has a large number of 
+[data processing methods](../../api/scalqa/val/stream/_build.html) attached to it and this library will only grow. 
 It is very easy to create a new [~](../../api/scalqa/val/Stream.html) operation, considering that it requires single implementation, 
 but benefits everything attached to [~](../../api/scalqa/val/Stream.html).
 ```

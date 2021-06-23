@@ -1,17 +1,14 @@
 package scalqa; package lang; package float; package custom; package data; import language.implicitConversions
 
-import scala.{ Float as REAL }
-
 abstract class Numerical[A<:Opaque.Float](typeName:String) extends Ordered[A](typeName):
 
   @fast given math: G.Math[A] = Float.math.cast[G.Math[A]]
 
   extension[A<:RAW](inline x: A)
-    /**/            inline def abs        : A  = {val v=x; if(v.real >= 0) v else (-v.real).cast[A]}
-    @tn("plus")     inline def +(v: A)    : A  = (x.real + v.real).cast[A]
-    @tn("minus")    inline def -(v: A)    : A  = (x.real - v.real).cast[A]
-    @tn("multiply") inline def *(v: REAL) : A  = (x.real * v).cast[A]
-    @tn("divide")   inline def /(v: REAL) : A  = (x.real / v).cast[A]
+    @tn("plus")     inline def +(inline v: A)                         : A  = (x.real + v.real).cast[A]
+    @tn("minus")    inline def -(inline v: A)                         : A  = (x.real - v.real).cast[A]
+    @tn("multiply") inline def *(inline v: Byte|Short|Int|Long|Float) : A  = (x.real * v.cast[Float]).cast[A]
+    @tn("divide")   inline def /(inline v: Byte|Short|Int|Long|Float) : A  = (x.real / v.cast[Float]).cast[A]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

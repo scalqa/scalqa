@@ -23,7 +23,7 @@ ___________________________________________________________________________*/
 /**
 @object Val -> ### Value Container Framework
 
-    Read more in the [Guide](../../../guide/features/Containers.html).
+    Read more in the [Guide](../../guide/features/Containers.html).
 
     [[Val]] is fully exported to scalqa root, thus all members and aliases of [[Val]] can be called with or without "Val." prefix.
 

@@ -1,6 +1,6 @@
 
 
-sonatypeBundleDirectory := (ThisBuild / baseDirectory).value / "generate" / "scalqa" / "sonatype-staging"
+sonatypeBundleDirectory := (ThisBuild / baseDirectory).value / "project" / "release" / "scalqa" / "sonatype-staging"
 publishTo               := sonatypePublishToBundle.value
 
 credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", "?login?", "?password?")

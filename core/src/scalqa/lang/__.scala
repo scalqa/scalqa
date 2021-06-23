@@ -68,10 +68,4 @@ ___________________________________________________________________________*/
 @type Raw    ->  Type alias \n\n Shortcut to [[scalqa.lang.any.Raw Any.Raw]]
 @val  Raw    ->  Companion alias \n\n Shortcut to [[scalqa.lang.any.Raw$ Any.Raw]]
 
-@type Doc   ->  Type alias      \n\n Shortcut to [[scalqa.gen.Doc                       Lang.Doc]]
-@val  Doc   ->  Companion alias \n\n Shortcut to [[scalqa.gen.Doc$                      Lang.Doc]]
-
-@type Void   ->  Type alias \n\n Shortcut to [[scalqa.lang.any.type.Void Any.Gen.Void]]
-@val  Void   ->  Companion alias \n\n Shortcut to [[scalqa.lang.any.type.Void$ Any.Gen.Void]]
-
 */

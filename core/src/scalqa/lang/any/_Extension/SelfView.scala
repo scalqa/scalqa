@@ -6,8 +6,8 @@ import gen.`given`. { NameTag, VoidTag, InTag, DocTag, EmptyTag }
 object SelfView:
   extension[A](x: SelfView[A])
     /**/                      def typeName                       (using d: NameTag[A]) : String   = if(d.isRef) Z.kind(x) else d.name
-    /**/                      def id                             (using d: NameTag[A]) : String   = { var n = x.typeName; if(!n.endsWith("$")) n += "@" + x.hash; n }
-    /**/                      def hash                                                 : String   = Z.Hash(x.hashCode)
+    /**/                      def id                             (using d: NameTag[A]) : String   = if(x == null) "null" else { var n = x.typeName; if(!n.endsWith("$")) n += "@" + x.hash; n }
+    /**/                      def hash                                                 : String   = if(x == null) "null" else Z.Hash(x.hashCode)
 
   extension[A](inline x: SelfView[A])
     private            inline def real                                                 : A        = x.cast[A]

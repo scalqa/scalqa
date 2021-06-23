@@ -48,20 +48,17 @@ ___________________________________________________________________________*/
 
 @class Table -> ###
 
-[[fx.Table]] is designed to visualize rows of rowData, broken out into columns
+   Table is designed to visualize rows of rowData, broken out into columns
 
    ```
-       object MyApp extends fx.Application {
+    object MyApp extends Fx.Application:
 
-         scene = new fx.Table[Int] {
+      object View extends Fx.Table[Int]:
 
-           new Column[Int]   ("Int",    100, i => i)
-           new Column[String]("String", 200, "str_" + _)
-           new Column[Int]   ("% 10",   100, _ % 10)
+        new Column[Int]   ("Int",    100, i => i)
+        new Column[String]("String", 200, "str_" + _)
+        new Column[Int]   ("% 10",   100, _ % 10)
 
-           items ++= 1 <> 1000
-         }
-       }
+        items ++= 1 <> 1000
    ```
-
 */

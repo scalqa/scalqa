@@ -36,7 +36,7 @@ already exists somewhere. The challenge is to make accessing it cheaper, then th
 Often times 'import' statements are not justified to bring in trivial functionality.
 
 In Scalqa code there are practically no imports (except for rare conflict resolutions). All the functionality is available from the root,
-but few levels of hierarchy provide unlimited naming opportunities for even the most trivial methods.
+but few levels of hierarchy provide unlimited naming opportunities for even the most trivial resources.
 
 ### Implementation        
 
