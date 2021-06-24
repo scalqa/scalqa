@@ -26,7 +26,7 @@ ___________________________________________________________________________*/
 @class Companion -> Base type for all Opaque companion objects.
 
     This class cannot be used directly, but rather through it's children like
-    [Int.Custom.Type](../../int.custom.Type.html), [Char.Custom.Data](../../char.custom.Data.html), etc.
+    [Int.Custom.Type](../../int/custom/Type.html), [Char.Custom.Data](../../char/custom/Data.html), etc.
 
 @def tag -> Type to String
 

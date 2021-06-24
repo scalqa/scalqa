@@ -27,13 +27,17 @@ Note. It is suggested to use single line (as above) for package and static defin
 
 It is possible to set up a project specific Scalqa root, which will be shared by all program units.
 
-To do so, copy the [root package content](https://github.com/scalqa/samples/blob/master/src/example/package.scala) of Samples project. 
+To do so, copy the ["fx" package root content](https://github.com/scalqa/samplesFx/blob/master/src/example/fx/package.scala) 
+of SamplesFx project into your root package. 
 
-Other program units in [Samples](https://github.com/scalqa/samples) do not need to import Scalqa anymore, but the root package definition must be accessible:
+Note, other program units (like 
+[Lines](https://github.com/scalqa/samplesFx/blob/master/src/example/fx/chart/Lines.scala),
+[Sorting](https://github.com/scalqa/samplesFx/blob/master/src/example/fx/table/Sorting.scala), etc.)
+do not need to import Scalqa anymore, but the "fx" package definition must be accessible:
 
 ``` 
-package example; package data   // package 'example' is accessible
+package example.fx; package chart   // package 'fx' is accessible
 // vs.    
-package example.data            // Not accessible    
+package example.fx.chart            // Not accessible    
 ```
 Note. `import language.implicitConversions` is still required in each file, unless implicits are enabled on configuration level.

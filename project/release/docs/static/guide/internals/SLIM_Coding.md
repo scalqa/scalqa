@@ -6,7 +6,9 @@ title: SLIM Coding
 
 Most methods in Scalqa are written as a single line of code and program units never exceed one screen (no need for scrolling down).
 
-For example, this is the definition of [Lookup](../../api/scalqa/val/Lookup.html) collection trait:
+For example, this is the definition of 
+[Lookup](../../api/scalqa/val/Lookup.html) ([source](https://github.com/scalqa/scalqa/blob/master/core/src/scalqa/val/lookup/__.scala))
+collection trait:
 
 ```scala
 trait Lookup[A,+B] extends Collection[B]:
@@ -21,7 +23,7 @@ trait Lookup[A,+B] extends Collection[B]:
 This format allows to understand the entire program unit in a glance, facilitating different kind 
 of non-linear thinking about program development.
 
-Take a look at few more examples:
+Take a look at few more source code examples:
 
  - [Val.Collection](https://github.com/scalqa/scalqa/blob/master/core/src/scalqa/val/collection/__.scala)
  - [Val.Idx](https://github.com/scalqa/scalqa/blob/master/core/src/scalqa/val/idx/__.scala)
