@@ -20,7 +20,7 @@ object Tab:
   def apply()        : Pane.Tab = new Pane.Tab
   def apply(s: Side) : Pane.Tab = apply().^(_.side = s)
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Panel = tab.Panel; inline def Panel = tab.Panel
 
 

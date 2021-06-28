@@ -23,7 +23,7 @@ object ComboBox:
   def apply[A](v: ~[A])                   (using t: Given.DocTag[A]) : ComboBox[A] = apply[A]().^(_.items ++= v)
   def apply[A](v: ~[A], selected: Opt[A]) (using t: Given.DocTag[A]) : ComboBox[A] = apply[A](v).^(v => selected.forval(v.selection.select(_)))
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Base[A] = comboBox.Base[A]
 
 /*___________________________________________________________________________

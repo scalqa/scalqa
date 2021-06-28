@@ -14,6 +14,9 @@ libraryDependencies += "org.scalqa" % "scalqa_3" % "0.93"
 
 Everyone else can download single JAR file from the [latest release](https://github.com/scalqa/scalqa/releases)
 
+Note. If GUI is to be used on JDK11 and above, the javaFx has to be provided manually. 
+Take a look at ["samplesFx" configuration](https://github.com/scalqa/samplesFx/blob/master/build.sbt). 
+
 ### Simple Use
 
 In basic case Scalqa root must always be imported into each program unit. This sounds a lot, but this is the only import to be done. 

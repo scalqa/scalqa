@@ -12,7 +12,7 @@ object Pro:
     @tn("observable_View") def observable_^(v1: Gen.Observable, v2: Opt[Gen.Observable] = \/) : Pro.O[A] = z.Observable_View(x, v1, v2)
     /**/            inline def contains(inline v: A)                                          : Boolean  = x() == v
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def Mutable           = pro.Mutable;           type Mutable[A]           = pro.Mutable[A]
   inline def M                 = pro.Mutable;           type M[A]                 = pro.Mutable[A]
   inline def Observable        = pro.Observable;        type Observable[A]        = pro.Observable[A]

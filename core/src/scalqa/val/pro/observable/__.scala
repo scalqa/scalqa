@@ -19,7 +19,7 @@ object Observable:
     @tn("map_View") def map_^[B](f: A => B)                     : Pro.O[B]      = z.Convert_View.O(x, f)
     @tn("mix_View") def mix_^[B,C](v:Observable[B],mix:(A,B)=>C): Pro.O[C]      = z.Mix_View(x, v, mix)
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~
   inline def X = observable.X
 
 /*___________________________________________________________________________

@@ -28,6 +28,8 @@ ___________________________________________________________________________*/
 
 @class Ordered -> ###
 
+  Custom Data Ordered element is provided with default ordering and can be compared with comparison operators.
+
 @def atLeast -> Max \n\n Returns maximum of current or given value
 @def atMost  -> Min \n\n Returns minimun of current or given value
 @def <       -> Less \n\n Returns `true` if current value is less than given, `false` - otherwise

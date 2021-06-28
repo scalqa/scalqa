@@ -15,7 +15,7 @@ trait Control:
 object Control extends Gen.Void.Setup[Control](z.Void):
   def join(c1: Control, c2: Control, c3: Opt[Control] = \/): Control = c3.map(v => new z.Join.Three(c1, c2, v)) or new z.Join.Two(c1, c2)
 
-  // ~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~
   inline def X = control.X
 
 /*___________________________________________________________________________

@@ -31,12 +31,13 @@ ___________________________________________________________________________*/
 /**
 @trait Permutation -> ###
 
-Permutation is a precise definition on how elements within Int.Range should be reorganized
+Permutation is a precise definition on how elements within range should be reorganized
 
      Consider ordering a buffer of integers. This could be accomplished it two steps:
 
         1. Based on some Ordering, we create a [[Permutation]] object, which captures all necessary repositions
         2. Apply permutation to the buffer
+
      ```
         val buf = ~~(0, 3, 1, 2, 4).toBuffer
 

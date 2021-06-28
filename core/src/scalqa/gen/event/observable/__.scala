@@ -12,7 +12,7 @@ object Observable:
   // **************************************************************************************
   private object zVoid extends Observable with Gen.Void { def onObservableChange[U](v: () => U) = Event.Control.void }
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~
   inline def X = observable.X
 
 /*___________________________________________________________________________

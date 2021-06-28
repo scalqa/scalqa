@@ -31,7 +31,7 @@ object JavaFx:
     def toString(a: A) = bm(a); def fromString(s: String) = bm.undo(s)
   }
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def To   = javaFx.To
   inline def Enum = javaFx.Enum;  type Enum[A <: java.lang.Enum[A]] = javaFx.Enum[A]
 

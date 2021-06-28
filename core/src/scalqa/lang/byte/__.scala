@@ -6,7 +6,7 @@ object Byte extends byte.custom.Framework[Byte]:
   inline def ordering: G.Ordering[Byte]   = byte.z.Math
   inline def math    : G.Math[Byte]       = byte.z.Math
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def Custom = byte.Custom
   inline def G      = byte.G
   type _extension   = byte._extension;

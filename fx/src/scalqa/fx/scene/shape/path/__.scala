@@ -13,7 +13,7 @@ object Path:
   def apply()             : Shape.Path = new Shape.Path
   def apply(v: Element *) : Shape.Path = apply().^(_.elements ++= v)
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Element      = path.Element;       inline def Element      = path.Element
   type ArcTo        = path.ArcTo;         inline def ArcTo        = path.ArcTo
   type ClosePath    = path.ClosePath;     inline def ClosePath    = path.ClosePath

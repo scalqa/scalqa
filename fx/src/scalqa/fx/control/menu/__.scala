@@ -17,7 +17,7 @@ object Menu:
   def apply(text: String, n: Node.Like)               : Menu = this(text).^(_.graphic_*() = n)
   def apply(text: String, n: Node.Like, its: ~[Item]) : Menu = this(text, n).^(_.items ++= its)
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Item   = menu.Item;    inline def Item   = menu.Item
   type Bar    = menu.Bar;     inline def Bar    = menu.Bar
   type Button = menu.Button;  inline def Button = menu.Button

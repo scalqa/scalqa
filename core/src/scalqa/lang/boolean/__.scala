@@ -2,7 +2,7 @@ package scalqa; package lang; import language.implicitConversions
 
 object Boolean extends boolean.custom.Framework[Boolean]:
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def Custom = boolean.Custom
   inline def G      = boolean.G
   type _extension   = boolean._extension;

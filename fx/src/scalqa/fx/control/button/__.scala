@@ -8,7 +8,7 @@ object Button:
   def apply(s: String)                  : Button = new Button().^(b => s.^.?.forval(b.text= _))
   def apply(s: String, action: => Unit) : Button = apply(s).^(_.onActionRun(action))
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Base = button.Base
   type Type = button.Type.opaque.`type`; inline def Type = button.Type
 

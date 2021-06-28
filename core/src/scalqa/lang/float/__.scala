@@ -6,7 +6,7 @@ object Float extends float.custom.Framework[Float]:
   inline def ordering: G.Ordering[Float] = float.z.Math
   inline def math    : G.Math[Float]       = float.z.Math
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def Custom = float.Custom
   inline def G      = float.G
   type _extension   = float._extension

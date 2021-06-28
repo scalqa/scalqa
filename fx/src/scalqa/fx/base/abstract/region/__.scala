@@ -40,7 +40,7 @@ object Region:
   inline def UseComputedSize  = javafx.scene.layout.Region.USE_COMPUTED_SIZE
   inline def UsePrefSize      = javafx.scene.layout.Region.USE_PREF_SIZE
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Background = region.Background.opaque.`type`; inline def Background = region.Background
 
 package region:

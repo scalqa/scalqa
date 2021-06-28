@@ -3,9 +3,9 @@ package scalqa; package lang; package double; package custom; import language.im
 abstract class Data[A<:Opaque.Double](typeName: String) extends Type[A](typeName) with Framework[A]
 
 object Data:
-  type Ordered[A<:Opaque.Double] = data.Ordered[A]
+  type Ordered  [A<:Opaque.Double] = data.Ordered[A]
   type Numerical[A<:Opaque.Double] = data.Numerical[A]
-  type Number [A<:Opaque.Double] = data.Number[A]
+  type Number   [A<:Opaque.Double] = data.Number[A]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -16,6 +16,8 @@ ___________________________________________________________________________*/
 /**
 @class Data -> ### Double Data Type Base
 
-  [[Data]] not only defines a Double based opaque type, but also privides a framework of custom specialized containers attached to this type.
+  Custom Data not only defines a Double based opaque type, but also privides a framework of custom specialized containers attached to this type.
+
+  See [more in guide](../../../../../guide/features/Data.html).
 
 */

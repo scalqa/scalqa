@@ -11,7 +11,7 @@ object Pane:
   def apply(e1: String, e2: Node.Like)      : Pane = Pane(Label(e1), e2)
   def apply(e1: Node.Like, e2: Node.Like) : Pane = Pane.Grid().^(v => { v.add(0,0,e1); v.add(0,1,e2) })
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Split         = pane.Split;         inline def Split         = pane.Split
   type Tab           = pane.Tab;           inline def Tab           = pane.Tab
   type Border        = pane.Border;        inline def Border        = pane.Border

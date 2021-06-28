@@ -14,7 +14,7 @@ object Mutable:
     /**/               def bindTo(v: Pro.O[_ <: A])                              : Event.Control = v.onChange(() => x() = v())
     /**/               def bindTo[B<:A](v: Idx.Selection.Observable[B], dflt: A) : Event.Control = v.onChangeRun { x() = v.get_? or dflt }
 
-  // ~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~
   inline def X = mutable.X
 
 /*___________________________________________________________________________

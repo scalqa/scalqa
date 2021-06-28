@@ -3,7 +3,7 @@ package scalqa; package lang; package any; import language.implicitConversions
 object Ref:
   @fast lazy val emptyArray : Array[Ref]  = ZZ.emptyObjectArray
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Buffer[A]     = ref.Buffer[A]
   @fast lazy val Custom  = ref.Custom
 

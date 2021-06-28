@@ -19,7 +19,7 @@ object Stream extends z.util._default with _build with _use:
   given givenCanEqualStream[A,B](using CanEqual[A,B]): CanEqual[~[A],~[B]] = CanEqual.derived
   given givenDocTag[A :Given.DocTag]                  : Given.DocTag[~[A]]  = z.util.DocTag()
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def _build  = stream._build;   type _build     = stream._build
   inline def _use    = stream._use;     type _use       = stream._use
   inline def Flow    = stream.Flow;     type Flow[A]    = stream.Flow[A]

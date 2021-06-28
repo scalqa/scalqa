@@ -14,7 +14,7 @@ object Array:
   inline def apply(inline x: Double,  inline xs: Double*)         : Array[Double]  = scala.Array(x,xs *)
   inline def apply[A](inline xs: A*)(using inline t: ClassTag[A]) : Array[A]       = scala.Array(xs *)
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type _extension = array._extension
 
 /*___________________________________________________________________________

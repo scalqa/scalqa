@@ -23,6 +23,8 @@ ___________________________________________________________________________*/
 /**
 @class Ordered -> ###
 
+  Custom Data Ordered element is provided with default ordering and can be compared with comparison operators.
+
 @def <>      -> Range \n\n  Returns Range from current to given value \n\n  Note. Range uses base primitive natural ordering
 @def <>>     -> Exclusive end range \n\n Returns Range from current to given value exclusive \n\n Note. Range uses base primitive natural ordering
 @def atLeast -> Max \n\n Returns maximum of current or given value

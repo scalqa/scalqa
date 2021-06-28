@@ -22,7 +22,7 @@ object Input extends Any.Ref.Custom.Type[Input, java.io.InputStream]("Io.Input")
 
   object opaque:
     opaque type `type` <: java.io.Closeable & Opaque.Ref = java.io.InputStream & Opaque.Ref
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Bytes = input.Bytes.opaque.`type`; inline def Bytes = input.Bytes
   type Data  = input.Data.opaque.`type`;  inline def Data  = input.Data
   type Text  = input.Text.opaque.`type`;  inline def Text  = input.Text

@@ -2,7 +2,7 @@ package scalqa; package j
 
 object Util:
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   /**/   val Concurrent   = util.Concurrent
   inline def WeakRef      = util.WeakRef;         type WeakRef[A]  = util.WeakRef.opaque.`type`[A]
   inline def Benchmark    = util.Benchmark

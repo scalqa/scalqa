@@ -8,7 +8,7 @@ object Label:
   def apply()              : Label = new Label
   def apply[A](txt: String): Label = apply().^(_.text = txt)
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~
   type Like = label.Like
 
 /*___________________________________________________________________________

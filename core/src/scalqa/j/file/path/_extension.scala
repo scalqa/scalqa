@@ -3,7 +3,7 @@ package scalqa; package j; package file; package path; import language.implicitC
 import java.nio.file.{ Path => JPath }
 import File.Path
 
-class Extension:
+trait _extension:
   extension(inline x: Path)
     /**/                 inline def names                                : Idx[String] = new Z.Names(x)
     /**/                 inline def isEmpty                              : Boolean     = x.size == 0

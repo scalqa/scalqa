@@ -20,7 +20,7 @@ object Lookup:
     @tn("toMap_View")             def toMap_^             : scala.collection.Map[A,B] = Z.ScalaMap_View(x)
     @tn("toPartialFunction_View") def toPartialFunction_^ : PartialFunction[A,B]      = Z.PartialFunction_View(x)
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   @fast lazy val Stable  = lookup.Stable;   type Stable[A,B]  = lookup.Stable[A,B]
   @fast lazy val Mutable = lookup.Mutable;  type Mutable[A,B] = lookup.Mutable[A,B]
   @fast lazy val M       = Mutable;         type M[A,B]       = Mutable[A,B]

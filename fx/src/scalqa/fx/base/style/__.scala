@@ -13,7 +13,7 @@ object Style extends String.Custom.Data[Style]("Fx.Style"):
   object opaque:
     opaque type `type` <: Any.Opaque.String = Any.Opaque.String
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def Class       = style.Class;         type Class       = style.Class.opaque.`type`
   inline def PseudoClass = style.PseudoClass;   type PseudoClass = style.PseudoClass.opaque.`type`
   inline def PseudoGroup = style.PseudoGroup;   type PseudoGroup = style.PseudoGroup

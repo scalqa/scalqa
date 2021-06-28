@@ -18,4 +18,7 @@ ___________________________________________________________________________*/
 /**
 @class Type -> ### Double Opaque Type Base
 
+  Custom Type is like more widely used [Custom Data](../../../../../guide/features/Data.html),
+  but without attached containers.  Type instances will still be processed by streams without boxing.
+
 */

@@ -18,7 +18,7 @@ object Popup:
     if (delay.nonVoid) Thread.scheduleIn(delay, if (!done) show)
     else Thread(show)
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Control = popup.Control
   type Menu    = popup.Menu;    inline def Menu    = popup.Menu
   type Window  = popup.Window

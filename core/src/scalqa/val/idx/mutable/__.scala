@@ -36,7 +36,7 @@ object Mutable:
   extension[SELF <: Mutable[A], A](x: SELF)
     /**/           inline def update(inline position:Int, inline v: A)        : Unit            = x.updateAt(position, v)
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def X = mutable.X
 
 /*___________________________________________________________________________

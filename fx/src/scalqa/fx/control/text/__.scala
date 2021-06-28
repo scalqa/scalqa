@@ -13,7 +13,7 @@ object Text:
   def apply() = new Text()
   def apply(v: String) = new Text(v)
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type InputControl = text.InputControl;      inline def InputControl = text.InputControl
   type Field        = text.Field;             inline def Field        = text.Field
   type Area         = text.Area;              inline def Area         = text.Area

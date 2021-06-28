@@ -38,7 +38,7 @@ object Action:
   implicit inline def implicitFromNode(v: Node)             : Action = apply(v)
   implicit inline def implicitRequest(inline v: SEPARATOR)  : Action = apply(v)
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Event    = action.Event; inline def Event = action.Event
   type Provider = action.Provider
 

@@ -26,7 +26,7 @@ sealed class Selection[A](val target: Idx[A], val real: SelectionModel[_ <: Any]
 object Selection:
   def apply[A](x: Idx[A], m: SelectionModel[_ <: Any]) : Selection[A] = new Selection[A](x, m)
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Mode = selection.Mode; val Mode = selection.Mode
 
 /*___________________________________________________________________________

@@ -43,7 +43,7 @@ object Application:
   private object UiReadyEvent
   private object StopEvent
   private[fx] var self: Application = null
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def Thread = application.Thread
 
 private class zStarter extends javafx.application.Application:

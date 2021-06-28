@@ -32,7 +32,7 @@ object Idx:
     def orderedSearch(v:A,max:Int=1)           (using Ordering[A]) : Int.<>            = idx.z.Ordered.search(x,v,max)
     def orderedSearchBy[B](map:A=>B,v:B,max:Int=1,
                    extraFilter: A=>Boolean= \/)(using Ordering[B]) : Int.<>            = idx.z.Ordered.searchBy(x,v,map,max,extraFilter)
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def Mutable           = idx.Mutable;              type Mutable[A]           = idx.Mutable[A]
   inline def M                 = Mutable;                  type M[A]                 = Mutable[A]
   inline def Observable        = idx.Observable;           type Observable[A]        = idx.Observable[A]

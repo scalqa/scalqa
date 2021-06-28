@@ -3,9 +3,9 @@ package scalqa; package lang; package float; package custom; import language.imp
 abstract class Data[A<:Opaque.Float](typeName: String) extends Type[A](typeName) with Framework[A]
 
 object Data:
-  type Ordered[A<:Opaque.Float] = data.Ordered[A]
+  type Ordered  [A<:Opaque.Float] = data.Ordered[A]
   type Numerical[A<:Opaque.Float] = data.Numerical[A]
-  type Number [A<:Opaque.Float] = data.Number[A]
+  type Number   [A<:Opaque.Float] = data.Number[A]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -16,6 +16,8 @@ ___________________________________________________________________________*/
 /**
 @class Data -> ### Float Data Type Base
 
-  [[Data]] not only defines a Float based opaque type, but also privides a framework of custom specialized containers attached to this type.
+  Custom Data not only defines a Float based opaque type, but also privides a framework of custom specialized containers attached to this type.
+
+  See [more in guide](../../../../../guide/features/Data.html).
 
 */

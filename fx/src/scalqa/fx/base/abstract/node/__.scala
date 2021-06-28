@@ -10,7 +10,7 @@ object Node:
 
   given FxConverter: ReversibleFunction[javafx.scene.Node, Node] = ReversibleFunction(v => Delegate.Gui.apply[Node](v.onZoomStartedProperty), _.real)
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Like        = node.Like;         val Like = node.Like
   type _events     = node._events
   type _methods    = node._methods

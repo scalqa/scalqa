@@ -8,7 +8,7 @@ object Math:
   inline def log10(inline v: Double)                 : Double = Java.log10(v)
   inline def pow(inline a: Double, inline b: Double) : Double = Java.pow(a,b)
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def Numeric    = math.Numeric
   inline def Ordering   = math.Ordering;    type Ordering[A]  = math.Ordering[A]
   inline def Format     = math.Format;      type Format       = math.Format.opaque.`type`

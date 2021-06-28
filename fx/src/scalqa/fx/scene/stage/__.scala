@@ -12,9 +12,9 @@ abstract class Stage(stage: Opt[javafx.stage.Stage] = \/) extends Window:
 
 object Stage:
 
-  def apply(titleO: String.Opt, w: Int, h: Int, e: Node.Like): Stage = new Stage(new javafx.stage.Stage) {
-    titleO.forval(title = _)
+  def apply(titleOpt: String.Opt, w: Int, h: Int, e: Node.Like): Stage = new Stage(new javafx.stage.Stage) {
     val scene = Scene(w, h, e)
+    titleOpt.forval(title = _)
   }
 
 /*___________________________________________________________________________

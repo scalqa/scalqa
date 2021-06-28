@@ -14,6 +14,8 @@ ___________________________________________________________________________*/
 /**
 @class Data -> ### Char Data Type Base
 
-  [[Data]] not only defines a Char based opaque type, but also privides a framework of custom specialized containers attached to this type.
+  Custom Data not only defines a Char based opaque type, but also privides a framework of custom specialized containers attached to this type.
+
+  See [more in guide](../../../../../guide/features/Data.html).
 
 */

@@ -14,8 +14,6 @@ object Time extends Long.Custom.Data.Ordered[Time]("Time") with time.x.Base[Time
   implicit       inline def implicitRequestCurrent(inline v: CURRENT): Time       = apply()
   implicit       inline def implicitRequestVoid(inline v: \/)        : Time       = -62167201438000L.asOpaque[Time]
 
-  //given givenVoidTag: Given.VoidTag[Time]=this
-
   extension(x: Time)
     /**/    inline def millisTotal             : Long        = x.real
     /**/           def format(pattern: String) : String      = new java.text.SimpleDateFormat(pattern).format(new java.util.Date(x.millisTotal))
@@ -30,7 +28,7 @@ object Time extends Long.Custom.Data.Ordered[Time]("Time") with time.x.Base[Time
   object opaque:
     opaque type `type` <: Opaque.Long = Opaque.Long
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def DayTime  = time.DayTime;             type DayTime = time.DayTime.opaque.`type`
   inline def Gmt      = time.Gmt;                 type Gmt     = time.Gmt.opaque.`type`
   inline def Instant  = time.Instant;             type Instant = time.Instant.opaque.`type`

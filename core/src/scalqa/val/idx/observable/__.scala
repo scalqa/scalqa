@@ -16,7 +16,7 @@ object Observable:
     @tn("statefulMap_View")  def statefulMap_^[B](f: A => B): Idx.O[B] = z.Convert_View.O.Stateful(x, f)
     @tn("map_View")          def map_^[B](f: A => B)        : Idx.O[B] = z.Convert_View.O(x, f)
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def Event = observable.Event;  type Event[A] = observable.Event[A]
   inline def X     = observable.X
 

@@ -21,7 +21,7 @@ ___________________________________________________________________________*/
 /**
     @object Memory -> ###
 
-[[App.Memory]] provides nicer access to 'java.lang.Runtime.getRuntime' memory values
+[[J.Memory]] provides nicer access to 'java.lang.Runtime.getRuntime' memory values
 
       ```
          J.Vm.Memory.TP

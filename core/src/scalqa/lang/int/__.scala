@@ -6,7 +6,7 @@ object Int extends int.custom.Framework[Int]:
   inline def ordering: G.Ordering[Int] = int.z.Math
   inline def math    : G.Math[Int]       = int.z.Math
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def Custom = int.Custom
   inline def G      = int.G
   type _extension   = int._extension

@@ -21,7 +21,7 @@ object Collection:
     /**/                 inline def flatMap[B](inline f:A=> ~[B])  : ~[B]          = x.~.flatMap(f)
     /**/                 inline def foreach[U](inline f: A=>U)     : Unit          = x.~.foreach(f)
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Mutable[A]           = collection.Mutable[A];             inline def Mutable           = collection.Mutable
   type Observable[A]        = collection.Observable[A];          inline def Observable        = collection.Observable
   type ObservableMutable[A] = collection.ObservableMutable[A];   inline def ObservableMutable = collection.ObservableMutable

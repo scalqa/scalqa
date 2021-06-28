@@ -34,7 +34,7 @@ object Promise:
 
   given givenCanEqualPromise[A,B](using CanEqual[A,B]) : CanEqual[Promise[A], Promise[B]] = CanEqual.derived
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def Control = promise.Control;  type Control[A] = promise.Control[A]
   inline def Context = promise.Context;  type Context    = promise.Context.opaque.`type`
 

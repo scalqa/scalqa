@@ -4,7 +4,7 @@ object Vm:
   def availableProcessors : Int   = Runtime.getRuntime().availableProcessors()
   def exit                : Unit  = { println("J.Vm.exit requested"); System.exit(0) }
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type       Priority     = vm.Priority.opaque.`type`
   inline def Setup        = vm.Setup
   inline def Memory       = vm.Memory

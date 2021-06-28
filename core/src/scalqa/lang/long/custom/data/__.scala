@@ -3,9 +3,9 @@ package scalqa; package lang; package long; package custom; import language.impl
 abstract class Data[A<:Opaque.Long](typeName: String) extends Type[A](typeName) with Framework[A]
 
 object Data:
-  type Ordered[A<:Opaque.Long] = data.Ordered[A]
+  type Ordered  [A<:Opaque.Long] = data.Ordered[A]
   type Numerical[A<:Opaque.Long] = data.Numerical[A]
-  type Number [A<:Opaque.Long] = data.Number[A]
+  type Number   [A<:Opaque.Long] = data.Number[A]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -16,6 +16,8 @@ ___________________________________________________________________________*/
 /**
 @class Data -> ### Long Data Type Base
 
-  [[Data]] not only defines a Long based opaque type, but also privides a framework of custom specialized containers attached to this type.
+  Custom Data not only defines a Long based opaque type, but also privides a framework of custom specialized containers attached to this type.
+
+  See [more in guide](../../../../../guide/features/Data.html).
 
 */

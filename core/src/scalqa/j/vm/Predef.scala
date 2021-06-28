@@ -10,7 +10,7 @@ object Predef:
          with int._extension     with long._extension    with float._extension   with double._extension
          with scalqa.gen.math.ordering.z._extension
 
-  given givenLib: GlobalExtensionLibrary.type = GlobalExtensionLibrary
+  given given_Lib: GlobalExtensionLibrary.type = GlobalExtensionLibrary
 
   inline given givenByteMath   : Byte  .G.Math[Byte  ] = Byte  .math
   inline given givenCharMath   : Char  .G.Math[Char  ] = Char  .math

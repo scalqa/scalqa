@@ -1,7 +1,6 @@
 package scalqa; package j; package zip; import language.implicitConversions
 
 trait Format[A]:
-
   protected def createEntryName(v: A)                 : String
   protected def read(name: String, i: J.Input)        : A
   protected def write(name: String, o: J.Output, v: A): Unit

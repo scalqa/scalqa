@@ -14,7 +14,7 @@ object J:
   inline  def illegalArgument(     inline message: String = \/)           : Nothing     = throw new IllegalArgumentException(message)
   /**/    def printStack(sizeLimit: Int.Opt = \/, label: String.Opt = \/) : Unit        = { new Exception().getStackTrace().~.take_<>(1 <> sizeLimit.or(5000)).zipIndex(1)
     /**/                                                                                    .map("\t" + _.toString.padEndTo(3) + " " + _).joinAt(0,label or "J.printStack").foreach(println) }
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   @fast lazy val File          = j.File;                          type File             = j.File.opaque.`type`
   @fast lazy val Path          = j.file.Path;                     type Path             = j.file.Path.opaque.`type`
   @fast lazy val Url           = j.Url;                           type Url              = j.Url.opaque.`type`

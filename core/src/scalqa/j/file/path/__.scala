@@ -3,7 +3,7 @@ package scalqa; package j; package file; import language.implicitConversions
 import java.nio.file.{ Path => PATH }
 import File.Path
 
-object Path extends Any.Ref.Custom.Type[Path,PATH]("J.Path"):
+object Path extends Any.Ref.Custom.Type[Path,PATH]("J.Path") with path._extension:
   inline          def apply(v: PATH)                : Path    = v.asOpaque[Path]
   /**/            def apply()                       : Path    = void.real.toAbsolutePath.asOpaque[Path]
   /**/            def apply(s:String, more:String*) : Path    = File.System().path(s, more *)
@@ -18,8 +18,6 @@ object Path extends Any.Ref.Custom.Type[Path,PATH]("J.Path"):
   implicit inline def implicitFromString(v: String)    : Path = apply(v)
   implicit inline def implicitFromFile(v: J.File)      : Path = v.path
   implicit inline def implicitRequestVoid(inline v: \/): Path = void
-
-  given x : path.Extension = new path.Extension
 
   object opaque:
     opaque type `type` <: Opaque.Ref = PATH & Opaque.Ref

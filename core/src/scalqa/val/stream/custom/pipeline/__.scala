@@ -17,7 +17,7 @@ object Pipeline:
     def infoTree : Doc     .Tree
     def doc     : Doc     = z.util.MultiDoc(this)
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type ParallelFlow[A] = pipeline.ParallelFlow[A]
 
 /*___________________________________________________________________________

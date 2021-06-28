@@ -19,6 +19,22 @@ ___________________________________________________________________________*/
 /**
 @class Numerical -> ###
 
+  Custom Data Numerical elements cannot be treated as numbers, but they support addition, subtraction with its own kind, and multiplication and division by primitives.
+
+  The best example of Data.Numerical type is [[scalqa.gen.time.Length Time.Length]]:
+
+  ```
+  var tl : Time.Length = 1.Hour - 10.Minutes + 20.Seconds
+
+  tl.tp          // Prints: 50 mins 20 secs
+
+  (tl / 5).tp    // Prints: 10 mins 4 secs
+
+  (tl * 5).tp    // Prints: 4 hours 11 mins 40 secs
+
+  ```
+  Stream operation "sum" is also valid for Data.Numerical
+
 @def abs         -> Absolute value   \n\n  Returns non negative value
 @def *           -> Multiply         \n\n  Returns the product of this and given value
 @def /           -> Divide           \n\n  Returns the quotient of this and given value

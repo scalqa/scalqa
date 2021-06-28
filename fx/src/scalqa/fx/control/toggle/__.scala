@@ -19,7 +19,7 @@ object Toggle:
     def apply(v: JToggle) = v.getUserData.cast[Toggle]
     def undo (v: Toggle)  = v.real
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Button = toggle.Button;  inline def Button = toggle.Button
   type Group  = toggle.Group;   inline def Group    = toggle.Group
 

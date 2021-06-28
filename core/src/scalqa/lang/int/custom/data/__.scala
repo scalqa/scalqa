@@ -4,7 +4,7 @@ abstract class Data[A<:Opaque.Int](typeName: String) extends Type[A](typeName) w
 
 object Data:
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Ordered   [A<:Opaque.Int] = data.Ordered[A]
   type Sequential[A<:Opaque.Int] = data.Sequential[A]
   type Numerical   [A<:Opaque.Int] = data.Numerical[A]
@@ -19,6 +19,8 @@ ___________________________________________________________________________*/
 /**
 @class Data -> ### Int Data Type Base
 
-  [[Data]] not only defines a Int based opaque type, but also privides a framework of custom specialized containers attached to this type.
+  Custom Data not only defines a Int based opaque type, but also privides a framework of custom specialized containers attached to this type.
+
+  See [more in guide](../../../../../guide/features/Data.html).
 
 */

@@ -6,7 +6,7 @@ object Double extends double.custom.Framework[Double]:
   inline def ordering: G.Ordering[Double] = double.z.Math
   inline def math    : G.Math[Double]       = double.z.Math
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def Custom = double.Custom
   inline def G      = double.G
   type _extension   = double._extension

@@ -14,7 +14,7 @@ object Opaque:
   opaque type Ref     <: AnyRef & Opaque  = scala.AnyRef     & Opaque
   opaque type String  <: Ref              = java.lang.String & Opaque
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Companion[A<:Opaque] = opaque.Companion[A]
 
 /*___________________________________________________________________________

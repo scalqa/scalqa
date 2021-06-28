@@ -44,6 +44,10 @@ ___________________________________________________________________________*/
 /**
 @class Number -> ###
 
+  Custom Data Number element is provided with similar operations, which are available on base primitive without any loss of performance.
+
+  See [more in guide](../../../../../guide/features/Data.html).
+
 @def unary_-     -> Negate           \n\n  Returns negation of this value
 @def *           -> Multiply         \n\n  Returns the product of this and given value
 @def /           -> Divide           \n\n  Returns the quotient of this and given value

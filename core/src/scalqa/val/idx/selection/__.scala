@@ -17,7 +17,7 @@ object Selection:
   @tn("getVoid")  def void[A]                                      : Selection[A]  = selection.Z.Void.cast[Selection[A]]
   implicit inline def implicitRequestVoid[A](inline v: \/)         : Selection[A]  = void
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Observable[A] = selection.Observable[A]
 
 /*___________________________________________________________________________

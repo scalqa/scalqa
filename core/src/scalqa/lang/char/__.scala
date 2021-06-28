@@ -6,7 +6,7 @@ object Char extends char.custom.Framework[Char]:
   inline def ordering: G.Ordering[Char] = char.z.Math
   inline def math    : G.Math[Char]       = char.z.Math
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def Custom = char.Custom
   inline def G      = char.G
   type _extension   = char._extension

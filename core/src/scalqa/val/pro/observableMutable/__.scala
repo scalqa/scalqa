@@ -10,7 +10,7 @@ object ObservableMutable:
     @tn("mutableMap_View") def mutableMap_^[B](m: A=>B, r: B => A)      : Pro.OM[B] = mutableMap_^(using ReversibleFunction(m,r))
     @tn("mutableMap_View") def mutableMap_^[B](using m: ReversibleFunction[A,B]) : Pro.OM[B] = z.TwoWay_View.ObservableMutable[A,B](x, m)
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def X = observableMutable.X
 
 /*___________________________________________________________________________

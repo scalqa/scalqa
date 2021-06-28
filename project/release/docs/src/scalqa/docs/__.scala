@@ -30,7 +30,7 @@ object Docs:
       "ByteCount","Year","Big","Percent","Week","Weeks","Day","Days","Hour","Hours","Minute","Minutes","Second","Seconds","Millis","Micros","Nanos",
       "Problem")
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   val Menu = docs.Menu
   val Path = docs.Path
 

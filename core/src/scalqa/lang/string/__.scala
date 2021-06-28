@@ -4,7 +4,7 @@ object String extends Any.Ref.Custom.Framework[String]:
   val ordering          : Ordering[String] = summon[Ordering[String]]
   val orderingIgnoreCase: Ordering[String] = string.z.Ordering.IgnoreCase
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   @fast lazy val Custom = string.Custom
   type Builder    = string.Builder.opaque.`type`;   inline def Builder    = string.Builder
   type _extension = string._extension;              inline def _extension = string._extension

@@ -22,7 +22,7 @@ object Scene extends Gen.Void.Setup[Scene](new Scene(\/, \/, Control.Label("void
   def apply(width: Int.Opt = \/, height: Int.Opt = \/, e: Opt[Node.Like] = \/) : Scene = new Scene(width, height, e)
   def apply(e: Opt[Node.Like])                                                 : Scene = apply(\/,\/, e)
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   @fast lazy val Application = scene.Application;          type Application  = scene.Application
   @fast lazy val Chart       = scene.Chart;                type Chart        = scene.Chart
   @fast lazy val Image       = scene.Image;                type Image        = scene.Image.opaque.`type`

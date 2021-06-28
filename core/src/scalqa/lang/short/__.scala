@@ -6,7 +6,7 @@ object Short extends short.custom.Framework[Short]:
   inline def ordering: G.Ordering[Short] = short.z.Math
   inline def math    : G.Math[Short]       = short.z.Math
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def Custom = short.Custom
   inline def G      = short.G
   type _extension   = short._extension;

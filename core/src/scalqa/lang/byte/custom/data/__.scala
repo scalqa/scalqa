@@ -3,9 +3,9 @@ package scalqa; package lang; package byte; package custom; import language.impl
 abstract class Data[A<:Opaque.Byte](typeName: String) extends Type[A](typeName) with Framework[A]
 
 object Data:
-  type Ordered[A<:Opaque.Byte] = data.Ordered[A]
+  type Ordered  [A<:Opaque.Byte] = data.Ordered[A]
   type Numerical[A<:Opaque.Byte] = data.Numerical[A]
-  type Number [A<:Opaque.Byte] = data.Number[A]
+  type Number   [A<:Opaque.Byte] = data.Number[A]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -16,6 +16,8 @@ ___________________________________________________________________________*/
 /**
 @class Data -> ### Byte Data Type Base
 
-  [[Data]] not only defines a Byte based opaque type, but also privides a framework of custom specialized containers attached to this type.
+  Custom Data not only defines a Byte based opaque type, but also privides a framework of custom specialized containers attached to this type.
+
+  See [more in guide](../../../../../guide/features/Data.html).
 
 */

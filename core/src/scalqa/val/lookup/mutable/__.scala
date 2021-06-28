@@ -19,7 +19,7 @@ object Mutable:
   def apply[A,B](v: ~[(A, B)]) : Mutable[A,B] = apply().self_^(_.putAll(v))
   def concurrent[A,B]()        : Mutable[A,B] = new X.Concurrent[A,B]()
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def X = mutable.X
 
 /*___________________________________________________________________________

@@ -36,7 +36,7 @@ object Range:
   given givenFor                                    : range.z.For           = new range.z.For{}
   given givenDocTag[A:Given.DocTag]                  : Given.DocTag[Range[A]] = new range.z.DocTag[A]
 
-  // ~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~
   inline def X = range.X
 
 /*___________________________________________________________________________

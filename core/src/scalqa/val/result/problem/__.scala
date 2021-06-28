@@ -16,7 +16,7 @@ object Problem:
   implicit inline def implicitToThrowable(inline v: Problem): Throwable      = z.ExceptionProblem.Wrap(v)
   /**/            def unapply(v: Problem)                   : Option[String] = Some(v.message)
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Timeout              = problem.Timeout
   type NotValid             = problem.NotValid
 

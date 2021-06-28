@@ -6,7 +6,7 @@ object Long extends long.custom.Framework[Long]:
   inline def ordering: G.Ordering[Long] = long.z.Math
   inline def math    : G.Math[Long]       = long.z.Math
 
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   inline def Custom = long.Custom
   inline def G      = long.G
   type _extension   = long._extension
