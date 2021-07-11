@@ -13,7 +13,7 @@ object StableSet:
   /**/            def apply[A](v: A*)           : StableSet[A] = Z.Ref(v.iterator)
   @tn("getVoid")  def void[A]                   : StableSet[A] = Z.Void.cast[StableSet[A]]
 
-  implicit inline def implicitRequestVoid[A](inline v: \/): StableSet[A] = void[A]
+  implicit inline def implicitRequest[A](inline v: \/): StableSet[A] = void[A]
 
   // *****************************************************************************************************
   private object Z:

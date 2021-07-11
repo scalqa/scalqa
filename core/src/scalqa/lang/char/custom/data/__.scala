@@ -1,9 +1,9 @@
 package scalqa; package lang; package char; package custom; import language.implicitConversions
 
-abstract class Data[A<:Opaque.Char](typeName: String) extends Type[A](typeName) with Framework[A]
+abstract class Data[A<:Opaque.Char](typeName: String) extends Type[A](typeName) with Containers[A]
 
 object Data:
-  type Ordered[A<:Opaque.Char] = data.Ordered[A]
+  type Ordered[A<:Opaque.Char] = data.Ordered[A];    transparent inline def Ordered    = data.Ordered
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -12,7 +12,7 @@ object Data:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@class Data -> ### Char Data Type Base
+@class Data -> ### Char Custom Data Setup
 
   Custom Data not only defines a Char based opaque type, but also privides a framework of custom specialized containers attached to this type.
 

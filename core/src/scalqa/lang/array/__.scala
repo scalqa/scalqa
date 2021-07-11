@@ -15,7 +15,7 @@ object Array:
   inline def apply[A](inline xs: A*)(using inline t: ClassTag[A]) : Array[A]       = scala.Array(xs *)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type _extension = array._extension
+  type _methods = array._methods
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

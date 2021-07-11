@@ -32,7 +32,7 @@ abstract class Cell extends Label.Like:
 
 object Cell:
   type Indexed = cell.Indexed
-  type Setup[A <: Cell] = cell.Setup[A]; inline def Setup = cell.Setup
+  type Setup[A <: Cell] = cell.Setup[A]; transparent inline def Setup = cell.Setup
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

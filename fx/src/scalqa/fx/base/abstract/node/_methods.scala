@@ -1,7 +1,7 @@
 package scalqa; package fx; package base; package `abstract`; package node; import language.implicitConversions
 
 transparent trait _methods:
-  self: Node =>
+  self: Fx.Node =>
 
   @tn("parent_Opt") def parent_?                                    : Opt[Parent]                           = real.getParent.?.map(Node.FxConverter(_).cast[Parent])
   /**/              def scene                                       : Scene                                 = Scene(real.getScene)

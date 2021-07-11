@@ -20,7 +20,7 @@ class Time protected (name: String, bm: ReversibleFunction[Gen.Time, Double]) ex
     }
 
 object Time:
-  type Gauge = time.Gauge; val Gauge = time.Gauge
+  type Gauge = time.Gauge; transparent inline def Gauge = time.Gauge
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

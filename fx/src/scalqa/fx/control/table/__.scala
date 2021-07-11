@@ -35,8 +35,8 @@ abstract class Table[ROW] extends Control with _properties[ROW] with _Column[ROW
 object Table:
   private[fx] type Column[ROW,V,A] = table.Column[ROW,V,A]
   private[fx] type RowCell[A,B]    = table.RowCell[A,B]
-  /**/        type Cell[ROW,V,A]   = table.Cell[ROW,V,A];     inline def Cell     = table.Cell
-  /**/        type SortMode        = table.SortMode;          inline def SortMode = table.SortMode
+  /**/        type Cell[ROW,V,A]   = table.Cell[ROW,V,A];     transparent inline def Cell     = table.Cell
+  /**/        type SortMode        = table.SortMode;          transparent inline def SortMode = table.SortMode
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

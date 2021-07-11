@@ -2,7 +2,7 @@ package scalqa; package fx; package scene; package pane; package tab; import lan
 
 class Panel extends Abstract.Delegate.Gui:
   def this(label: String) = { this(); text = label }
-  def this(label: String, e: Node.Like) = { this(label); content = e }
+  def this(label: String, e: Fx.Node.Like) = { this(label); content = e }
   // --------------------------------------------------------------------------------------------------
   protected type REAL = javafx.scene.control.Tab
   protected def _createReal = new REAL
@@ -10,7 +10,7 @@ class Panel extends Abstract.Delegate.Gui:
 
   closable = false
 
-  /**/                def scene_?                           : Opt[Scene]             = real.tabPaneProperty().get.^.?.map(v => Scene(v.getScene))
+  @tn("scene_Opt")    def scene_?                           : Opt[Scene]             = real.tabPaneProperty().get.^.?.map(v => Scene(v.getScene))
 
   /**/                def onSelectionChanged[U](l: () => U) : Event.Control          = _onFxEvent(real.onSelectionChangedProperty, l)
   /**/                def onSelection       [U](l: () => U) : Event.Control          = onSelectionChanged(() => if (selected) l())
@@ -28,9 +28,9 @@ class Panel extends Abstract.Delegate.Gui:
   /**/                def disable_=(v: Boolean)             : Unit                   = real.setDisable(v)
   @tn("disabled_Pro") def disabled_*                        : Boolean.Pro.O          = Fx.JavaFx.To.pro_O(real.disabledProperty)
   /**/                def disabled                          : Boolean                = real.disabledProperty.get
-  @tn("content_Pro")  def content_*                         : Pro.OM[Node.Like]    = Fx.JavaFx.To.pro_OM(real.contentProperty).mutableMap_^[Node.Like]
-  /**/                def content                           : Node.Like            = content_*()
-  /**/                def content_=(e: Node.Like)         : Unit                   = content_*() = e
+  @tn("content_Pro")  def content_*                         : Pro.OM[Fx.Node.Like]   = Fx.JavaFx.To.pro_OM(real.contentProperty).mutableMap_^[Fx.Node.Like]
+  /**/                def content                           : Fx.Node.Like           = content_*()
+  /**/                def content_=(e:Fx.Node.Like)         : Unit                   = content_*() = e
 
 object Panel:
   def apply(r: javafx.scene.control.Tab): Panel = Abstract.Delegate.Gui(r.onClosedProperty)

@@ -2,7 +2,7 @@ package scalqa; package fx; package base; package event
 
 import javafx.scene.input.GestureEvent
 
-class Gesture(real: GestureEvent, node: Node) extends Input(real, node):
+class Gesture(real: GestureEvent, node: Fx.Node) extends Input(real, node):
   protected type REAL <: GestureEvent
 
 /*___________________________________________________________________________

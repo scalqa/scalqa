@@ -2,6 +2,7 @@ package scalqa; package lang; package long; package g; import language.implicitC
 
 trait Collection[A<:RAW] extends Val.Collection[A] with Able.Contain[A] with any.raw.Specialized.OnLong:
   @tn("stream") def ~             : Stream[A]
+  @tn("pack")   def ><            : Pack[A]   = Pack.fromStream(this.~)
   /**/          def contains(v: A): Boolean   = this.~.takeOnly(v).readRaw_?
 
 object Collection:
@@ -30,7 +31,7 @@ object Collection:
     /**/            def apply[A<:RAW](v: A *)          : StableSet[A] = StableSet(v)
     /**/            def apply[A<:RAW](v: ~[A])         : StableSet[A] = new StableSet(LongMap.from(v.map(v => (v.real,())).iterator))
     @tn("getVoid")  def void [A<:RAW]                  : StableSet[A] = zVoid.cast[StableSet[A]]; private object zVoid extends StableSet(LongMap.empty) with Gen.Void
-    implicit inline def implicitRequestVoid[A<:RAW](inline v: \/): StableSet[A] = void
+    implicit inline def implicitRequest[A<:RAW](inline v: \/): StableSet[A] = void
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
@@ -40,6 +41,6 @@ ___________________________________________________________________________*/
 /**
 @def void  -> Get void instance
 
-@def implicitRequestVoid -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

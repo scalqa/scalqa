@@ -21,9 +21,9 @@ transparent trait _properties[ROW]:
   @tn("editable_Pro")         def editable_*                          : Boolean.Pro.OM                 = Fx.JavaFx.To.pro_OM(real.editableProperty)
   /**/                        def editable                            : Boolean                        = real.isEditable
   /**/                        def editable_=(b: Boolean)              : Unit                           = real.setEditable(b)
-  @tn("placeholder_Pro")      def placeholder_*                       : Pro.OM[Node]                   = Fx.JavaFx.To.pro_OM(real.placeholderProperty).mutableMap_^[Node]
-  /**/                        def placeholder                         : Node                           = placeholder_*()
-  /**/                        def placeholder_=(v: Node)              : Unit                             = real.setPlaceholder(v.real)
+  @tn("placeholder_Pro")      def placeholder_*                       : Pro.OM[Fx.Node]                = Fx.JavaFx.To.pro_OM(real.placeholderProperty).mutableMap_^[Fx.Node]
+  /**/                        def placeholder                         : Fx.Node                        = placeholder_*()
+  /**/                        def placeholder_=(v: Fx.Node)           : Unit                           = real.setPlaceholder(v.real)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

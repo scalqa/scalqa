@@ -11,7 +11,7 @@ object Idx:
   /**/                 def apply[A](v1:A, v2:A, v3:A, vs:A*)   : Idx[A]  = Pack(v1,v2,v3,vs *)
   /**/                 def wrap[A](v: java.util.List[A])       : Idx[A]  = idx.z.as.JavaListWrap[A](v)
   @tn("getVoid")inline def void[A]                             : Idx[A]  = ZZ.voidPack[A]
-  implicit      inline def implicitRequestVoid[A](inline v: \/): Idx[A]  = void
+  implicit      inline def implicitRequest[A](inline v: \/)    : Idx[A]  = void
 
   extension[A] (x: Idx[A])
     /**/                         def contains(v:A)                 : Boolean           = {var i=0; val sz=x.size; while(i<sz){if(x(i) == v) return true; i+=1}; false}
@@ -33,16 +33,16 @@ object Idx:
     def orderedSearchBy[B](map:A=>B,v:B,max:Int=1,
                    extraFilter: A=>Boolean= \/)(using Ordering[B]) : Int.<>            = idx.z.Ordered.searchBy(x,v,map,max,extraFilter)
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  inline def Mutable           = idx.Mutable;              type Mutable[A]           = idx.Mutable[A]
-  inline def M                 = Mutable;                  type M[A]                 = Mutable[A]
-  inline def Observable        = idx.Observable;           type Observable[A]        = idx.Observable[A]
-  inline def O                 = Observable;               type O[A]                 = Observable[A]
-  inline def ObservableMutable = idx.ObservableMutable;    type ObservableMutable[A] = idx.ObservableMutable[A]
-  inline def OM                = ObservableMutable;        type OM[A]                = ObservableMutable[A]
-  inline def Selection         = idx.Selection;            type Selection[A]         = idx.Selection[A]
-  inline def Event             = idx.observable.Event;     type Event[A]             = idx.observable.Event[A]
-  inline def Permutation       = idx.Permutation;          type Permutation          = idx.Permutation
-  inline def X                 = idx.X
+  transparent inline def Mutable           = idx.Mutable;              type Mutable[A]           = idx.Mutable[A]
+  transparent inline def M                 = Mutable;                  type M[A]                 = Mutable[A]
+  transparent inline def Observable        = idx.Observable;           type Observable[A]        = idx.Observable[A]
+  transparent inline def O                 = Observable;               type O[A]                 = Observable[A]
+  transparent inline def ObservableMutable = idx.ObservableMutable;    type ObservableMutable[A] = idx.ObservableMutable[A]
+  transparent inline def OM                = ObservableMutable;        type OM[A]                = ObservableMutable[A]
+  transparent inline def Selection         = idx.Selection;            type Selection[A]         = idx.Selection[A]
+  transparent inline def Event             = idx.observable.Event;     type Event[A]             = idx.observable.Event[A]
+  transparent inline def Permutation       = idx.Permutation;          type Permutation          = idx.Permutation
+  transparent inline def X                 = idx.X
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
@@ -95,7 +95,7 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitRequestVoid -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 @def  M      -> Alias \n\n Shortcut to [[scalqa.val.idx.Mutable$ Idx.Mutable]]
 @type M      -> Alias \n\n Shortcut to [[scalqa.val.idx.Mutable Idx.Mutable]]

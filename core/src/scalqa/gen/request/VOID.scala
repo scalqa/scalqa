@@ -68,7 +68,7 @@ ___________________________________________________________________________*/
     object Foo{
       val void = new Foo with Gen.Void
 
-      implicit inline def implicitRequestVoid(inline v: \/): Foo = void
+      implicit inline def implicitRequest(inline v: \/): Foo = void
     }
 
     var v: Foo = \/   // Standard void assignment

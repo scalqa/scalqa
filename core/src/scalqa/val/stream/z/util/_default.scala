@@ -10,7 +10,7 @@ class _default:
   inline def fromIterableOnce[A](inline v: scala.collection.IterableOnce[A])        : ~[A]             = z.a.Scala[A](v)
   inline def fromProduct        (inline v: Product)                                 : ~[(String,Any)]  = new z.a.Scala.Stream_fromProduct(v)
 
-  implicit inline def implicitRequestVoid[A](inline v: \/)                                    : ~[A] & Able.Size = void.cast[~[A] & Able.Size]
+  implicit inline def implicitRequest[A](inline v: \/)                                        : ~[A] & Able.Size = void.cast[~[A] & Able.Size]
   implicit inline def implicitFromRange[A:Able.Sequence](inline v: Range[A])                  : ~[A]             = v.~
   implicit inline def implicitFromIterable[A](inline v: java.lang.Iterable[A])                : ~[A]             = z.a.Java.Stream_fromIterable(v)
   implicit inline def implicitFromIterator[A](inline v: java.util.Iterator[A])                : ~[A]             = new z.a.Java.Stream_fromIterator(v)

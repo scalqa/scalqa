@@ -45,7 +45,7 @@ abstract class InputControl(initialTextO: String.Opt = \/) extends Control:
   }
 
 object InputControl:
-  type Change = inputControl.Change.opaque.`type`; inline def Change = inputControl.Change
+  type Change = inputControl.Change.opaque.`type`; transparent inline def Change = inputControl.Change
 
 package inputControl:
   type Change = inputControl.Change.opaque.`type`

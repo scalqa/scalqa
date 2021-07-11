@@ -1,15 +1,15 @@
 package scalqa; package lang; import language.implicitConversions
 
-object Char extends char.custom.Framework[Char]:
+object Char extends char.custom.Containers[Char]:
   inline def min     : Char               = java.lang.Character.MIN_VALUE
   inline def max     : Char               = java.lang.Character.MAX_VALUE
   inline def ordering: G.Ordering[Char] = char.z.Math
   inline def math    : G.Math[Char]       = char.z.Math
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  inline def Custom = char.Custom
-  inline def G      = char.G
-  type _extension   = char._extension
+  transparent inline def Custom = char.Custom
+  transparent inline def G      = char.G
+  type _methods   = char._methods
 
 package char:
   private[scalqa] type SELF = Char;             private[scalqa] inline def SELF = lang.Char

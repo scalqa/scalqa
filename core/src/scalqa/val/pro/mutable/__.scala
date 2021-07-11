@@ -15,7 +15,7 @@ object Mutable:
     /**/               def bindTo[B<:A](v: Idx.Selection.Observable[B], dflt: A) : Event.Control = v.onChangeRun { x() = v.get_? or dflt }
 
   // Members ~~~~~~~~~~~~~~~~~~~~~
-  inline def X = mutable.X
+  transparent inline def X = mutable.X
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

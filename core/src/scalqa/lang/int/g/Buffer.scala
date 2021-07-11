@@ -17,17 +17,17 @@ class Buffer[A<:RAW](_a: Array[Int], _sz: Int) extends Val.Buffer[A] with Idx.Mu
   // ----------------------------------------------------------------------------------------------------------------------------------------------
   /**/                  def apply(i: Int)                   : A              = ar(i).cast[A]
   /**/                  def size                            : Int            = sz
-  @tn("stream")override def ~                               : Stream[A]      = lang.array.z.stream.Ints(ar,sz)
+  @tn("stream")override def ~                               : Stream[A]      = lang.array.z.stream.As.Ints(ar,sz)
   /**/         override def add(v: A)                       : Unit           = { if(ar.length<=sz) mkSpace(sz+1); ar(sz)=v; sz+=1}
   /**/         override def addAt(i: Int, v: A)             : Unit           = { if(ar.length<=sz) mkSpace(sz+1); ar.copyTo(ar,i+1,i,sz-i); ar(i)=v; sz+=1 }
   /**/         override def updateAt(i: Int, v: A)          : Unit           = ar(i) = v
   /**/         override def contains(v: A)                  : Boolean        = lang.array.z.contains.int(ar,v,sz)
   /**/         override def sort      (using o: Ordering[A]): Unit           = ar.sort_<>(0,sz)(using o.cast[Ordering[Int]])
-  @tn("pack")           def ><                              : Pack[A]        = Pack.fromArray(ar,sz)
+  @tn("pack")  override def ><                              : Pack[A]        = Pack.fromArray(ar,sz)
 
-private[scalqa] object Buffer:
-  def accessible[A<:RAW](use: Array[Int], usedSize: Int): Buffer[A] & Able.Access[Array[Int]] = zAccessible[A](use,usedSize)
-  def accessible[A<:RAW](initSize: Int.Opt = \/)        : Buffer[A] & Able.Access[Array[Int]] = zAccessible(new Array[Int](initSize or J.initSize),0)
+object Buffer:
+  /**/   def accessible[A<:RAW](use: Array[Int], usedSize: Int)   : Buffer[A] & Able.Access[Array[Int]] = zAccessible[A](use,usedSize)
+  inline def accessible[A<:RAW](inline initSize: Int = J.initSize): Buffer[A] & Able.Access[Array[Int]] = accessible(new Array[Int](initSize),0)
 
   // ************************************************************************************************************************
   private class zAccessible[A<:RAW](a: Array[Int], s: Int) extends Buffer[A](a,s) with Able.Access[Array[Int]]:

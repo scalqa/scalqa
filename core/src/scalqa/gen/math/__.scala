@@ -9,12 +9,12 @@ object Math:
   inline def pow(inline a: Double, inline b: Double) : Double = Java.pow(a,b)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  inline def Numeric    = math.Numeric
-  inline def Ordering   = math.Ordering;    type Ordering[A]  = math.Ordering[A]
-  inline def Format     = math.Format;      type Format       = math.Format.opaque.`type`
-  inline def Rounding   = math.Rounding;    type Rounding     = math.Rounding
-  inline def BigDecimal = math.BigDecimal;  type BigDecimal   = math.BigDecimal.opaque.`type`
-  inline def BigInteger = math.BigInteger;  type BigInteger   = math.BigInteger.opaque.`type`
+  transparent inline def Numeric    = math.Numeric
+  transparent inline def Ordering   = math.Ordering;    type Ordering[A]  = math.Ordering[A]
+  transparent inline def Format     = math.Format;      type Format       = math.Format.opaque.`type`
+  transparent inline def Rounding   = math.Rounding;    type Rounding     = math.Rounding
+  transparent inline def BigDecimal = math.BigDecimal;  type BigDecimal   = math.BigDecimal.opaque.`type`
+  transparent inline def BigInteger = math.BigInteger;  type BigInteger   = math.BigInteger.opaque.`type`
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -23,6 +23,10 @@ object Math:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object Math -> ### Math Utilities
+@object Math -> ### General Math
+
+   Math type in Scalqa is an alias to scala.math.Numeric. Generally "Math" is a better name for what Numeric stands for.
+
+   Math object contains few shortcuts to java.lang.Math static methods.
 
 */

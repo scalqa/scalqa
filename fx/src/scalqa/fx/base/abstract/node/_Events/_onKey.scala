@@ -1,7 +1,7 @@
 package scalqa; package fx; package base; package `abstract`; package node; package _Events; import language.implicitConversions
 
 transparent trait _onKey:
-  self: Node =>
+  self: Fx.Node =>
 
   def onKeyPressed [U](l: Fx.Event.Key => U) : Gen.Event.Control = Fx.Event.Key.subscribe(self, l, real.onKeyPressedProperty)
   def onKeyReleased[U](l: Fx.Event.Key => U) : Gen.Event.Control = Fx.Event.Key.subscribe(self, l, real.onKeyReleasedProperty)

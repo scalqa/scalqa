@@ -44,6 +44,6 @@ ___________________________________________________________________________*/
 
     If type supports void instances, then following inmpelentation should be added in most cases:
     ```
-      implicit inline def implicitRequestVoid(inline v: \/) : <type> = <return void>
+      implicit inline def implicitRequest(inline v: \/) : <type> = <return void>
     ```
 */

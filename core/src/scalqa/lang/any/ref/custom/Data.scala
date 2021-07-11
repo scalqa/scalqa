@@ -1,21 +1,25 @@
 package scalqa; package lang; package any; package ref; package custom; import language.implicitConversions
 
-abstract class Data[A<:Opaque.Ref,BASE<:Ref:ClassTag](typeName: String) extends Type[A,BASE](typeName) with Framework[A]
+abstract class Data[A<:Opaque.Ref,BASE<:Ref:ClassTag](typeName: String) extends Type[A,BASE](typeName) with Containers[A]
 
 object Data:
 
   // ******************************************************************************************************************
-  abstract class Ordered[A<:Opaque.Ref, BASE<:Ref:ClassTag](typeName: String, c: Ordering  [BASE]) extends Data[A,BASE](typeName):
+  abstract class Ordered[A<:Opaque.Ref, BASE<:Ref:ClassTag](typeName: String, c: Ordering  [BASE]) extends Data[A,BASE](typeName) with Ordered._methods[A,BASE]:
 
     given ordering : Ordering  [A] = c.cast[Ordering  [A]]
 
-    extension[A<:Ref](inline x: A)(using o : Ordering  [A])
-      /**/            infix inline def atLeast(v: A)    : A         = {val w=x; if(w > v) w else v }
-      /**/            infix inline def atMost (v: A)    : A         = {val w=x; if(w < v) w else v }
-      @tn("less")           inline def <  (inline v: A) : Boolean   = o.compare(x,v) <  0
-      @tn("lessOrEqual")    inline def <= (inline v: A) : Boolean   = o.compare(x,v) <= 0
-      @tn("greater")        inline def >  (inline v: A) : Boolean   = o.compare(x,v) >  0
-      @tn("greaterOrEqual") inline def >= (inline v: A) : Boolean   = o.compare(x,v) >= 0
+  object Ordered:
+
+    trait _methods[A,BASE]:
+      extension(inline x: A)(using o : Ordering  [A])
+        /**/            infix inline def atLeast(v: A)    : A         = {val w=x; if(w > v) w else v }
+        /**/            infix inline def atMost (v: A)    : A         = {val w=x; if(w < v) w else v }
+        @tn("less")           inline def <  (inline v: A) : Boolean   = o.compare(x,v) <  0
+        @tn("lessOrEqual")    inline def <= (inline v: A) : Boolean   = o.compare(x,v) <= 0
+        @tn("greater")        inline def >  (inline v: A) : Boolean   = o.compare(x,v) >  0
+        @tn("greaterOrEqual") inline def >= (inline v: A) : Boolean   = o.compare(x,v) >= 0
+
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -24,11 +28,11 @@ object Data:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@class Data -> ### AnyRef Opaque Data Framework
+@class Data -> ### AnyRef Custom Data Setup
 
 @class Ordered -> ###
 
-  Custom Data Ordered element is provided with default ordering and can be compared with comparison operators.
+  Custom Ordered Data element is provided with default ordering and can be compared with comparison operators.
 
 @def atLeast -> Max \n\n Returns maximum of current or given value
 @def atMost  -> Min \n\n Returns minimun of current or given value

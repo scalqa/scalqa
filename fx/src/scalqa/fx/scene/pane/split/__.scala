@@ -7,7 +7,7 @@ class Split extends Control:
   protected override def _createReal = new REAL
   protected type REAL = SplitPane
 
-  /**/                   val items                         : Idx.M[Node.Like]  = Idx.M.wrap(real.getItems).mutableMap_^[Node.Like]
+  /**/                   val items                         : Idx.M[Fx.Node.Like] = Idx.M.wrap(real.getItems).mutableMap_^[Fx.Node.Like]
   /**/             lazy  val dividers                      : Idx[Split.Divider]  = Idx.wrap(real.getDividers).map_^(new Split.Divider(_))
 
   @tn("orientation_Pro") def orientation_*                 : Pro.OM[Orientation] = Fx.JavaFx.To.pro_OM(real.orientationProperty).mutableMap_^[Orientation]
@@ -15,7 +15,7 @@ class Split extends Control:
   /**/                   def orientation_=(o: Orientation) : Unit                = orientation_*() = o
 
   /**dividerPercent is a percent of entire space allocated to the added section, last section gets the rest*/
-  def add(e: Node.Like, dividerPercentOpt : Opt[Percent] = \/): this.type =
+  def add(e: Fx.Node.Like, dividerPercentOpt : Opt[Percent] = \/): this.type =
     items += e
     priorPercentOpt.forval(p => real.setDividerPosition(items.size - 2, real.getDividers.~.map(_.getPosition).dropLast(1).last_?.or(0D) + p.Double / 100d))
     priorPercentOpt = dividerPercentOpt
@@ -26,9 +26,9 @@ class Split extends Control:
 object Split:
   type Divider = split.Divider
 
-  def apply()                                       : Pane.Split = new Pane.Split
-  def apply(o: Orientation)                         : Pane.Split = apply().^(_.orientation = o)
-  def apply(e1: Node.Like, e2: Node.Like) : Pane.Split = apply().^(_.items += e1 += e2)
+  def apply()                                   : Pane.Split = new Pane.Split
+  def apply(o: Orientation)                     : Pane.Split = apply().^(_.orientation = o)
+  def apply(e1: Fx.Node.Like, e2: Fx.Node.Like) : Pane.Split = apply().^(_.items += e1 += e2)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

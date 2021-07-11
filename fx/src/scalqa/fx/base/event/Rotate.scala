@@ -2,7 +2,7 @@ package scalqa; package fx; package base; package event
 
 import javafx.scene.input.RotateEvent
 
-class Rotate(real: RotateEvent, node: Node) extends Input(real, node):
+class Rotate(real: RotateEvent, node: Fx.Node) extends Input(real, node):
   protected type REAL <: RotateEvent
 
 /*___________________________________________________________________________

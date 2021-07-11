@@ -1,7 +1,7 @@
 package scalqa; package fx; package base; package `abstract`; package node; import language.implicitConversions
 
 transparent trait _properties:
-  self: Node =>
+  self: Fx.Node =>
   @tn("cache_Pro")            def cache_*                        : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.cacheProperty)
   /**/                        def cache                          : Boolean         = real.isCache;
   /**/                        def cache_=(b: Boolean)            : Unit            = real.setCache(b)

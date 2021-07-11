@@ -20,7 +20,7 @@ object Mutable:
   def concurrent[A,B]()        : Mutable[A,B] = new X.Concurrent[A,B]()
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  inline def X = mutable.X
+  transparent inline def X = mutable.X
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -33,7 +33,7 @@ object Doc:
     if (s.contains(",")) "[" + s + "]" else s
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  inline     def Tree        = doc.Tree;        type Tree        = doc.Tree
+  transparent inline def Tree = doc.Tree;        type Tree = doc.Tree
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

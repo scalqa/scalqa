@@ -1,7 +1,7 @@
 package scalqa; package `val`; import pack.*; import language.implicitConversions
 
 import Pack.RawType
-import Gen.Given.PackTag.{ Raw as TAG }
+import gen.`given`.PackTag.{ Raw as TAG }
 
 abstract class Pack[A] extends Idx[A]:
   type THIS_TYPE <: Pack[A]
@@ -32,6 +32,7 @@ abstract class Pack[A] extends Idx[A]:
   /**/                     def compact                                            : this.type
 
 object Pack:
+  type AnyType[A] = Pack[A] | RawType[A]
   type RawType[A] = lang.boolean.G.><[A & Raw.Boolean] | lang.byte.G.><[A & Raw.Byte] | lang.char .G.><[A & Raw.Char]  | lang.short .G.><[A & Raw.Short]
                   | lang.int    .G.><[A & Raw.Int]     | lang.long.G.><[A & Raw.Long] | lang.float.G.><[A & Raw.Float] | lang.double.G.><[A & Raw.Double]
 
@@ -39,10 +40,10 @@ object Pack:
   /**/                 def apply[A](v1: A, v2: A)                : ><[A] = z.Few.Pack_ofTwo(v1, v2)
   /**/                 def apply[A](v1: A, v2: A, v3: A, vs: A*) : ><[A] = if (vs.isEmpty) z.Few.Pack_ofThree(v1, v2, v3) else z.ArrayPack(v1, v2, v3, vs)
   @tn("getVoid")inline def void[A]                               : ><[A] = ZZ.voidPack[A]
-  implicit      inline def implicitRequestVoid[A](inline v: \/)  : ><[A] = void[A]
+  implicit      inline def implicitRequest[A](inline v: \/)      : ><[A] = void[A]
   implicit      inline def implicitFromStream [A](inline v: ~[A]): ><[A] = v.><
-
-  private[scalqa]      def fromArray[A](a: Array[Ref], sz: Int)  : ><[A] = new z.ArrayPack(a.copySize(sz),sz)
+  /**/          inline def fromArray[A](a: Array[Ref])           : ><[A] = fromArray(a,a.length)
+  /**/                 def fromArray[A](a: Array[Ref], sz: Int)  : ><[A] = new z.ArrayPack(a.copySize(sz),sz)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -164,6 +165,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitRequestVoid -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

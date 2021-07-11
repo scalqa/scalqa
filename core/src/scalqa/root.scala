@@ -5,9 +5,24 @@ package object scalqa:
   export scalqa.Gen.*
   export scalqa.gen.Request.*
   export scalqa.j.vm.Predef.{ given }
-  export scalqa.Val.{ ~ as _, * }
-  @tn("Stream") type ~[+A] = Val.~[A]
-  @tn("Stream") val ~~    = Val.~
+//  export scalqa.Val.{ ~ as _, Idx as _, * }
+//  @tn("Stream") type ~[+A] = Val.~[A]
+//  //@tn("Stream") transparent inline def ~~ = `val`.Stream
+//  @tn("Stream") val ~~    = Val.~
+//  /**/          transparent inline def Idx        = `val`.Idx;                       type Idx[+A]        = `val`.Idx[A]
+
+  @tn("Stream")                    val ~~         = `val`.Stream;      @tn("Stream") type ~[A]           = `val`.Stream[A]
+  @tn("Range")  transparent inline def <>         = `val`.Range;       @tn("Range")  type <>[A]          = `val`.Range[A]
+  @tn("Pack")   transparent inline def ><         = `val`.Pack;        @tn("Pack")   type ><[A]          = `val`.Pack[A]
+  /**/          transparent inline def Buffer     = `val`.Buffer;                    type Buffer[A]      = `val`.Buffer[A]
+  /**/          transparent inline def Collection = `val`.Collection;                type Collection[+A] = `val`.Collection[A]
+  /**/          transparent inline def Idx        = `val`.Idx;                       type Idx[+A]        = `val`.Idx[A]
+  /**/          transparent inline def Lookup     = `val`.Lookup;                    type Lookup[A,+B]   = `val`.Lookup[A,B]
+  /**/          transparent inline def Opt        = `val`.Opt;                       type Opt[+A]        = `val`.Opt.opaque.`type`[A]
+  /**/          transparent inline def Pro        = `val`.Pro;                       type Pro[+A]        = `val`.Pro[A]
+  /**/          transparent inline def Promise    = `val`.Promise;                   type Promise[+A]    = `val`.Promise[A]
+  /**/          transparent inline def Result     = `val`.Result;                    type Result[+A]     = `val`.Result.opaque.`type`[A]
+  /**/          transparent inline def StableSet  = Collection.StableSet;            type StableSet[A]   = Collection.StableSet[A]
 
   private[scalqa] type ClassTag[A] = scala.reflect.ClassTag[A];     private[scalqa] inline def ClassTag = scala.reflect.ClassTag
   private[scalqa] type tn          = scala.annotation.targetName

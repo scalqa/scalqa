@@ -2,17 +2,19 @@ package scalqa; package gen; package time; import language.implicitConversions
 
 import Time.Instant
 
-object Instant extends Long.Custom.Data[Instant]("Time.Instant") with time.x.Base[Instant] with time.x.Nanos[Instant]:
+object Instant extends Long.Custom.Data.Ordered[Instant]("Time.Instant") with time.x.Base[Instant] with time.x.Nanos._methods[Instant]:
   inline   def fromNanos(inline v: Long)   : Instant = v.asOpaque[Instant]
   inline   def apply()                     : Instant = apply(clock.instant); private val clock = java.time.Clock.systemUTC
   /**/     def apply(i: java.time.Instant) : Instant = (i.getEpochSecond * 1_000_000_000L + i.getNano).asOpaque[Instant]
   override def tag(v: Instant)             : String  = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new java.util.Date(v.real / 1_000_000)) + "." + Z.pad(v.micros, 3) + "." + Z.pad(v.nanos, 3)
 
-  implicit inline def implicitRequestCurrent(inline v: CURRENT): Instant = apply()
+  implicit inline def implicitRequest(inline v: CURRENT): Instant = apply()
 
   extension(x: Instant)
     @tn("nanosTotal")        def nanosTotal : Long    = x.real
     @tn("general") protected def general    : Time    = Time.fromMillis(x.millisTotal)
+    @tn("plus")     inline def  +(inline l: Time.Length)               : Instant    = (x.nanosTotal + l.nanosTotal).cast[Instant]
+    @tn("minus")    inline def  -(inline l: Time.Length)               : Instant    = (x.nanosTotal - l.nanosTotal).cast[Instant]
 
   object opaque:
     opaque type `type` <: Opaque.Long = Opaque.Long

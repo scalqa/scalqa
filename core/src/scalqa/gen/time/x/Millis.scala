@@ -2,37 +2,37 @@ package scalqa; package gen; package time; package x; import language.implicitCo
 
 import Time.Length
 
-trait Millis[A<:Any.Raw.Long] :
-  extension(x:A)
-    @tn("nanosTotal")      def nanosTotal                         : Long = x.millisTotal * 1_000_000
-    @tn("millisTotal")     def millisTotal                        : Long
-    @tn("roundTo")         def roundTo(l:Length)(using r:Rounding): A    = (r(x.millisTotal, l.millisTotal)).cast[A]
-  extension(inline x:A)
-    /**/            inline def weeksTotal                         : Long = x.millisTotal / Millis.InOneWeek
-    /**/            inline def daysTotal                          : Long = x.millisTotal / Millis.InOneDay
-    /**/            inline def hoursTotal                         : Long = x.millisTotal / Millis.InOneHour
-    /**/            inline def minutesTotal                       : Long = x.millisTotal / Millis.InOneMinute
-    /**/            inline def secondsTotal                       : Long = x.millisTotal / Millis.InOneSecond
-    /**/            inline def microsTotal                        : Long = x.millisTotal * 1_000
-
-    /**/            inline def hours                              : Long = x.hoursTotal   % 24
-    /**/            inline def minutes                            : Long = x.minutesTotal % 60
-    /**/            inline def seconds                            : Long = x.secondsTotal % 60
-    /**/            inline def millis                             : Long = x.millisTotal  % 1000
-    /**/            inline def micros                             : Long = x.microsTotal  % 1000
-    /**/            inline def nanos                              : Long = x.nanosTotal   % 1000
-
-    @tn("plus")     inline def  +(inline l: Length)               : A    = (x.millisTotal + l.millisTotal).cast[A]
-    @tn("minus")    inline def  -(inline l: Length)               : A    = (x.millisTotal - l.millisTotal).cast[A]
-    @tn("plusAll")  inline def ++(inline s: ~[Length])            : A    = (s.foldAs(x.millisTotal)(_ + _.millisTotal)).cast[A]
-    @tn("minusAll") inline def --(inline s: ~[Length])            : A    = (s.foldAs(x.millisTotal)(_ - _.millisTotal)).cast[A]
-
 object Millis:
   inline val InOneSecond = 1000L
   inline val InOneMinute = InOneSecond * 60
   inline val InOneHour   = InOneMinute * 60
   inline val InOneDay    = InOneHour   * 24
   inline val InOneWeek   = InOneDay    * 7
+
+  trait _methods[A<:Any.Raw.Long]:
+    extension(x:A)
+      @tn("nanosTotal")      def nanosTotal                         : Long = x.millisTotal * 1_000_000
+      @tn("millisTotal")     def millisTotal                        : Long
+      @tn("roundTo")         def roundTo(l:Length)(using r:Rounding): A    = (r(x.millisTotal, l.millisTotal)).cast[A]
+    extension(inline x:A)
+      /**/            inline def weeksTotal                         : Long = x.millisTotal / Millis.InOneWeek
+      /**/            inline def daysTotal                          : Long = x.millisTotal / Millis.InOneDay
+      /**/            inline def hoursTotal                         : Long = x.millisTotal / Millis.InOneHour
+      /**/            inline def minutesTotal                       : Long = x.millisTotal / Millis.InOneMinute
+      /**/            inline def secondsTotal                       : Long = x.millisTotal / Millis.InOneSecond
+      /**/            inline def microsTotal                        : Long = x.millisTotal * 1_000
+
+      /**/            inline def hours                              : Long = x.hoursTotal   % 24
+      /**/            inline def minutes                            : Long = x.minutesTotal % 60
+      /**/            inline def seconds                            : Long = x.secondsTotal % 60
+      /**/            inline def millis                             : Long = x.millisTotal  % 1000
+      /**/            inline def micros                             : Long = x.microsTotal  % 1000
+      /**/            inline def nanos                              : Long = x.nanosTotal   % 1000
+
+      @tn("plus")     inline def  +(inline l: Length)               : A    = (x.millisTotal + l.millisTotal).cast[A]
+      @tn("minus")    inline def  -(inline l: Length)               : A    = (x.millisTotal - l.millisTotal).cast[A]
+      @tn("plusAll")  inline def ++(inline s: ~[Length])            : A    = (s.foldAs(x.millisTotal)(_ + _.millisTotal)).cast[A]
+      @tn("minusAll") inline def --(inline s: ~[Length])            : A    = (s.foldAs(x.millisTotal)(_ - _.millisTotal)).cast[A]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -119,6 +119,5 @@ ___________________________________________________________________________*/
        Total nanoseconds which fit in `this` time unit
 
        Note: Maximum duration expressed in nanoseconds is "7331 days, 10 hours, 50 mins, 44.854775807 secs". Unboxed over will cause problems
-
 
 */

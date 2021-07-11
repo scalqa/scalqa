@@ -9,10 +9,10 @@ abstract class Event[A] private[observable](final val name: String) extends Able
 object Event:
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Add[A]        = event.Add[A];        inline def Add        = event.Add
-  type Remove[A]     = event.Remove[A];     inline def Remove     = event.Remove
-  type Update[A]     = event.Update[A];     inline def Update     = event.Update
-  type Reposition[A] = event.Reposition[A]; inline def Reposition = event.Reposition
+  type Add[A]        = event.Add[A];        transparent inline def Add        = event.Add
+  type Remove[A]     = event.Remove[A];     transparent inline def Remove     = event.Remove
+  type Update[A]     = event.Update[A];     transparent inline def Update     = event.Update
+  type Reposition[A] = event.Reposition[A]; transparent inline def Reposition = event.Reposition
   type Recorder[A]   = event.Recorder[A]
 
 /*___________________________________________________________________________

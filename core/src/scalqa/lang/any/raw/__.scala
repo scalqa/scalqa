@@ -11,7 +11,7 @@ object Raw:
   type Double   = scala.Double  | Opaque.Double
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  @fast lazy val Specialized = raw.Specialized
+  transparent inline def Specialized = raw.Specialized
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

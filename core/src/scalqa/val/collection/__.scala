@@ -9,7 +9,7 @@ object Collection:
   /**/            def apply[A](v1: A, v2: A)                : Collection[A]  = Pack(v1, v2)
   /**/            def apply[A](v1: A, v2: A, v3: A, vs: A*) : Collection[A]  = Pack(v1, v2, v3, vs *)
   @tn("getVoid")  def void[A]                               : Collection[A]  = Z.Void
-  implicit inline def implicitRequestVoid[A](inline v: \/)  : Collection[A]  = void[A]
+  implicit inline def implicitRequest[A](inline v: \/)      : Collection[A]  = void[A]
   /**/            def unapplySeq[A](v: Collection[A])       : Option[Seq[A]] = Some(v.~.toSeq)
 
   extension [A] (inline x: Collection[A])
@@ -22,13 +22,13 @@ object Collection:
     /**/                 inline def foreach[U](inline f: A=>U)     : Unit          = x.~.foreach(f)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Mutable[A]           = collection.Mutable[A];             inline def Mutable           = collection.Mutable
-  type Observable[A]        = collection.Observable[A];          inline def Observable        = collection.Observable
-  type ObservableMutable[A] = collection.ObservableMutable[A];   inline def ObservableMutable = collection.ObservableMutable
-  type StableSet[A]         = collection.StableSet[A];           inline def StableSet         = collection.StableSet
-  type M[A]                 = collection.Mutable[A];             inline def M                 = collection.Mutable
-  type O[A]                 = collection.Observable[A];          inline def O                 = collection.Observable
-  type OM[A]                = collection.ObservableMutable[A];   inline def OM                = collection.ObservableMutable
+  type Mutable[A]           = collection.Mutable[A];             transparent inline def Mutable           = collection.Mutable
+  type Observable[A]        = collection.Observable[A];          transparent inline def Observable        = collection.Observable
+  type ObservableMutable[A] = collection.ObservableMutable[A];   transparent inline def ObservableMutable = collection.ObservableMutable
+  type StableSet[A]         = collection.StableSet[A];           transparent inline def StableSet         = collection.StableSet
+  type M[A]                 = collection.Mutable[A];             transparent inline def M                 = collection.Mutable
+  type O[A]                 = collection.Observable[A];          transparent inline def O                 = collection.Observable
+  type OM[A]                = collection.ObservableMutable[A];   transparent inline def OM                = collection.ObservableMutable
 
 
 /*___________________________________________________________________________
@@ -64,6 +64,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitRequestVoid -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

@@ -15,7 +15,7 @@ class Flow extends Pane:
   /**/                 def alignment_=(v: Pos) : Unit           = real.setAlignment(v)
 
 object Flow:
-  def apply(na: Node.Like*) = new Flow().^(_.children ++= na)
+  def apply(na: Fx.Node.Like*) = new Flow().^(_.children ++= na)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

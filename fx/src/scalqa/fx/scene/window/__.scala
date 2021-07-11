@@ -5,7 +5,7 @@ abstract class Window extends Abstract.Delegate.Gui:
   protected               def _createReal              : REAL          = new javafx.stage.Window() { setScene(scene.real) }.cast[REAL]
   private[fx] override    def _refPropertyOpt                          = real.onHidingProperty
 
-  /**/                    def scene_?                  : Opt[Scene]    = scene
+  @tn("scene_Opt")  final def scene_?                  : Opt[Scene]    = scene
   /**/                    def scene                    : Scene
   /**/                    def hide                     : Unit          = real.hide
   /**/                    def centerOnScreen           : Unit          = real.centerOnScreen

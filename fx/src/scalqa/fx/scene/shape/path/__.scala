@@ -14,16 +14,16 @@ object Path:
   def apply(v: Element *) : Shape.Path = apply().^(_.elements ++= v)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Element      = path.Element;       inline def Element      = path.Element
-  type ArcTo        = path.ArcTo;         inline def ArcTo        = path.ArcTo
-  type ClosePath    = path.ClosePath;     inline def ClosePath    = path.ClosePath
-  type CubicCurveTo = path.CubicCurveTo;  inline def CubicCurveTo = path.CubicCurveTo
-  type FillRule     = path.FillRule;      inline def FillRule     = path.FillRule
-  type HLineTo      = path.HLineTo;       inline def HLineTo      = path.HLineTo
-  type LineTo       = path.LineTo;        inline def LineTo       = path.LineTo
-  type MoveTo       = path.MoveTo;        inline def MoveTo       = path.MoveTo
-  type QuadCurveTo  = path.QuadCurveTo;   inline def QuadCurveTo  = path.QuadCurveTo
-  type VLineTo      = path.VLineTo;       inline def VLineTo      = path.VLineTo
+  type Element      = path.Element;        transparent inline def Element      = path.Element
+  type ArcTo        = path.ArcTo;          transparent inline def ArcTo        = path.ArcTo
+  type ClosePath    = path.ClosePath;      transparent inline def ClosePath    = path.ClosePath
+  type CubicCurveTo = path.CubicCurveTo;   transparent inline def CubicCurveTo = path.CubicCurveTo
+  type FillRule     = path.FillRule;       transparent inline def FillRule     = path.FillRule
+  type HLineTo      = path.HLineTo;        transparent inline def HLineTo      = path.HLineTo
+  type LineTo       = path.LineTo;         transparent inline def LineTo       = path.LineTo
+  type MoveTo       = path.MoveTo;         transparent inline def MoveTo       = path.MoveTo
+  type QuadCurveTo  = path.QuadCurveTo;    transparent inline def QuadCurveTo  = path.QuadCurveTo
+  type VLineTo      = path.VLineTo;        transparent inline def VLineTo      = path.VLineTo
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

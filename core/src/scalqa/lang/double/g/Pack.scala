@@ -7,6 +7,7 @@ class Pack[A<:RAW] private(_a: Array[SELF], sz: Int) extends ><[A] with Idx[A]:
   /**/                   def size                     : Int         = sz
   /**/                   def apply(i: Int)            : A           = ar(i).cast[A]
   @tn("stream") override def ~                        : Stream[A]   = ar.~(sz).cast[Stream[A]]
+  @tn("pack")   override def ><                       : Pack[A]     = this
   /**/          override def contains(v: A)           : Boolean     = lang.array.z.contains.double(ar,v,sz)
   /**/                   def compact                  : this.type   = {if(ar.length>sz) {ar=new Array[SELF](sz).^(ar.copyTo(_,0,0,sz))}; this}
   /**/                   def toBuffer                 : Buffer[A]   = Buffer(ar.copySize(sz),sz)
@@ -19,11 +20,12 @@ class Pack[A<:RAW] private(_a: Array[SELF], sz: Int) extends ><[A] with Idx[A]:
 
 object Pack:
   /**/            def fromVarArg[A<:RAW](v: A, vs: Seq[A])      : Pack[A] = new Pack(Array(v.real,vs.cast[Seq[SELF]] *))
+  inline          def fromArray [A<:RAW](v: Array[SELF])        : Pack[A] = fromArray(v,v.length)
   /**/            def fromArray [A<:RAW](v: Array[SELF],sz: Int): Pack[A] = new Pack(v.copySize(sz),sz)
   /**/            def fromStream[A<:RAW](v: ~[A])               : Pack[A] = void[A].joinAll(v)
   @tn("getVoid")  def void      [A<:RAW]                        : Pack[A] = zVoid.cast[Pack[A]]; private object zVoid extends Pack(SELF.emptyArray) with Gen.Void
 
-  implicit inline def implicitRequestVoid[A<:RAW](inline v: \/)       : Pack[A] = void[A]
+  implicit inline def implicitRequest[A<:RAW](inline v: \/)           : Pack[A] = void[A]
   implicit inline def implicitFromStream [A<:RAW](inline v: Stream[A]): Pack[A] = v.><
 
   private class Buf[A<:RAW] private(a: Array[SELF],sz:Int) extends Buffer[A](a,sz):
@@ -41,6 +43,6 @@ ___________________________________________________________________________*/
 /**
 @def void  -> Get void instance
 
-@def implicitRequestVoid -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

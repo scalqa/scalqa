@@ -24,9 +24,9 @@ transparent trait _properties[ROW,V,A]:
   @tn("width_Pro")         def width_*                     : Double.Pro.O        = Fx.JavaFx.To.pro_O(real.widthProperty)
   /**/                     def width                       : Double              = real.getWidth
   /**/                     def width_=(v: Double)          : Unit                = { /*maxWidth = v; minWidth = v;*/ prefWidth = v; }
-  @tn("graphic_Pro")       def graphic_*                   : Pro.OM[Node.Like]   = Fx.JavaFx.To.pro_OM(real.graphicProperty).mutableMap_^[Node.Like]
-  /**/                     def graphic                     : Node.Like           = Node.Like(real.getGraphic)
-  /**/                     def graphic_=(g: Node.Like)     : Unit                = real.setGraphic(g.real)
+  @tn("graphic_Pro")       def graphic_*                   : Pro.OM[Fx.Node.Like]= Fx.JavaFx.To.pro_OM(real.graphicProperty).mutableMap_^[Fx.Node.Like]
+  /**/                     def graphic                     : Fx.Node.Like        = Fx.Node.Like(real.getGraphic)
+  /**/                     def graphic_=(g: Fx.Node.Like)  : Unit                = real.setGraphic(g.real)
   @tn("ordering_Pro")      def ordering_*                  : Pro.OM[Ordering[A]]
   /**/                     def ordering                    : Ordering[A]         = self.ordering_*()
   /**/                     def ordering_=(o: Ordering[A])  : Unit                = self.ordering_*() = o

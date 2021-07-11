@@ -2,7 +2,7 @@ package scalqa; package fx; package base; package event; import language.implici
 
 import javafx.scene.input.MouseEvent
 
-class Mouse(e: MouseEvent, node: Node) extends Event.Input(e, node) with Able.Doc:
+class Mouse(e: MouseEvent, node: Fx.Node) extends Event.Input(e, node) with Able.Doc:
   protected type REAL <: MouseEvent
 
   def clickCount : Int          = real.getClickCount
@@ -10,7 +10,7 @@ class Mouse(e: MouseEvent, node: Node) extends Event.Input(e, node) with Able.Do
   def doc       : Doc         = Doc(this) += ("button", button)
 
 object Mouse:
-  type Button = mouse.Button; val Button = mouse.Button;
+  type Button = mouse.Button;   transparent inline def Button = mouse.Button
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

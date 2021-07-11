@@ -1,6 +1,6 @@
 package scalqa; package `val`; package pack; package z; import language.implicitConversions
 
-import Gen.Given.PackTag.{ Raw as SHAPE }
+import gen.`given`.PackTag.{ Raw as SHAPE }
 
 object raw:
 

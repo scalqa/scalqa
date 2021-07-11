@@ -13,7 +13,7 @@ object Lookup:
   /**/                  def apply[A,B](v: ~[(A, B)])                   : Lookup[A,B] = Stable(v)
   /**/                  def apply[A,B](vs: (A, B)*)                    : Lookup[A,B] = Stable(vs)
   @tn("getVoid") inline def void[A,B]                                  : Lookup[A,B] = Stable.void
-  implicit       inline def implicitRequestVoid[A,B](v: \/)            : Lookup[A,B] = void[A,B]
+  implicit       inline def implicitRequest[A,B](v: \/)                : Lookup[A,B] = void[A,B]
 
   extension[A,B] (x: Lookup[A,B])
     @tn("map_View")               def map_^[C](f: B => C) : Lookup[A,C]               = Z.Convert_View(x, f)
@@ -21,9 +21,9 @@ object Lookup:
     @tn("toPartialFunction_View") def toPartialFunction_^ : PartialFunction[A,B]      = Z.PartialFunction_View(x)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  @fast lazy val Stable  = lookup.Stable;   type Stable[A,B]  = lookup.Stable[A,B]
-  @fast lazy val Mutable = lookup.Mutable;  type Mutable[A,B] = lookup.Mutable[A,B]
-  @fast lazy val M       = Mutable;         type M[A,B]       = Mutable[A,B]
+  transparent inline def Stable  = lookup.Stable;   type Stable[A,B]  = lookup.Stable[A,B]
+  transparent inline def Mutable = lookup.Mutable;  type Mutable[A,B] = lookup.Mutable[A,B]
+  transparent inline def M       = Mutable;         type M[A,B]       = Mutable[A,B]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -71,6 +71,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitRequestVoid -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

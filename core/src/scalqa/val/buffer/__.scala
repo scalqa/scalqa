@@ -32,11 +32,11 @@ abstract class Buffer[A] private[scalqa]() extends Idx.Mutable[A] with Able.Cont
     size = sz+len
 
 object Buffer:
-  /**/     inline def apply[A]()                                    : Buffer[A]                         = new Ref.Buffer(J.initSize)
-  /**/     inline def apply[A](inline initSize: Int)                : Buffer[A]                         = new Ref.Buffer(initSize)
-  /**/     inline def apply[A](inline a:Array[A], inline s:Int)     : Buffer[A]                         = buffer.Z.create(a,s)
-  private[scalqa] def accessible[A](use: Array[A], usedSize: Int)   : Buffer[A] & Able.Access[Array[A]] = buffer.Z.accessible(use,usedSize)
-  private[scalqa] def accessible[A:ClassTag](initSize: Int.Opt = \/): Buffer[A] & Able.Access[Array[A]] = accessible(new Array[A](initSize or J.initSize),0)
+  inline def apply[A]()                                             : Buffer[A]                         = new Ref.Buffer(J.initSize)
+  inline def apply[A](inline initSize: Int)                         : Buffer[A]                         = new Ref.Buffer(initSize)
+  inline def apply[A](inline a:Array[A], inline s:Int)              : Buffer[A]                         = buffer.Z.create(a,s)
+  /**/   def accessible[A](use: Array[A], usedSize: Int)            : Buffer[A] & Able.Access[Array[A]] = buffer.Z.accessible(use,usedSize)
+  inline def accessible[A:ClassTag](inline initSize: Int=J.initSize): Buffer[A] & Able.Access[Array[A]] = accessible(new Array[A](initSize),0)
 
   given givenDocTag[A](using t: Given.DocTag[A]) : Given.DocTag[Buffer[A]] with
     def tag(v: Buffer[A]) = doc(v).tag

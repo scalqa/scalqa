@@ -24,10 +24,10 @@ trait _String:
       v = v.r("Root.Package.").r(".G.Util.",".G.").r("Event.Observable","Observable")
            .r("Fx.Control.","Fx.").r("Fx.Scene.","Fx.").r("Fx.Ui.","Fx.")
            .r("__.Package.")
-           .r(".Custom.Framework.Companion.Pro.",".Pro.").r(".Custom.Framework.Companion.Collection.",".Collection.").r(".Custom.Framework.Companion.Idx.",".Idx.")
-           .r(".Custom.Framework.Companion.",".CFC.").r(".Custom.Framework.",".").r(".CFC.",".Custom.Framework.Companion.")
+           .r(".Custom.Containers.Companion.Pro.",".Pro.").r(".Custom.Containers.Companion.Collection.",".Collection.").r(".Custom.Containers.Companion.Idx.",".Idx.")
+           .r(".Custom.Containers.Companion",".CFC").r(".Custom.Containers.",".").r(".CFC",".Custom.Containers.Companion")
            .r("THIS_TYPE","this.type").r("this.type.this.type","this.type")
-           .r("Array._extension.ARR","ARR").r("ARR.ARR","ARR")
+           .r("Array._methods.ARR","ARR").r("ARR.ARR","ARR")
 
       if(v.endsWith(".Type.type"))  v = v.dropLast(10)
 

@@ -12,7 +12,7 @@ object Input extends Any.Ref.Custom.Type[Input, java.io.InputStream]("Io.Input")
   implicit inline def implicitFromJava(v: java.io.InputStream): Input = apply(v)
 
   @tn("getVoid") inline def void                        : Input = Z.Void
-  implicit       inline def implicitRequestVoid(inline v: \/)     : Input = void
+  implicit       inline def implicitRequest(inline v: \/)     : Input = void
 
   extension (x: Input)
     def asBytes : Input.Bytes = Input.Bytes(x.real)
@@ -23,9 +23,9 @@ object Input extends Any.Ref.Custom.Type[Input, java.io.InputStream]("Io.Input")
   object opaque:
     opaque type `type` <: java.io.Closeable & Opaque.Ref = java.io.InputStream & Opaque.Ref
 // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Bytes = input.Bytes.opaque.`type`; inline def Bytes = input.Bytes
-  type Data  = input.Data.opaque.`type`;  inline def Data  = input.Data
-  type Text  = input.Text.opaque.`type`;  inline def Text  = input.Text
+  type Bytes = input.Bytes.opaque.`type`; transparent inline def Bytes = input.Bytes
+  type Data  = input.Data.opaque.`type`;  transparent inline def Data  = input.Data
+  type Text  = input.Text.opaque.`type`;  transparent inline def Text  = input.Text
 
 
 /*___________________________________________________________________________
@@ -41,6 +41,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitRequestVoid -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

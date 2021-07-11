@@ -3,7 +3,7 @@ package scalqa; package fx; package control; package menu; package item
 import javafx.scene.control.{ CustomMenuItem => JCustomMenuItem }
 
 class Custom extends control.Menu.Item:
-  def this(n: Node.Like, hideOnClick: Boolean = true) = { this();  _createRealOverride(new JCustomMenuItem({ if (n == null) null else n.real }, hideOnClick)) }
+  def this(n: Fx.Node.Like, hideOnClick: Boolean = true) = { this();  _createRealOverride(new JCustomMenuItem({ if (n == null) null else n.real }, hideOnClick)) }
 
   protected type REAL = JCustomMenuItem
   protected override def _createReal = new REAL

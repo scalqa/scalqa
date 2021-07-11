@@ -7,10 +7,12 @@ object Given:
   inline def EmptyTag   = `given`.EmptyTag;     type EmptyTag[-A]                            = `given`.EmptyTag[A]
   inline def InTag      = `given`.InTag;        type InTag[A,-C]                             = `given`.InTag[A,C]
   inline def ArrayTag   = `given`.ArrayTag;     type ArrayTag [A, ARRAY <: Array.AnyType[A]] = `given`.ArrayTag[A,ARRAY]
-  /**/   val PackTag    = `given`.PackTag
+  inline def PackTag    = `given`.PackTag;      type PackTag  [A, PACK  <: ><.AnyType[A]]    = `given`.PackTag[A,PACK]
   inline def RangeTag   = `given`.RangeTag;     type RangeTag [A, RANGE <: <>.AnyType[A]]    = `given`.RangeTag[A,RANGE]
   inline def OptTag     = `given`.OptTag;       type OptTag   [A, OPT   <: Opt.AnyType[A]]   = `given`.OptTag[A,OPT]
   inline def StreamTag  = `given`.StreamTag;    type StreamTag[A, STREAM<: ~~.AnyType[A]]    = `given`.StreamTag[A,STREAM]
+
+  inline def TypeTag    = `given`.TypeTag;      type TypeTag[+A]                             = `given`.TypeTag[A]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

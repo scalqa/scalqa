@@ -15,32 +15,32 @@ object J:
   /**/    def printStack(sizeLimit: Int.Opt = \/, label: String.Opt = \/) : Unit        = { new Exception().getStackTrace().~.take_<>(1 <> sizeLimit.or(5000)).zipIndex(1)
     /**/                                                                                    .map("\t" + _.toString.padEndTo(3) + " " + _).joinAt(0,label or "J.printStack").foreach(println) }
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  @fast lazy val File          = j.File;                          type File             = j.File.opaque.`type`
-  @fast lazy val Path          = j.file.Path;                     type Path             = j.file.Path.opaque.`type`
-  @fast lazy val Url           = j.Url;                           type Url              = j.Url.opaque.`type`
-  /**/                                                            type Printer          = java.io.PrintStream
-  @fast lazy val Io            = j.Io
-  @fast lazy val Input         = j.io.Input;                      type Input            = j.io.Input.opaque.`type`
-  @fast lazy val Output        = j.io.Output;                     type Output           = j.io.Output.opaque.`type`
+  transparent inline def File          = j.File;                          type File             = j.File.opaque.`type`
+  transparent inline def Path          = j.file.Path;                     type Path             = j.file.Path.opaque.`type`
+  transparent inline def Url           = j.Url;                           type Url              = j.Url.opaque.`type`
+  /**/                                                                    type Printer          = java.io.PrintStream
+  transparent inline def Io            = j.Io
+  transparent inline def Input         = j.io.Input;                      type Input            = j.io.Input.opaque.`type`
+  transparent inline def Output        = j.io.Output;                     type Output           = j.io.Output.opaque.`type`
 
-  @fast lazy val Json          = j.Json
-  @fast lazy val Object        = j.json.Object;                   type Object           = j.json.Object
-  @fast lazy val Array         = j.json.Array;                    type Array            = j.json.Array
+  transparent inline def Json          = j.Json
+  transparent inline def Object        = j.json.Object;                   type Object           = j.json.Object
+  transparent inline def Array         = j.json.Array;                    type Array            = j.json.Array
 
-  @fast lazy val Zip           = j.Zip
+  transparent inline def Zip           = j.Zip
 
-  @fast lazy val Util          = j.Util
-  @fast lazy val Benchmark     = j.util.Benchmark
-  @fast lazy val Random        = j.util.Random
-  /**/                                                            type Test             = j.util.Test
-  @fast lazy val Concurrent    = j.util.Concurrent
-  @fast lazy val WeakRef       = j.util.WeakRef;                  type WeakRef[A]       = j.util.WeakRef.opaque.`type`[A]
+  transparent inline def Util          = j.Util
+  transparent inline def Benchmark     = j.util.Benchmark
+  transparent inline def Random        = j.util.Random
+  /**/                                                                    type Test             = j.util.Test
+  transparent inline def Concurrent    = j.util.Concurrent
+  transparent inline def WeakRef       = j.util.WeakRef;                  type WeakRef[A]       = j.util.WeakRef.opaque.`type`[A]
 
-  @fast lazy val Vm            = j.Vm
-  @fast lazy val Priority      = j.vm.Priority;                   type Priority         = j.vm.Priority.opaque.`type`
-  @fast lazy val Setup         = j.vm.Setup
-  @fast lazy val Memory        = j.vm.Memory
-  @fast lazy val Host          = j.vm.Host
+  transparent inline def Vm            = j.Vm
+  transparent inline def Priority      = j.vm.Priority;                   type Priority         = j.vm.Priority.opaque.`type`
+  transparent inline def Setup         = j.vm.Setup
+  transparent inline def Memory        = j.vm.Memory
+  transparent inline def Host          = j.vm.Host
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -119,25 +119,25 @@ ___________________________________________________________________________*/
        ```
 
 @type Input       ->  Type alias \n\n Shortcut to [[scalqa.j.io.Input  J.Io.Input]]
-@val  Input       ->  Companion alias \n\n Shortcut to [[scalqa.j.io.Input$ J.Io.Input]]
+@def  Input       ->  Companion alias \n\n Shortcut to [[scalqa.j.io.Input$ J.Io.Input]]
 @type Output      ->  Type alias \n\n Shortcut to [[scalqa.j.io.Output  J.Io.Output]]
-@val  Output      ->  Companion alias \n\n Shortcut to [[scalqa.j.io.Output$ J.Io.Output]]
+@def  Output      ->  Companion alias \n\n Shortcut to [[scalqa.j.io.Output$ J.Io.Output]]
 @type Path        ->  Type alias \n\n Shortcut to [[scalqa.j.file.Path  J.File.Path]]
-@val  Path        ->  Companion alias \n\n Shortcut to [[scalqa.j.file.Path$ J.File.Path]]
+@def  Path        ->  Companion alias \n\n Shortcut to [[scalqa.j.file.Path$ J.File.Path]]
 @type Array       ->  Type alias \n\n Shortcut to [[scalqa.j.json.Array  J.Json.Array]]
-@val  Array       ->  Companion alias \n\n Shortcut to [[scalqa.j.json.Array$ J.Json.Array]]
+@def  Array       ->  Companion alias \n\n Shortcut to [[scalqa.j.json.Array$ J.Json.Array]]
 @type Object      ->  Type alias \n\n Shortcut to [[scalqa.j.json.Object  J.Json.Object]]
-@val  Object      ->  Companion alias \n\n Shortcut to [[scalqa.j.json.Object$ J.Json.Object]]
+@def  Object      ->  Companion alias \n\n Shortcut to [[scalqa.j.json.Object$ J.Json.Object]]
 @type Printer     ->  Type alias \n\n Shortcut to java.io.PrintStream
 @type Test        ->  Type alias \n\n Shortcut to [[scalqa.j.util.Test  J.Util.Test]]
-@val  Benchmark   ->  Alias \n\n Shortcut to [[scalqa.j.util.Benchmark$ J.Util.Benchmark]]
-@val  Random      ->  Companion alias \n\n Shortcut to [[scalqa.j.util.Random$ J.Util.Random]]
+@def  Benchmark   ->  Alias \n\n Shortcut to [[scalqa.j.util.Benchmark$ J.Util.Benchmark]]
+@def  Random      ->  Companion alias \n\n Shortcut to [[scalqa.j.util.Random$ J.Util.Random]]
 @type WeakRef     ->  Type alias \n\n Shortcut to [[scalqa.j.util.WeakRef  J.Util.WeakRef]]
-@val  WeakRef     ->  Companion alias \n\n Shortcut to [[scalqa.j.util.WeakRef$ J.Util.WeakRef]]
+@def  WeakRef     ->  Companion alias \n\n Shortcut to [[scalqa.j.util.WeakRef$ J.Util.WeakRef]]
 @type Priority    ->  Type alias \n\n Shortcut to [[scalqa.j.vm.Priority  J.Vm.Priority]]
-@val  Priority    ->  Companion alias \n\n Shortcut to [[scalqa.j.vm.Priority$ J.Vm.Priority]]
-@val  Host        ->  Companion alias \n\n Shortcut to [[scalqa.j.vm.Host$ J.Vm.Host]]
-@val  Setup       ->  Companion alias \n\n Shortcut to [[scalqa.j.vm.Setup$ J.Vm.Setup]]
-@val  Memory      ->  Companion alias \n\n Shortcut to [[scalqa.j.vm.Memory$ J.Vm.Memory]]
+@def  Priority    ->  Companion alias \n\n Shortcut to [[scalqa.j.vm.Priority$ J.Vm.Priority]]
+@def  Host        ->  Companion alias \n\n Shortcut to [[scalqa.j.vm.Host$ J.Vm.Host]]
+@def  Setup       ->  Companion alias \n\n Shortcut to [[scalqa.j.vm.Setup$ J.Vm.Setup]]
+@def  Memory      ->  Companion alias \n\n Shortcut to [[scalqa.j.vm.Memory$ J.Vm.Memory]]
 
 */

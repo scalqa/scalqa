@@ -41,7 +41,7 @@ object Region:
   inline def UsePrefSize      = javafx.scene.layout.Region.USE_PREF_SIZE
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Background = region.Background.opaque.`type`; inline def Background = region.Background
+  type Background = region.Background.opaque.`type`; transparent inline def Background = region.Background
 
 package region:
   type Background = region.Background.opaque.`type`

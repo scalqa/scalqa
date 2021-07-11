@@ -27,7 +27,7 @@ object Url extends Any.Ref.Custom.Type[Url,java.net.URL]("Url"):
     opaque type `type` <: Opaque.Ref = java.net.URL & Opaque.Ref
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Connection = url.Connection.opaque.`type`; inline def Connection = url.Connection
+  type Connection = url.Connection.opaque.`type`; transparent inline def Connection = url.Connection
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -14,11 +14,11 @@ class Grid extends Pane:
   /**/                 def vGap                 : Double         = real.getVgap
   /**/                 def vGap_=(b: Double)    : Unit           = real.setVgap(b)
 
-  def add(rowIndex: Int, columnIndex: Int, rowspan: Int, colspan: Int, child: Node.Like) : Unit = real.add(child.real, columnIndex, rowIndex, colspan, rowspan)
-  def add(rowIndex: Int, columnIndex: Int, rowspan: Int, colspan: Int, s: String)          : Unit = add(rowIndex, columnIndex, rowspan, colspan, fx.Label(s))
-  def add(rowIndex: Int, columnIndex: Int, child: Node.Like)                             : Unit = real.add(child.real, columnIndex, rowIndex)
-  def add(rowIndex: Int, columnIndex: Int, s: String)                                      : Unit = add(rowIndex, columnIndex, fx.Label(s))
-  def add(rowIndex: Int, columnIndex: Int, s: String, child: Node.Like)                  : Unit = { add(rowIndex, columnIndex, s); add(rowIndex, columnIndex + 1, child) }
+  def add(rowIndex: Int, columnIndex: Int, rowspan: Int, colspan: Int, child: Fx.Node.Like): Unit = real.add(child.real, columnIndex, rowIndex, colspan, rowspan)
+  def add(rowIndex: Int, columnIndex: Int, rowspan: Int, colspan: Int, s: String)          : Unit = add(rowIndex, columnIndex, rowspan, colspan, Fx.Label(s))
+  def add(rowIndex: Int, columnIndex: Int, child: Fx.Node.Like)                            : Unit = real.add(child.real, columnIndex, rowIndex)
+  def add(rowIndex: Int, columnIndex: Int, s: String)                                      : Unit = add(rowIndex, columnIndex, Fx.Label(s))
+  def add(rowIndex: Int, columnIndex: Int, s: String, child: Fx.Node.Like)                 : Unit = { add(rowIndex, columnIndex, s); add(rowIndex, columnIndex + 1, child) }
   def add(rowIndex: Int, columnIndex: Int, s: String, child: String)                       : Unit = add(rowIndex, columnIndex, s, Label(child))
 
 object Grid:

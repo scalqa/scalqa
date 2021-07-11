@@ -2,7 +2,7 @@ package scalqa; package fx; package base; package event
 
 import javafx.scene.input.DragEvent
 
-class Drag(real: DragEvent, node: Node) extends Input(real, node):
+class Drag(real: DragEvent, node: Fx.Node) extends Input(real, node):
   protected type REAL <: DragEvent
 
 /*___________________________________________________________________________

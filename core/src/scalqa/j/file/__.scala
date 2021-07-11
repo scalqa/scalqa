@@ -28,9 +28,9 @@ object File extends Any.Ref.Custom.Type[J.File,java.io.File]("File"):
     opaque type `type` <: Opaque.Ref = java.io.File & Opaque.Ref
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Path   = file.Path.opaque.`type`;   inline def Path   = file.Path
-  type Store  = file.Store.opaque.`type`;  inline def Store  = file.Store
-  type System = file.System.opaque.`type`; inline def System = file.System
+  type Path   = file.Path.opaque.`type`;   transparent inline def Path   = file.Path
+  type Store  = file.Store.opaque.`type`;  transparent inline def Store  = file.Store
+  type System = file.System.opaque.`type`; transparent inline def System = file.System
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

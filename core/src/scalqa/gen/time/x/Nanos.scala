@@ -2,32 +2,6 @@ package scalqa; package gen; package time; package x; import language.implicitCo
 
 import Time.Length
 
-trait Nanos[A<:Any.Raw.Long]:
-  extension(x:A)
-    @tn("millisTotal")     def millisTotal                        : Long = x.nanosTotal / 1_000_000L
-    @tn("nanosTotal")      def nanosTotal                         : Long
-    @tn("roundTo")         def roundTo(l:Length)(using r:Rounding): A    = (r(x.nanosTotal, l.nanosTotal)).cast[A]
-  extension(inline x:A)
-    /**/            inline def weeksTotal                         : Long = x.nanosTotal / Nanos.InOneWeek
-    /**/            inline def daysTotal                          : Long = x.nanosTotal / Nanos.InOneDay
-    /**/            inline def hoursTotal                         : Long = x.nanosTotal / Nanos.InOneHour
-    /**/            inline def minutesTotal                       : Long = x.nanosTotal / Nanos.InOneMinute
-    /**/            inline def secondsTotal                       : Long = x.nanosTotal / Nanos.InOneSecond
-    /**/            inline def microsTotal                        : Long = x.nanosTotal / 1000L
-
-    /**/            inline def hours                              : Long = x.hoursTotal   % 24
-    /**/            inline def minutes                            : Long = x.minutesTotal % 60
-    /**/            inline def seconds                            : Long = x.secondsTotal % 60
-    /**/            inline def millis                             : Long = x.millisTotal  % 1000
-    /**/            inline def micros                             : Long = x.microsTotal  % 1000
-    /**/            inline def nanos                              : Long = x.nanosTotal   % 1000
-
-    @tn("plus")     inline def  +(inline l: Length)               : A    = (x.nanosTotal + l.nanosTotal).cast[A]
-    @tn("minus")    inline def  -(inline l: Length)               : A    = (x.nanosTotal - l.nanosTotal).cast[A]
-    @tn("plusAll")  inline def ++(inline s: ~[Length])            : A    = (s.foldAs(x.nanosTotal)(_ + _.nanosTotal)).cast[A]
-    @tn("minusAll") inline def --(inline s: ~[Length])            : A    = (s.foldAs(x.nanosTotal)(_ - _.nanosTotal)).cast[A]
-
-
 object Nanos:
   inline val InOneMicros  = 1000L
   inline val InOneMillis  = InOneMicros  * 1000
@@ -36,6 +10,26 @@ object Nanos:
   inline val InOneHour    = InOneMinute  * 60
   inline val InOneDay     = InOneHour    * 24
   inline val InOneWeek    = InOneDay     * 7
+
+  trait _methods[A<:Any.Raw.Long]:
+    extension(x:A)
+      @tn("millisTotal")     def millisTotal                        : Long = x.nanosTotal / 1_000_000L
+      @tn("nanosTotal")      def nanosTotal                         : Long
+      @tn("roundTo")         def roundTo(l:Length)(using r:Rounding): A    = (r(x.nanosTotal, l.nanosTotal)).cast[A]
+    extension(inline x:A)
+      /**/            inline def weeksTotal                         : Long = x.nanosTotal / Nanos.InOneWeek
+      /**/            inline def daysTotal                          : Long = x.nanosTotal / Nanos.InOneDay
+      /**/            inline def hoursTotal                         : Long = x.nanosTotal / Nanos.InOneHour
+      /**/            inline def minutesTotal                       : Long = x.nanosTotal / Nanos.InOneMinute
+      /**/            inline def secondsTotal                       : Long = x.nanosTotal / Nanos.InOneSecond
+      /**/            inline def microsTotal                        : Long = x.nanosTotal / 1000L
+
+      /**/            inline def hours                              : Long = x.hoursTotal   % 24
+      /**/            inline def minutes                            : Long = x.minutesTotal % 60
+      /**/            inline def seconds                            : Long = x.secondsTotal % 60
+      /**/            inline def millis                             : Long = x.millisTotal  % 1000
+      /**/            inline def micros                             : Long = x.microsTotal  % 1000
+      /**/            inline def nanos                              : Long = x.nanosTotal   % 1000
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -30,7 +30,7 @@ ___________________________________________________________________________*/
 
    Custom Math implementations can provide more efficient ways for Streams to calculate `sum`.
 
-   Apparently primitive based numerics use it a lot
+   Apparently primitive based numeral data elements use it a lot
 
 @trait Average -> ###
 

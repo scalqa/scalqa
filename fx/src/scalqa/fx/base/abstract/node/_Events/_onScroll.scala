@@ -1,7 +1,7 @@
 package scalqa; package fx; package base; package `abstract`; package node; package _Events; import language.implicitConversions
 
 transparent trait _onScroll:
-  self: Node =>
+  self: Fx.Node =>
 
   def onScroll        [U](l: Fx.Event.Scroll => U) : Gen.Event.Control = _onScroll(l, real.onScrollProperty)
   def onScrollFinished[U](l: Fx.Event.Scroll => U) : Gen.Event.Control = _onScroll(l, real.onScrollFinishedProperty)

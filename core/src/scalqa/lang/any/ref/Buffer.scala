@@ -20,13 +20,13 @@ class Buffer[A](_a: Array[AnyRef], _s: Int) extends Val.Buffer[A]:
   /**/          override def add(v: A)                  : Unit          = { if(ar.length<=sz) mkSpace(sz+1); ar(sz)=v.cast[Ref]; sz+=1}
   /**/                   def addAt(i: Int, v: A)        : Unit          = { if(ar.length<=sz) mkSpace(sz+1); ar.copyTo(ar,i+1,i,sz-i); ar(i)=v.cast[Ref]; sz+=1 }
   /**/                   def updateAt(i: Int, v: A)     : Unit          = ar(i) = v.cast[Ref]
-  @tn("stream") override def ~                          : ~[A]          = lang.array.z.stream.Refs[A](ar,sz)
+  @tn("stream") override def ~                          : ~[A]          = lang.array.z.stream.As.Refs[A](ar,sz)
   /**/          override def sort  (using c:Ordering[A]): Unit          = ar.sort_<>(0,sz)(using c.cast[Ordering[Ref]])
   @tn("pack")            def ><                         : ><[A]         = `val`.Pack.fromArray(ar,sz)
 
-private[scalqa] object Buffer:
-  def accessible[A](use: Array[Ref], usedSize: Int): Buffer[A] & Able.Access[Array[Ref]] = zAccessible[A](use,usedSize)
-  def accessible[A](initSize: Int.Opt = \/)        : Buffer[A] & Able.Access[Array[Ref]] = zAccessible(new Array[Ref](initSize or J.initSize),0)
+object Buffer:
+  /**/   def accessible[A](use: Array[Ref], usedSize: Int)   : Buffer[A] & Able.Access[Array[Ref]] = zAccessible[A](use,usedSize)
+  inline def accessible[A](inline initSize: Int = J.initSize): Buffer[A] & Able.Access[Array[Ref]] = accessible(new Array[Ref](initSize),0)
 
   // ************************************************************************************************************************
   private class zAccessible[A](a: Array[Ref], s: Int) extends Buffer[A](a,s) with Able.Access[Array[Ref]]:

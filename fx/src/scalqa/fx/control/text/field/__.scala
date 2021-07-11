@@ -15,8 +15,8 @@ object Field:
   def apply(columns: Opt[Int] = \/, value: String.Opt = \/) : Text.Field = new Text.Field(columns, value)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Number   = field.Number;   inline def Number   = field.Number
-  type Password = field.Password; inline def Password = field.Password
+  type Number   = field.Number;    transparent inline def Number   = field.Number
+  type Password = field.Password;  transparent inline def Password = field.Password
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

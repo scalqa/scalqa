@@ -28,6 +28,7 @@ object Merge:
         print(dest)
         dest.parent.make
         dest.file.writeString(precompile.Code(f.readString))
+        //dest.file.writeString(f.readString)
         println()
      })
 

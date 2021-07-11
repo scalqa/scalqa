@@ -21,18 +21,18 @@ enum Pos(val real: JPos) extends Fx.JavaFx.Enum[JPos]:
   def horizontal : HPos = HPos(real.getHpos)
 
 object Pos extends Fx.JavaFx.Enum.Companion[Pos, JPos]:
-  implicit inline def implicitVoidRequest(inline v: \/)    : Pos = Void
+  implicit inline def implicitRequest(inline v: \/)    : Pos = Void
   implicit inline def implicitRequest(inline v: CENTER): Pos = Center
   implicit inline def implicitRequest(inline v: TOP)   : Pos = TopCenter
   implicit inline def implicitRequest(inline v: BOTTOM): Pos = BottomCenter
   implicit inline def implicitRequest(inline v: LEFT)  : Pos = CenterLeft
   implicit inline def implicitRequest(inline v: RIGHT) : Pos = CenterRight
-  implicit        def implicitRequest(v: HPos)  : Pos = v match
+  implicit        def implicitRequest(v: HPos)         : Pos = v match
     case HPos.Left   => BaselineLeft
     case HPos.Center => BaselineCenter
     case HPos.Right  => BaselineRight
 
-  implicit        def implicitRequest(v: VPos)  : Pos = v match
+  implicit        def implicitRequest(v: VPos)         : Pos = v match
     case VPos.Top      => TopCenter
     case VPos.Center   => Center
     case VPos.Baseline => BaselineCenter

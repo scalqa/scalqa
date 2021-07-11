@@ -32,8 +32,8 @@ object JavaFx:
   }
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  inline def To   = javaFx.To
-  inline def Enum = javaFx.Enum;  type Enum[A <: java.lang.Enum[A]] = javaFx.Enum[A]
+  transparent inline def To   = javaFx.To
+  transparent inline def Enum = javaFx.Enum;  type Enum[A <: java.lang.Enum[A]] = javaFx.Enum[A]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

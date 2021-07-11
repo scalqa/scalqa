@@ -1,7 +1,7 @@
 package scalqa; package fx; package base; package `abstract`; package node; package _Events; import language.implicitConversions
 
 transparent trait _onRotate:
-  self: Node =>
+  self: Fx.Node =>
 
   def onRotate          [U](l: Fx.Event.Rotate => U) : Gen.Event.Control = _onRotate(l, real.onRotateProperty)
   def onRotationFinished[U](l: Fx.Event.Rotate => U) : Gen.Event.Control = _onRotate(l, real.onRotationFinishedProperty)

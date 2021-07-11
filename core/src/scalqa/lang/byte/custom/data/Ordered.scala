@@ -1,19 +1,25 @@
 package scalqa; package lang; package byte; package custom; package data; import language.implicitConversions
 
-abstract class Ordered[A<:Opaque.Byte](typeName:String) extends Data[A](typeName):
+abstract class Ordered[A<:Opaque.Byte](typeName:String) extends Data[A](typeName) with Ordered._methods[A]:
 
   @fast given ordering : G.Ordering[A] = Byte.ordering.cast[G.Ordering[A]]
 
-  extension[A<:RAW](inline x: A)
-    @tn("range")          inline def <> (inline to:A)   : G.<>[A] = new G.<>[A](x,to,true)
-    @tn("rangeX")         inline def <>>(inline to:A)   : G.<>[A] = new G.<>[A](x,to,false)
-    @tn("rangeSized")     inline def <>=(inline sz:Int) : G.<>[A] = new G.<>[A](x,sz)
-    /**/            infix inline def atLeast(v: A)      : A       = {val a=x; if(a.real > v.real) a else v }
-    /**/            infix inline def atMost (v: A)      : A       = {val a=x; if(a.real < v.real) a else v }
-    @tn("less")           inline def <  (inline v: A)   : Boolean = x.real <  v.real
-    @tn("lessOrEqual")    inline def <= (inline v: A)   : Boolean = x.real <= v.real
-    @tn("greater")        inline def >  (inline v: A)   : Boolean = x.real >  v.real
-    @tn("greaterOrEqual") inline def >= (inline v: A)   : Boolean = x.real >= v.real
+object Ordered:
+
+  trait _methods[A<:RAW] extends zMethodsBase[A]:
+    extension(inline x: A)
+      @tn("less")           inline def <  (inline v: A)   : Boolean = x.real <  v.real
+      @tn("lessOrEqual")    inline def <= (inline v: A)   : Boolean = x.real <= v.real
+      @tn("greater")        inline def >  (inline v: A)   : Boolean = x.real >  v.real
+      @tn("greaterOrEqual") inline def >= (inline v: A)   : Boolean = x.real >= v.real
+
+  trait zMethodsBase[A<:RAW] extends Type._methods[A]:
+    extension(inline x: A)
+      @tn("range")          inline def <> (inline to:A)   : G.<>[A] = new G.<>[A](x,to,true)
+      @tn("rangeX")         inline def <>>(inline to:A)   : G.<>[A] = new G.<>[A](x,to,false)
+      @tn("rangeSized")     inline def <>=(inline sz:Int) : G.<>[A] = new G.<>[A](x,sz)
+      /**/            infix inline def atLeast(v: A)      : A       = {val a=x; if(a.real > v.real) a else v }
+      /**/            infix inline def atMost (v: A)      : A       = {val a=x; if(a.real < v.real) a else v }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -22,9 +28,11 @@ abstract class Ordered[A<:Opaque.Byte](typeName:String) extends Data[A](typeName
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@class Ordered -> ###
+@class Ordered -> ### Byte Custom Ordered Data Setup
 
-  Custom Data Ordered element is provided with default ordering and can be compared with comparison operators.
+  Custom Ordered Data element is provided with default ordering and can be compared with comparison operators.
+
+@trait _methods -> ### Custom Ordered Data Default Methods
 
 @def <>      -> Range \n\n  Returns Range from current to given value \n\n  Note. Range uses base primitive natural ordering
 @def <>>     -> Exclusive end range \n\n Returns Range from current to given value exclusive \n\n Note. Range uses base primitive natural ordering
@@ -34,4 +42,6 @@ ___________________________________________________________________________*/
 @def <=      -> Less or equal \n\n Returns `true` if current value is less or equal to given, `false` - otherwise
 @def >       -> Greater \n\n Returns `true` if current value is greater than given, `false` - otherwise
 @def >=      -> Greater or equal \n\n Returns `true` if current value is greater or equal to given, `false` - otherwise
+
+
 */

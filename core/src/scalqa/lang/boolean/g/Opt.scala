@@ -7,7 +7,7 @@ object Opt extends z.opt._base:
   /**/           inline def FALSE     [A<:RAW]                  : Opt[A]  =  0.toByte.cast[Opt[A]]
   implicit       inline def implicitFromTrue [A<:RAW](inline v: true)   : Opt[A]  = TRUE[A]
   implicit       inline def implicitFromFalse[A<:RAW](inline v: false)  : Opt[A]  = FALSE[A]
-  implicit       inline def implicitRequestVoid[A<:RAW](inline v: \/)   : Opt[A]  = void[A]
+  implicit       inline def implicitRequest[A<:RAW](inline v: \/)   : Opt[A]  = void[A]
   implicit       inline def implicitFromValue [A<:RAW](inline v: A)     : Opt[A]  = apply(v)
   implicit       inline def implicitToBoolean [A<:RAW](inline v: Opt[A]): Boolean = v.real != void.real
   extension[A<:RAW](inline x: Opt[A])
@@ -54,6 +54,6 @@ object Opt extends z.opt._base:
 ___________________________________________________________________________*/
 /**
 @def void      -> Get void instance
-@def implicitRequestVoid -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

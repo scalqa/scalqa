@@ -1,12 +1,12 @@
 package scalqa; package fx; package base
 
 object Abstract:
-  type Delegate = `abstract`.Delegate;    @fast lazy val Delegate = `abstract`.Delegate
-  type Group    = `abstract`.Group;       @fast lazy val Group    = `abstract`.Group
-  type Module   = `abstract`.Module;      @fast lazy val Module   = `abstract`.Module
-  type Node     = `abstract`.Node;        @fast lazy val Node     = `abstract`.Node
+  type Delegate = `abstract`.Delegate;    transparent inline def Delegate = `abstract`.Delegate
+  type Group    = `abstract`.Group;       transparent inline def Group    = `abstract`.Group
+  type Module   = `abstract`.Module;      transparent inline def Module   = `abstract`.Module
+  type Node     = `abstract`.Node;        transparent inline def Node     = `abstract`.Node
   type Parent   = `abstract`.Parent
-  type Region   = `abstract`.Region;      @fast lazy val Region   = `abstract`.Region
+  type Region   = `abstract`.Region;      transparent inline def Region   = `abstract`.Region
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -39,7 +39,7 @@ object Result extends result._givens:
     /**/              inline def process[U,W](inline f: A=>U,inline pf:Problem=>W): Result[A]    = {if(x.isValue){ val v=x.cast[A]; f(v)} else { val v=x.cast[Problem]; pf(v)}; x}
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  inline def Problem = result.Problem; type Problem = result.Problem
+  transparent inline def Problem = result.Problem; type Problem = result.Problem
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

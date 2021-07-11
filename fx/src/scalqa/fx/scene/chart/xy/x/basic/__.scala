@@ -16,13 +16,13 @@ class Basic[X, Y, XA <: Chart.Axis[X], YA <: Chart.Axis[Y]](override val axisX: 
     def this(p: (X, Y)) = { this(p._1, p._2) }
     x = xPar
     y = yPar
-    lazy  val node: Node = null
+    lazy  val node: Fx.Node = null
     def isVisible = true
     protected[x] var layoutJob: () => Unit = \/
 
   class Series(name: String, l:  Idx.O[ITEM]) extends SeriesBase(name, l):
     def this() = this("", \/)
-    lazy  val node: Node = null
+    lazy  val node: Fx.Node = null
     protected[x] var layoutJob: () => Unit = \/
 
 /*___________________________________________________________________________

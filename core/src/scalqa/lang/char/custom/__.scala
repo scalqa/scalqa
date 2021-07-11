@@ -1,10 +1,10 @@
 package scalqa; package lang; package char; import language.implicitConversions
 
 object Custom:
-  type Type[A<:Opaque.Char] = custom.Type[A]
-  type Data[A<:Opaque.Char] = custom.Data[A];       inline def Data      = custom.Data
-  type Framework[A<:RAW]    = custom.Framework[A];  inline def Framework = custom.Framework
-  /**/                                              inline def Companion = custom.framework.Companion
+  type Type[A<:Opaque.Char] = custom.Type[A];        transparent inline def Type       = custom.Type
+  type Data[A<:Opaque.Char] = custom.Data[A];        transparent inline def Data       = custom.Data
+  type Containers[A<:RAW]   = custom.Containers[A];  transparent inline def Containers = custom.Containers
+  /**/                                               transparent inline def Companion  = custom.containers.Companion
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

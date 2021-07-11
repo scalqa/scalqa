@@ -37,7 +37,7 @@ object Range:
   given givenDocTag[A:Given.DocTag]                  : Given.DocTag[Range[A]] = new range.z.DocTag[A]
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~
-  inline def X = range.X
+  transparent inline def X = range.X
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

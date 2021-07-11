@@ -1,5 +1,7 @@
 package scalqa; package fx; package control; import language.implicitConversions
 
+import Fx.Font
+
 class Text(s: String.Opt = \/) extends Shape:
   protected def _createReal: REAL = s.map(new REAL(_)) or new REAL
   protected type REAL = javafx.scene.text.Text
@@ -14,10 +16,10 @@ object Text:
   def apply(v: String) = new Text(v)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type InputControl = text.InputControl;      inline def InputControl = text.InputControl
-  type Field        = text.Field;             inline def Field        = text.Field
-  type Area         = text.Area;              inline def Area         = text.Area
-  type Font         = text.Font.opaque.`type`;  inline def Font         = text.Font
+  type InputControl = text.InputControl;       /*transparent inline def*/ val InputControl = text.InputControl
+  type Field        = text.Field;              /*transparent inline def*/ val Field        = text.Field
+  type Area         = text.Area;               /*transparent inline def*/ val Area         = text.Area
+  type Font         = text.Font.opaque.`type`; /*transparent inline def*/ val Font         = text.Font
 
 package text:
   type Font         = text.Font.opaque.`type`

@@ -2,7 +2,7 @@ package scalqa; package fx; package base; package event
 
 import javafx.scene.input.SwipeEvent
 
-class Swipe(real: SwipeEvent, node: Node) extends Input(real, node):
+class Swipe(real: SwipeEvent, node: Fx.Node) extends Input(real, node):
   protected type REAL <: SwipeEvent
 
 /*___________________________________________________________________________

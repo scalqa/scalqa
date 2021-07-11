@@ -12,9 +12,9 @@ class HorizontalBox extends Pane:
   /**/                 def alignment_=(v: Pos)  : Unit           = real.setAlignment(v)
 
 object HorizontalBox:
-  def apply(a: ~[Node.Like]) : HorizontalBox = new HorizontalBox().^(_.children ++= a)
-  def apply(a: Node.Like*)   : HorizontalBox = new HorizontalBox().^(_.children ++= a)
-  def apply(spacing: Double)      : HorizontalBox = new HorizontalBox().^(_.spacing = spacing)
+  def apply(a: ~[Fx.Node.Like]) : HorizontalBox = new HorizontalBox().^(_.children ++= a)
+  def apply(a: Fx.Node.Like*)   : HorizontalBox = new HorizontalBox().^(_.children ++= a)
+  def apply(spacing: Double)    : HorizontalBox = new HorizontalBox().^(_.spacing = spacing)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -4,11 +4,12 @@ transparent trait _process:
 
   extension[A](x: ~[A])
     /**/   def drain                                          : Unit   = x.FOREACH(_ => ())
-    inline def FOREACH[U](inline f: A=>U)                     : Unit   = {var o=x.read_?; while(o.nonEmpty){ f(o.cast[A]); o=x.read_?}}
-    /**/   def foreach[U](f: A=>U)                            : Unit   = x.FOREACH(f)
     /**/   def foreachIndexed[U](f: (Int,A)=>U, start:Int=0)  : Unit   = {var i=start; x.FOREACH(v => {f(i,v); i+=1})}
     /**/   def fornil[U](f:  =>U)                             : Unit   = if (x.read_?.isEmpty) { var v:U = f }
     /**/   def process[U,W](foreachFun: A=>U, fornilFun: => W): Unit   = {var o=x.read_?; if (o.isEmpty){var v:W=fornilFun} else while(o.nonEmpty){foreachFun(o.`val`); o=x.read_?}; ()}
+  extension[A](inline x: ~[A])
+    inline def foreach[U](inline f: A=>U)                     : Unit   = z.use.process._foreach(x,f)
+    inline def FOREACH[U](inline f: A=>U)                     : Unit   = z.use.process._FOREACH(x,f)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

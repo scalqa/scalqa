@@ -2,7 +2,7 @@ package scalqa; package fx; package base; package `abstract`; package node; pack
 
 
 transparent trait _onContextMenu:
-  self: Node =>
+  self: Fx.Node =>
 
   def onContextMenu[U](l: Fx.Event.ContextMenu => U) : Gen.Event.Control =
     _onFxEvent[javafx.scene.input.ContextMenuEvent, Fx.Event.ContextMenu, U](

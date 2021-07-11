@@ -12,15 +12,15 @@ class Menu extends Menu.Item with Able.Add[base.Action]:
 
 
 object Menu:
-  def apply()                                         : Menu = new Menu()
-  def apply(text: String, enabled: Boolean = true)    : Menu = new Menu(text, enabled)
-  def apply(text: String, n: Node.Like)               : Menu = this(text).^(_.graphic_*() = n)
-  def apply(text: String, n: Node.Like, its: ~[Item]) : Menu = this(text, n).^(_.items ++= its)
+  def apply()                                           : Menu = new Menu()
+  def apply(text: String, enabled: Boolean = true)      : Menu = new Menu(text, enabled)
+  def apply(text: String, n: Fx.Node.Like)              : Menu = this(text).^(_.graphic_*() = n)
+  def apply(text: String, n: Fx.Node.Like, its: ~[Item]): Menu = this(text, n).^(_.items ++= its)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Item   = menu.Item;    inline def Item   = menu.Item
-  type Bar    = menu.Bar;     inline def Bar    = menu.Bar
-  type Button = menu.Button;  inline def Button = menu.Button
+  type Item   = menu.Item;     transparent inline def Item   = menu.Item
+  type Bar    = menu.Bar;      transparent inline def Bar    = menu.Bar
+  type Button = menu.Button;   transparent inline def Button = menu.Button
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

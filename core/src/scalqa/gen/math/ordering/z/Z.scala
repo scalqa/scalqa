@@ -15,6 +15,17 @@ object Z:
   object Number extends Ordering[Number]:
     def compare(x: Number, y: Number) = java.lang.Double.compare(x.doubleValue, y.doubleValue)
 
+
+  // ------------------------------------------------------------------------------------------------------------------
+  import scala.math.{ Ordering as SMO }
+
+  def join[A](x: SMO[A], c: SMO[A])                         : SMO[A]           = if (x.^.isVoid) c.cast[Ordering[A]] else if (c.^.isVoid) x else z.View.Joined[A](x, c)
+  def rank_View[A](x: SMO[A],fun: A => Int)                 : Ordering[A]      = z.View.ByRank[A](x, fun)
+  def opt_View[A](x: SMO[A],voidPosition: Int)              : Ordering[Opt[A]] = z.View.Option[A](x, voidPosition)
+  def voidFirst_View[A](x: SMO[A])  (using Given.VoidTag[A]): Ordering[A]      = z.View.VoidPositionFirst[A](x)
+  def voidLast_View [A](x: SMO[A])  (using Given.VoidTag[A]): Ordering[A]      = z.View.VoidPositionLast[A](x)
+  def compare_Opt[A](x: SMO[A],v:Opt[A], w:Opt[A], none:Int): Int              = if (v.isEmpty) if (w.nonEmpty) none else 0 else if (w.isEmpty) none * -1 else x.compare(v.cast[A], w.cast[A])
+
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API

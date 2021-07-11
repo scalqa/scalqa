@@ -9,18 +9,18 @@ trait Control extends Abstract.Region:
   /**/               def tooltip_=(s: String)          : Unit                     = tooltip = Control.Tooltip(s)
 
 object Control:
-  @fast lazy val Button      = control.Button;               type Button       = control.Button
-  @fast lazy val Cell        = control.Cell;                 type Cell         = control.Cell
-  @fast lazy val CheckBox    = control.CheckBox;             type CheckBox     = control.CheckBox
-  @fast lazy val ComboBox    = control.ComboBox;             type ComboBox[A]  = control.ComboBox[A]
-  @fast lazy val Label       = control.Label;                type Label        = control.Label
-  @fast lazy val List        = control.List;                 type List[A]      = control.List[A]
-  @fast lazy val Menu        = control.Menu;                 type Menu         = control.Menu
-  @fast lazy val Popup       = control.Popup;                type Popup        = control.Popup
-  @fast lazy val Table       = control.Table;                type Table[A]     = control.Table[A]
-  @fast lazy val Text        = control.Text;                 type Text         = control.Text
-  @fast lazy val Tooltip     = control.Tooltip;              type Tooltip      = control.Tooltip
-  @fast lazy val Toggle      = control.Toggle;               type Toggle       = control.Toggle
+  transparent inline def Button      = control.Button;               type Button       = control.Button
+  transparent inline def Cell        = control.Cell;                 type Cell         = control.Cell
+  transparent inline def CheckBox    = control.CheckBox;             type CheckBox     = control.CheckBox
+  transparent inline def ComboBox    = control.ComboBox;             type ComboBox[A]  = control.ComboBox[A]
+  transparent inline def Label       = control.Label;                type Label        = control.Label
+  transparent inline def List        = control.List;                 type List[A]      = control.List[A]
+  transparent inline def Menu        = control.Menu;                 type Menu         = control.Menu
+  transparent inline def Popup       = control.Popup;                type Popup        = control.Popup
+  transparent inline def Table       = control.Table;                type Table[A]     = control.Table[A]
+  transparent inline def Text        = control.Text;                 type Text         = control.Text
+  transparent inline def Tooltip     = control.Tooltip;              type Tooltip      = control.Tooltip
+  transparent inline def Toggle      = control.Toggle;               type Toggle       = control.Toggle
 
 
 /*___________________________________________________________________________

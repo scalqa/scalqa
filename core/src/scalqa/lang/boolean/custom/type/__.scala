@@ -1,13 +1,16 @@
 package scalqa;  package lang; package boolean; package custom; import language.implicitConversions
 
-abstract class Type[A<:Opaque.Boolean](val name:String) extends Opaque.Companion[A](ClassTag.Boolean.cast[ClassTag[A]]) with gen.`given`.VoidTag.RawBoolean[A]:
+abstract class Type[A<:Opaque.Boolean](val name:String) extends Opaque.Companion[A](ClassTag.Boolean.cast[ClassTag[A]]) with gen.`given`.VoidTag.RawBoolean[A] with Type._methods[A]:
 
   override def isVoid(v: A): Boolean=false
 
   given givenVoidTag: Given.VoidTag.RawBoolean[A]=this
 
-  extension(inline x: A)
-    inline def real: Boolean = x.cast[Boolean]
+object Type:
+
+  trait _methods[A<:RAW]:
+    extension(inline x: A)
+      inline def real: Boolean = x.cast[Boolean]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -16,7 +19,7 @@ abstract class Type[A<:Opaque.Boolean](val name:String) extends Opaque.Companion
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@class Type -> ### Boolean Opaque Type Base
+@class Type -> ### Boolean Custom Type Setup
 
   Custom Type is like more widely used [Custom Data](../../../../../guide/features/Data.html),
   but without attached containers.  Type instances will still be processed by streams without boxing.

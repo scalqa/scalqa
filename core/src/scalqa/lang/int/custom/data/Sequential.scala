@@ -1,15 +1,18 @@
 package scalqa; package lang; package int; package custom; package data; import language.implicitConversions
 
-abstract class Sequential[A<:Opaque.Int](typeName:String) extends Ordered[A](typeName):
+abstract class Sequential[A<:Opaque.Int](typeName:String) extends Ordered[A](typeName) with Sequential._methods[A]:
   self =>
 
-  extension[A<:RAW](inline x: A)
-    @tn("plus")  inline def +(inline i: Int) : A = (x.real + i).cast[A]
-    @tn("minus") inline def -(inline i: Int) : A = (x.real - i).cast[A]
-    /**/         inline def next             : A = (x.real + 1).cast[A]
-    /**/         inline def prior            : A = (x.real - 1).cast[A]
-
   @fast given givenAbleSequence : Able.Sequence[A] = Able.Sequence.int.cast[Able.Sequence[A]]
+
+object Sequential:
+
+  trait _methods[A<:RAW] extends Ordered._methods[A]:
+    extension(inline x: A)
+      @tn("plus")  inline def +(inline i: Int) : A = (x.real + i).cast[A]
+      @tn("minus") inline def -(inline i: Int) : A = (x.real - i).cast[A]
+      /**/         inline def next             : A = (x.real + 1).cast[A]
+      /**/         inline def prior            : A = (x.real - 1).cast[A]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -20,7 +20,7 @@ object Observable:
     @tn("mix_View") def mix_^[B,C](v:Observable[B],mix:(A,B)=>C): Pro.O[C]      = z.Mix_View(x, v, mix)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~
-  inline def X = observable.X
+  transparent inline def X = observable.X
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

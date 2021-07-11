@@ -1,13 +1,13 @@
 package scalqa; package fx; package scene; package chart; package axis
 
 object X:
-  type Custom[A]  = x.Custom[A];  inline def Custom = x.Custom
+  type Custom[A]  = x.Custom[A];  transparent inline def Custom = x.Custom
   type Category   = x.Category
   type Doubles    = x.Doubles
   type Ints       = x.Ints
   type Numbers[A] = x.Numbers[A]
   type Value[A]   = x.Value[A]
-  type Time       = x.Time;       inline def Time = x.Time
+  type Time       = x.Time;       transparent inline def Time = x.Time
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

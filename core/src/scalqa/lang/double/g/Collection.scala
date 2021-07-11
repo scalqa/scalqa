@@ -2,6 +2,7 @@ package scalqa; package lang; package double; package g; import language.implici
 
 trait Collection[A<:RAW] extends Val.Collection[A] with Able.Contain[A] with any.raw.Specialized.OnDouble:
   @tn("stream") def ~             : Stream[A]
+  @tn("pack")   def ><            : Pack[A]   = Pack.fromStream(this.~)
   /**/          def contains(v: A): Boolean   = this.~.takeOnly(v).readRaw_?
 
 object Collection:

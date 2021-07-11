@@ -3,6 +3,7 @@ package scalqa; package lang; package int; package g; import language.implicitCo
 object Fun:
   trait Fold        [A<:RAW]                { def apply(v:A, w:A) : A        }
   trait FoldAs      [T, A<:RAW]             { def apply(v:T, w:A) : T        }
+  //trait Consume     [A<:RAW, U]             extends Function1[A,U]{ def apply(v:A)      : U        }
   trait Consume     [A<:RAW, U]             { def apply(v:A)      : U        }
   trait Filter      [A<:RAW]                { def apply(v:A)      : Boolean  }
   trait Revise      [A<:RAW]                { def apply(v:A)      : A        }

@@ -13,13 +13,13 @@ object Pro:
     /**/            inline def contains(inline v: A)                                          : Boolean  = x() == v
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  inline def Mutable           = pro.Mutable;           type Mutable[A]           = pro.Mutable[A]
-  inline def M                 = pro.Mutable;           type M[A]                 = pro.Mutable[A]
-  inline def Observable        = pro.Observable;        type Observable[A]        = pro.Observable[A]
-  inline def O                 = pro.Observable;        type O[A]                 = pro.Observable[A]
-  inline def ObservableMutable = pro.ObservableMutable; type ObservableMutable[A] = pro.ObservableMutable[A]
-  inline def OM                = pro.ObservableMutable; type OM[A]                = pro.ObservableMutable[A]
-  inline def X                 = pro.X
+  transparent inline def Mutable           = pro.Mutable;           type Mutable[A]           = pro.Mutable[A]
+  transparent inline def M                 = pro.Mutable;           type M[A]                 = pro.Mutable[A]
+  transparent inline def Observable        = pro.Observable;        type Observable[A]        = pro.Observable[A]
+  transparent inline def O                 = pro.Observable;        type O[A]                 = pro.Observable[A]
+  transparent inline def ObservableMutable = pro.ObservableMutable; type ObservableMutable[A] = pro.ObservableMutable[A]
+  transparent inline def OM                = pro.ObservableMutable; type OM[A]                = pro.ObservableMutable[A]
+  transparent inline def X                 = pro.X
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -1,11 +1,11 @@
 package scalqa; package lang; package long; package custom; import language.implicitConversions
 
-abstract class Data[A<:Opaque.Long](typeName: String) extends Type[A](typeName) with Framework[A]
+abstract class Data[A<:Opaque.Long](typeName: String) extends Type[A](typeName) with Containers[A]
 
 object Data:
-  type Ordered  [A<:Opaque.Long] = data.Ordered[A]
-  type Numerical[A<:Opaque.Long] = data.Numerical[A]
-  type Number   [A<:Opaque.Long] = data.Number[A]
+  type Ordered   [A<:Opaque.Long] = data.Ordered[A];    transparent inline def Ordered    = data.Ordered
+  type Calculable[A<:Opaque.Long] = data.Calculable[A]; transparent inline def Calculable = data.Calculable
+  type Numerical [A<:Opaque.Long] = data.Numerical[A];  transparent inline def Numerical  = data.Numerical
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -14,7 +14,7 @@ object Data:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@class Data -> ### Long Data Type Base
+@class Data -> ### Long Custom Data Setup
 
   Custom Data not only defines a Long based opaque type, but also privides a framework of custom specialized containers attached to this type.
 

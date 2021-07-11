@@ -4,8 +4,8 @@ trait Observable:
   protected def onObservableChange[U](l: () => U): Event.Control
 
 object Observable:
-  /**/            val \/                     : Observable = zVoid
-  implicit inline def implicitRequestVoid(inline v: \/): Observable = \/
+  /**/            val \/                           : Observable = zVoid
+  implicit inline def implicitRequest(inline v: \/): Observable = \/
 
   def onObservableChange[U](v: Observable)(l: () => U): Event.Control = v.onObservableChange(l)
 
@@ -13,7 +13,7 @@ object Observable:
   private object zVoid extends Observable with Gen.Void { def onObservableChange[U](v: () => U) = Event.Control.void }
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~
-  inline def X = observable.X
+  transparent inline def X = observable.X
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -1,7 +1,7 @@
 package scalqa; package fx; package base; package `abstract`; package node; package _Events; import language.implicitConversions
 
 transparent trait _onSwipe:
-  self: Node =>
+  self: Fx.Node =>
 
   def onSwipeDown [U](l: Fx.Event.Swipe => U) : Gen.Event.Control = onSwipe(l, real.onSwipeDownProperty)
   def onSwipeLeft [U](l: Fx.Event.Swipe => U) : Gen.Event.Control = onSwipe(l, real.onSwipeLeftProperty)

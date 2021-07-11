@@ -29,7 +29,7 @@ type  Price = Price.opaque.`type`
 
 extension (inline x: Double) inline def Dollars : Price = Price(x.Float)
 
-object Price extends Float.Custom.Data.Number[Price]("Price"):
+object Price extends Float.Custom.Data.Numerical[Price]("Price"):
   inline   def apply(inline v: Float): Price  = v.asOpaque[Price]
   override def tag(v:Price)          : String =  "$"+v.roundTo(0.01.Dollars).toString
 
@@ -55,10 +55,11 @@ Extension creates a Double method Price constructor. This is an optional conveni
 Double constructor will cover all primitives. 
 
 ```  
-object Price extends Float.Custom.Data.Number[Price]("Price"):
+object Price extends Float.Custom.Data.Numerical[Price]("Price"):
 ```  
 Object Price extends not only `Float.Custom.Data`, which would be sufficient to create a data element.
-Price extends `Float.Custom.Data.Number`, which adds Float like behaviour. For example:
+Price extends `Float.Custom.Data.Numerical`, which adds Float like behaviour with a set of 
+[default methods](../../api/scalqa/lang/float/custom/data/Numerical$$_methods.html) provided. For example:
 ```
 var p: Price = 19.99.Dollars
 

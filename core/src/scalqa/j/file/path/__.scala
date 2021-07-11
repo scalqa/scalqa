@@ -3,7 +3,7 @@ package scalqa; package j; package file; import language.implicitConversions
 import java.nio.file.{ Path => PATH }
 import File.Path
 
-object Path extends Any.Ref.Custom.Type[Path,PATH]("J.Path") with path._extension:
+object Path extends Any.Ref.Custom.Type[Path,PATH]("J.Path") with path._methods:
   inline          def apply(v: PATH)                : Path    = v.asOpaque[Path]
   /**/            def apply()                       : Path    = void.real.toAbsolutePath.asOpaque[Path]
   /**/            def apply(s:String, more:String*) : Path    = File.System().path(s, more *)
@@ -17,7 +17,7 @@ object Path extends Any.Ref.Custom.Type[Path,PATH]("J.Path") with path._extensio
   implicit inline def implicitFromReal(v: PATH)        : Path = v.asOpaque[Path]
   implicit inline def implicitFromString(v: String)    : Path = apply(v)
   implicit inline def implicitFromFile(v: J.File)      : Path = v.path
-  implicit inline def implicitRequestVoid(inline v: \/): Path = void
+  implicit inline def implicitRequest(inline v: \/): Path = void
 
   object opaque:
     opaque type `type` <: Opaque.Ref = PATH & Opaque.Ref
@@ -34,6 +34,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitRequestVoid -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

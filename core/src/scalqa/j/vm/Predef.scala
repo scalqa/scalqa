@@ -5,12 +5,12 @@ import scalqa.lang.*
 object Predef:
 
   object GlobalExtensionLibrary
-      extends any.z.Extension    with array.z._extension with string._extension  with scalqa.`val`.stream.custom._extension
-         with boolean._extension with byte._extension    with char._extension    with short._extension
-         with int._extension     with long._extension    with float._extension   with double._extension
-         with scalqa.gen.math.ordering.z._extension
+      extends any.z.Extension    with array._methods with string._methods  with scalqa.`val`.stream.custom.Constructors
+         with boolean._methods with byte._methods  with char._methods    with short._methods
+         with int._methods     with long._methods  with float._methods   with double._methods
+         with scalqa.gen.math.ordering.z._methods
 
-  given given_Lib: GlobalExtensionLibrary.type = GlobalExtensionLibrary
+  inline given given_Lib: GlobalExtensionLibrary.type = GlobalExtensionLibrary
 
   inline given givenByteMath   : Byte  .G.Math[Byte  ] = Byte  .math
   inline given givenCharMath   : Char  .G.Math[Char  ] = Char  .math

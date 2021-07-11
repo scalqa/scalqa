@@ -20,11 +20,11 @@ object Stream extends z.util._default with _build with _use:
   given givenDocTag[A :Given.DocTag]                  : Given.DocTag[~[A]]  = z.util.DocTag()
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  inline def _build  = stream._build;   type _build     = stream._build
-  inline def _use    = stream._use;     type _use       = stream._use
-  inline def Flow    = stream.Flow;     type Flow[A]    = stream.Flow[A]
-  inline def Preview = stream.Preview;  type Preview[A] = stream.Preview[A]
-  /**/   val Custom  = stream.Custom
+  transparent inline def _build  = stream._build;   type _build     = stream._build
+  transparent inline def _use    = stream._use;     type _use       = stream._use
+  transparent inline def Flow    = stream.Flow;     type Flow[A]    = stream.Flow[A]
+  transparent inline def Preview = stream.Preview;  type Preview[A] = stream.Preview[A]
+  transparent inline def Custom  = stream.Custom
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

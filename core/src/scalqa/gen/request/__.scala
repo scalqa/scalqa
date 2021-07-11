@@ -6,7 +6,6 @@ class Request:
 
 object Request:
   @tn("VOID")    type \/         = request.VOID;     @tn("VOID") inline def \/          = request.VOID
-  // /**/           type VOID1      = request.VOID;     @tn("VOID") inline def \/          = request.VOID
   /**/           type DEFAULT    = request.DEFAULT;              inline def DEFAULT     = request.DEFAULT
   /**/           type ALL        = request.ALL;                  inline def ALL         = request.ALL
   /**/           type EMPTY      = request.EMPTY;                inline def EMPTY       = request.EMPTY

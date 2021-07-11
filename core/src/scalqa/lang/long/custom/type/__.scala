@@ -1,13 +1,16 @@
 package scalqa;  package lang; package long; package custom; import language.implicitConversions
 
-abstract class Type[A<:Opaque.Long](val name:String) extends Opaque.Companion[A](ClassTag.Long.cast[ClassTag[A]]) with gen.`given`.VoidTag.RawLong[A]:
+abstract class Type[A<:Opaque.Long](val name:String) extends Opaque.Companion[A](ClassTag.Long.cast[ClassTag[A]]) with gen.`given`.VoidTag.RawLong[A] with Type._methods[A]:
 
   override def isVoid(v: A): Boolean=false
 
   given givenVoidTag: Given.VoidTag.RawLong[A]=this
 
-  extension(inline x: A)
-    inline def real: Long = x.cast[Long]
+object Type:
+
+  trait _methods[A<:RAW]:
+    extension(inline x: A)
+      inline def real: Long = x.cast[Long]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -16,7 +19,7 @@ abstract class Type[A<:Opaque.Long](val name:String) extends Opaque.Companion[A]
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@class Type -> ### Long Opaque Type Base
+@class Type -> ### Long Custom Type Setup
 
   Custom Type is like more widely used [Custom Data](../../../../../guide/features/Data.html),
   but without attached containers.  Type instances will still be processed by streams without boxing.

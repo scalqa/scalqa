@@ -27,7 +27,7 @@ object Selection:
   def apply[A](x: Idx[A], m: SelectionModel[_ <: Any]) : Selection[A] = new Selection[A](x, m)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Mode = selection.Mode; val Mode = selection.Mode
+  type Mode = selection.Mode; transparent inline def Mode = selection.Mode
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

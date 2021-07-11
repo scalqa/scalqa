@@ -1,7 +1,7 @@
 package scalqa; package fx; package base; package `abstract`; package node; package _Events; import language.implicitConversions
 
 transparent trait _onZoom:
-  self: Node =>
+  self: Fx.Node =>
 
   def onZoom        [U](l: Fx.Event.Zoom => U) : Gen.Event.Control = _onZoom(l, real.onZoomProperty)
   def onZoomStarted [U](l: Fx.Event.Zoom => U) : Gen.Event.Control = _onZoom(l, real.onZoomStartedProperty)

@@ -3,9 +3,9 @@ package scalqa; package fx; package base; package style; import language.implici
 class PseudoGroup protected[style] (val classes: ><[PseudoClass]):
   private def grp(sq: Seq[Boolean])               : Int   = sq.~.findPosition_?(b => b) or sq.size
 
-  /**/    def apply(n: Node, activeIndex: Int)  : Unit  = classes.~.foreachIndexed((i, c) => n.real.pseudoClassStateChanged(c.real, i == activeIndex))
-  /**/    def apply(n: Node, ba: Boolean*)      : Unit  = apply(n, grp(ba))
-  /**/    def apply(nodes: Node*)(ba: Boolean*) : Unit  = { val i = grp(ba); nodes.~.foreach(n => apply(n, i)) }
+  /**/    def apply(n: Fx.Node, activeIndex: Int) : Unit  = classes.~.foreachIndexed((i, c) => n.real.pseudoClassStateChanged(c.real, i == activeIndex))
+  /**/    def apply(n: Fx.Node, ba: Boolean*)     : Unit  = apply(n, grp(ba))
+  /**/    def apply(nodes: Fx.Node*)(ba: Boolean*): Unit  = { val i = grp(ba); nodes.~.foreach(n => apply(n, i)) }
 
 object PseudoGroup:
   val PositiveNegative         : PseudoGroup = PseudoGroup("positive", "negative")

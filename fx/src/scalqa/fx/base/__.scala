@@ -1,19 +1,18 @@
 package scalqa; package fx
 
 object Base:
-
-  @fast lazy val JavaFx      = base.JavaFx
-  @fast lazy val Abstract    = base.Abstract
-  @fast lazy val Action      = base.Action;       type Action       = base.Action
-  @fast lazy val HPos        = base.HPos;         type HPos         = base.HPos
-  @fast lazy val Insets      = base.Insets;       type Insets       = base.Insets.opaque.`type`
-  @fast lazy val Orientation = base.Orientation;  type Orientation  = base.Orientation
-  @fast lazy val Pos         = base.Pos;          type Pos          = base.Pos
-  @fast lazy val Side        = base.Side;         type Side         = base.Side
-  @fast lazy val VPos        = base.VPos;         type VPos         = base.VPos
-  @fast lazy val Style       = base.Style;        type Style        = base.Style.opaque.`type`
-  @fast lazy val Selection   = base.Selection;    type Selection[A] = base.Selection[A]
-  @fast lazy val Event       = base.Event;        type Event        = base.Event
+  transparent inline def JavaFx      = base.JavaFx
+  transparent inline def Abstract    = base.Abstract
+  transparent inline def Action      = base.Action;       type Action       = base.Action
+  transparent inline def HPos        = base.HPos;         type HPos         = base.HPos
+  transparent inline def Insets      = base.Insets;       type Insets       = base.Insets.opaque.`type`
+  transparent inline def Orientation = base.Orientation;  type Orientation  = base.Orientation
+  transparent inline def Pos         = base.Pos;          type Pos          = base.Pos
+  transparent inline def Side        = base.Side;         type Side         = base.Side
+  transparent inline def VPos        = base.VPos;         type VPos         = base.VPos
+  transparent inline def Style       = base.Style;        type Style        = base.Style.opaque.`type`
+  transparent inline def Selection   = base.Selection;    type Selection[A] = base.Selection[A]
+  transparent inline def Event       = base.Event;        type Event        = base.Event
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

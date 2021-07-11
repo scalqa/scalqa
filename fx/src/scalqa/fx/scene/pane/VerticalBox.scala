@@ -13,9 +13,9 @@ class VerticalBox extends Pane:
 
 object VerticalBox:
 
-  def apply(a: ~[Node.Like]) : VerticalBox = VerticalBox().^(_.children ++= a)
-  def apply(a: Node.Like*)   : VerticalBox = VerticalBox().^(_.children ++= a)
-  def apply(spacing: Double)      : VerticalBox = VerticalBox().^(_.spacing = spacing)
+  def apply(a: ~[Fx.Node.Like]) : VerticalBox = VerticalBox().^(_.children ++= a)
+  def apply(a: Fx.Node.Like*)   : VerticalBox = VerticalBox().^(_.children ++= a)
+  def apply(spacing: Double)    : VerticalBox = VerticalBox().^(_.spacing = spacing)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

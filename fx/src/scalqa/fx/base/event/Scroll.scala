@@ -2,7 +2,7 @@ package scalqa; package fx; package base; package event
 
 import javafx.scene.input.ScrollEvent
 
-class Scroll(real: ScrollEvent, node: Node) extends Input(real, node):
+class Scroll(real: ScrollEvent, node: Fx.Node) extends Input(real, node):
   protected type REAL <: ScrollEvent
 
 /*___________________________________________________________________________

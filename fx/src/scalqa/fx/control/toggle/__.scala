@@ -20,8 +20,8 @@ object Toggle:
     def undo (v: Toggle)  = v.real
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Button = toggle.Button;  inline def Button = toggle.Button
-  type Group  = toggle.Group;   inline def Group    = toggle.Group
+  type Button = toggle.Button;   transparent inline def Button = toggle.Button
+  type Group  = toggle.Group;    transparent inline def Group    = toggle.Group
 
 
 /*___________________________________________________________________________

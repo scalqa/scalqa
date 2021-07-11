@@ -9,7 +9,7 @@ object Observable:
   @tn("getVoid")inline def void[A]            : Observable[A] = z.Void.OM.cast[Observable[A]]
   /**/                 def wrap[A](v: Idx[A]) : Observable[A] = v match{ case v:Idx.O[_] => v.cast[Idx.O[A]]; case v  => new z.Unsupported_View.O[A](v) }
 
-  implicit      inline def implicitRequestVoid[A](inline v: \/): Observable[A] = void[A]
+  implicit      inline def implicitRequest[A](inline v: \/): Observable[A] = void[A]
 
   extension[A]  (x: Observable[A])
     @tn("reversed_View")     def reversed_^                 : Idx.O[A] = z.Reversed_View.O(x)
@@ -17,8 +17,8 @@ object Observable:
     @tn("map_View")          def map_^[B](f: A => B)        : Idx.O[B] = z.Convert_View.O(x, f)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  inline def Event = observable.Event;  type Event[A] = observable.Event[A]
-  inline def X     = observable.X
+  transparent inline def Event = observable.Event;  type Event[A] = observable.Event[A]
+  transparent inline def X     = observable.X
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -58,6 +58,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitRequestVoid -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

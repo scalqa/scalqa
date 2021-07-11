@@ -3,14 +3,14 @@ package scalqa; package gen; package time; import language.implicitConversions
 import Time.Length
 import x.Nanos
 
-object Length extends Long.Custom.Data.Numerical[Length]("Time.Length") with time.x.Nanos[Length]:
+object Length extends Long.Custom.Data.Calculable[Length]("Time.Length") with time.x.Nanos._methods[Length]:
   /**/     def apply    (v: Length*)            : Length  = v.~.fold(\/ :Length)(_ + _)
   inline   def fromNanos(  inline v: Long)      : Length  = v.asOpaque[Length]
 
   override def isVoid(v: Length)                : Boolean = v.real==0L
   override def tag(v: Length)                   : String  = z.formatLength(v,false)
 
-  implicit inline def implicitRequestVoid(inline q: \/): Length  = fromNanos(0L)
+  implicit inline def implicitRequest(inline q: \/): Length  = fromNanos(0L)
 
   extension(x: Length)
     inline def nanosTotal: Long   = x.real

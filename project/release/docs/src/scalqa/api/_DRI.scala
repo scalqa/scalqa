@@ -27,7 +27,7 @@ trait _DRI:
       if(v=="~" && x.tag == "scalqa.val.Stream$") "~~" else v.simpleName
 
 
-    def scalqaLabel(base: Opt[String] = \/): String = base.map(label) or label
+    def scalqaLabel(base: Val.Opt[String] = \/): String = base.map(label) or label
 
 
 

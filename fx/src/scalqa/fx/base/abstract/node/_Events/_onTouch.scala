@@ -1,7 +1,7 @@
 package scalqa; package fx; package base; package `abstract`; package node; package _Events; import language.implicitConversions
 
 transparent trait _onTouch:
-  self: Node =>
+  self: Fx.Node =>
 
   def onTouchPressed   [U](l: Fx.Event.Touch => U) : Gen.Event.Control = onTouch(l, real.onTouchPressedProperty)
   def onTouchReleased  [U](l: Fx.Event.Touch => U) : Gen.Event.Control = onTouch(l, real.onTouchReleasedProperty)

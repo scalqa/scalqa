@@ -1,6 +1,6 @@
 package scalqa; package fx; package base; package action; package z; import language.implicitConversions
 
-private[fx] class Basic(n: Node.Like) extends Action():
+private[fx] class Basic(n: Fx.Node.Like) extends Action():
   protected type REAL = javafx.scene.control.CustomMenuItem
 
   protected override def _createReal: REAL = new REAL(n.real).^(_.setUserData(this))

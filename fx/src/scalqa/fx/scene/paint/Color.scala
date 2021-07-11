@@ -1,6 +1,7 @@
 package scalqa; package fx; package scene; package paint
 
 import javafx.scene.paint.{ Color => FX }
+import Fx.Color
 
 object Color extends Abstract.Delegate.Opaque[Color, FX]("Fx.Paint.Color"):
   def apply(red: Int, green: Int, blue: Int) : Color = FX.rgb(red, green, blue).cast[Color]
@@ -10,7 +11,7 @@ object Color extends Abstract.Delegate.Opaque[Color, FX]("Fx.Paint.Color"):
 
   export Named.*
   object Named:
-    extension(x: javafx.scene.paint.Color) private inline def mk = Color(x)
+    extension(x: javafx.scene.paint.Color) private inline def mk: Color = Color(x)
     inline def AliceBlue         = FX.ALICEBLUE.mk
     inline def AntiqueWhite      = FX.ANTIQUEWHITE.mk
     inline def Aqua              = FX.AQUA.mk

@@ -2,7 +2,7 @@ package scalqa; package fx; package base; package event
 
 import javafx.scene.input.MouseDragEvent
 
-class MouseDrag(real: MouseDragEvent, node: Node) extends Event.Mouse(real, node):
+class MouseDrag(real: MouseDragEvent, node: Fx.Node) extends Event.Mouse(real, node):
   protected type REAL <: MouseDragEvent
 
 /*___________________________________________________________________________

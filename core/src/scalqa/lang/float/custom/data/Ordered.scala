@@ -1,18 +1,24 @@
 package scalqa; package lang; package float; package custom; package data; import language.implicitConversions
 
-abstract class Ordered[A<:Opaque.Float](typeName:String) extends Data[A](typeName):
+abstract class Ordered[A<:Opaque.Float](typeName:String) extends Data[A](typeName) with Ordered._methods[A]:
 
   @fast given ordering : G.Ordering[A] = Float.ordering.cast[G.Ordering[A]]
 
-  extension[A<:RAW](inline x: A)
-    @tn("range")          inline def <> (inline to:A) : G.<>[A] = new G.<>[A](x,to,true)
-    @tn("rangeX")         inline def <>>(inline to:A) : G.<>[A] = new G.<>[A](x,to,false)
-    /**/            infix inline def atLeast(v: A)    : A       = {val a=x; if(a.real > v.real) a else v }
-    /**/            infix inline def atMost (v: A)    : A       = {val a=x; if(a.real < v.real) a else v }
-    @tn("less")           inline def <  (inline v: A) : Boolean = x.real <  v.real
-    @tn("lessOrEqual")    inline def <= (inline v: A) : Boolean = x.real <= v.real
-    @tn("greater")        inline def >  (inline v: A) : Boolean = x.real >  v.real
-    @tn("greaterOrEqual") inline def >= (inline v: A) : Boolean = x.real >= v.real
+object Ordered:
+
+  trait _methods[A<:RAW] extends zMethodsBase[A]:
+    extension(inline x: A)
+      @tn("less")           inline def <  (inline v: A)   : Boolean = x.real <  v.real
+      @tn("lessOrEqual")    inline def <= (inline v: A)   : Boolean = x.real <= v.real
+      @tn("greater")        inline def >  (inline v: A)   : Boolean = x.real >  v.real
+      @tn("greaterOrEqual") inline def >= (inline v: A)   : Boolean = x.real >= v.real
+
+  trait zMethodsBase[A<:RAW] extends Type._methods[A]:
+    extension(inline x: A)
+      @tn("range")          inline def <> (inline to:A)   : G.<>[A] = new G.<>[A](x,to,true)
+      @tn("rangeX")         inline def <>>(inline to:A)   : G.<>[A] = new G.<>[A](x,to,false)
+      /**/            infix inline def atLeast(v: A)      : A       = {val a=x; if(a.real > v.real) a else v }
+      /**/            infix inline def atMost (v: A)      : A       = {val a=x; if(a.real < v.real) a else v }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -23,7 +29,7 @@ ___________________________________________________________________________*/
 /**
 @class Ordered -> ###
 
-  Custom Data Ordered element is provided with default ordering and can be compared with comparison operators.
+  Custom Ordered Data element is provided with default ordering and can be compared with comparison operators.
 
 @def <>      -> Range \n\n  Returns Range from current to given value \n\n  Note. Range uses base primitive natural ordering
 @def <>>     -> Exclusive end range \n\n Returns Range from current to given value exclusive \n\n Note. Range uses base primitive natural ordering

@@ -8,19 +8,19 @@ class Item extends Action:
   protected type REAL <: JItem
   protected override def _createReal: REAL = new JItem().cast[REAL]
 
-  @tn("graphic_Pro") def graphic_*                 : Pro.OM[Node.Like] = Fx.JavaFx.To.pro_OM(real.graphicProperty).mutableMap_^[Node.Like]
-  /**/               def graphic                   : Node.Like         = graphic_*()
-  /**/               def graphic_=(g: Node.Like) : Unit                = real.setGraphic(g.real)
-  @tn("id_Pro")      def id_*                      : String.Pro.OM       = Fx.JavaFx.To.pro_OM(real.idProperty)
-  /**/               def id                        : String              = real.getId
-  /**/               def id_=(v: String)           : Unit                = real.setId(v)
+  @tn("graphic_Pro") def graphic_*                : Pro.OM[Fx.Node.Like] = Fx.JavaFx.To.pro_OM(real.graphicProperty).mutableMap_^[Fx.Node.Like]
+  /**/               def graphic                  : Fx.Node.Like         = graphic_*()
+  /**/               def graphic_=(g:Fx.Node.Like): Unit                 = real.setGraphic(g.real)
+  @tn("id_Pro")      def id_*                     : String.Pro.OM        = Fx.JavaFx.To.pro_OM(real.idProperty)
+  /**/               def id                       : String               = real.getId
+  /**/               def id_=(v: String)          : Unit                 = real.setId(v)
 
 object Item:
   type Custom = item.Custom
 
   def apply(a: Action)                                               : Item              = a match { case v: Item => v; case _ => new Item(a) }
   def apply(text: String)                                            : Item              = new Item(text)
-  def apply(text: String, n: Node.Like)                              : Item              = apply(text).^(_.graphic_*() = n)
+  def apply(text: String, n: Fx.Node.Like)                           : Item              = apply(text).^(_.graphic_*() = n)
   def apply[U](text: String, l: Action.Event => U)                   : Item              = apply(text).^(_.onAction(l))
   def apply[U](text: String, enabled: Boolean, l: Action.Event => U) : Item              = apply(text, l).^(_.enable = enabled)
   def apply(real: JItem)                                             : Item              = real.getUserData.cast[Item]

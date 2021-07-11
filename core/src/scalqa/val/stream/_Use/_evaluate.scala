@@ -4,7 +4,7 @@ transparent trait _evaluate:
   extension[A](x: ~[A])
     @tn("find_Opt")            def find_?( f: A => Boolean)    : Opt[A]            = {var o=x.read_?; var b=true; while(b && o.nonEmpty) if(f(o.cast[A])) b=false else o=x.read_?; o}
     /**/                       def find(   f: A => Boolean)    : A                 = x.find_?(f).get
-    /**/                       def exists(  f: A => Boolean)    : Boolean           = x.find_?(f).nonEmpty
+    /**/                       def exists( f: A => Boolean)    : Boolean           = x.find_?(f).nonEmpty
     /**/                       def isEvery(f: A => Boolean)    : Boolean           = x.find_?(v => !f(v)).isEmpty
     /**/                       def contains(value: A)          : Boolean           = x.takeOnly(value).read_?
     /**/                       def last                        : A                 = x.last_?.get

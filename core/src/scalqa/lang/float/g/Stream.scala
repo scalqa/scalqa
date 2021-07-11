@@ -23,7 +23,7 @@ abstract class Stream[A<:RAW] extends Val.~[A] with ~~.Custom.Discharge[A] with 
   @tn("pack")             def ><                                          : Pack[A]       = Pack.fromStream(self)
   /**/                    def toBuffer                                    : Buffer[A]     = Buffer(self)
   /**/                    def toSet                                       : StableSet[A]  = StableSet(self)
-  /**/                    def toArray                                     : Array[A]      = {val b=Buffer.accessible(self.size_?).^(_ ++= self); var a=b.access; if(a.length!=b.size) a=a.copySize(b.size); a.cast[Array[A]]}
+  /**/                    def toArray                                     : Array[A]      = {val b=Buffer.accessible(self.size_? or J.initSize).^(_ ++= self); var a=b.access; if(a.length!=b.size) a=a.copySize(b.size); a.cast[Array[A]]}
   /**/                    def dischargeTo(b: Val.Buffer[A])               : Unit          = b match{case v:Buffer[A] => v.addAllRaw(self); case v => v.addAllRef(self)}
   /**/             inline def FILTER(inline f: A=>Boolean)                : Stream[A]     = z.stream.filter.TAKE(self,f)
   /**/             inline def TAKE(  inline f: A=>Boolean)                : Stream[A]     = z.stream.filter.TAKE(self,f)
@@ -48,7 +48,7 @@ object Stream:
   /**/                    def apply    [A<:RAW](v: A*)                    : Stream[A]     = v match{ case v: scala.collection.immutable.ArraySeq.ofFloat => v.unsafeArray.~.cast[Stream[A]]; case v => v.~.raw}
   @tn("getVoid")          def void     [A<:RAW]                           : Stream[A]     = Z.VoidStream.cast[Stream[A]]
 
-  implicit         inline def implicitRequestVoid[A<:RAW](inline v: \/)             : Stream[A]     = void
+  implicit         inline def implicitRequest[A<:RAW](inline v: \/)                 : Stream[A]     = void
   implicit         inline def implicitFromArray  [A<:RAW](inline v: Array[A])       : Stream[A]     = v.~
   implicit         inline def implicitFromOpt    [A<:RAW](inline v: G.Opt[A])       : Stream[A]     = v.~
   implicit         inline def implicitFromColl   [A<:RAW](inline v: g.Collection[A]): Stream[A]     = v.~
@@ -62,6 +62,6 @@ ___________________________________________________________________________*/
 /**
 @def void  -> Get void instance
 
-@def implicitRequestVoid -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

@@ -11,17 +11,17 @@ class Tab extends Control:
   /**/            def side_=(s: Side) : Unit                    = real.setSide(s)
 
   // ------------------------------------------------------------------------------------------------------
-  def add(pos: Int, t: Tab.Panel)                    : Unit = tabs.addAt(pos, t)
-  def add(t: Tab.Panel)                              : Unit = tabs += t
-  def add(pos: Int, text: String, n: Node.Like) : Unit = add(pos, new Tab.Panel(text, n))
-  def add(text: String, n: Node.Like)           : Unit = add(new Tab.Panel(text, n))
+  def add(pos: Int, t: Tab.Panel)                 : Unit = tabs.addAt(pos, t)
+  def add(t: Tab.Panel)                           : Unit = tabs += t
+  def add(pos: Int, text: String, n: Fx.Node.Like): Unit = add(pos, new Tab.Panel(text, n))
+  def add(text: String, n: Fx.Node.Like)          : Unit = add(new Tab.Panel(text, n))
 
 object Tab:
   def apply()        : Pane.Tab = new Pane.Tab
   def apply(s: Side) : Pane.Tab = apply().^(_.side = s)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Panel = tab.Panel; inline def Panel = tab.Panel
+  type Panel = tab.Panel;  transparent inline def Panel = tab.Panel
 
 
 /*___________________________________________________________________________

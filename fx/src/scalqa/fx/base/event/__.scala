@@ -6,9 +6,12 @@ abstract class Event(fxEvent: javafx.event.Event) /*extends Abstract.Delegate */
   def real: REAL = fxEvent.cast[REAL]
 
 object Event:
-  type Mouse       = event.Mouse;          inline def Mouse       = event.Mouse
-  type ContextMenu = event.ContextMenu;    inline def ContextMenu = event.ContextMenu
-  type Key         = event.Key;            inline def Key         = event.Key
+  type Id          = gen.event.Id;         transparent inline def Id          = gen.event.Id
+  type Control     = gen.event.Control;    transparent inline def Control     = gen.event.Control
+  type Store       = gen.event.Store;      transparent inline def Store       = gen.event.Store
+  type Mouse       = event.Mouse;          transparent inline def Mouse       = event.Mouse
+  type ContextMenu = event.ContextMenu;    transparent inline def ContextMenu = event.ContextMenu
+  type Key         = event.Key;            transparent inline def Key         = event.Key
   type Drag        = event.Drag
   type Gesture     = event.Gesture
   type Input       = event.Input

@@ -2,7 +2,7 @@ package scalqa; package gen; import time.*; import language.implicitConversions
 
 import Gen.Time
 
-object Time extends Long.Custom.Data.Ordered[Time]("Time") with time.x.Base[Time] with time.x.Millis[Time]:
+object Time extends Long.Custom.Data.Ordered[Time]("Time") with time.x.Base[Time] with time.x.Millis._methods[Time]:
   /**/           inline def fromMillis(inline v: Long)              : Time        = v.asOpaque[Time]
   /**/           inline def apply()                                 : Time        = System.currentTimeMillis.asOpaque[Time]
   /**/                  def apply(day: Day, l: Length, ls: Length*) : Time        = (day.start.millisTotal + {if (ls.isEmpty) l.millisTotal else ls.~.map(_.nanosTotal).fold(l.nanosTotal)(_ + _) / 1_000_000L}).asOpaque[Time]
@@ -11,8 +11,8 @@ object Time extends Long.Custom.Data.Ordered[Time]("Time") with time.x.Base[Time
   override              def isVoid(v: Time)                         : Boolean     = v.real == -62167201438000L
   override              def tag(v: Time)                            : String      = v.day.tag + ' ' + v.dayTime.tag
 
-  implicit       inline def implicitRequestCurrent(inline v: CURRENT): Time       = apply()
-  implicit       inline def implicitRequestVoid(inline v: \/)        : Time       = -62167201438000L.asOpaque[Time]
+  implicit       inline def implicitRequest(inline v: CURRENT): Time       = apply()
+  implicit       inline def implicitRequest(inline v: \/)        : Time       = -62167201438000L.asOpaque[Time]
 
   extension(x: Time)
     /**/    inline def millisTotal             : Long        = x.real
@@ -29,13 +29,13 @@ object Time extends Long.Custom.Data.Ordered[Time]("Time") with time.x.Base[Time
     opaque type `type` <: Opaque.Long = Opaque.Long
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  inline def DayTime  = time.DayTime;             type DayTime = time.DayTime.opaque.`type`
-  inline def Gmt      = time.Gmt;                 type Gmt     = time.Gmt.opaque.`type`
-  inline def Instant  = time.Instant;             type Instant = time.Instant.opaque.`type`
-  inline def Length   = time.Length;              type Length  = time.Length.opaque.`type`
-  inline def Period   = time.Period;              type Period  = time.Period
-  inline def Zone     = time.Zone
-  @fast lazy val X    = time.X
+  transparent inline def DayTime  = time.DayTime;             type DayTime = time.DayTime.opaque.`type`
+  transparent inline def Gmt      = time.Gmt;                 type Gmt     = time.Gmt.opaque.`type`
+  transparent inline def Instant  = time.Instant;             type Instant = time.Instant.opaque.`type`
+  transparent inline def Length   = time.Length;              type Length  = time.Length.opaque.`type`
+  transparent inline def Period   = time.Period;              type Period  = time.Period
+  transparent inline def Zone     = time.Zone
+  transparent inline def X        = time.X
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

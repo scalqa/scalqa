@@ -1,15 +1,15 @@
 package scalqa; package lang; import language.implicitConversions
 
-object Short extends short.custom.Framework[Short]:
+object Short extends short.custom.Containers[Short]:
   inline def min     : Short               = java.lang.Short.MIN_VALUE
   inline def max     : Short               = java.lang.Short.MAX_VALUE
   inline def ordering: G.Ordering[Short] = short.z.Math
   inline def math    : G.Math[Short]       = short.z.Math
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  inline def Custom = short.Custom
-  inline def G      = short.G
-  type _extension   = short._extension;
+  transparent inline def Custom = short.Custom
+  transparent inline def G      = short.G
+  type _methods   = short._methods;
 
 package short:
   private[scalqa] type SELF = Short;             private[scalqa] inline def SELF = lang.Short

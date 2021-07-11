@@ -21,5 +21,8 @@ object Math:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
+@class Math -> ### Generic Math
+
+   Math is an implementation of scala.math.Numeric, an instance required for generic calculations on underlying type.
 
 */

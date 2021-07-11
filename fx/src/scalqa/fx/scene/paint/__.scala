@@ -1,9 +1,10 @@
 package scalqa; package fx; package scene
 
 import javafx.scene.paint.{ Paint => JPaint }
+import Fx.Paint
 
 object Paint extends Abstract.Delegate.Opaque[Paint, JPaint]("Fx.Paint"):
-  type Color = paint.Color.opaque.`type`; val Color = paint.Color
+  type Color = paint.Color.opaque.`type`; transparent inline def Color = paint.Color
 
   object opaque:
     opaque type `type` <: JPaint & Opaque.Ref = JPaint & Opaque.Ref

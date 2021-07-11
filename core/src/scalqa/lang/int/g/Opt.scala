@@ -2,7 +2,7 @@ package scalqa; package lang; package int; package g; import language.implicitCo
 
 object Opt extends z.opt._base:
   @tn("getVoid") inline def void[A<:RAW]                                      : Opt[A]  = 3_000_000_000L.cast[Opt[A]]  // Smallest round number
-  implicit       inline def implicitRequestVoid[A<:RAW](inline v: Request.\/) : Opt[A]  = void[A]
+  implicit       inline def implicitRequest[A<:RAW](inline v: Request.\/) : Opt[A]  = void[A]
   implicit       inline def implicitFromValue[A<:RAW](inline v: A)            : Opt[A]  = v.cast[Opt[A]]
   implicit       inline def implicitToBoolean[A<:RAW](inline v: Opt[A])       : Boolean = v.real != void.real
   extension[A<:RAW](inline x: Opt[A])
@@ -50,6 +50,6 @@ ___________________________________________________________________________*/
 /**
 @def void      -> Get void instance
 
-@def implicitRequestVoid -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

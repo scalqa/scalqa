@@ -5,11 +5,11 @@ object Vm:
   def exit                : Unit  = { println("J.Vm.exit requested"); System.exit(0) }
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type       Priority     = vm.Priority.opaque.`type`
-  inline def Setup        = vm.Setup
-  inline def Memory       = vm.Memory
-  inline def Host         = vm.Host
-  inline def ClassLoader  = vm.ClassLoader
+  type Priority = vm.Priority.opaque.`type`
+  transparent inline def Setup        = vm.Setup
+  transparent inline def Memory       = vm.Memory
+  transparent inline def Host         = vm.Host
+  transparent inline def ClassLoader  = vm.ClassLoader
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

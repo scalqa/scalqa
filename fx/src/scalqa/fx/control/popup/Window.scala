@@ -1,13 +1,13 @@
 package scalqa; package fx; package control; package popup; import language.implicitConversions
 
-abstract class Window extends fx.Window:
+abstract class Window extends Fx.Window:
   protected type REAL <: javafx.stage.PopupWindow
 
   lazy  val scene = Fx.Scene()
 
   def show(n: Abstract.Parent, x: Double, y: Double): Unit = real.show(n.real, x, y)
-  def show(w: fx.Window, x: Double, y: Double)      : Unit = real.show(w.real, x, y)
-  def show(w: fx.Window)                            : Unit = real.show(w.real)
+  def show(w: Fx.Window, x: Double, y: Double)      : Unit = real.show(w.real, x, y)
+  def show(w: Fx.Window)                            : Unit = real.show(w.real)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -3,7 +3,7 @@ package scalqa; package fx; package base; package `abstract`; package node; impo
 abstract class Like protected[fx] extends Delegate.Gui:
   protected type REAL <: javafx.scene.Node
 
-  def scene_?    : Opt[Fx.Scene] = Scene(real.getScene())
+  @tn("scene_Opt") def scene_? : Opt[Fx.Scene] = Scene(real.getScene())
 
 object Like:
 
@@ -13,7 +13,7 @@ object Like:
 
   given FxConverter: ReversibleFunction[javafx.scene.Node, Like] = ReversibleFunction(apply, _.real)
 
-  implicit def implicitToNode(v: Like) : Node = v match { case v: Node => v; case v => Node(v.real) }
+  implicit def implicitToNode(v: Like) : Fx.Node = v match { case v: Fx.Node => v; case v => Node(v.real) }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

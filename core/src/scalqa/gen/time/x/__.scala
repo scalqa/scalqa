@@ -2,8 +2,8 @@ package scalqa; package gen; package time; import language.implicitConversions
 
 object X:
   type Base  [A<:Any.Raw.Long] = x.Base[A];
-  type Nanos [A<:Any.Raw.Long] = x.Nanos[A];    val Nanos  = x.Nanos
-  type Millis[A<:Any.Raw.Long] = x.Millis[A];   val Millis = x.Millis
+  val Nanos  = x.Nanos
+  val Millis = x.Millis
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

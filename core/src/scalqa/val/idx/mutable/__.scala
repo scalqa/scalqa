@@ -19,7 +19,7 @@ trait Mutable[A] extends Idx[A] with Val.Collection.Mutable[A] with Able.Contain
   /**/           override def clear                                    : Unit       = remove_<>(0 <>> size)
 
 object Mutable:
-  /**/                    def apply[A](initSize: Int = J.initSize)     : Mutable[A]             = Buffer[A](initSize)
+  /**/             inline def apply[A](inline initSize: Int=J.initSize): Mutable[A]             = new lang.any.ref.Buffer(initSize)
   /**/                    def sealable[A](initSize: Int = J.initSize)  : Mutable[A] & Able.Seal = new z.mutable.AsSealable(apply[A](initSize))
   /**/                    def wrap[A](v: java.util.List[A])            : Mutable[A]             = z.as.JavaListWrap.Mutable[A](v)
   /**/                    def wrap[A](v:  Idx[A])                      : Mutable[A]             = v match{ case v:Idx.M[_] => v.cast[Idx.M[A]]; case v => new z.Unsupported_View.M[A](v)}
@@ -37,7 +37,7 @@ object Mutable:
     /**/           inline def update(inline position:Int, inline v: A)        : Unit            = x.updateAt(position, v)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  inline def X = mutable.X
+  transparent inline def X = mutable.X
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

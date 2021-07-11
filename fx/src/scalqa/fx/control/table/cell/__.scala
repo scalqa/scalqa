@@ -17,12 +17,17 @@ abstract class Cell[ROW,V,A](val column: Column[ROW,V,_]) extends control.Cell.I
   protected override def afterItemUpdated: Unit =
     super.afterItemUpdated
     psedoClasses.clear
-    item_?.forval(i => {i.setup(this); i.text_?.forval(text = _)}).fornil{ column.emptyCellSetup(this) }
+    item_?.process(i => {
+        i.setup(this);
+        i.text_?.forval(text = _)
+      },{
+        column.emptyCellSetup(this)
+      })
     editable = row_?.map(e => column.editEnabledFun(e)).or(false)
-    //??? tooltip = setup_?.forval(_.optFunTooltip).map(_(value_?)) or \/
+    tooltip  = item_?.map_?(_.setup.funTooltipOpt.map(_(value_?))) or \/ : Tooltip
 
 object Cell:
-  inline def X        = cell.X
+  transparent inline def X = cell.X
   type Setup[ROW,V,A] = cell.Setup[ROW,V,A]
   type Item [ROW,V,A] = cell.Item[ROW,V,A]
 

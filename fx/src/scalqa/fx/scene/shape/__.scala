@@ -1,20 +1,20 @@
 package scalqa; package fx; package scene; import language.implicitConversions
 
-abstract class Shape extends Node:
+abstract class Shape extends Fx.Node:
   protected type REAL <: javafx.scene.shape.Shape
 
   @tn("fill_Pro")   def fill_*            : Pro.OM[Paint] = Fx.JavaFx.To.pro_OM(real.fillProperty)  .mutableMap_^[Paint]
   /**/              def fill              : Paint         = fill_*()
-  /**/              def fill_=(p: Paint)  : Unit = fill_*() = p
+  /**/              def fill_=(p: Paint)  : Unit          = fill_*() = p
 
   @tn("stroke_Pro") def stroke_*          : Pro.OM[Paint] = Fx.JavaFx.To.pro_OM(real.strokeProperty).mutableMap_^[Paint]
   /**/              def stroke            : Paint         = stroke_*()
   /**/              def stroke_=(p: Paint): Unit          = stroke_*() = p
 
 object Shape:
-  type Path   = shape.Path;    val Path   = shape.Path
-  type Circle = shape.Circle;  val Circle = shape.Circle
-  type Line   = shape.Line;    val Line   = shape.Line
+  type Path   = shape.Path;    transparent inline def Path   = shape.Path
+  type Circle = shape.Circle;  transparent inline def Circle = shape.Circle
+  type Line   = shape.Line;    transparent inline def Line   = shape.Line
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

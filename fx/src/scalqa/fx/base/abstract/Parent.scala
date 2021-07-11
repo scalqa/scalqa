@@ -1,6 +1,6 @@
 package scalqa; package fx; package base; package `abstract`; import language.implicitConversions
 
-trait Parent extends Node:
+trait Parent extends Fx.Node:
   protected type REAL <: javafx.scene.Parent
 
   @tn("needsLayout_Pro") def needsLayout_* : Boolean.Pro.O  = Fx.JavaFx.To.pro_O(real.needsLayoutProperty)

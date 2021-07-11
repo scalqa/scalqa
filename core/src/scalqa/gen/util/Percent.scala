@@ -2,13 +2,13 @@ package scalqa; package gen; package util; import language.implicitConversions
 
 import Gen.Percent
 
-object Percent extends Double.Custom.Data.Number[Percent]("Percent"):
+object Percent extends Double.Custom.Data.Numerical[Percent]("Percent"):
   /**/     inline def apply(inline v: Double)           : Percent = v.asOpaque[Percent]
   /**/     inline def apply(value: Double, base: Double): Percent = (if (base == 0) 0D else value * 100 / base).asOpaque[Percent]
   /**/     inline def apply(value: Number, base: Number): Percent = apply(value.doubleValue, base.doubleValue)
   override        def isVoid(v: Percent)                : Boolean = v.real == 0D
   override        def tag(v: Percent)                   : String  = {val l = v.Long; if(v.real==l) l.toString + "%" else v.toString + "%"}
-  implicit inline def implicitRequestVoid(inline v: \/)           : Percent = apply(0D)
+  implicit inline def implicitRequest(inline v: \/)           : Percent = apply(0D)
 
   extension(inline x: Percent)
     inline def apply(inline nv: Int)                                         : Int    = (x.real * nv / 100.0).toInt

@@ -20,7 +20,7 @@ object G:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object G -> ### Raw Float Generic Specialized Containers
+@object G -> ### Float Specialized Generic Containers
 
    The generic containers are never used directly, but rather as customized shortcuts for specific types.
 

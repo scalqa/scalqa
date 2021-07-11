@@ -1,5 +1,7 @@
 package scalqa; package fx; package scene; package chart; package axis; import language.implicitConversions
 
+import Fx.Font
+
 transparent trait _properties:
   self: Chart.Axis[_] =>
 

@@ -17,10 +17,10 @@ object Output extends Any.Ref.Custom.Type[Output, java.io.OutputStream]("Io.Outp
     opaque type `type` <: java.io.Closeable & Opaque.Ref = java.io.OutputStream & Opaque.Ref
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Bytes  = output.Bytes.opaque.`type`;  inline def Bytes  = output.Bytes
-  type Data   = output.Data.opaque.`type`;   inline def Data   = output.Data
-  type Text   = output.Text.opaque.`type`;   inline def Text   = output.Text
-  type Buffer = output.Buffer.opaque.`type`; inline def Buffer = output.Buffer
+  type Bytes  = output.Bytes.opaque.`type`;  transparent inline def Bytes  = output.Bytes
+  type Data   = output.Data.opaque.`type`;   transparent inline def Data   = output.Data
+  type Text   = output.Text.opaque.`type`;   transparent inline def Text   = output.Text
+  type Buffer = output.Buffer.opaque.`type`; transparent inline def Buffer = output.Buffer
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -4,11 +4,11 @@ class Tooltip(s: String.Opt = \/) extends Popup.Control:
   protected override def _createReal: REAL = s.map(new REAL(_)) or new REAL
   protected type REAL = javafx.scene.control.Tooltip
 
-  @tn("graphic_Pro") def graphic_*          : Pro.OM[Node] = Fx.JavaFx.To.pro_OM(real.graphicProperty).mutableMap_^[Node]
-  /**/               def graphic            : Node         = graphic_*()
-  /**/               def graphic_=(n: Node) : Unit           = graphic_*() = n
+  @tn("graphic_Pro") def graphic_*             : Pro.OM[Fx.Node] = Fx.JavaFx.To.pro_OM(real.graphicProperty).mutableMap_^[Fx.Node]
+  /**/               def graphic               : Fx.Node         = graphic_*()
+  /**/               def graphic_=(n: Fx.Node) : Unit            = graphic_*() = n
 
-  /**/               def attachTo(n: Node)  : Unit           = javafx.scene.control.Tooltip.install(n.real, real)
+  /**/               def attachTo(n: Fx.Node)  : Unit            = javafx.scene.control.Tooltip.install(n.real, real)
 
 object Tooltip extends Gen.Void.Setup[Tooltip](new Tooltip(\/) with Gen.Void):
   def apply(s: String.Opt = \/)              : Tooltip = new Tooltip(s)

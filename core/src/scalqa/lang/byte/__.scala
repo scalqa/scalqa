@@ -1,15 +1,15 @@
 package scalqa; package lang; import language.implicitConversions
 
-object Byte extends byte.custom.Framework[Byte]:
+object Byte extends byte.custom.Containers[Byte]:
   inline def min     : Byte               = java.lang.Byte.MIN_VALUE
   inline def max     : Byte               = java.lang.Byte.MAX_VALUE
   inline def ordering: G.Ordering[Byte]   = byte.z.Math
   inline def math    : G.Math[Byte]       = byte.z.Math
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  inline def Custom = byte.Custom
-  inline def G      = byte.G
-  type _extension   = byte._extension;
+  transparent inline def Custom = byte.Custom
+  transparent inline def G      = byte.G
+  type _methods   = byte._methods;
 
 package byte:
   private[scalqa] type SELF = Byte;             private[scalqa] inline def SELF = lang.Byte

@@ -1,7 +1,7 @@
 package scalqa; package lang; package boolean; package z; package stream; import language.implicitConversions
 
 import `val`.stream.z.a.Pipe
-import Any.{Raw as RAW}
+import Lang.Any.{Raw as RAW}
 import Gen.Given.StreamTag
 
 object mapOpt:

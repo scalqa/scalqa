@@ -14,8 +14,8 @@ abstract class Chart extends Abstract.Region:
   /**/                     def title_=(v: String)          : Unit            = real.setTitle(v)
 
 object Chart:
-  type Axis[A]  = chart.Axis[A];   inline def Axis = chart.Axis
-  type XY[X, Z] = chart.XY[X, Z];  inline def XY   = chart.XY
+  type Axis[A]  = chart.Axis[A];   transparent inline def Axis = chart.Axis
+  type XY[X, Z] = chart.XY[X, Z];  transparent inline def XY   = chart.XY
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

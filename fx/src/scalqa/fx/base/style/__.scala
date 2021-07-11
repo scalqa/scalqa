@@ -1,5 +1,7 @@
 package scalqa; package fx; package base; import language.implicitConversions
 
+import Fx.Style
+
 object Style extends String.Custom.Data[Style]("Fx.Style"):
   val Default : Idx                  = \/
   given FxConverter: ReversibleFunction[String,Style] = \/
@@ -14,9 +16,9 @@ object Style extends String.Custom.Data[Style]("Fx.Style"):
     opaque type `type` <: Any.Opaque.String = Any.Opaque.String
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  inline def Class       = style.Class;         type Class       = style.Class.opaque.`type`
-  inline def PseudoClass = style.PseudoClass;   type PseudoClass = style.PseudoClass.opaque.`type`
-  inline def PseudoGroup = style.PseudoGroup;   type PseudoGroup = style.PseudoGroup
+  transparent inline def Class       = style.Class;         type Class       = style.Class.opaque.`type`
+  transparent inline def PseudoClass = style.PseudoClass;   type PseudoClass = style.PseudoClass.opaque.`type`
+  transparent inline def PseudoGroup = style.PseudoGroup;   type PseudoGroup = style.PseudoGroup
 
 package style:
   type Class       = style.Class.opaque.`type`

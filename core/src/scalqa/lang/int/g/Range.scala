@@ -41,7 +41,7 @@ object Range:
     @tn("checkIn")  inline def checkIn(size:Int): Range[Int] = {if(x.start<0 || x.endX>size) J.illegalArgument(""+x.start+" <>> "+x.endX+" is out of range 0 <>> "+size); x}
     @tn("default")  inline def default(size:Int): Range[Int] = {var v=x; if(v.isInstanceOf[Void]) v = 0 <>> size; v }
   // ------------------------------------------------------------------------------------------------------------------------------------------
-  implicit inline def implicitRequestVoid(inline v: \/)   : Range[Int] = z.Range.Void
+  implicit inline def implicitRequest(inline v: \/)   : Range[Int] = z.Range.Void
   extension[A<:RAW,T,STM<: ~~.AnyType[T]](inline x: Range[A])
     /**/                                  inline def map    [B>:T](inline f:A=> B)   (using inline t: Given.StreamTag[B,STM]): STM       = g.Stream.map[A,T,STM](x.~)[B](f)(using t)
     /**/                                  inline def flatMap[B>:T](inline f:A=> ~[T])(using inline t: Given.StreamTag[B,STM]): STM       = g.Stream.flatMap[A,T,STM](x.~)[B](f)(using t)

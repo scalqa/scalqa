@@ -1,7 +1,7 @@
 package scalqa; package fx; package base; package `abstract`; package node; package _Events; import language.implicitConversions
 
 transparent trait _onMouseAndDrag:
-  self: Node =>
+  self: Fx.Node =>
 
   def onMouseClicked     [U](l: Fx.Event.Mouse => U)      : Gen.Event.Control   = onMouse(l, real.onMouseClickedProperty)
   def onMouseLeftClicked [U](l: Fx.Event.Mouse => U)      : Gen.Event.Control   = onMouseClicked(e => if (e.button.isLeft) l(e))

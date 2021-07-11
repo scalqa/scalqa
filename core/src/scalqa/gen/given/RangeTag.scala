@@ -1,6 +1,6 @@
 package scalqa; package gen; package `given`; import language.implicitConversions
 
-import Any. { Raw as RAW }
+import Lang.Any. { Raw as RAW }
 
 class  RangeTag[A, RANGE <: <>.AnyType[A]]
 

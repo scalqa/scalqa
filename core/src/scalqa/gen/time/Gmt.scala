@@ -2,18 +2,18 @@ package scalqa; package gen; package time; import language.implicitConversions
 
 import Time.Gmt
 
-object Gmt extends Long.Custom.Data[Gmt]("Time.Gmt") with time.x.Base[Gmt] with time.x.Millis[Gmt]:
+object Gmt extends Long.Custom.Data[Gmt]("Time.Gmt") with time.x.Base[Gmt] with time.x.Millis._methods[Gmt]:
   inline   def fromMillis(inline v: Long): Gmt     = v.asOpaque[Gmt]
   inline   def apply()                   : Gmt     = System.currentTimeMillis.asOpaque[Gmt]
   override def tag(v: Gmt)               : String  = v.day.tag + ' ' + v.dayTime.tag
 
-  implicit inline def implicitRequestCurrent(inline v: CURRENT) : Gmt     = apply()
+  implicit inline def implicitRequest(inline v: CURRENT) : Gmt     = apply()
 
   extension(x: Gmt)
-    @tn("millisTotal") inline    def millisTotal: Long    = x.real
-    @tn("day")         override  def day        : Day     = Day.byIndex((x.millisTotal / X.Millis.InOneDay).Int)
-    @tn("dayTime")     override  def dayTime    : DayTime = (x.millisTotal % X.Millis.InOneDay).Int.Millis
-    @tn("general")        inline def general    : Time    = Time.fromMillis(x.real)
+    @tn("millisTotal")   inline def millisTotal: Long    = x.real
+    @tn("day")         override def day        : Day     = Day.byIndex((x.millisTotal / X.Millis.InOneDay).Int)
+    @tn("dayTime")     override def dayTime    : DayTime = (x.millisTotal % X.Millis.InOneDay).Int.Millis
+    @tn("general")       inline def general    : Time    = Time.fromMillis(x.real)
 
   object opaque:
     opaque type `type` <: Opaque.Long = Opaque.Long

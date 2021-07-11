@@ -1,15 +1,15 @@
 package scalqa; package lang; import language.implicitConversions
 
-object Double extends double.custom.Framework[Double]:
+object Double extends double.custom.Containers[Double]:
   inline def min     : Double               = java.lang.Double.MIN_VALUE
   inline def max     : Double               = java.lang.Double.MAX_VALUE
   inline def ordering: G.Ordering[Double] = double.z.Math
   inline def math    : G.Math[Double]       = double.z.Math
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  inline def Custom = double.Custom
-  inline def G      = double.G
-  type _extension   = double._extension
+  transparent inline def Custom = double.Custom
+  transparent inline def G      = double.G
+  type _methods   = double._methods
 
 package double:
   private[scalqa] type SELF = Double;             private[scalqa] inline def SELF = lang.Double

@@ -4,13 +4,13 @@ import Gen.Given. { VoidTag, EmptyTag }
 
 transparent trait selfView:
 
-  extension[A](x: _extension.SelfView[A])
-    @tn("selfOpt")     inline def ? (using inline e:EmptyTag[A], inline v:VoidTag[A]) : Opt[A]    = if(x==null || v.isVoid(x.cast[A]) || e.isEmpty(x.cast[A])) \/ else x.cast[Opt[A]]
-    @tn("selfIsVoid")  inline def isVoid                 (using inline t: VoidTag[A]) : Boolean   = x==null ||  t.isVoid(x.cast[A])
-    @tn("selfNonVoid") inline def nonVoid                (using inline t: VoidTag[A]) : Boolean   = x!=null && !t.isVoid(x.cast[A])
+  extension[A](x: _methods._view[A])
+    @tn("selfOpt")     inline def ? (using inline e:EmptyTag[A], inline t:VoidTag[A]) : Opt[A]    = if(x==null || t.isVoid(x.cast[A]) || e.isEmpty(x.cast[A])) \/ else x.cast[Opt[A]]
+    @tn("selfIsVoid")  inline def isVoid                  (using inline t:VoidTag[A]) : Boolean   = x==null ||  t.isVoid(x.cast[A])
+    @tn("selfNonVoid") inline def nonVoid                 (using inline t:VoidTag[A]) : Boolean   = x!=null && !t.isVoid(x.cast[A])
 
-  extension[A](x: _extension.SelfView[~[A]]) // This is override for Stream
-    @tn("selfOpt")     inline def ?                                             : Opt[~[A]] = {val p=x.cast[~[A]].enablePreview; p.preview_?.map[~[A]](_ => p) }
+  extension[A](x: _methods._view[~[A]]) // This is override for Stream
+    @tn("selfOpt")     inline def ?                                                   : Opt[~[A]] = {val p=x.cast[~[A]].enablePreview; p.preview_?.map[~[A]](_ => p) }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

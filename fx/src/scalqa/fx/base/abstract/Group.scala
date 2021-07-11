@@ -3,8 +3,8 @@ package scalqa; package fx; package base; package `abstract`; import language.im
 class Group extends Parent:
   protected type REAL <: javafx.scene.Group;
   override                    def _createReal                     : REAL               = new javafx.scene.Group().cast[REAL]
-  /**/                  lazy  val children                        : Idx.M[Node.Like]   = Idx.M.wrap(real.getChildren).mutableMap_^[Node.Like]
-  /**/                        def +=(e: Node.Like)                : this.type          = { children.add(e); this }
+  /**/                  lazy  val children                        : Idx.M[Fx.Node.Like]= Idx.M.wrap(real.getChildren).mutableMap_^[Fx.Node.Like]
+  /**/                        def +=(e: Fx.Node.Like)             : this.type          = { children.add(e); this }
 
   @tn("autoSizeChildren_Pro") def autoSizeChildren_*              : Boolean.Pro.OM     = Fx.JavaFx.To.pro_OM(real.autoSizeChildrenProperty)
   /**/                        def autoSizeChildren                : Boolean            = real.isAutoSizeChildren

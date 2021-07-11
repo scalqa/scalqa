@@ -1,11 +1,14 @@
 package scalqa; package lang; package any; package ref; package custom; import language.implicitConversions
 
-abstract class Type[A<:Opaque.Ref, BASE<:Any.Ref](val name: String)(using ct: ClassTag[BASE]) extends Opaque.Companion[A](ct.cast[ClassTag[A]]):
+abstract class Type[A<:Opaque.Ref, BASE<:Any.Ref](val name: String)(using ct: ClassTag[BASE]) extends Opaque.Companion[A](ct.cast[ClassTag[A]]) with Type._methods[A,BASE]:
 
   given givenVoidTag  : Given.VoidTag[A]  = this
 
-  extension(inline x: A)
-    inline def real: BASE = x.cast[BASE]
+object Type:
+
+  trait _methods[A,BASE]:
+    extension(inline x: A)
+      inline def real: BASE = x.cast[BASE]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -14,6 +17,6 @@ abstract class Type[A<:Opaque.Ref, BASE<:Any.Ref](val name: String)(using ct: Cl
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@class Type -> ### Any.Ref Opaque Type Base
+@class Type -> ### Any.Ref Custom Type Setup
 
 */

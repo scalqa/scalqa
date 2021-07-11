@@ -2,7 +2,7 @@ package scalqa; package fx; package base; package event
 
 import javafx.scene.input.TouchEvent
 
-class Touch(real: TouchEvent, node: Node) extends Input(real, node):
+class Touch(real: TouchEvent, node: Fx.Node) extends Input(real, node):
   protected type REAL <: TouchEvent
 
 /*___________________________________________________________________________

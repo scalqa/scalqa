@@ -6,12 +6,12 @@ trait Node extends Like with _properties with _events with _methods:
 
 object Node:
 
-  def apply(v: javafx.scene.Node): Node = new Node { protected type REAL = javafx.scene.Node;  def _createReal = v }
+  def apply(v: javafx.scene.Node): Fx.Node = new Fx.Node { protected type REAL = javafx.scene.Node;  def _createReal = v }
 
-  given FxConverter: ReversibleFunction[javafx.scene.Node, Node] = ReversibleFunction(v => Delegate.Gui.apply[Node](v.onZoomStartedProperty), _.real)
+  given FxConverter: ReversibleFunction[javafx.scene.Node, Node] = ReversibleFunction(v => Delegate.Gui.apply[Fx.Node](v.onZoomStartedProperty), _.real)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Like        = node.Like;         val Like = node.Like
+  type Like        = node.Like;         transparent inline def Like = node.Like
   type _events     = node._events
   type _methods    = node._methods
   type _properties = node._properties

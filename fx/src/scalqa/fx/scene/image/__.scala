@@ -1,6 +1,7 @@
 package scalqa; package fx; package scene; import language.implicitConversions
 
 import javafx.scene.image.{ Image => JImage }
+import Fx.Image
 
 object Image extends Abstract.Delegate.Opaque[Image, JImage]("Fx.Image"):
   /**/     def apply(v: J.Url) : Image = new JImage(v.toString)

@@ -1,6 +1,6 @@
 package scalqa; package fx; package base; package `abstract`; import language.implicitConversions
 
-abstract class Module extends Node.Like:
+abstract class Module extends Fx.Node.Like:
   private[fx] override def _refPropertyOpt = real.onZoomFinishedProperty
 
 object Module:

@@ -11,9 +11,9 @@ abstract class Like extends Control:
   /**/                 def alignment            : Pos            = real.getAlignment
   /**/                 def alignment_=(v: Pos)  : Unit           = real.setAlignment(v)
 
-  @tn("font_Pro")      def font_*               : Pro.OM[Font]   = Fx.JavaFx.To.pro_OM(real.fontProperty).mutableMap_^[Font]
-  /**/                 def font                 : Font           = Font(real.getFont)
-  /**/                 def font_=(v: Font)      : Unit           = real.setFont(v.real)
+  @tn("font_Pro")      def font_*               : Pro.OM[Fx.Font]= Fx.JavaFx.To.pro_OM(real.fontProperty).mutableMap_^[Fx.Font]
+  /**/                 def font                 : Fx.Font        = Fx.Font(real.getFont)
+  /**/                 def font_=(v: Fx.Font)   : Unit           = real.setFont(v.real)
 
   @tn("textFill_Pro")  def textFill_*           : Pro.OM[Paint]  = Fx.JavaFx.To.pro_OM(real.textFillProperty).mutableMap_^[Paint]
   /**/                 def textFill             : Paint          = Paint(real.getTextFill)

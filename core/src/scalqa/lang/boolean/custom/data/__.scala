@@ -1,6 +1,6 @@
 package scalqa;  package lang; package boolean; package custom; import language.implicitConversions
 
-abstract class Data[A<:Opaque.Boolean](typeName: String) extends Type[A](typeName) with Framework[A]
+abstract class Data[A<:Opaque.Boolean](typeName: String) extends Type[A](typeName) with Containers[A]
 
 object Data
 
@@ -11,7 +11,7 @@ object Data
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@class Data -> ### Boolean Data Type Base
+@class Data -> ### Boolean Custom Data Setup
 
   Custom Data not only defines a Boolean based opaque type, but also privides a framework of custom specialized containers attached to this type.
 

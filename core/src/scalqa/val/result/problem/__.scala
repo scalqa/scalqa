@@ -17,8 +17,8 @@ object Problem:
   /**/            def unapply(v: Problem)                   : Option[String] = Some(v.message)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Timeout              = problem.Timeout
-  type NotValid             = problem.NotValid
+  type Timeout  = problem.Timeout
+  type NotValid = problem.NotValid
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

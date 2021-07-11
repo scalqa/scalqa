@@ -1,8 +1,8 @@
 package scalqa; package `val`; import language.implicitConversions;
 
-import Any.{ Raw as RAW }
+import Lang.Any.{ Raw as RAW }
 
-object Opt extends opt._extension:
+object Opt extends opt._methods:
   type AnyType[A] = Opt[A] | RawType[A]
   type RawType[A] = lang.boolean.G.Opt[A & Raw.Boolean] | lang.byte.G.Opt[A & Raw.Byte] | lang.char .G.Opt[A & Raw.Char]  | lang.short .G.Opt[A & Raw.Short]
                   | lang.int    .G.Opt[A & Raw.Int]     | lang.long.G.Opt[A & Raw.Long] | lang.float.G.Opt[A & Raw.Float] | lang.double.G.Opt[A & Raw.Double]
@@ -16,7 +16,7 @@ object Opt extends opt._extension:
   implicit   inline def implicitFromJava [A](v: java.util.Optional[A])                    : Opt[A]    = fromJava[A](v)
   implicit   inline def implicitFromResult[A](inline v: Result[A])                        : Opt[A]    = v.value_?
   implicit   inline def implicitToBoolean[A]( inline v: Opt[A])                           : Boolean   = v.nonEmpty
-  implicit   inline def implicitRequestVoid[A](inline v: \/)                              : Opt[A]    = ZZ.None.cast[Opt[A]]
+  implicit   inline def implicitRequest[A](inline v: \/)                                  : Opt[A]    = ZZ.None.cast[Opt[A]]
   implicit   inline def implicitFromBooleanOpt[A<:RAW.Boolean](inline v: Boolean.G.Opt[A]): Opt[A]    = v.ref
   implicit   inline def implicitFromByteOpt   [A<:RAW.Byte]   (inline v: Byte.G.Opt[A])   : Opt[A]    = v.ref
   implicit   inline def implicitFromCharOpt   [A<:RAW.Char]   (inline v: Char.G.Opt[A])   : Opt[A]    = v.ref
@@ -71,6 +71,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitRequestVoid -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

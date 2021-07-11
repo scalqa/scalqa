@@ -15,14 +15,16 @@ object DayTime extends Long.Custom.Data.Ordered[DayTime]("DayTime"):
   override        def isVoid(v: DayTime)                         : Boolean = v.real == 0L
   override        def tag(v: DayTime)                            : String  = z.formatDayTime(v, true)
   implicit inline def implicitFromLength(inline v: Length)       : DayTime = v.nanosTotal.asOpaque[DayTime]
-  implicit inline def implicitRequestVoid(inline v: \/)          : DayTime = 0L.asOpaque[DayTime]
+  implicit inline def implicitRequest(inline v: \/)          : DayTime = 0L.asOpaque[DayTime]
   implicit inline def implicitToLength(inline v: DayTime)        : Length  = v.length
 
-  given x: time.x.Nanos[opaque.`type`] with
+  given x: time.x.Nanos._methods[DayTime] with
     extension(x: DayTime)
-      inline def nanosTotal : Long    = x.real
-      inline def length     : Length  = Length.fromNanos(x.real)
-      /**/   def toBrief    : String  = z.formatDayTime(x, false)
+      /**/         inline def nanosTotal          : Long    = x.real
+      /**/         inline def length              : Length  = Length.fromNanos(x.real)
+      /**/                def toBrief             : String  = z.formatDayTime(x, false)
+      @tn("plus")  inline def  +(inline l: Length): DayTime = (x.nanosTotal + l.nanosTotal).cast[DayTime]
+      @tn("minus") inline def  -(inline l: Length): DayTime = (x.nanosTotal - l.nanosTotal).cast[DayTime]
 
   object opaque:
     opaque type `type` <: Opaque.Long = Opaque.Long

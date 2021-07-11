@@ -2,7 +2,7 @@ package scalqa; package fx; package base; package event; import language.implici
 
 import javafx.scene.input.ContextMenuEvent
 
-class ContextMenu(e: ContextMenuEvent, node: Node) extends Input(e, node):
+class ContextMenu(e: ContextMenuEvent, node: Fx.Node) extends Input(e, node):
   protected type REAL <: ContextMenuEvent
   private var onClosed: ><[() => Unit] = \/
 
@@ -19,7 +19,7 @@ object ContextMenu:
 
   def show(e: ContextMenu): Unit = synchronized {
     currentMenus += e
-    if (currentMenus.size == 1) fx.Thread.scheduleIn(33.Millis, showCurrent)
+    if (currentMenus.size == 1) Fx.Thread.scheduleIn(33.Millis, showCurrent)
   }
 
   private def showCurrent = synchronized {

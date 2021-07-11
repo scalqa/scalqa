@@ -16,7 +16,7 @@ abstract class Application(width: Int.Opt, height: Int.Opt, private val title: S
 
   /**/      lazy  val stage                 : Stage         = new Stage()
   /**/      lazy  val scene                 : Fx.Scene      = Fx.Scene(width,height,View)
-  protected lazy  val View                  : Node.Like
+  protected lazy  val View                  : Fx.Node.Like
 
   def main(sa: Array[String]) =
     Application.self = this
@@ -43,8 +43,9 @@ object Application:
   private object UiReadyEvent
   private object StopEvent
   private[fx] var self: Application = null
+
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  inline def Thread = application.Thread
+  transparent inline def Thread = application.Thread
 
 private class zStarter extends javafx.application.Application:
   override def start(s: JStage) = Application.self.stage.start(s)

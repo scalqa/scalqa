@@ -2,7 +2,7 @@ package scalqa; package fx; package base; package event
 
 import javafx.scene.input.ZoomEvent
 
-class Zoom(real: ZoomEvent, node: Node) extends Gesture(real, node):
+class Zoom(real: ZoomEvent, node: Fx.Node) extends Gesture(real, node):
   protected type REAL <: ZoomEvent
 
 /*___________________________________________________________________________
