@@ -2,7 +2,7 @@ package scalqa; package lang; package double; package z; package stream; import 
 
 import `val`.stream.z.a.{ FlatMap => FM }
 import g.Fun.{ ToMany => FUN }
-import Gen.Given.StreamTag
+import gen.`given`.StreamTag
 
 object flatMap:
   class Booleans[A<:RAW,B<:Raw.Boolean](x: G.~[A], f: FUN[A,B]) extends FM.ToBoolean[B](x){ def fewOpt = x.readRaw_?.map(f(_))}

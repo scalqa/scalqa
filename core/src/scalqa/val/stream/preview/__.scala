@@ -68,7 +68,7 @@ ___________________________________________________________________________*/
        p.previewSize < 100 // This will pre-load no more than 100 elements
       ```
 
-@def readWhile_~ -> Remove many elements by condition
+@def readWhile_~ -> Read many elements with condition
 
       Immediatelly removes all consequtive stream elements which satisfy the given predicate.
 
@@ -76,5 +76,5 @@ ___________________________________________________________________________*/
 
       Non consequtive, but complient elements found later will not be affected.
 
-      Note. This operation is only available in Preview interface, because it requires to examine elements before they are streamed
+      Note. This operation is only available in Preview interface, because it requires to examine elements before they are read
 */

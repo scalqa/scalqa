@@ -1,21 +1,22 @@
 package scalqa; package gen; package `given`; import language.implicitConversions
 
-class  TypeTag[+A]
+abstract class TypeTag[A] private[scalqa]():
+  private[scalqa] final def isRef   : Boolean = this.isInstanceOf[z.ReferenceTypeTag[_]]
+  /**/                  def typeName: String
 
-object TypeTag extends zTypeTagDefault:
-  inline given givenBoolean   [A<:Raw.Boolean]: TypeTag[Raw.Boolean] = new TypeTag[Boolean]
-  inline given givenByte      [A<:Raw.Byte   ]: TypeTag[Raw.Byte   ] = new TypeTag[Byte   ]
-  inline given givenChar      [A<:Raw.Char   ]: TypeTag[Raw.Char   ] = new TypeTag[Char   ]
-  inline given givenShort     [A<:Raw.Short  ]: TypeTag[Raw.Short  ] = new TypeTag[Short  ]
-  inline given givenInt       [A<:Raw.Int    ]: TypeTag[Raw.Int    ] = new TypeTag[Int    ]
-  inline given givenLong      [A<:Raw.Long   ]: TypeTag[Raw.Long   ] = new TypeTag[Long   ]
-  inline given givenFloat     [A<:Raw.Float  ]: TypeTag[Raw.Float  ] = new TypeTag[Float  ]
-  inline given givenDouble    [A<:Raw.Double ]: TypeTag[Raw.Double ] = new TypeTag[Double ]
-  inline given givenRef       [A<:Any.Ref]    : TypeTag[Ref        ] = new TypeTag[Any.Ref]
+object TypeTag extends zTypeDefault:
+  def apply[A <: Opaque](name: String): TypeTag[A] = new zOpaqueTag(name);  private class zOpaqueTag[A<:Opaque](val typeName: String) extends TypeTag[A]
 
-// **********************************************************************************************************************************************
-private[`given`] class zTypeTagDefault:
-  inline given givenAny[A,Any]: TypeTag[Any] = new TypeTag[Any]
+  inline given givenBoolean : TypeTag[Boolean] = ZZ.BooleanTag.cast[TypeTag[Boolean]]
+  inline given givenByte    : TypeTag[Byte]    = ZZ.ByteTag   .cast[TypeTag[Byte]]
+  inline given givenChar    : TypeTag[Char]    = ZZ.CharTag   .cast[TypeTag[Char]]
+  inline given givenShort   : TypeTag[Short]   = ZZ.ShortTag  .cast[TypeTag[Short]]
+  inline given givenInt     : TypeTag[Int]     = ZZ.IntTag    .cast[TypeTag[Int]]
+  inline given givenLong    : TypeTag[Long]    = ZZ.LongTag   .cast[TypeTag[Long]]
+  inline given givenFloat   : TypeTag[Float]   = ZZ.FloatTag  .cast[TypeTag[Float]]
+  inline given givenDouble  : TypeTag[Double]  = ZZ.DoubleTag .cast[TypeTag[Double]]
+private[`given`] abstract class zTypeDefault:
+  inline given givenAny[A]  : TypeTag[A]       = ZZ.RefTypeTag.cast[TypeTag[A]]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -23,3 +24,6 @@ private[`given`] class zTypeTagDefault:
  __\  \/ /___/ __  |/ /__/ /_/ /_/ __  |   (c) 2021, Scalqa.org Inc
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
+/**
+  @def typeName -> Type name
+*/

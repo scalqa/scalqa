@@ -3,7 +3,7 @@ package scalqa; package lang; package string; package z; import language.implici
 object tokenizedStream:
 
   def apply(text: String, doc: ~[String]): ~[(String, Int.<>, String)] =
-    val b = doc.flatMap(tag => text.indexesOf_~(tag).zipValue(_ => tag))
+    val b = doc.flatMap(tag => text.indexOf_~(tag).zipValue(_ => tag))
       .sortBy(_._1)
       .zipNext
       .map(t => (t._1._2, t._1._1 + t._1._2.length <>> t._2.map(_._1).or(text.length)))

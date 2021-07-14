@@ -1,18 +1,16 @@
 package scalqa; package gen; import language.implicitConversions
 
 object Given:
-  inline def NameTag    = `given`.NameTag;      type NameTag[A]                              = `given`.NameTag[A];
-  inline def DocTag     = `given`.DocTag;       type DocTag[-A]                              = `given`.DocTag[A]
-  inline def VoidTag    = `given`.VoidTag;      type VoidTag[A]                              = `given`.VoidTag[A]
-  inline def EmptyTag   = `given`.EmptyTag;     type EmptyTag[-A]                            = `given`.EmptyTag[A]
-  inline def InTag      = `given`.InTag;        type InTag[A,-C]                             = `given`.InTag[A,C]
-  inline def ArrayTag   = `given`.ArrayTag;     type ArrayTag [A, ARRAY <: Array.AnyType[A]] = `given`.ArrayTag[A,ARRAY]
-  inline def PackTag    = `given`.PackTag;      type PackTag  [A, PACK  <: ><.AnyType[A]]    = `given`.PackTag[A,PACK]
-  inline def RangeTag   = `given`.RangeTag;     type RangeTag [A, RANGE <: <>.AnyType[A]]    = `given`.RangeTag[A,RANGE]
-  inline def OptTag     = `given`.OptTag;       type OptTag   [A, OPT   <: Opt.AnyType[A]]   = `given`.OptTag[A,OPT]
-  inline def StreamTag  = `given`.StreamTag;    type StreamTag[A, STREAM<: ~~.AnyType[A]]    = `given`.StreamTag[A,STREAM]
-
-  inline def TypeTag    = `given`.TypeTag;      type TypeTag[+A]                             = `given`.TypeTag[A]
+  transparent inline def TypeTag    = `given`.TypeTag;      type TypeTag[A]                              = `given`.TypeTag[A];
+  transparent inline def DocTag     = `given`.DocTag;       type DocTag[-A]                              = `given`.DocTag[A]
+  transparent inline def VoidTag    = `given`.VoidTag;      type VoidTag[A]                              = `given`.VoidTag[A]
+  transparent inline def EmptyTag   = `given`.EmptyTag;     type EmptyTag[-A]                            = `given`.EmptyTag[A]
+  transparent inline def WithinTag  = `given`.WithinTag;    type WithinTag[A,-C]                         = `given`.WithinTag[A,C]
+  transparent inline def ArrayTag   = `given`.ArrayTag;     type ArrayTag [A, ARRAY <: lang.Array.AnyType[A]] = `given`.ArrayTag[A,ARRAY]
+  transparent inline def PackTag    = `given`.PackTag;      type PackTag  [A, PACK  <: ><.AnyType[A]]    = `given`.PackTag[A,PACK]
+  transparent inline def RangeTag   = `given`.RangeTag;     type RangeTag [A, RANGE <: <>.AnyType[A]]    = `given`.RangeTag[A,RANGE]
+  transparent inline def OptTag     = `given`.OptTag;       type OptTag   [A, OPT   <: Opt.AnyType[A]]   = `given`.OptTag[A,OPT]
+  transparent inline def StreamTag  = `given`.StreamTag;    type StreamTag[A, STREAM<: ~~.AnyType[A]]    = `given`.StreamTag[A,STREAM]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

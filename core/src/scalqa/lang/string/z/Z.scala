@@ -13,8 +13,8 @@ object Z:
   // evaluate
   def charAt_Opt       (x:String, i: Int)                         : Char.Opt       = if (i < 0 || i >= x.length) \/ else x.charAt(i)
   def indexOf_Opt      (x:String, v: String, s: Int.Opt)          : Int.Opt        = x.indexOf(v, s or 0).?.take(_ >= 0)
+  def indexOf_Stream   (x:String, v: String, s: Int.Opt)          : ~[Int]         = x.indexOf_?(v, s).map(i => ~~(i) ++ x.indexOf_~(v, i + v.length)) or \/
   def lastIndexOf_Opt  (x:String, v: String, s: Int.Opt)          : Int.Opt        = x.lastIndexOf(v, s or x.length).?.take(_ >= 0)
-  def indexesOf_Stream (x:String, v: String, s: Int.Opt)          : ~[Int]         = x.indexOf_?(v, s).map(i => ~~(i) ++ x.indexesOf_~(v, i + v.length)) or \/
   def charIndex_Opt    (x:String, f: Char => Boolean, s: Int.Opt) : Int.Opt        = { var i = s or 0; while (i < x.length) { if (f(x.charAt(i))) return i; i += 1 }; \/ }
   def lastCharIndex_Opt(x:String, f: Char => Boolean, s: Int.Opt) : Int.Opt        = { var i = s or x.length - 1; while (i >= 0) { if (f(x.charAt(i))) return i; i -= 1 }; \/ }
 

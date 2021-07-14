@@ -8,7 +8,7 @@ import scala.concurrent.ExecutionContext;
 import scalqa.gen.given.DocTag;
 import scalqa.gen.given.z.DefaultTag;
 import scalqa.gen.given.z.PrimitiveTag;
-import scalqa.gen.given.z.ReferenceNameTag;
+import scalqa.gen.given.z.ReferenceTypeTag;
 
 public final class ZZ{
     private ZZ(){};
@@ -82,5 +82,5 @@ public final class ZZ{
     public  static final DocTag ArrayTag   = new scalqa.gen.given.z.ArrayTag();
     public  static final DocTag MathTag    = new scalqa.gen.given.z.MathTag();
 
-    public  static final ReferenceNameTag RefNameTag = new ReferenceNameTag();
+    public  static final ReferenceTypeTag RefTypeTag = new ReferenceTypeTag();
 }

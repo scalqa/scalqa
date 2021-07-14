@@ -25,3 +25,22 @@ object Containers:
  __\  \/ /___/ __  |/ /__/ /_/ /_/ __  |   (c) 2021, Scalqa.org Inc
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
+/**
+@trait Containers -> ### Custom Containers Setup
+
+     This trait customizes generic containers with given Ref type.
+
+     Custom.Containers are already mixed with Custom.Data, so the application code usually uses them indirectly when defining data elements.
+
+     Generally there is no performance difference when using customized vs. generic containers, just better readability.  For example:
+
+    ```
+      val s: ~[String] = \/
+      // is equivalent to
+      val s: String.~  = \/
+
+      val o: Opt[String] = \/
+      // is equivalent to
+      val o: String.Opt  = \/
+    ```
+*/

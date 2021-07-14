@@ -1,7 +1,7 @@
 package scalqa; package `val`; package stream; package _Build; import language.implicitConversions
 
 import z.build.{ map => M }
-import Gen.Given.StreamTag
+import gen.`given`.StreamTag
 
 transparent trait _map:
   self: Stream.type =>

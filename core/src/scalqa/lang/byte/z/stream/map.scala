@@ -1,7 +1,7 @@
 package scalqa; package lang; package byte; package z; package stream; import language.implicitConversions
 
 import `val`.stream.z.a.Map
-import Gen.Given.StreamTag
+import gen.`given`.StreamTag
 
 object map:
   class Booleans[A<:RAW,B<:Raw.Boolean](x: G.~[A], f: G.Fun.ToRawBoolean[A,B]) extends Map.ToBoolean[B](x){ @tn("readRaw_Opt") def readRaw_? = x.readRaw_?.map(f(_))}

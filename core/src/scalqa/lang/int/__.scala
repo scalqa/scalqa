@@ -22,7 +22,7 @@ package int:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object Int -> ### Companion for scala.Int
+@object Int -> ### Companion Object for scala.Int
 
     This object also defines specialized custom containers for Int type,
     so the following code can run without boxing:

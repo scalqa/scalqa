@@ -1,8 +1,8 @@
 package scalqa; package lang; package any; package opaque; import language.implicitConversions
 
-abstract class Companion[A<:Opaque]private[lang](ct: ClassTag[A]) extends gen.`given`.NameTag[A] with gen.`given`.DocTag[A] with gen.`given`.VoidTag[A]:
+abstract class Companion[A<:Opaque]private[lang](ct: ClassTag[A]) extends gen.`given`.TypeTag[A] with gen.`given`.DocTag[A] with gen.`given`.VoidTag[A]:
   self =>
-  given givenNameTag : Given.NameTag[A]  = self
+  given givenTypeTag : Given.TypeTag[A]  = self
   given givenDocTag  : Given.DocTag[A]   = self
   given givenClassTag: ClassTag[A]   = ct
   given givenCanEqual: CanEqual[A,A] = CanEqual.derived
@@ -14,7 +14,7 @@ abstract class Companion[A<:Opaque]private[lang](ct: ClassTag[A]) extends gen.`g
   def doc(v: A): Doc      =
      if(ck<0) self.synchronized{ if(ck<0){ if(ck== -1){ ck= -2; tag(v); if(ck!=1) ck=0} else ck=1 }}
      val dt = ZZ.Tag.tag(v)
-     Doc(name+"@"+v.self_^.hash) ++= isVoid(v) ? ("","Void") += ("opaque",(v:Any).^.typeName+"("+dt+")") ++= ((ck==0) ? tag(v)).dropOnly(dt).map(v=>("tag",v))
+     Doc(typeName+"@"+v.self_^.hash) ++= isVoid(v) ? ("","Void") += ("opaque",(v:Any).^.typeName+"("+dt+")") ++= ((ck==0) ? tag(v)).dropOnly(dt).map(v=>("tag",v))
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -30,11 +30,11 @@ ___________________________________________________________________________*/
 
 @def tag -> Type to String
 
-    Override this method to provide type standard convertion to String
+    Override this method to provide type custom convertion to String
 
 @def doc -> Type to Doc
 
-    Override this method to provide type standard [[scalqa.gen.Doc Doc]] implementation
+    Override this method to provide type custom [[scalqa.gen.Doc Doc]] implementation
 
 @def isVoid -> Void check
 

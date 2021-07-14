@@ -2,10 +2,10 @@ package scalqa; package `val`; package stream; package custom; import language.i
 
 trait Pipeline extends Pipeline.Tree:
   protected def base     : Ref
-  /**/      def infoTree : Doc     .Tree = Doc.Tree.apply(doc, base.?.takeType[Pipeline.Tree].map(_.infoTree) or Doc.Tree(Able.Doc.doc_?(base) or z.util.MultiDoc(base)))
+  /**/      def infoTree : Doc.Tree = Doc.Tree.apply(doc, base.?.takeType[Pipeline.Tree].map(_.infoTree) or Doc.Tree(Able.Doc.doc_?(base) or z.util.MultiDoc(base)))
 
 object Pipeline:
-  def infoTree[A](v: Pipeline.Tree | ~[A] | Flow[A]) : Doc     .Tree = v match
+  def infoTree[A](v: Pipeline.Tree | ~[A] | Flow[A]) : Doc.Tree = v match
     case v: Tree    => v.infoTree
     case v: ~[_]    => Doc.Tree(z.util.MultiDoc(v))
     case v: Flow[_] => Doc.Tree(z.util.MultiDoc(v))
@@ -14,7 +14,7 @@ object Pipeline:
 
   // ************************************************************************************************************
   trait Tree extends gen.able.Doc :
-    def infoTree : Doc     .Tree
+    def infoTree : Doc.Tree
     def doc     : Doc     = z.util.MultiDoc(this)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

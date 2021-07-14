@@ -1,6 +1,6 @@
 package scalqa; package lang; package any; import language.implicitConversions
 
-import gen.`given`. { VoidTag, InTag, DocTag, RangeTag, OptTag }
+import gen.`given`. { VoidTag, WithinTag, DocTag, RangeTag, OptTag }
 import scala.{ Ordering as O }
 import _methods._view
 
@@ -12,7 +12,7 @@ transparent trait _methods:
     @tn("result")    inline def ??                                                                                      : Result[A]    = Result(x)
     @tn("range")     inline def <> [RNG<: Val.<>.AnyType[A]](inline to:A)(using inline o:O[A], inline t:RangeTag[A,RNG]): RNG          = z.range(x,to,o,t)
     @tn("rangeX")    inline def <>>[RNG<: Val.<>.AnyType[A]](inline to:A)(using inline o:O[A], inline t:RangeTag[A,RNG]): RNG          = z.range.exclusive(x,to,o,t)
-    infix            inline def in   [CONTAINER](inline c: CONTAINER)               (using inline t:InTag[A,CONTAINER]) : Boolean      = t.in(x,c)
+    infix            inline def in [CONTAINER](inline c: CONTAINER)             (using inline t:WithinTag[A,CONTAINER]) : Boolean      = t.within(x,c)
     /**/             inline def doc                                                         (using inline dd:DocTag[A]) : Doc          = dd.doc(x)
     /**/             inline def tag                                                         (using inline dd:DocTag[A]) : String       = dd.tag(x)
     /**/             inline def tp                                                          (using inline dd:DocTag[A]) : Unit         = ZZ.tp(x,dd)

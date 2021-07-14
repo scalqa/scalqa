@@ -9,7 +9,7 @@ object WeakRef:
   implicit inline def implicitToBoolean[A](v: WeakRef[A]): Boolean    = v.get_?
 
   given givenClassTag[A](using t: ClassTag[A]): ClassTag[WeakRef[A]] = t.cast[ClassTag[WeakRef[A]]]
-  given givenNameTag [A]: Given.NameTag[WeakRef[A]]  = Given.NameTag("WeakRef")
+  given givenTypeTag [A]: Given.TypeTag[WeakRef[A]]  = Given.TypeTag("WeakRef")
   given givenVoidTag [A]: Given.VoidTag[WeakRef[A]]  with { inline def isVoid(v: WeakRef[A]) = false }
 
   given givenDocTag[A](using t: Given.DocTag[A]) : Given.DocTag[WeakRef[A]] with

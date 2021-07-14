@@ -7,9 +7,7 @@ trait _DRI:
     def member_?          : Opt[Member] = Registry.member_?(x.id)
     def module_?          : Opt[Module] = Registry.module_?(x.id.mid)
     def isOpaqueDef       : Boolean     = x.location.endsWith("$$opaque$")
-    def isPrivate         : Boolean     = { val p=x.location+".";  p.contains(".z") || p.contains(".Z.") || p.contains(".Z$.") }
     def tag               : String      = x.location.replace("$$opaque$","").replace("$$",".").^.as(l => x.anchor.^.?.map(_.takeBefore("-")).map(a => l.^.reviseIf(_.endsWith("$"),_.dropLast(1)) + "." + a) or l)
-
     def label             : String      = label("")
     def label(base:String): String      =
       var tg = x.tag
@@ -29,5 +27,7 @@ trait _DRI:
 
     def scalqaLabel(base: Val.Opt[String] = \/): String = base.map(label) or label
 
-
+    def isPrivate: Boolean =
+      val s=(x.location+".").replace("$",".").replace("..",".").replace("..",".")
+      s.contains(".z.") || s.contains(".Z.") || s.indexOf_~(".z").map_?(i => s.charAt_?(i+2).take(_.isUpperCase)).read_?
 

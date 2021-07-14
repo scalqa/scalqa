@@ -22,7 +22,7 @@ package short:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object Short -> ### Companion for scala.Short
+@object Short -> ### Companion Object for scala.Short
 
     This object also defines specialized custom containers for Short type,
     so the following code can run without boxing:

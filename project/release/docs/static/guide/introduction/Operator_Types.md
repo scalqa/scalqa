@@ -8,7 +8,7 @@ There are four Scalqa types, which are so basic, they are represented as operato
  - [~](../../api/scalqa/val/Stream.html) is value stream
  - [<>](../../api/scalqa/val/Range.html) is value range
  - [><](../../api/scalqa/val/Pack.html)  is value pack
- - [\/](../../api/scalqa/gen//request/VOID.html) is a general request for a void instance.
+ - [\/](../../api/scalqa/gen/request/VOID.html) is a general request for a void instance.
      
 There are also same named operator methods to construct some of those types. 
 It is important to quickly grasp how these work, otherwise Scalqa code would not feel intuitive.

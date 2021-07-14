@@ -1,6 +1,6 @@
 package scalqa; package lang; package array; package z; import language.implicitConversions
 
-import Gen.Given.ArrayTag
+import gen.`given`.ArrayTag
 import java.util.{ Arrays, Collections}
 
 object sortRange:

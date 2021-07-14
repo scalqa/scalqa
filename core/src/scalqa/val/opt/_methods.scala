@@ -1,6 +1,6 @@
 package scalqa; package `val`; package opt; import language.implicitConversions;
 
-import Gen.Given.OptTag
+import gen.`given`.OptTag
 
 abstract class _methods extends _givens:
   self: Opt.type =>

@@ -5,6 +5,7 @@ package object scalqa:
   export scalqa.Gen.*
   export scalqa.gen.Request.*
   export scalqa.j.vm.Predef.{ given }
+
 //  export scalqa.Val.{ ~ as _, Idx as _, * }
 //  @tn("Stream") type ~[+A] = Val.~[A]
 //  //@tn("Stream") transparent inline def ~~ = `val`.Stream

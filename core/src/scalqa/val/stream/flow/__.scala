@@ -16,8 +16,13 @@ ___________________________________________________________________________*/
 /**
 @class Flow -> ### Stream Flow
 
-   [[scalqa.val.stream.Flow ~~.Flow]] is similar to [[scalqa.val.Stream stream]], but without sequence specific methods.
+   Flow is similar to [[scalqa.val.Stream stream]], but without sequence specific methods.
 
-   Elements of [[scalqa.val.stream.Flow ~~.Flow]] can be processed either in parallel or sequentially
+   Elements of Flow can be processed either in parallel or sequentially.
 
+   Flow is usually created from stream with ".parallel" method.
+
+   ```
+      val flow: ~~.Flow[Int] = (1 <> 10).~.parallel
+   ```
 */

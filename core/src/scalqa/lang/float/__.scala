@@ -22,7 +22,7 @@ package float:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object Float -> ### Companion for scala.Float
+@object Float -> ### Companion Object for scala.Float
 
     This object also defines specialized custom containers for Float type,
     so the following code can run without boxing:

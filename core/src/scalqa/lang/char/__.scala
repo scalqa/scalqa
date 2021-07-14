@@ -22,7 +22,7 @@ package char:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object Char -> ### Companion for scala.Char
+@object Char -> ### Companion Object for scala.Char
 
     This object also defines specialized custom containers for Char type,
     so the following code can run without boxing:

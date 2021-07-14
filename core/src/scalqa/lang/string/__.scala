@@ -5,8 +5,8 @@ object String extends Any.Ref.Custom.Containers[String]:
   val orderingIgnoreCase: Ordering[String] = string.z.Ordering.IgnoreCase
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  /**/                                              transparent inline def Custom     = string.Custom
-  type Builder    = string.Builder.opaque.`type`;   transparent inline def Builder    = string.Builder
+  /**/                                          transparent inline def Custom   = string.Custom
+  type Builder  = string.Builder.opaque.`type`; transparent inline def Builder  = string.Builder
   type _methods = string._methods;              transparent inline def _methods = string._methods
 
 /*___________________________________________________________________________

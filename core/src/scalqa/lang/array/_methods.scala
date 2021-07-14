@@ -1,6 +1,6 @@
 package scalqa; package lang; package array; import language.implicitConversions
 
-import Gen.Given.{ArrayTag, StreamTag, PackTag}
+import gen.`given`.{ArrayTag, StreamTag, PackTag}
 
 transparent trait _methods:
 

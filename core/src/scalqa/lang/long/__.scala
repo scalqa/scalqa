@@ -22,7 +22,7 @@ package long:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object Long -> ### Companion for scala.Long
+@object Long -> ### Companion Object for scala.Long
 
     This object also defines specialized custom containers for Long type,
     so the following code can run without boxing:

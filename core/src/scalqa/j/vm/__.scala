@@ -5,7 +5,7 @@ object Vm:
   def exit                : Unit  = { println("J.Vm.exit requested"); System.exit(0) }
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Priority = vm.Priority.opaque.`type`
+  transparent inline def Priority     = vm.Priority;  type Priority = vm.Priority.opaque.`type`
   transparent inline def Setup        = vm.Setup
   transparent inline def Memory       = vm.Memory
   transparent inline def Host         = vm.Host
@@ -20,9 +20,8 @@ ___________________________________________________________________________*/
 /**
 @object Vm -> ### JVM Utilities
 
-@def exit -> Kills process
+@def exit -> JVM shutdown
 
        Calls System.exit(0)
-
 
 */

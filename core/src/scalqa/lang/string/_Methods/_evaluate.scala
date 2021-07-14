@@ -11,9 +11,9 @@ transparent trait _evaluate[A<: String | Opaque.String] :
     /**/                     inline def compareTo       (inline v: A)                                          : Int      = x.real.compareTo(v.real)
     /**/                     inline def charAt          (inline i: Int)                                        : Char     = x.real.charAt(i)
     @tn("charAt_Opt")        inline def charAt_?        (i: Int)                                               : Char.Opt = Z.charAt_Opt(x,i)
-    @tn("indexOf_Opt")       inline def indexOf_?       (inline v: A|String,        inline from: Int.Opt = \/) : Int.Opt  = Z.indexOf_Opt     (x.cast[String],v.cast[String],from)
+    @tn("indexOf_Opt")       inline def indexOf_?       (inline v: A|String,        inline from: Int.Opt = \/) : Int.Opt  = Z.indexOf_Opt   (x.cast[String],v.cast[String],from)
+    @tn("indexOf_Stream")    inline def indexOf_~       (inline v: A|String,        inline from: Int.Opt = \/) : ~[Int]   = Z.indexOf_Stream(x.cast[String],v.cast[String],from)
     @tn("lastIndexOf_Opt")   inline def lastIndexOf_?   (inline v: A|String,        inline from: Int.Opt = \/) : Int.Opt  = Z.lastIndexOf_Opt (x.cast[String],v.cast[String],from)
-    @tn("indexesOf_Stream")  inline def indexesOf_~     (inline v: A|String,        inline from: Int.Opt = \/) : ~[Int]   = Z.indexesOf_Stream(x.cast[String],v.cast[String],from)
     @tn("charIndex_Opt")     inline def charIndex_?     (inline f: Char => Boolean, inline from: Int.Opt = \/) : Int.Opt  = Z.charIndex_Opt(x,f,from)
     @tn("lastCharIndex_Opt") inline def lastCharIndex_? (inline f: Char => Boolean, inline from: Int.Opt = \/) : Int.Opt  = Z.lastCharIndex_Opt(x,f,from)
 
@@ -101,10 +101,10 @@ ___________________________________________________________________________*/
      @param from last position to start looking from end to start
 
 
-@def indexesOf_~ -> Source of indexes
+@def indexOf_~ -> Source of indexes
 
      Source of indexes for each occurrence of `x`
-     ```"abcd_abcd_abcd_abcd_abcd".indexesOf_~("bc") TP // Prints ~(1, 6, 11, 16, 21) ```
+     ```"abcd_abcd_abcd_abcd_abcd".indexOf_~("bc") TP // Prints ~(1, 6, 11, 16, 21) ```
      @param from position to start looking from
 
 

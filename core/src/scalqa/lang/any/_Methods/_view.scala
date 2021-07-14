@@ -1,12 +1,12 @@
 package scalqa; package lang; package any; package _Methods; import language.implicitConversions
 
 import _methods._view
-import gen.`given`. { NameTag, VoidTag, InTag, DocTag, EmptyTag }
+import gen.`given`. { TypeTag, VoidTag, DocTag, EmptyTag }
 
 object _view:
   extension[A](x: _view[A])
-    /**/                      def typeName                       (using d: NameTag[A]) : String   = if(d.isRef) Z.kind(x) else d.name
-    /**/                      def id                             (using d: NameTag[A]) : String   = if(x == null) "null" else { var n = x.typeName; if(!n.endsWith("$")) n += "@" + x.hash; n }
+    /**/                      def typeName                       (using d: TypeTag[A]) : String   = if(d.isRef) Z.kind(x) else d.typeName
+    /**/                      def id                             (using d: TypeTag[A]) : String   = if(x == null) "null" else { var n = x.typeName; if(!n.endsWith("$")) n += "@" + x.hash; n }
     /**/                      def hash                                                 : String   = if(x == null) "null" else Z.Hash(x.hashCode)
 
   extension[A](inline x: _view[A])

@@ -9,10 +9,11 @@ class Module (val typ_? : Opt[Member], val val_? : Opt[Member]):
   def dri                : DRI     = typ_?.map(_.dri) or val_?.get.dri
   def dri2               : DRI     = val_?.map(_.dri) or typ_?.get.dri
   override def toString  : String  = "Module("+typ_?.map(_.tag) + ", " + val_?.map(_.tag) + ")"
-  def children: ><[Module] = ~~.void[Module]
+  def children: ><[Module] = (~~.void[Module]
                                .joinAll(val_?.~.flatMap(_.children.members.~.map_?(_.dri.module_?)))
                                .joinAll(typ_?.~.flatMap(_.children.members.~.map_?(_.dri.module_?).peek(_.inner=true)))
-                               .toLookupBy(_.main.id.mid).~.sort(using if(name=="scalqa") Sorting.root else Sorting.byName).><
+                               .toLookupBy(_.main.id.mid).~.sort(using if(name=="scalqa") Sorting.root else Sorting.byName)
+                              ).drop(_.dri.isPrivate).><
 object Module:
   def apply(m: Member)           : Module = if(m.kin.isDefLike) new Val(m) else if(m.kin.isTypeLike) new Typ(m) else Docs.fail(m.kin)
   def apply(s: Seq[Member])      : Module = s.size match{ case 1 => apply(s.head); case 2 => apply(s.head,s.tail.head); case 3 => apply(s.head,s.tail.head); case v => { s.foreach(println); Docs.fail("size="+v) }}

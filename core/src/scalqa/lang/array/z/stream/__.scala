@@ -1,6 +1,6 @@
 package scalqa; package lang; package array; package z; package stream; import language.implicitConversions
 
-import Gen.Given.StreamTag
+import gen.`given`.StreamTag
 
 object __ :
 

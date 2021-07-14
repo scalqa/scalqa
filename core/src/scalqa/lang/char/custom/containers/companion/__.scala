@@ -16,3 +16,9 @@ object Companion:
  __\  \/ /___/ __  |/ /__/ /_/ /_/ __  |   (c) 2021, Scalqa.org Inc
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
+/**
+@object Companion ->
+
+    Companion object contains a set of classes, which provide companion object functionality for customized generic containers.
+
+*/

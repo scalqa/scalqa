@@ -1,6 +1,6 @@
 package scalqa; package lang; package any; package z; package extension; import language.implicitConversions
 
-import Gen.Given. { VoidTag, EmptyTag }
+import gen.`given`. { VoidTag, EmptyTag }
 
 transparent trait selfView:
 

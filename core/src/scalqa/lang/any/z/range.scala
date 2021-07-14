@@ -1,6 +1,6 @@
 package scalqa; package lang; package any; package z; import language.implicitConversions
 
-import Gen.Given.RangeTag
+import gen.`given`.RangeTag
 
 object range:
 

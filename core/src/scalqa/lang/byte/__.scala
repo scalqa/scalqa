@@ -22,7 +22,7 @@ package byte:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object Byte -> ### Companion for scala.Byte
+@object Byte -> ### Companion Object for scala.Byte
 
     This object also defines specialized custom containers for Byte type,
     so the following code can run without boxing:

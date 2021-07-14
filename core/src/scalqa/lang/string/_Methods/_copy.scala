@@ -29,9 +29,6 @@ ___________________________________________________________________________*/
 /**
 @trait _copy -> ###
 
-This trait provides some copy overloads, which at first glance seem to be unnesasary, but they proved to bring semantic clarity in the code.
-
-
 @def takeFrom -> Copy end
 
        Copies String from the position where the specified `x` found

@@ -22,7 +22,7 @@ package double:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object Double -> ### Companion for scala.Double
+@object Double -> ### Companion Object for scala.Double
 
     This object also defines specialized custom containers for Double type,
     so the following code can run without boxing:

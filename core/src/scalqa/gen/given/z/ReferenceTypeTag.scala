@@ -1,7 +1,7 @@
 package scalqa; package gen; package `given`; package z; import language.implicitConversions
 
-final class ReferenceNameTag[A]() extends NameTag[A]:
-  val name = "AnyRef"
+final class ReferenceTypeTag[A]() extends TypeTag[A]:
+  val typeName = "AnyRef"
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

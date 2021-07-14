@@ -1,6 +1,6 @@
 package scalqa; package gen; package `given`; import language.implicitConversions
 
-class ArrayTag[A, ARRAY <: Array.AnyType[A]]
+class ArrayTag[A, ARRAY <: lang.Array.AnyType[A]]
 
 object ArrayTag extends zDefDefault:
   inline given givenBoolean[A<:Raw.Boolean]: ArrayTag[A,Array[A]] = new ArrayTag[A, Array[A]]

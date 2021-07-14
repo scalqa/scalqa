@@ -1,6 +1,6 @@
 package scalqa;  package lang; package byte; package custom; import language.implicitConversions
 
-abstract class Type[A<:Opaque.Byte](val name:String) extends Opaque.Companion[A](ClassTag.Byte.cast[ClassTag[A]]) with gen.`given`.VoidTag.RawByte[A] with Type._methods[A]:
+abstract class Type[A<:Opaque.Byte](val typeName:String) extends Opaque.Companion[A](ClassTag.Byte.cast[ClassTag[A]]) with gen.`given`.VoidTag.RawByte[A] with Type._methods[A]:
 
   override def isVoid(v: A): Boolean=false
 
@@ -26,6 +26,6 @@ ___________________________________________________________________________*/
 
 @trait _methods -> ### Custom Type Default Methods
 
-@def real -> Real value \n\n  Returns opaque contained real value
+@def real -> Real value \n\n  Returns real value standing behind the opaque type
 
 */

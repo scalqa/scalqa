@@ -18,7 +18,7 @@ package boolean:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object Boolean -> ### Companion for scala.Boolean
+@object Boolean -> ### Companion Object for scala.Boolean
 
     This object also defines specialized custom containers for Boolean type,
     so the following code can run without boxing:
