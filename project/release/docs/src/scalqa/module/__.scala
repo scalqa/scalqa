@@ -22,7 +22,7 @@ object Module:
     if(id!=m2.id.mid) Docs.fail("No id match")
     if     (m1.kin.isTypeLike && m2.kin.isDefLike ) Both(m1,m2)
     else if(m1.kin.isDefLike  && m2.kin.isTypeLike) Both(m2,m1)
-    //else if(m1.kin.isDefLike  && m2.kin.isDefLike)  Both(m2,m1)
+    //else if(m1.name=="Fx") kin.isDefLike  && m2.kin.isDefLike)  Both(m2,m1)
     else Docs.fail("Error: "+m1.tag+" <> "+m2.tag)
 
   class Both private(v1: Member,v2: Member) extends Module(v1,v2)

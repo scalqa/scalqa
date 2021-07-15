@@ -17,7 +17,7 @@ object Lang:
   transparent inline def Raw        = lang.any.Raw;             type Raw             = scala.AnyVal
   transparent inline def Opaque     = lang.any.Opaque;          type Opaque          = lang.Any.Opaque
 
-package lang:
+package object lang:
   inline implicit def implicitFromRaw(inline v: Raw.Boolean): Boolean = v.cast[Boolean]
   inline implicit def implicitFromRaw(inline v: Raw.Byte)   : Byte    = v.cast[Byte]
   inline implicit def implicitFromRaw(inline v: Raw.Char)   : Char    = v.cast[Char]

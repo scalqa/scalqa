@@ -43,8 +43,6 @@ object Region:
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Background = region.Background.opaque.`type`; transparent inline def Background = region.Background
 
-package region:
-  type Background = region.Background.opaque.`type`
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

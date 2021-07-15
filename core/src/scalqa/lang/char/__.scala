@@ -11,7 +11,7 @@ object Char extends char.custom.Containers[Char]:
   transparent inline def G      = char.G
   type _methods   = char._methods
 
-package char:
+package object char:
   private[scalqa] type SELF = Char;             private[scalqa] inline def SELF = lang.Char
   private[scalqa] type RAW  = Any.Raw.Char
 

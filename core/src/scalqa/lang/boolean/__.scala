@@ -7,7 +7,7 @@ object Boolean extends boolean.custom.Containers[Boolean]:
   transparent inline def G      = boolean.G
   type _methods   = boolean._methods;
 
-package boolean:
+package object boolean:
   private[scalqa] type SELF = Boolean;             private[scalqa] inline def SELF = lang.Boolean
   private[scalqa] type RAW  = Any.Raw.Boolean
 

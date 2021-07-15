@@ -23,6 +23,7 @@ object Mutable:
   /**/                    def sealable[A](initSize: Int = J.initSize)  : Mutable[A] & Able.Seal = new z.mutable.AsSealable(apply[A](initSize))
   /**/                    def wrap[A](v: java.util.List[A])            : Mutable[A]             = z.as.JavaListWrap.Mutable[A](v)
   /**/                    def wrap[A](v:  Idx[A])                      : Mutable[A]             = v match{ case v:Idx.M[_] => v.cast[Idx.M[A]]; case v => new z.Unsupported_View.M[A](v)}
+  implicit inline         def implicitRequest[A](inline v: NEW)        : Mutable[A]             = apply[A]()
 
   extension[A](x: Mutable[A])
     /**/                  def updateFor(f: A => Boolean, value: A)            : Int             = { var c = 0; x.~.foreachIndexed((i, v) => if (f(v)) { c += 1; x.update(i, value) }); c }

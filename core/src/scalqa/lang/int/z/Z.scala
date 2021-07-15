@@ -3,7 +3,6 @@ package scalqa; package lang; package int; import language.implicitConversions
 import `val`.stream.Custom.Pipeline
 
 object  Z:
-
   abstract class Pipe[A<:RAW](override val base: Ref) extends G.~[A] with Pipeline
 
   object VoidStream extends G.~[Int] with Able.Size.Zero with Gen.Void:

@@ -11,7 +11,7 @@ object Float extends float.custom.Containers[Float]:
   transparent inline def G      = float.G
   type _methods   = float._methods
 
-package float:
+package object float:
   private[scalqa] type SELF = Float;             private[scalqa] inline def SELF = lang.Float
   private[scalqa] type RAW  = Any.Raw.Float
 

@@ -11,7 +11,7 @@ object Double extends double.custom.Containers[Double]:
   transparent inline def G      = double.G
   type _methods   = double._methods
 
-package double:
+package object double:
   private[scalqa] type SELF = Double;             private[scalqa] inline def SELF = lang.Double
   private[scalqa] type RAW  = Any.Raw.Double
 

@@ -19,11 +19,11 @@ class Pack[A<:RAW] private(_a: Array[SELF], sz: Int) extends ><[A] with Idx[A]:
   /**/                   def joinAll(vs: ~[A])        : Pack[A]     = vs.read_?.map(v => Pack.Buf(ar,sz+1,v,vs).mk) or this
 
 object Pack:
-  /**/            def fromVarArg[A<:RAW](v: A, vs: Seq[A])      : Pack[A] = new Pack(Array(v.real,vs.cast[Seq[SELF]] *))
-  inline          def fromArray [A<:RAW](v: Array[SELF])        : Pack[A] = fromArray(v,v.length)
-  /**/            def fromArray [A<:RAW](v: Array[SELF],sz: Int): Pack[A] = new Pack(v.copySize(sz),sz)
-  /**/            def fromStream[A<:RAW](v: ~[A])               : Pack[A] = void[A].joinAll(v)
-  @tn("getVoid")  def void      [A<:RAW]                        : Pack[A] = zVoid.cast[Pack[A]]; private object zVoid extends Pack(SELF.emptyArray) with Gen.Void
+  /**/                   def fromVarArg[A<:RAW](v: A, vs: Seq[A])      : Pack[A] = new Pack(Array(v.real,vs.cast[Seq[SELF]] *))
+  /**/            inline def fromArray [A<:RAW](v: Array[SELF])        : Pack[A] = fromArray(v,v.length)
+  /**/                   def fromArray [A<:RAW](v: Array[SELF],sz: Int): Pack[A] = new Pack(v.copySize(sz),sz)
+  /**/                   def fromStream[A<:RAW](v: ~[A])               : Pack[A] = void[A].joinAll(v)
+  @tn("getVoid")         def void      [A<:RAW]                        : Pack[A] = zVoid.cast[Pack[A]]; private object zVoid extends Pack(SELF.emptyArray) with Gen.Void
 
   implicit inline def implicitRequest[A<:RAW](inline v: \/)           : Pack[A] = void[A]
   implicit inline def implicitFromStream [A<:RAW](inline v: Stream[A]): Pack[A] = v.><

@@ -12,7 +12,7 @@ object _methods:
   type _copy      = X._copy[String]
   type _transform = X._transform[String]
 
-package _Methods:
+package object _Methods:
   private[_Methods] implicit inline def implicitToString[A<: String | Opaque.String](inline v: A): String = v.cast[String]
 
 /*___________________________________________________________________________

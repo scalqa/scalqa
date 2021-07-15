@@ -11,7 +11,7 @@ object Short extends short.custom.Containers[Short]:
   transparent inline def G      = short.G
   type _methods   = short._methods;
 
-package short:
+package object short:
   private[scalqa] type SELF = Short;             private[scalqa] inline def SELF = lang.Short
   private[scalqa] type RAW  = Any.Raw.Short
 

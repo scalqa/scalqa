@@ -11,7 +11,7 @@ object Int extends int.custom.Containers[Int]:
   transparent inline def G      = int.G
   type _methods   = int._methods
 
-package int:
+package object int:
   private[scalqa] type SELF = Int;             private[scalqa] inline def SELF = lang.Int
   private[scalqa] type RAW  = Any.Raw.Int
 

@@ -1,6 +1,7 @@
 package scalqa; package fx; package control; package text; import language.implicitConversions
 
 import javafx.scene.text.{ Font => JFont }
+import Text.Font
 
 object Font extends Abstract.Delegate.Opaque[Font, JFont]("Fx.Font"):
   def apply(family: String, size: Double) : Font = JFont.font(family, size)

@@ -1,6 +1,7 @@
 package scalqa; package fx; package control; package text; package inputControl; import language.implicitConversions
 
 import javafx.scene.control.TextFormatter.{ Change => JChange }
+import InputControl.Change
 
 object Change extends Abstract.Delegate.Opaque[Change, JChange]("Fx.Text.InputControl.Change"):
   //implicit def implicitFromJava(v: JChange) : Change  = apply(v)

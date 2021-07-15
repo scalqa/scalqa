@@ -32,7 +32,7 @@ object Merge:
         println()
      })
 
-  private def acceptable(v: J.Path) =  v.contains("scalqa","root.scala") || v.contains("ZZ.java") || v.contains("scalqa","lang") || v.contains("scalqa","gen")
+  private def acceptable(v: J.Path) =  v.contains("scalqa","package.scala") || v.contains("ZZ.java") || v.contains("scalqa","lang") || v.contains("scalqa","gen")
                               || v.contains("scalqa","val") || v.contains("scalqa","j") || v.contains("scalqa","fx")
 
 /*___________________________________________________________________________

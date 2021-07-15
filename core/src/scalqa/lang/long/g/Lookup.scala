@@ -15,6 +15,7 @@ object Lookup:
     def remove(key: A)        : Val.Opt[B]
 
   object Mutable:
+    implicit inline def implicitRequest[A<:RAW,B](inline v: NEW): Mutable[A,B] = new X.Basic(J.initSize)
     object X:
       class Basic[A<:RAW,B](iSz: Int) extends Lookup.Mutable[A,B]:
         private val real = new collection.mutable.LongMap[B](iSz)

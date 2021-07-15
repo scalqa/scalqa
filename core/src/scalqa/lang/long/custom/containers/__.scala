@@ -8,7 +8,7 @@ transparent trait Containers[A<:RAW]:
   @tn("Range")  type <>           = g.Range[A]
   /**/          type Opt          = G.Opt[A];                         final  val Opt        = C.Opt       .cast[C.Opt[A]]
   /**/          type Buffer       = G.Buffer[A]
-  /**/          type Collection   = G.Collection[A];                  inline def Collection = C.Collection.cast[C.Collection[A]]
+  /**/          type Collection   = G.Collection[A];                  final  val Collection = C.Collection.cast[C.Collection[A]]
   /**/          type Idx          = G.Idx[A];                         final  val Idx        = C.Idx       .cast[C.Idx[A]]
   @tn("Pack")   type ><           = G.><[A];            @tn("Pack")   inline def ><         = C.Pack      .cast[C.Pack[A]]
   /**/          type Lookup[B]    = G.Lookup[A,B];                    final  val Lookup     = C.Lookup    .cast[C.Lookup[A]]

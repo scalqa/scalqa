@@ -11,7 +11,7 @@ object Long extends long.custom.Containers[Long]:
   transparent inline def G      = long.G
   type _methods   = long._methods
 
-package long:
+package object long:
   private[scalqa] type SELF = Long;          private[scalqa] inline def SELF = lang.Long
   private[scalqa] type RAW  = Any.Raw.Long
 

@@ -20,10 +20,6 @@ object Style extends String.Custom.Data[Style]("Fx.Style"):
   transparent inline def PseudoClass = style.PseudoClass;   type PseudoClass = style.PseudoClass.opaque.`type`
   transparent inline def PseudoGroup = style.PseudoGroup;   type PseudoGroup = style.PseudoGroup
 
-package style:
-  type Class       = style.Class.opaque.`type`
-  type PseudoClass = style.PseudoClass.opaque.`type`
-
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API

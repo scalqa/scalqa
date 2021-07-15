@@ -26,8 +26,9 @@ class Buffer[A<:RAW](_a: Array[Int], _sz: Int) extends Val.Buffer[A] with Idx.Mu
   @tn("pack")  override def ><                              : Pack[A]        = Pack.fromArray(ar,sz)
 
 object Buffer:
-  /**/   def accessible[A<:RAW](use: Array[Int], usedSize: Int)   : Buffer[A] & Able.Access[Array[Int]] = zAccessible[A](use,usedSize)
-  inline def accessible[A<:RAW](inline initSize: Int = J.initSize): Buffer[A] & Able.Access[Array[Int]] = accessible(new Array[Int](initSize),0)
+  /**/            def accessible[A<:RAW](use: Array[Int], usedSize: Int)   : Buffer[A] & Able.Access[Array[Int]] = zAccessible[A](use,usedSize)
+  /**/     inline def accessible[A<:RAW](inline initSize: Int = J.initSize): Buffer[A] & Able.Access[Array[Int]] = accessible(new Array[Int](initSize),0)
+  implicit inline def implicitRequest[A<:RAW](inline v: NEW)               : Buffer[A]                           = new Buffer()
 
   // ************************************************************************************************************************
   private class zAccessible[A<:RAW](a: Array[Int], s: Int) extends Buffer[A](a,s) with Able.Access[Array[Int]]:

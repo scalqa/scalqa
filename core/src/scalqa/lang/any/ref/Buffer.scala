@@ -25,8 +25,9 @@ class Buffer[A](_a: Array[AnyRef], _s: Int) extends Val.Buffer[A]:
   @tn("pack")            def ><                         : ><[A]         = `val`.Pack.fromArray(ar,sz)
 
 object Buffer:
-  /**/   def accessible[A](use: Array[Ref], usedSize: Int)   : Buffer[A] & Able.Access[Array[Ref]] = zAccessible[A](use,usedSize)
-  inline def accessible[A](inline initSize: Int = J.initSize): Buffer[A] & Able.Access[Array[Ref]] = accessible(new Array[Ref](initSize),0)
+  /**/            def accessible[A](use: Array[Ref], usedSize: Int)   : Buffer[A] & Able.Access[Array[Ref]] = zAccessible[A](use,usedSize)
+  /**/     inline def accessible[A](inline initSize: Int = J.initSize): Buffer[A] & Able.Access[Array[Ref]] = accessible(new Array[Ref](initSize),0)
+  implicit inline def implicitRequest[A](inline v: NEW)               : Buffer[A]                           = new Buffer()
 
   // ************************************************************************************************************************
   private class zAccessible[A](a: Array[Ref], s: Int) extends Buffer[A](a,s) with Able.Access[Array[Ref]]:

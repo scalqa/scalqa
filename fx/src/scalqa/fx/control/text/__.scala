@@ -1,6 +1,6 @@
 package scalqa; package fx; package control; import language.implicitConversions
 
-import Fx.Font
+import Text.Font
 
 class Text(s: String.Opt = \/) extends Shape:
   protected def _createReal: REAL = s.map(new REAL(_)) or new REAL
@@ -20,9 +20,6 @@ object Text:
   type Field        = text.Field;              /*transparent inline def*/ val Field        = text.Field
   type Area         = text.Area;               /*transparent inline def*/ val Area         = text.Area
   type Font         = text.Font.opaque.`type`; /*transparent inline def*/ val Font         = text.Font
-
-package text:
-  type Font         = text.Font.opaque.`type`
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

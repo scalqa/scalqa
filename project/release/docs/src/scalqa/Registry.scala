@@ -32,7 +32,7 @@ object Registry:
     true
 
   def register(m: Member): Member =
-    if(update(m) && m.kind.isClassLike && m.name != "__$package")
+    if(update(m) && m.kind.isClassLike && !m.name.contains("package"))
       try{
         val id = m.dri.id.mid
         val mid = modules.get_?(id).drop(_.main.id == m.id).map(v => Module(v.main,m)) or Module(m)

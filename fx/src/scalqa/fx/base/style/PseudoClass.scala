@@ -1,6 +1,7 @@
 package scalqa; package fx; package base; package style; import language.implicitConversions
 
 import javafx.css.{ PseudoClass => JPseudoClass }
+import Style.PseudoClass
 
 object PseudoClass extends Abstract.Delegate.Opaque[PseudoClass,JPseudoClass]("Fx.Style.PseudoClass"):
   inline   def apply(s: String)             : PseudoClass = JPseudoClass.getPseudoClass(s).cast[PseudoClass]

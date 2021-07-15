@@ -1,5 +1,7 @@
 package scalqa; package fx; package base; package style; import language.implicitConversions
 
+import Style.PseudoClass
+
 class PseudoGroup protected[style] (val classes: ><[PseudoClass]):
   private def grp(sq: Seq[Boolean])               : Int   = sq.~.findPosition_?(b => b) or sq.size
 

@@ -8,6 +8,7 @@ object Request:
   @tn("VOID")    type \/         = request.VOID;     @tn("VOID") inline def \/          = request.VOID
   /**/           type DEFAULT    = request.DEFAULT;              inline def DEFAULT     = request.DEFAULT
   /**/           type ALL        = request.ALL;                  inline def ALL         = request.ALL
+  /**/           type NEW        = request.NEW;                  inline def NEW         = request.NEW
   /**/           type EMPTY      = request.EMPTY;                inline def EMPTY       = request.EMPTY
   /**/           type CURRENT    = request.CURRENT;              inline def CURRENT     = request.CURRENT
   /**/           type LEFT       = request.LEFT;                 inline def LEFT        = request.LEFT

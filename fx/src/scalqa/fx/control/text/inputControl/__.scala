@@ -1,6 +1,6 @@
 package scalqa; package fx; package control; package text; import language.implicitConversions
 
-import inputControl.Change
+import InputControl.Change
 
 abstract class InputControl(initialTextO: String.Opt = \/) extends Control:
   protected type REAL <: javafx.scene.control.TextInputControl
@@ -46,9 +46,6 @@ abstract class InputControl(initialTextO: String.Opt = \/) extends Control:
 
 object InputControl:
   type Change = inputControl.Change.opaque.`type`; transparent inline def Change = inputControl.Change
-
-package inputControl:
-  type Change = inputControl.Change.opaque.`type`
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

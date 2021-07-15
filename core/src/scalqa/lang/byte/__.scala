@@ -11,7 +11,7 @@ object Byte extends byte.custom.Containers[Byte]:
   transparent inline def G      = byte.G
   type _methods   = byte._methods;
 
-package byte:
+package object byte:
   private[scalqa] type SELF = Byte;             private[scalqa] inline def SELF = lang.Byte
   private[scalqa] type RAW  = Any.Raw.Byte
 

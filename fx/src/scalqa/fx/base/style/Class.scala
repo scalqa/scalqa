@@ -1,6 +1,8 @@
 package scalqa; package fx; package base; package style; import language.implicitConversions
 
-object Class extends String.Custom.Data[style.Class]("Fx.Style.Class"):
+import Style.Class
+
+object Class extends String.Custom.Data[Class]("Fx.Style.Class"):
   /**/     inline def apply(inline v: String)             : Class   = v.asOpaque[Class]
   implicit inline def implicitFromString(inline v: String): Class   = apply(v)
 

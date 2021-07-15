@@ -1,16 +1,11 @@
 import language.implicitConversions
 
-package object scalqa:
+package object
+scalqa:
   export scalqa.Lang.*
   export scalqa.Gen.*
   export scalqa.gen.Request.*
   export scalqa.j.vm.Predef.{ given }
-
-//  export scalqa.Val.{ ~ as _, Idx as _, * }
-//  @tn("Stream") type ~[+A] = Val.~[A]
-//  //@tn("Stream") transparent inline def ~~ = `val`.Stream
-//  @tn("Stream") val ~~    = Val.~
-//  /**/          transparent inline def Idx        = `val`.Idx;                       type Idx[+A]        = `val`.Idx[A]
 
   @tn("Stream")                    val ~~         = `val`.Stream;      @tn("Stream") type ~[A]           = `val`.Stream[A]
   @tn("Range")  transparent inline def <>         = `val`.Range;       @tn("Range")  type <>[A]          = `val`.Range[A]
