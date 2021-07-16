@@ -58,15 +58,15 @@ ___________________________________________________________________________*/
 
     String.Builder is a zero overhead opaque wrap of java.lang.StringBuilder. The "add" methods handle primitives without boxing.
 
-@def +=        -> Alias for add
-@def +=@       -> Alias for addAt
-@def add       -> Append
-@def addAt     -> Insert at position
-@def charAt    -> Char at position
-@def remove_<> -> Remove range
-@def removeAt  -> Remove at position
-@def size      -> Added char count
-@def isEmpty   -> Zero size check
-@def makeString-> Create String \n  Same as "toString"
+@def +=         -> Alias for add
+@def +=@        -> Alias for addAt
+@def add        -> Append
+@def addAt      -> Insert at position
+@def charAt     -> Char at position
+@def remove_<>  -> Remove range
+@def removeAt   -> Remove at position
+@def size       -> Added char count
+@def isEmpty    -> Zero size check
+@def makeString -> Create String \n  Same as "toString"
 
 */
