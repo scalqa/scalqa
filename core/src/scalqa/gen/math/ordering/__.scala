@@ -5,14 +5,14 @@ import scala.math.{ Ordering as ORD }
 trait Ordering[A] extends scala.math.Ordering[A]:
 
   override def compare(x:A,y:A) : Int
-  /**/                  def join(c: ORD[A])                : ORD[A]      = if (this.^.isVoid) c.cast[Ordering[A]] else if (c.^.isVoid) this else z.View.Joined[A](this, c)
-  @tn("_join")          def +   (c: ORD[A])                : ORD[A]      = this.join(c)
-  @tn("rank_View")      def rank_^(fun: A => Int)          : ORD[A]      = z.View.ByRank[A](this, fun)
-  @tn("opt_View")       def opt_^(voidPosition: Int)       : ORD[Opt[A]] = z.View.Option[A](this, voidPosition)
+  /**/                  def join(c: ORD[A])                     : ORD[A]      = if (this.^.isVoid) c else if (c.^.isVoid) this else z.View.Joined[A](this, c)
+  @tn("_join")          def +   (c: ORD[A])                     : ORD[A]      = this.join(c)
+  @tn("rank_View")      def rank_^(fun: A => Int)               : ORD[A]      = z.View.ByRank[A](this, fun)
+  @tn("opt_View")       def opt_^(voidPosition: Int)            : ORD[Opt[A]] = z.View.Option[A](this, voidPosition)
   @tn("voidFirst_View") def voidFirst_^(using Given.VoidTag[A]) : ORD[A]      = z.View.VoidPositionFirst[A](this)
   @tn("voidLast_View")  def voidLast_^ (using Given.VoidTag[A]) : ORD[A]      = z.View.VoidPositionLast[A](this)
-  override              def reverse                        : ORD[A]      = z.View.Reversed[A](this)
-  override              def on[U](f: U => A)               : ORD[U]      = z.View.Fun[A,U](this,f)
+  override              def reverse                             : ORD[A]      = z.View.Reversed[A](this)
+  override              def on[U](f: U => A)                    : ORD[U]      = z.View.Fun[A,U](this,f)
 
 
 object Ordering:

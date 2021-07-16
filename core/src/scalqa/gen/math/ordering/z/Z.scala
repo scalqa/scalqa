@@ -19,7 +19,7 @@ object Z:
   // ------------------------------------------------------------------------------------------------------------------
   import scala.math.{ Ordering as SMO }
 
-  def join[A](x: SMO[A], c: SMO[A])                         : SMO[A]           = if (x.^.isVoid) c.cast[Ordering[A]] else if (c.^.isVoid) x else z.View.Joined[A](x, c)
+  def join[A](x: SMO[A], c: SMO[A])                         : SMO[A]           = if (x.^.isVoid) c else if (c.^.isVoid) x else z.View.Joined[A](x, c)
   def rank_View[A](x: SMO[A],fun: A => Int)                 : Ordering[A]      = z.View.ByRank[A](x, fun)
   def opt_View[A](x: SMO[A],voidPosition: Int)              : Ordering[Opt[A]] = z.View.Option[A](x, voidPosition)
   def voidFirst_View[A](x: SMO[A])  (using Given.VoidTag[A]): Ordering[A]      = z.View.VoidPositionFirst[A](x)
