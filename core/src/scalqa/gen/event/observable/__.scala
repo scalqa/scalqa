@@ -4,8 +4,8 @@ trait Observable:
   protected def onObservableChange[U](l: () => U): Event.Control
 
 object Observable:
-  /**/            val \/                           : Observable = zVoid
-  implicit inline def implicitRequest(inline v: \/): Observable = \/
+  @tn("getVoid")  def void                         : Observable = zVoid
+  implicit inline def implicitRequest(inline v: \/): Observable = void
 
   def onObservableChange[U](v: Observable)(l: () => U): Event.Control = v.onObservableChange(l)
 
@@ -26,7 +26,7 @@ ___________________________________________________________________________*/
 
        `General Observable` is the root interface of all observable types.
 
-       Note: Its only method is protected, but can be accessed through companion method
+       Note: Its only method is protected (because it is to be used by tools), but can be accessed through companion method
 
        ```
           val pro = Pro.OM[Int](0)

@@ -1,6 +1,6 @@
 package scalqa; package lang; package string; package custom; import language.implicitConversions
 
-import string.{ _Methods as X }
+import `type`.{ _Methods as X }
 
 abstract class Type[A<:Opaque.String](typeName: String) extends Any.Ref.Custom.Type[A,String](typeName) with Type._methods[A]:
   given ordering : Ordering[A] = String.ordering.cast[Ordering[A]]
@@ -16,10 +16,10 @@ object Type:
   transparent trait _methods[A<:Opaque.String] extends X._evaluate[A] with X._modify[A] with X._copy[A] with X._transform[A]
 
   object _methods:
-    trait _evaluate [A<:Opaque.String] extends X._evaluate[A]
-    trait _modify   [A<:Opaque.String] extends X._modify[A]
-    trait _copy     [A<:Opaque.String] extends X._copy[A]
-    trait _transform[A<:Opaque.String] extends X._transform[A]
+    type _evaluate [A<:Opaque.String] = X._evaluate[A]
+    type _modify   [A<:Opaque.String] = X._modify[A]
+    type _copy     [A<:Opaque.String] = X._copy[A]
+    type _transform[A<:Opaque.String] = X._transform[A]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

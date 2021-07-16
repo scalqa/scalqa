@@ -44,7 +44,7 @@ ___________________________________________________________________________*/
     ```
        val intToChar: ReversibleFunction[Int,Char] = ReversibleFunction(i => ('A' + i).toChar, _ - 'A')
 
-       val list:  Idx.M[Int] = Stream(0, 2, 4).toBuffer
+       val list:  Idx.M[Int] = ~~(0, 2, 4).toBuffer
        val view:  Idx.M[Char] = list.mutableMap_^(intToChar)
 
        list.~.TP     // Prints ~(0, 2, 4)

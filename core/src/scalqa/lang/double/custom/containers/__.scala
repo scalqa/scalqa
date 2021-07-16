@@ -42,7 +42,7 @@ ___________________________________________________________________________*/
 @val  Opt        ->  Type companion \n\n Holds methods to construct type instances
 @type Buffer     ->  Specialized buffer \n\n Already parameterized generic buffer
 @type Collection ->  Specialized collection \n\n Already parameterized generic collection
-@def  Collection ->  Type companion \n\n Holds methods to construct type instances
+@val  Collection ->  Type companion \n\n Holds methods to construct type instances
 @type Idx        ->  Specialized indexed collection \n\n Already parameterized generic indexed collection
 @val  Idx        ->  Type companion \n\n Holds methods to construct type instances
 @type ><         ->  Specialized pack\n\n Already parameterized generic immutable collection

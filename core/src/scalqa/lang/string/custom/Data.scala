@@ -1,6 +1,6 @@
 package scalqa; package lang; package string; package custom; import language.implicitConversions
 
-import string.{ _Methods as X }
+import `type`.{ _Methods as X }
 
 abstract class Data[A<:Opaque.String](typeName: String) extends Type[A](typeName) with Any.Ref.Custom.Containers[A]
 

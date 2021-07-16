@@ -97,14 +97,6 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
   def memberInfo(m: Member): Seq[AppliedTag] =
     var comment = m.deepDocs
 
-//    if(m.name == "clear" && m.dri.tag.contains("idx.Mutable"))
-//      "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%".tp
-//      m.dri.tag.tp
-//      comment.tp
-//      m.kind.tp
-//      m.origin.tp
-//      m.origin.override_?.map_?(_.overridenMembers.~.read_?).map(_.dri).map_?(Registry.member_?).map_?(_.members.~.find_?(_.name == m.name)).map(_.docs).tp
-
     val bodyContents = comment.fold(Nil)(e => renderDocPart(e.body) :: Nil)
 
     Seq(

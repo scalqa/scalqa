@@ -17,7 +17,7 @@ object Ordered:
     extension(inline x: A)
       @tn("range")          inline def <> (inline to:A)   : G.<>[A] = new G.<>[A](x,to,true)
       @tn("rangeX")         inline def <>>(inline to:A)   : G.<>[A] = new G.<>[A](x,to,false)
-      @tn("rangeSized")     inline def <>=(inline sz:Int) : G.<>[A] = new G.<>[A](x,sz)
+      @tn("rangeOfSize")    inline def <>=(inline sz:Int) : G.<>[A] = new G.<>[A](x,sz)
       /**/            infix inline def atLeast(v: A)      : A       = {val a=x; if(a.real > v.real) a else v }
       /**/            infix inline def atMost (v: A)      : A       = {val a=x; if(a.real < v.real) a else v }
 

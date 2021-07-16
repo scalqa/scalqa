@@ -1,16 +1,16 @@
 package scalqa; package lang; package string; import language.implicitConversions
 
-import string.{ _Methods as X }
+import custom.`type`.{ _Methods as X }
 
 transparent trait _methods extends X._evaluate[String] with X._modify[String] with X._copy[String] with X._transform[String]:
   extension(inline x: String)
     inline def Problem        : Result.Problem = Result.Problem(x)
 
 object _methods:
-  type _evaluate  = X._evaluate[String]
-  type _modify    = X._modify[String]
-  type _copy      = X._copy[String]
-  type _transform = X._transform[String]
+  trait _evaluate  extends X._evaluate[String]
+  trait _modify    extends X._modify[String]
+  trait _copy      extends X._copy[String]
+  trait _transform extends X._transform[String]
 
 package object _Methods:
   private[_Methods] implicit inline def implicitToString[A<: String | Opaque.String](inline v: A): String = v.cast[String]

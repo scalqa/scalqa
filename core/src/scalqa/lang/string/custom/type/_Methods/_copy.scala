@@ -1,17 +1,17 @@
-package scalqa; package lang; package string; package _Methods; import language.implicitConversions
+package scalqa; package lang; package string; package custom; package `type`; package `_Methods`; import language.implicitConversions
 
 transparent trait _copy[A<: String | Opaque.String]:
 
   extension(inline x: A)
-    inline def take_<>(s:Int, sz:Int)                                                             : A   = x.substring(s,s+sz).cast[A]
-    inline def take_<>(r: Int.<>)                                                                 : A   = x.substring(r.start, r.endX).cast[A]
-    inline def takeFirst(inline cnt: Int)                                                         : A   = x.substring(0, cnt).cast[A]
+    @tn("take_Range") inline def take_<>(start:Int, inline size:Int)                              : A   = x.substring(start,start+size).cast[A]
+    @tn("take_Range") inline def take_<>(r: Int.<>)                                               : A   = x.substring(r.start, r.endX).cast[A]
+    /**/              inline def takeFirst(inline cnt: Int)                                       : A   = x.substring(0, cnt).cast[A]
   extension(x: A)
-    inline def takeLast(cnt: Int)                                                                 : A   = x.substring(x.length - cnt, x.length).cast[A]
-    inline def drop_<>(s:Int, sz:Int)                                                             : A   = (x.substring(0, s) + x.substring(s+sz)).cast[A]
-    inline def drop_<>(i: Int.<>)                                                                 : A   = (x.substring(0, i.start) + x.substring(i.endX)).cast[A]
-    inline def dropFirst(inline cnt: Int)                                                         : A   = x.substring(cnt).cast[A]
-    inline def dropLast (inline cnt: Int)                                                         : A   = x.substring(0, x.length - cnt).cast[A]
+    /**/              inline def takeLast(inline cnt: Int)                                        : A   = x.substring(x.length - cnt, x.length).cast[A]
+    @tn("drop_Range") inline def drop_<>(start:Int, inline size:Int)                              : A   = (x.substring(0, start) + x.substring(start+size)).cast[A]
+    @tn("drop_Range") inline def drop_<>(i: Int.<>)                                               : A   = (x.substring(0, i.start) + x.substring(i.endX)).cast[A]
+    /**/              inline def dropFirst(inline cnt: Int)                                       : A   = x.substring(cnt).cast[A]
+    /**/              inline def dropLast (inline cnt: Int)                                       : A   = x.substring(0, x.length - cnt).cast[A]
   extension(inline x: A)
     inline def takeBefore    (inline v:A|String, inline dflt:Opt[A]= \/, inline from:Int.Opt = \/): A   = Z.takeBefore    (x.cast[String],v.cast[String],dflt.cast[Opt[String]],from).cast[A]
     inline def takeBeforeLast(inline v:A|String, inline dflt:Opt[A]= \/, inline from:Int.Opt = \/): A   = Z.takeBeforeLast(x.cast[String],v.cast[String],dflt.cast[Opt[String]],from).cast[A]
@@ -31,9 +31,9 @@ ___________________________________________________________________________*/
 
 @def takeFrom -> Copy end
 
-       Copies String from the position where the specified `x` found
+       Copies String from the position where the specified `v` found
 
-       If no x found, `dflt` x is returned, or original if dflt is void
+       If no v found, `dflt` v is returned, or original if dflt is void
        ```
            "abcdefg".takeFrom("cd") TP // Prints: cdefg
        ```
@@ -42,9 +42,9 @@ ___________________________________________________________________________*/
 
 @def takeFromLast -> Copy end
 
-       Copies String from the last position the specified `x` found
+       Copies String from the last position the specified `v` found
 
-       If no x found, `dflt` x is returned, or original if dflt is void.
+       If no v found, `dflt` v is returned, or original if dflt is void.
        ```
            "abcd_abcd_abcd".takeFromLast("ab") TP // Prints: abcd
        ```
@@ -53,9 +53,9 @@ ___________________________________________________________________________*/
 
 @def takeAfter ->  Copy end
 
-       Copies String from the position where the specified `x` found plus the length of the `x`
+       Copies String from the position where the specified `v` found plus the length of the `v`
 
-       If no x found, `dflt` x is returned, or original if dflt is void
+       If no v found, `dflt` v is returned, or original if dflt is void
        ```
            "abcdefg".copyAfter("cd") TP // Prints: efg
        ```
@@ -64,9 +64,9 @@ ___________________________________________________________________________*/
 
 @def takeAfterLast -> Copy end
 
-       Copies String from the last position the specified `x` found plus the length of the `x`
+       Copies String from the last position the specified `v` found plus the length of the `v`
 
-       If no x found, `dflt` x is returned, or original if dflt is void.
+       If no v found, `dflt` v is returned, or original if dflt is void.
        ```
            "abcd_abcd_abcd".takeFromLast("ab") TP // Prints: cd
        ```
@@ -75,9 +75,9 @@ ___________________________________________________________________________*/
 
 @def takeBefore ->  Copy start
 
-       Copies String from the beginning until specified `x` found
+       Copies String from the beginning until specified `v` found
 
-       If no x found, `dflt` x is returned, or original if dflt is void
+       If no v found, `dflt` v is returned, or original if dflt is void
        ```
            "abcdefg".takeBefore("ef") TP // Prints: abcd
        ```
@@ -86,9 +86,9 @@ ___________________________________________________________________________*/
 
 @def takeBeforeLast -> Copy start
 
-       Copies String from the beginning until the last occurrence of specified `x` found
+       Copies String from the beginning until the last occurrence of specified `v` found
 
-       If no x found, `dflt` x is returned, or original if dflt is void
+       If no v found, `dflt` v is returned, or original if dflt is void
 
        ```
            "abcd_abcd_abcd".copyBeforeLast("ab") TP // Prints: abcd_abcd_

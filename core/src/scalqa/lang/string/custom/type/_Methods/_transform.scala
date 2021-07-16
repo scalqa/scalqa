@@ -1,4 +1,4 @@
-package scalqa; package lang; package string; package _Methods; import language.implicitConversions
+package scalqa; package lang; package string; package custom; package `type`; package `_Methods`; import language.implicitConversions
 
 transparent trait _transform[A <: String | Opaque.String]:
 
@@ -33,11 +33,11 @@ ___________________________________________________________________________*/
      Prefixes first line with the tag, other lines with tag equal space
 
      ```
-        "abc\nde\nxyz".indent("Idxs: ").TP
+        "abc\\nde\\nxyz".indent("Idxs: ").TP
         // Output
         Idxs: abc
-               de
-               xyz
+              de
+              xyz
      ```
 
 
@@ -45,7 +45,7 @@ ___________________________________________________________________________*/
 
      Creates a [[Source]] of Strings representing lines (delimited by '\n') of this text
 
-     ```  "abc\n def\n xyz".line_~.TP // Prints ~(abc,  def,  xyz) ```
+     ```  "abc\\n def\\n xyz".line_~.TP // Prints ~(abc,  def,  xyz) ```
 
 
 
@@ -64,7 +64,7 @@ ___________________________________________________________________________*/
          "Text to Tokenize:".TP.TP
          str.TP.TP
          ("Token", "Range", "String").TP
-         str.replace("\n", "_").tokenized_~(Stream("000","111","222","333","444")).TP
+         str.tokenized_~(~~("000","111","222","333","444")).print
 
          // Output
 
@@ -76,7 +76,7 @@ ___________________________________________________________________________*/
          --- --------- -------------------
          ?   ?         ?
          --- --------- -------------------
-             0 <>> 11  12345678910
+              0 <>> 11 12345678910
          111 14 <>> 33 2131415161718192021
          222 36 <>> 55 3242526272829303132
          333 58 <>> 71 4353637383940

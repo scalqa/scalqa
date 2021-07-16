@@ -129,7 +129,7 @@ ___________________________________________________________________________*/
 
 @def ^ -> Self view
 
-    Returns additional [extra](_Methods/extra.html) library available to this instance
+    Returns additional ["view"](_Methods/_view.html) library available to this instance
 
     The most popular feature is doing some processing within context of an anonimous function
 

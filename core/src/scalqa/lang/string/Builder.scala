@@ -16,6 +16,7 @@ object Builder extends Any.Ref.Custom.Type[Builder,SB]("String.Builder"):
     /**/               inline def isEmpty                : Boolean = x.cast[SB].length == 0
     @tn("remove_Range")inline def remove_<>(v: Int.<>)   : Builder = x.cast[SB].delete(v.start,v.endX).cast[Builder]
     /**/               inline def removeAt(inline v: Int): Builder = x.cast[SB].deleteCharAt(v).cast[Builder]
+    /**/               inline def makeString             : String  = x.cast[SB].toString
 
     inline def add[T,A<:T|Boolean|Byte|Char|Short|Int|Long|Float|Double|CharSequence](inline v: A)(using inline tg:Given.DocTag[A]): Builder =
       inline v match
@@ -66,5 +67,6 @@ ___________________________________________________________________________*/
 @def removeAt  -> Remove at position
 @def size      -> Added char count
 @def isEmpty   -> Zero size check
+@def makeString-> Create String \n  Same as "toString"
 
 */

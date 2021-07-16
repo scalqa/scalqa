@@ -16,9 +16,6 @@ public final class ZZ{
     public  static final int count(){ cnt +=1; return cnt;}
     private static final scalqa.j.vm.z.ZZ_Access            Access                 = new scalqa.j.vm.z.ZZ_Access();
     private static final DefaultTag                         DefaultTag             = new DefaultTag();
-    public  static final scalqa.val.result.Problem          NullProblem            = new scalqa.val.result.problem.z.DefaultProblem("Null value");
-    public  static final scalqa.val.result.Problem          DefaultProblem         = new scalqa.val.result.problem.z.DefaultProblem("No Message");
-    public  static final scalqa.val.result.Problem          WithFilterProblem      = new scalqa.val.result.problem.z.DefaultProblem("For-Comprehension predicate is not satisfied");
     public  static final ExecutionContext                   Context                = Access.executionContext();
 
     public  static final Object                             None                   = Access.None();

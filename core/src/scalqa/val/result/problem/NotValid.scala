@@ -18,7 +18,6 @@ ___________________________________________________________________________*/
 
 @class NotValid -> ###
 
-       Problem indicating not valid state
-
+       A standard problem indicating not valid state
 
 */

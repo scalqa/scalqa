@@ -17,7 +17,6 @@ ___________________________________________________________________________*/
 /**
 @class Timeout -> ###
 
-       Problem indicating failure related to insufficient time
-
+       A standard problem indicating failure related to insufficient time
 
 */

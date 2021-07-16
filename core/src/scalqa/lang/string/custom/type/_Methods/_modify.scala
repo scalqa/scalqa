@@ -1,4 +1,4 @@
-package scalqa; package lang; package string; package _Methods; import language.implicitConversions
+package scalqa; package lang; package string; package custom; package `type`; package `_Methods`; import language.implicitConversions
 
 transparent trait _modify[A<: String | Opaque.String]:
 

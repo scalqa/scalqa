@@ -6,9 +6,9 @@ trait Problem:
   override             def toString    : String                     = "Problem(" + message + ")"
 
 object Problem:
-  inline def nullValue  : Problem = ZZ.NullProblem
-  inline def noMessage  : Problem = ZZ.DefaultProblem
-  inline def withFilter : Problem = ZZ.WithFilterProblem
+  val nullValue   : Problem = new z.DefaultProblem("Null value")
+  val noMessage   : Problem = new z.DefaultProblem("No Message")
+  val failedFilter: Problem = new z.DefaultProblem("For-Comprehension predicate is not satisfied")
 
   /**/     inline def apply(inline message: String = \/)    : Problem        = ZZ.problem(message)
   /**/            def apply(t: Throwable)                   : Problem        = t match{ case v: Problem => v; case v: z.ExceptionProblem.Wrap => v.deficiency; case v => z.ExceptionProblem(v)}

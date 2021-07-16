@@ -24,7 +24,7 @@ object Promise:
   def ready[A](v: A | Result.Problem)       : Promise[A] = v match {case p:Result.Problem => Z.Failed(p); case v => Z.Completed(v.cast[A])}
 
   extension[A](x: Promise[A])
-    inline def withFilter(inline f: A=>Boolean)(using inline c:Context): Promise[A] = x.take(f,_ => Result.Problem.withFilter)
+    inline def withFilter(inline f: A=>Boolean)(using inline c:Context): Promise[A] = x.take(f,_ => Result.Problem.failedFilter)
     inline def flatMap[B](f: A => Promise[B])  (using inline c:Context): Promise[B] = Z.flatMap(x,f)
     inline def foreach[U](inline f: A=>U)      (using inline c:Context): Unit       = x.onResult(_.forval(f))
 
@@ -73,6 +73,10 @@ ___________________________________________________________________________*/
 @def map_?? -> Map result
 
      Creates a new promise where future value will be converted to given function result
+
+@def mapWith -> Map with Promise
+
+     Creates a new promise, which will be completed based on promise created with the given function result.
 
 @def mapAll -> Change completly
 

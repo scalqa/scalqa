@@ -14,13 +14,11 @@ transparent trait _methods extends z.toPrimitives[Char]:
     /**/              inline def isDigit                           : Boolean      = Character.isDigit(x)
     /**/              inline def isLetter                          : Boolean      = Character.isLetter(x)
     /**/              inline def isLetterOrDigit                   : Boolean      = Character.isLetterOrDigit(x)
-    /**/              inline def isTitleCase                       : Boolean      = Character.isTitleCase(x)
-    /**/              inline def isLowerCase                       : Boolean      = Character.isLowerCase(x)
-    /**/              inline def isUpperCase                       : Boolean      = Character.isUpperCase(x)
+    /**/              inline def isLower                           : Boolean      = Character.isLowerCase(x)
+    /**/              inline def isUpper                           : Boolean      = Character.isUpperCase(x)
     /**/              inline def isWhitespace                      : Boolean      = Character.isWhitespace(x)
-    /**/              inline def toTitleCase                       : Char         = Character.toTitleCase(x)
-    /**/              inline def toLowerCase                       : Char         = Character.toLowerCase(x)
-    /**/              inline def toUpperCase                       : Char         = Character.toUpperCase(x)
+    /**/              inline def lower                             : Char         = Character.toLowerCase(x)
+    /**/              inline def upper                             : Char         = Character.toUpperCase(x)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -93,8 +91,6 @@ ___________________________________________________________________________*/
 @def isLowerCase     -> Lower case check         \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#isLowerCase(int) java.lang.Character.isLowerCase]]
 @def isUpperCase     -> Upper case check         \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#isUpperCase(int) java.lang.Character.isUpperCase]]
 @def isWhitespace    -> Whitespace check         \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#isWhitespace(int) java.lang.Character.isWhitespace]]
-@def toTitleCase     -> Make title case            \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#toTitleCase(int) java.lang.Character.toTitleCase]]
-@def toLowerCase     -> Make lower case            \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#toLowerCase(int) java.lang.Character.toLowerCase]]
-@def toUpperCase     -> Make upper case            \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#toUpperCase(int) java.lang.Character.toUpperCase]]
-
+@def lower           -> Make lower case          \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#toLowerCase(int) java.lang.Character.toLowerCase]]
+@def upper           -> Make upper case          \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#toUpperCase(int) java.lang.Character.toUpperCase]]
 */
