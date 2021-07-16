@@ -30,7 +30,7 @@ class GeneralData(m: Member) extends Data(m):
 
   // ---------------------------------------------------------------------------------------------------------------------------------------------------
   extension(x: String)    private def _propertyName          : String      = if(x.endsWith("_=")) x.dropLast(2) + "_*" else x + "_*"
-  extension(x: String)    private def _isAliasName           : Boolean     = x.charAt(0).isUpperCase && (x.length==1 || x.charAt(1).isLowerCase)
+  extension(x: String)    private def _isAliasName           : Boolean     = x.charAt(0).isUpper && (x.length==1 || x.charAt(1).isLower)
   extension(x: ~[Member]) private def _takeIfIn(s: ~[Member]): ~[Member]   = x.takeAllBy(_.name, s.map(_.name))
   extension(x: ~[Member]) private def _dropIfIn(s: ~[Member]): ~[Member]   = x.dropAllBy(_.name, s.map(_.name))
   extension(x: Member)    private def _isLocal               : Boolean     = x.inheritedFrom.filterNot(_.dri.id.startsWith(owner.id + "._")).isEmpty

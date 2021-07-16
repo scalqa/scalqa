@@ -29,5 +29,5 @@ trait _DRI:
 
     def isPrivate: Boolean =
       val s=(x.location+".").replace("$",".").replace("..",".").replace("..",".")
-      s.contains(".z.") || s.contains(".Z.") || s.indexOf_~(".z").map_?(i => s.charAt_?(i+2).take(_.isUpperCase)).read_?
+      s.contains(".z.") || s.contains(".Z.") || s.indexOf_~(".z").map_?(i => s.charAt_?(i+2).take(_.isUpper)).read_?
 
