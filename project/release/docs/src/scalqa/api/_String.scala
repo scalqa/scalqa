@@ -22,7 +22,7 @@ trait _String:
            .d("J.Util.Benchmark",2<>6).d("J.Util.Random",2<>6).d("J.Util.Concurrent",2<>6).d("J.Util.WeakRef",2<>6)
            .d("J.Vm.Priority",   2<>4).d("J.Vm.Setup",   2<>4).d("J.Vm.Memory",      2<>4).d("J.Vm.Host",     2<>4)
       v = v.r("Root.Package.").r(".G.Util.",".G.").r("Event.Observable","Observable")
-           .r("Fx.Control.","Fx.").r("Fx.Scene.","Fx.").r("Fx.Ui.","Fx.")
+           .r("Fx.Control.","Fx.").r("Fx.Scene.","Fx.").r("Fx.Base.","Fx.")
            .r("__.Package.")
            .r(".Custom.Containers.Companion.Pro.",".Pro.").r(".Custom.Containers.Companion.Collection.",".Collection.").r(".Custom.Containers.Companion.Idx.",".Idx.")
            .r(".Custom.Containers.Companion",".CFC").r(".Custom.Containers.",".").r(".CFC",".Custom.Containers.Companion")

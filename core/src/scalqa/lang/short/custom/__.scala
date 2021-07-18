@@ -4,7 +4,6 @@ object Custom:
   type Type[A<:Opaque.Short] = custom.Type[A];        transparent inline def Type       = custom.Type
   type Data[A<:Opaque.Short] = custom.Data[A];        transparent inline def Data       = custom.Data
   type Containers[A<:RAW]    = custom.Containers[A];  transparent inline def Containers = custom.Containers
-  /**/                                                transparent inline def Companion  = custom.containers.Companion
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

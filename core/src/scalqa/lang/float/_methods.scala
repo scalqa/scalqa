@@ -46,7 +46,7 @@ ___________________________________________________________________________*/
 
 @def <> ->  Range
 
-    Returns Float.Range from current to given value
+    Returns Float.<> from current to given value
     ```
       (1F <> 10F).TP  // Prints  1.0 <> 10.0
     ```
@@ -54,7 +54,7 @@ ___________________________________________________________________________*/
 
 @def <>> ->  Exclusive end range
 
-    Returns Float.Range from current to given value exclusive
+    Returns Float.<> from current to given value exclusive
     ```
       (1F <>> 10F).TP  // Prints  1.0 <>> 10.0
     ```

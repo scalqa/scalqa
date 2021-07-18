@@ -56,7 +56,7 @@ ___________________________________________________________________________*/
 
 @def <> ->  Range
 
-    Returns Long.Range from current to given value
+    Returns Long.<> from current to given value
     ```
       (1L <> 10L).TP  // Prints  1 <> 10
     ```
@@ -64,7 +64,7 @@ ___________________________________________________________________________*/
 
 @def <>> ->  Exclusive end range
 
-    Returns Long.Range from current to given value exclusive
+    Returns Long.<> from current to given value exclusive
     ```
       (1L <>> 10L).TP  // Prints  1 <> 9
     ```

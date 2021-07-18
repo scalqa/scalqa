@@ -11,8 +11,10 @@ sidebar:
           url: guide/introduction/H2O_Structure.html
         - title: Do Not Use toString
           url: guide/introduction/Do_Not_Use_toString.html
-        - title: Do Not Use toString
+        - title: Operator Types
           url: guide/introduction/Operator_Types.html
+        - title: Attached Constructors
+          url: guide/introduction/Attached_Constructors.html
         - title: Samples
           url: guide/introduction/Samples.html
     - title: Features
@@ -23,6 +25,8 @@ sidebar:
           url: guide/features/Stream.html
         - title: Option
           url: guide/features/Option.html
+        - title: Pack
+          url: guide/features/Pack.html
         - title: Specialized
           url: guide/features/Specialized.html
         - title: Data

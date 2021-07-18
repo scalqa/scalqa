@@ -38,7 +38,7 @@ ___________________________________________________________________________*/
 
 @def <> ->  Range
 
-    Returns Char.Range from current to given value
+    Returns Char.<> from current to given value
     ```
       ('a' <> 'd').TP  // Prints  a <> d
     ```
@@ -46,7 +46,7 @@ ___________________________________________________________________________*/
 
 @def <>> ->  Exclusive end range
 
-    Returns Char.Range from current to given value exclusive
+    Returns Char.<> from current to given value exclusive
     ```
       ('a' <>> 'd').TP  // Prints  a <> c
     ```
@@ -87,9 +87,8 @@ ___________________________________________________________________________*/
 @def isDigit         -> Is digit check           \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#isDigit(int) java.lang.Character.isDigit]]
 @def isLetter        -> Is letter check          \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#isLetter(int) java.lang.Character.isLetter]]
 @def isLetterOrDigit -> Is letter or digit check \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#isLetterOrDigit(int) java.lang.Character.isLetterOrDigit]]
-@def isTitleCase     -> Title case check         \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#isTitleCase(int) java.lang.Character.isTitleCase]]
-@def isLowerCase     -> Lower case check         \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#isLowerCase(int) java.lang.Character.isLowerCase]]
-@def isUpperCase     -> Upper case check         \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#isUpperCase(int) java.lang.Character.isUpperCase]]
+@def isLower         -> Lower case check         \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#isLowerCase(int) java.lang.Character.isLowerCase]]
+@def isUpper         -> Upper case check         \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#isUpperCase(int) java.lang.Character.isUpperCase]]
 @def isWhitespace    -> Whitespace check         \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#isWhitespace(int) java.lang.Character.isWhitespace]]
 @def lower           -> Make lower case          \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#toLowerCase(int) java.lang.Character.toLowerCase]]
 @def upper           -> Make upper case          \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#toUpperCase(int) java.lang.Character.toUpperCase]]

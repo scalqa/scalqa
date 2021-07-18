@@ -16,7 +16,7 @@ For example, the following outputs are not very informative, as they represent `
     println(tl)     // Prints: 12000000000
 ```   
 
-In Scalqa, instead of `.toString()` one has to always use method [`.tag`](../../api/scalqa/lang/any/_extension.html#tag), 
+In Scalqa, instead of `.toString()` one has to always use method [`.tag`](../../api/scalqa/lang/any/_methods.html#tag), 
 which is universally available for all types including opaques.
 
 ```scala
@@ -25,8 +25,8 @@ which is universally available for all types including opaques.
 ```
 
 Furthermore, there is a universal method to print debugging information 
-[`.tp`](../../api/scalqa/lang/any/_extension.html#tp) (pronounced as 'tip'), which stands for 'tag print'. 
-Same as [`.tag`](../../api/scalqa/lang/any/_extension.html#tag), [`.tp`](../../api/scalqa/lang/any/_extension.html#tp) is also 
+[`.tp`](../../api/scalqa/lang/any/_methods.html#tp) (pronounced as 'tip'), which stands for 'tag print'. 
+Same as [`.tag`](../../api/scalqa/lang/any/_methods.html#tag), [`.tp`](../../api/scalqa/lang/any/_methods.html#tp) is also 
 available for all types: 
 
 ```scala
@@ -34,9 +34,9 @@ available for all types:
     tl.tp           // Prints: 12 secs
 ```
 
-Note, [`.tp`](../../api/scalqa/lang/any/_extension.html#tp) must not appear in production code, 
+Note, [`.tp`](../../api/scalqa/lang/any/_methods.html#tp) must not appear in production code, 
 its presence indicates leftover debugging functionality. 
 
-Method [`.tp`](../../api/scalqa/lang/any/_extension.html#tp) is also widely used in examples, 
+Method [`.tp`](../../api/scalqa/lang/any/_methods.html#tp) is also widely used in examples, 
 so prepare to see a lot of it in this documentation.  
 

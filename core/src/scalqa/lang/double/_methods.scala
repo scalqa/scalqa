@@ -50,7 +50,7 @@ ___________________________________________________________________________*/
 
 @def <> ->  Range
 
-    Returns Double.Range from current to given value
+    Returns Double.<> from current to given value
     ```
       (1.0 <> 10.0).TP  // Prints  1.0 <> 10.0
     ```
@@ -58,7 +58,7 @@ ___________________________________________________________________________*/
 
 @def <>> ->  Exclusive end range
 
-    Returns Double.Range from current to given value exclusive
+    Returns Double.<> from current to given value exclusive
     ```
       (1.0 <>> 10.0).TP  // Prints  1.0 <>> 10.0
     ```

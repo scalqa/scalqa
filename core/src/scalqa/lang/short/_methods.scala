@@ -29,7 +29,7 @@ ___________________________________________________________________________*/
 
 @def <> ->  Range
 
-    Returns Short.Range from current to given value
+    Returns Short.<> from current to given value
     ```
       (1.Short <> 10.Short).TP  // Prints  1 <> 10
     ```
@@ -37,7 +37,7 @@ ___________________________________________________________________________*/
 
 @def <>> ->  Exclusive end range
 
-    Returns Short.Range from current to given value exclusive
+    Returns Short.<> from current to given value exclusive
     ```
       (1.Short <>> 10.Short).TP  // Prints  1 <> 9
     ```

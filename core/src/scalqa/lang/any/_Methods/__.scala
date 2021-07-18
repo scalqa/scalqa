@@ -172,7 +172,7 @@ ___________________________________________________________________________*/
 
 @def <>> ->  Exclusive end range
 
-    Returns Byte.Range from current to given value exclusive
+    Returns <> from current to given value exclusive
     ```
       ("AAA" <>> "BBB").TP  // Prints  AAA <>> BBB
     ```

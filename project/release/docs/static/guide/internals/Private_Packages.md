@@ -9,8 +9,9 @@ put in special packages named ".z". In simpler cases there is a "Z" object to ho
 Sometimes a type name would start from a lower case "z", like "zProvider", to show that it is private.
 Thus, 'Z' stands for 'private'.
 
-Note that "Z" objects are not necessarily inaccessible. Due to the fact that many methods are inlined, "Z" definitions must remain public to be inline able. 
-Nevertheless, they are not part of public API and must not be used directly.   
+Note that "Z" objects are not necessarily inaccessible. Due to the fact that many methods are inlined, "Z" definitions must
+remain public to be inline able. Nevertheless, they are not part of public API and must not be used directly, because 
+they can change in future releases.   
 
 "Z" definitions also simplify reading stack traces, where it is
 immediately clear which classes and packages are private implementations.   

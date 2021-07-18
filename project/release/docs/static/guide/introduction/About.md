@@ -2,7 +2,7 @@
 layout: doc-page
 title: About
 ---
-**Scalqa** stands for 'Scala Quick API'.  
+**Scalqa** stands for 'Scala Quick API'. 
 It can be used instead of more complex Scala native API, when simplicity and performance are a priority.
 
 Scalqa is built around fast proprietary collections, which support unboxed processing of primitive types.

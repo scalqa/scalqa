@@ -29,7 +29,7 @@ ___________________________________________________________________________*/
 
 @def <> ->  Range
 
-    Returns Byte.Range from current to given value
+    Returns Byte.<> from current to given value
     ```
       (1.Byte <> 10.Byte).TP  // Prints  1 <> 10
     ```
@@ -37,7 +37,7 @@ ___________________________________________________________________________*/
 
 @def <>> ->  Exclusive end range
 
-    Returns Byte.Range from current to given value exclusive
+    Returns Byte.<> from current to given value exclusive
     ```
       (1.Byte <>> 10.Byte).TP  // Prints  1 <> 9
     ```
