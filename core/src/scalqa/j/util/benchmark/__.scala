@@ -6,7 +6,7 @@ object Benchmark:
 
   // The test code is physically repeated 5 times (BUNDLED) to prevent JVM on picking favorite execution path
 
-  @tn("ed") inline def apply[A](inline targets: (() => A)*)(using Opt[Math[A]]): Unit =
+  @tn("numbered") inline def apply[A](inline targets: (() => A)*)(using Opt[Math[A]]): Unit =
     var s=sep1; val BUNDLE_1=targets; s=sep2; val BUNDLE_2=targets; val BUNDLE_3=targets; val BUNDLE_4=targets; val BUNDLE_5=targets
     execute[A]((BUNDLE_1.~ ++ BUNDLE_2 ++ BUNDLE_3 ++ BUNDLE_4 ++ BUNDLE_5).zipIndex.map((i,f) => ((i%BUNDLE_1.size+1).tag,f)).><,5)
 
