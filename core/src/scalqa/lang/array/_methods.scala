@@ -5,8 +5,8 @@ import gen.`given`.{ArrayTag, StreamTag, PackTag}
 transparent trait _methods:
 
   extension[A,STREAM<: Val.~.AnyType[A]](inline x:Array[A])
-    @tn("stream")     inline def ~                                                (using inline t: StreamTag[A,STREAM]): STREAM & Able.Size = z.stream.__(x,t)
-    @tn("stream")     inline def ~(inline sz:Int)                                 (using inline t: StreamTag[A,STREAM]): STREAM & Able.Size = z.stream.__(x,sz,t)
+    @tn("stream")     inline def ~                                                (using inline t: StreamTag[A,STREAM]): STREAM & Able.Size = z.Stream(x,t)
+    @tn("stream")     inline def ~(inline sz:Int)                                 (using inline t: StreamTag[A,STREAM]): STREAM & Able.Size = z.Stream(x,sz,t)
 
   extension[A,PACK<: Val.><.AnyType[A]](inline x:Array[A])
     @tn("pack")       inline def ><                                                   (using inline t: PackTag[A,PACK]): PACK    = z.pack(x,t)

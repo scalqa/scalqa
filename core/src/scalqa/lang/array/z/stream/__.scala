@@ -1,8 +1,9 @@
-package scalqa; package lang; package array; package z; package stream; import language.implicitConversions
+package scalqa; package lang; package array; package z; import language.implicitConversions
 
+import stream.As
 import gen.`given`.StreamTag
 
-object __ :
+object Stream:
 
   inline def apply[A,STREAM<: ~~.AnyType[A]](inline x:Array[A], inline t: StreamTag[A,STREAM]): STREAM & Able.Size =
     inline t match
