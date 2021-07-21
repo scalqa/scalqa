@@ -16,7 +16,7 @@ object sort:
               case _ : ArrayTag[A&Raw.Float,  Array[A&Raw.Float  ]] => float  (x.cast[Array[Float  ]],c.cast[Ordering[Float  ]])
               case _ : ArrayTag[A&Raw.Double, Array[A&Raw.Double ]] => double (x.cast[Array[Double ]],c.cast[Ordering[Double ]])
               case _ : ArrayTag[A&Ref,        Array[A&Ref        ]] => ref    (x.cast[Array[Ref    ]],c.cast[Ordering[Ref    ]])
-              case _                                               => any    (x.cast[Array[A      ]],c                          )
+              case _                                                => any    (x.cast[Array[A      ]],c                        )
 
   def any  [A](x: Array[A], c:Ordering[A]): Unit =
     x match
@@ -30,15 +30,15 @@ object sort:
        case x: Array[Short]      => short(x,c)
        case x: Array[Boolean]    => boolean(x,c)
 
-  def boolean(a:Array[Boolean],c:Ordering[Boolean])               : Unit = Collections.sort(BooleanList(a,0,a.length),c)
-  def byte   (a:Array[Byte],   c:Ordering[Byte])                  : Unit = if(c eq Byte.ordering)   Arrays.sort(a) else Collections.sort(ByteList  (a,0,a.length),c)
-  def char   (a:Array[Char],   c:Ordering[Char])                  : Unit = if(c eq Char.ordering)   Arrays.sort(a) else Collections.sort(CharList  (a,0,a.length),c)
-  def short  (a:Array[Short],  c:Ordering[Short])                 : Unit = if(c eq Short.ordering)  Arrays.sort(a) else Collections.sort(ShortList (a,0,a.length),c)
-  def int    (a:Array[Int],    c:Ordering[Int])                   : Unit = if(c eq Int.ordering)    Arrays.sort(a) else Collections.sort(IntList   (a,0,a.length),c)
-  def long   (a:Array[Long],   c:Ordering[Long])                  : Unit = if(c eq Long.ordering)   Arrays.sort(a) else Collections.sort(LongList  (a,0,a.length),c)
-  def float  (a:Array[Float],  c:Ordering[Float])                 : Unit = if(c eq Float.ordering)  Arrays.sort(a) else Collections.sort(FloatList (a,0,a.length),c)
-  def double (a:Array[Double], c:Ordering[Double])                : Unit = if(c eq Double.ordering) Arrays.sort(a) else Collections.sort(DoubleList(a,0,a.length),c)
-  def ref    (a:Array[Ref],    c:Ordering[Ref])                   : Unit = Collections.sort(RefList(a,0,a.length),c)
+  def boolean(a:Array[Boolean],c:Ordering[Boolean]) : Unit = Collections.sort(BooleanList(a,0,a.length),c)
+  def byte   (a:Array[Byte],   c:Ordering[Byte])    : Unit = if(c eq Byte.ordering)   Arrays.sort(a) else Collections.sort(ByteList  (a,0,a.length),c)
+  def char   (a:Array[Char],   c:Ordering[Char])    : Unit = if(c eq Char.ordering)   Arrays.sort(a) else Collections.sort(CharList  (a,0,a.length),c)
+  def short  (a:Array[Short],  c:Ordering[Short])   : Unit = if(c eq Short.ordering)  Arrays.sort(a) else Collections.sort(ShortList (a,0,a.length),c)
+  def int    (a:Array[Int],    c:Ordering[Int])     : Unit = if(c eq Int.ordering)    Arrays.sort(a) else Collections.sort(IntList   (a,0,a.length),c)
+  def long   (a:Array[Long],   c:Ordering[Long])    : Unit = if(c eq Long.ordering)   Arrays.sort(a) else Collections.sort(LongList  (a,0,a.length),c)
+  def float  (a:Array[Float],  c:Ordering[Float])   : Unit = if(c eq Float.ordering)  Arrays.sort(a) else Collections.sort(FloatList (a,0,a.length),c)
+  def double (a:Array[Double], c:Ordering[Double])  : Unit = if(c eq Double.ordering) Arrays.sort(a) else Collections.sort(DoubleList(a,0,a.length),c)
+  def ref    (a:Array[Ref],    c:Ordering[Ref])     : Unit = Collections.sort(RefList(a,0,a.length),c)
 
   class BooleanList(a: Array[Boolean],p:Int, val size:Int) extends java.util.AbstractList[Boolean]{def get(i:Int)=a(p+i); override def set(i:Int,v:Boolean)={val j=p+i; val o=a(j); a(j)=v; o}}
   class ByteList   (a: Array[Byte],   p:Int, val size:Int) extends java.util.AbstractList[Byte]   {def get(i:Int)=a(p+i); override def set(i:Int,v:Byte)   ={val j=p+i; val o=a(j); a(j)=v; o}}

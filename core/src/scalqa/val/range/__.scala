@@ -4,21 +4,22 @@ import gen.`given`.RangeTag
 
 abstract class Range[A] extends Able.Contain[A]:
   type THIS_TYPE <: Range[A]
-  /**/              def start                                            : A
-  /**/              def end                                              : A
-  /**/              def endIsIn                                          : Boolean
-  /**/              def ordering                                         : Ordering[A]
-  /**/              def join(v: A)                                       : THIS_TYPE
-  /**/              def join(v: Range[A])                                : THIS_TYPE
-  /**/              def overlaps( r: Range[A])                           : Boolean
-  @tn("overlap_Opt")def overlap_?(r: Range[A])                           : Opt[THIS_TYPE]
-  /**/              def step_~(f: A => A)                                : ~[A]                = z.StepStream(this, f)
-  /**/              def step_~(step: Int)(using Able.Sequence[A])        : ~[A]                = z.StepStream(this, step)
-  /**/              def contains(v: Range[A])                            : Boolean             = z.Ops.contains(this,v)
-  /**/              def contains(v: A)                                   : Boolean             = z.Ops.contains(this,v)
-  /**/              def isEmpty                                          : Boolean             = z.Ops.isEmpty(this)
-  override          def equals(v: Any)                                   : Boolean             = v.isInstanceOf[Range[_]] && {val r=v.cast[Range[A]]; this.contains(r) && r.contains(this)}
-  inline            def raw[RAW<:Range.RawType[A]](using inline s:RangeTag.Raw[A,RAW]) : RAW     = z.raw(this,s)
+  /**/              def start                                     : A
+  /**/              def end                                       : A
+  /**/              def endIsIn                                   : Boolean
+  /**/              def ordering                                  : Ordering[A]
+  /**/              def join(v: A)                                : THIS_TYPE
+  /**/              def join(v: Range[A])                         : THIS_TYPE
+  /**/              def overlaps( r: Range[A])                    : Boolean
+  @tn("overlap_Opt")def overlap_?(r: Range[A])                    : Opt[THIS_TYPE]
+  /**/              def step_~(f: A => A)                         : ~[A]                = z.StepStream(this, f)
+  /**/              def step_~(step: Int)(using Able.Sequence[A]) : ~[A]                = z.StepStream(this, step)
+  /**/              def contains(v: Range[A])                     : Boolean             = z.Ops.contains(this,v)
+  /**/              def contains(v: A)                            : Boolean             = z.Ops.contains(this,v)
+  /**/              def isEmpty                                   : Boolean             = z.Ops.isEmpty(this)
+  override          def equals(v: Any)                            : Boolean             = v.isInstanceOf[Range[_]] && {val r=v.cast[Range[A]]; this.contains(r) && r.contains(this)}
+  inline            def raw[RAW<:Range.RawType[A]]
+                             (using inline s:RangeTag.Raw[A,RAW]) : RAW                 = z.raw(this,s)
 
 object Range:
   type AnyType[A] = <>[A] | RawType[A]

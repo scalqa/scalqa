@@ -6,11 +6,11 @@ trait Selection[A] extends Idx[A] with Able.Doc:
   /**/                   def indexes           : Idx[Int]
   /**/                   def size              : Int       = indexes.size
   /**/                   def apply(i: Int)     : A         = target(indexes(i))
-  @tn("get_Opt")         def get_?             : Opt[A]    = indexes.head_?.map_?(target.at_?(_))
-//  /**/            inline def get               : A         = get_?.get
+  @tn("value_Opt")       def value_?           : Opt[A]    = indexes.head_?.map_?(target.at_?(_))
+  /**/            inline def value             : A         = value_?.get
   @tn("stream") override def ~                 : ~[A]      = indexes.~.map_?(target.at_?(_))
-  /**/                   def property(dflt: A) : Pro[A]    = new Pro[A] { def apply() = indexes.at_?(0).map(self.apply) or dflt }
-  /**/                   def doc              : Doc      = Doc(this) += ("indexes", indexes.~.makeString(","))
+  /**/                   def property(dflt: A) : Pro[A]    = new Pro[A] { def apply() = value_? or dflt }
+  /**/                   def doc               : Doc       = Doc(this) += ("indexes", indexes.~.makeString(","))
 
 object Selection:
   /**/            def apply[A](targetIndex: Idx[A], idx: Idx[Int]) : Selection[A]  = selection.Z.Basic(targetIndex,idx)
@@ -40,7 +40,7 @@ Lists selected values for some target indexed collection
 
        Get selected value at given index
 
-@def get_? -> Optional selected value
+@def value_? -> Optional selected value
 
        Returns first selected value or void option, if selection is empty
 

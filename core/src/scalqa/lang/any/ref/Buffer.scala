@@ -11,7 +11,7 @@ class Buffer[A](_a: Array[AnyRef], _s: Int) extends Val.Buffer[A]:
   protected              def array                      : Array[Ref]    = ar
   protected              def array_=(v: Array[Ref])     : Unit          = ar = v
   protected              def size_=(v:Int)              : Unit          = sz = v
-  protected       final  def mkSpace(sz:Int)            : Unit          = { ar=ar.copySize(ar.length * 2 max sz); }
+  protected       final  def mkSpace(sz:Int)            : Unit          = { ar=ar.copySize(ar.length * 2 atLeast sz); }
   private[scalqa]        def addAllRef(v: Val.~[A])     : Unit          = {v.size_?.forval(s=>{val ns=sz+s; if(ar.length<ns) mkSpace(ns); var i=sz; while(i<ns){ar(i)=v.read_?.cast[Ref]; i+=1}; sz=ns});v.FOREACH(add)}
   // -----------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**/                   def apply(i: Int)              : A             = ar(i).cast[A]

@@ -3,13 +3,13 @@ package scalqa; package gen; package request; import language.implicitConversion
 class MAX private() extends Request
 
 object MAX extends MAX:
-  implicit inline def implicitToChar  (v: MAX.type): Char   = Char.max
-  implicit inline def implicitToByte  (v: MAX.type): Byte   = Byte.max
-  implicit inline def implicitToShort (v: MAX.type): Short  = Short.max
-  implicit inline def implicitToInt   (v: MAX.type): Int    = Int.max
-  implicit inline def implicitToLong  (v: MAX.type): Long   = Long.max
-  implicit inline def implicitToFloat (v: MAX.type): Float  = Float.max
-  implicit inline def implicitToDouble(v: MAX.type): Double = Double.max
+  implicit inline def implicitToChar  (inline v: MAX.type): Char   = Char.max
+  implicit inline def implicitToByte  (inline v: MAX.type): Byte   = Byte.max
+  implicit inline def implicitToShort (inline v: MAX.type): Short  = Short.max
+  implicit inline def implicitToInt   (inline v: MAX.type): Int    = Int.max
+  implicit inline def implicitToLong  (inline v: MAX.type): Long   = Long.max
+  implicit inline def implicitToFloat (inline v: MAX.type): Float  = Float.max
+  implicit inline def implicitToDouble(inline v: MAX.type): Double = Double.max
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

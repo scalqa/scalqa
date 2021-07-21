@@ -12,17 +12,19 @@ object BigInteger extends Any.Ref.Custom.Data[BigInteger,JBigInteger]("BigIntege
   given ordering : Ordering[BigInteger] with
     def compare(x: BigInteger, y: BigInteger) = x.Number.compareTo(y.Number)
 
-  private inline def mk(inline v:BigInteger | Long): JBigInteger = inline v match{ case v:Long => JBigInteger.valueOf(v); case v => v.cast[JBigInteger]}
+  extension(inline x: BigInteger | Long)
+    private                 inline def mkReal                            : JBigInteger    = inline x match{ case _ : Long => JBigInteger.valueOf(x.cast[Long]); case _ => x.cast[JBigInteger]}
+
   extension(inline x: BigInteger)
-    @tn("greater")          inline def  >  (inline v: Long | BigInteger) : Boolean        = x.real.compareTo(mk(v)) >  0
-    @tn("greaterOrEqual")   inline def  >= (inline v: Long | BigInteger) : Boolean        = x.real.compareTo(mk(v)) >= 0
-    @tn("less")             inline def  <  (inline v: Long | BigInteger) : Boolean        = x.real.compareTo(mk(v)) <  0
-    @tn("lessOrEqual")      inline def  <= (inline v: Long | BigInteger) : Boolean        = x.real.compareTo(mk(v)) <= 0
-    @tn("plus")             inline def  +  (inline v: Long | BigInteger) : BigInteger     = x.real.add(mk(v)).asOpaque[BigInteger]
-    @tn("minus")            inline def  -  (inline v: Long | BigInteger) : BigInteger     = x.real.subtract(mk(v)).asOpaque[BigInteger]
-    @tn("multiply")         inline def  *  (inline v: Long | BigInteger) : BigInteger     = x.real.multiply(mk(v)).asOpaque[BigInteger]
-    @tn("divide")           inline def  /  (inline v: Long | BigInteger) : BigInteger     = x.real.divide(mk(v)).asOpaque[BigInteger]
-    @tn("remainder")        inline def  %  (inline v: Long | BigInteger) : BigInteger     = x.real.remainder(mk(v)).asOpaque[BigInteger]
+    @tn("greater")          inline def  >  (inline v: Long | BigInteger) : Boolean        = x.real.compareTo(v.mkReal) >  0
+    @tn("greaterOrEqual")   inline def  >= (inline v: Long | BigInteger) : Boolean        = x.real.compareTo(v.mkReal) >= 0
+    @tn("less")             inline def  <  (inline v: Long | BigInteger) : Boolean        = x.real.compareTo(v.mkReal) <  0
+    @tn("lessOrEqual")      inline def  <= (inline v: Long | BigInteger) : Boolean        = x.real.compareTo(v.mkReal) <= 0
+    @tn("plus")             inline def  +  (inline v: Long | BigInteger) : BigInteger     = x.real.add(v.mkReal).asOpaque[BigInteger]
+    @tn("minus")            inline def  -  (inline v: Long | BigInteger) : BigInteger     = x.real.subtract(v.mkReal).asOpaque[BigInteger]
+    @tn("multiply")         inline def  *  (inline v: Long | BigInteger) : BigInteger     = x.real.multiply(v.mkReal).asOpaque[BigInteger]
+    @tn("divide")           inline def  /  (inline v: Long | BigInteger) : BigInteger     = x.real.divide(v.mkReal).asOpaque[BigInteger]
+    @tn("remainder")        inline def  %  (inline v: Long | BigInteger) : BigInteger     = x.real.remainder(v.mkReal).asOpaque[BigInteger]
     /**/                    inline def abs                               : BigInteger     = x.real.abs().asOpaque[BigInteger]
     /**/                    inline def unary_-                           : BigInteger     = x.real.negate.asOpaque[BigInteger]
     /**/                    inline def sign                              : Int            = x.real.signum

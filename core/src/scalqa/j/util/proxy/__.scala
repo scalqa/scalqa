@@ -5,9 +5,9 @@ trait Proxy[+VALUE]:
 
 object Proxy:
   type JavaList[A]   = proxy.JavaList[A]
-  type Collection[A] = proxy.Collection[A];   inline def Collection  = proxy.Collection
-  type Idx[A]        = proxy.Idx[A];          inline def Idx         = proxy.Idx
-  type Lookup[A,B]   = proxy.Lookup[A,B];     inline def Lookup      = proxy.Lookup
+  type Collection[A] = proxy.Collection[A];   transparent inline def Collection  = proxy.Collection
+  type Idx[A]        = proxy.Idx[A];          transparent inline def Idx         = proxy.Idx
+  type Lookup[A,B]   = proxy.Lookup[A,B];     transparent inline def Lookup      = proxy.Lookup
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

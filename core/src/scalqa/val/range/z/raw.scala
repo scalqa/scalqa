@@ -31,7 +31,7 @@ object raw:
           case _ : RangeTag.Raw[A,Long   .G.<>[A & Raw.Long   ]] => long   [A & Raw.Long   ](x.cast[Range[A & Raw.Long   ]])
           case _ : RangeTag.Raw[A,Float  .G.<>[A & Raw.Float  ]] => float  [A & Raw.Float  ](x.cast[Range[A & Raw.Float  ]])
           case _ : RangeTag.Raw[A,Double .G.<>[A & Raw.Double ]] => double [A & Raw.Double ](x.cast[Range[A & Raw.Double ]])
-          case _                                            => J.illegalState()
+          case _                                                 => J.illegalState()
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

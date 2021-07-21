@@ -19,15 +19,18 @@ private[`val`] class ArrayPack[A](_a: Array[Ref], sz: Int) extends ><[A] with Ab
   /**/                   def doc                         : Doc              = Doc(this) += ("size", size) ++= (ar.length != sz) ? ("","Uncompacted") += ar.tag
   override               def compact                     : this.type        = {if(ar.length > sz) ar=ar.copySize(sz); this}
   /**/                   def toBuffer                    : Buffer[A]        = new Any.Ref.Buffer(ar.copySize(sz),sz)
-  /**/                   def joinAll(vs: ~[A])           : ><[A]            = vs.read_?.map(v => ArrayPack.Buf(ar,sz+1,v,vs).mk) or this
+  /**/                   def joinAll(vs: ~[A])           : ><[A]            = vs.read_?.map(v => ArrayPack.zBuf(ar,sz+1,v,vs).mk) or this
 
 object ArrayPack:
 
-  def fromStream[A](vs: ~[A]): ><[A] = vs.read_?.map(v => Buf(Ref.emptyArray,1,v,vs).mk) or \/
+  def fromStream[A](vs: ~[A]): ><[A] = vs.read_?.map(v => zBuf(Ref.emptyArray,1,v,vs).mk) or \/
 
-  private class Buf[A] private (a: Array[Ref],s:Int) extends Any.Ref.Buffer[A](a,s):
-    def this(a: Array[Ref], sz: Int, v: A, vs: ~[A]) = {
-      this(a.copySize(vs.size_?.map(sz + _) or sz + J.initSize).^(_(sz-1)=v.cast[Ref]), sz); addAll(vs) }
+  // *****************************************************************************************************
+  private class zBuf[A] private (a: Array[Ref],s:Int) extends Any.Ref.Buffer[A](a,s):
+    def this(a: Array[Ref], sz: Int, v: A, vs: ~[A]) =
+      this(a.copySize(vs.size_?.map(sz + _) or sz + J.initSize).^(_(sz-1)=v.cast[Ref]), sz)
+      addAll(vs)
+
     def mk: Pack[A] =
       val s=size; val a=array
       if(s==0) Pack.void else if(a.length==s || J.Setup.allowUncompactedPack) new ArrayPack(a,s) else new ArrayPack(a.copySize(s),s)

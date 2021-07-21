@@ -2,9 +2,9 @@ package scalqa; package `val`; package lookup; package stable; package z; import
 
 object Void extends Stable[Any,Any] with Gen.Void:
   type THIS_TYPE = Stable[Any,Any]
-  @tn("get_Opt")     def get_?(key: Any)           : Opt[Any]           = \/
-  @tn("pair_Stream") def pair_~                    : ~[(Any,Any)]       = \/
-  /**/               def size                      : Int                = 0
+  @tn("get_Opt")     def get_?(key: Any)           : Opt[Any]        = \/
+  @tn("pair_Stream") def pair_~                    : ~[(Any,Any)]    = \/
+  /**/               def size                      : Int             = 0
   /**/               def join(k: Any, v: Any)      : Stable[Any,Any] = Stable((k,v))
   /**/               def joinAll(v: ~[(Any, Any)]) : Stable[Any,Any] = Stable(v)
 

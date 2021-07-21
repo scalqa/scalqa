@@ -30,9 +30,9 @@ object StableSet:
 
     object Void extends StableSet[Any] with Gen.Void:
       type THIS_TYPE = StableSet[Any]
-      /**/            def contains(v: Any)  : Boolean      = false
-      /**/            def size              : Int          = 0
-      @tn("stream")   def ~                 : ~[Any]       = \/
+      /**/            def contains(v: Any)  : Boolean        = false
+      /**/            def size              : Int            = 0
+      @tn("stream")   def ~                 : ~[Any]         = \/
       /**/            def join(v: Any)      : StableSet[Any] = StableSet(v)
       /**/            def joinAll(v: ~[Any]): StableSet[Any] = StableSet(v)
 

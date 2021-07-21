@@ -12,7 +12,7 @@ class joinAllAt[A](p1: ~[A], pos: Int, p2: ~[A]) extends ~[A] with Custom.Pipeli
     else
       p2.read_? or_? { end = true; read_? }
 
-  override            def doc       = super.doc += ("position", pos)
+  override            def doc        = super.doc += ("position", pos)
   @tn("sizeLong_Opt") def sizeLong_? = p1.sizeLong_?.mix(p2.sizeLong_?, _ + _)
   /**/                def infoTree   = Doc.Tree(this.doc, Custom.Pipeline.infoTree(p1), Custom.Pipeline.infoTree(p2))
 

@@ -8,6 +8,7 @@ object Stream extends z.util._default with _build with _use:
   type RawType[A] = lang.boolean.g.Stream[A & Raw.Boolean] | lang.byte.g.Stream[A & Raw.Byte] | lang.char .g.Stream[A & Raw.Char]  | lang.short .g.Stream[A & Raw.Short]
                   | lang.int    .g.Stream[A & Raw.Int]     | lang.long.g.Stream[A & Raw.Long] | lang.float.g.Stream[A & Raw.Float] | lang.double.g.Stream[A & Raw.Double]
 
+  // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**/           inline def apply[A](inline v: A)                 : ~[A]             = z.a.VarArg.Stream_ofOne[A](v)
   /**/           inline def apply[A](inline v1: A, inline v2: A)  : ~[A]             = z.a.VarArg.Stream_ofTwo[A](v1, v2)
   /**/                  def apply[A](v1: A, v2: A, v3: A, vs: A*) : ~[A]             = if (vs.isEmpty) z.a.VarArg.Stream_ofThree[A](v1,v2,v3) else z.a.VarArg.Stream_ofMany[A](v1,v2,v3,vs)

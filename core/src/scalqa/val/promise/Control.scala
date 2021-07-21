@@ -1,7 +1,7 @@
 package scalqa; package `val`; package promise; import language.implicitConversions
 
 trait Control[A]:
-  def promise                          : Promise[A]
+  def promise                               : Promise[A]
   def complete(v: Result[A])                : Boolean
   def tryComplete(expression: => Result[A]) : Boolean     = try { complete(expression) } catch { case t: Throwable => complete(Result(Result.Problem(t))) }
 

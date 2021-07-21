@@ -16,7 +16,7 @@ object copySize:
               case _ : ArrayTag[A&Raw.Float,  Array[A&Raw.Float  ]] => Arrays.copyOf(x.cast[Array[Float  ]],sz).cast[ARRAY]
               case _ : ArrayTag[A&Raw.Double, Array[A&Raw.Double ]] => Arrays.copyOf(x.cast[Array[Double ]],sz).cast[ARRAY]
               case _ : ArrayTag[A&Ref,        Array[A&Ref        ]] => Arrays.copyOf(x.cast[Array[Ref    ]],sz).cast[ARRAY]
-              case _                                               =>           any(x.cast[Array[A      ]],sz).cast[ARRAY]
+              case _                                                =>           any(x.cast[Array[A      ]],sz).cast[ARRAY]
 
   def any[A](x: Array[A], sz:Int): Array[A] =
     x match

@@ -2,9 +2,13 @@ package scalqa; package `val`; package idx; package selection; import language.i
 
 private[idx] object Z:
 
-  class Basic[A](targetIndex: Idx[A], idx: Idx[Int]) extends Selection[A] { def target = targetIndex; def indexes = idx }
+  class Basic[A](targetIndex: Idx[A], idx: Idx[Int]) extends Selection[A]:
+    def target  = targetIndex
+    def indexes = idx
 
-  object Void extends Selection[Any] with Gen.Void { def target = \/; def indexes = \/ }
+  object Void extends Selection[Any] with Gen.Void:
+    def target  = \/
+    def indexes = \/
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

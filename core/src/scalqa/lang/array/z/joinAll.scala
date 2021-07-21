@@ -15,7 +15,7 @@ object joinAll:
       case _ : ArrayTag[A&Raw.Float,  Array[A&Raw.Float  ]] => float  (x.cast[Array[Float  ]],v.cast[~[Float  ]]).cast[ARRAY]
       case _ : ArrayTag[A&Raw.Double, Array[A&Raw.Double ]] => double (x.cast[Array[Double ]],v.cast[~[Double ]]).cast[ARRAY]
       case _ : ArrayTag[A&Ref,        Array[A&Ref        ]] => ref    (x.cast[Array[Ref    ]],v.cast[~[Ref    ]]).cast[ARRAY]
-      case _                                               => any    (x.cast[Array[A      ]],v                 ).cast[ARRAY]
+      case _                                                => any    (x.cast[Array[A      ]],v                 ).cast[ARRAY]
 
   def any[A](x: Array[A], v: ~[A]): Array[A] =
     x match

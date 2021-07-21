@@ -26,7 +26,6 @@ object X:
       this(source)
       dependencies.foreach(v => Gen.Observable.onObservableChange(v)(() => fireChange))
 
-    //protected          val eventStore        = new Event.Store()
     private            var valueOpt : Opt[A] = \/
     /**/               def apply()           = valueOpt or source.^(valueOpt = _)
     protected override def fireChange: Int   = { valueOpt = \/;  super.fireChange }

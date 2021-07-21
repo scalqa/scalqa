@@ -7,10 +7,10 @@ object Opt extends opt._methods:
   type RawType[A] = lang.boolean.G.Opt[A & Raw.Boolean] | lang.byte.G.Opt[A & Raw.Byte] | lang.char .G.Opt[A & Raw.Char]  | lang.short .G.Opt[A & Raw.Short]
                   | lang.int    .G.Opt[A & Raw.Int]     | lang.long.G.Opt[A & Raw.Long] | lang.float.G.Opt[A & Raw.Float] | lang.double.G.Opt[A & Raw.Double]
 
-  /**/              def apply[A](v: A)                                          : Opt[A]    = v.cast[AnyRef].cast[Opt[A]]
-  /**/       inline def fromScala[A](v: scala.Option[A])                        : Opt[A]    = if (v.isEmpty) \/ else v.get
-  /**/       inline def fromJava [A](v: java.util.Optional[A])                  : Opt[A]    = if (v.isPresent) v.get else \/
-  @tn("getVoid")    def void[A]                                                 : Opt[A]    = ZZ.None.cast[Opt[A]]
+  /**/              def apply[A](v: A)                                                    : Opt[A]    = v.cast[AnyRef].cast[Opt[A]]
+  /**/       inline def fromScala[A](v: scala.Option[A])                                  : Opt[A]    = if (v.isEmpty) \/ else v.get
+  /**/       inline def fromJava [A](v: java.util.Optional[A])                            : Opt[A]    = if (v.isPresent) v.get else \/
+  @tn("getVoid")    def void[A]                                                           : Opt[A]    = ZZ.None.cast[Opt[A]]
 
   implicit   inline def implicitFromScala[A](v: scala.Option[A])                          : Opt[A]    = fromScala[A](v)
   implicit   inline def implicitFromJava [A](v: java.util.Optional[A])                    : Opt[A]    = fromJava[A](v)

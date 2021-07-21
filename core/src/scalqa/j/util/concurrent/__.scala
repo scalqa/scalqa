@@ -1,9 +1,9 @@
 package scalqa; package j; package util; import language.implicitConversions
 
 object Concurrent:
-  type Ref[A]   = concurrent.Ref.opaque.`type`[A];    inline def Ref     = concurrent.Ref
+  type Ref[A]   = concurrent.Ref.opaque.`type`[A];    transparent inline def Ref     = concurrent.Ref
+  type Counter  = concurrent.Counter.opaque.`type`;   transparent inline def Counter = concurrent.Counter
   type Deque[A] = concurrent.Deque[A]
-  type Counter  = concurrent.Counter.opaque.`type`;   inline def Counter = concurrent.Counter
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -1,11 +1,11 @@
 package scalqa; package gen
 
 object Event:
-  val Control            = event.Control;         type Control = event.Control
-  val Store              = event.Store;           type Store   = event.Store
-  val Id                 = event.Id;              type Id      = event.Id
-  val CancelRequest      = event.CancelRequest
-  inline def Observable  = event.Observable;      type Observable         = event.Observable
+  transparent inline def Control       = event.Control;         type Control    = event.Control
+  @fast       lazy   val Store         = event.Store;           type Store      = event.Store
+  transparent inline def Id            = event.Id;              type Id         = event.Id
+  transparent inline def Observable    = event.Observable;      type Observable = event.Observable
+  transparent inline def CancelRequest = event.CancelRequest
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

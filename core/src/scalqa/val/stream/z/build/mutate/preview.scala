@@ -9,7 +9,7 @@ class preview[A](src: ~[A]) extends a.Pipe[A](src) with ~~.Preview[A] with Able.
   // ---------------------------------------------------------------------------------------------------------------------------
   private                   def preload(cnt: Int)         : Int              = src.size_?.map(_ + stack.size) or (if (stack.size >= cnt) stack.size else load(cnt))
   private                   def load(cnt: Int)            : Int              = { while (!allIn && stack.size < cnt) { src.read_?.forval(stack.add(_)).fornil({ allIn = true }) }; stack.size }
-  override                  def doc                      : Doc             = super.doc += ("buffered", stack.size)
+  override                  def doc                       : Doc              = super.doc += ("buffered", stack.size)
   // ---------------------------------------------------------------------------------------------------------------------------
   @tn("read_Opt")           def read_?                    : Opt[A]           = if (!stack.isEmpty) stack.pop else src.read_?
   @tn("size_Opt")           def size_?                    : Int.Opt          = src.size_?.map(_ + stack.size)

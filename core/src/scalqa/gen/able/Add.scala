@@ -1,8 +1,6 @@
 package scalqa; package gen; package able; import language.implicitConversions
 
 trait Add[A]:
-  self =>
-
   /**/           def add(v: A)      : Unit
   /**/           def addAll(v: ~[A]): Unit      = v.foreach(add)
 

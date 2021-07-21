@@ -8,11 +8,12 @@ object Time extends Long.Custom.Data.Ordered[Time]("Time") with time.x.Base[Time
   /**/                  def apply(day: Day, l: Length, ls: Length*) : Time        = (day.start.millisTotal + {if (ls.isEmpty) l.millisTotal else ls.~.map(_.nanosTotal).fold(l.nanosTotal)(_ + _) / 1_000_000L}).asOpaque[Time]
   /**/                  def apply(i: java.time.Instant)             : Time        = (i.getEpochSecond * 1000 + i.getNano / 1_000_000L).asOpaque[Time]
   @tn("current_Pro")    def current_*(changeEvery: Length)          : Time.Pro.O  = z.CurrentProperty(changeEvery)
-  override              def isVoid(v: Time)                         : Boolean     = v.real == -62167201438000L
+  override              def isVoid(v: Time)                         : Boolean     = v.real == voidValue
   override              def tag(v: Time)                            : String      = v.day.tag + ' ' + v.dayTime.tag
+  private        inline val voidValue                                             = -62167201438000L
 
-  implicit       inline def implicitRequest(inline v: CURRENT): Time       = apply()
-  implicit       inline def implicitRequest(inline v: \/)        : Time       = -62167201438000L.asOpaque[Time]
+  implicit       inline def implicitRequest(inline v: CURRENT)      : Time        = apply()
+  implicit       inline def implicitRequest(inline v: \/)           : Time        = voidValue.asOpaque[Time]
 
   extension(x: Time)
     /**/    inline def millisTotal             : Long        = x.real

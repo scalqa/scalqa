@@ -6,7 +6,7 @@ object X:
 
   // ***************************************************
   trait Basis[A] extends Pro[A] with Able.Doc:
-    def doc = Doc(this) ++= this.?.takeType[Able.Name].map(n => ("name", n.name)).~ += ("value", apply())
+    def doc = Doc(this) ++= this.?.takeType[Able.Name].map(n => ("name", n.name)) += ("value", apply())
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

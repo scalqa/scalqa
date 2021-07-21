@@ -6,9 +6,7 @@ private[scalqa] class ZZ_Access:
 
   def Console          : scala.Console.type    = scala.Console
   def None             : Ref                   = scalqa.`val`.Opt.None
-
   def initSize         : Int                   = Setup.arrayInitSize_*()
-
   def executionContext : ExecutionContext      = Setup.defaultExecutionContext
 
   def emptyObjectArray : Array[Ref]            = scala.Array.emptyObjectArray

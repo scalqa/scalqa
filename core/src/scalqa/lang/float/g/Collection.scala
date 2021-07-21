@@ -19,8 +19,8 @@ object Collection:
   extension[A<:RAW,T,STM<: ~~.AnyType[T]](inline x: Collection[A])
     /**/                                       inline def map    [B>:T](inline f: A=> B)   (using inline s: Given.StreamTag[B,STM]): STM       = g.Stream.map[A,T,STM](x.~)[B](f)(using s)
     /**/                                       inline def flatMap[B>:T](inline f: A=> ~[B])(using inline s: Given.StreamTag[B,STM]): STM       = g.Stream.flatMap[A,T,STM](x.~)[B](f)(using s)
-  extension[A<:RAW]  (inline x: Collection[A]) inline def withFilter(inline f: Fun.Filter[A])                                       : Stream[A] = x.~.filter(f)
-  extension[A<:RAW,U](inline x: Collection[A]) inline def foreach(   inline f: Fun.Consume[A,U])                                    : Unit      = x.~.foreach(f)
+  extension[A<:RAW]  (inline x: Collection[A]) inline def withFilter(inline f: Fun.Filter[A])                                      : Stream[A] = x.~.filter(f)
+  extension[A<:RAW,U](inline x: Collection[A]) inline def foreach(   inline f: Fun.Consume[A,U])                                   : Unit      = x.~.foreach(f)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

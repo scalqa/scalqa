@@ -18,7 +18,6 @@ object Gen:
   transparent inline def Observable         = gen.event.Observable;           type Observable              = gen.event.Observable
 
   transparent inline def Math               = gen.Math;                       type Math[A]                 = scala.math.Numeric[A]
-  transparent inline def Numeric            = gen.math.Numeric
   transparent inline def Rounding           = gen.math.Rounding;              type Rounding                = gen.math.Rounding
   transparent inline def BigDecimal         = gen.math.BigDecimal;            type BigDecimal              = gen.math.BigDecimal.opaque.`type`
   transparent inline def BigInteger         = gen.math.BigInteger;            type BigInteger              = gen.math.BigInteger.opaque.`type`

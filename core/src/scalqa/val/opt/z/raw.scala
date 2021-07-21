@@ -14,7 +14,7 @@ object raw:
               case _ : OptTag.Raw[A,Long   .G.Opt[A]] => (if(x.isEmpty) Long   .G.Opt.void[Long]    else x.cast[java.lang.Long     ].longValue).cast[RAW]
               case _ : OptTag.Raw[A,Float  .G.Opt[A]] => (if(x.isEmpty) Float  .G.Opt.void[Float]   else x.cast[java.lang.Float    ].floatValue).cast[RAW]
               case _ : OptTag.Raw[A,Double .G.Opt[A]] => (if(x.isEmpty) Double .G.Opt.void[Double]  else x.cast[java.lang.Double   ].doubleValue).cast[RAW]
-              case _                               => J.illegalState()
+              case _                                  => J.illegalState()
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

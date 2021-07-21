@@ -16,7 +16,7 @@ object Random:
   def fraction            : Double    = source.nextDouble
   def fraction_~          : Double.~  = {class FractionStream extends Double.~ { @tn("readRaw_Opt") def readRaw_? = source.nextDouble}; new FractionStream}
 
-// ********************************************************************
+  // ********************************************************************
   trait Source:
     def nextInt    : Int
     def nextDouble : Double

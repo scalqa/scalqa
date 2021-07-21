@@ -17,7 +17,7 @@ private[observable] object Z:
       /**/                                                        range += (size - sz)
       /**/                                                        assert(real.size == _old.size)
       /**/                                                        this
-      /**/                                                      }
+      /**/                                                   }
 
   trait Mutable[A] extends Event[A] with J.Util.Proxy.Idx.Basis[A]:
     /**/          val real          : Idx.M[A]  = Idx.M()

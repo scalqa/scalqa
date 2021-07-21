@@ -4,7 +4,7 @@ abstract class Event[A] private[observable](final val name: String) extends Able
   /**/               def range                : Int.<>
   /**/               def convert[B](f: A => B): Event[B]
   @tn("project_Opt") def project_?(i: Int.<>) : Opt[Event[A]]
-  override           def doc                 : Doc              = Doc("IdxChange") += ("type", name) += ("range", range.tag)
+  override           def doc                  : Doc              = Doc("Idx.Event") += ("type", name) += ("range", range.tag)
 
 object Event:
 

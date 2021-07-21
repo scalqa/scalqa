@@ -15,7 +15,7 @@ object fill:
               case _ : ArrayTag[A&Raw.Float,  Array[A&Raw.Float  ]] => float  (x.cast[Array[Float]],  p, sz, v.cast[Float])
               case _ : ArrayTag[A&Raw.Double, Array[A&Raw.Double ]] => double (x.cast[Array[Double]], p, sz, v.cast[Double])
               case _ : ArrayTag[A&Ref,        Array[A&Ref        ]] => ref    (x.cast[Array[Ref]],    p, sz, v.cast[Ref])
-              case _                                               => any    (x.cast[Array[A]],      p, sz, v)
+              case _                                                => any    (x.cast[Array[A]],      p, sz, v)
 
   def any[A](x: Array[A], p:Int, sz:Int, v: A): Unit =
     x match

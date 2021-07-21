@@ -7,10 +7,10 @@ trait Monitor:
   protected def runOnEmpty                                : Unit
 
 object Monitor:
-  inline private[stream] def runOnBeforeFirst(l: Monitor)                          : Unit    = l.runOnBeforeFirst
-  inline private[stream] def runOnEvery(l: Monitor, cnt: Int, tm: Time.Length)     : Unit    = l.runOnEvery(cnt, tm)
-  inline private[stream] def runOnAfterLast(l: Monitor, cnt: Int, tm: Time.Length) : Unit    = l.runOnAfterLast(cnt, tm)
-  inline private[stream] def runOnEmpty(l: Monitor)                                : Unit    = l.runOnEmpty
+  private[stream] inline def runOnBeforeFirst(l: Monitor)                          : Unit    = l.runOnBeforeFirst
+  private[stream] inline def runOnEvery(l: Monitor, cnt: Int, tm: Time.Length)     : Unit    = l.runOnEvery(cnt, tm)
+  private[stream] inline def runOnAfterLast(l: Monitor, cnt: Int, tm: Time.Length) : Unit    = l.runOnAfterLast(cnt, tm)
+  private[stream] inline def runOnEmpty(l: Monitor)                                : Unit    = l.runOnEmpty
 
   implicit def implicitRequest(v: \/)     : Monitor = zVoid
   implicit def implicitRequest(v: DEFAULT): Monitor = new zDefault

@@ -23,7 +23,7 @@ object VoidTag:
   inline given givenFloat      : RawFloat  [Float]   with {  inline def isVoid(v: Float)   = v==0F }
   inline given givenDouble     : RawDouble [Double]  with {  inline def isVoid(v: Double)  = v==0D }
   inline given givenString     : VoidTag   [String]  with {  inline def isVoid(v: String)  = v.length==0 }
-  inline given givenDefault[A] : VoidTag   [A]       = ZZ.Tag.cast[VoidTag[A]]
+  inline given givenDefault[A] : VoidTag   [A]                                             = ZZ.Tag.cast[VoidTag[A]]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

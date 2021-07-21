@@ -16,7 +16,7 @@ transparent private[z] trait extra :
   extension(inline x: String | Opaque.String) inline def real: String  = x.cast[String]
 
   // ----------------------------------------------------------------------------------------------------------------
-  // The `val` methods are inlined and must be public, here is the best place to put them
+  // The `val` methods are not a public API, but they are inlined and must be public.  Here is the best place to put them
   extension[A             ](inline x:       Val.Opt[A]) inline def `val` : A                = {val v=x.cast[A]; v}
   extension[A<:Raw.Boolean](inline x: Boolean.G.Opt[A]) inline def `val` : A                = {val v=(x.real== Boolean.G.Opt.TRUE.real).cast[A]; v}
   extension[A<:Raw.Byte   ](inline x: Byte   .G.Opt[A]) inline def `val` : A                = {val v=x.cast[A]; v}

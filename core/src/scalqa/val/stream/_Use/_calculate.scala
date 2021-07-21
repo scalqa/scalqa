@@ -23,11 +23,12 @@ transparent trait _calculate:
     @tn("minBy_Opt")   def minBy_?[B](f: A=>B)  (using c:Ordering[B]) : Opt[A]        = x.read_?.map(u=>{var v,w=u; var vf=f(u); var wf=vf; x.FOREACH(w=>{ wf=f(w); if(c.compare(vf,wf)>0){v=w;vf=wf}});v})
     @tn("maxBy_Opt")   def maxBy_?[B](f: A=>B)  (using c:Ordering[B]) : Opt[A]        = x.read_?.map(u=>{var v,w=u; var vf=f(u); var wf=vf; x.FOREACH(w=>{ wf=f(w); if(c.compare(vf,wf)<0){v=w;vf=wf}});v})
 
-    def averageFew[B,C,D,E,F](fb:A=>Opt[B], fc:A=>Opt[C], fd:A=>Opt[D]= \/, fe:A=>Opt[E]= \/, ff:A=>Opt[F]= \/)(using nb:Average[B],nc:Average[C],nd:Average[D],ne:Average[E],nf:Average[F])
-                                                                      : (B,C)|(B,C,D)|(B,C,D,E)|(B,C,D,E,F) = z.use.calculate.averageFew(x,fb,fc,fd,fe,ff)
 
-    def sumFew    [B,C,D,E,F](fb:A=>Opt[B], fc:A=>Opt[C], fd:A=>Opt[D]= \/, fe:A=>Opt[E]= \/, ff:A=>Opt[F]= \/)(using nb:Math[B],nc:Math[C],nd:Math[D],ne:Math[E],nf:Math[F])
-                                                                      : (B,C)|(B,C,D)|(B,C,D,E)|(B,C,D,E,F) = z.use.calculate.sumFew(x,fb,fc,fd,fe,ff)
+    def averageFew[B,C,D,E,F](fb:A=>Opt[B], fc:A=>Opt[C], fd:A=>Opt[D]= \/, fe:A=>Opt[E]= \/, ff:A=>Opt[F]= \/)
+                                  (using nb:Average[B],nc:Average[C],nd:Average[D],ne:Average[E],nf:Average[F]) : (B,C)|(B,C,D)|(B,C,D,E)|(B,C,D,E,F) = z.use.calculate.averageFew(x,fb,fc,fd,fe,ff)
+
+    def sumFew  [B,C,D,E,F](fb:A=>Opt[B], fc:A=>Opt[C], fd:A=>Opt[D]= \/, fe:A=>Opt[E]= \/, ff:A=>Opt[F]= \/)
+                                                 (using nb:Math[B],nc:Math[C],nd:Math[D],ne:Math[E],nf:Math[F]) : (B,C)|(B,C,D)|(B,C,D,E)|(B,C,D,E,F) = z.use.calculate.sumFew(x,fb,fc,fd,fe,ff)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

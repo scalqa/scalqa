@@ -13,18 +13,20 @@ object BigDecimal extends Any.Ref.Custom.Data[BigDecimal,JBigDecimal]("BigDecima
   given ordering : Ordering[BigDecimal] with
     def compare(x: BigDecimal, y: BigDecimal) = x.Number.compareTo(y.Number)
 
-  private inline def mk(inline v:BigDecimal | Double): JBigDecimal = inline v match{ case v:Double => JBigDecimal.valueOf(v); case v => v.cast[JBigDecimal]}
+  extension(inline x: BigDecimal | Double)
+    private                 inline def mkReal                               : JBigDecimal   = inline x match{ case _ : Double => JBigDecimal.valueOf(x.cast[Double]); case _ => x.cast[JBigDecimal]}
+
   extension(inline x: BigDecimal)
-    @tn("greater")          inline def  >  (inline v: Double | BigDecimal)  : Boolean       = x.real.compareTo(mk(v)) >  0
-    @tn("greaterOrEqual")   inline def  >= (inline v: Double | BigDecimal)  : Boolean       = x.real.compareTo(mk(v)) >= 0
-    @tn("less")             inline def  <  (inline v: Double | BigDecimal)  : Boolean       = x.real.compareTo(mk(v)) <  0
-    @tn("lessOrEqual")      inline def  <= (inline v: Double | BigDecimal)  : Boolean       = x.real.compareTo(mk(v)) <= 0
-    @tn("plus")             inline def  +  (inline v: Double | BigDecimal)  : BigDecimal    = x.real.add(mk(v)).asOpaque[BigDecimal]
-    @tn("minus")            inline def  -  (inline v: Double | BigDecimal)  : BigDecimal    = x.real.subtract(mk(v)).asOpaque[BigDecimal]
-    @tn("multiply")         inline def  *  (inline v: Double | BigDecimal)  : BigDecimal    = x.real.multiply(mk(v)).asOpaque[BigDecimal]
+    @tn("greater")          inline def  >  (inline v: Double | BigDecimal)  : Boolean       = x.real.compareTo(v.mkReal) >  0
+    @tn("greaterOrEqual")   inline def  >= (inline v: Double | BigDecimal)  : Boolean       = x.real.compareTo(v.mkReal) >= 0
+    @tn("less")             inline def  <  (inline v: Double | BigDecimal)  : Boolean       = x.real.compareTo(v.mkReal) <  0
+    @tn("lessOrEqual")      inline def  <= (inline v: Double | BigDecimal)  : Boolean       = x.real.compareTo(v.mkReal) <= 0
+    @tn("plus")             inline def  +  (inline v: Double | BigDecimal)  : BigDecimal    = x.real.add(v.mkReal).asOpaque[BigDecimal]
+    @tn("minus")            inline def  -  (inline v: Double | BigDecimal)  : BigDecimal    = x.real.subtract(v.mkReal).asOpaque[BigDecimal]
+    @tn("multiply")         inline def  *  (inline v: Double | BigDecimal)  : BigDecimal    = x.real.multiply(v.mkReal).asOpaque[BigDecimal]
     @tn("divide")           inline def  /  (inline v: Double | BigDecimal)
-                                                 (using inline r: Rounding) : BigDecimal    = x.real.divide(mk(v), J.Setup.bigDecimalDefaultScale, r.mode).asOpaque[BigDecimal]
-    @tn("remainder")        inline def  %  (inline v: Double | BigDecimal)  : BigDecimal    = x.real.remainder(mk(v)).asOpaque[BigDecimal]
+                                                 (using inline r: Rounding) : BigDecimal    = x.real.divide(v.mkReal, J.Setup.bigDecimalDefaultScale, r.mode).asOpaque[BigDecimal]
+    @tn("remainder")        inline def  %  (inline v: Double | BigDecimal)  : BigDecimal    = x.real.remainder(v.mkReal).asOpaque[BigDecimal]
     /**/                    inline def abs                                  : BigDecimal    = x.real.abs().asOpaque[BigDecimal]
     /**/                    inline def unary_-                              : BigDecimal    = x.real.negate.asOpaque[BigDecimal]
     /**/                    inline def sign                                 : Int           = x.real.signum

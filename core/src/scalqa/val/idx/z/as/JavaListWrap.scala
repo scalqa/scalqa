@@ -1,7 +1,7 @@
 package scalqa; package `val`; package idx; package z; package as; import language.implicitConversions
 
 private[scalqa] class JavaListWrap[A](val real: java.util.List[A]) extends idx.X.Base[A]:
-  def size = real.size
+  def size          = real.size
   def apply(i: Int) = real.get(i)
 
 private[scalqa] object JavaListWrap:

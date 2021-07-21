@@ -5,10 +5,10 @@ object X:
   abstract class Base[A] extends Observable[A]
 
   trait EventsInterface[A] extends Observable[A] with Gen.Event.Store.Provider:
-    /**/      def onChange[U](l: ><[Event[A]] => U) : Gen.Event.Control = eventStore.onEvent1(Event,l)
-    protected def fireChange(v:  ><[Event[A]])      : Unit              = if (!v.isEmpty) eventStore.fireEvent1(Event,v)
+    /**/      def onChange[U](l: ><[Event[A]] => U) : Gen.Event.Control = eventStore.onEvent1(EventId,l)
+    protected def fireChange(v:  ><[Event[A]])      : Unit              = if (!v.isEmpty) eventStore.fireEvent1(EventId,v)
 
-  private object Event
+  private object EventId
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

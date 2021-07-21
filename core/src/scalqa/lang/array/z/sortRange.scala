@@ -16,7 +16,7 @@ object sortRange:
               case _ : ArrayTag[A&Raw.Float,  Array[A&Raw.Float  ]] => float  (x.cast[Array[Float  ]],p,sz,c.cast[Ordering[Float  ]])
               case _ : ArrayTag[A&Raw.Double, Array[A&Raw.Double ]] => double (x.cast[Array[Double ]],p,sz,c.cast[Ordering[Double ]])
               case _ : ArrayTag[A&Ref,        Array[A&Ref        ]] => ref    (x.cast[Array[Ref    ]],p,sz,c.cast[Ordering[Ref    ]])
-              case _                                               => any    (x.cast[Array[A      ]],p,sz,c                          )
+              case _                                                => any    (x.cast[Array[A      ]],p,sz,c                        )
 
   def any[A](x: Array[A], p:Int, sz:Int, c:Ordering[A]): Unit =
     x match

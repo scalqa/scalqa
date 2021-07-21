@@ -4,7 +4,7 @@ private class StepStream[A](r: Range[A], start: A, step: A => A) extends ~[A]:
   private         var cur    : A      = start
   @tn("read_Opt") def read_? : Opt[A] = if(r.contains(cur)){ val v=cur; cur=step(v); v } else \/
 
-private[scalqa] object StepStream:
+object StepStream:
 
   def apply[A](r: Range[A], step: A => A): ~[A] =
     r.ordering.compare(r.start,step(r.start)) match

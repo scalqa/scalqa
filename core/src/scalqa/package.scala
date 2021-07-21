@@ -1,7 +1,6 @@
 import language.implicitConversions
 
-package object
-scalqa:
+package object scalqa:
   export scalqa.Lang.*
   export scalqa.Gen.*
   export scalqa.gen.Request.*

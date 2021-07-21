@@ -4,25 +4,27 @@ import J.File
 
 object File extends Any.Ref.Custom.Type[J.File,java.io.File]("File"):
   inline          def apply(inline v: java.io.File)            : File   = v.asOpaque[File]
-  implicit inline def implicitFromJava(inline v: java.io.File) : File   = v.asOpaque[File]
   override        def tag(v: File)                             : String = v.path.toString
+  implicit inline def implicitFromJava(inline v: java.io.File) : File   = v.asOpaque[File]
 
-  extension (x: File)
-    def name                                   : String    = x.real.getName
-    def path                                   : Path      = x.real.toPath
-    def exists                                 : Boolean   = x.real.exists
-    def lastModified                           : Time      = Time.fromMillis(x.real.lastModified)
-    def extension                              : String    = x.real.getCanonicalPath.takeAfterLast(".", "")
-    def size                                   : ByteCount = x.real.length.ByteCount
-    def openOutput                             : J.Output  = J.Output(x)
-    def openInput                              : J.Input   = J.Input(x)
-    def readString                             : String    = x.openInput.asText.readAllAndClose
-    def writeString(s: String)                 : Unit      = Z.writeString(x, s)
-    def delete                                 : Boolean   = x.real.delete
-    def move(trgt:Path,overwrite:Boolean=false): File      = Z.move(x, trgt, overwrite)
-    def temp                                   : File      = Z.tempFile(x)
-    def copy(p:Path, overwrite:Boolean=false,
-                      copyAttr:Boolean=false)  : File      = Z.copy(x, p, overwrite, copyAttr)
+  extension (inline x: File)
+    inline def name                                   : String    = x.real.getName
+    inline def path                                   : Path      = x.real.toPath
+    inline def exists                                 : Boolean   = x.real.exists
+    inline def lastModified                           : Time      = Time.fromMillis(x.real.lastModified)
+    inline def extension                              : String    = x.real.getCanonicalPath.takeAfterLast(".", "")
+    inline def size                                   : ByteCount = x.real.length.ByteCount
+    inline def openOutput                             : J.Output  = J.Output(x)
+    inline def openInput                              : J.Input   = J.Input(x)
+    inline def readString                             : String    = x.openInput.asText.readAllAndClose
+    inline def writeString(inline s: String)          : Unit      = Z.writeString(x, s)
+    inline def delete                                 : Boolean   = x.real.delete
+    inline def temp                                   : File      = Z.tempFile(x)
+    inline def move(inline trgt:Path,
+                    inline overwrite:Boolean=false)   : File      = Z.move(x, trgt, overwrite)
+    inline def copy(inline p:Path,
+                    inline overwrite:Boolean=false,
+                    inline copyAttr:Boolean=false)    : File      = Z.copy(x, p, overwrite, copyAttr)
 
   object opaque:
     opaque type `type` <: Opaque.Ref = java.io.File & Opaque.Ref

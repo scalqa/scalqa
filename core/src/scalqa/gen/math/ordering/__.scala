@@ -16,7 +16,7 @@ trait Ordering[A] extends scala.math.Ordering[A]:
 
 
 object Ordering:
-  inline def apply[A](using inline o: ORD[A]): ORD[A] = o
+  inline def apply[A](using inline o: ORD[A]): ORD[A]       = o
   /**/   def anyAsString                     : ORD[Any]     = Z.AnyAsString
   /**/   def number                          : ORD[Number]  = Z.Number
 

@@ -7,26 +7,13 @@ object Text extends Any.Ref.Custom.Type[Text, java.io.Reader]("Io.Input.Text"):
 
   extension(inline x: Text)
     inline def read                                    : Int                         = x.real.read
+    inline def read(size: Int)                         : String                      = Z.readString(x,size)
     inline def read(inline ca: Array[Char])            : Int                         = x.real.read(ca)
     inline def read(inline ca: Array[Char], i: Int.<>) : Int                         = x.real.read(ca, i.start, i.size)
-    inline def readAll                                 : String                      = x.read(MAX)
+    inline def readAll                                 : String                      = read(MAX)
     inline def readAllAndClose                         : String                      = { val v = x.readAll; x.close; v }
     inline def separated_~(separator: Char => Boolean) : ~[Char.Idx & CharSequence]  = new z.SeparatedTextStream(x, separator)
     inline def ~                                       : Char.~                      = new Z.CharStream(x.real)
-
-  extension (x: Text) def read(size: Int): String = {
-    val r: java.io.Reader = x.real
-    var sz = 0
-    val sw = new java.io.StringWriter
-    val ca = new Array[Char](256)
-    def load = if (size - sz >= ca.length) r.read(ca) else r.read(ca, 0, size - sz)
-    var i = load
-    while (i > -1 && sz <= size)
-      sz += i;
-      sw.write(ca, 0, i);
-      i = load
-    sw.getBuffer.toString
-  }
 
   object opaque:
     opaque type `type` <: java.io.Closeable & Opaque.Ref = java.io.Reader & Opaque.Ref

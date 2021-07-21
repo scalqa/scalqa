@@ -8,7 +8,8 @@ transparent trait _transformTo:
   extension[A] (x: ~[A])
     @tn("pack") def ><                                        : ><[A]                = pack.z.ArrayPack.fromStream[A](x)
     /**/        def iterator                                  : Iterator[A]          = z.use.transformTo.Iterator(x)
-    /**/        def makeString(sep:String= \/)(using t :Given.DocTag[A]): String     = String.Builder(256).^(b => x.foreachIndexed((i,v) =>{ if (i>0) b +=sep; b +=t.tag(v)})).tag
+    /**/        def makeString(sep:String= \/)
+      /**/                         (using t :Given.DocTag[A]) : String               = String.Builder(256).^(b => x.foreachIndexed((i,v) =>{ if (i>0) b +=sep; b +=t.tag(v)})).tag
     /**/        def toIdx                                     : Idx[A]               = pack.z.ArrayPack.fromStream[A](x)
     /**/        def toBuffer                                  : Buffer[A]            = new Any.Ref.Buffer[A](x)
     /**/        def toSet                                     : StableSet[A]         = StableSet(x)

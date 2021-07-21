@@ -34,14 +34,14 @@ abstract class _methods extends _givens:
 
   //------------ Mapping ---------------------------------------------------------------------------------------------------------------------------------
   extension[A,T,OPT<:AnyType[T]](inline x:Opt[A])
-    /**/               inline def map    [B>:T](inline f: A => B)                         (using inline s: OptTag[B,OPT])     : OPT    = z.map(x,f,s)
+    /**/               inline def map    [B>:T](inline f: A => B)                        (using inline s: OptTag[B,OPT])     : OPT    = z.map(x,f,s)
   extension[A,T](inline x:Opt[A])
     @tn("map_Opt")     inline def map_?  [OPT<:AnyType[T]](inline f: A=>OPT)             (using inline s: OptTag[T,OPT])     : OPT    = z.mapOpt(x,f,s)
     /**/               inline def flatMap[OPT<:AnyType[T]](inline f: A=>OPT)             (using inline s: OptTag[T,OPT])     : OPT    = z.mapOpt(x,f,s)
   extension[A, OPT<:RawType[A]](inline x:Opt[A])
-    /**/               inline def raw                                                     (using inline s: OptTag.Raw[A,OPT]) : OPT    = z.raw(x,s)
+    /**/               inline def raw                                                    (using inline s: OptTag.Raw[A,OPT]) : OPT    = z.raw(x,s)
   extension[A,B,C](inline x:Opt[A])
-    /**/               inline def mix[OPT<:AnyType[C]](inline o:AnyType[B],inline f:(A,B)=>C)(using inline s: OptTag[C,OPT]): OPT    = z.mixOpt(x,o,f,s)
+    /**/               inline def mix[OPT<:AnyType[C]](inline o:AnyType[B],inline f:(A,B)=>C) (using inline s: OptTag[C,OPT]): OPT    = z.mixOpt(x,o,f,s)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

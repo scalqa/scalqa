@@ -20,10 +20,10 @@ private[scalqa] object Unsupported_View:
       @tn("remove_Range") def remove_<>(r: Int.<>)   : Unit = J.unsupportedOperation()
 
     class OM[A](protected val real: Idx.Mutable[A]) extends J.Util.Proxy.Idx.M[A] with Unsupported_View.OM.Like[A]:
-      /**/                override def addAt(i: Int, e: A)                             : Unit          = real.addAt(i, e)
-      /**/                override def updateAt(i: Int, e: A)                          : Unit          = real.update(i, e)
-      @tn("remove_Range") override def remove_<>(r: Int.<>)                            : Unit          = real.remove_<>(r)
-      /**/                override def modify(ch: Idx.Mutable[A] => Unit)              : Unit          = ch(this)
+      /**/                override def addAt(i: Int, e: A)                          : Unit          = real.addAt(i, e)
+      /**/                override def updateAt(i: Int, e: A)                       : Unit          = real.update(i, e)
+      @tn("remove_Range") override def remove_<>(r: Int.<>)                         : Unit          = real.remove_<>(r)
+      /**/                override def modify(ch: Idx.Mutable[A] => Unit)           : Unit          = ch(this)
       /**/                override def onChange[U](l: ><[Observable.Event[A]] => U) : Event.Control = \/
 
   class OM[A](protected val real: Idx[A]) extends Idx.OM.X.Base[A] with J.Util.Proxy.Idx.Basis[A] with OM.Like[A]

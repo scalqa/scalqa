@@ -4,7 +4,7 @@ object Zone extends Able.Doc:
 
   val Id     : java.time.ZoneId = java.time.ZoneId.systemDefault
   val Offset : Time.Length      = java.time.Instant.ofEpochMilli(0).atZone(Id).getOffset.getTotalSeconds.Seconds
-  def doc   : Doc             = Doc("Time.Zone") += ("Id", Id) += ("Offset", Offset)
+  def doc    : Doc              = Doc("Time.Zone") += ("Id", Id) += ("Offset", Offset)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

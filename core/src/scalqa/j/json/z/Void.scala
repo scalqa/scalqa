@@ -10,7 +10,6 @@ private[json] object Void:
   object Array extends Array with Gen.Void:
     def size = 0
     def apply(i: Int) = J.illegalState("Requesting element '" + i + "' on empty Array")
-    protected def _add(t: Any) = J.illegalState()
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

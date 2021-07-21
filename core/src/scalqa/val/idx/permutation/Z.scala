@@ -1,6 +1,6 @@
 package scalqa; package `val`; package idx; package permutation; import language.implicitConversions
 
-private[scalqa] object Z:
+object Z:
 
   def random(r: Int.<>): Permutation =
     var a = r.toArray

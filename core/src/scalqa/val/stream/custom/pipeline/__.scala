@@ -15,7 +15,7 @@ object Pipeline:
   // ************************************************************************************************************
   trait Tree extends gen.able.Doc :
     def infoTree : Doc.Tree
-    def doc     : Doc     = z.util.MultiDoc(this)
+    def doc      : Doc       = z.util.MultiDoc(this)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type ParallelFlow[A] = pipeline.ParallelFlow[A]

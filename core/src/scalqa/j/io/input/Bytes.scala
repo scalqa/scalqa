@@ -10,23 +10,11 @@ object Bytes extends Any.Ref.Custom.Type[Bytes, java.io.InputStream]("Io.Input.B
     /**/            inline def read(inline ba: Array[Byte])                                : Int         = x.real.read(ba)
     /**/            inline def read(inline ba: Array[Byte], inline from:Int,inline sz:Int) : Int         = x.real.read(ba, from, sz)
     @tn("read_Opt") inline def read_?                                                      : Byte.Opt    = { val i = x.read; if (i < 0) \/ else (i - Byte.min).Byte }
-    /**/            inline def readAll                                                     : Array[Byte] = toByteArray(x)
+    /**/            inline def readAll                                                     : Array[Byte] = Z.toByteArray(x)
     /**/            inline def readAllAndClose                                             : Array[Byte] = x.readAll.^(_ => x.close)
 
   object opaque:
     opaque type `type` <: java.io.Closeable & Opaque.Ref = java.io.InputStream & Opaque.Ref
-// -------------------------------------------------------------------------------------------------------------------------------
-  private def toByteArray(in: Bytes): Array[Byte] =
-    var a, buf = new Array[Byte](1000)
-    var len = 0
-    var i = in.read(buf)
-    while (i != -1)
-      while (a.length <= len) a = a.copySize(len*2)
-      buf.copyTo(a, len, 0, i)
-      len += i
-      i = in.read(buf)
-    a.copySize(len)
-
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

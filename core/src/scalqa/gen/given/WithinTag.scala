@@ -18,7 +18,7 @@ object WithinTag extends zWithinDefault:
 private class zWithinDefault:
   given givenString[A<:String | Opaque.String]: WithinTag[A,A]               with { inline def within(v:A   , x:A) = x.asInstanceOf[String].contains(v.asInstanceOf[String])}
   given givenChar  [A<:String | Opaque.String]: WithinTag[Char,A]            with { inline def within(v:Char, x:A) = x.asInstanceOf[String].indexOf(v)>=0 }
-  given givenCollection  [A]: WithinTag[A,Collection[A]] = z.WithinTag.Collection  .cast[WithinTag[A,Collection[A]]]
+  given givenCollection[A]                    : WithinTag[A,Collection[A]]        = z.WithinTag.Collection  .cast[WithinTag[A,Collection[A]]]
 
 
 /*___________________________________________________________________________

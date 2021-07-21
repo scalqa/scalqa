@@ -7,11 +7,10 @@ object Counter extends Any.Ref.Custom.Type[Counter,AtomicLong]("Concurrent.Count
   def apply(initValue : Long = 0): Counter = new AtomicLong(initValue).asOpaque[Counter]
 
   extension(inline x: Counter)
-    private inline def self : AtomicLong = x.cast[AtomicLong]
-    inline def get          : Int        = self.intValue
-    inline def next         : Int        = self.incrementAndGet.Int
-    inline def getLong      : Long       = self.longValue
-    inline def nextLong     : Long       = self.incrementAndGet
+    inline def get      : Int     = x.cast[AtomicLong].intValue
+    inline def next     : Int     = x.cast[AtomicLong].incrementAndGet.Int
+    inline def getLong  : Long    = x.cast[AtomicLong].longValue
+    inline def nextLong : Long    = x.cast[AtomicLong].incrementAndGet
 
   object opaque:
     opaque type `type` <: Opaque.Ref = AtomicLong & Opaque.Ref

@@ -1,7 +1,7 @@
 package scalqa; package `val`; package stream; package z; package a; import language.implicitConversions
 
 object Map:
-  abstract class ToRef    [A]                 (x: Ref) extends                 Pipe[A](x) with Able.Size.Opt.Long{ @tn("sizeLong_Opt") def sizeLong_? = Able.Size.sizeLong_?(x)}
+  abstract class ToRef    [A]                 (x: Ref) extends                Pipe[A](x) with Able.Size.Opt.Long{ @tn("sizeLong_Opt") def sizeLong_? = Able.Size.sizeLong_?(x)}
   abstract class ToBoolean[A<:Any.Raw.Boolean](x: Ref) extends lang.boolean.Z.Pipe[A](x) with Able.Size.Opt.Long{ @tn("sizeLong_Opt") def sizeLong_? = Able.Size.sizeLong_?(x)}
   abstract class ToByte   [A<:Any.Raw.Byte]   (x: Ref) extends lang.byte   .Z.Pipe[A](x) with Able.Size.Opt.Long{ @tn("sizeLong_Opt") def sizeLong_? = Able.Size.sizeLong_?(x)}
   abstract class ToChar   [A<:Any.Raw.Char]   (x: Ref) extends lang.char   .Z.Pipe[A](x) with Able.Size.Opt.Long{ @tn("sizeLong_Opt") def sizeLong_? = Able.Size.sizeLong_?(x)}

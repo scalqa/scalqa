@@ -2,39 +2,35 @@ package scalqa; package gen; package request; import language.implicitConversion
 
 class VOID private() extends Request
 
-object VOID extends VOID with zVoidDefaults:
-  inline given givenSelf : VOID.type = this
+object VOID extends VOID with zVOIDDefaults:
 
   implicit def implicitToString                (v: \/) : String            = ""
-  implicit def implicitToException             (v: \/) : Exception         = z.Void.Exception
-  implicit def implicitToJavaList[A]           (v: \/) : java.util.List[A] = z.Void.JavaList.cast[java.util.List[A]]
-  implicit def implicitToFunction0             (v: \/) : () => Unit        = z.Void.Function0
-  implicit def implicitToFunction1[A]          (v: \/) : (A) => Unit       = z.Void.Function1
-  implicit def implicitToFunction2[A,B]        (v: \/) : (A,B) => Unit     = z.Void.Function2
-  implicit def implicitToFunction3[A, B, C]    (v: \/) : (A,B,C) => Unit   = z.Void.Function3
-  implicit def implicitToFunction4[A, B, C, D] (v: \/) : (A,B,C,D) => Unit = z.Void.Function4
-  implicit def implicitToOrdering[A]           (v: \/) : Ordering[A]       = z.Void.Ordering.cast[Ordering[A]]
-//  implicit def implicitToIntFunToDouble        (v: \/) : Int.Fun.ToDouble  = z.Void.IntFunToDouble
-//  implicit def implicitToIntFunToLong          (v: \/) : Int.Fun.ToLong    = z.Void.IntFunToLong
+  implicit def implicitToException             (v: \/) : Exception         = z.VOID.Exception
+  implicit def implicitToJavaList[A]           (v: \/) : java.util.List[A] = z.VOID.JavaList.cast[java.util.List[A]]
+  implicit def implicitToFunction0             (v: \/) : () => Unit        = z.VOID.Function0
+  implicit def implicitToFunction1[A]          (v: \/) : (A) => Unit       = z.VOID.Function1
+  implicit def implicitToFunction2[A,B]        (v: \/) : (A,B) => Unit     = z.VOID.Function2
+  implicit def implicitToFunction3[A, B, C]    (v: \/) : (A,B,C) => Unit   = z.VOID.Function3
+  implicit def implicitToFunction4[A, B, C, D] (v: \/) : (A,B,C,D) => Unit = z.VOID.Function4
+  implicit def implicitToOrdering[A]           (v: \/) : Ordering[A]       = z.VOID.Ordering.cast[Ordering[A]]
 
   override def toString = "\\/"
 
-  given givenMath    : Math[\/]                   = z.Void.Math
-  given givenAverage : ~~.Custom.Math.Average[\/] = z.Void.Math
+  inline given givenToMath    : Math[\/]                   = z.VOID.Math
+  inline given givenToAverage : ~~.Custom.Math.Average[\/] = z.VOID.Math
 
-private trait zVoidDefaults extends zVoidDefaults1:
-  implicit def implicitToFunctionToOptDouble[A](v: \/) : A => Opt[Double]  = z.Void.Function1_Opt.cast[A => Opt[Double]]
-  implicit def implicitToBooleanFunction[A]    (v: \/) : A => Boolean    = z.Void.Filter
+private trait zVOIDDefaults extends zVOIDDefaults1:
+  implicit def implicitToFunctionToOptDouble[A](v: \/) : A => Opt[Double]  = z.VOID.Function1_Opt.cast[A => Opt[Double]]
+  implicit def implicitToBooleanFunction[A]    (v: \/) : A => Boolean      = z.VOID.Filter
 
-private trait zVoidDefaults1 extends zVoidDefaults2:
-  implicit def implicitToFunctionToOpt[A,B]    (v: \/) : A => Opt[B]     = z.Void.Function1_Opt.cast[A => Opt[B]]
+private trait zVOIDDefaults1 extends zVOIDDefaults2:
+  implicit def implicitToFunctionToOpt[A,B]    (v: \/) : A => Opt[B]       = z.VOID.Function1_Opt.cast[A => Opt[B]]
 
-private trait zVoidDefaults2:
-  implicit def implicitToVector[A]             (v: \/) : Vector[A]       = Vector.empty[A]
-  implicit def implicitToScalaList[A]          (v: \/) : scala.List[A]   = Nil
-  implicit def implicitToScalaOption[A]        (v: \/) : scala.Option[A] = scala.None
-  //implicit def implicitToFunctionToUnit[A]     (v: \/) : Unit            = z.Void.Function1_Unit
-  implicit def implicitToAnyFunction[A,B]      (v: \/) : A => B          = z.Void.Function1_Any.cast[A => B]
+private trait zVOIDDefaults2:
+  implicit def implicitToVector[A]             (v: \/) : Vector[A]         = Vector.empty[A]
+  implicit def implicitToScalaList[A]          (v: \/) : scala.List[A]     = Nil
+  implicit def implicitToScalaOption[A]        (v: \/) : scala.Option[A]   = scala.None
+  implicit def implicitToAnyFunction[A,B]      (v: \/) : A => B            = z.VOID.Function1_Any.cast[A => B]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

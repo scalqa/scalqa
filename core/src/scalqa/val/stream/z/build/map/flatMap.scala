@@ -36,7 +36,7 @@ object flatMap:
       case _ : StreamTag[B,Long   .G.~[B & Raw.Long   ]] =>{ class Longs   (x: Stream[A]) extends FM.ToLong   [B & Raw.Long   ](x){ def fewOpt=x.read_?.map(f(_).cast[~[B & Raw.Long   ]])}; Longs   (x)}
       case _ : StreamTag[B,Float  .G.~[B & Raw.Float  ]] =>{ class Floats  (x: Stream[A]) extends FM.ToFloat  [B & Raw.Float  ](x){ def fewOpt=x.read_?.map(f(_).cast[~[B & Raw.Float  ]])}; Floats  (x)}
       case _ : StreamTag[B,Double .G.~[B & Raw.Double ]] =>{ class Doubles (x: Stream[A]) extends FM.ToDouble [B & Raw.Double ](x){ def fewOpt=x.read_?.map(f(_).cast[~[B & Raw.Double ]])}; Doubles (x)}
-      case _ : StreamTag[B,       Val.~[B]]               =>{ class Refs    (x: Stream[A]) extends FM.ToRef    [B]              (x){ def fewOpt=x.read_?.map(f(_))};                                  Refs    (x)}
+      case _ : StreamTag[B,      Val.~[B]]               =>{ class Refs    (x: Stream[A]) extends FM.ToRef    [B]              (x){ def fewOpt=x.read_?.map(f(_))};                          Refs    (x)}
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

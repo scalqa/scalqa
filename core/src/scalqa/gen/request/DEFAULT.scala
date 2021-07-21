@@ -4,10 +4,11 @@ class DEFAULT private() extends Request
 
 object DEFAULT extends DEFAULT:
   implicit inline def implicitToExecutionContext (inline v: DEFAULT) : concurrent.ExecutionContext = ZZ.Context
-  implicit inline def implicitToStringFunction[A](inline v: DEFAULT) : A => String                 = ToString.cast[A => String]
+  implicit inline def implicitToStringFunction[A](inline v: DEFAULT) : A => String                 = zToString.cast[A => String]
 
   // *********************************************************************************************************
-  private object ToString extends (Any => String) { def apply(v: Any) = if(v == null) "null" else v.toString }
+  object zToString extends (Any => String):
+    def apply(v: Any) = if(v == null) "null" else v.toString
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

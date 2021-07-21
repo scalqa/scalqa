@@ -23,10 +23,10 @@ object Pack:
   /**/            inline def fromArray [A<:RAW](v: Array[SELF])        : Pack[A] = fromArray(v,v.length)
   /**/                   def fromArray [A<:RAW](v: Array[SELF],sz: Int): Pack[A] = new Pack(v.copySize(sz),sz)
   /**/                   def fromStream[A<:RAW](v: ~[A])               : Pack[A] = void[A].joinAll(v)
-  @tn("getVoid")  inline def void      [A<:RAW]                 : Pack[A] = zVoid.cast[Pack[A]]; object zVoid extends Pack(SELF.emptyArray) with Gen.Void
+  @tn("getVoid")  inline def void      [A<:RAW]                        : Pack[A] = zVoid.cast[Pack[A]]; object zVoid extends Pack(SELF.emptyArray) with Gen.Void
 
-  implicit inline def implicitRequest[A<:RAW](inline v: \/)           : Pack[A] = void[A]
-  implicit inline def implicitFromStream [A<:RAW](inline v: Stream[A]): Pack[A] = v.><
+  implicit inline def implicitRequest[A<:RAW](inline v: \/)            : Pack[A] = void[A]
+  implicit inline def implicitFromStream [A<:RAW](inline v: Stream[A]) : Pack[A] = v.><
 
   private class Buf[A<:RAW] private(a: Array[SELF],sz:Int) extends Buffer[A](a,sz):
     def this(a: Array[SELF], sz: Int, v: A, vs: ~[A]) = { this(a.copySize(vs.size_?.map(sz + _) or sz + J.initSize).^(_(sz-1)=v), sz); addAll(vs) }

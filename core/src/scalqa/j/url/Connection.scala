@@ -5,14 +5,19 @@ import Url.Connection
 object Connection extends Any.Ref.Custom.Type[Connection,java.net.URLConnection]("Url"):
   inline def apply(inline v: java.net.URLConnection): Connection = v.asOpaque[Connection]
 
+  extension (inline x: Connection)
+    inline def openOutput                             : J.Output       = J.Output(x.real.getOutputStream)
+    inline def openInput                              : J.Input        = J.Input(x.real.getInputStream)
+    inline def doInput                                : Boolean        = x.real.getDoInput;
+    inline def doInput_=(inline v: Boolean)           : Unit           = x.real.setDoInput(v)
+    inline def doOutput                               : Boolean        = x.real.getDoOutput;
+    inline def doOutput_=(inline v: Boolean)          : Unit           = x.real.setDoOutput(v)
+    inline def connectTimeout                         : Time.Length    = x.real.getConnectTimeout.Seconds;
+    inline def connectTimeout_=(inline t: Time.Length): Unit           = { x.real.setConnectTimeout(t.secondsTotal.toInt) }
+    inline def readTimeout                            : Time.Length    = x.real.getReadTimeout.Seconds;
+    inline def readTimeout_=(inline t: Time.Length)   : Unit           = x.real.setReadTimeout(t.secondsTotal.toInt)
   extension (x: Connection)
-    def openOutput           : J.Output       = J.Output(x.real.getOutputStream)
-    def openInput            : J.Input        = J.Input(x.real.getInputStream)
-    def doInput              : Boolean        = x.real.getDoInput;                 def doInput_=(v: Boolean)            : Unit = x.real.setDoInput(v)
-    def doOutput             : Boolean        = x.real.getDoOutput;                def doOutput_=(v: Boolean)           : Unit = x.real.setDoOutput(v)
-    def connectTimeout       : Time.Length    = x.real.getConnectTimeout.Seconds;  def connectTimeout_=(t: Time.Length) : Unit = { x.real.setConnectTimeout(t.secondsTotal.toInt) }
-    def readTimeout          : Time.Length    = x.real.getReadTimeout.Seconds;     def readTimeout_=(t: Time.Length)    : Unit = x.real.setReadTimeout(t.secondsTotal.toInt)
-    def request(key: String) : Val.Pro.M[String]  = zProperty(x.real,key)
+    /**/   def requestProperty(key: String)           : Pro.M[String]  = zProperty(x.real,key)
 
   object opaque:
     opaque type `type` <: Opaque.Ref = java.io.File & Opaque.Ref

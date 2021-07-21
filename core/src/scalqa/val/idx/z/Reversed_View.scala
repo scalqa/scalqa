@@ -15,7 +15,7 @@ private[scalqa] object Reversed_View:
         case v: Idx.Event.Update[A] if v.isRefresh => Idx.Event.Update.refresh(in, v.items.reversed_^)
         case v: Idx.Event.Update[A]                => Idx.Event.Update(in, v.items.reversed_^, v.oldItems.reversed_^)
         case v: Idx.Event.Reposition[A]            => J.unsupportedOperation()
-        case _                                      => J.illegalState()
+        case _                                     => J.illegalState()
       } : Observable.Event[A]
     }).><)).removeHardReference
 

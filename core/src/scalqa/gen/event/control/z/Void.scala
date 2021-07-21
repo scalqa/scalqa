@@ -5,7 +5,7 @@ private[event] object Void extends Control with Gen.Void:
   def isCancelled                 = true
   def cancelIf(b: () => Boolean)  = this
   def onCancel[U](b: () => U)     = this
-  def removeHardReference       = null
+  def removeHardReference         = null
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

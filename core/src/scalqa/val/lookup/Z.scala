@@ -6,9 +6,8 @@ object Z:
     def this(createFunOpt : A => Opt[B]) = this(createFunOpt.?, Mutable[A,B]())
     def this(s: ~[(A, B)]) = { this(\/, Mutable()); real.putAll(s) }
 
-    @tn("get_Opt") override def get_?(key: A) = real.get_?(key) or_? createFunOpt.map_?(_(key).forval(v => real.put(key, v)))
-
-    protected def put(s: ~[(A, B)]): Unit = real.putAll(s)
+    @tn("get_Opt") override def get_?(key: A)    : Opt[B]   = real.get_?(key) or_? createFunOpt.map_?(_(key).forval(v => real.put(key, v)))
+    protected               def put(s: ~[(A, B)]): Unit     = real.putAll(s)
 
   // *************************************************************************************************************************
   class Convert_View[A, B, C](protected val real: Lookup[A,B], f: B => C) extends Lookup[A, C]:

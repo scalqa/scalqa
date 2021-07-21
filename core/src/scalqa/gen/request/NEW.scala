@@ -3,9 +3,9 @@ package scalqa; package gen; package request; import language.implicitConversion
 class NEW private() extends Request
 
 object NEW extends NEW:
-  implicit inline def implicitScalaBuffer     [A](inline v: NEW): scala.collection.mutable.Buffer[A]      = scala.collection.mutable.Buffer.empty
-  implicit inline def implicitScalaArrayBuffer[A](inline v: NEW): scala.collection.mutable.ArrayBuffer[A] = new scala.collection.mutable.ArrayBuffer()
-  implicit inline def implicitJavaArrayList   [A](inline v: NEW): java.util.ArrayList[A]                  = new java.util.ArrayList()
+  implicit inline def implicitToScalaBuffer     [A](inline v: NEW): scala.collection.mutable.Buffer[A]      = scala.collection.mutable.Buffer.empty
+  implicit inline def implicitToScalaArrayBuffer[A](inline v: NEW): scala.collection.mutable.ArrayBuffer[A] = new scala.collection.mutable.ArrayBuffer()
+  implicit inline def implicitToJavaArrayList   [A](inline v: NEW): java.util.ArrayList[A]                  = new java.util.ArrayList()
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

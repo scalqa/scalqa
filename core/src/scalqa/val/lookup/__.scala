@@ -1,12 +1,12 @@
 package scalqa; package `val`; import lookup.*; import language.implicitConversions
 
 trait Lookup[A, +B] extends Collection[B]:
-  @tn("get_Opt")     def get_?(key: A)     : Opt[B]
-  @tn("get_Stream")  def get_~(keys: ~[A]) : ~[B]       = keys.map_?(k => get_?(k))
-  /**/               def get(v: A)         : B          = get_?(v) or (throw ZZ.ME(v.tag))
-  @tn("pair_Stream") def pair_~            : ~[(A, B)]
-  @tn("key_Stream")  def key_~             : ~[A]       = pair_~.map(_._1)
-  @tn("stream")      def ~                 : ~[B]       = pair_~.map(_._2)
+  @tn("get_Opt")        def get_?(key: A)     : Opt[B]
+  @tn("get_Stream")     def get_~(keys: ~[A]) : ~[B]       = keys.map_?(k => get_?(k))
+  /**/                  def get(v: A)         : B          = get_?(v) or (throw ZZ.ME(v.tag))
+  @tn("pair_Stream")    def pair_~            : ~[(A, B)]
+  @tn("key_Stream")     def key_~             : ~[A]       = pair_~.map(_._1)
+  @tn("stream")         def ~                 : ~[B]       = pair_~.map(_._2)
 
 object Lookup:
   /**/                  def lazySource[A,B](createFunOpt: A => Opt[B]) : Lookup[A,B] = Z.Basic(createFunOpt)

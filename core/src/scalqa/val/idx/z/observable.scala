@@ -6,14 +6,14 @@ private[idx] object observable:
     idx.onChange(Event.Id.map1(l,_.~.foreach {
       case v: Idx.Event.Add[_]                    => v.cast[Idx.Event.Add[A]].items.~.foreach(l(_))
       case v: Idx.Event.Update[_] if !v.isRefresh => v.cast[Idx.Event.Update[A]].items.~.foreach(l(_))
-      case _                                  => ()
+      case _                                      => ()
     }))
 
   def onRemove[A,U](idx: Observable[A], l: A => U) =
     idx.onChange(Event.Id.map1(l, _.~.foreach {
       case v: Idx.Event.Remove[_]                 => v.cast[Idx.Event.Remove[A]].items.~.foreach(l(_))
       case v: Idx.Event.Update[_] if !v.isRefresh => v.cast[Idx.Event.Update[A]].oldItems.~.foreach(l(_))
-      case _                                  => ()
+      case _                                      => ()
     }))
 
   def removeAll[A](idx: ObservableMutable[A], s: ~[A]) : Int =

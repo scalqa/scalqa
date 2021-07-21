@@ -37,10 +37,10 @@ abstract class Stream[A<:RAW] extends Val.~[A] with ~~.Custom.Discharge[A] with 
 object Stream:
   import gen.`given`.StreamTag
   extension[A<:RAW,T,STM<: ~~.AnyType[T]](inline x: g.Stream[A])
-    /**/           inline def map      [B>:T](inline f: A => B)                  (using inline t:StreamTag[B,       STM]): STM  = z.stream.map(x,f,t)
-    /**/           inline def MAP      [B>:T](inline f: A => B)                  (using inline t:StreamTag[B,       STM]): STM  = z.stream.map.APPLY(x,f,t)
-    /**/           inline def flatMap  [B>:T](inline f: A => ~[B])               (using inline t:StreamTag[B,       STM]): STM  = z.stream.flatMap(x,f,t)
-    /**/           inline def FLAT_MAP [B>:T](inline f: A => ~[B])               (using inline t:StreamTag[B,       STM]): STM  = z.stream.flatMap.APPLY(x,f,t)
+    /**/           inline def map      [B>:T](inline f: A => B)                  (using inline t:StreamTag[B,        STM]): STM  = z.stream.map(x,f,t)
+    /**/           inline def MAP      [B>:T](inline f: A => B)                  (using inline t:StreamTag[B,        STM]): STM  = z.stream.map.APPLY(x,f,t)
+    /**/           inline def flatMap  [B>:T](inline f: A => ~[B])               (using inline t:StreamTag[B,        STM]): STM  = z.stream.flatMap(x,f,t)
+    /**/           inline def FLAT_MAP [B>:T](inline f: A => ~[B])               (using inline t:StreamTag[B,        STM]): STM  = z.stream.flatMap.APPLY(x,f,t)
     @tn("map_Opt") inline def map_?    [OPT<:Val.Opt.AnyType[T]](inline f:A=>OPT)(using inline t:StreamTag.Opt[T,OPT,STM]): STM  = z.stream.mapOpt(x,f,t)
     @tn("MAP_Opt") inline def MAP_?    [OPT<:Val.Opt.AnyType[T]](inline f:A=>OPT)(using inline t:StreamTag.Opt[T,OPT,STM]): STM  = z.stream.mapOpt.APPLY(x,f,t)
 

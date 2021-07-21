@@ -18,7 +18,7 @@ class Pro[A]:
   object Observable:
     def apply(v: => A, dependencies: ~[Observable] = \/)                         : O                            = Val.Pro.O(v, dependencies)
     def apply(v: => A, dependencies: Observable*)                                : O                            = Val.Pro.O(v, dependencies.~)
-    def constant(v: A)                                                             : O                            = Val.Pro.O.constant(v)
+    def constant(v: A)                                                           : O                            = Val.Pro.O.constant(v)
     def named(name: String, v: => A, dependencies: ~[Observable] = \/)           : O & Able.Name                = Val.Pro.O.named[A](name, v, dependencies)
     def refreshable(v: => A, dependencies: ~[Observable] = \/)                   : O & Able.Refresh             = Val.Pro.O.refreshable[A](v, dependencies)
     def namedRefreshable(name: String, v: => A, dependencies: ~[Observable] = \/): O & Able.Name & Able.Refresh = Val.Pro.O.namedRefreshable[A](name, v, dependencies)

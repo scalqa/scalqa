@@ -3,26 +3,27 @@ package scalqa; package j; package io; import input.*; import language.implicitC
 import Io.Input
 
 object Input extends Any.Ref.Custom.Type[Input, java.io.InputStream]("Io.Input"):
-  def apply(v: java.io.InputStream)                     : Input = v.asOpaque[Input]
-  def apply(ba: Array[Byte])                            : Input = apply(java.io.ByteArrayInputStream(ba))
-  def apply(ba: Array[Byte], offs: Int, length: Int)    : Input = apply(java.io.ByteArrayInputStream(ba, offs, length))
-  def apply(text: String)                               : Input = apply(text.getBytes)
-  def apply(f: File.Path)                               : Input = apply(java.io.FileInputStream(f.real.toFile))
+  def apply(v: java.io.InputStream)                      : Input = v.asOpaque[Input]
+  def apply(ba: Array[Byte])                             : Input = apply(java.io.ByteArrayInputStream(ba))
+  def apply(ba: Array[Byte], offs: Int, length: Int)     : Input = apply(java.io.ByteArrayInputStream(ba, offs, length))
+  def apply(text: String)                                : Input = apply(text.getBytes)
+  def apply(f: File.Path)                                : Input = apply(java.io.FileInputStream(f.real.toFile))
 
   implicit inline def implicitFromJava(v: java.io.InputStream): Input = apply(v)
 
-  @tn("getVoid") inline def void                        : Input = Z.Void
-  implicit       inline def implicitRequest(inline v: \/)     : Input = void
+  @tn("getVoid") inline def void                         : Input = Z.Void
+  implicit       inline def implicitRequest(inline v: \/): Input = void
 
   extension (x: Input)
-    def asBytes : Input.Bytes = Input.Bytes(x.real)
-    def asData  : Data        = Data(x.real)
-    def asText  : Text        = Text(x.real)
-    def load    : Input       = { val v = Input(x.asBytes.readAll); x.close; v }
+    def asBytes : Bytes  = Bytes(x.real)
+    def asData  : Data   = Data(x.real)
+    def asText  : Text   = Text(x.real)
+    def load    : Input  = { val v = Input(x.asBytes.readAll); x.close; v }
 
   object opaque:
     opaque type `type` <: java.io.Closeable & Opaque.Ref = java.io.InputStream & Opaque.Ref
-// Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Bytes = input.Bytes.opaque.`type`; transparent inline def Bytes = input.Bytes
   type Data  = input.Data.opaque.`type`;  transparent inline def Data  = input.Data
   type Text  = input.Text.opaque.`type`;  transparent inline def Text  = input.Text

@@ -1,6 +1,6 @@
 package scalqa; package `val`; package stream; package z; package build; package mutate; import language.implicitConversions
 
-import Lang.Any.{Raw as RAW}
+import lang.any.{Raw as RAW}
 import gen.`given`.StreamTag
 import z.a.Map
 
@@ -42,7 +42,7 @@ object raw:
           case _ : StreamTag.Raw[A,Long   .G.~[A & RAW.Long   ]] => long   (x.cast[~[A & RAW.Long   ]])
           case _ : StreamTag.Raw[A,Float  .G.~[A & RAW.Float  ]] => float  (x.cast[~[A & RAW.Float  ]])
           case _ : StreamTag.Raw[A,Double .G.~[A & RAW.Double ]] => double (x.cast[~[A & RAW.Double ]])
-          case _                                              => J.illegalState()
+          case _                                                 => J.illegalState()
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

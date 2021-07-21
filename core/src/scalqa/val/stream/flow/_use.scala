@@ -7,7 +7,7 @@ transparent trait _use[A]:
   @tn("find_Opt")    def find_?( f: A => Boolean)                      : Opt[A]
   /**/               def find(   f: A => Boolean)                      : A
   /**/               def isEvery(f: A => Boolean)                      : Boolean
-  /**/               def exists(  f: A => Boolean)                      : Boolean
+  /**/               def exists(  f: A => Boolean)                     : Boolean
   /**/               def contains[B >: A](value: B)                    : Boolean
   /**/               def count                                         : Int
   /**/               def countAndTime                                  : (Int, Time.Length)

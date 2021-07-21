@@ -53,7 +53,7 @@ object mapOpt:
       case _ : StreamTag.Opt[B,      Val.Opt[BL],Long   .G.~[BL]] => {class Longs   (x: ~[A]) extends a.Pipe.Longs   [BL](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[  Val.Opt[BL]].raw; if(r.nonEmpty) return r; o=x.read_? }; \/}}; Longs   (x)}
       case _ : StreamTag.Opt[B,      Val.Opt[BF],Float  .G.~[BF]] => {class Floats  (x: ~[A]) extends a.Pipe.Floats  [BF](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[  Val.Opt[BF]].raw; if(r.nonEmpty) return r; o=x.read_? }; \/}}; Floats  (x)}
       case _ : StreamTag.Opt[B,      Val.Opt[BD],Double .G.~[BD]] => {class Doubles (x: ~[A]) extends a.Pipe.Doubles [BD](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[  Val.Opt[BD]].raw; if(r.nonEmpty) return r; o=x.read_? }; \/}}; Doubles (x)}
-      case _ : StreamTag.Opt[B,      Val.Opt[B ],      Val.~[B ]] => {class Refs    (x: ~[A]) extends a.Pipe.Ref       [B ](x){@tn("read_Opt")    def read_?    ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[  Val.Opt[B]];      if(r.nonEmpty) return r; o=x.read_? }; \/}}; Refs    (x)}
+      case _ : StreamTag.Opt[B,      Val.Opt[B ],      Val.~[B ]] => {class Refs    (x: ~[A]) extends a.Pipe.Ref     [B ](x){@tn("read_Opt")    def read_?    ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[  Val.Opt[B]];      if(r.nonEmpty) return r; o=x.read_? }; \/}}; Refs    (x)}
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -4,7 +4,7 @@ import java.nio.file.Files
 import java.nio.file.StandardCopyOption.*
 import File.Path
 
-private[j] object Z:
+object Z:
 
   def writeString(f: J.File, s: String) =
     if (f.exists) f.delete
@@ -19,12 +19,13 @@ private[j] object Z:
     p.parent.make
     Path(Files.copy(f.path.real, p.real, ((overwrite ? REPLACE_EXISTING).~ ++ copyAttributes ? COPY_ATTRIBUTES).toSeq *)).file
 
-  def tempFile(f: J.File): J.File = (0 <> 100).~.
-    map(i => f.name + ".temp" + { if (i == 0) "" else i.toString }).
-    map((Vm.Setup.tempPath_? or f.path.dropLast(1)) + _).
-    drop(_.exists).
-    map(_.file).
-    read_? or (J.illegalState("Could not create temp file for: " + this))
+  def tempFile(f: J.File): J.File =
+      (0 <> 100).~
+        .map(i => f.name + ".temp" + { if (i == 0) "" else i.toString })
+        .map((Vm.Setup.tempPath_? or f.path.dropLast(1)) + _)
+        .drop(_.exists)
+        .map(_.file)
+        .read_? or (J.illegalState("Could not create temp file for: " + this))
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

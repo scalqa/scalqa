@@ -9,7 +9,7 @@ transparent trait selfView:
     @tn("selfIsVoid")  inline def isVoid                  (using inline t:VoidTag[A]) : Boolean   = x==null ||  t.isVoid(x.cast[A])
     @tn("selfNonVoid") inline def nonVoid                 (using inline t:VoidTag[A]) : Boolean   = x!=null && !t.isVoid(x.cast[A])
 
-  extension[A](x: _methods._view[~[A]]) // This is override for Stream
+  extension[A](x: _methods._view[~[A]]) // This is override for ~, which has to be treated differently from others
     @tn("selfOpt")     inline def ?                                                   : Opt[~[A]] = {val p=x.cast[~[A]].enablePreview; p.preview_?.map[~[A]](_ => p) }
 
 /*___________________________________________________________________________

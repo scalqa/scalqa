@@ -3,9 +3,9 @@ package scalqa; package `val`; package stream; import language.implicitConversio
 abstract class Flow[A] private[stream] extends flow._build[A] with flow._use[A] with flow._metadata[A]
 
 object Flow:
-  type _build[A] = flow._build[A]
-  type _metadata[A]  = flow._metadata[A]
-  type _use[A]   = flow._use[A]
+  type _build[A]    = flow._build[A]
+  type _metadata[A] = flow._metadata[A]
+  type _use[A]      = flow._use[A]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

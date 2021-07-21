@@ -5,9 +5,6 @@ class Problem(val message: String) extends Exception(message) with Result.Proble
 
   @tn("exception_Opt") def exception_? = this
 
-
-
-
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API

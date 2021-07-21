@@ -1,8 +1,8 @@
 package scalqa; package `val`; package idx; package z; import language.implicitConversions
 
 private[scalqa] class Void[A] extends Idx[A] with Gen.Void:
-  /**/     def size                                                  = 0
-  /**/     def apply(i: Int)                                         = J.illegalState()
+  def size          = 0
+  def apply(i: Int) = J.illegalState()
 
 object Void extends Void[Nothing]:
 

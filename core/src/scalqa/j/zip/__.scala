@@ -1,17 +1,16 @@
 package scalqa; package j; import language.implicitConversions
 
 import java.util.zip.{ Deflater, Inflater}
-import zip.z
 
 object Zip:
 
-  def load(file: J.File, entryNamefilter: String => Boolean = \/): ~[(String, Pro[J.Input])] = z.File.load(file, entryNamefilter)
+  def load(file: J.File, entryNamefilter: String => Boolean = \/): ~[(String, Pro[J.Input])] = zip.Z.loadFromFile(file, entryNamefilter)
 
   def save(file: J.File, entries: ~[(String, Pro[J.Input])], level: Int = 1, writeEmptyFile: Boolean = true): Unit  =
-    val buf = entries.enablePreview
-    if(buf.preview_?.nonEmpty || writeEmptyFile)
+    val stream = entries.enablePreview
+    if(stream.preview_?.nonEmpty || writeEmptyFile)
       val tempFile = file.temp
-      z.File.save(tempFile, buf, level)
+      zip.Z.saveToFile(tempFile, stream, level)
       file.delete
       tempFile.move(file)
 

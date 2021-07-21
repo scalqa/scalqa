@@ -13,16 +13,16 @@ object ReversibleFunction:
   extension[A,B](x: ReversibleFunction[A,B])
     def reverse: ReversibleFunction[B, A] = new Z.Reversed(x)
 
-
+  // ****************************************************************************************************
   private object Z:
 
     class Basic [A,B](applyFun: A => B, undoFun: B => A) extends ReversibleFunction[A,B]:
-      def apply(v: A)  = applyFun(v)
-      def undo(v: B)   = undoFun(v)
+      def apply(v: A)   = applyFun(v)
+      def undo(v: B)    = undoFun(v)
 
     class Reversed[A,B](val original: ReversibleFunction[B, A])  extends ReversibleFunction[A,B]:
-      def apply(v: A)  = original.undo(v)
-      def undo(v: B)   = original.apply(v)
+      def apply(v: A)   = original.undo(v)
+      def undo(v: B)    = original.apply(v)
 
     object Void extends ReversibleFunction[Any, Any] with Gen.Void:
       def apply(v: Any) = v

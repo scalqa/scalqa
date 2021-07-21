@@ -9,19 +9,13 @@ object Url extends Any.Ref.Custom.Type[Url,java.net.URL]("Url"):
   override        def tag(v:Url)                               : String = v.real.toExternalForm
   implicit inline def implicitFromReal(inline v: java.net.URL) : Url    = apply(v)
 
-  extension (x: Url)
-    def host                            : String         = x.real.getHost
-    def port                            : Int            = x.real.getPort
-    def openConnection                  : Url.Connection = Url.Connection(x.real.openConnection)
-    def openInput                       : J.Input        = J.Input(x.real.openStream)
-    def readString                      : String         = x.openInput.asText.readAllAndClose
-    def readString(timeOut: Time.Length): String         = { val c = x.openConnection
-      /**/                                                   c.connectTimeout_=(timeOut)
-      /**/                                                   c.readTimeout_=(timeOut)
-      /**/                                                   c.doOutput_=(true)
-      /**/                                                   c.request("Content-Type").update("application/x-www-form-urlencoded")
-      /**/                                                   c.openInput.asText.readAllAndClose
-      /**/                                                 }
+  extension (inline x: Url)
+    inline def host                            : String         = x.real.getHost
+    inline def port                            : Int            = x.real.getPort
+    inline def openConnection                  : Url.Connection = Url.Connection(x.real.openConnection)
+    inline def openInput                       : J.Input        = J.Input(x.real.openStream)
+    inline def readString                      : String         = x.openInput.asText.readAllAndClose
+    inline def readString(timeOut: Time.Length): String         = Z.readString(x,timeOut)
 
   object opaque:
     opaque type `type` <: Opaque.Ref = java.net.URL & Opaque.Ref

@@ -1,6 +1,7 @@
 package scalqa; package gen; package `given`; package z; import language.implicitConversions
 
 class PrimitiveTag[A <: Any.Raw | Opaque](val typeName: String) extends `given`.TypeTag[A] with Given.DocTag[A]:
+
   def tag(v: A): String    = v.toString
   def doc(v: A): Doc       = Doc(typeName) += ("value",v.toString)
 

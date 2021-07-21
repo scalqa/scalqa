@@ -14,7 +14,7 @@ object newArray:
               case _ : ArrayTag[A&Raw.Long,   Array[A&Raw.Long   ]] => new Array[Long](sz).cast[ARRAY]
               case _ : ArrayTag[A&Raw.Float,  Array[A&Raw.Float  ]] => new Array[Float](sz).cast[ARRAY]
               case _ : ArrayTag[A&Raw.Double, Array[A&Raw.Double ]] => new Array[Double](sz).cast[ARRAY]
-              case _                                                        => java.lang.reflect.Array.newInstance(x.getClass().getComponentType(), sz).cast[ARRAY]
+              case _                                                => java.lang.reflect.Array.newInstance(x.getClass().getComponentType(), sz).cast[ARRAY]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

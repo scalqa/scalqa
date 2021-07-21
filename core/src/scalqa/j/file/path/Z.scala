@@ -15,12 +15,15 @@ object Z:
       i += 1
     \/
 
+  // ---------------------------------------------------------------------------------
+
   def join(p: File.Path, a: File.Path | String): File.Path =
     val v = File.Path.any(a)
     if (p.isEmpty) v
     else if (v.root_?) J.illegalState("Cannot extend with root: " + v)
     else p.real.resolve(v.real)
 
+  // **********************************************************************************
   class Names(p: File.Path) extends Val.Idx[String]:
     def apply(i: Int) = p.name(i)
     val size          = p.size

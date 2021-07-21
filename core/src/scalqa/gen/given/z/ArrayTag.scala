@@ -1,8 +1,10 @@
 package scalqa; package gen; package `given`; package z; import language.implicitConversions
 
 class ArrayTag extends Given.DocTag[Object]:
+
   def tag(v: Object) = doc(v).tag
-  def doc(v: Object): Doc      =
+
+  def doc(v: Object): Doc =
     val (name,b,len) = v match
       case v: Array[Int]     => ("Array[Int]",    v eq ZZ.emptyIntArray,     v.length)
       case v: Array[Double]  => ("Array[Double]", v eq ZZ.emptyDoubleArray,  v.length)

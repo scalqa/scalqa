@@ -4,9 +4,12 @@ import java.lang.ref.WeakReference
 import J.WeakRef
 
 object WeakRef:
-  /**/     inline def apply[A](inline v: A): WeakRef[A] = new WeakReference[A](v).asOpaque[WeakRef[A]]
+  /**/     inline def apply[A](inline v: A)                     : WeakRef[A] = new WeakReference[A](v).asOpaque[WeakRef[A]]
+  implicit inline def implicitToBoolean[A](inline v: WeakRef[A]): Boolean    = v.get_?
 
-  implicit inline def implicitToBoolean[A](v: WeakRef[A]): Boolean    = v.get_?
+  extension[A](x: WeakRef[A])
+    @tn("get_Opt") def get_? : Opt[A] = { val v = x.cast[WeakReference[A]].get; if (v == null) \/ else v }
+
 
   given givenClassTag[A](using t: ClassTag[A]): ClassTag[WeakRef[A]] = t.cast[ClassTag[WeakRef[A]]]
   given givenTypeTag [A]: Given.TypeTag[WeakRef[A]]  = Given.TypeTag("WeakRef")
@@ -15,9 +18,6 @@ object WeakRef:
   given givenDocTag[A](using t: Given.DocTag[A]) : Given.DocTag[WeakRef[A]] with
     def tag(v: WeakRef[A]) : String   = "WeakRef("+ v.get_?.map(v => t.tag(v)).or("\\/") + ")"
     def doc(v: WeakRef[A]) : Doc      = Doc("WeakRef@"+v.self_^.hash)
-
-  extension[A](x: WeakRef[A])
-     @tn("get_Opt") def get_? : Opt[A] = { val v = x.cast[WeakReference[A]].get; if (v == null) \/ else v }
 
   object opaque:
     opaque type `type`[A] <: Opaque.Ref = WeakReference[A] & Opaque.Ref

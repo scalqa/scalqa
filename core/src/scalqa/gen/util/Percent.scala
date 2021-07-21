@@ -8,17 +8,17 @@ object Percent extends Double.Custom.Data.Numerical[Percent]("Percent"):
   /**/     inline def apply(value: Number, base: Number): Percent = apply(value.doubleValue, base.doubleValue)
   override        def isVoid(v: Percent)                : Boolean = v.real == 0D
   override        def tag(v: Percent)                   : String  = {val l = v.Long; if(v.real==l) l.toString + "%" else v.toString + "%"}
-  implicit inline def implicitRequest(inline v: \/)           : Percent = apply(0D)
+  implicit inline def implicitRequest(inline v: \/)     : Percent = apply(0D)
 
   extension(inline x: Percent)
-    inline def apply(inline nv: Int)                                         : Int    = (x.real * nv / 100.0).toInt
-    inline def apply(inline nv: Long)                                        : Long   = (x.real * nv / 100.0).toLong
-    inline def apply(inline nv: Float)                                       : Float  = (x.real * nv / 100.0).toFloat
-    inline def apply(inline nv: Double)                 (using inline v: \/) : Double = (x.real * nv / 100.0)
-    inline def apply[A<:Opaque.Int]   (inline nv: A)(using inline n:Math[A]) : A      =  x(nv.cast[Int]).cast[A]
-    inline def apply[A<:Opaque.Long]  (inline nv: A)(using inline n:Math[A]) : A      =  x(nv.cast[Long]).cast[A]
-    inline def apply[A<:Opaque.Float] (inline nv: A)(using inline n:Math[A]) : A      =  x(nv.cast[Float]).cast[A]
-    inline def apply[A<:Opaque.Double](inline nv: A)(using inline n:Math[A]) : A      =  x(nv.cast[Double]).cast[A]
+    /**/               inline def apply(inline nv: Int)                                         : Int    = (x.real * nv / 100.0).toInt
+    /**/               inline def apply(inline nv: Long)                                        : Long   = (x.real * nv / 100.0).toLong
+    /**/               inline def apply(inline nv: Float)                                       : Float  = (x.real * nv / 100.0).toFloat
+    @tn("applyDouble") inline def apply(inline nv: Double)                                      : Double = (x.real * nv / 100.0)
+    /**/               inline def apply[A<:Opaque.Int]   (inline nv: A)(using inline n:Math[A]) : A      =  x(nv.cast[Int]).cast[A]
+    /**/               inline def apply[A<:Opaque.Long]  (inline nv: A)(using inline n:Math[A]) : A      =  x(nv.cast[Long]).cast[A]
+    /**/               inline def apply[A<:Opaque.Float] (inline nv: A)(using inline n:Math[A]) : A      =  x(nv.cast[Float]).cast[A]
+    /**/               inline def apply[A<:Opaque.Double](inline nv: A)(using inline n:Math[A]) : A      =  x(nv.cast[Double]).cast[A]
 
   object opaque:
     opaque type `type` <: Opaque.Double = Opaque.Double

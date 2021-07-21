@@ -23,11 +23,11 @@ private[`val`] object Few:
   abstract class Base[A] private[Few]() extends ><[A]:
     type THIS_TYPE = Pack[A]
     /**/                       def join(v: A)                 : ><[A]
-    /**/                       def joinAt(i: Int, v: A)       : ><[A]   = this.~.joinAt(i, v).><
-    /**/                       def joinAll(v: ~[A])           : ><[A]   = v.nonEmpty_?.map(v => (this.~ ++ v).><) or this
-    /**/                       def joinAllAt(i: Int, v: ~[A]) : ><[A]   = v.nonEmpty_?.map(v => (this.~ ++@ (i,v)).><) or this
-    @tn("take_Range") override def take_<>(f:Int,sz:Int)      : ><[A]   = this.~.take_<>(f <>= sz).><
-    @tn("drop_Range") override def drop_<>(f:Int,sz:Int)      : ><[A]   = this.~.drop_<>(f <>= sz).><
+    /**/                       def joinAt(i: Int, v: A)       : ><[A]     = this.~.joinAt(i, v).><
+    /**/                       def joinAll(v: ~[A])           : ><[A]     = v.nonEmpty_?.map(v => (this.~ ++ v).><) or this
+    /**/                       def joinAllAt(i: Int, v: ~[A]) : ><[A]     = v.nonEmpty_?.map(v => (this.~ ++@ (i,v)).><) or this
+    @tn("take_Range") override def take_<>(f:Int,sz:Int)      : ><[A]     = this.~.take_<>(f <>= sz).><
+    @tn("drop_Range") override def drop_<>(f:Int,sz:Int)      : ><[A]     = this.~.drop_<>(f <>= sz).><
     /**/                       def compact                    : this.type = this
     /**/                       def toBuffer                   : Buffer[A] = new Any.Ref.Buffer(this.~)
 

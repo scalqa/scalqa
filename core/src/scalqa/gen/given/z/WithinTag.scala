@@ -10,14 +10,14 @@ object WithinTag:
 
   object IterableOnce extends WithinTag[AnyRef,S.IterableOnce[AnyRef]]:
     def within(v:AnyRef, x:S.IterableOnce[AnyRef]) = x match
-                                                    case x: S.SeqOps[_,_,_] => x.contains(v)
-                                                    case x: S.IterableOnceOps[_,_,_] => x.exists(_ == v)
-                                                    case x => {val i=x.iterator; while(i.hasNext) if(v == i.next) return true; false }
+                                                        case x: S.SeqOps[_,_,_] => x.contains(v)
+                                                        case x: S.IterableOnceOps[_,_,_] => x.exists(_ == v)
+                                                        case x => {val i=x.iterator; while(i.hasNext) if(v == i.next) return true; false }
 
   object Iterable extends WithinTag[AnyRef,J.Iterable[AnyRef]]:
     def within(v:AnyRef, x:J.Iterable[AnyRef])     = x match
-                                                    case x: U.Collection[_] => x.contains(v)
-                                                    case x => {val i=x.iterator; while(i.hasNext) if(v == i.next) return true; false }
+                                                        case x: U.Collection[_] => x.contains(v)
+                                                        case x => {val i=x.iterator; while(i.hasNext) if(v == i.next) return true; false }
 
   object Iterator extends WithinTag[AnyRef,U.Iterator[AnyRef]]:
     def within(v:AnyRef, x:U.Iterator[AnyRef])     = { while(x.hasNext) if(v == x.next) return true; false }
@@ -25,8 +25,8 @@ object WithinTag:
 
   object Collection extends WithinTag[AnyRef,Collection[AnyRef]]:
     def within(v:AnyRef, x:Collection[AnyRef])     = x match
-                                                    case x: Idx[_] => x.contains(v)
-                                                    case x         => x.contains(v)
+                                                        case x: Idx[_] => x.contains(v)
+                                                        case x         => x.contains(v)
 
 
 /*___________________________________________________________________________

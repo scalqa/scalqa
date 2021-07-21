@@ -1,6 +1,6 @@
 package scalqa; package gen; package `given`; import language.implicitConversions
 
-import Lang.Any.{ Raw as RAW }
+import lang.any.{ Raw as RAW }
 
 class  OptTag[A, OPT <: Opt.AnyType[A]]
 

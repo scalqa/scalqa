@@ -16,7 +16,7 @@ object range:
       case _ : ArrayTag[A&Raw.Float,  Array[A&Raw.Float  ]] => Arrays.copyOfRange(x.cast[Array[Float  ]],s,s+sz).cast[ARRAY]
       case _ : ArrayTag[A&Raw.Double, Array[A&Raw.Double ]] => Arrays.copyOfRange(x.cast[Array[Double ]],s,s+sz).cast[ARRAY]
       case _ : ArrayTag[A&Ref,        Array[A&Ref        ]] => Arrays.copyOfRange(x.cast[Array[Ref    ]],s,s+sz).cast[ARRAY]
-      case _                                               =>            takeAny(x.cast[Array[A]]      ,s,sz  ).cast[ARRAY]
+      case _                                                =>            takeAny(x.cast[Array[A]]      ,s,sz  ).cast[ARRAY]
 
   def takeAny[A](x: Array[A], s:Int, sz: Int): Array[A] =
     x match

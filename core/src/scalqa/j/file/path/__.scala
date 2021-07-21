@@ -14,10 +14,10 @@ object Path extends Any.Ref.Custom.Type[Path,PATH]("J.Path") with path._methods:
   override        def tag(v: Path)                  : String  = v.real.toString
   override        def doc(v: Path)                  : Doc     = super.doc(v) += ("size",v.size)
 
-  implicit inline def implicitFromReal(v: PATH)        : Path = v.asOpaque[Path]
-  implicit inline def implicitFromString(v: String)    : Path = apply(v)
-  implicit inline def implicitFromFile(v: J.File)      : Path = v.path
-  implicit inline def implicitRequest(inline v: \/): Path = void
+  implicit inline def implicitFromReal(inline v: PATH)    : Path    = v.asOpaque[Path]
+  implicit inline def implicitFromString(inline v: String): Path    = apply(v)
+  implicit inline def implicitFromFile(inline v: J.File)  : Path    = v.path
+  implicit inline def implicitRequest(inline v: \/)       : Path    = void
 
   object opaque:
     opaque type `type` <: Opaque.Ref = PATH & Opaque.Ref

@@ -4,7 +4,7 @@ object Ref:
   @fast lazy val emptyArray : Array[Ref]  = ZZ.emptyObjectArray
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Buffer[A]     = ref.Buffer[A]
+  type Buffer[A]                 = ref.Buffer[A]
   transparent inline def Custom  = ref.Custom
 
 /*___________________________________________________________________________

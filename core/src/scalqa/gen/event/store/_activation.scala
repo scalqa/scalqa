@@ -36,7 +36,8 @@ transparent trait _activation:
     c
 
 private object Activation:
-  object Status; object Events
+  object Status
+  object Events
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

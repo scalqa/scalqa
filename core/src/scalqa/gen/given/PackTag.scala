@@ -17,14 +17,14 @@ object PackTag extends zPackTagDefault:
   sealed class Raw[A, PACK <: ><.RawType[A]]
 
   object Raw:
-    inline given givenBoolean[A<:Any.Raw.Boolean] : Raw[A,Boolean.G.><[A]] = new Raw[A,Boolean.G.><[A]]
-    inline given givenByte   [A<:Any.Raw.Byte]    : Raw[A,Byte   .G.><[A]] = new Raw[A,Byte   .G.><[A]]
-    inline given givenChar   [A<:Any.Raw.Char]    : Raw[A,Char   .G.><[A]] = new Raw[A,Char   .G.><[A]]
-    inline given givenShort  [A<:Any.Raw.Short]   : Raw[A,Short  .G.><[A]] = new Raw[A,Short  .G.><[A]]
-    inline given givenInt    [A<:Any.Raw.Int]     : Raw[A,Int    .G.><[A]] = new Raw[A,Int    .G.><[A]]
-    inline given givenLong   [A<:Any.Raw.Long]    : Raw[A,Long   .G.><[A]] = new Raw[A,Long   .G.><[A]]
-    inline given givenFloat  [A<:Any.Raw.Float]   : Raw[A,Float  .G.><[A]] = new Raw[A,Float  .G.><[A]]
-    inline given givenDouble [A<:Any.Raw.Double]  : Raw[A,Double .G.><[A]] = new Raw[A,Double .G.><[A]]
+    inline given givenBoolean[A<:Any.Raw.Boolean] : Raw[A,Boolean.G.><[A]]     = new Raw[A,Boolean.G.><[A]]
+    inline given givenByte   [A<:Any.Raw.Byte]    : Raw[A,Byte   .G.><[A]]     = new Raw[A,Byte   .G.><[A]]
+    inline given givenChar   [A<:Any.Raw.Char]    : Raw[A,Char   .G.><[A]]     = new Raw[A,Char   .G.><[A]]
+    inline given givenShort  [A<:Any.Raw.Short]   : Raw[A,Short  .G.><[A]]     = new Raw[A,Short  .G.><[A]]
+    inline given givenInt    [A<:Any.Raw.Int]     : Raw[A,Int    .G.><[A]]     = new Raw[A,Int    .G.><[A]]
+    inline given givenLong   [A<:Any.Raw.Long]    : Raw[A,Long   .G.><[A]]     = new Raw[A,Long   .G.><[A]]
+    inline given givenFloat  [A<:Any.Raw.Float]   : Raw[A,Float  .G.><[A]]     = new Raw[A,Float  .G.><[A]]
+    inline given givenDouble [A<:Any.Raw.Double]  : Raw[A,Double .G.><[A]]     = new Raw[A,Double .G.><[A]]
 
 // **********************************************************************************************************************************************
 private[`given`] class zPackTagDefault:

@@ -7,7 +7,7 @@ object Gmt extends Long.Custom.Data[Gmt]("Time.Gmt") with time.x.Base[Gmt] with 
   inline   def apply()                   : Gmt     = System.currentTimeMillis.asOpaque[Gmt]
   override def tag(v: Gmt)               : String  = v.day.tag + ' ' + v.dayTime.tag
 
-  implicit inline def implicitRequest(inline v: CURRENT) : Gmt     = apply()
+  implicit inline def implicitRequest(inline v: CURRENT): Gmt = apply()
 
   extension(x: Gmt)
     @tn("millisTotal")   inline def millisTotal: Long    = x.real

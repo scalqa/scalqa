@@ -5,7 +5,7 @@ import scalqa.lang.*
 object Predef:
 
   object GlobalExtensionLibrary
-      extends any.z.Extension    with array._methods with string._methods  with scalqa.`val`.stream.custom.Constructors
+      extends any.z.Extension  with array._methods with string._methods  with scalqa.`val`.stream.custom.Constructors
          with boolean._methods with byte._methods  with char._methods    with short._methods
          with int._methods     with long._methods  with float._methods   with double._methods
          with scalqa.gen.math.ordering.z._methods

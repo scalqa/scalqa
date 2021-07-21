@@ -1,6 +1,5 @@
 package scalqa; package gen; package request
 
-
 class CENTER private() extends Request
 
 object CENTER extends CENTER

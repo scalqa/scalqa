@@ -1,6 +1,6 @@
 package scalqa; package gen; package request; package z; import language.implicitConversions
 
-private[request] object Void:
+private[request] object VOID:
   object Ordering            extends Ordering[Any]                   with Gen.Void { def compare(x: Any, y: Any) = 0 }
   object Filter              extends (Any => Boolean)                with Gen.Void { def apply(v: Any) = true }
   object ToStringFunction    extends (Any => String)                 with Gen.Void { def apply(v: Any) = "" }

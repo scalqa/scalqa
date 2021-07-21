@@ -11,10 +11,10 @@ object Instant extends Long.Custom.Data.Ordered[Instant]("Time.Instant") with ti
   implicit inline def implicitRequest(inline v: CURRENT): Instant = apply()
 
   extension(x: Instant)
-    @tn("nanosTotal")        def nanosTotal : Long    = x.real
-    @tn("general") protected def general    : Time    = Time.fromMillis(x.millisTotal)
-    @tn("plus")     inline def  +(inline l: Time.Length)               : Instant    = (x.nanosTotal + l.nanosTotal).cast[Instant]
-    @tn("minus")    inline def  -(inline l: Time.Length)               : Instant    = (x.nanosTotal - l.nanosTotal).cast[Instant]
+    @tn("nanosTotal")        def nanosTotal                : Long     = x.real
+    @tn("general") protected def general                   : Time     = Time.fromMillis(x.millisTotal)
+    @tn("plus")       inline def + (inline l: Time.Length) : Instant  = (x.nanosTotal + l.nanosTotal).cast[Instant]
+    @tn("minus")      inline def - (inline l: Time.Length) : Instant  = (x.nanosTotal - l.nanosTotal).cast[Instant]
 
   object opaque:
     opaque type `type` <: Opaque.Long = Opaque.Long

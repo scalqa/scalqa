@@ -16,8 +16,7 @@ class monitor[A](x: ~[A], monitor: Monitor) extends a.Pipe.Sized[A](x):
       cnt += 1
       Monitor.runOnEvery(monitor, cnt, len)
      },
-    if (cnt == 0) Monitor.runOnEmpty(monitor)
-    else Monitor.runOnAfterLast(monitor, cnt, len)
+    if (cnt == 0) Monitor.runOnEmpty(monitor) else Monitor.runOnAfterLast(monitor, cnt, len)
   )
 
 

@@ -18,13 +18,13 @@ object RangeTag extends zRangeTagDefault:
   sealed class Raw[A, RANGE <: <>.RawType[A]] extends RangeTag[A,RANGE]
 
   object Raw:
-    inline given givenByte  [A<:RAW.Byte  ] : Raw[A,Byte  .G.<>[A]] = new Raw[A,Byte  .G.<>[A]]
-    inline given givenChar  [A<:RAW.Char  ] : Raw[A,Char  .G.<>[A]] = new Raw[A,Char  .G.<>[A]]
-    inline given givenShort [A<:RAW.Short ] : Raw[A,Short .G.<>[A]] = new Raw[A,Short .G.<>[A]]
-    inline given givenInt   [A<:RAW.Int   ] : Raw[A,Int   .G.<>[A]] = new Raw[A,Int   .G.<>[A]]
-    inline given givenLong  [A<:RAW.Long  ] : Raw[A,Long  .G.<>[A]] = new Raw[A,Long  .G.<>[A]]
-    inline given givenFloat [A<:RAW.Float ] : Raw[A,Float .G.<>[A]] = new Raw[A,Float .G.<>[A]]
-    inline given givenDouble[A<:RAW.Double] : Raw[A,Double.G.<>[A]] = new Raw[A,Double.G.<>[A]]
+    inline given givenByte  [A<:RAW.Byte  ] : Raw[A,Byte  .G.<>[A]]       = new Raw[A,Byte  .G.<>[A]]
+    inline given givenChar  [A<:RAW.Char  ] : Raw[A,Char  .G.<>[A]]       = new Raw[A,Char  .G.<>[A]]
+    inline given givenShort [A<:RAW.Short ] : Raw[A,Short .G.<>[A]]       = new Raw[A,Short .G.<>[A]]
+    inline given givenInt   [A<:RAW.Int   ] : Raw[A,Int   .G.<>[A]]       = new Raw[A,Int   .G.<>[A]]
+    inline given givenLong  [A<:RAW.Long  ] : Raw[A,Long  .G.<>[A]]       = new Raw[A,Long  .G.<>[A]]
+    inline given givenFloat [A<:RAW.Float ] : Raw[A,Float .G.<>[A]]       = new Raw[A,Float .G.<>[A]]
+    inline given givenDouble[A<:RAW.Double] : Raw[A,Double.G.<>[A]]       = new Raw[A,Double.G.<>[A]]
 
 private[`given`] class zRangeTagDefault:
   inline given givenAny    [A             ] : RangeTag[A,      Val.<>[A]] = new RangeTag[A,       Val.<>[A]]

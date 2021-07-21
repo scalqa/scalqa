@@ -1,6 +1,14 @@
-package scalqa; package gen; package math; import ordering.*; import language.implicitConversions
+package scalqa; package j; import language.implicitConversions
 
-object Numeric
+object Z:
+
+  def readString(x: J.Url, timeOut: Time.Length): String =
+    x.openConnection.^(c => {
+      c.connectTimeout = timeOut
+      c.readTimeout    = timeOut
+      c.doOutput       = true
+      c.requestProperty("Content-Type").update("application/x-www-form-urlencoded")
+    }).openInput.asText.readAllAndClose
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

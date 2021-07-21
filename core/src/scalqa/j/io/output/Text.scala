@@ -25,6 +25,7 @@ object Text extends Any.Ref.Custom.Type[Text, java.io.OutputStreamWriter]("Io.Ou
 
   object opaque:
     opaque type `type` <: java.io.Closeable & Opaque.Ref = java.io.OutputStreamWriter & Opaque.Ref
+
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API

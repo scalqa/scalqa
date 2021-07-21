@@ -9,7 +9,6 @@ object Math:
   inline def pow(inline a: Double, inline b: Double) : Double = Java.pow(a,b)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  transparent inline def Numeric    = math.Numeric
   transparent inline def Ordering   = math.Ordering;    type Ordering[A]  = math.Ordering[A]
   transparent inline def Format     = math.Format;      type Format       = math.Format.opaque.`type`
   transparent inline def Rounding   = math.Rounding;    type Rounding     = math.Rounding
