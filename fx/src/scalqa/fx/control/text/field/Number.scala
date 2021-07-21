@@ -8,7 +8,7 @@ class Number protected (columns: Opt[Int] = \/, value: String.Opt = \/) extends 
   @tn("double_Result")  def double_?? : Result[Double] = text.trim.toDouble_??
 
 object Number:
-  def apply(value: String)                                   : Number = new Number(\/, value)
+  def apply(value: String)                                  : Number = new Number(\/, value)
   def apply(columns: Opt[Int] = \/, value: String.Opt = \/) : Number = new Number(columns, value)
 
 /*___________________________________________________________________________

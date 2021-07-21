@@ -18,13 +18,13 @@ class Item extends Action:
 object Item:
   type Custom = item.Custom
 
-  def apply(a: Action)                                               : Item              = a match { case v: Item => v; case _ => new Item(a) }
-  def apply(text: String)                                            : Item              = new Item(text)
-  def apply(text: String, n: Fx.Node.Like)                           : Item              = apply(text).^(_.graphic_*() = n)
-  def apply[U](text: String, l: Action.Event => U)                   : Item              = apply(text).^(_.onAction(l))
-  def apply[U](text: String, enabled: Boolean, l: Action.Event => U) : Item              = apply(text, l).^(_.enable = enabled)
-  def apply(real: JItem)                                             : Item              = real.getUserData.cast[Item]
-  def separator                                                      : Item              = new z.Separator
+  def apply(a: Action)                                               : Item  = a match { case v: Item => v; case _ => new Item(a) }
+  def apply(text: String)                                            : Item  = new Item(text)
+  def apply(text: String, n: Fx.Node.Like)                           : Item  = apply(text).^(_.graphic_*() = n)
+  def apply[U](text: String, l: Action.Event => U)                   : Item  = apply(text).^(_.onAction(l))
+  def apply[U](text: String, enabled: Boolean, l: Action.Event => U) : Item  = apply(text, l).^(_.enable = enabled)
+  def apply(real: JItem)                                             : Item  = real.getUserData.cast[Item]
+  def separator                                                      : Item  = new z.Separator
 
   given FxConverter: ReversibleFunction[JItem,Item] = zTwoWay;
 

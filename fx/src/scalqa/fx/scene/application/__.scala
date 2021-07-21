@@ -25,19 +25,17 @@ abstract class Application(width: Int.Opt, height: Int.Opt, private val title: S
 
   // *************************************************************************************
   protected class Stage extends Fx.Stage():
-    /**/                 def scene              : Fx.Scene         = self.scene
-    private[Application] var args               : ><[String] = null
-    private[Application] var stopped            : Boolean          = false
-    private[fx]          def start(s: JStage)   : Unit             = { _createRealOverride(s);
-
+    /**/                 def scene              : Fx.Scene     = self.scene
+    private[Application] var args               : ><[String]   = null
+    private[Application] var stopped            : Boolean      = false
+    private[fx]          def stop               : Unit         = { stopped = true; self.eventStore.fireEvent0(StopEvent) }
+    private[fx]          def start(s: JStage)   : Unit         = {
+      _createRealOverride(s);
       s.setTitle(self.title);
-
       real.setScene(scene.real);
-
       self.eventStore.fireEvent0(UiReadyEvent);
-
-      if (self.show) this.show }
-    private[fx]          def stop               : Unit             = { stopped = true; self.eventStore.fireEvent0(StopEvent) }
+      if (self.show) this.show
+    }
 
 object Application:
   private object UiReadyEvent
@@ -50,6 +48,7 @@ object Application:
 private class zStarter extends javafx.application.Application:
   override def start(s: JStage) = Application.self.stage.start(s)
   override def stop()           = Application.self.stage.stop
+
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API

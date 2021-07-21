@@ -2,7 +2,7 @@ package scalqa; package fx; package base; package action; package z
 
 private[fx] class Separator extends Action:
   protected type REAL = javafx.scene.control.SeparatorMenuItem
-  protected override def _createReal : REAL      = new REAL
+  protected override def _createReal: REAL      = new REAL
 
   override           def toMenuItem : Menu.Item = Menu.Item(this)
 

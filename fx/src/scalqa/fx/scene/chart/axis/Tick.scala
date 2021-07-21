@@ -7,7 +7,7 @@ abstract class Tick[A] extends Able.Doc:
   def position : Double
   def visible  : Boolean
   def value    : A
-  def doc     : Doc          = Doc(this) += ("label", label) += ("position", position) += ("value", value)
+  def doc      : Doc          = Doc(this) += ("label", label) += ("position", position) += ("value", value)
 
 private[chart] object Tick:
   def apply[A,B](tm: JTick[B], bm: ReversibleFunction[A,B]): Tick[A] = new Z(tm, bm)

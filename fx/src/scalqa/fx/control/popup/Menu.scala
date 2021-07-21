@@ -10,8 +10,7 @@ class Menu extends Control:
 
 object Menu:
 
-  def apply()                 : Menu = new Menu
-  //def apply(p: ~[_ <: Action]): Menu = Menu().^(_.items ++= p.map(fx.Menu.Item.apply))
+  def apply()            : Menu = new Menu
   def apply(p: ~[Action]): Menu = Menu().^(_.items ++= p.map(Fx.Menu.Item.apply))
 
 /*___________________________________________________________________________

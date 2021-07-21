@@ -5,7 +5,7 @@ class Divider(val real: javafx.scene.control.SplitPane.Divider) extends Able.Doc
   @tn("position_Pro") lazy  val position_*            : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.positionProperty)
   /**/                      def position              : Double         = real.getPosition
   /**/                      def position_=(b: Double) : Unit           = real.setPosition(b)
-  /**/                      def doc                  : Doc           = Doc(this) += ("position", position)
+  /**/                      def doc                   : Doc            = Doc(this) += ("position", position)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

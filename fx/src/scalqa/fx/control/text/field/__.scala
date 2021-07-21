@@ -11,7 +11,7 @@ class Field(columnsO: Opt[Int] = \/, value: String.Opt = \/) extends Text.InputC
   /**/                   def columnCount_=(b: Int)   : Unit          = real.setPrefColumnCount(b)
 
 object Field:
-  def apply(value: String)                                   : Text.Field = new Text.Field(\/, value)
+  def apply(value: String)                                  : Text.Field = new Text.Field(\/, value)
   def apply(columns: Opt[Int] = \/, value: String.Opt = \/) : Text.Field = new Text.Field(columns, value)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

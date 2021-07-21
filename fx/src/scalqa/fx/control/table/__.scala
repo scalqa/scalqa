@@ -24,13 +24,9 @@ abstract class Table[ROW] extends Control with _properties[ROW] with _Column[ROW
     })
   })
 
-  // Lazy vals have problem in _properties trait, and have to be defined here
-  @tn("ordering_Pro")      lazy  val ordering_*    : Pro.OM[Ordering[ROW]] = Pro.OM.X.Basic[Ordering[ROW]](\/)
-  @tn("sortingBase_Pro")   lazy  val sortingBase_* : Pro.OM[Ordering[ROW]] = Pro.OM.X.Basic[Ordering[ROW]](\/)
-
-  /**/               private[fx] def mkViewOpt[VIEW](v: ROW)     : Opt[VIEW] = viewOptFun(v).cast[Opt[VIEW]]; private var viewOptFun: ROW => Opt[VIEW] = v => if(v == null) \/ else v.cast[VIEW]
-  @tn("view_Setup")    protected def view_: (f: ROW => VIEW)     : Unit      = view_:?(f(_))
-  @tn("view_SetupOpt") protected def view_:?(f: ROW => Opt[VIEW]): Unit      = viewOptFun = f
+  /**/                 private[fx] def mkViewOpt[VIEW](v: ROW)     : Opt[VIEW] = viewOptFun(v).cast[Opt[VIEW]]; private var viewOptFun: ROW => Opt[VIEW] = v => if(v == null) \/ else v.cast[VIEW]
+  @tn("view_Setup")    protected   def view_: (f: ROW => VIEW)     : Unit      = view_:?(f(_))
+  @tn("view_SetupOpt") protected   def view_:?(f: ROW => Opt[VIEW]): Unit      = viewOptFun = f
 
 object Table:
   private[fx] type Column[ROW,V,A] = table.Column[ROW,V,A]

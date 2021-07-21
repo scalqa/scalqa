@@ -4,7 +4,6 @@ import javafx.scene.control.TextFormatter.{ Change => JChange }
 import InputControl.Change
 
 object Change extends Abstract.Delegate.Opaque[Change, JChange]("Fx.Text.InputControl.Change"):
-  //implicit def implicitFromJava(v: JChange) : Change  = apply(v)
 
   extension (x: Change)
     inline def anchor                 : Int     = x.real.getAnchor

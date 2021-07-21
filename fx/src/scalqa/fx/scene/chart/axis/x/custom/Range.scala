@@ -4,7 +4,7 @@ class Range[A] (val start: A, val end: A, val unit: Double, val format: String, 
 
   def transform[B](m: A => B) : Range[B] = new Range(m(start), m(end), unit, format, scale)
   def isSingularity           : Boolean  = start == end
-  def doc                     : Doc     = Doc(this) += ("start", start) += ("end", end) += ("unit", unit) += ("format", format) += ("scale", scale) += ("class", start.getClass)
+  def doc                     : Doc      = Doc(this) += ("start", start) += ("end", end) += ("unit", unit) += ("format", format) += ("scale", scale) += ("class", start.getClass)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -11,7 +11,9 @@ private[fx] class IdxO[A](val real: JFX.ObservableList[A]) extends Idx.O[A]:
   def onChange[U](l: ><[Idx.O.Event[A]] => U): Gen.Event.Control =
     if (l.isInstanceOf[Gen.Event.Id]) J.unsupportedOperation()
     else
-      object Listener extends Gen.Event.Control.X.Basic(l) with JFX.ListChangeListener[A] { def onChanged(real: JFX.ListChangeListener.Change[_ <: A]) = target_?.forval(_(Fx.JavaFx.To.parseChanges(real))) }
+      object Listener extends Gen.Event.Control.X.Basic(l) with JFX.ListChangeListener[A]:
+        def onChanged(real: JFX.ListChangeListener.Change[_ <: A]) = target_?.forval(_(Fx.JavaFx.To.parseChanges(real)))
+
       Listener.onCancel(() => real.removeListener(Listener))
       real.addListener(Listener)
       Listener

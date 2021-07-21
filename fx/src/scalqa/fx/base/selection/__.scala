@@ -9,8 +9,8 @@ sealed class Selection[A](val target: Idx[A], val real: SelectionModel[_ <: Any]
   /**/           def mode_=(v: Selection.Mode)  : Unit              = real match { case m: MSM[_] => m.setSelectionMode(v.real); case _ => () }
   /**/           def onChange[U](f:THIS_TYPE=>U): Gen.Event.Control = zEvent(f)
   /**/           def clear                      : Unit              = real.clearSelection
-  /**/           def set(i: Int)                : Unit              = real.select(i)
-  /**/           def select(a: A)               : Unit              = target.~.findPosition_?(_ == a).forval(set(_))
+  /**/           def selectAt(i: Int)           : Unit              = real.select(i)
+  /**/           def select(a: A)               : Unit              = target.~.foreachIndexed((i,v) => if(v==a) selectAt(i))
   @tn("map_View")def map_^[B](f: A => B)        : Selection[B]      = new Selection[B](target.map_^(f), real)
 
   // *********************************************************************************************************************************

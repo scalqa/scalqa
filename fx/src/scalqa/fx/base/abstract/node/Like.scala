@@ -1,6 +1,6 @@
 package scalqa; package fx; package base; package `abstract`; package node; import language.implicitConversions
 
-abstract class Like protected[fx] extends Delegate.Gui:
+abstract class Like protected[fx] extends delegate.Gui:
   protected type REAL <: javafx.scene.Node
 
   @tn("scene_Opt") def scene_? : Opt[Fx.Scene] = Scene(real.getScene())

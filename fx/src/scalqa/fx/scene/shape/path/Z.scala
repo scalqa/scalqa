@@ -4,9 +4,11 @@ import javafx.scene.{ shape => J }
 
 private[path] object Z:
 
+// **********************************************************************************************************************
   trait Base[TYPE <: Base[TYPE, BASE], BASE <: J.PathElement] extends Any with Element with Abstract.Delegate.Value[TYPE, BASE]:
     protected def setup: Setup[TYPE, BASE]
 
+  // **********************************************************************************************************************
   abstract class Setup[TYPE <: Base[TYPE, BASE], BASE <: J.PathElement] extends Abstract.Delegate.Value.Setup[TYPE, BASE]
 
 

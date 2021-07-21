@@ -1,23 +1,23 @@
 package scalqa; package fx; package control; package cell; import language.implicitConversions
 
 trait Setup[CELL <: control.Cell] extends Able.Doc:
-  private                    var updateJobs                                           : ><[CELL => Unit]                      = \/
-  private                    var clickJobs                                            : ><[(Fx.Event.Mouse, CELL) => Unit]       = \/
-  private                    var menuJobs                                             : ><[(Fx.Event.ContextMenu, CELL) => Unit] = \/
+  private                    var updateJobs                                             : ><[CELL => Unit]                         = \/
+  private                    var clickJobs                                              : ><[(Fx.Event.Mouse, CELL) => Unit]       = \/
+  private                    var menuJobs                                               : ><[(Fx.Event.ContextMenu, CELL) => Unit] = \/
 
-  @tn("cell_Setup")          def cell_:        (f: CELL => Unit)                      : Unit        = updateJobs += f
-  @tn("mouseClicked_Setup")  def mouseClicked_:(f: (Fx.Event.Mouse, CELL) => Unit)       : Unit        = clickJobs += f
-  @tn("contextMenu_Setup")   def contextMenu_: (f: (Fx.Event.ContextMenu, CELL) => Unit) : Unit        = menuJobs  += f
-  @tn("alignment_SetupOpt")  def alignment_:?  (f: CELL => Opt[Pos])                  : Unit        = cell_:(c => f(c).forval(c.alignment= _))
-  @tn("style_SetupOpt")      def style_:?      (f: CELL => Opt[Style])                : Unit        = cell_:(c => f(c).forval(c.style += _))
-  @tn("styleClass_SetupOpt") def styleClass_:? (f: CELL => Opt[Style.Class])          : Unit        = cell_:(c => f(c).forval(c.styleClass= _))
+  @tn("cell_Setup")          def cell_:        (f: CELL => Unit)                        : Unit        = updateJobs += f
+  @tn("mouseClicked_Setup")  def mouseClicked_:(f: (Fx.Event.Mouse, CELL) => Unit)      : Unit        = clickJobs += f
+  @tn("contextMenu_Setup")   def contextMenu_: (f: (Fx.Event.ContextMenu, CELL) => Unit): Unit        = menuJobs  += f
+  @tn("alignment_SetupOpt")  def alignment_:?  (f: CELL => Opt[Pos])                    : Unit        = cell_:(c => f(c).forval(c.alignment= _))
+  @tn("style_SetupOpt")      def style_:?      (f: CELL => Opt[Style])                  : Unit        = cell_:(c => f(c).forval(c.style += _))
+  @tn("styleClass_SetupOpt") def styleClass_:? (f: CELL => Opt[Style.Class])            : Unit        = cell_:(c => f(c).forval(c.styleClass= _))
 
-  /**/                       def alignment                                            : Pos         = J.unsupportedOperation()
-  /**/                       def style                                                : Style       = J.unsupportedOperation()
-  /**/                       def styleClass                                           : Style.Class = J.unsupportedOperation()
-  /**/                       def alignment_=(s: Pos)                                  : Unit        = alignment_:?(_ => s)
-  /**/                       def style_=(s: Style)                                    : Unit        = style_:?(_ => s)
-  /**/                       def styleClass_=(s: Style.Class)                         : Unit        = styleClass_:?(_ => s)
+  /**/                       def alignment                                              : Pos         = J.unsupportedOperation()
+  /**/                       def style                                                  : Style       = J.unsupportedOperation()
+  /**/                       def styleClass                                             : Style.Class = J.unsupportedOperation()
+  /**/                       def alignment_=(s: Pos)                                    : Unit        = alignment_:?(_ => s)
+  /**/                       def style_=(s: Style)                                      : Unit        = style_:?(_ => s)
+  /**/                       def styleClass_=(s: Style.Class)                           : Unit        = styleClass_:?(_ => s)
 
   def apply(c: CELL): Unit =
     if (updateJobs.size > 0) updateJobs.~.foreach(_(c))

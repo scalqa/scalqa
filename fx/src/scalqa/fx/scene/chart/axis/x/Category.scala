@@ -5,7 +5,7 @@ class Category extends Chart.Axis[String]:
   type VALUE = String
   protected type REAL = javafx.scene.chart.CategoryAxis; override def _createReal = new REAL
 
-  /**/  val list:  Idx.M[String] =  Idx.M.wrap(real.getCategories)
+  /**/  val list: Idx.M[String] =  Idx.M.wrap(real.getCategories)
   final def valueMap = \/
   /**/  val ordering = String.ordering
 

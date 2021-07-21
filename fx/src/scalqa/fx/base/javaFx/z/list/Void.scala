@@ -3,12 +3,12 @@ package scalqa; package fx; package base; package javaFx; package z; package lis
 private[fx] object Void extends Base[Nothing] with Gen.Void:
 
   def get(i: Int) = J.illegalState()
-  def size = 0
+  def size        = 0
 
-  def addListener(l: javafx.beans.InvalidationListener) = ()
-  def removeListener(l: javafx.beans.InvalidationListener) = ()
+  def addListener   (l: javafx.beans.InvalidationListener)        = ()
+  def removeListener(l: javafx.beans.InvalidationListener)        = ()
 
-  def addListener(l: javafx.collections.ListChangeListener[_]) = ()
+  def addListener   (l: javafx.collections.ListChangeListener[_]) = ()
   def removeListener(l: javafx.collections.ListChangeListener[_]) = ()
 
 /*___________________________________________________________________________

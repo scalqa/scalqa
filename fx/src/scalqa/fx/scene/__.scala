@@ -6,7 +6,6 @@ import base.`abstract`.Parent
 class Scene(width: Int.Opt = \/, height: Int.Opt = \/, e: Opt[Fx.Node.Like] = \/) extends Abstract.Delegate.Gui:
   protected type REAL = JFX.Scene
   protected def _createReal = new JFX.Scene(e.map(_.real.cast[JFX.Parent]) or control.Label("No Root").real, width or -1, height or -1)
-  _onRealCreated(real => Style.Default.~.map(_.toString).foreach(real.getStylesheets.add(_)))
   private[fx] override def _refPropertyOpt = real.onZoomFinishedProperty
 
   @tn("scene_Opt") def scene_?               : Opt[Scene]      = this

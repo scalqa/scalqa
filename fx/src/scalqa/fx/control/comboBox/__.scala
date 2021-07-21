@@ -5,8 +5,8 @@ import javafx.scene.control.ListCell
 class ComboBox[A](using val docTag: Given.DocTag[A]) extends comboBox.Base[A]:
   protected type REAL = javafx.scene.control.ComboBox[A];  protected override def _createReal = new REAL
 
-  /**/                 lazy  val items                     : Idx.M[A]        = Idx.M.wrap(real.getItems)
-  /**/                 lazy  val selection                 : Fx.Selection[A] = Fx.Selection(items, real.getSelectionModel)
+  @fast                lazy  val items                     : Idx.M[A]        = Idx.M.wrap(real.getItems)
+  @fast                lazy  val selection                 : Fx.Selection[A] = Fx.Selection(items, real.getSelectionModel)
   @tn("visibleRowCount_Pro") def visibleRowCount_*         : Int.Pro.OM      = Fx.JavaFx.To.pro_OM(real.visibleRowCountProperty);
   /**/                       def visibleRowCount           : Int             = real.getVisibleRowCount;
   /**/                       def visibleRowCount_=(v: Int) : Unit            = real.setVisibleRowCount(v)

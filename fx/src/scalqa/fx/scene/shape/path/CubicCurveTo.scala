@@ -24,10 +24,10 @@ class CubicCurveTo(val real: JCubicCurveTo) extends AnyVal with Z.Base[CubicCurv
   /**/                 def controlY2_=(v: Double) : Unit           = real.setControlY2(v)
 
 object CubicCurveTo extends Z.Setup[CubicCurveTo,JCubicCurveTo]:
-  def apply(v: JCubicCurveTo)                                           : CubicCurveTo = new CubicCurveTo(v)
-  def apply()                                                           : CubicCurveTo = apply(JCubicCurveTo())
+  def apply(v: JCubicCurveTo)                                        : CubicCurveTo = new CubicCurveTo(v)
+  def apply()                                                        : CubicCurveTo = apply(JCubicCurveTo())
   def apply(controlX1: Double, controlY1: Double, controlX2: Double,
-              controlY2: Double, x: Double, y: Double)                  : CubicCurveTo = apply(JCubicCurveTo(controlX1, controlY1, controlX2, controlY2, x, y))
+            controlY2: Double, x: Double, y: Double)                 : CubicCurveTo = apply(JCubicCurveTo(controlX1, controlY1, controlX2, controlY2, x, y))
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -1,6 +1,6 @@
 package scalqa; package fx; import language.implicitConversions
 
-trait Control extends Abstract.Region:
+trait Control extends base.`abstract`.Region:
   protected type REAL <: javafx.scene.control.Control
 
   @tn("tooltip_Pro") def tooltip_*                     : Pro.OM[Control.Tooltip]  = Fx.JavaFx.To.pro_OM(real.tooltipProperty).mutableMap_^[Control.Tooltip]

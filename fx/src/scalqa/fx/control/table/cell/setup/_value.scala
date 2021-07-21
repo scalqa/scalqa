@@ -4,12 +4,12 @@ transparent trait _value[ROW, VIEW, A]:
   //self :cell.Setup[ROW, VIEW, A] =>
   private inline def self = this.cast[cell.Setup[ROW, VIEW, A]]
 
-  private                      var proSetup         : ROW => Pro.O[Opt[A]]                            = Z.voidFun
-  private                      var enhance          : ><[(ROW, Pro.O[Opt[A]]) => Pro.O[Opt[A]]]       = \/
-  private[table]               def mkProOpt(e: ROW) : Pro.O[Opt[A]]                                   = enhance.~.foldAs(proSetup(e):Pro.O[Opt[A]])((p,pe) => pe(e,p))
-  private[table]               var funFormat        : A => String.Opt                                 = v => v.tag(using self.docTag)
-  private[table]               var funFormatVoid    : ROW => String.Opt                               = v => \/
-  private[table]               var funTooltipOpt    : Opt[Opt[A] => Tooltip]                          = \/
+  private                      var proSetup         : ROW => Pro.O[Opt[A]]                           = Z.voidFun
+  private                      var enhance          : ><[(ROW, Pro.O[Opt[A]]) => Pro.O[Opt[A]]]      = \/
+  private[table]               def mkProOpt(e: ROW) : Pro.O[Opt[A]]                                  = enhance.~.foldAs(proSetup(e):Pro.O[Opt[A]])((p,pe) => pe(e,p))
+  private[table]               var funFormat        : A => String.Opt                                = v => v.tag(using self.docTag)
+  private[table]               var funFormatVoid    : ROW => String.Opt                              = v => \/
+  private[table]               var funTooltipOpt    : Opt[Opt[A] => Tooltip]                         = \/
 
   @tn("value_Setup")           def value_:    (f: ROW => A)                                 : Unit   = value_:?(f(_))
   @tn("value_SetupOpt")        def value_:?   (f: ROW => Opt[A])                            : Unit   = value_:*?(r => Pro.O.constant(f(r)))

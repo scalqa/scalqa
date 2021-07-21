@@ -20,12 +20,12 @@ private[fx] class HeaderFooter[A](hf: (><[A], ><[A]), override val real:  Idx.OM
 private object HeaderFooter:
 
   class Base[A](val head: ><[A], val foot: ><[A], val real:  Idx.M[A]) extends Idx.M.X.Base[A]:
-    /**/                   val headSize              : Int  = head.size
-    /**/                   val footSize              : Int  = foot.size
-    /**/                   def size                  : Int  = headSize + footSize + real.size
-    /**/                   def apply(idx: Int)       : A    = { val i = idx - headSize; if (idx < headSize) head(idx) else if (i < real.size) real(i) else foot(i - real.size) }
-    /**/                   def addAt(i: Int, e: A)   : Unit = real.addAt(mapPos(i), e)
-    /**/                   def updateAt(i: Int, e: A): Unit = real.updateAt(mapPos(i), e)
+    /**/                val headSize              : Int  = head.size
+    /**/                val footSize              : Int  = foot.size
+    /**/                def size                  : Int  = headSize + footSize + real.size
+    /**/                def apply(idx: Int)       : A    = { val i = idx - headSize; if (idx < headSize) head(idx) else if (i < real.size) real(i) else foot(i - real.size) }
+    /**/                def addAt(i: Int, e: A)   : Unit = real.addAt(mapPos(i), e)
+    /**/                def updateAt(i: Int, e: A): Unit = real.updateAt(mapPos(i), e)
     @tn("remove_Range") def remove_<>(r: Int.<>)  : Unit = if (r.size > 0) { mapPos(r.start); mapPos(r.end); real.remove_<>(r << headSize) }
 
     private def mapPos(i: Int) : Int  =

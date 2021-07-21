@@ -6,8 +6,8 @@ import z.Pro.OM.{ JavaFxWrap => POM }
 
 object To:
 
-  def idx_O [A](v: javafx.collections.ObservableList[A]): Idx.O[A]  = new z.IdxO[A](v)
-  def idx_OM[A](v: javafx.collections.ObservableList[A]): Idx.OM[A] = new z.IdxOM[A](v)
+  def idx_O [A](v: javafx.collections.ObservableList[A]): Idx.O[A]   = new z.IdxO[A](v)
+  def idx_OM[A](v: javafx.collections.ObservableList[A]): Idx.OM[A]  = new z.IdxOM[A](v)
 
   def parseChanges[A](v: javafx.collections.ListChangeListener.Change[_ <: A]) : ><[Idx.O.Event[A]] = javaFx.z.list.List.parseChanges(v)
 
@@ -18,12 +18,12 @@ object To:
   def pro_O    (v: value.ObservableIntegerValue)   : Int.Pro.O       = new PO.IntProO(v)
   def pro_O    (v: value.ObservableStringValue)    : String.Pro.O    = new PO.StringProO(v)
 
-  def pro_OM[A](v: property.ObjectProperty[A])    : Val.Pro.OM[A]   = new POM.ObjectProOM(v)
-  def pro_OM   (v: property.BooleanProperty)      : Boolean.Pro.OM  = new POM.BooleanProOM(v)
-  def pro_OM   (v: property.DoubleProperty)       : Double.Pro.OM   = new POM.DoubleProOM(v)
-  def pro_OM   (v: property.LongProperty)         : Long.Pro.OM     = new POM.LongProOM(v)
-  def pro_OM   (v: property.IntegerProperty)      : Int.Pro.OM      = new POM.IntProOM(v)
-  def pro_OM   (v: property.StringProperty)       : String.Pro.OM   = new POM.StringProOM(v)
+  def pro_OM[A](v: property.ObjectProperty[A])    : Val.Pro.OM[A]    = new POM.ObjectProOM(v)
+  def pro_OM   (v: property.BooleanProperty)      : Boolean.Pro.OM   = new POM.BooleanProOM(v)
+  def pro_OM   (v: property.DoubleProperty)       : Double.Pro.OM    = new POM.DoubleProOM(v)
+  def pro_OM   (v: property.LongProperty)         : Long.Pro.OM      = new POM.LongProOM(v)
+  def pro_OM   (v: property.IntegerProperty)      : Int.Pro.OM       = new POM.IntProOM(v)
+  def pro_OM   (v: property.StringProperty)       : String.Pro.OM    = new POM.StringProOM(v)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

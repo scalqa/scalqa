@@ -7,7 +7,8 @@ object PseudoClass extends Abstract.Delegate.Opaque[PseudoClass,JPseudoClass]("F
   inline   def apply(s: String)             : PseudoClass = JPseudoClass.getPseudoClass(s).cast[PseudoClass]
   implicit def implicitFromString(v: String): PseudoClass = apply(v)
 
-  extension (x: PseudoClass) inline def name: String = x.real.getPseudoClassName
+  extension (x: PseudoClass)
+    inline def name: String = x.real.getPseudoClassName
 
   object opaque:
     opaque type `type` <: Any.Opaque.Ref = JPseudoClass & Any.Opaque.Ref

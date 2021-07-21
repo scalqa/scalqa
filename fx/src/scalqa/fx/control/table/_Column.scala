@@ -19,7 +19,6 @@ transparent trait _Column[ROW]:
     def this(label: String)                           (using o: Opt[Ordering[A]])(using t:VoidTag[A],d:DocTag[A]) = this(label, \/, null)(using o)(using t,d)
     def this(f: ROW => A)                             (using o: Opt[Ordering[A]])(using t:VoidTag[A],d:DocTag[A]) = this("", \/, f)(using o)(using t,d)
 
-
     def table = self
 
 

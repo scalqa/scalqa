@@ -7,7 +7,6 @@ object Type extends Abstract.Delegate.Opaque[Button.Type, JType]("Fx.Button.Type
   object opaque:
     opaque type `type` <: Opaque.Ref = JType & Opaque.Ref
 
-
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API

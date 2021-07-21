@@ -3,9 +3,9 @@ package scalqa; package fx; package control; package table; package z; import la
 private[fx] class RowData[A](table: Table[A]) extends J.Util.Proxy.Idx.OM[A] with Event.Store.Provider with (><[Idx.O.Event[A]] => Any):
   protected var real =  Idx.OM[A]().^(_.onChange(Event.Id.make1(this, this)))
 
-  @tn("items_Pro")        lazy  val items_*        : Pro.OM[Idx.OM[A]]          = Pro.OM.X.Basic(real).^(_.onChangeRun(resetRows))
+  @tn("items_Pro")        lazy  val items_*        : Pro.OM[Idx.OM[A]]      = Pro.OM.X.Basic(real).^(_.onChangeRun(resetRows))
   @tn("headerFooter_Pro") lazy  val headerFooter_* : Pro.OM[(><[A], ><[A])] = Pro.OM.X.Basic[(><[A], ><[A])]((\/, \/)).^(_.onChangeRun(resetRows))
-  @tn("sortMode_Pro")     lazy  val sortMode_*     : Pro.OM[SortMode]           = Pro.OM(SortMode.Direct).^(p => p.onChangeRun({resetRows; table.columns.~.foreach(c => c.sortable = p().nonVoid && c.ordering.nonVoid) }))
+  @tn("sortMode_Pro")     lazy  val sortMode_*     : Pro.OM[SortMode]       = Pro.OM(SortMode.Direct).^(p => p.onChangeRun({resetRows; table.columns.~.foreach(c => c.sortable = p().nonVoid && c.ordering.nonVoid) }))
 
   override def onChange[U](l: ><[Idx.O.Event[A]] => U) = eventStore.onEvent1(RowData.ChangeEvent, l)
 

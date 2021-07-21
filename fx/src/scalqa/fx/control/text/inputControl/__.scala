@@ -12,7 +12,7 @@ abstract class InputControl(initialTextO: String.Opt = \/) extends Control:
   /**/                     def size                        : Int             = real.getLength
   /**/                     def end                         : Unit            = real.end
   /**/                     def +=(s: String)               : Unit            = real.appendText(s)
-  /**/                     def onChange[U](l: Change => U) : Unit            = { _onChange += l; if (!real.getTextFormatter.isInstanceOf[Formatter[_]]) real.setTextFormatter(new Formatter) }
+  /**/                     def onChange[U](l: Change => U) : Unit            = { _onChange += l; if (!real.getTextFormatter.isInstanceOf[zFormatter[_]]) real.setTextFormatter(new zFormatter) }
 
   @tn("editable_Pro")      def editable_*                  : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.editableProperty)
   /**/                     def editable                    : Boolean         = real.isEditable
@@ -23,26 +23,9 @@ abstract class InputControl(initialTextO: String.Opt = \/) extends Control:
   /**/                     def text                        : String          = real.getText
   /**/                     def text_=(v: String)           : Unit            = real.setText(v)
 
-  /*
-    // -----------------------------------
-    public <T> scalqa.O._^.O<T> createView(Gen.FxConverter<String, T> m) {
-      TextFormatter<?> old = real().getTextFormatter();
-      if (old instanceof Formatter && ((Formatter) old).view != null) throw new scalqa.E.IllegalState("Z already created.");
-      Formatter<T> f = new Formatter><(this, m);
-      real().setTextFormatter(f);
-      return f.view();
-    }
-
-*/
-
+  // ***********************************************************************************
   import javafx.scene.control.TextFormatter.{ Change => FXC }
-  private class Formatter[A] extends javafx.scene.control.TextFormatter[A](new java.util.function.UnaryOperator[FXC] { def apply(c: FXC) = { _onChange.~.foreach(_(Change(c))); c } }) {
-    //      private scalqa.O._^.O<A> view;
-    //      public scalqa.O._^.O<A> view() {
-    //        if (view == null) toDo;// view = new scalqa.O._*.O.C(valueProperty());
-    //        return view;
-    //      }
-  }
+  private class zFormatter[A] extends javafx.scene.control.TextFormatter[A](new java.util.function.UnaryOperator[FXC] { def apply(c: FXC) = { _onChange.~.foreach(_(Change(c))); c } })
 
 object InputControl:
   type Change = inputControl.Change.opaque.`type`; transparent inline def Change = inputControl.Change

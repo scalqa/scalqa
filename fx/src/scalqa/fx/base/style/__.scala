@@ -3,7 +3,6 @@ package scalqa; package fx; package base; import language.implicitConversions
 import Fx.Style
 
 object Style extends String.Custom.Data[Style]("Fx.Style"):
-  val Default : Idx                  = \/
   given FxConverter: ReversibleFunction[String,Style] = \/
 
   /**/     inline def apply(inline v: String)             : Style = v.asOpaque[Style]

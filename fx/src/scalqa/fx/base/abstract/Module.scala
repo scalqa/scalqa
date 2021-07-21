@@ -4,7 +4,7 @@ abstract class Module extends Fx.Node.Like:
   private[fx] override def _refPropertyOpt = real.onZoomFinishedProperty
 
 object Module:
-  def apply[T <: Module](r: javafx.scene.Node) : T                                 = Delegate.Gui(r.onZoomFinishedProperty)
+  def apply[T <: Module](r: javafx.scene.Node) : T                  = Delegate.Gui(r.onZoomFinishedProperty)
 
   given FxConverter: ReversibleFunction[javafx.scene.Node, Module]  = ReversibleFunction(apply, _.real)
 
