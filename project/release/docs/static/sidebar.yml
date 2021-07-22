@@ -31,6 +31,8 @@ sidebar:
           url: guide/features/Specialized.html
         - title: Data
           url: guide/features/Data.html
+        - title: For-Comprehensions
+          url: guide/features/For-Comprehensions.html
     - title: Internals
       subsection:
         - title: SLIM Codding

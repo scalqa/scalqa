@@ -41,4 +41,11 @@ but few levels of hierarchy provide unlimited naming opportunities for even the 
 ### Implementation        
 
 Of course there are packages on implementation level, but they are not a part of public API and should not be called directly. 
-All public functionality is exposed as objects, which can be imported (if required) the same way packages are.
+All public functionality is exposed as objects, which can be imported (when required) the same way packages are.
+
+### Should users follow H2O structure?
+
+Probably "no". It is better to write programs the regular way.
+It would take months of considerable effort before first benefits are realized. 
+And even then, H2O is mostly beneficial for large, very interconnected library type code.
+        
