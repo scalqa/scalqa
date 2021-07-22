@@ -2,7 +2,7 @@ package scalqa; package test.`val`.stream._build._group; import language.implici
 
 object sliding extends J.Test:
 
-  test_~(
+  testEqual_~(
     (1 to 1000).sliding(5, 12).flatten.sliding(3, 4).flatten.sliding(3, 3).flatten.sliding(3, 2).flatten.sliding(3, 1).flatten.~,
     (1 <> 1000).~.sliding(5, 12).flatten.sliding(3, 4).flatten.sliding(3, 3).flatten.sliding(3, 2).flatten.sliding(3, 1).flatten)
 

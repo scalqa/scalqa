@@ -2,12 +2,12 @@ package scalqa; package test.`val`.range; import language.implicitConversions
 
 object overlap extends J.Test:
 
-  test_~("common range")(
+  testEqual_~("common range")(
     1  <> 20 overlap_? 10 <> 30,
     1  <> 20 overlap_? 10 <> 30,
     10 <> 30 overlap_? 1 <> 20)
 
-  test_~("no range")(
+  testEqual_~("no range")(
     1  <> 10 overlap_? 20 <> 30,
     20 <> 30 overlap_? 1  <> 10)
 

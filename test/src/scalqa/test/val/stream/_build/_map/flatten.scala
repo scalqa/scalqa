@@ -2,7 +2,7 @@ package scalqa; package test.`val`.stream._build._map; import language.implicitC
 
 object flatten extends J.Test:
 
-  test_~(
+  testEqual_~(
     1 to 1000,
     (1 <> 1000).~.groupEvery(5).flatten)
 

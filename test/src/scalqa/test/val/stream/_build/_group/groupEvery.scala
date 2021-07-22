@@ -2,7 +2,7 @@ package scalqa; package test.`val`.stream._build._group; import language.implici
 
 object groupEvery extends J.Test:
 
-  test_~(
+  testEqual_~(
     (1 to 1000).grouped(10).map(_.sum),
     (1 <> 1000).~.groupEvery(10).map(_.sum))
 

@@ -2,7 +2,7 @@ package scalqa; package test.`val`.stream._build._filter; import language.implic
 
 object takeInterval extends J.Test("take_<>"):
 
-  test_~(
+  testEqual_~(
     (30 to 60),
     (0 <> 100).~.take_<>(30 <> 60))
 

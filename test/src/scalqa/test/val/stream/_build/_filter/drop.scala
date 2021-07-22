@@ -2,7 +2,7 @@ package scalqa; package test.`val`.stream._build._filter; import language.implic
 
 object drop extends J.Test:
 
-  test_~(
+  testEqual_~(
     (1 to 100).filterNot(_ % 7 != 0),
     (1 <> 100).~.drop(_ % 7 != 0))
 

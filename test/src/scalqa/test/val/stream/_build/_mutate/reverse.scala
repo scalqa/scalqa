@@ -2,7 +2,7 @@ package scalqa; package test.`val`.stream._build._mutate; import language.implic
 
 object reverse extends J.Test:
 
-  test_~(
+  testEqual_~(
     (1 <> 100).~.sortReversed,
     (1 <> 100).~.reverse,
     (1 <> 100).~.hideSizeData.reverse)

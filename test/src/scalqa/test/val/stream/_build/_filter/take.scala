@@ -2,7 +2,7 @@ package scalqa; package test.`val`.stream._build._filter; import language.implic
 
 object take extends J.Test:
 
-  test_~(
+  testEqual_~(
     (1 to 100).filter(_ % 4 != 0),
     (1 <> 100).~.take(_ % 4 != 0))
 

@@ -2,15 +2,15 @@ package scalqa; package test.lang.array; import language.implicitConversions
 
 object Extension extends J.Test:
 
-  test_~("fill")(
+  testEqual_~("fill")(
     new Array[Int](10).^(a => { a.fill(1); a.fill_<>(0 <>> 5, 2) }),
     new Array[Int](10).^(a => { a.fill(2); a.fill_<>(5 <>= 5, 1) }))
 
-  test_~("sort")(
+  testEqual_~("sort")(
     (1 <> 10).~.toArray,
     (1 <> 10).~.reverseEvery(3).toArray.^(_.sort))
 
-  test_~("addAllAt")(
+  testEqual_~("addAllAt")(
     (1 <> 10).~.toArray ++@ (5, 100 <> 111),
     (1 <> 10).~         ++@ (5, 100 <> 111))
 

@@ -2,15 +2,15 @@ package scalqa; package test.`val`.stream._build._zip; import language.implicitC
 
 object zipAll extends J.Test:
 
-  test_~(
+  testEqual_~(
     (1 to 10).zipAll(1 to 10, -1, -2),
     (1 <> 10).~.zipAll(1 <> 10, -1, -2))
 
-  test_~("short one")(
+  testEqual_~("short one")(
     (1 to 5).zipAll(1 to 10, -1, -2),
     (1 <> 5).~.zipAll(1 <> 10, -1, -2))
 
-  test_~("short two")(
+  testEqual_~("short two")(
     (1 to 10).zipAll(1 to 5, -1, -2),
     (1 <> 10).~.zipAll(1 <> 5, -1, -2))
 

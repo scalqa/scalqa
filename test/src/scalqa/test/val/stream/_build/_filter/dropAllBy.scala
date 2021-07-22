@@ -2,7 +2,7 @@ package scalqa; package test.`val`.stream._build._filter; import language.implic
 
 object dropAllBy extends J.Test("dropAllBy"):
 
-  test_~(
+  testEqual_~(
     (1 until 50) ++ (81 to 100),
     (1 <> 100).~.dropAllBy(_ * 10, 500 <> 800),
     (1 <> 100).~.dropAllBy(_ * 10, (500 <> 800).~.reverseEvery(5)))

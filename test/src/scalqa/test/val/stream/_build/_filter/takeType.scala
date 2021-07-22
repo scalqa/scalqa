@@ -2,7 +2,7 @@ package scalqa; package test.`val`.stream._build._filter; import language.implic
 
 object takeType extends J.Test:
 
-  test_~(
+  testEqual_~(
     1 <> 10,
     (~~.void[Any] + "Abc" ++ ('a' <> 'z') ++ (1 <> 10) ++ (1L to 10L)).reverseEvery(3).takeType[Int].sort
   )

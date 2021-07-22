@@ -2,7 +2,7 @@ package scalqa; package test.`val`.stream._build._filter; import language.implic
 
 object takeAllBy extends J.Test("takeAllBy"):
 
-  test_~(
+  testEqual_~(
     30 to 50,
     (1 <> 100).~.takeAllBy(_ * 10, 300 <> 500),
     (1 <> 100).~.takeAllBy(_ * 10, (300 <> 500).~.reverseEvery(4)))

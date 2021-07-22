@@ -2,11 +2,11 @@ package scalqa; package test.`val`.stream._build._group; import language.implici
 
 object group extends J.Test:
 
-  test_~(
+  testEqual_~(
     1 to 100,
     (1 <> 100).~.flatMap(v => ~~(v, v, v)).group.map(_.read))
 
-  test_~("(?)")(
+  testEqual_~("(?)")(
     (0 to 100).filter(_ % 3 == 0),
     (0 <> 100).~.group((x, y) => x / 3 == y / 3).map(_.read))
 

@@ -2,7 +2,7 @@ package scalqa; package test.`val`.stream._build._filter; import language.implic
 
 object dropFirst extends J.Test:
 
-  test_~(
+  testEqual_~(
     50 to 100,
     (0 <> 100).~.dropFirst(50))
 

@@ -2,7 +2,7 @@ package scalqa; package test.`val`.stream._use._convert; import language.implici
 
 object toArray extends J.Test:
 
-  test_~(
+  testEqual_~(
     (1 to 100).toArray,
     (1 <> 100).~.toArray)
 

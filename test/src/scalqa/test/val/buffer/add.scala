@@ -5,19 +5,19 @@ object add extends J.Test:
   def stream                : ~[Int]      = 1 <> 10
   def buffer(initSize: Int) : Buffer[Int] = Buffer[Int](initSize).^(_ ++= stream)
 
-  test_~("1")(
+  testEqual_~("1")(
     buffer(25) ++=@ (8, 20 <> 24),
     stream     ++@  (8, 20 <> 24))
 
-  test_~("2")(
+  testEqual_~("2")(
     buffer(15) ++=@ (8, 20 <> 24),
     stream     ++@  (8, 20 <> 24))
 
-  test_~("3")(
+  testEqual_~("3")(
     buffer(25) ++=@ (2, 20 <> 24),
     stream     ++@  (2, 20 <> 24))
 
-  test_~("4")(
+  testEqual_~("4")(
     buffer(15) ++=@ (2, 20 <> 24),
     stream     ++@  (2, 20 <> 24))
 

@@ -4,7 +4,7 @@ object sumFew extends J.Test:
 
   def all = (1 <> 100).~
 
-  test_~(
+  testEqual_~(
     ~~(all.map(_ * 10).sum, all.map(_ % 10).sum, all.sum),
     {val (x,y,z) = all.sumFew(_ * 10, _ % 10, v => v); ~~(x,y,z) })
 

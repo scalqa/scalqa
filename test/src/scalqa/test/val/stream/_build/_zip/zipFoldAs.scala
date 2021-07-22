@@ -2,7 +2,7 @@ package scalqa; package test.`val`.stream._build._zip; import language.implicitC
 
 object zipFoldAs extends J.Test:
 
-  test_~(
+  testEqual_~(
     (1 to 100).scanLeft(0L)(_ + _).drop(1),
     (1 <> 100).~.zipFoldAs(0L, _ + _).map(_._2))
 

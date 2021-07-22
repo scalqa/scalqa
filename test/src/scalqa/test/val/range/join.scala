@@ -2,7 +2,7 @@ package scalqa; package test.`val`.range; import language.implicitConversions
 
 object join extends J.Test:
 
-  test_~(
+  testEqual_~(
     3 <> 8  join 1 join 10,
     3 <> 8  join 1 <> 10,
     1 <> 10 join 3 <> 8,

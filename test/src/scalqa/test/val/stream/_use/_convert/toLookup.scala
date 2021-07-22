@@ -2,7 +2,7 @@ package scalqa; package test.`val`.stream._use._convert; import language.implici
 
 object toLookup extends J.Test:
 
-  test_~(
+  testEqual_~(
     Lookup(0 -> 'A', 1 -> 'B', 2 -> 'C').pair_~.sort,
     ('A' <> 'C').~.zipKey(_ - 'A').toLookup.pair_~.sort,
     ('A' <> 'C').~.toLookupBy(_ - 'A').pair_~.sort

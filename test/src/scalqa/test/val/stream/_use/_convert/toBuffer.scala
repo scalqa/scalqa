@@ -2,7 +2,7 @@ package scalqa; package test.`val`.stream._use._convert; import language.implici
 
 object toBuffer extends J.Test:
 
-  test_~("collection.mutable.Buffer")(
+  testEqual_~("collection.mutable.Buffer")(
     (1 to 100).toBuffer,
     (1 <> 100).~.iterator.toBuffer)
 

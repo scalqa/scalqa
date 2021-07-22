@@ -2,7 +2,7 @@ package scalqa; package test.`val`.stream._build._order; import language.implici
 
 object sort extends J.Test:
 
-  test_~(
+  testEqual_~(
     1  to 1000,
     (1 <> 1000).~.reverseEvery(3).reverse.sort)
 

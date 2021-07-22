@@ -2,7 +2,7 @@ package scalqa; package test.`val`.stream._build._group; import language.implici
 
 object groupBy extends J.Test:
 
-  test_~(
+  testEqual_~(
     (0 to 100).filter(_ % 3 == 0),
     (0 <> 100).~.groupBy(_ / 3).map(_.read))
 
