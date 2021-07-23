@@ -14,6 +14,7 @@ transparent trait _mutate:
     /**/          inline def reverseEvery(inline size: Int)          : ~[A]              = new M.reverseEvery(x, size)
     /**/          inline def shuffle                                 : ~[A]              = new M.shuffle(x)
     /**/          inline def transpose[B](using inline f:A => ~[B])  : ~[~[B]]           = new M.transpose[A](x,f.cast[A => ~[Ref]]).cast[~[~[B]]]
+    /**/          inline def synchronize                             : ~[A]              = new M.synchronize(x)
   extension[A] (x: ~[A])
     /**/                 def load                                    : ~[A] & Able.Size  = x.toBuffer.~.enableSize
     /**/                 def hideSizeData                            : ~[A]              = if(x.sizeLong_?) new M.hideSizeData(x) else x
@@ -31,6 +32,20 @@ transparent trait _mutate:
 ___________________________________________________________________________*/
 /**
 @trait _mutate -> ### Various Stream Mutation Interface
+
+@def synchronize -> Synchronize access
+
+     Nothing fancy, just a convenience "synchronized" wrapper
+
+     ```
+      val nonSyncStream: ~[Int] = (0 <>> 10000).~
+
+      (1 <> 10000).~.parallel.map(_ => nonSyncStream.read ).~.sort.takeDuplicates.count.tp  // Prints 0 to few hundred count
+
+      val syncStream: ~[Int] = (0 <>> 10000).~.synchronize
+
+      (1 <> 10000).~.parallel.map(_ => syncStream.read ).~.sort.takeDuplicates.count.tp    // Prints 0
+    ```
 
 @def ref -> Generalize
 
@@ -132,6 +147,8 @@ ___________________________________________________________________________*/
 @def shuffle -> Randomize order
 
        Re-arranges elements is random order
+
+      Note. "reverseEvery" might be a better choice if need repeatable randomness
 
 @def transpose -> Transpose
 

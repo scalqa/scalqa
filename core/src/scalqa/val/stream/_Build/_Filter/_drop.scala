@@ -10,8 +10,8 @@ transparent trait _drop :
     @tn("drop_Range") inline def drop_<>(inline i: Int.<>)               : ~[A] = new F.drop_Interval(x, i)
     /**/              inline def dropLast(n: Int)                        : ~[A] = new F.dropLast(x.cast[~[Ref]], n).cast[~[A]]
     /**/              inline def dropEvery(nTh: Int)                     : ~[A] = new F.dropEvery(x,nTh)
-    /**/              inline def dropSame                                : ~[A] = new F.dropSame(x)
-    /**/              inline def dropSameBy[B](inline f: A=>B)           : ~[A] = new F.dropSame.By(x,f)
+    /**/              inline def dropDuplicates                          : ~[A] = new F.dropDuplicates(x)
+    /**/              inline def dropDuplicatesBy[B](inline f: A=>B)     : ~[A] = new F.dropDuplicates.By(x,f)
   extension[A](x: ~[A])
     /**/                     def dropAll(v: ~[A])                        : ~[A] = { val set=v.toSet;  if(set.isEmpty) x else x.DROP(v => set.contains(v))}
     /**/                     def dropAllBy[B](f: A=>B,v: ~[B])           : ~[A] = { val set=v.toSet;  if(set.isEmpty) x else x.DROP(v => set.contains(f(v)))}
@@ -136,20 +136,22 @@ ___________________________________________________________________________*/
 
       Drops elements which test to be void
 
-@def dropSame -> Duplicates reversed filter
+@def dropDuplicates -> Duplicates reversed filter
 
       Drops elements equal to the passed in prior position
 
       Note: To generally get rid of all duplicates, the stream must be sorted to arrange duplicates in sequence
-
-@def dropSameBy -> Mapped duplicates reversed filter
+      ```
+      (1 <> 10).~.repeat(3).dropDuplicates.tp // Prints ~(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+      ```
+@def dropDuplicatesBy -> Mapped duplicates reversed filter
 
       Drops elements, which evaluate to the same value as elements passed in prior position
 
       Note: To generally get rid of all duplicates, the stream must be sorted by the mapping function
 
       ```
-         (1 <> 100).~.dropSameBy(_.toString.length).TP
+         (1 <> 100).~.dropDuplicatesBy(_.toString.length).TP
 
          // Output
          ~(1, 10, 100)

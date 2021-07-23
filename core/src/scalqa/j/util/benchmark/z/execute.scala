@@ -6,8 +6,10 @@ object execute:
 
     val (slotCount, slotDuration) = setup(trialDuration, targets, repeated)
 
+    if(slotCount == 0) J.illegalArgument("The targets take too much time to execute, cannot setup tests within given duration:" +- trialDuration)
+
     def printPack(l: ><[Result]) =
-      l.~.map(_.opsPerSec).max.self_^(v => l.~.foreach(_.maxOpsPerSec = v))
+      l.~.map(_.opsPerSec    ).max.self_^(v => l.~.foreach(_.maxOpsPerSec     = v))
       l.~.map(_.memoryAverage).max.self_^(v => l.~.foreach(_.maxMemoryAverage = v))
       println(l.~.toText)
 

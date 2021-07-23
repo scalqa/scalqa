@@ -13,6 +13,9 @@ transparent trait _take :
     /**/              inline def takeEvery(inline nTh: Int)              : ~[A] = new F.takeEvery(x,nTh)
     /**/              inline def takeIndexed(inline f:(Int,A)=>Boolean,
                                                       inline start:Int=0): ~[A] = new F.takeIndexed(x,f,start)
+    /**/              inline def takeDuplicates                          : ~[A] = new F.takeDuplicates(x)
+    /**/              inline def takeDuplicatesBy[B](inline f: A=>B)     : ~[A] = new F.takeDuplicates.By(x,f)
+
   extension[A](x: ~[A])
     /**/                     def takeAll(v: ~[A])                        : ~[A] = { val set = v.toSet; if(set.isEmpty) \/ else x.TAKE(v => set.contains(v)) }
     /**/                     def takeAllBy[B](f: A=>B, v: ~[B])          : ~[A] = { val set = v.toSet; if(set.isEmpty) \/ else x.TAKE(v => set.contains(f(v)))}
@@ -154,5 +157,30 @@ ___________________________________________________________________________*/
 
       Note: Everything starting from the first non compliant element will be discarded (including later compliant elements)
 
+@def takeDuplicates -> Duplicates filter
+
+      Takes only elements equal to the passed in prior position
+
+      Note: To generally get all duplicates, the stream must be sorted to arrange them in sequence
+
+      ```
+          ~~(1,1,2,3,3,4,5,5,5).takeDuplicates.tp
+
+          // Output
+          ~(1, 3, 5, 5)
+      ```
+
+@def takeDuplicatesBy -> Mapped duplicates filter
+
+      Takes only elements, which evaluate to the same value as elements passed in prior position
+
+      Note: To generally get all duplicates, the stream must be sorted by the mapping function
+
+      ```
+         (0 <> 10).~.takeDuplicatesBy(_ / 2).TP
+
+         // Output
+         ~(1, 3, 5, 7, 9)
+      ```
 */
 
