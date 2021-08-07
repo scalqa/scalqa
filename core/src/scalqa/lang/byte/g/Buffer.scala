@@ -1,6 +1,6 @@
 package scalqa; package lang; package byte; package g; import language.implicitConversions
 
-class Buffer[A<:RAW](_a: Array[Byte], _sz: Int) extends Val.Buffer[A] with Idx.Mutable[A]:
+class Buffer[A<:Raw](_a: Array[Byte], _sz: Int) extends Val.Buffer[A] with Idx.Mutable[A]:
   protected type ARRAY_TYPE = Byte
   def this(initSize: Int) = this(new Array[Byte](initSize),0)
   def this()              = this(J.initSize)
@@ -26,12 +26,12 @@ class Buffer[A<:RAW](_a: Array[Byte], _sz: Int) extends Val.Buffer[A] with Idx.M
   @tn("pack")  override def ><                              : Pack[A]        = Pack.fromArray(ar,sz)
 
 object Buffer:
-  /**/            def accessible[A<:RAW](use: Array[Byte], usedSize: Int)  : Buffer[A] & Able.Access[Array[Byte]] = zAccessible[A](use,usedSize)
-  /**/     inline def accessible[A<:RAW](inline initSize: Int = J.initSize): Buffer[A] & Able.Access[Array[Byte]] = accessible(new Array[Byte](initSize),0)
-  implicit inline def implicitRequest[A<:RAW](inline v: NEW)               : Buffer[A]                            = new Buffer()
+  /**/            def accessible[A<:Raw](use: Array[Byte], usedSize: Int)  : Buffer[A] & Able.Access[Array[Byte]] = zAccessible[A](use,usedSize)
+  /**/     inline def accessible[A<:Raw](inline initSize: Int = J.initSize): Buffer[A] & Able.Access[Array[Byte]] = accessible(new Array[Byte](initSize),0)
+  implicit inline def implicitRequest[A<:Raw](inline v: NEW)               : Buffer[A]                            = new Buffer()
 
   // ************************************************************************************************************************
-  private class zAccessible[A<:RAW](a: Array[Byte], s: Int) extends Buffer[A](a,s) with Able.Access[Array[Byte]]:
+  private class zAccessible[A<:Raw](a: Array[Byte], s: Int) extends Buffer[A](a,s) with Able.Access[Array[Byte]]:
     def access: Array[Byte] = super.array
 
 /*___________________________________________________________________________

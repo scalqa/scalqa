@@ -1,19 +1,19 @@
 package scalqa; package lang; import language.implicitConversions
 
-object Long extends long.custom.Containers[Long]:
+object Long extends long.g.customized.Containers[Long]:
   inline def min     : Long               = java.lang.Long.MIN_VALUE
   inline def max     : Long               = java.lang.Long.MAX_VALUE
-  inline def ordering: G.Ordering[Long] = long.z.Math
+  inline def ordering: G.Ordering[Long]   = long.z.Math
   inline def math    : G.Math[Long]       = long.z.Math
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  transparent inline def Custom = long.Custom
-  transparent inline def G      = long.G
-  type _methods   = long._methods
+  type _methods = long._methods;          transparent inline def G      = long.G
+  type Opaque   = long.Opaque;            transparent inline def Opaque = long.Opaque
+  type Raw      = Long | long.Opaque;     transparent inline def Raw    = long.Raw
 
 package object long:
-  private[scalqa] type SELF = Long;          private[scalqa] inline def SELF = lang.Long
-  private[scalqa] type RAW  = Any.Raw.Long
+  type Raw    = Long.Raw
+  opaque type Opaque >: Long <: AnyVal = Long
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -28,12 +28,11 @@ ___________________________________________________________________________*/
     so the following code can run without boxing:
 
     ```
-
         val s: Long.~    = 1L <> 5L
 
         val o: Long.Opt  = s.readRaw_?  // Holds Long.Opt(1)
 
-        val l: Long.><   = s.><        // Holds (2,3,4,5)
+        val l: Long.><   = s.><         // Holds (2,3,4,5)
     ```
 
 @def min      -> Minimum \n\n  Returns type minimal value: -2 ^ 63

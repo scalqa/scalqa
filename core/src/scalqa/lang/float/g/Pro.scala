@@ -1,28 +1,28 @@
 package scalqa; package lang; package float; package g; import language.implicitConversions
 
- trait Pro[A<:RAW] extends Val.Pro[A] with any.raw.Specialized.OnFloat:
+ trait Pro[A<:Raw] extends Val.Pro[A] with Raw.Specialized:
   def apply(): A
 
 object Pro:
 
-  trait  Mutable[A<:RAW] extends Pro[A] with Val.Pro.M[A] { def update(v: A): Unit }
+  trait  Mutable[A<:Raw] extends Pro[A] with Val.Pro.M[A] { def update(v: A): Unit }
   object Mutable:
     object X:
-      class Basic[A<:RAW](v: A) extends Mutable[A]:
+      class Basic[A<:Raw](v: A) extends Mutable[A]:
         private var value        : A     = v
         /**/    def apply()      : A     = value
         /**/    def update(v: A) : Unit  = value = v
 
-  trait  Observable[A<:RAW] extends Pro[A] with Val.Pro.O[A]
+  trait  Observable[A<:Raw] extends Pro[A] with Val.Pro.O[A]
   object Observable:
     object X:
-      abstract class Base[A<:RAW] extends Val.Pro.Observable.X.Base[A] with Observable[A]
+      abstract class Base[A<:Raw] extends Val.Pro.Observable.X.Base[A] with Observable[A]
 
-  trait  ObservableMutable[A<:RAW] extends Mutable[A] with Observable[A] with Val.Pro.OM[A]
+  trait  ObservableMutable[A<:Raw] extends Mutable[A] with Observable[A] with Val.Pro.OM[A]
   object ObservableMutable:
     object X:
-      abstract class Base[A<:RAW] extends Observable.X.Base[A] with ObservableMutable[A]
-      class Basic[A<:RAW](v: A) extends Mutable.X.Basic[A](v) with Val.Pro.Observable.X.Basis[A] with ObservableMutable[A]:
+      abstract class Base[A<:Raw] extends Observable.X.Base[A] with ObservableMutable[A]
+      class Basic[A<:Raw](v: A) extends Mutable.X.Basic[A](v) with Val.Pro.Observable.X.Basis[A] with ObservableMutable[A]:
         override def update(v: A) = if(apply() != v) { super.update(v); fireChange }
 
 /*___________________________________________________________________________

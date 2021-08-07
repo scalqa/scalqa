@@ -1,9 +1,10 @@
 package scalqa; package j; package io; package input; import language.implicitConversions
 
 import Input.Data
+import java.io.{ DataInputStream as REAL }
 
-object Data extends Any.Ref.Custom.Type[Data, java.io.DataInputStream]("Io.Input.Data"):
-  inline def apply(inline v: Io.Input): Data = new java.io.DataInputStream(v.real).asOpaque[Data]
+object Data extends AnyRef.Opaque.Base[Data, REAL]("Io.Input.Data"):
+  inline def apply(inline v: Io.Input): Data = new REAL(v.real).opaque
 
   extension(inline x: Data)
     inline def readFully(inline ba: Array[Byte])                                    : Unit     = x.real.readFully(ba)
@@ -21,8 +22,8 @@ object Data extends Any.Ref.Custom.Type[Data, java.io.DataInputStream]("Io.Input
     inline def double                                                               : Double   = x.real.readDouble
     inline def utf                                                                  : String   = x.real.readUTF
 
-  object opaque:
-    opaque type `type` <: java.io.Closeable & Opaque.Ref = java.io.InputStream & Opaque.Ref
+  object OPAQUE:
+    opaque type TYPE <: java.io.Closeable & AnyRef.Opaque = java.io.InputStream & AnyRef.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -31,7 +32,7 @@ object Data extends Any.Ref.Custom.Type[Data, java.io.DataInputStream]("Io.Input
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object opaque -> ###
+@object OPAQUE  -> ###
 
    [[J.Input.Data]] is an opaque value, backed by java.io.DataInputStream
 

@@ -1,5 +1,7 @@
 package scalqa; package gen; package time; import language.implicitConversions
 
+import Gen.Time
+
 final class Period private[time] (val start: Time, val end: Time, val endIsIn: Boolean = false) extends Val.<>.X.Base[Time,Period]:
   def ordering : Time.Ordering        = Time.ordering
   def length   : Time.Length          = start lengthTo end
@@ -19,9 +21,3 @@ object Period:
  __\  \/ /___/ __  |/ /__/ /_/ /_/ __  |   (c) 2021, Scalqa.org Inc
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
-/**
-@def endIsIn -> false
-
-      Always false
-
-*/

@@ -25,8 +25,8 @@ ___________________________________________________________________________*/
        Defines a function to be called when this Node or its child Node has input focus and a key has been released
 
 
-@def onKeyTyped -> On key typed
+@def onKeyTyped -> On key customized
 
-       Defines a function to be called when this Node or its child Node has input focus and a key has been typed
+       Defines a function to be called when this Node or its child Node has input focus and a key has been customized
 
 */

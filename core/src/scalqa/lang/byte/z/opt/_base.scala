@@ -5,12 +5,12 @@ import G.Opt
 abstract class _base:
   self: Opt.type =>
 
-  given givenCanEqualOpt[A<:RAW,B<:RAW](using CanEqual[A,B]) : CanEqual[Opt[A],Opt[B]] = CanEqual.derived
-  given givenVoidTag [A<:RAW]                                : Given.VoidTag[Opt[A]]        with { def isVoid( v:Opt[A]) = v.isEmpty }
-  given givenEmptyTag[A<:RAW]                                : Given.EmptyTag[Opt[A]]       with { def isEmpty(v:Opt[A]) = v.isEmpty }
-  given givenTypeTag [A<:RAW]     (using t :Given.TypeTag[A]): Given.TypeTag[Opt[A]]        with { def typeName          = t.typeName + ".Opt"}
-  given givenDocTag  [A<:RAW :Given.DocTag](using t :Given.TypeTag[A]):Given.DocTag[Opt[A]] with { def tag( v: Opt[A])   = t.typeName + ".Opt(" + v.map(_.tag).or("\\/") + ")"
-                                                                                                   def doc(v: Opt[A])    = Doc(t.typeName + ".Opt") += ("value", v.map(_.tag).or("\\/"))}
+  given givenCanEqualOpt[A<:Raw,B<:Raw](using CanEqual[A,B]) : CanEqual[Opt[A],Opt[B]] = CanEqual.derived
+  given givenTypeDef [A<:Raw]     (using t :Given.TypeDef[A]): Given.TypeDef[Opt[A]]        with { def typeName                = t.typeName + ".Opt"}
+  given givenVoidDef [A<:Raw]                                : Given.VoidDef[Opt[A]]        with { def value_isVoid( v:Opt[A]) = v.isEmpty }
+  given givenEmptyDef[A<:Raw]                                : Given.EmptyDef[Opt[A]]       with { def value_isEmpty(v:Opt[A]) = v.isEmpty }
+  given givenDocDef  [A<:Raw :Given.DocDef](using t :Given.TypeDef[A]):Given.DocDef[Opt[A]] with { def value_tag(v: Opt[A])    = t.typeName + ".Opt(" + v.map(_.tag).or("\\/") + ")"
+                                                                                                   def value_doc(v: Opt[A])    = Doc(t.typeName + ".Opt") += ("value", v.map(_.tag).or("\\/"))}
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

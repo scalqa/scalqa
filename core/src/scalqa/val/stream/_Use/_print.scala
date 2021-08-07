@@ -1,11 +1,11 @@
-package scalqa; package `val`; package stream; package _Use; import language.implicitConversions
+package scalqa; package `val`; package stream; package _use; import language.implicitConversions
 
 transparent trait _print:
 
   extension[A](x: ~[A])
-    /**/                def print   (using Given.DocTag[A]) : Unit = z.use.print(x, false,false)
-    /**/                def printId (using Given.DocTag[A]) : Unit = z.use.print(x, true,false)
-    @tn("print_Number") def print_# (using Given.DocTag[A]) : Unit = z.use.print(x, false,true)
+    /**/                def print   (using Given.DocDef[A]) : Unit = z._use._print(x, false,false)
+    /**/                def printId (using Given.DocDef[A]) : Unit = z._use._print(x, true,false)
+    @tn("print_Number") def print_# (using Given.DocDef[A]) : Unit = z._use._print(x, false,true)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

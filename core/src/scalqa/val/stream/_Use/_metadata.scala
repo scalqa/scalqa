@@ -1,4 +1,4 @@
-package scalqa; package `val`; package stream; package _Use; import language.implicitConversions
+package scalqa; package `val`; package stream; package _use; import language.implicitConversions
 
 transparent trait _metadata :
 
@@ -28,7 +28,7 @@ ___________________________________________________________________________*/
 
      ```
      ('a' <> 'z').~
-       .map(_.Int)
+       .map(_.toInt)
        .take(_ % 2 == 0)
        .docTree.TP
 
@@ -59,7 +59,7 @@ ___________________________________________________________________________*/
      Many streams can return their current element count.  If the information is not available, void option is returned
 
      ```
-      var s = (Int.min.Long <> Int.max.Long).~
+      var s = (Int.min.Long <> Int.max.toLong).~
 
       s.sizeLong_?.TP    // Prints Long.Opt(4294967296)
 

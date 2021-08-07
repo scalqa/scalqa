@@ -1,26 +1,27 @@
 package scalqa; package j; package file; import language.implicitConversions
 
-import java.nio.file.{ Path => PATH }
+import java.nio.file.{ Path => REAL }
 import File.Path
 
-object Path extends Any.Ref.Custom.Type[Path,PATH]("J.Path") with path._methods:
-  inline          def apply(v: PATH)                : Path    = v.asOpaque[Path]
-  /**/            def apply()                       : Path    = void.real.toAbsolutePath.asOpaque[Path]
-  /**/            def apply(s:String, more:String*) : Path    = File.System().path(s, more *)
-  /**/            def apply(names: ~[String])       : Path    = File.System().path(names)
-  @tn("getVoid")  def void                          : Path    = File.System().real.getPath("")
-  private[j]      def any(v: Any)                   : Path    = v match { case v: PATH => apply(v); case v => apply(v.toString) }
-  override        def isVoid(v: Path)               : Boolean = v.real.startsWith("")
-  override        def tag(v: Path)                  : String  = v.real.toString
-  override        def doc(v: Path)                  : Doc     = super.doc(v) += ("size",v.size)
+object Path extends AnyRef.Opaque.Base[Path,REAL]("J.Path") with path._methods:
+  inline          def apply(v: REAL)                      : Path    = v.opaque
+  /**/            def current                             : Path    = void.real.toAbsolutePath.opaque
+  /**/            def apply(s:String, more:String*)       : Path    = File.System().path(s, more *)
+  /**/            def apply(names: ~[String])             : Path    = File.System().path(names)
+  @tn("getVoid")  def void                                : Path    = File.System().real.getPath("")
+  private[j]      def any(v: Any)                         : Path    = v match { case v: REAL => apply(v); case v => apply(v.toString) }
+  override        def value_isVoid(v: Path)               : Boolean = v.real.startsWith("")
+  override        def value_tag(v: Path)                  : String  = v.real.toString
+  override        def value_doc(v: Path)                  : Doc     = super.value_doc(v) += ("size",v.size)
 
-  implicit inline def implicitFromReal(inline v: PATH)    : Path    = v.asOpaque[Path]
+  implicit inline def implicitFromReal(inline v: REAL)    : Path    = v.opaque
   implicit inline def implicitFromString(inline v: String): Path    = apply(v)
   implicit inline def implicitFromFile(inline v: J.File)  : Path    = v.path
-  implicit inline def implicitRequest(inline v: \/)       : Path    = void
+  implicit inline def implicitRequest(v: \/)              : Path    = void
+  implicit inline def implicitRequest(v: CURRENT)         : Path    = current
 
-  object opaque:
-    opaque type `type` <: Opaque.Ref = PATH & Opaque.Ref
+  object OPAQUE:
+    opaque type TYPE <: AnyRef.Opaque = REAL & AnyRef.Opaque
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
@@ -28,7 +29,7 @@ object Path extends Any.Ref.Custom.Type[Path,PATH]("J.Path") with path._methods:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object opaque -> ###
+@object OPAQUE  -> ###
 
    [[J.Path]] is an opaque value, backed by java.nio.file.Path
 

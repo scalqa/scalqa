@@ -4,11 +4,11 @@ trait Sequence[A]:
   def step(v: A, step: Int): A
 
 object Sequence:
-  given byte  : Sequence[Byte]  = new Sequence[Byte] { inline def step(v: Byte,  s: Int) = (v + s).Byte  }
-  given char  : Sequence[Char]  = new Sequence[Char] { inline def step(v: Char,  s: Int) = (v + s).Char  }
-  given short : Sequence[Short] = new Sequence[Short]{ inline def step(v: Short, s: Int) = (v + s).Short }
-  given int   : Sequence[Int]   = new Sequence[Int]  { inline def step(v: Int,   s: Int) =  v + s        }
-  given long  : Sequence[Long]  = new Sequence[Long] { inline def step(v: Long,  s: Int) =  v + s        }
+  given byte  : Sequence[Byte]  = new Sequence[Byte] { inline def step(v: Byte,  s: Int) = (v + s).toByte  }
+  given char  : Sequence[Char]  = new Sequence[Char] { inline def step(v: Char,  s: Int) = (v + s).toChar  }
+  given short : Sequence[Short] = new Sequence[Short]{ inline def step(v: Short, s: Int) = (v + s).toShort }
+  given int   : Sequence[Int]   = new Sequence[Int]  { inline def step(v: Int,   s: Int) =  v + s          }
+  given long  : Sequence[Long]  = new Sequence[Long] { inline def step(v: Long,  s: Int) =  v + s          }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

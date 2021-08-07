@@ -31,7 +31,7 @@ object Z:
     @tn("stream") def ~             = real.keySet
     /**/          def size          = real.size
     /**/          def add(v: A)     = real.put(v,())
-    /**/          def remove(v: A)  = real.remove(v).nonEmpty.Int
+    /**/          def remove(v: A)  = real.remove(v).nonEmpty.toInt
     /**/          def clear         = real.clear
 
 /*___________________________________________________________________________

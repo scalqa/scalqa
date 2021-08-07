@@ -3,34 +3,34 @@ package scalqa; package lang; package double; package z; import language.implici
 object Math extends g.Math[Double] with math.Numeric.DoubleIsFractional with ~~.Custom.Math[Double]:
 
   @tn("min_Opt")
-    def min_?(s: ~[SELF]): Val.Opt[SELF] = s.read_?.map(v=>
+    def min_?(s: ~[Double]): Val.Opt[Double] = s.read_?.map(v=>
       s match
-         case s: SELF.~ => s.FOLD(v)((v,w) => if(v<w) v else w)
-         case s         => s.FOLD(v)((v,w) => if(v<w) v else w)
+         case s: Double.~ => s.FOLD(v)((v,w) => if(v<w) v else w)
+         case s           => s.FOLD(v)((v,w) => if(v<w) v else w)
     )
 
   @tn("max_Opt")
-    def max_?(s: ~[SELF]): Val.Opt[SELF] = s.read_?.map(v=>
+    def max_?(s: ~[Double]): Val.Opt[Double] = s.read_?.map(v=>
       s match
-         case s: SELF.~ => s.FOLD(v)((v,w) => if(v>w) v else w)
-         case s         => s.FOLD(v)((v,w) => if(v>w) v else w)
+         case s: Double.~ => s.FOLD(v)((v,w) => if(v>w) v else w)
+         case s           => s.FOLD(v)((v,w) => if(v>w) v else w)
     )
 
   @tn("range_Opt")
-    def range_?(s: ~[SELF]): Val.Opt[SELF.<>] = s.read_?.map(v => {
+    def range_?(s: ~[Double]): Val.Opt[Double.<>] = s.read_?.map(v => {
       var f,l=v
       s match
-         case s: SELF.~ => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
-         case s         => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
-      new SELF.<>(f,l,true)
+         case s: Double.~ => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
+         case s           => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
+      new Double.<>(f,l,true)
     })
 
   @tn("calculateSum_Opt")
-    def calculateSum_?(s: ~[SELF]): Val.Opt[SELF] = s.read_?.map(first => {
-      var sum: SELF = first
+    def calculateSum_?(s: ~[Double]): Val.Opt[Double] = s.read_?.map(first => {
+      var sum: Double = first
       s match
-         case s: SELF.~ => s.FOREACH(v => sum = sum + v)
-         case s         => s.FOREACH(v => sum = sum + v)
+         case s: Double.~ => s.FOREACH(v => sum = sum + v)
+         case s           => s.FOREACH(v => sum = sum + v)
       sum
     })
 

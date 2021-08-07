@@ -6,9 +6,9 @@ object Build {
   lazy val merge      = taskKey[Unit]("Merge")
 
   lazy val commonSettings = Seq(
-    //scalaVersion           := "3.0.1",         // Supported
-    scalaVersion           := "3.0.2-RC1",   // Testing
-    version                := "0.96",
+    scalaVersion           := "3.0.1",         // Supported
+    //scalaVersion           := "3.0.2-RC1",   // Testing
+    version                := "0.97",
     organization           := "org.scalqa",
     scalaSource in Compile := baseDirectory.value / "src",
     javaSource  in Compile := baseDirectory.value / "src"

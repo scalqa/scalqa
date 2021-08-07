@@ -1,6 +1,6 @@
 package scalqa; package lang; package char; package g; import language.implicitConversions
 
-abstract class Stream[A<:RAW] extends Val.~[A] with ~~.Custom.Discharge[A] with any.raw.Specialized.OnChar:
+abstract class Stream[A<:Raw] extends Val.~[A] with ~~.Custom.Discharge[A] with Raw.Specialized:
   self =>
   @tn("readRaw_Opt")      def readRaw_?                                   : G.Opt[A]
   @tn("read_Opt")         def read_?                                      : Val.Opt[A]    = readRaw_?.ref
@@ -35,24 +35,24 @@ abstract class Stream[A<:RAW] extends Val.~[A] with ~~.Custom.Discharge[A] with 
   @tn("REDUCE_Opt")inline def REDUCE_?(  inline f: (A,A) => A)            : G.Opt[A]      = { var o = readRaw_?; if(o.nonEmpty) o=FOLD(o.`val`)(f); o}
 
 object Stream:
-  import gen.`given`.StreamTag
-  extension[A<:RAW,T,STM<: ~~.AnyType[T]](inline x: g.Stream[A])
-    /**/           inline def map      [B>:T](inline f: A => B)                  (using inline t:StreamTag[B,        STM]): STM  = z.stream.map(x,f,t)
-    /**/           inline def MAP      [B>:T](inline f: A => B)                  (using inline t:StreamTag[B,        STM]): STM  = z.stream.map.APPLY(x,f,t)
-    /**/           inline def flatMap  [B>:T](inline f: A => ~[B])               (using inline t:StreamTag[B,        STM]): STM  = z.stream.flatMap(x,f,t)
-    /**/           inline def FLAT_MAP [B>:T](inline f: A => ~[B])               (using inline t:StreamTag[B,        STM]): STM  = z.stream.flatMap.APPLY(x,f,t)
-    @tn("map_Opt") inline def map_?    [OPT<:Val.Opt.AnyType[T]](inline f:A=>OPT)(using inline t:StreamTag.Opt[T,OPT,STM]): STM  = z.stream.mapOpt(x,f,t)
-    @tn("MAP_Opt") inline def MAP_?    [OPT<:Val.Opt.AnyType[T]](inline f:A=>OPT)(using inline t:StreamTag.Opt[T,OPT,STM]): STM  = z.stream.mapOpt.APPLY(x,f,t)
+  import gen.`given`.StreamShape
+  extension[A<:Raw,T,STM<: ~~.AnyType[T]](inline x: g.Stream[A])
+    /**/           inline def map      [B>:T](inline f: A => B)                  (using inline t:StreamShape[B,        STM]): STM  = z.stream.map(x,f,t)
+    /**/           inline def MAP      [B>:T](inline f: A => B)                  (using inline t:StreamShape[B,        STM]): STM  = z.stream.map.APPLY(x,f,t)
+    /**/           inline def flatMap  [B>:T](inline f: A => ~[B])               (using inline t:StreamShape[B,        STM]): STM  = z.stream.flatMap(x,f,t)
+    /**/           inline def FLAT_MAP [B>:T](inline f: A => ~[B])               (using inline t:StreamShape[B,        STM]): STM  = z.stream.flatMap.APPLY(x,f,t)
+    @tn("map_Opt") inline def map_?    [OPT<:Val.Opt.AnyType[T]](inline f:A=>OPT)(using inline t:StreamShape.Opt[T,OPT,STM]): STM  = z.stream.mapOpt(x,f,t)
+    @tn("MAP_Opt") inline def MAP_?    [OPT<:Val.Opt.AnyType[T]](inline f:A=>OPT)(using inline t:StreamShape.Opt[T,OPT,STM]): STM  = z.stream.mapOpt.APPLY(x,f,t)
   // -------------------------------------------------------------------------------------------------------------------------------------------------------
-  /**/             inline def apply    [A<:RAW](inline v:A)               : Stream[A]     = Z.Stream_ofOne(v)
-  /**/                    def apply    [A<:RAW](v: A*)                    : Stream[A]     = v match{ case v: scala.collection.immutable.ArraySeq.ofChar => v.unsafeArray.~.cast[Stream[A]]; case v => v.~.raw}
-  @tn("getVoid")          def void     [A<:RAW]                           : Stream[A]     = Z.VoidStream.cast[Stream[A]]
+  /**/             inline def apply    [A<:Raw](inline v:A)                         : Stream[A]     = Z.Stream_ofOne(v)
+  /**/                    def apply    [A<:Raw](v: A*)                              : Stream[A]     = v match{ case v: scala.collection.immutable.ArraySeq.ofChar => v.unsafeArray.~.cast[Stream[A]]; case v => v.~.raw}
+  @tn("getVoid")          def void     [A<:Raw]                                     : Stream[A]     = Z.VoidStream.cast[Stream[A]]
 
-  implicit         inline def implicitRequest[A<:RAW](inline v: \/)                 : Stream[A]     = void
-  implicit         inline def implicitFromArray  [A<:RAW](inline v: Array[A])       : Stream[A]     = v.~
-  implicit         inline def implicitFromOpt    [A<:RAW](inline v: G.Opt[A])       : Stream[A]     = v.~
-  implicit         inline def implicitFromColl   [A<:RAW](inline v: g.Collection[A]): Stream[A]     = v.~
-  implicit         inline def implicitFromRange  [A<:RAW](inline v: g.Range[A])     : Stream[A]     = v.~
+  implicit         inline def implicitRequest[A<:Raw](inline v: \/)                 : Stream[A]     = void
+  implicit         inline def implicitFromArray  [A<:Raw](inline v: Array[A])       : Stream[A]     = v.~
+  implicit         inline def implicitFromOpt    [A<:Raw](inline v: G.Opt[A])       : Stream[A]     = v.~
+  implicit         inline def implicitFromColl   [A<:Raw](inline v: g.Collection[A]): Stream[A]     = v.~
+  implicit         inline def implicitFromRange  [A<:Raw](inline v: g.Range[A])     : Stream[A]     = v.~
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

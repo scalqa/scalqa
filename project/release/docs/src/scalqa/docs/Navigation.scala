@@ -4,7 +4,7 @@ object Navigation:
 
   def build(x: DRI): Seq[(String,String,String)] =
     var i = -1
-    var s = x.tag.split_~('.').dropFirst(1).reverse.map(v=>v.real.docLabel).map(v =>{ i+=1; (".",v.simpleName,"" + ("../" * i) + v +(if(i>0) "$" else "") + ".html")}).toSeq
+    var s = x.tag.split_~('.').dropFirst(1).reverse.map(_.docLabel).map(v =>{ i+=1; (".",v.simpleName,"" + ("../" * i) + v +(if(i>0) "$" else "") + ".html")}).toSeq
 
     if(s.isEmpty || s.head._2 == "Md") return Nil
 

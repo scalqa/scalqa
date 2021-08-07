@@ -1,10 +1,10 @@
 package scalqa; package gen; package event; import store.*; import language.implicitConversions
 
 class Store extends _events with _entries with _activation with _properties:
-  private         val cRef               : J.Concurrent.Ref[z.Entry] = J.Concurrent.Ref(z.Void)
-  private[event]  def top                : z.Entry                   = { val e=cRef.get; if(!e.isCancelled) e else cRef.reset(_.child,e) }
-  private[scalqa] def get(typ: Ref)      : z.Entry                   = top.find(typ)
-  /**/            def add(typ:Ref, v:Any): Event.Control             = cRef.reset(e => new z.Entry(e,typ,v))
+  private         val cRef                  : J.Concurrent.Ref[z.Entry] = J.Concurrent.Ref(z.Void)
+  private[event]  def top                   : z.Entry                   = { val e=cRef.get; if(!e.isCancelled) e else cRef.reset(_.child,e) }
+  private[scalqa] def get(typ: AnyRef)      : z.Entry                   = top.find(typ)
+  /**/            def add(typ:AnyRef, v:Any): Event.Control             = cRef.reset(e => new z.Entry(e,typ,v))
 
 object Store:
   type _activation  = store._activation

@@ -8,8 +8,8 @@ abstract class Stable[A,B] private[scalqa]() extends Lookup[A,B]:
   @tn("_joinAll") inline def ++(inline v: ~[(A, B)])       : THIS_TYPE   = joinAll(v)
 
 object Stable :
-  /**/                 def apply[A,B](v: ~[(A, B)])        : Stable[A,B] = stable.z.Ref(v.iterator)
-  /**/                 def apply[A,B](v: (A, B)*)          : Stable[A,B] = stable.z.Ref(v.iterator)
+  /**/                 def apply[A,B](v: ~[(A, B)])        : Stable[A,B] = stable.z.AnyRef(v.iterator)
+  /**/                 def apply[A,B](v: (A, B)*)          : Stable[A,B] = stable.z.AnyRef(v.iterator)
   @tn("getVoid")inline def void[A,B]                       : Stable[A,B] = stable.z.Void.cast[Stable[A,B]]
   implicit      inline def implicitRequest[A,B](v: \/)     : Stable[A,B] = void[A,B]
 

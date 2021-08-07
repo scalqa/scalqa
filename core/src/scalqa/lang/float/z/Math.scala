@@ -3,34 +3,34 @@ package scalqa; package lang; package float; package z; import language.implicit
 object Math extends g.Math[Float] with math.Numeric.FloatIsFractional with ~~.Custom.Math[Float]:
 
   @tn("min_Opt")
-    def min_?(s: ~[SELF]): Val.Opt[SELF] = s.read_?.map(v=>
+    def min_?(s: ~[Float]): Val.Opt[Float] = s.read_?.map(v=>
       s match
-         case s: SELF.~ => s.FOLD(v)((v,w) => if(v<w) v else w)
-         case s         => s.FOLD(v)((v,w) => if(v<w) v else w)
+         case s: Float.~ => s.FOLD(v)((v,w) => if(v<w) v else w)
+         case s          => s.FOLD(v)((v,w) => if(v<w) v else w)
     )
 
   @tn("max_Opt")
-    def max_?(s: ~[SELF]): Val.Opt[SELF] = s.read_?.map(v=>
+    def max_?(s: ~[Float]): Val.Opt[Float] = s.read_?.map(v=>
       s match
-         case s: SELF.~ => s.FOLD(v)((v,w) => if(v>w) v else w)
-         case s         => s.FOLD(v)((v,w) => if(v>w) v else w)
+         case s: Float.~ => s.FOLD(v)((v,w) => if(v>w) v else w)
+         case s          => s.FOLD(v)((v,w) => if(v>w) v else w)
     )
 
   @tn("range_Opt")
-    def range_?(s: ~[SELF]): Val.Opt[SELF.<>] = s.read_?.map(v => {
+    def range_?(s: ~[Float]): Val.Opt[Float.<>] = s.read_?.map(v => {
       var f,l=v
       s match
-         case s: SELF.~ => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
-         case s         => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
-      new SELF.<>(f,l,true)
+         case s: Float.~ => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
+         case s          => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
+      new Float.<>(f,l,true)
     })
 
   @tn("calculateSum_Opt")
-    def calculateSum_?(s: ~[SELF]): Val.Opt[SELF] = s.read_?.map(first => {
-      var sum: SELF = first
+    def calculateSum_?(s: ~[Float]): Val.Opt[Float] = s.read_?.map(first => {
+      var sum: Float = first
       s match
-         case s: SELF.~ => s.FOREACH(v => sum = sum + v)
-         case s         => s.FOREACH(v => sum = sum + v)
+         case s: Float.~ => s.FOREACH(v => sum = sum + v)
+         case s          => s.FOREACH(v => sum = sum + v)
       sum
     })
 
@@ -43,8 +43,8 @@ private class AverageLogic extends ~~.Custom.Math.Average.Logic[Float]:
   private var sum   : Double     = 0
   private var cnt   : Int        = 0
   def add(v: Float) : Unit       = {sum+=v; cnt+=1}
-  def result        : Float      = if(cnt==0) 0  else (sum / cnt).Float
-  def resultOpt     : Opt[Float] = if(cnt==0) \/ else (sum / cnt).Float
+  def result        : Float      = if(cnt==0) 0  else (sum / cnt).toFloat
+  def resultOpt     : Opt[Float] = if(cnt==0) \/ else (sum / cnt).toFloat
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

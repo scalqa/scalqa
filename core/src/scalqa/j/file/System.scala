@@ -1,10 +1,10 @@
 package scalqa; package j; package file; import language.implicitConversions
 
-import java.nio.file.{ FileSystem => JSystem }
+import java.nio.file.{ FileSystem => REAL }
 import File.*
 
-object System extends Any.Ref.Custom.Type[System,JSystem]("File.System"):
-  def apply(): System = java.nio.file.FileSystems.getDefault.asOpaque[System]
+object System extends AnyRef.Opaque.Base[System,REAL]("File.System"):
+  def apply(): System = java.nio.file.FileSystems.getDefault.opaque
 
   extension (inline x: System)
     @tn("store_Stream") inline def store_~                    : ~[Store] = x.real.getFileStores.iterator.~.map(Store(_))
@@ -14,8 +14,8 @@ object System extends Any.Ref.Custom.Type[System,JSystem]("File.System"):
       /**/                              inline more: String*) : Path     = x.real.getPath(first, more *)
     /**/                inline def path(inline a: ~[String])  : Path     = {val p=x; a.read_?.map(p.path(_, a.toSeq *)) or p.path("") }
 
-  object opaque:
-    opaque type `type` <: Opaque.Ref = JSystem & Opaque.Ref
+  object OPAQUE:
+    opaque type TYPE <: AnyRef.Opaque = REAL & AnyRef.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -24,7 +24,7 @@ object System extends Any.Ref.Custom.Type[System,JSystem]("File.System"):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object opaque -> ###
+@object OPAQUE  -> ###
 
    [[J.File.System]] is an opaque value, backed by java.nio.file.FileSystem
 

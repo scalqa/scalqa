@@ -9,7 +9,7 @@ object ClassLoader:
       val name = cn.replace(".", "/") + ".class"
       val file = paths.~.map_?(v => (v + name).file_?).find_?(_.exists) or (J.illegalState("Not found " + name + " in: \n" + paths.~.makeString("\n")))
       //("Loading: " + file).TP
-      val ba = new Array[Byte](file.size.Int)
+      val ba = new Array[Byte](file.size.toInt)
       val s  = new java.io.DataInputStream(new java.io.FileInputStream(file.real))
       s.readFully(ba);
       s.close

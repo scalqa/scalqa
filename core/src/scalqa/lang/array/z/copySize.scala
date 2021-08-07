@@ -1,26 +1,26 @@
 package scalqa; package lang; package array; package z; import language.implicitConversions
 
 import java.util.Arrays
-import gen.`given`.ArrayTag
+import gen.`given`.ArrayShape
 
 object copySize:
 
-  inline def apply[A,ARRAY<:Array.AnyType[A]](inline x: ARRAY, inline sz: Int, inline t: ArrayTag[A,ARRAY]): ARRAY =
+  inline def apply[A,ARRAY<:Array.AnyType[A]](inline x: ARRAY, inline sz: Int, inline t: ArrayShape[A,ARRAY]): ARRAY =
     inline t match
-              case _ : ArrayTag[A&Raw.Boolean,Array[A&Raw.Boolean]] => Arrays.copyOf(x.cast[Array[Boolean]],sz).cast[ARRAY]
-              case _ : ArrayTag[A&Raw.Byte,   Array[A&Raw.Byte   ]] => Arrays.copyOf(x.cast[Array[Byte   ]],sz).cast[ARRAY]
-              case _ : ArrayTag[A&Raw.Char,   Array[A&Raw.Char   ]] => Arrays.copyOf(x.cast[Array[Char   ]],sz).cast[ARRAY]
-              case _ : ArrayTag[A&Raw.Short,  Array[A&Raw.Short  ]] => Arrays.copyOf(x.cast[Array[Short  ]],sz).cast[ARRAY]
-              case _ : ArrayTag[A&Raw.Int,    Array[A&Raw.Int    ]] => Arrays.copyOf(x.cast[Array[Int    ]],sz).cast[ARRAY]
-              case _ : ArrayTag[A&Raw.Long,   Array[A&Raw.Long   ]] => Arrays.copyOf(x.cast[Array[Long   ]],sz).cast[ARRAY]
-              case _ : ArrayTag[A&Raw.Float,  Array[A&Raw.Float  ]] => Arrays.copyOf(x.cast[Array[Float  ]],sz).cast[ARRAY]
-              case _ : ArrayTag[A&Raw.Double, Array[A&Raw.Double ]] => Arrays.copyOf(x.cast[Array[Double ]],sz).cast[ARRAY]
-              case _ : ArrayTag[A&Ref,        Array[A&Ref        ]] => Arrays.copyOf(x.cast[Array[Ref    ]],sz).cast[ARRAY]
-              case _                                                =>           any(x.cast[Array[A      ]],sz).cast[ARRAY]
+              case _ : ArrayShape[A&Boolean.Raw,Array[A&Boolean.Raw]] => Arrays.copyOf(x.cast[Array[Boolean]],sz).cast[ARRAY]
+              case _ : ArrayShape[A&Byte.Raw,   Array[A&Byte.Raw   ]] => Arrays.copyOf(x.cast[Array[Byte   ]],sz).cast[ARRAY]
+              case _ : ArrayShape[A&Char.Raw,   Array[A&Char.Raw   ]] => Arrays.copyOf(x.cast[Array[Char   ]],sz).cast[ARRAY]
+              case _ : ArrayShape[A&Short.Raw,  Array[A&Short.Raw  ]] => Arrays.copyOf(x.cast[Array[Short  ]],sz).cast[ARRAY]
+              case _ : ArrayShape[A&Int.Raw,    Array[A&Int.Raw    ]] => Arrays.copyOf(x.cast[Array[Int    ]],sz).cast[ARRAY]
+              case _ : ArrayShape[A&Long.Raw,   Array[A&Long.Raw   ]] => Arrays.copyOf(x.cast[Array[Long   ]],sz).cast[ARRAY]
+              case _ : ArrayShape[A&Float.Raw,  Array[A&Float.Raw  ]] => Arrays.copyOf(x.cast[Array[Float  ]],sz).cast[ARRAY]
+              case _ : ArrayShape[A&Double.Raw, Array[A&Double.Raw ]] => Arrays.copyOf(x.cast[Array[Double ]],sz).cast[ARRAY]
+              case _ : ArrayShape[A&AnyRef,     Array[A&AnyRef     ]] => Arrays.copyOf(x.cast[Array[AnyRef ]],sz).cast[ARRAY]
+              case _                                                  =>           any(x.cast[Array[A      ]],sz).cast[ARRAY]
 
   def any[A](x: Array[A], sz:Int): Array[A] =
     x match
-      case x: Array[Ref]        => Arrays.copyOf(x.cast[Array[Ref    ]],sz).cast[Array[A]]
+      case x: Array[AnyRef]     => Arrays.copyOf(x.cast[Array[AnyRef ]],sz).cast[Array[A]]
       case x: Array[Int]        => Arrays.copyOf(x.cast[Array[Int    ]],sz).cast[Array[A]]
       case x: Array[Double]     => Arrays.copyOf(x.cast[Array[Double ]],sz).cast[Array[A]]
       case x: Array[Long]       => Arrays.copyOf(x.cast[Array[Long   ]],sz).cast[Array[A]]

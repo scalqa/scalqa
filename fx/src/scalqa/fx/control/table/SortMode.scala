@@ -10,7 +10,7 @@ enum SortMode:
   def isProxy             : Boolean = isProxyWithUnsorted || isProxyNoUnsorted
 
 object SortMode extends EnumCompanion[SortMode]:
-  implicit inline def implicitRequest(inline v: \/): SortMode = SortMode.Void
+  implicit inline def implicitRequest(v: \/): SortMode = SortMode.Void
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

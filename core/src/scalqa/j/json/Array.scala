@@ -22,7 +22,7 @@ object Array extends Gen.Void.Setup[Array](z.Void.Array):
     def apply(): Mutable = X.Basic()
 
     object X:
-      class Basic extends Any.Ref.Buffer[Any] with Mutable
+      class Basic extends AnyRef.G.Buffer[Any] with Mutable
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -28,15 +28,15 @@ object Promise:
     inline def flatMap[B](f: A => Promise[B])  (using inline c:Context): Promise[B] = Z.flatMap(x,f)
     inline def foreach[U](inline f: A=>U)      (using inline c:Context): Unit       = x.onResult(_.forval(f))
 
-  given givenDocTag[A](using t: Given.DocTag[A]): Given.DocTag[Promise[A]] with
-    def tag(v: Promise[A]) : String   = v.result_?.map(v => "Promise("+v.tag+")") or "Promise(NOT_READY)"
-    def doc(v: Promise[A]) : Doc      = Doc(v)
+  given givenDocDef[A](using t: Given.DocDef[A]): Given.DocDef[Promise[A]] with
+    def value_tag(v: Promise[A]) : String   = v.result_?.map(v => "Promise("+v.tag+")") or "Promise(NOT_READY)"
+    def value_doc(v: Promise[A]) : Doc      = Doc(v)
 
   given givenCanEqualPromise[A,B](using CanEqual[A,B]) : CanEqual[Promise[A], Promise[B]] = CanEqual.derived
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def Control = promise.Control;  type Control[A] = promise.Control[A]
-  transparent inline def Context = promise.Context;  type Context    = promise.Context.opaque.`type`
+  transparent inline def Context = promise.Context;  type Context    = promise.Context.OPAQUE.TYPE
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

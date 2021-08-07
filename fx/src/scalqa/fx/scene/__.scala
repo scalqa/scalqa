@@ -24,8 +24,8 @@ object Scene extends Gen.Void.Setup[Scene](new Scene(\/, \/, Control.Label("void
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def Application = scene.Application;          type Application  = scene.Application
   transparent inline def Chart       = scene.Chart;                type Chart        = scene.Chart
-  transparent inline def Image       = scene.Image;                type Image        = scene.Image.opaque.`type`
-  transparent inline def Paint       = scene.Paint;                type Paint        = scene.Paint.opaque.`type`
+  transparent inline def Image       = scene.Image;                type Image        = scene.Image.OPAQUE.TYPE
+  transparent inline def Paint       = scene.Paint;                type Paint        = scene.Paint.OPAQUE.TYPE
   transparent inline def Pane        = scene.Pane;                 type Pane         = scene.Pane
   transparent inline def Shape       = scene.Shape;                type Shape        = scene.Shape
   transparent inline def Stage       = scene.Stage;                type Stage        = scene.Stage

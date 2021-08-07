@@ -1,6 +1,6 @@
 package scalqa; package `val`; package stream; package z; package flow; package parallel; import language.implicitConversions
 
-class Flow_asJavaStream[A] private (val name: String, jStream: java.util.stream.Stream[A], szOpt: Long.Opt, override val base: Ref) extends custom.pipeline.ParallelFlow[A] with Custom.Pipeline:
+class Flow_asJavaStream[A] private (val name: String, jStream: java.util.stream.Stream[A], szOpt: Long.Opt, override val base: AnyRef) extends custom.pipeline.ParallelFlow[A] with Custom.Pipeline:
   def this(v: ~[A]) = this(\/, v.toJavaStream(true), v.sizeLong_?, v)
   @tn("sizeLong_Opt") def sizeLong_?                                         : Long.Opt             = szOpt
   /**/                def take(f: A => Boolean)                              : Flow_asJavaStream[A] = Flow_asJavaStream[A]("take",    jStream.filter( v =>  f(v) ), \/, this)

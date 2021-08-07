@@ -1,25 +1,25 @@
 package scalqa; package lang; package array; package z; import language.implicitConversions
 
-import gen.`given`.ArrayTag
+import gen.`given`.ArrayShape
 
 object contains:
 
-  inline def apply[A,ARRAY<:Array.AnyType[A]](inline x: ARRAY, inline v: A, inline t: ArrayTag[A,ARRAY]): Boolean =
+  inline def apply[A,ARRAY<:Array.AnyType[A]](inline x: ARRAY, inline v: A, inline t: ArrayShape[A,ARRAY]): Boolean =
     inline t match
-              case _ : ArrayTag[A&Raw.Boolean,Array[A&Raw.Boolean]] => boolean(x.cast[Array[Boolean]],v.cast[Boolean])
-              case _ : ArrayTag[A&Raw.Byte,   Array[A&Raw.Byte   ]] => byte   (x.cast[Array[Byte   ]],v.cast[Byte])
-              case _ : ArrayTag[A&Raw.Char,   Array[A&Raw.Char   ]] => char   (x.cast[Array[Char   ]],v.cast[Char])
-              case _ : ArrayTag[A&Raw.Short,  Array[A&Raw.Short  ]] => short  (x.cast[Array[Short  ]],v.cast[Short])
-              case _ : ArrayTag[A&Raw.Int,    Array[A&Raw.Int    ]] => int    (x.cast[Array[Int    ]],v.cast[Int])
-              case _ : ArrayTag[A&Raw.Long,   Array[A&Raw.Long   ]] => long   (x.cast[Array[Long   ]],v.cast[Long])
-              case _ : ArrayTag[A&Raw.Float,  Array[A&Raw.Float  ]] => float  (x.cast[Array[Float  ]],v.cast[Float])
-              case _ : ArrayTag[A&Raw.Double, Array[A&Raw.Double ]] => double (x.cast[Array[Double ]],v.cast[Double])
-              case _ : ArrayTag[A&Ref,        Array[A&Ref        ]] => ref    (x.cast[Array[Ref    ]],v.cast[Ref])
-              case _                                                => any    (x.cast[Array[A      ]],v)
+              case _ : ArrayShape[A&Boolean.Raw,Array[A&Boolean.Raw]] => boolean(x.cast[Array[Boolean]],v.cast[Boolean])
+              case _ : ArrayShape[A&Byte.Raw,   Array[A&Byte.Raw   ]] => byte   (x.cast[Array[Byte   ]],v.cast[Byte])
+              case _ : ArrayShape[A&Char.Raw,   Array[A&Char.Raw   ]] => char   (x.cast[Array[Char   ]],v.cast[Char])
+              case _ : ArrayShape[A&Short.Raw,  Array[A&Short.Raw  ]] => short  (x.cast[Array[Short  ]],v.cast[Short])
+              case _ : ArrayShape[A&Int.Raw,    Array[A&Int.Raw    ]] => int    (x.cast[Array[Int    ]],v.cast[Int])
+              case _ : ArrayShape[A&Long.Raw,   Array[A&Long.Raw   ]] => long   (x.cast[Array[Long   ]],v.cast[Long])
+              case _ : ArrayShape[A&Float.Raw,  Array[A&Float.Raw  ]] => float  (x.cast[Array[Float  ]],v.cast[Float])
+              case _ : ArrayShape[A&Double.Raw, Array[A&Double.Raw ]] => double (x.cast[Array[Double ]],v.cast[Double])
+              case _ : ArrayShape[A&AnyRef,     Array[A&AnyRef     ]] => anyref (x.cast[Array[AnyRef ]],v.cast[AnyRef])
+              case _                                                  => any    (x.cast[Array[A      ]],v)
 
   def any[A](x: Array[A], v: A): Boolean =
     x match
-       case x: Array[Ref]        => ref    (x,v)
+       case x: Array[AnyRef]     => anyref (x,v)
        case x: Array[Int]        => int    (x,v)
        case x: Array[Double]     => double (x,v)
        case x: Array[Long]       => long   (x,v)
@@ -37,7 +37,7 @@ object contains:
   def long   (a: Array[Long],    v: Long,    sz: Int): Boolean = {var i=0; while(i<sz){if(a(i)==v) return true; i+=1}; false}
   def float  (a: Array[Float],   v: Float,   sz: Int): Boolean = {var i=0; while(i<sz){if(a(i)==v) return true; i+=1}; false}
   def double (a: Array[Double],  v: Double,  sz: Int): Boolean = {var i=0; while(i<sz){if(a(i)==v) return true; i+=1}; false}
-  def ref    (a: Array[Ref],     v: Ref,     sz: Int): Boolean = {var i=0; while(i<sz){if(a(i)==v) return true; i+=1}; false}
+  def anyref (a: Array[AnyRef],  v: AnyRef,  sz: Int): Boolean = {var i=0; while(i<sz){if(a(i)==v) return true; i+=1}; false}
 
   inline def boolean(x:Array[Boolean],inline v: Boolean): Boolean = boolean(x,v,x.length)
   inline def byte   (x:Array[Byte],   inline v: Byte)   : Boolean = byte   (x,v,x.length)
@@ -47,7 +47,7 @@ object contains:
   inline def long   (x:Array[Long],   inline v: Long)   : Boolean = long   (x,v,x.length)
   inline def float  (x:Array[Float],  inline v: Float)  : Boolean = float  (x,v,x.length)
   inline def double (x:Array[Double], inline v: Double) : Boolean = double (x,v,x.length)
-  inline def ref    (x:Array[Ref],    inline v: Ref)    : Boolean = ref    (x,v,x.length)
+  inline def anyref (x:Array[AnyRef], inline v: AnyRef) : Boolean = anyref (x,v,x.length)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

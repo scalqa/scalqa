@@ -1,42 +1,43 @@
 package scalqa; package gen; package math; import language.implicitConversions
 
-import java.math. { BigDecimal => JBigDecimal, BigInteger => JBigInteger }
+import java.math. { BigDecimal => REAL, BigInteger => JBigInteger }
 import Math.BigDecimal
 
-object BigDecimal extends Any.Ref.Custom.Data[BigDecimal,JBigDecimal]("BigDecimal"):
-  inline   def apply(inline v: JBigDecimal)              : BigDecimal = v.asOpaque[BigDecimal]
-  inline   def apply(inline v: JBigInteger | BigInteger) : BigDecimal = JBigDecimal(v.cast[JBigInteger]).asOpaque[BigDecimal]
-  inline   def apply(inline v: Double)                   : BigDecimal = JBigDecimal.valueOf(v).asOpaque[BigDecimal]
-  inline   def apply(inline v: String)                   : BigDecimal = JBigDecimal(v).asOpaque[BigDecimal]
-  override def tag(v: BigDecimal)                        : String     = v.real.toString
+object BigDecimal extends AnyRef.Opaque.Data[BigDecimal,REAL]("BigDecimal"):
+  inline   def apply(inline v: REAL)                     : BigDecimal = v.opaque
+  inline   def apply(inline v: JBigInteger | BigInteger) : BigDecimal = REAL(v.cast[JBigInteger]).opaque
+  inline   def apply(inline v: Double)                   : BigDecimal = REAL.valueOf(v).opaque
+  inline   def apply(inline v: String)                   : BigDecimal = REAL(v).opaque
+  override def value_tag(v: BigDecimal)                  : String     = v.real.toString
 
   given ordering : Ordering[BigDecimal] with
-    def compare(x: BigDecimal, y: BigDecimal) = x.Number.compareTo(y.Number)
+    def compare(x: BigDecimal, y: BigDecimal) = x.toNumber.compareTo(y.toNumber)
 
-  extension(inline x: BigDecimal | Double)
-    private                 inline def mkReal                               : JBigDecimal   = inline x match{ case _ : Double => JBigDecimal.valueOf(x.cast[Double]); case _ => x.cast[JBigDecimal]}
+  extension(x: BigDecimal | Double)
+    private                 inline def mkReal                               : REAL          = inline x match{ case _ : Double => REAL.valueOf(x.cast[Double]); case _ => x.cast[REAL]}
 
   extension(inline x: BigDecimal)
     @tn("greater")          inline def  >  (inline v: Double | BigDecimal)  : Boolean       = x.real.compareTo(v.mkReal) >  0
     @tn("greaterOrEqual")   inline def  >= (inline v: Double | BigDecimal)  : Boolean       = x.real.compareTo(v.mkReal) >= 0
     @tn("less")             inline def  <  (inline v: Double | BigDecimal)  : Boolean       = x.real.compareTo(v.mkReal) <  0
     @tn("lessOrEqual")      inline def  <= (inline v: Double | BigDecimal)  : Boolean       = x.real.compareTo(v.mkReal) <= 0
-    @tn("plus")             inline def  +  (inline v: Double | BigDecimal)  : BigDecimal    = x.real.add(v.mkReal).asOpaque[BigDecimal]
-    @tn("minus")            inline def  -  (inline v: Double | BigDecimal)  : BigDecimal    = x.real.subtract(v.mkReal).asOpaque[BigDecimal]
-    @tn("multiply")         inline def  *  (inline v: Double | BigDecimal)  : BigDecimal    = x.real.multiply(v.mkReal).asOpaque[BigDecimal]
+    @tn("plus")             inline def  +  (inline v: Double | BigDecimal)  : BigDecimal    = x.real.add(v.mkReal).opaque
+    @tn("minus")            inline def  -  (inline v: Double | BigDecimal)  : BigDecimal    = x.real.subtract(v.mkReal).opaque
+    @tn("multiply")         inline def  *  (inline v: Double | BigDecimal)  : BigDecimal    = x.real.multiply(v.mkReal).opaque
     @tn("divide")           inline def  /  (inline v: Double | BigDecimal)
-                                                 (using inline r: Rounding) : BigDecimal    = x.real.divide(v.mkReal, J.Setup.bigDecimalDefaultScale, r.mode).asOpaque[BigDecimal]
-    @tn("remainder")        inline def  %  (inline v: Double | BigDecimal)  : BigDecimal    = x.real.remainder(v.mkReal).asOpaque[BigDecimal]
-    /**/                    inline def abs                                  : BigDecimal    = x.real.abs().asOpaque[BigDecimal]
-    /**/                    inline def unary_-                              : BigDecimal    = x.real.negate.asOpaque[BigDecimal]
+                                                 (using inline r: Rounding) : BigDecimal    = x.real.divide(v.mkReal, J.Setup.bigDecimalDefaultScale, r.mode).opaque
+    @tn("remainder")        inline def  %  (inline v: Double | BigDecimal)  : BigDecimal    = x.real.remainder(v.mkReal).opaque
+    /**/                    inline def abs                                  : BigDecimal    = x.real.abs().opaque
+    /**/                    inline def unary_-                              : BigDecimal    = x.real.negate.opaque
     /**/                    inline def sign                                 : Int           = x.real.signum
-    /**/                    inline def Double                               : Double        = x.real.doubleValue
-    /**/                    inline def Number                               : JBigDecimal   = x.real
+    /**/                    inline def toDouble                             : Double        = x.real.doubleValue
+    /**/                    inline def toNumber                             : REAL          = x.real
     /**/                    inline def BigInteger                           : BigInteger    = Gen.BigInteger(x.real.toBigInteger)
-    /**/                    inline def roundDecimal(v:Int)(using r:Rounding): BigDecimal    = x.real.round(java.math.MathContext(v,r.mode)).asOpaque[BigDecimal]
+    /**/                    inline def roundToDecimal(inline v:Int)
+                                                   (using inline r:Rounding): BigDecimal    = x.real.round(java.math.MathContext(v,r.mode)).opaque
 
-  object opaque:
-    opaque type `type` <: Opaque.Ref = JBigDecimal & Opaque.Ref
+  object OPAQUE:
+    opaque type TYPE <: AnyRef.Opaque = REAL & AnyRef.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -46,7 +47,7 @@ object BigDecimal extends Any.Ref.Custom.Data[BigDecimal,JBigDecimal]("BigDecima
 ___________________________________________________________________________*/
 /**
 
-@object opaque -> ### Big BigDecimal
+@object OPAQUE  -> ### Big BigDecimal
 
      [[BigDecimal]] is an opaque value holding java.math.BigDecimal
 
@@ -64,4 +65,7 @@ ___________________________________________________________________________*/
 
        // Prints: 3.1415926535585900763679167025419016466613791096007613231066955478
      ```
+
+@def roundToDecimal -> Round to decimal \n\n  Rounds current value to specified decimal position of fractional value
+
 */

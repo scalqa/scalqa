@@ -2,21 +2,21 @@ package scalqa; package fx; package base; import language.implicitConversions
 
 import Fx.Style
 
-object Style extends String.Custom.Data[Style]("Fx.Style"):
+object Style extends String.Opaque.Data[Style]("Fx.Style"):
+  /**/     inline def apply(inline v: String)             : Style   = v.opaque
+  implicit inline def implicitFromString(inline v: String): Style   = apply(v)
+
   given FxConverter: ReversibleFunction[String,Style] = \/
 
-  /**/     inline def apply(inline v: String)             : Style = v.asOpaque[Style]
-  implicit inline def implicitFromString(inline v: String): Style = apply(v)
-
   extension(x: Style)
-    override def join(v: Style|String) : Style = apply(if(x.isVoid) v.real else if(v.real.isVoid) x.real else x.real + ';' + v.real)
+    @tn("join") def +(v: Style|String): Style = {val s=v.cast[String]; if(x.isVoid) s:Style else if(s.isVoid) x else x.real + ';' + s }
 
-  object opaque:
-    opaque type `type` <: Any.Opaque.String = Any.Opaque.String
+  object OPAQUE:
+    opaque type TYPE <: String.Opaque = String.Opaque
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  transparent inline def Class       = style.Class;         type Class       = style.Class.opaque.`type`
-  transparent inline def PseudoClass = style.PseudoClass;   type PseudoClass = style.PseudoClass.opaque.`type`
+  transparent inline def Class       = style.Class;         type Class       = style.Class.OPAQUE.TYPE
+  transparent inline def PseudoClass = style.PseudoClass;   type PseudoClass = style.PseudoClass.OPAQUE.TYPE
   transparent inline def PseudoGroup = style.PseudoGroup;   type PseudoGroup = style.PseudoGroup
 
 /*___________________________________________________________________________

@@ -4,11 +4,11 @@ private[event] object Void extends Entry(null, null, null):
   override def child                      = this
   override def isCancelled                = false
   override def cancel                     = false
-  override def find(typ: Ref)             = this
+  override def find(typ: AnyRef)          = this
   override def next                       = this
   override def cancelIf(b: () => Boolean) = J.illegalState()
   override def onCancel[U](l: () => U)    = J.illegalState()
-  override def removeHardReference: Ref   = J.illegalState()
+  override def removeHardReference:AnyRef = J.illegalState()
   override def doc                        = Doc("Entry") += "void"
   override def isVoid                     = true
 

@@ -11,6 +11,7 @@ object Z:
   def takeAfterLast (x:String, v:String, d:Opt[String], s:Int.Opt): String         = x.lastIndexOf_?(v, s).map(i => x.substring(i + v.length, x.length)) or_? d or x
 
   // evaluate
+  def joinAll[A](x: String, v: ~[A])(using d: Given.DocDef[A])    : String         = v.map(d.value_tag).foldAs(x)(_ + _)
   def charAt_Opt       (x:String, i: Int)                         : Char.Opt       = if (i < 0 || i >= x.length) \/ else x.charAt(i)
   def indexOf_Opt      (x:String, v: String, s: Int.Opt)          : Int.Opt        = x.indexOf(v, s or 0).?.take(_ >= 0)
   def indexOf_Stream   (x:String, v: String, s: Int.Opt)          : ~[Int]         = x.indexOf_?(v, s).map(i => ~~(i) ++ x.indexOf_~(v, i + v.length)) or \/
@@ -30,8 +31,7 @@ object Z:
 
   // transform
   def char_Stream     (x:String)                                  : Char.~         = z.CharStream(x)
-  def split_Stream    (x:String,separator:Char)                   : ~[String]      = x.split(separator).~  // Can be improved
-  def split_Stream    (x:String,separators:Array[Char])           : ~[String]      = x.split(separators).~ // Can be improved
+  def split_Stream    (x:String, sep: Char, more: Seq[Char])      : ~[String]      = if(more.size==0) x.split(sep).~ else x.split(more.prepended(sep).toArray).~
   def line_Stream     (x:String)                                  : ~[String]      = z.LineStream(x)
   def toDouble_Opt    (x:String)                                  : Double.Opt     = try{x.toDouble } catch{ case _ => \/}
   def toDouble_Result (x:String)                                  : Result[Double] = try{x.toDouble } catch{ case v:Throwable => Result.Problem(v) }

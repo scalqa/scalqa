@@ -2,16 +2,16 @@ package scalqa; package j; package vm; import language.implicitConversions
 
 import Vm.Priority
 
-object Priority extends Int.Custom.Type[Priority]("Vm.Priority"):
-  def apply(v: Int): Priority = { assert(v in (1 <> 10), "Value " + v + " not in 1 <> 10");  v.asOpaque[Priority] }
+object Priority extends Int.Opaque.Base[Priority]("Vm.Priority"):
+  def apply(v: Int): Priority = { assert(v in (1 <> 10), "Value " + v + " not in 1 <> 10");  v.opaque }
 
   implicit inline def implicitFromInt(v: Int)     : Priority = apply(v)
-  implicit inline def implicitRequest(v: MIN)     : Priority = 1.asOpaque[Priority]
-  implicit inline def implicitRequest(v: MAX)     : Priority = 10.asOpaque[Priority]
-  implicit inline def implicitRequest(v: DEFAULT) : Priority = 5.asOpaque[Priority]
+  implicit inline def implicitRequest(v: MIN)     : Priority = 1.opaque
+  implicit inline def implicitRequest(v: MAX)     : Priority = 10.opaque
+  implicit inline def implicitRequest(v: DEFAULT) : Priority = 5.opaque
 
-  object opaque:
-    opaque type `type` <: Opaque.Int = Opaque.Int
+  object OPAQUE:
+    opaque type TYPE <: Int.Opaque = Int.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -20,7 +20,7 @@ object Priority extends Int.Custom.Type[Priority]("Vm.Priority"):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object opaque -> ###
+@object OPAQUE  -> ###
 
    [[Priority]] is an opaque Int value, ranging from 1 to 10
 

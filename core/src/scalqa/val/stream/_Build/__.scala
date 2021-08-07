@@ -1,19 +1,19 @@
-package scalqa; package `val`; package stream; import _Build.*; import language.implicitConversions
+package scalqa; package `val`; package stream; import _build.*; import language.implicitConversions
 
 
-transparent trait _build extends _extend with _filter with _group with _map with _mutate with _order with _parallel with _peek with _zip:
+transparent trait _Build extends _extend with _Filter with _group with _map with _mutate with _order with _parallel with _peek with _zip:
   self: Stream.type =>
 
-object _build:
-  type _extend    =  _Build._extend
-  type _filter    =  _Build._filter;   val _filter =  _Build._filter
-  type _mutate    =  _Build._mutate
-  type _parallel  =  _Build._parallel
-  type _group     =  _Build._group
-  type _map       =  _Build._map
-  type _order     =  _Build._order
-  type _peek      =  _Build._peek
-  type _zip       =  _Build._zip
+object _Build:
+  type _extend    =  _build._extend
+  type _filter    =  _build._Filter;   val _filter =  _build._Filter
+  type _mutate    =  _build._mutate
+  type _parallel  =  _build._parallel
+  type _group     =  _build._group
+  type _map       =  _build._map
+  type _order     =  _build._order
+  type _peek      =  _build._peek
+  type _zip       =  _build._zip
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -22,7 +22,7 @@ object _build:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait _build -> ### Build Stream Interface
+@trait _Build -> ### Build Stream Interface
 
   Build methods extend stream pipeline creating functionality which will add, remove or modify stream elements, when they finally start moving throught the pipeline.
 

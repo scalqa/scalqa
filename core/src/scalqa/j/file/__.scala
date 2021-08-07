@@ -1,11 +1,12 @@
 package scalqa; package j; import file.*; import language.implicitConversions
 
 import J.File
+import java.io.{ File as REAL}
 
-object File extends Any.Ref.Custom.Type[J.File,java.io.File]("File"):
-  inline          def apply(inline v: java.io.File)            : File   = v.asOpaque[File]
-  override        def tag(v: File)                             : String = v.path.toString
-  implicit inline def implicitFromJava(inline v: java.io.File) : File   = v.asOpaque[File]
+object File extends AnyRef.Opaque.Base[J.File,REAL]("File"):
+  inline          def apply(inline v: REAL)           : File   = v.opaque
+  override        def value_tag(v: File)              : String = v.path.toString
+  implicit inline def implicitFromJava(inline v: REAL): File   = v.opaque
 
   extension (inline x: File)
     inline def name                                   : String    = x.real.getName
@@ -26,13 +27,13 @@ object File extends Any.Ref.Custom.Type[J.File,java.io.File]("File"):
                     inline overwrite:Boolean=false,
                     inline copyAttr:Boolean=false)    : File      = Z.copy(x, p, overwrite, copyAttr)
 
-  object opaque:
-    opaque type `type` <: Opaque.Ref = java.io.File & Opaque.Ref
+  object OPAQUE:
+    opaque type TYPE <: AnyRef.Opaque = REAL & AnyRef.Opaque
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Path   = file.Path.opaque.`type`;   transparent inline def Path   = file.Path
-  type Store  = file.Store.opaque.`type`;  transparent inline def Store  = file.Store
-  type System = file.System.opaque.`type`; transparent inline def System = file.System
+  type Path   = file.Path.OPAQUE.TYPE;   transparent inline def Path   = file.Path
+  type Store  = file.Store.OPAQUE.TYPE;  transparent inline def Store  = file.Store
+  type System = file.System.OPAQUE.TYPE; transparent inline def System = file.System
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -41,7 +42,7 @@ object File extends Any.Ref.Custom.Type[J.File,java.io.File]("File"):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object opaque -> ###
+@object OPAQUE  -> ###
 
    [[J.File]] is an opaque value, backed by java.io.File
 
@@ -79,9 +80,9 @@ ___________________________________________________________________________*/
 
          val f2: J.File = f1.copy(p.parent + "Test2.txt")
 
-         f2 TP            // Prints: C:\Temp\Test2.txt
+         f2.TP            // Prints: C:\Temp\Test2.txt
 
-         f2.readString TP // Prints: Foo
+         f2.readString.TP // Prints: Foo
        ```
 
 @def readString -> Read as String
@@ -128,11 +129,11 @@ ___________________________________________________________________________*/
 
          val f: J.File = p.fileMake
 
-         f.path TP       // Prints: C:\Temp\Test.txt
+         f.path.TP       // Prints: C:\Temp\Test.txt
 
-         f.name TP       // Prints: Test.txt
+         f.name.TP       // Prints: Test.txt
 
-         f.extension TP  // Prints: txt
+         f.extension.TP  // Prints: txt
       ```
 
 @def size -> File size
@@ -146,7 +147,7 @@ ___________________________________________________________________________*/
 
          f.writeString("ABC" * 1000)
 
-         f.size TP // Prints: 3.0kB
+         f.size.TP // Prints: 3.0kB
       ```
 
 
@@ -161,9 +162,9 @@ ___________________________________________________________________________*/
 
          val f2: J.File = f1.move(p.parent + "Test2.txt")
 
-         f2 TP            // Prints: C:\Temp\Test2.txt
+         f2.TP            // Prints: C:\Temp\Test2.txt
 
-         f2.readString TP // Prints: Foo
+         f2.readString.TP // Prints: Foo
        ```
 
 
@@ -179,11 +180,11 @@ ___________________________________________________________________________*/
 
          val f: J.File = p.fileMake
 
-         f.temp TP // Prints: C:\Temp\Test.txt.temp
+         f.temp.TP // Prints: C:\Temp\Test.txt.temp
 
-         f.temp TP // Prints: C:\Temp\Test.txt.temp1
+         f.temp.TP // Prints: C:\Temp\Test.txt.temp1
 
-         f.temp TP // Prints: C:\Temp\Test.txt.temp2
+         f.temp.TP // Prints: C:\Temp\Test.txt.temp2
        ```
 
 */

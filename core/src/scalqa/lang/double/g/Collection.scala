@@ -1,26 +1,26 @@
 package scalqa; package lang; package double; package g; import language.implicitConversions
 
-trait Collection[A<:RAW] extends Val.Collection[A] with Able.Contain[A] with any.raw.Specialized.OnDouble:
+trait Collection[A<:Raw] extends Val.Collection[A] with Able.Contain[A] with Raw.Specialized:
   @tn("stream") def ~             : Stream[A]
   @tn("pack")   def ><            : Pack[A]   = Pack.fromStream(this.~)
   /**/          def contains(v: A): Boolean   = this.~.takeOnly(v).readRaw_?
 
 object Collection:
-  implicit inline def implicitRequest[A<:RAW](inline v: \/): Collection[A] = Pack.void
+  implicit inline def implicitRequest[A<:Raw](inline v: \/): Collection[A] = Pack.void
 
-  trait Mutable[A<:RAW] extends Collection[A] with Val.Collection.M[A]:
+  trait Mutable[A<:Raw] extends Collection[A] with Val.Collection.M[A]:
     /**/                 def add(v: A): Unit
     @tn("_add") override def += (v: A): this.type = { add(v); this }
 
   object Mutable:
-    implicit inline def implicitRequest[A<:RAW](inline v: NEW): Mutable[A] = new Buffer()
+    implicit inline def implicitRequest[A<:Raw](inline v: NEW): Mutable[A] = new Buffer()
 
   // ------------------------------------------------------------------------------------------------------------------------------------------
-  extension[A<:RAW,T,STM<: ~~.AnyType[T]](inline x: Collection[A])
-    /**/                                       inline def map    [B>:T](inline f: A=> B)   (using inline s: Given.StreamTag[B,STM]): STM       = g.Stream.map[A,T,STM](x.~)[B](f)(using s)
-    /**/                                       inline def flatMap[B>:T](inline f: A=> ~[B])(using inline s: Given.StreamTag[B,STM]): STM       = g.Stream.flatMap[A,T,STM](x.~)[B](f)(using s)
-  extension[A<:RAW]  (inline x: Collection[A]) inline def withFilter(inline f: Fun.Filter[A])                                      : Stream[A] = x.~.filter(f)
-  extension[A<:RAW,U](inline x: Collection[A]) inline def foreach(   inline f: Fun.Consume[A,U])                                   : Unit      = x.~.foreach(f)
+  extension[A<:Raw,T,STM<: ~~.AnyType[T]](inline x: Collection[A])
+    /**/                                       inline def map    [B>:T](inline f: A=> B)   (using inline s: Given.StreamShape[B,STM]): STM       = g.Stream.map[A,T,STM](x.~)[B](f)(using s)
+    /**/                                       inline def flatMap[B>:T](inline f: A=> ~[B])(using inline s: Given.StreamShape[B,STM]): STM       = g.Stream.flatMap[A,T,STM](x.~)[B](f)(using s)
+  extension[A<:Raw]  (inline x: Collection[A]) inline def withFilter(inline f: Fun.Filter[A])                                        : Stream[A] = x.~.filter(f)
+  extension[A<:Raw,U](inline x: Collection[A]) inline def foreach(   inline f: Fun.Consume[A,U])                                     : Unit      = x.~.foreach(f)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

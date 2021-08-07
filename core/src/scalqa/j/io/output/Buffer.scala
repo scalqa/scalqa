@@ -1,9 +1,10 @@
 package scalqa; package j; package io; package output; import language.implicitConversions
 
 import Output.Buffer
+import java.io.{ ByteArrayOutputStream as REAL }
 
-object Buffer extends Any.Ref.Custom.Type[Buffer, java.io.ByteArrayOutputStream]("Io.Output.Buffer"):
-  def apply(initSize: Int = 512): Buffer = new zByteArrayOutputStream(initSize).asOpaque[Buffer]
+object Buffer extends AnyRef.Opaque.Base[Buffer, REAL]("Io.Output.Buffer"):
+  def apply(initSize: Int = 512): Buffer = new zByteArrayOutputStream(initSize).opaque
 
   extension(inline x: Buffer)
     inline def size    : Int         = x.real.cast[zByteArrayOutputStream]._count
@@ -11,12 +12,12 @@ object Buffer extends Any.Ref.Custom.Type[Buffer, java.io.ByteArrayOutputStream]
     inline def clear   : Unit        = x.real.reset
     inline def toInput : Io.Input    = Input(x.bytes)
 
-  object opaque:
-    opaque type `type` <: Output.opaque.`type` = Output.opaque.`type` & java.io.ByteArrayOutputStream
+  object OPAQUE:
+    opaque type TYPE <: Output.OPAQUE.TYPE = Output.OPAQUE.TYPE & REAL
 
 
   // **************************************************************************************************************
-  private class zByteArrayOutputStream(isz: Int) extends java.io.ByteArrayOutputStream(isz):
+  private class zByteArrayOutputStream(isz: Int) extends REAL(isz):
     def _count: Int = count
 
 
@@ -27,7 +28,7 @@ object Buffer extends Any.Ref.Custom.Type[Buffer, java.io.ByteArrayOutputStream]
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object opaque -> ###
+@object OPAQUE  -> ###
 
    [[J.Output.Buffer]] is an opaque value, backed by java.io.ByteArrayOutputStream
 

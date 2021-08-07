@@ -1,42 +1,46 @@
 package scalqa; package lang; package long; import language.implicitConversions
 
-transparent trait _methods extends z.toPrimitives[Long]:
-  extension(inline x:Long)
-    @tn("Opt")        inline def ?                         : SELF.Opt     = {val v=x; if(v==g.Opt.void.real) throw ZZ.LO(); v.cast[SELF.Opt]}
-    @tn("range")      inline def <> (inline to: Long)      : SELF.<>      = new SELF.<>(x,to,true)
-    @tn("rangeX")     inline def <>>(inline to: Long)      : SELF.<>      = new SELF.<>(x,to,false)
-    @tn("rangeOfSize")inline def <>=(inline size: Int)     : SELF.<>      = {val v=x; new SELF.<>(v,v+size,false)}
-    infix             inline def atLeast(v: Long)          : Long         = {val w=x; if(w>v) w else v }
-    infix             inline def atMost(v: Long)           : Long         = {val w=x; if(w<v) w else v }
-    /**/              inline def roundTo(inline size:Long)
-                                        (using r:Rounding) : Long         = r(x,size)
+import scalqa.gen.time.x.{ Nanos => NANOS }
 
-  extension(x: Long)         def toBrief                   : String       = x match
-    /**/                                                                       case v if v >= 1_000_000_000_000L => s"${v * 10 / 1_000_000_000_000L / 10D}t"
-    /**/                                                                       case v if v >= 1_000_000_000L     => s"${v * 10 / 1_000_000_000L / 10D}g"
-    /**/                                                                       case v if v >= 1_000_000L         => s"${v * 10 / 1_000_000L / 10D}m"
-    /**/                                                                       case v if v >= 1000L              => s"${v * 10 / 1000L / 10D}k"
-    /**/                                                                       case v                            => v.toString
-  //  -------------------------------------------------------------------------------------------------------
-  import scalqa.gen.time.x.{ Nanos => NANOS }
+transparent trait _methods:
+
   extension(inline x:Long)
-    /**/              inline def ByteCount                 : ByteCount    = scalqa.Gen.ByteCount(x)
-    /**/              inline def Year                      : Year         = scalqa.Gen.Year(x.toInt)
-    /**/              inline def Big                       : BigInteger   = scalqa.Gen.BigInteger(x)
-    /**/              inline def Percent                   : Percent      = scalqa.Gen.Percent(x.toDouble)
-    /**/              inline def Week                      : Time.Length  = (x * NANOS.InOneWeek).Nanos
-    /**/              inline def Weeks                     : Time.Length  = (x * NANOS.InOneWeek).Nanos
-    /**/              inline def Day                       : Time.Length  = (x * NANOS.InOneDay).Nanos
-    /**/              inline def Days                      : Time.Length  = (x * NANOS.InOneDay).Nanos
-    /**/              inline def Hour                      : Time.Length  = (x * NANOS.InOneHour).Nanos
-    /**/              inline def Hours                     : Time.Length  = (x * NANOS.InOneHour).Nanos
-    /**/              inline def Minute                    : Time.Length  = (x * NANOS.InOneMinute).Nanos
-    /**/              inline def Minutes                   : Time.Length  = (x * NANOS.InOneMinute).Nanos
-    /**/              inline def Second                    : Time.Length  = (x * NANOS.InOneSecond).Nanos
-    /**/              inline def Seconds                   : Time.Length  = (x * NANOS.InOneSecond).Nanos
-    /**/              inline def Millis                    : Time.Length  = (x * NANOS.InOneMillis).Nanos
-    /**/              inline def Micros                    : Time.Length  = (x * NANOS.InOneMicros).Nanos
-    /**/              inline def Nanos                     : Time.Length  = x.cast[Time.Length]
+    @tn("Opt")        inline def ?                         : lang.Long.Opt  = {val v=x; if(v==g.Opt.void.cast[Long]) throw ZZ.LO(); v.cast[lang.Long.Opt]}
+    @tn("range")      inline def <> (inline to: Long)      : lang.Long.<>   = new lang.Long.<>(x,to,true)
+    @tn("rangeX")     inline def <>>(inline to: Long)      : lang.Long.<>   = new lang.Long.<>(x,to,false)
+    @tn("rangeOfSize")inline def <>=(inline size: Int)     : lang.Long.<>   = {val v=x; new lang.Long.<>(v,v+size,false)}
+    /**/        infix inline def max(inline v: Long)       : Long           = {val y=x; val w=v; if(y.real > w.real) y else w }
+    /**/        infix inline def min(inline v: Long)       : Long           = {val y=x; val w=v; if(y.real < w.real) y else w }
+    /**/              inline def toBrief                   : String         = Z.toBrief(x)
+    /**/              inline def roundTo(inline unit:Long)
+                                        (using r:Rounding) : Long           = r(x,unit)
+    //  -------------------------------------------------------------------------------------------------------
+    /**/              inline def ByteCount                 : ByteCount      = Gen.ByteCount(x)
+    /**/              inline def Year                      : Year           = Gen.Year(x.toInt)
+    /**/              inline def Big                       : BigInteger     = Gen.BigInteger(x)
+    /**/              inline def Percent                   : Percent        = Gen.Percent(x.toDouble)
+    /**/              inline def Week                      : Time.Length    = (x * NANOS.InOneWeek).Nanos
+    /**/              inline def Weeks                     : Time.Length    = (x * NANOS.InOneWeek).Nanos
+    /**/              inline def Day                       : Time.Length    = (x * NANOS.InOneDay).Nanos
+    /**/              inline def Days                      : Time.Length    = (x * NANOS.InOneDay).Nanos
+    /**/              inline def Hour                      : Time.Length    = (x * NANOS.InOneHour).Nanos
+    /**/              inline def Hours                     : Time.Length    = (x * NANOS.InOneHour).Nanos
+    /**/              inline def Minute                    : Time.Length    = (x * NANOS.InOneMinute).Nanos
+    /**/              inline def Minutes                   : Time.Length    = (x * NANOS.InOneMinute).Nanos
+    /**/              inline def Second                    : Time.Length    = (x * NANOS.InOneSecond).Nanos
+    /**/              inline def Seconds                   : Time.Length    = (x * NANOS.InOneSecond).Nanos
+    /**/              inline def Millis                    : Time.Length    = (x * NANOS.InOneMillis).Nanos
+    /**/              inline def Micros                    : Time.Length    = (x * NANOS.InOneMicros).Nanos
+    /**/              inline def Nanos                     : Time.Length    = x.cast[Time.Length]
+
+    /**/              inline def toByte                    : Byte           = x.cast[Byte]
+    /**/              inline def toChar                    : Char           = x.cast[Char]
+    /**/              inline def toShort                   : Short          = x.cast[Short]
+    /**/              inline def toInt                     : Int            = x.cast[Int]
+    /**/              inline def toLong                    : Long           = x
+    /**/              inline def toFloat                   : Float          = x.cast[Float]
+    /**/              inline def toDouble                  : Double         = x.cast[Double]
+    /**/              inline def toNumber                  : java.lang.Long = java.lang.Long.valueOf(x)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -76,28 +80,28 @@ ___________________________________________________________________________*/
       (5L <>= 10L).TP  // Prints 5 <> 14
     ```
 
-@def atLeast -> Max
+@def max -> Max value
 
     Returns maximum of current or given value
 
     ```
       val v = 5L
 
-      v.atLeast(0).TP   // Prints 5
+      v.max(0).TP   // Prints 5
 
-      v.atLeast(10).TP  // Prints 10
+      v.max(10).TP  // Prints 10
     ```
 
-@def atMost -> Min
+@def min -> Min value
 
     Returns minimun of current or given value
 
     ```
       val v = 5L
 
-      v.atMost(0).TP   // Prints 0
+      v.min(0).TP   // Prints 0
 
-      v.atMost(10).TP  // Prints 5
+      v.min(10).TP  // Prints 5
     ```
 
 @def roundTo -> Round to size
@@ -178,4 +182,13 @@ ___________________________________________________________________________*/
 
                 [[scalqa.gen.time.Length Time.Length]] constructor attached to Long
 
+
+@def toByte    -> Make Byte        \n\n  Returns underlying value
+@def toChar    -> Make Char        \n\n  Attached Char constructor
+@def toShort   -> Make Short       \n\n  Attached Short constructor
+@def toInt     -> Make Int         \n\n  Attached Int constructor
+@def toLong    -> Make Long        \n\n  Attached Long constructor
+@def toFloat   -> Make Float       \n\n  Attached Float constructor
+@def toDouble  -> Make Double      \n\n  Attached Double constructor
+@def toNumber  -> Make Number      \n\n  Attached Number constructor
 */

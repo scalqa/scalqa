@@ -22,13 +22,13 @@ object Deque:
     def doc      : Doc      = Doc("Entry:"+this.^.hash) += ("thisOk",ok) += ("nextOk",next.ok) += ("priorOk",prior.ok) += ("size",size) += ("value",value.toString)
 
   object Root extends Entry(null, null):
-    override val next  = this
-    override def prior = this
-    override def ok    = false
-    override def last  = this
-    override def size  = 0
+    override val next              = this
+    override def prior             = this
+    override def ok                = false
+    override def last              = this
+    override def size              = 0
     override def popOpt[A]: Opt[A] = \/
-    override def doc  = Doc("Entry:Void")
+    override def doc               = Doc("Entry:Void")
 
   class Stream[A](v: Entry) extends ~[A]:
     private         var e      : Entry  = v

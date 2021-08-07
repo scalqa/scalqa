@@ -12,7 +12,7 @@ private[fx] abstract class Base[A] extends java.util.concurrent.atomic.AtomicRef
 
   protected def fireInvalidated: Unit = get match
     case l: InvalidationListener => l.invalidated(this)
-    case a: Array[Ref] => a.~.foreach {
+    case a: Array[AnyRef] => a.~.foreach {
       case l: InvalidationListener => l.invalidated(this)
       case _                       => ()
     }
@@ -21,7 +21,7 @@ private[fx] abstract class Base[A] extends java.util.concurrent.atomic.AtomicRef
   protected def fireChanged(v: A, old: A): Unit = get match
     case l: ChangeListener[_]    => l.cast[ChangeListener[A]].changed(this, old, v)
     case l: InvalidationListener => l.invalidated(this)
-    case a: Array[Ref] => a.~.foreach {
+    case a: Array[AnyRef] => a.~.foreach {
       case l: ChangeListener[_]    => l.cast[ChangeListener[A]].changed(this, old, v)
       case l: InvalidationListener => l.invalidated(this)
       case _                       => ()
@@ -34,16 +34,16 @@ private[fx] abstract class Base[A] extends java.util.concurrent.atomic.AtomicRef
   protected def afterLastListenerRemoved: Unit = ()
 
   private def _addListener(l: AnyRef): Unit = get match
-    case Base          => if (!compareAndSet(Base, l)) _addListener(l) else afterFirstListenerAdded
-    case v: Array[Ref] => if (!compareAndSet(v, v + l)) _addListener(l)
-    case v             => if (!compareAndSet(v, Array[Ref](v, l))) _addListener(l)
+    case Base             => if (!compareAndSet(Base, l)) _addListener(l) else afterFirstListenerAdded
+    case v: Array[AnyRef] => if (!compareAndSet(v, v + l)) _addListener(l)
+    case v                => if (!compareAndSet(v, Array[AnyRef](v, l))) _addListener(l)
 
   private def _removeListener(l: AnyRef): Unit =
     def clear(v: AnyRef) = if (!compareAndSet(v, Base)) _removeListener(l) else afterLastListenerRemoved
     get match
       case Base => ()
-      case v: Array[Ref] if v.length == 1 => if (v(0) == l) clear(v)
-      case v: Array[Ref] =>
+      case v: Array[AnyRef] if v.length == 1 => if (v(0) == l) clear(v)
+      case v: Array[AnyRef] =>
         val a = v.~.dropOnly(l).toArray
         if (a.length == 0) clear(v)
         else if ((v ne a) && !compareAndSet(v, a)) _removeListener(l)

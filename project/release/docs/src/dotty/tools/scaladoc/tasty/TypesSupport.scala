@@ -236,7 +236,7 @@ trait TypesSupport:
         // }
 
       // NOTE: old SymRefs are now either TypeRefs or TermRefs - the logic here needs to be moved into above branches
-      // NOTE: _.symbol on *Ref returns its symbol
+      // NOTE: _.symbol on *AnyRef returns its symbol
       // case SymRef(symbol, typeOrBounds) => symbol match {
       // }
       // case _ => throw Exception("No match for type in conversion to Reference. This should not happen, please open an issue. " + tp)

@@ -1,16 +1,16 @@
 package scalqa; package lang; package float; package g; import language.implicitConversions
 
-abstract class Math[A<:RAW] extends Math.Ordering[A] with Gen.Math[A] with ~~.Custom.Math.Average[A]:
+abstract class Math[A<:Raw] extends Math.Ordering[A] with Gen.Math[A] with ~~.Custom.Math.Average[A]:
   final override def compare(x:A,y:A): Int = java.lang.Float.compare(x,y)
 
 object Math:
 
-  trait Ordering[A<:RAW] extends Gen.Math.Ordering[A]:
+  trait Ordering[A<:Raw] extends Gen.Math.Ordering[A]:
     /**/     def compare(x:A,y:A): Int
     override def reverse         : Ordering[A] = new zReversedOrdering(this);
 
   // *******************************************************************************
-  private class zReversedOrdering[A<:RAW](c: Ordering[A]) extends Ordering[A]:
+  private class zReversedOrdering[A<:Raw](c: Ordering[A]) extends Ordering[A]:
     /**/     def compare(x:A,y:A): Int         = c.compare(y,x)
     override def reverse         : Ordering[A] = c
 

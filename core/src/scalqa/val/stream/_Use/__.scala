@@ -1,17 +1,17 @@
-package scalqa; package `val`; package stream; import _Use.*; import language.implicitConversions
+package scalqa; package `val`; package stream; import _use.*; import language.implicitConversions
 
-transparent trait _use extends _aggregate with _calculate with _evaluate with _metadata with _print with _process with _read with _transformTo:
+transparent trait _Use extends _aggregate with _calculate with _evaluate with _metadata with _print with _process with _read with _transformTo:
   self =>
 
-object _use:
-  type _aggregate   =  _Use._aggregate
-  type _calculate   =  _Use._calculate
-  type _evaluate    =  _Use._evaluate
-  type _metadata    =  _Use._metadata
-  type _print       =  _Use._print
-  type _process     =  _Use._process
-  type _read        =  _Use._read
-  type _transformTo =  _Use._transformTo
+object _Use:
+  type _aggregate   =  _use._aggregate
+  type _calculate   =  _use._calculate
+  type _evaluate    =  _use._evaluate
+  type _metadata    =  _use._metadata
+  type _print       =  _use._print
+  type _process     =  _use._process
+  type _read        =  _use._read
+  type _transformTo =  _use._transformTo
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -20,9 +20,9 @@ object _use:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait _use -> ### Stream Consumption Interface
+@trait _Use -> ### Stream Consumption Interface
 
   Once a single stream consumption method is invoked, the stream object should generally be discarded.
-  The only exceptions are methods defined in [_metadata](_Use/_metadata.html) and [_read](_Use/_read.html) interfaces.
+  The only exceptions are methods defined in [_metadata](_use/_metadata.html) and [_read](_use/_read.html) interfaces.
 
 */

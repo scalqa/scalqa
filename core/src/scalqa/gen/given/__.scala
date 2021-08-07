@@ -1,16 +1,16 @@
 package scalqa; package gen; import language.implicitConversions
 
 object Given:
-  transparent inline def TypeTag    = `given`.TypeTag;      type TypeTag[A]                                   = `given`.TypeTag[A];
-  transparent inline def DocTag     = `given`.DocTag;       type DocTag[-A]                                   = `given`.DocTag[A]
-  transparent inline def VoidTag    = `given`.VoidTag;      type VoidTag[A]                                   = `given`.VoidTag[A]
-  transparent inline def EmptyTag   = `given`.EmptyTag;     type EmptyTag[-A]                                 = `given`.EmptyTag[A]
-  transparent inline def WithinTag  = `given`.WithinTag;    type WithinTag[A,-C]                              = `given`.WithinTag[A,C]
-  transparent inline def ArrayTag   = `given`.ArrayTag;     type ArrayTag [A, ARRAY <: lang.Array.AnyType[A]] = `given`.ArrayTag[A,ARRAY]
-  transparent inline def PackTag    = `given`.PackTag;      type PackTag  [A, PACK  <: ><.AnyType[A]]         = `given`.PackTag[A,PACK]
-  transparent inline def RangeTag   = `given`.RangeTag;     type RangeTag [A, RANGE <: <>.AnyType[A]]         = `given`.RangeTag[A,RANGE]
-  transparent inline def OptTag     = `given`.OptTag;       type OptTag   [A, OPT   <: Opt.AnyType[A]]        = `given`.OptTag[A,OPT]
-  transparent inline def StreamTag  = `given`.StreamTag;    type StreamTag[A, STREAM<: ~~.AnyType[A]]         = `given`.StreamTag[A,STREAM]
+  transparent inline def TypeDef    = `given`.TypeDef;      type TypeDef[A]                                     = `given`.TypeDef[A];
+  transparent inline def DocDef     = `given`.DocDef;       type DocDef[A]                                      = `given`.DocDef[A]
+  transparent inline def VoidDef    = `given`.VoidDef;      type VoidDef[A]                                     = `given`.VoidDef[A]
+  transparent inline def EmptyDef   = `given`.EmptyDef;     type EmptyDef[-A]                                   = `given`.EmptyDef[A]
+  transparent inline def WithinDef  = `given`.WithinDef;    type WithinDef  [A,-C]                              = `given`.WithinDef[A,C]
+  transparent inline def ArrayShape = `given`.ArrayShape;   type ArrayShape [A, ARRAY <: lang.Array.AnyType[A]] = `given`.ArrayShape[A,ARRAY]
+  transparent inline def PackShape  = `given`.PackShape;    type PackShape  [A, PACK  <: ><.AnyType[A]]         = `given`.PackShape[A,PACK]
+  transparent inline def RangeShape = `given`.RangeShape;   type RangeShape [A, RANGE <: <>.AnyType[A]]         = `given`.RangeShape[A,RANGE]
+  transparent inline def OptShape   = `given`.OptShape;     type OptShape   [A, OPT   <: Opt.AnyType[A]]        = `given`.OptShape[A,OPT]
+  transparent inline def StreamShape= `given`.StreamShape;  type StreamShape[A, STREAM<: ~~.AnyType[A]]         = `given`.StreamShape[A,STREAM]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -19,8 +19,10 @@ object Given:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object Def -> ### Type Implicit Definitions
+@object Given -> ### Implicit Definitions
 
-    Contans a set of interfaces, which can be given (implicitly) for any type
+    Contans a set of interfaces, which can be given (implicitly) for any type.
+
+    Also contains Shape interfaces for some containers.
 
 */

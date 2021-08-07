@@ -1,6 +1,6 @@
-package scalqa; package `val`; package stream; package _Build; import language.implicitConversions
+package scalqa; package `val`; package stream; package _build; import language.implicitConversions
 
-import z.build.{ group => G }
+import z._build.{ _group => G }
 
 transparent trait _group:
 
@@ -12,7 +12,7 @@ transparent trait _group:
     inline def groupBy(inline f: A => Any, inline more: A => Any*)               : ~[~[A]]     = new G.groupBy(x, f, more)
 
     inline def partition(inline p: A => Boolean, inline more: A => Boolean*)     : ~[~[A]]     = new G.partition(x, p, more)
-    inline def sliding(inline size: Int, inline step: Int = 1)                   : ~[~[A]]     = new G.sliding(x.cast[~[Ref]], size, step).cast[~[~[A]]]
+    inline def sliding(inline size: Int, inline step: Int = 1)                   : ~[~[A]]     = new G.sliding(x.cast[~[AnyRef]], size, step).cast[~[~[A]]]
     inline def splitAt(inline positions: Int*)                                   : ~[~[A]]     = new G.splitAt(x, positions)
 
 /*___________________________________________________________________________

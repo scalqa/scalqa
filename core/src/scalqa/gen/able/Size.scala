@@ -25,18 +25,18 @@ object Size:
       @tn("sizeLong_Opt") def sizeLong_? : Long.Opt
 
   // ------------------------------------------------------------------------------------
-  @tn("size_Opt")  def size_?(v: Ref) : Int.Opt  = v match
+  @tn("size_Opt")  def size_?(v: AnyRef) : Int.Opt  = v match
     case v: Size     => v.size.?
     case v: Opt      => v.size_?
-    case v: Long     => v.sizeLong.?.map_?[Int.Opt](v => if(v <= Int.max) v.Int else \/)
-    case v: Opt.Long => v.sizeLong_?.map_?[Int.Opt](v => if(v <= Int.max) v.Int else \/)
+    case v: Long     => v.sizeLong.?.map_?[Int.Opt](v => if(v <= Int.max) v.toInt else \/)
+    case v: Opt.Long => v.sizeLong_?.map_?[Int.Opt](v => if(v <= Int.max) v.toInt else \/)
     case _           => \/
 
-  @tn("sizeLong_Opt") def sizeLong_?(v: Ref): Long.Opt = v match
+  @tn("sizeLong_Opt") def sizeLong_?(v: AnyRef): Long.Opt = v match
     case v: Long     => v.sizeLong.?
     case v: Opt.Long => v.sizeLong_?
-    case v: Size     => v.size.Long.?
-    case v: Opt      => v.size_?.map(_.Long)
+    case v: Size     => v.size.toLong.?
+    case v: Opt      => v.size_?.map(_.toLong)
     case _           => \/
 
 /*___________________________________________________________________________

@@ -19,7 +19,7 @@ object Registry:
     rootId_? = id
     println("=" * 40 + "\nRoot Registered:" +- id)
     val api  = Module(m)
-    //m.members.~.map(_.name).print
+
     val root = m.members.find(_.name=="scalqa").get
     modules.put(id,api)
     modules.put("scalqa",Module(root))

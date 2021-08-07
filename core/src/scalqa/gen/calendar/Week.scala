@@ -2,10 +2,12 @@ package scalqa; package gen; package calendar; import language.implicitConversio
 
 import Calendar.Week
 
-object Week extends Int.Custom.Data.Sequential[Week]("Calendar.Week"):
-  inline   def byIndex(epochWeek: Int): Week   = epochWeek.asOpaque[Week]
-  /**/     def apply()                : Week   = Gen.Day().week
-  override def tag(v: Week)           : String = "Week-" + v.startDay.tag
+object Week extends Int.Opaque.Data.Sequential[Week]("Calendar.Week"):
+  inline   def byIndex(epochWeek: Int)           : Week   = epochWeek.opaque
+  /**/     def current                           : Week   = Calendar.Day.current.week
+  override def value_tag(v: Week)                : String = "Week-" + v.startDay.tag
+
+  implicit inline def implicitRequest(v: CURRENT): Week   = current
 
   extension (x: Week)
     def index     : Int          = x.real
@@ -13,11 +15,11 @@ object Week extends Int.Custom.Data.Sequential[Week]("Calendar.Week"):
     def startDay  : Calendar.Day = Calendar.Day.byIndex(x.real * 7)
     def year      : Year         = x.startDay.year
     def month     : Month        = x.startDay.month
-    def isCurrent : Boolean      = Calendar.Week() == x
+    def isCurrent : Boolean      = x == Calendar.Week.current
     def period    : Period       = Period(x.start, x.next.start)
 
-  object opaque:
-    opaque type `type` <: Opaque.Int = Opaque.Int
+  object OPAQUE:
+    opaque type TYPE <: Int.Opaque = Int.Opaque
 
   // *******************************************************************************************************************
 
@@ -43,7 +45,7 @@ object Week extends Int.Custom.Data.Sequential[Week]("Calendar.Week"):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object opaque -> ### Calendar Week
+@object OPAQUE  -> ### Calendar Week
 
     [[Week]] is an opaque Int value, holding week index since start of 1970
 

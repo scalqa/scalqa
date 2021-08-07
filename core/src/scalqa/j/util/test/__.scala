@@ -31,7 +31,7 @@ class Test(private[j] val name: String = \/):
   def main(sa: Array[String]) = { J.sleep(100.Millis); run }
 
   def run: Unit =
-    val t = Time()
+    val t = Time.current
     val s = "Started at " +- t.roundTo(1.Second)
     println(s + "\n" + "-" * s.length)
     val o = group.run_??(0)

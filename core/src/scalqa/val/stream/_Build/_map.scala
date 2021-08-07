@@ -1,22 +1,22 @@
-package scalqa; package `val`; package stream; package _Build; import language.implicitConversions
+package scalqa; package `val`; package stream; package _build; import language.implicitConversions
 
-import z.build.{ map => M }
-import gen.`given`.StreamTag
+import z._build.{ _map => M }
+import gen.`given`.StreamShape
 
 transparent trait _map:
   self: Stream.type =>
 
   extension[A,T,STM<: ~~.AnyType[T]](inline x: ~[A])
-    /**/            inline def map     [B>:T](inline f: A => B)                       (using inline s:StreamTag[B,STM]): STM  = M.map(x,f,s)
-    /**/            inline def MAP     [B>:T](inline f: A => B)                       (using inline s:StreamTag[B,STM]): STM  = M.map.APPLY(x,f,s)
-    /**/            inline def flatMap [B>:T](inline f: A => ~[B])                    (using inline s:StreamTag[B,STM]): STM  = M.flatMap(x,f,s)
-    /**/            inline def FLAT_MAP[B>:T](inline f: A => ~[B])                    (using inline s:StreamTag[B,STM]): STM  = M.flatMap.APPLY(x,f,s)
-    /**/            inline def flatten                         (using inline f:A=>Able.~[T], inline s:StreamTag[T,STM]): STM  = M.flatMap(x,f(_).~,s)
-    @tn("map_Opt")  inline def map_?   [OPT<:Opt.AnyType[T]](inline f:A=>OPT) (using inline s:StreamTag.Opt[T,OPT,STM]): STM  = M.mapOpt(x,f,s)
-    @tn("MAP_Opt")  inline def MAP_?   [OPT<:Opt.AnyType[T]](inline f:A=>OPT) (using inline s:StreamTag.Opt[T,OPT,STM]): STM  = M.mapOpt.APPLY(x,f,s)
+    /**/            inline def map     [B>:T](inline f: A => B)                       (using inline s:StreamShape[B,STM]): STM  = M.map(x,f,s)
+    /**/            inline def MAP     [B>:T](inline f: A => B)                       (using inline s:StreamShape[B,STM]): STM  = M.map.APPLY(x,f,s)
+    /**/            inline def flatMap [B>:T](inline f: A => ~[B])                    (using inline s:StreamShape[B,STM]): STM  = M.flatMap(x,f,s)
+    /**/            inline def FLAT_MAP[B>:T](inline f: A => ~[B])                    (using inline s:StreamShape[B,STM]): STM  = M.flatMap.APPLY(x,f,s)
+    /**/            inline def flatten                         (using inline f:A=>Able.~[T], inline s:StreamShape[T,STM]): STM  = M.flatMap(x,f(_).~,s)
+    @tn("map_Opt")  inline def map_?   [OPT<:Opt.AnyType[T]](inline f:A=>OPT) (using inline s:StreamShape.Opt[T,OPT,STM]): STM  = M.mapOpt(x,f,s)
+    @tn("MAP_Opt")  inline def MAP_?   [OPT<:Opt.AnyType[T]](inline f:A=>OPT) (using inline s:StreamShape.Opt[T,OPT,STM]): STM  = M.mapOpt.APPLY(x,f,s)
 
   extension[A](inline x: ~[A])
-    /**/            inline def collect[B](inline f: PartialFunction[A,B])                                              : ~[B] = new M.collect(x,f)
+    /**/            inline def collect[B](inline f: PartialFunction[A,B])                                                : ~[B] = new M.collect(x,f)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -32,7 +32,7 @@ ___________________________________________________________________________*/
      Creates a new [[scalqa.val.Stream ~]] where each element is a result of applying given function to current [[scalqa.val.Stream ~]] elements
 
      ```
-      (0 <>> 26).~.map(i => ('a' + i).Char).TP
+      (0 <>> 26).~.map(i => ('a' + i).toChar).TP
 
       // Output
       ~(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z)
@@ -57,7 +57,7 @@ ___________________________________________________________________________*/
      Pattern matching can be used, but the last void case must always be present:
      ```
      (0 <>> 26).~.map_?[Char.Opt]{
-       case i if(i%2==0) => ('a' + i).Char
+       case i if(i%2==0) => ('a' + i).toChar
        case _            => \/
      }.TP
 
@@ -107,7 +107,7 @@ ___________________________________________________________________________*/
 
     ```
     (0 <>> 26).~.collect{
-      case i if(i%2==0) => ('a' + i).Char
+      case i if(i%2==0) => ('a' + i).toChar
     }.TP
 
     // Output

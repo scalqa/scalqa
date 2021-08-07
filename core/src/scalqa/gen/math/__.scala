@@ -10,10 +10,10 @@ object Math:
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def Ordering   = math.Ordering;    type Ordering[A]  = math.Ordering[A]
-  transparent inline def Format     = math.Format;      type Format       = math.Format.opaque.`type`
+  transparent inline def Format     = math.Format;      type Format       = math.Format.OPAQUE.TYPE
   transparent inline def Rounding   = math.Rounding;    type Rounding     = math.Rounding
-  transparent inline def BigDecimal = math.BigDecimal;  type BigDecimal   = math.BigDecimal.opaque.`type`
-  transparent inline def BigInteger = math.BigInteger;  type BigInteger   = math.BigInteger.opaque.`type`
+  transparent inline def BigDecimal = math.BigDecimal;  type BigDecimal   = math.BigDecimal.OPAQUE.TYPE
+  transparent inline def BigInteger = math.BigInteger;  type BigInteger   = math.BigInteger.OPAQUE.TYPE
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

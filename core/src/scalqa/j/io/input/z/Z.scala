@@ -8,7 +8,7 @@ object Z:
     @tn("readRaw_Opt") def readRaw_? =
       var o: Char.Opt = \/
       val v = r.read
-      if(v >= 0) o = v.Char
+      if(v >= 0) o = v.toChar
       o
 
   // ***************************************************************

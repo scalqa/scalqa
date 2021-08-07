@@ -9,10 +9,10 @@ enum Side(val real: JSide) extends Fx.JavaFx.Enum[JSide]:
   case Top    extends Side(JSide.TOP)
 
 object Side extends Fx.JavaFx.Enum.Companion[Side, JSide]:
-  implicit inline def implicitRequest(inline v: LEFT)   : Side = Left
-  implicit inline def implicitRequest(inline v: RIGHT)  : Side = Right
-  implicit inline def implicitRequest(inline v: TOP   ) : Side = Top
-  implicit inline def implicitRequest(inline v: BOTTOM) : Side = Bottom
+  implicit inline def implicitRequest(v: LEFT)  : Side = Left
+  implicit inline def implicitRequest(v: RIGHT) : Side = Right
+  implicit inline def implicitRequest(v: TOP   ): Side = Top
+  implicit inline def implicitRequest(v: BOTTOM): Side = Bottom
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

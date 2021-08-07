@@ -1,14 +1,15 @@
 package scalqa; package lang; package boolean; import language.implicitConversions
 
 object G:
-  @tn("Stream") type ~         [A<:RAW]      = g.Stream[A];             @tn("Stream") inline def ~          = g.Stream
-  @tn("Pack")   type ><        [A<:RAW]      = g.Pack[A];               @tn("Pack")   inline def ><         = g.Pack
-  /**/          type Opt       [A<:RAW]      = g.Opt.opaque.`type`[A];                inline def Opt        = g.Opt
-  /**/          type Buffer    [A<:RAW]      = g.Buffer[A];                           inline def Buffer     = g.Buffer
-  /**/          type Collection[A<:RAW]      = g.Collection[A];                       inline def Collection = g.Collection
-  /**/          type Idx       [A<:RAW]      = g.Idx[A];                              inline def Idx        = g.Idx
-  /**/          type Pro       [A<:RAW]      = g.Pro[A];                              inline def Pro        = g.Pro
-  /**/                                                                                inline def Fun        = g.Fun
+  /**/                                                                                transparent inline def Customized      = g.Customized
+  @tn("Stream") type ~         [A<:Raw]      = g.Stream[A];             @tn("Stream") transparent inline def ~          = g.Stream
+  @tn("Pack")   type ><        [A<:Raw]      = g.Pack[A];               @tn("Pack")   transparent inline def ><         = g.Pack
+  /**/          type Opt       [A<:Raw]      = g.Opt.OPAQUE.TYPE[A];                  transparent inline def Opt        = g.Opt
+  /**/          type Buffer    [A<:Raw]      = g.Buffer[A];                           transparent inline def Buffer     = g.Buffer
+  /**/          type Collection[A<:Raw]      = g.Collection[A];                       transparent inline def Collection = g.Collection
+  /**/          type Idx       [A<:Raw]      = g.Idx[A];                              transparent inline def Idx        = g.Idx
+  /**/          type Pro       [A<:Raw]      = g.Pro[A];                              transparent inline def Pro        = g.Pro
+  /**/                                                                                transparent inline def Fun        = g.Fun
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -17,7 +18,7 @@ object G:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object G -> ### Boolean Specialized Generic Containers
+@object G -> ### Boolean Generic Specialized Containers
 
    The generic containers are never used directly, but rather as customized shortcuts for specific types.
 

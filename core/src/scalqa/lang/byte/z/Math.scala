@@ -3,35 +3,35 @@ package scalqa; package lang; package byte; package z; import language.implicitC
 object Math extends g.Math[Byte] with math.Numeric.ByteIsIntegral with ~~.Custom.Math[Byte]:
 
   @tn("min_Opt")
-    def min_?(s: ~[SELF]): Val.Opt[SELF] = s.read_?.map(v=>
+    def min_?(s: ~[Byte]): Val.Opt[Byte] = s.read_?.map(v=>
       s match
-         case s: SELF.~ => s.FOLD(v)((v,w) => if(v<w) v else w)
+         case s: Byte.~ => s.FOLD(v)((v,w) => if(v<w) v else w)
          case s         => s.FOLD(v)((v,w) => if(v<w) v else w)
     )
 
   @tn("max_Opt")
-    def max_?(s: ~[SELF]): Val.Opt[SELF] = s.read_?.map(v=>
+    def max_?(s: ~[Byte]): Val.Opt[Byte] = s.read_?.map(v=>
       s match
-         case s: SELF.~ => s.FOLD(v)((v,w) => if(v>w) v else w)
+         case s: Byte.~ => s.FOLD(v)((v,w) => if(v>w) v else w)
          case s         => s.FOLD(v)((v,w) => if(v>w) v else w)
     )
 
   @tn("range_Opt")
-    def range_?(s: ~[SELF]): Val.Opt[SELF.<>] = s.read_?.map(v => {
+    def range_?(s: ~[Byte]): Val.Opt[Byte.<>] = s.read_?.map(v => {
       var f,l=v
       s match
-         case s: SELF.~ => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
+         case s: Byte.~ => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
          case s         => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
-      new SELF.<>(f,l-f+1)
+      new Byte.<>(f,l-f+1)
     })
 
   @tn("calculateSum_Opt")
-    def calculateSum_?(s: ~[SELF]): Val.Opt[SELF] = s.read_?.map(first => {
+    def calculateSum_?(s: ~[Byte]): Val.Opt[Byte] = s.read_?.map(first => {
       var sum: Int = first
       s match
-         case s: SELF.~ => s.FOREACH(v => sum = sum + v)
+         case s: Byte.~ => s.FOREACH(v => sum = sum + v)
          case s         => s.FOREACH(v => sum = sum + v)
-      sum.Byte
+      sum.toByte
     })
 
 /*___________________________________________________________________________

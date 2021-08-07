@@ -1,4 +1,4 @@
-package scalqa; package `val`; package stream; package _Use; import language.implicitConversions
+package scalqa; package `val`; package stream; package _use; import language.implicitConversions
 
 transparent trait _process:
 
@@ -8,8 +8,8 @@ transparent trait _process:
     /**/   def fornil[U](f:  =>U)                             : Unit   = if (x.read_?.isEmpty) { var v:U = f }
     /**/   def process[U,W](foreachFun: A=>U, fornilFun: => W): Unit   = {var o=x.read_?; if (o.isEmpty){var v:W=fornilFun} else while(o.nonEmpty){foreachFun(o.`val`); o=x.read_?}; ()}
   extension[A](inline x: ~[A])
-    inline def foreach[U](inline f: A=>U)                     : Unit   = z.use.process._foreach(x,f)
-    inline def FOREACH[U](inline f: A=>U)                     : Unit   = z.use.process._FOREACH(x,f)
+    inline def foreach[U](inline f: A=>U)                     : Unit   = z._use._process._foreach(x,f)
+    inline def FOREACH[U](inline f: A=>U)                     : Unit   = z._use._process._FOREACH(x,f)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

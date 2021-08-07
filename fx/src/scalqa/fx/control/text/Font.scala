@@ -6,8 +6,8 @@ import Text.Font
 object Font extends Abstract.Delegate.Opaque[Font, JFont]("Fx.Font"):
   def apply(family: String, size: Double) : Font = JFont.font(family, size)
 
-  object opaque:
-    opaque type `type` <: Any.Opaque.Ref = JFont & Any.Opaque.Ref
+  object OPAQUE:
+    opaque type TYPE <: AnyRef.Opaque = JFont & AnyRef.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

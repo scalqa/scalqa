@@ -1,7 +1,7 @@
 package scalqa; package `val`; import pack.*; import language.implicitConversions
 
 import Pack.RawType
-import gen.`given`.PackTag.{ Raw as TAG }
+import gen.`given`.PackShape.{ Raw as TAG }
 
 abstract class Pack[A] extends Idx[A]:
   type THIS_TYPE <: Pack[A]
@@ -33,8 +33,8 @@ abstract class Pack[A] extends Idx[A]:
 
 object Pack:
   type AnyType[A] = Pack[A] | RawType[A]
-  type RawType[A] = lang.boolean.G.><[A & Raw.Boolean] | lang.byte.G.><[A & Raw.Byte] | lang.char .G.><[A & Raw.Char]  | lang.short .G.><[A & Raw.Short]
-                  | lang.int    .G.><[A & Raw.Int]     | lang.long.G.><[A & Raw.Long] | lang.float.G.><[A & Raw.Float] | lang.double.G.><[A & Raw.Double]
+  type RawType[A] = lang.boolean.G.><[A & Boolean.Raw] | lang.byte.G.><[A & Byte.Raw] | lang.char .G.><[A & Char.Raw]  | lang.short .G.><[A & Short.Raw]
+                  | lang.int    .G.><[A & Int.Raw]     | lang.long.G.><[A & Long.Raw] | lang.float.G.><[A & Float.Raw] | lang.double.G.><[A & Double.Raw]
 
   /**/                 def apply[A](v: A)                        : ><[A] = z.Few.Pack_ofOne(v)
   /**/                 def apply[A](v1: A, v2: A)                : ><[A] = z.Few.Pack_ofTwo(v1, v2)
@@ -42,8 +42,8 @@ object Pack:
   @tn("getVoid")inline def void[A]                               : ><[A] = ZZ.voidPack[A]
   implicit      inline def implicitRequest[A](inline v: \/)      : ><[A] = void[A]
   implicit      inline def implicitFromStream [A](inline v: ~[A]): ><[A] = v.><
-  /**/          inline def fromArray[A](a: Array[Ref])           : ><[A] = fromArray(a,a.length)
-  /**/                 def fromArray[A](a: Array[Ref], sz: Int)  : ><[A] = new z.ArrayPack(a.copySize(sz),sz)
+  /**/          inline def fromArray[A](a: Array[AnyRef])        : ><[A] = fromArray(a,a.length)
+  /**/                 def fromArray[A](a: Array[AnyRef], sz:Int): ><[A] = new z.ArrayPack(a.copySize(sz),sz)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

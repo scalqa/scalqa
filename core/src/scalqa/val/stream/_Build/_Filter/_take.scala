@@ -1,6 +1,6 @@
-package scalqa; package `val`; package stream; package _Build; package _Filter
+package scalqa; package `val`; package stream; package _build; package _filter
 
-import z.build.{ filter => F }
+import z._build.{ _filter => F }
 
 transparent trait _take :
   extension[A](inline x: ~[A])
@@ -9,7 +9,7 @@ transparent trait _take :
     /**/              inline def takeWhile(inline f: A => Boolean)       : ~[A] = new F.takeWhile(x,f)
     /**/              inline def takeFirst(n: Int)                       : ~[A] = new F.take_Range(x,0 <>> n)
     @tn("take_Range") inline def take_<>(inline i: Int.<>)               : ~[A] = new F.take_Range(x,i)
-    /**/              inline def takeLast(inline n: Int)                 : ~[A] = new F.takeLast(x.cast[~[Ref]], n).cast[~[A]]
+    /**/              inline def takeLast(inline n: Int)                 : ~[A] = new F.takeLast(x.cast[~[AnyRef]], n).cast[~[A]]
     /**/              inline def takeEvery(inline nTh: Int)              : ~[A] = new F.takeEvery(x,nTh)
     /**/              inline def takeIndexed(inline f:(Int,A)=>Boolean,
                                                       inline start:Int=0): ~[A] = new F.takeIndexed(x,f,start)
@@ -78,7 +78,7 @@ ___________________________________________________________________________*/
       Only lets elements, which mapped value is found in given stream
 
       ```
-         ('a' <> 'z').~.takeAllBy(_.Int % 10, ~~(1,3,7)).TP
+         ('a' <> 'z').~.takeAllBy(_.toInt % 10, ~~(1,3,7)).TP
 
          // Output
          ~(a, e, g, k, o, q, u, y)

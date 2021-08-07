@@ -1,8 +1,8 @@
 package scalqa; package gen; package able
 
 trait Tag:
-  /**/            def tag      : String
-  inline override def toString : String = tag
+  /**/     def tag      : String
+  override def toString : String = tag
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

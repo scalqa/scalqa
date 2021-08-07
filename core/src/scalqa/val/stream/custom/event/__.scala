@@ -9,7 +9,7 @@ class Event extends event.Monitor:
   protected def runOnAfterLast(cnt: Int, tm: Time.Length)              : Unit = afterLast.~.foreach(_(cnt, tm))
   protected def runOnEmpty                                             : Unit = empty.~.foreach(_())
 
-  /**/      def onBeforeFirst[U](l: Time => U)                         : Unit = beforeFirst += { () => l(Time()) }
+  /**/      def onBeforeFirst[U](l: Time => U)                         : Unit = beforeFirst += { () => l(Time.current) }
   /**/      def onEvery[U](c: Int, l: (Int, Time.Length) => U)         : Unit = each = each.join{ var next = c; (cnt, tm) => if (cnt == next) { next += c; l(cnt, tm) }}
   /**/      def onEvery[U](t: Time.Length, l: (Int, Time.Length) => U) : Unit = each = each.join(new Listener(t,l))
   /**/      def onAfterLast[U](l: (Int, Time.Length) => U)             : Unit = afterLast += ((c, t) => l(c, t))

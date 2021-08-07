@@ -12,7 +12,7 @@ transparent trait Constructors extends ConstructorsDefault:
   extension[A](inline x: SCALA.LinearSeq[A])          @tn("stream") inline def ~ : ~[A]            = new z.a.Scala.Stream_fromLinearSeq[A](x)
 
 private[custom] trait ConstructorsDefault:
-  extension[A](inline x: SCALA.IterableOnce[A])       @tn("stream") inline def ~ : ~[A]            = z.a.Scala(x)
+  extension[A](inline x: SCALA.IterableOnce[A])       @tn("stream") inline def ~ : ~[A]            = z.a.Scala.mkStream(x)
 
 
 /*___________________________________________________________________________

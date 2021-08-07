@@ -1,32 +1,41 @@
 package scalqa; package lang; package float; import language.implicitConversions
 
-transparent trait _methods extends z.toPrimitives[Float]:
+transparent trait _methods:
   extension(inline x: Float)
-    @tn("Opt")   inline def ?                          : SELF.Opt      = x.cast[SELF.Opt]
-    @tn("range") inline def <> (inline to: Float)      : SELF.<>       = new SELF.<>(x,to,true)
-    @tn("rangeX")inline def <>>(inline to: Float)      : SELF.<>       = new SELF.<>(x,to,false)
-    infix        inline def atLeast(v: Float)          : Float         = {val w=x; if(w>v) w else v }
-    infix        inline def atMost(v: Float)           : Float         = {val w=x; if(w<v) w else v }
-    /**/         inline def roundTo(inline size:Float)
-                             (using inline r:Rounding) : Float         = r(x,size)
-    /**/         inline def roundDecimal(inline d:Int)
-                             (using inline r:Rounding) : Float         = r.decimal(x,d).Float
+    @tn("Opt")   inline def ?                          : lang.Float.Opt  = x.cast[lang.Float.Opt]
+    @tn("range") inline def <> (inline to: Float)      : lang.Float.<>   = new lang.Float.<>(x,to,true)
+    @tn("rangeX")inline def <>>(inline to: Float)      : lang.Float.<>   = new lang.Float.<>(x,to,false)
+    /**/   infix inline def max(inline v: Float)       : Float           = {val y=x; val w=v; if(y.real > w.real) y else w }
+    /**/   infix inline def min(inline v: Float)       : Float           = {val y=x; val w=v; if(y.real < w.real) y else w }
+    /**/         inline def roundTo(inline unit:Float)
+                             (using inline r:Rounding) : Float           = r(x,unit)
+    /**/         inline def roundToDecimal(inline d:Int)
+                             (using inline r:Rounding) : Float           = r.decimal(x,d).toFloat
     //  -------------------------------------------------------------------------------------------------------
-    /**/         inline def Big                        : BigDecimal    = BigDecimal(x)
-    /**/         inline def Percent                    : Percent       = x.cast[Percent]
-    /**/         inline def Week                       : Time.Length   = x.Double.Week
-    /**/         inline def Weeks                      : Time.Length   = x.Double.Weeks
-    /**/         inline def Day                        : Time.Length   = x.Double.Day
-    /**/         inline def Days                       : Time.Length   = x.Double.Days
-    /**/         inline def Hour                       : Time.Length   = x.Double.Hour
-    /**/         inline def Hours                      : Time.Length   = x.Double.Hours
-    /**/         inline def Minute                     : Time.Length   = x.Double.Minute
-    /**/         inline def Minutes                    : Time.Length   = x.Double.Minutes
-    /**/         inline def Second                     : Time.Length   = x.Double.Second
-    /**/         inline def Seconds                    : Time.Length   = x.Double.Seconds
-    /**/         inline def Millis                     : Time.Length   = x.Double.Millis
-    /**/         inline def Micros                     : Time.Length   = x.Double.Micros
-    /**/         inline def Nanos                      : Time.Length   = x.Double.Nanos
+    /**/         inline def Big                        : BigDecimal      = BigDecimal(x)
+    /**/         inline def Percent                    : Percent         = x.cast[Percent]
+    /**/         inline def Week                       : Time.Length     = x.toDouble.Week
+    /**/         inline def Weeks                      : Time.Length     = x.toDouble.Weeks
+    /**/         inline def Day                        : Time.Length     = x.toDouble.Day
+    /**/         inline def Days                       : Time.Length     = x.toDouble.Days
+    /**/         inline def Hour                       : Time.Length     = x.toDouble.Hour
+    /**/         inline def Hours                      : Time.Length     = x.toDouble.Hours
+    /**/         inline def Minute                     : Time.Length     = x.toDouble.Minute
+    /**/         inline def Minutes                    : Time.Length     = x.toDouble.Minutes
+    /**/         inline def Second                     : Time.Length     = x.toDouble.Second
+    /**/         inline def Seconds                    : Time.Length     = x.toDouble.Seconds
+    /**/         inline def Millis                     : Time.Length     = x.toDouble.Millis
+    /**/         inline def Micros                     : Time.Length     = x.toDouble.Micros
+    /**/         inline def Nanos                      : Time.Length     = x.toDouble.Nanos
+
+    /**/         inline def toByte                     : Byte            = x.cast[Byte]
+    /**/         inline def toChar                     : Char            = x.cast[Char]
+    /**/         inline def toShort                    : Short           = x.cast[Short]
+    /**/         inline def toInt                      : Int             = x.cast[Int]
+    /**/         inline def toLong                     : Long            = x.cast[Long]
+    /**/         inline def toFloat                    : Float           = x.real
+    /**/         inline def toDouble                   : Double          = x.cast[Double]
+    /**/         inline def toNumber                   : java.lang.Float = java.lang.Float.valueOf(x)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -59,28 +68,28 @@ ___________________________________________________________________________*/
       (1F <>> 10F).TP  // Prints  1.0 <>> 10.0
     ```
 
-@def atLeast -> Max
+@def max -> Max value
 
     Returns maximum of current or given value
 
     ```
       val v = 5F
 
-      v.atLeast(0).TP   // Prints 5.0
+      v.max(0).TP   // Prints 5.0
 
-      v.atLeast(10).TP  // Prints 10.0
+      v.max(10).TP  // Prints 10.0
     ```
 
-@def atMost -> Min
+@def min -> Min value
 
     Returns minimun of current or given value
 
     ```
       val v = 5F
 
-      v.atMost(0).TP   // Prints 0.0
+      v.min(0).TP   // Prints 0.0
 
-      v.atMost(10).TP  // Prints 5.0
+      v.min(10).TP  // Prints 5.0
     ```
 
 @def roundTo -> Round to size
@@ -92,6 +101,8 @@ ___________________________________________________________________________*/
 
       91F.roundTo(5)(using UP).TP  // Prints 95.0
     ```
+
+@def roundToDecimal -> Round to decimal \n\n  Rounds current value to specified decimal position of fractional value
 
 @def Big       -> Make BigDecimal
 
@@ -153,4 +164,12 @@ ___________________________________________________________________________*/
 
                 [[scalqa.gen.time.Length Time.Length]] constructor attached to Float
 
+@def toByte    -> Make Byte        \n\n  Attached Byte constructor
+@def toChar    -> Make Char        \n\n  Attached Char constructor
+@def toShort   -> Make Short       \n\n  Attached Short constructor
+@def toInt     -> Make Int         \n\n  Attached Int constructor
+@def toLong    -> Make Long        \n\n  Attached Long constructor
+@def toFloat   -> Make Float       \n\n  Returns underlying value
+@def toDouble  -> Make Double      \n\n  Attached Double constructor
+@def toNumber  -> Make Number      \n\n  Attached Number constructor
 */

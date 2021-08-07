@@ -1,6 +1,6 @@
-package scalqa; package `val`; package stream; package _Build
+package scalqa; package `val`; package stream; package _build
 
-import z.build.{ extend => X }
+import z._build.{ _extend => X }
 
 transparent trait _extend:
   self: Stream.type =>

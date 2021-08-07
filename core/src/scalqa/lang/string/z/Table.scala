@@ -10,7 +10,7 @@ private[scalqa] class Table(val name: String = \/):
     class Column(index: Int, var width: Int = 1) extends Cell(index, "?")
     override def toString: String = separator + '\n' + super.toString + '\n' + separator
 
-  object Rows extends Any.Ref.Buffer[Row]
+  object Rows extends AnyRef.G.Buffer[Row]
 
   class Row(val index: Int):
     /**/      val cells                             = Buffer[Cell]()

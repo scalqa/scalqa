@@ -1,25 +1,25 @@
 package scalqa; package lang; package array; package z; import language.implicitConversions
 
-import gen.`given`.ArrayTag
+import gen.`given`.ArrayShape
 
 object joinAll:
 
-  inline def apply[A,ARRAY<:Array.AnyType[A]](inline x: ARRAY, inline v: ~[A], inline t: ArrayTag[A,ARRAY]) : ARRAY =
+  inline def apply[A,ARRAY<:Array.AnyType[A]](inline x: ARRAY, inline v: ~[A], inline t: ArrayShape[A,ARRAY]) : ARRAY =
     inline t match
-      case _ : ArrayTag[A&Raw.Boolean,Array[A&Raw.Boolean]] => boolean(x.cast[Array[Boolean]],v.cast[~[Boolean]]).cast[ARRAY]
-      case _ : ArrayTag[A&Raw.Byte,   Array[A&Raw.Byte   ]] => byte   (x.cast[Array[Byte   ]],v.cast[~[Byte   ]]).cast[ARRAY]
-      case _ : ArrayTag[A&Raw.Char,   Array[A&Raw.Char   ]] => char   (x.cast[Array[Char   ]],v.cast[~[Char   ]]).cast[ARRAY]
-      case _ : ArrayTag[A&Raw.Short,  Array[A&Raw.Short  ]] => short  (x.cast[Array[Short  ]],v.cast[~[Short  ]]).cast[ARRAY]
-      case _ : ArrayTag[A&Raw.Int,    Array[A&Raw.Int    ]] => int    (x.cast[Array[Int    ]],v.cast[~[Int    ]]).cast[ARRAY]
-      case _ : ArrayTag[A&Raw.Long,   Array[A&Raw.Long   ]] => long   (x.cast[Array[Long   ]],v.cast[~[Long   ]]).cast[ARRAY]
-      case _ : ArrayTag[A&Raw.Float,  Array[A&Raw.Float  ]] => float  (x.cast[Array[Float  ]],v.cast[~[Float  ]]).cast[ARRAY]
-      case _ : ArrayTag[A&Raw.Double, Array[A&Raw.Double ]] => double (x.cast[Array[Double ]],v.cast[~[Double ]]).cast[ARRAY]
-      case _ : ArrayTag[A&Ref,        Array[A&Ref        ]] => ref    (x.cast[Array[Ref    ]],v.cast[~[Ref    ]]).cast[ARRAY]
-      case _                                                => any    (x.cast[Array[A      ]],v                 ).cast[ARRAY]
+      case _ : ArrayShape[A&Boolean.Raw,Array[A&Boolean.Raw]] => boolean(x.cast[Array[Boolean]],v.cast[~[Boolean]]).cast[ARRAY]
+      case _ : ArrayShape[A&Byte.Raw,   Array[A&Byte.Raw   ]] => byte   (x.cast[Array[Byte   ]],v.cast[~[Byte   ]]).cast[ARRAY]
+      case _ : ArrayShape[A&Char.Raw,   Array[A&Char.Raw   ]] => char   (x.cast[Array[Char   ]],v.cast[~[Char   ]]).cast[ARRAY]
+      case _ : ArrayShape[A&Short.Raw,  Array[A&Short.Raw  ]] => short  (x.cast[Array[Short  ]],v.cast[~[Short  ]]).cast[ARRAY]
+      case _ : ArrayShape[A&Int.Raw,    Array[A&Int.Raw    ]] => int    (x.cast[Array[Int    ]],v.cast[~[Int    ]]).cast[ARRAY]
+      case _ : ArrayShape[A&Long.Raw,   Array[A&Long.Raw   ]] => long   (x.cast[Array[Long   ]],v.cast[~[Long   ]]).cast[ARRAY]
+      case _ : ArrayShape[A&Float.Raw,  Array[A&Float.Raw  ]] => float  (x.cast[Array[Float  ]],v.cast[~[Float  ]]).cast[ARRAY]
+      case _ : ArrayShape[A&Double.Raw, Array[A&Double.Raw ]] => double (x.cast[Array[Double ]],v.cast[~[Double ]]).cast[ARRAY]
+      case _ : ArrayShape[A&AnyRef,     Array[A&AnyRef     ]] => anyref (x.cast[Array[AnyRef ]],v.cast[~[AnyRef ]]).cast[ARRAY]
+      case _                                                  => any    (x.cast[Array[A      ]],v                 ).cast[ARRAY]
 
   def any[A](x: Array[A], v: ~[A]): Array[A] =
     x match
-       case x: Array[Ref]        => ref    (x,v)
+       case x: Array[AnyRef]     => anyref (x,v)
        case x: Array[Int]        => int    (x,v)
        case x: Array[Double]     => double (x,v)
        case x: Array[Long]       => long   (x,v)
@@ -37,7 +37,7 @@ object joinAll:
   def long   (x:Array[Long],   v: ~[Long])   : Array[Long]   = {var b=lang.long   .g.Buffer.accessible(x,x.length).^(_ ++= v); var a=b.access; val sz=b.size; if(a.length!=sz || (a eq x)) a=a.copySize(sz); a}
   def float  (x:Array[Float],  v: ~[Float])  : Array[Float]  = {var b=lang.float  .g.Buffer.accessible(x,x.length).^(_ ++= v); var a=b.access; val sz=b.size; if(a.length!=sz || (a eq x)) a=a.copySize(sz); a}
   def double (x:Array[Double], v: ~[Double]) : Array[Double] = {var b=lang.double .g.Buffer.accessible(x,x.length).^(_ ++= v); var a=b.access; val sz=b.size; if(a.length!=sz || (a eq x)) a=a.copySize(sz); a}
-  def ref    (x:Array[Ref],    v: ~[Ref])    : Array[Ref]    = {var b=lang.any.ref  .Buffer.accessible(x,x.length).^(_ ++= v); var a=b.access; val sz=b.size; if(a.length!=sz || (a eq x)) a=a.copySize(sz); a}
+  def anyref (x:Array[AnyRef], v: ~[AnyRef]) : Array[AnyRef] = {var b=lang.anyref .g.Buffer.accessible(x,x.length).^(_ ++= v); var a=b.access; val sz=b.size; if(a.length!=sz || (a eq x)) a=a.copySize(sz); a}
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

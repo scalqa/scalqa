@@ -1,6 +1,6 @@
 package scalqa; package `val`; import range.*; import language.implicitConversions
 
-import gen.`given`.RangeTag
+import gen.`given`.RangeShape
 
 abstract class Range[A] extends Able.Contain[A]:
   type THIS_TYPE <: Range[A]
@@ -19,12 +19,12 @@ abstract class Range[A] extends Able.Contain[A]:
   /**/              def isEmpty                                   : Boolean             = z.Ops.isEmpty(this)
   override          def equals(v: Any)                            : Boolean             = v.isInstanceOf[Range[_]] && {val r=v.cast[Range[A]]; this.contains(r) && r.contains(this)}
   inline            def raw[RAW<:Range.RawType[A]]
-                             (using inline s:RangeTag.Raw[A,RAW]) : RAW                 = z.raw(this,s)
+                           (using inline s:RangeShape.Raw[A,RAW]) : RAW                 = z.raw(this,s)
 
 object Range:
   type AnyType[A] = <>[A] | RawType[A]
-  type RawType[A] = lang.byte.g.Range[A & Raw.Byte] | lang.char.g.Range[A & Raw.Char] | lang.short.g.Range[A & Raw.Short]
-                  | lang.int .g.Range[A & Raw.Int]  | lang.long.g.Range[A & Raw.Long] | lang.float.g.Range[A & Raw.Float] | lang.double.g.Range[A & Raw.Double]
+  type RawType[A] = lang.byte.g.Range[A & Byte.Raw] | lang.char.g.Range[A & Char.Raw] | lang.short.g.Range[A & Short.Raw]
+                  | lang.int .g.Range[A & Int.Raw]  | lang.long.g.Range[A & Long.Raw] | lang.float.g.Range[A & Float.Raw] | lang.double.g.Range[A & Double.Raw]
 
   def apply[A:Ordering  ](start:A,end:A, endIn:Boolean=true): Range[A] = if(endIn) Z.EndInclsive(start,end)  else Z.EndExclusive(start,end)
   def singleValue[A:Ordering  ](v:A,  endIn: Boolean = true): Range[A] = if(endIn) Z.SingleValueInclusive(v) else Z.SingleValueExclusive(v)
@@ -35,7 +35,7 @@ object Range:
 
   given givenCanEqualRange[A,B](using CanEqual[A,B]): CanEqual[<>[A],<>[B]] = CanEqual.derived
   given givenFor                                    : range.z.For           = new range.z.For{}
-  given givenDocTag[A:Given.DocTag]                  : Given.DocTag[Range[A]] = new range.z.DocTag[A]
+  given givenDocDef[A:Given.DocDef]                  : Given.DocDef[Range[A]] = new range.z.DocDef[A]
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def X = range.X

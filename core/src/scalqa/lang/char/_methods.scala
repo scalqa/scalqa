@@ -1,24 +1,33 @@
 package scalqa; package lang; package char; import language.implicitConversions
 
-transparent trait _methods extends z.toPrimitives[Char]:
+transparent trait _methods:
   extension(inline x:Char)
-    @tn("Opt")        inline def ?                                 : SELF.Opt     = x.toInt.cast[SELF.Opt]
-    @tn("range")      inline def <> (inline to: Char)              : SELF.<>      = {val w=x; w <>= to-w+1 }
-    @tn("rangeX")     inline def <>>(inline to: Char)              : SELF.<>      = {val w=x; w <>= to-w   }
-    @tn("rangeOfSize")inline def <>=(inline size: Int)             : SELF.<>      = new SELF.<>(x,size)
-    infix             inline def atLeast(v: Char)                  : Char         = {val w=x; if(w>v) w else v }
-    infix             inline def atMost(v: Char)                   : Char         = {val w=x; if(w<v) w else v }
+    @tn("Opt")        inline def ?                     : lang.Char.Opt       = x.toInt.cast[lang.Char.Opt]
+    @tn("range")      inline def <> (inline to: Char)  : lang.Char.<>        = {val w=x; w <>= to-w+1 }
+    @tn("rangeX")     inline def <>>(inline to: Char)  : lang.Char.<>        = {val w=x; w <>= to-w   }
+    @tn("rangeOfSize")inline def <>=(inline size: Int) : lang.Char.<>        = new lang.Char.<>(x,size)
+    /**/        infix inline def max(inline v: Char)   : Char                = {val y=x; val w=v; if(y.real > w.real) y else w }
+    /**/        infix inline def min(inline v: Char)   : Char                = {val y=x; val w=v; if(y.real < w.real) y else w }
     //  -------------------------------------------------------------------------------------------------------
-    /**/              inline def name                              : String       = Character.getName(x)
-    /**/              inline def isAlphabetic                      : Boolean      = Character.isAlphabetic(x)
-    /**/              inline def isDigit                           : Boolean      = Character.isDigit(x)
-    /**/              inline def isLetter                          : Boolean      = Character.isLetter(x)
-    /**/              inline def isLetterOrDigit                   : Boolean      = Character.isLetterOrDigit(x)
-    /**/              inline def isLower                           : Boolean      = Character.isLowerCase(x)
-    /**/              inline def isUpper                           : Boolean      = Character.isUpperCase(x)
-    /**/              inline def isWhitespace                      : Boolean      = Character.isWhitespace(x)
-    /**/              inline def lower                             : Char         = Character.toLowerCase(x)
-    /**/              inline def upper                             : Char         = Character.toUpperCase(x)
+    /**/              inline def name                  : String              = Character.getName(x)
+    /**/              inline def isAlphabetic          : Boolean             = Character.isAlphabetic(x)
+    /**/              inline def isDigit               : Boolean             = Character.isDigit(x)
+    /**/              inline def isLetter              : Boolean             = Character.isLetter(x)
+    /**/              inline def isLetterOrDigit       : Boolean             = Character.isLetterOrDigit(x)
+    /**/              inline def isLower               : Boolean             = Character.isLowerCase(x)
+    /**/              inline def isUpper               : Boolean             = Character.isUpperCase(x)
+    /**/              inline def isWhitespace          : Boolean             = Character.isWhitespace(x)
+    /**/              inline def lower                 : Char                = Character.toLowerCase(x)
+    /**/              inline def upper                 : Char                = Character.toUpperCase(x)
+
+    /**/              inline def toByte                : Byte                = x.cast[Byte]
+    /**/              inline def toChar                : Char                = x
+    /**/              inline def toShort               : Short               = x.cast[Short]
+    /**/              inline def toInt                 : Int                 = x.cast[Int]
+    /**/              inline def toLong                : Long                = x.cast[Long]
+    /**/              inline def toFloat               : Float               = x.cast[Float]
+    /**/              inline def toDouble              : Double              = x.cast[Double]
+    /**/              inline def toNumber              : java.lang.Character = java.lang.Character.valueOf(x)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -58,28 +67,28 @@ ___________________________________________________________________________*/
       ('a' <>= 5).TP  // Prints a <> e
     ```
 
-@def atLeast -> Max
+@def max -> Max value
 
     Returns maximum of current or given value
 
     ```
       val v = 'D'
 
-      v.atLeast('A').TP   // Prints D
+      v.max('A').TP   // Prints D
 
-      v.atLeast('F').TP   // Prints F
+      v.max('F').TP   // Prints F
     ```
 
-@def atMost -> Min
+@def min -> Min value
 
     Returns minimun of current or given value
 
     ```
     val v = 'D'
 
-    v.atMost('A').TP   // Prints A
+    v.min('A').TP   // Prints A
 
-    v.atMost('F').TP   // Prints D
+    v.min('F').TP   // Prints D
     ```
 
 @def name            -> Char name                \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#getName(int) java.lang.Character.getName]]
@@ -92,4 +101,13 @@ ___________________________________________________________________________*/
 @def isWhitespace    -> Whitespace check         \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#isWhitespace(int) java.lang.Character.isWhitespace]]
 @def lower           -> Make lower case          \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#toLowerCase(int) java.lang.Character.toLowerCase]]
 @def upper           -> Make upper case          \n\n Inlines call to [[https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html#toUpperCase(int) java.lang.Character.toUpperCase]]
+
+@def toByte    -> Make Byte        \n\n  Attached Byte constructor
+@def toChar    -> Make Char        \n\n  Returns underlying value
+@def toShort   -> Make Short       \n\n  Attached Short constructor
+@def toInt     -> Make Int         \n\n  Attached Int constructor
+@def toLong    -> Make Long        \n\n  Attached Long constructor
+@def toFloat   -> Make Float       \n\n  Attached Float constructor
+@def toDouble  -> Make Double      \n\n  Attached Double constructor
+@def toNumber  -> Make Number      \n\n  Attached Number constructor
 */

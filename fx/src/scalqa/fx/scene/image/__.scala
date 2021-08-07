@@ -1,12 +1,12 @@
 package scalqa; package fx; package scene; import language.implicitConversions
 
-import javafx.scene.image.{ Image => JImage }
+import javafx.scene.image.{ Image => REAL }
 import Fx.Image
 
-object Image extends Abstract.Delegate.Opaque[Image, JImage]("Fx.Image"):
-  /**/     def apply(v: J.Url)            : Image = new JImage(v.toString)
-  implicit def implicitFromJava(v: JImage): Image = this(v)
-  override def doc(v: Image)              : Doc   = Doc(typeName) += ("width", v.width) += ("height", v.height)
+object Image extends Abstract.Delegate.Opaque[Image, REAL]("Fx.Image"):
+  /**/     def apply(v: J.Url)          : Image = new REAL(v.toString)
+  implicit def implicitFromJava(v: REAL): Image = this(v)
+  override def value_doc(v: Image)      : Doc   = Doc(typeName) += ("width", v.width) += ("height", v.height)
 
   extension (x: Image)
     @tn("width_Pro")  def width_*  : Double.Pro.O  = Fx.JavaFx.To.pro_O(x.real.widthProperty)
@@ -15,8 +15,8 @@ object Image extends Abstract.Delegate.Opaque[Image, JImage]("Fx.Image"):
     /**/              def height   : Double        = x.real.getHeight
     /**/              def isError  : Boolean       = x.real.isError
 
-  object opaque:
-    opaque type `type` <: Any.Opaque.Ref = JImage & Any.Opaque.Ref
+  object OPAQUE:
+    opaque type TYPE <: AnyRef.Opaque = REAL & AnyRef.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

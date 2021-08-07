@@ -72,7 +72,7 @@ trait Locations(using ctx: DocContext):
     pathToRaw(from, to.split("/").toList)
 
   def resolveRoot(dri: DRI, path: String): String = resolveRoot(rawLocation(dri), path)
-  def absolutePath(dri: DRI): String = rawLocation(dri).mkString("", "/", ".html").replace("$$opaque$.html",".html") // scalqa
+  def absolutePath(dri: DRI): String = rawLocation(dri).mkString("", "/", ".html").replace("$$OPAQUE$.html",".html") // scalqa
 
   def resolveLink(dri: DRI, url: String): String =
     if URI(url).isAbsolute then url else resolveRoot(dri, url)

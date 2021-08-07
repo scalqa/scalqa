@@ -5,7 +5,7 @@ transparent trait _metadata[A]:
 
   /**/                 def isParallel : Boolean
   /**/                 def docTree    : Doc.Tree    = Custom.Pipeline.infoTree(self)
-  @tn("size_Opt")      def size_?     : Int.Opt     = sizeLong_?.take(v => v>=0 && v<=Int.max).map(_.Int)
+  @tn("size_Opt")      def size_?     : Int.Opt     = sizeLong_?.take(v => v>=0 && v<=Int.max).map(_.toInt)
   @tn("sizeLong_Opt")  def sizeLong_? : Long.Opt
 
 /*___________________________________________________________________________
@@ -66,7 +66,7 @@ ___________________________________________________________________________*/
      Many streams can return their current element count.  If the information is not available, void option is returned
 
      ```
-      var s = (Int.min.Long <> Int.max.Long).~
+      var s = (Int.min.Long <> Int.max.toLong).~
 
       s.sizeLong_?.TP    // Prints Long.Opt(4294967296)
 

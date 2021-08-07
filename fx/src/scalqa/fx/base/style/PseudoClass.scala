@@ -10,8 +10,8 @@ object PseudoClass extends Abstract.Delegate.Opaque[PseudoClass,JPseudoClass]("F
   extension (x: PseudoClass)
     inline def name: String = x.real.getPseudoClassName
 
-  object opaque:
-    opaque type `type` <: Any.Opaque.Ref = JPseudoClass & Any.Opaque.Ref
+  object OPAQUE:
+    opaque type TYPE <: AnyRef.Opaque = JPseudoClass & AnyRef.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

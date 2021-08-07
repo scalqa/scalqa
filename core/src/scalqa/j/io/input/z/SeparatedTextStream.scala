@@ -31,7 +31,7 @@ class SeparatedTextStream(real: Input.Text, separator: Char => Boolean) extends 
     return from < to
   }
 
-private class Chars() extends Chars.Like with Char.Idx with CharSequence:
+private class Chars() extends Chars.Raw with Char.Idx with CharSequence:
   var array = new Array[Char](256)
   var start = 0;
   var end = array.length
@@ -39,7 +39,7 @@ private class Chars() extends Chars.Like with Char.Idx with CharSequence:
 
 private object Chars:
 
-  abstract class Like extends Val.Idx[Char] with CharSequence {
+  abstract class Raw extends Val.Idx[Char] with CharSequence {
     protected def array: Array[Char]
     protected def start: Int
     protected def end: Int
@@ -52,10 +52,10 @@ private object Chars:
 
     def range: Int.<> = start <>> end
 
-    def subSequence(from: Int, until: Int): CharSequence = new Like {
-      def array = Like.this.array
-      def start = Like.this.start + from
-      def end = Like.this.start + until
+    def subSequence(from: Int, until: Int): CharSequence = new Raw {
+      def array = Raw.this.array
+      def start = Raw.this.start + from
+      def end = Raw.this.start + until
     }
 
     def toString(r: Int.<>) = new String(array, start + r.start, r.size)

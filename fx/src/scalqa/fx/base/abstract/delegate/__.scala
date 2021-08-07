@@ -6,7 +6,7 @@ trait Delegate extends Any:
   def real: REAL
 
 object Delegate:
-  type Opaque[A<:Opaque.Ref,B<:AnyRef]   = delegate.Opaque[A,B]
+  type Opaque[A<:AnyRef.Opaque,B<:AnyRef]   = delegate.Opaque[A,B]
   type Gui                               = delegate.Gui;            transparent inline def Gui   = delegate.Gui
   type Value[A <: delegate.Value[A,B],B] = delegate.Value[A,B];     transparent inline def Value = delegate.Value
 

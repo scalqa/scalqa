@@ -7,8 +7,8 @@ enum Orientation(val real: JOrientation) extends Fx.JavaFx.Enum[JOrientation]:
   case Vertical   extends Orientation(JOrientation.VERTICAL)
 
 object Orientation extends Fx.JavaFx.Enum.Companion[Orientation, JOrientation]:
-  implicit inline def implicitRequest(inline v: HORIZONTAL) : Orientation = Horizontal
-  implicit inline def implicitRequest(inline v: VERTICAL)   : Orientation = Vertical
+  implicit inline def implicitRequest(v: HORIZONTAL): Orientation = Horizontal
+  implicit inline def implicitRequest(v: VERTICAL)  : Orientation = Vertical
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

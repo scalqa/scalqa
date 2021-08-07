@@ -2,21 +2,20 @@ package scalqa; package gen; package time; import language.implicitConversions
 
 import Time.Gmt
 
-object Gmt extends Long.Custom.Data[Gmt]("Time.Gmt") with time.x.Base[Gmt] with time.x.Millis._methods[Gmt]:
-  inline   def fromMillis(inline v: Long): Gmt     = v.asOpaque[Gmt]
-  inline   def apply()                   : Gmt     = System.currentTimeMillis.asOpaque[Gmt]
-  override def tag(v: Gmt)               : String  = v.day.tag + ' ' + v.dayTime.tag
+object Gmt extends Long.Opaque.Data[Gmt]("Time.Gmt") with time.x.Base[Gmt] with time.x.Millis.Base:
+  inline   def fromMillis(inline v: Long): Gmt     = v.opaque
+  inline   def apply()                   : Gmt     = System.currentTimeMillis.opaque
+  override def value_tag(v: Gmt)         : String  = v.day.tag + ' ' + v.dayTime.tag
 
-  implicit inline def implicitRequest(inline v: CURRENT): Gmt = apply()
+  implicit inline def implicitRequest(v: CURRENT): Gmt = apply()
 
   extension(x: Gmt)
-    @tn("millisTotal")   inline def millisTotal: Long    = x.real
-    @tn("day")         override def day        : Day     = Day.byIndex((x.millisTotal / X.Millis.InOneDay).Int)
-    @tn("dayTime")     override def dayTime    : DayTime = (x.millisTotal % X.Millis.InOneDay).Int.Millis
-    @tn("general")       inline def general    : Time    = Time.fromMillis(x.real)
+    inline   def genTime : Time    = Time.fromMillis(x.real)
+    override def day     : Day     = Day.byIndex((x.real / X.Millis.InOneDay).toInt)
+    override def dayTime : DayTime = (x.real % X.Millis.InOneDay).toInt.Millis
 
-  object opaque:
-    opaque type `type` <: Opaque.Long = Opaque.Long
+  object OPAQUE:
+    opaque type TYPE <: Long.Opaque = Long.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -25,7 +24,7 @@ object Gmt extends Long.Custom.Data[Gmt]("Time.Gmt") with time.x.Base[Gmt] with 
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object opaque -> ### Greenwich Mean Time
+@object OPAQUE  -> ### Greenwich Mean Time
 
       [[Time.Gmt]] is an opaque Long value same as [[Time]], but not localized for printing
 

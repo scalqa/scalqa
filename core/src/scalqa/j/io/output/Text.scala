@@ -2,9 +2,10 @@ package scalqa; package j; package io; package output; import language.implicitC
 
 import java.lang.{ String => S }
 import Output.Text
+import java.io.{ OutputStreamWriter as REAL }
 
-object Text extends Any.Ref.Custom.Type[Text, java.io.OutputStreamWriter]("Io.Output.Text"):
-  inline def apply(inline v: Io.Output): Text = new java.io.OutputStreamWriter(v.real).asOpaque[Text]
+object Text extends AnyRef.Opaque.Base[Text, REAL]("Io.Output.Text"):
+  inline def apply(inline v: Io.Output): Text = new REAL(v.real).opaque
 
   extension (x: Text)
     inline def float (inline v: Float)                                          : Text = { x.real.write(S.valueOf(v)); x }
@@ -23,8 +24,8 @@ object Text extends Any.Ref.Custom.Type[Text, java.io.OutputStreamWriter]("Io.Ou
     inline def flush                                                            : Text = { x.real.flush; x }
     inline def writeAllAndClose(inline v: String)                               : Unit = { x.real.write(v); x.close }
 
-  object opaque:
-    opaque type `type` <: java.io.Closeable & Opaque.Ref = java.io.OutputStreamWriter & Opaque.Ref
+  object OPAQUE:
+    opaque type TYPE <: java.io.Closeable & AnyRef.Opaque = REAL & AnyRef.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -33,7 +34,7 @@ object Text extends Any.Ref.Custom.Type[Text, java.io.OutputStreamWriter]("Io.Ou
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object opaque -> ###
+@object OPAQUE  -> ###
 
    [[J.Output.Text]] is an opaque value, backed by java.io.OutputStreamWriter
 

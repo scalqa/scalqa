@@ -10,7 +10,7 @@ object Button:
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Base = button.Base
-  type Type = button.Type.opaque.`type`;  transparent inline def Type = button.Type
+  type Type = button.Type.OPAQUE.TYPE;  transparent inline def Type = button.Type
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

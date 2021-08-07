@@ -4,7 +4,7 @@ import scala.{ collection as SC }
 
 object Scala:
 
-  def apply[A](x: SC.IterableOnce[A]): ~[A] =
+  def mkStream[A](x: SC.IterableOnce[A]): ~[A] =
     x match
        case v: SC.IndexedSeq[A] => new Stream_fromIndexedSeq(v)
        case v: SC.LinearSeq[A]  => new Stream_fromLinearSeq(v)

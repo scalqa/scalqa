@@ -5,12 +5,12 @@ import scalqa.lang.*
 object Predef:
 
   object GlobalExtensionLibrary
-      extends any.z.Extension  with array._methods with string._methods  with scalqa.`val`.stream.custom.Constructors
+      extends any.z._Methods   with array._methods with string._Methods  with scalqa.`val`.stream.custom.Constructors
          with boolean._methods with byte._methods  with char._methods    with short._methods
          with int._methods     with long._methods  with float._methods   with double._methods
          with scalqa.gen.math.ordering.z._methods
 
-  inline given given_Lib: GlobalExtensionLibrary.type = GlobalExtensionLibrary
+  given given_Lib: GlobalExtensionLibrary.type = scalqa.J.illegalState("All library methods must be inlined") // do not inline this "given"
 
   inline given givenByteMath   : Byte  .G.Math[Byte  ] = Byte  .math
   inline given givenCharMath   : Char  .G.Math[Char  ] = Char  .math

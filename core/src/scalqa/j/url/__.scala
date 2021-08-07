@@ -1,13 +1,14 @@
 package scalqa; package j; import language.implicitConversions
 
 import J.Url
+import java.net.{ URL as REAL }
 
-object Url extends Any.Ref.Custom.Type[Url,java.net.URL]("Url"):
-  /**/     inline def apply(inline v: java.net.URL)            : Url    = v.asOpaque[Url]
-  /**/     inline def apply(inline v: String)                  : Url    = apply(java.net.URL(v))
-  /**/            def apply(c: Class[_], resourceName: String) : Url    = { val v = c.getResource(resourceName); if(v != null) apply(v) else J.illegalState("Resourse: '" + resourceName +"' is no available within class: " + c.getName)}
-  override        def tag(v:Url)                               : String = v.real.toExternalForm
-  implicit inline def implicitFromReal(inline v: java.net.URL) : Url    = apply(v)
+object Url extends AnyRef.Opaque.Base[Url,REAL]("Url"):
+  /**/     inline def apply(inline v: REAL)                : Url    = v.opaque
+  /**/     inline def apply(inline v: String)              : Url    = apply(REAL(v))
+  /**/            def apply(c:Class[_],resourceName:String): Url    = { val v = c.getResource(resourceName); if(v != null) apply(v) else J.illegalState("Resourse: '" + resourceName +"' is no available within class: " + c.getName)}
+  override        def value_tag(v:Url)                     : String = v.real.toExternalForm
+  implicit inline def implicitFromReal(inline v: REAL)     : Url    = apply(v)
 
   extension (inline x: Url)
     inline def host                            : String         = x.real.getHost
@@ -17,11 +18,11 @@ object Url extends Any.Ref.Custom.Type[Url,java.net.URL]("Url"):
     inline def readString                      : String         = x.openInput.asText.readAllAndClose
     inline def readString(timeOut: Time.Length): String         = Z.readString(x,timeOut)
 
-  object opaque:
-    opaque type `type` <: Opaque.Ref = java.net.URL & Opaque.Ref
+  object OPAQUE:
+    opaque type TYPE <: AnyRef.Opaque = REAL & AnyRef.Opaque
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Connection = url.Connection.opaque.`type`; transparent inline def Connection = url.Connection
+  type Connection = url.Connection.OPAQUE.TYPE; transparent inline def Connection = url.Connection
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -30,7 +31,7 @@ object Url extends Any.Ref.Custom.Type[Url,java.net.URL]("Url"):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object opaque -> ###
+@object OPAQUE  -> ###
 
    [[J.Url]] is an opaque value, backed by java.net.URL
 

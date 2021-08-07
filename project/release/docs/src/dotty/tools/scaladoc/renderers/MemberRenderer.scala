@@ -136,7 +136,7 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
     val inlineBuilder = rawBuilder.asInstanceOf[InlineSignatureBuilder]
     if inlineBuilder.preName.isEmpty then println(member)
     val kind :: modifiersRevered = inlineBuilder.preName
-    val signature =  inlineBuilder.names.reverse.dropPrivate
+    val signature =  inlineBuilder.names.reverse.dropPrivate.dropOPAQUE // scalqa
 
     Seq(
       span(cls := "modifiers")(

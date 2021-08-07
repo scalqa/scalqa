@@ -1,21 +1,21 @@
 package scalqa; package `val`; package opt; package z; import language.implicitConversions;
 
-import gen.`given`.OptTag
+import gen.`given`.OptShape
 import AnyTypeOps.*
 
 object mixOpt:
 
-  inline def apply[A,B,C,OPT<:Opt.AnyType[C]](x:Opt[A], bo: Opt.AnyType[B], inline f: (A,B) => C, inline s:OptTag[C,OPT]): OPT =
+  inline def apply[A,B,C,OPT<:Opt.AnyType[C]](x:Opt[A], bo: Opt.AnyType[B], inline f: (A,B) => C, inline s:OptShape[C,OPT]): OPT =
     inline s match
-      case _ : OptTag[C,Boolean.G.Opt[C]] => {var o:Boolean.G.Opt[C & Raw.Boolean]= \/; if(x.nonEmpty && bo.SOME) o=f(x.`val`,bo.VAL).cast[C & Raw.Boolean]; o.cast[OPT]}
-      case _ : OptTag[C,Byte   .G.Opt[C]] => {var o:Byte   .G.Opt[C & Raw.Byte   ]= \/; if(x.nonEmpty && bo.SOME) o=f(x.`val`,bo.VAL).cast[C & Raw.Byte   ]; o.cast[OPT]}
-      case _ : OptTag[C,Char   .G.Opt[C]] => {var o:Char   .G.Opt[C & Raw.Char   ]= \/; if(x.nonEmpty && bo.SOME) o=f(x.`val`,bo.VAL).cast[C & Raw.Char   ]; o.cast[OPT]}
-      case _ : OptTag[C,Short  .G.Opt[C]] => {var o:Short  .G.Opt[C & Raw.Short  ]= \/; if(x.nonEmpty && bo.SOME) o=f(x.`val`,bo.VAL).cast[C & Raw.Short  ]; o.cast[OPT]}
-      case _ : OptTag[C,Int    .G.Opt[C]] => {var o:Int    .G.Opt[C & Raw.Int    ]= \/; if(x.nonEmpty && bo.SOME) o=f(x.`val`,bo.VAL).cast[C & Raw.Int    ]; o.cast[OPT]}
-      case _ : OptTag[C,Long   .G.Opt[C]] => {var o:Long   .G.Opt[C & Raw.Long   ]= \/; if(x.nonEmpty && bo.SOME) o=f(x.`val`,bo.VAL).cast[C & Raw.Long   ]; o.cast[OPT]}
-      case _ : OptTag[C,Float  .G.Opt[C]] => {var o:Float  .G.Opt[C & Raw.Float  ]= \/; if(x.nonEmpty && bo.SOME) o=f(x.`val`,bo.VAL).cast[C & Raw.Float  ]; o.cast[OPT]}
-      case _ : OptTag[C,Double .G.Opt[C]] => {var o:Double .G.Opt[C & Raw.Double ]= \/; if(x.nonEmpty && bo.SOME) o=f(x.`val`,bo.VAL).cast[C & Raw.Double ]; o.cast[OPT]}
-      case _ : OptTag[C,      Val.Opt[C]] => {var o:      Val.Opt[C              ]= \/; if(x.nonEmpty && bo.SOME) o=f(x.`val`,bo.VAL).cast[C              ]; o.cast[OPT]}
+      case _ : OptShape[C,Boolean.G.Opt[C]] => {var o:Boolean.G.Opt[C & Boolean.Raw]= \/; if(x.nonEmpty && bo.SOME) o=f(x.`val`,bo.VAL).cast[C & Boolean.Raw]; o.cast[OPT]}
+      case _ : OptShape[C,Byte   .G.Opt[C]] => {var o:Byte   .G.Opt[C & Byte.Raw   ]= \/; if(x.nonEmpty && bo.SOME) o=f(x.`val`,bo.VAL).cast[C & Byte.Raw   ]; o.cast[OPT]}
+      case _ : OptShape[C,Char   .G.Opt[C]] => {var o:Char   .G.Opt[C & Char.Raw   ]= \/; if(x.nonEmpty && bo.SOME) o=f(x.`val`,bo.VAL).cast[C & Char.Raw   ]; o.cast[OPT]}
+      case _ : OptShape[C,Short  .G.Opt[C]] => {var o:Short  .G.Opt[C & Short.Raw  ]= \/; if(x.nonEmpty && bo.SOME) o=f(x.`val`,bo.VAL).cast[C & Short.Raw  ]; o.cast[OPT]}
+      case _ : OptShape[C,Int    .G.Opt[C]] => {var o:Int    .G.Opt[C & Int.Raw    ]= \/; if(x.nonEmpty && bo.SOME) o=f(x.`val`,bo.VAL).cast[C & Int.Raw    ]; o.cast[OPT]}
+      case _ : OptShape[C,Long   .G.Opt[C]] => {var o:Long   .G.Opt[C & Long.Raw   ]= \/; if(x.nonEmpty && bo.SOME) o=f(x.`val`,bo.VAL).cast[C & Long.Raw   ]; o.cast[OPT]}
+      case _ : OptShape[C,Float  .G.Opt[C]] => {var o:Float  .G.Opt[C & Float.Raw  ]= \/; if(x.nonEmpty && bo.SOME) o=f(x.`val`,bo.VAL).cast[C & Float.Raw  ]; o.cast[OPT]}
+      case _ : OptShape[C,Double .G.Opt[C]] => {var o:Double .G.Opt[C & Double.Raw ]= \/; if(x.nonEmpty && bo.SOME) o=f(x.`val`,bo.VAL).cast[C & Double.Raw ]; o.cast[OPT]}
+      case _ : OptShape[C,      Val.Opt[C]] => {var o:      Val.Opt[C              ]= \/; if(x.nonEmpty && bo.SOME) o=f(x.`val`,bo.VAL).cast[C              ]; o.cast[OPT]}
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -1,9 +1,11 @@
 package scalqa; package j; package file; package path; import language.implicitConversions
 
-import java.nio.file.{ Path => JPath }
+import java.nio.file.{ Path => REAL }
 import File.Path
 
-trait _methods:
+transparent trait _methods:
+  self: Any.Opaque.Base[Path] =>
+
   extension(inline x: Path)
     /**/                 inline def names                                : Idx[String] = new Z.Names(x)
     /**/                 inline def isEmpty                              : Boolean     = x.size == 0
@@ -23,7 +25,7 @@ trait _methods:
     /**/                        def size                                 : Int         = {val v=x; val i=v.real.getNameCount; if (i == 1 && v.real.startsWith("")) 0 else i }
     @tn("root_Opt")             def root_?                               : Opt[Path]   = x.real.getRoot.^.?.map(Path(_))
     /**/                        def root                                 : Path        = x.root_?.get
-    /**/                        def rootMake                             : Path        = x.root_? or Path().root + x
+    /**/                        def rootMake                             : Path        = x.root_? or Path.current.root + x
     /**/                        def rootDrop                             : Path        = x.root_?.map(_ => Path(x.real.subpath(0, x.real.getNameCount))) or x
     @tn("child_Stream")         def child_~                              : ~[Path]     = { val v = x.real.toFile; if (v.isDirectory) v.listFiles.~.map(f => Path(f.toPath)) else \/ }
     @tn("childRecursive_Stream")def childRecursive_~                     : ~[Path]     = x.child_~.flatMap(v => v.childRecursive_~ +@ (0, v))
@@ -56,9 +58,9 @@ trait _methods:
 ___________________________________________________________________________*/
 /**
 
-@class Extension -> ###
+@class _methods -> ###
 
-[[J.Path]] represents a directory or file in the [[File.System]], which may or may not exist
+     [[J.Path]] represents a directory or file in the [[File.System]], which may or may not exist
 
      [[Path]] implements [[Idx[String]]], representing directory names hierarchy. The last name may be a name of file, if [[Path]] is for file
 
@@ -93,7 +95,7 @@ ___________________________________________________________________________*/
 
          p.root_? TP           // May print: Opt(C:\)
 
-         p.rootDrop.root_? TP //     prints: Opt(\/)
+         p.rootDrop.root_?.TP //     prints: Opt(\/)
        ```
 
 
@@ -103,7 +105,7 @@ ___________________________________________________________________________*/
 
        Note: Fails if no root available
        ```
-          J.Path.get.root TP // May print: C:\
+          J.Path.get.root.TP // May print: C:\
        ```
 
 
@@ -177,9 +179,9 @@ ___________________________________________________________________________*/
      ```
          val path: J.Path = "aaa" , "bbb" + "ccc" + "ddd"
 
-         path endsWith "ccc" , "ddd" TP // Prints: true
+         path endsWith "ccc" , "ddd".TP // Prints: true
 
-         path endsWith "aaa" , "bbb" TP // Prints: false
+         path endsWith "aaa" , "bbb".TP // Prints: false
      ```
 
 
@@ -197,11 +199,11 @@ ___________________________________________________________________________*/
        ```
          val p: J.Path = "aaa" , "bbb" + "ccc" + "ddd" + "eee" + "fff"
 
-         p TP                                             // Prints: aaa\bbb\ccc\ddd\eee\fff
+         p TP                                              // Prints: aaa\bbb\ccc\ddd\eee\fff
 
-         p subpathAfter "ccc" , "ddd" TP                    // Prints: eee\fff
+         p subpathAfter "ccc" , "ddd" TP                   // Prints: eee\fff
 
-         p subpathAfter "ddd" , "ccc" TP                    // Prints: aaa\bbb\ccc\ddd\eee\fff
+         p subpathAfter "ddd" , "ccc" TP                   // Prints: aaa\bbb\ccc\ddd\eee\fff
 
          p subpathAfter ("ddd" , "ccc", "xyz" , "bbc") TP  // Prints: xyz\bbc
       ```
@@ -243,7 +245,7 @@ ___________________________________________________________________________*/
 
          p subpathFrom "ddd" , "ccc" TP                  // Prints: aaa\bbb\ccc\ddd\eee\fff
 
-         p subpathFrom ("ddd" , "ccc", "xyz" , "bbc") TP // Prints: xyz\bbc
+         p subpathFrom ("ddd" , "ccc", "xyz" , "bbc").TP // Prints: xyz\bbc
       ```
 
 

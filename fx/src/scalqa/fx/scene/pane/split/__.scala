@@ -17,7 +17,7 @@ class Split extends Control:
   /**dividerPercent is a percent of entire space allocated to the added section, last section gets the rest*/
   def add(e: Fx.Node.Like, dividerPercentOpt : Opt[Percent] = \/): this.type =
     items += e
-    priorPercentOpt.forval(p => real.setDividerPosition(items.size - 2, real.getDividers.~.map(_.getPosition).dropLast(1).last_?.or(0D) + p.Double / 100d))
+    priorPercentOpt.forval(p => real.setDividerPosition(items.size - 2, real.getDividers.~.map(_.getPosition).dropLast(1).last_?.or(0D) + p.toDouble / 100d))
     priorPercentOpt = dividerPercentOpt
     this
 

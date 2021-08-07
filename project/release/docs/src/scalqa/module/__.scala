@@ -2,7 +2,7 @@ package scalqa; import module.*
 
 class Module (val typ_? : Opt[Member], val val_? : Opt[Member]):
   val main               : Member  = typ_? or val_?.get
-  val name               : String  = main.name.nameToOp.^.reviseIf(_ == "opaque", v => val_?.map(_.name) or v)
+  val name               : String  = main.name.nameToOp.^.reviseIf(_ == "OPAQUE", v => val_?.map(_.name) or v)
   var inner              : Boolean = false
   def prefix             : String  = if(inner) "A" else "B"
   def label              : String  = {var l=name; val i=l.lastIndexOf("."); if(i>0) l.substring(i+1); if(inner) l = "#" + l; l}
@@ -28,7 +28,7 @@ object Module:
   class Both private(v1: Member,v2: Member) extends Module(v1,v2)
   object Both:
     def apply(v1: Member,v2: Member): Both = if(!v1.dri.isOpaqueDef) new Both(v1,v2) else
-      val t = v1.members.~.find(_.name == "`type`")
+      val t = v1.members.~.find(_.name == "TYPE")
       val m = v1.copy(name=v2.name,kind=t.kind,dri=v1.dri,members=v2.members)
       Registry.update(m)
       new Both(m,v2)

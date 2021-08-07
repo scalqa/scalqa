@@ -5,9 +5,9 @@ import java.lang.ref.{ WeakReference => WEAK }
 object X:
   private val Cancelled = ><[() => Boolean](() => true)
 
-  abstract class Basic[A<:Ref](_target: A) extends Control:
+  abstract class Basic[A<:AnyRef](_target: A) extends Control:
     private   val ref                                      = J.Concurrent.Ref[><[() => Boolean]](><.void)
-    private   var target                     : Ref         = _target
+    private   var target                     : AnyRef      = _target
     private   var onCancelPack               : ><[()=>Any] = \/
     /**/      def isCancelled                : Boolean     = ref.get == Cancelled
     /**/      def onCancel[U](f: () => U)    : this.type   = { onCancelPack += f; this }

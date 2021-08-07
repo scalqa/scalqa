@@ -1,10 +1,12 @@
 package scalqa; package lang; package boolean; import language.implicitConversions
 
 transparent trait _methods:
-  extension    (inline x: Boolean) @tn("Opt") inline def ?                   : Boolean.Opt = if(x) G.Opt.TRUE else G.Opt.FALSE
-  extension[A] (inline x: Boolean) @tn("Opt") inline def ?(inline v: => A)   : Val.Opt[A]  = if(x) v else ZZ.BoolNone.cast[Val.Opt[A]]
-  extension    (inline x: Boolean)            inline def not                 : Boolean     = !x
-  extension    (inline x: Boolean)            inline def Int                 : Int         = if(x) 1 else 0
+
+  extension (inline x: Boolean)
+    @tn("Opt") inline def ?                    : Boolean.Opt = if(x) G.Opt.TRUE else G.Opt.FALSE
+    @tn("Opt") inline def ?[A](inline v: => A) : Val.Opt[A]  = if(x) v else ZZ.BoolNone.cast[Val.Opt[A]]
+    /**/       inline def not                  : Boolean     = !x
+    /**/       inline def toInt                : Int         = if(x) 1 else 0
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -63,7 +65,7 @@ ___________________________________________________________________________*/
 
     Note: This operation is inlined and can be used without performance worries
 
-@def Int -> Make Int
+@def toInt -> Make Int
 
          Int constructor attached to Boolean
 

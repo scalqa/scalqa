@@ -1,6 +1,6 @@
-package scalqa; package `val`; package stream; package _Build; import language.implicitConversions
+package scalqa; package `val`; package stream; package _build; import language.implicitConversions
 
-import z.build.{ zip => Z }
+import z._build.{ _zip => Z }
 
 transparent trait _zip:
   self: Stream.type =>
@@ -123,7 +123,7 @@ ___________________________________________________________________________*/
      The paired value is in the first tuple position
 
      ```
-        ('A' <> 'F').~.zipKey(_.Int).TP  // Prints ~((65,A), (66,B), (67,C), (68,D), (69,E), (70,F))
+        ('A' <> 'F').~.zipKey(_.toInt).TP  // Prints ~((65,A), (66,B), (67,C), (68,D), (69,E), (70,F))
      ```
 
 @def zipValue -> Merge property
@@ -133,7 +133,7 @@ ___________________________________________________________________________*/
      The paired value is in the second tuple position
 
      ```
-        ('A' <> 'F').~.zipValue(_.Int).TP  // Prints ~((A,65), (B,66), (C,67), (D,68), (E,69), (F,70))
+        ('A' <> 'F').~.zipValue(_.toInt).TP  // Prints ~((A,65), (B,66), (C,67), (D,68), (E,69), (F,70))
      ```
 
 

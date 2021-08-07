@@ -5,7 +5,7 @@ object J:
   /**/    def scheduleEveryIn[U](period: Time.Length, initDelay:Time.Length, f: =>U): Event.Control = j.vm.z.Schedule.everyIn(period, initDelay, () => f)
   /**/    def scheduleIn[U](delay: Time.Length, job: => U)                          : Event.Control = j.vm.z.Schedule.in(delay, () => job)
   /**/    def schedule[U](f: => U)                                                  : Unit          = j.vm.z.Schedule(() => f)
-  /**/    def sleep(tl: Time.Length)                                                : Unit          = java.lang.Thread.sleep(tl.millisTotal, (tl.micros * 1000 + tl.nanos).Int)
+  /**/    def sleep(tl: Time.Length)                                                : Unit          = java.lang.Thread.sleep(tl.millisTotal, (tl.micros * 1000 + tl.nanos).toInt)
 
   inline  def initSize                                                    : Int         = ZZ.initSize
   inline  def toDo(                inline message: String = \/)           : Nothing     = throw new UnsupportedOperationException("J.toDo. "+message)
@@ -15,13 +15,13 @@ object J:
   /**/    def printStack(sizeLimit: Int.Opt = \/, label: String.Opt = \/) : Unit        = { new Exception().getStackTrace().~.take_<>(1 <> sizeLimit.or(5000)).zipIndex(1)
     /**/                                                                                    .map("\t" + _.toString.padEndTo(3) + " " + _).joinAt(0,label or "J.printStack").foreach(println) }
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  transparent inline def File          = j.File;                          type File             = j.File.opaque.`type`
-  transparent inline def Path          = j.file.Path;                     type Path             = j.file.Path.opaque.`type`
-  transparent inline def Url           = j.Url;                           type Url              = j.Url.opaque.`type`
+  transparent inline def File          = j.File;                          type File             = j.File.OPAQUE.TYPE
+  transparent inline def Path          = j.file.Path;                     type Path             = j.file.Path.OPAQUE.TYPE
+  transparent inline def Url           = j.Url;                           type Url              = j.Url.OPAQUE.TYPE
   /**/                                                                    type Printer          = java.io.PrintStream
   transparent inline def Io            = j.Io
-  transparent inline def Input         = j.io.Input;                      type Input            = j.io.Input.opaque.`type`
-  transparent inline def Output        = j.io.Output;                     type Output           = j.io.Output.opaque.`type`
+  transparent inline def Input         = j.io.Input;                      type Input            = j.io.Input.OPAQUE.TYPE
+  transparent inline def Output        = j.io.Output;                     type Output           = j.io.Output.OPAQUE.TYPE
 
   transparent inline def Json          = j.Json
   transparent inline def Object        = j.json.Object;                   type Object           = j.json.Object
@@ -34,10 +34,10 @@ object J:
   transparent inline def Random        = j.util.Random
   /**/                                                                    type Test             = j.util.Test
   transparent inline def Concurrent    = j.util.Concurrent
-  transparent inline def WeakRef       = j.util.WeakRef;                  type WeakRef[A]       = j.util.WeakRef.opaque.`type`[A]
+  transparent inline def WeakRef       = j.util.WeakRef;                  type WeakRef[A]       = j.util.WeakRef.OPAQUE.TYPE[A]
 
   transparent inline def Vm            = j.Vm
-  transparent inline def Priority      = j.vm.Priority;                   type Priority         = j.vm.Priority.opaque.`type`
+  transparent inline def Priority      = j.vm.Priority;                   type Priority         = j.vm.Priority.OPAQUE.TYPE
   transparent inline def Setup         = j.vm.Setup
   transparent inline def Memory        = j.vm.Memory
   transparent inline def Host          = j.vm.Host

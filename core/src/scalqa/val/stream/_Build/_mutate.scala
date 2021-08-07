@@ -1,28 +1,28 @@
-package scalqa; package `val`; package stream; package _Build; import language.implicitConversions
+package scalqa; package `val`; package stream; package _build; import language.implicitConversions
 
-import gen.`given`.StreamTag
-import z.build.{ mutate => M }
+import gen.`given`.StreamShape
+import z._build.{ _mutate => M }
 
 transparent trait _mutate:
   self: Stream.type =>
 
   extension[A,STM<: ~~.RawType[A]](inline x: ~[A])
-    /**/          inline def raw(using inline s:StreamTag.Raw[A,STM]): STM               = M.raw(x,s)
+    /**/          inline def raw(using inline s:StreamShape.Raw[A,STM]): STM               = M.raw(x,s)
   extension[A](inline x: ~[A])
-    /**/          inline def ref                                     : ~[A]              = x
-    /**/          inline def reverse                                 : ~[A]              = new M.reverse(x)
-    /**/          inline def reverseEvery(inline size: Int)          : ~[A]              = new M.reverseEvery(x, size)
-    /**/          inline def shuffle                                 : ~[A]              = new M.shuffle(x)
-    /**/          inline def transpose[B](using inline f:A => ~[B])  : ~[~[B]]           = new M.transpose[A](x,f.cast[A => ~[Ref]]).cast[~[~[B]]]
-    /**/          inline def synchronize                             : ~[A]              = new M.synchronize(x)
+    /**/          inline def ref                                       : ~[A]              = x
+    /**/          inline def reverse                                   : ~[A]              = new M.reverse(x)
+    /**/          inline def reverseEvery(inline size: Int)            : ~[A]              = new M.reverseEvery(x, size)
+    /**/          inline def shuffle                                   : ~[A]              = new M.shuffle(x)
+    /**/          inline def transpose[B](using inline f:A => ~[B])    : ~[~[B]]           = new M.transpose[A](x,f.cast[A => ~[AnyRef]]).cast[~[~[B]]]
+    /**/          inline def synchronize                               : ~[A]              = new M.synchronize(x)
   extension[A] (x: ~[A])
-    /**/                 def load                                    : ~[A] & Able.Size  = x.toBuffer.~.enableSize
-    /**/                 def hideSizeData                            : ~[A]              = if(x.sizeLong_?) new M.hideSizeData(x) else x
-    /**/                 def enablePreview                           : ~[A] & Preview[A] = x match{ case v: Preview[_] => v.cast[Preview[A]]; case v => M.preview(v)}
-    /**/                 def enableSize                              : ~[A] & Able.Size  = x match{ case v: Able.Size => x.cast[~[A] & Able.Size];  case v => M.enableSize(v)}
-    @tn("nonEmpty_Opt")  def nonEmpty_?                              : Opt[~[A]]         = x.sizeLong_? match
-                                                                                                        case o if o.nonEmpty => o.take(_ > 0).map(_ => x)
-                                                                                                        case _ => {val b=x.enablePreview; if(b.preview_?) b.? else \/}
+    /**/                 def load                                      : ~[A] & Able.Size  = x.toBuffer.~.enableSize
+    /**/                 def hideSizeData                              : ~[A]              = if(x.sizeLong_?) new M.hideSizeData(x) else x
+    /**/                 def enablePreview                             : ~[A] & Preview[A] = x match{ case v: Preview[_] => v.cast[Preview[A]]; case v => M.preview(v)}
+    /**/                 def enableSize                                : ~[A] & Able.Size  = x match{ case v: Able.Size => x.cast[~[A] & Able.Size];  case v => M.enableSize(v)}
+    @tn("nonEmpty_Opt")  def nonEmpty_?                                : Opt[~[A]]         = x.sizeLong_? match
+                                                                                                          case o if o.nonEmpty => o.take(_ > 0).map(_ => x)
+                                                                                                          case _ => {val b=x.enablePreview; if(b.preview_?) b.? else \/}
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -19,7 +19,7 @@ object Text:
   type InputControl = text.InputControl;       transparent inline def InputControl = text.InputControl
   type Field        = text.Field;              transparent inline def Field        = text.Field
   type Area         = text.Area;               transparent inline def Area         = text.Area
-  type Font         = text.Font.opaque.`type`; transparent inline def Font         = text.Font
+  type Font         = text.Font.OPAQUE.TYPE; transparent inline def Font         = text.Font
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

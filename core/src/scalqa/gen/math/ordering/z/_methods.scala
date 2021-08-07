@@ -9,8 +9,8 @@ transparent trait _methods:
     /**/                  inline def join(inline c: Ordering[A])            : Ordering[A]      = Z.join(x,c)
     @tn("rank_View")      inline def rank_^(fun: A => Int)                  : Ordering[A]      = Z.rank_View(x,fun)
     @tn("opt_View")       inline def opt_^(voidPosition: Int)               : Ordering[Opt[A]] = Z.opt_View(x,voidPosition)
-    @tn("voidFirst_View") inline def voidFirst_^   (using Given.VoidTag[A]) : Ordering[A]      = Z.voidFirst_View(x)
-    @tn("voidLast_View")  inline def voidLast_^    (using Given.VoidTag[A]) : Ordering[A]      = Z.voidLast_View(x)
+    @tn("voidFirst_View") inline def voidFirst_^   (using Given.VoidDef[A]) : Ordering[A]      = Z.voidFirst_View(x)
+    @tn("voidLast_View")  inline def voidLast_^    (using Given.VoidDef[A]) : Ordering[A]      = Z.voidLast_View(x)
     @tn("compare_Opt")    inline def compare_?(v:Opt[A], w:Opt[A], none:Int): Int              = Z.compare_Opt(x,v,w,none)
 
 /*___________________________________________________________________________

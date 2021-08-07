@@ -12,7 +12,7 @@ private[scalqa] final class Void[A] extends ><[A] with Gen.Void:
   @tn("take_Range") override def take_<>(f:Int, sz:Int)      : ><[A]     = this
   @tn("drop_Range") override def drop_<>(f:Int, sz:Int)      : ><[A]     = this
   /**/                       def compact                     : this.type = this
-  /**/                       def toBuffer                    : Buffer[A] = new Any.Ref.Buffer()
+  /**/                       def toBuffer                    : Buffer[A] = new AnyRef.G.Buffer()
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

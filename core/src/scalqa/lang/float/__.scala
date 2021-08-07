@@ -1,19 +1,19 @@
 package scalqa; package lang; import language.implicitConversions
 
-object Float extends float.custom.Containers[Float]:
+object Float extends float.g.customized.Containers[Float]:
   inline def min     : Float               = java.lang.Float.MIN_VALUE
   inline def max     : Float               = java.lang.Float.MAX_VALUE
-  inline def ordering: G.Ordering[Float] = float.z.Math
+  inline def ordering: G.Ordering[Float]   = float.z.Math
   inline def math    : G.Math[Float]       = float.z.Math
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  transparent inline def Custom = float.Custom
-  transparent inline def G      = float.G
-  type _methods   = float._methods
+  type _methods = float._methods;          transparent inline def G      = float.G
+  type Opaque   = float.Opaque;            transparent inline def Opaque = float.Opaque
+  type Raw      = Float | float.Opaque;    transparent inline def Raw    = float.Raw
 
 package object float:
-  private[scalqa] type SELF = Float;             private[scalqa] inline def SELF = lang.Float
-  private[scalqa] type RAW  = Any.Raw.Float
+  type Raw    = Float.Raw
+  opaque type Opaque >: Float <: AnyVal = Float
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

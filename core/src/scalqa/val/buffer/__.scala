@@ -19,7 +19,7 @@ abstract class Buffer[A] private[scalqa]() extends Idx.Mutable[A] with Able.Cont
     if(ar.length < sz+len) { mkSpace(sz+len); ar=array}
     a match
       case a if ar.getClass.isAssignableFrom(a.getClass) => System.arraycopy(a,start,ar,sz,len)
-      case a: Array[Ref]     => for(i <- 0 <>> len) updateAt(sz+i, a(start+i).cast[A])
+      case a: Array[AnyRef]  => for(i <- 0 <>> len) updateAt(sz+i, a(start+i).cast[A])
       case a: Array[Int]     => for(i <- 0 <>> len) updateAt(sz+i, a(start+i).cast[A])
       case a: Array[Double]  => for(i <- 0 <>> len) updateAt(sz+i, a(start+i).cast[A])
       case a: Array[Long]    => for(i <- 0 <>> len) updateAt(sz+i, a(start+i).cast[A])
@@ -32,16 +32,16 @@ abstract class Buffer[A] private[scalqa]() extends Idx.Mutable[A] with Able.Cont
     size = sz+len
 
 object Buffer:
-  /**/     inline def apply[A]()                                             : Buffer[A]                         = new Ref.Buffer(J.initSize)
-  /**/     inline def apply[A](inline initSize: Int)                         : Buffer[A]                         = new Ref.Buffer(initSize)
+  /**/     inline def apply[A]()                                             : Buffer[A]                         = new AnyRef.G.Buffer(J.initSize)
+  /**/     inline def apply[A](inline initSize: Int)                         : Buffer[A]                         = new AnyRef.G.Buffer(initSize)
   /**/     inline def apply[A](inline a:Array[A], inline s:Int)              : Buffer[A]                         = buffer.Z.create(a,s)
   /**/            def accessible[A](use: Array[A], usedSize: Int)            : Buffer[A] & Able.Access[Array[A]] = buffer.Z.accessible(use,usedSize)
   /**/     inline def accessible[A:ClassTag](inline initSize: Int=J.initSize): Buffer[A] & Able.Access[Array[A]] = accessible(new Array[A](initSize),0)
   implicit inline def implicitRequest[A](inline v: NEW)                      : Buffer[A]                         = apply[A]()
 
-  given givenDocTag[A](using t: Given.DocTag[A]) : Given.DocTag[Buffer[A]] with
-    def tag(v: Buffer[A]) = doc(v).tag
-    def doc(v: Buffer[A]) = Doc(v) += ("size", v.size) += v.array.tag
+  given givenDocDef[A](using t: Given.DocDef[A]) : Given.DocDef[Buffer[A]] with
+    def value_tag(v: Buffer[A]) = value_doc(v).tag
+    def value_doc(v: Buffer[A]) = Doc(v) += ("size", v.size) += v.array.tag
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

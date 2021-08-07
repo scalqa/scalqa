@@ -8,7 +8,7 @@ abstract class Like protected[fx] extends delegate.Gui:
 object Like:
 
   def apply(real: javafx.scene.Node): Like = real.onZoomFinishedProperty.get match
-    case _ : delegate.gui.Z.RefEventDispatch => Module(real)
+    case _ : delegate.Z.RefEventDispatch => Module(real)
     case _ => Node.FxConverter(real)
 
   given FxConverter: ReversibleFunction[javafx.scene.Node, Like] = ReversibleFunction(apply, _.real)

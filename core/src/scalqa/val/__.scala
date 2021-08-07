@@ -8,10 +8,10 @@ object Val:
   /**/          transparent inline def Collection = `val`.Collection;                type Collection[+A] = `val`.Collection[A]
   /**/          transparent inline def Idx        = `val`.Idx;                       type Idx[+A]        = `val`.Idx[A]
   /**/          transparent inline def Lookup     = `val`.Lookup;                    type Lookup[A,+B]   = `val`.Lookup[A,B]
-  /**/          transparent inline def Opt        = `val`.Opt;                       type Opt[+A]        = `val`.Opt.opaque.`type`[A]
+  /**/          transparent inline def Opt        = `val`.Opt;                       type Opt[+A]        = `val`.Opt.OPAQUE.TYPE[A]
   /**/          transparent inline def Pro        = `val`.Pro;                       type Pro[+A]        = `val`.Pro[A]
   /**/          transparent inline def Promise    = `val`.Promise;                   type Promise[+A]    = `val`.Promise[A]
-  /**/          transparent inline def Result     = `val`.Result;                    type Result[+A]     = `val`.Result.opaque.`type`[A]
+  /**/          transparent inline def Result     = `val`.Result;                    type Result[+A]     = `val`.Result.OPAQUE.TYPE[A]
   /**/          transparent inline def StableSet  = Collection.StableSet;            type StableSet[A]   = Collection.StableSet[A]
 
 /*___________________________________________________________________________

@@ -1,9 +1,10 @@
 package scalqa; package j; package io; package output; import language.implicitConversions
 
 import Output.Bytes
+import java.io.{ OutputStream as REAL }
 
-object Bytes extends Any.Ref.Custom.Type[Bytes, java.io.OutputStream]("Io.Output.Bytes"):
-  inline def apply(inline v: Io.Output): Bytes = v.real.asOpaque[Bytes]
+object Bytes extends AnyRef.Opaque.Base[Bytes, REAL]("Io.Output.Bytes"):
+  inline def apply(inline v: Io.Output): Bytes = v.real.opaque
 
   extension(inline x: Bytes)
     inline def writeByte(inline b: Int)                                       : Unit  = x.real.write(b)
@@ -21,8 +22,8 @@ object Bytes extends Any.Ref.Custom.Type[Bytes, java.io.OutputStream]("Io.Output
     /**/                                                                                  in.close
     /**/                                                                                 }
 
-  object opaque:
-    opaque type `type` <: java.io.Closeable & Opaque.Ref = java.io.OutputStream & Opaque.Ref
+  object OPAQUE:
+    opaque type TYPE <: java.io.Closeable & AnyRef.Opaque = REAL & AnyRef.Opaque
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
@@ -30,7 +31,7 @@ object Bytes extends Any.Ref.Custom.Type[Bytes, java.io.OutputStream]("Io.Output
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object opaque -> ###
+@object OPAQUE  -> ###
 
    [[J.Output.Bytes]] is an opaque value, backed by java.io.OutputStream
 

@@ -1,17 +1,17 @@
-package scalqa; package `val`; package stream; package _Build
+package scalqa; package `val`; package stream; package _build
 
-import z.build.{ filter => F }
+import z._build.{ _filter => F }
 
-transparent trait _filter extends _Filter._take with _Filter._drop:
+transparent trait _Filter extends _filter._take with _filter._drop:
 
   extension[A](inline x: ~[A])
     inline def filter(inline f: A => Boolean)     : ~[A] = new F.take(x,f)
     inline def withFilter(inline f: A => Boolean) : ~[A] = x.take(f)
     inline def FILTER(inline f: A => Boolean)     : ~[A] = x.TAKE(f)
 
-object _filter:
-  type _take =  _Filter._take
-  type _drop =  _Filter._drop
+object _Filter:
+  type _take =  _filter._take
+  type _drop =  _filter._drop
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -20,7 +20,7 @@ object _filter:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait _filter -> ### Stream Filtering Interface
+@trait _Filter -> ### Stream Filtering Interface
 
 @def filter ->  Legacy filter
 

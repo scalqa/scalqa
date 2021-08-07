@@ -1,9 +1,9 @@
 package scalqa; package fx; package control; package text; package inputControl; import language.implicitConversions
 
-import javafx.scene.control.TextFormatter.{ Change => JChange }
+import javafx.scene.control.TextFormatter.{ Change => REAL }
 import InputControl.Change
 
-object Change extends Abstract.Delegate.Opaque[Change, JChange]("Fx.Text.InputControl.Change"):
+object Change extends Abstract.Delegate.Opaque[Change, REAL]("Fx.Text.InputControl.Change"):
 
   extension (x: Change)
     inline def anchor                 : Int     = x.real.getAnchor
@@ -23,8 +23,8 @@ object Change extends Abstract.Delegate.Opaque[Change, JChange]("Fx.Text.InputCo
     inline def isDelete               : Boolean = x.real.isDeleted
     inline def isTextChange           : Boolean = x.real.isContentChange
 
-  object opaque:
-    opaque type `type` <: Any.Opaque.Ref = JChange & Any.Opaque.Ref
+  object OPAQUE:
+    opaque type TYPE <: AnyRef.Opaque = REAL & AnyRef.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -1,6 +1,6 @@
-package scalqa; package `val`; package stream; package _Build; import language.implicitConversions
+package scalqa; package `val`; package stream; package _build; import language.implicitConversions
 
-import z.build.{ peek => P }
+import z._build.{ _peek => P }
 
 transparent trait _peek:
   self: Stream.type =>

@@ -2,7 +2,7 @@ package scalqa; package test.`val`.stream._use._aggregate; import language.impli
 
 object averageFew extends J.Test:
 
-  @fast lazy val l = (1 <> 100).~.map(_.Float).reverseEvery(10).><
+  @fast lazy val l = (1 <> 100).~.map(_.toFloat).reverseEvery(10).><
 
   test{
     var i1, i2 = 0F

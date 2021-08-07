@@ -1,6 +1,6 @@
-package scalqa; package `val`; package stream; package _Build; package _Filter
+package scalqa; package `val`; package stream; package _build; package _filter
 
-import z.build.{ filter => F }
+import z._build.{ _filter => F }
 
 transparent trait _drop :
   extension[A](inline x: ~[A])
@@ -8,7 +8,7 @@ transparent trait _drop :
     /**/              inline def dropWhile(inline f: A => Boolean)       : ~[A] = new F.dropWhile(x, f)
     /**/              inline def dropFirst(inline n: Int)                : ~[A] = new F.dropFirst(x, n)
     @tn("drop_Range") inline def drop_<>(inline i: Int.<>)               : ~[A] = new F.drop_Interval(x, i)
-    /**/              inline def dropLast(n: Int)                        : ~[A] = new F.dropLast(x.cast[~[Ref]], n).cast[~[A]]
+    /**/              inline def dropLast(n: Int)                        : ~[A] = new F.dropLast(x.cast[~[AnyRef]], n).cast[~[A]]
     /**/              inline def dropEvery(nTh: Int)                     : ~[A] = new F.dropEvery(x,nTh)
     /**/              inline def dropDuplicates                          : ~[A] = new F.dropDuplicates(x)
     /**/              inline def dropDuplicatesBy[B](inline f: A=>B)     : ~[A] = new F.dropDuplicates.By(x,f)
@@ -17,7 +17,7 @@ transparent trait _drop :
     /**/                     def dropAllBy[B](f: A=>B,v: ~[B])           : ~[A] = { val set=v.toSet;  if(set.isEmpty) x else x.DROP(v => set.contains(f(v)))}
     /**/                     def dropOnly(v: A, vs: A*)                  : ~[A] = if(vs.isEmpty) x.DROP(_ == v) else dropAll(vs.~ + v)
     /**/                     def dropOnlyBy[B](f:A=>B,vs: B*)            : ~[A] = dropAllBy(f,vs.~)
-    /**/                     def dropVoid       (using Given.VoidTag[A]) : ~[A] = new F.dropVoid(x) // do not inline, there is same method in Opt - trouble when Opt[~[_]]
+    /**/                     def dropVoid       (using Given.VoidDef[A]) : ~[A] = new F.dropVoid(x) // do not inline, there is same method in Opt - trouble when Opt[~[_]]
   extension[A](inline x: ~[A])
     /**/              inline def DROP(inline f: A => Boolean)            : ~[A] = { class DROP(x: ~[A]) extends z.a.Pipe[A](x){@tn("read_Opt") def read_? ={var o=x.read_?; while(o.nonEmpty){ if(!f(o.cast[A])) return o; o=x.read_?}; o}}; new DROP(x)}
 
@@ -73,7 +73,7 @@ ___________________________________________________________________________*/
       Only lets elements, which mapped value is not found in given stream
 
       ```
-         ('a' <> 'z').~.dropAllBy(_.Int % 10, ~~(1,3,7,4,6)).TP
+         ('a' <> 'z').~.dropAllBy(_.toInt % 10, ~~(1,3,7,4,6)).TP
 
          // Output
          ~(b, c, d, f, i, l, m, n, p, s, v, w, x, z)

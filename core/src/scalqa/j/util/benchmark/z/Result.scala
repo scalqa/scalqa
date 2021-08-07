@@ -6,7 +6,7 @@ private[j] class Result(
     val count            : Int,
     val time             : Time.Length,
     val totalMemory      : ByteCount,
-    val lastOpt          : Opt[Ref],
+    val lastOpt          : Opt[AnyRef],
     val sumOpt           : Double.Opt,
     var maxOpsPerSec     : Long  = 0,
     var maxMemoryAverage : ByteCount = 0.ByteCount
@@ -17,14 +17,14 @@ private[j] class Result(
   def memoryAverage  : ByteCount  = if (count == 0) \/ else totalMemory / count
 
   def doc =
-    def percent(v: Long, t: Long) = if (t == 0) 0 else (v * 100D / t).Int
+    def percent(v: Long, t: Long) = if (t == 0) 0 else (v * 100D / t).toInt
     Doc(this)
       +=  ("Num", number)
       ++= (label != number.toString) ? ("Name", label)
       +=  ("Ops/Sec", if (time <= \/) "Too many" else opsPerSec.toBrief)
       +=  ("%",        percent(opsPerSec, maxOpsPerSec))
       +=  ("Memory",   memoryAverage.toBrief)
-      +=  ("%",        percent(memoryAverage.Long, maxMemoryAverage.Long))
+      +=  ("%",        percent(memoryAverage.toLong, maxMemoryAverage.toLong))
       ++= ( sumOpt.drop(_ => count == 0).map(v => ("Avg Value",(v / count).tag)) or_? lastOpt.map(v => ("Last Value" , v.tag)))
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

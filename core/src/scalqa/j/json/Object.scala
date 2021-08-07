@@ -19,7 +19,7 @@ trait Object extends `val`.Lookup[String, Any] with Able.Doc:
   /**/              def doc                     : Doc            = Doc(this) ++= pair_~.map(t => (t._1,t._2.tag))
   override          def tag                     : String         = Json.format(this)
 
-object Object extends Gen.Void.Setup[Ref](z.Void.Object):
+object Object extends Gen.Void.Setup[AnyRef](z.Void.Object):
   type M = Mutable; inline def M = Mutable
 
   trait Mutable extends Object with Lookup.Mutable[String, Any]:

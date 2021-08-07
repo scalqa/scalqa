@@ -1,19 +1,17 @@
 package scalqa; package lang; import language.implicitConversions
 
-import any.Raw
-
 object Array:
-  //  type AnyType[A] = Array[A] | Array[A & Raw.Boolean] | Array[A & Raw.Byte] | Array[A & Raw.Char]  | Array[A & Raw.Short]   // Aparently this is harder for compiler
-  //                             | Array[A & Raw.Int]     | Array[A & Raw.Long] | Array[A & Raw.Float] | Array[A & Raw.Double]  // version 3.0.2.RC1 failed to process
+//  type AnyType[A] = Array[A] | Array[A & Boolean.Raw] | Array[A & Byte.Raw] | Array[A & Char.Raw]  | Array[A & Short.Raw]   // Aparently this is harder for compiler,
+//                             | Array[A & Int.Raw]     | Array[A & Long.Raw] | Array[A & Float.Raw] | Array[A & Double.Raw]  // version 3.0.2.RC1 failed to process
   type AnyType[A] = Array[A]
-                  | Array[A & Boolean] | Array[A & Opaque.Boolean]
-                  | Array[A & Byte]    | Array[A & Opaque.Byte]
-                  | Array[A & Char]    | Array[A & Opaque.Char]
-                  | Array[A & Short]   | Array[A & Opaque.Short]
-                  | Array[A & Int]     | Array[A & Opaque.Int]
-                  | Array[A & Long]    | Array[A & Opaque.Long]
-                  | Array[A & Float]   | Array[A & Opaque.Float]
-                  | Array[A & Double]  | Array[A & Opaque.Double]
+                  | Array[A & Boolean] | Array[A & Boolean.Opaque]
+                  | Array[A & Byte]    | Array[A & Byte.Opaque]
+                  | Array[A & Char]    | Array[A & Char.Opaque]
+                  | Array[A & Short]   | Array[A & Short.Opaque]
+                  | Array[A & Int]     | Array[A & Int.Opaque]
+                  | Array[A & Long]    | Array[A & Long.Opaque]
+                  | Array[A & Float]   | Array[A & Float.Opaque]
+                  | Array[A & Double]  | Array[A & Double.Opaque]
 
   inline def apply(inline x: Boolean, inline xs: Boolean*)        : Array[Boolean] = scala.Array(x,xs *)
   inline def apply(inline x: Byte,    inline xs: Byte*)           : Array[Byte]    = scala.Array(x,xs *)

@@ -4,7 +4,7 @@ object Util:
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def Concurrent   = util.Concurrent
-  transparent inline def WeakRef      = util.WeakRef;         type WeakRef[A]  = util.WeakRef.opaque.`type`[A]
+  transparent inline def WeakRef      = util.WeakRef;         type WeakRef[A]  = util.WeakRef.OPAQUE.TYPE[A]
   transparent inline def Benchmark    = util.Benchmark
   transparent inline def Random       = util.Random
   transparent inline def Proxy        = util.Proxy;           type Proxy[A]    = util.Proxy[A]

@@ -2,14 +2,14 @@ package scalqa; package gen; package calendar; import language.implicitConversio
 
 import Calendar.Year
 
-object Year extends Int.Custom.Data.Sequential[Year]("Year"):
-  inline   def apply(inline v: Int)              : Year    = v.asOpaque[Year]
-  /**/     def apply()                           : Year    = Time().year
-  override def tag(v: Year)                      : String  = v.toString
-  override def isVoid(v: Year)                   : Boolean = v.real == Int.min
+object Year extends Int.Opaque.Data.Sequential[Year]("Year"):
+  inline   def apply(inline v: Int)              : Year    = v.opaque
+  /**/     def current                           : Year    = Time.current.year
+  override def value_tag(v: Year)                : String  = v.toString
+  override def value_isVoid(v: Year)             : Boolean = v.real == Int.min
 
-  implicit inline def implicitRequest(inline v: \/)    : Year = Int.min.asOpaque[Year]
-  implicit inline def implicitRequest(inline v:CURRENT): Year = apply()
+  implicit inline def implicitRequest(v: \/)     : Year    = Int.min.opaque
+  implicit inline def implicitRequest(v:CURRENT) : Year    = current
 
   extension (x: Year)
     inline def number    : Int       = x.real
@@ -18,10 +18,10 @@ object Year extends Int.Custom.Data.Sequential[Year]("Year"):
     inline def period    : Period    = Period(x.start,  x.next.start)
     /**/   def months    : Month.Idx = zMonthIdx(x)
     /**/   def days      : Day.Idx   = zDayIdx(x)
-    /**/   def isCurrent : Boolean   = x == Day().year
+    /**/   def isCurrent : Boolean   = x == Year.current
 
-  object opaque:
-    opaque type `type` <: Opaque.Int = Opaque.Int
+  object OPAQUE:
+    opaque type TYPE <: Int.Opaque = Int.Opaque
 
 // ****************************************************************************************************
 private class zDayIdx(v: Year) extends Day.Idx:
@@ -40,7 +40,7 @@ private class zMonthIdx(v: Year) extends Month.Idx:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object opaque -> ### Calendar Year
+@object OPAQUE  -> ### Calendar Year
 
     [[Year]] is an opaque Int value, holding literally the year number
 
@@ -65,9 +65,9 @@ ___________________________________________________________________________*/
      ```
 
 
-@def days -> | of days.
+@def days -> Index of days.
 
-     [[!]] of all [[Day]]s for the year.
+     Index of all [[Day]]s for the year.
 
      Size is 366 for leap and 365 for regular years.
 
@@ -78,9 +78,9 @@ ___________________________________________________________________________*/
      ```
 
 
-@def months -> | of months.
+@def months -> Index of months.
 
-     [[!]] of all [[Month]]s for the year.
+     Index of all [[Month]]s for the year.
 
      Size is always 12.
      ```

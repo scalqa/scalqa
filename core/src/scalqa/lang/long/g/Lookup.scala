@@ -2,22 +2,22 @@ package scalqa; package lang; package long; package g; import language.implicitC
 
 import scala.collection.immutable.LongMap
 
-trait Lookup[A<:RAW,+B] extends Val.Lookup[A,B]:
+trait Lookup[A<:Raw,+B] extends Val.Lookup[A,B]:
   @tn("get_Opt")             def get_?(key: A) : Val.Opt[B]
   /**/              override def get(v: A)     : B           = get_?(v) or (throw ZZ.ME(v.tag))
   @tn("key_Stream") override def key_~         : Stream[A]   = super.key_~.raw
 
 object Lookup:
-  implicit def implicitRequest[A<:RAW,B](v: \/): Lookup[A,B] = Stable.void
+  implicit def implicitRequest[A<:Raw,B](v: \/): Lookup[A,B] = Stable.void
 
-  trait Mutable[A<:RAW,B] extends Lookup[A,B] with Val.Lookup.Mutable[A,B]:
+  trait Mutable[A<:Raw,B] extends Lookup[A,B] with Val.Lookup.Mutable[A,B]:
     def put(key: A, value: B) : Unit
     def remove(key: A)        : Val.Opt[B]
 
   object Mutable:
-    implicit inline def implicitRequest[A<:RAW,B](inline v: NEW): Mutable[A,B] = new X.Basic(J.initSize)
+    implicit inline def implicitRequest[A<:Raw,B](inline v: NEW): Mutable[A,B] = new X.Basic(J.initSize)
     object X:
-      class Basic[A<:RAW,B](iSz: Int) extends Lookup.Mutable[A,B]:
+      class Basic[A<:Raw,B](iSz: Int) extends Lookup.Mutable[A,B]:
         private val real = new collection.mutable.LongMap[B](iSz)
         /**/               def size           : Int          = real.size
         @tn("get_Opt")     def get_?(key: A)  : Val.Opt[B]   = Val.Opt.fromScala(real.get(key.real))
@@ -27,7 +27,7 @@ object Lookup:
         /**/               def remove(k: A)   : Val.Opt[B]   = Val.Opt.fromScala(real.remove(k.real))
 
   // ************************************************************************************************************
-  class Stable[A<:RAW,B] private(real: LongMap[B]) extends Val.Lookup.Stable[A,B] with Lookup[A,B]:
+  class Stable[A<:Raw,B] private(real: LongMap[B]) extends Val.Lookup.Stable[A,B] with Lookup[A,B]:
     type THIS_TYPE = Stable[A,B]
     /**/                       def size                  : Int            = real.size
     @tn("get_Opt")             def get_?(key: A)         : Val.Opt[B]     = Val.Opt.fromScala(real.get(key.real))
@@ -37,10 +37,10 @@ object Lookup:
     /**/                       def joinAll(v: ~[(A, B)]) : Stable[A,B] = new Stable(real.concat(v.map(v => (v._1.real,v._2)).iterator))
 
   object Stable:
-    /**/            def apply[A<:RAW,B](v: (A,B) *)      : Stable[A,B] = apply(v.~)
-    /**/            def apply[A<:RAW,B](v: ~[(A,B)])     : Stable[A,B] = new Stable(LongMap.from(v.map(v => (v._1.real,v._2)).iterator))
-    @tn("getVoid")  def void[A<:RAW,B]                   : Stable[A,B] = zVoid.cast[Stable[A,B]]; private object zVoid extends Stable(LongMap.empty) with Gen.Void
-    implicit inline def implicitRequest[A<:RAW,B](inline v: \/): Stable[A,B] = void
+    /**/            def apply[A<:Raw,B](v: (A,B) *)      : Stable[A,B] = apply(v.~)
+    /**/            def apply[A<:Raw,B](v: ~[(A,B)])     : Stable[A,B] = new Stable(LongMap.from(v.map(v => (v._1.real,v._2)).iterator))
+    @tn("getVoid")  def void[A<:Raw,B]                   : Stable[A,B] = zVoid.cast[Stable[A,B]]; private object zVoid extends Stable(LongMap.empty) with Gen.Void
+    implicit inline def implicitRequest[A<:Raw,B](inline v: \/): Stable[A,B] = void
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

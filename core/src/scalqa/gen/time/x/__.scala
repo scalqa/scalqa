@@ -2,7 +2,7 @@ package scalqa; package gen; package time; import language.implicitConversions
 
 object X:
 
-  type Base[A<:Any.Raw.Long]    = x.Base[A]
+  type Base[A<:Long.Raw]    = x.Base[A]
 
   transparent inline def Nanos  = x.Nanos
   transparent inline def Millis = x.Millis

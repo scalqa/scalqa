@@ -4,12 +4,12 @@ abstract class Add[A] extends Event[A]("Add"):
   /**/               def items                : Idx[A]
   /**/               def convert[B](f: A => B): Add[B]      = Add(range, items.map_^(f))
   @tn("project_Opt") def project_?(i: Int.<>) : Opt[Add[A]] = i.overlap_?(range).map(oi => Add[A](oi, items.range_^(oi << range.start)))
-  override           def doc                  : Doc         = super.doc += ("item" ++ (items.size != 1) ? "s", items.~.makeString(","))
+  override           def doc                  : Doc         = super.doc += ("item" +? (items.size != 1) ? "s", items.~.makeString(","))
 
 object Add:
-  def apply[A](i: Int, items: Idx[A]) : Add[A] = Z.Add[A](i <>= items.size, items)
-  def apply[A](i: Int.<>,  items: Idx[A]) : Add[A] = { assert(i.size == items.size); Z.Add[A](i, items) }
-  def apply[A](i: Int,  item: A)      : Add[A] = Z.Single.Add[A](i, item)
+  def apply[A](i: Int, items: Idx[A])    : Add[A] = Z.Add[A](i <>= items.size, items)
+  def apply[A](i: Int.<>,  items: Idx[A]): Add[A] = { assert(i.size == items.size); Z.Add[A](i, items) }
+  def apply[A](i: Int,  item: A)         : Add[A] = Z.Single.Add[A](i, item)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

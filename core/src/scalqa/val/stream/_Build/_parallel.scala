@@ -1,4 +1,4 @@
-package scalqa; package `val`; package stream; package _Build; import language.implicitConversions
+package scalqa; package `val`; package stream; package _build; import language.implicitConversions
 
 transparent trait _parallel:
   self: Stream.type =>

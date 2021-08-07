@@ -2,17 +2,17 @@ package scalqa; package fx; package base; package style; import language.implici
 
 import Style.Class
 
-object Class extends String.Custom.Data[Class]("Fx.Style.Class"):
-  /**/     inline def apply(inline v: String)             : Class   = v.asOpaque[Class]
+object Class extends String.Opaque.Data[Class]("Fx.Style.Class"):
+  /**/     inline def apply(inline v: String)             : Class   = v.opaque
   implicit inline def implicitFromString(inline v: String): Class   = apply(v)
 
   given FxConverter: ReversibleFunction[String,Class] = \/
 
   extension (x: Class)
-    override def join(v: Class|String) : Class = apply(if(x.isVoid) v.real else if(v.real.isVoid) x.real else x.real + ';' + v.real)
+    @tn("join") def +(v: Style|String): Class =  {val s=v.cast[String]; if(x.isVoid) s:Class else if(s.isVoid) x else x.real + ';' + s }
 
-  object opaque:
-    opaque type `type` <: Any.Opaque.String = Any.Opaque.String
+  object OPAQUE:
+    opaque type TYPE <: String.Opaque = String.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

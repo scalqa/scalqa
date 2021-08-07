@@ -3,31 +3,29 @@ package scalqa; package gen; package time; import language.implicitConversions
 import Time.DayTime
 import Time.Length
 
-object DayTime extends Long.Custom.Data.Ordered[DayTime]("DayTime"):
-  /**/     inline def _0_Hours                                   : DayTime = 0L.asOpaque[DayTime]
+object DayTime extends Long.Opaque.Data.Ordered[DayTime]("DayTime") with time.x.Nanos.BaseLength:
+  /**/     inline def _0_Hours                                   : DayTime = 0L.opaque
   /**/     inline def _24_Hours                                  : DayTime = apply(24.Hours)
-  /**/            def apply()                                    : DayTime = Time().dayTime
-  /**/            def apply(hours: Int, min: Int, sec: Int = 0)  : DayTime = (hours.Hours.nanosTotal + min.Minutes.nanosTotal + sec.Seconds.nanosTotal ).asOpaque[DayTime]
-  /**/            def apply(unit: Length, more: Length*)         : DayTime = more.map(_.nanosTotal).fold(unit.nanosTotal)(_ + _).asOpaque[DayTime]
-  /**/     inline def nanos(inline n: Long)                      : DayTime = n.asOpaque[DayTime]
-  /**/     inline def millis(inline m: Long)                     : DayTime = (m * 1000000).asOpaque[DayTime]
+  /**/            def current                                    : DayTime = Time.current.dayTime
+  /**/            def apply(hours: Int, min: Int, sec: Int = 0)  : DayTime = (hours.Hours.nanosTotal + min.Minutes.nanosTotal + sec.Seconds.nanosTotal ).opaque
+  /**/            def apply(unit: Length, more: Length*)         : DayTime = more.map(_.nanosTotal).fold(unit.nanosTotal)(_ + _).opaque
+  /**/     inline def nanos(inline n: Long)                      : DayTime = n.opaque
+  /**/     inline def millis(inline m: Long)                     : DayTime = (m * 1000000).opaque
   /**/     inline def seconds(inline v: Long)                    : DayTime = millis(v * 1000)
-  override        def isVoid(v: DayTime)                         : Boolean = v.real == 0L
-  override        def tag(v: DayTime)                            : String  = z.formatDayTime(v, true)
-  implicit inline def implicitFromLength(inline v: Length)       : DayTime = v.nanosTotal.asOpaque[DayTime]
-  implicit inline def implicitToLength(inline v: DayTime)        : Length  = v.length
-  implicit inline def implicitRequest(inline v: \/)              : DayTime = 0L.asOpaque[DayTime]
+  override        def value_isVoid(v: DayTime)                   : Boolean = v.real == 0L
+  override        def value_tag(v: DayTime)                      : String  = z.formatDayTime(v, true)
+  implicit inline def implicitFromLength(inline v: Length)       : DayTime = v.nanosTotal.opaque
+  implicit inline def implicitRequest(v: \/)                     : DayTime = 0L.opaque
+  implicit inline def implicitRequest(v: CURRENT)                : DayTime = current
 
-  given x: time.x.Nanos._methods[DayTime] with
-    extension(x: DayTime)
-      /**/         inline def nanosTotal          : Long    = x.real
-      /**/         inline def length              : Length  = Length.fromNanos(x.real)
-      /**/                def toBrief             : String  = z.formatDayTime(x, false)
-      @tn("plus")  inline def  +(inline l: Length): DayTime = (x.nanosTotal + l.nanosTotal).cast[DayTime]
-      @tn("minus") inline def  -(inline l: Length): DayTime = (x.nanosTotal - l.nanosTotal).cast[DayTime]
+  extension(x: DayTime)
+    /**/         inline def length              : Length  = Length.fromNanos(x.real)
+    /**/                def toBrief             : String  = z.formatDayTime(x, false)
+    @tn("plus")  inline def  +(inline l: Length): DayTime = (x.nanosTotal + l.nanosTotal).opaque
+    @tn("minus") inline def  -(inline l: Length): DayTime = (x.nanosTotal - l.nanosTotal).opaque
 
-  object opaque:
-    opaque type `type` <: Opaque.Long = Opaque.Long
+  object OPAQUE:
+    opaque type TYPE <: Long.Opaque = Long.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -36,11 +34,11 @@ object DayTime extends Long.Custom.Data.Ordered[DayTime]("DayTime"):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object opaque -> ### Time within Day
+@object OPAQUE  -> ### Time within Day
 
         [[DayTime]] is an opaque Long value holding nanoseconds since midnigth
 
-@def apply()  -> Current DayTime.
+@def current  -> Current DayTime.
 
 
 @def apply(unit -> By generic units.

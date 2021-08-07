@@ -8,8 +8,8 @@ object Result extends result._givens:
   implicit inline def implicitFromProblem [A](inline v: Problem): Result[A]   = apply(v)
   implicit inline def implicitToBoolean[A](inline v: Result[A]) : Boolean     = v.isValue
 
-  object opaque:
-    opaque type `type`[+A]<: Opaque.Ref = Opaque.Ref
+  object OPAQUE:
+    opaque type TYPE[+A]<: AnyRef.Opaque = AnyRef.Opaque
 
   // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   extension[A](inline x: Result[A])
@@ -21,7 +21,7 @@ object Result extends result._givens:
     /**/        infix inline def or(inline default: => A)                         : A            = if(x.isValue) x.cast[A] else default
     /**/              inline def isValue                                          : Boolean      = x.isInstanceOf[Problem].not
     /**/              inline def isProblem                                        : Boolean      = x.isInstanceOf[Problem]
-    /**/              inline def contains(value: Any)                             : Boolean      = x == value.cast[Ref]
+    /**/              inline def contains(value: Any)                             : Boolean      = x == value.cast[AnyRef]
   extension[A](x: Result[A])
     /**/                     def value                                            : A            = {if(x.isProblem) throw Problem("Method 'value' is called on 'Result' with problem"); x.cast[A] }
     @tn("value_Opt")  inline def value_?                                          : Opt[A]       = {var o:Opt[A]      = \/;  if(x.isValue) o=x.cast[A];       o}
@@ -48,7 +48,7 @@ object Result extends result._givens:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object opaque -> ### Value Result
+@object OPAQUE  -> ### Value Result
 
     Result is a container, which holds either 'value' or 'problem', which explains why value is not available.
 

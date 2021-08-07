@@ -25,7 +25,7 @@ trait SignatureRenderer:
 
   def renderLinkContent(content: TagArg, dri: DRI, modifiers: AppliedAttr*) =
     link(dri) match
-      case Some(link) => a(href := link.replace("$$opaque$",""), modifiers)(content)
+      case Some(link) => a(href := link.replace("$$OPAQUE$",""), modifiers)(content)
       case _ => unresolvedLink(content, modifiers:_*)
 
   import scalqa.given

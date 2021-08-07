@@ -3,10 +3,10 @@ package scalqa; package `val`; import stream.*; import language.implicitConversi
 trait Stream[+A]:
   @tn("read_Opt") def read_? : Opt[A]
 
-object Stream extends z.util._default with _build with _use:
+object Stream extends z.util._default with _Build with _Use:
   type AnyType[A] = Stream[A] | RawType[A]
-  type RawType[A] = lang.boolean.g.Stream[A & Raw.Boolean] | lang.byte.g.Stream[A & Raw.Byte] | lang.char .g.Stream[A & Raw.Char]  | lang.short .g.Stream[A & Raw.Short]
-                  | lang.int    .g.Stream[A & Raw.Int]     | lang.long.g.Stream[A & Raw.Long] | lang.float.g.Stream[A & Raw.Float] | lang.double.g.Stream[A & Raw.Double]
+  type RawType[A] = lang.boolean.g.Stream[A & Boolean.Raw] | lang.byte.g.Stream[A & Byte.Raw] | lang.char .g.Stream[A & Char.Raw]  | lang.short .g.Stream[A & Short.Raw]
+                  | lang.int    .g.Stream[A & Int.Raw]     | lang.long.g.Stream[A & Long.Raw] | lang.float.g.Stream[A & Float.Raw] | lang.double.g.Stream[A & Double.Raw]
 
   // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   /**/           inline def apply[A](inline v: A)                 : ~[A]             = z.a.VarArg.Stream_ofOne[A](v)
@@ -18,11 +18,11 @@ object Stream extends z.util._default with _build with _use:
   implicit       inline def implicitFromAbleStream[A](inline v:Able.~[A]): ~[A]      = v.~
 
   given givenCanEqualStream[A,B](using CanEqual[A,B]): CanEqual[~[A],~[B]] = CanEqual.derived
-  given givenDocTag[A :Given.DocTag]                  : Given.DocTag[~[A]]  = z.util.DocTag()
+  given givenDocDef[A :Given.DocDef]                  : Given.DocDef[~[A]]  = z.util.DocDef()
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  transparent inline def _build  = stream._build;   type _build     = stream._build
-  transparent inline def _use    = stream._use;     type _use       = stream._use
+  transparent inline def _build  = stream._Build;   type _build     = stream._Build
+  transparent inline def _use    = stream._Use;     type _use       = stream._Use
   transparent inline def Flow    = stream.Flow;     type Flow[A]    = stream.Flow[A]
   transparent inline def Preview = stream.Preview;  type Preview[A] = stream.Preview[A]
   transparent inline def Custom  = stream.Custom

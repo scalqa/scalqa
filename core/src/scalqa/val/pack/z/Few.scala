@@ -29,7 +29,7 @@ private[`val`] object Few:
     @tn("take_Range") override def take_<>(f:Int,sz:Int)      : ><[A]     = this.~.take_<>(f <>= sz).><
     @tn("drop_Range") override def drop_<>(f:Int,sz:Int)      : ><[A]     = this.~.drop_<>(f <>= sz).><
     /**/                       def compact                    : this.type = this
-    /**/                       def toBuffer                   : Buffer[A] = new Any.Ref.Buffer(this.~)
+    /**/                       def toBuffer                   : Buffer[A] = new AnyRef.G.Buffer(this.~)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

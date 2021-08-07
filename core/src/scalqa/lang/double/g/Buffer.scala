@@ -1,14 +1,14 @@
 package scalqa; package lang; package double; package g; import language.implicitConversions
 
-class Buffer[A<:RAW](_a: Array[Double], _sz: Int) extends Val.Buffer[A] with Idx.Mutable[A]:
+class Buffer[A<:Raw](_a: Array[Double], _sz: Int) extends Val.Buffer[A] with Idx.Mutable[A]:
   protected type ARRAY_TYPE = Double
   def this(initSize: Int) = this(new Array[Double](initSize),0)
   def this()              = this(J.initSize)
   def this(v: Val.~[A])   = {this(v.size_? or J.initSize); addAll(v)}
 
-  private               var ar                              : Array[Double]    = _a
+  private               var ar                              : Array[Double]  = _a
   private               var sz                              : Int            = _sz
-  protected             def array                           : Array[Double]    = ar
+  protected             def array                           : Array[Double]  = ar
   protected             def array_=(v: Array[Double])       : Unit           = ar = v
   protected             def size_=(v:Int)                   : Unit           = sz = v
   protected      final  def mkSpace(sz:Int)                 : Unit           = ar=ar.copySize(ar.length * 2 max sz)
@@ -26,12 +26,12 @@ class Buffer[A<:RAW](_a: Array[Double], _sz: Int) extends Val.Buffer[A] with Idx
   @tn("pack")  override def ><                              : Pack[A]        = Pack.fromArray(ar,sz)
 
 object Buffer:
-  /**/            def accessible[A<:RAW](use: Array[Double], usedSize: Int): Buffer[A] & Able.Access[Array[Double]] = zAccessible[A](use,usedSize)
-  /**/     inline def accessible[A<:RAW](inline initSize: Int = J.initSize): Buffer[A] & Able.Access[Array[Double]] = accessible(new Array[Double](initSize),0)
-  implicit inline def implicitRequest[A<:RAW](inline v: NEW)               : Buffer[A]                              = new Buffer()
+  /**/            def accessible[A<:Raw](use: Array[Double], usedSize: Int): Buffer[A] & Able.Access[Array[Double]] = zAccessible[A](use,usedSize)
+  /**/     inline def accessible[A<:Raw](inline initSize: Int = J.initSize): Buffer[A] & Able.Access[Array[Double]] = accessible(new Array[Double](initSize),0)
+  implicit inline def implicitRequest[A<:Raw](inline v: NEW)               : Buffer[A]                              = new Buffer()
 
   // ************************************************************************************************************************
-  private class zAccessible[A<:RAW](a: Array[Double], s: Int) extends Buffer[A](a,s) with Able.Access[Array[Double]]:
+  private class zAccessible[A<:Raw](a: Array[Double], s: Int) extends Buffer[A](a,s) with Able.Access[Array[Double]]:
     def access: Array[Double] = super.array
 
 /*___________________________________________________________________________

@@ -1,10 +1,10 @@
-package scalqa; package `val`; package stream; package _Use; import language.implicitConversions
+package scalqa; package `val`; package stream; package _use; import language.implicitConversions
 
 import Custom.{ Math as CM }
 import CM.Average
 
 transparent trait _calculate:
-  self: _use =>
+  self: _Use =>
 
   extension[A](x: ~[A])
     @tn("min")         def min                    (using Ordering[A]) : A             = x.min_?.get
@@ -25,10 +25,10 @@ transparent trait _calculate:
 
 
     def averageFew[B,C,D,E,F](fb:A=>Opt[B], fc:A=>Opt[C], fd:A=>Opt[D]= \/, fe:A=>Opt[E]= \/, ff:A=>Opt[F]= \/)
-                                  (using nb:Average[B],nc:Average[C],nd:Average[D],ne:Average[E],nf:Average[F]) : (B,C)|(B,C,D)|(B,C,D,E)|(B,C,D,E,F) = z.use.calculate.averageFew(x,fb,fc,fd,fe,ff)
+                                  (using nb:Average[B],nc:Average[C],nd:Average[D],ne:Average[E],nf:Average[F]) : (B,C)|(B,C,D)|(B,C,D,E)|(B,C,D,E,F) = z._use._calculate.averageFew(x,fb,fc,fd,fe,ff)
 
     def sumFew  [B,C,D,E,F](fb:A=>Opt[B], fc:A=>Opt[C], fd:A=>Opt[D]= \/, fe:A=>Opt[E]= \/, ff:A=>Opt[F]= \/)
-                                                 (using nb:Math[B],nc:Math[C],nd:Math[D],ne:Math[E],nf:Math[F]) : (B,C)|(B,C,D)|(B,C,D,E)|(B,C,D,E,F) = z.use.calculate.sumFew(x,fb,fc,fd,fe,ff)
+                                                 (using nb:Math[B],nc:Math[C],nd:Math[D],ne:Math[E],nf:Math[F]) : (B,C)|(B,C,D)|(B,C,D,E)|(B,C,D,E,F) = z._use._calculate.sumFew(x,fb,fc,fd,fe,ff)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -98,7 +98,7 @@ ___________________________________________________________________________*/
      For empty Stream returns zero value
 
      ```
-         (10 <> 15).~.map(_.Float).average  // Returns 12.5
+         (10 <> 15).~.map(_.toFloat).average  // Returns 12.5
      ```
 
      Note: [[average]] is available for types providing given [[scalqa.val.stream.custom.Math.Average ~~.Custom.Math.Average]] implementations,
@@ -109,7 +109,7 @@ ___________________________________________________________________________*/
      Computes average or returns void option for empty stream
 
      ```
-         (10 <> 15).~.map(_.Float).average_?  // Returns Opt(12.5)
+         (10 <> 15).~.map(_.toFloat).average_?  // Returns Opt(12.5)
      ```
 
      Note: [[average_?]] is available for types providing given [[scalqa.val.stream.custom.Math.Average ~~.Custom.Math.Average]] implementations,
@@ -126,7 +126,7 @@ ___________________________________________________________________________*/
      ```
          (1 <> 1000).~.averageFew(_ * 10F, _ * 100F).TP  // Prints (5005, 50050)
 
-          val (first, second, third) = (1 <> 1000).~.averageFew(v => v.Double, _ * 10.0, _ * 100.0)
+          val (first, second, third) = (1 <> 1000).~.averageFew(v => v.toDouble, _ * 10.0, _ * 100.0)
 
           first.TP     // Prints 5005
           second.TP    // Prints 5005

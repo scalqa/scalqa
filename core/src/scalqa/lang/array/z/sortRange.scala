@@ -1,26 +1,26 @@
 package scalqa; package lang; package array; package z; import language.implicitConversions
 
-import gen.`given`.ArrayTag
+import gen.`given`.ArrayShape
 import java.util.{ Arrays, Collections}
 
 object sortRange:
 
-  inline def apply[A,ARRAY<:Array.AnyType[A]](inline x: ARRAY, inline p: Int, inline sz: Int, inline c:Ordering[A], inline t: ArrayTag[A,ARRAY]): Unit =
+  inline def apply[A,ARRAY<:Array.AnyType[A]](inline x: ARRAY, inline p: Int, inline sz: Int, inline c:Ordering[A], inline t: ArrayShape[A,ARRAY]): Unit =
     inline t match
-              case _ : ArrayTag[A&Raw.Boolean,Array[A&Raw.Boolean]] => boolean(x.cast[Array[Boolean]],p,sz,c.cast[Ordering[Boolean]])
-              case _ : ArrayTag[A&Raw.Byte,   Array[A&Raw.Byte   ]] => byte   (x.cast[Array[Byte   ]],p,sz,c.cast[Ordering[Byte   ]])
-              case _ : ArrayTag[A&Raw.Char,   Array[A&Raw.Char   ]] => char   (x.cast[Array[Char   ]],p,sz,c.cast[Ordering[Char   ]])
-              case _ : ArrayTag[A&Raw.Short,  Array[A&Raw.Short  ]] => short  (x.cast[Array[Short  ]],p,sz,c.cast[Ordering[Short  ]])
-              case _ : ArrayTag[A&Raw.Int,    Array[A&Raw.Int    ]] => int    (x.cast[Array[Int    ]],p,sz,c.cast[Ordering[Int    ]])
-              case _ : ArrayTag[A&Raw.Long,   Array[A&Raw.Long   ]] => long   (x.cast[Array[Long   ]],p,sz,c.cast[Ordering[Long   ]])
-              case _ : ArrayTag[A&Raw.Float,  Array[A&Raw.Float  ]] => float  (x.cast[Array[Float  ]],p,sz,c.cast[Ordering[Float  ]])
-              case _ : ArrayTag[A&Raw.Double, Array[A&Raw.Double ]] => double (x.cast[Array[Double ]],p,sz,c.cast[Ordering[Double ]])
-              case _ : ArrayTag[A&Ref,        Array[A&Ref        ]] => ref    (x.cast[Array[Ref    ]],p,sz,c.cast[Ordering[Ref    ]])
-              case _                                                => any    (x.cast[Array[A      ]],p,sz,c                        )
+              case _ : ArrayShape[A&Boolean.Raw,Array[A&Boolean.Raw]] => boolean(x.cast[Array[Boolean]],p,sz,c.cast[Ordering[Boolean]])
+              case _ : ArrayShape[A&Byte.Raw,   Array[A&Byte.Raw   ]] => byte   (x.cast[Array[Byte   ]],p,sz,c.cast[Ordering[Byte   ]])
+              case _ : ArrayShape[A&Char.Raw,   Array[A&Char.Raw   ]] => char   (x.cast[Array[Char   ]],p,sz,c.cast[Ordering[Char   ]])
+              case _ : ArrayShape[A&Short.Raw,  Array[A&Short.Raw  ]] => short  (x.cast[Array[Short  ]],p,sz,c.cast[Ordering[Short  ]])
+              case _ : ArrayShape[A&Int.Raw,    Array[A&Int.Raw    ]] => int    (x.cast[Array[Int    ]],p,sz,c.cast[Ordering[Int    ]])
+              case _ : ArrayShape[A&Long.Raw,   Array[A&Long.Raw   ]] => long   (x.cast[Array[Long   ]],p,sz,c.cast[Ordering[Long   ]])
+              case _ : ArrayShape[A&Float.Raw,  Array[A&Float.Raw  ]] => float  (x.cast[Array[Float  ]],p,sz,c.cast[Ordering[Float  ]])
+              case _ : ArrayShape[A&Double.Raw, Array[A&Double.Raw ]] => double (x.cast[Array[Double ]],p,sz,c.cast[Ordering[Double ]])
+              case _ : ArrayShape[A&AnyRef,     Array[A&AnyRef     ]] => anyref (x.cast[Array[AnyRef ]],p,sz,c.cast[Ordering[AnyRef ]])
+              case _                                                  => any    (x.cast[Array[A      ]],p,sz,c                        )
 
   def any[A](x: Array[A], p:Int, sz:Int, c:Ordering[A]): Unit =
     x match
-       case x: Array[Ref]        => ref(x,p,sz,c)
+       case x: Array[AnyRef]     => anyref(x,p,sz,c)
        case x: Array[Int]        => int(x,p,sz,c)
        case x: Array[Double]     => double(x,p,sz,c)
        case x: Array[Long]       => long(x,p,sz,c)
@@ -38,7 +38,7 @@ object sortRange:
   def long   (a:Array[Long],   p:Int, sz:Int, c:Ordering[Long])   : Unit = if(c eq Long.ordering)   Arrays.sort(a,p,p+sz) else Collections.sort(sort.LongList  (a,p,sz),c)
   def float  (a:Array[Float],  p:Int, sz:Int, c:Ordering[Float])  : Unit = if(c eq Float.ordering)  Arrays.sort(a,p,p+sz) else Collections.sort(sort.FloatList (a,p,sz),c)
   def double (a:Array[Double], p:Int, sz:Int, c:Ordering[Double]) : Unit = if(c eq Double.ordering) Arrays.sort(a,p,p+sz) else Collections.sort(sort.DoubleList(a,p,sz),c)
-  def ref    (a:Array[Ref],    p:Int, sz:Int, c:Ordering[Ref])    : Unit = Collections.sort(sort.RefList(a,p,sz),c)
+  def anyref (a:Array[AnyRef], p:Int, sz:Int, c:Ordering[AnyRef]) : Unit = Collections.sort(sort.RefList(a,p,sz),c)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

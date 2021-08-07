@@ -1,9 +1,10 @@
 package scalqa; package j; package io; package output; import language.implicitConversions
 
 import Output.Data
+import java.io.{ DataOutputStream as REAL }
 
-object Data extends Any.Ref.Custom.Type[Data, java.io.DataOutputStream]("Io.Output.Data"):
-  inline def apply(inline v: Io.Output): Data = new java.io.DataOutputStream(v.real).asOpaque[Data]
+object Data extends AnyRef.Opaque.Base[Data, REAL]("Io.Output.Data"):
+  inline def apply(inline v: Io.Output): Data = new REAL(v.real).opaque
 
   extension (x: Data)
     inline def flush                      : Data = { x.real.flush;           x }
@@ -19,8 +20,8 @@ object Data extends Any.Ref.Custom.Type[Data, java.io.DataOutputStream]("Io.Outp
     inline def char   (inline v: String)  : Data = { x.real.writeChars(v);   x }
     inline def utf    (inline v: String)  : Data = { x.real.writeUTF(v);     x }
 
-  object opaque:
-    opaque type `type` <: java.io.Closeable & Opaque.Ref = java.io.DataOutputStream & Opaque.Ref
+  object OPAQUE:
+    opaque type TYPE <: java.io.Closeable & AnyRef.Opaque = REAL & AnyRef.Opaque
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
@@ -28,7 +29,7 @@ object Data extends Any.Ref.Custom.Type[Data, java.io.DataOutputStream]("Io.Outp
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object opaque -> ###
+@object OPAQUE  -> ###
 
    [[J.Output.Data]] is an opaque value, backed by java.io.DataOutputStream
 

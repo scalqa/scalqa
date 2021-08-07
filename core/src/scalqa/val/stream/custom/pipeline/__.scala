@@ -1,7 +1,7 @@
 package scalqa; package `val`; package stream; package custom; import language.implicitConversions
 
 trait Pipeline extends Pipeline.Tree:
-  protected def base     : Ref
+  protected def base     : AnyRef
   /**/      def infoTree : Doc.Tree = Doc.Tree.apply(doc, base.?.takeType[Pipeline.Tree].map(_.infoTree) or Doc.Tree(Able.Doc.doc_?(base) or z.util.MultiDoc(base)))
 
 object Pipeline:

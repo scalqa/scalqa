@@ -1,25 +1,25 @@
 package scalqa; package lang; package array; package z; import language.implicitConversions
 
-import gen.`given`.ArrayTag
+import gen.`given`.ArrayShape
 
 object joinAt:
 
-  inline def apply[A,ARRAY<:Array.AnyType[A]](inline x: ARRAY, inline i: Int, inline v: A, inline t: ArrayTag[A,ARRAY]) : ARRAY =
+  inline def apply[A,ARRAY<:Array.AnyType[A]](inline x: ARRAY, inline i: Int, inline v: A, inline t: ArrayShape[A,ARRAY]) : ARRAY =
     inline t match
-      case _ : ArrayTag[A&Raw.Boolean,Array[A&Raw.Boolean]] => boolean(x.cast[Array[Boolean]],i,v.cast[Boolean]).cast[ARRAY]
-      case _ : ArrayTag[A&Raw.Byte,   Array[A&Raw.Byte   ]] => byte   (x.cast[Array[Byte   ]],i,v.cast[Byte   ]).cast[ARRAY]
-      case _ : ArrayTag[A&Raw.Char,   Array[A&Raw.Char   ]] => char   (x.cast[Array[Char   ]],i,v.cast[Char   ]).cast[ARRAY]
-      case _ : ArrayTag[A&Raw.Short,  Array[A&Raw.Short  ]] => short  (x.cast[Array[Short  ]],i,v.cast[Short  ]).cast[ARRAY]
-      case _ : ArrayTag[A&Raw.Int,    Array[A&Raw.Int    ]] => int    (x.cast[Array[Int    ]],i,v.cast[Int    ]).cast[ARRAY]
-      case _ : ArrayTag[A&Raw.Long,   Array[A&Raw.Long   ]] => long   (x.cast[Array[Long   ]],i,v.cast[Long   ]).cast[ARRAY]
-      case _ : ArrayTag[A&Raw.Float,  Array[A&Raw.Float  ]] => float  (x.cast[Array[Float  ]],i,v.cast[Float  ]).cast[ARRAY]
-      case _ : ArrayTag[A&Raw.Double, Array[A&Raw.Double ]] => double (x.cast[Array[Double ]],i,v.cast[Double ]).cast[ARRAY]
-      case _ : ArrayTag[A&Ref,        Array[A&Ref        ]] => ref    (x.cast[Array[Ref    ]],i,v.cast[Ref    ]).cast[ARRAY]
-      case _                                                => any    (x.cast[Array[A      ]],i,v              ).cast[ARRAY]
+      case _ : ArrayShape[A&Boolean.Raw,Array[A&Boolean.Raw]] => boolean(x.cast[Array[Boolean]],i,v.cast[Boolean]).cast[ARRAY]
+      case _ : ArrayShape[A&Byte.Raw,   Array[A&Byte.Raw   ]] => byte   (x.cast[Array[Byte   ]],i,v.cast[Byte   ]).cast[ARRAY]
+      case _ : ArrayShape[A&Char.Raw,   Array[A&Char.Raw   ]] => char   (x.cast[Array[Char   ]],i,v.cast[Char   ]).cast[ARRAY]
+      case _ : ArrayShape[A&Short.Raw,  Array[A&Short.Raw  ]] => short  (x.cast[Array[Short  ]],i,v.cast[Short  ]).cast[ARRAY]
+      case _ : ArrayShape[A&Int.Raw,    Array[A&Int.Raw    ]] => int    (x.cast[Array[Int    ]],i,v.cast[Int    ]).cast[ARRAY]
+      case _ : ArrayShape[A&Long.Raw,   Array[A&Long.Raw   ]] => long   (x.cast[Array[Long   ]],i,v.cast[Long   ]).cast[ARRAY]
+      case _ : ArrayShape[A&Float.Raw,  Array[A&Float.Raw  ]] => float  (x.cast[Array[Float  ]],i,v.cast[Float  ]).cast[ARRAY]
+      case _ : ArrayShape[A&Double.Raw, Array[A&Double.Raw ]] => double (x.cast[Array[Double ]],i,v.cast[Double ]).cast[ARRAY]
+      case _ : ArrayShape[A&AnyRef,     Array[A&AnyRef     ]] => anyref (x.cast[Array[AnyRef ]],i,v.cast[AnyRef ]).cast[ARRAY]
+      case _                                                  => any    (x.cast[Array[A      ]],i,v              ).cast[ARRAY]
 
   def any[A](x: Array[A], i: Int, v: A): Array[A] =
     x match
-       case x: Array[Ref]        => ref    (x,i,v)
+       case x: Array[AnyRef]     => anyref (x,i,v)
        case x: Array[Int]        => int    (x,i,v)
        case x: Array[Double]     => double (x,i,v)
        case x: Array[Long]       => long   (x,i,v)
@@ -37,7 +37,7 @@ object joinAt:
   def long   (x: Array[Long],    i: Int, v: Long)   : Array[Long]    = {val a=x.newArray(x.length+1); x.copyTo(a,0,0,i); a(i)=v; x.copyTo(a,i+1,i,x.length-i); a}
   def float  (x: Array[Float],   i: Int, v: Float)  : Array[Float]   = {val a=x.newArray(x.length+1); x.copyTo(a,0,0,i); a(i)=v; x.copyTo(a,i+1,i,x.length-i); a}
   def double (x: Array[Double],  i: Int, v: Double) : Array[Double]  = {val a=x.newArray(x.length+1); x.copyTo(a,0,0,i); a(i)=v; x.copyTo(a,i+1,i,x.length-i); a}
-  def ref    (x: Array[Ref],     i: Int, v: Ref)    : Array[Ref]     = {val a=x.newArray(x.length+1); x.copyTo(a,0,0,i); a(i)=v; x.copyTo(a,i+1,i,x.length-i); a}
+  def anyref (x: Array[AnyRef],  i: Int, v: AnyRef) : Array[AnyRef]  = {val a=x.newArray(x.length+1); x.copyTo(a,0,0,i); a(i)=v; x.copyTo(a,i+1,i,x.length-i); a}
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

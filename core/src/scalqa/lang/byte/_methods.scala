@@ -1,15 +1,25 @@
 package scalqa; package lang; package byte; import language.implicitConversions
 
-transparent trait _methods extends z.toPrimitives[Byte]:
+transparent trait _methods:
+
   extension(inline x:Byte)
-    @tn("Opt")        inline def ?                        : SELF.Opt     = x.cast[SELF.Opt]
-    @tn("range")      inline def <> (inline to: Byte)     : SELF.<>      = {val w=x; w <>= to-w+1 }
-    @tn("rangeX")     inline def <>>(inline to: Byte)     : SELF.<>      = {val w=x; w <>= to-w   }
-    @tn("rangeOfSize")inline def <>=(inline size: Int)    : SELF.<>      = new SELF.<>(x,size)
-    infix             inline def atLeast(v: Byte)         : Byte         = {val w=x; if(w>v) w else v }
-    infix             inline def atMost(v: Byte)          : Byte         = {val w=x; if(w<v) w else v }
-    /**/              inline def roundTo(inline size:Int)
-                                       (using r:Rounding) : Byte         = r(x,size.Byte)
+    @tn("Opt")        inline def ?                        : lang.Byte.Opt  = x.cast[lang.Byte.Opt]
+    @tn("range")      inline def <> (inline to: Byte)     : lang.Byte.<>   = {val w=x; w <>= to-w+1 }
+    @tn("rangeX")     inline def <>>(inline to: Byte)     : lang.Byte.<>   = {val w=x; w <>= to-w   }
+    @tn("rangeOfSize")inline def <>=(inline size: Int)    : lang.Byte.<>   = new lang.Byte.<>(x,size)
+    /**/        infix inline def max(inline v: Byte)      : Byte           = {val y=x; val w=v; if(y.real > w.real) y else w }
+    /**/        infix inline def min(inline v: Byte)      : Byte           = {val y=x; val w=v; if(y.real < w.real) y else w }
+    /**/              inline def roundTo(inline unit:Int)
+                                       (using r:Rounding) : Byte           = r(x,unit.toByte)
+
+    /**/              inline def toByte                   : Byte           = x
+    /**/              inline def toChar                   : Char           = x.cast[Char]
+    /**/              inline def toShort                  : Short          = x.cast[Short]
+    /**/              inline def toInt                    : Int            = x.cast[Int]
+    /**/              inline def toLong                   : Long           = x.cast[Long]
+    /**/              inline def toFloat                  : Float          = x.cast[Float]
+    /**/              inline def toDouble                 : Double         = x.cast[Double]
+    /**/              inline def toNumber                 : java.lang.Byte = java.lang.Byte.valueOf(x)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -49,28 +59,28 @@ ___________________________________________________________________________*/
       (5.Byte <>= 10).TP  // Prints 5 <> 14
     ```
 
-@def atLeast -> Max
+@def max -> Max value
 
     Returns maximum of current or given value
 
     ```
       val b = 5.Byte
 
-      b.atLeast(0).TP   // Prints 5
+      b.max(0).TP   // Prints 5
 
-      b.atLeast(10).TP  // Prints 10
+      b.max(10).TP  // Prints 10
     ```
 
-@def atMost -> Min
+@def min -> Min value
 
     Returns minimun of current or given value
 
     ```
       val b = 5.Byte
 
-      b.atMost(0).TP   // Prints 0
+      b.min(0).TP   // Prints 0
 
-      b.atMost(10).TP  // Prints 5
+      b.min(10).TP  // Prints 5
     ```
 
 @def roundTo -> Round to size
@@ -82,4 +92,13 @@ ___________________________________________________________________________*/
 
       91.Byte.roundTo(5)(using UP).TP  // Prints 95
     ```
+
+@def toByte    -> Make Byte        \n\n  Returns underlying value
+@def toChar    -> Make Char        \n\n  Attached Char constructor
+@def toShort   -> Make Short       \n\n  Attached Short constructor
+@def toInt     -> Make Int         \n\n  Attached Int constructor
+@def toLong    -> Make Long        \n\n  Attached Long constructor
+@def toFloat   -> Make Float       \n\n  Attached Float constructor
+@def toDouble  -> Make Double      \n\n  Attached Double constructor
+@def toNumber  -> Make Number      \n\n  Attached Number constructor
 */

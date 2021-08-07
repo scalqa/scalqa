@@ -1,9 +1,10 @@
 package scalqa; package j; package url; import language.implicitConversions
 
 import Url.Connection
+import java.net.{ URLConnection as REAL }
 
-object Connection extends Any.Ref.Custom.Type[Connection,java.net.URLConnection]("Url"):
-  inline def apply(inline v: java.net.URLConnection): Connection = v.asOpaque[Connection]
+object Connection extends AnyRef.Opaque.Base[Connection,REAL]("Url"):
+  inline def apply(inline v: REAL): Connection = v.opaque
 
   extension (inline x: Connection)
     inline def openOutput                             : J.Output       = J.Output(x.real.getOutputStream)
@@ -19,11 +20,11 @@ object Connection extends Any.Ref.Custom.Type[Connection,java.net.URLConnection]
   extension (x: Connection)
     /**/   def requestProperty(key: String)           : Pro.M[String]  = zProperty(x.real,key)
 
-  object opaque:
-    opaque type `type` <: Opaque.Ref = java.io.File & Opaque.Ref
+  object OPAQUE:
+    opaque type TYPE <: AnyRef.Opaque = java.io.File & AnyRef.Opaque
 
   // ************************************************************************************
-  private class zProperty(c: java.net.URLConnection, key: String) extends Val.Pro.M[String]:
+  private class zProperty(c: REAL, key: String) extends Val.Pro.M[String]:
     c.setDoOutput(true);
     def apply():  String  = c.getRequestProperty(key)
     def update(v: String) = c.setRequestProperty(key,v)
@@ -35,7 +36,7 @@ object Connection extends Any.Ref.Custom.Type[Connection,java.net.URLConnection]
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object opaque -> ###
+@object OPAQUE  -> ###
 
    [[J.Url.Connection]] is an opaque value, backed by java.net.URLConnection
 

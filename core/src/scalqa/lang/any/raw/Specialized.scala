@@ -1,27 +1,20 @@
 package scalqa; package lang; package any; package raw; import language.implicitConversions
 
+trait Specialized private[lang]():
+  type SPECIALIZED_FOR <: AnyVal
+
 object Specialized:
-  trait OnAnyRaw
-  trait OnBoolean extends OnAnyRaw
-  trait OnByte    extends OnAnyRaw
-  trait OnChar    extends OnAnyRaw
-  trait OnShort   extends OnAnyRaw
-  trait OnInt     extends OnAnyRaw
-  trait OnLong    extends OnAnyRaw
-  trait OnFloat   extends OnAnyRaw
-  trait OnDouble  extends OnAnyRaw
 
   @tn("get_Opt") def get_?(v: Any) : Opt[String] = v match
-    case v: OnBoolean    => "Boolean"
-    case v: OnByte       => "Byte"
-    case v: OnChar       => "Char"
-    case v: OnShort      => "Short"
-    case v: OnInt        => "Int"
-    case v: OnLong       => "Long"
-    case v: OnFloat      => "Float"
-    case v: OnDouble     => "Double"
-    case v: OnAnyRaw     => "AnyRaw"
-    case _               => \/
+    case v: Boolean.Raw.Specialized => "Boolean"
+    case v: Byte   .Raw.Specialized => "Byte"
+    case v: Char   .Raw.Specialized => "Char"
+    case v: Short  .Raw.Specialized => "Short"
+    case v: Int    .Raw.Specialized => "Int"
+    case v: Long   .Raw.Specialized => "Long"
+    case v: Float  .Raw.Specialized => "Float"
+    case v: Double .Raw.Specialized => "Double"
+    case _                          => \/
 
 
 /*___________________________________________________________________________
@@ -31,10 +24,9 @@ object Specialized:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object Specialized -> ###
+@trait Specialized -> ###
 
-  Specialized object provides a set of tags to indicate special implementations.
+  Specialized is the root of traits like: Byte.Raw.Specialized, Int.Raw.Specialized, etc., which indicate implementations with unboxed processing.
 
-  It is used primarily for documentation purposes.  Processing logic does not depend on it.
-
+  Generally, Specialized marker is for information only and is not required for processing.
 */

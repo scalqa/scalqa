@@ -3,9 +3,9 @@ package scalqa; package gen; package event; package store; import language.impli
 transparent trait _entries:
   self: Store =>
 
-  def add(typ:Ref, v:Any)             : Event.Control
-  def find_?(typ: Ref)                : Opt[Entry]    = top.find(typ).?.drop(_.isVoid)
-  def ~(typ: Ref)                     : ~[Entry]      = new zStream().TAKE(_.`type` == typ)
+  def add(typ:AnyRef, v:Any)          : Event.Control
+  def find_?(typ: AnyRef)             : Opt[Entry]    = top.find(typ).?.drop(_.isVoid)
+  def ~(typ: AnyRef)                  : ~[Entry]      = new zStream().TAKE(_.`type` == typ)
   def isEmpty                         : Boolean       = top.isVoid
   def count                           : Int           = new zStream().count
   def toText(label: Opt[String] = \/) : String        = new zStream().nonEmpty_?.map(_.zipIndex.makeString("\n")).or("empty").indent((label or "Event.Store")+": ")

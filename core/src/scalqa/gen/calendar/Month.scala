@@ -2,14 +2,14 @@ package scalqa; package gen; package calendar; import language.implicitConversio
 
 import Calendar.Month
 
-object Month extends Int.Custom.Data.Sequential[Month]("Month"):
-  /**/     def apply(year: Int, month: Int)       : Month   = (year * 12 + month - 1).asOpaque[Month]
-  /**/     def apply()                            : Month   = Day().month
-  override def tag(v: Month)                      : String  = v.year.tag + "-" + { if (v.number > 9) v.number else "0" + v.number }
-  override def isVoid(v: Month)                   : Boolean = v.real == Int.min
+object Month extends Int.Opaque.Data.Sequential[Month]("Month"):
+  /**/     def apply(year: Int, month: Int)      : Month   = (year * 12 + month - 1).opaque
+  /**/     def current                           : Month   = Day.current.month
+  override def value_tag(v: Month)               : String  = v.year.tag + "-" + { if (v.number > 9) v.number else "0" + v.number }
+  override def value_isVoid(v: Month)            : Boolean = v.real == Int.min
 
-  implicit inline def implicitRequest(inline v: \/)     : Month = Int.min.asOpaque[Month]
-  implicit inline def implicitRequest(inline v: CURRENT): Month = apply()
+  implicit inline def implicitRequest(v: \/)     : Month   = Int.min.opaque
+  implicit inline def implicitRequest(v: CURRENT): Month   = current
 
   extension (x: Month)
     inline def index     : Int      = x.real
@@ -17,11 +17,11 @@ object Month extends Int.Custom.Data.Sequential[Month]("Month"):
     inline def number    : Int      = x.real % 12 + 1
     /**/   def start     : Time     = x.days(0).start
     inline def period    : Period   = Period(x.start, x.next.start)
-    /**/   def isCurrent : Boolean  = x == Day().month
+    /**/   def isCurrent : Boolean  = x == Month.current
     /**/   def days      : Day.Idx  = new zDays(x)
 
-  object opaque:
-    opaque type `type` <: Opaque.Int = Opaque.Int
+  object OPAQUE:
+    opaque type TYPE <: Int.Opaque = Int.Opaque
 
   // ***************************************************************************************************************
   private class zDays(v: Month) extends Day.Idx:
@@ -35,21 +35,20 @@ object Month extends Int.Custom.Data.Sequential[Month]("Month"):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object opaque -> ### Calendar Month
+@object OPAQUE  -> ### Calendar Month
 
     [[Month]] is an opaque Int value, holding month index since start of 1970
 
-@def apply()  -> Current month.
-
+@def current  -> Current month.
 
 @def apply(year -> Month by year and month numbers.
 
        Note, month number is within 1 <> 12.
 
 
-@def days -> | of days.
+@def days -> Index of days.
 
-     [[!]] of all [[Day]]s for the month.
+     Index of all [[Day]]s for the month.
 
      ```
         Month(2018, 1).days.~.range.TP
@@ -70,7 +69,7 @@ ___________________________________________________________________________*/
 
 @def index -> Set sequential index.
 
-      | is calculated as: (year.number * 12 + month.number - 1)
+      Index is calculated as: (year.number * 12 + month.number - 1)
 
       ```
          Month(2018, 1).index.TP // Prints: 24216

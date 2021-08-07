@@ -49,7 +49,7 @@ object calcScope:
           if (axis.setup.side.isVertical) v.getHeight / 2 else v.getWidth / 2
         }
         if (d == min) last = sz
-        else maxReqTickGap = maxReqTickGap.atLeast(last + 6 + sz)
+        else maxReqTickGap = maxReqTickGap.max(last + 6 + sz)
         count += 1
       })
       reqLength = (count - 1) * maxReqTickGap;

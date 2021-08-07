@@ -1,38 +1,38 @@
 package scalqa; package gen; package math; import language.implicitConversions
 
-import java.math. { BigInteger => JBigInteger }
+import java.math. { BigInteger => REAL }
 import Math.BigInteger
 
-object BigInteger extends Any.Ref.Custom.Data[BigInteger,JBigInteger]("BigInteger"):
-  inline   def apply(inline v: JBigInteger) : BigInteger  = v.asOpaque[BigInteger]
-  inline   def apply(inline v: Long)        : BigInteger  = JBigInteger.valueOf(v).asOpaque[BigInteger]
-  inline   def apply(inline v: String)      : BigInteger  = JBigInteger(v).asOpaque[BigInteger]
-  override def tag(v: BigInteger)           : String      = v.real.toString
+object BigInteger extends AnyRef.Opaque.Data[BigInteger,REAL]("BigInteger"):
+  inline   def apply(inline v: REAL)   : BigInteger  = v.opaque
+  inline   def apply(inline v: Long)   : BigInteger  = REAL.valueOf(v).opaque
+  inline   def apply(inline v: String) : BigInteger  = REAL(v).opaque
+  override def value_tag(v: BigInteger): String      = v.real.toString
 
   given ordering : Ordering[BigInteger] with
-    def compare(x: BigInteger, y: BigInteger) = x.Number.compareTo(y.Number)
+    def compare(x: BigInteger, y: BigInteger) = x.toNumber.compareTo(y.toNumber)
 
-  extension(inline x: BigInteger | Long)
-    private                 inline def mkReal                            : JBigInteger    = inline x match{ case _ : Long => JBigInteger.valueOf(x.cast[Long]); case _ => x.cast[JBigInteger]}
+  extension(x: BigInteger | Long)
+    private                 inline def mkReal                            : REAL           = inline x match{ case _ : Long => REAL.valueOf(x.cast[Long]); case _ => x.cast[REAL]}
 
   extension(inline x: BigInteger)
     @tn("greater")          inline def  >  (inline v: Long | BigInteger) : Boolean        = x.real.compareTo(v.mkReal) >  0
     @tn("greaterOrEqual")   inline def  >= (inline v: Long | BigInteger) : Boolean        = x.real.compareTo(v.mkReal) >= 0
     @tn("less")             inline def  <  (inline v: Long | BigInteger) : Boolean        = x.real.compareTo(v.mkReal) <  0
     @tn("lessOrEqual")      inline def  <= (inline v: Long | BigInteger) : Boolean        = x.real.compareTo(v.mkReal) <= 0
-    @tn("plus")             inline def  +  (inline v: Long | BigInteger) : BigInteger     = x.real.add(v.mkReal).asOpaque[BigInteger]
-    @tn("minus")            inline def  -  (inline v: Long | BigInteger) : BigInteger     = x.real.subtract(v.mkReal).asOpaque[BigInteger]
-    @tn("multiply")         inline def  *  (inline v: Long | BigInteger) : BigInteger     = x.real.multiply(v.mkReal).asOpaque[BigInteger]
-    @tn("divide")           inline def  /  (inline v: Long | BigInteger) : BigInteger     = x.real.divide(v.mkReal).asOpaque[BigInteger]
-    @tn("remainder")        inline def  %  (inline v: Long | BigInteger) : BigInteger     = x.real.remainder(v.mkReal).asOpaque[BigInteger]
-    /**/                    inline def abs                               : BigInteger     = x.real.abs().asOpaque[BigInteger]
-    /**/                    inline def unary_-                           : BigInteger     = x.real.negate.asOpaque[BigInteger]
+    @tn("plus")             inline def  +  (inline v: Long | BigInteger) : BigInteger     = x.real.add(v.mkReal).opaque
+    @tn("minus")            inline def  -  (inline v: Long | BigInteger) : BigInteger     = x.real.subtract(v.mkReal).opaque
+    @tn("multiply")         inline def  *  (inline v: Long | BigInteger) : BigInteger     = x.real.multiply(v.mkReal).opaque
+    @tn("divide")           inline def  /  (inline v: Long | BigInteger) : BigInteger     = x.real.divide(v.mkReal).opaque
+    @tn("remainder")        inline def  %  (inline v: Long | BigInteger) : BigInteger     = x.real.remainder(v.mkReal).opaque
+    /**/                    inline def abs                               : BigInteger     = x.real.abs().opaque
+    /**/                    inline def unary_-                           : BigInteger     = x.real.negate.opaque
     /**/                    inline def sign                              : Int            = x.real.signum
-    /**/                    inline def Long                              : Long           = x.real.longValue
-    /**/                    inline def Number                            : JBigInteger    = x.real
+    /**/                    inline def toLong                            : Long           = x.real.longValue
+    /**/                    inline def toNumber                          : REAL           = x.real
 
-  object opaque:
-    opaque type `type` <: Opaque.Ref = JBigInteger & Opaque.Ref
+  object OPAQUE:
+    opaque type TYPE <: AnyRef.Opaque = REAL & AnyRef.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -41,7 +41,7 @@ object BigInteger extends Any.Ref.Custom.Data[BigInteger,JBigInteger]("BigIntege
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object opaque -> ### Big Integer
+@object OPAQUE  -> ### Big Integer
 
       [[BigInteger]] is an opaque value holding java.math.BigInteger
 

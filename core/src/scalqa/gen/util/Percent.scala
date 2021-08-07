@@ -2,26 +2,26 @@ package scalqa; package gen; package util; import language.implicitConversions
 
 import Gen.Percent
 
-object Percent extends Double.Custom.Data.Numerical[Percent]("Percent"):
-  /**/     inline def apply(inline v: Double)           : Percent = v.asOpaque[Percent]
-  /**/     inline def apply(value: Double, base: Double): Percent = (if (base == 0) 0D else value * 100 / base).asOpaque[Percent]
+object Percent extends Double.Opaque.Data.Numerical[Percent]("Percent"):
+  /**/     inline def apply(inline v: Double)           : Percent = v.opaque
+  /**/     inline def apply(value: Double, base: Double): Percent = (if (base == 0.0) 0.0 else value * 100.0 / base).opaque
   /**/     inline def apply(value: Number, base: Number): Percent = apply(value.doubleValue, base.doubleValue)
-  override        def isVoid(v: Percent)                : Boolean = v.real == 0D
-  override        def tag(v: Percent)                   : String  = {val l = v.Long; if(v.real==l) l.toString + "%" else v.toString + "%"}
-  implicit inline def implicitRequest(inline v: \/)     : Percent = apply(0D)
+  override        def value_isVoid(v: Percent)          : Boolean = v.real == 0.0
+  override        def value_tag(v: Percent)             : String  = {val l = v.toLong; if(v.real==l) l.toString + "%" else v.toString + "%"}
+  implicit inline def implicitRequest(v: \/)            : Percent = 0.0.opaque
 
   extension(inline x: Percent)
     /**/               inline def apply(inline nv: Int)                                         : Int    = (x.real * nv / 100.0).toInt
     /**/               inline def apply(inline nv: Long)                                        : Long   = (x.real * nv / 100.0).toLong
     /**/               inline def apply(inline nv: Float)                                       : Float  = (x.real * nv / 100.0).toFloat
     @tn("applyDouble") inline def apply(inline nv: Double)                                      : Double = (x.real * nv / 100.0)
-    /**/               inline def apply[A<:Opaque.Int]   (inline nv: A)(using inline n:Math[A]) : A      =  x(nv.cast[Int]).cast[A]
-    /**/               inline def apply[A<:Opaque.Long]  (inline nv: A)(using inline n:Math[A]) : A      =  x(nv.cast[Long]).cast[A]
-    /**/               inline def apply[A<:Opaque.Float] (inline nv: A)(using inline n:Math[A]) : A      =  x(nv.cast[Float]).cast[A]
-    /**/               inline def apply[A<:Opaque.Double](inline nv: A)(using inline n:Math[A]) : A      =  x(nv.cast[Double]).cast[A]
+    /**/               inline def apply[A<:Int.Opaque]   (inline nv: A)(using inline n:Math[A]) : A      =  x(nv.cast[Int]).cast[A]
+    /**/               inline def apply[A<:Long.Opaque]  (inline nv: A)(using inline n:Math[A]) : A      =  x(nv.cast[Long]).cast[A]
+    /**/               inline def apply[A<:Float.Opaque] (inline nv: A)(using inline n:Math[A]) : A      =  x(nv.cast[Float]).cast[A]
+    /**/               inline def apply[A<:Double.Opaque](inline nv: A)(using inline n:Math[A]) : A      =  x(nv.cast[Double]).cast[A]
 
-  object opaque:
-    opaque type `type` <: Opaque.Double = Opaque.Double
+  object OPAQUE:
+    opaque type TYPE <: Double.Opaque = Double.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -30,7 +30,7 @@ object Percent extends Double.Custom.Data.Numerical[Percent]("Percent"):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object opaque -> ###
+@object OPAQUE  -> ###
 
    [[Percent]] is an opaque Double value
 

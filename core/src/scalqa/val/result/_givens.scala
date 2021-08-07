@@ -3,15 +3,15 @@ package scalqa; package `val`; package result; import language.implicitConversio
 class _givens:
   self: Result.type =>
 
-  given givenTypeTag[A]                              : Given.TypeTag[Result[A]]       = Given.TypeTag("Result")
+  given givenTypeDef[A]                              : Given.TypeDef[Result[A]]       = Given.TypeDef("Result")
   given givenClassTag[A]  (using t: ClassTag[A])     : ClassTag[Result[A]]            = t.cast[ClassTag[Result[A]]]
   given givenCanEqualResult[A,B](using CanEqual[A,B]): CanEqual[Result[A], Result[B]] = CanEqual.derived
 
-  given givenDocTag[A](using t: Given.DocTag[A])     : Given.DocTag[Result[A]] with
-    def tag(v: Result[A]) : String   = if(v.isValue) "Result("+t.tag(v.cast[A])+")" else "Result(Problem("+v.problem.message+"))"
-    def doc(v: Result[A]) : Doc      = Doc("Result@"+v.self_^.hash)
+  given givenDocDef[A](using t: Given.DocDef[A])     : Given.DocDef[Result[A]] with
+    def value_tag(v: Result[A]) : String   = if(v.isValue) "Result("+t.value_tag(v.cast[A])+")" else "Result(Problem("+v.problem.message+"))"
+    def value_doc(v: Result[A]) : Doc      = Doc("Result@"+v.self_^.hash)
 
-  given givenFilter : Ref with
+  given givenFilter : AnyRef with
     extension[A](x: Result[A])
       inline def foreach[U](inline f: A=>U)         : Unit      = x.forval(f)
       inline def flatMap[B](inline f: A=>Result[B]) : Result[B] = x.map_??(f)

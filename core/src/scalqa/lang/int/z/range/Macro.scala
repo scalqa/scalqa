@@ -4,17 +4,17 @@ import scala.quoted.*
 
 object Macro:
 
-  inline def foreach[A<:RAW,U](inline x: g.Range[A], inline f:A=>U): Unit = ${ foreachMacro('x,'f)}
+  inline def foreach[A<:Raw,U](inline x: g.Range[A], inline f:A=>U): Unit = ${ foreachMacro('x,'f)}
 
   // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  private def foreachMacro[A<:Raw.Int:Type,U:Type](r: Expr[Int.G.<>[A]] ,f: Expr[A => U])(using Quotes): Expr[Unit] =
+  private def foreachMacro[A<:Int.Raw:Type,U:Type](r: Expr[Int.G.<>[A]] ,f: Expr[A => U])(using Quotes): Expr[Unit] =
     r match
-      case '{ new G.<>[A]($s,$to,true)  } => '{ var i=$s.real; val e=$to.real;  while(i<=e){ val r=$f(i.cast[A]); i+=1 }}
-      case '{ new G.<>[A]($s,$to,false) } => '{ var i=$s.real; val e=$to.real;  while(i< e){ val r=$f(i.cast[A]); i+=1 }}
-      case '{ new G.<>[A]($s,$sz)       } => '{ var i=$s.real; val e=i+$sz;     while(i< e){ val r=$f(i.cast[A]); i+=1 }}
+      case '{ new G.<>[A]($s,$to,true)  } => '{ var i=$s.cast[Int]; val e=$to.cast[Int];  while(i<=e){ val r=$f(i.cast[A]); i+=1 }}
+      case '{ new G.<>[A]($s,$to,false) } => '{ var i=$s.cast[Int]; val e=$to.cast[Int];  while(i< e){ val r=$f(i.cast[A]); i+=1 }}
+      case '{ new G.<>[A]($s,$sz)       } => '{ var i=$s.cast[Int]; val e=i+$sz;          while(i< e){ val r=$f(i.cast[A]); i+=1 }}
       case _                              => '{ foreachDflt($r,$f) }
 
-  inline def foreachDflt[A<:RAW,U](inline x: G.<>[A], inline f:A=>U): Unit = { val v=x; var i=v.start.real; val e=v.endX.real; while(i<e){ val r=f(i.cast[A]); i+=1 }}
+  inline def foreachDflt[A<:Raw,U](inline x: G.<>[A], inline f:A=>U): Unit = { val v=x; var i=v.start.cast[Int]; val e=v.endX.cast[Int]; while(i<e){ val r=f(i.cast[A]); i+=1 }}
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

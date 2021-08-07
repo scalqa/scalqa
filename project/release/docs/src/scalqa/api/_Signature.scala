@@ -5,6 +5,7 @@ trait _Signature:
   extension (x: Signature)
     def tag               : String      = x.map{case s: String => s; case l: Link => l.dri.label}.~.makeString()
 
+
     def dropPrivate       : Signature   =
       var p   = false
       var in  = 0
@@ -15,3 +16,16 @@ trait _Signature:
       while(seq.nonEmpty && seq.last.?.takeType[String].take(_.trim in ("extends","with"))) seq = seq.dropRight(1)
       //if(x.exists{case v: String => false; case v: Link => v.isPrivate}) ("----------------------------------\n" + x.tag +" \n" + seq.~.toSeq.tag +" \n" + seq.size + "\n" + x.~.makeString("|") + "\n" + seq.~.makeString("|")).tp
       seq.~.toSeq
+
+
+    def dropOPAQUE : Signature   =
+      def s = x.~.map{case l: Link => l.name.trim; case v => v.toString.trim}.dropVoid
+
+      if(!s.equalsStart(_Signature.OPAQUE)) x
+      else x.drop(x.~.findPosition_?(_.toString.trim == "]").map(_ + 1) or 0)
+
+
+object _Signature:
+
+  val OPAQUE = String.><("[", "THIS_OPAQUE", "<:" /*, "Opaque"*/)
+

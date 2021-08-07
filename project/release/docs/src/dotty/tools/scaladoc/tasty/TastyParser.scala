@@ -148,12 +148,14 @@ case class ScaladocTastyInspector()(using ctx: DocContext) extends DocTastyInspe
     val filePaths = ctx.args.tastyFiles.map(_.getAbsolutePath).toList
     val classpath = ctx.args.classpath.split(java.io.File.pathSeparator).toList
 
-    println("Tasty Parsing...")
+    import scalqa.{*,given}
+    println("Tasty Parsing... " + filePaths.size + " " + classpath.size)
 
     if filePaths.nonEmpty then inspectFilesInContext(classpath, filePaths)
 
-    import scalqa.{*,given}
     val all = topLevels.result().filterNot(_._2.dri.isPrivate)
+
+    println("Tasty Parsed: " + all.size)
 
     all.groupBy(_._1).map { case (pckName, members) =>
       val (pcks, rest) = members.map(_._2).partition(_.kind == Kind.Package)

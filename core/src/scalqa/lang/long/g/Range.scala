@@ -1,13 +1,13 @@
 package scalqa; package lang; package long; package g; import language.implicitConversions
 
-class Range[A<:RAW](_start: A, e: A, eIn: Boolean) extends Val.<>[A] with Able.~[A] with any.raw.Specialized.OnLong:
+class Range[A<:Raw](_start: A, e: A, eIn: Boolean) extends Val.<>[A] with Able.~[A] with Raw.Specialized:
   type THIS_TYPE = Range[A]
   final             def start                           : A             = _start
   final             def end                             : A             = e
   final             def endIsIn                         : Boolean       = eIn
   final             def ordering                        : G.Ordering[A] = Long.ordering.cast[G.Ordering[A]]
-  @tn("stream")     def ~                               : Stream[A]     = Z.Stream_fromRange(_start,e+eIn.Int,1)
-  @tn("step_Stream")def step_~(step: A)                 : Stream[A]     = Z.Stream_fromRange(_start,e+eIn.Int,step.real)
+  @tn("stream")     def ~                               : Stream[A]     = Z.Stream_fromRange(_start,e+eIn.toInt,1)
+  @tn("step_Stream")def step_~(step: A)                 : Stream[A]     = Z.Stream_fromRange(_start,e+eIn.toInt,step.real)
   override          def contains(v: A)                  : Boolean       = _start <= v && v <* (true,e,eIn)
   /**/              def contains(r: Range[A])           : Boolean       = _contains(r.start,r.end,r.endIsIn)
   override          def contains(r: Val.<>[A])          : Boolean       = _contains(r.start,r.end,r.endIsIn)
@@ -29,14 +29,14 @@ class Range[A<:RAW](_start: A, e: A, eIn: Boolean) extends Val.<>[A] with Able.~
     private inline def *>(inline xIn: Boolean, v:A, inline vIn:Boolean): Boolean = x > v || ( xIn && !vIn) && x==v
 
 object Range:
-  implicit inline def implicitToStream[A<:RAW](inline v: Range[A]) : ~[A] = v.~
+  implicit inline def implicitToStream[A<:Raw](inline v: Range[A]) : ~[A] = v.~
 
   // ------------------------------------------------------------------------------------------------------------------------------------------
-  extension[A<:RAW,T,STM<: ~~.AnyType[T]](inline x: Range[A])
-    /**/                                  inline def map    [B>:T](inline f:A=> B)   (using inline t: Given.StreamTag[B,STM]): STM       = g.Stream.map[A,T,STM](x.~)[B](f)(using t)
-    /**/                                  inline def flatMap[B>:T](inline f:A=> ~[T])(using inline t: Given.StreamTag[B,STM]): STM       = g.Stream.flatMap[A,T,STM](x.~)[B](f)(using t)
-  extension[A<:RAW]  (inline x: Range[A]) inline def withFilter(inline f: Fun.Filter[A])                                    : Stream[A] = x.~.take(f)
-  extension[A<:RAW,U](inline x: Range[A]) inline def foreach(   inline f: Fun.Consume[A,U])                                 : Unit      = {var i=x.start.real; val e=x.end.real+x.endIsIn.Int; while(i<e){f(i.cast[A]); i+=1L}}
+  extension[A<:Raw,T,STM<: ~~.AnyType[T]](inline x: Range[A])
+    /**/                                  inline def map    [B>:T](inline f:A=> B)   (using inline t: Given.StreamShape[B,STM]): STM       = g.Stream.map[A,T,STM](x.~)[B](f)(using t)
+    /**/                                  inline def flatMap[B>:T](inline f:A=> ~[T])(using inline t: Given.StreamShape[B,STM]): STM       = g.Stream.flatMap[A,T,STM](x.~)[B](f)(using t)
+  extension[A<:Raw]  (inline x: Range[A]) inline def withFilter(inline f: Fun.Filter[A])                                       : Stream[A] = x.~.take(f)
+  extension[A<:Raw,U](inline x: Range[A]) inline def foreach(   inline f: Fun.Consume[A,U])                                    : Unit      = {var i=x.start.real; val e=x.end.real+x.endIsIn.toInt; while(i<e){f(i.cast[A]); i+=1L}}
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

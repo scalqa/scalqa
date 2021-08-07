@@ -1,38 +1,38 @@
 package scalqa; package lang; package array; package z; import language.implicitConversions
 
 import stream.As
-import gen.`given`.StreamTag
+import gen.`given`.StreamShape
 
 object Stream:
 
-  inline def apply[A,STREAM<: ~~.AnyType[A]](inline x:Array[A], inline t: StreamTag[A,STREAM]): STREAM & Able.Size =
+  inline def apply[A,STREAM<: ~~.AnyType[A]](inline x:Array[A], inline t: StreamShape[A,STREAM]): STREAM & Able.Size =
     inline t match
-      case _ : StreamTag[A&Raw.Boolean,Boolean.G.~[A&Raw.Boolean]] => As.Booleans(x.cast[Array[Boolean]]).cast[STREAM & Able.Size]
-      case _ : StreamTag[A&Raw.Byte,   Byte   .G.~[A&Raw.Byte   ]] => As.Bytes   (x.cast[Array[Byte   ]]).cast[STREAM & Able.Size]
-      case _ : StreamTag[A&Raw.Char,   Char   .G.~[A&Raw.Char   ]] => As.Chars   (x.cast[Array[Char   ]]).cast[STREAM & Able.Size]
-      case _ : StreamTag[A&Raw.Short,  Short  .G.~[A&Raw.Short  ]] => As.Shorts  (x.cast[Array[Short  ]]).cast[STREAM & Able.Size]
-      case _ : StreamTag[A&Raw.Int,    Int    .G.~[A&Raw.Int    ]] => As.Ints    (x.cast[Array[Int    ]]).cast[STREAM & Able.Size]
-      case _ : StreamTag[A&Raw.Long,   Long   .G.~[A&Raw.Long   ]] => As.Longs   (x.cast[Array[Long   ]]).cast[STREAM & Able.Size]
-      case _ : StreamTag[A&Raw.Float,  Float  .G.~[A&Raw.Float  ]] => As.Floats  (x.cast[Array[Float  ]]).cast[STREAM & Able.Size]
-      case _ : StreamTag[A&Raw.Double, Double .G.~[A&Raw.Double ]] => As.Doubles (x.cast[Array[Double ]]).cast[STREAM & Able.Size]
-      case _ : StreamTag[A&Ref,                  ~[A&Ref        ]] => As.Refs    (x.cast[Array[Ref    ]]).cast[STREAM & Able.Size]
+      case _ : StreamShape[A&Boolean.Raw,Boolean.G.~[A&Boolean.Raw]] => As.Booleans(x.cast[Array[Boolean]]).cast[STREAM & Able.Size]
+      case _ : StreamShape[A&Byte.Raw,   Byte   .G.~[A&Byte.Raw   ]] => As.Bytes   (x.cast[Array[Byte   ]]).cast[STREAM & Able.Size]
+      case _ : StreamShape[A&Char.Raw,   Char   .G.~[A&Char.Raw   ]] => As.Chars   (x.cast[Array[Char   ]]).cast[STREAM & Able.Size]
+      case _ : StreamShape[A&Short.Raw,  Short  .G.~[A&Short.Raw  ]] => As.Shorts  (x.cast[Array[Short  ]]).cast[STREAM & Able.Size]
+      case _ : StreamShape[A&Int.Raw,    Int    .G.~[A&Int.Raw    ]] => As.Ints    (x.cast[Array[Int    ]]).cast[STREAM & Able.Size]
+      case _ : StreamShape[A&Long.Raw,   Long   .G.~[A&Long.Raw   ]] => As.Longs   (x.cast[Array[Long   ]]).cast[STREAM & Able.Size]
+      case _ : StreamShape[A&Float.Raw,  Float  .G.~[A&Float.Raw  ]] => As.Floats  (x.cast[Array[Float  ]]).cast[STREAM & Able.Size]
+      case _ : StreamShape[A&Double.Raw, Double .G.~[A&Double.Raw ]] => As.Doubles (x.cast[Array[Double ]]).cast[STREAM & Able.Size]
+      case _ : StreamShape[A&AnyRef,               ~[A&AnyRef     ]] => As.Refs    (x.cast[Array[AnyRef ]]).cast[STREAM & Able.Size]
       case _                                                       => any(x,\/).cast[STREAM & Able.Size]
 
-  inline def apply[A,STREAM<: ~~.AnyType[A]](inline x:Array[A], sz: Int, inline t: StreamTag[A,STREAM]): STREAM & Able.Size =
+  inline def apply[A,STREAM<: ~~.AnyType[A]](inline x:Array[A], sz: Int, inline t: StreamShape[A,STREAM]): STREAM & Able.Size =
     inline t match
-      case _ : StreamTag[A&Raw.Boolean,Boolean.G.~[A&Raw.Boolean]] => As.Booleans(x.cast[Array[Boolean]],sz).cast[STREAM & Able.Size]
-      case _ : StreamTag[A&Raw.Byte,   Byte   .G.~[A&Raw.Byte   ]] => As.Bytes   (x.cast[Array[Byte   ]],sz).cast[STREAM & Able.Size]
-      case _ : StreamTag[A&Raw.Char,   Char   .G.~[A&Raw.Char   ]] => As.Chars   (x.cast[Array[Char   ]],sz).cast[STREAM & Able.Size]
-      case _ : StreamTag[A&Raw.Short,  Short  .G.~[A&Raw.Short  ]] => As.Shorts  (x.cast[Array[Short  ]],sz).cast[STREAM & Able.Size]
-      case _ : StreamTag[A&Raw.Int,    Int    .G.~[A&Raw.Int    ]] => As.Ints    (x.cast[Array[Int    ]],sz).cast[STREAM & Able.Size]
-      case _ : StreamTag[A&Raw.Long,   Long   .G.~[A&Raw.Long   ]] => As.Longs   (x.cast[Array[Long   ]],sz).cast[STREAM & Able.Size]
-      case _ : StreamTag[A&Raw.Float,  Float  .G.~[A&Raw.Float  ]] => As.Floats  (x.cast[Array[Float  ]],sz).cast[STREAM & Able.Size]
-      case _ : StreamTag[A&Raw.Double, Double .G.~[A&Raw.Double ]] => As.Doubles (x.cast[Array[Double ]],sz).cast[STREAM & Able.Size]
-      case _ : StreamTag[A&Ref,                  ~[A&Ref        ]] => As.Refs    (x.cast[Array[Ref    ]],sz).cast[STREAM & Able.Size]
+      case _ : StreamShape[A&Boolean.Raw,Boolean.G.~[A&Boolean.Raw]] => As.Booleans(x.cast[Array[Boolean]],sz).cast[STREAM & Able.Size]
+      case _ : StreamShape[A&Byte.Raw,   Byte   .G.~[A&Byte.Raw   ]] => As.Bytes   (x.cast[Array[Byte   ]],sz).cast[STREAM & Able.Size]
+      case _ : StreamShape[A&Char.Raw,   Char   .G.~[A&Char.Raw   ]] => As.Chars   (x.cast[Array[Char   ]],sz).cast[STREAM & Able.Size]
+      case _ : StreamShape[A&Short.Raw,  Short  .G.~[A&Short.Raw  ]] => As.Shorts  (x.cast[Array[Short  ]],sz).cast[STREAM & Able.Size]
+      case _ : StreamShape[A&Int.Raw,    Int    .G.~[A&Int.Raw    ]] => As.Ints    (x.cast[Array[Int    ]],sz).cast[STREAM & Able.Size]
+      case _ : StreamShape[A&Long.Raw,   Long   .G.~[A&Long.Raw   ]] => As.Longs   (x.cast[Array[Long   ]],sz).cast[STREAM & Able.Size]
+      case _ : StreamShape[A&Float.Raw,  Float  .G.~[A&Float.Raw  ]] => As.Floats  (x.cast[Array[Float  ]],sz).cast[STREAM & Able.Size]
+      case _ : StreamShape[A&Double.Raw, Double .G.~[A&Double.Raw ]] => As.Doubles (x.cast[Array[Double ]],sz).cast[STREAM & Able.Size]
+      case _ : StreamShape[A&AnyRef,               ~[A&AnyRef     ]] => As.Refs    (x.cast[Array[AnyRef ]],sz).cast[STREAM & Able.Size]
       case _                                                       => any(x,\/).cast[STREAM & Able.Size]
 
   def any[A](x:Array[A], sz:Int.Opt) : ~[A] & Able.Size = x match
-    case x: Array[Ref]      => As.Refs    (x,sz or x.length)
+    case x: Array[AnyRef]   => As.Refs    (x,sz or x.length)
     case x: Array[Int]      => As.Ints    (x,sz or x.length).cast[~[A] & Able.Size]
     case x: Array[Long]     => As.Longs   (x,sz or x.length).cast[~[A] & Able.Size]
     case x: Array[Double]   => As.Doubles (x,sz or x.length).cast[~[A] & Able.Size]

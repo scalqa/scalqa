@@ -8,7 +8,7 @@ trait Control:
   def cancelIf(b: () => Boolean)    : Control
   def cancelIfTrue(b: => Boolean)   : Control     = cancelIf(() => b)
   def cancelIfFalse(b: => Boolean)  : Control     = cancelIf(() => !b)
-  def removeHardReference           : Any.Ref
+  def removeHardReference           : AnyRef
   def expireIn(tl: Time.Length)     : Control     = { val t = System.nanoTime + tl.nanosTotal; cancelIf(() => System.nanoTime > t) }
   def limitRunsTo(maxRunCount: Int) : Control     = { if (maxRunCount <= 0) { cancel; this } else { var c = 0; cancelIf(() => maxRunCount < { c += 1; c }) }}
 

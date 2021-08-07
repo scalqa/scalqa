@@ -25,20 +25,20 @@ Let's create an example of data element 'Price', which would be based on a Float
 
 He is the definition part (available in [samples](https://github.com/scalqa/samples/blob/master/src/example/data/PriceData.scala)):
 ```
-type  Price = Price.opaque.`type`
+type  Price = Price.OPAQUE.TYPE
 
 extension (inline x: Double) inline def Dollars : Price = Price(x.Float)
 
-object Price extends Float.Custom.Data.Numerical[Price]("Price"):
-  inline   def apply(inline v: Float): Price  = v.asOpaque[Price]
+object Price extends Float.Opaque.Data.Numerical[Price]("Price"):
+  inline   def apply(inline v: Float): Price  = v.opaque
   override def tag(v:Price)          : String =  "$"+v.roundTo(0.01.Dollars).toString
 
   extension (x: Price)
-    def discount(p: Percent): Price   = x - p(x)
+    def discount(p: Percent): Price   = (x.real - p(x.real)).opaque
     def isNotExpensive      : Boolean = x < 100
 
-  object opaque:
-    opaque type `type` <: Any.Opaque.Float = Any.Opaque.Float
+  object OPAQUE:
+    opaque type TYPE <: Float.Opaque = Float.Opaque
 
 ```
 Let's explain the above line by line.  
@@ -55,11 +55,11 @@ Extension creates a Double method Price constructor. This is an optional conveni
 Double constructor will cover all primitives. 
 
 ```  
-object Price extends Float.Custom.Data.Numerical[Price]("Price"):
+object Price extends Float.Opaque.Data.Numerical[Price]("Price"):
 ```  
 Object Price extends not only `Float.Custom.Data`, which would be sufficient to create a data element.
 Price extends `Float.Custom.Data.Numerical`, which adds Float like behaviour with a set of 
-[default methods](../../api/scalqa/lang/float/custom/data/Numerical$$_methods.html) provided. For example:
+[default methods](../../api/scalqa/lang/float/opaque/data/Numerical$$_methods.html) provided. For example:
 ```
 var p: Price = 19.99.Dollars
 
@@ -72,14 +72,15 @@ p = 12.0F                     // FAILS to compile, Price is NOT a Float
 All the above operations are inlined and are as efficient, as if they were performed on Float value.
 
 ```
-inline   def apply(inline v: Float): Price  = v.asOpaque[Price]
+inline   def apply(inline v: Float): Price  = v.opaque
 ```
-This is a standard constructor, which is inlined and does not have any overhead.
+This is a standard constructor, which is inlined and does not have any overhead. The method `.opaque` is attached 
+to base type within Data definition scope. 
 
 ```
-override def tag(v:Price)           : String =  "$"+v.roundTo(0.01.Dollars).toString
+override def value_tag(v:Price)           : String =  "$"+v.roundTo(0.01.Dollars).toString
 ```
-The `tag` is the new `.toString`. Here we define what the universal `.tag` method on type Price will return. If this method is
+The `value_tag` is the new `.toString`. Here we define what the universal `.tag` method on type Price will return. If this method is
 not overridden, the default behavior would convert Float toString.  
 
 ```
@@ -88,10 +89,10 @@ extension (x: Price)
 The extension section is where custom Price methods are defined. 
 
 ```
-object opaque:   
+object OPAQUE:   
 ```
-The type definition must be inside another object to allow `inline` definitions in parent scope (this is a Scala3 limitation to go around).  
-
+The type definition must be inside another object to allow `inline` methods in parent scope. This is a Scala3 limitation to go around.
+Starting version 3.0.2 Scala will allow mixing `inline` with `opaque`, but Scalqa definitions will probably stay the same.  
 
 ## Use
 

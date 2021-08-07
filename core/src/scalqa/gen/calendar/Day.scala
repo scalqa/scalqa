@@ -2,32 +2,32 @@
 
 import Calendar.Day
 
-object Day extends Int.Custom.Data.Sequential[Day]("Day"):
-  inline   def byIndex(epochDay: Int)                 : Day                   = epochDay.asOpaque[Day]
-  /**/     def apply()                                : Day                   = z.day.current
-  /**/     def apply(year: Int, month: Int, day: Int) : Day                   = java.time.LocalDate.of(year, month, day).toEpochDay.toInt.asOpaque[Day]
+object Day extends Int.Opaque.Data.Sequential[Day]("Day"):
+  inline   def byIndex(epochDay: Int)                 : Day                   = epochDay.opaque
+  /**/     def current                                : Day                   = z.day.current
+  /**/     def apply(year: Int, month: Int, day: Int) : Day                   = java.time.LocalDate.of(year, month, day).toEpochDay.toInt.opaque
   /**/     def apply(m: Month, day: Int)              : Day                   = apply(m.year.number, m.number, day)
   /**/     def unapply(v: Day)                        : Option[(Int,Int,Int)] = Some((v.year.number,v.month.number,v.number))
-  override def tag(v:Day)                             : String                = v.month.tag + "-" + { val s = v.number.toString; if (s.length < 2) "0" + s else s }
-  override def isVoid(v: Day)                         : Boolean               = v.real == Int.min
+  override def value_tag(v:Day)                       : String                = v.month.tag + "-" + { val s = v.number.toString; if (s.length < 2) "0" + s else s }
+  override def value_isVoid(v: Day)                   : Boolean               = v.real == Int.min
 
-  implicit inline def implicitRequest(inline v: \/)     : Day          = Int.min.asOpaque[Day]
-  implicit inline def implicitRequest(inline v: CURRENT): Day          = apply()
+  implicit inline def implicitRequest(v: \/)          : Day                   = Int.min.opaque
+  implicit inline def implicitRequest(v: CURRENT)     : Day                   = current
 
   extension (x: Day)
-    /**/      inline def index             : Int      = x.real
-    /**/             def number            : Int      = z.day.setup(x).number
-    /**/             def week              : Week     = Week.byIndex(x.real / 7)
-    /**/             def month             : Month    = z.day.setup(x).month
-    /**/             def year              : Year     = z.day.setup(x).year
-    /**/             def weekDay           : Week.Day = Week.Day.><(((Int.max - 5L + x.real) % 7).Int)
-    /**/      inline def isCurrent         : Boolean  = x == Day()
-    /**/      inline def period            : Period   = Period(x.start, x.next.start)
-    @tn("and")inline def &(l: Time.Length) : Time     = Time(x, l)
-    /**/             def start             : Time     = z.day.setup(x).start
+    /**/      inline def index                   : Int      = x.real
+    /**/             def number                  : Int      = z.day.setup(x).number
+    /**/             def week                    : Week     = Week.byIndex(x.real / 7)
+    /**/             def month                   : Month    = z.day.setup(x).month
+    /**/             def year                    : Year     = z.day.setup(x).year
+    /**/             def weekDay                 : Week.Day = Week.Day.><(((Int.max - 5L + x.real) % 7).toInt)
+    /**/      inline def isCurrent               : Boolean  = x == Day.current
+    /**/      inline def period                  : Period   = Period(x.start, x.next.start)
+    @tn("and")inline def &(inline l: Time.Length): Time     = Time(x, l)
+    /**/             def start                   : Time     = z.day.setup(x).start
 
-  object opaque:
-    opaque type `type` <: Opaque.Int = Opaque.Int
+  object OPAQUE:
+    opaque type TYPE <: Int.Opaque = Int.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -36,7 +36,7 @@ object Day extends Int.Custom.Data.Sequential[Day]("Day"):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object opaque -> ### Calendar Date
+@object OPAQUE  -> ### Calendar Date
 
        [[Day]] is an opaque Int value, holding day index since start of 1970
 

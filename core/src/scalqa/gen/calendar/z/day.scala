@@ -2,12 +2,14 @@ package scalqa; package gen; package calendar; package z; import language.implic
 
 private[calendar] object day:
   private var lookup       : Day.Lookup.Stable[Setup] = \/
-  private var currentDay   : Day                      = Time().day
+  private var currentDay   : Day                      = Time.current.day
   private var nextDayStart : Time                     = currentDay.next.start
 
   def current: Day =
-    val t = Time()
-    if (t >= nextDayStart) { currentDay = t.day; nextDayStart = currentDay.next.start }
+    val t = Time.current
+    if (t >= nextDayStart)
+      currentDay = t.day
+      nextDayStart = currentDay.next.start
     currentDay
 
   def setup(d: Day): Setup =

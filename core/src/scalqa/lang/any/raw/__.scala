@@ -1,17 +1,9 @@
 package scalqa; package lang; package any; import language.implicitConversions
 
 object Raw:
-  type Boolean  = scala.Boolean | Opaque.Boolean
-  type Byte     = scala.Byte    | Opaque.Byte
-  type Char     = scala.Char    | Opaque.Char
-  type Short    = scala.Short   | Opaque.Short
-  type Int      = scala.Int     | Opaque.Int
-  type Long     = scala.Long    | Opaque.Long
-  type Float    = scala.Float   | Opaque.Float
-  type Double   = scala.Double  | Opaque.Double
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  transparent inline def Specialized = raw.Specialized
+  type Specialized = raw.Specialized; transparent inline def Specialized = raw.Specialized
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -22,8 +14,10 @@ ___________________________________________________________________________*/
 /**
 @object Raw -> ###
 
-  Raw type is an alias for scala.AnyVal
-
-  Raw object contains all root raw types, which are based on Java primitive values
+  Any.Raw type is defined as
+  ```
+  object Any:
+    type Raw = Boolean.Raw | Byte.Raw | Char.Raw | Short.Raw | Int.Raw | Long.Raw | Float.Raw | Double.Raw
+  ```
 
 */

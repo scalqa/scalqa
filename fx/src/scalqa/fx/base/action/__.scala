@@ -36,7 +36,7 @@ object Action:
   def apply(label: String)                                : Action            = new Action(label)
 
   implicit inline def implicitFromNode(v: Fx.Node)        : Action            = apply(v)
-  implicit inline def implicitRequest(inline v: SEPARATOR): Action            = apply(v)
+  implicit inline def implicitRequest(v: SEPARATOR)       : Action            = apply(v)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Event    = action.Event;     transparent inline def Event = action.Event

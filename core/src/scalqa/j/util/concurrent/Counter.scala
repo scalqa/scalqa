@@ -3,17 +3,17 @@ package scalqa; package j; package util; package concurrent
 import java.util.concurrent.atomic.AtomicLong
 import Concurrent.Counter
 
-object Counter extends Any.Ref.Custom.Type[Counter,AtomicLong]("Concurrent.Counter"):
-  def apply(initValue : Long = 0): Counter = new AtomicLong(initValue).asOpaque[Counter]
+object Counter extends AnyRef.Opaque.Base[Counter,AtomicLong]("Concurrent.Counter"):
+  def apply(initValue : Long = 0): Counter = new AtomicLong(initValue).opaque
 
   extension(inline x: Counter)
     inline def get      : Int     = x.cast[AtomicLong].intValue
-    inline def next     : Int     = x.cast[AtomicLong].incrementAndGet.Int
+    inline def next     : Int     = x.cast[AtomicLong].incrementAndGet.toInt
     inline def getLong  : Long    = x.cast[AtomicLong].longValue
     inline def nextLong : Long    = x.cast[AtomicLong].incrementAndGet
 
-  object opaque:
-    opaque type `type` <: Opaque.Ref = AtomicLong & Opaque.Ref
+  object OPAQUE:
+    opaque type TYPE <: AnyRef.Opaque = AtomicLong & AnyRef.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

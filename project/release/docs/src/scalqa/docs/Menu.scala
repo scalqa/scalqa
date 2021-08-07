@@ -31,10 +31,10 @@ object Menu:
       def linkHtml(expanded: Boolean = false) =
         val attrs = if (isSelected) Seq(cls := "selected expanded") else Nil
         var dri = if(isSelected && id==module.main.id) module.dri2 else module.dri
-        var str : String = l.pathToPage(link.dri, dri).replace("$$opaque$","")
-        Seq(a(href := str, attrs)(module.name.^.reviseIf(_ == "scalqa", _ => "API")))
+        var str : String = l.pathToPage(link.dri, dri).replace("$$OPAQUE$","")
+        Seq(a(href := str, attrs)(module.name.^.reviseIf(_ == "scalqa", _ => "API").^.reviseIf(_.startsWith("_"), v => v.takeFirst(2).lower + v.dropFirst(2))))
 
-      module.children.^.as(l =>
+      module.children.^.to(l =>
         if(l.isEmpty) (isSelected -> div(linkHtml()))
         else
           val nested   = l.~.map(renderApi).toList

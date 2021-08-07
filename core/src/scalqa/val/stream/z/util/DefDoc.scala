@@ -1,8 +1,8 @@
 package scalqa; package `val`; package stream; package z; package util; import language.implicitConversions
 
-class DocTag[A](using t: Given.DocTag[A]) extends Given.DocTag[~[A]]:
-  def tag(v: ~[A]) : String   = "~(" + v.makeString(", ") + ")"
-  def doc(v: ~[A]) : Doc      = Able.Doc.doc_?(v) or z.util.MultiDoc(v)
+class DocDef[A](using t: Given.DocDef[A]) extends Given.DocDef[~[A]]:
+  def value_tag(v: ~[A]) : String   = "~(" + v.makeString(", ") + ")"
+  def value_doc(v: ~[A]) : Doc      = Able.Doc.doc_?(v) or z.util.MultiDoc(v)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

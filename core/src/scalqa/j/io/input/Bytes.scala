@@ -1,20 +1,21 @@
 package scalqa; package j; package io; package input; import language.implicitConversions
 
 import Input.Bytes
+import java.io.{ InputStream as REAL }
 
-object Bytes extends Any.Ref.Custom.Type[Bytes, java.io.InputStream]("Io.Input.Bytes"):
-  inline def apply(inline v: Io.Input): Bytes = v.real.asOpaque[Bytes]
+object Bytes extends AnyRef.Opaque.Base[Bytes, REAL]("Io.Input.Bytes"):
+  inline def apply(inline v: Io.Input): Bytes = v.real.opaque
 
   extension(inline x: Bytes)
     /**/            inline def read                                                        : Int         = x.real.read
     /**/            inline def read(inline ba: Array[Byte])                                : Int         = x.real.read(ba)
     /**/            inline def read(inline ba: Array[Byte], inline from:Int,inline sz:Int) : Int         = x.real.read(ba, from, sz)
-    @tn("read_Opt") inline def read_?                                                      : Byte.Opt    = { val i = x.read; if (i < 0) \/ else (i - Byte.min).Byte }
+    @tn("read_Opt") inline def read_?                                                      : Byte.Opt    = { val i = x.read; if (i < 0) \/ else (i - Byte.min).toByte }
     /**/            inline def readAll                                                     : Array[Byte] = Z.toByteArray(x)
     /**/            inline def readAllAndClose                                             : Array[Byte] = x.readAll.^(_ => x.close)
 
-  object opaque:
-    opaque type `type` <: java.io.Closeable & Opaque.Ref = java.io.InputStream & Opaque.Ref
+  object OPAQUE:
+    opaque type TYPE <: java.io.Closeable & AnyRef.Opaque = REAL & AnyRef.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -23,7 +24,7 @@ object Bytes extends Any.Ref.Custom.Type[Bytes, java.io.InputStream]("Io.Input.B
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object opaque -> ###
+@object OPAQUE  -> ###
 
    [[J.Input.Bytes]] is an opaque value, backed by java.io.InputStream
 

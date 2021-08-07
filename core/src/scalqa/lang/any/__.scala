@@ -2,9 +2,12 @@ package scalqa; package lang; import language.implicitConversions
 
 object Any:
   type _methods  = any._methods
-  type Opaque;                        transparent inline def Opaque      = any.Opaque
-  type Ref         = scala.AnyRef;    transparent inline def Ref         = any.Ref
-  type Raw         = scala.AnyVal;    transparent inline def Raw         = any.Raw
+
+  transparent inline def Opaque      = any.Opaque
+  type Opaque    = AnyRef.Opaque | Boolean.Opaque | Byte.Opaque | Char.Opaque | Short.Opaque | Int.Opaque | Long.Opaque | Float.Opaque | Double.Opaque
+
+  transparent inline def Raw         = any.Raw
+  type Raw       = Boolean.Raw | Byte.Raw | Char.Raw | Short.Raw | Int.Raw | Long.Raw | Float.Raw | Double.Raw
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

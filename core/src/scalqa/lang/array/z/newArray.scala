@@ -1,20 +1,20 @@
 package scalqa; package lang; package array; package z; import language.implicitConversions
 
-import gen.`given`.ArrayTag
+import gen.`given`.ArrayShape
 
 object newArray:
 
-  inline def apply[A,ARRAY<:Array.AnyType[A]](inline x: ARRAY, inline sz: Int, inline t: ArrayTag[A,ARRAY]): ARRAY =
+  inline def apply[A,ARRAY<:Array.AnyType[A]](inline x: ARRAY, inline sz: Int, inline t: ArrayShape[A,ARRAY]): ARRAY =
     inline t match
-              case _ : ArrayTag[A&Raw.Boolean,Array[A&Raw.Boolean]] => new Array[Boolean](sz).cast[ARRAY]
-              case _ : ArrayTag[A&Raw.Byte,   Array[A&Raw.Byte   ]] => new Array[Byte](sz).cast[ARRAY]
-              case _ : ArrayTag[A&Raw.Char,   Array[A&Raw.Char   ]] => new Array[Char](sz).cast[ARRAY]
-              case _ : ArrayTag[A&Raw.Short,  Array[A&Raw.Short  ]] => new Array[Short](sz).cast[ARRAY]
-              case _ : ArrayTag[A&Raw.Int,    Array[A&Raw.Int    ]] => new Array[Int](sz).cast[ARRAY]
-              case _ : ArrayTag[A&Raw.Long,   Array[A&Raw.Long   ]] => new Array[Long](sz).cast[ARRAY]
-              case _ : ArrayTag[A&Raw.Float,  Array[A&Raw.Float  ]] => new Array[Float](sz).cast[ARRAY]
-              case _ : ArrayTag[A&Raw.Double, Array[A&Raw.Double ]] => new Array[Double](sz).cast[ARRAY]
-              case _                                                => java.lang.reflect.Array.newInstance(x.getClass().getComponentType(), sz).cast[ARRAY]
+              case _ : ArrayShape[A&Boolean.Raw,Array[A&Boolean.Raw]] => new Array[Boolean](sz).cast[ARRAY]
+              case _ : ArrayShape[A&Byte.Raw,   Array[A&Byte.Raw   ]] => new Array[Byte   ](sz).cast[ARRAY]
+              case _ : ArrayShape[A&Char.Raw,   Array[A&Char.Raw   ]] => new Array[Char   ](sz).cast[ARRAY]
+              case _ : ArrayShape[A&Short.Raw,  Array[A&Short.Raw  ]] => new Array[Short  ](sz).cast[ARRAY]
+              case _ : ArrayShape[A&Int.Raw,    Array[A&Int.Raw    ]] => new Array[Int    ](sz).cast[ARRAY]
+              case _ : ArrayShape[A&Long.Raw,   Array[A&Long.Raw   ]] => new Array[Long   ](sz).cast[ARRAY]
+              case _ : ArrayShape[A&Float.Raw,  Array[A&Float.Raw  ]] => new Array[Float  ](sz).cast[ARRAY]
+              case _ : ArrayShape[A&Double.Raw, Array[A&Double.Raw ]] => new Array[Double ](sz).cast[ARRAY]
+              case _                                                  => java.lang.reflect.Array.newInstance(x.getClass().getComponentType(), sz).cast[ARRAY]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

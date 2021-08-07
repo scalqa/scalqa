@@ -3,33 +3,33 @@ package scalqa; package lang; package int; package z; import language.implicitCo
 object Math extends g.Math[Int] with math.Numeric.IntIsIntegral with ~~.Custom.Math[Int]:
 
   @tn("min_Opt")
-    def min_?(s: ~[SELF]): Val.Opt[SELF] = s.read_?.map(v=>
+    def min_?(s: ~[Int]): Val.Opt[Int] = s.read_?.map(v=>
       s match
-         case s: SELF.~ => s.FOLD(v)((v,w) => if(v<w) v else w)
+         case s: Int.~  => s.FOLD(v)((v,w) => if(v<w) v else w)
          case s         => s.FOLD(v)((v,w) => if(v<w) v else w)
     )
 
   @tn("max_Opt")
-    def max_?(s: ~[SELF]): Val.Opt[SELF] = s.read_?.map(v=>
+    def max_?(s: ~[Int]): Val.Opt[Int] = s.read_?.map(v=>
       s match
-         case s: SELF.~ => s.FOLD(v)((v,w) => if(v>w) v else w)
+         case s: Int.~  => s.FOLD(v)((v,w) => if(v>w) v else w)
          case s         => s.FOLD(v)((v,w) => if(v>w) v else w)
     )
 
   @tn("range_Opt")
-    def range_?(s: ~[SELF]): Val.Opt[SELF.<>] = s.read_?.map(v => {
+    def range_?(s: ~[Int]): Val.Opt[Int.<>] = s.read_?.map(v => {
       var f,l=v
       s match
-         case s: SELF.~ => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
+         case s: Int.~  => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
          case s         => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
-      new SELF.<>(f,l-f+1)
+      new Int.<>(f,l-f+1)
     })
 
   @tn("calculateSum_Opt")
-    def calculateSum_?(s: ~[SELF]): Val.Opt[SELF] = s.read_?.map(first => {
+    def calculateSum_?(s: ~[Int]): Val.Opt[Int] = s.read_?.map(first => {
       var sum: Int = first
       s match
-         case s: SELF.~ => s.FOREACH(v => sum = sum + v)
+         case s: Int.~  => s.FOREACH(v => sum = sum + v)
          case s         => s.FOREACH(v => sum = sum + v)
       sum
     })

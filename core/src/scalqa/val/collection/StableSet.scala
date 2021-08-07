@@ -9,8 +9,8 @@ abstract class StableSet[A] private[scalqa]() extends Collection[A] with gen.abl
   /**/                   def contains(v: A)     : Boolean
 
 object StableSet:
-  /**/            def apply[A](v: ~[A])         : StableSet[A] = Z.Ref(v.iterator)
-  /**/            def apply[A](v: A*)           : StableSet[A] = Z.Ref(v.iterator)
+  /**/            def apply[A](v: ~[A])         : StableSet[A] = Z.AnyRef(v.iterator)
+  /**/            def apply[A](v: A*)           : StableSet[A] = Z.AnyRef(v.iterator)
   @tn("getVoid")  def void[A]                   : StableSet[A] = Z.Void.cast[StableSet[A]]
 
   implicit inline def implicitRequest[A](inline v: \/): StableSet[A] = void[A]
@@ -19,14 +19,14 @@ object StableSet:
   private object Z:
     import scala.collection.immutable.{ HashSet => REAL }
 
-    final class Ref[A] private (real: REAL[A]) extends StableSet[A]:
+    final class AnyRef[A] private (real: REAL[A]) extends StableSet[A]:
         def this(v : Iterator[A]) = this(REAL.from(v))
         type THIS_TYPE = StableSet[A]
         /**/          def contains(v: A)   : Boolean      = real.contains(v)
         /**/          def size             : Int          = real.size
         @tn("stream") def ~                : ~[A]         = real.~
-        /**/          def join(v: A)       : StableSet[A] = new Ref(real + v)
-        /**/          def joinAll(v: ~[A]) : StableSet[A] = new Ref(real ++ v.iterator)
+        /**/          def join(v: A)       : StableSet[A] = new AnyRef(real + v)
+        /**/          def joinAll(v: ~[A]) : StableSet[A] = new AnyRef(real ++ v.iterator)
 
     object Void extends StableSet[Any] with Gen.Void:
       type THIS_TYPE = StableSet[Any]

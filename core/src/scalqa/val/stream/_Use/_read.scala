@@ -1,11 +1,11 @@
-package scalqa; package `val`; package stream; package _Use; import language.implicitConversions
+package scalqa; package `val`; package stream; package _use; import language.implicitConversions
 
 transparent trait _read:
 
   extension[A](inline x: ~[A])
     /**/               inline def read                    : A                = x.read_?.get
     @tn("read_Opt")    inline def read_?                  : Opt[A]           = x.read_?
-    @tn("read_Stream") inline def read_~(inline cnt: Int) : ~[A] & Able.Size = z.use.read.stream(x,cnt)
+    @tn("read_Stream") inline def read_~(inline cnt: Int) : ~[A] & Able.Size = z._use._read.stream(x,cnt)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -1,4 +1,4 @@
-package scalqa; package `val`; package stream; package _Use; import language.implicitConversions
+package scalqa; package `val`; package stream; package _use; import language.implicitConversions
 
 transparent trait _evaluate:
   extension[A](x: ~[A])
@@ -14,13 +14,13 @@ transparent trait _evaluate:
     /**/                       def count(f: A => Boolean)      : Int               = {var c=0; x.foreach(v => if(f(v)) c+=1); c }
     /**/                       def countAndTime                : (Int,Time.Length) = {val v=System.nanoTime; (x.count, Time.Length.fromNanos(System.nanoTime - v))}
 
-    /**/                       def equalsStart(   v: ~[A])     : Boolean           = z.use.evaluate.equals[A](x,v,false)
-    @tn("equalsStart_Result")  def equalsStart_??(v: ~[A])     : Result[true]      = z.use.evaluate.equals[A](x,v,false)
-    /**/                       def equalsAll(     v: ~[A])     : Boolean           = z.use.evaluate.equals[A](x,v,true)
-    @tn("equalsAll_Result")    def equalsAll_??(  v: ~[A])     : Result[true]      = z.use.evaluate.equals[A](x,v,true)
+    /**/                       def equalsStart(   v: ~[A])     : Boolean           = z._use._evaluate.equals[A](x,v,false)
+    @tn("equalsStart_Result")  def equalsStart_??(v: ~[A])     : Result[true]      = z._use._evaluate.equals[A](x,v,false)
+    /**/                       def equalsAll(     v: ~[A])     : Boolean           = z._use._evaluate.equals[A](x,v,true)
+    @tn("equalsAll_Result")    def equalsAll_??(  v: ~[A])     : Result[true]      = z._use._evaluate.equals[A](x,v,true)
 
   extension[A](x: ~[A])
-    def countFew(f1:A=>Boolean, f2:A=>Boolean, f3:A=>Boolean= \/, f4:A=>Boolean= \/, f5:A=>Boolean= \/): (Int,Int)|(Int,Int,Int)|(Int,Int,Int,Int)|(Int,Int,Int,Int,Int) = z.use.calculate.countFew(x,f1,f2,f3,f4,f5)
+    def countFew(f1:A=>Boolean, f2:A=>Boolean, f3:A=>Boolean= \/, f4:A=>Boolean= \/, f5:A=>Boolean= \/): (Int,Int)|(Int,Int,Int)|(Int,Int,Int,Int)|(Int,Int,Int,Int,Int) = z._use._calculate.countFew(x,f1,f2,f3,f4,f5)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

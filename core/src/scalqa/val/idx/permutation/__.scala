@@ -18,9 +18,9 @@ object Permutation extends Gen.Void.Setup[Permutation](Z.Void):
   def random(r: Int.<>)                                               : Permutation = Z.random(r)
   def sorting[A](idx:Idx[A], full:Boolean=false)(using c: Ordering[A]): Permutation = Z.sorting(idx, full, c)
 
-  given givenDocTag: Given.DocTag[Permutation] with
-    def tag(v: Permutation) = doc(v).tag
-    def doc(v: Permutation) = Doc("Permutation") += ("range", v.range) += v.mutation_~.makeString()
+  given givenDocDef: Given.DocDef[Permutation] with
+    def value_tag(v: Permutation) = value_doc(v).tag
+    def value_doc(v: Permutation) = Doc("Permutation") += ("range", v.range) += v.mutation_~.makeString()
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -31,7 +31,7 @@ ___________________________________________________________________________*/
 /**
 @trait Permutation -> ###
 
-Permutation is a precise definition on how elements within range should be reorganized
+     Permutation is a precise definition on how elements within range should be reorganized
 
      Consider ordering a buffer of integers. This could be accomplished it two steps:
 
@@ -43,7 +43,7 @@ Permutation is a precise definition on how elements within range should be reorg
 
         buf.~.TP // Prints:  ~(0, 3, 1, 2, 4)
 
-        // Creating permutation based on comparator
+        // Creating permutation based on given ordering
         val p = Idx.Permutation.sorting(buffer)
 
         p.TP               // Prints: Permutation{range=1 <>> 4,(1,3)(2,1)(3,2)}
@@ -59,11 +59,11 @@ Permutation is a precise definition on how elements within range should be reorg
 
 @def mutation_~ -> All changes
 
-       Returns a stream of all changed positions as a tuple: (<old position>, <new position>)
+       Returns a stream of all changed positions as a tuple: ('old position','new position')
 
 @def validate -> Check for consistency
 
-      If is possible to create inconsistent [[Permutation]]. For example, the same position could be changed twice, etc.
+      It is possible to create inconsistent [[Permutation]]. For example, the same position could be changed twice, etc.
 
       This operation will throw an exception if inconsistency found
 

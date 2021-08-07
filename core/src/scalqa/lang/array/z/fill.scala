@@ -1,25 +1,25 @@
 package scalqa; package lang; package array; package z; import language.implicitConversions
 
-import gen.`given`.ArrayTag
+import gen.`given`.ArrayShape
 
 object fill:
 
-  inline def apply[A,ARRAY<:Array.AnyType[A]](inline x: ARRAY, inline p: Int, inline sz: Int, inline v: A, inline t: ArrayTag[A,ARRAY]) : Unit =
+  inline def apply[A,ARRAY<:Array.AnyType[A]](inline x: ARRAY, inline p: Int, inline sz: Int, inline v: A, inline t: ArrayShape[A,ARRAY]) : Unit =
     inline t match
-              case _ : ArrayTag[A&Raw.Boolean,Array[A&Raw.Boolean]] => boolean(x.cast[Array[Boolean]],p, sz, v.cast[Boolean])
-              case _ : ArrayTag[A&Raw.Byte,   Array[A&Raw.Byte   ]] => byte   (x.cast[Array[Byte]],   p, sz, v.cast[Byte])
-              case _ : ArrayTag[A&Raw.Char,   Array[A&Raw.Char   ]] => char   (x.cast[Array[Char]],   p, sz, v.cast[Char])
-              case _ : ArrayTag[A&Raw.Short,  Array[A&Raw.Short  ]] => short  (x.cast[Array[Short]],  p, sz, v.cast[Short])
-              case _ : ArrayTag[A&Raw.Int,    Array[A&Raw.Int    ]] => int    (x.cast[Array[Int]],    p, sz, v.cast[Int])
-              case _ : ArrayTag[A&Raw.Long,   Array[A&Raw.Long   ]] => long   (x.cast[Array[Long]],   p, sz, v.cast[Long])
-              case _ : ArrayTag[A&Raw.Float,  Array[A&Raw.Float  ]] => float  (x.cast[Array[Float]],  p, sz, v.cast[Float])
-              case _ : ArrayTag[A&Raw.Double, Array[A&Raw.Double ]] => double (x.cast[Array[Double]], p, sz, v.cast[Double])
-              case _ : ArrayTag[A&Ref,        Array[A&Ref        ]] => ref    (x.cast[Array[Ref]],    p, sz, v.cast[Ref])
-              case _                                                => any    (x.cast[Array[A]],      p, sz, v)
+              case _ : ArrayShape[A&Boolean.Raw,Array[A&Boolean.Raw]] => boolean(x.cast[Array[Boolean]],p, sz, v.cast[Boolean])
+              case _ : ArrayShape[A&Byte.Raw,   Array[A&Byte.Raw   ]] => byte   (x.cast[Array[Byte]],   p, sz, v.cast[Byte])
+              case _ : ArrayShape[A&Char.Raw,   Array[A&Char.Raw   ]] => char   (x.cast[Array[Char]],   p, sz, v.cast[Char])
+              case _ : ArrayShape[A&Short.Raw,  Array[A&Short.Raw  ]] => short  (x.cast[Array[Short]],  p, sz, v.cast[Short])
+              case _ : ArrayShape[A&Int.Raw,    Array[A&Int.Raw    ]] => int    (x.cast[Array[Int]],    p, sz, v.cast[Int])
+              case _ : ArrayShape[A&Long.Raw,   Array[A&Long.Raw   ]] => long   (x.cast[Array[Long]],   p, sz, v.cast[Long])
+              case _ : ArrayShape[A&Float.Raw,  Array[A&Float.Raw  ]] => float  (x.cast[Array[Float]],  p, sz, v.cast[Float])
+              case _ : ArrayShape[A&Double.Raw, Array[A&Double.Raw ]] => double (x.cast[Array[Double]], p, sz, v.cast[Double])
+              case _ : ArrayShape[A&AnyRef,     Array[A&AnyRef     ]] => anyref (x.cast[Array[AnyRef]], p, sz, v.cast[AnyRef])
+              case _                                                  => any    (x.cast[Array[A]],      p, sz, v)
 
   def any[A](x: Array[A], p:Int, sz:Int, v: A): Unit =
     x match
-       case x: Array[Ref]        => ref    (x,p,sz,v)
+       case x: Array[AnyRef]     => anyref (x,p,sz,v)
        case x: Array[Int]        => int    (x,p,sz,v)
        case x: Array[Double]     => double (x,p,sz,v)
        case x: Array[Long]       => long   (x,p,sz,v)
@@ -37,7 +37,7 @@ object fill:
   def long   (a: Array[Long],    p: Int, sz: Int, v: Long)   : Unit  = for(i <- p <>= sz) a(i) = v
   def float  (a: Array[Float],   p: Int, sz: Int, v: Float)  : Unit  = for(i <- p <>= sz) a(i) = v
   def double (a: Array[Double],  p: Int, sz: Int, v: Double) : Unit  = for(i <- p <>= sz) a(i) = v
-  def ref    (a: Array[Ref],     p: Int, sz: Int, v: Ref)    : Unit  = for(i <- p <>= sz) a(i) = v
+  def anyref (a: Array[AnyRef],  p: Int, sz: Int, v: AnyRef) : Unit  = for(i <- p <>= sz) a(i) = v
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
