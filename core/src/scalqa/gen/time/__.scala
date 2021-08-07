@@ -25,7 +25,7 @@ object Time extends Long.Opaque.Data.Ordered[Time]("Time") with time.x.Base[Time
     /**/    inline def toInstant                     : Instant     = Instant.fromNanos(x.real * 1_000_000L)
     /**/           def skipTo(dt: DayTime)           : Time        = x + { val l = dt.millisTotal - x.dayTime.millisTotal; { if (l >= 0) l else l + X.Millis.InOneDay}.Millis}
     override       def day                           : Day         = Day.byIndex(Z.zonedDateTime(x).toLocalDate.toEpochDay.toInt)
-    override       def dayTime                       : DayTime     = Z.zonedDateTime(x).^.to(dt => dt.getHour.Hours + dt.getMinute.Minutes + dt.getSecond.Seconds + dt.getNano.Nanos)
+    override       def dayTime                       : DayTime     = Z.zonedDateTime(x).^.to(dt => ((dt.getHour.Hours.real + dt.getMinute.Minutes.real + dt.getSecond.Seconds.real) + dt.getNano).Nanos) // Cannot do + on Length, Time + gest picked up
 
   object OPAQUE:
     opaque type TYPE <: Long.Opaque = Long.Opaque
