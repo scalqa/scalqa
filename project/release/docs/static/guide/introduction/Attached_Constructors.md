@@ -12,15 +12,8 @@ Java and Scala widely use a conversion pattern which starts with a prefix "to":
     val d : Byte   = i.toByte
 ```
 
-Scalqa basically drops the prefix "to" in cases when the base type is a straight forward argument for creating target type. 
-This makes a method name start with an upper case, but this is exactly what differentiates constructor methods from regular methods:
-
-```
-    val i : Int    = 12
-    val d : Double = i.Double
-    val d : Byte   = i.Byte
-```
-
+In Scalqa the prefix "to" is dropped in cases when the base type is a straight forward argument for creating target type. 
+This makes a method name start with an upper case, but this is exactly what differentiates constructor methods from regular methods.
 This pattern really shines with simple opaque types, when constructors are attached to primitives: 
 
 ```
@@ -30,5 +23,5 @@ This pattern really shines with simple opaque types, when constructors are attac
     val bd  : BigDecimal  = 3.14.Big
 ```
 
-Linked are the definitions for attached default constructor methods on
+Here are the definitions for attached default constructor methods on
 [Int](../../api/scalqa/lang/int/_methods.html) and [Double](../../api/scalqa/lang/double/_methods.html). 

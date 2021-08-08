@@ -10,7 +10,7 @@ If in doubt, take a look at project [Samples](https://github.com/scalqa/samples)
 
 SBT users should add following library dependency:
 
-libraryDependencies += "org.scalqa" % "scalqa_3" % "0.96"
+libraryDependencies += "org.scalqa" % "scalqa_3" % "0.98"
 
 Everyone else can download single JAR file from the [latest release](https://github.com/scalqa/scalqa/releases)
 
