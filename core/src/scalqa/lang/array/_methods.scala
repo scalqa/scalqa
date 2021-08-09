@@ -12,8 +12,8 @@ transparent trait _methods:
     @tn("pack")       inline def ><                                                   (using inline t: PackShape[A,PACK]): PACK    = z.pack(x,t)
 
   extension[A](inline x:Array[A])
-    /**/              inline def copyTo(a:Array[A])                                                                      : Unit    = {val v=x; val sz= v.length min a.length;        v.copyTo(a,0,  0,sz)}
-    /**/              inline def copyTo(a:Array[A], pos: Int)                                                            : Unit    = {val v=x; val sz=(v.length min a.length) - pos; v.copyTo(a,pos,0,sz)}
+    /**/              inline def copyTo(a:Array[A])                                                                      : Unit    = {val v=x; val sz= v.length min  a.length;        v.copyTo(a,0,  0,sz)}
+    /**/              inline def copyTo(a:Array[A], pos: Int)                                                            : Unit    = {val v=x; val sz= v.length min (a.length - pos); v.copyTo(a,pos,0,sz)}
     /**/              inline def copyTo(inline a:Array[A], inline pos:Int, inline from:Int, inline size:Int)             : Unit    = System.arraycopy(x,from,a,pos,size)
 
   extension[A,ARR<:Array.AnyType[A]](inline x: ARR)

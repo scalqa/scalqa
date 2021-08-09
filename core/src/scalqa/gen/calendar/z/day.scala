@@ -1,26 +1,50 @@
 package scalqa; package gen; package calendar; package z; import language.implicitConversions
 
-private[calendar] object day:
-  private var lookup       : Day.Lookup.Stable[Setup] = \/
-  private var currentDay   : Day                      = Time.current.day
-  private var nextDayStart : Time                     = currentDay.next.start
+import day.Setup
+
+object day extends java.util.concurrent.atomic.AtomicReference[Setup.Lookup](Setup.Lookup()):
+  private var currentDay   : Day  = Time.current.day
+  private var nextDayStart : Time = Time.fromMillis(java.time.LocalDate.ofEpochDay(currentDay.index + 1).atStartOfDay(Time.Zone.Id).toInstant.toEpochMilli)
 
   def current: Day =
     val t = Time.current
-    if (t >= nextDayStart)
-      currentDay = t.day
-      nextDayStart = currentDay.next.start
+    if (t >= nextDayStart){ currentDay = t.day;  nextDayStart = currentDay.next.start }
     currentDay
 
-  def setup(d: Day): Setup =
-    if (d.^.isVoid) Void
-    else lookup.get_?(d) or { Setup(java.time.LocalDate.ofEpochDay(d.index)).^(v => lookup = lookup + (d,v) )}
+  def setup(d: Day): Setup = if (d.isVoid) Setup.Void else
+      var l = this.get
+      l.get_Opt(d) or {
+        while(!compareAndSet(l,l.cloneExtend(d))) l = this.get
+        setup(d)
+      }
 
   // ***********************************************************************************
   class Setup(val year: Year, val month: Month, val number: Int, val start: Time):
     def this(d: java.time.LocalDate) = this(Year(d.getYear), Month(d.getYear, d.getMonthValue), d.getDayOfMonth, Time.fromMillis(d.atStartOfDay(Time.Zone.Id).toInstant.toEpochMilli))
 
-  private object Void extends Setup(\/, \/, 0, \/) with Gen.Void
+  // ***********************************************************************************
+  private[z] object Setup:
+    object Void extends Setup(\/, \/, 0, \/) with Gen.Void
+
+    // *******************************************************************************************************************
+    class Lookup private (array : Array[Array[Setup]], start: Int):
+      def this() = this(new Array[Array[Setup]](100), 0)
+      private inline val SZ = 1000
+      private        val end = start + array.length * SZ
+
+      def get_Opt(d: Day): Opt[Setup] =
+        if(d.real < start || d.real >= end) return \/
+        var i = d.real - start
+        val a = array(i / SZ).^.reviseIf(_ == null, _ => new Array[Setup](SZ).^(array(i / SZ) = _))
+        a(i % SZ).^.reviseIf(_ == null, _ => new Setup(java.time.LocalDate.ofEpochDay(d.real)).^(a(i % SZ) = _))
+
+      def cloneExtend(d: Day): Lookup =
+        d.real match
+                case i if (i < start) => val d = (start - i) / SZ + 1
+                                         new Lookup(array.newArray(array.length + d).^(a => array.copyTo(a, d)), start - d * SZ)
+                case i if (i >= end)  => val d = (i - end) / SZ + 1
+                                         new Lookup(array.newArray(array.length + d).^(a => array.copyTo(a)), start)
+                case _                => J.illegalState()
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

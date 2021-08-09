@@ -16,7 +16,7 @@ object  Z:
     /**/                def infoTree   : Doc.Tree    = Doc.Tree(this.doc, Pipeline.infoTree(s1), Pipeline.infoTree(s2))
     override            def dischargeTo(b:Buffer[A]) = { if(v) b.addAll(s1); b.addAll(s2) }
 
-  class Stream_ofIdx[A<:Raw](idx: Idx[A]) extends G.~[A] with Able.Size:
+  class Stream_ofIdx[A<:Raw](idx: G.Idx[A]) extends G.~[A] with Able.Size:
     private             var i         = 0
     private             val sz        = idx.size
     @tn("readRaw_Opt")  def readRaw_? = { var o:G.Opt[A] = \/; if(i<sz) { o = idx(i); i+=1 }; o}
