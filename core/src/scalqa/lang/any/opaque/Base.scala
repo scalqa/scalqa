@@ -3,6 +3,7 @@ package scalqa; package lang; package any; package opaque; import language.impli
 abstract class Base[A<: Any.Opaque]private[lang](ct: ClassTag[A]) extends gen.`given`.TypeDef[A] with gen.`given`.DocDef[A] with gen.`given`.VoidDef[A]:
   self =>
   given givenTypeDef : Given.TypeDef[A] = self
+  given givenDocDef  : Given.DocDef[A]  = self
   given givenClassTag: ClassTag[A]      = ct
   given givenCanEqual: CanEqual[A,A]    = CanEqual.derived
 

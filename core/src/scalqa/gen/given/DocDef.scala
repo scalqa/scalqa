@@ -3,20 +3,11 @@ package scalqa; package gen; package `given`; import language.implicitConversion
 import `given`.{ DocDef as Y }
 import `given`.z.{ ProductDoc as PD }
 
-trait DocDef[A]:
+trait DocDef[-A]:
   def value_tag(v: A): String
   def value_doc(v: A): Doc
 
 object DocDef:
-  trait BooleanRaw[A<:Boolean.Raw] extends DocDef[A]{ override def value_tag(v: A): String; override def value_doc(v: A): Doc }
-  trait ByteRaw   [A<:Byte.Raw]    extends DocDef[A]{ override def value_tag(v: A): String; override def value_doc(v: A): Doc }
-  trait CharRaw   [A<:Char.Raw]    extends DocDef[A]{ override def value_tag(v: A): String; override def value_doc(v: A): Doc }
-  trait ShortRaw  [A<:Short.Raw]   extends DocDef[A]{ override def value_tag(v: A): String; override def value_doc(v: A): Doc }
-  trait IntRaw    [A<:Int.Raw]     extends DocDef[A]{ override def value_tag(v: A): String; override def value_doc(v: A): Doc }
-  trait LongRaw   [A<:Long.Raw]    extends DocDef[A]{ override def value_tag(v: A): String; override def value_doc(v: A): Doc }
-  trait FloatRaw  [A<:Float.Raw]   extends DocDef[A]{ override def value_tag(v: A): String; override def value_doc(v: A): Doc }
-  trait DoubleRaw [A<:Double.Raw]  extends DocDef[A]{ override def value_tag(v: A): String; override def value_doc(v: A): Doc }
-
   inline given givenBoolean   : DocDef[Boolean]    = ZZ.BooleanDef.cast[DocDef[Boolean]]
   inline given givenByte      : DocDef[Byte]       = ZZ.ByteDef.cast[DocDef[Byte]]
   inline given givenChar      : DocDef[Char]       = ZZ.CharDef.cast[DocDef[Char]]

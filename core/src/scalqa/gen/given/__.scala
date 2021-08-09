@@ -2,7 +2,7 @@ package scalqa; package gen; import language.implicitConversions
 
 object Given:
   transparent inline def TypeDef    = `given`.TypeDef;      type TypeDef[A]                                     = `given`.TypeDef[A];
-  transparent inline def DocDef     = `given`.DocDef;       type DocDef[A]                                      = `given`.DocDef[A]
+  transparent inline def DocDef     = `given`.DocDef;       type DocDef[-A]                                     = `given`.DocDef[A]
   transparent inline def VoidDef    = `given`.VoidDef;      type VoidDef[A]                                     = `given`.VoidDef[A]
   transparent inline def EmptyDef   = `given`.EmptyDef;     type EmptyDef[-A]                                   = `given`.EmptyDef[A]
   transparent inline def WithinDef  = `given`.WithinDef;    type WithinDef  [A,-C]                              = `given`.WithinDef[A,C]

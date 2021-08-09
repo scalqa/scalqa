@@ -17,14 +17,14 @@ transparent trait tp :
   extension(inline x: gen.able.Tag)     inline def tp                                   : Unit   = ZZ.tp(x.tag)
   extension(inline x: Unit)             inline def tp                                   : Unit   = {val v=x /*need to realize x for side effects*/; ZZ.tp(" ") /*keep one space*/}
 
-  extension[A<:Boolean.Raw](inline x:A) inline def tp (using inline t :Given.DocDef[A]) : Unit   = ZZ.tp(x.cast[Boolean],t)
-  extension[A<:Byte.Raw]   (inline x:A) inline def tp (using inline t :Given.DocDef[A]) : Unit   = ZZ.tp(x.cast[Byte]   ,t)
-  extension[A<:Char.Raw]   (inline x:A) inline def tp (using inline t :Given.DocDef[A]) : Unit   = ZZ.tp(x.cast[Char]   ,t)
-  extension[A<:Short.Raw]  (inline x:A) inline def tp (using inline t :Given.DocDef[A]) : Unit   = ZZ.tp(x.cast[Short]  ,t)
-  extension[A<:Int.Raw]    (inline x:A) inline def tp (using inline t :Given.DocDef[A]) : Unit   = ZZ.tp(x.cast[Int]    ,t)
-  extension[A<:Long.Raw]   (inline x:A) inline def tp (using inline t :Given.DocDef[A]) : Unit   = ZZ.tp(x.cast[Long]   ,t)
-  extension[A<:Float.Raw]  (inline x:A) inline def tp (using inline t :Given.DocDef[A]) : Unit   = ZZ.tp(x.cast[Float]  ,t)
-  extension[A<:Double.Raw] (inline x:A) inline def tp (using inline t :Given.DocDef[A]) : Unit   = ZZ.tp(x.cast[Double] ,t)
+  extension[A<:Boolean.Raw](inline x:A) inline def tp (using inline d :Given.DocDef[A]) : Unit   = ZZ.tp(x.cast[Boolean],d)
+  extension[A<:Byte.Raw]   (inline x:A) inline def tp (using inline d :Given.DocDef[A]) : Unit   = ZZ.tp(x.cast[Byte]   ,d)
+  extension[A<:Char.Raw]   (inline x:A) inline def tp (using inline d :Given.DocDef[A]) : Unit   = ZZ.tp(x.cast[Char]   ,d)
+  extension[A<:Short.Raw]  (inline x:A) inline def tp (using inline d :Given.DocDef[A]) : Unit   = ZZ.tp(x.cast[Short]  ,d)
+  extension[A<:Int.Raw]    (inline x:A) inline def tp (using inline d :Given.DocDef[A]) : Unit   = ZZ.tp(x.cast[Int]    ,d)
+  extension[A<:Long.Raw]   (inline x:A) inline def tp (using inline d :Given.DocDef[A]) : Unit   = ZZ.tp(x.cast[Long]   ,d)
+  extension[A<:Float.Raw]  (inline x:A) inline def tp (using inline d :Given.DocDef[A]) : Unit   = ZZ.tp(x.cast[Float]  ,d)
+  extension[A<:Double.Raw] (inline x:A) inline def tp (using inline d :Given.DocDef[A]) : Unit   = ZZ.tp(x.cast[Double] ,d)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

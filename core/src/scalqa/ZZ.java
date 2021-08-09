@@ -48,14 +48,23 @@ public final class ZZ{
     public  static       void tp(String v)           { Access.Console().println(v); }
     public  static <A>   void tp(A v)                { tp(DefaultDef.value_tag(v)); }
     public  static <A>   void tp(A v,       DocDef<A> t){ tp(t.value_tag(v)); }
-    public  static <A>   void tp(boolean v, DocDef<A> t){ tp(((DocDef<Boolean>)  t).value_tag(Boolean  .valueOf(v)));}
-    public  static <A>   void tp(byte    v, DocDef<A> t){ tp(((DocDef<Byte>)     t).value_tag(Byte     .valueOf(v)));}
-    public  static <A>   void tp(char    v, DocDef<A> t){ tp(((DocDef<Character>)t).value_tag(Character.valueOf(v)));}
-    public  static <A>   void tp(short   v, DocDef<A> t){ tp(((DocDef<Short>)    t).value_tag(Short    .valueOf(v)));}
-    public  static <A>   void tp(int     v, DocDef<A> t){ tp(((DocDef<Integer>)  t).value_tag(Integer  .valueOf(v)));}
-    public  static <A>   void tp(long    v, DocDef<A> t){ tp(((DocDef<Long>)     t).value_tag(Long     .valueOf(v)));}
-    public  static <A>   void tp(float   v, DocDef<A> t){ tp(((DocDef<Float>)    t).value_tag(Float    .valueOf(v)));}
-    public  static <A>   void tp(double  v, DocDef<A> t){ tp(((DocDef<Double>)   t).value_tag(Double   .valueOf(v)));}
+    public  static <A>   void tp(boolean v, DocDef<A> t){ tp(tag(v,t));}
+    public  static <A>   void tp(byte    v, DocDef<A> t){ tp(tag(v,t));}
+    public  static <A>   void tp(char    v, DocDef<A> t){ tp(tag(v,t));}
+    public  static <A>   void tp(short   v, DocDef<A> t){ tp(tag(v,t));}
+    public  static <A>   void tp(int     v, DocDef<A> t){ tp(tag(v,t));}
+    public  static <A>   void tp(long    v, DocDef<A> t){ tp(tag(v,t));}
+    public  static <A>   void tp(float   v, DocDef<A> t){ tp(tag(v,t));}
+    public  static <A>   void tp(double  v, DocDef<A> t){ tp(tag(v,t));}
+
+    public  static <A> String tag(boolean v, DocDef<A> t){ return ((DocDef<Boolean>)  t).value_tag(Boolean  .valueOf(v));}
+    public  static <A> String tag(byte    v, DocDef<A> t){ return ((DocDef<Byte>)     t).value_tag(Byte     .valueOf(v));}
+    public  static <A> String tag(char    v, DocDef<A> t){ return ((DocDef<Character>)t).value_tag(Character.valueOf(v));}
+    public  static <A> String tag(short   v, DocDef<A> t){ return ((DocDef<Short>)    t).value_tag(Short    .valueOf(v));}
+    public  static <A> String tag(int     v, DocDef<A> t){ return ((DocDef<Integer>)  t).value_tag(Integer  .valueOf(v));}
+    public  static <A> String tag(long    v, DocDef<A> t){ return ((DocDef<Long>)     t).value_tag(Long     .valueOf(v));}
+    public  static <A> String tag(float   v, DocDef<A> t){ return ((DocDef<Float>)    t).value_tag(Float    .valueOf(v));}
+    public  static <A> String tag(double  v, DocDef<A> t){ return ((DocDef<Double>)   t).value_tag(Double   .valueOf(v));}
 
     // *********************** Arrays **************************
     public  static final Object[]  emptyObjectArray  = Access.emptyObjectArray();

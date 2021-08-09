@@ -1,13 +1,11 @@
 package scalqa;  package lang; package long; package opaque; import language.implicitConversions
 
-abstract class Base[A<:Opaque](val typeName:String) extends Any.Opaque.Base[A](ClassTag.Long.cast[ClassTag[A]]) with Base._methods with gen.`given`.VoidDef.LongRaw[A] with gen.`given`.DocDef.LongRaw[A]:
-
+abstract class Base[A<:Opaque](val typeName:String) extends Any.Opaque.Base[A](ClassTag.Long.cast[ClassTag[A]]) with Base._methods with gen.`given`.VoidDef.LongRaw[A]:
   def value_isVoid(v: A): Boolean = false
   def value_tag(v: A)   : String  = default_doc(v).tag
   def value_doc(v: A)   : Doc     = default_doc(v)
 
-  given givenDocDef : Given.DocDef.LongRaw[A]  = this
-  given givenVoidDef: Given.VoidDef.LongRaw[A] = this
+  given givenVoidDef  : Given.VoidDef.LongRaw[A] = this
 
   extension(inline x: Long)
     inline def opaque[THIS_OPAQUE >: A <: A]: THIS_OPAQUE = x.cast[THIS_OPAQUE]

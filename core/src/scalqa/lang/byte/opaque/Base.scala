@@ -1,12 +1,10 @@
 package scalqa;  package lang; package byte; package opaque; import language.implicitConversions
 
-abstract class Base[A<:Opaque](val typeName:String) extends Any.Opaque.Base[A](ClassTag.Byte.cast[ClassTag[A]]) with Base._methods with gen.`given`.VoidDef.ByteRaw[A] with gen.`given`.DocDef.ByteRaw[A]:
-
+abstract class Base[A<:Opaque](val typeName:String) extends Any.Opaque.Base[A](ClassTag.Byte.cast[ClassTag[A]]) with Base._methods with gen.`given`.VoidDef.ByteRaw[A]:
   def value_isVoid(v: A): Boolean = false
   def value_tag(v: A)   : String  = default_doc(v).tag
   def value_doc(v: A)   : Doc     = default_doc(v)
 
-  given givenDocDef : Given.DocDef.ByteRaw[A]  = this
   given givenVoidDef: Given.VoidDef.ByteRaw[A] = this
 
   extension(inline x: Byte)

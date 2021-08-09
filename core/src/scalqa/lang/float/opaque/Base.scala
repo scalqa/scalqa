@@ -1,12 +1,10 @@
 package scalqa;  package lang; package float; package opaque; import language.implicitConversions
 
-abstract class Base[A<:Opaque](val typeName:String) extends Any.Opaque.Base[A](ClassTag.Float.cast[ClassTag[A]]) with Base._methods with gen.`given`.VoidDef.FloatRaw[A] with gen.`given`.DocDef.FloatRaw[A]:
-
+abstract class Base[A<:Opaque](val typeName:String) extends Any.Opaque.Base[A](ClassTag.Float.cast[ClassTag[A]]) with Base._methods with gen.`given`.VoidDef.FloatRaw[A]:
   def value_isVoid(v: A): Boolean = false
   def value_tag(v: A)   : String  = default_doc(v).tag
   def value_doc(v: A)   : Doc     = default_doc(v)
 
-  given givenDocDef : Given.DocDef.FloatRaw[A]  = this
   given givenVoidDef: Given.VoidDef.FloatRaw[A] = this
 
   extension(inline x: Float)
