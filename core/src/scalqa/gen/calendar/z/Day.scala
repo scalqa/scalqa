@@ -45,7 +45,7 @@ object Day extends java.util.concurrent.atomic.AtomicReference[Setup.Lookup](Set
                                          new Lookup(array.newArray(array.length + d).^(a => array.copyTo(a, d)), start - d * SZ)
                 case i if (i >= end)  => val d = (i - end) / SZ + 1
                                          new Lookup(array.newArray(array.length + d).^(a => array.copyTo(a)), start)
-                case _                => J.illegalState()
+                case _                => this // can happen with concurrent access
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
