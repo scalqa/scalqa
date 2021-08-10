@@ -8,16 +8,16 @@ specialized framework of collections for efficient unboxed data processing.
 
 Defining data elements is quite easy, one just needs to select one of the following data roots and follow certain conventions:
 
-- [Boolean.Custom.Data](../../api/scalqa/lang/boolean/custom/Data.html)
-- [Byte.Custom.Data](../../api/scalqa/lang/byte/custom/Data.html) 
-- [Char.Custom.Data](../../api/scalqa/lang/char/custom/Data.html) 
-- [Short.Custom.Data](../../api/scalqa/lang/short/custom/Data.html) 
-- [Int.Custom.Data](../../api/scalqa/lang/int/custom/Data.html) 
-- [Long.Custom.Data](../../api/scalqa/lang/long/custom/Data.html) 
-- [Float.Custom.Data](../../api/scalqa/lang/float/custom/Data.html) 
-- [Double.Custom.Data](../../api/scalqa/lang/double/custom/Data.html) 
-- [Any.Ref.Custom.Data](../../api/scalqa/lang/any/ref/custom/Data.html) 
-- [String.Custom.Data](../../api/scalqa/lang/string/custom/Data.html) 
+- [Boolean.Opaque.Data](../../api/scalqa/lang/boolean/opaque/Data.html)
+- [Byte.Opaque.Data](../../api/scalqa/lang/byte/opaque/Data.html) 
+- [Char.Opaque.Data](../../api/scalqa/lang/char/opaque/Data.html) 
+- [Short.Opaque.Data](../../api/scalqa/lang/short/opaque/Data.html) 
+- [Int.Opaque.Data](../../api/scalqa/lang/int/opaque/Data.html) 
+- [Long.Opaque.Data](../../api/scalqa/lang/long/opaque/Data.html) 
+- [Float.Opaque.Data](../../api/scalqa/lang/float/opaque/Data.html) 
+- [Double.Opaque.Data](../../api/scalqa/lang/double/opaque/Data.html) 
+- [Any.Ref.Opaque.Data](../../api/scalqa/lang/any/ref/opaque/Data.html) 
+- [String.Opaque.Data](../../api/scalqa/lang/string/opaque/Data.html) 
 
 ## Define
 
@@ -57,8 +57,8 @@ Double constructor will cover all primitives.
 ```  
 object Price extends Float.Opaque.Data.Numerical[Price]("Price"):
 ```  
-Object Price extends not only `Float.Custom.Data`, which would be sufficient to create a data element.
-Price extends `Float.Custom.Data.Numerical`, which adds Float like behaviour with a set of 
+Object Price extends not only `Float.Opaque.Data`, which would be sufficient to create a data element.
+Price extends `Float.Opaque.Data.Numerical`, which adds Float like behaviour with a set of 
 [default methods](../../api/scalqa/lang/float/opaque/data/Numerical$$_methods.html) provided. For example:
 ```
 var p: Price = 19.99.Dollars
