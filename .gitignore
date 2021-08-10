@@ -13,7 +13,6 @@
 /project/release/scalqa/target
 /project/release/scalqa/src
 /project/release/scalqa/sonatype-staging
-
 /core/src/scalqa/Test*.scala
 /core/src/scalqa/Example*.scala
 

@@ -39,7 +39,7 @@ object Fx:
   transparent inline def Selection   = fx.base.Selection;      type Selection[A] = fx.base.Selection[A]
   transparent inline def Event       = fx.base.Event;          type Event        = fx.base.Event
 
-  // Shortcuts
+  //Shortcuts
   transparent inline def Node        = Abstract.Node;          type Node         = Abstract.Node
   transparent inline def Color       = Paint.Color;            type Color        = Paint.Color
   transparent inline def Font        = Text.Font;              type Font         = Text.Font
