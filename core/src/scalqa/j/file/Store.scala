@@ -5,8 +5,8 @@ import File.Store
 
 object Store extends AnyRef.Opaque.Base[Store,REAL]("File.Store"):
   /**/     def apply(v: REAL)     : Store = v.opaque
-  override def value_doc(v: Store): Doc   = Doc(this) += ("name", v.name) += ("label", v.label) += ("totalSpace", v.totalSpace.toBrief)
-    /**/                                              += ("unallocatedSpace", v.unallocatedSpace.toBrief) += ("usableSpace", v.usableSpace.toBrief)
+  override def value_doc(v: Store): Doc   = Doc(this) += ("name", v.name) += ("label", v.label) += ("totalSpace", v.totalSpace.tagBrief)
+    /**/                                              += ("unallocatedSpace", v.unallocatedSpace.tagBrief) += ("usableSpace", v.usableSpace.tagBrief)
 
   extension (inline x: Store)
     inline def name            : String    = x.real.name

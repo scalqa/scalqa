@@ -1,10 +1,10 @@
 package scalqa; package gen; package calendar; package z; import language.implicitConversions
 
-import day.Setup
+import Day.Setup
 
-object day extends java.util.concurrent.atomic.AtomicReference[Setup.Lookup](Setup.Lookup()):
+object Day extends java.util.concurrent.atomic.AtomicReference[Setup.Lookup](Setup.Lookup()):
   private var currentDay   : Day  = Time.current.day
-  private var nextDayStart : Time = Time.fromMillis(java.time.LocalDate.ofEpochDay(currentDay.index + 1).atStartOfDay(Time.Zone.Id).toInstant.toEpochMilli)
+  private var nextDayStart : Time = new Setup(currentDay.next).start
 
   def current: Day =
     val t = Time.current
@@ -20,7 +20,8 @@ object day extends java.util.concurrent.atomic.AtomicReference[Setup.Lookup](Set
 
   // ***********************************************************************************
   class Setup(val year: Year, val month: Month, val number: Int, val start: Time):
-    def this(d: java.time.LocalDate) = this(Year(d.getYear), Month(d.getYear, d.getMonthValue), d.getDayOfMonth, Time.fromMillis(d.atStartOfDay(Time.Zone.Id).toInstant.toEpochMilli))
+    def this(d: java.time.LocalDate) = this(Year(d.getYear), Month(d.getYear, d.getMonthValue), d.getDayOfMonth, Time.fromIndex(d.atStartOfDay(Time.Zone.id).toInstant.toEpochMilli))
+    def this(d: Day)                 = this(java.time.LocalDate.ofEpochDay(d.real))
 
   // ***********************************************************************************
   private[z] object Setup:
@@ -36,7 +37,7 @@ object day extends java.util.concurrent.atomic.AtomicReference[Setup.Lookup](Set
         if(d.real < start || d.real >= end) return \/
         var i = d.real - start
         val a = array(i / SZ).^.reviseIf(_ == null, _ => new Array[Setup](SZ).^(array(i / SZ) = _))
-        a(i % SZ).^.reviseIf(_ == null, _ => new Setup(java.time.LocalDate.ofEpochDay(d.real)).^(a(i % SZ) = _))
+        a(i % SZ).^.reviseIf(_ == null, _ => new Setup(d).^(a(i % SZ) = _))
 
       def cloneExtend(d: Day): Lookup =
         d.real match

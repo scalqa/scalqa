@@ -3,26 +3,25 @@ package scalqa; package gen; package calendar; import language.implicitConversio
 import Calendar.Week
 
 object Week extends Int.Opaque.Data.Sequential[Week]("Calendar.Week"):
-  inline   def byIndex(epochWeek: Int)           : Week   = epochWeek.opaque
-  /**/     def current                           : Week   = Calendar.Day.current.week
-  override def value_tag(v: Week)                : String = "Week-" + v.startDay.tag
+  /**/     inline def fromIndex(epochWeek: Int) : Week         = epochWeek.opaque
+  /**/            def current                   : Week         = Calendar.Day.current.week
+  override        def value_tag(v: Week)        : String       = "Week-" + v.startDay.tag
 
-  implicit inline def implicitRequest(v: CURRENT): Week   = current
+  implicit inline def implicitRequest(v:CURRENT): Week         = current
 
   extension (x: Week)
-    def index     : Int          = x.real
-    def start     : Time         = x.startDay.start
-    def startDay  : Calendar.Day = Calendar.Day.byIndex(x.real * 7)
-    def year      : Year         = x.startDay.year
-    def month     : Month        = x.startDay.month
-    def isCurrent : Boolean      = x == Calendar.Week.current
-    def period    : Period       = Period(x.start, x.next.start)
+    /**/          def index                     : Int          = x.real
+    /**/          def start                     : Time         = x.startDay.start
+    /**/          def startDay                  : Calendar.Day = Calendar.Day.fromIndex(x.real * 7)
+    /**/          def year                      : Year         = x.startDay.year
+    /**/          def month                     : Month        = x.startDay.month
+    /**/          def isCurrent                 : Boolean      = x == Calendar.Week.current
+    /**/          def period                    : Period       = Period(x.start, x.next.start)
 
   object OPAQUE:
     opaque type TYPE <: Int.Opaque = Int.Opaque
 
   // *******************************************************************************************************************
-
   enum Day:
     case Mon, Tue, Wed, Thu, Fri, Sat, Sun
 

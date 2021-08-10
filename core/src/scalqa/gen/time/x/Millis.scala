@@ -18,11 +18,6 @@ object Millis:
       /**/            inline def seconds                 : Long      = x.real / Millis.InOneSecond % 60
       /**/            inline def minutes                 : Long      = x.real / Millis.InOneMinute % 60
       /**/            inline def hours                   : Long      = x.real / Millis.InOneHour   % 24
-
-      @tn("plus")     inline def  +(inline l: Length)    : OPAQUE    = (x.real + l.millisTotal).cast[OPAQUE]
-      @tn("minus")    inline def  -(inline l: Length)    : OPAQUE    = (x.real - l.millisTotal).cast[OPAQUE]
-      @tn("plusAll")  inline def ++(inline s: ~[Length]) : OPAQUE    = (s.foldAs(x.real)(_ + _.millisTotal)).cast[OPAQUE]
-      @tn("minusAll") inline def --(inline s: ~[Length]) : OPAQUE    = (s.foldAs(x.real)(_ - _.millisTotal)).cast[OPAQUE]
       /**/            inline def roundTo(l:Length)
                                        (using r:Rounding): OPAQUE    = (r(x.real, l.millisTotal)).cast[OPAQUE]
 

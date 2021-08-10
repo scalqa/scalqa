@@ -25,7 +25,7 @@ object Nanos:
                  (using r:Rounding): OPAQUE    = (r(x.real, l.nanosTotal)).cast[OPAQUE]
 
   // ***********************************************************************************************
-  transparent trait BaseLength extends Base:
+  transparent trait LengthBase extends Base:
 
     extension[OPAQUE <: Long.Opaque](inline x: OPAQUE)
       inline def nanosTotal        : Long      = x.real

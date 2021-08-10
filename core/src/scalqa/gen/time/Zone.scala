@@ -2,9 +2,9 @@ package scalqa; package gen; package time; import language.implicitConversions
 
 object Zone extends Able.Doc:
 
-  val Id     : java.time.ZoneId = java.time.ZoneId.systemDefault
-  val Offset : Time.Length      = java.time.Instant.ofEpochMilli(0).atZone(Id).getOffset.getTotalSeconds.Seconds
-  def doc    : Doc              = Doc("Time.Zone") += ("Id", Id) += ("Offset", Offset)
+  val id     : java.time.ZoneId = java.time.ZoneId.systemDefault
+  val offset : Time.Length      = java.time.Instant.ofEpochMilli(0).atZone(id).getOffset.getTotalSeconds.Seconds
+  def doc    : Doc              = Doc("Time.Zone") += ("id", id) += ("offset", offset)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

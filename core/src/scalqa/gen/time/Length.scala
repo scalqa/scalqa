@@ -3,17 +3,17 @@ package scalqa; package gen; package time; import language.implicitConversions
 import Time.Length
 import x.Nanos
 
-object Length extends Long.Opaque.Data.Calculable[Length]("Time.Length") with time.x.Nanos.BaseLength:
-  /**/     def apply    (v: Length*)        : Length  = v.~.fold(\/ :Length)(_ + _)
-  inline   def fromNanos(  inline v: Long)  : Length  = v.opaque
+object Length extends Long.Opaque.Data.Calculable[Length]("Time.Length") with time.x.Nanos.LengthBase:
+  /**/            def apply(v: Length*)       : Length  = v.~.fold(\/ :Length)(_ + _)
+  /**/     inline def fromNanos(inline v:Long): Length  = v.opaque
 
-  override def value_isVoid(v: Length)      : Boolean = v.real==0L
-  override def value_tag(v: Length)         : String  = z.formatLength(v,false)
+  override        def value_isVoid(v: Length) : Boolean = v.real==0L
+  override        def value_tag(v: Length)    : String  = z.formatLength(v,false)
 
-  implicit inline def implicitRequest(v: \/): Length  = fromNanos(0L)
+  implicit inline def implicitRequest(v: \/)  : Length  = fromNanos(0L)
 
   extension(x: Length)
-    /**/   def toBrief   : String = z.formatLength(x, true)
+    /**/          def tagBrief                : String = z.formatLength(x, true)
 
   object OPAQUE:
     opaque type TYPE <: Long.Opaque = Long.Opaque

@@ -12,7 +12,7 @@ object File extends AnyRef.Opaque.Base[J.File,REAL]("File"):
     inline def name                                   : String    = x.real.getName
     inline def path                                   : Path      = x.real.toPath
     inline def exists                                 : Boolean   = x.real.exists
-    inline def lastModified                           : Time      = Time.fromMillis(x.real.lastModified)
+    inline def lastModified                           : Time      = Time.fromIndex(x.real.lastModified)
     inline def extension                              : String    = x.real.getCanonicalPath.takeAfterLast(".", "")
     inline def size                                   : ByteCount = x.real.length.ByteCount
     inline def openOutput                             : J.Output  = J.Output(x)

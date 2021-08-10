@@ -3,16 +3,19 @@ package scalqa; package gen; package time; import language.implicitConversions
 import Time.Gmt
 
 object Gmt extends Long.Opaque.Data[Gmt]("Time.Gmt") with time.x.Base[Gmt] with time.x.Millis.Base:
-  inline   def fromMillis(inline v: Long): Gmt     = v.opaque
-  inline   def apply()                   : Gmt     = System.currentTimeMillis.opaque
-  override def value_tag(v: Gmt)         : String  = v.day.tag + ' ' + v.dayTime.tag
+  /**/           inline def fromIndex(inline v: Long)  : Gmt     = v.opaque
+  /**/           inline def current                    : Gmt     = System.currentTimeMillis.opaque
+  override              def value_tag(v: Gmt)          : String  = v.day.tag + ' ' + v.dayTime.tag
 
-  implicit inline def implicitRequest(v: CURRENT): Gmt = apply()
+  implicit       inline def implicitRequest(v: CURRENT): Gmt     = current
 
   extension(x: Gmt)
-    inline   def genTime : Time    = Time.fromMillis(x.real)
-    override def day     : Day     = Day.byIndex((x.real / X.Millis.InOneDay).toInt)
-    override def dayTime : DayTime = (x.real % X.Millis.InOneDay).toInt.Millis
+    /**/         inline def genTime                    : Time    = Time.fromIndex(x.real)
+    override            def day                        : Day     = Day.fromIndex((x.real / X.Millis.InOneDay).toInt)
+    override            def dayTime                    : DayTime = (x.real % X.Millis.InOneDay).toInt.Millis
+  extension(inline x: Gmt)
+    @tn("plus")  inline def +(inline l: Time.Length)   : Gmt     = (x.real + l.millisTotal).opaque
+    @tn("minus") inline def -(inline l: Time.Length)   : Gmt     = (x.real - l.millisTotal).opaque
 
   object OPAQUE:
     opaque type TYPE <: Long.Opaque = Long.Opaque
@@ -29,12 +32,12 @@ ___________________________________________________________________________*/
       [[Time.Gmt]] is an opaque Long value same as [[Time]], but not localized for printing
 
       ```
-        val time = Time()
-        val gmt  = Time.Gmt()
+        val time = Time.current
+        val gmt  = Time.Gmt.current
 
-        time.dayTime.toBrief.TP // Prints: 13:34
+        time.dayTime.tagBrief.TP // Prints: 13:34
 
-        gmt.dayTime.toBrief.TP  // Prints: 17:34
+        gmt.dayTime.tagBrief.TP  // Prints: 17:34
 
         // Nevertheless they are data equal
 

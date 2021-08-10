@@ -9,7 +9,7 @@ object ByteCount extends Long.Opaque.Data.Numerical[ByteCount]("ByteCount"):
   implicit inline def implicitRequest(v: \/)    : ByteCount = 0L.opaque
 
   extension(inline x: ByteCount)
-    inline def toBrief : String = x.real.toBrief + 'B'
+    inline def tagBrief: String = x.real.tagBrief + 'B'
     inline def toLongKb: Long   = x.real / 1000
     inline def toLongMb: Long   = x.real / 1_000_000
     inline def toLongGb: Long   = x.real / 1_000_000_000

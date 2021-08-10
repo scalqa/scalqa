@@ -3,22 +3,23 @@ package scalqa; package gen; package calendar; import language.implicitConversio
 import Calendar.Month
 
 object Month extends Int.Opaque.Data.Sequential[Month]("Month"):
-  /**/     def apply(year: Int, month: Int)      : Month   = (year * 12 + month - 1).opaque
-  /**/     def current                           : Month   = Day.current.month
-  override def value_tag(v: Month)               : String  = v.year.tag + "-" + { if (v.number > 9) v.number else "0" + v.number }
-  override def value_isVoid(v: Month)            : Boolean = v.real == Int.min
+  /**/     inline def fromIndex(epochMonth: Int) : Month    = epochMonth.opaque
+  /**/            def apply(year: Int,month: Int): Month    = (year * 12 + month - 1).opaque
+  /**/            def current                    : Month    = Day.current.month
+  override        def value_tag(v: Month)        : String   = v.year.tag + "-" + { if (v.number > 9) v.number else "0" + v.number }
+  override        def value_isVoid(v: Month)     : Boolean  = v.real == Int.min
 
-  implicit inline def implicitRequest(v: \/)     : Month   = Int.min.opaque
-  implicit inline def implicitRequest(v: CURRENT): Month   = current
+  implicit inline def implicitRequest(v: \/)     : Month    = Int.min.opaque
+  implicit inline def implicitRequest(v: CURRENT): Month    = current
 
   extension (x: Month)
-    inline def index     : Int      = x.real
-    inline def year      : Year     = Year(x.real / 12)
-    inline def number    : Int      = x.real % 12 + 1
-    /**/   def start     : Time     = x.days(0).start
-    inline def period    : Period   = Period(x.start, x.next.start)
-    /**/   def isCurrent : Boolean  = x == Month.current
-    /**/   def days      : Day.Idx  = new zDays(x)
+    /**/   inline def index                      : Int      = x.real
+    /**/   inline def year                       : Year     = Year(x.real / 12)
+    /**/   inline def number                     : Int      = x.real % 12 + 1
+    /**/          def start                      : Time     = Day(x,1).start
+    /**/   inline def period                     : Period   = Period(x.start, x.next.start)
+    /**/          def isCurrent                  : Boolean  = x == Month.current
+    /**/          def days                       : Day.Idx  = new zDays(x)
 
   object OPAQUE:
     opaque type TYPE <: Int.Opaque = Int.Opaque
@@ -26,7 +27,7 @@ object Month extends Int.Opaque.Data.Sequential[Month]("Month"):
   // ***************************************************************************************************************
   private class zDays(v: Month) extends Day.Idx:
     def apply(i: Int) = Day(v.year.number, v.number, i + 1);
-    val size = v.number match { case 2 => if (v.year.isLeap) 29 else 28; case 4 | 6 | 9 | 11 => 30; case _ => 31 }
+    val size          = v.number match { case 2 => if (v.year.isLeap) 29 else 28; case 4 | 6 | 9 | 11 => 30; case _ => 31 }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

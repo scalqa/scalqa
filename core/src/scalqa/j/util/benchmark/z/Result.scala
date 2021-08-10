@@ -21,9 +21,9 @@ private[j] class Result(
     Doc(this)
       +=  ("Num", number)
       ++= (label != number.toString) ? ("Name", label)
-      +=  ("Ops/Sec", if (time <= \/) "Too many" else opsPerSec.toBrief)
+      +=  ("Ops/Sec", if (time <= \/) "Too many" else opsPerSec.tagBrief)
       +=  ("%",        percent(opsPerSec, maxOpsPerSec))
-      +=  ("Memory",   memoryAverage.toBrief)
+      +=  ("Memory",   memoryAverage.tagBrief)
       +=  ("%",        percent(memoryAverage.toLong, maxMemoryAverage.toLong))
       ++= ( sumOpt.drop(_ => count == 0).map(v => ("Avg Value",(v / count).tag)) or_? lastOpt.map(v => ("Last Value" , v.tag)))
 /*___________________________________________________________________________

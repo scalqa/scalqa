@@ -3,17 +3,17 @@ package scalqa; package gen; package time; import language.implicitConversions
 import Time.Instant
 
 object Instant extends Long.Opaque.Data.Ordered[Instant]("Time.Instant") with time.x.Base[Instant] with time.x.Nanos.Base:
-  inline   def fromNanos(inline v: Long)   : Instant = v.opaque
-  inline   def apply()                     : Instant = apply(clock.instant); private val clock = java.time.Clock.systemUTC
-  /**/     def apply(i: java.time.Instant) : Instant = (i.getEpochSecond * 1_000_000_000L + i.getNano).opaque
-  override def value_tag(v: Instant)       : String  = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new java.util.Date(v.real / 1_000_000L)) + "." + Z.pad(v.micros, 3) + "." + Z.pad(v.nanos, 3)
+  /**/           inline def fromNanos(inline v: Long)  : Instant = v.opaque
+  /**/           inline def apply()                    : Instant = apply(clock.instant); private val clock = java.time.Clock.systemUTC
+  /**/                  def apply(i: java.time.Instant): Instant = (i.getEpochSecond * 1_000_000_000L + i.getNano).opaque
+  override              def value_tag(v: Instant)      : String  = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new java.util.Date(v.real / 1_000_000L)) + "." + Z.pad(v.micros, 3) + "." + Z.pad(v.nanos, 3)
 
-  implicit inline def implicitRequest(v: CURRENT): Instant = apply()
+  implicit       inline def implicitRequest(v: CURRENT): Instant = apply()
 
   extension(x: Instant)
-    /**/                def genTime                   : Time     = Time.fromMillis(x.real / 1_000_000L)
-    @tn("plus")  inline def + (inline l: Time.Length) : Instant  = (x.real + l.nanosTotal).opaque
-    @tn("minus") inline def - (inline l: Time.Length) : Instant  = (x.real - l.nanosTotal).opaque
+    /**/                def genTime                    : Time    = Time.fromIndex(x.real / 1_000_000L)
+    @tn("plus")  inline def + (inline l: Time.Length)  : Instant = (x.real + l.nanosTotal).opaque
+    @tn("minus") inline def - (inline l: Time.Length)  : Instant = (x.real - l.nanosTotal).opaque
 
   object OPAQUE:
     opaque type TYPE <: Long.Opaque = Long.Opaque

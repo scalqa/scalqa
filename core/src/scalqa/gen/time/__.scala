@@ -3,29 +3,31 @@ package scalqa; package gen; import time.*; import language.implicitConversions
 import Gen.Time
 
 object Time extends Long.Opaque.Data.Ordered[Time]("Time") with time.x.Base[Time] with time.x.Millis.Base:
-  /**/       inline def fromMillis(inline v: Long)   : Time        = v.opaque
-  /**/       inline def current                      : Time        = System.currentTimeMillis.opaque
-  /**/              def apply(day: Day,
-    /**/                     l: Length, ls: Length*) : Time        = (day.start.real + {if (ls.isEmpty) l.millisTotal else ls.~.map(_.nanosTotal).fold(l.nanosTotal)(_ + _) / 1_000_000L}).opaque
-  /**/              def apply(i: java.time.Instant)  : Time        = (i.getEpochSecond * 1000 + i.getNano / 1_000_000L).opaque
-  @tn("current_Pro")def current_*(changeEvery:Length): Time.Pro.O  = z.CurrentProperty(changeEvery)
-  override          def value_isVoid(v: Time)        : Boolean     = v.real == voidValue
-  override          def value_tag(v: Time)           : String      = v.day.tag + ' ' + v.dayTime.tag
-  private    inline val voidValue                 /* : Long */     = -62167201438000L
+  /**/           inline def fromIndex(epochMillis: Long)    : Time        = epochMillis.opaque
+  /**/           inline def current                         : Time        = System.currentTimeMillis.opaque
+  /**/                  def apply(d:Day,l:Length,ls:Length*): Time        = (d.start.real + {if (ls.isEmpty) l.millisTotal else ls.~.map(_.nanosTotal).fold(l.nanosTotal)(_ + _) / 1_000_000L}).opaque
+  /**/                  def apply(i: java.time.Instant)     : Time        = (i.getEpochSecond * 1000 + i.getNano / 1_000_000L).opaque
+  @tn("current_Pro")    def current_*(changeEvery:Length)   : Time.Pro.O  = z.CurrentProperty(changeEvery)
+  override              def value_isVoid(v: Time)           : Boolean     = v.real == voidValue
+  override              def value_tag(v: Time)              : String      = v.day.tag + ' ' + v.dayTime.tag
+  private        inline val voidValue                    /* : Long */     = -62167201438000L  // 0000-01-01 00:00:00
 
-  implicit   inline def implicitRequest(v: CURRENT)  : Time        = current
-  implicit   inline def implicitRequest(v: \/)       : Time        = voidValue.opaque
+  implicit       inline def implicitRequest(v: CURRENT)     : Time        = current
+  implicit       inline def implicitRequest(v: \/)          : Time        = voidValue.opaque
 
   extension(x: Time)
-    protected      def genTime                       : Time        = x
-    /**/           def age                           : Length      = { val cm = System.currentTimeMillis; val m = x.real; if (cm <= m) \/ else (cm - m).Millis }
-    /**/           def lengthTo(that: Time)          : Length      = (that.real - x.real).abs.Millis
-    /**/           def format(pattern: String)       : String      = new java.text.SimpleDateFormat(pattern).format(new java.util.Date(x.real))
-    /**/    inline def toGmt                         : Gmt         = Gmt.fromMillis(x.real)
-    /**/    inline def toInstant                     : Instant     = Instant.fromNanos(x.real * 1_000_000L)
-    /**/           def skipTo(dt: DayTime)           : Time        = x + { val l = dt.millisTotal - x.dayTime.millisTotal; { if (l >= 0) l else l + X.Millis.InOneDay}.Millis}
-    override       def day                           : Day         = Day.byIndex(Z.zonedDateTime(x).toLocalDate.toEpochDay.toInt)
-    override       def dayTime                       : DayTime     = Z.zonedDateTime(x).^.to(dt => ((dt.getHour.Hours.real + dt.getMinute.Minutes.real + dt.getSecond.Seconds.real) + dt.getNano).Nanos) // Cannot do + on Length, Time + gest picked up
+    protected           def genTime                         : Time        = x
+    /**/                def age                             : Length      = { val cm = System.currentTimeMillis; val m = x.real; if (cm <= m) \/ else (cm - m).Millis }
+    /**/                def lengthTo(that: Time)            : Length      = (that.real - x.real).abs.Millis
+    /**/                def format(pattern: String)         : String      = new java.text.SimpleDateFormat(pattern).format(new java.util.Date(x.real))
+    /**/                def skipTo(dt: DayTime)             : Time        = x + { val l = dt.millisTotal - x.dayTime.millisTotal; { if (l >= 0) l else l + X.Millis.InOneDay}.Millis}
+    override            def day                             : Day         = Day.fromIndex(Z.zonedDateTime(x).toLocalDate.toEpochDay.toInt)
+    override            def dayTime                         : DayTime     = Z.zonedDateTime(x).^.to(dt => dt.getHour.Hours + dt.getMinute.Minutes + dt.getSecond.Seconds + dt.getNano.Nanos)
+  extension(inline x: Time)
+    /**/         inline def toGmt                           : Gmt         = Gmt.fromIndex(x.real)
+    /**/         inline def toInstant                       : Instant     = Instant.fromNanos(x.real * 1_000_000L)
+    @tn("plus")  inline def +(inline l: Length)             : Time        = (x.real + l.millisTotal).opaque
+    @tn("minus") inline def -(inline l: Length)             : Time        = (x.real - l.millisTotal).opaque
 
   object OPAQUE:
     opaque type TYPE <: Long.Opaque = Long.Opaque

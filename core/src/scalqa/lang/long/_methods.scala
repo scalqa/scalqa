@@ -11,7 +11,7 @@ transparent trait _methods:
     @tn("rangeOfSize")inline def <>=(inline size: Int)     : lang.Long.<>   = {val v=x; new lang.Long.<>(v,v+size,false)}
     /**/        infix inline def max(inline v: Long)       : Long           = {val y=x; val w=v; if(y.real > w.real) y else w }
     /**/        infix inline def min(inline v: Long)       : Long           = {val y=x; val w=v; if(y.real < w.real) y else w }
-    /**/              inline def toBrief                   : String         = Z.toBrief(x)
+    /**/              inline def tagBrief                  : String         = Z.tagBrief(x)
     /**/              inline def roundTo(inline unit:Long)
                                         (using r:Rounding) : Long           = r(x,unit)
     //  -------------------------------------------------------------------------------------------------------

@@ -33,7 +33,7 @@ object  Z:
     /**/               def sizeLong  : Long     = { val sz=eX-i;  sz/step + (if(sz%step > 0) 1 else 0)}
     /**/               def doc      : Doc     = this.defaultDoc ++= (i<eX) ? ("from",i.toString) += ("step",step)
 
-  def toBrief(x: Long): String = x match
+  def tagBrief(x: Long): String = x match
     case v if v >= 1_000_000_000_000L => s"${v * 10 / 1_000_000_000_000L / 10D}t"
     case v if v >= 1_000_000_000L     => s"${v * 10 / 1_000_000_000L / 10D}g"
     case v if v >= 1_000_000L         => s"${v * 10 / 1_000_000L / 10D}m"
