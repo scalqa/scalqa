@@ -2,8 +2,7 @@ package scalqa; package `val`; package stream; package z; package _build; packag
 
 import gen.`given`.StreamShape.{ Opt as SHAPE}
 
-class mapOpt     [A,B]             (x: ~[A], f: A => Val.Opt[B]                        ) extends a.Pipe.ofRef    [B](x){@tn("read_Opt")    def read_?    ={var o=x.read_?; while(o.nonEmpty){ val r=f(o.`val`); if(r.nonEmpty) return r; o=x.read_? }; \/}}
-
+class  mapOpt    [A,B]             (x: ~[A], f:A => Val.Opt[B]                         ) extends a.Pipe.ofRef    [B](x){@tn("read_Opt")    def read_?    ={var o=x.read_?; while(o.nonEmpty){ val r=f(o.`val`); if(r.nonEmpty) return r; o=x.read_? }; \/}}
 object mapOpt:
   class toBoolean[A,B<:Boolean.Raw](x: ~[A], f:Byte  .G.Fun.FromAny[A,Boolean.G.Opt[B]]) extends a.Pipe.ofBoolean[B](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){ val r=f(o.`val`); if(r.nonEmpty) return r; o=x.read_? }; \/}}
   class toByte   [A,B<:Byte.Raw]   (x: ~[A], f:Short .G.Fun.FromAny[A,Byte   .G.Opt[B]]) extends a.Pipe.ofByte   [B](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){ val r=f(o.`val`); if(r.nonEmpty) return r; o=x.read_? }; \/}}
@@ -17,44 +16,44 @@ object mapOpt:
   inline def apply[A,B,STM<: ~~.AnyType[B],OPT<:Val.Opt.AnyType[B]](inline x: ~[A], inline f: A => OPT, inline s:SHAPE[B,OPT,STM]): STM =
     type BB=B&Boolean.Raw;type BY=B&Byte.Raw;type BC=B&Char.Raw;type BS=B&Short.Raw;type BI=B&Int.Raw;type BL=B&Long.Raw;type BF=B&Float.Raw;type BD=B&Double.Raw
     inline s match
-      case _ : SHAPE[B,Boolean.G.Opt[BB],Boolean.G.~[BB]] => toBoolean (x,v => f(v).cast[Boolean.G.Opt[BB]])
-      case _ : SHAPE[B,Byte   .G.Opt[BY],Byte   .G.~[BY]] => toByte    (x,v => f(v).cast[Byte   .G.Opt[BY]])
-      case _ : SHAPE[B,Char   .G.Opt[BC],Char   .G.~[BC]] => toChar    (x,v => f(v).cast[Char   .G.Opt[BC]])
-      case _ : SHAPE[B,Short  .G.Opt[BS],Short  .G.~[BS]] => toShort   (x,v => f(v).cast[Short  .G.Opt[BS]])
-      case _ : SHAPE[B,Int    .G.Opt[BI],Int    .G.~[BI]] => toInt     (x,v => f(v).cast[Int    .G.Opt[BI]])
-      case _ : SHAPE[B,Long   .G.Opt[BL],Long   .G.~[BL]] => toLong    (x,v => f(v).cast[Long   .G.Opt[BL]])
-      case _ : SHAPE[B,Float  .G.Opt[BF],Float  .G.~[BF]] => toFloat   (x,v => f(v).cast[Float  .G.Opt[BF]])
-      case _ : SHAPE[B,Double .G.Opt[BD],Double .G.~[BD]] => toDouble  (x,v => f(v).cast[Double .G.Opt[BD]])
-      case _ : SHAPE[B,      Val.Opt[BB],Boolean.G.~[BB]] => toBoolean (x,v => f(v).cast[Opt[BB]].raw)
-      case _ : SHAPE[B,      Val.Opt[BY],Byte   .G.~[BY]] => toByte    (x,v => f(v).cast[Opt[BY]].raw)
-      case _ : SHAPE[B,      Val.Opt[BC],Char   .G.~[BC]] => toChar    (x,v => f(v).cast[Opt[BC]].raw)
-      case _ : SHAPE[B,      Val.Opt[BS],Short  .G.~[BS]] => toShort   (x,v => f(v).cast[Opt[BS]].raw)
-      case _ : SHAPE[B,      Val.Opt[BI],Int    .G.~[BI]] => toInt     (x,v => f(v).cast[Opt[BI]].raw)
-      case _ : SHAPE[B,      Val.Opt[BL],Long   .G.~[BL]] => toLong    (x,v => f(v).cast[Opt[BL]].raw)
-      case _ : SHAPE[B,      Val.Opt[BF],Float  .G.~[BF]] => toFloat   (x,v => f(v).cast[Opt[BF]].raw)
-      case _ : SHAPE[B,      Val.Opt[BD],Double .G.~[BD]] => toDouble  (x,v => f(v).cast[Opt[BD]].raw)
-      case _ : SHAPE[B,      Val.Opt[B ],AnyRef .G.~[B ]] => new mapOpt(x,v => f(v).cast[Opt[B ]])
+      case _ : SHAPE[B,Boolean.G.Opt[BB],Boolean.G.~[BB]] => new toBoolean(x,v => f(v).cast[Boolean.G.Opt[BB]])
+      case _ : SHAPE[B,Byte   .G.Opt[BY],Byte   .G.~[BY]] => new toByte   (x,v => f(v).cast[Byte   .G.Opt[BY]])
+      case _ : SHAPE[B,Char   .G.Opt[BC],Char   .G.~[BC]] => new toChar   (x,v => f(v).cast[Char   .G.Opt[BC]])
+      case _ : SHAPE[B,Short  .G.Opt[BS],Short  .G.~[BS]] => new toShort  (x,v => f(v).cast[Short  .G.Opt[BS]])
+      case _ : SHAPE[B,Int    .G.Opt[BI],Int    .G.~[BI]] => new toInt    (x,v => f(v).cast[Int    .G.Opt[BI]])
+      case _ : SHAPE[B,Long   .G.Opt[BL],Long   .G.~[BL]] => new toLong   (x,v => f(v).cast[Long   .G.Opt[BL]])
+      case _ : SHAPE[B,Float  .G.Opt[BF],Float  .G.~[BF]] => new toFloat  (x,v => f(v).cast[Float  .G.Opt[BF]])
+      case _ : SHAPE[B,Double .G.Opt[BD],Double .G.~[BD]] => new toDouble (x,v => f(v).cast[Double .G.Opt[BD]])
+      case _ : SHAPE[B,AnyRef .G.Opt[BB],Boolean.G.~[BB]] => new toBoolean(x,v => f(v).cast[Opt[BB]].raw)
+      case _ : SHAPE[B,AnyRef .G.Opt[BY],Byte   .G.~[BY]] => new toByte   (x,v => f(v).cast[Opt[BY]].raw)
+      case _ : SHAPE[B,AnyRef .G.Opt[BC],Char   .G.~[BC]] => new toChar   (x,v => f(v).cast[Opt[BC]].raw)
+      case _ : SHAPE[B,AnyRef .G.Opt[BS],Short  .G.~[BS]] => new toShort  (x,v => f(v).cast[Opt[BS]].raw)
+      case _ : SHAPE[B,AnyRef .G.Opt[BI],Int    .G.~[BI]] => new toInt    (x,v => f(v).cast[Opt[BI]].raw)
+      case _ : SHAPE[B,AnyRef .G.Opt[BL],Long   .G.~[BL]] => new toLong   (x,v => f(v).cast[Opt[BL]].raw)
+      case _ : SHAPE[B,AnyRef .G.Opt[BF],Float  .G.~[BF]] => new toFloat  (x,v => f(v).cast[Opt[BF]].raw)
+      case _ : SHAPE[B,AnyRef .G.Opt[BD],Double .G.~[BD]] => new toDouble (x,v => f(v).cast[Opt[BD]].raw)
+      case _ : SHAPE[B,AnyRef .G.Opt[B ],AnyRef .G.~[B ]] => new mapOpt   (x,v => f(v).cast[Opt[B ]])
 
   inline def APPLY[A,B,STM<: ~~.AnyType[B],OPT<:Val.Opt.AnyType[B]](inline x: ~[A], inline f: A => OPT, inline s:SHAPE[B,OPT,STM]): STM =
     type BB=B&Boolean.Raw;type BY=B&Byte.Raw;type BC=B&Char.Raw;type BS=B&Short.Raw;type BI=B&Int.Raw;type BL=B&Long.Raw;type BF=B&Float.Raw;type BD=B&Double.Raw
     inline s match
-      case _ : SHAPE[B,Boolean.G.Opt[BB],Boolean.G.~[BB]] => {class mapOptToBoolean(x: ~[A]) extends a.Pipe.ofBoolean[BB](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[Boolean.G.Opt[BB]]; if(r.nonEmpty) return r; o=x.read_? }; \/}}; mapOptToBoolean(x)}
-      case _ : SHAPE[B,Byte   .G.Opt[BY],Byte   .G.~[BY]] => {class mapOptToByte   (x: ~[A]) extends a.Pipe.ofByte   [BY](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[Byte   .G.Opt[BY]]; if(r.nonEmpty) return r; o=x.read_? }; \/}}; mapOptToByte   (x)}
-      case _ : SHAPE[B,Char   .G.Opt[BC],Char   .G.~[BC]] => {class mapOptToChar   (x: ~[A]) extends a.Pipe.ofChar   [BC](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[Char   .G.Opt[BC]]; if(r.nonEmpty) return r; o=x.read_? }; \/}}; mapOptToChar   (x)}
-      case _ : SHAPE[B,Short  .G.Opt[BS],Short  .G.~[BS]] => {class mapOptToShort  (x: ~[A]) extends a.Pipe.ofShort  [BS](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[Short  .G.Opt[BS]]; if(r.nonEmpty) return r; o=x.read_? }; \/}}; mapOptToShort  (x)}
-      case _ : SHAPE[B,Int    .G.Opt[BI],Int    .G.~[BI]] => {class mapOptToInt    (x: ~[A]) extends a.Pipe.ofInt    [BI](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[Int    .G.Opt[BI]]; if(r.nonEmpty) return r; o=x.read_? }; \/}}; mapOptToInt    (x)}
-      case _ : SHAPE[B,Long   .G.Opt[BL],Long   .G.~[BL]] => {class mapOptToLong   (x: ~[A]) extends a.Pipe.ofLong   [BL](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[Long   .G.Opt[BL]]; if(r.nonEmpty) return r; o=x.read_? }; \/}}; mapOptToLong   (x)}
-      case _ : SHAPE[B,Float  .G.Opt[BF],Float  .G.~[BF]] => {class mapOptToFloat  (x: ~[A]) extends a.Pipe.ofFloat  [BF](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[Float  .G.Opt[BF]]; if(r.nonEmpty) return r; o=x.read_? }; \/}}; mapOptToFloat  (x)}
-      case _ : SHAPE[B,Double .G.Opt[BD],Double .G.~[BD]] => {class mapOptToDouble (x: ~[A]) extends a.Pipe.ofDouble [BD](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[Double .G.Opt[BD]]; if(r.nonEmpty) return r; o=x.read_? }; \/}}; mapOptToDouble (x)}
-      case _ : SHAPE[B,      Val.Opt[BB],Boolean.G.~[BB]] => {class mapOptToBoolean(x: ~[A]) extends a.Pipe.ofBoolean[BB](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[  Val.Opt[BB]].raw; if(r.nonEmpty) return r; o=x.read_? }; \/}}; mapOptToBoolean(x)}
-      case _ : SHAPE[B,      Val.Opt[BY],Byte   .G.~[BY]] => {class mapOptToByte   (x: ~[A]) extends a.Pipe.ofByte   [BY](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[  Val.Opt[BY]].raw; if(r.nonEmpty) return r; o=x.read_? }; \/}}; mapOptToByte   (x)}
-      case _ : SHAPE[B,      Val.Opt[BC],Char   .G.~[BC]] => {class mapOptToChar   (x: ~[A]) extends a.Pipe.ofChar   [BC](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[  Val.Opt[BC]].raw; if(r.nonEmpty) return r; o=x.read_? }; \/}}; mapOptToChar   (x)}
-      case _ : SHAPE[B,      Val.Opt[BS],Short  .G.~[BS]] => {class mapOptToShort  (x: ~[A]) extends a.Pipe.ofShort  [BS](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[  Val.Opt[BS]].raw; if(r.nonEmpty) return r; o=x.read_? }; \/}}; mapOptToShort  (x)}
-      case _ : SHAPE[B,      Val.Opt[BI],Int    .G.~[BI]] => {class mapOptToInt    (x: ~[A]) extends a.Pipe.ofInt    [BI](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[  Val.Opt[BI]].raw; if(r.nonEmpty) return r; o=x.read_? }; \/}}; mapOptToInt    (x)}
-      case _ : SHAPE[B,      Val.Opt[BL],Long   .G.~[BL]] => {class mapOptToLong   (x: ~[A]) extends a.Pipe.ofLong   [BL](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[  Val.Opt[BL]].raw; if(r.nonEmpty) return r; o=x.read_? }; \/}}; mapOptToLong   (x)}
-      case _ : SHAPE[B,      Val.Opt[BF],Float  .G.~[BF]] => {class mapOptToFloat  (x: ~[A]) extends a.Pipe.ofFloat  [BF](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[  Val.Opt[BF]].raw; if(r.nonEmpty) return r; o=x.read_? }; \/}}; mapOptToFloat  (x)}
-      case _ : SHAPE[B,      Val.Opt[BD],Double .G.~[BD]] => {class mapOptToDouble (x: ~[A]) extends a.Pipe.ofDouble [BD](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[  Val.Opt[BD]].raw; if(r.nonEmpty) return r; o=x.read_? }; \/}}; mapOptToDouble (x)}
-      case _ : SHAPE[B,      Val.Opt[B ],AnyRef .G.~[B ]] => {class mapOpt         (x: ~[A]) extends a.Pipe.ofRef    [B ](x){@tn("read_Opt")    def read_?    ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[  Val.Opt[B]];      if(r.nonEmpty) return r; o=x.read_? }; \/}}; new mapOpt     (x)}
+      case _ : SHAPE[B,Boolean.G.Opt[BB],Boolean.G.~[BB]] => {class mapOptToBoolean(x: ~[A]) extends a.Pipe.ofBoolean[BB](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[Boolean.G.Opt[BB]];     if(r.nonEmpty) return r; o=x.read_? }; \/}}; new mapOptToBoolean(x)}
+      case _ : SHAPE[B,Byte   .G.Opt[BY],Byte   .G.~[BY]] => {class mapOptToByte   (x: ~[A]) extends a.Pipe.ofByte   [BY](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[Byte   .G.Opt[BY]];     if(r.nonEmpty) return r; o=x.read_? }; \/}}; new mapOptToByte   (x)}
+      case _ : SHAPE[B,Char   .G.Opt[BC],Char   .G.~[BC]] => {class mapOptToChar   (x: ~[A]) extends a.Pipe.ofChar   [BC](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[Char   .G.Opt[BC]];     if(r.nonEmpty) return r; o=x.read_? }; \/}}; new mapOptToChar   (x)}
+      case _ : SHAPE[B,Short  .G.Opt[BS],Short  .G.~[BS]] => {class mapOptToShort  (x: ~[A]) extends a.Pipe.ofShort  [BS](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[Short  .G.Opt[BS]];     if(r.nonEmpty) return r; o=x.read_? }; \/}}; new mapOptToShort  (x)}
+      case _ : SHAPE[B,Int    .G.Opt[BI],Int    .G.~[BI]] => {class mapOptToInt    (x: ~[A]) extends a.Pipe.ofInt    [BI](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[Int    .G.Opt[BI]];     if(r.nonEmpty) return r; o=x.read_? }; \/}}; new mapOptToInt    (x)}
+      case _ : SHAPE[B,Long   .G.Opt[BL],Long   .G.~[BL]] => {class mapOptToLong   (x: ~[A]) extends a.Pipe.ofLong   [BL](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[Long   .G.Opt[BL]];     if(r.nonEmpty) return r; o=x.read_? }; \/}}; new mapOptToLong   (x)}
+      case _ : SHAPE[B,Float  .G.Opt[BF],Float  .G.~[BF]] => {class mapOptToFloat  (x: ~[A]) extends a.Pipe.ofFloat  [BF](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[Float  .G.Opt[BF]];     if(r.nonEmpty) return r; o=x.read_? }; \/}}; new mapOptToFloat  (x)}
+      case _ : SHAPE[B,Double .G.Opt[BD],Double .G.~[BD]] => {class mapOptToDouble (x: ~[A]) extends a.Pipe.ofDouble [BD](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[Double .G.Opt[BD]];     if(r.nonEmpty) return r; o=x.read_? }; \/}}; new mapOptToDouble (x)}
+      case _ : SHAPE[B,AnyRef .G.Opt[BB],Boolean.G.~[BB]] => {class mapOptToBoolean(x: ~[A]) extends a.Pipe.ofBoolean[BB](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[AnyRef .G.Opt[BB]].raw; if(r.nonEmpty) return r; o=x.read_? }; \/}}; new mapOptToBoolean(x)}
+      case _ : SHAPE[B,AnyRef .G.Opt[BY],Byte   .G.~[BY]] => {class mapOptToByte   (x: ~[A]) extends a.Pipe.ofByte   [BY](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[AnyRef .G.Opt[BY]].raw; if(r.nonEmpty) return r; o=x.read_? }; \/}}; new mapOptToByte   (x)}
+      case _ : SHAPE[B,AnyRef .G.Opt[BC],Char   .G.~[BC]] => {class mapOptToChar   (x: ~[A]) extends a.Pipe.ofChar   [BC](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[AnyRef .G.Opt[BC]].raw; if(r.nonEmpty) return r; o=x.read_? }; \/}}; new mapOptToChar   (x)}
+      case _ : SHAPE[B,AnyRef .G.Opt[BS],Short  .G.~[BS]] => {class mapOptToShort  (x: ~[A]) extends a.Pipe.ofShort  [BS](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[AnyRef .G.Opt[BS]].raw; if(r.nonEmpty) return r; o=x.read_? }; \/}}; new mapOptToShort  (x)}
+      case _ : SHAPE[B,AnyRef .G.Opt[BI],Int    .G.~[BI]] => {class mapOptToInt    (x: ~[A]) extends a.Pipe.ofInt    [BI](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[AnyRef .G.Opt[BI]].raw; if(r.nonEmpty) return r; o=x.read_? }; \/}}; new mapOptToInt    (x)}
+      case _ : SHAPE[B,AnyRef .G.Opt[BL],Long   .G.~[BL]] => {class mapOptToLong   (x: ~[A]) extends a.Pipe.ofLong   [BL](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[AnyRef .G.Opt[BL]].raw; if(r.nonEmpty) return r; o=x.read_? }; \/}}; new mapOptToLong   (x)}
+      case _ : SHAPE[B,AnyRef .G.Opt[BF],Float  .G.~[BF]] => {class mapOptToFloat  (x: ~[A]) extends a.Pipe.ofFloat  [BF](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[AnyRef .G.Opt[BF]].raw; if(r.nonEmpty) return r; o=x.read_? }; \/}}; new mapOptToFloat  (x)}
+      case _ : SHAPE[B,AnyRef .G.Opt[BD],Double .G.~[BD]] => {class mapOptToDouble (x: ~[A]) extends a.Pipe.ofDouble [BD](x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[AnyRef .G.Opt[BD]].raw; if(r.nonEmpty) return r; o=x.read_? }; \/}}; new mapOptToDouble (x)}
+      case _ : SHAPE[B,AnyRef .G.Opt[B ],AnyRef .G.~[B ]] => {class mapOpt         (x: ~[A]) extends a.Pipe.ofRef    [B ](x){@tn("read_Opt")    def read_?    ={var o=x.read_?; while(o.nonEmpty){val r= f(o.`val`).cast[AnyRef .G.Opt[B]];      if(r.nonEmpty) return r; o=x.read_? }; \/}}; new mapOpt         (x)}
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

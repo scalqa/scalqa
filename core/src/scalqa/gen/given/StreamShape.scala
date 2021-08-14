@@ -37,17 +37,17 @@ object StreamShape extends zStreamShapeDefault:
     inline given givenFloat     [A<:Float.Raw  ] : Opt[A,Float  .G.Opt[A], Float  .G.~[A]] = new Opt[A,Float  .G.Opt[A], Float  .G.~[A]]
     inline given givenDouble    [A<:Double.Raw ] : Opt[A,Double .G.Opt[A], Double .G.~[A]] = new Opt[A,Double .G.Opt[A], Double .G.~[A]]
 
-    inline given givenRefBoolean[A<:Boolean.Raw] : Opt[A,      Val.Opt[A], Boolean.G.~[A]] = new Opt[A,      Val.Opt[A], Boolean.G.~[A]]
-    inline given givenRefByte   [A<:Byte.Raw   ] : Opt[A,      Val.Opt[A], Byte   .G.~[A]] = new Opt[A,      Val.Opt[A], Byte   .G.~[A]]
-    inline given givenRefChar   [A<:Char.Raw   ] : Opt[A,      Val.Opt[A], Char   .G.~[A]] = new Opt[A,      Val.Opt[A], Char   .G.~[A]]
-    inline given givenRefShort  [A<:Short.Raw  ] : Opt[A,      Val.Opt[A], Short  .G.~[A]] = new Opt[A,      Val.Opt[A], Short  .G.~[A]]
-    inline given givenRefInt    [A<:Int.Raw    ] : Opt[A,      Val.Opt[A], Int    .G.~[A]] = new Opt[A,      Val.Opt[A], Int    .G.~[A]]
-    inline given givenRefLong   [A<:Long.Raw   ] : Opt[A,      Val.Opt[A], Long   .G.~[A]] = new Opt[A,      Val.Opt[A], Long   .G.~[A]]
-    inline given givenRefFloat  [A<:Float.Raw  ] : Opt[A,      Val.Opt[A], Float  .G.~[A]] = new Opt[A,      Val.Opt[A], Float  .G.~[A]]
-    inline given givenRefDouble [A<:Double.Raw ] : Opt[A,      Val.Opt[A], Double .G.~[A]] = new Opt[A,      Val.Opt[A], Double .G.~[A]]
-    inline given givenRef       [A<:AnyRef        ] : Opt[A,      Val.Opt[A],       Val.~[A]] = new Opt[A,      Val.Opt[A],       Val.~[A]]
+    inline given givenRefBoolean[A<:Boolean.Raw] : Opt[A,AnyRef .G.Opt[A], Boolean.G.~[A]] = new Opt[A,AnyRef .G.Opt[A], Boolean.G.~[A]]
+    inline given givenRefByte   [A<:Byte.Raw   ] : Opt[A,AnyRef .G.Opt[A], Byte   .G.~[A]] = new Opt[A,AnyRef .G.Opt[A], Byte   .G.~[A]]
+    inline given givenRefChar   [A<:Char.Raw   ] : Opt[A,AnyRef .G.Opt[A], Char   .G.~[A]] = new Opt[A,AnyRef .G.Opt[A], Char   .G.~[A]]
+    inline given givenRefShort  [A<:Short.Raw  ] : Opt[A,AnyRef .G.Opt[A], Short  .G.~[A]] = new Opt[A,AnyRef .G.Opt[A], Short  .G.~[A]]
+    inline given givenRefInt    [A<:Int.Raw    ] : Opt[A,AnyRef .G.Opt[A], Int    .G.~[A]] = new Opt[A,AnyRef .G.Opt[A], Int    .G.~[A]]
+    inline given givenRefLong   [A<:Long.Raw   ] : Opt[A,AnyRef .G.Opt[A], Long   .G.~[A]] = new Opt[A,AnyRef .G.Opt[A], Long   .G.~[A]]
+    inline given givenRefFloat  [A<:Float.Raw  ] : Opt[A,AnyRef .G.Opt[A], Float  .G.~[A]] = new Opt[A,AnyRef .G.Opt[A], Float  .G.~[A]]
+    inline given givenRefDouble [A<:Double.Raw ] : Opt[A,AnyRef .G.Opt[A], Double .G.~[A]] = new Opt[A,AnyRef .G.Opt[A], Double .G.~[A]]
+    inline given givenRef       [A<:AnyRef     ] : Opt[A,AnyRef.G.Opt[A],  AnyRef .G.~[A]] = new Opt[A,AnyRef .G.Opt[A], AnyRef .G.~[A]]
   private[`given`] class zOptTagDefault:
-    inline given givenAny       [A                 ] : Opt[A,      Val.Opt[A],       Val.~[A]] = new Opt[A,      Val.Opt[A],       Val.~[A]]
+    inline given givenAny       [A             ] : Opt[A,AnyRef.G.Opt[A],  AnyRef .G.~[A]] = new Opt[A,AnyRef .G.Opt[A], AnyRef .G.~[A]]
 
 // **********************************************************************************************************************************************
 private[`given`] class zStreamShapeDefault:
