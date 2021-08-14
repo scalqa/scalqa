@@ -14,7 +14,7 @@ object map:
       case _ : OptShape[B,Long   .G.Opt[B]] => {var o:Long   .G.Opt[B & Long.Raw   ]= \/; if(x.nonEmpty) o=f(x.`val`).cast[B & Long.Raw   ]; o.cast[OPT]}
       case _ : OptShape[B,Float  .G.Opt[B]] => {var o:Float  .G.Opt[B & Float.Raw  ]= \/; if(x.nonEmpty) o=f(x.`val`).cast[B & Float.Raw  ]; o.cast[OPT]}
       case _ : OptShape[B,Double .G.Opt[B]] => {var o:Double .G.Opt[B & Double.Raw ]= \/; if(x.nonEmpty) o=f(x.`val`).cast[B & Double.Raw ]; o.cast[OPT]}
-      case _ : OptShape[B,      Val.Opt[B]] => {var o:      Val.Opt[B              ]= \/; if(x.nonEmpty) o=f(x.`val`).cast[B              ]; o.cast[OPT]}
+      case _ : OptShape[B,AnyRef .G.Opt[B]] => {var o:AnyRef .G.Opt[B              ]= \/; if(x.nonEmpty) o=f(x.`val`).cast[B              ]; o.cast[OPT]}
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -8,7 +8,7 @@ private[`val`] class ArrayPack[A](_a: Array[AnyRef], sz: Int) extends ><[A] with
   type THIS_TYPE = Pack[A]
 
   private                var ar                          : Array[AnyRef]    = _a
-  @tn("stream") override def ~                           : ~[A] & Able.Size = lang.array.z.stream.As.Refs(ar,sz)
+  @tn("stream") override def ~                           : ~[A] & Able.Size = lang.array.z.As.RefStream(ar,sz)
   /**/                   def apply(i: Int)               : A                = ar(i).cast[A]
   /**/                   def size                        : Int              = sz
   /**/                   def join(v: A)                  : ><[A]            = new ArrayPack(ar.copySize(sz+1).^(_(sz)=v.cast[AnyRef]),sz+1)

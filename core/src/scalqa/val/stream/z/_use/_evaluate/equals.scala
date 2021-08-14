@@ -1,8 +1,8 @@
-package scalqa; package `val`; package stream; package z; package _use; import language.implicitConversions
+package scalqa; package `val`; package stream; package z; package _use; package _evaluate; import language.implicitConversions
 
-object _evaluate:
+object equals:
 
-  def equals[A](s1: ~[A], s2: ~[A], all: Boolean): Result[true] =
+  def apply[A](s1: ~[A], s2: ~[A], all: Boolean): Result[true] =
     var i = 0
     var o1 = s1.read_?
     var o2 = s2.read_?

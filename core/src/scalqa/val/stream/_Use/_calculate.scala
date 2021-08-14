@@ -1,34 +1,33 @@
 package scalqa; package `val`; package stream; package _use; import language.implicitConversions
 
-import Custom.{ Math as CM }
-import CM.Average
+import Custom.Math.Average
 
 transparent trait _calculate:
   self: _Use =>
 
-  extension[A](x: ~[A])
-    @tn("min")         def min                    (using Ordering[A]) : A             = x.min_?.get
-    @tn("max")         def max                    (using Ordering[A]) : A             = x.max_?.get
-    @tn("range")       def range                  (using Ordering[A]) : Range[A]      = x.range_?.get
-    @tn("sum")         def sum                      (using n:Math[A]) : A             = x.sum_? or n.zero
-    @tn("average")     def average               (using v:Average[A]) : A             = v.average(x)
-    // ------------------------------------------------------------
-    @tn("min_Opt")     def min_?                (using c:Ordering[A]) : Opt[A]        = if(c.isInstanceOf[CM[_]]) c.cast[CM[A]].min_?(x)          else x.read_?.map(u=>{var v=u;   x.FOREACH(w => if(c.compare(v,w)>0) v=w); v})
-    @tn("max_Opt")     def max_?                (using c:Ordering[A]) : Opt[A]        = if(c.isInstanceOf[CM[_]]) c.cast[CM[A]].max_?(x)          else x.read_?.map(u=>{var v=u;   x.FOREACH(w => if(c.compare(v,w)<0) v=w); v})
-    @tn("range_Opt")   def range_?              (using c:Ordering[A]) : Opt[<>[A]]    = if(c.isInstanceOf[CM[_]]) c.cast[CM[A]].range_?(x)        else x.read_?.map(u=>{var f,l=u; x.FOREACH(v => {if(c.compare(v,f)<0) f=v; if(c.compare(v,l)>0) l=v}); Val.<>(f,l,true)(using c)})
-    @tn("sum_Opt")     def sum_?                    (using n:Math[A]) : Opt[A]        = if(n.isInstanceOf[CM[_]]) n.cast[CM[A]].calculateSum_?(x) else x.read_?.map(v=>{var r=v;   x.FOREACH(v => r=n.plus(r,v)); r})
-    @tn("average_Opt") def average_?             (using v:Average[A]) : Opt[A]        = v.averageOpt(x)
-    @tn("minBy")       def minBy  [B](f: A=>B)  (using   Ordering[B]) : A             = x.minBy_?(f).get
-    @tn("maxBy")       def maxBy  [B](f: A=>B)  (using   Ordering[B]) : A             = x.maxBy_?(f).get
-    @tn("minBy_Opt")   def minBy_?[B](f: A=>B)  (using c:Ordering[B]) : Opt[A]        = x.read_?.map(u=>{var v,w=u; var vf=f(u); var wf=vf; x.FOREACH(w=>{ wf=f(w); if(c.compare(vf,wf)>0){v=w;vf=wf}});v})
-    @tn("maxBy_Opt")   def maxBy_?[B](f: A=>B)  (using c:Ordering[B]) : Opt[A]        = x.read_?.map(u=>{var v,w=u; var vf=f(u); var wf=vf; x.FOREACH(w=>{ wf=f(w); if(c.compare(vf,wf)<0){v=w;vf=wf}});v})
+  extension[A](inline x: ~[A])
+    @tn("min")         inline def min                      (using inline o:Ordering[A]) : A          = x.min_?.get
+    @tn("min_Opt")     inline def min_?                    (using inline o:Ordering[A]) : Opt[A]     = z._use.calculate.min_Opt(x,o)
+    @tn("max")         inline def max                      (using inline o:Ordering[A]) : A          = x.max_?.get
+    @tn("max_Opt")     inline def max_?                    (using inline o:Ordering[A]) : Opt[A]     = z._use.calculate.max_Opt(x,o)
+    @tn("range")       inline def range                    (using inline o:Ordering[A]) : Range[A]   = x.range_?.get
+    @tn("range_Opt")   inline def range_?                  (using inline o:Ordering[A]) : Opt[<>[A]] = z._use.calculate.range_Opt(x,o)
+    @tn("sum")         inline def sum                          (using inline n:Math[A]) : A          = x.sum_? or n.zero
+    @tn("sum_Opt")     inline def sum_?                        (using inline n:Math[A]) : Opt[A]     = z._use._calculate.sum.opt(x,n)
+    @tn("average")     inline def average                   (using inline v:Average[A]) : A          = v.average(x)
+    @tn("average_Opt") inline def average_?                 (using inline v:Average[A]) : Opt[A]     = v.averageOpt(x)
+    @tn("minBy")       inline def minBy  [B](inline f: A=>B)(using inline o:Ordering[B]): A          = x.minBy_?(f).get
+    @tn("maxBy")       inline def maxBy  [B](inline f: A=>B)(using inline o:Ordering[B]): A          = x.maxBy_?(f).get
+    @tn("minBy_Opt")   inline def minBy_?[B](inline f: A=>B)(using inline o:Ordering[B]): Opt[A]     = z._use.calculate.minBy_Opt(x,f,o)
+    @tn("maxBy_Opt")   inline def maxBy_?[B](inline f: A=>B)(using inline o:Ordering[B]): Opt[A]     = z._use.calculate.maxBy_Opt(x,f,o)
 
+    inline def averageFew[B,C,D,E,F](inline fb:A=>Opt[B], inline fc:A=>Opt[C], inline fd:A=>Opt[D]= \/, inline fe:A=>Opt[E]= \/, inline ff:A=>Opt[F]= \/)
+                                  (using inline nb:Average[B], inline nc:Average[C], inline nd:Average[D], inline ne:Average[E], inline nf:Average[F])
+                                                         : (B,C) | (B,C,D) | (B,C,D,E) | (B,C,D,E,F) = z._use._calculate.average.few(x,fb,fc,fd,fe,ff)
 
-    def averageFew[B,C,D,E,F](fb:A=>Opt[B], fc:A=>Opt[C], fd:A=>Opt[D]= \/, fe:A=>Opt[E]= \/, ff:A=>Opt[F]= \/)
-                                  (using nb:Average[B],nc:Average[C],nd:Average[D],ne:Average[E],nf:Average[F]) : (B,C)|(B,C,D)|(B,C,D,E)|(B,C,D,E,F) = z._use._calculate.averageFew(x,fb,fc,fd,fe,ff)
-
-    def sumFew  [B,C,D,E,F](fb:A=>Opt[B], fc:A=>Opt[C], fd:A=>Opt[D]= \/, fe:A=>Opt[E]= \/, ff:A=>Opt[F]= \/)
-                                                 (using nb:Math[B],nc:Math[C],nd:Math[D],ne:Math[E],nf:Math[F]) : (B,C)|(B,C,D)|(B,C,D,E)|(B,C,D,E,F) = z._use._calculate.sumFew(x,fb,fc,fd,fe,ff)
+    inline def sumFew  [B,C,D,E,F](inline fb:A=>Opt[B], inline fc:A=>Opt[C], inline fd:A=>Opt[D]= \/, inline fe:A=>Opt[E]= \/, inline ff:A=>Opt[F]= \/)
+                                                 (using inline nb:Math[B], inline nc:Math[C], inline nd:Math[D], inline ne:Math[E], inline nf:Math[F])
+                                                         : (B,C) | (B,C,D) | (B,C,D,E) | (B,C,D,E,F) = z._use._calculate.sum.few(x,fb,fc,fd,fe,ff)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -13,7 +13,7 @@ object AnyTypeOps:
       case _: lang.long   .G.Opt[A] => x.cast[lang.long   .G.Opt[A & Long.Raw   ]].nonEmpty
       case _: lang.float  .G.Opt[A] => x.cast[lang.float  .G.Opt[A & Float.Raw  ]].nonEmpty
       case _: lang.double .G.Opt[A] => x.cast[lang.double .G.Opt[A & Double.Raw ]].nonEmpty
-      case v:            Val.Opt[A] => x.cast[           Val.Opt[A              ]].nonEmpty
+      case v: lang.anyref .G.Opt[A] => x.cast[lang.anyref .G.Opt[A              ]].nonEmpty
 
     inline def VAL: A = inline x match
       case _: lang.boolean.G.Opt[A] => x.cast[lang.boolean.G.Opt[A & Boolean.Raw]].`val`
@@ -24,7 +24,7 @@ object AnyTypeOps:
       case _: lang.long   .G.Opt[A] => x.cast[lang.long   .G.Opt[A & Long.Raw   ]].`val`
       case _: lang.float  .G.Opt[A] => x.cast[lang.float  .G.Opt[A & Float.Raw  ]].`val`
       case _: lang.double .G.Opt[A] => x.cast[lang.double .G.Opt[A & Double.Raw ]].`val`
-      case v:            Val.Opt[A] => x.cast[           Val.Opt[A              ]].`val`
+      case v: lang.anyref .G.Opt[A] => x.cast[lang.anyref .G.Opt[A              ]].`val`
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

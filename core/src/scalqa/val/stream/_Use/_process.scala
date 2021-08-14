@@ -2,14 +2,13 @@ package scalqa; package `val`; package stream; package _use; import language.imp
 
 transparent trait _process:
 
-  extension[A](x: ~[A])
-    /**/   def drain                                          : Unit   = x.FOREACH(_ => ())
-    /**/   def foreachIndexed[U](f: (Int,A)=>U, start:Int=0)  : Unit   = {var i=start; x.FOREACH(v => {f(i,v); i+=1})}
-    /**/   def fornil[U](f:  =>U)                             : Unit   = if (x.read_?.isEmpty) { var v:U = f }
-    /**/   def process[U,W](foreachFun: A=>U, fornilFun: => W): Unit   = {var o=x.read_?; if (o.isEmpty){var v:W=fornilFun} else while(o.nonEmpty){foreachFun(o.`val`); o=x.read_?}; ()}
   extension[A](inline x: ~[A])
-    inline def foreach[U](inline f: A=>U)                     : Unit   = z._use._process._foreach(x,f)
-    inline def FOREACH[U](inline f: A=>U)                     : Unit   = z._use._process._FOREACH(x,f)
+    inline def drain                                                        : Unit   = z._use.process.drain(x)
+    inline def fornil[U](inline f:  =>U)                                    : Unit   = z._use.process.fornil(x,f)
+    inline def process[U,W](inline foreachFun: A=>U, inline fornilFun: => W): Unit   = z._use.process(x,foreachFun,fornilFun)
+    inline def foreach[U](inline f: A=>U)                                   : Unit   = z._use._process.foreach.any(x,f)
+    inline def FOREACH[U](inline f: A=>U)                                   : Unit   = z._use._process.foreach.heavy(x,f)
+    inline def foreachIndexed[U](inline f: (Int,A) => U,inline start: Int=0): Unit   = z._use._process.foreach.indexed(x,f,start)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

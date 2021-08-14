@@ -3,7 +3,7 @@ package scalqa; package lang; package boolean; package z; package stream; import
 object filter:
 
   inline def TAKE[A<:Raw](inline s: G.~[A], inline  f: A=>Boolean): G.~[A] =
-    class TakeStream(x: G.~[A]) extends Z.Pipe[A](x):
+    class TakeStream(x: G.~[A]) extends `val`.stream.z.a.Pipe.ofBoolean[A](x):
       @tn("readRaw_Opt") def readRaw_? =
         var o=x.readRaw_?
         while(o.nonEmpty)
@@ -13,7 +13,7 @@ object filter:
     new TakeStream(s)
 
   inline def DROP[A<:Raw](inline s: G.~[A], inline f: A=>Boolean): G.~[A] =
-    class DropStream(x: G.~[A]) extends Z.Pipe[A](x):
+    class DropStream(x: G.~[A]) extends `val`.stream.z.a.Pipe.ofBoolean[A](x):
       @tn("readRaw_Opt") def readRaw_? =
         var o=x.readRaw_?
         while(o.nonEmpty)

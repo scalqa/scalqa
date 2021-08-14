@@ -20,7 +20,7 @@ class Buffer[A](_a: Array[AnyRef], _s: Int) extends Val.Buffer[A]:
   /**/          override def add(v: A)                  : Unit          = { if(ar.length<=sz) mkSpace(sz+1); ar(sz)=v.cast[AnyRef]; sz+=1}
   /**/                   def addAt(i: Int, v: A)        : Unit          = { if(ar.length<=sz) mkSpace(sz+1); ar.copyTo(ar,i+1,i,sz-i); ar(i)=v.cast[AnyRef]; sz+=1 }
   /**/                   def updateAt(i: Int, v: A)     : Unit          = ar(i) = v.cast[AnyRef]
-  @tn("stream") override def ~                          : ~[A]          = lang.array.z.stream.As.Refs[A](ar,sz)
+  @tn("stream") override def ~                          : ~[A]          = lang.array.z.As.RefStream[A](ar,sz)
   /**/          override def sort  (using c:Ordering[A]): Unit          = ar.sort_<>(0,sz)(using c.cast[Ordering[AnyRef]])
   @tn("pack")            def ><                         : ><[A]         = `val`.Pack.fromArray(ar,sz)
 

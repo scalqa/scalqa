@@ -15,7 +15,7 @@ object mixOpt:
       case _ : OptShape[C,Long   .G.Opt[C]] => {var o:Long   .G.Opt[C & Long.Raw   ]= \/; if(x.nonEmpty && bo.SOME) o=f(x.`val`,bo.VAL).cast[C & Long.Raw   ]; o.cast[OPT]}
       case _ : OptShape[C,Float  .G.Opt[C]] => {var o:Float  .G.Opt[C & Float.Raw  ]= \/; if(x.nonEmpty && bo.SOME) o=f(x.`val`,bo.VAL).cast[C & Float.Raw  ]; o.cast[OPT]}
       case _ : OptShape[C,Double .G.Opt[C]] => {var o:Double .G.Opt[C & Double.Raw ]= \/; if(x.nonEmpty && bo.SOME) o=f(x.`val`,bo.VAL).cast[C & Double.Raw ]; o.cast[OPT]}
-      case _ : OptShape[C,      Val.Opt[C]] => {var o:      Val.Opt[C              ]= \/; if(x.nonEmpty && bo.SOME) o=f(x.`val`,bo.VAL).cast[C              ]; o.cast[OPT]}
+      case _ : OptShape[C,AnyRef .G.Opt[C]] => {var o:AnyRef .G.Opt[C              ]= \/; if(x.nonEmpty && bo.SOME) o=f(x.`val`,bo.VAL).cast[C              ]; o.cast[OPT]}
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

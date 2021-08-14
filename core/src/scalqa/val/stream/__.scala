@@ -36,11 +36,13 @@ ___________________________________________________________________________*/
 /**
 @trait Stream -> ### ~ is Value Stream
 
+      Read about ~ in the [Guide](../../../guide/features/Stream.html).
+
       Note. Stream companion object is [[scalqa.val.stream.Stream$ Val.~]], but when called without prefix it is [[scalqa.val.stream.Stream$ ~~]] (double tilde).
 
       Stream has just one method to be implemented, but it has large attached libraries for:
-        - [building](stream/_build.html) stream pipeline
-        - [using](stream/_use.html) stream data
+        - [building](stream/_Build.html) stream pipeline
+        - [using](stream/_Use.html) stream data
 
       By Scalqa convention, method names, which return [[~]], are ended with '_~'
 
@@ -50,7 +52,6 @@ ___________________________________________________________________________*/
       s.TP  // Prints ~(A, B, C, D)
       ```
 
-      Read more in the [Guide](../../../guide/features/Stream.html).
 
 @object Stream -> ### Value Stream Companion
 
@@ -64,8 +65,8 @@ ___________________________________________________________________________*/
 
       This is the only real method of stream interface, the rest of functionality is provided with extension methods for:
 
-        - [building](stream/_build.html) stream pipeline
-        - [using](stream/_use.html) stream data
+        - [building](stream/_Build.html) stream pipeline
+        - [using](stream/_Use.html) stream data
 
 
 @def apply            -> Single element consructor

@@ -2,10 +2,10 @@ package scalqa; package `val`; package stream; package _use; import language.imp
 
 transparent trait _print:
 
-  extension[A](x: ~[A])
-    /**/                def print   (using Given.DocDef[A]) : Unit = z._use._print(x, false,false)
-    /**/                def printId (using Given.DocDef[A]) : Unit = z._use._print(x, true,false)
-    @tn("print_Number") def print_# (using Given.DocDef[A]) : Unit = z._use._print(x, false,true)
+  extension[A](inline x: ~[A])
+    /**/                inline def print   (using inline d:Given.DocDef[A]) : Unit = z._use._print(x)
+    /**/                inline def printId (using inline d:Given.DocDef[A]) : Unit = z._use._print.id(x)
+    @tn("print_Number") inline def print_# (using inline d:Given.DocDef[A]) : Unit = z._use._print.numbers(x)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -16,7 +16,7 @@ Defining data elements is quite easy, one just needs to select one of the follow
 - [Long.Opaque.Data](../../api/scalqa/lang/long/opaque/Data.html) 
 - [Float.Opaque.Data](../../api/scalqa/lang/float/opaque/Data.html) 
 - [Double.Opaque.Data](../../api/scalqa/lang/double/opaque/Data.html) 
-- [Any.Ref.Opaque.Data](../../api/scalqa/lang/any/ref/opaque/Data.html) 
+- [AnyRef.Opaque.Data](../../api/scalqa/lang/anyref/opaque/Data.html) 
 - [String.Opaque.Data](../../api/scalqa/lang/string/opaque/Data.html) 
 
 ## Define

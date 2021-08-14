@@ -3,7 +3,6 @@ package scalqa; package lang; package int; import language.implicitConversions
 import `val`.stream.Custom.Pipeline
 
 object  Z:
-  abstract class Pipe[A<:Raw](override val base: AnyRef) extends G.~[A] with Pipeline
 
   object VoidStream extends G.~[Int] with Able.Size.Zero with Gen.Void:
     @tn("readRaw_Opt")  def readRaw_?  : Int.Opt = \/

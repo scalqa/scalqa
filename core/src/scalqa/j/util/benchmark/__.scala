@@ -34,7 +34,7 @@ ___________________________________________________________________________*/
 
        [[Benchmark]] allows to run several targets side by side, comparing their performance against each other
 
-       Let's try to benchmark 'append' performance for `List`, `Vector` and `Buffer`
+       Let's try to benchmark 'add' element performance for `List`, `Vector` and `Buffer`
 
        ```
        J.Benchmark(

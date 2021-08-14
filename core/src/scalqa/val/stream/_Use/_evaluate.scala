@@ -1,26 +1,27 @@
 package scalqa; package `val`; package stream; package _use; import language.implicitConversions
 
 transparent trait _evaluate:
-  extension[A](x: ~[A])
-    @tn("find_Opt")            def find_?( f: A => Boolean)    : Opt[A]            = {var o=x.read_?; var b=true; while(b && o.nonEmpty) if(f(o.cast[A])) b=false else o=x.read_?; o}
-    /**/                       def find(   f: A => Boolean)    : A                 = x.find_?(f).get
-    /**/                       def exists( f: A => Boolean)    : Boolean           = x.find_?(f).nonEmpty
-    /**/                       def isEvery(f: A => Boolean)    : Boolean           = x.find_?(v => !f(v)).isEmpty
-    /**/                       def contains(value: A)          : Boolean           = x.takeOnly(value).read_?
-    /**/                       def last                        : A                 = x.last_?.get
-    @tn("findPosition_Opt")    def findPosition_?(f:A=>Boolean): Int.Opt           = {var r:Int.Opt= \/;var o=x.read_?;var i=0;while(r.isEmpty && o.nonEmpty){ if(f(o.cast[A])) r=i else o=x.read_?; i+=1};r}
-    @tn("last_Opt")            def last_?                      : Opt[A]            = x.read_?.map(x.fold(_)((_, v) => v))
-    /**/                       def count                       : Int               = {var c=0; x.foreach(_ => c+=1); c }
-    /**/                       def count(f: A => Boolean)      : Int               = {var c=0; x.foreach(v => if(f(v)) c+=1); c }
-    /**/                       def countAndTime                : (Int,Time.Length) = {val v=System.nanoTime; (x.count, Time.Length.fromNanos(System.nanoTime - v))}
 
-    /**/                       def equalsStart(   v: ~[A])     : Boolean           = z._use._evaluate.equals[A](x,v,false)
-    @tn("equalsStart_Result")  def equalsStart_??(v: ~[A])     : Result[true]      = z._use._evaluate.equals[A](x,v,false)
-    /**/                       def equalsAll(     v: ~[A])     : Boolean           = z._use._evaluate.equals[A](x,v,true)
-    @tn("equalsAll_Result")    def equalsAll_??(  v: ~[A])     : Result[true]      = z._use._evaluate.equals[A](x,v,true)
+  extension[A](inline x: ~[A])
+    @tn("find_Opt")           inline def find_?(inline f: A => Boolean)     : Opt[A]            = z._use._evaluate.find.opt(x,f)
+    /**/                      inline def find(  inline f: A => Boolean)     : A                 = z._use._evaluate.find.opt(x,f).get
+    @tn("findPosition_Opt")   inline def findPosition_?(inline f:A=>Boolean): Int.Opt           = z._use._evaluate.find.position_Opt(x,f)
+    /**/                      inline def count                              : Int               = z._use._evaluate.count.all(x)
+    /**/                      inline def count(inline f: A => Boolean)      : Int               = z._use._evaluate.count.conditional(x,f)
+    /**/                      inline def countAndTime                       : (Int,Time.Length) = z._use._evaluate.count.andTime(x)
 
-  extension[A](x: ~[A])
-    def countFew(f1:A=>Boolean, f2:A=>Boolean, f3:A=>Boolean= \/, f4:A=>Boolean= \/, f5:A=>Boolean= \/): (Int,Int)|(Int,Int,Int)|(Int,Int,Int,Int)|(Int,Int,Int,Int,Int) = z._use._calculate.countFew(x,f1,f2,f3,f4,f5)
+    /**/                      inline def equalsStart(   inline v: ~[A])     : Boolean           = z._use._evaluate.equals[A](x,v,false)
+    @tn("equalsStart_Result") inline def equalsStart_??(inline v: ~[A])     : Result[true]      = z._use._evaluate.equals[A](x,v,false)
+    /**/                      inline def equalsAll(     inline v: ~[A])     : Boolean           = z._use._evaluate.equals[A](x,v,true)
+    @tn("equalsAll_Result")   inline def equalsAll_??(  inline v: ~[A])     : Result[true]      = z._use._evaluate.equals[A](x,v,true)
+    /**/                      inline def exists( inline f: A => Boolean)    : Boolean           = z._use.evaluate.exists(x,f)
+    /**/                      inline def isEvery(inline f: A => Boolean)    : Boolean           = z._use.evaluate.isEvery(x,f)
+    /**/                      inline def contains(inline value: A)          : Boolean           = z._use.evaluate.contains(x,value)
+    /**/                      inline def last                               : A                 = z._use.evaluate.last_Opt(x).get
+    @tn("last_Opt")           inline def last_?                             : Opt[A]            = z._use.evaluate.last_Opt(x)
+
+    inline def countFew(inline f1:A=>Boolean, inline f2:A=>Boolean, inline f3:A=>Boolean= \/, inline f4:A=>Boolean= \/, inline f5:A=>Boolean= \/)
+      : (Int,Int) | (Int,Int,Int) | (Int,Int,Int,Int) | (Int,Int,Int,Int,Int) = z._use._evaluate.count.few(x,f1,f2,f3,f4,f5)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

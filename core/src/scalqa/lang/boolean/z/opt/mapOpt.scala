@@ -15,7 +15,7 @@ object mapOpt:
       case _ : OptShape[B,Long   .G.Opt[B]] => {var o:Long   .G.Opt[BL]= \/; if(x.nonEmpty) o= f(x.`val`).asInstanceOf[Long   .G.Opt[BL]]; o.cast[OPT]}
       case _ : OptShape[B,Float  .G.Opt[B]] => {var o:Float  .G.Opt[BF]= \/; if(x.nonEmpty) o= f(x.`val`).asInstanceOf[Float  .G.Opt[BF]]; o.cast[OPT]}
       case _ : OptShape[B,Double .G.Opt[B]] => {var o:Double .G.Opt[BD]= \/; if(x.nonEmpty) o= f(x.`val`).asInstanceOf[Double .G.Opt[BD]]; o.cast[OPT]}
-      case _ : OptShape[B,      Val.Opt[B]] => {var o:      Val.Opt[B ]= \/; if(x.nonEmpty) o= f(x.`val`).asInstanceOf[      Val.Opt[B ]]; o.cast[OPT]}
+      case _ : OptShape[B,AnyRef .G.Opt[B]] => {var o:AnyRef .G.Opt[B ]= \/; if(x.nonEmpty) o= f(x.`val`).asInstanceOf[AnyRef .G.Opt[B ]]; o.cast[OPT]}
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

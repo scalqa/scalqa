@@ -3,15 +3,15 @@ package scalqa; package `val`; package stream; package z; package a; import lang
 abstract class Pipe[A](val base: AnyRef) extends ~[A] with Custom.Pipeline
 
 object Pipe:
-  type Refs    [A]              = Pipe[A]
-  type Booleans[A<:Boolean.Raw] = lang.boolean.Z.Pipe[A]
-  type Bytes   [A<:Byte.Raw]    = lang.byte   .Z.Pipe[A]
-  type Chars   [A<:Char.Raw]    = lang.char   .Z.Pipe[A]
-  type Shorts  [A<:Short.Raw]   = lang.short  .Z.Pipe[A]
-  type Ints    [A<:Int.Raw]     = lang.int    .Z.Pipe[A]
-  type Longs   [A<:Long.Raw]    = lang.long   .Z.Pipe[A]
-  type Floats  [A<:Float.Raw]   = lang.float  .Z.Pipe[A]
-  type Doubles [A<:Double.Raw]  = lang.double .Z.Pipe[A]
+  type ofRef[A] = Pipe[A]
+  abstract class ofBoolean[A<:Boolean.Raw](val base: AnyRef) extends Boolean.G.~[A] with Custom.Pipeline
+  abstract class ofByte   [A<:Byte.Raw   ](val base: AnyRef) extends Byte   .G.~[A] with Custom.Pipeline
+  abstract class ofChar   [A<:Char.Raw   ](val base: AnyRef) extends Char   .G.~[A] with Custom.Pipeline
+  abstract class ofShort  [A<:Short.Raw  ](val base: AnyRef) extends Short  .G.~[A] with Custom.Pipeline
+  abstract class ofInt    [A<:Int.Raw    ](val base: AnyRef) extends Int    .G.~[A] with Custom.Pipeline
+  abstract class ofLong   [A<:Long.Raw   ](val base: AnyRef) extends Long   .G.~[A] with Custom.Pipeline
+  abstract class ofFloat  [A<:Float.Raw  ](val base: AnyRef) extends Float  .G.~[A] with Custom.Pipeline
+  abstract class ofDouble [A<:Double.Raw ](val base: AnyRef) extends Double .G.~[A] with Custom.Pipeline
 
   abstract class Sized[A](x: AnyRef) extends Pipe[A](x) with Able.Size.Opt.Long:
     @tn("sizeLong_Opt") def sizeLong_? : Long.Opt = Able.Size.sizeLong_?(x)

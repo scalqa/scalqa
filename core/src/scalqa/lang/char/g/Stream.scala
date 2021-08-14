@@ -19,7 +19,8 @@ abstract class Stream[A<:Raw] extends Val.~[A] with ~~.Custom.Discharge[A] with 
   /**/                    def fold     (start: A)(f: Fun.Fold[A])         : A             = FOLD(start)(f(_,_))
   /**/                    def reduce(  f: Fun.Fold[A])                    : A             = REDUCE(f(_,_))
   @tn("reduce_Opt")       def reduce_?(f: Fun.Fold[A])                    : G.Opt[A]      = REDUCE_?(f(_,_))
-  /**/                    def count                                       : Int           = {var v = 0; FOREACH(w => v += 1); v}
+  /**/                    def count                                       : Int           = {var c = 0; FOREACH(_ => c += 1); c}
+  /**/                    def count(f: Fun.Filter[A])                     : Int           = {var c = 0; FOREACH(v => if(f(v)) c += 1); c}
   @tn("pack")             def ><                                          : Pack[A]       = Pack.fromStream(self)
   /**/                    def toBuffer                                    : Buffer[A]     = Buffer(self)
   /**/                    def toSet                                       : StableSet[A]  = StableSet(self)

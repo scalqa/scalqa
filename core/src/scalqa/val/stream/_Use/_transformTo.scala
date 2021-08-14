@@ -1,34 +1,33 @@
 package scalqa; package `val`; package stream; package _use; import language.implicitConversions
 
-import scala.{ collection as SC }
-import java.{ util as JU }
+import java.{ util as J }
 
 transparent trait _transformTo:
 
-  extension[A] (x: ~[A])
-    @tn("pack") def ><                                        : ><[A]                = pack.z.ArrayPack.fromStream[A](x)
-    /**/        def iterator                                  : Iterator[A]          = z._use._transformTo.Iterator(x)
-    /**/        def makeString(sep:String= \/)
-      /**/                         (using t :Given.DocDef[A]) : String               = String.Builder(256).^(b => x.foreachIndexed((i,v) =>{ if (i>0) b +=sep; b +=t.value_tag(v)})).tag
-    /**/        def toIdx                                     : Idx[A]               = pack.z.ArrayPack.fromStream[A](x)
-    /**/        def toBuffer                                  : Buffer[A]            = new AnyRef.G.Buffer[A](x)
-    /**/        def toSet                                     : StableSet[A]         = StableSet(x)
-    /**/        def toProduct                                 : Product              = x.><.toProduct_^
-    /**/        def toSeq                                     : IndexedSeq[A]        = z._use._transformTo.Seq(x)
-    /**/        def toArray               (using ClassTag[A]) : Array[A]             = {val b=Buffer.accessible(x.size_? or J.initSize).^(_ ++= x); var a:Array[A]=b.access; if(a.length!=b.size) a=a.copySize(b.size); a.cast[Array[A]]}
-    /**/        def toList                                    : List[A]              = {var l: List[A] = Nil; x.FOREACH(v => l = l :+ v); l }
-    /**/        def toVector                                  : Vector[A]            = {var b=new scala.collection.immutable.VectorBuilder[A](); x.FOREACH(b += _); b.result }
-    /**/        def toJavaList                                : JU.List[A]           = x.toBuffer.toJavaList_^
-    /**/ inline def toJavaIterator                            : JU.Iterator[A]       = z._use._transformTo.JavaIterator(x)
-    /**/ inline def toJavaSpliterator(inline splitSize: Int)  : JU.Spliterator[A]    = z._use._transformTo.JavaSpliterator(x,splitSize)
-    /**/        def toJavaStream(parallel: Boolean = false)   : JU.stream.Stream[A]  = JU.stream.StreamSupport.stream(x.toJavaSpliterator(1), parallel)
-    /**/        def toText          (using t :Given.DocDef[A]): String               = z._use._print.toText(x,false)
-    /**/        def toLookupBy[K](f: A => K)                  : Lookup[K,A]          = {val l=Lookup.Mutable[K,A](); x.FOREACH(v => l.put(f(v),v)); l}
-    /**/        def toMapBy[K](f: A => K)                     : Map[K,A]             = x.zipKey(f).toMap
+  extension[A] (inline x: ~[A])
+    @tn("pack") inline def ><                                            : ><[A]               = pack.z.ArrayPack.fromStream[A](x)
+    /**/        inline def makeString(inline sep:String= \/)
+    /**/                               (using inline t :Given.DocDef[A]) : String              = z._use.transformTo.makeString(x,sep,t)
+    /**/        inline def toIdx                                         : Idx[A]              = z._use.transformTo.toIdx(x)
+    /**/        inline def toSet                                         : StableSet[A]        = StableSet(x)
+    /**/        inline def toBuffer                                      : Buffer[A]           = new AnyRef.G.Buffer[A](x)
+    /**/        inline def iterator                                      : Iterator[A]         = z._use._transformTo.Scala.Iterator(x)
+    /**/        inline def toArray          (using inline t:ClassTag[A]) : Array[A]            = z._use._transformTo.Scala.Array(x)
+    /**/        inline def toList                                        : List[A]             = z._use._transformTo.Scala.List(x)
+    /**/        inline def toVector                                      : Vector[A]           = z._use._transformTo.Scala.Vector(x)
+    /**/        inline def toSeq                                         : IndexedSeq[A]       = z._use._transformTo.Scala.Seq(x)
+    /**/        inline def toProduct                                     : Product             = z._use._transformTo.Scala.Product(x)
+    /**/        inline def toJavaList                                    : J.List[A]           = x.toBuffer.toJavaList_^
+    /**/        inline def toJavaIterator                                : J.Iterator[A]       = z._use._transformTo.Java.Iterator(x)
+    /**/        inline def toJavaSpliterator(inline splitSize: Int)      : J.Spliterator[A]    = z._use._transformTo.Java.Spliterator(x,splitSize)
+    /**/        inline def toJavaStream(inline parallel: Boolean = false): J.stream.Stream[A]  = J.stream.StreamSupport.stream(x.toJavaSpliterator(1), parallel)
+    /**/        inline def toText       (using inline t: Given.DocDef[A]): String              = z._use._print.toText(x,false)
+    /**/        inline def toLookupBy[K](inline f: A => K)               : Lookup[K,A]         = z._use.transformTo.toLookupBy(x,f)
+    /**/        inline def toMapBy[K](inline f: A => K)                  : Map[K,A]            = x.zipKey(f).toMap
 
-  extension[A,B] (x: ~[(A,B)])
-    /**/        def toLookup                                  : Lookup[A,B]          = Lookup.Stable[A,B](x)
-    /**/        def toMap                                     : Map[A,B]             = SC.immutable.Map.from(x.iterator)
+  extension[A,B] (inline x: ~[(A,B)])
+    /**/        inline def toLookup                                      : Lookup[A,B]         = Lookup.Stable[A,B](x)
+    /**/        inline def toMap                                         : Map[A,B]            = scala.collection.immutable.Map.from(x.iterator)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

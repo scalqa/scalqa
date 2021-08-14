@@ -1,13 +1,15 @@
 package scalqa; package `val`; package stream; package _use; import language.implicitConversions
 
+import z._use.{ _aggregate as G }
+
 transparent trait _aggregate:
 
   extension[A](inline x: ~[A])
-    /**/              inline def fold     (inline start:A)(inline f:(A,A)=>A) : A      = z._use._aggregate._fold(x,start,f)
-    transparent       inline def foldAs[B](inline start:B)(inline f:(B,A)=>B) : B      = z._use._aggregate._foldAs(x,start,f)
+    /**/              inline def fold     (inline start:A)(inline f:(A,A)=>A) : A      = G.fold.any(x,start,f)
+    transparent       inline def foldAs[B](inline start:B)(inline f:(B,A)=>B) : B      = G.foldAs.any(x,start,f)
     /**/              inline def FOLD(inline start:A)(inline f:(A,A)=>A)      : A      = { var rv = start; x.FOREACH(fv => rv = f(rv,fv)); rv}
     /**/              inline def FOLD_AS[B](inline start:B)(inline f:(B,A)=>B): B      = { var rv = start; x.FOREACH(fv => rv = f(rv,fv)); rv}
-    @tn("reduce_Opt") inline def reduce_?(inline f: (A,A) => A)               : Opt[A] = z._use._aggregate._reduce_Opt(x,f)
+    @tn("reduce_Opt") inline def reduce_?(inline f: (A,A) => A)               : Opt[A] = G.reduce.opt(x,f)
     /**/              inline def reduce(  inline f: (A,A) => A)               : A      = x.reduce_?(f).get
     /**/              inline def REDUCE(  inline f: (A,A) => A)               : A      = x.REDUCE_?(f).get
     @tn("REDUCE_Opt") inline def REDUCE_?(inline f: (A,A) => A)               : Opt[A] = {val s=x; s.read_?.map(v => s.FOLD(v)(f))}
@@ -72,6 +74,8 @@ ___________________________________________________________________________*/
 
     @param start seed value to start with
     @param f binary function to fold elements with
+
+    Note. When folding AnyRef stream as a primitive value, there will be value boxing. Use FOLD_AS instead, which will be perfectly specialized.
 
 @def FOLD_AS -> Heavy Fold and convert
 

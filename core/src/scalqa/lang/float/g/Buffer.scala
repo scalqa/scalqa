@@ -17,7 +17,7 @@ class Buffer[A<:Raw](_a: Array[Float], _sz: Int) extends Val.Buffer[A] with Idx.
   // ----------------------------------------------------------------------------------------------------------------------------------------------
   /**/                  def apply(i: Int)                   : A              = ar(i).cast[A]
   /**/                  def size                            : Int            = sz
-  @tn("stream")override def ~                               : Stream[A]      = lang.array.z.stream.As.Floats(ar,sz)
+  @tn("stream")override def ~                               : Stream[A]      = lang.array.z.As.FloatStream(ar,sz)
   /**/         override def add(v: A)                       : Unit           = { if(ar.length<=sz) mkSpace(sz+1); ar(sz)=v; sz+=1}
   /**/         override def addAt(i: Int, v: A)             : Unit           = { if(ar.length<=sz) mkSpace(sz+1); ar.copyTo(ar,i+1,i,sz-i); ar(i)=v; sz+=1 }
   /**/         override def updateAt(i: Int, v: A)          : Unit           = ar(i) = v

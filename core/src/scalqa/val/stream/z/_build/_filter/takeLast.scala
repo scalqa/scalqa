@@ -6,7 +6,7 @@ class takeLast(x: ~[AnyRef], cnt: Int) extends a.Pipe.Calculated[AnyRef](x):
     val a = new Array[AnyRef](cnt)
     var i = 0
     x.foreach(v => { a(i % cnt) = v; i+=1 })
-    new z.a.Pipe.Refs[AnyRef](x) with Able.Size {
+    new z.a.Pipe.ofRef[AnyRef](x) with Able.Size {
       private         val sz     = i min cnt;
       private         val off    = i - sz - 1
       private         var j      = 0

@@ -5,6 +5,10 @@ import lang.string.z.Table
 object _print:
   private def EMPTY  = "EMPTY_STREAM"
 
+  def apply  [A](x: ~[A])(using Given.DocDef[A]) : Unit = apply(x, false,false)
+  def id     [A](x: ~[A])(using Given.DocDef[A]) : Unit = apply(x, true,false)
+  def numbers[A](x: ~[A])(using Given.DocDef[A]) : Unit = apply(x, false,true)
+
   def apply[A](v: ~[A], id: Boolean, num: Boolean)(using t: Given.DocDef[A]): Unit =
     val ps      = v.map(toProduct)
     val tbl     = Table()
