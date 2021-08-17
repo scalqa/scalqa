@@ -21,3 +21,9 @@ object Counter extends AnyRef.Opaque.Base[Counter,AtomicLong]("Concurrent.Counte
  __\  \/ /___/ __  |/ /__/ /_/ /_/ __  |   (c) 2021, Scalqa.org Inc
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
+/**
+@object OPAQUE  -> ###
+
+    Thread safe, minimal overhead counter based on java.util.concurrent.atomic.AtomicLong.
+
+*/

@@ -2,9 +2,9 @@ package scalqa; package gen; package event; import store.*; import language.impl
 
 class Store extends _events with _entries with _activation with _properties:
   private         val cRef                  : J.Concurrent.Ref[z.Entry] = J.Concurrent.Ref(z.Void)
-  private[event]  def top                   : z.Entry                   = { val e=cRef.get; if(!e.isCancelled) e else cRef.reset(_.child,e) }
+  private[event]  def top                   : z.Entry                   = {while(true){ val e=cRef.get; if(!e.isCancelled) return e else if(cRef.tryChange(e,e.child)) return e.child }; J.illegalState()}
   private[scalqa] def get(typ: AnyRef)      : z.Entry                   = top.find(typ)
-  /**/            def add(typ:AnyRef, v:Any): Event.Control             = cRef.reset(e => new z.Entry(e,typ,v))
+  /**/            def add(typ:AnyRef, v:Any): Event.Control             = cRef.change(e => new z.Entry(e,typ,v))
 
 object Store:
   type _activation  = store._activation

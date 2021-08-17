@@ -39,3 +39,5 @@ sidebar:
           url: guide/internals/SLIM_Coding.html
         - title: Private Packages
           url: guide/internals/Private_Packages.html
+    - title: BlogIndex
+      url: guide/blog/Index.html

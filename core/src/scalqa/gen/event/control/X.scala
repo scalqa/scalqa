@@ -11,8 +11,8 @@ object X:
     private   var onCancelPack               : ><[()=>Any] = \/
     /**/      def isCancelled                : Boolean     = ref.get == Cancelled
     /**/      def onCancel[U](f: () => U)    : this.type   = { onCancelPack += f; this }
-    /**/      def cancelIf(f: () => Boolean) : this.type   = { ref.set(_ + f); this }
-    /**/      def cancel                     : Boolean     = if(isCancelled) false else { ref.set(_ => Cancelled); fireOnCancel; true }
+    /**/      def cancelIf(f: () => Boolean) : this.type   = { ref.change(_ + f); this }
+    /**/      def cancel                     : Boolean     = if(isCancelled) false else { ref.change(_ => Cancelled); fireOnCancel; true }
     protected def fireOnCancel               : Unit        = { onCancelPack.~.foreach(_.apply()); onCancelPack = \/ }
 
     def removeHardReference: AnyRef = target match

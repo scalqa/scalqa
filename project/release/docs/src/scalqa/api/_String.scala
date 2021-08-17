@@ -43,7 +43,7 @@ trait _String:
 
       v = v.nameToOp
       if(v.startsWith("~."))              v = "~~." + v.dropFirst(2)
-      if(v.endsWith("Opt.TYPE"))          v = v.dropLast(5)
+      if(v.endsWith(".TYPE"))             v = v.dropLast(5)
       else if(v.endsWith(".THIS_OPAQUE")) v = "THIS_OPAQUE"
       else if(v.endsWith(".REAL"))        v = "REAL"
       else if(v=="Int.G.<>")              v = "Int.<>"
