@@ -4,7 +4,7 @@ class Result[A]:
   def apply(v: A | Val.Result.Problem) : Val.Result[A] = Val.Result[A](v)
   def fail(message: String)            : Val.Result[A] = Val.Result.fail(message)
 
-object Result extends Result[AnyRef]
+private[scalqa] object Result extends Result[AnyRef]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

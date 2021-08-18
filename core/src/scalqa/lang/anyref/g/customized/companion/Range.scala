@@ -4,7 +4,7 @@ class Range[A]:
 
   def apply(start: A, end: A, endIsIn: Boolean = true)(using Ordering  [A]) : <>[A] = Val.<>(start, end, endIsIn)
 
-object Range extends Range[AnyRef]
+private[scalqa] object Range extends Range[AnyRef]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

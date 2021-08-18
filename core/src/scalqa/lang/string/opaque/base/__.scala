@@ -1,8 +1,6 @@
 package scalqa; package lang; package string; package opaque; import language.implicitConversions
 
-import base.{ _Methods as X }
-
-abstract class Base[A<:Opaque](typeName: String) extends AnyRef.Opaque.Base[A,String](typeName) with base._Methods:
+abstract class Base[A<:Opaque](name: String) extends AnyRef.Opaque.Base[A,String](name) with base._Methods:
   given ordering : Ordering[A] = String.ordering.cast[Ordering[A]]
 
   override def value_isVoid(v: A)           : Boolean = v.real.length==0
@@ -30,6 +28,14 @@ ___________________________________________________________________________*/
   String Opaque Base by default inherits a large library of String methods.
 
   Note. Most opaque companions extend Opaque.Data, which also defines specialized containers attached to the type.
+
+@def value_tag -> Value to String
+
+    Override this method to provide type custom convertion to String
+
+@def value_doc -> Value to Doc
+
+    Override this method to provide type custom [[scalqa.gen.Doc Doc]] implementation
 
 @def value_isVoid -> Void check
 

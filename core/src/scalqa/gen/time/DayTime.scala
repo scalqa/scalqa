@@ -2,7 +2,7 @@ package scalqa; package gen; package time; import language.implicitConversions
 
 import Time.{ DayTime, Length}
 
-object DayTime extends Long.Opaque.Data.Ordered[DayTime]("DayTime") with time.x.Nanos.LengthBase:
+object DayTime extends Long.Opaque.Data.Ordered[DayTime]("DayTime") with x.Nanos.Base.Length:
   /**/           inline def _0_Hours                           : DayTime = 0L.opaque
   /**/           inline def _24_Hours                          : DayTime = apply(24.Hours)
   /**/                  def current                            : DayTime = Time.current.dayTime

@@ -1,6 +1,6 @@
 package scalqa; package lang; package int; package opaque; package data; import language.implicitConversions
 
-abstract class Sequential[A<:Opaque](typeName:String) extends Ordered[A](typeName) with Sequential._methods:
+abstract class Sequential[A<:Opaque](name: String) extends Ordered[A](name) with Sequential._methods:
   self =>
 
   @fast given givenAbleSequence: Able.Sequence[A] = Able.Sequence.int.cast[Able.Sequence[A]]
@@ -27,5 +27,7 @@ ___________________________________________________________________________*/
 @def -       -> Get before in sequance  \n\n Returns value, which is given number of position before in sequence
 @def next    -> Next in sequance  \n\n Returns next value in sequance
 @def prior   -> Prior in sequance \n\n Returns prior value in sequance
+
+@trait _methods -> Default methods for all Int.Opaque.Data.Sequential defined types
 
 */

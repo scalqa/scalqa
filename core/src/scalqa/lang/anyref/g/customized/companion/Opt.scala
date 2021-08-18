@@ -5,7 +5,7 @@ class Opt[A]:
   def option[A]  (v: scala.Option[A])       : Val.Opt[A]  = Val.Opt.fromScala(v)
   def optional[A](v: java.util.Optional[A]) : Val.Opt[A]  = Val.Opt.fromJava(v)
 
-object Opt extends Opt[AnyRef]
+private[scalqa] object Opt extends Opt[AnyRef]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

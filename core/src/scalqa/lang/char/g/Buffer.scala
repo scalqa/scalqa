@@ -1,13 +1,13 @@
 package scalqa; package lang; package char; package g; import language.implicitConversions
 
-class Buffer[A<:Raw](_a: Array[Char], _sz: Int) extends Val.Buffer[A] with Idx.Mutable[A]:
+class Buffer[A<:Raw](arrayToUse: Array[Char], sizeToStartWith: Int) extends Val.Buffer[A] with Idx.Mutable[A]:
   protected type ARRAY_TYPE = Char
   def this(initSize: Int) = this(new Array[Char](initSize),0)
   def this()              = this(J.initSize)
   def this(v: Val.~[A])   = {this(v.size_? or J.initSize); addAll(v)}
 
-  private               var ar                              : Array[Char]    = _a
-  private               var sz                              : Int            = _sz
+  private               var ar                              : Array[Char]    = arrayToUse
+  private               var sz                              : Int            = sizeToStartWith
   protected             def array                           : Array[Char]    = ar
   protected             def array_=(v: Array[Char])         : Unit           = ar = v
   protected             def size_=(v:Int)                   : Unit           = sz = v

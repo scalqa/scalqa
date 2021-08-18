@@ -34,12 +34,12 @@ ___________________________________________________________________________*/
 
        Joins value tag to base string.
 
-       Use it instead of '+' (single plus), because it joins '.toString' instead of '.tag' result, which often does not make sense especially for 'opaque values'
+       Use it instead of '+'. Single plus joins '.toString' instead of '.tag', which often does not make sense especially for 'opaque values'
 
        Note. This method should logically be called '+'.
              However, it is already defined in 'final class String' and cannot be overridden.
 
-       ``
+       ```
           val p = 12.Percent
 
           val s = "Value: " ++ p
@@ -53,7 +53,7 @@ ___________________________________________________________________________*/
 
        Joins option value to base string.
 
-       Returns String as "is for" empty option.
+       Returns String "as is" for empty option.
 
 @def padStartTo -> Pad start
 

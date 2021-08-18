@@ -29,5 +29,6 @@ ___________________________________________________________________________*/
 @object G -> ### AnyRef Generic Containers
 
    With the exception of Buffer, AnyRef.G contains same containers as [[scalqa.Val$ Val]], which are aliased in here.
+   This is done for consistency with all the primitive based generic frameworks, like [[scalqa.lang.byte.G$ Byte.G]], [[scalqa.lang.int.G$ Int.G]], etc.
 
 */

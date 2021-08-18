@@ -2,7 +2,7 @@ package scalqa; package lang; package any; package _methods; import language.imp
 
 object Z:
 
-  def kind(v: Any): String = if(v == null) "null" else
+  def name(v: Any): String = if(v == null) "null" else
     val s = v.getClass.getName.replace(".__", "").replace("$__", "")
     val sa = s.split('.')
     if (sa.length >= 2 && sa.last == sa(sa.length - 2)) sa.array.dropRight(1).mkString(".")

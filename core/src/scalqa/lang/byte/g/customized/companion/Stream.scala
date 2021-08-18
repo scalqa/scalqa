@@ -5,7 +5,7 @@ class Stream[A<:Raw]:
   /**/           inline def apply(v: A*)      : G.~[A] = G.~(v *)
   @tn("getVoid") inline def void              : G.~[A] = G.~.void
 
-object Stream extends Stream[Byte]
+private[scalqa] object Stream extends Stream[Byte]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

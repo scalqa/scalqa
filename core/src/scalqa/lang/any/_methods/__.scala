@@ -31,11 +31,9 @@ object _Methods:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait _Methods -> ### Every Type Extension Methods
+@trait _Methods -> ### Universal Extension Methods
 
-    Extension methods universaly avaialble for all types
-
-    Note. For primitives these methods often have efficient overrides.
+    Extension methods avaialble for all types
 
 @def isVoid -> Void check
 
@@ -54,29 +52,27 @@ ___________________________________________________________________________*/
     `tp` should never be inside a production program, `println` should be used instead. Searching code for `tp` should immediately locate debugging fragments.
 
      ```
-      // Compare:
+     // Compare:
 
-      1.tp
-      // vs.
-      println(1.tag)
+     1.tp
+     // vs.
+     println(1.tag)
 
-      (1 <> 10).~.TP
-      // vs.
-      println((1 <> 10).~.tag)
+     (1 <> 10).~.TP
+     // vs.
+     println((1 <> 10).~.tag)
 
-      100.Seconds.TP
-      // vs.
-      println(100.Seconds.tag)
-    ```
+     100.Seconds.TP
+     // vs.
+     println(100.Seconds.tag)
+     ```
 
-    Also, there is postfix like overload of `tp` on String type
-
-   ```
-
-      "Results:" +- 1 +- 2 +- 3 +- 4.Percent tp()
-      // vs.
-      println("Results:" +- 1 +- 2 +- 3 +- 4.Percent)
-    ```
+     Also, there is postfix like overload of `tp` on String type
+     ```
+     "Results:" +- 1 +- 2 +- 3 +- 4.Percent tp()
+     // vs.
+     println("Results:" +- 1 +- 2 +- 3 +- 4.Percent)
+     ```
 
 @def in -> Is within
 
@@ -99,14 +95,14 @@ ___________________________________________________________________________*/
     Returns [[scalqa.any.self.Doc Doc]] object describing current instance
 
     Reference types can implement [[scalqa.gen.able.Doc Able.Doc]], opaque types can provide implicit [[scalqa.any.self.given.DocDef DocDef]],
-    in any case this operation will retrieve [[scalqa.any.self.Doc Doc]] or will create a basic one, if none is found.
+    in any case this operation will retrieve [[scalqa.any.self.Doc Doc]] or will create a default one, if none is found.
 
 @def tag -> Make String
 
-    Returns String representation of base type value.
+    Returns String representation of base value.
 
-    `.tag` has to universally be used instead of Java `.toString`. This is due opaque types,
-    which by definition cannot overwrite `.toString`, but have facility to provide correct `.tag`.
+    `.tag` has to universally be used instead of Java `.toString`. This is due to opaque types,
+    which by definition cannot override `.toString`, but have facility to provide correct `.tag`.
 
     In traditional objects, `.tag` by default calls `.toString`.
 
@@ -128,7 +124,7 @@ ___________________________________________________________________________*/
 
 @def ^ -> Self view
 
-    Returns additional ["view"](_Methods/_view.html) library available to this instance
+    Returns additional ["view"](_methods/_view.html) library available to this instance
 
     The most popular feature is doing some processing within context of an anonimous function
 
@@ -167,7 +163,7 @@ ___________________________________________________________________________*/
       ("AAA" <> "BBB").TP  // Prints  AAA <> BBB
     ```
 
-    Note. An Ordering be implicitly available
+    Note. An Ordering must be implicitly available
 
 @def <>> ->  Exclusive end range
 
@@ -188,7 +184,7 @@ ___________________________________________________________________________*/
     ```
 
     Note. Java supports AnyRef + AnyRef, resulting in their String representation concatenation.
-    Scala 2 also used to support this, which was a huge mistake, because this not important `+` operation, due to it global nature,
+    Scala 2 also used to support this, which was a big mistake, because this not really important `+` operation, due to it global nature,
     would interfere with all attempts to use `+` for anything else.
     Scala 3 got rid of this for good.
     Scalqa re-introduces this usefull functionality with such a weired name "+-", hoping it will not pose naming conflits

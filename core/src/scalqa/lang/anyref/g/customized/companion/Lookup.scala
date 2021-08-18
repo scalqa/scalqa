@@ -10,7 +10,7 @@ class Lookup[A]:
     /**/           inline def apply[B](inline v: (A, B)*)   : Stable[B] = Val.Lookup.Stable(v)
     @tn("getVoid") inline def void[B]                       : Stable[B] = Val.Lookup.Stable.void
 
-object Lookup extends Lookup[AnyRef]
+private[scalqa] object Lookup extends Lookup[AnyRef]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

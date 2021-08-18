@@ -40,15 +40,15 @@ ___________________________________________________________________________*/
      ```
 
 
-@def line_~ -> Source of lines
+@def line_~ -> Stream of lines
 
-     Creates a [[Source]] of Strings representing lines (delimited by '\n') of this text
+     Creates a [[Stream]] of Strings representing lines (delimited by '\n') of this text
 
      ```
      "abc\\n def\\n xyz".line_~.TP // Prints ~(abc,  def,  xyz)
      ```
 
-@def tokenized_~ -> Source of tokens
+@def tokenized_~ -> Stream of tokens
 
       Multi token tokenizetion
 
@@ -82,13 +82,13 @@ ___________________________________________________________________________*/
          --- --------- -------------------
       ```
 
-      @param separators a [[Source]] of text separators to consider
+      @param separators a [[Stream]] of text separators to consider
 
 
 
-@def char_~ -> Source of Chars
+@def char_~ -> Stream of Chars
 
-      Returns String as a [[Source]] of [Char]]
+      Returns String as a [[Stream]] of [Char]]
       ```
       "abcd".char_~.TP // Prints ~(a, x, c, d)
       ```

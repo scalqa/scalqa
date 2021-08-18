@@ -1,6 +1,6 @@
 package scalqa; package lang; package string; package opaque; import language.implicitConversions
 
-abstract class Data[A<:Opaque](typeName: String) extends Base[A](typeName) with Data._methods with AnyRef.G.Customized.Containers[A]
+abstract class Data[A<:Opaque](name: String) extends Base[A](name) with Data._methods with AnyRef.G.Customized.Containers[A]
 
 object Data:
 
@@ -26,6 +26,8 @@ ___________________________________________________________________________*/
 
 @trait _methods -> ###
 
-  Default methods largerly replicate String Extension Methods
+  _methods -> Default methods for all String.Opaque.Data defined types
+
+  The default methods are largerly same as String Extension Methods
 
 */

@@ -4,7 +4,7 @@ class Buffer[A]:
 
   def apply(initSize: Int = J.initSize): Val.Buffer[A] = Val.Buffer(initSize)
 
-object Buffer extends Buffer[AnyRef]
+private[scalqa] object Buffer extends Buffer[AnyRef]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

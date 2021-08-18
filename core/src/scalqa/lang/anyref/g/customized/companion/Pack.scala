@@ -5,7 +5,7 @@ class Pack[A]:
   def apply(v1: A, v2: A)                : ><[A] = ><(v1, v2)
   def apply(v1: A, v2: A, v3: A, vs: A*) : ><[A] = ><(v1, v2, v3, vs *)
 
-object Pack extends Pack[AnyRef]
+private[scalqa] object Pack extends Pack[AnyRef]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -13,7 +13,7 @@ class Collection[A<:Raw] extends Pack.zBased[A,G.Collection[A]]:
     /**/           inline def apply(inline v: ~[A]): StableSet = Val.Collection.StableSet(v)
     @tn("getVoid") inline def void                 : StableSet = Val.Collection.StableSet.void
 
-object Collection extends Collection[Byte]
+private[scalqa] object Collection extends Collection[Byte]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

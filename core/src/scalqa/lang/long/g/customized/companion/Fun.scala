@@ -18,7 +18,7 @@ class Fun[A<:Raw]:
   type ToFloatRaw  [B<:Float.Raw  ] = G.Fun.ToFloatRaw[A,B];       type ToFloat   = G.Fun.ToFloatRaw  [A,Float]
   type ToDoubleRaw [B<:Double.Raw ] = G.Fun.ToDoubleRaw[A,B];      type ToDouble  = G.Fun.ToDoubleRaw [A,Double]
 
-object Fun extends Fun[Long]
+private[scalqa] object Fun extends Fun[Long]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

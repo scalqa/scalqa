@@ -2,7 +2,7 @@ package scalqa; package lang; package float; package g; package customized; pack
 
 class Pack[A<:Raw] private[lang]() extends Pack.zBased[A,G.><[A]]
 
-object Pack extends Pack[Float]:
+private[scalqa] object Pack extends Pack[Float]:
 
   class zBased[A<:Raw, PACK]:
     /**/           inline def apply(inline v:A, inline vs: A*): PACK = G.><.fromVarArg(v,vs).cast[PACK]

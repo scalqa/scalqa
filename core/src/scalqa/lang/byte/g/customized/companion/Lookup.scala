@@ -17,7 +17,7 @@ class Lookup[A<:Raw]:
     /**/           inline def apply[B](inline v: ~[(A,B)]): Stable[B] = G.Lookup.Stable[A,B](v)
     @tn("getVoid") inline def void[B]                     : Stable[B] = G.Lookup.Stable.void[A,B]
 
-object Lookup extends Lookup[Byte]
+private[scalqa] object Lookup extends Lookup[Byte]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

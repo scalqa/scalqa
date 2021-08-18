@@ -1,6 +1,6 @@
 package scalqa; package lang; package float; package opaque; package data; import language.implicitConversions
 
-abstract class Numerical[A<:Opaque](typeName:String) extends Ordered[A](typeName) with Numerical._methods:
+abstract class Numerical[A<:Opaque](name: String) extends Ordered[A](name) with Numerical._methods:
 
   @fast given math: G.Math[A] = Lang.Float.math.cast[G.Math[A]]
 
@@ -52,6 +52,8 @@ ___________________________________________________________________________*/
   Opaque Numerical Data  element is provided with similar operations, which are available on base primitive without any loss of performance.
 
   See [more in guide](../../../../../guide/features/Data.html).
+
+@trait _methods -> Default methods for all Float.Opaque.Data.Numerical defined types
 
 @def unary_-  -> Negate           \n\n  Returns negation of this value
 @def *        -> Multiply         \n\n  Returns the product of this and given value

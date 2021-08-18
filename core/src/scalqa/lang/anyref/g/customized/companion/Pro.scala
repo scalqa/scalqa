@@ -29,7 +29,7 @@ class Pro[A]:
     def apply(v: A)               : OM             = Val.Pro.OM(v)
     def named(name: String, v: A) : OM & Able.Name = Val.Pro.OM.named(name,v)
 
-object Pro extends Pro[AnyRef]
+private[scalqa] object Pro extends Pro[AnyRef]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

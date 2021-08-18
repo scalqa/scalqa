@@ -15,7 +15,7 @@ class Collection[A]:
     /**/           def apply(v: ~[A]): StableSet = Val.Collection.StableSet(v)
     @tn("getVoid") def void          : StableSet = Val.Collection.StableSet.void
 
-object Collection extends Collection[AnyRef]
+private[scalqa] object Collection extends Collection[AnyRef]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

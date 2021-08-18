@@ -1,6 +1,6 @@
 package scalqa;  package lang; package char; package opaque; import language.implicitConversions
 
-abstract class Base[A<:Opaque](val typeName:String) extends Any.Opaque.Base[A](ClassTag.Char.cast[ClassTag[A]]) with Base._methods with gen.`given`.VoidDef.CharRaw[A]:
+abstract class Base[A<:Opaque](name:String) extends Any.Opaque.Base[A](name,ClassTag.Char.cast[ClassTag[A]]) with Base._methods with gen.`given`.VoidDef.CharRaw[A]:
   def value_isVoid(v: A): Boolean = false
   def value_tag(v: A)   : String  = default_doc(v).tag
   def value_doc(v: A)   : Doc     = default_doc(v)
@@ -26,9 +26,21 @@ ___________________________________________________________________________*/
 /**
 @class Base -> ### Char Opaque Companion Object Base
 
-  Opaque Base allows to create Scalqa basic opaque type, which can be processed by stream without boxing.
+  Opaque Base allows to create basic opaque type, which can be recognized and processed by stream without boxing.
 
   Note. Most opaque companions extend Opaque.Data, which also defines specialized containers attached to the type.
+
+  As an example of opaque base definition look into [J.Vm.Priority](../../../j/vm/Priority.html) with source code [available](https://github.com/scalqa/scalqa/blob/master/core/src/scalqa/j/vm/Priority.scala).
+
+@trait _methods -> Default methods for all Char.Opaque.Base defined types
+
+@def value_tag -> Value to String
+
+    Override this method to provide type custom convertion to String
+
+@def value_doc -> Value to Doc
+
+    Override this method to provide type custom [[scalqa.gen.Doc Doc]] implementation
 
 @def value_isVoid -> Void check
 
@@ -38,7 +50,7 @@ ___________________________________________________________________________*/
 
     If type supports void instances, then following inmpelentation should be added in most cases:
     ```
-      implicit inline def implicitRequest(v: \/) : (type) = (return void)
+      implicit inline def implicitRequest(v: \/): OPAQUE_TYPE
     ```
 
 @def real -> Real value

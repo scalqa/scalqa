@@ -29,4 +29,12 @@ ___________________________________________________________________________*/
   Specialized is the root of traits like: Byte.Raw.Specialized, Int.Raw.Specialized, etc., which indicate implementations with unboxed processing.
 
   Generally, Specialized marker is for information only and is not required for processing.
+
+  See the [[Specialized$.html get_?]] method to receive description.
+
+
+@def get_? -> Specialization name
+
+  Returns specialization name, like "Boolean", "Byte", "Char", etc, if given instance is specialized
+
 */

@@ -1,13 +1,13 @@
 package scalqa; package lang; package anyref; package g; import language.implicitConversions
 
-class Buffer[A](_a: Array[AnyRef], _s: Int) extends Val.Buffer[A]:
+class Buffer[A](arrayToUse: Array[AnyRef], sizeToStartWith: Int) extends Val.Buffer[A]:
   protected type ARRAY_TYPE = AnyRef
   def this(initSize: Int) = this(new Array[AnyRef](initSize),0)
   def this()              = this(J.initSize)
   def this(v: Val.~[A])   = {this(v.size_? or J.initSize); addAll(v)}
 
-  private                var ar                         : Array[AnyRef] = _a
-  private                var sz                         : Int           = _s
+  private                var ar                         : Array[AnyRef] = arrayToUse
+  private                var sz                         : Int           = sizeToStartWith
   protected              def array                      : Array[AnyRef] = ar
   protected              def array_=(v: Array[AnyRef])  : Unit          = ar = v
   protected              def size_=(v:Int)              : Unit          = sz = v
@@ -42,6 +42,6 @@ ___________________________________________________________________________*/
 /**
 @class Buffer -> ###
 
-  This is the main Buffer implementation for reference values.
+  This is the main Buffer implementation for reference types.
 
 */

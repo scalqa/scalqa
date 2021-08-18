@@ -6,7 +6,7 @@ class Promise[A]:
   def apply[A](calc: => A)(using e: CONTEXT) : Val.Promise[A] = Val.Promise(calc)
   def ready[A](v: A | Val.Result.Problem)    : Val.Promise[A] = Val.Promise.ready(v)
 
-object Promise extends Promise[AnyRef]
+private[scalqa] object Promise extends Promise[AnyRef]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

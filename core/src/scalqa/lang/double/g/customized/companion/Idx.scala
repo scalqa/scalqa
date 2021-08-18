@@ -7,7 +7,7 @@ class Idx[A<:Raw] extends Pack.zBased[A,G.Idx[A]]:
   object Mutable:
     inline def apply(inline initSize: Int = J.initSize): Mutable = new G.Buffer[A](initSize)
 
-object Idx extends Idx[Double]
+private[scalqa] object Idx extends Idx[Double]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

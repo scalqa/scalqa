@@ -1,13 +1,13 @@
 package scalqa; package lang; package boolean; package g; import language.implicitConversions
 
-class Buffer[A<:Raw](_a: Array[Boolean], _sz: Int) extends Val.Buffer[A] with Idx.Mutable[A]:
+class Buffer[A<:Raw](arrayToUse: Array[Boolean], sizeToStartWith: Int) extends Val.Buffer[A] with Idx.Mutable[A]:
   protected type ARRAY_TYPE = Boolean
   def this(initSize: Int) = this(new Array[Boolean](initSize),0)
   def this()              = this(J.initSize)
   def this(v: Val.~[A])   = {this(v.size_? or J.initSize); addAll(v)}
 
-  private               var ar                              : Array[Boolean] = _a
-  private               var sz                              : Int            = _sz
+  private               var ar                              : Array[Boolean] = arrayToUse
+  private               var sz                              : Int            = sizeToStartWith
   protected             def array                           : Array[Boolean] = ar
   protected             def array_=(v: Array[Boolean])      : Unit           = ar = v
   protected             def size_=(v:Int)                   : Unit           = sz = v

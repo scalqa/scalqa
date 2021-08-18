@@ -1,6 +1,6 @@
 package scalqa; package lang; package long; package opaque; package data; import language.implicitConversions
 
-abstract class Calculable[A<:Opaque](typeName:String) extends Ordered[A](typeName) with Calculable._methods:
+abstract class Calculable[A<:Opaque](name: String) extends Ordered[A](name) with Calculable._methods:
 
   @fast given math: G.Math[A] = Long.math.cast[G.Math[A]]
 
@@ -37,6 +37,8 @@ ___________________________________________________________________________*/
 
   ```
   Stream operation "sum" is also valid for Data.Calculable
+
+@trait _methods -> Default methods for all Long.Opaque.Data.Calculable defined types
 
 @def *           -> Multiply         \n\n  Returns the product of this and given value
 @def /           -> Divide           \n\n  Returns the quotient of this and given value

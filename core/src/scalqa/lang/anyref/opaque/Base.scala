@@ -1,6 +1,6 @@
 package scalqa; package lang; package anyref; package opaque; import language.implicitConversions
 
-abstract class Base[A<:Opaque, REAL<:AnyRef](val typeName: String)(using ct: ClassTag[REAL]) extends Any.Opaque.Base[A](ct.cast[ClassTag[A]]) with Base._methods[A,REAL]:
+abstract class Base[A<:Opaque, REAL<:AnyRef](name: String)(using ct: ClassTag[REAL]) extends Any.Opaque.Base[A](name,ct.cast[ClassTag[A]]) with Base._methods[A,REAL]:
   def value_isVoid(v: A): Boolean = false
   def value_tag(v: A)   : String  = default_doc(v).tag
   def value_doc(v: A)   : Doc     = default_doc(v)
@@ -26,6 +26,10 @@ ___________________________________________________________________________*/
 @class Base -> ### AnyRef Opaque Companion Object Base
 
   Opaque Base allows to create Scalqa basic opaque type.
+
+  As an example look into [J.File.Store](../../../j/file/Store.html)  with source code [available](https://github.com/scalqa/scalqa/blob/master/core/src/scalqa/j/file/Store.scala).
+
+@trait _methods -> Default methods for all AnyRef.Opaque.Base defined types
 
 @def real -> Real value
 

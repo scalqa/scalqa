@@ -1,15 +1,16 @@
 package scalqa; package lang; package any; package opaque; import language.implicitConversions
 
-abstract class Base[A<: Any.Opaque]private[lang](ct: ClassTag[A]) extends gen.`given`.TypeDef[A] with gen.`given`.DocDef[A] with gen.`given`.VoidDef[A]:
+abstract class Base[A<: Any.Opaque]private[lang](name: String, ct: ClassTag[A]) extends gen.`given`.TypeDef[A] with gen.`given`.DocDef[A] with gen.`given`.VoidDef[A]:
   self =>
-  given givenTypeDef : Given.TypeDef[A] = self
-  given givenDocDef  : Given.DocDef[A]  = self
-  given givenClassTag: ClassTag[A]      = ct
-  given givenCanEqual: CanEqual[A,A]    = CanEqual.derived
-
+  val typeName          : String           = name
   def value_isVoid(v: A): Boolean
   def value_tag(v: A)   : String
   def value_doc(v: A)   : Doc
+
+  given givenTypeDef    : Given.TypeDef[A] = self
+  given givenDocDef     : Given.DocDef[A]  = self
+  given givenClassTag   : ClassTag[A]      = ct
+  given givenCanEqual   : CanEqual[A,A]    = CanEqual.derived
 
   // -------------------------------------------------------------------------------------------------------------------------------------
   private var ck = -1 // Checking if `doc` is called from `value_tag` (it may be overridden), if not, `value_tag` value is included in doc
@@ -38,6 +39,10 @@ ___________________________________________________________________________*/
     This class cannot be used directly, but rather through it's children like
     [Int.Opaque.Base](../../int/opaque/Base.html), [Char.Opaque.Data](../../char/opaque/Data.html), etc.
 
+@val typeName -> Type name
+
+    Returns defined opaque type name
+
 @def value_tag -> Value to String
 
     Override this method to provide type custom convertion to String
@@ -54,7 +59,7 @@ ___________________________________________________________________________*/
 
     If type supports void instances, then following inmpelentation should be added in most cases:
     ```
-      implicit inline def implicitRequest(v: \/) : (type) = (return void)
+      implicit inline def implicitRequest(v: \/): OPAQUE_TYPE
     ```
 @def real -> Real value
 

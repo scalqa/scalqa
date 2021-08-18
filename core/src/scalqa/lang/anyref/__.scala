@@ -18,9 +18,9 @@ package object anyref:
 ___________________________________________________________________________*/
 /**
 @object AnyRef -> ###
-   AnyRef type is an alias for java.lang.Object.
+   scala.AnyRef type is an alias for java.lang.Object, they can be used interchangebly.
 
-   AnyRef object contains reference type implementations.
+   AnyRef object is a companion for scala.AnyRef type
 
 @val emptyArray -> Empty object array
 

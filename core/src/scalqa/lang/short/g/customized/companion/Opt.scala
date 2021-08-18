@@ -3,7 +3,7 @@ package scalqa; package lang; package short; package g; package customized; pack
 class Opt[A<:Raw]:
   @tn("getVoid") inline def void: G.Opt[A]      = G.Opt.void[A]
 
-object Opt extends Opt[Short]
+private[scalqa] object Opt extends Opt[Short]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

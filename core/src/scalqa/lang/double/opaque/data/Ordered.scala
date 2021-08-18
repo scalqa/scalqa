@@ -1,6 +1,6 @@
 package scalqa; package lang; package double; package opaque; package data; import language.implicitConversions
 
-abstract class Ordered[A<:Opaque](typeName:String) extends Data[A](typeName) with Ordered._methods:
+abstract class Ordered[A<:Opaque](name: String) extends Data[A](name) with Ordered._methods:
 
   @fast given ordering: G.Ordering[A] = Double.ordering.cast[G.Ordering[A]]
 
@@ -30,6 +30,8 @@ ___________________________________________________________________________*/
 @class Ordered -> ### Double Opaque Ordered Data Companion Object Base
 
   Opaque Ordered Data element is provided with default ordering and can be compared with comparison operators.
+
+@trait _methods -> Default methods for all Double.Opaque.Data.Ordered defined types
 
 @def <>      -> Range \n\n  Returns Range from current to given value \n\n  Note. Range uses base primitive natural ordering
 @def <>>     -> Exclusive end range \n\n Returns Range from current to given value exclusive \n\n Note. Range uses base primitive natural ordering

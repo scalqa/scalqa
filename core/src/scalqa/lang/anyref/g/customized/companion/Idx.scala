@@ -20,7 +20,7 @@ class Idx[A]:
   type O  = Observable;        inline def O  = Observable
   type OM = ObservableMutable; inline def OM = ObservableMutable
 
-object Idx extends Idx[AnyRef]
+private[scalqa] object Idx extends Idx[AnyRef]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

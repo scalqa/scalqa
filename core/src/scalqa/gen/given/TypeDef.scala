@@ -1,8 +1,8 @@
 package scalqa; package gen; package `given`; import language.implicitConversions
 
 abstract class TypeDef[A] private[scalqa]():
-  private[scalqa] final def isRef   : Boolean = this.isInstanceOf[z.ReferenceTypeDef[_]]
   /**/                  def typeName: String
+  private[scalqa] final def isRef   : Boolean = this.isInstanceOf[z.ReferenceTypeDef[_]]
 
 object TypeDef extends zTypeDefDefault:
   def apply[A <: Any.Opaque](name: String): TypeDef[A] = new zOpaqueTag(name);  private class zOpaqueTag[A](val typeName: String) extends TypeDef[A]

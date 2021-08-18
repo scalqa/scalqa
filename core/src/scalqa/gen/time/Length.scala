@@ -2,7 +2,7 @@ package scalqa; package gen; package time; import language.implicitConversions
 
 import Time.Length
 
-object Length extends Long.Opaque.Data.Calculable[Length]("Time.Length") with time.x.Nanos.LengthBase:
+object Length extends Long.Opaque.Data.Calculable[Length]("Time.Length") with x.Nanos.Base.Length:
   /**/            def apply(v: Length*)       : Length  = v.~.fold(\/ :Length)(_ + _)
   /**/     inline def fromNanos(inline v:Long): Length  = v.opaque
 

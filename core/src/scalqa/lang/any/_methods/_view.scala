@@ -5,7 +5,7 @@ import gen.`given`. { TypeDef, VoidDef, DocDef, EmptyDef }
 
 object _view:
   extension[A](x: _view[A])
-    /**/                      def typeName                       (using d: TypeDef[A]) : String   = if(d.isRef) Z.kind(x) else d.typeName
+    /**/                      def typeName                       (using d: TypeDef[A]) : String   = if(d.isRef) Z.name(x) else d.typeName
     /**/                      def id                             (using d: TypeDef[A]) : String   = if(x == null) "null" else { var n = x.typeName; if(!n.endsWith("$")) n += "@" + x.hash; n }
     /**/                      def hash                                                 : String   = if(x == null) "null" else Z.Hash(x.hashCode)
 
@@ -39,14 +39,13 @@ ___________________________________________________________________________*/
 /**
 @object OPAQUE  -> ### Self View Methods
 
-    Self view is another library available on all types, but it has to be activated by calling a universal ".^" or (".self_^") method on original value.
-
-    Due to opaque implementation, calling "self view" methods incures no overhead as if they were called directly on base value.
+    Self view is another library available for all types, but it has to be activated by calling a universal ".^" or (".self_^") method on original value.
 
     For example:
     ```
       val pack: ><[String] = "FOO".^.><
     ```
+    Due to opaque implementation, calling self view methods incures no overhead as if they were called directly on base value.
 
     A common use case is to manipulate an object within expression context:
     ```
@@ -65,13 +64,15 @@ ___________________________________________________________________________*/
 
 @def id -> Instance id
 
-    Usually it is type name and hash code.
+    Id is usually type name + "@" + hash code.
 
 @def hash -> Hash code
 
     Returns alphanumeric hash code 4 characters long
 
     It is shorter and display friendly compared to Java hash.
+
+    It is not meant to be used for calculations, like in Hashtable, but rather for display purposes.
 
 @def apply -> Process
 
@@ -110,10 +111,19 @@ ___________________________________________________________________________*/
     Unlike general .? method, this method will create empty option for void or empty values
 
     ```
-      List().?.tp    // prints: Opt(List())
+      val p: ><[Int] = \/
 
-      List().^.?.tp  // prints: Opt(\/)
+      p.?.tp    // prints: Opt(scalqa.val.pack.z.Void)
 
+      p.^.?.tp  // prints: Opt(\/)
+    ```
+
+    This method can even safely check ~ for emptiness, returning ~ with original values
+    ```
+    def s = (0 <>> 0).~
+
+    s.^.?.tp  // prints: Opt(\/)
+    s.?.tp    // prints: Opt(~())
     ```
 
 @def >< -> Pack
@@ -131,10 +141,14 @@ ___________________________________________________________________________*/
 
 @def isEmpty -> Empty check
 
-    Returns `true` if value is empty, `false` - otherwise
+    Returns `true` if value is empty, `false` - otherwise.
+
+    Note. Given.EmptyDef is available for most known types, but can be defined for new.
 
 @def nonEmpty -> Non empty check
 
     Returns `true` if value is not empty, `false` - otherwise
+
+   Note. Given.EmptyDef is available for most known types, but can be defined for new.
 
 */

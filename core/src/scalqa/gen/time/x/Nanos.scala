@@ -24,18 +24,19 @@ object Nanos:
       inline def roundTo(l:Length)
                  (using r:Rounding): OPAQUE    = (r(x.real, l.nanosTotal)).cast[OPAQUE]
 
-  // ***********************************************************************************************
-  transparent trait LengthBase extends Base:
+  object Base:
 
-    extension[OPAQUE <: Long.Opaque](inline x: OPAQUE)
-      inline def nanosTotal        : Long      = x.real
-      inline def microsTotal       : Long      = x.real / Nanos.InOneMicros
-      inline def millisTotal       : Long      = x.real / Nanos.InOneMillis
-      inline def secondsTotal      : Long      = x.real / Nanos.InOneSecond
-      inline def minutesTotal      : Long      = x.real / Nanos.InOneMinute
-      inline def hoursTotal        : Long      = x.real / Nanos.InOneHour
-      inline def daysTotal         : Long      = x.real / Nanos.InOneDay
-      inline def weeksTotal        : Long      = x.real / Nanos.InOneWeek
+    transparent trait Length extends Base:
+
+      extension[OPAQUE <: Long.Opaque](inline x: OPAQUE)
+        inline def nanosTotal        : Long      = x.real
+        inline def microsTotal       : Long      = x.real / Nanos.InOneMicros
+        inline def millisTotal       : Long      = x.real / Nanos.InOneMillis
+        inline def secondsTotal      : Long      = x.real / Nanos.InOneSecond
+        inline def minutesTotal      : Long      = x.real / Nanos.InOneMinute
+        inline def hoursTotal        : Long      = x.real / Nanos.InOneHour
+        inline def daysTotal         : Long      = x.real / Nanos.InOneDay
+        inline def weeksTotal        : Long      = x.real / Nanos.InOneWeek
 
 
 /*___________________________________________________________________________
@@ -123,6 +124,5 @@ ___________________________________________________________________________*/
        Total nanoseconds which fit in `this` time unit
 
        Note: Maximum duration expressed in nanoseconds is "7331 days, 10 hours, 50 mins, 44.854775807 secs". Unboxed over will cause problems
-
 
 */

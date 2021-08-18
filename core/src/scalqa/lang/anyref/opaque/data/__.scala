@@ -1,6 +1,6 @@
 package scalqa; package lang; package anyref; package opaque; import language.implicitConversions
 
-abstract class Data[A<:Opaque,REAL<:AnyRef:ClassTag](typeName: String) extends Base[A,REAL](typeName) with g.customized.Containers[A] with Data._methods[A,REAL]
+abstract class Data[A<:Opaque,REAL<:AnyRef](name: String)(using ct: ClassTag[REAL]) extends Base[A,REAL](name) with g.customized.Containers[A] with Data._methods[A,REAL]
 
 object Data:
   type Ordered[A<:Opaque, REAL<:AnyRef] = data.Ordered[A,REAL];    transparent inline def Ordered       = data.Ordered
@@ -28,5 +28,9 @@ ___________________________________________________________________________*/
 
   val sb2: String.Buffer = NEW
   ```
+
+  As an example look into [BigInteger](../../../gen/math/BigInteger.html) with source code [available](https://github.com/scalqa/scalqa/blob/master/core/src/scalqa/gen/math/BigInteger.scala).
+
+@trait _methods -> Default methods for all AnyRef.Opaque.Data defined types
 
 */

@@ -23,7 +23,7 @@ class Pro[A<:Raw]:
       type Base  = G.Pro.ObservableMutable.X.Base[A]
       type Basic = G.Pro.ObservableMutable.X.Basic[A]
 
-object Pro extends Pro[Float]
+private[scalqa] object Pro extends Pro[Float]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

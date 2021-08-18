@@ -1,6 +1,6 @@
 package scalqa; package lang; package char; package opaque; import language.implicitConversions
 
-abstract class Data[A<:Opaque](typeName: String) extends Base[A](typeName) with Data._methods with g.customized.Containers[A]
+abstract class Data[A<:Opaque](name: String) extends Base[A](name) with Data._methods with g.customized.Containers[A]
 
 object Data:
 
@@ -21,5 +21,7 @@ ___________________________________________________________________________*/
   Opaque Data not only defines a Char based opaque type, but also privides a framework of custom specialized containers attached to this type.
 
   See [more in guide](../../../../../guide/features/Data.html).
+
+@trait _methods -> Default methods for all Char.Opaque.Data defined types
 
 */
