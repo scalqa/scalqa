@@ -22,16 +22,16 @@ ___________________________________________________________________________*/
    When evaluated with comparison operators, [LazySize] preloads just enough stream elements to answer the questions
 
    ```
-   def s : ~[String] = ?_?_?
+   def s  : ~[String]          = ?_?_?
+   def ps : ~~.Preview[String] = s.preview
 
-   val lazySize = s.preview.previewSize
+   ps.previewSize >= 10 // This will pre-load no more than 10 elements
 
-   lazySize >= 10 // This will pre-load no more than 10 elements
-
-   lazySize < 100 // This will pre-load no more than 100 elements
+   ps.previewSize < 100 // This will pre-load no more than 100 elements
   ```
 
 @def size -> Total size
 
     Preloads all elements, unless sizing is available in metadata
+
 */

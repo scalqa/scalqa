@@ -77,13 +77,21 @@ ___________________________________________________________________________*/
 
      ```
 
-         Time().roundTo(1.Second)(using UP)
+         Time.current.roundTo(1.Second)(using UP)
          // vs.
-         Time().roundTo(1.Second)(using Gen.Rounding.Up)
+         Time.current.roundTo(1.Second)(using Gen.Rounding.Up)
 
-         Time().roundTo(1.Minute)(using DOWN)
+         Time.current.roundTo(1.Minute)(using DOWN)
          // vs.
-         Time().roundTo(1.Minute)(using Gen.Rounding.Down)
+         Time.current.roundTo(1.Minute)(using Gen.Rounding.Down)
+
+         val b: Int.Buffer = NEW
+         // vs.
+         val b: Int.Buffer = Int.Buffer()
+
+         val j: java.util.List[String] = NEW
+         // vs.
+         val j: java.util.List[String] = new java.util.ArrayList()
 
          val l: Long = MAX
          // vs.

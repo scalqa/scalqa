@@ -4,7 +4,8 @@ object Raw:
 
   // *************************************************
   trait Specialized extends Any.Raw.Specialized:
-    type SPECIALIZED_FOR = Boolean
+    inline def specializedFor = "Boolean"
+
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -28,5 +29,7 @@ ___________________________________________________________________________*/
   Trait to mix with a class to indicate Boolean specialized implementation.
 
   Generally, Specialized marker is for information only and is not required for processing.
+
+@def specializedFor -> returns "Boolean"
 
 */

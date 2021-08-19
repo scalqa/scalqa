@@ -1,11 +1,13 @@
 package scalqa; package `val`; package stream
 
-trait Preview[A] extends ~[A]:
+trait Preview[A] extends ~[A] with Able.Empty:
   /**/                    def preview                     : A
   @tn("preview_Opt")      def preview_?                   : Opt[A]
   @tn("preview_Stream")   def preview_~(cnt: Int)         : ~[A] & Able.Size
   /**/                    def previewSize                 : Preview.LazySize
   @tn("readWhile_Stream") def readWhile_~(f: A => Boolean): ~[A] & Able.Size
+  /**/             inline def isEmpty                     : Boolean            = preview_?.isEmpty
+
 
 object Preview:
   type LazySize = preview.LazySize

@@ -8,7 +8,7 @@ object Zip:
 
   def save(file: J.File, entries: ~[(String, Pro[J.Input])], level: Int = 1, writeEmptyFile: Boolean = true): Unit  =
     val stream = entries.enablePreview
-    if(stream.preview_?.nonEmpty || writeEmptyFile)
+    if(stream.nonEmpty || writeEmptyFile)
       val tempFile = file.temp
       zip.Z.saveToFile(tempFile, stream, level)
       file.delete

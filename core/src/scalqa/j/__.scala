@@ -40,7 +40,6 @@ object J:
   transparent inline def Priority      = j.vm.Priority;                   type Priority         = j.vm.Priority.OPAQUE.TYPE
   transparent inline def Setup         = j.vm.Setup
   transparent inline def Memory        = j.vm.Memory
-  transparent inline def Host          = j.vm.Host
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -105,7 +104,7 @@ ___________________________________________________________________________*/
 
           val day = Day()
 
-          App.Concurrent.runEvery(1.Seconds, Time().TP).cancelIf(day != Day())
+          App.Concurrent.runEvery(1.Seconds, Time.current.TP).cancelIf(day != Day())
        ```
 
 
@@ -115,7 +114,7 @@ ___________________________________________________________________________*/
 
        ```
           // In 10 minutes, this will start printing time every 1 second for one hour
-          Schedule.everyIn(1.Second, 10.Minutes, Time().TP).expireIn(1.Hour)
+          Schedule.everyIn(1.Second, 10.Minutes, Time.current.TP).expireIn(1.Hour)
        ```
 
 @type Input       ->  Type alias \n\n Shortcut to [[scalqa.j.io.Input  J.Io.Input]]

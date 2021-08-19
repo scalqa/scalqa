@@ -10,7 +10,7 @@ class MultiDoc private(target: AnyRef/* expected Pipeline | ~[_] | Flow[_]*/, v:
 
     if(id.lower.contains("stream").not) this += "Stream"
 
-    Any.Raw.Specialized.get_?(v).forval(name => {
+    v.?.takeType[Any.Raw.Specialized].map(_.specializedFor).forval(name => {
       this +=  ("raw",name)
       this ++= v.?.takeType[Pipeline].map_?(Pipeline.baseDoc_?).map_?(_.~.find_?(_._1 == "raw").map(_._2)).drop(_ == name).map(n => ("fromRaw",n))
     })

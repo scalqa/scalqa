@@ -30,7 +30,7 @@ ___________________________________________________________________________*/
 
   Note. Most opaque companions extend Opaque.Data, which also defines specialized containers attached to the type.
 
-  As an example of opaque base definition look into [J.Vm.Priority](../../../j/vm/Priority.html) with source code [available](https://github.com/scalqa/scalqa/blob/master/core/src/scalqa/j/vm/Priority.scala).
+  As an example of opaque base definition look into [J.Vm.Priority](../../../j/vm/Priority$.html) with source code [available](https://github.com/scalqa/scalqa/blob/master/core/src/scalqa/j/vm/Priority.scala).
 
 @trait _methods -> Default methods for all Long.Opaque.Base defined types
 

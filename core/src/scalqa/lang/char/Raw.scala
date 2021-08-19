@@ -4,7 +4,7 @@ object Raw:
 
   // *************************************************
   trait Specialized extends Any.Raw.Specialized:
-    type SPECIALIZED_FOR = Char
+    inline def specializedFor = "Char"
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -28,5 +28,7 @@ ___________________________________________________________________________*/
   Trait to mix with a class to indicate Char specialized implementation.
 
   Generally, Specialized marker is for information only and is not required for processing.
+
+@def specializedFor -> returns "Char"
 
 */

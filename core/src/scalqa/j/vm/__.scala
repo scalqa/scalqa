@@ -1,15 +1,19 @@
 package scalqa; package j
 
 object Vm:
-  def availableProcessors : Int   = Runtime.getRuntime().availableProcessors()
-  def exit                : Unit  = { println("J.Vm.exit requested"); System.exit(0) }
+
+  inline def host                                       : String   = java.net.InetAddress.getLocalHost.getHostName()
+  inline def address                                    : String   = java.net.InetAddress.getLocalHost.getHostAddress()
+
+  inline def availableProcessors                        : Int      = Runtime.getRuntime().availableProcessors()
+  inline def exit                                       : Unit     = { println("J.Vm.exit requested"); System.exit(0) }
+
+  /**/   def reload(className: String, paths: ~[J.Path]): Class[_] = vm.z.ClassLoader.reload(className, paths)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def Priority     = vm.Priority;     type Priority = vm.Priority.OPAQUE.TYPE
   transparent inline def Setup        = vm.Setup
   transparent inline def Memory       = vm.Memory
-  transparent inline def Host         = vm.Host
-  transparent inline def ClassLoader  = vm.ClassLoader
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -20,8 +24,37 @@ ___________________________________________________________________________*/
 /**
 @object Vm -> ### JVM Utilities
 
+@def host -> Local host name
+
+    Inlines following:
+    ```
+    java.net.InetAddress.getLocalHost.getHostName()
+    ```
+
+@def address -> Local host address
+
+    Inlines following:
+    ```
+    java.net.InetAddress.getLocalHost.getHostAddress()
+    ```
+
+@def availableProcessors -> Core count
+
+    Inlines following:
+    ```
+    java.lang.Runtime.getRuntime().availableProcessors()
+    ```
+
 @def exit -> JVM shutdown
 
-       Calls System.exit(0)
+    Inlines following:
+    ```
+    println("J.Vm.exit requested")
+    System.exit(0)
+    ```
+
+@def reload -> Load Class
+
+    Retreives latest class definition with custom ClassLoader.
 
 */
