@@ -3,7 +3,7 @@ package scalqa; package lang; package int; package g; import language.implicitCo
 object Opt extends z.opt._base:
   @tn("getVoid") inline def void[A<:Raw]                               : Opt[A]  = 3_000_000_000L.cast[Opt[A]]  // Smallest round number
   implicit       inline def implicitFrom     [A<:Raw](inline v: \/)    : Opt[A]  = void[A]
-  implicit       inline def implicitFromValue[A<:Raw](inline v: A)     : Opt[A]  = v.cast[Opt[A]]
+  implicit       inline def implicitFromRaw  [A<:Raw](inline v: A)     : Opt[A]  = v.cast[Opt[A]]
   implicit       inline def implicitToBoolean[A<:Raw](inline v: Opt[A]): Boolean = v.real != void.real
 
   extension[A<:Raw](inline x: Opt[A])

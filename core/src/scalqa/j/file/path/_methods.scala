@@ -58,7 +58,7 @@ transparent trait _methods:
 ___________________________________________________________________________*/
 /**
 
-@class _methods -> ###
+@trait _methods -> ###
 
      [[J.Path]] represents a directory or file in the [[File.System]], which may or may not exist
 

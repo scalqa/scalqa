@@ -6,15 +6,17 @@ object Docs:
 
   def generate(v: String): Nothing = ???
 
-  def isHiddenName(owner: Member, name: String): Boolean = owner.name match
-    case "Doc"                               => name.startsWith("product")
-    case "Opt"                               => name == "withFilter" || name == "foreach" || name == "flatMap"
-    case "Result"                            => name == "withFilter" || name == "foreach" || name == "flatMap"
-    case "Promise"                           => name == "withFilter" || name == "foreach" || name == "flatMap"
-    case "Collection"                        => name == "withFilter" || name == "foreach" || name == "flatMap" || name == "map"
-    case "ReversibleFunction"                => name == "andThen"    || name == "compose"
-    case "Ordering" if owner.kind.isTypeLike => name.startsWith("thenComparing") || !name.in("compare","reverse","on","join","+") && !name.contains("^")
-    case _                                   => name == "withFilter" || name == "toString" || name.startsWith("thenComparing") || name == "opaque"
+  def isHiddenName(owner: Member, name: String): Boolean = name.startsWith("zz") || name == "withFilter" || name == "toString" || name.startsWith("thenComparing") || {
+    owner.name match
+      case "Doc"                               => name.startsWith("product")
+      case "Opt"                               => name == "withFilter" || name == "foreach" || name == "flatMap"
+      case "Result"                            => name == "withFilter" || name == "foreach" || name == "flatMap"
+      case "Promise"                           => name == "withFilter" || name == "foreach" || name == "flatMap"
+      case "Collection"                        => name == "withFilter" || name == "foreach" || name == "flatMap" || name == "map"
+      case "ReversibleFunction"                => name == "andThen"    || name == "compose"
+      case "Ordering" if owner.kind.isTypeLike => name.startsWith("thenComparing") || !name.in("compare","reverse","on","join","+") && !name.contains("^")
+      case _                                   => false
+  }
 
   def isTypeLikeAlias(m: Member): Boolean =
     if(!m.kind.isTypeLike) false

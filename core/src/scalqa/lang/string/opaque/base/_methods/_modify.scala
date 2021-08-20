@@ -34,7 +34,7 @@ transparent trait _modify:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@def ++ -> Join tag
+@def + -> Join tag
 
        Joins value tag to base opaque string.
 

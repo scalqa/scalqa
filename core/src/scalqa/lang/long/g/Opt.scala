@@ -3,7 +3,7 @@ package scalqa; package lang; package long; package g; import language.implicitC
 object Opt extends z.opt._base:
   @tn("getVoid") inline def void[A<:Raw]                               : Opt[A]   = 9223372036854775806L.cast[Opt[A]] // java.lang.Long.MAX_VALUE - 1
   implicit       inline def implicitFrom     [A<:Raw](inline v: \/)    : Opt[A]   = void[A]
-  implicit       inline def implicitFromValue[A<:Raw](inline v: A)     : Opt[A]   = v.cast[Opt[A]]
+  implicit       inline def implicitFromRaw  [A<:Raw](inline v: A)     : Opt[A]   = v.cast[Opt[A]]
   implicit       inline def implicitToBoolean[A<:Raw](inline v: Opt[A]): Boolean  = v.real != void.real
 
   extension[A<:Raw](inline x: Opt[A])

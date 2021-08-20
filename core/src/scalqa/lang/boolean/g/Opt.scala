@@ -5,10 +5,10 @@ object Opt extends z.opt._base:
   @tn("getVoid") inline def void[A<:Raw]                               : Opt[A]  = -1.toByte.cast[Opt[A]]
   /**/           inline def TRUE      [A<:Raw]                         : Opt[A]  =  1.toByte.cast[Opt[A]]
   /**/           inline def FALSE     [A<:Raw]                         : Opt[A]  =  0.toByte.cast[Opt[A]]
+  implicit       inline def implicitFrom     [A<:Raw](inline v: \/)    : Opt[A]  = void[A]
   implicit       inline def implicitFromTrue [A<:Raw](inline v: true)  : Opt[A]  = TRUE[A]
   implicit       inline def implicitFromFalse[A<:Raw](inline v: false) : Opt[A]  = FALSE[A]
-  implicit       inline def implicitFrom     [A<:Raw](inline v: \/)    : Opt[A]  = void[A]
-  implicit       inline def implicitFromValue[A<:Raw](inline v: A)     : Opt[A]  = apply(v)
+  implicit       inline def implicitFromRaw  [A<:Raw](inline v: A)     : Opt[A]  = apply(v)
   implicit       inline def implicitToBoolean[A<:Raw](inline v: Opt[A]): Boolean = v.real != void.real
   extension[A<:Raw](inline x: Opt[A])
     /**/               inline def real                                        : Byte       = x.cast[Byte]

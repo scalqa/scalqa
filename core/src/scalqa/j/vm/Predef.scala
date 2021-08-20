@@ -1,6 +1,7 @@
 package scalqa.j.vm; import language.implicitConversions
 
 import scalqa.lang.*
+import scalqa.Val.Opt
 
 object Predef:
 
@@ -19,6 +20,7 @@ object Predef:
   inline given givenIntMath    : Int   .G.Math[Int   ] = Int   .math
   inline given givenLongMath   : Long  .G.Math[Long  ] = Long  .math
   inline given givenDoubleMath : Double.G.Math[Double] = Double.math
+
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

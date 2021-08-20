@@ -300,31 +300,21 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
         ("", GET.types)
       )),
       buildGroup("Def", Seq(
-          ("Constructor", GET.constructors),
-          (if(GET.constructors.isEmpty) "" else "Body", GET.defs)
+        ("Constructor", GET.constructors),
+        (if(GET.constructors.isEmpty) "" else "Body", GET.defs)
       )),
       buildGroup("Make", Seq(
         ("", GET.makers),
       )),
       buildGroup("Extension", Seq(
-          ("", GET.extended),
-      )),
-      buildGroup("Given", Seq(
-          ("", rest.filter(_.kind.isGiven))
+        ("", GET.extended),
       )),
       buildGroup("Implicit", Seq(
-        ("", rest.filter(_.kind.isImplicit))
+        ("", rest.filter(m => m.kind.isImplicit && !m.name.startsWith("zz")))
       )),
-//      buildGroup("Implied", Seq[SubGroup](
-//          ("Given",    rest.filter(_.kind.isGiven)),
-//          ("Implicit", rest.filter(_.kind.isImplicit)),
-//        )/* ++ GET.extensions.map((t,s) => (t,s)).map[SubGroup]((on:ExtensionTarget,m:Seq[Member]) => {
-//            val sig = Signature(s"extension (${on.name}: ") ++ on.signature ++ Signature(")")
-//            val mg  = MGroup(span(sig.map(renderElement)),m)
-//            val sg : SubGroup = ("",Seq(mg))
-//            sg
-//          })*/
-//      ),
+      buildGroup("Given", Seq(
+        ("", rest.filter(m => m.kind.isGiven && !m.name.startsWith("zz")))
+      )),
       buildGroup("Export", Seq(
         ("Defined exports", GET.exports),
       ))

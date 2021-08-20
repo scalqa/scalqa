@@ -135,7 +135,6 @@ ___________________________________________________________________________*/
 @def  WeakRef     ->  Companion alias \n\n Shortcut to [[scalqa.j.util.WeakRef$ J.Util.WeakRef]]
 @type Priority    ->  Type alias \n\n Shortcut to [[scalqa.j.vm.Priority  J.Vm.Priority]]
 @def  Priority    ->  Companion alias \n\n Shortcut to [[scalqa.j.vm.Priority$ J.Vm.Priority]]
-@def  Host        ->  Companion alias \n\n Shortcut to [[scalqa.j.vm.Host$ J.Vm.Host]]
 @def  Setup       ->  Companion alias \n\n Shortcut to [[scalqa.j.vm.Setup$ J.Vm.Setup]]
 @def  Memory      ->  Companion alias \n\n Shortcut to [[scalqa.j.vm.Memory$ J.Vm.Memory]]
 

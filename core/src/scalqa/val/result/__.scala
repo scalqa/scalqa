@@ -4,7 +4,7 @@ object Result extends result._givens:
   /**/     inline def apply[A](inline v: A | Problem)          : Result[A]   = v.cast[Result[A]]
   /**/            def fail [A](message: String)                : Result[A]   = (if(message eq null) Problem.noMessage else message.Problem).cast[Result[A]]
 
-  implicit inline def implicitFromValue[A](inline v: A)        : Result[A]   = apply(v)
+  implicit inline def implicitFromAny  [A](inline v: A)        : Result[A]   = apply(v)
   implicit inline def implicitFrom     [A](inline v: Problem)  : Result[A]   = apply(v)
   implicit inline def implicitToBoolean[A](inline v: Result[A]): Boolean     = v.isValue
 

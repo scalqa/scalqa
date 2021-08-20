@@ -11,8 +11,8 @@ object Input extends AnyRef.Opaque.Base[Input, REAL]("Io.Input"):
   def apply(f: File.Path)                            : Input = apply(java.io.FileInputStream(f.real.toFile))
 
   @tn("getVoid") inline def void                     : Input = Z.Void
-  implicit       inline def implicitFrom(v: REAL)    : Input = apply(v)
   implicit       inline def implicitFrom(v: \/)      : Input = void
+  implicit       inline def implicitFrom(v: REAL)    : Input = apply(v)
 
   extension (x: Input)
     def asBytes : Bytes  = Bytes(x.real)

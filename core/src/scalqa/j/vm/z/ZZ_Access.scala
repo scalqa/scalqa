@@ -5,7 +5,7 @@ import concurrent.ExecutionContext
 private[scalqa] class ZZ_Access:
 
   def Console          : scala.Console.type    = scala.Console
-  def None             : AnyRef                = scalqa.`val`.Opt.None
+  def None             : AnyRef                = scalqa.`val`.opt.z.None
   def initSize         : Int                   = Setup.arrayInitSize_*()
   def executionContext : ExecutionContext      = Setup.defaultExecutionContext
 

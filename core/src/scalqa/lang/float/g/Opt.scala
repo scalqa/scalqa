@@ -3,7 +3,7 @@ package scalqa; package lang; package float; package g; import language.implicit
 object Opt extends z.opt._base:
   @tn("getVoid") inline def void[A<:Raw]                               : Opt[A]  = java.lang.Float.NaN.cast[Opt[A]]
   implicit       inline def implicitFrom     [A<:Raw](inline v: \/)    : Opt[A]  = void[A]
-  implicit       inline def implicitFromValue[A<:Raw](inline v: A)     : Opt[A]  = v.cast[Opt[A]]
+  implicit       inline def implicitFromRaw  [A<:Raw](inline v: A)     : Opt[A]  = v.cast[Opt[A]]
   implicit       inline def implicitToBoolean[A<:Raw](inline v: Opt[A]): Boolean = java.lang.Float.isNaN(v.real).not
 
   extension[A<:Raw](inline x: Opt[A])

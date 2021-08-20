@@ -2,7 +2,7 @@ package scalqa; package children; import language.implicitConversions
 
 class Data(val owner: Member):
 
-  val all: ><[Member] = owner.members.~.dropOnlyBy(_.name,"THIS_TYPE"/*,"NumericOps","OrderingOps"*/).drop(m => Docs.isHiddenName(owner,m.name))
+  val all: ><[Member] = owner.members.~.drop(m => m.name == "THIS_TYPE" || Docs.isHiddenName(owner,m.name))
 
   var members,
       aliases,
