@@ -14,7 +14,6 @@ object Collection:
 
   extension [A] (inline x: Collection[A])
     /**/                 inline def contains(inline v: A)          : Boolean       = Z.contains(x,v)
-    @tn("readOnly_View") inline def readOnly_^                     : Collection[A] = Z.ReadOnly_View(x)
     /**/                 inline def withFilter(inline f:A=>Boolean): ~[A]          = x.~.take(f)
     @tn("map_View")      inline def map_^[B](inline f: A => B)     : Collection[B] = Z.ValueMap_View(x, f)
     /**/                 inline def map[B](inline f:A=>B)          : ~[B]          = x.~.map(f)

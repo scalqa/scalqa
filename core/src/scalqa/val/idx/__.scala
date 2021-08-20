@@ -21,7 +21,6 @@ object Idx:
     @tn("at_Opt")                def at_?(position: Int)           : Opt[A]            = if (position < 0 || position >= x.size) \/ else x(position)
     /**/                         def last                          : A                 = x.last_?.get
     @tn("last_Opt")              def last_?                        : Opt[A]            = x.at_?(x.size - 1)
-    @tn("readOnly_View")         def readOnly_^                    : Idx[A]            = idx.z.View.ReadOnly(x)
     @tn("range_View")            def range_^(r: Int.<>)            : Idx[A]            = idx.z.View.Range(x, r.start, r.size)
     @tn("reversed_View")         def reversed_^                    : Idx[A]            = idx.z.Reversed_View(x)
     @tn("map_View")              def map_^[B](f: A => B)           : Idx[B]            = idx.z.Convert_View(x, f)

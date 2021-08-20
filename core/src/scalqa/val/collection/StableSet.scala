@@ -53,7 +53,7 @@ ___________________________________________________________________________*/
 
        Note: [[scalqa.val.collection.StableSet StableSet]] is a concrete single implementation of unique collection.
        There is no general "Set" interface, because its use is rare. If there is a need for more efficient "Set",
-       create one with [[scalqa.val.collection.Mutable$.uniqueElementSet Collection.Mutable.uniqueElementSet]]. The result is faster, but not thread safe.
+       create one with [[scalqa.val.collection.Mutable$.uniqueElementSet Collection.Mutable.uniqueElementSet]]. The result is faster, but is not thread safe.
 
 @def join -> Join element
 

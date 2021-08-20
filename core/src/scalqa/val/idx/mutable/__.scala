@@ -25,10 +25,12 @@ object Mutable:
   /**/                    def wrap[A](v:  Idx[A])                      : Mutable[A]             = v match{ case v:Idx.M[_] => v.cast[Idx.M[A]]; case v => new z.Unsupported_View.M[A](v)}
   implicit inline         def implicitRequest[A](inline v: NEW)        : Mutable[A]             = apply[A]()
 
+
   extension[A](x: Mutable[A])
     /**/                  def updateFor(f: A => Boolean, value: A)            : Int             = { var c = 0; x.~.foreachIndexed((i, v) => if (f(v)) { c += 1; x.update(i, value) }); c }
     /**/                  def removeFor(f: A => Boolean)                      : Int             = { var c = 0; (0 <>> x.size).~.reverse.foreach(i => if (f(x(i))) { c += 1; x.removeAt(i) }); c }
     /**/                  def sortReversed                    (using o: O[A]) : Unit            = x.sort(using o.reverse)
+    @tn("readOnly_View")  def readOnly_^                                      : Idx[A]          = idx.z.View.ReadOnly[A](x)
     @tn("mutableMap_View")def mutableMap_^[B](m: A=>B, r: B => A)             : Mutable[B]      = mutableMap_^(using ReversibleFunction(m,r))
     @tn("mutableMap_View")def mutableMap_^[B](using m:ReversibleFunction[A,B]): Mutable[B]      = z.TwoWay_View.M[A,B](x, m)
     /**/                  def sortBy[B](f:  A=>B)             (using o: O[B]) : Unit            = x.sort(using o.on(f))
