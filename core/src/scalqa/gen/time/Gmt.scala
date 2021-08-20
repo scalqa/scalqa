@@ -3,19 +3,19 @@ package scalqa; package gen; package time; import language.implicitConversions
 import Time.Gmt
 
 object Gmt extends Long.Opaque.Data[Gmt]("Time.Gmt") with time.x.Base[Gmt] with time.x.Millis.Base:
-  /**/           inline def fromIndex(inline v: Long)  : Gmt     = v.opaque
-  /**/           inline def current                    : Gmt     = System.currentTimeMillis.opaque
-  override              def value_tag(v: Gmt)          : String  = v.day.tag + ' ' + v.dayTime.tag
+  /**/           inline def fromIndex(inline v:Long): Gmt     = v.opaque
+  /**/           inline def current                 : Gmt     = System.currentTimeMillis.opaque
+  override              def value_tag(v: Gmt)       : String  = v.day.tag + ' ' + v.dayTime.tag
 
-  implicit       inline def implicitRequest(v: CURRENT): Gmt     = current
+  implicit       inline def implicitFrom(v: CURRENT): Gmt     = current
 
   extension(x: Gmt)
-    /**/         inline def genTime                    : Time    = Time.fromIndex(x.real)
-    override            def day                        : Day     = Day.fromIndex((x.real / X.Millis.InOneDay).toInt)
-    override            def dayTime                    : DayTime = (x.real % X.Millis.InOneDay).toInt.Millis
+    /**/         inline def genTime                 : Time    = Time.fromIndex(x.real)
+    override            def day                     : Day     = Day.fromIndex((x.real / X.Millis.InOneDay).toInt)
+    override            def dayTime                 : DayTime = (x.real % X.Millis.InOneDay).toInt.Millis
   extension(inline x: Gmt)
-    @tn("plus")  inline def +(inline l: Time.Length)   : Gmt     = (x.real + l.millisTotal).opaque
-    @tn("minus") inline def -(inline l: Time.Length)   : Gmt     = (x.real - l.millisTotal).opaque
+    @tn("plus")  inline def +(inline l: Time.Length): Gmt     = (x.real + l.millisTotal).opaque
+    @tn("minus") inline def -(inline l: Time.Length): Gmt     = (x.real - l.millisTotal).opaque
 
   object OPAQUE:
     opaque type TYPE <: Long.Opaque = Long.Opaque

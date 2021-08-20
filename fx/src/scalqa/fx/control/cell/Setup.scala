@@ -33,7 +33,7 @@ trait Setup[CELL <: control.Cell] extends Able.Doc:
   def doc = Doc(this) += ("updateJobs", updateJobs.size) ++= clickJobs.size.?.take(_ > 0).map(_.tag).map(("MouseClickedJobs", _)).~ ++= menuJobs.size.?.take(_ > 0).map(_.tag).map(("contextMenuJobs", _)).~
 
 object Setup:
-  implicit def implicitRequest[CELL <: control.Cell](v: \/) : Setup[CELL] = Z.Void.cast[Setup[CELL]]
+  implicit def implicitFrom[CELL <: control.Cell](v: \/) : Setup[CELL] = Z.Void.cast[Setup[CELL]]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

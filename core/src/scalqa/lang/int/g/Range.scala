@@ -33,6 +33,7 @@ class Range[A<:Raw](_start: A, _size: Int) extends Val.<>[A] with Able.Size with
   private    inline def _mk (f:A, inline to:A) : Range[A]      = Range(f,to-f)
 
 object Range:
+  implicit inline   def implicitFrom(v: \/)    : Range[Int]    = z.Range.Void
   extension(x:Range[Int])
     @tn("moveRight")inline def >>(move: Int)    : Range[Int] = Range(x.start+move,x.size)
     @tn("moveLeft") inline def <<(move: Int)    : Range[Int] = Range(x.start-move,x.size)
@@ -41,7 +42,6 @@ object Range:
     @tn("checkIn")  inline def checkIn(size:Int): Range[Int] = {if(x.start<0 || x.endX>size) J.illegalArgument(""+x.start+" <>> "+x.endX+" is out of range 0 <>> "+size); x}
     @tn("default")  inline def default(size:Int): Range[Int] = {var v=x; if(v.isInstanceOf[Void]) v = 0 <>> size; v }
   // ------------------------------------------------------------------------------------------------------------------------------------------
-  implicit inline def implicitRequest(v: \/)    : Range[Int] = z.Range.Void
   extension[A<:Raw,T,STM<: ~~.AnyType[T]](inline x: Range[A])
     /**/                                  inline def map    [B>:T](inline f:A=> B)   (using inline t: Given.StreamShape[B,STM]): STM       = g.Stream.map[A,T,STM](x.~)[B](f)(using t)
     /**/                                  inline def flatMap[B>:T](inline f:A=> ~[T])(using inline t: Given.StreamShape[B,STM]): STM       = g.Stream.flatMap[A,T,STM](x.~)[B](f)(using t)

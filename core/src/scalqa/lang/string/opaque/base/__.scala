@@ -3,11 +3,11 @@ package scalqa; package lang; package string; package opaque; import language.im
 abstract class Base[A<:Opaque](name: String) extends AnyRef.Opaque.Base[A,String](name) with base._Methods:
   given ordering : Ordering[A] = String.ordering.cast[Ordering[A]]
 
-  override def value_isVoid(v: A)           : Boolean = v.real.length==0
-  override def value_tag(v: A)              : String  = typeName+":"+v
-  implicit inline def implicitRequest(v: \/): A       = "".cast[A]
+  override def value_isVoid(v: A)        : Boolean = v.real.length==0
+  override def value_tag(v: A)           : String  = typeName+":"+v
+  implicit inline def implicitFrom(v: \/): A       = "".cast[A]
 
-  given givenCanEqual_String: CanEqual[A,String] = CanEqual.derived
+  given givenCanEqualString: CanEqual[A,String] = CanEqual.derived
 
   extension[THIS_OPAQUE<:Opaque](inline x: THIS_OPAQUE)
     @tn("realString") inline def real: String = x.cast[String]

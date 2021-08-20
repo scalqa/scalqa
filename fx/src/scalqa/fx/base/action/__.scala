@@ -35,8 +35,8 @@ object Action:
   def apply[U](label: String, l: () => U)                 : Action            = Action(label, true, l)
   def apply(label: String)                                : Action            = new Action(label)
 
-  implicit inline def implicitFromNode(v: Fx.Node)        : Action            = apply(v)
-  implicit inline def implicitRequest(v: SEPARATOR)       : Action            = apply(v)
+  implicit inline def implicitFrom(v: Fx.Node)            : Action            = apply(v)
+  implicit inline def implicitFrom(v: SEPARATOR)          : Action            = apply(v)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Event    = action.Event;     transparent inline def Event = action.Event

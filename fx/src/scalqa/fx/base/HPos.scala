@@ -8,9 +8,9 @@ enum HPos(val real: JHPos) extends Fx.JavaFx.Enum[JHPos]:
   case Right  extends HPos(JHPos.RIGHT)
 
 object HPos extends Fx.JavaFx.Enum.Companion[HPos, JHPos]:
-  implicit inline def implicitRequest(v: CENTER): HPos = Center
-  implicit inline def implicitRequest(v: LEFT)  : HPos = Left
-  implicit inline def implicitRequest(v: RIGHT) : HPos = Right
+  implicit inline def implicitFrom(v: CENTER): HPos = Center
+  implicit inline def implicitFrom(v: LEFT)  : HPos = Left
+  implicit inline def implicitFrom(v: RIGHT) : HPos = Right
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

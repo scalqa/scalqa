@@ -3,8 +3,8 @@ package scalqa; package fx; package base; package style; import language.implici
 import Style.Class
 
 object Class extends String.Opaque.Data[Class]("Fx.Style.Class"):
-  /**/     inline def apply(inline v: String)             : Class   = v.opaque
-  implicit inline def implicitFromString(inline v: String): Class   = apply(v)
+  /**/     inline def apply(inline v: String)       : Class   = v.opaque
+  implicit inline def implicitFrom(inline v: String): Class   = apply(v)
 
   given FxConverter: ReversibleFunction[String,Class] = \/
 

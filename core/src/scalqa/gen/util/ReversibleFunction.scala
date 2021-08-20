@@ -8,7 +8,7 @@ object ReversibleFunction:
   /**/            def apply [A,B](af: A => B, bf:B => A): ReversibleFunction[A,B] = new Z.Basic(af,bf)
   /**/            def wrap[A,B](f:  A => B)             : ReversibleFunction[A,B] = new ReversibleFunction[A,B] { def apply(a: A) = f(a); def undo(b: B) = J.unsupportedOperation() }
   @tn("getVoid")  def void[A,B]                         : ReversibleFunction[A,B] = Z.Void.cast[ReversibleFunction[A,B]]
-  implicit inline def implicitRequest[A,B](inline v: \/): ReversibleFunction[A,B] = void[A,B]
+  implicit inline def implicitFrom[A,B](inline v: \/)   : ReversibleFunction[A,B] = void[A,B]
 
   extension[A,B](x: ReversibleFunction[A,B])
     def reverse: ReversibleFunction[B, A] = new Z.Reversed(x)
@@ -67,6 +67,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitRequest -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitFrom    -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

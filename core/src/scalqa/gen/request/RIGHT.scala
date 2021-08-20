@@ -15,7 +15,7 @@ ___________________________________________________________________________*/
 
        See [[Request]] for usage
 
-@object RIGHT -> ### RIGHT Object
+@object RIGHT -> ### RIGHT Request Object
 
        Singleton implementation of [[RIGHT]] request type
 

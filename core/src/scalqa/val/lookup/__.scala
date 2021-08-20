@@ -9,11 +9,11 @@ trait Lookup[A, +B] extends Collection[B]:
   @tn("stream")         def ~                 : ~[B]       = pair_~.map(_._2)
 
 object Lookup:
-  /**/                  def lazySource[A,B](createFunOpt: A => Opt[B]) : Lookup[A,B] = Z.Basic(createFunOpt)
-  /**/                  def apply[A,B](v: ~[(A, B)])                   : Lookup[A,B] = Stable(v)
-  /**/                  def apply[A,B](vs: (A, B)*)                    : Lookup[A,B] = Stable(vs)
-  @tn("getVoid") inline def void[A,B]                                  : Lookup[A,B] = Stable.void
-  implicit       inline def implicitRequest[A,B](v: \/)                : Lookup[A,B] = void[A,B]
+  /**/                  def lazySource[A,B](createFunOpt:A=>Opt[B]): Lookup[A,B] = Z.Basic(createFunOpt)
+  /**/                  def apply[A,B](v: ~[(A, B)])               : Lookup[A,B] = Stable(v)
+  /**/                  def apply[A,B](vs: (A, B)*)                : Lookup[A,B] = Stable(vs)
+  @tn("getVoid") inline def void[A,B]                              : Lookup[A,B] = Stable.void
+  implicit       inline def implicitFrom[A,B](v: \/)               : Lookup[A,B] = void[A,B]
 
   extension[A,B] (x: Lookup[A,B])
     @tn("map_View")               def map_^[C](f: B => C) : Lookup[A,C]               = Z.Convert_View(x, f)
@@ -71,6 +71,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitRequest -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitFrom    -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

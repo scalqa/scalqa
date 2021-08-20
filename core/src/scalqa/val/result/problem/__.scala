@@ -10,11 +10,11 @@ object Problem:
   val noMessage   : Problem = new z.DefaultProblem("No Message")
   val failedFilter: Problem = new z.DefaultProblem("For-Comprehension predicate is not satisfied")
 
-  /**/     inline def apply(inline message: String = \/)    : Problem        = ZZ.problem(message)
-  /**/            def apply(t: Throwable)                   : Problem        = t match{ case v: Problem => v; case v: z.ExceptionProblem.Wrap => v.deficiency; case v => z.ExceptionProblem(v)}
-  implicit inline def implicitFromString(inline v: String)  : Problem        = ZZ.problem(v)
-  implicit inline def implicitToThrowable(inline v: Problem): Throwable      = z.ExceptionProblem.Wrap(v)
-  /**/            def unapply(v: Problem)                   : Option[String] = Some(v.message)
+  /**/     inline def apply(inline message: String = \/): Problem        = ZZ.problem(message)
+  /**/            def apply(t: Throwable)               : Problem        = t match{ case v: Problem => v; case v: z.ExceptionProblem.Wrap => v.deficiency; case v => z.ExceptionProblem(v)}
+  implicit inline def implicitFrom(inline v: String)    : Problem        = ZZ.problem(v)
+  implicit inline def implicitTo  (inline v: Problem)   : Throwable      = z.ExceptionProblem.Wrap(v)
+  /**/            def unapply(v: Problem)               : Option[String] = Some(v.message)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Timeout  = problem.Timeout

@@ -4,8 +4,8 @@ import javafx.scene.layout.{ Background => JBackground, BackgroundFill => JFill,
 import Region.Background
 
 object Background extends Delegate.Opaque[Background, JBackground]("Fx.Abstract.Region.Background"):
-  implicit def implicitFromxxJava(v: JBackground) : Background  = apply(v)
-  implicit def implicitToJava    (v: Background)  : JBackground = apply(v)
+  implicit def implicitFrom(v: JBackground): Background  = apply(v)
+  implicit def implicitTo  (v: Background) : JBackground = apply(v)
 
   extension(x: Background)
     def images : Idx[Fx.Image] = Val.Idx.wrap(x.getImages).map_^(bi => Fx.Image(bi.getImage))

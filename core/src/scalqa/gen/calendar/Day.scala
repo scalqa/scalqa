@@ -11,8 +11,8 @@ object Day extends Int.Opaque.Data.Sequential[Day]("Day"):
   override           def value_tag(v:Day)                 : String                = v.month.tag + "-" + { val s = v.number.toString; if (s.length < 2) "0" + s else s }
   override           def value_isVoid(v: Day)             : Boolean               = v.real == Int.min
 
-  implicit    inline def implicitRequest(v: \/)           : Day                   = Int.min.opaque
-  implicit    inline def implicitRequest(v: CURRENT)      : Day                   = current
+  implicit    inline def implicitFrom(v: \/)              : Day                   = Int.min.opaque
+  implicit    inline def implicitFrom(v: CURRENT)         : Day                   = current
 
   extension (x: Day)
     /**/      inline def index                            : Int                   = x.real

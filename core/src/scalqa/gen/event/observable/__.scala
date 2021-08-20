@@ -4,8 +4,8 @@ trait Observable:
   protected def onObservableChange[U](l: () => U): Event.Control
 
 object Observable:
-  @tn("getVoid")  def void                  : Observable = zVoid
-  implicit inline def implicitRequest(v: \/): Observable = void
+  @tn("getVoid")  def void               : Observable = zVoid
+  implicit inline def implicitFrom(v: \/): Observable = void
 
   def onObservableChange[U](v: Observable)(l: () => U): Event.Control = v.onObservableChange(l)
 

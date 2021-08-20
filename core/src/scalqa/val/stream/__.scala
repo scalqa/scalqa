@@ -9,16 +9,16 @@ object Stream extends z.util._default with _Build with _Use:
                   | lang.int    .g.Stream[A & Int.Raw]     | lang.long.g.Stream[A & Long.Raw] | lang.float.g.Stream[A & Float.Raw] | lang.double.g.Stream[A & Double.Raw]
 
   // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  /**/           inline def apply[A](inline v: A)                 : ~[A]             = z.a.VarArg.Stream_ofOne[A](v)
-  /**/           inline def apply[A](inline v1: A, inline v2: A)  : ~[A]             = z.a.VarArg.Stream_ofTwo[A](v1, v2)
-  /**/                  def apply[A](v1: A, v2: A, v3: A, vs: A*) : ~[A]             = if (vs.isEmpty) z.a.VarArg.Stream_ofThree[A](v1,v2,v3) else z.a.VarArg.Stream_ofMany[A](v1,v2,v3,vs)
-  @tn("getVoid") inline def void[A]                               : ~[A]             = ZZ.voidStream
-  /**/                  def unapplySeq[A](v: ~[A])                : Option[Seq[A]]   = Some(v.toSeq)
+  /**/           inline def apply[A](inline v: A)                 : ~[A]           = z.a.VarArg.Stream_ofOne[A](v)
+  /**/           inline def apply[A](inline v1: A, inline v2: A)  : ~[A]           = z.a.VarArg.Stream_ofTwo[A](v1, v2)
+  /**/                  def apply[A](v1: A, v2: A, v3: A, vs: A*) : ~[A]           = if (vs.isEmpty) z.a.VarArg.Stream_ofThree[A](v1,v2,v3) else z.a.VarArg.Stream_ofMany[A](v1,v2,v3,vs)
+  @tn("getVoid") inline def void[A]                               : ~[A]           = ZZ.voidStream
+  /**/                  def unapplySeq[A](v: ~[A])                : Option[Seq[A]] = Some(v.toSeq)
 
-  implicit       inline def implicitFromAbleStream[A](inline v:Able.~[A]): ~[A]      = v.~
+  implicit       inline def implicitFrom[A](inline v:Able.~[A])   : ~[A]           = v.~
 
   given givenCanEqualStream[A,B](using CanEqual[A,B]): CanEqual[~[A],~[B]] = CanEqual.derived
-  given givenDocDef[A :Given.DocDef]                  : Given.DocDef[~[A]]  = z.util.DocDef()
+  given givenDocDef[A :Given.DocDef]                 : Given.DocDef[~[A]]  = z.util.DocDef()
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def _build  = stream._Build;   type _build     = stream._Build

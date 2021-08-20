@@ -3,22 +3,22 @@ package scalqa; package gen; package calendar; import language.implicitConversio
 import Calendar.Year
 
 object Year extends Int.Opaque.Data.Sequential[Year]("Year"):
-  /**/     inline def apply(inline v: Int)      : Year      = v.opaque
-  /**/     inline def current                   : Year      = Time.current.year
-  override        def value_tag(v: Year)        : String    = v.toString
-  override        def value_isVoid(v: Year)     : Boolean   = v.real == Int.min
+  /**/     inline def apply(inline v: Int)   : Year      = v.opaque
+  /**/     inline def current                : Year      = Time.current.year
+  override        def value_tag(v: Year)     : String    = v.toString
+  override        def value_isVoid(v: Year)  : Boolean   = v.real == Int.min
 
-  implicit inline def implicitRequest(v: \/)    : Year      = Int.min.opaque
-  implicit inline def implicitRequest(v:CURRENT): Year      = current
+  implicit inline def implicitFrom(v: \/)    : Year      = Int.min.opaque
+  implicit inline def implicitFrom(v:CURRENT): Year      = current
 
   extension (x: Year)
-    /**/   inline def number                    : Int       = x.real
-    /**/   inline def isLeap                    : Boolean   = java.time.Year.isLeap(x.real)
-    /**/          def start                     : Time      = Day(x.number,1,1).start
-    /**/   inline def period                    : Period    = Period(x.start,  x.next.start)
-    /**/          def months                    : Month.Idx = zMonths(x)
-    /**/          def days                      : Day.Idx   = zDays(x)
-    /**/          def isCurrent                 : Boolean   = x == Year.current
+    /**/   inline def number                 : Int       = x.real
+    /**/   inline def isLeap                 : Boolean   = java.time.Year.isLeap(x.real)
+    /**/          def start                  : Time      = Day(x.number,1,1).start
+    /**/   inline def period                 : Period    = Period(x.start,  x.next.start)
+    /**/          def months                 : Month.Idx = zMonths(x)
+    /**/          def days                   : Day.Idx   = zDays(x)
+    /**/          def isCurrent              : Boolean   = x == Year.current
 
   object OPAQUE:
     opaque type TYPE <: Int.Opaque = Int.Opaque

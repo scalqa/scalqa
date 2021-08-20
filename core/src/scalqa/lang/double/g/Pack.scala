@@ -25,8 +25,8 @@ object Pack:
   /**/                   def fromStream[A<:Raw](v: ~[A])                 : Pack[A] = void[A].joinAll(v)
   @tn("getVoid")  inline def void      [A<:Raw]                          : Pack[A] = zVoid.cast[Pack[A]]; object zVoid extends Pack(Double.emptyArray) with Gen.Void
 
-  implicit inline def implicitRequest[A<:Raw](inline v: \/)              : Pack[A] = void[A]
-  implicit inline def implicitFromStream [A<:Raw](inline v: Stream[A])   : Pack[A] = v.><
+  implicit        inline def implicitFrom[A<:Raw](inline v: \/)          : Pack[A] = void[A]
+  implicit        inline def implicitFrom[A<:Raw](inline v: Stream[A])   : Pack[A] = v.><
 
   private class Buf[A<:Raw] private(a: Array[Double],sz:Int) extends Buffer[A](a,sz):
     def this(a: Array[Double], sz: Int, v: A, vs: ~[A]) = { this(a.copySize(vs.size_?.map(sz + _) or sz + J.initSize).^(_(sz-1)=v), sz); addAll(vs) }
@@ -43,6 +43,6 @@ ___________________________________________________________________________*/
 /**
 @def void  -> Get void instance
 
-@def implicitRequest -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitFrom    -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

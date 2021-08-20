@@ -15,7 +15,7 @@ ___________________________________________________________________________*/
 
        See [[Request]] for usage
 
-@object HORIZONTAL -> ### HORIZONTAL Object
+@object HORIZONTAL -> ### HORIZONTAL Request Object
 
        Singleton implementation of [[HORIZONTAL]] request type
 

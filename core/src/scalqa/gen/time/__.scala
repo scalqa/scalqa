@@ -12,8 +12,8 @@ object Time extends Long.Opaque.Data.Ordered[Time]("Time") with time.x.Base[Time
   override              def value_tag(v: Time)              : String      = v.day.tag + ' ' + v.dayTime.tag
   private        inline val voidValue                    /* : Long */     = -62167201438000L  // 0000-01-01 00:00:00
 
-  implicit       inline def implicitRequest(v: CURRENT)     : Time        = current
-  implicit       inline def implicitRequest(v: \/)          : Time        = voidValue.opaque
+  implicit       inline def implicitFrom(v: CURRENT)        : Time        = current
+  implicit       inline def implicitFrom(v: \/)             : Time        = voidValue.opaque
 
   extension(x: Time)
     protected           def genTime                         : Time        = x

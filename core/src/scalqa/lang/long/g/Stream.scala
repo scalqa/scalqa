@@ -45,15 +45,15 @@ object Stream:
     @tn("map_Opt") inline def map_?    [OPT<:Val.Opt.AnyType[T]](inline f:A=>OPT)(using inline t:StreamShape.Opt[T,OPT,STM]): STM  = z.stream.mapOpt(x,f,t)
     @tn("MAP_Opt") inline def MAP_?    [OPT<:Val.Opt.AnyType[T]](inline f:A=>OPT)(using inline t:StreamShape.Opt[T,OPT,STM]): STM  = z.stream.mapOpt.APPLY(x,f,t)
   // -------------------------------------------------------------------------------------------------------------------------------------------------------
-  /**/             inline def apply    [A<:Raw](inline v:A)                         : Stream[A]     = Z.Stream_ofOne(v)
-  /**/                    def apply    [A<:Raw](v: A*)                              : Stream[A]     = v match{ case v: scala.collection.immutable.ArraySeq.ofLong => v.unsafeArray.~.cast[Stream[A]]; case v => v.~.raw}
-  @tn("getVoid")          def void     [A<:Raw]                                     : Stream[A]     = Z.VoidStream.cast[Stream[A]]
+  /**/             inline def apply    [A<:Raw](inline v:A)                  : Stream[A] = Z.Stream_ofOne(v)
+  /**/                    def apply    [A<:Raw](v: A*)                       : Stream[A] = v match{ case v: scala.collection.immutable.ArraySeq.ofLong => v.unsafeArray.~.cast[Stream[A]]; case v => v.~.raw}
+  @tn("getVoid")          def void     [A<:Raw]                              : Stream[A] = Z.VoidStream.cast[Stream[A]]
 
-  implicit         inline def implicitRequest[A<:Raw](inline v: \/)                 : Stream[A]     = void
-  implicit         inline def implicitFromArray  [A<:Raw](inline v: Array[A])       : Stream[A]     = v.~
-  implicit         inline def implicitFromOpt    [A<:Raw](inline v: G.Opt[A])       : Stream[A]     = v.~
-  implicit         inline def implicitFromColl   [A<:Raw](inline v: g.Collection[A]): Stream[A]     = v.~
-  implicit         inline def implicitFromRange  [A<:Raw](inline v: g.Range[A])     : Stream[A]     = v.~
+  implicit         inline def implicitFrom[A<:Raw](inline v: \/)             : Stream[A] = void
+  implicit         inline def implicitFrom[A<:Raw](inline v: Array[A])       : Stream[A] = v.~
+  implicit         inline def implicitFrom[A<:Raw](inline v: G.Opt[A])       : Stream[A] = v.~
+  implicit         inline def implicitFrom[A<:Raw](inline v: g.Collection[A]): Stream[A] = v.~
+  implicit         inline def implicitFrom[A<:Raw](inline v: g.Range[A])     : Stream[A] = v.~
 
 
 /*___________________________________________________________________________
@@ -65,6 +65,6 @@ ___________________________________________________________________________*/
 /**
 @def void  -> Get void instance
 
-@def implicitRequest -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitFrom    -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

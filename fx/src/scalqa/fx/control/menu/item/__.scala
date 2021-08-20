@@ -28,7 +28,7 @@ object Item:
 
   given FxConverter: ReversibleFunction[JItem,Item] = zTwoWay;
 
-  implicit inline def implicitRequest(v: SEPARATOR): Item = separator
+  implicit inline def implicitFrom(v: SEPARATOR): Item = separator
 
   // *************************************************************
   private object zTwoWay extends ReversibleFunction[JItem,Item] { def apply(real: JItem) = Item.apply(real); def undo(i: Item): JItem = i.real }

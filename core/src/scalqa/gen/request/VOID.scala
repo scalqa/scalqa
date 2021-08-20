@@ -40,7 +40,7 @@ private trait zVOIDDefaults2:
 ___________________________________________________________________________*/
 
 /**
-@object VOID -> ### VOID Object
+@object VOID -> ### VOID Request Object
 
        Singleton implementation of [[VOID]] request type
 
@@ -64,7 +64,7 @@ ___________________________________________________________________________*/
     object Foo{
       val void = new Foo with Gen.Void
 
-      implicit inline def implicitRequest(v: \/): Foo = void
+      implicit inline def implicitFrom(v: \/): Foo = void
     }
 
     var v: Foo = \/   // Standard void assignment

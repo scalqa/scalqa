@@ -22,7 +22,7 @@ ___________________________________________________________________________*/
 
        See [[Request]] for usage
 
-@object MAX -> ### MAX Object
+@object MAX -> ### MAX Request Object
 
        Singleton implementation of [[MAX]] request type
 

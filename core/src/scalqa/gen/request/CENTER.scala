@@ -15,7 +15,7 @@ ___________________________________________________________________________*/
 
        See [[Request]] for usage
 
-@object CENTER -> ### CENTER Object
+@object CENTER -> ### CENTER Request Object
 
        Singleton implementation of [[CENTER]] request type
 

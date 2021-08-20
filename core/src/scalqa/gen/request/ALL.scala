@@ -15,7 +15,7 @@ ___________________________________________________________________________*/
 
        See [[Request]] for usage
 
-@object ALL -> ### ALL Object
+@object ALL -> ### ALL Request Object
 
        Singleton implementation of [[ALL]] request type
 

@@ -21,7 +21,7 @@ ___________________________________________________________________________*/
 
        See [[Request]] for usage
 
-@object DEFAULT -> ### DEFAULT Object
+@object DEFAULT -> ### DEFAULT Request Object
 
        Singleton implementation of [[DEFAULT]] request type
 

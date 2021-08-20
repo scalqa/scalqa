@@ -18,7 +18,7 @@ ___________________________________________________________________________*/
 
        See [[Request]] for usage
 
-@object NEW -> ### NEW Object
+@object NEW -> ### NEW Request Object
 
        Singleton implementation of [[NEW]] request type
 

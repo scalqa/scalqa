@@ -15,7 +15,7 @@ ___________________________________________________________________________*/
 
        See [[Request]] for usage
 
-@object VERTICAL -> ### VERTICAL Object
+@object VERTICAL -> ### VERTICAL Request Object
 
        Singleton implementation of [[VERTICAL]] request type
 

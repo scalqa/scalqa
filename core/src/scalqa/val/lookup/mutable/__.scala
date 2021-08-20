@@ -1,24 +1,24 @@
 package scalqa; package `val`; package lookup; import mutable.*; import language.implicitConversions
 
 trait Mutable[A,B] extends Lookup[A,B]:
-  /**/              def getOrPut(key: A, v: => B): B         = get_?(key) or { val b = v; put(key, b); b }
+  /**/              def getOrPut(key: A, v: => B): B            = get_?(key) or { val b = v; put(key, b); b }
   /**/              def put(key: A, value: B)    : Unit
-  /**/              def putAll(s: ~[(A, B)])     : Unit      = s.foreach(put)
-  /**/              def update(key: A, value: B) : Opt[B]    = get_?(key).^(_ => put(key,value))
-  /**/              def updateAll(s: ~[(A, B)])  : ~[B]      = s.map_?(update).load
+  /**/              def putAll(s: ~[(A, B)])     : Unit         = s.foreach(put)
+  /**/              def update(key: A, value: B) : Opt[B]       = get_?(key).^(_ => put(key,value))
+  /**/              def updateAll(s: ~[(A, B)])  : ~[B]         = s.map_?(update).load
   /**/              def remove(v: A)             : Opt[B]
-  /**/              def removeAll(keys: ~[A])    : ~[B]      = keys.map_?(remove).load
+  /**/              def removeAll(keys: ~[A])    : ~[B]         = keys.map_?(remove).load
   /**/              def clear                    : Unit
-  @tn("_put")       def +=(v: (A,B))             : this.type = { put(v._1,v._2);  this }
-  @tn("_putAll")    def ++=(s: ~[(A, B)])        : this.type = { putAll(s);       this }
-  @tn("_remove")    def -= (key: A)              : this.type = { remove(key);     this }
-  @tn("_removeAll") def --=(keys: ~[A])          : this.type = { removeAll(keys); this }
+  @tn("_put")       def +=(v: (A,B))             : this.type    = { put(v._1,v._2);  this }
+  @tn("_putAll")    def ++=(s: ~[(A, B)])        : this.type    = { putAll(s);       this }
+  @tn("_remove")    def -= (key: A)              : this.type    = { remove(key);     this }
+  @tn("_removeAll") def --=(keys: ~[A])          : this.type    = { removeAll(keys); this }
 
 object Mutable:
-  /**/              def apply[A,B]()                      : Mutable[A,B] = X.Basic[A,B]
-  /**/              def apply[A,B](v: ~[(A, B)])          : Mutable[A,B] = apply().self_^(_.putAll(v))
-  /**/              def concurrent[A,B]()                 : Mutable[A,B] = new X.Concurrent[A,B]()
-  implicit   inline def implicitRequest[A,B](inline v:NEW): Mutable[A,B] = apply()
+  /**/              def apply[A,B]()             : Mutable[A,B] = X.Basic[A,B]
+  /**/              def apply[A,B](v: ~[(A, B)]) : Mutable[A,B] = apply().self_^(_.putAll(v))
+  /**/              def concurrent[A,B]()        : Mutable[A,B] = new X.Concurrent[A,B]()
+  implicit   inline def implicitFrom[A,B](v:NEW) : Mutable[A,B] = apply()
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def X = mutable.X

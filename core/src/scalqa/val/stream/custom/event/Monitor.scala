@@ -12,8 +12,8 @@ object Monitor:
   private[stream] inline def runOnAfterLast(l: Monitor, cnt: Int, tm: Time.Length) : Unit    = l.runOnAfterLast(cnt, tm)
   private[stream] inline def runOnEmpty(l: Monitor)                                : Unit    = l.runOnEmpty
 
-  implicit def implicitRequest(v: \/)     : Monitor = zVoid
-  implicit def implicitRequest(v: DEFAULT): Monitor = new zDefault
+  implicit def implicitFrom(v: \/)     : Monitor = zVoid
+  implicit def implicitFrom(v: DEFAULT): Monitor = new zDefault
 
 // *******************************************************************************
 private object zVoid extends Monitor with Gen.Void:

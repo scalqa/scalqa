@@ -15,7 +15,7 @@ ___________________________________________________________________________*/
 
        See [[Request]] for usage
 
-@object TOP -> ### TOP Object
+@object TOP -> ### TOP Request Object
 
        Singleton implementation of [[TOP]] request type
 

@@ -2,9 +2,10 @@ package scalqa; package lang; package long; package g; import language.implicitC
 
 object Opt extends z.opt._base:
   @tn("getVoid") inline def void[A<:Raw]                               : Opt[A]   = 9223372036854775806L.cast[Opt[A]] // java.lang.Long.MAX_VALUE - 1
-  implicit       inline def implicitRequest [A<:Raw](inline v: \/) : Opt[A]   = void[A]
+  implicit       inline def implicitFrom     [A<:Raw](inline v: \/)    : Opt[A]   = void[A]
   implicit       inline def implicitFromValue[A<:Raw](inline v: A)     : Opt[A]   = v.cast[Opt[A]]
   implicit       inline def implicitToBoolean[A<:Raw](inline v: Opt[A]): Boolean  = v.real != void.real
+
   extension[A<:Raw](inline x: Opt[A])
     /**/               inline def real                                        : Long       = x.cast[Long]
     @tn("is_Void")     inline def isEmpty                                     : Boolean    = x.real == void.real
@@ -51,6 +52,6 @@ ___________________________________________________________________________*/
 /**
 @def void      -> Get void instance
 
-@def implicitRequest -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitFrom    -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

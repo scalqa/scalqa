@@ -15,7 +15,7 @@ ___________________________________________________________________________*/
 
        See [[Request]] for usage
 
-@object BOTTOM -> ### BOTTOM Object
+@object BOTTOM -> ### BOTTOM Request Object
 
        Singleton implementation of [[BOTTOM]] request type
 

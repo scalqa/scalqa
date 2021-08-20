@@ -21,9 +21,9 @@ object Rounding:
 
   given default : Rounding = HalfUp
 
-  implicit inline def implicitRequest(v: DEFAULT): Rounding = HalfUp
-  implicit inline def implicitRequest(v: UP)     : Rounding = Up
-  implicit inline def implicitRequest(v: DOWN)   : Rounding = Down
+  implicit inline def implicitFrom(v: DEFAULT): Rounding = HalfUp
+  implicit inline def implicitFrom(v: UP)     : Rounding = Up
+  implicit inline def implicitFrom(v: DOWN)   : Rounding = Down
 
   private val Multiplier: Array[Int] = ~~(1).unfold(_.last * 10).takeFirst(12).toArray
 /*___________________________________________________________________________

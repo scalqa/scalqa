@@ -10,11 +10,11 @@ object Opt extends opt._methods:
   /**/       inline def fromJava [A](v: java.util.Optional[A])                            : Opt[A]    = if (v.isPresent) v.get else \/
   @tn("getVoid")    def void[A]                                                           : Opt[A]    = ZZ.None.cast[Opt[A]]
 
-  implicit   inline def implicitFromScala[A](v: scala.Option[A])                          : Opt[A]    = fromScala[A](v)
-  implicit   inline def implicitFromJava [A](v: java.util.Optional[A])                    : Opt[A]    = fromJava[A](v)
-  implicit   inline def implicitFromResult[A](inline v: Result[A])                        : Opt[A]    = v.value_?
   implicit   inline def implicitToBoolean[A]( inline v: Opt[A])                           : Boolean   = v.nonEmpty
-  implicit   inline def implicitRequest[A](inline v: \/)                                  : Opt[A]    = ZZ.None.cast[Opt[A]]
+  implicit   inline def implicitFrom[A](v: scala.Option[A])                               : Opt[A]    = fromScala[A](v)
+  implicit   inline def implicitFrom[A](v: java.util.Optional[A])                         : Opt[A]    = fromJava[A](v)
+  implicit   inline def implicitFrom[A](inline v: \/)                                     : Opt[A]    = ZZ.None.cast[Opt[A]]
+  implicit   inline def implicitFromResult[A](inline v: Result[A])                        : Opt[A]    = v.value_?
   implicit   inline def implicitFromBooleanOpt[A<:Boolean.Raw](inline v: Boolean.G.Opt[A]): Opt[A]    = v.ref
   implicit   inline def implicitFromByteOpt   [A<:Byte.Raw]   (inline v: Byte.G.Opt[A])   : Opt[A]    = v.ref
   implicit   inline def implicitFromCharOpt   [A<:Char.Raw]   (inline v: Char.G.Opt[A])   : Opt[A]    = v.ref
@@ -69,6 +69,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitRequest -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitFrom    -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

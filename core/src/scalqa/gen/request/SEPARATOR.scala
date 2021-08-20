@@ -15,7 +15,7 @@ ___________________________________________________________________________*/
 
        See [[Request]] for usage
 
-@object SEPARATOR -> ### SEPARATOR Object
+@object SEPARATOR -> ### SEPARATOR Request Object
 
        Singleton implementation of [[SEPARATOR]] request type
 

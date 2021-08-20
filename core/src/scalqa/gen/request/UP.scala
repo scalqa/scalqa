@@ -15,7 +15,7 @@ ___________________________________________________________________________*/
 
        See [[Request]] for usage
 
-@object UP -> ### UP Object
+@object UP -> ### UP Request Object
 
        Singleton implementation of [[UP]] request type
 

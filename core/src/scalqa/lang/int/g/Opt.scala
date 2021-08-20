@@ -1,10 +1,11 @@
 package scalqa; package lang; package int; package g; import language.implicitConversions; import G.Opt
 
 object Opt extends z.opt._base:
-  @tn("getVoid") inline def void[A<:Raw]                                      : Opt[A]  = 3_000_000_000L.cast[Opt[A]]  // Smallest round number
-  implicit       inline def implicitRequest[A<:Raw](inline v: Request.\/) : Opt[A]  = void[A]
-  implicit       inline def implicitFromValue[A<:Raw](inline v: A)            : Opt[A]  = v.cast[Opt[A]]
-  implicit       inline def implicitToBoolean[A<:Raw](inline v: Opt[A])       : Boolean = v.real != void.real
+  @tn("getVoid") inline def void[A<:Raw]                               : Opt[A]  = 3_000_000_000L.cast[Opt[A]]  // Smallest round number
+  implicit       inline def implicitFrom     [A<:Raw](inline v: \/)    : Opt[A]  = void[A]
+  implicit       inline def implicitFromValue[A<:Raw](inline v: A)     : Opt[A]  = v.cast[Opt[A]]
+  implicit       inline def implicitToBoolean[A<:Raw](inline v: Opt[A]): Boolean = v.real != void.real
+
   extension[A<:Raw](inline x: Opt[A])
     /**/               inline def real                                        : Long       = x.cast[Long]
     @tn("is_Void")     inline def isEmpty                                     : Boolean    = x.real == void.real
@@ -51,6 +52,6 @@ ___________________________________________________________________________*/
 /**
 @def void      -> Get void instance
 
-@def implicitRequest -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitFrom    -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

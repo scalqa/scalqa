@@ -15,7 +15,7 @@ ___________________________________________________________________________*/
 
        See [[Request]] for usage
 
-@object DOWN -> ### DOWN Object
+@object DOWN -> ### DOWN Request Object
 
        Singleton implementation of [[DOWN]] request type
 

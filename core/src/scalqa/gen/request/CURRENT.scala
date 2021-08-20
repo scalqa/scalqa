@@ -15,7 +15,7 @@ ___________________________________________________________________________*/
 
        See [[Request]] for usage
 
-@object CURRENT -> ### CURRENT Object
+@object CURRENT -> ### CURRENT Request bject
 
        Singleton implementation of [[CURRENT]] request type
 

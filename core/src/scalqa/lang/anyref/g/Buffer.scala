@@ -27,7 +27,7 @@ class Buffer[A](arrayToUse: Array[AnyRef], sizeToStartWith: Int) extends Val.Buf
 object Buffer:
   /**/            def accessible[A](use: Array[AnyRef], usedSize: Int): Buffer[A] & Able.Access[Array[AnyRef]] = zAccessible[A](use,usedSize)
   /**/     inline def accessible[A](inline initSize: Int = J.initSize): Buffer[A] & Able.Access[Array[AnyRef]] = accessible(new Array[AnyRef](initSize),0)
-  implicit inline def implicitRequest[A](inline v: NEW)               : Buffer[A]                              = new Buffer()
+  implicit inline def implicitFrom[A](inline v: NEW)                  : Buffer[A]                              = new Buffer()
 
   // ************************************************************************************************************************
   private class zAccessible[A](a: Array[AnyRef], s: Int) extends Buffer[A](a,s) with Able.Access[Array[AnyRef]]:

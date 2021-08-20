@@ -9,9 +9,9 @@ enum VPos(val real: JVPos) extends Fx.JavaFx.Enum[JVPos]:
   case Bottom   extends VPos(JVPos.BOTTOM)
 
 object VPos extends Fx.JavaFx.Enum.Companion[VPos, JVPos]:
-  implicit inline def implicitRequest(v: CENTER): VPos = Center
-  implicit inline def implicitRequest(v: TOP   ): VPos = Top
-  implicit inline def implicitRequest(v: BOTTOM): VPos = Bottom
+  implicit inline def implicitFrom(v: CENTER): VPos = Center
+  implicit inline def implicitFrom(v: TOP   ): VPos = Top
+  implicit inline def implicitFrom(v: BOTTOM): VPos = Bottom
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

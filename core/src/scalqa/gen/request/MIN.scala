@@ -22,7 +22,7 @@ ___________________________________________________________________________*/
 
        See [[Request]] for usage
 
-@object MIN -> ### MIN Object
+@object MIN -> ### MIN Request Object
 
        Singleton implementation of [[MIN]] request type
 

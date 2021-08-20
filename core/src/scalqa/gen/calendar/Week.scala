@@ -7,7 +7,7 @@ object Week extends Int.Opaque.Data.Sequential[Week]("Calendar.Week"):
   /**/            def current                   : Week         = Calendar.Day.current.week
   override        def value_tag(v: Week)        : String       = "Week-" + v.startDay.tag
 
-  implicit inline def implicitRequest(v:CURRENT): Week         = current
+  implicit inline def implicitFrom(v:CURRENT)   : Week         = current
 
   extension (x: Week)
     /**/          def index                     : Int          = x.real

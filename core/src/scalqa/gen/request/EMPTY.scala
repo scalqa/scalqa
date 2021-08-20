@@ -15,7 +15,7 @@ ___________________________________________________________________________*/
 
        See [[Request]] for usage
 
-@object EMPTY -> ### EMPTY Object
+@object EMPTY -> ### EMPTY Request Object
 
        Singleton implementation of [[EMPTY]] request type
 

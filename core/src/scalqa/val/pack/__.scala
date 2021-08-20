@@ -40,10 +40,10 @@ object Pack:
   /**/                 def apply[A](v1: A, v2: A)                : ><[A] = z.Few.Pack_ofTwo(v1, v2)
   /**/                 def apply[A](v1: A, v2: A, v3: A, vs: A*) : ><[A] = if (vs.isEmpty) z.Few.Pack_ofThree(v1, v2, v3) else z.ArrayPack(v1, v2, v3, vs)
   @tn("getVoid")inline def void[A]                               : ><[A] = ZZ.voidPack[A]
-  implicit      inline def implicitRequest[A](inline v: \/)      : ><[A] = void[A]
-  implicit      inline def implicitFromStream [A](inline v: ~[A]): ><[A] = v.><
   /**/          inline def fromArray[A](a: Array[AnyRef])        : ><[A] = fromArray(a,a.length)
   /**/                 def fromArray[A](a: Array[AnyRef], sz:Int): ><[A] = new z.ArrayPack(a.copySize(sz),sz)
+  implicit      inline def implicitFrom[A](inline v: \/)         : ><[A] = void[A]
+  implicit      inline def implicitFrom[A](inline v: ~[A])       : ><[A] = v.><
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -165,6 +165,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitRequest -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitFrom    -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

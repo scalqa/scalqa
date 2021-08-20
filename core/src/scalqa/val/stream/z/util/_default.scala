@@ -3,21 +3,21 @@ package scalqa; package `val`; package stream; package z; package util; import l
 class _default:
   self: Stream.type =>
 
-  /**/     inline def fromIterator[A]    (inline v: java.util.Iterator[A])                    : ~[A]             = new z.a.Java.Stream_fromIterator(v)
-  /**/     inline def fromSpliterator[A] (inline v: java.util.Spliterator[A])                 : ~[A]             = new z.a.Java.Stream_fromSpliterator(v)
-  /**/     inline def fromEnumeration[A] (inline v: java.util.Enumeration[A])                 : ~[A]             = new z.a.Java.Stream_fromEnumeration(v)
-  /**/     inline def fromIterable[A]    (inline v: java.lang.Iterable[A])                    : ~[A]             = z.a.Java.Stream_fromIterable(v)
-  /**/     inline def fromIterableOnce[A](inline v: scala.collection.IterableOnce[A])         : ~[A]             = z.a.Scala.mkStream[A](v)
-  /**/     inline def fromProduct        (inline v: Product)                                  : ~[(String,Any)]  = new z.a.Scala.Stream_fromProduct(v)
+  /**/     inline def fromIterator[A]    (inline v: java.util.Iterator[A])           : ~[A]             = new z.a.Java.Stream_fromIterator(v)
+  /**/     inline def fromSpliterator[A] (inline v: java.util.Spliterator[A])        : ~[A]             = new z.a.Java.Stream_fromSpliterator(v)
+  /**/     inline def fromEnumeration[A] (inline v: java.util.Enumeration[A])        : ~[A]             = new z.a.Java.Stream_fromEnumeration(v)
+  /**/     inline def fromIterable[A]    (inline v: java.lang.Iterable[A])           : ~[A]             = z.a.Java.Stream_fromIterable(v)
+  /**/     inline def fromIterableOnce[A](inline v: scala.collection.IterableOnce[A]): ~[A]             = z.a.Scala.mkStream[A](v)
+  /**/     inline def fromProduct        (inline v: Product)                         : ~[(String,Any)]  = new z.a.Scala.Stream_fromProduct(v)
 
-  implicit inline def implicitRequest[A](inline v: \/)                                        : ~[A] & Able.Size = void.cast[~[A] & Able.Size]
-  implicit inline def implicitFromRange[A:Able.Sequence](inline v: Range[A])                  : ~[A]             = v.~
-  implicit inline def implicitFromIterable[A](inline v: java.lang.Iterable[A])                : ~[A]             = z.a.Java.Stream_fromIterable(v)
-  implicit inline def implicitFromIterator[A](inline v: java.util.Iterator[A])                : ~[A]             = new z.a.Java.Stream_fromIterator(v)
-  implicit inline def implicitFromIterableOnce[A](inline v: scala.collection.IterableOnce[A]) : ~[A]             = z.a.Scala.mkStream[A](v)
-  implicit inline def implicitFromOpt[A](inline v: Opt[A])                                    : ~[A]             = {val o=v; o.~ }
-  implicit inline def implicitFromResult[A](inline v: Result[A])                              : ~[A]             = {val o=v; o.~ }
-  implicit inline def implicitFromArray[A](inline v: Array[A])                                : ~[A]             = v.~
+  implicit inline def implicitFrom[A](v: \/)                                         : ~[A] & Able.Size = void.cast[~[A] & Able.Size]
+  implicit inline def implicitFrom[A](inline v: Range[A])(using Able.Sequence[A])    : ~[A]             = v.~
+  implicit inline def implicitFrom[A](inline v: java.lang.Iterable[A])               : ~[A]             = z.a.Java.Stream_fromIterable(v)
+  implicit inline def implicitFrom[A](inline v: java.util.Iterator[A])               : ~[A]             = new z.a.Java.Stream_fromIterator(v)
+  implicit inline def implicitFrom[A](inline v: scala.collection.IterableOnce[A])    : ~[A]             = z.a.Scala.mkStream[A](v)
+  implicit inline def implicitFrom[A](inline v: Array[A])                            : ~[A]             = v.~
+  implicit inline def implicitFromOpt   [A](inline v: Opt[A])                        : ~[A]             = {val o=v; o.~ }
+  implicit inline def implicitFromResult[A](inline v: Result[A])                     : ~[A]             = {val o=v; o.~ }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

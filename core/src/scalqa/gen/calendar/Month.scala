@@ -9,8 +9,8 @@ object Month extends Int.Opaque.Data.Sequential[Month]("Month"):
   override        def value_tag(v: Month)        : String   = v.year.tag + "-" + { if (v.number > 9) v.number else "0" + v.number }
   override        def value_isVoid(v: Month)     : Boolean  = v.real == Int.min
 
-  implicit inline def implicitRequest(v: \/)     : Month    = Int.min.opaque
-  implicit inline def implicitRequest(v: CURRENT): Month    = current
+  implicit inline def implicitFrom(v: \/)        : Month    = Int.min.opaque
+  implicit inline def implicitFrom(v: CURRENT)   : Month    = current
 
   extension (x: Month)
     /**/   inline def index                      : Int      = x.real
