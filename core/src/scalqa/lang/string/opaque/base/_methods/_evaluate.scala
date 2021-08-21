@@ -3,19 +3,19 @@ package scalqa; package lang; package string; package opaque; package base; pack
 transparent trait _evaluate:
 
   extension[THIS_OPAQUE<:Opaque](inline x: THIS_OPAQUE)
-    /**/                     inline def length                                                                      : Int      = x.cast[String].length
-    /**/                     inline def contains        (inline v: THIS_OPAQUE|String)                              : Boolean  = x.cast[String].contains(v.cast[String])
-    /**/                     inline def startsWith      (inline v: THIS_OPAQUE|String)                              : Boolean  = x.cast[String].startsWith(v.cast[String])
-    /**/                     inline def endsWith        (inline v: THIS_OPAQUE|String)                              : Boolean  = x.cast[String].endsWith(v.cast[String])
-    /**/                     inline def equalsIgnoreCase(inline v: THIS_OPAQUE|String)                              : Boolean  = x.cast[String].equalsIgnoreCase(v.cast[String])
-    /**/                     inline def compareTo       (inline v: THIS_OPAQUE)                                     : Int      = x.cast[String].compareTo(v.cast[String])
-    /**/                     inline def charAt          (inline i: Int)                                             : Char     = x.cast[String].charAt(i)
-    @tn("charAt_Opt")        inline def charAt_?        (i: Int)                                                    : Char.Opt = x.cast[String].charAt_?(i)
-    @tn("indexOf_Opt")       inline def indexOf_?       (inline v: THIS_OPAQUE|String,   inline from: Int.Opt = \/) : Int.Opt  = x.cast[String].indexOf_?      (v.cast[String],from)
-    @tn("indexOf_Stream")    inline def indexOf_~       (inline v: THIS_OPAQUE|String,   inline from: Int.Opt = \/) : ~[Int]   = x.cast[String].indexOf_~      (v.cast[String],from)
-    @tn("lastIndexOf_Opt")   inline def lastIndexOf_?   (inline v: THIS_OPAQUE|String,   inline from: Int.Opt = \/) : Int.Opt  = x.cast[String].lastIndexOf_?  (v.cast[String],from)
-    @tn("charIndex_Opt")     inline def charIndex_?     (inline f: Char => Boolean, inline from: Int.Opt = \/)      : Int.Opt  = x.cast[String].charIndex_?    (f,from)
-    @tn("lastCharIndex_Opt") inline def lastCharIndex_? (inline f: Char => Boolean, inline from: Int.Opt = \/)      : Int.Opt  = x.cast[String].lastCharIndex_?(f,from)
+    /**/                     inline def length                                                                   : Int      = x.cast[String].length
+    /**/                     inline def contains        (inline v: THIS_OPAQUE|String)                           : Boolean  = x.cast[String].contains(v.cast[String])
+    /**/                     inline def startsWith      (inline v: THIS_OPAQUE|String)                           : Boolean  = x.cast[String].startsWith(v.cast[String])
+    /**/                     inline def endsWith        (inline v: THIS_OPAQUE|String)                           : Boolean  = x.cast[String].endsWith(v.cast[String])
+    /**/                     inline def equalsIgnoreCase(inline v: THIS_OPAQUE|String)                           : Boolean  = x.cast[String].equalsIgnoreCase(v.cast[String])
+    /**/                     inline def compareTo       (inline v: THIS_OPAQUE)                                  : Int      = x.cast[String].compareTo(v.cast[String])
+    /**/                     inline def charAt          (inline i: Int)                                          : Char     = x.cast[String].charAt(i)
+    @tn("charAt_Opt")        inline def charAt_?        (i: Int)                                                 : Char.Opt = x.cast[String].charAt_?(i)
+    @tn("indexOf_Opt")       inline def indexOf_?       (inline v: THIS_OPAQUE|String, inline from: Int.Opt = \/): Int.Opt  = x.cast[String].indexOf_?      (v.cast[String],from)
+    @tn("indexOf_Stream")    inline def indexOf_~       (inline v: THIS_OPAQUE|String, inline from: Int.Opt = \/): ~[Int]   = x.cast[String].indexOf_~      (v.cast[String],from)
+    @tn("lastIndexOf_Opt")   inline def lastIndexOf_?   (inline v: THIS_OPAQUE|String, inline from: Int.Opt = \/): Int.Opt  = x.cast[String].lastIndexOf_?  (v.cast[String],from)
+    @tn("charIndex_Opt")     inline def charIndex_?     (inline f: Char => Boolean,    inline from: Int.Opt = \/): Int.Opt  = x.cast[String].charIndex_?    (f,from)
+    @tn("lastCharIndex_Opt") inline def lastCharIndex_? (inline f: Char => Boolean,    inline from: Int.Opt = \/): Int.Opt  = x.cast[String].lastCharIndex_?(f,from)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

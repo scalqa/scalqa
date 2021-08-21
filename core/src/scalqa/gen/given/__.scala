@@ -21,8 +21,8 @@ ___________________________________________________________________________*/
 /**
 @object Given -> ### Implicit Definitions
 
-    Contans a set of interfaces, which can be given (implicitly) for any type.
+    Contans a set of "Def" interfaces, which can be given (implicitly) for any type.
 
-    Also contains Shape interfaces for some containers.
+    Also contains "Shape" interfaces for some containers.
 
 */

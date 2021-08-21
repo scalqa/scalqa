@@ -37,7 +37,7 @@ ___________________________________________________________________________*/
 
    Given instance of [[Math.Average]] for a particular type, enables this type to participate in calculating average value for streamed instances.
 
-   By default Double, Float and opaque numerics of Double and Float allow averaging.
+   By default Double, Float and opaque numericals of Double and Float allow averaging.
 
 */
 

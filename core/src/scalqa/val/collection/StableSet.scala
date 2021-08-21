@@ -49,7 +49,7 @@ ___________________________________________________________________________*/
 
        [[StableSet]] has global alias and can be called without parent prefix [[Collection.StableSet]]
 
-       When an elements is [[join]]ed to [[StableSet]], it is evaluated for uniqueness and the operation is ignored in case of duplicates.
+       When an element is [[join]]ed to [[StableSet]], it is evaluated for uniqueness and the operation is ignored in case of duplicates.
 
        Note: [[scalqa.val.collection.StableSet StableSet]] is a concrete single implementation of unique collection.
        There is no general "Set" interface, because its use is rare. If there is a need for more efficient "Set",

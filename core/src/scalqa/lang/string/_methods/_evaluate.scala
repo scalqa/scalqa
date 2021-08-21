@@ -3,19 +3,19 @@ package scalqa; package lang; package string; package _methods; import language.
 transparent trait _evaluate:
 
   extension(inline x: String)
-    /**/                     inline def length                                                               : Int      = x.length
-    /**/                     inline def contains        (inline v: String)                                   : Boolean  = x.contains(v)
-    /**/                     inline def startsWith      (inline v: String)                                   : Boolean  = x.startsWith(v)
-    /**/                     inline def endsWith        (inline v: String)                                   : Boolean  = x.endsWith(v)
-    /**/                     inline def equalsIgnoreCase(inline v: String)                                   : Boolean  = x.equalsIgnoreCase(v)
-    /**/                     inline def compareTo       (inline v: String)                                   : Int      = x.compareTo(v)
-    /**/                     inline def charAt          (inline i: Int)                                      : Char     = x.charAt(i)
-    @tn("charAt_Opt")        inline def charAt_?        (i: Int)                                             : Char.Opt = Z.charAt_Opt(x,i)
-    @tn("indexOf_Opt")       inline def indexOf_?       (inline v: String,        inline from: Int.Opt = \/) : Int.Opt  = Z.indexOf_Opt      (x,v,from)
-    @tn("indexOf_Stream")    inline def indexOf_~       (inline v: String,        inline from: Int.Opt = \/) : ~[Int]   = Z.indexOf_Stream   (x,v,from)
-    @tn("lastIndexOf_Opt")   inline def lastIndexOf_?   (inline v: String,        inline from: Int.Opt = \/) : Int.Opt  = Z.lastIndexOf_Opt  (x,v,from)
-    @tn("charIndex_Opt")     inline def charIndex_?     (inline f: Char=>Boolean, inline from: Int.Opt = \/) : Int.Opt  = Z.charIndex_Opt    (x,f,from)
-    @tn("lastCharIndex_Opt") inline def lastCharIndex_? (inline f: Char=>Boolean, inline from: Int.Opt = \/) : Int.Opt  = Z.lastCharIndex_Opt(x,f,from)
+    /**/                     inline def length                                                              : Int      = x.length
+    /**/                     inline def contains        (inline v: String)                                  : Boolean  = x.contains(v)
+    /**/                     inline def startsWith      (inline v: String)                                  : Boolean  = x.startsWith(v)
+    /**/                     inline def endsWith        (inline v: String)                                  : Boolean  = x.endsWith(v)
+    /**/                     inline def equalsIgnoreCase(inline v: String)                                  : Boolean  = x.equalsIgnoreCase(v)
+    /**/                     inline def compareTo       (inline v: String)                                  : Int      = x.compareTo(v)
+    /**/                     inline def charAt          (inline i: Int)                                     : Char     = x.charAt(i)
+    @tn("charAt_Opt")        inline def charAt_?        (i: Int)                                            : Char.Opt = Z.charAt_Opt(x,i)
+    @tn("indexOf_Opt")       inline def indexOf_?       (inline v: String,        inline from: Int.Opt = \/): Int.Opt  = Z.indexOf_Opt      (x,v,from)
+    @tn("indexOf_Stream")    inline def indexOf_~       (inline v: String,        inline from: Int.Opt = \/): ~[Int]   = Z.indexOf_Stream   (x,v,from)
+    @tn("lastIndexOf_Opt")   inline def lastIndexOf_?   (inline v: String,        inline from: Int.Opt = \/): Int.Opt  = Z.lastIndexOf_Opt  (x,v,from)
+    @tn("charIndex_Opt")     inline def charIndex_?     (inline f: Char=>Boolean, inline from: Int.Opt = \/): Int.Opt  = Z.charIndex_Opt    (x,f,from)
+    @tn("lastCharIndex_Opt") inline def lastCharIndex_? (inline f: Char=>Boolean, inline from: Int.Opt = \/): Int.Opt  = Z.lastCharIndex_Opt(x,f,from)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

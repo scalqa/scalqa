@@ -14,16 +14,18 @@ object VoidDef:
   trait FloatRaw  [A<:Float.Raw]   extends VoidDef[A]{ override def value_isVoid(v: A): Boolean }
   trait DoubleRaw [A<:Double.Raw]  extends VoidDef[A]{ override def value_isVoid(v: A): Boolean }
 
-  inline given givenBoolean    : BooleanRaw[Boolean] with {  inline def value_isVoid(v: Boolean) = false }
-  inline given givenByte       : ByteRaw   [Byte]    with {  inline def value_isVoid(v: Byte)    = false }
-  inline given givenChar       : CharRaw   [Char]    with {  inline def value_isVoid(v: Char)    = false }
-  inline given givenShort      : ShortRaw  [Short]   with {  inline def value_isVoid(v: Short)   = v==0  }
-  inline given givenInt        : IntRaw    [Int]     with {  inline def value_isVoid(v: Int)     = v==0  }
-  inline given givenLong       : LongRaw   [Long]    with {  inline def value_isVoid(v: Long)    = v==0L }
-  inline given givenFloat      : FloatRaw  [Float]   with {  inline def value_isVoid(v: Float)   = v==0F }
-  inline given givenDouble     : DoubleRaw [Double]  with {  inline def value_isVoid(v: Double)  = v==0D }
-  inline given givenString     : VoidDef   [String]  with {  inline def value_isVoid(v: String)  = v.length==0 }
-  inline given givenDefault[A] : VoidDef   [A]                                                   = ZZ.Def.cast[VoidDef[A]]
+  inline given givenBoolean    : BooleanRaw[Boolean]   with {  inline def value_isVoid(v: Boolean)   = false }
+  inline given givenByte       : ByteRaw   [Byte]      with {  inline def value_isVoid(v: Byte)      = false }
+  inline given givenChar       : CharRaw   [Char]      with {  inline def value_isVoid(v: Char)      = false }
+  inline given givenShort      : ShortRaw  [Short]     with {  inline def value_isVoid(v: Short)     = v==0  }
+  inline given givenInt        : IntRaw    [Int]       with {  inline def value_isVoid(v: Int)       = v==0  }
+  inline given givenLong       : LongRaw   [Long]      with {  inline def value_isVoid(v: Long)      = v==0L }
+  inline given givenFloat      : FloatRaw  [Float]     with {  inline def value_isVoid(v: Float)     = v==0F }
+  inline given givenDouble     : DoubleRaw [Double]    with {  inline def value_isVoid(v: Double)    = v==0D }
+  inline given givenString     : VoidDef   [String]    with {  inline def value_isVoid(v: String)    = v.length==0 }
+  inline given givenList[A]    : VoidDef   [List[A]]   with {  inline def value_isVoid(v: List[A])   = v eq Nil }
+  inline given givenOption[A]  : VoidDef   [Option[A]] with {  inline def value_isVoid(v: Option[A]) = v eq None }
+  inline given givenDefault[A] : VoidDef   [A]                                                       = ZZ.Def.cast[VoidDef[A]]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

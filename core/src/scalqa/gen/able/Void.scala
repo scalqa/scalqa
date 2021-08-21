@@ -2,8 +2,12 @@ package scalqa; package gen; package able
 
 trait Void:
 
-  /**/   def isVoid  : Boolean
-  inline def nonVoid : Boolean  = !isVoid
+  def isVoid: Boolean
+
+object Void:
+
+  extension(inline x: Void)
+    inline def nonVoid: Boolean = !x.isVoid
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -12,21 +16,22 @@ trait Void:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait Void -> ### General Void Able
-
-      Class implementing this interface manifests, that some instance (or instances) will be considered void
-
-      ```
-
-         class Foo extends Able.Void {
-
-             def isVoid = false
-         }
-
-      ```
-
 @def isVoid -> Is void check
 
       Returns `true` if this instance is void, false othervise
 
+@def nonVoid -> Is non void check
+
+      Returns `true` if this instance is not void, false othervise
+
+@trait Void -> ### General Void Able
+
+      Class mixing this trait manifests, that some instance (or instances) will be considered void.
+
+      ```
+      class Foo extends Able.Void:
+         def isVoid = false
+      ```
+
+      See [[scalqa.gen.Void Gen.Void]] for more info.
 */

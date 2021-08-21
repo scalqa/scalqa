@@ -3,16 +3,6 @@ package scalqa; package lang; package anyref; package g; package customized; pac
 class Pro[A]:
   def apply[A](source: => A): Val.Pro[A] = Val.Pro(source)
 
-  type M  = Mutable;           inline def M  = Mutable
-  type O  = Observable;        inline def O  = Observable
-  type OM = ObservableMutable; inline def OM = ObservableMutable
-
-  // *****************************************************************************************
-  type Mutable = Val.Pro.M[A]
-  object Mutable:
-    def apply(v: A)               : M             = Val.Pro.M.apply(v)
-    def named(name: String, v: A) : M & Able.Name = Val.Pro.M.named(name, v)
-
   // *****************************************************************************************
   type Observable = Val.Pro.O[A]
   object Observable:
@@ -24,10 +14,21 @@ class Pro[A]:
     def namedRefreshable(name: String, v: => A, dependencies: ~[Observable] = \/): O & Able.Name & Able.Refresh = Val.Pro.O.namedRefreshable[A](name, v, dependencies)
 
   // *****************************************************************************************
+  type Mutable = Val.Pro.M[A]
+  object Mutable:
+    def apply(v: A)               : M             = Val.Pro.M.apply(v)
+    def named(name: String, v: A) : M & Able.Name = Val.Pro.M.named(name, v)
+
+  // *****************************************************************************************
   type ObservableMutable = Val.Pro.OM[A]
   object ObservableMutable:
     def apply(v: A)               : OM             = Val.Pro.OM(v)
     def named(name: String, v: A) : OM & Able.Name = Val.Pro.OM.named(name,v)
+
+  // Aliases
+  type M  = Mutable;           transparent inline def M  = Mutable
+  type O  = Observable;        transparent inline def O  = Observable
+  type OM = ObservableMutable; transparent inline def OM = ObservableMutable
 
 private[scalqa] object Pro extends Pro[AnyRef]
 

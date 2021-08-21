@@ -61,9 +61,9 @@ ___________________________________________________________________________*/
     --- ------ -----
   ```
 
-@def printId -> Print to console with rows indexed
+@def printId -> Print to console with row id
 
-    Same as regular [[print]], but with added index as first column identifying the object
+    Same as regular [[print]], but with added first column identifying the object
 
     ```
 

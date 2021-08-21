@@ -69,14 +69,14 @@ ___________________________________________________________________________*/
 
 @class Request -> ### General Request
 
-     Request objects establish some concept
+     General Request types establish some concept. They are always available without need to import.
 
-     Application classes and traits can have implicit conversions from Request type to local definitions
+     Application classes and traits can have implicit conversions from General Request type to a local definition
+     ([for example](https://github.com/scalqa/scalqa/blob/master/fx/src/scalqa/fx/base/Side.scala)).
 
-     Using universal instead of local values can reduce and clarify code
+     Using general request singleton objects can make code more readable. There is no overhead, if conversions are inlined.
 
      ```
-
          Time.current.roundTo(1.Second)(using UP)
          // vs.
          Time.current.roundTo(1.Second)(using Gen.Rounding.Up)
@@ -116,7 +116,7 @@ ___________________________________________________________________________*/
          }
      ```
 
-     By far the most common request is `\/`, which is request for void object
+     By far the most common request is `\/`, which is request for void instance
 
      ```
      var s: ~[Int]       = \/     // Assigning empty stream of Ints

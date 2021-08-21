@@ -46,39 +46,26 @@ ___________________________________________________________________________*/
 
 @class VOID -> ### VOID Request Type
 
-    Scalqa supports a concept of "void object" ("empty object"), which can be defined for many types.
-    This is similar to [Null Object Pattern](https://en.wikipedia.org/wiki/Null_object_pattern)
-
-    Unlike 'null', void object can have methods invoked, getting some behavior pertinent to 'voidness'
-
-    Examples:
-
-    - Void stream can be a singleton empty stream, which can be re-used for any type
-    - Void String is a string of zero length, which can be re-used for String type instead of null
+    Scalqa supports a concept of "void object" ("empty object"), please see [[scalqa.gen.Void Gen.Void]].
 
     Types with void values have to define implicit conversions from `\/`
 
     ```
     class Foo
 
-    object Foo{
+    object Foo:
       val void = new Foo with Gen.Void
-
       implicit inline def implicitFrom(v: \/): Foo = void
-    }
 
-    var v: Foo = \/   // Standard void assignment
+    // Standard void assignment is:
+    var v: Foo = \/
     ```
 
-    \\/ is a shortcut to assign empty implementations for many types
+    \\/ is a shortcut to assign void instances for many types
 
     ```
     var s: ~[Int]       = \/     // Assigning empty stream of Ints
     var o: Opt[String]  = \/     // Assigning empty optional value of String
     var i: Long.Idx     = \/     // Assigning empty indexed collection of Long
     ```
-
-    Also see [[scalqa.lang.any.self.Void Any.Gen.Void]]
-
-    A standard way to test for voidness is universal `.isVoid` method.
 */

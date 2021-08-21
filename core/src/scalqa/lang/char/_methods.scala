@@ -27,7 +27,7 @@ transparent trait _methods:
     /**/              inline def toLong                : Long                = x.cast[Long]
     /**/              inline def toFloat               : Float               = x.cast[Float]
     /**/              inline def toDouble              : Double              = x.cast[Double]
-    /**/              inline def toNumber              : java.lang.Character = java.lang.Character.valueOf(x)
+    /**/              inline def toRef                 : java.lang.Character = java.lang.Character.valueOf(x)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -109,5 +109,5 @@ ___________________________________________________________________________*/
 @def toLong    -> Make Long        \n\n  Attached Long constructor
 @def toFloat   -> Make Float       \n\n  Attached Float constructor
 @def toDouble  -> Make Double      \n\n  Attached Double constructor
-@def toNumber  -> Make Number      \n\n  Attached Number constructor
+@def toRef     -> Make Character   \n\n  Attached Character constructor
 */

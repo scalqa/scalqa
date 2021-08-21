@@ -19,32 +19,39 @@ ___________________________________________________________________________*/
 @trait Void -> ### General Void
 
     Scalqa supports a concept of "void object" ("empty object"), which can be defined for any type.
-    This is similar to [[https://en.wikipedia.org/wiki/Null_object_pattern Null Object Pattern]]
+    This is similar to [[https://en.wikipedia.org/wiki/Null_object_pattern Null Object Pattern]].
 
-    Unlike 'null', void object can have methods invoked, getting some behavior pertinent to 'voidness'
+    Unlike "null", void object can have methods invoked, getting some behavior pertinent to 'voidness'
 
     Examples:
 
       - Void ~ is a singleton object of empty stream, which can be re-used for any type
       - Void Opt, is a singleton optional value with no value, which can be re-used for any type
       - Void String, is a string of zero length, which can be re-used for String type instead of null
+      - scala.Nil is a void instance, re-used for all parameterized scala.List types
 
-    Void objects have a standard way to declare their voidness by mixing this trait. Alternatively, [[Able.Void]] trait can be mixed and isVoid test added explicitly
+    Void objects have a standard way to declare their voidness by mixing this [[scalqa.gen.Void Void]] trait.
+    Alternatively, [[scalqa.gen.able.Void Able.Void]] trait can be mixed and `"def isVoid"` test added explicitly.
+    For standard opaque types `"def value_isVoid"` has to be overridden in companion object.
 
-    Types with void values have to define implicit conversions from `\/`
+    Types with void values have to define implicit conversions from [[scalqa.gen.request.VOID \/]].
 
     ```
-        class Foo
+    class Foo
 
-        object Foo{
-          val void = new Foo with Gen.Void
+    object Foo:
+      val void = new Foo with Void
+      implicit inline def implicitFrom(v: \/): Foo = void
 
-          implicit inline def implicitFrom(v: \/) = void
-        }
-
-        var v: Foo = \/   // Standard void assignment
+    // Standard void assignment is:
+    val v: Foo = \/
     ```
 
-    A standard way to test for non voidness is [[<any>.^.isVoid]] method
+    A standard way to test for voidness is universal `.isVoid` method available for [[scalqa.lang.any._Methods all types]] (including opaque).
+
+
+@def isVoid -> Returns "true"
+
+    Method is final with `true` value hardcoded.
 
 */

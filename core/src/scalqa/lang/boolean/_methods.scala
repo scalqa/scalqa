@@ -3,10 +3,11 @@ package scalqa; package lang; package boolean; import language.implicitConversio
 transparent trait _methods:
 
   extension (inline x: Boolean)
-    @tn("Opt") inline def ?                    : Boolean.Opt = if(x) G.Opt.TRUE else G.Opt.FALSE
-    @tn("Opt") inline def ?[A](inline v: => A) : Val.Opt[A]  = if(x) v else ZZ.BoolNone.cast[Val.Opt[A]]
-    /**/       inline def not                  : Boolean     = !x
-    /**/       inline def toInt                : Int         = if(x) 1 else 0
+    @tn("Opt") inline def ?                    : Boolean.Opt       = if(x) G.Opt.TRUE else G.Opt.FALSE
+    @tn("Opt") inline def ?[A](inline v: => A) : Val.Opt[A]        = if(x) v else ZZ.BoolNone.cast[Val.Opt[A]]
+    /**/       inline def not                  : Boolean           = !x
+    /**/       inline def toInt                : Int               = if(x) 1 else 0
+    /**/       inline def toRef                : java.lang.Boolean = java.lang.Boolean.valueOf(x)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
