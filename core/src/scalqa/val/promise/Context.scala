@@ -12,8 +12,8 @@ object Context:
     inline def execute(inline r: Runnable)           : Unit             = x.real.execute(r)
     inline def reportFailure(inline cause: Throwable): Unit             = x.real.reportFailure(cause)
 
-  object OPAQUE:
-    opaque type TYPE >: ExecutionContext = ExecutionContext
+  object TYPE:
+    opaque type DEF >: ExecutionContext = ExecutionContext
 
 
 /*___________________________________________________________________________
@@ -23,7 +23,7 @@ object Context:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object OPAQUE  -> ###
+@type DEF  -> ###
 
 Promise context is an opaque type backed by scala.concurrent.ExecutionContext, esentially they are the same thing
 

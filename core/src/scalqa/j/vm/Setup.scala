@@ -11,7 +11,7 @@ object Setup:
   /**/    def seal     = _sealed = true
 
   @tn("schedular_Pro")               val schedular_*               : Pro.M[ScheduledExecutorService]                    = new PRO(Executors.newScheduledThreadPool(J.Vm.availableProcessors - 1 max 2))
-  @tn("parallelFlowSetup_Pro")       val parallelFlowSetup_*       : Pro.M[(~[Any],Opt[(J.Vm.Priority,Int)])=>Flow[Any]]= new PRO(`val`.stream.z.flow.parallel.Setup)
+  @tn("parallelFlowSetup_Pro")       val parallelFlowSetup_*       : Pro.M[(~[Any],Opt[(J.Vm.Priority,Int)])=>Flow[Any]]= new PRO(`val`.stream.z.flow.ParallelSetup)
   @tn("defaultExecutionContext_Pro") val defaultExecutionContext_* : Pro.M[ExecutionContext]                            = new PRO(ExecutionContext.Implicits.global);
   @tn("arrayInitSize_Pro")           val arrayInitSize_*           : Pro.M[Int]                                         = new PRO(16)
   @tn("jsonFormat_Pro")              val jsonFormat_*              : Pro.M[Json.Format]                                 = new PRO(json.z.DefaultFormat)

@@ -4,11 +4,12 @@ object AnyRef:
   @fast lazy val emptyArray : Array[AnyRef]  = ZZ.emptyObjectArray
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  transparent inline def G       = anyref.G
-  transparent inline def Opaque  = anyref.Opaque;     type Opaque = anyref.Opaque
+  type Buffer[A]     = anyref.Buffer[A];
+  type Containers[A] = anyref.Containers[A];   transparent inline def Containers = anyref.Containers
+  type Opaque        = anyref.Opaque.TYPE.DEF; transparent inline def Opaque     = anyref.Opaque;
 
 package object anyref:
-  opaque type Opaque <: AnyRef = AnyRef
+  type Opaque = lang.anyref.Opaque.TYPE.DEF
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

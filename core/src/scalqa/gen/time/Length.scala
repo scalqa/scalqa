@@ -4,7 +4,7 @@ import Time.Length
 
 object Length extends Long.Opaque.Data.Calculable[Length]("Time.Length") with x.Nanos.Base.Length:
   /**/            def apply(v: Length*)       : Length  = v.~.fold(\/ :Length)(_ + _)
-  /**/     inline def fromNanos(inline v:Long): Length  = v.opaque
+  /**/     inline def fromNanos(inline v:Long): Length  = v.toOpaque
 
   override        def value_isVoid(v: Length) : Boolean = v.real==0L
   override        def value_tag(v: Length)    : String  = z.formatLength(v,false)
@@ -14,8 +14,8 @@ object Length extends Long.Opaque.Data.Calculable[Length]("Time.Length") with x.
   extension(x: Length)
     /**/          def tagBrief                : String  = z.formatLength(x, true)
 
-  object OPAQUE:
-    opaque type TYPE <: Long.Opaque = Long.Opaque
+  object TYPE:
+    opaque type DEF <: Long.Opaque = Long.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -24,7 +24,7 @@ object Length extends Long.Opaque.Data.Calculable[Length]("Time.Length") with x.
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object OPAQUE  ->
+@type DEF  ->
 
       [[Time.Length]] is an opaque Long value, holding total nanoseconds
 

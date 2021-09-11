@@ -34,7 +34,7 @@ ___________________________________________________________________________*/
 
       Mutable lookup collection provides methods to modify its content
 
-      Note. [[Lookup.Mutable]] DOES NOT extend [[Collection.Mutable]], as it if impossible to reconsile operations.
+      Note. [[Lookup.Mutable]] does not extend [[Collection.Mutable]], because it is impossible to reconsile update operations.
 
 @def +=  -> Alias for [[put]]
 @def ++= -> Alias for [[putAll]]

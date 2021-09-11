@@ -4,16 +4,16 @@ object _read:
 
   private class stream[A](val base: ~[A], v: Array[AnyRef], sz: Int) extends lang.array.z.As.RefStream[A](v,sz)
 
-  def stream[A](s: ~[A], cnt: Int): ~[A] & Able.Size = if (cnt <= 0) \/ else
+  def stream[A](s: ~[A], cnt: Int): ~[A] & Able.Size = if (cnt <= 0) EMPTY else
     var o = s.read_?
-    if (o.isEmpty) \/
+    if (!o) EMPTY
     else
       val a = new Array[AnyRef](cnt)
       a(0) = o.get.cast[AnyRef]
       var i = 1
       while (i < cnt)
         o = s.read_?
-        if (o.isEmpty) return new stream(s,a,i)
+        if (!o) return new stream(s,a,i)
         a(i) = o.get.cast[AnyRef]
         i += 1
       new stream(s,a,i)

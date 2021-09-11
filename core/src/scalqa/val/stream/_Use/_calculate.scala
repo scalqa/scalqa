@@ -1,5 +1,6 @@
 package scalqa; package `val`; package stream; package _use; import language.implicitConversions
 
+import z._use.{ calculate as Z }
 import Custom.Math.Average
 
 transparent trait _calculate:
@@ -7,19 +8,19 @@ transparent trait _calculate:
 
   extension[A](inline x: ~[A])
     @tn("min")         inline def min                      (using inline o:Ordering[A]) : A          = x.min_?.get
-    @tn("min_Opt")     inline def min_?                    (using inline o:Ordering[A]) : Opt[A]     = z._use.calculate.min_Opt(x,o)
+    @tn("min_Opt")     inline def min_?                    (using inline o:Ordering[A]) : Opt[A]     = Z.min_Opt(x,o)
     @tn("max")         inline def max                      (using inline o:Ordering[A]) : A          = x.max_?.get
-    @tn("max_Opt")     inline def max_?                    (using inline o:Ordering[A]) : Opt[A]     = z._use.calculate.max_Opt(x,o)
+    @tn("max_Opt")     inline def max_?                    (using inline o:Ordering[A]) : Opt[A]     = Z.max_Opt(x,o)
     @tn("range")       inline def range                    (using inline o:Ordering[A]) : Range[A]   = x.range_?.get
-    @tn("range_Opt")   inline def range_?                  (using inline o:Ordering[A]) : Opt[<>[A]] = z._use.calculate.range_Opt(x,o)
+    @tn("range_Opt")   inline def range_?                  (using inline o:Ordering[A]) : Opt[<>[A]] = Z.range_Opt(x,o)
     @tn("sum")         inline def sum                          (using inline n:Math[A]) : A          = x.sum_? or n.zero
     @tn("sum_Opt")     inline def sum_?                        (using inline n:Math[A]) : Opt[A]     = z._use._calculate.sum.opt(x,n)
     @tn("average")     inline def average                   (using inline v:Average[A]) : A          = v.average(x)
     @tn("average_Opt") inline def average_?                 (using inline v:Average[A]) : Opt[A]     = v.averageOpt(x)
     @tn("minBy")       inline def minBy  [B](inline f: A=>B)(using inline o:Ordering[B]): A          = x.minBy_?(f).get
     @tn("maxBy")       inline def maxBy  [B](inline f: A=>B)(using inline o:Ordering[B]): A          = x.maxBy_?(f).get
-    @tn("minBy_Opt")   inline def minBy_?[B](inline f: A=>B)(using inline o:Ordering[B]): Opt[A]     = z._use.calculate.minBy_Opt(x,f,o)
-    @tn("maxBy_Opt")   inline def maxBy_?[B](inline f: A=>B)(using inline o:Ordering[B]): Opt[A]     = z._use.calculate.maxBy_Opt(x,f,o)
+    @tn("minBy_Opt")   inline def minBy_?[B](inline f: A=>B)(using inline o:Ordering[B]): Opt[A]     = Z.minBy_Opt(x,f,o)
+    @tn("maxBy_Opt")   inline def maxBy_?[B](inline f: A=>B)(using inline o:Ordering[B]): Opt[A]     = Z.maxBy_Opt(x,f,o)
 
     inline def averageFew[B,C,D,E,F](inline fb:A=>Opt[B], inline fc:A=>Opt[C], inline fd:A=>Opt[D]= \/, inline fe:A=>Opt[E]= \/, inline ff:A=>Opt[F]= \/)
                                   (using inline nb:Average[B], inline nc:Average[C], inline nd:Average[D], inline ne:Average[E], inline nf:Average[F])
@@ -101,7 +102,7 @@ ___________________________________________________________________________*/
      ```
 
      Note: [[average]] is available for types providing given [[scalqa.val.stream.custom.Math.Average ~~.Custom.Math.Average]] implementations,
-     which are by default Double, Float and opaque numerics based on Double and Float
+     which are by default Double, Float and opaque numerals based on Double and Float
 
 @def average_? ->  Average option
 
@@ -112,7 +113,7 @@ ___________________________________________________________________________*/
      ```
 
      Note: [[average_?]] is available for types providing given [[scalqa.val.stream.custom.Math.Average ~~.Custom.Math.Average]] implementations,
-     which are by default Double, Float and opaque numerics based on Double and Float
+     which are by default Double, Float and opaque numerals based on Double and Float
 
 @def averageFew -> Multi average
 
@@ -132,7 +133,7 @@ ___________________________________________________________________________*/
           third.TP     // Prints 5005
      ```
      Note: Averages areavailable for types providing given [[scalqa.val.stream.custom.Average ~~.Custom.Average]] implementations,
-     which are by default Double, Float and opaque numerics based on Double and Float
+     which are by default Double, Float and opaque numerals based on Double and Float
 
 @def sum -> Sum
 

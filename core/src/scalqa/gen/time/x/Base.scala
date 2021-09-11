@@ -2,7 +2,7 @@ package scalqa; package gen; package time; package x; import language.implicitCo
 
 import Time.Length
 
-transparent trait Base[A<:Long.Raw]:
+transparent trait Base[A<:Any.Long]:
 
   extension(x: A)
     protected def genTime       : Gen.Time

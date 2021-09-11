@@ -22,7 +22,7 @@ object Array extends Gen.Void.Setup[Array](z.Void.Array):
     def apply(): Mutable = X.Basic()
 
     object X:
-      class Basic extends AnyRef.G.Buffer[Any] with Mutable
+      class Basic extends AnyRef.Buffer[Any] with Mutable
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -31,5 +31,5 @@ object Array extends Gen.Void.Setup[Array](z.Void.Array):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object X -> ###  \n\n Object [[X]] defines standard parent type extensions
+@object X -> ### Type Extention
 */

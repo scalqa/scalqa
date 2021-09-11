@@ -3,7 +3,7 @@ package scalqa; package `val`; package stream; package _use; import language.imp
 transparent trait _metadata :
 
   extension[A](inline x: ~[A])
-    /**/                inline def docTree    : Doc.Tree      = Custom.Pipeline.infoTree(x)
+    /**/                inline def docTree    : Doc.Tree      = Custom.Pipeline.docTree(x)
     @tn("size_Opt")     inline def size_?     : Int.Opt       = Able.Size.size_?(x)
     @tn("sizeLong_Opt") inline def sizeLong_? : Long.Opt      = Able.Size.sizeLong_?(x)
     private[scalqa]     inline def defaultDoc : Doc           = z.util.MultiDoc(x)

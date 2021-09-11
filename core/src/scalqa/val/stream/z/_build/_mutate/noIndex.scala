@@ -1,6 +1,6 @@
 package scalqa; package `val`; package stream; package z; package _build; package _mutate
 
-class noIndex[A](x: ~[A]) extends a.Pipe.Sized[A](x):
+class noIndex[A](x: ~[A]) extends z.x.Pipe.Sized[A](x):
   @tn("read_Opt") def read_? = x.read_?
 
 /*___________________________________________________________________________

@@ -17,8 +17,8 @@ object Insets extends Abstract.Delegate.Opaque[Fx.Insets, REAL]("Fx.Insets"):
     /**/   def newRight( v: Double) : Insets = Insets(x.top, v, x.bottom, x.left)
     /**/   def newLeft(  v: Double) : Insets = Insets(x.top, x.right, x.bottom, v)
 
-  object OPAQUE:
-    opaque type TYPE <: AnyRef.Opaque = REAL & AnyRef.Opaque
+  object TYPE:
+    opaque type DEF <: AnyRef.Opaque = REAL & AnyRef.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

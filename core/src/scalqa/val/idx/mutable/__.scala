@@ -3,8 +3,8 @@ package scalqa; package `val`; package idx; import language.implicitConversions
 import scala.{ Ordering as O }
 
 trait Mutable[A] extends Idx[A] with Val.Collection.Mutable[A] with Able.Contain[A]:
-  @tn("_addAt")           def +=@ (position:Int, v: A)                 : this.type  = { addAt(position, v);    this }
-  @tn("_addAllAt")        def ++=@(position:Int, v: ~[A])              : this.type  = { addAllAt(position, v); this }
+  @tn("addAt")     inline def +@= (inline position:Int, inline v: A)   : this.type  = { addAt(position, v);    this }
+  @tn("atAddAll")  inline def ++@=(inline position:Int, inline v: ~[A]): this.type  = { addAllAt(position, v); this }
   /**/                    def add(v: A)                                : Unit       = addAt(size, v)
   /**/                    def addAt(position: Int, v: A)               : Unit
   /**/           override def addAll(v: ~[A])                          : Unit       = v.foreach(add)
@@ -19,7 +19,7 @@ trait Mutable[A] extends Idx[A] with Val.Collection.Mutable[A] with Able.Contain
   /**/           override def clear                                    : Unit       = remove_<>(0 <>> size)
 
 object Mutable:
-  /**/             inline def apply[A](inline initSize: Int=J.initSize): Mutable[A]             = new lang.anyref.g.Buffer(initSize)
+  /**/             inline def apply[A](inline initSize: Int=J.initSize): Mutable[A]             = new lang.anyref.Buffer(initSize)
   /**/                    def sealable[A](initSize: Int = J.initSize)  : Mutable[A] & Able.Seal = new z.mutable.AsSealable(apply[A](initSize))
   /**/                    def wrap[A](v: java.util.List[A])            : Mutable[A]             = z.as.JavaListWrap.Mutable[A](v)
   /**/                    def wrap[A](v:  Idx[A])                      : Mutable[A]             = v match{ case v:Idx.M[_] => v.cast[Idx.M[A]]; case v => new z.Unsupported_View.M[A](v)}
@@ -96,14 +96,14 @@ ___________________________________________________________________________*/
          x.~.TP // Prints ~(a, A, b, B, c, C, d, D, E, F)
       ```
 
-@def +=@ -> Alias for [[addAt]]
+@def +@= -> Alias for [[addAt]]
 
       Adds `element` at given `position`
       ```
          // Generic example
          val x = ('A' <> 'F').~.toBuffer
 
-         x +=@ (3, 'd') +=@ (2, 'c') +=@ (1, 'b') +=@ (0, 'a')
+         x +@= (3, 'd') +@= (2, 'c') +@= (1, 'b') +@= (0, 'a')
 
          x.~.TP // Prints ~(a, A, b, B, c, C, d, D, E, F)
       ```
@@ -121,14 +121,14 @@ ___________________________________________________________________________*/
          x.~.TP // Prints ~(A, b, c, d, B, C, D, e, f, g, E, F)
       ```
 
-@def ++=@ -> Alias for [[addAllAt]]
+@def ++@= -> Alias for [[addAllAt]]
 
       Adds stream `elements` at given `position`
       ```
          // Generic example
          val x = ('A' <> 'F').~.toBuffer
 
-         x ++=@ (4, 'e' <> 'g') ++=@ (1, ~~('b','c','d'))
+         x ++@= (4, 'e' <> 'g') ++@= (1, ~~('b','c','d'))
 
          x.~.TP // Prints ~(A, b, c, d, B, C, D, e, f, g, E, F)
       ```

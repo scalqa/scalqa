@@ -1,6 +1,8 @@
-**Scalqa** stands for 'Scala Quick API'. It can be used instead of more complex Scala native API, when simplicity and performance are a priority. 
+Scala is a way better, more efficient than Java. However, it has a reputation of harder language to learn, 
+which is to a large extent due to complex, overcrowded API.
+**Scalqa** stands for 'Scala Quick API'. It provides full functionality with minimal, simplified libraries. 
 
-Scalqa is built around fast proprietary collections, which support unboxed processing of primitive types.
+Scalqa collections are fully specialized and allow processing of primitive types without boxing.
 
 Scalqa also provides a standardized way to define [opaque data](https://scalqa.org/doc/guide/features/Data.html)
 based on Java primitives. Data elements naturally inherit built-in specialized collections.

@@ -1,8 +1,8 @@
 package scalqa; package `val`; package stream; package z; package _build; package _group; import language.implicitConversions
 
-class sliding(x: ~[AnyRef], size: Int, step: Int) extends a.Pipe[~[AnyRef]](x):
-  var pa: Array[AnyRef] = null
-  var pos = 0
+class sliding(x: ~[AnyRef], size: Int, step: Int) extends z.x.Pipe[~[AnyRef]](x):
+  private var pa: Array[AnyRef] = null
+  private var pos = 0
 
   @tn("read_Opt")  def read_? : Opt[~[AnyRef]] =
     val a = new Array[AnyRef](size)
@@ -22,7 +22,7 @@ class sliding(x: ~[AnyRef], size: Int, step: Int) extends a.Pipe[~[AnyRef]](x):
     var i = from
     while (i < a.length)
       val o = x.read_?
-      if (o.isEmpty) return i
+      if (!o) return i
       a(i) = o.get
       i += 1
     i

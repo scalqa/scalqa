@@ -11,9 +11,9 @@ trait Object extends `val`.Lookup[String, Any] with Able.Doc:
   /**/              def int(      name: String) : Int            = int_?(name).get
   /**/              def long(     name: String) : Long           = long_?(name).get
   /**/              def double(   name: String) : Double         = double_?(name).get
-  @tn("int_Opt")    def int_?(    name: String) : Int.Opt        = get_?(name).map_?[Int   .Opt]{case v:Int   => v; case s:String => s.toInt_?;    case v:Number => v.intValue;    case _ => \/ }
-  @tn("long_Opt")   def long_?(   name: String) : Long.Opt       = get_?(name).map_?[Long  .Opt]{case v:Long  => v; case s:String => s.toLong_?;   case v:Number => v.longValue;   case _ => \/ }
-  @tn("double_Opt") def double_?( name: String) : Double.Opt     = get_?(name).map_?[Double.Opt]{case v:Double=> v; case s:String => s.toDouble_?; case v:Number => v.doubleValue; case _ => \/ }
+  @tn("int_Opt")    def int_?(    name: String) : Int.Opt        = get_?(name).map_?{case v:Int   => v; case s:String => s.toInt_?;    case v:Number => v.intValue;    case _ => \/ :Int.Opt}
+  @tn("long_Opt")   def long_?(   name: String) : Long.Opt       = get_?(name).map_?{case v:Long  => v; case s:String => s.toLong_?;   case v:Number => v.longValue;   case _ => \/ :Long.Opt}
+  @tn("double_Opt") def double_?( name: String) : Double.Opt     = get_?(name).map_?{case v:Double=> v; case s:String => s.toDouble_?; case v:Number => v.doubleValue; case _ => \/ :Double.Opt}
   /**/              def boolean(  name: String) : Boolean        = string(name).toBoolean
 
   /**/              def doc                     : Doc            = Doc(this) ++= pair_~.map(t => (t._1,t._2.tag))
@@ -39,5 +39,5 @@ object Object extends Gen.Void.Setup[AnyRef](z.Void.Object):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object X -> ###  \n\n Object [[X]] defines standard parent type extensions
+@object X -> ### Type Extention
 */

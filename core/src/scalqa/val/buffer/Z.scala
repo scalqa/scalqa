@@ -14,7 +14,7 @@ object Z:
        else        { val na = a.take_<>(to,s2);    a.copyTo(a, from+s2,from,s1); na.copyTo(a, from, 0,   s2)}
 
   def create[A](a:Array[A], s:Int): Buffer[A] = a match
-    case a: Array[AnyRef]   => new AnyRef .G.Buffer[A](a,s)
+    case a: Array[AnyRef]   => new AnyRef   .Buffer[A](a,s)
     case a: Array[Int]      => new Int    .G.Buffer(a,s).cast[Buffer[A]]
     case a: Array[Long]     => new Long   .G.Buffer(a,s).cast[Buffer[A]]
     case a: Array[Double]   => new Double .G.Buffer(a,s).cast[Buffer[A]]
@@ -27,7 +27,7 @@ object Z:
 
   def accessible[A](a: Array[A], sz: Int): Buffer[A] & Able.Access[Array[A]] =
     { a match
-      case a: Array[AnyRef]   => lang.anyref .g.Buffer.accessible[A](a,sz)
+      case a: Array[AnyRef]   => lang.anyref   .Buffer.accessible[A](a,sz)
       case a: Array[Int]      => lang.int    .g.Buffer.accessible(a,sz)
       case a: Array[Long]     => lang.long   .g.Buffer.accessible(a,sz)
       case a: Array[Double]   => lang.double .g.Buffer.accessible(a,sz)

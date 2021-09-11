@@ -4,7 +4,7 @@ import Url.Connection
 import java.net.{ URLConnection as REAL }
 
 object Connection extends AnyRef.Opaque.Base[Connection,REAL]("Url"):
-  inline def apply(inline v: REAL): Connection = v.opaque
+  inline def apply(inline v: REAL): Connection = v.toOpaque
 
   extension (inline x: Connection)
     inline def openOutput                             : J.Output       = J.Output(x.real.getOutputStream)
@@ -20,8 +20,8 @@ object Connection extends AnyRef.Opaque.Base[Connection,REAL]("Url"):
   extension (x: Connection)
     /**/   def requestProperty(key: String)           : Pro.M[String]  = zProperty(x.real,key)
 
-  object OPAQUE:
-    opaque type TYPE <: AnyRef.Opaque = java.io.File & AnyRef.Opaque
+  object TYPE:
+    opaque type DEF <: AnyRef.Opaque = java.io.File & AnyRef.Opaque
 
   // ************************************************************************************
   private class zProperty(c: REAL, key: String) extends Val.Pro.M[String]:
@@ -36,7 +36,7 @@ object Connection extends AnyRef.Opaque.Base[Connection,REAL]("Url"):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object OPAQUE  -> ###
+@type DEF  -> ###
 
    [[J.Url.Connection]] is an opaque value, backed by java.net.URLConnection
 

@@ -28,8 +28,8 @@ object Size:
   @tn("size_Opt")  def size_?(v: AnyRef) : Int.Opt  = v match
     case v: Size     => v.size.?
     case v: Opt      => v.size_?
-    case v: Long     => v.sizeLong.?.map_?[Int.Opt](v => if(v <= Int.max) v.toInt else \/)
-    case v: Opt.Long => v.sizeLong_?.map_?[Int.Opt](v => if(v <= Int.max) v.toInt else \/)
+    case v: Long     => v.sizeLong.?.map_?(v => if(v <= Int.max) v.toInt else \/ :Int.Opt)
+    case v: Opt.Long => v.sizeLong_?.map_?(v => if(v <= Int.max) v.toInt else \/ :Int.Opt)
     case _           => \/
 
   @tn("sizeLong_Opt") def sizeLong_?(v: AnyRef): Long.Opt = v match

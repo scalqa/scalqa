@@ -8,10 +8,10 @@ object process:
 
   def apply[A,U,W](x: ~[A], foreachFun: A=>U, fornilFun: => W): Unit =
     var o=x.read_?
-    if (o.isEmpty)
+    if (!o)
       var v: W = fornilFun
     else
-      while(o.nonEmpty)
+      while(o)
         foreachFun(o.`val`)
         o=x.read_?
     ()

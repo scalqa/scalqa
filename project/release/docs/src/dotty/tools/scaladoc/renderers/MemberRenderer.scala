@@ -100,7 +100,7 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
     val bodyContents = comment.fold(Nil)(e => renderDocPart(e.body) :: Nil)
 
     Seq(
-      div(cls := "documentableBrief doc")(comment.filterNot(_ => m.kind.isClassLike || m.dri.isOpaqueDef /*scalqa*/).flatMap(_.short).fold("")(renderDocPart)),
+      div(cls := "documentableBrief doc")(comment.filterNot(_ => m.kind.isClassLike || m.dri.isTypeDef /*scalqa*/).flatMap(_.short).fold("")(renderDocPart)),
       div(cls := "cover")(
         div(cls := "doc")(bodyContents),
         dl(cls := "attributes")(
@@ -128,7 +128,7 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
     case _ => Nil
   }
 
-  def memberSignature(member: Member) =
+  def memberSignature(member: Member, heading: Boolean = false) =
     val depStyle = if member.deprecated.isEmpty then "" else "deprecated"
     val nameClasses = cls := s"documentableName $depStyle"
 
@@ -136,7 +136,7 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
     val inlineBuilder = rawBuilder.asInstanceOf[InlineSignatureBuilder]
     if inlineBuilder.preName.isEmpty then println(member)
     val kind :: modifiersRevered = inlineBuilder.preName
-    val signature =  inlineBuilder.names.reverse.dropPrivate.dropOPAQUE // scalqa
+    var signature = inlineBuilder.names.reverse.scalqaImprove(member,heading)
 
     Seq(
       span(cls := "modifiers")(
@@ -144,7 +144,7 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
         span(cls := "kind")(renderElement(kind)),
       ),
       renderLink(member.name.nameToOp, member.dri, nameClasses),
-      span(cls := "signature")(signature.map(renderElement)),
+      span(cls := "signature")(signature.map(v => renderElementWith(v,member,heading))),
     )
 
   def memberIcon(member: Member) = member.kind match {
@@ -293,11 +293,11 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
       buildGroup("Member", Seq(
         ("", GET.members)
       )),
-      buildGroup("Alias", Seq(
-        ("", GET.aliases)
-      )),
       buildGroup("Type", Seq(
         ("", GET.types)
+      )),
+      buildGroup("Alias", Seq(
+        ("", GET.aliases)
       )),
       buildGroup("Def", Seq(
         ("Constructor", GET.constructors),
@@ -392,7 +392,7 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
           ),
           div(cls := "signature monospace")(
             annotations(m),
-            memberSignature(m)
+            memberSignature(m,true)
           )
         )
 

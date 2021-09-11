@@ -4,9 +4,9 @@ import J.File
 import java.io.{ File as REAL}
 
 object File extends AnyRef.Opaque.Base[J.File,REAL]("File"):
-  inline          def apply(inline v: REAL)        : File      = v.opaque
+  inline          def apply(inline v: REAL)        : File      = v.toOpaque
   override        def value_tag(v: File)           : String    = v.path.toString
-  implicit inline def implicitFrom(inline v: REAL) : File      = v.opaque
+  implicit inline def implicitFrom(inline v: REAL) : File      = v.toOpaque
 
   extension (inline x: File)
     inline def name                                : String    = x.real.getName
@@ -27,13 +27,13 @@ object File extends AnyRef.Opaque.Base[J.File,REAL]("File"):
                     inline overwrite:Boolean=false,
                     inline copyAttr:Boolean=false) : File      = Z.copy(x, p, overwrite, copyAttr)
 
-  object OPAQUE:
-    opaque type TYPE <: AnyRef.Opaque = REAL & AnyRef.Opaque
+  object TYPE:
+    opaque type DEF <: AnyRef.Opaque = REAL & AnyRef.Opaque
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Path   = file.Path.OPAQUE.TYPE;   transparent inline def Path   = file.Path
-  type Store  = file.Store.OPAQUE.TYPE;  transparent inline def Store  = file.Store
-  type System = file.System.OPAQUE.TYPE; transparent inline def System = file.System
+  type Path   = file.Path.TYPE.DEF;   transparent inline def Path   = file.Path
+  type Store  = file.Store.TYPE.DEF;  transparent inline def Store  = file.Store
+  type System = file.System.TYPE.DEF; transparent inline def System = file.System
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -42,7 +42,7 @@ object File extends AnyRef.Opaque.Base[J.File,REAL]("File"):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object OPAQUE  -> ###
+@type DEF  -> ###
 
    [[J.File]] is an opaque value, backed by java.io.File
 

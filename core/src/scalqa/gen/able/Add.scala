@@ -1,14 +1,12 @@
 package scalqa; package gen; package able; import language.implicitConversions
 
 trait Add[A]:
-  /**/           def add(v: A)      : Unit
-  /**/           def addAll(v: ~[A]): Unit      = v.foreach(add)
+  /**/                  def add(v: A)            : Unit
+  /**/                  def addAll(v: ~[A])      : Unit      = v.foreach(add)
 
-  @tn("_add")    def += (v: A)      : this.type = { add(v); this }
-  @tn("_addAll") def ++=(v: ~[A])   : this.type = { addAll(v); this }
-  @tn("_addOpt") def ++= (v: Opt[A]): this.type = { v.forval(add); this }
-
-
+  @tn("_add")    inline def += (inline v: A)     : this.type = { add(v); this }
+  @tn("_addAll") inline def ++=(inline v: ~[A])  : this.type = { addAll(v); this }
+  @tn("_addOpt") inline def ++=(inline v: Opt[A]): this.type = { v.forval(add); this }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

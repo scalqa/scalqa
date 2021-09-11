@@ -9,9 +9,8 @@ object Idx:
   implicit inline def implicitFrom[A<:Raw](inline v: \/): Idx[A] = Pack.void
 
   trait Mutable[A<:Raw] extends Idx[A] with Collection.Mutable[A] with Val.Idx.M[A]:
-    @tn("_addAt") override def +=@ (position:Int, v: A): this.type = { addAt(position, v); this }
-    /**/                   def addAt(i: Int, v: A)     : Unit
-    /**/                   def updateAt(i: Int, v: A)  : Unit
+    def addAt   (i: Int, v: A): Unit
+    def updateAt(i: Int, v: A): Unit
 
   object Mutable:
     implicit inline def implicitFrom[A<:Raw](inline v: NEW): Mutable[A] = new Buffer()

@@ -1,19 +1,18 @@
 package scalqa; package lang; import language.implicitConversions
 
-object Int extends int.g.customized.Containers[Int]:
+object Int extends int.g.Containers[Int]:
   inline def min     : Int               = java.lang.Integer.MIN_VALUE
   inline def max     : Int               = java.lang.Integer.MAX_VALUE
   inline def ordering: G.Ordering[Int]   = int.z.Math
   inline def math    : G.Math[Int]       = int.z.Math
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  type Opaque   = int.Opaque.TYPE.DEF;   transparent inline def Opaque = int.Opaque
   type _methods = int._methods;          transparent inline def G      = int.G
-  type Opaque   = int.Opaque;            transparent inline def Opaque = int.Opaque
-  type Raw      = Int | int.Opaque;      transparent inline def Raw    = int.Raw
 
 package object int:
-  type Raw    = Int.Raw
-  opaque type Opaque >: Int <: AnyVal = Int
+  type Raw      = Any.Int
+  type Opaque   = int.Opaque.TYPE.DEF
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

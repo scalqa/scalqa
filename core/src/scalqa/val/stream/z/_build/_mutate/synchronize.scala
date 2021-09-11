@@ -1,6 +1,6 @@
 package scalqa; package `val`; package stream; package z; package _build; package _mutate; import language.implicitConversions
 
-class synchronize[A](s: ~[A]) extends a.Pipe.Sized[A](s):
+class synchronize[A](s: ~[A]) extends z.x.Pipe.Sized[A](s):
 
   @tn("read_Opt") def read_? = synchronized{ s.read_? }
 

@@ -3,13 +3,13 @@ package scalqa; package gen; package calendar; import language.implicitConversio
 import Calendar.Month
 
 object Month extends Int.Opaque.Data.Sequential[Month]("Month"):
-  /**/     inline def fromIndex(epochMonth: Int) : Month    = epochMonth.opaque
-  /**/            def apply(year: Int,month: Int): Month    = (year * 12 + month - 1).opaque
+  /**/     inline def fromIndex(epochMonth: Int) : Month    = epochMonth.toOpaque
+  /**/            def apply(year: Int,month: Int): Month    = (year * 12 + month - 1).toOpaque
   /**/            def current                    : Month    = Day.current.month
   override        def value_tag(v: Month)        : String   = v.year.tag + "-" + { if (v.number > 9) v.number else "0" + v.number }
   override        def value_isVoid(v: Month)     : Boolean  = v.real == Int.min
 
-  implicit inline def implicitFrom(v: \/)        : Month    = Int.min.opaque
+  implicit inline def implicitFrom(v: \/)        : Month    = Int.min.toOpaque
   implicit inline def implicitFrom(v: CURRENT)   : Month    = current
 
   extension (x: Month)
@@ -21,8 +21,8 @@ object Month extends Int.Opaque.Data.Sequential[Month]("Month"):
     /**/          def isCurrent                  : Boolean  = x == Month.current
     /**/          def days                       : Day.Idx  = new zDays(x)
 
-  object OPAQUE:
-    opaque type TYPE <: Int.Opaque = Int.Opaque
+  object TYPE:
+    opaque type DEF <: Int.Opaque = Int.Opaque
 
   // ***************************************************************************************************************
   private class zDays(v: Month) extends Day.Idx:
@@ -36,7 +36,7 @@ object Month extends Int.Opaque.Data.Sequential[Month]("Month"):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object OPAQUE  -> ### Calendar Month
+@type DEF  -> ### Calendar Month
 
     [[Month]] is an opaque Int value, holding month index since start of 1970
 

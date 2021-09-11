@@ -3,20 +3,20 @@ package scalqa; package gen; package time; import language.implicitConversions
 import Time.Instant
 
 object Instant extends Long.Opaque.Data.Ordered[Instant]("Time.Instant") with time.x.Base[Instant] with time.x.Nanos.Base:
-  /**/           inline def fromNanos(inline v: Long)  : Instant = v.opaque
+  /**/           inline def fromNanos(inline v: Long)  : Instant = v.toOpaque
   /**/           inline def apply()                    : Instant = apply(clock.instant); private val clock = java.time.Clock.systemUTC
-  /**/                  def apply(i: java.time.Instant): Instant = (i.getEpochSecond * 1_000_000_000L + i.getNano).opaque
+  /**/                  def apply(i: java.time.Instant): Instant = (i.getEpochSecond * 1_000_000_000L + i.getNano).toOpaque
   override              def value_tag(v: Instant)      : String  = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new java.util.Date(v.real / 1_000_000L)) + "." + Z.pad(v.micros, 3) + "." + Z.pad(v.nanos, 3)
 
   implicit       inline def implicitFrom(v: CURRENT)   : Instant = apply()
 
   extension(x: Instant)
     /**/                def genTime                    : Time    = Time.fromIndex(x.real / 1_000_000L)
-    @tn("plus")  inline def + (inline l: Time.Length)  : Instant = (x.real + l.nanosTotal).opaque
-    @tn("minus") inline def - (inline l: Time.Length)  : Instant = (x.real - l.nanosTotal).opaque
+    @tn("plus")  inline def + (inline l: Time.Length)  : Instant = (x.real + l.nanosTotal).toOpaque
+    @tn("minus") inline def - (inline l: Time.Length)  : Instant = (x.real - l.nanosTotal).toOpaque
 
-  object OPAQUE:
-    opaque type TYPE <: Long.Opaque = Long.Opaque
+  object TYPE:
+    opaque type DEF <: Long.Opaque = Long.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -25,7 +25,7 @@ object Instant extends Long.Opaque.Data.Ordered[Instant]("Time.Instant") with ti
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object OPAQUE  -> ###
+@type DEF  -> ###
 
       [[Time.Instant]] is an opaque Long value, holding nanoseconds since start of 1970
 

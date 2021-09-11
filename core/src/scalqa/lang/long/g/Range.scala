@@ -1,6 +1,6 @@
 package scalqa; package lang; package long; package g; import language.implicitConversions
 
-class Range[A<:Raw](_start: A, e: A, eIn: Boolean) extends Val.<>[A] with Able.~[A] with Raw.Specialized:
+class Range[A<:Raw](_start: A, e: A, eIn: Boolean) extends Val.<>[A] with Able.~[A] with any.z.PrimitiveTag.Long:
   type THIS_TYPE = Range[A]
   final             def start                           : A             = _start
   final             def end                             : A             = e
@@ -30,13 +30,12 @@ class Range[A<:Raw](_start: A, e: A, eIn: Boolean) extends Val.<>[A] with Able.~
 
 object Range:
   implicit inline def implicitToStream[A<:Raw](inline v: Range[A]) : ~[A] = v.~
-
   // ------------------------------------------------------------------------------------------------------------------------------------------
-  extension[A<:Raw,T,STM<: ~~.AnyType[T]](inline x: Range[A])
-    /**/                                  inline def map    [B>:T](inline f:A=> B)   (using inline t: Given.StreamShape[B,STM]): STM       = g.Stream.map[A,T,STM](x.~)[B](f)(using t)
-    /**/                                  inline def flatMap[B>:T](inline f:A=> ~[T])(using inline t: Given.StreamShape[B,STM]): STM       = g.Stream.flatMap[A,T,STM](x.~)[B](f)(using t)
-  extension[A<:Raw]  (inline x: Range[A]) inline def withFilter(inline f: Fun.Filter[A])                                       : Stream[A] = x.~.take(f)
-  extension[A<:Raw,U](inline x: Range[A]) inline def foreach(   inline f: Fun.Consume[A,U])                                    : Unit      = {var i=x.start.real; val e=x.end.real+x.endIsIn.toInt; while(i<e){f(i.cast[A]); i+=1L}}
+  extension[A<:Raw](inline x: Range[A])
+    inline def map    [B](inline f: A=>B)   (using inline B:Specialized[B]): B.~    = x.~.map(f)
+    inline def flatMap[B](inline f:A=> ~[B])(using inline B:Specialized[B]): B.~    = x.~.flatMap(f)
+    inline def withFilter(inline f: Fun.Filter[A])                         : G.~[A] = x.~.take(f)
+    inline def foreach[U](inline f: A=>U)                                  : Unit   = {var i=x.start.real; val e=x.end.real+x.endIsIn.toInt; while(i<e){f(i.cast[A]); i+=1L}}
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

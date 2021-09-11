@@ -8,16 +8,16 @@ object Fun:
   trait Filter      [A<:Raw]                { def apply(v:A)      : Boolean  }
   trait Revise      [A<:Raw]                { def apply(v:A)      : A        }
   trait FromAny     [T, A<:Raw]             { def apply(v:T)      : A        }
-  trait ToAny       [A<:Raw, B]             { def apply(v:A)      : B        }
   trait ToMany      [A<:Raw, B]             { def apply(v:A)      : Val.~[B] }
-  trait ToBooleanRaw[A<:Raw, B<:Boolean.Raw]{ def apply(v:A)      : B        };       type  ToBoolean[A<:Raw] = ToBooleanRaw[A,Boolean]
-  trait ToByteRaw   [A<:Raw, B<:Byte.Raw   ]{ def apply(v:A)      : B        };       type  ToByte   [A<:Raw] = ToByteRaw   [A,Byte]
-  trait ToCharRaw   [A<:Raw, B<:Char.Raw   ]{ def apply(v:A)      : B        };       type  ToChar   [A<:Raw] = ToCharRaw   [A,Char]
-  trait ToShortRaw  [A<:Raw, B<:Short.Raw  ]{ def apply(v:A)      : B        };       type  ToShort  [A<:Raw] = ToShortRaw  [A,Short]
-  trait ToIntRaw    [A<:Raw, B<:Int.Raw    ]{ def apply(v:A)      : B        };       type  ToInt    [A<:Raw] = ToIntRaw    [A,Int]
-  trait ToLongRaw   [A<:Raw, B<:Long.Raw   ]{ def apply(v:A)      : B        };       type  ToLong   [A<:Raw] = ToLongRaw   [A,Long]
-  trait ToFloatRaw  [A<:Raw, B<:Float.Raw  ]{ def apply(v:A)      : B        };       type  ToFloat  [A<:Raw] = ToFloatRaw  [A,Float]
-  trait ToDoubleRaw [A<:Raw, B<:Double.Raw ]{ def apply(v:A)      : B        };       type  ToDouble [A<:Raw] = ToDoubleRaw [A,Double]
+  trait ToAny       [A<:Raw, B]             { def apply(v:A)      : B        }
+  trait ToAnyBoolean[A<:Raw, B<:Any.Boolean]{ def apply(v:A)      : B        };       type  ToBoolean[A<:Raw] = ToAnyBoolean[A,Boolean]
+  trait ToAnyByte   [A<:Raw, B<:Any.Byte   ]{ def apply(v:A)      : B        };       type  ToByte   [A<:Raw] = ToAnyByte   [A,Byte]
+  trait ToAnyChar   [A<:Raw, B<:Any.Char   ]{ def apply(v:A)      : B        };       type  ToChar   [A<:Raw] = ToAnyChar   [A,Char]
+  trait ToAnyShort  [A<:Raw, B<:Any.Short  ]{ def apply(v:A)      : B        };       type  ToShort  [A<:Raw] = ToAnyShort  [A,Short]
+  trait ToAnyInt    [A<:Raw, B<:Any.Int    ]{ def apply(v:A)      : B        };       type  ToInt    [A<:Raw] = ToAnyInt    [A,Int]
+  trait ToAnyLong   [A<:Raw, B<:Any.Long   ]{ def apply(v:A)      : B        };       type  ToLong   [A<:Raw] = ToAnyLong   [A,Long]
+  trait ToAnyFloat  [A<:Raw, B<:Any.Float  ]{ def apply(v:A)      : B        };       type  ToFloat  [A<:Raw] = ToAnyFloat  [A,Float]
+  trait ToAnyDouble [A<:Raw, B<:Any.Double ]{ def apply(v:A)      : B        };       type  ToDouble [A<:Raw] = ToAnyDouble [A,Double]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

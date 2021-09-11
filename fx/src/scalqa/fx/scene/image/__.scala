@@ -15,8 +15,8 @@ object Image extends Abstract.Delegate.Opaque[Image, REAL]("Fx.Image"):
     /**/              def height   : Double        = x.real.getHeight
     /**/              def isError  : Boolean       = x.real.isError
 
-  object OPAQUE:
-    opaque type TYPE <: AnyRef.Opaque = REAL & AnyRef.Opaque
+  object TYPE:
+    opaque type DEF <: AnyRef.Opaque = REAL & AnyRef.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

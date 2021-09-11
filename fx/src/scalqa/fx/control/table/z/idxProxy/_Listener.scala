@@ -10,7 +10,7 @@ private[z] transparent trait _Listener[A]:
       def row_?(items: ~[A]): ~[(Entry[A], Int)] = {var i=r.start-1; items.map(v => new Entry({i+=1; i}, v)).zipValue(e => if (ordered) entries.orderedSearch(e)(using _rowOrdering).start else e.index) }
       v match
         case c: Idx.Event.Reposition[A] =>
-          entries.~.take(v => c.range.contains(v.index)).foreach(e => e.index = c.permutation.mutate(e.index))
+          entries.~.take(v => c.range.contains(v.index)).foreach(e => e.index = c.permutation.position(e.index))
           \/
         case c: Idx.Event.Add[A] =>
           reindex(c.range.size);

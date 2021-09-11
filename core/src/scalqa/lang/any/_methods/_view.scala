@@ -1,12 +1,11 @@
 package scalqa; package lang; package any; package _methods; import language.implicitConversions
 
 import _Methods._view
-import gen.`given`. { TypeDef, VoidDef, DocDef, EmptyDef }
 
 object _view:
   extension[A](x: _view[A])
-    /**/                      def typeName                       (using d: TypeDef[A]) : String   = if(d.isRef) Z.name(x) else d.typeName
-    /**/                      def id                             (using d: TypeDef[A]) : String   = if(x == null) "null" else { var n = x.typeName; if(!n.endsWith("$")) n += "@" + x.hash; n }
+    /**/                      def typeName                           (using d: Def.TypeName[A]) : String   = if(d.isRef) Z.name(x) else d.typeName
+    /**/                      def id                                 (using d: Def.TypeName[A]) : String   = if(x == null) "null" else { var n = x.typeName; if(!n.endsWith("$")) n += "@" + x.hash; n }
     /**/                      def hash                                                 : String   = if(x == null) "null" else Z.Hash(x.hashCode)
 
   extension[A](inline x: _view[A])
@@ -15,19 +14,19 @@ object _view:
     /**/               inline def to[B](inline f: A => B)                              : B        = f(x.real)
     /**/               inline def revise(inline f:A=>A)                                : A        = {val v=x.real; f(v) }
     /**/               inline def reviseIf(inline filter:A=>Boolean, inline f:A=>A)    : A        = {var v=x.real; if(filter(v)) v=f(v); v }
-    /**/               inline def isVoid                  (using inline d: VoidDef[A]) : Boolean  = {val v=x.real;v==null ||  d.value_isVoid(v)}
-    /**/               inline def nonVoid                 (using inline d: VoidDef[A]) : Boolean  = {val v=x.real;v!=null && !d.value_isVoid(v)}
-    @tn("nonEmptyOpt") inline def ? (using inline e:EmptyDef[A], inline d: VoidDef[A]) : Opt[A]   = J.illegalState() // Overtaken by root lib
-    /**/               inline def isEmpty                 (using inline d:EmptyDef[A]) : Boolean  = d.value_isEmpty(x.real)
-    /**/               inline def nonEmpty                (using inline d:EmptyDef[A]) : Boolean  = !d.value_isEmpty(x.real)
+    /**/               inline def isVoid                 (using inline d: Def.Void[A]) : Boolean  = {val v=x.real;v==null ||  d.value_isVoid(v)}
+    /**/               inline def nonVoid                (using inline d: Def.Void[A]) : Boolean  = {val v=x.real;v!=null && !d.value_isVoid(v)}
+    @tn("nonEmptyOpt") inline def ?(using inline e:Def.Empty[A],inline d: Def.Void[A]) : Opt[A]   = J.illegalState() // Overtaken by root lib
+    /**/               inline def isEmpty                (using inline d:Def.Empty[A]) : Boolean  = d.value_isEmpty(x.real)
+    /**/               inline def nonEmpty               (using inline d:Def.Empty[A]) : Boolean  = !d.value_isEmpty(x.real)
     @tn("pack")        inline def ><                                                   : ><[A]    = Val.><[A](x.real)
 
-  given givenDocDef[A](using d: DocDef[A]): DocDef[_view[A]] with
+  given givenDocDef[A](using d: Any.Def.Doc[A]): Any.Def.Doc[_view[A]] with
     def value_tag(v: _view[A]) = value_doc(v).tag
     def value_doc(v: _view[A]) = d.value_doc(v.real)
 
-  object OPAQUE:
-    opaque type TYPE[+A] <: AnyRef = AnyRef
+  object TYPE:
+    opaque type DEF[+A] <: AnyRef = AnyRef
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -37,7 +36,7 @@ object _view:
 ___________________________________________________________________________*/
 
 /**
-@object OPAQUE  -> ### Self View Methods
+@type DEF  -> ### Self View Methods
 
     Self view is another library available for all types, but it has to be activated by calling a universal ".^" or (".self_^") method on original value.
 
@@ -143,12 +142,12 @@ ___________________________________________________________________________*/
 
     Returns `true` if value is empty, `false` - otherwise.
 
-    Note. Given.EmptyDef is available for most known types, but can be defined for new.
+    Note. Any.Def.Empty is available for most known types, but can be defined for new.
 
 @def nonEmpty -> Non empty check
 
     Returns `true` if value is not empty, `false` - otherwise
 
-   Note. Given.EmptyDef is available for most known types, but can be defined for new.
+   Note. Any.Def.Empty is available for most known types, but can be defined for new.
 
 */

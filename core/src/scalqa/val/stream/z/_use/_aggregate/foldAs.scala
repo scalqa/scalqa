@@ -3,14 +3,14 @@ package scalqa; package `val`; package stream; package z; package _use; package 
 object foldAs:
 
   transparent inline def any[A,B](inline x: ~[A], inline s: B, inline f: (B,A) => B) : B  = inline x match
-    case _ : ~[A & Boolean.Raw] => { var r = s; _process.foreach.boolean(x.cast[~[Boolean]],v => r = f(r,v.cast[A])); r}
-    case _ : ~[A & Byte.Raw]    => { var r = s; _process.foreach.byte(   x.cast[~[Byte]],   v => r = f(r,v.cast[A])); r}
-    case _ : ~[A & Short.Raw]   => { var r = s; _process.foreach.short(  x.cast[~[Short]],  v => r = f(r,v.cast[A])); r}
-    case _ : ~[A & Char.Raw]    => { var r = s; _process.foreach.char(   x.cast[~[Char]],   v => r = f(r,v.cast[A])); r}
-    case _ : ~[A & Int.Raw]     => { var r = s; _process.foreach.int(    x.cast[~[Int]],    v => r = f(r,v.cast[A])); r}
-    case _ : ~[A & Long.Raw]    => { var r = s; _process.foreach.long(   x.cast[~[Long]],   v => r = f(r,v.cast[A])); r}
-    case _ : ~[A & Float.Raw]   => { var r = s; _process.foreach.float(  x.cast[~[Float]],  v => r = f(r,v.cast[A])); r}
-    case _ : ~[A & Double.Raw]  => { var r = s; _process.foreach.double( x.cast[~[Double]], v => r = f(r,v.cast[A])); r}
+    case _ : ~[A & Any.Boolean] => { var r = s; _process.foreach.boolean(x.cast[~[Boolean]],v => r = f(r,v.cast[A])); r}
+    case _ : ~[A & Any.Byte]    => { var r = s; _process.foreach.byte(   x.cast[~[Byte]],   v => r = f(r,v.cast[A])); r}
+    case _ : ~[A & Any.Short]   => { var r = s; _process.foreach.short(  x.cast[~[Short]],  v => r = f(r,v.cast[A])); r}
+    case _ : ~[A & Any.Char]    => { var r = s; _process.foreach.char(   x.cast[~[Char]],   v => r = f(r,v.cast[A])); r}
+    case _ : ~[A & Any.Int]     => { var r = s; _process.foreach.int(    x.cast[~[Int]],    v => r = f(r,v.cast[A])); r}
+    case _ : ~[A & Any.Long]    => { var r = s; _process.foreach.long(   x.cast[~[Long]],   v => r = f(r,v.cast[A])); r}
+    case _ : ~[A & Any.Float]   => { var r = s; _process.foreach.float(  x.cast[~[Float]],  v => r = f(r,v.cast[A])); r}
+    case _ : ~[A & Any.Double]  => { var r = s; _process.foreach.double( x.cast[~[Double]], v => r = f(r,v.cast[A])); r}
     case _                      => ref(x,s,f)
 
   def ref[A,B](x: ~[A], s: B, f: (B,A) => B) : B  = { var r = s; x.FOREACH(v => r = f(r,v)); r}

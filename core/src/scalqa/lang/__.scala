@@ -14,16 +14,17 @@ object Lang:
   transparent inline def Double     = lang.Double;              type Double          = scala.Double
   transparent inline def String     = lang.String;              type String          = java.lang.String
 
+
 package object lang:
-  // Allow Raw to Primitive conversion insize "lang"
-  inline implicit def implicitFrom(inline v: Boolean.Raw): Boolean = v.cast[Boolean]
-  inline implicit def implicitFrom(inline v: Byte.Raw)   : Byte    = v.cast[Byte]
-  inline implicit def implicitFrom(inline v: Char.Raw)   : Char    = v.cast[Char]
-  inline implicit def implicitFrom(inline v: Short.Raw)  : Short   = v.cast[Short]
-  inline implicit def implicitFrom(inline v: Int.Raw)    : Int     = v.cast[Int]
-  inline implicit def implicitFrom(inline v: Long.Raw)   : Long    = v.cast[Long]
-  inline implicit def implicitFrom(inline v: Float.Raw)  : Float   = v.cast[Float]
-  inline implicit def implicitFrom(inline v: Double.Raw) : Double  = v.cast[Double]
+  // Allow Primitive to Primitive conversion insize "lang"
+  inline implicit def implicitFrom(inline v: Any.Boolean): Boolean = v.cast[Boolean]
+  inline implicit def implicitFrom(inline v: Any.Byte)   : Byte    = v.cast[Byte]
+  inline implicit def implicitFrom(inline v: Any.Char)   : Char    = v.cast[Char]
+  inline implicit def implicitFrom(inline v: Any.Short)  : Short   = v.cast[Short]
+  inline implicit def implicitFrom(inline v: Any.Int)    : Int     = v.cast[Int]
+  inline implicit def implicitFrom(inline v: Any.Long)   : Long    = v.cast[Long]
+  inline implicit def implicitFrom(inline v: Any.Float)  : Float   = v.cast[Float]
+  inline implicit def implicitFrom(inline v: Any.Double) : Double  = v.cast[Double]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -40,12 +41,10 @@ ___________________________________________________________________________*/
     ```
     val v: Lang.Byte.Idx = ?_?_?
     // is same as
-    val v: Byte.Idx     = ?_?_?
+    val v: Byte.Idx      = ?_?_?
 
-    val v: Lang.AnyRef.G.Buffer[String] = ?_?_?
+    val v: Lang.Int.Buffer = ?_?_?
     // is same as
-    val v: AnyRef.G.Buffer[String] = ?_?_?
-    // is same as
-    val v: AnyRef.G.Buffer[String] = ?_?_?
+    val v: Int.Buffer      = ?_?_?
     ```
 */

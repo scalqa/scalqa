@@ -1,22 +1,24 @@
 package scalqa; package `val`; package stream; package _build; import language.implicitConversions
 
 import z._build.{ _map => M }
-import gen.`given`.StreamShape
 
 transparent trait _map:
   self: Stream.type =>
 
-  extension[A,T,STM<: ~~.AnyType[T]](inline x: ~[A])
-    /**/            inline def map     [B>:T](inline f: A => B)                       (using inline s:StreamShape[B,STM]): STM  = M.map(x,f,s)
-    /**/            inline def MAP     [B>:T](inline f: A => B)                       (using inline s:StreamShape[B,STM]): STM  = M.map.APPLY(x,f,s)
-    /**/            inline def flatMap [B>:T](inline f: A => ~[B])                    (using inline s:StreamShape[B,STM]): STM  = M.flatMap(x,f,s)
-    /**/            inline def FLAT_MAP[B>:T](inline f: A => ~[B])                    (using inline s:StreamShape[B,STM]): STM  = M.flatMap.APPLY(x,f,s)
-    /**/            inline def flatten                         (using inline f:A=>Able.~[T], inline s:StreamShape[T,STM]): STM  = M.flatMap(x,f(_).~,s)
-    @tn("map_Opt")  inline def map_?   [OPT<:Opt.AnyType[T]](inline f:A=>OPT) (using inline s:StreamShape.Opt[T,OPT,STM]): STM  = M.mapOpt(x,f,s)
-    @tn("MAP_Opt")  inline def MAP_?   [OPT<:Opt.AnyType[T]](inline f:A=>OPT) (using inline s:StreamShape.Opt[T,OPT,STM]): STM  = M.mapOpt.APPLY(x,f,s)
-
   extension[A](inline x: ~[A])
-    /**/            inline def collect[B](inline f: PartialFunction[A,B])                                                : ~[B] = new M.collect(x,f)
+    /**/            inline def map     [T](inline f: A => T)              (using inline T:Specialized[T]): T.~  = M.map(x,f)
+    /**/            inline def MAP     [T](inline f: A => T)              (using inline T:Specialized[T]): T.~  = M.map.APPLY(x,f)
+
+    /**/            inline def flatMap [T](inline f: A => ~[T])           (using inline T:Specialized[T]): T.~  = M.flatMap(x,f)
+    /**/            inline def FLAT_MAP[T](inline f: A => ~[T])           (using inline T:Specialized[T]): T.~  = M.flatMap.APPLY(x,f)
+
+    /**/            inline def flatten [T]   (using inline f:A=>Able.~[T])(using inline T:Specialized[T]): T.~  = M.flatMap(x,f(_).~)
+    /**/            inline def collect [T](inline f: PartialFunction[A,T])                               : ~[T] = new M.collect(x,f)
+
+    @tn("map_Opt")  inline def map_?   [T,OPT<:Any.Opt[T]](inline f: A=>OPT)
+                                          (using inline o:Specialized.Opt[T,OPT],inline T:Specialized[T]): T.~ = M.mapOpt(x,f)
+    @tn("MAP_Opt")  inline def MAP_?   [T,OPT<:Any.Opt[T]](inline f: A=>OPT)
+                                          (using inline o:Specialized.Opt[T,OPT],inline T:Specialized[T]): T.~ = M.mapOpt.APPLY(x,f)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -48,17 +50,17 @@ ___________________________________________________________________________*/
      If the function returns void option, the element is dropped.
 
      ```
-     (1 <> 10).~.map_?[Opt[String]](i => if(i>5) "Str_"+i else \/).TP
+     (1 <> 10).~.map_?(i => if(i % 2 == 0) "Even_"+i else \/).TP
 
      // Output
-     ~(Str_6, Str_7, Str_8, Str_9, Str_10)
+     ~(Even_2, Even_4, Even_6, Even_8, Even_10)
      ```
 
-     Pattern matching can be used, but the last void case must always be present:
+     Pattern matching can be used, but the last void case must always be pivided explicitly:
      ```
-     (0 <>> 26).~.map_?[Char.Opt]{
-       case i if(i%2==0) => ('a' + i).toChar
-       case _            => \/
+     (0 <>> 26).~.map_?{
+       case i if(i % 2 == 0) => ('a' + i).toChar
+       case _                => \/
      }.TP
 
      // Output
@@ -67,8 +69,8 @@ ___________________________________________________________________________*/
 
      Note:
 
-     - [[map_?]] is functionally similar to [[collect]], but is faster (PartialFunction has to be evaluated twice)
-     - [[map_?]] can return specialized stream result, but boxing might happen during mapping
+     - All cases must return the same type, otherwise the operation will not compile.
+     - [[map_?]] is functionally similar to [[collect]], but is faster (PartialFunction in [[collect]] has to be evaluated twice)
 
 @def MAP_? -> Heavy optional map
 

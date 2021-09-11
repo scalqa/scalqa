@@ -6,6 +6,10 @@ object Code:
 
     val l: ><[(String,Int.<>,String)] = code.tokenized_~(Tag.Ids.~.map("@" + _ + " "))
 
+
+    if(l.size == 0)
+      code.tp
+
     var txt = l.head._3.trim
     if(txt.endsWith("/**")) txt = txt.dropLast(3)
 

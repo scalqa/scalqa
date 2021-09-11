@@ -17,5 +17,5 @@ object X:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object X -> ###  \n\n Object [[X]] defines standard parent type extensions
+@object X -> ### Type Extention
 */

@@ -1,15 +1,15 @@
 package scalqa; package `val`; package stream; package _build; import language.implicitConversions
 
-import z._build.{ _order as O }
+import z._build.{ _order as Z }
 
 transparent trait _order:
 
   extension[A](inline x: ~[A])
-    inline def sort                                                   (using inline o:Ordering[A]): ~[A] = new O.sort(x)
-    inline def sortReversed                                           (using inline o:Ordering[A]): ~[A] = new O.sortReversed(x)
-    inline def sortBy[B]    (inline f: A=>B)                          (using inline o:Ordering[B]): ~[A] = new O.sortBy(x, f)
-    inline def sortBy[B,C]  (f1:A=>B,f2:A=>C)                    (using  Ordering[B], Ordering[C]): ~[A] = new O.sortBy(x, v => (f1(v), f2(v)))
-    inline def sortBy[B,C,D](f1:A=>B,f2:A=>C,f3:A=>D)(using Ordering[B], Ordering[C], Ordering[D]): ~[A] = new O.sortBy(x, v => (f1(v), f2(v), f3(v)))
+    inline def sort                                                   (using inline o:Ordering[A]): ~[A] = new Z.sort(x)
+    inline def sortReversed                                           (using inline o:Ordering[A]): ~[A] = new Z.sortReversed(x)
+    inline def sortBy[B]    (inline f: A=>B)                          (using inline o:Ordering[B]): ~[A] = new Z.sortBy(x, f)
+    inline def sortBy[B,C]  (f1:A=>B,f2:A=>C)                    (using  Ordering[B], Ordering[C]): ~[A] = new Z.sortBy(x, v => (f1(v), f2(v)))
+    inline def sortBy[B,C,D](f1:A=>B,f2:A=>C,f3:A=>D)(using Ordering[B], Ordering[C], Ordering[D]): ~[A] = new Z.sortBy(x, v => (f1(v), f2(v), f3(v)))
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -4,7 +4,7 @@ class zip[A,B](one: ~[A], two: ~[B]) extends ~[(A, B)] with Custom.Pipeline.Tree
 
   @tn("read_Opt")     def read_?     = one.read_?.map_?(v => two.read_?.map(w => (v,w)))
   @tn("sizeLong_Opt") def sizeLong_? = one.sizeLong_?.mix(two.sizeLong_?, _ min _)
-  /**/                def infoTree   = Doc.Tree(this.doc, Custom.Pipeline.infoTree(one), Custom.Pipeline.infoTree(two))
+  /**/                def docTree    = Doc.Tree(this.doc, Custom.Pipeline.docTree(one), Custom.Pipeline.docTree(two))
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

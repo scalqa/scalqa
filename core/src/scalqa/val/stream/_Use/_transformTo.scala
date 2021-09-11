@@ -1,5 +1,6 @@
 package scalqa; package `val`; package stream; package _use; import language.implicitConversions
 
+import z._use.{ _transformTo as _Z, transformTo as Z }
 import java.{ util as J }
 
 transparent trait _transformTo:
@@ -7,23 +8,23 @@ transparent trait _transformTo:
   extension[A] (inline x: ~[A])
     @tn("pack") inline def ><                                            : ><[A]               = pack.z.ArrayPack.fromStream[A](x)
     /**/        inline def makeString(inline sep:String= \/)
-    /**/                               (using inline t :Given.DocDef[A]) : String              = z._use.transformTo.makeString(x,sep,t)
-    /**/        inline def toIdx                                         : Idx[A]              = z._use.transformTo.toIdx(x)
+    /**/                                (using inline t :Any.Def.Doc[A]) : String              = Z.makeString(x,sep,t)
+    /**/        inline def toIdx                                         : Idx[A]              = Z.toIdx(x)
     /**/        inline def toSet                                         : StableSet[A]        = StableSet(x)
-    /**/        inline def toBuffer                                      : Buffer[A]           = new AnyRef.G.Buffer[A](x)
-    /**/        inline def iterator                                      : Iterator[A]         = z._use._transformTo.Scala.Iterator(x)
-    /**/        inline def toArray          (using inline t:ClassTag[A]) : Array[A]            = z._use._transformTo.Scala.Array(x)
-    /**/        inline def toList                                        : List[A]             = z._use._transformTo.Scala.List(x)
-    /**/        inline def toVector                                      : Vector[A]           = z._use._transformTo.Scala.Vector(x)
-    /**/        inline def toSeq                                         : IndexedSeq[A]       = z._use._transformTo.Scala.Seq(x)
-    /**/        inline def toProduct                                     : Product             = z._use._transformTo.Scala.Product(x)
+    /**/        inline def toBuffer                                      : Buffer[A]           = new AnyRef.Buffer[A](x)
+    /**/        inline def iterator                                      : Iterator[A]         = _Z.Scala.Iterator(x)
+    /**/        inline def toArray          (using inline t:ClassTag[A]) : Array[A]            = _Z.Scala.Array(x)
+    /**/        inline def toList                                        : List[A]             = _Z.Scala.List(x)
+    /**/        inline def toVector                                      : Vector[A]           = _Z.Scala.Vector(x)
+    /**/        inline def toSeq                                         : IndexedSeq[A]       = _Z.Scala.Seq(x)
+    /**/        inline def toProduct                                     : Product             = _Z.Scala.Product(x)
     /**/        inline def toJavaList                                    : J.List[A]           = x.toBuffer.toJavaList_^
-    /**/        inline def toJavaIterator                                : J.Iterator[A]       = z._use._transformTo.Java.Iterator(x)
-    /**/        inline def toJavaSpliterator(inline splitSize: Int)      : J.Spliterator[A]    = z._use._transformTo.Java.Spliterator(x,splitSize)
+    /**/        inline def toJavaIterator                                : J.Iterator[A]       = _Z.Java.Iterator(x)
+    /**/        inline def toJavaSpliterator(inline splitSize: Int)      : J.Spliterator[A]    = _Z.Java.Spliterator(x,splitSize)
     /**/        inline def toJavaStream(inline parallel: Boolean = false): J.stream.Stream[A]  = J.stream.StreamSupport.stream(x.toJavaSpliterator(1), parallel)
-    /**/        inline def toText       (using inline t: Given.DocDef[A]): String              = z._use._print.toText(x,false)
-    /**/        inline def toLookupBy[K](inline f: A => K)               : Lookup[K,A]         = z._use.transformTo.toLookupBy(x,f)
-    /**/        inline def toMapBy[K](inline f: A => K)                  : Map[K,A]            = x.zipKey(f).toMap
+    /**/        inline def toText        (using inline t: Any.Def.Doc[A]): String              = z._use._print.toText(x,false)
+    /**/        inline def toLookupBy[B](inline f: A => B)               : Lookup[B,A]         = Z.toLookupBy(x,f)
+    /**/        inline def toMapBy[B](inline f: A => B)                  : Map[B,A]            = x.zipKey(f).toMap
 
   extension[A,B] (inline x: ~[(A,B)])
     /**/        inline def toLookup                                      : Lookup[A,B]         = Lookup.Stable[A,B](x)
@@ -40,7 +41,9 @@ ___________________________________________________________________________*/
 
 @def toLookup -> Convert to Lookup
 
-        Returns a stream of tuples with (Key,Value) pairs as [[scalqa.val.Lookup Lookup]]
+        Note. This operation is only available for streams holding tuples, like (KEY,VALUE)
+
+        Converts a stream of tuples to [[scalqa.val.Lookup Lookup]]
 
         ```
         val intLookup : Lookup[Int,Char] = ('A' <> 'F').~.zipKey(_.toInt).toLookup
@@ -51,6 +54,26 @@ ___________________________________________________________________________*/
 
         charLookup.pair_~.TP   // Prints ~((E,69), (F,70), (A,65), (B,66), (C,67), (D,68))
         ```
+
+@def toLookupBy -> Convert to Lookup
+
+        Converts stream to a Lookup collection, where key is created with provided function
+
+        ```
+        val intLookup : Lookup[Int,Char] = ('A' <> 'F').~.toLookupBy(_.toInt)
+
+        intLookup.pair_~.TP   // Prints ~((69,E), (70,F), (65,A), (66,B), (67,C), (68,D))
+        ```
+
+@def toMap -> Convert to scala.Map
+
+        Note. This operation is only available for streams holding tuples, like (KEY,VALUE)
+
+        Converts a stream of tuples to scala.Map
+
+@def toMapBy -> Convert to scala.Map
+
+        Converts stream to scala.Map, where key is created with provided function
 
 @def iterator -> Iterator view
 

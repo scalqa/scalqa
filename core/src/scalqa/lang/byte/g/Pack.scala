@@ -4,19 +4,19 @@ class Pack[A<:Raw] private(_a: Array[Byte], sz: Int) extends ><[A] with Idx[A]:
   private def this(a: Array[Byte]) = this(a,a.length)
   type THIS_TYPE = Pack[A]
   private                var ar                       : Array[Byte] = _a
-  /**/                   def size                     : Int         = sz
-  /**/                   def apply(i: Int)            : A           = ar(i).cast[A]
-  @tn("stream") override def ~                        : Stream[A]   = ar.~(sz).cast[Stream[A]]
-  @tn("pack")   override def ><                       : Pack[A]     = this
-  /**/          override def contains(v: A)           : Boolean     = lang.array.z.contains.byte(ar,v,sz)
-  /**/                   def compact                  : this.type   = {if(ar.length>sz) {ar=new Array[Byte](sz).^(ar.copyTo(_,0,0,sz))}; this}
-  /**/                   def toBuffer                 : Buffer[A]   = Buffer(ar.copySize(sz),sz)
-  @tn("take_Range")      def take_<>(from:Int, sz:Int): Pack[A]     = new Pack(ar.take_<>(from,sz),sz)
-  @tn("drop_Range")      def drop_<>(from:Int, sz:Int): Pack[A]     = new Pack(ar.drop_<>(from,sz),sz)
-  /**/                   def join(v: A)               : Pack[A]     = new Pack(ar.copySize(sz+1).^(_(sz)=v), sz+1)
-  /**/                   def joinAt( i: Int, v: A)    : Pack[A]     = new Pack(ar.copySize(sz+1).^(a=>{a.copyTo(a,i+1,i,a.length-i-1);a(i)=v}),sz+1)
-  /**/                   def joinAllAt(i:Int,vs: ~[A]): Pack[A]     = new Pack(lang.array.z.joinAllAt.byte(ar,i,vs.cast[~[Byte]],sz))
-  /**/                   def joinAll(vs: ~[A])        : Pack[A]     = vs.read_?.map(v => Pack.Buf(ar,sz+1,v,vs).mk) or this
+  /**/                   def size                     : Int           = sz
+  /**/                   def apply(i: Int)            : A             = ar(i).cast[A]
+  @tn("stream") override def ~                        : Stream[A]     = ar.~(sz).cast[Stream[A]]
+  @tn("pack")   override def ><                       : Pack[A]       = this
+  /**/          override def contains(v: A)           : Boolean       = lang.array.z.contains.byte(ar,v,sz)
+  /**/                   def compact                  : Pack[A]       = {if(ar.length>sz) {ar=new Array[Byte](sz).^(ar.copyTo(_,0,0,sz))}; this}
+  /**/                   def toBuffer                 : Buffer[A]     = Buffer(ar.copySize(sz),sz)
+  @tn("take_Range")      def take_<>(from:Int, sz:Int): Pack[A]       = new Pack(ar.take_<>(from,sz),sz)
+  @tn("drop_Range")      def drop_<>(from:Int, sz:Int): Pack[A]       = new Pack(ar.drop_<>(from,sz),sz)
+  /**/                   def join(v: A)               : Pack[A]       = new Pack(ar.copySize(sz+1).^(_(sz)=v), sz+1)
+  /**/                   def joinAt( i: Int, v: A)    : Pack[A]       = new Pack(ar.copySize(sz+1).^(a=>{a.copyTo(a,i+1,i,a.length-i-1);a(i)=v}),sz+1)
+  /**/                   def joinAllAt(i:Int,vs: ~[A]): Pack[A]       = new Pack(lang.array.z.joinAllAt.byte(ar,i,vs.cast[~[Byte]],sz))
+  /**/                   def joinAll(vs: ~[A])        : Pack[A]       = vs.read_?.map(v => Pack.Buf(ar,sz+1,v,vs).mk) or this
 
 object Pack:
   /**/                   def fromVarArg[A<:Raw](v: A, vs: Seq[A])      : Pack[A] = new Pack(Array(v.real,vs.cast[Seq[Byte]] *))

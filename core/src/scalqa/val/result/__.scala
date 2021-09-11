@@ -8,14 +8,14 @@ object Result extends result._givens:
   implicit inline def implicitFrom     [A](inline v: Problem)  : Result[A]   = apply(v)
   implicit inline def implicitToBoolean[A](inline v: Result[A]): Boolean     = v.isValue
 
-  object OPAQUE:
-    opaque type TYPE[+A]<: AnyRef.Opaque = AnyRef.Opaque
+  object TYPE:
+    opaque type DEF[+A]<: AnyRef.Opaque = AnyRef.Opaque
 
   // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   extension[A](inline x: Result[A])
     /**/              inline def take(inline f: A=>Boolean, inline p:A=>Problem)  : Result[A]    = {var r=x; if(r.isValue){   val v=r.cast[A]; if(!f(v)) r=p(v)}; r}
     /**/              inline def drop(inline f: A=>Boolean, inline p:A=>Problem)  : Result[A]    = {var r=x; if(r.isValue){   val v=r.cast[A]; if( f(v)) r=p(v)}; r}
-    /**/              inline def recover(inline f: Problem => Opt[A])             : Result[A]    = {var r=x; if(r.isProblem){ val v=r.cast[Problem]; val o=f(v); if(o.nonEmpty) r=o.`val`}; r}
+    /**/              inline def recover(inline f: Problem => Opt[A])             : Result[A]    = {var r=x; if(r.isProblem){ val v=r.cast[Problem]; val o=f(v); if(o) r=o.`val`}; r}
     @tn("or_Result")
     /**/        infix inline def or_??(  inline default: => Result[A])            : Result[A]    = {var r=x; if(r.isProblem){ r=default                     }; r}
     /**/        infix inline def or(inline default: => A)                         : A            = if(x.isValue) x.cast[A] else default
@@ -29,7 +29,7 @@ object Result extends result._givens:
     @tn("problem_Opt")inline def problem_?                                        : Opt[Problem] = {var o:Opt[Problem]= \/;  if(x.isProblem) o=x.cast[Problem]; o}
     @tn("stream")            def ~                                                : ~[A]         = {var s: ~[A]= \/; if(x.isValue){ val v=x.cast[A]; s= ~~(v)}; s}
     /**/                     def toTry                                            : util.Try[A]  = x match
-      /**/                                                                                           case v: Problem => {val o=v.exception_?; util.Failure(if(o.nonEmpty) o.`val` else new Exception(v.message))}
+      /**/                                                                                           case v: Problem => {val o=v.exception_?; util.Failure(if(o) o.`val` else new Exception(v.message))}
       /**/                                                                                           case _ => util.Success(x.cast[A])
     /**/              inline def map[B](     inline f: A => B)                    : Result[B]    = {var r=x.cast[Result[B]]; if(r.isValue){ val v=r.cast[A]; r=f(v)       }; r}
     @tn("map_Result") inline def map_??[B](  inline f: A => Result[B])            : Result[B]    = {var r=x.cast[Result[B]]; if(r.isValue){ val v=r.cast[A]; r=f(v)       }; r}
@@ -48,7 +48,7 @@ object Result extends result._givens:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object OPAQUE  -> ### Value Result
+@type DEF  -> ### Value Result
 
     Result is a container, which holds either 'value' or 'problem', which explains why value is not available.
 

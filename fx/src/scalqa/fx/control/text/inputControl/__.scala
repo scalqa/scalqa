@@ -28,7 +28,7 @@ abstract class InputControl(initialTextO: String.Opt = \/) extends Control:
   private class zFormatter[A] extends javafx.scene.control.TextFormatter[A](new java.util.function.UnaryOperator[FXC] { def apply(c: FXC) = { _onChange.~.foreach(_(Change(c))); c } })
 
 object InputControl:
-  type Change = inputControl.Change.OPAQUE.TYPE; transparent inline def Change = inputControl.Change
+  type Change = inputControl.Change.TYPE.DEF; transparent inline def Change = inputControl.Change
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

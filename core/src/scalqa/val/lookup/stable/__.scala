@@ -20,7 +20,7 @@ object Stable :
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@class Stable -> Stable is an immutable lookup collection
+@class Stable -> Lookup.Stable is an immutable lookup collection
 
 
 @def void  -> Get void instance

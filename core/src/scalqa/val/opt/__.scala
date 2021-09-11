@@ -1,57 +1,83 @@
 package scalqa; package `val`; import language.implicitConversions;
 
-import gen.`given`.OptShape
-
-object Opt extends opt._givens:
-  type AnyType[A] = Opt[A] | RawType[A]
-  type RawType[A] = lang.boolean.G.Opt[A & Boolean.Raw] | lang.byte.G.Opt[A & Byte.Raw] | lang.char .G.Opt[A & Char.Raw]  | lang.short .G.Opt[A & Short.Raw]
-                  | lang.int    .G.Opt[A & Int.Raw]     | lang.long.G.Opt[A & Long.Raw] | lang.float.G.Opt[A & Float.Raw] | lang.double.G.Opt[A & Double.Raw]
-
-  /**/              def apply[A](v: A)                                                       : Opt[A]    = v.cast[AnyRef].cast[Opt[A]]
-  /**/       inline def fromScala[A](v: scala.Option[A])                                     : Opt[A]    = if (v.isEmpty) \/ else v.get
-  /**/       inline def fromJava [A](v: java.util.Optional[A])                               : Opt[A]    = if (v.isPresent) v.get else \/
-  @tn("getVoid")    def void[A]                                                              : Opt[A]    = ZZ.None.cast[Opt[A]]
+object Opt extends zValOptDefailts:
+  def apply[A](v: A)                        : Opt[A] = v.cast[AnyRef].cast[Opt[A]]
+  def fromScala[A](v: scala.Option[A])      : Opt[A] = if (v.isEmpty) \/ else v.get
+  def fromJava [A](v: java.util.Optional[A]): Opt[A] = if (v.isPresent) v.get else \/
+  @tn("getVoid") def void[A]                : Opt[A] = ZZ.None.cast[Opt[A]]
 
   extension[A](inline x:Opt[A])
-    @tn("is_Void")     inline def isEmpty                                     : Boolean    = x eq ZZ.None
-    @tn("not_Void")    inline def nonEmpty                                    : Boolean    = x ne ZZ.None
-    /**/               inline def filter( inline f: A => Boolean)             : Opt[A]     = take(f)
+    /**/               inline def isEmpty                                     : Boolean    = x eq ZZ.None
+    /**/               inline def nonEmpty                                    : Boolean    = x ne ZZ.None
     /**/               inline def take( inline f: A => Boolean)               : Opt[A]     = {var o=x; if(o.nonEmpty && !f(o.`val`)) o= \/; o}
     /**/               inline def takeOnly(inline v: A)                       : Opt[A]     = {val o=x; if(o == v.?) x else \/ }
     /**/               inline def takeType[B](using inline t:ClassTag[B])     : Opt[B]     = {var o:Opt[B]= \/; if(t.unapply(x).isEmpty.not) o=x.cast[Opt[B]]; o}
     /**/               inline def drop(inline f: A => Boolean)                : Opt[A]     = {var o=x; if(o.nonEmpty &&  f(o.`val`)) o= \/; o}
     /**/               inline def dropOnly(inline v: A)                       : Opt[A]     = {val o=x; if(o == v.?) \/ else x }
-    /**/               inline def dropVoid(using inline d: Given.VoidDef[A])  : Opt[A]     = {var o=x; if(o != null && o.nonEmpty && d.value_isVoid(o.`val`)) o= \/; o}
+    /**/               inline def dropVoid (using inline d: Any.Def.Void[A])  : Opt[A]     = {var o=x; if(o != null && o.nonEmpty && d.value_isVoid(o.`val`)) o= \/; o}
     /**/               inline def default(inline dv: => A)                    : Opt[A]     = {val o=x; if(o.isEmpty)  dv  else o}
-    @tn("or_Opt")infix inline def or_?(inline that: => Opt[A])                : Opt[A]     = {val o=x; if(o.isEmpty) that else o}
-    /**/         infix inline def or(inline default: => A)                    : A          = opt.z.Macro.or(x,default)
     /**/               inline def contains(value: A)                          : Boolean    = x == value.?
+    /**/               inline def foldAs[B](inline v: =>B)(inline f: A=>B)    : B          = x.map(f) or v
+    /**/         infix inline def or(inline default: => A)                    : A          = opt.z.Macro.or(x,default)
+    @tn("or_Opt")infix inline def or_?(inline that: => Opt[A])                : Opt[A]     = {val X=x; if(X.isEmpty) that else X}
+    /**/               inline def forval[U]( inline f: A=>U)                  : Opt[A]     = {val X=x; if(X.nonEmpty) f(X.`val`); X}
+    /**/               inline def foreach[U](inline f: A=>U)                  : Opt[A]     = {val X=x; if(X.nonEmpty) f(X.`val`); X}
+    /**/         infix inline def fornil[U]( inline f: => U)                  : Opt[A]     = {val X=x; if(X.isEmpty){ val u:U=f}; X}
+    /**/               inline def process[U,W](inline f:A=>U,inline fNil: =>W): Opt[A]     = {val X=x; if(X.isEmpty){ val w:W=fNil} else f(X.`val`); X}
+    /**/               inline def filter( inline f: A => Boolean)             : Opt[A]     = x.take(f)
+    /**/               inline def withFilter(inline f: A => Boolean)          : Opt[A]     = x.take(f)
+    /**/               inline def map[T](inline f:A=>T)                                                       (using inline T:Specialized[T]): T.Opt = opt.Z.map(x,f)
+    /**/               inline def mapmap[T](inline f:A=>T)                                                       (using inline T:Specialized[T]): T.Opt = opt.Z.map(x,f)
+    @tn("map_Opt")     inline def map_?  [T,OPT<:Any.Opt[T]](inline f: A=>OPT)(using inline o:Specialized.Opt[T,OPT],inline T:Specialized[T]): T.Opt = opt.Z.mapOpt(x,f)
+    /**/               inline def flatMap[T,OPT<:Any.Opt[T]](inline f: A=>OPT)(using inline o:Specialized.Opt[T,OPT],inline T:Specialized[T]): T.Opt = opt.Z.mapOpt(x,f)
+    /**/               inline def mix[B,T](inline o:Any.Opt[B],inline f:(A,B)=>T)                             (using inline T:Specialized[T]): T.Opt = opt.Z.mix(x,o,f)
+    /**/               inline def raw                                                               (using inline A:Specialized.Primitive[A]): A.Opt = opt.Z.raw(x)
   extension[A](x:Opt[A])
     /**/                      def collect[B](f: PartialFunction[A,B])         : Opt[B]     = {var o:Opt[B]= \/; if(x.nonEmpty){val w=x.`val`; if(f.isDefinedAt(w)) o=f(w)}; o}
     @tn("stream")             def ~                                           : ~[A]       = if(x.nonEmpty) ~~(x.`val`) else Stream.void
     /**/                      def get                                         : A          = {if(x.isEmpty) throw new ZZ.EO(); x.cast[A]}
-    /**/               inline def withFilter(inline f: A => Boolean)          : Opt[A]     = {var o:Opt[A]= \/; if(x.nonEmpty){val w=x.cast[A]; if(f(w)) o=x}; o}
-    /**/               inline def forval[U](inline  f: A => U)                : Opt[A]     = { if(x.nonEmpty){ f(x.`val`)}; x}
-    /**/         infix inline def fornil[U](inline f: => U)                   : Opt[A]     = { if(x.isEmpty){ var u:U=f };  x}
-    /**/               inline def foreach[U](inline f: A => U)                : Opt[A]     = { if(x.nonEmpty){ f(x.`val`)}; x}
-    /**/               inline def process[U,W](inline f:A=>U,inline fNil: =>W): Opt[A]     = { if(x.isEmpty){ val w:W=fNil} else f(x.`val`); x}
-    /**/               inline def toScala                                : scala.Option[A] = if(x.nonEmpty) scala.Some(x.`val`) else scala.None
-    /**/               inline def toJava                           : java.util.Optional[A] = if(x.nonEmpty) java.util.Optional.of(x.`val`) else java.util.Optional.empty
-    /**/               inline def foldAs[B](inline v: =>B)(inline f: A=>B)    : B          = x.map(f) or v
+    /**/                      def toScala                                : scala.Option[A] = if(x.nonEmpty) scala.Some(x.`val`) else scala.None
+    /**/                      def toJava                           : java.util.Optional[A] = if(x.nonEmpty) java.util.Optional.of(x.`val`) else java.util.Optional.empty
 
-  //------------ Mapping ---------------------------------------------------------------------------------------------------------------------------------
-  extension[A,T,OPT<:AnyType[T]](inline x:Opt[A])
-    /**/               inline def map    [B>:T](inline f: A => B)                        (using inline s: OptShape[B,OPT])     : OPT    = opt.z.map(x,f,s)
-  extension[A,T](inline x:Opt[A])
-    @tn("map_Opt")     inline def map_?  [OPT<:AnyType[T]](inline f: A=>OPT)             (using inline s: OptShape[T,OPT])     : OPT    = opt.z.mapOpt(x,f,s)
-    /**/               inline def flatMap[OPT<:AnyType[T]](inline f: A=>OPT)             (using inline s: OptShape[T,OPT])     : OPT    = opt.z.mapOpt(x,f,s)
-  extension[A, OPT<:RawType[A]](inline x:Opt[A])
-    /**/               inline def raw                                                    (using inline s: OptShape.Raw[A,OPT]) : OPT    = opt.z.raw(x,s)
-  extension[A,B,C](inline x:Opt[A])
-    /**/               inline def mix[OPT<:AnyType[C]](inline o:AnyType[B],inline f:(A,B)=>C) (using inline s: OptShape[C,OPT]): OPT    = opt.z.mixOpt(x,o,f,s)
+  object TYPE:
+    opaque type DEF[+A] <: AnyRef.Opaque = AnyRef.Opaque
 
-  object OPAQUE:
-    opaque type TYPE[+A] <: AnyRef.Opaque = AnyRef.Opaque
+  inline given givenSummonAnyOfAny[A[B],B]      (using inline v: A[B])                : Opt[A[B]] = v.cast[Opt[A[B]]]
+  inline given zzOrderingOfByte  [A<:Any.Byte  ](using inline v: Byte  .G.Ordering[A]): Opt[Byte  .G.Ordering[A]] = v.cast[Opt[Byte  .G.Ordering[A]]]
+  inline given zzOrderingOfByte  [A<:Any.Char  ](using inline v: Char  .G.Ordering[A]): Opt[Char  .G.Ordering[A]] = v.cast[Opt[Char  .G.Ordering[A]]]
+  inline given zzOrderingOfByte  [A<:Any.Short ](using inline v: Short .G.Ordering[A]): Opt[Short .G.Ordering[A]] = v.cast[Opt[Short .G.Ordering[A]]]
+  inline given zzOrderingOfInt   [A<:Any.Int   ](using inline v: Int   .G.Ordering[A]): Opt[Int   .G.Ordering[A]] = v.cast[Opt[Int   .G.Ordering[A]]]
+  inline given zzOrderingOfByte  [A<:Any.Long  ](using inline v: Long  .G.Ordering[A]): Opt[Long  .G.Ordering[A]] = v.cast[Opt[Long  .G.Ordering[A]]]
+  inline given zzOrderingOfByte  [A<:Any.Float ](using inline v: Float .G.Ordering[A]): Opt[Float .G.Ordering[A]] = v.cast[Opt[Float .G.Ordering[A]]]
+  inline given zzOrderingOfDouble[A<:Any.Double](using inline v: Double.G.Ordering[A]): Opt[Double.G.Ordering[A]] = v.cast[Opt[Double.G.Ordering[A]]]
+
+  given givenCanEqualOpt[A,B](using CanEqual[A,B])  : CanEqual[Opt[A], Opt[B]] = CanEqual.derived
+  given givenClassTag[A]  (using t: ClassTag[A])    : ClassTag[Opt[A]]         = t.cast[ClassTag[Opt[A]]]
+  given givenNameDef [A]                            : Any.Def.TypeName[Opt[A]] = Any.Def.TypeName("Opt")
+  given givenVoidDef [A]                            : Any.Def.Void[Opt[A]]     = opt.z.Def.cast[Any.Def.Void[Opt[A]]]
+  given givenDocDef[A](using t: Any.Def.Doc[A])     : Any.Def.Doc[Opt[A]]      = new opt.z.Def.Doc
+
+  implicit inline def implicitFromAny    [A](inline v: A)                    : Opt[A]    = v.cast[Opt[A]]
+  implicit inline def implicitFromVoidRequest[A](inline v: \/)               : Opt[A]    = ZZ.None.cast[Opt[A]]
+  implicit inline def implicitFromScala  [A](inline v: scala.Option[A])      : Opt[A]    = fromScala[A](v)
+  implicit inline def implicitFromJava   [A](inline v: java.util.Optional[A]): Opt[A]    = fromJava[A](v)
+  implicit inline def implicitFromResult [A](inline v: Result[A])            : Opt[A]    = v.value_?
+  implicit inline def implicitToBoolean  [A](inline v: Opt[A])               : Boolean   = v.nonEmpty
+
+//  // These will push boxing to JVM, making decompiled byte code clearer
+//  implicit   inline def zzImplicitFromRaw[A<:Any.Boolean](inline v: A)        : Opt[A]    = java.lang.Boolean  .valueOf(v.cast[Boolean]).cast[Opt[A]]
+//  implicit   inline def zzImplicitFromRaw[A<:Any.Byte]   (inline v: A)        : Opt[A]    = java.lang.Byte     .valueOf(v.cast[Byte]   ).cast[Opt[A]]
+//  implicit   inline def zzImplicitFromRaw[A<:Any.Char]   (inline v: A)        : Opt[A]    = java.lang.Character.valueOf(v.cast[Char]   ).cast[Opt[A]]
+//  implicit   inline def zzImplicitFromRaw[A<:Any.Short]  (inline v: A)        : Opt[A]    = java.lang.Short    .valueOf(v.cast[Short]  ).cast[Opt[A]]
+//  implicit   inline def zzImplicitFromRaw[A<:Any.Int]    (inline v: A)        : Opt[A]    = java.lang.Integer  .valueOf(v.cast[Int]    ).cast[Opt[A]]
+//  implicit   inline def zzImplicitFromRaw[A<:Any.Long]   (inline v: A)        : Opt[A]    = java.lang.Long     .valueOf(v.cast[Long]   ).cast[Opt[A]]
+//  implicit   inline def zzImplicitFromRaw[A<:Any.Float]  (inline v: A)        : Opt[A]    = java.lang.Float    .valueOf(v.cast[Float]  ).cast[Opt[A]]
+//  implicit   inline def zzImplicitFromRaw[A<:Any.Double] (inline v: A)        : Opt[A]    = java.lang.Double   .valueOf(v.cast[Double] ).cast[Opt[A]]
+
+// ******************************************************
+class zValOptDefailts:
+  inline given givenNoneAnyOfAny[C<:A[B],A[B],B] : Opt[C]           = \/
+  inline given givenOrdering[T<:Comparable[T]]   : Opt[Ordering[T]] = gen.math.z.Ordering.OrderingComparable.cast[Ordering[T]]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -60,7 +86,7 @@ object Opt extends opt._givens:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object OPAQUE  -> ### Value Option
+@type DEF  -> ### Value Option
 
       [[Opt]] is a container, which can hold a single value or be empty
 
@@ -84,6 +110,30 @@ ___________________________________________________________________________*/
 @def ~ ->  Stream
 
            Returns single value stream or empty stream, if option is void
+
+@def foldAs -> Convert or default
+
+     This is a synthetic operation:
+     ```
+      val o: Opt[String] = \/
+
+      o.foldAs(0)(_.length)
+
+      // same as
+
+      o.map(_.length) or 0
+     ```
+
+     foldAs is more readable if mapping code is substantial:
+
+     ```
+      o.foldAs(0){ v =>
+        var l = v.length
+        if     (l > 1000) l = 1000
+        else if(l < 0)    l = 0
+        l
+      }
+     ```
 
 @def forval -> Process option value
 
@@ -243,14 +293,14 @@ ___________________________________________________________________________*/
       Void option allways yeilds void option
 
       ```
-      "a".?  .map_?(s => if(s.length > 2) s.toUpperCase else Opt.void).tp         // Prints Opt(\/)
+      "a"  .?.map_?(s => if(s.length > 2) s.toUpperCase else Opt.void).tp         // Prints Opt(\/)
       "abc".?.map_?(s => if(s.length > 2) s.toUpperCase else Opt.void).tp         // Prints Opt(ABC)
-      "a".?  .map_?[Opt[String]](s => if(s.length > 2) s.toUpperCase else \/).tp  // Prints Opt(\/)
+      "a"  .?.map_?[Opt[String]](s => if(s.length > 2) s.toUpperCase else \/).tp  // Prints Opt(\/)
       "abc".?.map_?[Opt[String]](s => if(s.length > 2) s.toUpperCase else \/).tp  // Prints Opt(ABC)
 
-      "a".?  .map_?(s => if(s.length > 2) s.length.? else Int.Opt.void).tp        // Prints Int.Opt(\/)
+      "a"  .?.map_?(s => if(s.length > 2) s.length.? else Int.Opt.void).tp        // Prints Int.Opt(\/)
       "abc".?.map_?(s => if(s.length > 2) s.length.? else Int.Opt.void).tp        // Prints Int.Opt(3)
-      "a".?  .map_?[Int.Opt](s => if(s.length > 2) s.length else \/).tp           // Prints Int.Opt(\/)
+      "a"  .?.map_?[Int.Opt](s => if(s.length > 2) s.length else \/).tp           // Prints Int.Opt(\/)
       "abc".?.map_?[Int.Opt](s => if(s.length > 2) s.length else \/).tp           // Prints Int.Opt(3)
       ```
 

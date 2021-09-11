@@ -2,23 +2,23 @@ package scalqa; package gen; package doc; import doc.*; import language.implicit
 
 transparent trait _core extends Able.Tag:
   self: Doc =>
-  /**/                var id                                                             : String
-  /**/                def tag                                                            : String
-  /**/                def text                                                           : String
-  @tn("name_Stream")  def name_~                                                         : ~[String]
-  @tn("value_Stream") def value_~                                                        : ~[String]
-  @tn("pair_Stream")  def pair_~(sep: String = "=")                                      : ~[String]
+  /**/                var id                                                                               : String
+  /**/                def tag                                                                              : String
+  /**/                def text                                                                             : String
+  @tn("name_Stream")  def name_~                                                                           : ~[String]
+  @tn("value_Stream") def value_~                                                                          : ~[String]
+  @tn("pair_Stream")  def pair_~(sep: String = "=")                                                        : ~[String]
 
-  /**/                def add[A](name: String, value: A)       (using t: Given.DocDef[A]): Unit
-  /**/                def add[A](value: A)                     (using t: Given.DocDef[A]): Unit
-  /**/                def addAt[A](pos:Int,name:String,value:A)(using t: Given.DocDef[A]): Unit
+  /**/                def add[A](name: String, value: A)                          (using t: Any.Def.Doc[A]): Unit
+  /**/                def add[A](value: A)                                        (using t: Any.Def.Doc[A]): Unit
+  /**/                def addAt[A](pos:Int,name:String,value:A)                   (using t: Any.Def.Doc[A]): Unit
 
-  @tn("_add")         def +=[A] (name: String, value: A)       (using t: Given.DocDef[A]): Doc
-  @tn("_add")         def +=    (value: String)                                          : Doc
-  @tn("_addAt")       def +=@[A](p:Int, n:String, v:A)         (using t :Given.DocDef[A]): Doc
+  @tn("add")   inline def +=[A] (inline name: String, inline value: A)     (using inline t: Any.Def.Doc[A]): Doc
+  @tn("add")   inline def +=    (inline value: String)                                                     : Doc
+  @tn("addAt") inline def +@=[A](inline p:Int, inline n:String, inline v:A)(using inline t :Any.Def.Doc[A]): Doc
 
-  /**/                def update[A](name: String, v: A)        (using t :Given.DocDef[A]): Unit
-  /**/                def update[A](pos: Int, v: A)            (using t :Given.DocDef[A]): Unit
+  /**/                def update[A](name: String, v: A)                           (using t :Any.Def.Doc[A]): Unit
+  /**/                def update[A](pos: Int, v: A)                               (using t :Any.Def.Doc[A]): Unit
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -29,7 +29,7 @@ ___________________________________________________________________________*/
 /**
 @trait _core -> ### Non buffer methods
 
-    This is the full list of Doc methods, with the exception of ones inherited from [[AnyRef.G.Buffer]] and scala.Product
+    This is the full list of Doc methods, with the exception of ones inherited from [[AnyRef.Buffer]] and scala.Product
 
 @var id      -> Instance id    \n\n  Id used to identify the instance \n\n It usually includes class name and hash code
 @def tag     -> Generates tag  description \n\n  Tag  contains a single line Doc representation
@@ -37,7 +37,7 @@ ___________________________________________________________________________*/
 
 @def +=      ->  Alias to [[add]]   \n\n Adds name and value pair to the buffer
 @def +=      ->  Alias to [[add]]   \n\n Adds value with empty name
-@def +=@     ->  Alias to [[addAt]] \n\n Adds name and value at given position
+@def +@=     ->  Alias to [[addAt]] \n\n Adds name and value at given position
 @def add     ->  Add name/value     \n\n Adds name and value pair to the buffer
 @def add     ->  Add value          \n\n Adds value with empty name
 @def addAt   ->  Add name/value at position \n\n Adds name and value at given position

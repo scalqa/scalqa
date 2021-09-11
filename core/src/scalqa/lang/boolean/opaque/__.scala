@@ -4,6 +4,9 @@ object Opaque:
   type Base[A<:Opaque] = opaque.Base[A]
   type Data[A<:Opaque] = opaque.Data[A];        transparent inline def Data       = opaque.Data
 
+  object TYPE:
+    opaque type DEF >: Boolean <: AnyVal = Boolean
+
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
@@ -11,13 +14,8 @@ object Opaque:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object Opaque ->
-  Opaque type is defined as
-  ```
-  object Boolean:
-    opaque type Opaque >: Boolean <: AnyVal = Boolean
-  ```
+@type DEF  ->
 
-  It must be the base for all Boolean opaque types
+  Boolean.Opaque is the supertype for all opaques based on Boolean
 
 */

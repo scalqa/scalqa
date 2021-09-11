@@ -9,10 +9,10 @@ transparent trait _properties[ROW]:
   @tn("sortMode_Pro")              def sortMode_*                          : Pro.OM[SortMode]               = rowData.sortMode_*
   /**/                             def sortMode                            : SortMode                       = sortMode_*()
   /**/                             def sortMode_=(v: SortMode)             : Unit                           = sortMode_*() = v
-  @tn("ordering_Pro")   @fast lazy val ordering_*                          : Pro.OM[Ordering[ROW]]          = Pro.OM.X.Basic[Ordering[ROW]](\/)
+  @tn("ordering_Pro")   @fast lazy val ordering_*                          : Pro.OM[Ordering[ROW]]          // = Pro.OM.X.Basic[Ordering[ROW]](\/)
   /**/                             def ordering                            : Ordering[ROW]                  = self.ordering_*()
   /**/                             def ordering_=(v: Ordering[ROW])        : Unit                           = self.ordering_*() = v
-  @tn("sortingBase_Pro")@fast lazy val sortingBase_*                       : Pro.OM[Ordering[ROW]]          = Pro.OM.X.Basic[Ordering[ROW]](\/)
+  @tn("sortingBase_Pro")@fast lazy val sortingBase_*                       : Pro.OM[Ordering[ROW]]          // = Pro.OM.X.Basic[Ordering[ROW]](\/)
   /**/                             def sortingBase                         : Ordering[ROW]                  = self.sortingBase_*()
   /**/                             def sortingBase_=(v: Ordering[ROW])     : Unit                           = self.sortingBase_*() = v
   @tn("headerFooter_Pro")          def headerFooter_*                      : Pro.OM[(><[ROW], ><[ROW])]     = rowData.headerFooter_*

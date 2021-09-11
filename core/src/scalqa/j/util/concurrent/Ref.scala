@@ -13,8 +13,8 @@ object Ref:
   extension[A](x: Ref[A])
     /**/   def change(f:A=>A)                        : A       = { while(true){ val o=x.get; val v=f(o); if(x.tryChange(o,v)) return v}; J.illegalState()}
 
-  object OPAQUE:
-    opaque type TYPE[A] <: AnyRef.Opaque = REAL[A] & AnyRef.Opaque
+  object TYPE:
+    opaque type DEF[A] <: AnyRef.Opaque = REAL[A] & AnyRef.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -23,7 +23,7 @@ object Ref:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object OPAQUE  -> ###
+@type DEF  -> ###
 
   Thread safe, minimal overhead reference based on java.util.concurrent.atomic.AtomicReference
 

@@ -3,7 +3,6 @@ package scalqa; package gen; package request; import language.implicitConversion
 class VOID private() extends Request
 
 object VOID extends VOID with zVOIDDefaults:
-
   implicit def implicitToString                (v: \/) : String            = ""
   implicit def implicitToException             (v: \/) : Exception         = z.VOID.Exception
   implicit def implicitToJavaList[A]           (v: \/) : java.util.List[A] = z.VOID.JavaList.cast[java.util.List[A]]
@@ -22,6 +21,7 @@ object VOID extends VOID with zVOIDDefaults:
 private trait zVOIDDefaults extends zVOIDDefaults1:
   implicit def implicitToFunctionToOptDouble[A](v: \/) : A => Opt[Double]  = z.VOID.Function1_Opt.cast[A => Opt[Double]]
   implicit def implicitToBooleanFunction[A]    (v: \/) : A => Boolean      = z.VOID.Filter
+  //implicit inline def implicitToValOpt[A](inline v: \/): Opt[A]    = ZZ.None.cast[Opt[A]]
 
 private trait zVOIDDefaults1 extends zVOIDDefaults2:
   implicit def implicitToFunctionToOpt[A,B]    (v: \/) : A => Opt[B]       = z.VOID.Function1_Opt.cast[A => Opt[B]]

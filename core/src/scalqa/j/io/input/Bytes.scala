@@ -4,7 +4,7 @@ import Input.Bytes
 import java.io.{ InputStream as REAL }
 
 object Bytes extends AnyRef.Opaque.Base[Bytes, REAL]("Io.Input.Bytes"):
-  inline def apply(inline v: Io.Input): Bytes = v.real.opaque
+  inline def apply(inline v: Io.Input): Bytes = v.real.toOpaque
 
   extension(inline x: Bytes)
     /**/            inline def read                                                        : Int         = x.real.read
@@ -14,8 +14,8 @@ object Bytes extends AnyRef.Opaque.Base[Bytes, REAL]("Io.Input.Bytes"):
     /**/            inline def readAll                                                     : Array[Byte] = Z.toByteArray(x)
     /**/            inline def readAllAndClose                                             : Array[Byte] = x.readAll.^(_ => x.close)
 
-  object OPAQUE:
-    opaque type TYPE <: java.io.Closeable & AnyRef.Opaque = REAL & AnyRef.Opaque
+  object TYPE:
+    opaque type DEF <: java.io.Closeable & AnyRef.Opaque = REAL & AnyRef.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -24,7 +24,7 @@ object Bytes extends AnyRef.Opaque.Base[Bytes, REAL]("Io.Input.Bytes"):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object OPAQUE  -> ###
+@type DEF  -> ###
 
    [[J.Input.Bytes]] is an opaque value, backed by java.io.InputStream
 

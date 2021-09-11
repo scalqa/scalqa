@@ -5,7 +5,7 @@ class Children private (val m: Member):
   private lazy val data: Data =
     if     (m.name == "API")    new Data(m).^(_.members = m.members.~.take(_.name=="scalqa"))
     else if(m.name == "scalqa") new RootData(m)
-    else if(m.dri.isOpaqueDef)  new OpaqueData(m)
+    else if(m.dri.isTypeDef)    new OpaqueData(m)
     else                        new GeneralData(m)
 
   def constructors : Seq[Member]                         = m.members.~.take(_.kind.isConstructor).sort.toSeq

@@ -5,11 +5,11 @@ import lang.string.z.Table
 object _print:
   private def EMPTY  = "EMPTY_STREAM"
 
-  def apply  [A](x: ~[A])(using Given.DocDef[A]) : Unit = apply(x, false,false)
-  def id     [A](x: ~[A])(using Given.DocDef[A]) : Unit = apply(x, true,false)
-  def numbers[A](x: ~[A])(using Given.DocDef[A]) : Unit = apply(x, false,true)
+  def apply  [A](x: ~[A])(using Any.Def.Doc[A]) : Unit = apply(x, false,false)
+  def id     [A](x: ~[A])(using Any.Def.Doc[A]) : Unit = apply(x, true,false)
+  def numbers[A](x: ~[A])(using Any.Def.Doc[A]) : Unit = apply(x, false,true)
 
-  def apply[A](v: ~[A], id: Boolean, num: Boolean)(using t: Given.DocDef[A]): Unit =
+  def apply[A](v: ~[A], id: Boolean, num: Boolean)(using t: Any.Def.Doc[A]): Unit =
     val ps      = v.map(toProduct)
     val tbl     = Table()
     val TAKE_SZ = 10
@@ -26,11 +26,11 @@ object _print:
     else
       println(EMPTY)
 
-  def toText[A](v: ~[A], id: Boolean)(using t: Given.DocDef[A]): String = Table().^(fillRows(_,v.map(toProduct),id)).^.to(t => if (t.Rows.size == 0) EMPTY else t.toString)
+  def toText[A](v: ~[A], id: Boolean)(using t: Any.Def.Doc[A]): String = Table().^(fillRows(_,v.map(toProduct),id)).^.to(t => if (t.Rows.size == 0) EMPTY else t.toString)
 
   // ------------------------------------------------------------------------------------------------------------
-  private def toProduct[A](v: A)(using t: Given.DocDef[A]): Product =
-    import gen.`given`.z.ProductDoc
+  private def toProduct[A](v: A)(using t: Any.Def.Doc[A]): Product =
+    import lang.any.`def`.z.ProductDoc
     v match
       case v : Stream[Any]                                 => Tuple1(t.value_tag(v))
       case v : Product if(t.isInstanceOf[ProductDoc[_]]) => t.value_doc(v)

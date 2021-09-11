@@ -1,16 +1,16 @@
 package scalqa; package lang; import language.implicitConversions
 
-object String extends AnyRef.G.Customized.Containers[String]:
+object String extends AnyRef.Containers[String]:
   val ordering          : Ordering[String] = summon[Ordering[String]]
   val orderingIgnoreCase: Ordering[String] = string.z.Ordering.IgnoreCase
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Opaque   = string.Opaque;              transparent inline def Opaque   = string.Opaque
-  type Builder  = string.Builder.OPAQUE.TYPE; transparent inline def Builder  = string.Builder
-  type _methods = string._Methods;            transparent inline def _methods = string._Methods
+  type Opaque   = string.Opaque.TYPE.DEF;  transparent inline def Opaque   = string.Opaque
+  type Builder  = string.Builder.TYPE.DEF; transparent inline def Builder  = string.Builder
+  type _methods = string._Methods;         transparent inline def _methods = string._Methods
 
 package object string:
-  opaque type Opaque <: AnyRef.Opaque  = java.lang.String & AnyRef.Opaque
+  type Opaque = string.Opaque.TYPE.DEF
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -1,19 +1,18 @@
 package scalqa; package lang; import language.implicitConversions
 
-object Byte extends byte.g.customized.Containers[Byte]:
+object Byte extends byte.g.Containers[Byte]:
   inline def min     : Byte               = java.lang.Byte.MIN_VALUE
   inline def max     : Byte               = java.lang.Byte.MAX_VALUE
   inline def ordering: G.Ordering[Byte]   = byte.z.Math
   inline def math    : G.Math[Byte]       = byte.z.Math
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  type Opaque   = byte.Opaque.TYPE.DEF;   transparent inline def Opaque = byte.Opaque
   type _methods = byte._methods;          transparent inline def G      = byte.G
-  type Opaque   = byte.Opaque;            transparent inline def Opaque = byte.Opaque
-  type Raw      = Byte | byte.Opaque;     transparent inline def Raw    = byte.Raw
 
 package object byte:
-  type Raw    = Byte.Raw
-  opaque type Opaque >: Byte <: AnyVal = Byte
+  type Raw      = Any.Byte
+  type Opaque   = byte.Opaque.TYPE.DEF
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -1,7 +1,6 @@
 package scalqa; package lang; package int; package z; import language.implicitConversions
 
 object Range:
-  // --------------------------------------------------------------------------------------------------------------------------
   /**/  private inline def SZ = 1024
   @fast private   lazy val BUF                  : Array[Int] = mk(0,SZ)
   /**/  private        def mk(s:Int,sz:Int)     : Array[Int] = { val a = new Array[Int](sz); (0 <>> sz).~.foreach(i => a(i)=s+i); a}

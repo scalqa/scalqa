@@ -1,28 +1,27 @@
 package scalqa; package lang; package any; import language.implicitConversions
 
-import gen.`given`. { VoidDef, WithinDef, DocDef, RangeShape, OptShape }
 import scala.{ Ordering as O }
 import _Methods._view
 
 transparent trait _Methods:
   extension[A](inline x:A)
-    /**/             inline def isVoid                                                       (using inline d: VoidDef[A]) : Boolean      = d.value_isVoid(x)
-    /**/             inline def nonVoid                                                      (using inline d: VoidDef[A]) : Boolean      = !d.value_isVoid(x)
-    @tn("opt")       inline def ?[OPT<:Opt.AnyType[A]]                                   (using inline t:OptShape[A,OPT]) : OPT          = z.opt(x,t)
-    @tn("result")    inline def ??                                                                                        : Result[A]    = Result(x)
-    @tn("range")     inline def <> [RNG<: Val.<>.AnyType[A]](inline to:A)(using inline o:O[A], inline t:RangeShape[A,RNG]): RNG          = z.range(x,to,o,t)
-    @tn("rangeX")    inline def <>>[RNG<: Val.<>.AnyType[A]](inline to:A)(using inline o:O[A], inline t:RangeShape[A,RNG]): RNG          = z.range.exclusive(x,to,o,t)
-    infix            inline def in [CONTAINER](inline c: CONTAINER)               (using inline t:WithinDef[A,CONTAINER]) : Boolean      = t.value_isWithin(x,c)
-    /**/             inline def doc                                                           (using inline dd:DocDef[A]) : Doc          = dd.value_doc(x)
-    /**/             inline def tag                                                           (using inline dd:DocDef[A]) : String       = dd.value_tag(x)
-    /**/             inline def tp                                                            (using inline dd:DocDef[A]) : Unit         = ZZ.tp(x,dd)
-    @tn("addSpaced") inline def +- [B](v: B)                              (using inline ta:DocDef[A],inline tb:DocDef[B]) : String       = ta.value_tag(x) + ' ' + tb.value_tag(v)
-    @tn("selfView")  inline def ^                                                                                         : _view[A]     = x.cast[_view[A]]
-    @tn("self_View") inline def self_^                                                                                    : _view[A]     = x.cast[_view[A]]
+    /**/             inline def isVoid                                (using inline d: Def.Void[A]) : Boolean      = d.value_isVoid(x)
+    /**/             inline def nonVoid                               (using inline d: Def.Void[A]) : Boolean      = !d.value_isVoid(x)
+    @tn("opt")       inline def ?                                   (using inline A:Specialized[A]) : A.Opt        = z.opt.make(x)
+    @tn("result")    inline def ??                                                                  : Result[A]    = Result(x)
+    @tn("range")     inline def <> (inline to:A)(using inline o:O[A])(using inline A:Specialized[A]): A.<>         = z.range(x,to)
+    @tn("rangeX")    inline def <>>(inline to:A)(using inline o:O[A])(using inline A:Specialized[A]): A.<>         = z.range.exclusive(x,to)
+    infix            inline def in[HOLDER]   (inline c: HOLDER)(using inline t:Def.Within[A,HOLDER]): Boolean      = t.value_isWithin(x,c)
+    /**/             inline def doc                                    (using inline dd:Def.Doc[A]) : Doc          = dd.value_doc(x)
+    /**/             inline def tag                                    (using inline dd:Def.Doc[A]) : String       = dd.value_tag(x)
+    /**/             inline def tp                                     (using inline dd:Def.Doc[A]) : Unit         = ZZ.tp(x,dd)
+    @tn("addSpaced") inline def +- [B](v: B)      (using inline ta:Def.Doc[A],inline tb:Def.Doc[B]) : String       = ta.value_tag(x) + ' ' + tb.value_tag(v)
+    @tn("selfView")  inline def ^                                                                   : _view[A]     = x.cast[_view[A]]
+    @tn("self_View") inline def self_^                                                              : _view[A]     = x.cast[_view[A]]
 
 
 object _Methods:
-  transparent inline def _view = _methods._view; type _view[+A] = _methods._view.OPAQUE.TYPE[A]
+  transparent inline def _view = _methods._view; type _view[+A] = _methods._view.TYPE.DEF[A]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -94,7 +93,7 @@ ___________________________________________________________________________*/
 
     Returns [[scalqa.any.self.Doc Doc]] object describing current instance
 
-    Reference types can implement [[scalqa.gen.able.Doc Able.Doc]], opaque types can provide implicit [[scalqa.any.self.given.DocDef DocDef]],
+    Reference types can implement [[scalqa.gen.able.Doc Able.Doc]], opaque types can provide implicit [[scalqa.any.def.Doc Any.Def.Doc]],
     in any case this operation will retrieve [[scalqa.any.self.Doc Doc]] or will create a default one, if none is found.
 
 @def tag -> Make String
@@ -140,7 +139,7 @@ ___________________________________________________________________________*/
 
 @def ? ->  To option
 
-    Returns [[scalqa.val.Opt.opaque Opt]] for current value
+    Returns [[scalqa.val.Opt.toOpaque Opt]] for current value
     ```
       val o : Opt[String] = "Foo".?
     ```

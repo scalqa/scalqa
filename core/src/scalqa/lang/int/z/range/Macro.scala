@@ -7,7 +7,7 @@ object Macro:
   inline def foreach[A<:Raw,U](inline x: g.Range[A], inline f:A=>U): Unit = ${ foreachMacro('x,'f)}
 
   // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  private def foreachMacro[A<:Int.Raw:Type,U:Type](r: Expr[Int.G.<>[A]] ,f: Expr[A => U])(using Quotes): Expr[Unit] =
+  private def foreachMacro[A<:Any.Int:Type,U:Type](r: Expr[Int.G.<>[A]] ,f: Expr[A => U])(using Quotes): Expr[Unit] =
     r match
       case '{ new G.<>[A]($s,$to,true)  } => '{ var i=$s.cast[Int]; val e=$to.cast[Int];  while(i<=e){ val r=$f(i.cast[A]); i+=1 }}
       case '{ new G.<>[A]($s,$to,false) } => '{ var i=$s.cast[Int]; val e=$to.cast[Int];  while(i< e){ val r=$f(i.cast[A]); i+=1 }}

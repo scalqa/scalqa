@@ -1,6 +1,6 @@
 package scalqa; package `val`; package stream; package z; package _build; package _group; import language.implicitConversions
 
-class splitAt[A](x: ~[A], pos: ~[Int]) extends a.Pipe[~[A]](x):
+class splitAt[A](x: ~[A], pos: ~[Int]) extends z.x.Pipe[~[A]](x):
   private var i     = 0
   private var ended = false
 

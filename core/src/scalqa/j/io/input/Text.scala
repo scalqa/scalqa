@@ -4,7 +4,7 @@ import Input.Text
 import java.io.{ Reader as REAL }
 
 object Text extends AnyRef.Opaque.Base[Text, REAL]("Io.Input.Text"):
-  inline def apply(inline v: Io.Input): Text = new java.io.InputStreamReader(v.real).opaque
+  inline def apply(inline v: Io.Input): Text = new java.io.InputStreamReader(v.real).toOpaque
 
   extension(inline x: Text)
     inline def read                                    : Int                         = x.real.read
@@ -16,8 +16,8 @@ object Text extends AnyRef.Opaque.Base[Text, REAL]("Io.Input.Text"):
     inline def separated_~(separator: Char => Boolean) : ~[Char.Idx & CharSequence]  = new z.SeparatedTextStream(x, separator)
     inline def ~                                       : Char.~                      = new Z.CharStream(x.real)
 
-  object OPAQUE:
-    opaque type TYPE <: java.io.Closeable & AnyRef.Opaque = REAL & AnyRef.Opaque
+  object TYPE:
+    opaque type DEF <: java.io.Closeable & AnyRef.Opaque = REAL & AnyRef.Opaque
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
@@ -25,7 +25,7 @@ object Text extends AnyRef.Opaque.Base[Text, REAL]("Io.Input.Text"):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object OPAQUE  -> ###
+@type DEF  -> ###
 
    [[J.Input.Data]] is an opaque value, backed by java.io.Reader
 

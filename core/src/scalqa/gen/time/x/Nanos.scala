@@ -14,21 +14,21 @@ object Nanos:
   // ***********************************************************************************************
   transparent trait Base:
 
-    extension[OPAQUE <: Long.Opaque](inline x: OPAQUE)
-      inline def nanos             : Long      = x.real                      % 1000
-      inline def micros            : Long      = x.real / Nanos.InOneMicros  % 1000
-      inline def millis            : Long      = x.real / Nanos.InOneMillis  % 1000
-      inline def seconds           : Long      = x.real / Nanos.InOneSecond  % 60
-      inline def minutes           : Long      = x.real / Nanos.InOneMinute  % 60
-      inline def hours             : Long      = x.real / Nanos.InOneHour    % 24
+    extension[THIS_OPAQUE <: Long.Opaque](inline x: THIS_OPAQUE)
+      inline def nanos             : Long        = x.real                      % 1000
+      inline def micros            : Long        = x.real / Nanos.InOneMicros  % 1000
+      inline def millis            : Long        = x.real / Nanos.InOneMillis  % 1000
+      inline def seconds           : Long        = x.real / Nanos.InOneSecond  % 60
+      inline def minutes           : Long        = x.real / Nanos.InOneMinute  % 60
+      inline def hours             : Long        = x.real / Nanos.InOneHour    % 24
       inline def roundTo(l:Length)
-                 (using r:Rounding): OPAQUE    = (r(x.real, l.nanosTotal)).cast[OPAQUE]
+                 (using r:Rounding): THIS_OPAQUE = (r(x.real, l.nanosTotal)).cast[THIS_OPAQUE]
 
   object Base:
 
     transparent trait Length extends Base:
 
-      extension[OPAQUE <: Long.Opaque](inline x: OPAQUE)
+      extension[THIS_OPAQUE <: Long.Opaque](inline x: THIS_OPAQUE)
         inline def nanosTotal        : Long      = x.real
         inline def microsTotal       : Long      = x.real / Nanos.InOneMicros
         inline def millisTotal       : Long      = x.real / Nanos.InOneMillis

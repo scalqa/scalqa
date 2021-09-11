@@ -7,7 +7,7 @@ transparent trait _value[ROW, VIEW, A]:
   private                      var proSetup         : ROW => Pro.O[Opt[A]]                           = Z.voidFun
   private                      var enhance          : ><[(ROW, Pro.O[Opt[A]]) => Pro.O[Opt[A]]]      = \/
   private[table]               def mkProOpt(e: ROW) : Pro.O[Opt[A]]                                  = enhance.~.foldAs(proSetup(e):Pro.O[Opt[A]])((p,pe) => pe(e,p))
-  private[table]               var funFormat        : A => String.Opt                                = v => v.tag(using self.docTag)
+  private[table]               var funFormat        : A => String.Opt                                = v => v.tag(using self.docDef)
   private[table]               var funFormatVoid    : ROW => String.Opt                              = v => \/
   private[table]               var funTooltipOpt    : Opt[Opt[A] => Tooltip]                         = \/
 
@@ -24,8 +24,8 @@ transparent trait _value[ROW, VIEW, A]:
   @tn("valueView_SetupOptPro") def valueView_:?*(f: VIEW => Opt[Pro.O[A]])                  : Unit   = self.valueView_:*?(f(_).map(_.map_^(Opt(_))) or Z.voidPro)
   @tn("valueView_SetupProOpt") def valueView_:*?(f: VIEW => Pro.O[Opt[A]])                  : Unit   = value_:*?(ZValueView(f))
 
-  /**/                         def voidTag                                                  : Given.VoidDef[A]
-  /**/                         def docTag                                                   : Given.DocDef[A]
+  /**/                         def voidDef                                                  : Any.Def.Void[A]
+  /**/                         def docDef                                                   : Any.Def.Doc[A]
   @tn("format_Setup")          def format_:(f: A => String.Opt)                             : Unit   = funFormat = f
   @tn("format_Setup")          def format_:(f: A => String.Opt, voidVal: ROW => String.Opt) : Unit   = { funFormat = f; funFormatVoid = voidVal }
   @tn("tooltip_Setup")         def tooltip_:(f: Opt[A] => Any)                              : Unit   = funTooltipOpt = f.?.map(f => (v:Opt[A]) => f(v) match { case v: Tooltip => v; case _ => Tooltip(v.toString) })

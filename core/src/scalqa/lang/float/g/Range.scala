@@ -1,6 +1,6 @@
 package scalqa; package lang; package float; package g; import language.implicitConversions
 
-class Range[A<:Raw](_start: A, e: A, eIn: Boolean) extends Val.<>[A] with Raw.Specialized:
+class Range[A<:Raw](_start: A, e: A, eIn: Boolean) extends Val.<>[A] with any.z.PrimitiveTag.Float:
   type THIS_TYPE = Range[A]
   final             def start                           : A             = _start
   final             def end                             : A             = e

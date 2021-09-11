@@ -3,12 +3,12 @@ package scalqa; package gen; package util; import language.implicitConversions
 import Gen.Percent
 
 object Percent extends Double.Opaque.Data.Numerical[Percent]("Percent"):
-  /**/     inline def apply(inline v: Double)           : Percent = v.opaque
-  /**/     inline def apply(value: Double, base: Double): Percent = (if (base == 0.0) 0.0 else value * 100.0 / base).opaque
+  /**/     inline def apply(inline v: Double)           : Percent = v.toOpaque
+  /**/     inline def apply(value: Double, base: Double): Percent = (if (base == 0.0) 0.0 else value * 100.0 / base).toOpaque
   /**/     inline def apply(value: Number, base: Number): Percent = apply(value.doubleValue, base.doubleValue)
   override        def value_isVoid(v: Percent)          : Boolean = v.real == 0.0
   override        def value_tag(v: Percent)             : String  = {val l = v.toLong; if(v.real==l) l.toString + "%" else v.toString + "%"}
-  implicit inline def implicitFrom(v: \/)               : Percent = 0.0.opaque
+  implicit inline def implicitFrom(v: \/)               : Percent = 0.0.toOpaque
 
   extension(inline x: Percent)
     /**/               inline def apply(inline nv: Int)                                         : Int    = (x.real * nv / 100.0).toInt
@@ -20,8 +20,8 @@ object Percent extends Double.Opaque.Data.Numerical[Percent]("Percent"):
     /**/               inline def apply[A<:Float.Opaque] (inline nv: A)(using inline n:Math[A]) : A      =  x(nv.cast[Float]).cast[A]
     /**/               inline def apply[A<:Double.Opaque](inline nv: A)(using inline n:Math[A]) : A      =  x(nv.cast[Double]).cast[A]
 
-  object OPAQUE:
-    opaque type TYPE <: Double.Opaque = Double.Opaque
+  object TYPE:
+    opaque type DEF <: Double.Opaque = Double.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -30,7 +30,7 @@ object Percent extends Double.Opaque.Data.Numerical[Percent]("Percent"):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object OPAQUE  -> ###
+@type DEF  -> ###
 
    [[Percent]] is an opaque Double value
 

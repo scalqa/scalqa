@@ -13,8 +13,6 @@ sidebar:
           url: guide/introduction/Do_Not_Use_toString.html
         - title: Operator Types
           url: guide/introduction/Operator_Types.html
-        - title: Attached Constructors
-          url: guide/introduction/Attached_Constructors.html
         - title: Samples
           url: guide/introduction/Samples.html
     - title: Features

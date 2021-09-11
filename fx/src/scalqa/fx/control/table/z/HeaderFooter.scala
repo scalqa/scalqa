@@ -13,7 +13,7 @@ private[fx] class HeaderFooter[A](hf: (><[A], ><[A]), override val real:  Idx.OM
       case v:  Idx.Event.Remove[A]                => Idx.Event.Remove(r, v.items)
       case v:  Idx.Event.Update[A] if v.isRefresh => Idx.Event.Update.refresh(r, v.items)
       case v:  Idx.Event.Update[A]                => Idx.Event.Update(r, v.items, v.oldItems)
-      case v:  Idx.Event.Reposition[A]            => Idx.Event.Reposition(r, v.rangeMutated.~.map(_ + headSize).><)
+      case v:  Idx.Event.Reposition[A]            => Idx.Event.Reposition(r, v.positions.~.map(_ + headSize).><)
       case _                                      => J.illegalState()
   }).><)))
 

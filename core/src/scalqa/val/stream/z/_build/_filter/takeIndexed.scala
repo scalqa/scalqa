@@ -1,11 +1,11 @@
 package scalqa; package `val`; package stream; package z; package _build; package _filter
 
-class takeIndexed[A](x: ~[A], f: (Int, A) => Boolean, start: Int) extends a.Pipe[A](x):
+class takeIndexed[A](x: ~[A], f: (Int, A) => Boolean, start: Int) extends z.x.Pipe[A](x):
   private var i = start
 
   @tn("read_Opt") def read_? =
     var o = x.read_?
-    while (o.nonEmpty && !f(i, o.get)) { o = x.read_?; i += 1 }
+    while (o && !f(i, o.get)) { o = x.read_?; i += 1 }
     o
 
 /*___________________________________________________________________________

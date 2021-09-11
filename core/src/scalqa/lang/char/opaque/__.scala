@@ -4,6 +4,9 @@ object Opaque:
   type Base[A<:Opaque] = opaque.Base[A]
   type Data[A<:Opaque] = opaque.Data[A];        transparent inline def Data       = opaque.Data
 
+  object TYPE:
+    opaque type DEF >: Char <: AnyVal = Char
+
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
@@ -11,13 +14,8 @@ object Opaque:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object Opaque ->
-  Opaque type is defined as
-  ```
-  object Char:
-    opaque type Opaque >: Char <: AnyVal = Char
-  ```
+@type DEF  ->
 
-  It must be the base for all Char opaque types
+  Char.Opaque is the supertype for all opaques based on Char
 
 */

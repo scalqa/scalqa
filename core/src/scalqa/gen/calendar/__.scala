@@ -1,10 +1,10 @@
 package scalqa; package gen
 
 object Calendar:
-  type Week  = calendar.Week.OPAQUE.TYPE;    transparent inline def Week  = calendar.Week
-  type Day   = calendar.Day.OPAQUE.TYPE;     transparent inline def Day   = calendar.Day
-  type Month = calendar.Month.OPAQUE.TYPE;   transparent inline def Month = calendar.Month
-  type Year  = calendar.Year.OPAQUE.TYPE;    transparent inline def Year  = calendar.Year
+  type Week  = calendar.Week.TYPE.DEF;    transparent inline def Week  = calendar.Week
+  type Day   = calendar.Day.TYPE.DEF;     transparent inline def Day   = calendar.Day
+  type Month = calendar.Month.TYPE.DEF;   transparent inline def Month = calendar.Month
+  type Year  = calendar.Year.TYPE.DEF;    transparent inline def Year  = calendar.Year
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

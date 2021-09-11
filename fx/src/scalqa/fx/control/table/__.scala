@@ -28,6 +28,10 @@ abstract class Table[ROW] extends Control with _properties[ROW] with _Column[ROW
   @tn("view_Setup")    protected   def view_: (f: ROW => VIEW)     : Unit      = view_:?(f(_))
   @tn("view_SetupOpt") protected   def view_:?(f: ROW => Opt[VIEW]): Unit      = viewOptFun = f
 
+  // This will move to _properties when dotty issue 13358 is fixed
+  @tn("ordering_Pro")   @fast lazy val ordering_*    : Pro.OM[Ordering[ROW]]          = Pro.OM.X.Basic[Ordering[ROW]](\/)
+  @tn("sortingBase_Pro")@fast lazy val sortingBase_* : Pro.OM[Ordering[ROW]]          = Pro.OM.X.Basic[Ordering[ROW]](\/)
+
 object Table:
   private[fx] type Column[ROW,V,A] = table.Column[ROW,V,A]
   private[fx] type RowCell[A,B]    = table.RowCell[A,B]

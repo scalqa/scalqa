@@ -2,7 +2,7 @@ package scalqa; package lang; package short; import language.implicitConversions
 
 transparent trait _methods:
   extension(inline x:Short)
-    @tn("Opt")        inline def ?                         : lang.Short.Opt  = x.cast[lang.Short.Opt]
+    @tn("Opt")        inline def ?                         : lang.Short.Opt  = x.cast[Short.Opt]
     @tn("range")      inline def <> (inline to: Short)     : lang.Short.<>   = {val w=x; w <>= to-w+1 }
     @tn("rangeX")     inline def <>>(inline to: Short)     : lang.Short.<>   = {val w=x; w <>= to-w   }
     @tn("rangeOfSize")inline def <>=(inline size: Int)     : lang.Short.<>   = new lang.Short.<>(x,size)

@@ -4,7 +4,7 @@ import scalqa.gen.time.x.{ Nanos => NANOS }
 
 transparent trait _methods:
   extension(inline x:Double)
-    @tn("Opt")   inline def ?                          : lang.Double.Opt  = x.cast[lang.Double.Opt]
+    @tn("Opt")   inline def ?                          : lang.Double.Opt  = x.cast[Double.Opt]
     @tn("range") inline def <> (inline to: Double)     : lang.Double.<>   = new lang.Double.<>(x,to,true)
     @tn("rangeX")inline def <>>(inline to: Double)     : lang.Double.<>   = new lang.Double.<>(x,to,false)
     /**/   infix inline def max(inline v: Double)      : Double           = {val y=x; val w=v; if(y.real > w.real) y else w }

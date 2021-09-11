@@ -1,23 +1,23 @@
 package scalqa; package `val`; package stream; package z; package _build; package _filter; import scala.language.implicitConversions
 
-class dropDuplicates[A](x: ~[A]) extends a.Pipe[A](x):
+class dropDuplicates[A](x: ~[A]) extends z.x.Pipe[A](x):
   private var lastOpt: Opt[A] = \/
 
   @tn("read_Opt") def read_? =
     var o = x.read_?
-    while(o.nonEmpty && lastOpt.contains(o.`val`)) o = x.read_?
+    while(o && lastOpt.contains(o.`val`)) o = x.read_?
     lastOpt = o
     o
 
 
 object dropDuplicates:
 
-  class By[A,B](x: ~[A], f: A => B) extends a.Pipe[A](x):
+  class By[A,B](x: ~[A], f: A => B) extends z.x.Pipe[A](x):
     private var lastOpt: Opt[B] = \/
 
     @tn("read_Opt") def read_? =
       var o = x.read_?
-      while(o.nonEmpty && lastOpt.contains(f(o.`val`))) o = x.read_?
+      while(o && lastOpt.contains(f(o.`val`))) o = x.read_?
       lastOpt = o.map(f)
       o
 

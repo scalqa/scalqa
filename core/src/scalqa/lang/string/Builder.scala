@@ -8,8 +8,8 @@ object Builder extends AnyRef.Opaque.Base[Builder,REAL]("String.Builder"):
   inline def apply(inline capacity: Int): Builder = new REAL(capacity).cast[Builder]
 
   extension(inline x: Builder)
-    @tn("_add")        inline def += [T,A<:T|Boolean|Byte|Char|Short|Int|Long|Float|Double|CharSequence](inline v: A)(using inline tg:Given.DocDef[A]): Builder = add(v)
-    @tn("addAt")       inline def +=@[T,A<:T|Boolean|Byte|Char|Short|Int|Long|Float|Double|CharSequence](inline off: Int, inline v: A)(using inline tg:Given.DocDef[A]): Builder = addAt(off,v)
+    @tn("add")         inline def += [T,A<:T|Boolean|Byte|Char|Short|Int|Long|Float|Double|CharSequence](inline v: A)(using inline tg:Any.Def.Doc[A]): Builder = add(v)
+    @tn("addAt")       inline def +@=[T,A<:T|Boolean|Byte|Char|Short|Int|Long|Float|Double|CharSequence](inline off: Int, inline v: A)(using inline tg:Any.Def.Doc[A]): Builder = addAt(off,v)
 
     /**/               inline def charAt(inline i: Int)  : Char    = x.real.charAt(i)
     /**/               inline def size                   : Int     = x.real.length
@@ -18,7 +18,7 @@ object Builder extends AnyRef.Opaque.Base[Builder,REAL]("String.Builder"):
     /**/               inline def removeAt(inline v: Int): Builder = x.real.deleteCharAt(v).cast[Builder]
     /**/               inline def tag                    : String  = x.real.toString
 
-    inline def add[T,A<:T|Boolean|Byte|Char|Short|Int|Long|Float|Double|CharSequence](inline v: A)(using inline tg:Given.DocDef[A]): Builder =
+    inline def add[T,A<:T|Boolean|Byte|Char|Short|Int|Long|Float|Double|CharSequence](inline v: A)(using inline tg:Any.Def.Doc[A]): Builder =
       inline v match
         case _ :Boolean      => x.real.append(v.cast[Boolean     ]).cast[Builder]
         case _ :Byte         => x.real.append(v.cast[Byte        ]).cast[Builder]
@@ -31,7 +31,7 @@ object Builder extends AnyRef.Opaque.Base[Builder,REAL]("String.Builder"):
         case _ :CharSequence => x.real.append(v.cast[CharSequence]).cast[Builder]
         case _               => x.real.append(tg.value_tag(v)     ).cast[Builder]
 
-    inline def addAt[T,A<:T|Boolean|Byte|Char|Short|Int|Long|Float|Double|CharSequence](inline off: Int, inline v: A)(using inline tg:Given.DocDef[A]): Builder =
+    inline def addAt[T,A<:T|Boolean|Byte|Char|Short|Int|Long|Float|Double|CharSequence](inline off: Int, inline v: A)(using inline tg:Any.Def.Doc[A]): Builder =
       inline v match
         case _ :Boolean      => x.real.insert(off,v.cast[Boolean     ]).cast[Builder]
         case _ :Byte         => x.real.insert(off,v.cast[Byte        ]).cast[Builder]
@@ -44,8 +44,8 @@ object Builder extends AnyRef.Opaque.Base[Builder,REAL]("String.Builder"):
         case _ :CharSequence => x.real.insert(off,v.cast[CharSequence]).cast[Builder]
         case _               => x.real.insert(off,tg.value_tag(v)     ).cast[Builder]
 
-  object OPAQUE:
-    opaque type TYPE <: AnyRef.Opaque & CharSequence  = REAL & AnyRef.Opaque
+  object TYPE:
+    opaque type DEF <: AnyRef.Opaque & CharSequence  = REAL & AnyRef.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -54,12 +54,12 @@ object Builder extends AnyRef.Opaque.Base[Builder,REAL]("String.Builder"):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object OPAQUE  ->
+@type DEF  ->
 
     String.Builder is a zero overhead opaque wrap of java.lang.StringBuilder. The "add" methods handle primitives without boxing.
 
 @def +=         -> Alias for add
-@def +=@        -> Alias for addAt
+@def +@=        -> Alias for addAt
 @def add        -> Append
 @def addAt      -> Insert at position
 @def charAt     -> Char at position

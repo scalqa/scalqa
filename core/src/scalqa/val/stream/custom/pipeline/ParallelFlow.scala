@@ -2,7 +2,7 @@ package scalqa; package `val`; package stream; package custom; package pipeline;
 
 abstract class ParallelFlow[A] extends Flow[A] with Pipeline.Tree:
   /**/               def isParallel                                 : Boolean          = true
-  @tn("stream")      def ~                                          : ~[A]             = z.a.Stream_fromParallelFlow(this)
+  @tn("stream")      def ~                                          : ~[A]             = z.x.Stream_fromParallelFlow(this)
   /**/               def name                                       : String
   /**/               def takeType[B](using t: ClassTag[B])          : Flow[B]          = take(v => !t.unapply(v).isEmpty).cast[Flow[B]]
   /**/               def collect[B](f: PartialFunction[A,B])        : Flow[B]          = take(f.isDefinedAt).map(f.apply)

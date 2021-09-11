@@ -5,9 +5,9 @@ import z._build.{ _filter => F }
 transparent trait _Filter extends _filter._take with _filter._drop:
 
   extension[A](inline x: ~[A])
-    inline def filter(inline f: A => Boolean)     : ~[A] = new F.take(x,f)
+    inline def filter    (inline f: A => Boolean) : ~[A] = x.take(f)
     inline def withFilter(inline f: A => Boolean) : ~[A] = x.take(f)
-    inline def FILTER(inline f: A => Boolean)     : ~[A] = x.TAKE(f)
+    inline def FILTER    (inline f: A => Boolean) : ~[A] = x.TAKE(f)
 
 object _Filter:
   type _take =  _filter._take
@@ -35,5 +35,12 @@ ___________________________________________________________________________*/
 
     Note: [[take]] is usually used instead.
 
+@def FILTER -> Legacy heavy filter
+
+    Filters [[scalqa.val.Stream ~]] elements according to given function
+
+    [[FILTER]] is functionally equivalent to [[filter]], but is fully inlined. It makes compiled code larger, but guarantees the best possible performance on large streams.
+
+    Note: [[TAKE]] is usually used instead.
 */
 

@@ -1,7 +1,7 @@
 package scalqa; package `val`; package pack; package z; import language.implicitConversions
 
 private[`val`] class Tail[A](l: ><[A], off: Int) extends ><[A] :
-  type THIS_TYPE = Pack[A]
+  type THIS_TYPE = ><[A]
   private                def resolve                     : ><[A]          = l.drop_<>(0,off)
   override               def tail                        : ><[A]          = if(size<=1) \/ else new Tail[A](l,off+1)
   /**/                   def apply(i: Int)               : A              = l(i + off)

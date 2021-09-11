@@ -1,8 +1,8 @@
 package scalqa; package j; import language.implicitConversions
 
 object Io:
-  inline def Input  = io.Input;   type Input  = io.Input.OPAQUE.TYPE
-  inline def Output = io.Output;  type Output = io.Output.OPAQUE.TYPE
+  inline def Input  = io.Input;   type Input  = io.Input.TYPE.DEF
+  inline def Output = io.Output;  type Output = io.Output.TYPE.DEF
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

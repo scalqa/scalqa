@@ -1,48 +1,45 @@
 package scalqa; package `val`; package stream; package z; package _build; package _mutate; import language.implicitConversions
 
-import lang.any.{Raw as RAW}
-import gen.`given`.StreamShape
-import z.a.Map
-
 object raw:
-  class toBoolean[A<:Boolean.Raw](x: ~[A]) extends Map.ToBoolean[A](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
-  class toByte   [A<:Byte.Raw]   (x: ~[A]) extends Map.ToByte   [A](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
-  class toChar   [A<:Char.Raw]   (x: ~[A]) extends Map.ToChar   [A](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
-  class toShort  [A<:Short.Raw]  (x: ~[A]) extends Map.ToShort  [A](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
-  class toInt    [A<:Int.Raw]    (x: ~[A]) extends Map.ToInt    [A](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
-  class toLong   [A<:Long.Raw]   (x: ~[A]) extends Map.ToLong   [A](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
-  class toFloat  [A<:Float.Raw]  (x: ~[A]) extends Map.ToFloat  [A](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
-  class toDouble [A<:Double.Raw] (x: ~[A]) extends Map.ToDouble [A](x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
+  class toBoolean(x: ~[Boolean]) extends z.x.Map.AsBoolean(x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
+  class toByte   (x: ~[Byte])    extends z.x.Map.AsByte   (x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
+  class toChar   (x: ~[Char])    extends z.x.Map.AsChar   (x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
+  class toShort  (x: ~[Short])   extends z.x.Map.AsShort  (x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
+  class toInt    (x: ~[Int])     extends z.x.Map.AsInt    (x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
+  class toLong   (x: ~[Long])    extends z.x.Map.AsLong   (x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
+  class toFloat  (x: ~[Float])   extends z.x.Map.AsFloat  (x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
+  class toDouble (x: ~[Double])  extends z.x.Map.AsDouble (x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.raw }
 
-  def boolean[A<:Boolean.Raw](x: ~[A]): Boolean.G.~[A] = x match{case v: Boolean.G.~[_] => v.cast[Boolean.G.~[A]]; case v => toBoolean(v)}
-  def byte   [A<:Byte.Raw   ](x: ~[A]): Byte   .G.~[A] = x match{case v: Byte   .G.~[_] => v.cast[Byte   .G.~[A]]; case v => toByte(v)}
-  def char   [A<:Char.Raw   ](x: ~[A]): Char   .G.~[A] = x match{case v: Char   .G.~[_] => v.cast[Char   .G.~[A]]; case v => toChar(v)}
-  def short  [A<:Short.Raw  ](x: ~[A]): Short  .G.~[A] = x match{case v: Short  .G.~[_] => v.cast[Short  .G.~[A]]; case v => toShort(v)}
-  def int    [A<:Int.Raw    ](x: ~[A]): Int    .G.~[A] = x match{case v: Int    .G.~[_] => v.cast[Int    .G.~[A]]; case v => toInt(v)}
-  def long   [A<:Long.Raw   ](x: ~[A]): Long   .G.~[A] = x match{case v: Long   .G.~[_] => v.cast[Long   .G.~[A]]; case v => toLong(v)}
-  def float  [A<:Float.Raw  ](x: ~[A]): Float  .G.~[A] = x match{case v: Float  .G.~[_] => v.cast[Float  .G.~[A]]; case v => toFloat(v)}
-  def double [A<:Double.Raw ](x: ~[A]): Double .G.~[A] = x match{case v: Double .G.~[_] => v.cast[Double .G.~[A]]; case v => toDouble(v)}
+  def toBoolean(x: ~[Boolean]): Boolean.~ = x match{ case x: Boolean.~ => x; case x => new toBoolean(x)}
+  def toByte   (x: ~[Byte   ]): Byte   .~ = x match{ case x: Byte.~    => x; case x => new toByte(x)   }
+  def toChar   (x: ~[Char   ]): Char   .~ = x match{ case x: Char.~    => x; case x => new toChar(x)   }
+  def toShort  (x: ~[Short  ]): Short  .~ = x match{ case x: Short.~   => x; case x => new toShort(x)  }
+  def toInt    (x: ~[Int    ]): Int    .~ = x match{ case x: Int.~     => x; case x => new toInt(x)    }
+  def toLong   (x: ~[Long   ]): Long   .~ = x match{ case x: Long.~    => x; case x => new toLong(x)   }
+  def toFloat  (x: ~[Float  ]): Float  .~ = x match{ case x: Float.~   => x; case x => new toFloat(x)  }
+  def toDouble (x: ~[Double ]): Double .~ = x match{ case x: Double.~  => x; case x => new toDouble(x) }
 
-  inline def apply[A,RAW<: ~~.RawType[A]](inline x:Stream[A], inline s: StreamShape.Raw[A,RAW]): RAW  =
+  inline def apply[A](inline x:Stream[A])(using inline A: Specialized.Primitive[A]): A.~ =
     inline x match
-      case _ : Boolean.G.~[A] => x.cast[RAW]
-      case _ : Byte   .G.~[A] => x.cast[RAW]
-      case _ : Char   .G.~[A] => x.cast[RAW]
-      case _ : Short  .G.~[A] => x.cast[RAW]
-      case _ : Int    .G.~[A] => x.cast[RAW]
-      case _ : Long   .G.~[A] => x.cast[RAW]
-      case _ : Float  .G.~[A] => x.cast[RAW]
-      case _ : Double .G.~[A] => x.cast[RAW]
-      case _ => inline s match
-          case _ : StreamShape.Raw[A,Boolean.G.~[A & Boolean.Raw]] => boolean[A & Boolean.Raw](x.cast[~[A & Boolean.Raw]])
-          case _ : StreamShape.Raw[A,Byte   .G.~[A & Byte.Raw   ]] => byte   (x.cast[~[A & Byte.Raw   ]])
-          case _ : StreamShape.Raw[A,Char   .G.~[A & Char.Raw   ]] => char   (x.cast[~[A & Char.Raw   ]])
-          case _ : StreamShape.Raw[A,Short  .G.~[A & Short.Raw  ]] => short  (x.cast[~[A & Short.Raw  ]])
-          case _ : StreamShape.Raw[A,Int    .G.~[A & Int.Raw    ]] => int    (x.cast[~[A & Int.Raw    ]])
-          case _ : StreamShape.Raw[A,Long   .G.~[A & Long.Raw   ]] => long   (x.cast[~[A & Long.Raw   ]])
-          case _ : StreamShape.Raw[A,Float  .G.~[A & Float.Raw  ]] => float  (x.cast[~[A & Float.Raw  ]])
-          case _ : StreamShape.Raw[A,Double .G.~[A & Double.Raw ]] => double (x.cast[~[A & Double.Raw ]])
-          case _                                                   => J.illegalState()
+      case _ : Boolean.G.~[A] => x.cast[A.~]
+      case _ : Byte   .G.~[A] => x.cast[A.~]
+      case _ : Char   .G.~[A] => x.cast[A.~]
+      case _ : Short  .G.~[A] => x.cast[A.~]
+      case _ : Int    .G.~[A] => x.cast[A.~]
+      case _ : Long   .G.~[A] => x.cast[A.~]
+      case _ : Float  .G.~[A] => x.cast[A.~]
+      case _ : Double .G.~[A] => x.cast[A.~]
+      case _ =>
+        inline A  match
+          case _ : Specialized.Primitive[A & Any.Boolean] => toBoolean(x.cast[~[Boolean]]).cast[A.~]
+          case _ : Specialized.Primitive[A & Any.Byte   ] => toByte   (x.cast[~[Byte   ]]).cast[A.~]
+          case _ : Specialized.Primitive[A & Any.Char   ] => toChar   (x.cast[~[Char   ]]).cast[A.~]
+          case _ : Specialized.Primitive[A & Any.Short  ] => toShort  (x.cast[~[Short  ]]).cast[A.~]
+          case _ : Specialized.Primitive[A & Any.Int    ] => toInt    (x.cast[~[Int    ]]).cast[A.~]
+          case _ : Specialized.Primitive[A & Any.Long   ] => toLong   (x.cast[~[Long   ]]).cast[A.~]
+          case _ : Specialized.Primitive[A & Any.Float  ] => toFloat  (x.cast[~[Float  ]]).cast[A.~]
+          case _ : Specialized.Primitive[A & Any.Double ] => toDouble (x.cast[~[Double ]]).cast[A.~]
+          case _                                          => J.illegalState()
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -1,34 +1,32 @@
 package scalqa; package lang; package array; package z; import language.implicitConversions
 
-import gen.`given`.StreamShape
-
 object Stream:
 
-  inline def apply[A,STREAM<: ~~.AnyType[A]](inline x:Array[A], inline t: StreamShape[A,STREAM]): STREAM & Able.Size =
-    inline t match
-      case _ : StreamShape[A&Boolean.Raw,Boolean.G.~[A&Boolean.Raw]] => As.BooleanStream(x.cast[Array[Boolean]]).cast[STREAM & Able.Size]
-      case _ : StreamShape[A&Byte.Raw,   Byte   .G.~[A&Byte.Raw   ]] => As.ByteStream   (x.cast[Array[Byte   ]]).cast[STREAM & Able.Size]
-      case _ : StreamShape[A&Char.Raw,   Char   .G.~[A&Char.Raw   ]] => As.CharStream   (x.cast[Array[Char   ]]).cast[STREAM & Able.Size]
-      case _ : StreamShape[A&Short.Raw,  Short  .G.~[A&Short.Raw  ]] => As.ShortStream  (x.cast[Array[Short  ]]).cast[STREAM & Able.Size]
-      case _ : StreamShape[A&Int.Raw,    Int    .G.~[A&Int.Raw    ]] => As.IntStream    (x.cast[Array[Int    ]]).cast[STREAM & Able.Size]
-      case _ : StreamShape[A&Long.Raw,   Long   .G.~[A&Long.Raw   ]] => As.LongStream   (x.cast[Array[Long   ]]).cast[STREAM & Able.Size]
-      case _ : StreamShape[A&Float.Raw,  Float  .G.~[A&Float.Raw  ]] => As.FloatStream  (x.cast[Array[Float  ]]).cast[STREAM & Able.Size]
-      case _ : StreamShape[A&Double.Raw, Double .G.~[A&Double.Raw ]] => As.DoubleStream (x.cast[Array[Double ]]).cast[STREAM & Able.Size]
-      case _ : StreamShape[A&AnyRef,     AnyRef .G.~[A&AnyRef     ]] => As.RefStream    (x.cast[Array[AnyRef ]]).cast[STREAM & Able.Size]
-      case _                                                         => any(x,\/).cast[STREAM & Able.Size]
+  inline def apply[A](inline x:Array[A])(using inline A: Specialized[A]): A.~ & Able.Size =
+    inline A match
+      case _ : Specialized[A&Any.Boolean] => As.BooleanStream(x.cast[Array[Boolean]]).cast[A.~ & Able.Size]
+      case _ : Specialized[A&Any.Byte   ] => As.ByteStream   (x.cast[Array[Byte   ]]).cast[A.~ & Able.Size]
+      case _ : Specialized[A&Any.Char   ] => As.CharStream   (x.cast[Array[Char   ]]).cast[A.~ & Able.Size]
+      case _ : Specialized[A&Any.Short  ] => As.ShortStream  (x.cast[Array[Short  ]]).cast[A.~ & Able.Size]
+      case _ : Specialized[A&Any.Int    ] => As.IntStream    (x.cast[Array[Int    ]]).cast[A.~ & Able.Size]
+      case _ : Specialized[A&Any.Long   ] => As.LongStream   (x.cast[Array[Long   ]]).cast[A.~ & Able.Size]
+      case _ : Specialized[A&Any.Float  ] => As.FloatStream  (x.cast[Array[Float  ]]).cast[A.~ & Able.Size]
+      case _ : Specialized[A&Any.Double ] => As.DoubleStream (x.cast[Array[Double ]]).cast[A.~ & Able.Size]
+      case _ : Specialized[A&AnyRef     ] => As.RefStream    (x.cast[Array[AnyRef ]]).cast[A.~ & Able.Size]
+      case _                              => any(x,\/).cast[A.~ & Able.Size]
 
-  inline def apply[A,STREAM<: ~~.AnyType[A]](inline x:Array[A], sz: Int, inline t: StreamShape[A,STREAM]): STREAM & Able.Size =
-    inline t match
-      case _ : StreamShape[A&Boolean.Raw,Boolean.G.~[A&Boolean.Raw]] => As.BooleanStream(x.cast[Array[Boolean]],sz).cast[STREAM & Able.Size]
-      case _ : StreamShape[A&Byte.Raw,   Byte   .G.~[A&Byte.Raw   ]] => As.ByteStream   (x.cast[Array[Byte   ]],sz).cast[STREAM & Able.Size]
-      case _ : StreamShape[A&Char.Raw,   Char   .G.~[A&Char.Raw   ]] => As.CharStream   (x.cast[Array[Char   ]],sz).cast[STREAM & Able.Size]
-      case _ : StreamShape[A&Short.Raw,  Short  .G.~[A&Short.Raw  ]] => As.ShortStream  (x.cast[Array[Short  ]],sz).cast[STREAM & Able.Size]
-      case _ : StreamShape[A&Int.Raw,    Int    .G.~[A&Int.Raw    ]] => As.IntStream    (x.cast[Array[Int    ]],sz).cast[STREAM & Able.Size]
-      case _ : StreamShape[A&Long.Raw,   Long   .G.~[A&Long.Raw   ]] => As.LongStream   (x.cast[Array[Long   ]],sz).cast[STREAM & Able.Size]
-      case _ : StreamShape[A&Float.Raw,  Float  .G.~[A&Float.Raw  ]] => As.FloatStream  (x.cast[Array[Float  ]],sz).cast[STREAM & Able.Size]
-      case _ : StreamShape[A&Double.Raw, Double .G.~[A&Double.Raw ]] => As.DoubleStream (x.cast[Array[Double ]],sz).cast[STREAM & Able.Size]
-      case _ : StreamShape[A&AnyRef,     AnyRef .G.~[A&AnyRef     ]] => As.RefStream    (x.cast[Array[AnyRef ]],sz).cast[STREAM & Able.Size]
-      case _                                                         => any(x,\/).cast[STREAM & Able.Size]
+  inline def apply[A](inline x:Array[A], sz: Int)(using inline A: Specialized[A]): A.~ & Able.Size =
+    inline A match
+      case _ : Specialized[A&Any.Boolean] => As.BooleanStream(x.cast[Array[Boolean]],sz).cast[A.~ & Able.Size]
+      case _ : Specialized[A&Any.Byte   ] => As.ByteStream   (x.cast[Array[Byte   ]],sz).cast[A.~ & Able.Size]
+      case _ : Specialized[A&Any.Char   ] => As.CharStream   (x.cast[Array[Char   ]],sz).cast[A.~ & Able.Size]
+      case _ : Specialized[A&Any.Short  ] => As.ShortStream  (x.cast[Array[Short  ]],sz).cast[A.~ & Able.Size]
+      case _ : Specialized[A&Any.Int    ] => As.IntStream    (x.cast[Array[Int    ]],sz).cast[A.~ & Able.Size]
+      case _ : Specialized[A&Any.Long   ] => As.LongStream   (x.cast[Array[Long   ]],sz).cast[A.~ & Able.Size]
+      case _ : Specialized[A&Any.Float  ] => As.FloatStream  (x.cast[Array[Float  ]],sz).cast[A.~ & Able.Size]
+      case _ : Specialized[A&Any.Double ] => As.DoubleStream (x.cast[Array[Double ]],sz).cast[A.~ & Able.Size]
+      case _ : Specialized[A&AnyRef     ] => As.RefStream    (x.cast[Array[AnyRef ]],sz).cast[A.~ & Able.Size]
+      case _                              => any(x,\/).cast[A.~ & Able.Size]
 
   def any[A](x:Array[A], sz:Int.Opt) : ~[A] & Able.Size = x match
     case x: Array[AnyRef]   => As.RefStream    (x,sz or x.length)

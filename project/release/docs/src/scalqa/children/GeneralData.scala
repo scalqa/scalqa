@@ -2,7 +2,7 @@ package scalqa; package children; import language.implicitConversions
 
 class GeneralData(m: Member) extends Data(m):
 
-  this.members  = { all.~.take(_.kind.isClassLike).drop(_.dri.isOpaqueDef) ++ all.~.takeOnlyBy(_.kind.name, "def","val","type").map_?(_._child_?) }.sort
+  this.members  = { all.~.take(_.kind.isClassLike).drop(_.dri.isTypeDef) ++ all.~.takeOnlyBy(_.kind.name, "def","val","type").map_?(_._child_?) }.sort
 
   this.makers   = all.~.take(m => !owner.kind.isObject && m.kind.isExtension && Docs.isMakerMethod(owner.name,m.name)).sort
 

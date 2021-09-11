@@ -32,14 +32,15 @@ abstract class Buffer[A] private[scalqa]() extends Idx.Mutable[A] with Able.Cont
     size = sz+len
 
 object Buffer:
-  /**/     inline def apply[A]()                                             : Buffer[A]                         = new AnyRef.G.Buffer(J.initSize)
-  /**/     inline def apply[A](inline initSize: Int)                         : Buffer[A]                         = new AnyRef.G.Buffer(initSize)
-  /**/     inline def apply[A](inline a:Array[A], inline s:Int)              : Buffer[A]                         = buffer.Z.create(a,s)
-  /**/            def accessible[A](use: Array[A], usedSize: Int)            : Buffer[A] & Able.Access[Array[A]] = buffer.Z.accessible(use,usedSize)
-  /**/     inline def accessible[A:ClassTag](inline initSize: Int=J.initSize): Buffer[A] & Able.Access[Array[A]] = accessible(new Array[A](initSize),0)
-  implicit inline def implicitFrom[A](v: NEW)                                : Buffer[A]                         = apply[A]()
+  /**/     inline def apply[A]()                                    : Buffer[A]                         = new AnyRef.Buffer(J.initSize)
+  /**/     inline def apply[A](inline initSize: Int)                : Buffer[A]                         = new AnyRef.Buffer(initSize)
+  /**/     inline def apply[A](inline a:Array[A], inline s:Int)     : Buffer[A]                         = buffer.Z.create(a,s)
+  /**/            def accessible[A](use: Array[A], usedSize: Int)   : Buffer[A] & Able.Access[Array[A]] = buffer.Z.accessible(use,usedSize)
+  /**/     inline def accessible[A](inline initSize: Int=J.initSize)
+                                        (using inline t:ClassTag[A]): Buffer[A] & Able.Access[Array[A]] = accessible(new Array[A](initSize),0)
+  implicit inline def implicitFrom[A](v: NEW)                       : Buffer[A]                         = apply[A]()
 
-  given givenDocDef[A](using t: Given.DocDef[A]) : Given.DocDef[Buffer[A]] with
+  given givenDocDef[A](using t: Any.Def.Doc[A]) : Any.Def.Doc[Buffer[A]] with
     def value_tag(v: Buffer[A]) = value_doc(v).tag
     def value_doc(v: Buffer[A]) = Doc(v) += ("size", v.size) += v.array.tag
 
@@ -54,6 +55,12 @@ ___________________________________________________________________________*/
 @class Buffer -> ### Value Buffer
 
       [[Buffer]] is the default implementation of [[scalqa.val.idx.Mutable Mutable Indexed Collection]]
+
+      Buffer is an abstract class with concrete implementations:
+      [[scalqa.lang.anyref.Buffer AnyRef.Buffer]],
+      [[scalqa.lang.byte.g.Buffer Byte.G.Buffer]],
+      [[scalqa.lang.int.g.Buffer Int.G.Buffer]],
+      etc.
 
 @def addAll -> Append [[Stream]]
 

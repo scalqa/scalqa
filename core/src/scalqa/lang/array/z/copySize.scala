@@ -1,22 +1,21 @@
 package scalqa; package lang; package array; package z; import language.implicitConversions
 
 import java.util.Arrays
-import gen.`given`.ArrayShape
 
 object copySize:
 
-  inline def apply[A,ARRAY<:Array.AnyType[A]](inline x: ARRAY, inline sz: Int, inline t: ArrayShape[A,ARRAY]): ARRAY =
-    inline t match
-              case _ : ArrayShape[A&Boolean.Raw,Array[A&Boolean.Raw]] => Arrays.copyOf(x.cast[Array[Boolean]],sz).cast[ARRAY]
-              case _ : ArrayShape[A&Byte.Raw,   Array[A&Byte.Raw   ]] => Arrays.copyOf(x.cast[Array[Byte   ]],sz).cast[ARRAY]
-              case _ : ArrayShape[A&Char.Raw,   Array[A&Char.Raw   ]] => Arrays.copyOf(x.cast[Array[Char   ]],sz).cast[ARRAY]
-              case _ : ArrayShape[A&Short.Raw,  Array[A&Short.Raw  ]] => Arrays.copyOf(x.cast[Array[Short  ]],sz).cast[ARRAY]
-              case _ : ArrayShape[A&Int.Raw,    Array[A&Int.Raw    ]] => Arrays.copyOf(x.cast[Array[Int    ]],sz).cast[ARRAY]
-              case _ : ArrayShape[A&Long.Raw,   Array[A&Long.Raw   ]] => Arrays.copyOf(x.cast[Array[Long   ]],sz).cast[ARRAY]
-              case _ : ArrayShape[A&Float.Raw,  Array[A&Float.Raw  ]] => Arrays.copyOf(x.cast[Array[Float  ]],sz).cast[ARRAY]
-              case _ : ArrayShape[A&Double.Raw, Array[A&Double.Raw ]] => Arrays.copyOf(x.cast[Array[Double ]],sz).cast[ARRAY]
-              case _ : ArrayShape[A&AnyRef,     Array[A&AnyRef     ]] => Arrays.copyOf(x.cast[Array[AnyRef ]],sz).cast[ARRAY]
-              case _                                                  =>           any(x.cast[Array[A      ]],sz).cast[ARRAY]
+  inline def apply[A](inline x: Array[A], inline sz: Int)(using inline A: Specialized[A]): A.Array =
+    inline A match
+              case _ : Specialized[A&Any.Boolean] => Arrays.copyOf(x.cast[Array[Boolean]],sz).cast[A.Array]
+              case _ : Specialized[A&Any.Byte   ] => Arrays.copyOf(x.cast[Array[Byte   ]],sz).cast[A.Array]
+              case _ : Specialized[A&Any.Char   ] => Arrays.copyOf(x.cast[Array[Char   ]],sz).cast[A.Array]
+              case _ : Specialized[A&Any.Short  ] => Arrays.copyOf(x.cast[Array[Short  ]],sz).cast[A.Array]
+              case _ : Specialized[A&Any.Int    ] => Arrays.copyOf(x.cast[Array[Int    ]],sz).cast[A.Array]
+              case _ : Specialized[A&Any.Long   ] => Arrays.copyOf(x.cast[Array[Long   ]],sz).cast[A.Array]
+              case _ : Specialized[A&Any.Float  ] => Arrays.copyOf(x.cast[Array[Float  ]],sz).cast[A.Array]
+              case _ : Specialized[A&Any.Double ] => Arrays.copyOf(x.cast[Array[Double ]],sz).cast[A.Array]
+              case _ : Specialized[A&AnyRef     ] => Arrays.copyOf(x.cast[Array[AnyRef ]],sz).cast[A.Array]
+              case _                              =>           any(x.cast[Array[A      ]],sz).cast[A.Array]
 
   def any[A](x: Array[A], sz:Int): Array[A] =
     x match
@@ -31,11 +30,9 @@ object copySize:
       case x: Array[Boolean]    => Arrays.copyOf(x.cast[Array[Boolean]],sz).cast[Array[A]]
       case _                    => J.illegalState()
 
-
-
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
- __\  \/ /___/ __  |/ /__/ /_/ /_/ __  |   (c) 2021, Scalqa.org Inc
+ __\  \/ /___/ __  |/ /__/ /_/ /_/ __  |   (A) 2021, Scalqa.org Inc
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/

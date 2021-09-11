@@ -1,18 +1,19 @@
 package scalqa; package lang; package int; package g; import language.implicitConversions
 
 abstract class Math[A<:Raw] extends Math.Ordering[A] with Gen.Math[A]:
-  final override def compare(x:A,y:A): Int = java.lang.Integer.compare(x,y)
+  override def compare(x:A,y:A): Int              = java.lang.Integer.compare(x,y)
+  override def reverse         : Math.Ordering[A] = new Math.zReversedOrdering(this)
 
 object Math:
 
   trait Ordering[A<:Raw] extends Gen.Math.Ordering[A]:
-    /**/     def compare(x:A,y:A): Int
-    override def reverse         : Ordering[A] = new zReversedOrdering(this);
+    override def compare(x:A,y:A): Int
+    override def reverse         : Ordering[A] = new zReversedOrdering(this)
 
   // *******************************************************************************
-  private class zReversedOrdering[A<:Raw](c: Ordering[A]) extends Ordering[A]:
-    /**/     def compare(x:A,y:A): Int         = c.compare(y,x)
-    override def reverse         : Ordering[A] = c
+  private class zReversedOrdering[A<:Raw](o: Ordering[A]) extends Ordering[A] with scala.Ordering[A]:
+    /**/     def compare(x:A,y:A): Int         = o.compare(y,x)
+    override def reverse         : Ordering[A] = o
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

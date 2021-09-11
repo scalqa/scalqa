@@ -11,17 +11,17 @@ object Background extends Delegate.Opaque[Background, JBackground]("Fx.Abstract.
     def images : Idx[Fx.Image] = Val.Idx.wrap(x.getImages).map_^(bi => Fx.Image(bi.getImage))
     def fills  : Idx[Fill]     = Val.Idx.wrap(x.getFills).map_^(Fill(_))
 
-  object OPAQUE:
-    opaque type TYPE <: AnyRef.Opaque = JBackground & AnyRef.Opaque
+  object TYPE:
+    opaque type DEF <: AnyRef.Opaque = JBackground & AnyRef.Opaque
 
   // *****************************************************************************************
-  type   Fill = Fill.OPAQUE.TYPE
+  type   Fill = Fill.TYPE.DEF
   object Fill extends Delegate.Opaque[Fill, JFill]("Fx.Abstract.Region.Background.Fill"):
-    object OPAQUE  { opaque type TYPE <: AnyRef.Opaque = JFill & AnyRef.Opaque}
+    object TYPE  { opaque type DEF <: AnyRef.Opaque = JFill & AnyRef.Opaque}
 
-  type   Image = Image.OPAQUE.TYPE
+  type   Image = Image.TYPE.DEF
   object Image extends Delegate.Opaque[Fx.Image, JImage]("Fx.Abstract.Region.Background.Image"):
-    object OPAQUE  { opaque type TYPE <: AnyRef.Opaque = JImage & AnyRef.Opaque}
+    object TYPE  { opaque type DEF <: AnyRef.Opaque = JImage & AnyRef.Opaque}
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

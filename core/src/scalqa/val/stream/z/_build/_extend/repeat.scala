@@ -1,6 +1,6 @@
 package scalqa; package `val`; package stream; package z; package _build; package _extend; import language.implicitConversions
 
-class repeat[A](x: ~[A], times: Int) extends a.Pipe[A](x) with Able.Size.Opt.Long:
+class repeat[A](x: ~[A], times: Int) extends z.x.Pipe[A](x) with Able.Size.Opt.Long:
   private var i = 0
   private var c: A = _
 

@@ -1,25 +1,25 @@
 package scalqa; package `val`; package stream; package _build; package _filter
 
-import z._build.{ _filter => F }
+import z._build.{ _filter => _Z, filter => Z }
 
 transparent trait _drop :
   extension[A](inline x: ~[A])
-    /**/              inline def drop(inline f: A => Boolean)            : ~[A] = new F.drop(x, f)
-    /**/              inline def dropWhile(inline f: A => Boolean)       : ~[A] = new F.dropWhile(x, f)
-    /**/              inline def dropFirst(inline n: Int)                : ~[A] = new F.dropFirst(x, n)
-    @tn("drop_Range") inline def drop_<>(inline i: Int.<>)               : ~[A] = new F.drop_Interval(x, i)
-    /**/              inline def dropLast(n: Int)                        : ~[A] = new F.dropLast(x.cast[~[AnyRef]], n).cast[~[A]]
-    /**/              inline def dropEvery(nTh: Int)                     : ~[A] = new F.dropEvery(x,nTh)
-    /**/              inline def dropDuplicates                          : ~[A] = new F.dropDuplicates(x)
-    /**/              inline def dropDuplicatesBy[B](inline f: A=>B)     : ~[A] = new F.dropDuplicates.By(x,f)
-  extension[A](x: ~[A])
-    /**/                     def dropAll(v: ~[A])                        : ~[A] = { val set=v.toSet;  if(set.isEmpty) x else x.DROP(v => set.contains(v))}
-    /**/                     def dropAllBy[B](f: A=>B,v: ~[B])           : ~[A] = { val set=v.toSet;  if(set.isEmpty) x else x.DROP(v => set.contains(f(v)))}
-    /**/                     def dropOnly(v: A, vs: A*)                  : ~[A] = if(vs.isEmpty) x.DROP(_ == v) else dropAll(vs.~ + v)
-    /**/                     def dropOnlyBy[B](f:A=>B,vs: B*)            : ~[A] = dropAllBy(f,vs.~)
-    /**/                     def dropVoid       (using Given.VoidDef[A]) : ~[A] = new F.dropVoid(x) // do not inline, there is same method in Opt - trouble when Opt[~[_]]
-  extension[A](inline x: ~[A])
-    /**/              inline def DROP(inline f: A => Boolean)            : ~[A] = { class DROP(x: ~[A]) extends z.a.Pipe[A](x){@tn("read_Opt") def read_? ={var o=x.read_?; while(o.nonEmpty){ if(!f(o.cast[A])) return o; o=x.read_?}; o}}; new DROP(x)}
+    /**/              inline def drop(inline f: A => Boolean)                     : ~[A] = new _Z.drop(x, f)
+    /**/              inline def dropWhile(inline f: A => Boolean)                : ~[A] = new _Z.dropWhile(x, f)
+    /**/              inline def dropFirst(inline n: Int)                         : ~[A] = new _Z.dropFirst(x, n)
+    @tn("drop_Range") inline def drop_<>(inline i: Int.<>)                        : ~[A] = new _Z.drop_Interval(x, i)
+    /**/              inline def dropLast(n: Int)                                 : ~[A] = new _Z.dropLast(x,n)
+    /**/              inline def dropEvery(nTh: Int)                              : ~[A] = new _Z.dropEvery(x,nTh)
+    /**/              inline def dropDuplicates                                   : ~[A] = new _Z.dropDuplicates(x)
+    /**/              inline def dropDuplicatesBy[B](inline f: A=>B)              : ~[A] = new _Z.dropDuplicates.By(x,f)
+    /**/              inline def dropSequence(inline seq: ~[A])                   : ~[A] = new  z._build._mutate.replaceSequence(x,  seq.><,\/)
+    /**/              inline def dropSequenceBy[B](inline f:A=>B,inline seq: ~[B]): ~[A] = new  z._build._mutate.replaceSequence(x,f,seq.><,\/)
+    /**/              inline def dropAll(inline v: ~[A])                          : ~[A] = Z.dropAll(x,v)
+    /**/              inline def dropAllBy[B](inline f:A=>B,inline v: ~[B])       : ~[A] = Z.dropAllBy(x,f,v)
+    /**/              inline def dropOnly(inline v: A, inline vs: A*)             : ~[A] = Z.dropOnly(x,v,vs)
+    /**/              inline def dropOnlyBy[B](inline f:A=>B,inline vs: B*)       : ~[A] = Z.dropOnlyBy(x,f,vs)
+    /**/              inline def dropVoid       (using inline d: Any.Def.Void[A]) : ~[A] = new _Z.dropVoid(x)
+    /**/              inline def DROP(inline f: A => Boolean)                     : ~[A] = Z.DROP(x,f)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -105,9 +105,9 @@ ___________________________________________________________________________*/
 
       Note: This method will block on unlimited streams
 
-@def dropOnly -> Single value reversed filter
+@def dropOnly -> Enumerated values reversed filter
 
-    Drops only specified value.
+    Drops only specified values.
 
     ```
        (1 <> 4).~.dropOnly(3).TP
@@ -116,7 +116,7 @@ ___________________________________________________________________________*/
        ~(1, 2, 4)
     ```
 
-    Note: [[dropOnly]] is more efficient than general filter, because there is no function involved.
+    Note: When single value is given, [[dropOnly]] is more efficient than general filter ".drop(_ == value)", because there is no function involved.
 
 @def dropWhile -> Coditional reversed head filter
 

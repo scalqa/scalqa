@@ -1,19 +1,18 @@
 package scalqa; package lang; import language.implicitConversions
 
-object Double extends double.g.customized.Containers[Double]:
+object Double extends double.g.Containers[Double]:
   inline def min     : Double               = java.lang.Double.MIN_VALUE
   inline def max     : Double               = java.lang.Double.MAX_VALUE
   inline def ordering: G.Ordering[Double]   = double.z.Math
   inline def math    : G.Math[Double]       = double.z.Math
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  type Opaque   = double.Opaque.TYPE.DEF;   transparent inline def Opaque = double.Opaque
   type _methods = double._methods;          transparent inline def G      = double.G
-  type Opaque   = double.Opaque;            transparent inline def Opaque = double.Opaque
-  type Raw      = Double | double.Opaque;   transparent inline def Raw    = double.Raw
 
 package object double:
-  type Raw = Double.Raw
-  opaque type Opaque >: Double <: AnyVal = Double
+  type Raw      = Any.Double
+  type Opaque   = double.Opaque.TYPE.DEF
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

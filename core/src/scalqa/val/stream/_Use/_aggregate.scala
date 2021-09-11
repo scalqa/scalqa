@@ -1,15 +1,15 @@
 package scalqa; package `val`; package stream; package _use; import language.implicitConversions
 
-import z._use.{ _aggregate as G }
+import z._use.{ _aggregate as Z }
 
 transparent trait _aggregate:
 
   extension[A](inline x: ~[A])
-    /**/              inline def fold     (inline start:A)(inline f:(A,A)=>A) : A      = G.fold.any(x,start,f)
-    transparent       inline def foldAs[B](inline start:B)(inline f:(B,A)=>B) : B      = G.foldAs.any(x,start,f)
+    /**/              inline def fold     (inline start:A)(inline f:(A,A)=>A) : A      = Z.fold.any(x,start,f)
+    transparent       inline def foldAs[B](inline start:B)(inline f:(B,A)=>B) : B      = Z.foldAs.any(x,start,f)
     /**/              inline def FOLD(inline start:A)(inline f:(A,A)=>A)      : A      = { var rv = start; x.FOREACH(fv => rv = f(rv,fv)); rv}
     /**/              inline def FOLD_AS[B](inline start:B)(inline f:(B,A)=>B): B      = { var rv = start; x.FOREACH(fv => rv = f(rv,fv)); rv}
-    @tn("reduce_Opt") inline def reduce_?(inline f: (A,A) => A)               : Opt[A] = G.reduce.opt(x,f)
+    @tn("reduce_Opt") inline def reduce_?(inline f: (A,A) => A)               : Opt[A] = Z.reduce.opt(x,f)
     /**/              inline def reduce(  inline f: (A,A) => A)               : A      = x.reduce_?(f).get
     /**/              inline def REDUCE(  inline f: (A,A) => A)               : A      = x.REDUCE_?(f).get
     @tn("REDUCE_Opt") inline def REDUCE_?(inline f: (A,A) => A)               : Opt[A] = {val s=x; s.read_?.map(v => s.FOLD(v)(f))}

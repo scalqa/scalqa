@@ -28,7 +28,7 @@ object Z:
 
   // --------------------------------------------------------------------------------------------------
   def validate(p: Permutation): Unit =
-    val list = p.rangeMutated
+    val list = p.positions
     if (p.range.size != list.size)
       J.illegalState("sizes:" + p.range.size + "!=" + list.size)
     val a = new Array[Boolean](list.size)
@@ -38,10 +38,12 @@ object Z:
     })
 
   // ***************************************************************************************
-  class Basic(val range: Int.<>, val rangeMutated: Int.><) extends Permutation:
-    assert(range.size == rangeMutated.size)
+  class Basic(val range : Int.<>, val positions: Int.><) extends Permutation:
+    assert(range.size == positions.size)
 
-  object Void extends Permutation with Gen.Void { def range = 0 <>> 0;  def rangeMutated: Int.>< = \/}
+  object Void extends Permutation with Gen.Void:
+    def range             = 0 <>> 0;
+    def positions: Int.>< = \/
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

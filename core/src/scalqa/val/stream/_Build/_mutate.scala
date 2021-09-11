@@ -1,28 +1,27 @@
 package scalqa; package `val`; package stream; package _build; import language.implicitConversions
 
-import gen.`given`.StreamShape
-import z._build.{ _mutate => M }
+import z._build.{ _mutate => _Z, mutate => Z }
 
 transparent trait _mutate:
   self: Stream.type =>
 
-  extension[A,STM<: ~~.RawType[A]](inline x: ~[A])
-    /**/          inline def raw(using inline s:StreamShape.Raw[A,STM]): STM               = M.raw(x,s)
   extension[A](inline x: ~[A])
-    /**/          inline def ref                                       : ~[A]              = x
-    /**/          inline def reverse                                   : ~[A]              = new M.reverse(x)
-    /**/          inline def reverseEvery(inline size: Int)            : ~[A]              = new M.reverseEvery(x, size)
-    /**/          inline def shuffle                                   : ~[A]              = new M.shuffle(x)
-    /**/          inline def transpose[B](using inline f:A => ~[B])    : ~[~[B]]           = new M.transpose[A](x,f.cast[A => ~[AnyRef]]).cast[~[~[B]]]
-    /**/          inline def synchronize                               : ~[A]              = new M.synchronize(x)
-  extension[A] (x: ~[A])
-    /**/                 def load                                      : ~[A] & Able.Size  = x.toBuffer.~.enableSize
-    /**/                 def hideSizeData                              : ~[A]              = if(x.sizeLong_?) new M.hideSizeData(x) else x
-    /**/                 def enablePreview                             : ~[A] & Preview[A] = x match{ case v: Preview[_] => v.cast[Preview[A]]; case v => M.preview(v)}
-    /**/                 def enableSize                                : ~[A] & Able.Size  = x match{ case v: Able.Size => x.cast[~[A] & Able.Size];  case v => M.enableSize(v)}
-    @tn("nonEmpty_Opt")  def nonEmpty_?                                : Opt[~[A]]         = x.sizeLong_? match
-                                                                                                          case o if o.nonEmpty => o.take(_ > 0).map(_ => x)
-                                                                                                          case _ => {val b=x.enablePreview; if(b.preview_?) b.? else \/}
+    inline def ref                                              : ~[A]              = x
+    inline def raw     (using inline A:Specialized.Primitive[A]): A.~               = _Z.raw(x)
+    inline def reverse                                          : ~[A]              = new _Z.reverse(x)
+    inline def reverseEvery(inline size: Int)                   : ~[A]              = new _Z.reverseEvery(x, size)
+    inline def shuffle                                          : ~[A]              = new _Z.shuffle(x)
+    inline def transpose[B]          (using inline f:A => ~[B]) : ~[~[B]]           = new _Z.transpose(x,f)
+    inline def synchronize                                      : ~[A]              = new _Z.synchronize(x)
+    inline def load                                             : ~[A] & Able.Size  = Z.load(x)
+    inline def hideSizeData                                     : ~[A]              = Z.hideSizeData(x)
+    inline def enablePreview                                    : ~[A] & Preview[A] = Z.enablePreview(x)
+    inline def enableSize                                       : ~[A] & Able.Size  = Z.enableSize(x)
+    inline def replaceSequence(inline seq: ~[A],inline to: ~[A]): ~[A]              = _Z.replaceSequence(x,seq.><,to.><)
+    inline def replaceSequenceBy[B](inline f:A=>B,
+                               inline seq: ~[B],inline to: ~[A]): ~[A]              = _Z.replaceSequence(x,f,seq.><,to.><)
+    @tn("nonEmpty_Opt")
+    inline def nonEmpty_?                                       : Opt[~[A]]         = Z.nonEmpty_Opt(x)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -79,19 +78,20 @@ ___________________________________________________________________________*/
      Immediately loads all stream elements into memory, so they are no longer dependent on underlying sources.
 
      ```
-        def strm : ~[String] = ?_?_?
+        def s : ~[String] = ?_?_?
 
-        strm.load
+        s.load
 
         // is functionally same as
 
-        strm.toBuffer.~
+        s.toBuffer.~
       ```
 
 @def nonEmpty_? -> Non empty option
+
     Optionally returns stream, if it is not empty.
 
-    Note: If stream does not have sizing information, this method will immediately preload at lease the first element.
+    Note: If stream does not have sizing information, this method will immediately preload at least the first element.
 
 @def enablePreview -> Enables preview capabilities
 
@@ -103,9 +103,9 @@ ___________________________________________________________________________*/
         if(strm.enablePreview.previewSize > 1000) "Stream is over 1K".TP
       ```
 
-@def raw -> Specialized stream
+@def raw -> Specialize
 
-    Converts current stream into specialized on underlying primitive data. If stream is already specialized, the conversion is a simple cas t.
+    Converts current stream into specialized on underlying primitive type. If stream is already specialized, the conversion is a simple cast.
 
     ```
         val s  : ~[Int] = 1 <> 10

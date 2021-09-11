@@ -3,13 +3,13 @@ package scalqa; package j; package util; package test; package z; import languag
 object streamsEqual:
 
   def result[A](s1: ~[A], s2: ~[A], ms: ~[~[A]]): Result[true] =
-    val firstList = s1.><
-    val restList  = ms.><
-    (~~(s2) ++ restList.~)
+    val firstPack = s1.><
+    val restPack  = ms.><
+    (~~(s2) ++ restPack.~)
       .zipIndex(2)
       .map(t => {
-        var v: Result[true] = firstList.~.equalsAll_??(t._2)
-        if(v.isProblem) v = new Problem((if(restList.isEmpty) "Streams" else "1 and "+t._1+" streams") + " are not equal. " + v.problem.message)
+        var v: Result[true] = firstPack.~.equalsSequence_??(t._2)
+        if(v.isProblem) v = new Problem((if(restPack.isEmpty) "Streams" else "1 and "+t._1+" streams") + " are not equal. " + v.problem.message)
         v
       })
       .take(_.isProblem)

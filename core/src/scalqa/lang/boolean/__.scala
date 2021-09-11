@@ -1,15 +1,14 @@
 package scalqa; package lang; import language.implicitConversions
 
-object Boolean extends boolean.g.customized.Containers[Boolean]:
+object Boolean extends boolean.g.Containers[Boolean]:
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  type Opaque   = boolean.Opaque.TYPE.DEF;   transparent inline def Opaque = boolean.Opaque
   type _methods = boolean._methods;          transparent inline def G      = boolean.G
-  type Opaque   = boolean.Opaque;            transparent inline def Opaque = boolean.Opaque
-  type Raw      = Boolean | boolean.Opaque;  transparent inline def Raw    = boolean.Raw
 
 package object boolean:
-  type Raw    = Boolean.Raw
-  opaque type Opaque >: Boolean <: AnyVal = Boolean
+  type Raw      = Any.Boolean
+  type Opaque   = boolean.Opaque.TYPE.DEF
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -31,4 +30,5 @@ ___________________________________________________________________________*/
 
         val l: Boolean.><   = s.><       // Holds (true,false,false)
     ```
+
 */

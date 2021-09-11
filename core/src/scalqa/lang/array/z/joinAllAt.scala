@@ -1,21 +1,19 @@
 package scalqa; package lang; package array; package z; import language.implicitConversions
 
-import gen.`given`.ArrayShape
-
 object joinAllAt:
 
-  inline def apply[A,ARRAY<:Array.AnyType[A]](inline x: ARRAY, inline i: Int, inline v: ~[A], inline t: ArrayShape[A,ARRAY]) : ARRAY =
-    inline t match
-      case _ : ArrayShape[A&Boolean.Raw,Array[A&Boolean.Raw]] => boolean(x.cast[Array[Boolean]],i,v.cast[~[Boolean]]).cast[ARRAY]
-      case _ : ArrayShape[A&Byte.Raw,   Array[A&Byte.Raw   ]] => byte   (x.cast[Array[Byte   ]],i,v.cast[~[Byte   ]]).cast[ARRAY]
-      case _ : ArrayShape[A&Char.Raw,   Array[A&Char.Raw   ]] => char   (x.cast[Array[Char   ]],i,v.cast[~[Char   ]]).cast[ARRAY]
-      case _ : ArrayShape[A&Short.Raw,  Array[A&Short.Raw  ]] => short  (x.cast[Array[Short  ]],i,v.cast[~[Short  ]]).cast[ARRAY]
-      case _ : ArrayShape[A&Int.Raw,    Array[A&Int.Raw    ]] => int    (x.cast[Array[Int    ]],i,v.cast[~[Int    ]]).cast[ARRAY]
-      case _ : ArrayShape[A&Long.Raw,   Array[A&Long.Raw   ]] => long   (x.cast[Array[Long   ]],i,v.cast[~[Long   ]]).cast[ARRAY]
-      case _ : ArrayShape[A&Float.Raw,  Array[A&Float.Raw  ]] => float  (x.cast[Array[Float  ]],i,v.cast[~[Float  ]]).cast[ARRAY]
-      case _ : ArrayShape[A&Double.Raw, Array[A&Double.Raw ]] => double (x.cast[Array[Double ]],i,v.cast[~[Double ]]).cast[ARRAY]
-      case _ : ArrayShape[A&AnyRef,     Array[A&AnyRef     ]] => anyref (x.cast[Array[AnyRef ]],i,v.cast[~[AnyRef ]]).cast[ARRAY]
-      case _                                                  => any    (x.cast[Array[A      ]],i,v                 ).cast[ARRAY]
+  inline def apply[A](inline x: Array[A], inline i: Int, inline v: ~[A])(using inline A: Specialized[A]): A.Array =
+    inline A match
+      case _ : Specialized[A&Any.Boolean] => boolean(x.cast[Array[Boolean]],i,v.cast[~[Boolean]]).cast[A.Array]
+      case _ : Specialized[A&Any.Byte   ] => byte   (x.cast[Array[Byte   ]],i,v.cast[~[Byte   ]]).cast[A.Array]
+      case _ : Specialized[A&Any.Char   ] => char   (x.cast[Array[Char   ]],i,v.cast[~[Char   ]]).cast[A.Array]
+      case _ : Specialized[A&Any.Short  ] => short  (x.cast[Array[Short  ]],i,v.cast[~[Short  ]]).cast[A.Array]
+      case _ : Specialized[A&Any.Int    ] => int    (x.cast[Array[Int    ]],i,v.cast[~[Int    ]]).cast[A.Array]
+      case _ : Specialized[A&Any.Long   ] => long   (x.cast[Array[Long   ]],i,v.cast[~[Long   ]]).cast[A.Array]
+      case _ : Specialized[A&Any.Float  ] => float  (x.cast[Array[Float  ]],i,v.cast[~[Float  ]]).cast[A.Array]
+      case _ : Specialized[A&Any.Double ] => double (x.cast[Array[Double ]],i,v.cast[~[Double ]]).cast[A.Array]
+      case _ : Specialized[A&AnyRef     ] => anyref (x.cast[Array[AnyRef ]],i,v.cast[~[AnyRef ]]).cast[A.Array]
+      case _                              => any    (x.cast[Array[A      ]],i,v                 ).cast[A.Array]
 
   def any[A](x: Array[A], i:Int, v: ~[A]): Array[A] =
     x match
@@ -47,7 +45,7 @@ object joinAllAt:
   def long   (x:Array[Long],   i:Int, v: ~[Long],   sz:Int): Array[Long]   ={val b=lang.long   .g.Buffer.accessible(new Array[Long   ](v.size_?.map(_ + sz) or i+J.initSize),i).^(_ ++= v); var a=b.access; val s=b.size+sz-i; if(a.length != s) a=a.copySize(s); x.copyTo(a,0,0,i); x.copyTo(a,b.size,i,sz-i); a}
   def float  (x:Array[Float],  i:Int, v: ~[Float],  sz:Int): Array[Float]  ={val b=lang.float  .g.Buffer.accessible(new Array[Float  ](v.size_?.map(_ + sz) or i+J.initSize),i).^(_ ++= v); var a=b.access; val s=b.size+sz-i; if(a.length != s) a=a.copySize(s); x.copyTo(a,0,0,i); x.copyTo(a,b.size,i,sz-i); a}
   def double (x:Array[Double], i:Int, v: ~[Double], sz:Int): Array[Double] ={val b=lang.double .g.Buffer.accessible(new Array[Double ](v.size_?.map(_ + sz) or i+J.initSize),i).^(_ ++= v); var a=b.access; val s=b.size+sz-i; if(a.length != s) a=a.copySize(s); x.copyTo(a,0,0,i); x.copyTo(a,b.size,i,sz-i); a}
-  def anyref (x:Array[AnyRef], i:Int, v: ~[AnyRef], sz:Int): Array[AnyRef] ={val b=lang.anyref .g.Buffer.accessible(new Array[AnyRef ](v.size_?.map(_ + sz) or i+J.initSize),i).^(_ ++= v); var a=b.access; val s=b.size+sz-i; if(a.length != s) a=a.copySize(s); x.copyTo(a,0,0,i); x.copyTo(a,b.size,i,sz-i); a}
+  def anyref (x:Array[AnyRef], i:Int, v: ~[AnyRef], sz:Int): Array[AnyRef] ={val b=lang.anyref   .Buffer.accessible(new Array[AnyRef ](v.size_?.map(_ + sz) or i+J.initSize),i).^(_ ++= v); var a=b.access; val s=b.size+sz-i; if(a.length != s) a=a.copySize(s); x.copyTo(a,0,0,i); x.copyTo(a,b.size,i,sz-i); a}
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

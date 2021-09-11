@@ -3,7 +3,7 @@ package scalqa; package lang; package byte; import language.implicitConversions
 transparent trait _methods:
 
   extension(inline x:Byte)
-    @tn("Opt")        inline def ?                        : lang.Byte.Opt  = x.cast[lang.Byte.Opt]
+    @tn("Opt")        inline def ?                        : lang.Byte.Opt  = x.cast[Byte.Opt]
     @tn("range")      inline def <> (inline to: Byte)     : lang.Byte.<>   = {val w=x; w <>= to-w+1 }
     @tn("rangeX")     inline def <>>(inline to: Byte)     : lang.Byte.<>   = {val w=x; w <>= to-w   }
     @tn("rangeOfSize")inline def <>=(inline size: Int)    : lang.Byte.<>   = new lang.Byte.<>(x,size)

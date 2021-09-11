@@ -1,6 +1,6 @@
 package scalqa; package fx; package control; package table; import column.*; import language.implicitConversions
 
-abstract class Column[ROW,V,A] private[control](val voidTag: Given.VoidDef[A], val docTag: Given.DocDef[A]) extends cell.Setup[ROW,V,A] with _value[ROW,V,A] with _edit[ROW,V,A] with _properties[ROW,V,A] with _customCell[ROW,V,A]:
+abstract class Column[ROW,V,A] private[control](val voidDef: Any.Def.Void[A], val docDef: Any.Def.Doc[A]) extends cell.Setup[ROW,V,A] with _value[ROW,V,A] with _edit[ROW,V,A] with _properties[ROW,V,A] with _customCell[ROW,V,A]:
   protected type REAL = javafx.scene.control.TableColumn[ROW, Cell.Item[ROW, V, A]]
   val real = new REAL {
     setSortable(false)
@@ -25,9 +25,13 @@ abstract class Column[ROW,V,A] private[control](val voidTag: Given.VoidDef[A], v
   /**/                     def refreshRow(c: Cell[ROW,V,A])       : Unit               = refreshAt(c.index)
   /**/                     def refreshAt(i: Int)                  : Unit               = column.table.rows.refreshAt(i)
   @tn("refresh_Range")     def refresh_<>(r: Int.<>)              : Unit               = column.table.rows.refresh_<>(r)
-  override                 def doc                                : Doc                = super.doc +=@ (0, "label", label) +=@ (1, "width", width)
+  override                 def doc                                : Doc                = super.doc +@= (0, "label", label) +@= (1, "width", width)
   private[table]           def column                             : Column[ROW,V,A]    = this
   private[table]           def rowOrdering                        : Ordering[ROW]      = { val o = ordering.opt_^(1).on[ROW](e => mkProOpt(e)()); if (real.getSortType == javafx.scene.control.TableColumn.SortType.DESCENDING) o.reverse else o }
+
+  // This will move to _properties when dotty issue 13358 is fixed
+  @tn("ordering_Pro")@fast lazy val ordering_*                  : Pro.OM[Ordering[A]] = Pro.OM(\/)
+  @tn("sortable_Pro")@fast lazy val sortable_*                  : Boolean.Pro.OM      = Fx.JavaFx.To.pro_OM(real.sortableProperty)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

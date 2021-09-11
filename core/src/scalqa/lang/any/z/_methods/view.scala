@@ -1,17 +1,15 @@
 package scalqa; package lang; package any; package z; package _methods; import language.implicitConversions
 
-import gen.`given`. { VoidDef, EmptyDef }
-
 transparent trait view:
 
   extension[A](x: any._Methods._view[A])
-    @tn("selfIsVoid")   inline def isVoid                  (using inline d:VoidDef[A]) : Boolean   = x==null ||  d.value_isVoid(x.cast[A])
-    @tn("selfNonVoid")  inline def nonVoid                 (using inline d:VoidDef[A]) : Boolean   = x!=null && !d.value_isVoid(x.cast[A])
+    @tn("selfIsVoid")   inline def isVoid                  (using inline d:Def.Void[A]) : Boolean   = x==null ||  d.value_isVoid(x.cast[A])
+    @tn("selfNonVoid")  inline def nonVoid                 (using inline d:Def.Void[A]) : Boolean   = x!=null && !d.value_isVoid(x.cast[A])
 
   extension[A](inline x: any._Methods._view[A])
-    @tn("nonEmpty_Opt") inline def ? (using inline e:EmptyDef[A], inline d:VoidDef[A]) : Opt[A]    = {var o:Opt[A] = \/; val v=x.cast[A&AnyRef]; if(v!=null && !d.value_isVoid(v) && !e.value_isEmpty(v)) o=v; o}
+    @tn("nonEmpty_Opt") inline def ? (using inline e:Def.Empty[A],inline d:Def.Void[A]) : Opt[A]    = {var o:Opt[A] = \/; val v=x.cast[A&AnyRef]; if(v!=null && !d.value_isVoid(v) && !e.value_isEmpty(v)) o=v; o}
   extension[A](inline x: any._Methods._view[~[A]]) // ~ has to be treated differently from others
-    @tn("nonEmpty_Opt") inline def ?                                                   : Opt[~[A]] = view.nonEmptyStream_Opt(x.cast[~[A]])
+    @tn("nonEmpty_Opt") inline def ?                                                    : Opt[~[A]] = view.nonEmptyStream_Opt(x.cast[~[A]])
 
 
 object view:

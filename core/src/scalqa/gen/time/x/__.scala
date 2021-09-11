@@ -2,7 +2,7 @@ package scalqa; package gen; package time; import language.implicitConversions
 
 object X:
 
-  type Base[A<:Long.Raw]    = x.Base[A]
+  type Base[A<:Any.Long]    = x.Base[A]
 
   transparent inline def Nanos  = x.Nanos
   transparent inline def Millis = x.Millis
@@ -14,5 +14,5 @@ object X:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object X -> ###  \n\n Object [[X]] defines standard parent type extensions
+@object X -> ### Type Extention
 */

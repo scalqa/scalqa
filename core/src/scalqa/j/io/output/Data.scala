@@ -4,7 +4,7 @@ import Output.Data
 import java.io.{ DataOutputStream as REAL }
 
 object Data extends AnyRef.Opaque.Base[Data, REAL]("Io.Output.Data"):
-  inline def apply(inline v: Io.Output): Data = new REAL(v.real).opaque
+  inline def apply(inline v: Io.Output): Data = new REAL(v.real).toOpaque
 
   extension (x: Data)
     inline def flush                      : Data = { x.real.flush;           x }
@@ -20,8 +20,8 @@ object Data extends AnyRef.Opaque.Base[Data, REAL]("Io.Output.Data"):
     inline def char   (inline v: String)  : Data = { x.real.writeChars(v);   x }
     inline def utf    (inline v: String)  : Data = { x.real.writeUTF(v);     x }
 
-  object OPAQUE:
-    opaque type TYPE <: java.io.Closeable & AnyRef.Opaque = REAL & AnyRef.Opaque
+  object TYPE:
+    opaque type DEF <: java.io.Closeable & AnyRef.Opaque = REAL & AnyRef.Opaque
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
@@ -29,7 +29,7 @@ object Data extends AnyRef.Opaque.Base[Data, REAL]("Io.Output.Data"):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object OPAQUE  -> ###
+@type DEF  -> ###
 
    [[J.Output.Data]] is an opaque value, backed by java.io.DataOutputStream
 

@@ -1,20 +1,48 @@
 package scalqa; package lang; package any; package z; import language.implicitConversions
 
-import gen.`given`.OptShape
-
 object opt:
 
-  transparent inline def apply[A,OPT<:Opt.AnyType[A]](x: A, inline s:OptShape[A,OPT] ): OPT =
-    inline s match
-      case _ : OptShape[A,Boolean.G.Opt[A]] => (if(x.cast[Boolean]) Boolean.G.Opt.TRUE else Boolean.G.Opt.FALSE).asInstanceOf[OPT & Boolean.G.Opt[A & Boolean]]
-      case _ : OptShape[A,Byte   .G.Opt[A]] => x.asInstanceOf[OPT & Byte  .G.Opt[A & Byte]]
-      case _ : OptShape[A,Char   .G.Opt[A]] => x.asInstanceOf[OPT & Char  .G.Opt[A & Char]]
-      case _ : OptShape[A,Short  .G.Opt[A]] => x.asInstanceOf[OPT & Short .G.Opt[A & Short]]
-      case _ : OptShape[A,Int    .G.Opt[A]] => x.asInstanceOf[OPT & Int   .G.Opt[A & Int]]
-      case _ : OptShape[A,Long   .G.Opt[A]] => x.asInstanceOf[OPT & Long  .G.Opt[A & Long]]
-      case _ : OptShape[A,Float  .G.Opt[A]] => x.asInstanceOf[OPT & Float .G.Opt[A & Float]]
-      case _ : OptShape[A,Double .G.Opt[A]] => x.asInstanceOf[OPT & Double.G.Opt[A & Double]]
-      case _ : OptShape[A,      Val.Opt[A]] => (if(x == null) ZZ.None else x).cast[Val.Opt[A]]
+  inline def make[A](x: A)(using inline A:Specialized[A]): A.Opt =
+    inline A match
+      case _ : Specialized[A & Any.Boolean] => (if(x.cast[Boolean]) Boolean.G.Opt.TRUE else Boolean.G.Opt.FALSE).cast[Boolean.Opt].cast[A.Opt]
+      case _ : Specialized[A & Any.Byte   ] => x.cast[Byte  .Opt].cast[A.Opt]
+      case _ : Specialized[A & Any.Char   ] => x.cast[Char  .Opt].cast[A.Opt]
+      case _ : Specialized[A & Any.Short  ] => x.cast[Short .Opt].cast[A.Opt]
+      case _ : Specialized[A & Any.Int    ] => x.cast[Int   .Opt].cast[A.Opt]
+      case _ : Specialized[A & Any.Long   ] => x.cast[Long  .Opt].cast[A.Opt]
+      case _ : Specialized[A & Any.Float  ] => x.cast[Float .Opt].cast[A.Opt]
+      case _ : Specialized[A & Any.Double ] => x.cast[Double.Opt].cast[A.Opt]
+      case _ : Specialized[A              ] => (if(x == null) ZZ.None else x).cast[Val.Opt[A]].cast[A.Opt]
+
+  // *************************************************************************************************
+  class NameDef[A]()(using t :Any.Def.TypeName[A]) extends Def.TypeName[A]:
+    def typeName = t.typeName + ".Opt"
+
+  // *************************************************************************************************
+  object Ops:
+
+    extension[A](x: Any.Opt[A])
+      inline def SOME: Boolean = inline x match
+        case _: boolean.G.Opt[A] => x.cast[boolean.G.Opt[A & Any.Boolean]].nonEmpty
+        case _: byte   .G.Opt[A] => x.cast[byte   .G.Opt[A & Any.Byte   ]].nonEmpty
+        case _: char   .G.Opt[A] => x.cast[char   .G.Opt[A & Any.Char   ]].nonEmpty
+        case _: short  .G.Opt[A] => x.cast[short  .G.Opt[A & Any.Short  ]].nonEmpty
+        case _: int    .G.Opt[A] => x.cast[int    .G.Opt[A & Any.Int    ]].nonEmpty
+        case _: long   .G.Opt[A] => x.cast[long   .G.Opt[A & Any.Long   ]].nonEmpty
+        case _: float  .G.Opt[A] => x.cast[float  .G.Opt[A & Any.Float  ]].nonEmpty
+        case _: double .G.Opt[A] => x.cast[double .G.Opt[A & Any.Double ]].nonEmpty
+        case _: Val.Opt[A]       => x.cast[Val.Opt[A]].nonEmpty
+
+      inline def VAL: A = inline x match
+        case _: boolean.G.Opt[A] => x.cast[boolean.G.Opt[A & Any.Boolean]].`val`
+        case _: byte   .G.Opt[A] => x.cast[byte   .G.Opt[A & Any.Byte   ]].`val`
+        case _: char   .G.Opt[A] => x.cast[char   .G.Opt[A & Any.Char   ]].`val`
+        case _: short  .G.Opt[A] => x.cast[short  .G.Opt[A & Any.Short  ]].`val`
+        case _: int    .G.Opt[A] => x.cast[int    .G.Opt[A & Any.Int    ]].`val`
+        case _: long   .G.Opt[A] => x.cast[long   .G.Opt[A & Any.Long   ]].`val`
+        case _: float  .G.Opt[A] => x.cast[float  .G.Opt[A & Any.Float  ]].`val`
+        case _: double .G.Opt[A] => x.cast[double .G.Opt[A & Any.Double ]].`val`
+        case v:       Val.Opt[A] => x.cast[      Val.Opt[A              ]].`val`
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

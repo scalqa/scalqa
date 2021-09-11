@@ -4,9 +4,9 @@ import java.math. { BigInteger => REAL }
 import Math.BigInteger
 
 object BigInteger extends AnyRef.Opaque.Data[BigInteger,REAL]("BigInteger"):
-  inline   def apply(inline v: REAL)   : BigInteger  = v.opaque
-  inline   def apply(inline v: Long)   : BigInteger  = REAL.valueOf(v).opaque
-  inline   def apply(inline v: String) : BigInteger  = REAL(v).opaque
+  inline   def apply(inline v: REAL)   : BigInteger  = v.toOpaque
+  inline   def apply(inline v: Long)   : BigInteger  = REAL.valueOf(v).toOpaque
+  inline   def apply(inline v: String) : BigInteger  = REAL(v).toOpaque
   override def value_tag(v: BigInteger): String      = v.real.toString
 
   given ordering : Ordering[BigInteger] with
@@ -20,19 +20,19 @@ object BigInteger extends AnyRef.Opaque.Data[BigInteger,REAL]("BigInteger"):
     @tn("greaterOrEqual")   inline def  >= (inline v: Long | BigInteger) : Boolean        = x.real.compareTo(v.mkReal) >= 0
     @tn("less")             inline def  <  (inline v: Long | BigInteger) : Boolean        = x.real.compareTo(v.mkReal) <  0
     @tn("lessOrEqual")      inline def  <= (inline v: Long | BigInteger) : Boolean        = x.real.compareTo(v.mkReal) <= 0
-    @tn("plus")             inline def  +  (inline v: Long | BigInteger) : BigInteger     = x.real.add(v.mkReal).opaque
-    @tn("minus")            inline def  -  (inline v: Long | BigInteger) : BigInteger     = x.real.subtract(v.mkReal).opaque
-    @tn("multiply")         inline def  *  (inline v: Long | BigInteger) : BigInteger     = x.real.multiply(v.mkReal).opaque
-    @tn("divide")           inline def  /  (inline v: Long | BigInteger) : BigInteger     = x.real.divide(v.mkReal).opaque
-    @tn("remainder")        inline def  %  (inline v: Long | BigInteger) : BigInteger     = x.real.remainder(v.mkReal).opaque
-    /**/                    inline def abs                               : BigInteger     = x.real.abs().opaque
-    /**/                    inline def unary_-                           : BigInteger     = x.real.negate.opaque
+    @tn("plus")             inline def  +  (inline v: Long | BigInteger) : BigInteger     = x.real.add(v.mkReal).toOpaque
+    @tn("minus")            inline def  -  (inline v: Long | BigInteger) : BigInteger     = x.real.subtract(v.mkReal).toOpaque
+    @tn("multiply")         inline def  *  (inline v: Long | BigInteger) : BigInteger     = x.real.multiply(v.mkReal).toOpaque
+    @tn("divide")           inline def  /  (inline v: Long | BigInteger) : BigInteger     = x.real.divide(v.mkReal).toOpaque
+    @tn("remainder")        inline def  %  (inline v: Long | BigInteger) : BigInteger     = x.real.remainder(v.mkReal).toOpaque
+    /**/                    inline def abs                               : BigInteger     = x.real.abs().toOpaque
+    /**/                    inline def unary_-                           : BigInteger     = x.real.negate.toOpaque
     /**/                    inline def sign                              : Int            = x.real.signum
     /**/                    inline def toLong                            : Long           = x.real.longValue
     /**/                    inline def toNumber                          : REAL           = x.real
 
-  object OPAQUE:
-    opaque type TYPE <: AnyRef.Opaque = REAL & AnyRef.Opaque
+  object TYPE:
+    opaque type DEF <: AnyRef.Opaque = REAL & AnyRef.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -41,7 +41,7 @@ object BigInteger extends AnyRef.Opaque.Data[BigInteger,REAL]("BigInteger"):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object OPAQUE  -> ### Big Integer
+@type DEF  -> ### Big Integer
 
       [[BigInteger]] is an opaque value holding java.math.BigInteger
 

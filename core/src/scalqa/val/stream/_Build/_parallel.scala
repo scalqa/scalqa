@@ -5,7 +5,7 @@ transparent trait _parallel:
 
   extension[A](x: ~[A])
     def parallel                                                                             : Flow[A] = J.Setup.parallelFlowSetup_*()(x.cast[~[Any]],\/).cast[Flow[A]]
-    def parallelIf(v: Boolean)                                                               : Flow[A] = if (v) x.parallel else z.flow.Flow_asStreamWrap(x)
+    def parallelIf(v: Boolean)                                                               : Flow[A] = if (v) x.parallel else z.flow.SequencialFlow(x)
     def parallelIfOver(threshold: Int)                                                       : Flow[A] = { val b = x.enablePreview; b.parallelIf(b.previewSize > threshold) }
     def parallelWithPriority(p: J.Vm.Priority, parallelism: Int = J.Vm.availableProcessors-1): Flow[A] = J.Setup.parallelFlowSetup_*()(x.cast[~[Any]],(p,parallelism)).cast[Flow[A]]
 

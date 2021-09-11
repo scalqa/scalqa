@@ -4,7 +4,7 @@ import J.Url
 import java.net.{ URL as REAL }
 
 object Url extends AnyRef.Opaque.Base[Url,REAL]("Url"):
-  /**/     inline def apply(inline v: REAL)                : Url    = v.opaque
+  /**/     inline def apply(inline v: REAL)                : Url    = v.toOpaque
   /**/     inline def apply(inline v: String)              : Url    = apply(REAL(v))
   /**/            def apply(c:Class[_],resourceName:String): Url    = { val v = c.getResource(resourceName); if(v != null) apply(v) else J.illegalState("Resourse: '" + resourceName +"' is no available within class: " + c.getName)}
   override        def value_tag(v:Url)                     : String = v.real.toExternalForm
@@ -18,11 +18,11 @@ object Url extends AnyRef.Opaque.Base[Url,REAL]("Url"):
     inline def readString                      : String         = x.openInput.asText.readAllAndClose
     inline def readString(timeOut: Time.Length): String         = Z.readString(x,timeOut)
 
-  object OPAQUE:
-    opaque type TYPE <: AnyRef.Opaque = REAL & AnyRef.Opaque
+  object TYPE:
+    opaque type DEF <: AnyRef.Opaque = REAL & AnyRef.Opaque
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Connection = url.Connection.OPAQUE.TYPE; transparent inline def Connection = url.Connection
+  type Connection = url.Connection.TYPE.DEF; transparent inline def Connection = url.Connection
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -31,7 +31,7 @@ object Url extends AnyRef.Opaque.Base[Url,REAL]("Url"):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object OPAQUE  -> ###
+@type DEF  -> ###
 
    [[J.Url]] is an opaque value, backed by java.net.URL
 

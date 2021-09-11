@@ -1,18 +1,19 @@
 package scalqa; package `val`; package stream; package _build; import language.implicitConversions
 
-import z._build.{ _peek => P }
+import z.{ _build as Z }
+import Z.{ _peek => _Z }
 
 transparent trait _peek:
   self: Stream.type =>
 
   extension[A](x: ~[A])
-    inline def peek[U](inline f: A => U)                                : ~[A]  = new P.peek(x,f)
-    inline def peekIndexed[U](inline f: (Int,A)=>U, inline start:Int=0) : ~[A]  = new P.peekIndexed(x, f, start)
-    /**/   def peekStart[U](f: Time=>U)                                 : ~[A]  = x.peekEvents(_.onBeforeFirst(f))
-    /**/   def peekEnd[U](  f: (Int,Time.Length)=>U)                    : ~[A]  = x.peekEvents(_.onAfterLast(f))
-    /**/   def peekEmpty[U](f: => U)                                    : ~[A]  = x.peekEvents(_.onEmpty(() => f))
-    /**/   def peekEvents[U]( f: Custom.Event => U)                     : ~[A]  = new P.monitor(x, new Custom.Event().^(f(_)))
-    /**/   def peekMonitor(v: Custom.Event.Monitor)                     : ~[A]  = if (v.^.isVoid) x else new P.monitor(x, v)
+    inline def peek[U](inline f: A => U)                                : ~[A]  = new Z.peek(x,f)
+    inline def peekIndexed[U](inline f: (Int,A)=>U, inline start:Int=0) : ~[A]  = new _Z.peekIndexed(x, f, start)
+    inline def peekStart[U] (inline f: Time=>U)                         : ~[A]  = Z.peek.start(x,f)
+    inline def peekEnd[U]   (inline f: (Int,Time.Length)=>U)            : ~[A]  = Z.peek.end(x,f)
+    inline def peekEmpty[U] (inline f: => U)                            : ~[A]  = Z.peek.empty(x,f)
+    inline def peekEvents[U](inline f: Custom.Event => U)               : ~[A]  = Z.peek.events(x,f)
+    inline def peekMonitor  (inline v: Custom.Event.Monitor)            : ~[A]  = Z.peek.monitor(x,v)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -97,7 +98,7 @@ ___________________________________________________________________________*/
         Stream is empty
       ```
 
-@def peekEvents -> Custom events
+@def peekEvents -> Specialized events
 
     Allows to setup [[scalqa.val.stream.custom.Event ~~.Custom.Events]] multiple monitoring events
 
@@ -122,7 +123,7 @@ ___________________________________________________________________________*/
       Finished in: 5.411673300 secs, Element count: 1000
     ```
 
-@def peekMonitor -> Custom monitor
+@def peekMonitor -> Specialized monitor
 
     Adds pre-build [[scalqa.val.stream.custom.event.Monitor ~~.Custom.Event.Monitor ]]
 

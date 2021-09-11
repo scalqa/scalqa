@@ -4,7 +4,7 @@ import Io.Output
 import java.io.{ OutputStream as REAL }
 
 object Output extends AnyRef.Opaque.Base[Output, REAL]("Io.Output"):
-  inline def apply(inline v: REAL): Output = v.opaque
+  inline def apply(inline v: REAL): Output = v.toOpaque
   /**/   def apply(f: File.Path)  : Output = apply(java.io.FileOutputStream(f.real.toFile))
 
   extension (x: Output)
@@ -14,14 +14,14 @@ object Output extends AnyRef.Opaque.Base[Output, REAL]("Io.Output"):
     def asPrinter : java.io.PrintStream   = java.io.PrintStream(x.real)
     def flush     : Output                = { x.real.flush; x }
 
-  object OPAQUE:
-    opaque type TYPE <: java.io.Closeable & AnyRef.Opaque = REAL & AnyRef.Opaque
+  object TYPE:
+    opaque type DEF <: java.io.Closeable & AnyRef.Opaque = REAL & AnyRef.Opaque
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Bytes  = output.Bytes.OPAQUE.TYPE;  transparent inline def Bytes  = output.Bytes
-  type Data   = output.Data.OPAQUE.TYPE;   transparent inline def Data   = output.Data
-  type Text   = output.Text.OPAQUE.TYPE;   transparent inline def Text   = output.Text
-  type Buffer = output.Buffer.OPAQUE.TYPE; transparent inline def Buffer = output.Buffer
+  type Bytes  = output.Bytes.TYPE.DEF;  transparent inline def Bytes  = output.Bytes
+  type Data   = output.Data.TYPE.DEF;   transparent inline def Data   = output.Data
+  type Text   = output.Text.TYPE.DEF;   transparent inline def Text   = output.Text
+  type Buffer = output.Buffer.TYPE.DEF; transparent inline def Buffer = output.Buffer
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -30,7 +30,7 @@ object Output extends AnyRef.Opaque.Base[Output, REAL]("Io.Output"):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object OPAQUE  -> ###
+@type DEF  -> ###
 
    [[J.Output]] is an opaque value, backed by java.io.OutputStream
 

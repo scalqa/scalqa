@@ -1,18 +1,18 @@
 package scalqa
 
 object Val:
-  @tn("Stream") transparent inline def ~          = `val`.Stream;      @tn("Stream") type ~[A]           = `val`.Stream[A]
-  @tn("Range")  transparent inline def <>         = `val`.Range;       @tn("Range")  type <>[A]          = `val`.Range[A]
-  @tn("Pack")   transparent inline def ><         = `val`.Pack;        @tn("Pack")   type ><[A]          = `val`.Pack[A]
-  /**/          transparent inline def Buffer     = `val`.Buffer;                    type Buffer[A]      = `val`.Buffer[A]
-  /**/          transparent inline def Collection = `val`.Collection;                type Collection[+A] = `val`.Collection[A]
-  /**/          transparent inline def Idx        = `val`.Idx;                       type Idx[+A]        = `val`.Idx[A]
-  /**/          transparent inline def Lookup     = `val`.Lookup;                    type Lookup[A,+B]   = `val`.Lookup[A,B]
-  /**/          transparent inline def Opt        = `val`.Opt;                       type Opt[+A]        = `val`.Opt.OPAQUE.TYPE[A]
-  /**/          transparent inline def Pro        = `val`.Pro;                       type Pro[+A]        = `val`.Pro[A]
-  /**/          transparent inline def Promise    = `val`.Promise;                   type Promise[+A]    = `val`.Promise[A]
-  /**/          transparent inline def Result     = `val`.Result;                    type Result[+A]     = `val`.Result.OPAQUE.TYPE[A]
-  /**/          transparent inline def StableSet  = Collection.StableSet;            type StableSet[A]   = Collection.StableSet[A]
+  @tn("Stream") type ~[A]           = `val`.Stream[A];    @tn("Stream") transparent inline def ~          = `val`.Stream;
+  @tn("Range")  type <>[A]          = `val`.Range[A];     @tn("Range")  transparent inline def <>         = `val`.Range;
+  @tn("Pack")   type ><[A]          = `val`.Pack[A];      @tn("Pack")   transparent inline def ><         = `val`.Pack
+  /**/          type Buffer[A]      = `val`.Buffer[A];                  transparent inline def Buffer     = `val`.Buffer
+  /**/          type Collection[+A] = `val`.Collection[A];              transparent inline def Collection = `val`.Collection
+  /**/          type Idx[+A]        = `val`.Idx[A];                     transparent inline def Idx        = `val`.Idx
+  /**/          type Lookup[A,+B]   = `val`.Lookup[A,B];                transparent inline def Lookup     = `val`.Lookup
+  /**/          type Opt[+A]        = `val`.Opt.TYPE.DEF[A];            transparent inline def Opt        = `val`.Opt
+  /**/          type Pro[+A]        = `val`.Pro[A];                     transparent inline def Pro        = `val`.Pro
+  /**/          type Promise[+A]    = `val`.Promise[A];                 transparent inline def Promise    = `val`.Promise
+  /**/          type Result[+A]     = `val`.Result.TYPE.DEF[A];         transparent inline def Result     = `val`.Result
+  /**/          type StableSet[A]   = Collection.StableSet[A];          transparent inline def StableSet  = Collection.StableSet
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

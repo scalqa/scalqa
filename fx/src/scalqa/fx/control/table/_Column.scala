@@ -1,23 +1,28 @@
 package scalqa; package fx; package control; package table; import language.implicitConversions
 
-import Gen.Given.{ DocDef, VoidDef }
+import Any.Def
 
 transparent trait _Column[ROW]:
   self: Table[ROW] =>
 
-  class Column[A] private (t: VoidDef[A], d: DocDef[A]) extends table.Column[ROW, VIEW, A](t,d):
-    def this()(using oo: Opt[Ordering[A]])(using t:VoidDef[A], d:DocDef[A]) = {
+  class Column[A] private (t: Def.Void[A], d: Def.Doc[A]) extends table.Column[ROW, VIEW, A](t,d):
+    def this()(using oo: Opt[Ordering[A]])(using t:Def.Void[A], d:Def.Doc[A]) = {
       this(t,d)
       if (self.columnData.isSealed) J.illegalState("Table already used, all the columns must be defined before rows or properties")
       self.columnData += this
       createCell_:(cell.x.Label[ROW, VIEW, A](this))
-      oo.forval(ordering = _ )
+      oo.forval(v => ordering = v)
     }
-    def this(label: String, widthOpt:Int.Opt,f:ROW=>A)(using o: Opt[Ordering[A]])(using t:VoidDef[A],d:DocDef[A]) = {this()(using o)(using t,d); label.^.?.forval(this.label= _); if (f != null) value_:(f); widthOpt.forval(prefWidth = _) }
-    def this(label: String, f: ROW => A)              (using o: Opt[Ordering[A]])(using t:VoidDef[A],d:DocDef[A]) = this(label, \/, f)(using o)(using t,d)
-    def this(label: String, width : Int)              (using o: Opt[Ordering[A]])(using t:VoidDef[A],d:DocDef[A]) = this(label, width, null)(using o)(using t,d)
-    def this(label: String)                           (using o: Opt[Ordering[A]])(using t:VoidDef[A],d:DocDef[A]) = this(label, \/, null)(using o)(using t,d)
-    def this(f: ROW => A)                             (using o: Opt[Ordering[A]])(using t:VoidDef[A],d:DocDef[A]) = this("", \/, f)(using o)(using t,d)
+    def this(label: String, widthOpt:Int.Opt, f:ROW=>A) (using o: Opt[Ordering[A]])(using t:Def.Void[A],d:Def.Doc[A]) = {
+      this()(using o)(using t,d)
+      label.^.?.forval(this.label= _)
+      if (f != null) value_:(f)
+      widthOpt.forval(prefWidth = _)
+    }
+    def this(label: String, f: ROW => A)(using o: Opt[Ordering[A]])(using t:Def.Void[A],d:Def.Doc[A]) = this(label, \/, f)(using o)(using t,d)
+    def this(label: String, width : Int)(using o: Opt[Ordering[A]])(using t:Def.Void[A],d:Def.Doc[A]) = this(label, width, null)(using o)(using t,d)
+    def this(label: String)             (using o: Opt[Ordering[A]])(using t:Def.Void[A],d:Def.Doc[A]) = this(label, \/, null)(using o)(using t,d)
+    def this(f: ROW => A)               (using o: Opt[Ordering[A]])(using t:Def.Void[A],d:Def.Doc[A]) = this("", \/, f)(using o)(using t,d)
 
     def table = self
 

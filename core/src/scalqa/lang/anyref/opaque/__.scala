@@ -4,6 +4,9 @@ object Opaque:
   type Base[A<:Opaque, REAL<:AnyRef] = opaque.Base[A,REAL];    transparent inline def Base       = opaque.Base
   type Data[A<:Opaque, REAL<:AnyRef] = opaque.Data[A,REAL];    transparent inline def Data       = opaque.Data
 
+  object TYPE:
+    opaque type DEF <: AnyRef = AnyRef
+
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
@@ -11,13 +14,8 @@ object Opaque:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object Opaque ->
-  Opaque type is defined as
-  ```
-  object AnyRef:
-    opaque type Opaque <: AnyRef = AnyRef
-  ```
+@type DEF  ->
 
-  It must be the base for all Object opaque types
+  AnyRef.Opaque is the supertype for all reference based opaque types
 
 */

@@ -15,7 +15,7 @@ object X:
     @tn("pair_Stream") def pair_~ : ~[(A, B)]    = cRef.get.iterator.~
     /**/               def clear                 = cRef.change(_.mapFactory.empty)
     /**/               def put(key: A, value: B) = cRef.change(_.updated(key,value))
-    /**/               def remove(k: A) : Opt[B] = {while(true){ val m=cRef.get; val o:Opt[B]=m.get(k); if(o.isEmpty || cRef.tryChange(m,m.removed(k))) return o }; \/ }
+    /**/               def remove(k: A) : Opt[B] = { while(true){ val m=cRef.get; val o:Opt[B]=m.get(k); if(!o || cRef.tryChange(m,m.removed(k))) return o }; \/ }
 
   // ************************************************************************
   class Basic[A,B](protected val real: HashMap[A,B]) extends Base[A,B]:
@@ -35,5 +35,5 @@ object X:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object X -> ###  \n\n Object [[X]] defines standard parent type extensions
+@object X -> ### Type Extention
 */

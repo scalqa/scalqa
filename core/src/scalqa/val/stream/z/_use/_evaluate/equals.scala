@@ -2,7 +2,7 @@ package scalqa; package `val`; package stream; package z; package _use; package 
 
 object equals:
 
-  def apply[A](s1: ~[A], s2: ~[A], all: Boolean): Result[true] =
+  def sequence[A](s1: ~[A], s2: ~[A], all: Boolean): Result[true] =
     var i = 0
     var o1 = s1.read_?
     var o2 = s2.read_?

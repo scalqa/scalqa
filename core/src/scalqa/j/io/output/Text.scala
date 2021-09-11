@@ -5,7 +5,7 @@ import Output.Text
 import java.io.{ OutputStreamWriter as REAL }
 
 object Text extends AnyRef.Opaque.Base[Text, REAL]("Io.Output.Text"):
-  inline def apply(inline v: Io.Output): Text = new REAL(v.real).opaque
+  inline def apply(inline v: Io.Output): Text = new REAL(v.real).toOpaque
 
   extension (x: Text)
     inline def float (inline v: Float)                                          : Text = { x.real.write(S.valueOf(v)); x }
@@ -24,8 +24,8 @@ object Text extends AnyRef.Opaque.Base[Text, REAL]("Io.Output.Text"):
     inline def flush                                                            : Text = { x.real.flush; x }
     inline def writeAllAndClose(inline v: String)                               : Unit = { x.real.write(v); x.close }
 
-  object OPAQUE:
-    opaque type TYPE <: java.io.Closeable & AnyRef.Opaque = REAL & AnyRef.Opaque
+  object TYPE:
+    opaque type DEF <: java.io.Closeable & AnyRef.Opaque = REAL & AnyRef.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -34,7 +34,7 @@ object Text extends AnyRef.Opaque.Base[Text, REAL]("Io.Output.Text"):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object OPAQUE  -> ###
+@type DEF  -> ###
 
    [[J.Output.Text]] is an opaque value, backed by java.io.OutputStreamWriter
 

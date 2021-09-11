@@ -4,7 +4,7 @@ import Input.Data
 import java.io.{ DataInputStream as REAL }
 
 object Data extends AnyRef.Opaque.Base[Data, REAL]("Io.Input.Data"):
-  inline def apply(inline v: Io.Input): Data = new REAL(v.real).opaque
+  inline def apply(inline v: Io.Input): Data = new REAL(v.real).toOpaque
 
   extension(inline x: Data)
     inline def readFully(inline ba: Array[Byte])                                    : Unit     = x.real.readFully(ba)
@@ -22,8 +22,8 @@ object Data extends AnyRef.Opaque.Base[Data, REAL]("Io.Input.Data"):
     inline def double                                                               : Double   = x.real.readDouble
     inline def utf                                                                  : String   = x.real.readUTF
 
-  object OPAQUE:
-    opaque type TYPE <: java.io.Closeable & AnyRef.Opaque = java.io.InputStream & AnyRef.Opaque
+  object TYPE:
+    opaque type DEF <: java.io.Closeable & AnyRef.Opaque = java.io.InputStream & AnyRef.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -32,7 +32,7 @@ object Data extends AnyRef.Opaque.Base[Data, REAL]("Io.Input.Data"):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object OPAQUE  -> ###
+@type DEF  -> ###
 
    [[J.Input.Data]] is an opaque value, backed by java.io.DataInputStream
 

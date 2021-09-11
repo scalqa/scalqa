@@ -1,22 +1,21 @@
 package scalqa; package lang; package array; package z; import language.implicitConversions
 
-import gen.`given`.ArrayShape
 import java.util.{ Arrays, Collections}
 
 object sort:
 
-  inline def apply[A,ARRAY<:Array.AnyType[A]](inline x: ARRAY, inline c:Ordering[A], inline t: ArrayShape[A,ARRAY]): Unit =
-    inline t match
-              case _ : ArrayShape[A&Boolean.Raw,Array[A&Boolean.Raw]] => boolean(x.cast[Array[Boolean]],c.cast[Ordering[Boolean]])
-              case _ : ArrayShape[A&Byte.Raw,   Array[A&Byte.Raw   ]] => byte   (x.cast[Array[Byte   ]],c.cast[Ordering[Byte   ]])
-              case _ : ArrayShape[A&Char.Raw,   Array[A&Char.Raw   ]] => char   (x.cast[Array[Char   ]],c.cast[Ordering[Char   ]])
-              case _ : ArrayShape[A&Short.Raw,  Array[A&Short.Raw  ]] => short  (x.cast[Array[Short  ]],c.cast[Ordering[Short  ]])
-              case _ : ArrayShape[A&Int.Raw,    Array[A&Int.Raw    ]] => int    (x.cast[Array[Int    ]],c.cast[Ordering[Int    ]])
-              case _ : ArrayShape[A&Long.Raw,   Array[A&Long.Raw   ]] => long   (x.cast[Array[Long   ]],c.cast[Ordering[Long   ]])
-              case _ : ArrayShape[A&Float.Raw,  Array[A&Float.Raw  ]] => float  (x.cast[Array[Float  ]],c.cast[Ordering[Float  ]])
-              case _ : ArrayShape[A&Double.Raw, Array[A&Double.Raw ]] => double (x.cast[Array[Double ]],c.cast[Ordering[Double ]])
-              case _ : ArrayShape[A&AnyRef,     Array[A&AnyRef     ]] => anyref (x.cast[Array[AnyRef ]],c.cast[Ordering[AnyRef ]])
-              case _                                                => any    (x.cast[Array[A      ]],c                        )
+  inline def apply[A](inline x: Array[A], inline c:Ordering[A])(using inline A: Specialized[A]): Unit =
+    inline A match
+              case _ : Specialized[A&Any.Boolean] => boolean(x.cast[Array[Boolean]],c.cast[Ordering[Boolean]])
+              case _ : Specialized[A&Any.Byte   ] => byte   (x.cast[Array[Byte   ]],c.cast[Ordering[Byte   ]])
+              case _ : Specialized[A&Any.Char   ] => char   (x.cast[Array[Char   ]],c.cast[Ordering[Char   ]])
+              case _ : Specialized[A&Any.Short  ] => short  (x.cast[Array[Short  ]],c.cast[Ordering[Short  ]])
+              case _ : Specialized[A&Any.Int    ] => int    (x.cast[Array[Int    ]],c.cast[Ordering[Int    ]])
+              case _ : Specialized[A&Any.Long   ] => long   (x.cast[Array[Long   ]],c.cast[Ordering[Long   ]])
+              case _ : Specialized[A&Any.Float  ] => float  (x.cast[Array[Float  ]],c.cast[Ordering[Float  ]])
+              case _ : Specialized[A&Any.Double ] => double (x.cast[Array[Double ]],c.cast[Ordering[Double ]])
+              case _ : Specialized[A&AnyRef     ] => anyref (x.cast[Array[AnyRef ]],c.cast[Ordering[AnyRef ]])
+              case _                              => any    (x.cast[Array[A      ]],c                        )
 
   def any  [A](x: Array[A], c:Ordering[A]): Unit =
     x match

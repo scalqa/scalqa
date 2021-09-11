@@ -4,7 +4,7 @@ transparent trait _metadata[A]:
   self: Flow[A] =>
 
   /**/                 def isParallel : Boolean
-  /**/                 def docTree    : Doc.Tree    = Custom.Pipeline.infoTree(self)
+  /**/                 def docTree    : Doc.Tree
   @tn("size_Opt")      def size_?     : Int.Opt     = sizeLong_?.take(v => v>=0 && v<=Int.max).map(_.toInt)
   @tn("sizeLong_Opt")  def sizeLong_? : Long.Opt
 
@@ -39,7 +39,7 @@ ___________________________________________________________________________*/
           .docTree.TP
 
        // Output
-        scalqa.val.stream.z.flow.parallel.Flow_asJavaStream@ncwo{}
+        scalqa.val.stream.z.flow.parallel.JavaStreamParallelFlow@ncwo{}
           scalqa.lang.char.g.stream.z.map$Chars@uru4{raw=Char,fromRaw=Char}
             scalqa.lang.char.g.Stream$TakeStream$2@56u4{raw=Char,fromRaw=Char}
               scalqa.lang.char.g.stream.Z$Stream_fromRange@cq06{raw=Char,size=26,from=a,step=1}

@@ -21,10 +21,6 @@ object Z:
     @tn("stream") def ~    = real.~.map(m(_))
     /**/          def size = real.size
 
-  object Void extends Collection[Nothing] with Gen.Void:
-    @tn("stream") def ~    = \/
-    /**/          def size = 0
-
   class UniqueElementSet[A](initSize: Int) extends Mutable[A]:
     import scala.collection.mutable.HashMap
     private val real = new HashMap[A,Unit](initSize,HashMap.defaultLoadFactor)

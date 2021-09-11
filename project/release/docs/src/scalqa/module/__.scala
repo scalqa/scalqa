@@ -2,7 +2,7 @@ package scalqa; import module.*
 
 class Module (val typ_? : Opt[Member], val val_? : Opt[Member]):
   val main               : Member  = typ_? or val_?.get
-  val name               : String  = main.name.nameToOp.^.reviseIf(_ == "OPAQUE", v => val_?.map(_.name) or v)
+  val name               : String  = main.name.nameToOp.^.reviseIf(_ == "TYPE", v => val_?.map(_.name) or v)
   var inner              : Boolean = false
   def prefix             : String  = if(inner) "A" else "B"
   def label              : String  = {var l=name; val i=l.lastIndexOf("."); if(i>0) l.substring(i+1); if(inner) l = "#" + l; l}
@@ -17,7 +17,7 @@ class Module (val typ_? : Opt[Member], val val_? : Opt[Member]):
 object Module:
   def apply(m: Member)           : Module = if(m.kin.isDefLike) new Val(m) else if(m.kin.isTypeLike) new Typ(m) else Docs.fail(m.kin)
   def apply(s: Seq[Member])      : Module = s.size match{ case 1 => apply(s.head); case 2 => apply(s.head,s.tail.head); case 3 => apply(s.head,s.tail.head); case v => { s.foreach(println); Docs.fail("size="+v) }}
-  def apply(m1: Member, m2: Member): Module =
+  def apply(m1:Member, m2:Member): Module =
     val id= m1.id.mid
     if(id!=m2.id.mid) Docs.fail("No id match")
     if     (m1.kin.isTypeLike && m2.kin.isDefLike ) Both(m1,m2)
@@ -27,9 +27,11 @@ object Module:
 
   class Both private(v1: Member,v2: Member) extends Module(v1,v2)
   object Both:
-    def apply(v1: Member,v2: Member): Both = if(!v1.dri.isOpaqueDef) new Both(v1,v2) else
-      val t = v1.members.~.find(_.name == "TYPE")
-      val m = v1.copy(name=v2.name,kind=t.kind,dri=v1.dri,members=v2.members)
+    def apply(v1: Member,v2: Member): Both = if(!v1.dri.isTypeDef) new Both(v1,v2) else
+      val t = v1.members.~.find(_.name == "DEF")
+      //v2.name +- t.signature.~.tag tp()
+      //val m = v1.copy(name=v2.name,signature=t.signature,kind=t.kind,dri=v1.dri,members=v2.members)
+      val m = t.copy(name=v2.name,dri=v1.dri,members=v2.members)
       Registry.update(m)
       new Both(m,v2)
 

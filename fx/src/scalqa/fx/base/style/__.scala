@@ -3,7 +3,7 @@ package scalqa; package fx; package base; import language.implicitConversions
 import Fx.Style
 
 object Style extends String.Opaque.Data[Style]("Fx.Style"):
-  /**/     inline def apply(inline v: String)       : Style   = v.opaque
+  /**/     inline def apply(inline v: String)       : Style   = v.toOpaque
   implicit inline def implicitFrom(inline v: String): Style   = apply(v)
 
   given FxConverter: ReversibleFunction[String,Style] = \/
@@ -11,12 +11,12 @@ object Style extends String.Opaque.Data[Style]("Fx.Style"):
   extension(x: Style)
     @tn("join") def +(v: Style|String): Style = {val s=v.cast[String]; if(x.isVoid) s:Style else if(s.isVoid) x else x.real + ';' + s }
 
-  object OPAQUE:
-    opaque type TYPE <: String.Opaque = String.Opaque
+  object TYPE:
+    opaque type DEF <: String.Opaque = String.Opaque
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  transparent inline def Class       = style.Class;         type Class       = style.Class.OPAQUE.TYPE
-  transparent inline def PseudoClass = style.PseudoClass;   type PseudoClass = style.PseudoClass.OPAQUE.TYPE
+  transparent inline def Class       = style.Class;         type Class       = style.Class.TYPE.DEF
+  transparent inline def PseudoClass = style.PseudoClass;   type PseudoClass = style.PseudoClass.TYPE.DEF
   transparent inline def PseudoGroup = style.PseudoGroup;   type PseudoGroup = style.PseudoGroup
 
 /*___________________________________________________________________________

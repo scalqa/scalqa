@@ -1,6 +1,6 @@
 package scalqa;  package lang; package boolean; package opaque; import language.implicitConversions
 
-abstract class Data[A<:Opaque](name: String) extends Base[A](name) with Data._methods with g.customized.Containers[A]
+abstract class Data[A<:Opaque](name: String) extends Base[A](name) with Data._methods with g.Containers[A]
 
 object Data:
 

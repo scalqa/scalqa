@@ -10,6 +10,9 @@ There are four Scalqa types, which are so basic, they are represented as operato
  - [><](../../api/scalqa/val/Pack.html)  is value pack
  - [\\/](../../api/scalqa/gen/request/VOID.html) is a general request for a void instance
      
+The same operator names are also used in specialized contexts
+like: [Int.G.~](../../api/scalqa/lang/int/g/Stream.html),  [Long.G.><](../../api/scalqa/lang/long/g/Pack.html), etc.       
+     
 There are also same named operator methods to construct some of those types. 
 It is important to quickly grasp how these work, otherwise Scalqa code would not feel intuitive.
 

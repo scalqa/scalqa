@@ -1,6 +1,6 @@
 package scalqa; package lang; package char; package g; import language.implicitConversions
 
-class Range[A<:Raw](_start: A, _size: Int) extends Val.<>[A] with Able.Size with Able.~[A] with Raw.Specialized:
+class Range[A<:Raw](_start: A, _size: Int) extends Val.<>[A] with Able.Size with Able.~[A] with any.z.PrimitiveTag.Char:
   def this(start:A, end:A, endIn: Boolean) = this(start, end.cast[Int] - start.cast[Int] - endIn.toInt)
   type THIS_TYPE = Range[A]
   /**/              def start                  : A             = _start
@@ -30,11 +30,11 @@ class Range[A<:Raw](_start: A, _size: Int) extends Val.<>[A] with Able.Size with
   private    inline def _mk (f:A, inline to:A) : Range[A]      = Range(f,to-f)
 
 object Range:
-  extension[A<:Raw,T,STM<: ~~.AnyType[T]](inline x: Range[A])
-    /**/                                  inline def map    [B>:T](inline f:A=> B)   (using inline t: Given.StreamShape[B,STM]): STM       = g.Stream.map[A,T,STM](x.~)[B](f)(using t)
-    /**/                                  inline def flatMap[B>:T](inline f:A=> ~[T])(using inline t: Given.StreamShape[B,STM]): STM       = g.Stream.flatMap[A,T,STM](x.~)[B](f)(using t)
-  extension[A<:Raw]  (inline x: Range[A]) inline def withFilter(inline f: Fun.Filter[A])                                       : Stream[A] = x.~.take(f)
-  extension[A<:Raw,U](inline x: Range[A]) inline def foreach(   inline f: A=>U)                                                : Unit      = for(i <- x.start.real.toInt <>> x.endX.real.toInt) f(i.cast[A])
+  extension[A<:Raw](inline x: Range[A])
+    inline def map    [B](inline f: A=>B)   (using inline B:Specialized[B]): B.~    = x.~.map(f)
+    inline def flatMap[B](inline f:A=> ~[B])(using inline B:Specialized[B]): B.~    = x.~.flatMap(f)
+    inline def withFilter(inline f: Fun.Filter[A])                         : G.~[A] = x.~.take(f)
+    inline def foreach[U](inline f: A=>U)                                  : Unit   = for(i <- x.start.real.toInt <>> x.endX.real.toInt) f(i.cast[A])
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

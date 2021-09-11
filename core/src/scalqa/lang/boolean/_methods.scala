@@ -4,7 +4,7 @@ transparent trait _methods:
 
   extension (inline x: Boolean)
     @tn("Opt") inline def ?                    : Boolean.Opt       = if(x) G.Opt.TRUE else G.Opt.FALSE
-    @tn("Opt") inline def ?[A](inline v: => A) : Val.Opt[A]        = if(x) v else ZZ.BoolNone.cast[Val.Opt[A]]
+    @tn("Opt") inline def ?[A](inline v: => A) : Val.Opt[A]        = if(x) v else ZZ.None.cast[Val.Opt[A]]
     /**/       inline def not                  : Boolean           = !x
     /**/       inline def toInt                : Int               = if(x) 1 else 0
     /**/       inline def toRef                : java.lang.Boolean = java.lang.Boolean.valueOf(x)
@@ -71,4 +71,14 @@ ___________________________________________________________________________*/
          Int constructor attached to Boolean
 
          `true` is converted to `1`, `false` to `0`
+
+@def toRef -> To Boolean object
+
+         ```
+         val b = true
+
+         b.toRef
+         // is inlined as
+         java.lang.Boolean.valueOf(b)
+         ```
 */

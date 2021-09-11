@@ -1,6 +1,6 @@
 package scalqa; package `val`; package stream; package z; package _build; package _zip
 
-class zipNext[A](x: ~[A]) extends a.Pipe.Sized[(A, Opt[A])](x):
+class zipNext[A](x: ~[A]) extends z.x.Pipe.Sized[(A, Opt[A])](x):
   private         val buf    = x.enablePreview
   @tn("read_Opt") def read_? = buf.read_?.map((_, buf.preview_?))
 

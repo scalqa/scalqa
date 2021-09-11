@@ -4,8 +4,8 @@ import java.nio.file.{ Path => REAL }
 import File.Path
 
 object Path extends AnyRef.Opaque.Base[Path,REAL]("J.Path") with path._methods:
-  inline          def apply(v: REAL)                 : Path    = v.opaque
-  /**/            def current                        : Path    = void.real.toAbsolutePath.opaque
+  inline          def apply(v: REAL)                 : Path    = v.toOpaque
+  /**/            def current                        : Path    = void.real.toAbsolutePath.toOpaque
   /**/            def apply(s:String, more:String*)  : Path    = File.System().path(s, more *)
   /**/            def apply(names: ~[String])        : Path    = File.System().path(names)
   @tn("getVoid")  def void                           : Path    = File.System().real.getPath("")
@@ -15,13 +15,13 @@ object Path extends AnyRef.Opaque.Base[Path,REAL]("J.Path") with path._methods:
   override        def value_doc(v: Path)             : Doc     = super.value_doc(v) += ("size",v.size)
 
   implicit inline def implicitFrom(v: \/)            : Path    = void
-  implicit inline def implicitFrom(inline v: REAL)   : Path    = v.opaque
+  implicit inline def implicitFrom(inline v: REAL)   : Path    = v.toOpaque
   implicit inline def implicitFrom(inline v: String) : Path    = apply(v)
   implicit inline def implicitFrom(inline v: J.File) : Path    = v.path
   implicit inline def implicitFrom(v: CURRENT)       : Path    = current
 
-  object OPAQUE:
-    opaque type TYPE <: AnyRef.Opaque = REAL & AnyRef.Opaque
+  object TYPE:
+    opaque type DEF <: AnyRef.Opaque = REAL & AnyRef.Opaque
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
@@ -29,7 +29,7 @@ object Path extends AnyRef.Opaque.Base[Path,REAL]("J.Path") with path._methods:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object OPAQUE  -> ###
+@type DEF  -> ###
 
    [[J.Path]] is an opaque value, backed by java.nio.file.Path
 

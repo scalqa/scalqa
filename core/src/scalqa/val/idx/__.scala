@@ -10,7 +10,7 @@ object Idx:
   /**/                 def apply[A](v1:A, v2:A)             : Idx[A]  = Pack(v1,v2)
   /**/                 def apply[A](v1:A, v2:A, v3:A, vs:A*): Idx[A]  = Pack(v1,v2,v3,vs *)
   /**/                 def wrap[A](v: java.util.List[A])    : Idx[A]  = idx.z.as.JavaListWrap[A](v)
-  @tn("getVoid")inline def void[A]                          : Idx[A]  = ZZ.voidPack[A]
+  @tn("getVoid")inline def void[A]                          : Idx[A]  = \/ : ><[A]
   implicit      inline def implicitFrom[A](v: \/)           : Idx[A]  = void
 
   extension[A] (x: Idx[A])

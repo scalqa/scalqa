@@ -2,7 +2,7 @@ package scalqa; package `val`; package stream; package z; package _build; packag
 
 object unzip:
 
-  @inline def apply[A, B, C](x: ~[A], f: A => (B, C)): (~[B], ~[C]) =
+  def apply[A, B, C](x: ~[A], f: A => (B, C)): (~[B],~[C]) =
 
     abstract class Stacked[T] extends ~[T]:
       /**/            val queue  = new java.util.ArrayDeque[T]

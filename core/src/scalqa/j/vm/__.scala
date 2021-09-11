@@ -11,7 +11,7 @@ object Vm:
   /**/   def reload(className: String, paths: ~[J.Path]): Class[_] = vm.z.ClassLoader.reload(className, paths)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  transparent inline def Priority     = vm.Priority;     type Priority = vm.Priority.OPAQUE.TYPE
+  transparent inline def Priority     = vm.Priority;     type Priority = vm.Priority.TYPE.DEF
   transparent inline def Setup        = vm.Setup
   transparent inline def Memory       = vm.Memory
 

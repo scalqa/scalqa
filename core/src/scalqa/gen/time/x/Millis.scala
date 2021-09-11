@@ -11,15 +11,15 @@ object Millis:
 
   transparent trait Base:
 
-    extension[OPAQUE <: Long.Opaque](inline x: OPAQUE)
-      /**/            inline def nanos                   : Long      = 0L
-      /**/            inline def micros                  : Long      = 0L
-      /**/            inline def millis                  : Long      = x.real                      % 1000
-      /**/            inline def seconds                 : Long      = x.real / Millis.InOneSecond % 60
-      /**/            inline def minutes                 : Long      = x.real / Millis.InOneMinute % 60
-      /**/            inline def hours                   : Long      = x.real / Millis.InOneHour   % 24
+    extension[THIS_OPAQUE <: Long.Opaque](inline x: THIS_OPAQUE)
+      /**/            inline def nanos                   : Long        = 0L
+      /**/            inline def micros                  : Long        = 0L
+      /**/            inline def millis                  : Long        = x.real                      % 1000
+      /**/            inline def seconds                 : Long        = x.real / Millis.InOneSecond % 60
+      /**/            inline def minutes                 : Long        = x.real / Millis.InOneMinute % 60
+      /**/            inline def hours                   : Long        = x.real / Millis.InOneHour   % 24
       /**/            inline def roundTo(l:Length)
-                                       (using r:Rounding): OPAQUE    = (r(x.real, l.millisTotal)).cast[OPAQUE]
+                                       (using r:Rounding): THIS_OPAQUE = (r(x.real, l.millisTotal)).cast[THIS_OPAQUE]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

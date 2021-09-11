@@ -6,7 +6,7 @@ transparent trait _Member:
   self: Api.type =>
   extension (x: Member)
     def id          : Id          = x.dri.id
-    def kin         : Kind        = if(x.dri.isOpaqueDef) new Kind.Type(true,true,Nil) else x.kind
+    def kin         : Kind        = if(x.dri.isTypeDef) new Kind.Type(true,true,Nil) else x.kind
     def module      : Module      = x.dri.module_? or Module(x)
     def children    : Children    = Children(x)
     def tag         : String      = x.name+"(ilk="+x.kind.name+", id="+x.id+", ##="+ x.## +")"

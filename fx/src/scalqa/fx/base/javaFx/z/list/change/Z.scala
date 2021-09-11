@@ -21,7 +21,7 @@ private object Z:
 
   class ReorderFrame[A](val change:  Idx.Event.Reposition[A], l: JFX.ObservableList[A]) extends zFrame[A](l):
     override       def wasPermutated = true
-    override       val getPermutation: Array[Int] = change.rangeMutated.~.toArray
+    override       val getPermutation: Array[Int] = change.positions.~.toArray
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

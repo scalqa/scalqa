@@ -23,8 +23,8 @@ object Change extends Abstract.Delegate.Opaque[Change, REAL]("Fx.Text.InputContr
     inline def isDelete               : Boolean = x.real.isDeleted
     inline def isTextChange           : Boolean = x.real.isContentChange
 
-  object OPAQUE:
-    opaque type TYPE <: AnyRef.Opaque = REAL & AnyRef.Opaque
+  object TYPE:
+    opaque type DEF <: AnyRef.Opaque = REAL & AnyRef.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

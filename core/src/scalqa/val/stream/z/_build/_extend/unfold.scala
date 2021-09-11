@@ -1,6 +1,6 @@
 package scalqa; package `val`; package stream; package z; package _build; package _extend; import language.implicitConversions
 
-class unfold[A](x: ~[A], fun: ~[A] => Opt[A]) extends a.Pipe[A](x):
+class unfold[A](x: ~[A], fun: ~[A] => Opt[A]) extends z.x.Pipe[A](x):
   private val b = Val.Buffer[A]()
   private var pass, make = true
 

@@ -5,28 +5,29 @@ import scala.Tuple3;
 import scalqa.val.Stream;
 import scala.math.Ordering;
 import scala.concurrent.ExecutionContext;
-import scalqa.gen.given.DocDef;
-import scalqa.gen.given.z.DefaultDef;
-import scalqa.gen.given.z.PrimitiveDef;
-import scalqa.gen.given.z.ReferenceTypeDef;
+import scalqa.lang.any.def.TypeName;
+import scalqa.lang.any.def.Doc;
+import scalqa.lang.any.def.z.Default;
+import scalqa.lang.any.def.z.Primitive;
+import scalqa.lang.any.def.z.ReferenceName;
 
 public final class ZZ{
     private ZZ(){};
     private static int cnt = 0;
     public  static final int count(){ cnt +=1; return cnt;}
     private static final scalqa.j.vm.z.ZZ_Access            Access                 = new scalqa.j.vm.z.ZZ_Access();
-    private static final DefaultDef                         DefaultDef             = new DefaultDef();
+    private static final Default                            Default                = new Default();
     public  static final ExecutionContext                   Context                = Access.executionContext();
 
     public  static final Object                             None                   = Access.None();
-    public  static final Object                             BoolNone               = None;
-    public  static final scalqa.val.stream.z.a.Void<Object> VOID_STREAM            = new scalqa.val.stream.z.a.Void();
-    public  static final scalqa.val.Pack<Object>            VOID_LIST              = new scalqa.val.pack.z.Void<Object>();
+    public  static final Stream<Object>                     VOID_STREAM            = new scalqa.val.stream.z.x.Void();
+    public  static <A>   Stream<A>                          VoidStream()           { return (scalqa.val.Stream<A>)VOID_STREAM; }
+    public  static <A>   Doc<Stream<A>>                     streamDoc(Doc<A> v)    { return new scalqa.val.stream.z.util.DocDef(v); }
+    public  static final scalqa.val.Pack<Object>            VOID                   = new scalqa.val.pack.z.Void<Object>();
+    public  static <A>   scalqa.val.Pack<A>                 Void()                 { return (scalqa.val.Pack<A>)  VOID;   }
     public  static final int                                initSize               = Access.initSize();
 
-    public  static <A>   DefaultDef<A>                      Def()                  { return (DefaultDef<A>)DefaultDef; }
-    public  static <A>   scalqa.val.stream.z.a.Void<A>      voidStream()           { return (scalqa.val.stream.z.a.Void<A>)VOID_STREAM; }
-    public  static <A>   scalqa.val.Pack<A>                 voidPack()             { return (scalqa.val.Pack<A>)         VOID_LIST;   }
+    public  static <A>   Default<A>                         Def()                  { return (Default<A>)Default; }
     public  static       scalqa.val.result.Problem          problem(String message){ return new scalqa.val.result.problem.z.DefaultProblem(message); }
 
     // *********************** Exceptions **************************
@@ -46,25 +47,25 @@ public final class ZZ{
     public  static       void tp(float v)            { tp(String.valueOf(v));  }
     public  static       void tp(double v)           { tp(String.valueOf(v));  }
     public  static       void tp(String v)           { Access.Console().println(v); }
-    public  static <A>   void tp(A v)                { tp(DefaultDef.value_tag(v)); }
-    public  static <A>   void tp(A v,       DocDef<A> t){ tp(t.value_tag(v)); }
-    public  static <A>   void tp(boolean v, DocDef<A> t){ tp(tag(v,t));}
-    public  static <A>   void tp(byte    v, DocDef<A> t){ tp(tag(v,t));}
-    public  static <A>   void tp(char    v, DocDef<A> t){ tp(tag(v,t));}
-    public  static <A>   void tp(short   v, DocDef<A> t){ tp(tag(v,t));}
-    public  static <A>   void tp(int     v, DocDef<A> t){ tp(tag(v,t));}
-    public  static <A>   void tp(long    v, DocDef<A> t){ tp(tag(v,t));}
-    public  static <A>   void tp(float   v, DocDef<A> t){ tp(tag(v,t));}
-    public  static <A>   void tp(double  v, DocDef<A> t){ tp(tag(v,t));}
+    public  static <A>   void tp(A v)                { tp(Default.value_tag(v)); }
+    public  static <A>   void tp(A v,       Doc<A> t){ tp(t.value_tag(v)); }
+    public  static <A>   void tp(boolean v, Doc<A> t){ tp(tag(v,t));}
+    public  static <A>   void tp(byte    v, Doc<A> t){ tp(tag(v,t));}
+    public  static <A>   void tp(char    v, Doc<A> t){ tp(tag(v,t));}
+    public  static <A>   void tp(short   v, Doc<A> t){ tp(tag(v,t));}
+    public  static <A>   void tp(int     v, Doc<A> t){ tp(tag(v,t));}
+    public  static <A>   void tp(long    v, Doc<A> t){ tp(tag(v,t));}
+    public  static <A>   void tp(float   v, Doc<A> t){ tp(tag(v,t));}
+    public  static <A>   void tp(double  v, Doc<A> t){ tp(tag(v,t));}
 
-    public  static <A> String tag(boolean v, DocDef<A> t){ return ((DocDef<Boolean>)  t).value_tag(Boolean  .valueOf(v));}
-    public  static <A> String tag(byte    v, DocDef<A> t){ return ((DocDef<Byte>)     t).value_tag(Byte     .valueOf(v));}
-    public  static <A> String tag(char    v, DocDef<A> t){ return ((DocDef<Character>)t).value_tag(Character.valueOf(v));}
-    public  static <A> String tag(short   v, DocDef<A> t){ return ((DocDef<Short>)    t).value_tag(Short    .valueOf(v));}
-    public  static <A> String tag(int     v, DocDef<A> t){ return ((DocDef<Integer>)  t).value_tag(Integer  .valueOf(v));}
-    public  static <A> String tag(long    v, DocDef<A> t){ return ((DocDef<Long>)     t).value_tag(Long     .valueOf(v));}
-    public  static <A> String tag(float   v, DocDef<A> t){ return ((DocDef<Float>)    t).value_tag(Float    .valueOf(v));}
-    public  static <A> String tag(double  v, DocDef<A> t){ return ((DocDef<Double>)   t).value_tag(Double   .valueOf(v));}
+    public  static <A> String tag(boolean v, Doc<A> t){ return ((Doc<Boolean>)  t).value_tag(Boolean  .valueOf(v));}
+    public  static <A> String tag(byte    v, Doc<A> t){ return ((Doc<Byte>)     t).value_tag(Byte     .valueOf(v));}
+    public  static <A> String tag(char    v, Doc<A> t){ return ((Doc<Character>)t).value_tag(Character.valueOf(v));}
+    public  static <A> String tag(short   v, Doc<A> t){ return ((Doc<Short>)    t).value_tag(Short    .valueOf(v));}
+    public  static <A> String tag(int     v, Doc<A> t){ return ((Doc<Integer>)  t).value_tag(Integer  .valueOf(v));}
+    public  static <A> String tag(long    v, Doc<A> t){ return ((Doc<Long>)     t).value_tag(Long     .valueOf(v));}
+    public  static <A> String tag(float   v, Doc<A> t){ return ((Doc<Float>)    t).value_tag(Float    .valueOf(v));}
+    public  static <A> String tag(double  v, Doc<A> t){ return ((Doc<Double>)   t).value_tag(Double   .valueOf(v));}
 
     // *********************** Arrays **************************
     public  static final Object[]  emptyObjectArray  = Access.emptyObjectArray();
@@ -77,16 +78,25 @@ public final class ZZ{
     public  static final float[]   emptyFloatArray   = Access.emptyFloatArray();
     public  static final double[]  emptyDoubleArray  = Access.emptyDoubleArray();
     // *********************** Defs **************************
-    public  static final DocDef BooleanDef = new PrimitiveDef("Boolean");
-    public  static final DocDef ByteDef    = new PrimitiveDef("Byte");
-    public  static final DocDef CharDef    = new PrimitiveDef("Char");
-    public  static final DocDef ShortDef   = new PrimitiveDef("Short");
-    public  static final DocDef IntDef     = new PrimitiveDef("Int");
-    public  static final DocDef LongDef    = new PrimitiveDef("Long");
-    public  static final DocDef FloatDef   = new PrimitiveDef("Float");
-    public  static final DocDef DoubleDef  = new PrimitiveDef("Double");
-    public  static final DocDef ArrayDoc   = new scalqa.gen.given.z.ArrayDoc();
-    public  static final DocDef MathDoc    = new scalqa.gen.given.z.MathDoc();
+    public  static final Doc      BooleanDoc = new Primitive("Boolean");
+    public  static final Doc      ByteDoc    = new Primitive("Byte");
+    public  static final Doc      CharDoc    = new Primitive("Char");
+    public  static final Doc      ShortDoc   = new Primitive("Short");
+    public  static final Doc      IntDoc     = new Primitive("Int");
+    public  static final Doc      LongDoc    = new Primitive("Long");
+    public  static final Doc      FloatDoc   = new Primitive("Float");
+    public  static final Doc      DoubleDoc  = new Primitive("Double");
+    public  static final Doc      ArrayDoc   = new scalqa.lang.any.def.z.ArrayDoc();
+    public  static final Doc      MathDoc    = new scalqa.lang.any.def.z.MathDoc();
 
-    public  static final ReferenceTypeDef RefTypeDef = new ReferenceTypeDef();
+    public  static final TypeName BooleanName= (TypeName)BooleanDoc;
+    public  static final TypeName ByteName   = (TypeName)ByteDoc;
+    public  static final TypeName CharName   = (TypeName)CharDoc;
+    public  static final TypeName ShortName  = (TypeName)ShortDoc;
+    public  static final TypeName IntName    = (TypeName)IntDoc;
+    public  static final TypeName LongName   = (TypeName)LongDoc;
+    public  static final TypeName FloatName  = (TypeName)FloatDoc;
+    public  static final TypeName DoubleName = (TypeName)DoubleDoc;
+
+    public  static final ReferenceName RefName = new ReferenceName();
 }

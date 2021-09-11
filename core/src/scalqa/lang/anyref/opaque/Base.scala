@@ -1,14 +1,14 @@
 package scalqa; package lang; package anyref; package opaque; import language.implicitConversions
 
-abstract class Base[A<:Opaque, REAL<:AnyRef](name: String)(using ct: ClassTag[REAL]) extends Any.Opaque.Base[A](name,ct.cast[ClassTag[A]]) with Base._methods[A,REAL]:
+abstract class Base[A<:Opaque, REAL<:AnyRef](name: String)(using ct: ClassTag[REAL]) extends any.z.OpaqueBase[A](name,ct.cast[ClassTag[A]]) with Base._methods[A,REAL]:
   def value_isVoid(v: A): Boolean = false
   def value_tag(v: A)   : String  = default_doc(v).tag
   def value_doc(v: A)   : Doc     = default_doc(v)
 
-  given givenVoidDef: Given.VoidDef[A] = this
+  given givenVoidDef: Any.Def.Void[A] = this
 
   extension[B>:REAL<:REAL](inline x: B)
-    inline def opaque[THIS_OPAQUE >: A <: A]: THIS_OPAQUE = x.cast[THIS_OPAQUE]
+    inline def toOpaque[THIS_OPAQUE >: A <: A]: THIS_OPAQUE = x.cast[THIS_OPAQUE]
 
 object Base:
 

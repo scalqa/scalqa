@@ -4,13 +4,12 @@ import scala.reflect.Enum
 
 object Gen:
   transparent inline def Able               = gen.Able
-  transparent inline def Given              = gen.Given
 
   transparent inline def Calendar           = gen.Calendar
-  transparent inline def Day                = gen.calendar.Day;               type Day                     = gen.calendar.Day.OPAQUE.TYPE
-  transparent inline def Week               = gen.calendar.Week;              type Week                    = gen.calendar.Week.OPAQUE.TYPE
-  transparent inline def Month              = gen.calendar.Month;             type Month                   = gen.calendar.Month.OPAQUE.TYPE
-  transparent inline def Year               = gen.calendar.Year;              type Year                    = gen.calendar.Year.OPAQUE.TYPE
+  transparent inline def Day                = gen.calendar.Day;               type Day                     = gen.calendar.Day.TYPE.DEF
+  transparent inline def Week               = gen.calendar.Week;              type Week                    = gen.calendar.Week.TYPE.DEF
+  transparent inline def Month              = gen.calendar.Month;             type Month                   = gen.calendar.Month.TYPE.DEF
+  transparent inline def Year               = gen.calendar.Year;              type Year                    = gen.calendar.Year.TYPE.DEF
 
   transparent inline def Doc                = gen.Doc;                        type Doc                     = gen.Doc
 
@@ -18,19 +17,20 @@ object Gen:
   transparent inline def Observable         = gen.event.Observable;           type Observable              = gen.event.Observable
 
   transparent inline def Math               = gen.Math;                       type Math[A]                 = scala.math.Numeric[A]
+  transparent inline def Ordering           = gen.math.Ordering;              type Ordering[A]             = scala.Ordering[A]
   transparent inline def Rounding           = gen.math.Rounding;              type Rounding                = gen.math.Rounding
-  transparent inline def BigDecimal         = gen.math.BigDecimal;            type BigDecimal              = gen.math.BigDecimal.OPAQUE.TYPE
-  transparent inline def BigInteger         = gen.math.BigInteger;            type BigInteger              = gen.math.BigInteger.OPAQUE.TYPE
+  transparent inline def BigDecimal         = gen.math.BigDecimal;            type BigDecimal              = gen.math.BigDecimal.TYPE.DEF
+  transparent inline def BigInteger         = gen.math.BigInteger;            type BigInteger              = gen.math.BigInteger.TYPE.DEF
 
   transparent inline def Request            = gen.Request;                    type Request                 = gen.Request
 
-  transparent inline def Time               = gen.Time;                       type Time                    = gen.Time.OPAQUE.TYPE
-  transparent inline def DayTime            = gen.time.DayTime;               type DayTime                 = gen.time.DayTime.OPAQUE.TYPE
+  transparent inline def Time               = gen.Time;                       type Time                    = gen.Time.TYPE.DEF
+  transparent inline def DayTime            = gen.time.DayTime;               type DayTime                 = gen.time.DayTime.TYPE.DEF
   transparent inline def Period             = gen.time.Period;                type Period                  = gen.time.Period
 
   transparent inline def Util               = gen.Util
-  transparent inline def ByteCount          = gen.util.ByteCount;             type ByteCount               = gen.util.ByteCount.OPAQUE.TYPE
-  transparent inline def Percent            = gen.util.Percent;               type Percent                 = gen.util.Percent.OPAQUE.TYPE
+  transparent inline def ByteCount          = gen.util.ByteCount;             type ByteCount               = gen.util.ByteCount.TYPE.DEF
+  transparent inline def Percent            = gen.util.Percent;               type Percent                 = gen.util.Percent.TYPE.DEF
   transparent inline def ReversibleFunction = gen.util.ReversibleFunction;    type ReversibleFunction[A,B] = gen.util.ReversibleFunction[A,B]
   /**/                                                                        type EnumCompanion[A<:Enum]  = gen.util.EnumCompanion[A]
   transparent inline def Void               = gen.Void;                       type Void                    = gen.Void

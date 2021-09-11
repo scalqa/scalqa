@@ -4,13 +4,13 @@ object transformTo:
 
   def toIdx[A](x: ~[A])                 : Idx[A]       = pack.z.ArrayPack.fromStream[A](x)
 
-  def toLookupBy[A,K](x: ~[A],f: A => K): Lookup[K,A]  = {val l=Lookup.Mutable[K,A](); x.FOREACH(v => l.put(f(v),v)); l}
+  def toLookupBy[A,B](x: ~[A],f: A => B): Lookup[B,A]  = {val l=Lookup.Mutable[B,A](); x.FOREACH(v => l.put(f(v),v)); l}
 
-  def makeString[A](x: ~[A], sep: String, t :Given.DocDef[A]): String =
+  def makeString[A](x: ~[A], sep: String, t :Any.Def.Doc[A]): String =
     x.read_?.map(v => {
       val b = String.Builder(256)
       b += t.value_tag(v)
-      x.FOREACH(v => { b +=sep; b +=t.value_tag(v)})
+      x.FOREACH(v => { b += sep; b += t.value_tag(v)})
       b.tag
     }) or ""
 

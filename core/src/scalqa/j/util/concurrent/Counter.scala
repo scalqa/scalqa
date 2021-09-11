@@ -4,7 +4,7 @@ import java.util.concurrent.atomic.AtomicLong
 import Concurrent.Counter
 
 object Counter extends AnyRef.Opaque.Base[Counter,AtomicLong]("Concurrent.Counter"):
-  def apply(initValue : Long = 0): Counter = new AtomicLong(initValue).opaque
+  def apply(initValue : Long = 0): Counter = new AtomicLong(initValue).toOpaque
 
   extension(inline x: Counter)
     inline def get      : Int     = x.cast[AtomicLong].intValue
@@ -12,8 +12,8 @@ object Counter extends AnyRef.Opaque.Base[Counter,AtomicLong]("Concurrent.Counte
     inline def getLong  : Long    = x.cast[AtomicLong].longValue
     inline def nextLong : Long    = x.cast[AtomicLong].incrementAndGet
 
-  object OPAQUE:
-    opaque type TYPE <: AnyRef.Opaque = AtomicLong & AnyRef.Opaque
+  object TYPE:
+    opaque type DEF <: AnyRef.Opaque = AtomicLong & AnyRef.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -22,7 +22,7 @@ object Counter extends AnyRef.Opaque.Base[Counter,AtomicLong]("Concurrent.Counte
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object OPAQUE  -> ###
+@type DEF  -> ###
 
     Thread safe, minimal overhead counter based on java.util.concurrent.atomic.AtomicLong.
 

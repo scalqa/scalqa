@@ -1,10 +1,10 @@
 package scalqa; package `val`; package stream; package z; package _build; package _filter; import scala.language.implicitConversions
 
-class drop[A](x: ~[A], f: A => Boolean) extends a.Pipe[A](x):
+class drop[A](x: ~[A], f: A => Boolean) extends z.x.Pipe[A](x):
 
   @tn("read_Opt") def read_? =
     var o = x.read_?
-    while (o.nonEmpty)
+    while(o)
       if(!f(o.cast[A])) return o
       o = x.read_?
     \/

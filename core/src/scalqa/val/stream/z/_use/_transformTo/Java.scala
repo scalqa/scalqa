@@ -6,12 +6,12 @@ object Java:
 
   class Iterator[A](v: ~[A]) extends J.Iterator[A]:
     private var o: Opt[A] = \/
-    def hasNext           = o.nonEmpty || { o = v.read_?; o.nonEmpty }
+    def hasNext           = o || { o = v.read_?; o }
     def next              = if (hasNext) { val v = o.get; o = \/; v } else throw ZZ.EO()
 
   class Enumeration[A](v: ~[A]) extends J.Enumeration[A]:
     private var o: Opt[A] = \/
-    def hasMoreElements   = o.nonEmpty || { o = v.read_?; o.nonEmpty}
+    def hasMoreElements   = o || { o = v.read_?; o}
     def nextElement       = if (hasMoreElements) { val v = o.get; o = \/; v} else throw ZZ.EO()
 
   class Spliterator[A](s: ~[A], protected val splitSize: Int) extends J.Spliterator[A]:

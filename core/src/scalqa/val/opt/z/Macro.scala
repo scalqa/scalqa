@@ -8,9 +8,9 @@ object Macro:
 
   private def orImpl[A](oe: Expr[Opt[A]] ,ve: Expr[A])(using Quotes, Type[A]): Expr[A] =
     oe match
-      case '{ if($b:Boolean) ($v) else ZZ.BoolNone.cast[Val.Opt[A]] }  => '{{if($b) $v.cast[A] else $ve }}
-      case '{ ZZ.BoolNone.cast[Val.Opt[A]]                          }  => {ve}
-      case _                                                           => '{{val o=$oe; if(o ne ZZ.None) o.cast[A] else $ve}}
+      case '{ if($b:Boolean) ($v) else ZZ.None.cast[Val.Opt[A]] }  => '{{if($b) $v.cast[A] else $ve }}
+      case '{ ZZ.None.cast[Val.Opt[A]]                          }  => {ve}
+      case _                                                       => '{{val o=$oe; if(o ne ZZ.None) o.cast[A] else $ve}}
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

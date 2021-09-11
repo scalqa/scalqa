@@ -1,6 +1,6 @@
 package scalqa; package `val`; package stream; package z; package _build; package _zip
 
-class zipIndex[A](val x: ~[A], val start: Int) extends a.Pipe.Sized[(Int, A)](x):
+class zipIndex[A](val x: ~[A], val start: Int) extends z.x.Pipe.Sized[(Int, A)](x):
   private         var i      = start - 1
   @tn("read_Opt") def read_? = x.read_?.map(v => { i += 1; (i, v) })
 

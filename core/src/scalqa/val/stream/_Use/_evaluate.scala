@@ -1,27 +1,31 @@
 package scalqa; package `val`; package stream; package _use; import language.implicitConversions
 
+import z._use.{ _evaluate as _Z, evaluate as Z }
+
 transparent trait _evaluate:
 
   extension[A](inline x: ~[A])
-    @tn("find_Opt")           inline def find_?(inline f: A => Boolean)     : Opt[A]            = z._use._evaluate.find.opt(x,f)
-    /**/                      inline def find(  inline f: A => Boolean)     : A                 = z._use._evaluate.find.opt(x,f).get
-    @tn("findPosition_Opt")   inline def findPosition_?(inline f:A=>Boolean): Int.Opt           = z._use._evaluate.find.position_Opt(x,f)
-    /**/                      inline def count                              : Int               = z._use._evaluate.count.all(x)
-    /**/                      inline def count(inline f: A => Boolean)      : Int               = z._use._evaluate.count.conditional(x,f)
-    /**/                      inline def countAndTime                       : (Int,Time.Length) = z._use._evaluate.count.andTime(x)
+    @tn("find_Opt")                 inline def find_?(inline f: A => Boolean)        : Opt[A]            = _Z.find.opt(x,f)
+    /**/                            inline def find(  inline f: A => Boolean)        : A                 = _Z.find.opt(x,f).get
+    @tn("findPosition_Opt")         inline def findPosition_?(inline f:A=>Boolean)   : Int.Opt           = _Z.find.position_Opt(x,f)
+    @tn("findSequencePosition_Opt") inline def findSequencePosition_?(inline v: ~[A]): Int.Opt           = _Z.find.sequencePosition_Opt(x,v)
+    /**/                            inline def count                                 : Int               = _Z.count.all(x)
+    /**/                            inline def count(inline f: A => Boolean)         : Int               = _Z.count.conditional(x,f)
+    /**/                            inline def countAndTime                          : (Int,Time.Length) = _Z.count.andTime(x)
 
-    /**/                      inline def equalsStart(   inline v: ~[A])     : Boolean           = z._use._evaluate.equals[A](x,v,false)
-    @tn("equalsStart_Result") inline def equalsStart_??(inline v: ~[A])     : Result[true]      = z._use._evaluate.equals[A](x,v,false)
-    /**/                      inline def equalsAll(     inline v: ~[A])     : Boolean           = z._use._evaluate.equals[A](x,v,true)
-    @tn("equalsAll_Result")   inline def equalsAll_??(  inline v: ~[A])     : Result[true]      = z._use._evaluate.equals[A](x,v,true)
-    /**/                      inline def exists( inline f: A => Boolean)    : Boolean           = z._use.evaluate.exists(x,f)
-    /**/                      inline def isEvery(inline f: A => Boolean)    : Boolean           = z._use.evaluate.isEvery(x,f)
-    /**/                      inline def contains(inline value: A)          : Boolean           = z._use.evaluate.contains(x,value)
-    /**/                      inline def last                               : A                 = z._use.evaluate.last_Opt(x).get
-    @tn("last_Opt")           inline def last_?                             : Opt[A]            = z._use.evaluate.last_Opt(x)
+    /**/                            inline def startsWithSequence(   inline v: ~[A]) : Boolean           = _Z.equals.sequence[A](x,v,false)
+    @tn("startsWithSequence_Result")inline def startsWithSequence_??(inline v: ~[A]) : Result[true]      = _Z.equals.sequence[A](x,v,false)
+    /**/                            inline def equalsSequence(       inline v: ~[A]) : Boolean           = _Z.equals.sequence[A](x,v,true)
+    @tn("equalsSequence_Result")    inline def equalsSequence_??(    inline v: ~[A]) : Result[true]      = _Z.equals.sequence[A](x,v,true)
+    /**/                            inline def exists( inline f: A => Boolean)       : Boolean           = Z.exists(x,f)
+    /**/                            inline def isEvery(inline f: A => Boolean)       : Boolean           = Z.isEvery(x,f)
+    /**/                            inline def contains(inline value: A)             : Boolean           = Z.contains(x,value)
+    /**/                            inline def containsSequence(inline seq: ~[A])    : Boolean           = Z.containsSequence(x,seq)
+    /**/                            inline def last                                  : A                 = Z.last_Opt(x).get
+    @tn("last_Opt")                 inline def last_?                                : Opt[A]            = Z.last_Opt(x)
 
     inline def countFew(inline f1:A=>Boolean, inline f2:A=>Boolean, inline f3:A=>Boolean= \/, inline f4:A=>Boolean= \/, inline f5:A=>Boolean= \/)
-      : (Int,Int) | (Int,Int,Int) | (Int,Int,Int,Int) | (Int,Int,Int,Int,Int) = z._use._evaluate.count.few(x,f1,f2,f3,f4,f5)
+      : (Int,Int) | (Int,Int,Int) | (Int,Int,Int,Int) | (Int,Int,Int,Int,Int) = _Z.count.few(x,f1,f2,f3,f4,f5)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -60,6 +64,10 @@ ___________________________________________________________________________*/
           (50 <> 500).~.findPosition_?(_ == 400)  // Retuns Int.Opt(350)
        ```
 
+@def findStartPosition_? -> Find start index
+
+       Optionally returns index where given stream value sequence matches current stream values
+
 @def exists -> Exists check
 
     Returns true if there is an elemnet satisfying given predicate
@@ -71,6 +79,10 @@ ___________________________________________________________________________*/
 @def contains -> Value check
 
     Returns true if stream contains given value.
+
+@def contains -> Sequence check
+
+    Returns true if stream contains given sequence of values.
 
 @def count -> All count
 

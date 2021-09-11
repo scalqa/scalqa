@@ -3,22 +3,25 @@ package scalqa; package `val`; import stream.*; import language.implicitConversi
 trait Stream[+A]:
   @tn("read_Opt") def read_? : Opt[A]
 
-object Stream extends z.util._default with _Build with _Use:
-  type AnyType[A] = Stream[A] | RawType[A]
-  type RawType[A] = lang.boolean.g.Stream[A & Boolean.Raw] | lang.byte.g.Stream[A & Byte.Raw] | lang.char .g.Stream[A & Char.Raw]  | lang.short .g.Stream[A & Short.Raw]
-                  | lang.int    .g.Stream[A & Int.Raw]     | lang.long.g.Stream[A & Long.Raw] | lang.float.g.Stream[A & Float.Raw] | lang.double.g.Stream[A & Double.Raw]
+object Stream extends zStreamDefaults with _Build with _Use:
+  /**/          inline def apply[A](inline v: A)                                  : ~[A]             = z.x.VarArg.Stream_ofOne[A](v)
+  /**/          inline def apply[A](inline v1: A, inline v2: A)                   : ~[A]             = z.x.VarArg.Stream_ofTwo[A](v1, v2)
+  /**/                 def apply[A](v1: A, v2: A, v3: A, vs: A*)                  : ~[A]             = if (vs.isEmpty) z.x.VarArg.Stream_ofThree[A](v1,v2,v3) else z.x.VarArg.Stream_ofMany[A](v1,v2,v3,vs)
+  /**/          inline def fromIterator[A]    (inline v: java.util.Iterator[A])   : ~[A]             = new z.x.Java.Stream_fromIterator(v)
+  /**/          inline def fromSpliterator[A] (inline v: java.util.Spliterator[A]): ~[A]             = new z.x.Java.Stream_fromSpliterator(v)
+  /**/          inline def fromEnumeration[A] (inline v: java.util.Enumeration[A]): ~[A]             = new z.x.Java.Stream_fromEnumeration(v)
+  /**/          inline def fromIterable[A]    (inline v: java.lang.Iterable[A])   : ~[A]             = z.x.Java.Stream_fromIterable(v)
+  /**/          inline def fromProduct        (inline v: Product)                 : ~[(String,Any)]  = new z.x.Scala.Stream_fromProduct(v)
+  /**/          inline def fromIterableOnce[A]
+                                       (inline v:scala.collection.IterableOnce[A]): ~[A]             = z.x.Scala.mkStream[A](v)
+  /**/                 def unapplySeq[A](v: ~[A])                                 : Option[Seq[A]]   = Some(v.toSeq)
+  @tn("getVoid")inline def void[A]                                                : ~[A]             = ZZ.VoidStream[A]
+  implicit      inline def implicitFromRequest   [A](v: \/)                       : ~[A]             = void
+  implicit      inline def implicitFromRequest   [A](v: EMPTY)                    : ~[A] & Able.Size = void.cast[~[A] & Able.Size]
+  implicit      inline def implicitFromAbleStream[A](inline v:Able.~[A])          : ~[A]             = v.~
 
-  // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  /**/           inline def apply[A](inline v: A)                 : ~[A]           = z.a.VarArg.Stream_ofOne[A](v)
-  /**/           inline def apply[A](inline v1: A, inline v2: A)  : ~[A]           = z.a.VarArg.Stream_ofTwo[A](v1, v2)
-  /**/                  def apply[A](v1: A, v2: A, v3: A, vs: A*) : ~[A]           = if (vs.isEmpty) z.a.VarArg.Stream_ofThree[A](v1,v2,v3) else z.a.VarArg.Stream_ofMany[A](v1,v2,v3,vs)
-  @tn("getVoid") inline def void[A]                               : ~[A]           = ZZ.voidStream
-  /**/                  def unapplySeq[A](v: ~[A])                : Option[Seq[A]] = Some(v.toSeq)
-
-  implicit       inline def implicitFrom[A](inline v:Able.~[A])   : ~[A]           = v.~
-
-  given givenCanEqualStream[A,B](using CanEqual[A,B]): CanEqual[~[A],~[B]] = CanEqual.derived
-  given givenDocDef[A :Given.DocDef]                 : Given.DocDef[~[A]]  = z.util.DocDef()
+  /**/   given givenCanEqualStream[A,B] (using CanEqual[A,B]): CanEqual[~[A],~[B]] = CanEqual.derived
+  inline given givenDocDef[A](using inline v: Any.Def.Doc[A]): Any.Def.Doc[~[A]]   = ZZ.streamDoc(v)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def _build  = stream._Build;   type _build     = stream._Build
@@ -27,6 +30,14 @@ object Stream extends z.util._default with _Build with _Use:
   transparent inline def Preview = stream.Preview;  type Preview[A] = stream.Preview[A]
   transparent inline def Custom  = stream.Custom
 
+class zStreamDefaults:
+  implicit inline def implicitFromRange       [A](inline v: Range[A])(using Able.Sequence[A]): ~[A] = v.~
+  implicit inline def implicitFromIterable    [A](inline v: java.lang.Iterable[A])           : ~[A] = z.x.Java.Stream_fromIterable(v)
+  implicit inline def implicitFromIterator    [A](inline v: java.util.Iterator[A])           : ~[A] = new z.x.Java.Stream_fromIterator(v)
+  implicit inline def implicitFromIterableOnce[A](inline v: scala.collection.IterableOnce[A]): ~[A] = z.x.Scala.mkStream[A](v)
+  implicit inline def implicitFromArray       [A](inline v: Array[A])                        : ~[A] = v.~
+  implicit inline def implicitFromOpt         [A](inline v: Opt[A])                          : ~[A] = {val o=v; o.~ }
+  implicit inline def implicitFromResult      [A](inline v: Result[A])                       : ~[A] = {val o=v; o.~ }
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
@@ -41,8 +52,8 @@ ___________________________________________________________________________*/
       Note. Stream companion object is [[scalqa.val.stream.Stream$ Val.~]], but when called without prefix it is [[scalqa.val.stream.Stream$ ~~]] (double tilde).
 
       Stream has just one method to be implemented, but it has large attached libraries for:
-        - [building](stream/_Build.html) stream pipeline
-        - [using](stream/_Use.html) stream data
+        - [building stream pipeline](stream/_Build.html)
+        - [using stream data](stream/_Use.html) stream data
 
       By Scalqa convention, method names, which return [[~]], are ended with '_~'
 
@@ -52,6 +63,12 @@ ___________________________________________________________________________*/
       s.TP  // Prints ~(A, B, C, D)
       ```
 
+@def fromIterator     -> Explicit constructor from Iterator     \n\n Note: There is also global implicit conversion from `Iterator` to `Stream`
+@def fromSpliterator  -> Constructor from Spliterator
+@def fromEnumeration  -> Constructor from Enumeration
+@def fromIterable     -> Explicit constructor from Iterable     \n\n Note: There is also global implicit conversion from `Iterable` to `Stream`
+@def fromIterableOnce -> Explicit constructor from IterableOnce \n\n Note: There is also global implicit conversion from `IterableOnce` to `Stream`
+@def fromProduct      -> Constructor from Product
 
 @object Stream -> ### Value Stream Companion
 

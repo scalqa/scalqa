@@ -1,14 +1,14 @@
 package scalqa; package `val`; package stream; package z; package _build; package _filter; import language.implicitConversions
 
-class take_Range[A](x: ~[A], in: Int.<>) extends a.Pipe[A](x) with Able.Size.Opt.Long:
-  private val start = in.start
-  private val endX  = in.endX
+class take_Range[A](x: ~[A], range: Int.<>) extends z.x.Pipe[A](x) with Able.Size.Opt.Long:
+  private val start = range.start
+  private val endX  = range.endX
   private var i     = -1
 
   @tn("read_Opt") def read_? =
     i += 1
     var o = x.read_?
-    while (i < start && o.nonEmpty) { i += 1; o = x.read_? }
+    while (i < start && o) { i += 1; o = x.read_? }
     o.drop(_ => i >= endX)
 
   @tn("sizeLong_Opt") def sizeLong_? : Long.Opt =
@@ -20,7 +20,7 @@ class take_Range[A](x: ~[A], in: Int.<>) extends a.Pipe[A](x) with Able.Size.Opt
       sz max 0
     })
 
-  override def doc = super.doc +=@ (0, "", in)
+  override def doc = super.doc +@= (0, "", range)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

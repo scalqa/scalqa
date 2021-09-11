@@ -4,10 +4,10 @@ import javafx.scene.paint.{ Paint => JPaint }
 import Fx.Paint
 
 object Paint extends Abstract.Delegate.Opaque[Paint, JPaint]("Fx.Paint"):
-  type Color = paint.Color.OPAQUE.TYPE; transparent inline def Color = paint.Color
+  type Color = paint.Color.TYPE.DEF; transparent inline def Color = paint.Color
 
-  object OPAQUE:
-    opaque type TYPE <: JPaint & AnyRef.Opaque = JPaint & AnyRef.Opaque
+  object TYPE:
+    opaque type DEF <: JPaint & AnyRef.Opaque = JPaint & AnyRef.Opaque
 
 
 /*___________________________________________________________________________

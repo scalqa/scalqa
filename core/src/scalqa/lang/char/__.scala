@@ -1,19 +1,18 @@
 package scalqa; package lang; import language.implicitConversions
 
-object Char extends char.g.customized.Containers[Char]:
+object Char extends char.g.Containers[Char]:
   inline def min     : Char               = java.lang.Character.MIN_VALUE
   inline def max     : Char               = java.lang.Character.MAX_VALUE
   inline def ordering: G.Ordering[Char]   = char.z.Math
   inline def math    : G.Math[Char]       = char.z.Math
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  type Opaque   = char.Opaque.TYPE.DEF;   transparent inline def Opaque = char.Opaque
   type _methods = char._methods;          transparent inline def G      = char.G
-  type Opaque   = char.Opaque;            transparent inline def Opaque = char.Opaque
-  type Raw      = Char | char.Opaque;     transparent inline def Raw    = char.Raw
 
 package object char:
-  type Raw    = Char.Raw
-  opaque type Opaque >: Char <: AnyVal = Char
+  type Raw      = Any.Char
+  type Opaque   = char.Opaque.TYPE.DEF
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -1,6 +1,6 @@
 package scalqa; package lang; package int; package g; import language.implicitConversions
 
-class Range[A<:Raw](_start: A, _size: Int) extends Val.<>[A] with Able.Size with Able.~[A] with Raw.Specialized:
+class Range[A<:Raw](_start: A, _size: Int) extends Val.<>[A] with Able.Size with Able.~[A] with any.z.PrimitiveTag.Int:
   def this(start:A, end:A, endIn: Boolean) = this(start, end.real - start.real + endIn.toInt)
   type THIS_TYPE = Range[A]
   /**/              def start                  : A             = _start
@@ -42,11 +42,11 @@ object Range:
     @tn("checkIn")  inline def checkIn(size:Int): Range[Int] = {if(x.start<0 || x.endX>size) J.illegalArgument(""+x.start+" <>> "+x.endX+" is out of range 0 <>> "+size); x}
     @tn("default")  inline def default(size:Int): Range[Int] = {var v=x; if(v.isInstanceOf[Void]) v = 0 <>> size; v }
   // ------------------------------------------------------------------------------------------------------------------------------------------
-  extension[A<:Raw,T,STM<: ~~.AnyType[T]](inline x: Range[A])
-    /**/                                  inline def map    [B>:T](inline f:A=> B)   (using inline t: Given.StreamShape[B,STM]): STM       = g.Stream.map[A,T,STM](x.~)[B](f)(using t)
-    /**/                                  inline def flatMap[B>:T](inline f:A=> ~[T])(using inline t: Given.StreamShape[B,STM]): STM       = g.Stream.flatMap[A,T,STM](x.~)[B](f)(using t)
-  extension[A<:Raw]  (inline x: Range[A]) inline def withFilter(inline f: Fun.Filter[A])                                       : Stream[A] = x.~.take(f)
-  extension[A<:Raw,U](inline x: Range[A]) inline def foreach(   inline f: A=>U)                                                : Unit      = z.range.Macro.foreach(x,f)
+  extension[A<:Raw](inline x: Range[A])
+    inline def map    [B](inline f: A=>B)   (using inline B:Specialized[B]): B.~    = x.~.map(f)
+    inline def flatMap[B](inline f:A=> ~[B])(using inline B:Specialized[B]): B.~    = x.~.flatMap(f)
+    inline def withFilter(inline f: Fun.Filter[A])                         : G.~[A] = x.~.take(f)
+    inline def foreach[U](inline f: A=>U)                                  : Unit   = z.range.Macro.foreach(x,f)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -3,22 +3,22 @@ package scalqa; package lang; package string; package _methods; import language.
 transparent trait _copy:
 
   extension(inline x: String)
-    /**/              inline def takeBefore    (inline v:String, inline dflt:Opt[String]= \/, inline from:Int.Opt = \/): String   = Z.takeBefore    (x,v,dflt,from)
-    /**/              inline def takeBeforeLast(inline v:String, inline dflt:Opt[String]= \/, inline from:Int.Opt = \/): String   = Z.takeBeforeLast(x,v,dflt,from)
-    /**/              inline def takeFrom      (inline v:String, inline dflt:Opt[String]= \/, inline from:Int.Opt = \/): String   = Z.takeFrom(      x,v,dflt,from)
-    /**/              inline def takeFromLast  (inline v:String, inline dflt:Opt[String]= \/, inline from:Int.Opt = \/): String   = Z.takeFromLast(  x,v,dflt,from)
-    /**/              inline def takeAfter     (inline v:String, inline dflt:Opt[String]= \/, inline from:Int.Opt = \/): String   = Z.takeAfter(     x,v,dflt,from)
-    /**/              inline def takeAfterLast (inline v:String, inline dflt:Opt[String]= \/, inline from:Int.Opt = \/): String   = Z.takeAfterLast( x,v,dflt,from)
-    @tn("take_Range") inline def take_<>(start:Int, inline size:Int)                                                   : String   = x.substring(start,start+size)
-    @tn("take_Range") inline def take_<>(r: Int.<>)                                                                    : String   = x.substring(r.start, r.endX)
-    /**/              inline def takeFirst(inline cnt: Int)                                                            : String   = x.substring(0, cnt)
-    /**/              inline def dropFirst(inline cnt: Int)                                                            : String   = x.substring(cnt)
+    /**/              inline def takeBefore    (inline v:String, inline dflt:Opt[String]= \/, inline fromPosition:Int.Opt = \/): String   = Z.takeBefore    (x,v,dflt,fromPosition)
+    /**/              inline def takeBeforeLast(inline v:String, inline dflt:Opt[String]= \/, inline fromPosition:Int.Opt = \/): String   = Z.takeBeforeLast(x,v,dflt,fromPosition)
+    /**/              inline def takeFrom      (inline v:String, inline dflt:Opt[String]= \/, inline fromPosition:Int.Opt = \/): String   = Z.takeFrom(      x,v,dflt,fromPosition)
+    /**/              inline def takeFromLast  (inline v:String, inline dflt:Opt[String]= \/, inline fromPosition:Int.Opt = \/): String   = Z.takeFromLast(  x,v,dflt,fromPosition)
+    /**/              inline def takeAfter     (inline v:String, inline dflt:Opt[String]= \/, inline fromPosition:Int.Opt = \/): String   = Z.takeAfter(     x,v,dflt,fromPosition)
+    /**/              inline def takeAfterLast (inline v:String, inline dflt:Opt[String]= \/, inline fromPosition:Int.Opt = \/): String   = Z.takeAfterLast( x,v,dflt,fromPosition)
+    @tn("take_Range") inline def take_<>(start:Int, inline size:Int)                                                           : String   = x.substring(start,start+size)
+    @tn("take_Range") inline def take_<>(r: Int.<>)                                                                            : String   = x.substring(r.start, r.endX)
+    /**/              inline def takeFirst(inline cnt: Int)                                                                    : String   = x.substring(0, cnt)
+    /**/              inline def dropFirst(inline cnt: Int)                                                                    : String   = x.substring(cnt)
 
   extension(x: String)
-    /**/              inline def takeLast(inline cnt: Int)                                                             : String   = x.substring(x.length - cnt, x.length)
-    @tn("drop_Range") inline def drop_<>(start:Int, inline size:Int)                                                   : String   = (x.substring(0, start) + x.substring(start+size))
-    @tn("drop_Range") inline def drop_<>(i: Int.<>)                                                                    : String   = (x.substring(0, i.start) + x.substring(i.endX))
-    /**/              inline def dropLast (inline cnt: Int)                                                            : String   = x.substring(0, x.length - cnt)
+    /**/              inline def takeLast(inline cnt: Int)                                                                     : String   = x.substring(x.length - cnt, x.length)
+    @tn("drop_Range") inline def drop_<>(start:Int, inline size:Int)                                                           : String   = (x.substring(0, start) + x.substring(start+size))
+    @tn("drop_Range") inline def drop_<>(i: Int.<>)                                                                            : String   = (x.substring(0, i.start) + x.substring(i.endX))
+    /**/              inline def dropLast (inline cnt: Int)                                                                    : String   = x.substring(0, x.length - cnt)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -1,8 +1,8 @@
 package scalqa; package `val`; package stream; package z; package _build; package _group; import language.implicitConversions
 
-class partition[A](x: ~[A], p: A => Boolean, seq: Seq[A=>Boolean]) extends a.Pipe.Calculated[~[A]](x):
+class partition[A](x: ~[A], p: A => Boolean, seq: Seq[A=>Boolean]) extends z.x.Pipe.Calc[~[A]](x):
 
-  def calculate =
+  def calc =
     val cnt  = seq.size + 1
     val init = x.size_?.map(_ / cnt * 2) or J.initSize
     if(cnt == 1)
@@ -11,7 +11,7 @@ class partition[A](x: ~[A], p: A => Boolean, seq: Seq[A=>Boolean]) extends a.Pip
       ~~(one.~,two.~)
     else
       val pa = new Array[A =>Boolean](cnt).^(a =>{a(0)=p; for(i <- 1 <>> cnt) a(i) = seq(i-1) })
-      val ra = new Array[Buffer[A]](cnt+1).^(a => for(i <- 0 <> cnt) a(i) = new AnyRef.G.Buffer[A](init))
+      val ra = new Array[Buffer[A]](cnt+1).^(a => for(i <- 0 <> cnt) a(i) = new AnyRef.Buffer[A](init))
 
       x.FOREACH(v => {
         var i = 0

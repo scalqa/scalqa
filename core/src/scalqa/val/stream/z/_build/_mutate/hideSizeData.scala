@@ -1,6 +1,6 @@
 package scalqa; package `val`; package stream; package z; package _build; package _mutate; import language.implicitConversions
 
-class hideSizeData[A](x: ~[A]) extends a.Pipe[A](x):
+class hideSizeData[A](x: ~[A]) extends z.x.Pipe[A](x):
   @tn("read_Opt") def read_? = x.read_?
 
 /*___________________________________________________________________________

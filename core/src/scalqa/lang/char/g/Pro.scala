@@ -1,6 +1,6 @@
 package scalqa; package lang; package char; package g; import language.implicitConversions
 
- trait Pro[A<:Raw] extends Val.Pro[A] with Raw.Specialized:
+ trait Pro[A<:Raw] extends Val.Pro[A] with any.z.PrimitiveTag.Char:
   def apply(): A
 
 object Pro:
@@ -32,7 +32,7 @@ object Pro:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object X -> ###  \n\n Object [[X]] defines standard parent type extensions
-@object X -> ###  \n\n Object [[X]] defines standard parent type extensions
-@object X -> ###  \n\n Object [[X]] defines standard parent type extensions
+@object X -> ### Type Extention
+@object X -> ### Type Extention
+@object X -> ### Type Extention
 */

@@ -6,8 +6,8 @@ import Fx.Color
 object Color extends Abstract.Delegate.Opaque[Color, FX]("Fx.Paint.Color"):
   def apply(red: Int, green: Int, blue: Int) : Color = FX.rgb(red, green, blue).cast[Color]
 
-  object OPAQUE:
-    opaque type TYPE <: Paint.OPAQUE.TYPE  = FX & Paint.OPAQUE.TYPE
+  object TYPE:
+    opaque type DEF <: Paint.TYPE.DEF  = FX & Paint.TYPE.DEF
 
   export Named.*
   object Named:

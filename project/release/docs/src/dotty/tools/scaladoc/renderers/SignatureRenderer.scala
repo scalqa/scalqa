@@ -10,6 +10,9 @@ import scala.util.Try
 import org.jsoup.Jsoup
 import java.nio.file.Paths
 
+import scalqa.{*,given}
+
+
 // TODO merge it with new renderer
 trait SignatureRenderer:
   def currentDri: DRI
@@ -25,13 +28,12 @@ trait SignatureRenderer:
 
   def renderLinkContent(content: TagArg, dri: DRI, modifiers: AppliedAttr*) =
     link(dri) match
-      case Some(link) => a(href := link.replace("$$OPAQUE$",""), modifiers)(content)
+      case Some(link) => a(href := link.replace("$$TYPE$",""), modifiers)(content)
       case _ => unresolvedLink(content, modifiers:_*)
 
-  import scalqa.given
 
-  def renderElementWith(e: String | (String, DRI) | Link, modifiers: AppliedAttr*) = e match
-    case (name, dri) => renderLink("!!"+dri.scalqaLabel(name), dri, modifiers *)
+  def renderElementWith(e: String | (String, DRI) | Link, owner: Opt[Member] = \/, heading: Boolean = false, modifiers: AppliedAttr*) = e match
+    case (name, dri) => ??? //renderLink("!!"+dri.scalqaLabel(name), dri, modifiers *)
     case name: String => raw(name)
     case Link(name, dri) =>
-      renderLink(dri.scalqaLabel(name), dri, modifiers *)
+      renderLink(dri.scalqaLabel(name,owner,heading), dri, modifiers *)

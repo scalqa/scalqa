@@ -1,49 +1,42 @@
 package scalqa; package `val`; import pack.*; import language.implicitConversions
 
-import Pack.RawType
-import gen.`given`.PackShape.{ Raw as TAG }
-
 abstract class Pack[A] extends Idx[A]:
   type THIS_TYPE <: Pack[A]
-  /**/                     def join (v: A)                                        : THIS_TYPE
-  /**/                     def joinAll(v: ~[A])                                   : THIS_TYPE
-  /**/                     def joinAt(i: Int, v: A)                               : THIS_TYPE
-  /**/                     def joinAllAt(i: Int, v: ~[A])                         : THIS_TYPE
-  @tn("_join")      inline def + (inline v: A)                                    : THIS_TYPE  = join(v)
-  @tn("_joinAll")   inline def ++(inline v: ~[A])                                 : THIS_TYPE  = joinAll(v)
-  @tn("_joinAt")    inline def +@ (inline i: Int, inline v: A)                    : THIS_TYPE  = joinAt(i,v)
-  @tn("_joinAllAt") inline def ++@(inline i: Int, inline v: ~[A])                 : THIS_TYPE  = joinAllAt(i,v)
+  /**/                     def join (v: A)                                 : THIS_TYPE
+  /**/                     def joinAll(v: ~[A])                            : THIS_TYPE
+  /**/                     def joinAt(i: Int, v: A)                        : THIS_TYPE
+  /**/                     def joinAllAt(i: Int, v: ~[A])                  : THIS_TYPE
+  @tn("join")       inline def + (inline v: A)                             : THIS_TYPE  = join(v)
+  @tn("joinAll")    inline def ++(inline v: ~[A])                          : THIS_TYPE  = joinAll(v)
+  @tn("join")       inline def +@ (inline i: Int, inline v: A)             : THIS_TYPE  = joinAt(i,v)
+  @tn("joinAllAt")  inline def ++@(inline i: Int, inline v: ~[A])          : THIS_TYPE  = joinAllAt(i,v)
   // -------------------------
-  /**/                     def head                                               : A          = apply(0)
-  @tn("head_Opt")          def head_?                                             : Opt[A]     = if(size==0) \/ else apply(0)
-  /**/                     def tail                                               : ><[A]      = if(size<=1) \/ else new z.Tail[A](this,1)
+  /**/                     def head                                        : A          = apply(0)
+  @tn("head_Opt")          def head_?                                      : Opt[A]     = if(size==0) \/ else apply(0)
+  /**/                     def tail                                        : ><[A]      = if(size<=1) \/ else new z.Tail[A](this,1)
   // -------------------------
-  /**/              inline def takeFirst(cnt: Int)                                : THIS_TYPE  = take_<>(0,cnt)
-  /**/              inline def takeLast (cnt: Int)                                : THIS_TYPE  = take_<>(cnt,size - cnt)
-  @tn("take_Range")        def take_<>(from: Int, size: Int)                      : THIS_TYPE
-  @tn("take_Range") inline def take_<>(r: Int.<>)                                 : THIS_TYPE  = take_<>(r.start,r.size)
+  /**/              inline def takeFirst(cnt: Int)                         : THIS_TYPE  = take_<>(0,cnt)
+  /**/              inline def takeLast (cnt: Int)                         : THIS_TYPE  = take_<>(cnt,size - cnt)
+  @tn("take_Range")        def take_<>(from: Int, size: Int)               : THIS_TYPE
+  @tn("take_Range") inline def take_<>(r: Int.<>)                          : THIS_TYPE  = take_<>(r.start,r.size)
   // -------------------------
-  /**/              inline def dropFirst(cnt: Int)                                : THIS_TYPE  = take_<>(cnt,size - cnt)
-  /**/              inline def dropLast (cnt: Int)                                : THIS_TYPE  = take_<>(0,size - cnt)
-  @tn("drop_Range")        def drop_<>(from: Int, size: Int)                      : THIS_TYPE
-  @tn("drop_Range") inline def drop_<>(r: Int.<>)                                 : THIS_TYPE  = take_<>(r.start,r.size)
-  /**/                     def toBuffer                                           : Buffer[A]
-  /**/              inline def raw[PACK<:RawType[A]] (using inline s:TAG[A,PACK]) : PACK       = z.raw(this,s)
-  /**/                     def compact                                            : this.type
+  /**/              inline def dropFirst(cnt: Int)                         : THIS_TYPE  = take_<>(cnt,size - cnt)
+  /**/              inline def dropLast (cnt: Int)                         : THIS_TYPE  = take_<>(0,size - cnt)
+  @tn("drop_Range")        def drop_<>(from: Int, size: Int)               : THIS_TYPE
+  @tn("drop_Range") inline def drop_<>(r: Int.<>)                          : THIS_TYPE  = take_<>(r.start,r.size)
+  /**/                     def toBuffer                                    : Buffer[A]
+  /**/              inline def raw(using inline A:Specialized.Primitive[A]): A.><       = z.raw(this)
+  /**/                     def compact                                     : THIS_TYPE
 
 object Pack:
-  type AnyType[A] = Pack[A] | RawType[A]
-  type RawType[A] = lang.boolean.G.><[A & Boolean.Raw] | lang.byte.G.><[A & Byte.Raw] | lang.char .G.><[A & Char.Raw]  | lang.short .G.><[A & Short.Raw]
-                  | lang.int    .G.><[A & Int.Raw]     | lang.long.G.><[A & Long.Raw] | lang.float.G.><[A & Float.Raw] | lang.double.G.><[A & Double.Raw]
-
-  /**/                 def apply[A](v: A)                        : ><[A] = z.Few.Pack_ofOne(v)
-  /**/                 def apply[A](v1: A, v2: A)                : ><[A] = z.Few.Pack_ofTwo(v1, v2)
-  /**/                 def apply[A](v1: A, v2: A, v3: A, vs: A*) : ><[A] = if (vs.isEmpty) z.Few.Pack_ofThree(v1, v2, v3) else z.ArrayPack(v1, v2, v3, vs)
-  @tn("getVoid")inline def void[A]                               : ><[A] = ZZ.voidPack[A]
-  /**/          inline def fromArray[A](a: Array[AnyRef])        : ><[A] = fromArray(a,a.length)
-  /**/                 def fromArray[A](a: Array[AnyRef], sz:Int): ><[A] = new z.ArrayPack(a.copySize(sz),sz)
-  implicit      inline def implicitFrom[A](inline v: \/)         : ><[A] = void[A]
-  implicit      inline def implicitFrom[A](inline v: ~[A])       : ><[A] = v.><
+  /**/                     def apply[A](v: A)                              : ><[A]      = z.Few.Pack_ofOne(v)
+  /**/                     def apply[A](v1: A, v2: A)                      : ><[A]      = z.Few.Pack_ofTwo(v1, v2)
+  /**/                     def apply[A](v1: A, v2: A, v3: A, vs: A*)       : ><[A]      = if (vs.isEmpty) z.Few.Pack_ofThree(v1, v2, v3) else z.ArrayPack(v1, v2, v3, vs)
+  @tn("getVoid")    inline def void[A]                                     : ><[A]      = ZZ.Void[A]
+  /**/              inline def fromArray[A](a: Array[AnyRef])              : ><[A]      = fromArray(a,a.length)
+  /**/                     def fromArray[A](a: Array[AnyRef], sz: Int)     : ><[A]      = new z.ArrayPack(a.copySize(sz),sz)
+  implicit          inline def implicitFrom[A](inline v: \/)               : ><[A]      = void[A]
+  implicit          inline def implicitFrom[A](inline v: ~[A])             : ><[A]      = v.><
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

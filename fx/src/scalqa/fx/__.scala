@@ -18,8 +18,8 @@ object Fx:
   transparent inline def Scene       = fx.Scene;               type Scene        = fx.Scene
   transparent inline def Application = fx.scene.Application;   type Application  = fx.scene.Application
   transparent inline def Chart       = fx.scene.Chart;         type Chart        = fx.scene.Chart
-  transparent inline def Image       = fx.scene.Image;         type Image        = fx.scene.Image.OPAQUE.TYPE
-  transparent inline def Paint       = fx.scene.Paint;         type Paint        = fx.scene.Paint.OPAQUE.TYPE
+  transparent inline def Image       = fx.scene.Image;         type Image        = fx.scene.Image.TYPE.DEF
+  transparent inline def Paint       = fx.scene.Paint;         type Paint        = fx.scene.Paint.TYPE.DEF
   transparent inline def Pane        = fx.scene.Pane;          type Pane         = fx.scene.Pane
   transparent inline def Shape       = fx.scene.Shape;         type Shape        = fx.scene.Shape
   transparent inline def Stage       = fx.scene.Stage;         type Stage        = fx.scene.Stage
@@ -29,12 +29,12 @@ object Fx:
   transparent inline def Abstract    = fx.base.Abstract
   transparent inline def Action      = fx.base.Action;         type Action       = fx.base.Action
   transparent inline def Orientation = fx.base.Orientation;    type Orientation  = fx.base.Orientation
-  transparent inline def Insets      = fx.base.Insets;         type Insets       = fx.base.Insets.OPAQUE.TYPE
+  transparent inline def Insets      = fx.base.Insets;         type Insets       = fx.base.Insets.TYPE.DEF
   transparent inline def Side        = fx.base.Side;           type Side         = fx.base.Side
   transparent inline def Pos         = fx.base.Pos;            type Pos          = fx.base.Pos
   transparent inline def VPos        = fx.base.VPos;           type VPos         = fx.base.VPos
   transparent inline def HPos        = fx.base.HPos;           type HPos         = fx.base.HPos
-  transparent inline def Style       = fx.base.Style;          type Style        = fx.base.Style.OPAQUE.TYPE
+  transparent inline def Style       = fx.base.Style;          type Style        = fx.base.Style.TYPE.DEF
   transparent inline def JavaFx      = fx.base.JavaFx
   transparent inline def Selection   = fx.base.Selection;      type Selection[A] = fx.base.Selection[A]
   transparent inline def Event       = fx.base.Event;          type Event        = fx.base.Event

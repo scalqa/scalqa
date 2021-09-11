@@ -1,18 +1,17 @@
 package scalqa; package `val`; package stream; package z; package _build; package _filter; import language.implicitConversions
 
-class takeLast(x: ~[AnyRef], cnt: Int) extends a.Pipe.Calculated[AnyRef](x):
+class takeLast[A](x: ~[A], cnt: Int) extends z.x.Pipe.Calc[A](x):
+  def calc = new Calc
 
-  def calculate =
-    val a = new Array[AnyRef](cnt)
-    var i = 0
-    x.foreach(v => { a(i % cnt) = v; i+=1 })
-    new z.a.Pipe.ofRef[AnyRef](x) with Able.Size {
-      private         val sz     = i min cnt;
-      private         val off    = i - sz - 1
-      private         var j      = 0
-      @tn("read_Opt") def read_? = if(j<sz){ j+=1; a((off + j) % cnt)} else \/
-      /**/            def size   = sz - j
-    }
+  class Calc extends z.x.Pipe[A](x) with Able.Size:
+    private         val a = new Array[AnyRef](cnt)
+    private         var i = 0
+    x.foreach(v => { a(i % a.length) = v.cast[AnyRef]; i+=1 })
+    private         val sz     = i min a.length;
+    private         val off    = i - sz - 1
+    private         var j      = 0
+    @tn("read_Opt") def read_? = {var o:Opt[A]= \/; if(j<sz){ j+=1; o = a((off + j) % a.length).cast[A]}; o}
+    /**/            def size   = sz - j
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

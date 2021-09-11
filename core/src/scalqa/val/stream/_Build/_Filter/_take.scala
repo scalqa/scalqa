@@ -1,28 +1,26 @@
 package scalqa; package `val`; package stream; package _build; package _filter
 
-import z._build.{ _filter => F }
+import z._build.{ _filter => _Z, filter => Z }
 
 transparent trait _take :
   extension[A](inline x: ~[A])
-    /**/              inline def take(inline f: A => Boolean)            : ~[A] = new F.take(x,f)
-    /**/              inline def takeType[B](using inline t:ClassTag[B]) : ~[B] = new F.takeType(x)
-    /**/              inline def takeWhile(inline f: A => Boolean)       : ~[A] = new F.takeWhile(x,f)
-    /**/              inline def takeFirst(n: Int)                       : ~[A] = new F.take_Range(x,0 <>> n)
-    @tn("take_Range") inline def take_<>(inline i: Int.<>)               : ~[A] = new F.take_Range(x,i)
-    /**/              inline def takeLast(inline n: Int)                 : ~[A] = new F.takeLast(x.cast[~[AnyRef]], n).cast[~[A]]
-    /**/              inline def takeEvery(inline nTh: Int)              : ~[A] = new F.takeEvery(x,nTh)
+    /**/              inline def take(inline f: A => Boolean)                : ~[A] = new _Z.take(x,f)
+    /**/              inline def takeType[B](using inline t:ClassTag[B])     : ~[B] = new _Z.takeType(x)
+    /**/              inline def takeWhile(inline f: A => Boolean)           : ~[A] = new _Z.takeWhile(x,f)
+    /**/              inline def takeFirst(n: Int)                           : ~[A] = new _Z.take_Range(x,0 <>> n)
+    @tn("take_Range") inline def take_<>(inline i: Int.<>)                   : ~[A] = new _Z.take_Range(x,i)
+    /**/              inline def takeLast(inline n: Int)                     : ~[A] = new _Z.takeLast(x,n)
+    /**/              inline def takeEvery(inline nTh: Int)                  : ~[A] = new _Z.takeEvery(x,nTh)
     /**/              inline def takeIndexed(inline f:(Int,A)=>Boolean,
-                                                      inline start:Int=0): ~[A] = new F.takeIndexed(x,f,start)
-    /**/              inline def takeDuplicates                          : ~[A] = new F.takeDuplicates(x)
-    /**/              inline def takeDuplicatesBy[B](inline f: A=>B)     : ~[A] = new F.takeDuplicates.By(x,f)
+                                                          inline start:Int=0): ~[A] = new _Z.takeIndexed(x,f,start)
+    /**/              inline def takeDuplicates                              : ~[A] = new _Z.takeDuplicates(x)
+    /**/              inline def takeDuplicatesBy[B](inline f: A=>B)         : ~[A] = new _Z.takeDuplicates.By(x,f)
 
-  extension[A](x: ~[A])
-    /**/                     def takeAll(v: ~[A])                        : ~[A] = { val set = v.toSet; if(set.isEmpty) \/ else x.TAKE(v => set.contains(v)) }
-    /**/                     def takeAllBy[B](f: A=>B, v: ~[B])          : ~[A] = { val set = v.toSet; if(set.isEmpty) \/ else x.TAKE(v => set.contains(f(v)))}
-    /**/                     def takeOnly(v: A, vs: A*)                  : ~[A] = if(vs.isEmpty) x.TAKE(_ == v) else takeAll(vs.~ + v)
-    /**/                     def takeOnlyBy[B](f:A=>B, v: B*)            : ~[A] = takeAllBy(f,v.~)
-  extension[A](inline x: ~[A])
-    /**/              inline def TAKE(inline f: A => Boolean)            : ~[A] = { class TAKE(x: ~[A]) extends z.a.Pipe[A](x){@tn("read_Opt") def read_? ={var o=x.read_?; while(o.nonEmpty){ if( f(o.cast[A])) return o; o=x.read_?}; o}}; new TAKE(x)}
+    /**/              inline def takeAll(inline v: ~[A])                     : ~[A] = Z.takeAll(x,v)
+    /**/              inline def takeAllBy[B](inline f: A=>B, inline v: ~[B]): ~[A] = Z.takeAllBy[A,B](x,f,v)
+    /**/              inline def takeOnly(inline v: A, inline vs: A*)        : ~[A] = Z.takeOnly(x,v,vs)
+    /**/              inline def takeOnlyBy[B](inline f:A=>B, inline v: B*)  : ~[A] = Z.takeOnlyBy(x,f,v)
+    /**/              inline def TAKE(inline f: A => Boolean)                : ~[A] = Z.TAKE(x,f)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -122,9 +120,9 @@ ___________________________________________________________________________*/
 
       Note: This method will block on unlimited streams
 
-@def takeOnly -> Single value filter
+@def takeOnly -> Enumerated values filter
 
-    Filters only specified value.
+    Filters only specified values.
 
     ```
        (0 <>> 10).~.takeOnly(5).TP
@@ -133,7 +131,7 @@ ___________________________________________________________________________*/
        ~(5)
     ```
 
-    Note: [[takeOnly]] is more efficient than general filter, because there is no function involved.
+    Note: When single value is given, [[takeOnly]] is more efficient than general filter ".take(_ == value)", because there is no function involved.
 
 @def takeType -> Type filter
 

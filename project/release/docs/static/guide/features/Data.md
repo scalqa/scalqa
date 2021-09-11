@@ -4,7 +4,7 @@ title: Data
 ---
 
 A data element in Scalqa is an opaque type often based on Java primitive, which is also provided with custom 
-specialized framework of collections for efficient unboxed data processing.  
+specialized framework of containers for efficient unboxed data processing.  
 
 Defining data elements is quite easy, one just needs to select one of the following data roots and follow certain conventions:
 
@@ -25,33 +25,33 @@ Let's create an example of data element 'Price', which would be based on a Float
 
 He is the definition part (available in [samples](https://github.com/scalqa/samples/blob/master/src/example/data/PriceData.scala)):
 ```
-type  Price = Price.OPAQUE.TYPE
+type  Price = Price.TYPE.DEF
 
 extension (inline x: Double) inline def Dollars : Price = Price(x.Float)
 
 object Price extends Float.Opaque.Data.Numerical[Price]("Price"):
-  inline   def apply(inline v: Float): Price  = v.opaque
+  inline   def apply(inline v: Float): Price  = v.toOpaque
   override def tag(v:Price)          : String =  "$"+v.roundTo(0.01.Dollars).toString
 
   extension (x: Price)
-    def discount(p: Percent): Price   = (x.real - p(x.real)).opaque
+    def discount(p: Percent): Price   = (x.real - p(x.real)).toOpaque
     def isNotExpensive      : Boolean = x < 100
 
-  object OPAQUE:
-    opaque type TYPE <: Float.Opaque = Float.Opaque
+  object TYPE:
+    opaque type DEF <: Float.Opaque = Float.Opaque
 
 ```
 Let's explain the above line by line.  
 ```  
-type Price = Price.opaque.`type`
+type Price = Price.TYPE.DEF
 ```
 The `Price` alias is the public name to be used. This definition can be next to the '`object Price`' or can be in some other 
-more accessible place, like a root package (it is for developer to decide).
+more accessible place, like a root package (it is for developers to decide).
 
 ```  
 extension (inline x: Double) inline def Dollars : Price = Price(x.Float)
 ```  
-Extension creates a Double method Price constructor. This is an optional convenience pattern, but it is widely used in Scalqa. 
+The extension creates a Double based Price constructor. This is an optional convenience pattern, but it is widely used in Scalqa. 
 Double constructor will cover all primitives. 
 
 ```  
@@ -72,9 +72,9 @@ p = 12.0F                     // FAILS to compile, Price is NOT a Float
 All the above operations are inlined and are as efficient, as if they were performed on Float value.
 
 ```
-inline   def apply(inline v: Float): Price  = v.opaque
+inline   def apply(inline v: Float): Price  = v.toOpaque
 ```
-This is a standard constructor, which is inlined and does not have any overhead. The method `.opaque` is attached 
+This is a standard constructor, which is inlined and does not have any overhead. The method `.toOpaque` is attached 
 to base type within Data definition scope. 
 
 ```
@@ -87,12 +87,6 @@ not overridden, the default behavior would convert Float toString.
 extension (x: Price)    
 ```
 The extension section is where custom Price methods are defined. 
-
-```
-object OPAQUE:   
-```
-The type definition must be inside another object to allow `inline` methods in parent scope. This is a Scala3 limitation to go around.
-Starting version 3.0.2 Scala will allow mixing `inline` with `opaque`, but Scalqa definitions will probably stay the same.  
 
 ## Use
 
@@ -133,5 +127,3 @@ Num Name         Ops/Sec %   Memory %   Last Value
 The conclusion is: boxing in Scala is quite efficient, it is only few times slower. The biggest difference is the memory consumption, 
 which on heavy calculations could slow down the entire JVM. 
     
-  
- 

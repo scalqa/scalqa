@@ -1,41 +1,34 @@
 package scalqa; package `val`; import range.*; import language.implicitConversions
 
-import gen.`given`.RangeShape
-
 abstract class Range[A] extends Able.Contain[A]:
   type THIS_TYPE <: Range[A]
-  /**/              def start                                     : A
-  /**/              def end                                       : A
-  /**/              def endIsIn                                   : Boolean
-  /**/              def ordering                                  : Ordering[A]
-  /**/              def join(v: A)                                : THIS_TYPE
-  /**/              def join(v: Range[A])                         : THIS_TYPE
-  /**/              def overlaps( r: Range[A])                    : Boolean
-  @tn("overlap_Opt")def overlap_?(r: Range[A])                    : Opt[THIS_TYPE]
-  /**/              def step_~(f: A => A)                         : ~[A]                = z.StepStream(this, f)
-  /**/              def step_~(step: Int)(using Able.Sequence[A]) : ~[A]                = z.StepStream(this, step)
-  /**/              def contains(v: Range[A])                     : Boolean             = z.Ops.contains(this,v)
-  /**/              def contains(v: A)                            : Boolean             = z.Ops.contains(this,v)
-  /**/              def isEmpty                                   : Boolean             = z.Ops.isEmpty(this)
-  override          def equals(v: Any)                            : Boolean             = v.isInstanceOf[Range[_]] && {val r=v.cast[Range[A]]; this.contains(r) && r.contains(this)}
-  inline            def raw[RAW<:Range.RawType[A]]
-                           (using inline s:RangeShape.Raw[A,RAW]) : RAW                 = z.raw(this,s)
+  /**/              def start                                       : A
+  /**/              def end                                         : A
+  /**/              def endIsIn                                     : Boolean
+  /**/              def ordering                                    : Ordering[A]
+  /**/              def join(v: A)                                  : THIS_TYPE
+  /**/              def join(v: Range[A])                           : THIS_TYPE
+  /**/              def overlaps( r: Range[A])                      : Boolean
+  @tn("overlap_Opt")def overlap_?(r: Range[A])                      : Opt[THIS_TYPE]
+  /**/              def step_~(f: A => A)                           : ~[A]          = z.StepStream(this, f)
+  /**/              def step_~(step: Int)(using Able.Sequence[A])   : ~[A]          = z.StepStream(this, step)
+  /**/              def contains(v: Range[A])                       : Boolean       = z.Ops.contains(this,v)
+  /**/              def contains(v: A)                              : Boolean       = z.Ops.contains(this,v)
+  /**/              def isEmpty                                     : Boolean       = z.Ops.isEmpty(this)
+  override          def equals(v: Any)                              : Boolean       = v.isInstanceOf[Range[_]] && {val r=v.cast[Range[A]]; this.contains(r) && r.contains(this)}
+  inline            def raw(using inline A:Specialized.Primitive[A]): A.<>          = z.raw(this)
 
 object Range:
-  type AnyType[A] = <>[A] | RawType[A]
-  type RawType[A] = lang.byte.g.Range[A & Byte.Raw] | lang.char.g.Range[A & Char.Raw] | lang.short.g.Range[A & Short.Raw]
-                  | lang.int .g.Range[A & Int.Raw]  | lang.long.g.Range[A & Long.Raw] | lang.float.g.Range[A & Float.Raw] | lang.double.g.Range[A & Double.Raw]
-
-  def apply[A:Ordering  ](start:A,end:A, endIn:Boolean=true): Range[A] = if(endIn) Z.EndInclsive(start,end)  else Z.EndExclusive(start,end)
-  def singleValue[A:Ordering  ](v:A,  endIn: Boolean = true): Range[A] = if(endIn) Z.SingleValueInclusive(v) else Z.SingleValueExclusive(v)
+  def apply[A](start:A,end:A, endIn:Boolean=true)(using Ordering[A]): Range[A]      = if(endIn) Z.EndInclsive(start,end)  else Z.EndExclusive(start,end)
+  def singleValue[A](v:A,  endIn: Boolean = true)(using Ordering[A]): Range[A]      = if(endIn) Z.SingleValueInclusive(v) else Z.SingleValueExclusive(v)
 
   extension[A](x: Range[A])
-    @tn("stream")     def ~ (using Able.Sequence[A])             : ~[A]          = x match{ case v:Able.~[_] => v.cast[Able.~[A]].~; case _ => x.step_~(1) }
-    /**/              def convert[B](f:A=>B)(using s:Ordering[B]): Range[B]      = Range(f(x.start),f(x.end),x.endIsIn)
+    @tn("stream")   def ~ (using Able.Sequence[A])                  : ~[A]          = x match{ case v:Able.~[_] => v.cast[Able.~[A]].~; case _ => x.step_~(1) }
+    /**/            def convert[B](f:A=>B)(using s:Ordering[B])     : Range[B]      = Range(f(x.start),f(x.end),x.endIsIn)
 
   given givenCanEqualRange[A,B](using CanEqual[A,B]): CanEqual[<>[A],<>[B]] = CanEqual.derived
   given givenFor                                    : range.z.For           = new range.z.For{}
-  given givenDocDef[A:Given.DocDef]                  : Given.DocDef[Range[A]] = new range.z.DocDef[A]
+  given givenDocDef[A]        (using Any.Def.Doc[A]): Any.Def.Doc[Range[A]] = new range.z.DocDef[A]
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def X = range.X
@@ -60,7 +53,7 @@ ___________________________________________________________________________*/
       Note. Scala provided range structures (Range and NumericRange) are implemented more as collections and this class is designed to close this void focusing on generic range operations
 
 
-@def raw -> Raw range
+@def raw -> Primitive range
 
      Returns primitive specialized range implementation.
 

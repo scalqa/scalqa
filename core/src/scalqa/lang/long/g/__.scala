@@ -1,11 +1,11 @@
 package scalqa; package lang; package long; import language.implicitConversions
 
 object G:
-  /**/                                                                                transparent inline def Customized      = g.Customized
+  /**/                                                                                      transparent inline def Containers = g.Containers
   @tn("Stream") type ~         [A<:Raw]      = g.Stream[A];             @tn("Stream") transparent inline def ~          = g.Stream
   @tn("Range")  type <>        [A<:Raw]      = g.Range[A];              @tn("Range")  transparent inline def <>         = Range
   @tn("Pack")   type ><        [A<:Raw]      = g.Pack[A];               @tn("Pack")   transparent inline def ><         = g.Pack
-  /**/          type Opt       [A<:Raw]      = g.Opt.OPAQUE.TYPE[A];                  transparent inline def Opt        = g.Opt
+  /**/          type Opt       [A<:Raw]      = g.Opt.TYPE.DEF[A];                  transparent inline def Opt        = g.Opt
   /**/          type Buffer    [A<:Raw]      = g.Buffer[A];                           transparent inline def Buffer     = g.Buffer
   /**/          type Collection[A<:Raw]      = g.Collection[A];                       transparent inline def Collection = g.Collection
   /**/          type Idx       [A<:Raw]      = g.Idx[A];                              transparent inline def Idx        = g.Idx

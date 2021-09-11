@@ -1,7 +1,6 @@
 package scalqa; package `val`; package stream; import language.implicitConversions
 
 object Custom:
-  type Constructors        = custom.Constructors
   type Discharge[A]        = custom.Discharge[A]
   type Pipeline            = custom.Pipeline;               transparent inline def Pipeline   = custom.Pipeline
   type Event               = custom.Event;                  transparent inline def Event      = custom.Event

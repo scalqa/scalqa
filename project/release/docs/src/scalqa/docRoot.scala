@@ -3,7 +3,7 @@ package scalqa
 import dotty.tools.{ scaladoc as SD }
 
 type Member = SD.Member
-type Id     = scalqa.Id.OPAQUE.TYPE
+type Id     = scalqa.Id.TYPE.DEF
 
 export SD.{ DRI, Kind, Origin, Signature, Classlike, Link, ExtensionTarget}
 

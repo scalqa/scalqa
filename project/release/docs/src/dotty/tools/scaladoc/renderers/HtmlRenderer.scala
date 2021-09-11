@@ -92,7 +92,7 @@ class HtmlRenderer(rootPackage: Member, val members: Map[DRI, Member])(using ctx
       def run: Unit = page.content match
         case v: Member if v.kind.isPackage && v.name != "scalqa" => ()
         case _ =>
-          val pg = page.^.reviseIf(_.link.dri.isOpaqueDef, p => { val d = p.link.dri; Page(Link(d.scalqaLabel().takeAfterLast("."),d),Registry.member_?(d.id) or {"\n@@@ "+d.id +"   " + d.tag tp(); ???} , Nil) })
+          val pg = page.^.reviseIf(_.link.dri.isTypeDef, p => { val d = p.link.dri; Page(Link(d.scalqaLabel().takeAfterLast("."),d),Registry.member_?(d.id) or {"\n@@@ "+d.id +"   " + d.tag tp(); ???} , Nil) })
           write(pg.link.dri, html( mkHead(pg), body( if !pg.hasFrame then renderContent(pg) else mkFrame(pg.link, newParents, renderContent(pg)))))
       (absolutePath(page.link.dri),() => run) +: page.children.flatMap(prepare(_, newParents))
     allPages.flatMap(prepare(_, Vector.empty)).~.parallel.foreach(_._2())

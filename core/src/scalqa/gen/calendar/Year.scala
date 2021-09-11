@@ -3,12 +3,12 @@ package scalqa; package gen; package calendar; import language.implicitConversio
 import Calendar.Year
 
 object Year extends Int.Opaque.Data.Sequential[Year]("Year"):
-  /**/     inline def apply(inline v: Int)   : Year      = v.opaque
+  /**/     inline def apply(inline v: Int)   : Year      = v.toOpaque
   /**/     inline def current                : Year      = Time.current.year
   override        def value_tag(v: Year)     : String    = v.toString
   override        def value_isVoid(v: Year)  : Boolean   = v.real == Int.min
 
-  implicit inline def implicitFrom(v: \/)    : Year      = Int.min.opaque
+  implicit inline def implicitFrom(v: \/)    : Year      = Int.min.toOpaque
   implicit inline def implicitFrom(v:CURRENT): Year      = current
 
   extension (x: Year)
@@ -20,8 +20,8 @@ object Year extends Int.Opaque.Data.Sequential[Year]("Year"):
     /**/          def days                   : Day.Idx   = zDays(x)
     /**/          def isCurrent              : Boolean   = x == Year.current
 
-  object OPAQUE:
-    opaque type TYPE <: Int.Opaque = Int.Opaque
+  object TYPE:
+    opaque type DEF <: Int.Opaque = Int.Opaque
 
   // ****************************************************************************************************
   private class zDays(v: Year) extends Day.Idx:
@@ -40,7 +40,7 @@ object Year extends Int.Opaque.Data.Sequential[Year]("Year"):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object OPAQUE  -> ### Calendar Year
+@type DEF  -> ### Calendar Year
 
     [[Year]] is an opaque Int value, holding literally the year number
 

@@ -2,7 +2,7 @@ package scalqa; package `val`; package stream; package z; package _build; packag
 
 import java.util.ArrayDeque
 
-class preview[A](src: ~[A]) extends a.Pipe[A](src) with ~~.Preview[A] with Able.Size.Opt:
+class preview[A](src: ~[A]) extends z.x.Pipe[A](src) with ~~.Preview[A] with Able.Size.Opt:
   self =>
   private var stack : ArrayDeque[A] = ArrayDeque(J.initSize)
   private var allIn : Boolean       = false
@@ -13,16 +13,16 @@ class preview[A](src: ~[A]) extends a.Pipe[A](src) with ~~.Preview[A] with Able.
   // ---------------------------------------------------------------------------------------------------------------------------
   @tn("read_Opt")           def read_?                    : Opt[A]           = if (!stack.isEmpty) stack.pop else src.read_?
   @tn("size_Opt")           def size_?                    : Int.Opt          = src.size_?.map(_ + stack.size)
-  @tn("preview_Stream")     def preview_~(cnt: Int)       : ~[A] & Able.Size = if (load(cnt) == 0) \/ else stack.~.read_~(cnt)
+  @tn("preview_Stream")     def preview_~(cnt: Int)       : ~[A] & Able.Size = if (load(cnt) == 0) EMPTY else stack.~.read_~(cnt)
   @tn("preview_Opt")        def preview_?                 : Opt[A]           = (load(1) > 0) ? stack.peek
   /**/                      def preview                   : A                = preview_?.get
   @tn("readWhile_Stream")   def readWhile_~(f:A=>Boolean) : ~[A] & Able.Size = stack.~.findPosition_?(!f(_)).map(i => (0 <>> i).~.map(_ => stack.pop).load) or new readWhile_Stream(f)
 
   // **********************************************************************************************************
-  private class readWhile_Stream(f: A => Boolean) extends a.Pipe[A](src) with Able.Size:
+  private class readWhile_Stream(f: A => Boolean) extends z.x.Pipe[A](src) with Able.Size:
     private val s = self.stack.^(s => {
         self.stack = new ArrayDeque[A](J.initSize)
-        var o = src.read_?; while (o.nonEmpty) { val v=o.cast[A]; if (f(v)) { s.add(v); o=src.read_?.fornil{allIn=true} } else { stack.add(v); o = \/ }}
+        var o = src.read_?; while (o) { val v=o.cast[A]; if (f(v)) { s.add(v); o=src.read_?.fornil{allIn=true} } else { stack.add(v); o = \/ }}
     })
     @tn("read_Opt") def read_? = if(s.size>0) s.pop else \/
     /**/            def size   = s.size

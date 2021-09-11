@@ -4,7 +4,7 @@ import Io.Input
 import java.io.{ InputStream as REAL }
 
 object Input extends AnyRef.Opaque.Base[Input, REAL]("Io.Input"):
-  def apply(v: REAL)                                 : Input = v.opaque
+  def apply(v: REAL)                                 : Input = v.toOpaque
   def apply(ba: Array[Byte])                         : Input = apply(java.io.ByteArrayInputStream(ba))
   def apply(ba: Array[Byte], offs: Int, length: Int) : Input = apply(java.io.ByteArrayInputStream(ba, offs, length))
   def apply(text: String)                            : Input = apply(text.getBytes)
@@ -20,13 +20,13 @@ object Input extends AnyRef.Opaque.Base[Input, REAL]("Io.Input"):
     def asText  : Text   = Text(x.real)
     def load    : Input  = { val v = Input(x.asBytes.readAll); x.close; v }
 
-  object OPAQUE:
-    opaque type TYPE <: java.io.Closeable & AnyRef.Opaque = REAL & AnyRef.Opaque
+  object TYPE:
+    opaque type DEF <: java.io.Closeable & AnyRef.Opaque = REAL & AnyRef.Opaque
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Bytes = input.Bytes.OPAQUE.TYPE; transparent inline def Bytes = input.Bytes
-  type Data  = input.Data.OPAQUE.TYPE;  transparent inline def Data  = input.Data
-  type Text  = input.Text.OPAQUE.TYPE;  transparent inline def Text  = input.Text
+  type Bytes = input.Bytes.TYPE.DEF; transparent inline def Bytes = input.Bytes
+  type Data  = input.Data.TYPE.DEF;  transparent inline def Data  = input.Data
+  type Text  = input.Text.TYPE.DEF;  transparent inline def Text  = input.Text
 
 
 /*___________________________________________________________________________
@@ -36,7 +36,7 @@ object Input extends AnyRef.Opaque.Base[Input, REAL]("Io.Input"):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object OPAQUE  -> ###
+@type DEF  -> ###
 
    [[J.Input]] is an opaque value, backed by java.io.InputStream
 

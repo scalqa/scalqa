@@ -28,7 +28,7 @@ object Promise:
     inline def flatMap[B](f: A => Promise[B])  (using inline c:Context): Promise[B] = Z.flatMap(x,f)
     inline def foreach[U](inline f: A=>U)      (using inline c:Context): Unit       = x.onResult(_.forval(f))
 
-  given givenDocDef[A](using t: Given.DocDef[A]): Given.DocDef[Promise[A]] with
+  given givenDocDef[A](using t: Any.Def.Doc[A]): Any.Def.Doc[Promise[A]] with
     def value_tag(v: Promise[A]) : String   = v.result_?.map(v => "Promise("+v.tag+")") or "Promise(NOT_READY)"
     def value_doc(v: Promise[A]) : Doc      = Doc(v)
 
@@ -36,7 +36,7 @@ object Promise:
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def Control = promise.Control;  type Control[A] = promise.Control[A]
-  transparent inline def Context = promise.Context;  type Context    = promise.Context.OPAQUE.TYPE
+  transparent inline def Context = promise.Context;  type Context    = promise.Context.TYPE.DEF
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

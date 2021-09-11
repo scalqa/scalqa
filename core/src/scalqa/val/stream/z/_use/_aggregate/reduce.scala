@@ -3,14 +3,14 @@ package scalqa; package `val`; package stream; package z; package _use; package 
 object reduce:
 
   inline def opt[A](x: ~[A], inline f: (A,A) => A) : Opt[A] = inline x match
-    case _ :  ~[A & Boolean.Raw] => boolean_Opt(x.cast[~[Boolean]],(x,y) => f(x.cast[A],y.cast[A]).cast[Boolean]).cast[A]
-    case _ :  ~[A & Byte.Raw]    => byte_Opt   (x.cast[~[Byte]],   (x,y) => f(x.cast[A],y.cast[A]).cast[Byte   ]).cast[A]
-    case _ :  ~[A & Short.Raw]   => short_Opt  (x.cast[~[Short]],  (x,y) => f(x.cast[A],y.cast[A]).cast[Short  ]).cast[A]
-    case _ :  ~[A & Char.Raw]    => char_Opt   (x.cast[~[Char]],   (x,y) => f(x.cast[A],y.cast[A]).cast[Char   ]).cast[A]
-    case _ :  ~[A & Int.Raw]     => int_Opt    (x.cast[~[Int]],    (x,y) => f(x.cast[A],y.cast[A]).cast[Int    ]).cast[A]
-    case _ :  ~[A & Long.Raw]    => long_Opt   (x.cast[~[Long]],   (x,y) => f(x.cast[A],y.cast[A]).cast[Long   ]).cast[A]
-    case _ :  ~[A & Float.Raw]   => float_Opt  (x.cast[~[Float]],  (x,y) => f(x.cast[A],y.cast[A]).cast[Float  ]).cast[A]
-    case _ :  ~[A & Double.Raw]  => double_Opt (x.cast[~[Double]], (x,y) => f(x.cast[A],y.cast[A]).cast[Double ]).cast[A]
+    case _ :  ~[A & Any.Boolean] => boolean_Opt(x.cast[~[Boolean]],(x,y) => f(x.cast[A],y.cast[A]).cast[Boolean]).cast[A]
+    case _ :  ~[A & Any.Byte]    => byte_Opt   (x.cast[~[Byte]],   (x,y) => f(x.cast[A],y.cast[A]).cast[Byte   ]).cast[A]
+    case _ :  ~[A & Any.Short]   => short_Opt  (x.cast[~[Short]],  (x,y) => f(x.cast[A],y.cast[A]).cast[Short  ]).cast[A]
+    case _ :  ~[A & Any.Char]    => char_Opt   (x.cast[~[Char]],   (x,y) => f(x.cast[A],y.cast[A]).cast[Char   ]).cast[A]
+    case _ :  ~[A & Any.Int]     => int_Opt    (x.cast[~[Int]],    (x,y) => f(x.cast[A],y.cast[A]).cast[Int    ]).cast[A]
+    case _ :  ~[A & Any.Long]    => long_Opt   (x.cast[~[Long]],   (x,y) => f(x.cast[A],y.cast[A]).cast[Long   ]).cast[A]
+    case _ :  ~[A & Any.Float]   => float_Opt  (x.cast[~[Float]],  (x,y) => f(x.cast[A],y.cast[A]).cast[Float  ]).cast[A]
+    case _ :  ~[A & Any.Double]  => double_Opt (x.cast[~[Double]], (x,y) => f(x.cast[A],y.cast[A]).cast[Double ]).cast[A]
     case _                       => ref_Opt(x,f)
 
   def ref_Opt[A] (x: ~[A],      f: (A,A) => A      ): Opt[A]       = x.read_?.map(v => fold.ref(x,v,f))

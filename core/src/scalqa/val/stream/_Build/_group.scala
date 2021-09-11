@@ -4,7 +4,7 @@ import z._build.{ _group => G }
 
 transparent trait _group:
 
-  extension[A]  (inline x: ~[A])
+  extension[A](inline x: ~[A])
     inline def group                                                             : ~[~[A]]     = new G.group(x, _ == _)
     inline def group[U](inline f:(A,A)=>Boolean, inline peek:(A,Boolean)=>U= \/) : ~[~[A]]     = new G.group(x, f, peek)
     inline def groupWith[B](f: A => B)                                           : ~[(B,~[A])] = new G.groupBy(x, f, Nil).map(_.enablePreview).map(v => (f(v.preview), v))

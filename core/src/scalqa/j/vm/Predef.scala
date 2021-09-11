@@ -6,10 +6,10 @@ import scalqa.Val.Opt
 object Predef:
 
   object GlobalExtensionLibrary
-      extends any.z._Methods   with array._methods with string._Methods  with scalqa.`val`.stream.custom.Constructors
+      extends any.z._Methods   with array._methods with string._Methods  with scalqa.`val`.stream.z.util.GlobalMethods
          with boolean._methods with byte._methods  with char._methods    with short._methods
          with int._methods     with long._methods  with float._methods   with double._methods
-         with scalqa.gen.math.ordering.z._methods
+         with scalqa.gen.math.z.Ordering._methods
 
   given given_Lib: GlobalExtensionLibrary.type = scalqa.J.illegalState("All library methods must be inlined") // do not inline this "given"
 
@@ -20,7 +20,6 @@ object Predef:
   inline given givenIntMath    : Int   .G.Math[Int   ] = Int   .math
   inline given givenLongMath   : Long  .G.Math[Long  ] = Long  .math
   inline given givenDoubleMath : Double.G.Math[Double] = Double.math
-
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

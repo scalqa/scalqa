@@ -4,7 +4,7 @@ import java.nio.file.{ Path => REAL }
 import File.Path
 
 transparent trait _methods:
-  self: Any.Opaque.Base[Path] =>
+  self: lang.any.z.OpaqueBase[Path] =>
 
   extension(inline x: Path)
     /**/                 inline def names                                : Idx[String] = new Z.Names(x)

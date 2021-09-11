@@ -1,6 +1,6 @@
 package scalqa; package `val`; package stream; package z; package _build; package _mutate; import language.implicitConversions
 
-class reverseEvery[A](x: ~[A], size: Int) extends a.Pipe[A](x) with Able.Size.Opt.Long:
+class reverseEvery[A](x: ~[A], size: Int) extends z.x.Pipe[A](x) with Able.Size.Opt.Long:
   private var cur: ~[A] = \/
 
   @tn("read_Opt")     def read_?     = cur.read_? or_? { cur = x.read_~(size).reverse; cur.read_? }

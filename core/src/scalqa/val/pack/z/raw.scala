@@ -1,37 +1,35 @@
 package scalqa; package `val`; package pack; package z; import language.implicitConversions
 
-import gen.`given`.PackShape.{ Raw as SHAPE }
-
 object raw:
 
-  def boolean[A<:Boolean.Raw](x: ><[A]): Boolean.G.><[A] = x match{case v: Boolean.G.><[A] => v; case v => Boolean.G.><.fromStream(x)}
-  def byte   [A<:Byte.Raw   ](x: ><[A]): Byte   .G.><[A] = x match{case v: Byte   .G.><[A] => v; case v => Byte   .G.><.fromStream(x)}
-  def char   [A<:Char.Raw   ](x: ><[A]): Char   .G.><[A] = x match{case v: Char   .G.><[A] => v; case v => Char   .G.><.fromStream(x)}
-  def short  [A<:Short.Raw  ](x: ><[A]): Short  .G.><[A] = x match{case v: Short  .G.><[A] => v; case v => Short  .G.><.fromStream(x)}
-  def int    [A<:Int.Raw    ](x: ><[A]): Int    .G.><[A] = x match{case v: Int    .G.><[A] => v; case v => Int    .G.><.fromStream(x)}
-  def long   [A<:Long.Raw   ](x: ><[A]): Long   .G.><[A] = x match{case v: Long   .G.><[A] => v; case v => Long   .G.><.fromStream(x)}
-  def float  [A<:Float.Raw  ](x: ><[A]): Float  .G.><[A] = x match{case v: Float  .G.><[A] => v; case v => Float  .G.><.fromStream(x)}
-  def double [A<:Double.Raw ](x: ><[A]): Double .G.><[A] = x match{case v: Double .G.><[A] => v; case v => Double .G.><.fromStream(x)}
+  def boolean[A<:Any.Boolean](x: ><[A]): Boolean.G.><[A] = x match{case v: Boolean.G.><[A] => v; case v => Boolean.G.><.fromStream(x)}
+  def byte   [A<:Any.Byte   ](x: ><[A]): Byte   .G.><[A] = x match{case v: Byte   .G.><[A] => v; case v => Byte   .G.><.fromStream(x)}
+  def char   [A<:Any.Char   ](x: ><[A]): Char   .G.><[A] = x match{case v: Char   .G.><[A] => v; case v => Char   .G.><.fromStream(x)}
+  def short  [A<:Any.Short  ](x: ><[A]): Short  .G.><[A] = x match{case v: Short  .G.><[A] => v; case v => Short  .G.><.fromStream(x)}
+  def int    [A<:Any.Int    ](x: ><[A]): Int    .G.><[A] = x match{case v: Int    .G.><[A] => v; case v => Int    .G.><.fromStream(x)}
+  def long   [A<:Any.Long   ](x: ><[A]): Long   .G.><[A] = x match{case v: Long   .G.><[A] => v; case v => Long   .G.><.fromStream(x)}
+  def float  [A<:Any.Float  ](x: ><[A]): Float  .G.><[A] = x match{case v: Float  .G.><[A] => v; case v => Float  .G.><.fromStream(x)}
+  def double [A<:Any.Double ](x: ><[A]): Double .G.><[A] = x match{case v: Double .G.><[A] => v; case v => Double .G.><.fromStream(x)}
 
-  inline def apply[A,PACK<:Pack.RawType[A]](inline x: ><[A], inline s: SHAPE[A,PACK]): PACK  =
+  inline def apply[A](inline x: ><[A])(using inline A:Specialized.Primitive[A]): A.>< =
     inline x match
-      case _ : Boolean.G.><[A] => x.cast[PACK]
-      case _ : Byte   .G.><[A] => x.cast[PACK]
-      case _ : Char   .G.><[A] => x.cast[PACK]
-      case _ : Short  .G.><[A] => x.cast[PACK]
-      case _ : Int    .G.><[A] => x.cast[PACK]
-      case _ : Long   .G.><[A] => x.cast[PACK]
-      case _ : Float  .G.><[A] => x.cast[PACK]
-      case _ : Double .G.><[A] => x.cast[PACK]
-      case _ => inline s match
-          case _ : SHAPE[A,Boolean.G.><[A & Boolean.Raw]] => boolean[A & Boolean.Raw](x.cast[><[A & Boolean.Raw]])
-          case _ : SHAPE[A,Byte   .G.><[A & Byte.Raw   ]] => byte   [A & Byte.Raw   ](x.cast[><[A & Byte.Raw   ]])
-          case _ : SHAPE[A,Char   .G.><[A & Char.Raw   ]] => char   [A & Char.Raw   ](x.cast[><[A & Char.Raw   ]])
-          case _ : SHAPE[A,Short  .G.><[A & Short.Raw  ]] => short  [A & Short.Raw  ](x.cast[><[A & Short.Raw  ]])
-          case _ : SHAPE[A,Int    .G.><[A & Int.Raw    ]] => int    [A & Int.Raw    ](x.cast[><[A & Int.Raw    ]])
-          case _ : SHAPE[A,Long   .G.><[A & Long.Raw   ]] => long   [A & Long.Raw   ](x.cast[><[A & Long.Raw   ]])
-          case _ : SHAPE[A,Float  .G.><[A & Float.Raw  ]] => float  [A & Float.Raw  ](x.cast[><[A & Float.Raw  ]])
-          case _ : SHAPE[A,Double .G.><[A & Double.Raw ]] => double [A & Double.Raw ](x.cast[><[A & Double.Raw ]])
+      case _ : Boolean.G.><[A] => x.cast[A.><]
+      case _ : Byte   .G.><[A] => x.cast[A.><]
+      case _ : Char   .G.><[A] => x.cast[A.><]
+      case _ : Short  .G.><[A] => x.cast[A.><]
+      case _ : Int    .G.><[A] => x.cast[A.><]
+      case _ : Long   .G.><[A] => x.cast[A.><]
+      case _ : Float  .G.><[A] => x.cast[A.><]
+      case _ : Double .G.><[A] => x.cast[A.><]
+      case _ => inline A match
+          case _ : Specialized.Primitive[A & Any.Boolean] => boolean[A & Any.Boolean](x.cast[><[A & Any.Boolean]]).cast[A.><]
+          case _ : Specialized.Primitive[A & Any.Byte   ] => byte   [A & Any.Byte   ](x.cast[><[A & Any.Byte   ]]).cast[A.><]
+          case _ : Specialized.Primitive[A & Any.Char   ] => char   [A & Any.Char   ](x.cast[><[A & Any.Char   ]]).cast[A.><]
+          case _ : Specialized.Primitive[A & Any.Short  ] => short  [A & Any.Short  ](x.cast[><[A & Any.Short  ]]).cast[A.><]
+          case _ : Specialized.Primitive[A & Any.Int    ] => int    [A & Any.Int    ](x.cast[><[A & Any.Int    ]]).cast[A.><]
+          case _ : Specialized.Primitive[A & Any.Long   ] => long   [A & Any.Long   ](x.cast[><[A & Any.Long   ]]).cast[A.><]
+          case _ : Specialized.Primitive[A & Any.Float  ] => float  [A & Any.Float  ](x.cast[><[A & Any.Float  ]]).cast[A.><]
+          case _ : Specialized.Primitive[A & Any.Double ] => double [A & Any.Double ](x.cast[><[A & Any.Double ]]).cast[A.><]
           case _                                          => J.illegalState()
 
 /*___________________________________________________________________________

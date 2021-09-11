@@ -4,8 +4,8 @@ import javafx.scene.control.{ButtonType => JType}
 
 object Type extends Abstract.Delegate.Opaque[Button.Type, JType]("Fx.Button.Type"):
 
-  object OPAQUE:
-    opaque type TYPE <: AnyRef.Opaque = JType & AnyRef.Opaque
+  object TYPE:
+    opaque type DEF <: AnyRef.Opaque = JType & AnyRef.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
