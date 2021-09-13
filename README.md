@@ -1,5 +1,4 @@
-Scala is a way better, more efficient than Java. However, it has a reputation of harder language to learn, 
-which is to a large extent due to complex, overcrowded API.
+Scala has a reputation of harder language to learn, which is to a large extent due to complex, overcrowded API.
 **Scalqa** stands for 'Scala Quick API'. It provides full functionality with minimal, simplified libraries. 
 
 Scalqa collections are fully specialized and allow processing of primitive types without boxing.
