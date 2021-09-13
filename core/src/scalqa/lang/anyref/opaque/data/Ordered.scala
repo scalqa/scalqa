@@ -27,6 +27,8 @@ ___________________________________________________________________________*/
 
   Opaque Ordered Data element is provided with default ordering and can be compared with comparison operators.
 
+  See [sample type definition](https://github.com/scalqa/samples/blob/master/src/example/opaque/all/OrderedAnyRefData.scala).
+
 @trait _methods -> Default methods for all AnyRef.Opaque.Data.Ordered defined types
 
 @def max     -> Max value \n\n Returns maximum of current or given value

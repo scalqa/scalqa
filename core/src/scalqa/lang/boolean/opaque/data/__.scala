@@ -20,6 +20,8 @@ ___________________________________________________________________________*/
 
   See [more in guide](../../../../../guide/features/Data.html).
 
+  See [sample type definition](https://github.com/scalqa/samples/blob/master/src/example/opaque/all/BooleanData.scala).
+
 @trait _methods -> Default methods for all Boolean.Opaque.Data defined types
 
 */

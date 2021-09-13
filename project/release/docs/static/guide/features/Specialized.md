@@ -5,7 +5,7 @@ title: Specialized
 ## Containers and Collections
 
 Scalqa provides a default generic value container framework [Val](../../api/scalqa/Val$.html), which works 
-with Object based types. This is similar what Java and Scala collections have to offer.
+with Object based types. This is similar to what Java and Scala collections have to offer.
 
 What is novel, is the generic specialized frameworks for all primitive based types, these are: 
 

@@ -80,7 +80,7 @@ ___________________________________________________________________________*/
 
     Returns true if stream contains given value.
 
-@def contains -> Sequence check
+@def containsSequence -> Sequence check
 
     Returns true if stream contains given sequence of values.
 
@@ -133,13 +133,13 @@ ___________________________________________________________________________*/
        Fails if empty
 
 
-@def equalsAll -> Equal check
+@def equalsSequence -> Equal check
 
        Iterates both streams and compares all corresponding elements
 
        Returns `true` if all are equal, `false`` otherwise
 
-@def equalsAll_?? -> Equal check
+@def equalsSequence_?? -> Equal check
 
        Iterates both streams and compares all corresponding elements
 
@@ -159,11 +159,11 @@ ___________________________________________________________________________*/
        ```
        Note: The returned problem contains message with basic description
 
-@def equalsStart -> Equal start check
+@def startsWithSequence -> Equal start check
 
        Checks if starting elements of two streams (to a point where one stream ends) are equal
 
-@def equalsStart_?? -> Equal start check
+@def startsWithSequence_?? -> Equal start check
 
        Checks if starting elements of two streams (to a point where one stream ends) are equal
 

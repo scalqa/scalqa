@@ -9,3 +9,8 @@ It also contains many [performance tests](https://github.com/scalqa/samples/tree
 ["SamplesFx"](https://github.com/scalqa/samplesFx) is another project focused on GUI.
 
 
+["TradingStationExample"](https://github.com/scalqa/TradingStationExample) is a sizable GUI application based on [Scalqa.Fx](https://scalqa.org/doc/api/scalqa/Fx$.html).
+
+
+
+

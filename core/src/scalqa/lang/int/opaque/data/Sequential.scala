@@ -23,6 +23,8 @@ ___________________________________________________________________________*/
 /**
 @class Sequential -> ###
 
+   See [sample type definition](https://github.com/scalqa/samples/blob/master/src/example/opaque/all/SequentialIntData.scala).
+
 @def +       -> Get further in sequance \n\n Returns value, which is given number of position further in sequence
 @def -       -> Get before in sequance  \n\n Returns value, which is given number of position before in sequence
 @def next    -> Next in sequance  \n\n Returns next value in sequance

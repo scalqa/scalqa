@@ -6,7 +6,7 @@ title: Pack
 Pack is a type defined as [><](../../api/scalqa/val/Pack.html). It is an immutable collection of values designed 
 to replace scala.List and scala.Vector. Pack is mostly a wrapper around an Array, which is private and cannot be modified. 
 Scala3 does introduce an IArray type, which also cannot be modified, but it can easily be cast into regular array and therefor
-is not tamper proof.  
+is not sufficiently tamper proof.  
 
 ## Creation
 

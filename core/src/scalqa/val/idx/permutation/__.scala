@@ -53,11 +53,11 @@ ___________________________________________________________________________*/
         buf.~.TP           // Prints ~(0, 1, 2, 3, 4)
       ```
 
-@def reposition -> New index
+@def position -> New index
 
        Given current position, returns new position
 
-@def mutation_~ -> All changes
+@def pair_~ -> All changes
 
        Returns a stream of all changed positions as a tuple: ('old position','new position')
 

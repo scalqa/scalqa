@@ -33,6 +33,8 @@ ___________________________________________________________________________*/
 
   Opaque Ordered Data element is provided with default ordering and can be compared with comparison operators.
 
+  See [sample type definition](https://github.com/scalqa/samples/blob/master/src/example/opaque/all/OrderedLongData.scala).
+
 @trait _methods -> Default methods for all Long.Opaque.Data.Ordered defined types
 
 @def <>      -> Range \n\n  Returns Range from current to given value \n\n  Note. Range uses base primitive natural ordering

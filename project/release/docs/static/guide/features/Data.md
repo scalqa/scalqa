@@ -23,7 +23,7 @@ Defining data elements is quite easy, one just needs to select one of the follow
 
 Let's create an example of data element 'Price', which would be based on a Float, behave like a Float, but be distinct from a Float.
 
-He is the definition part (available in [samples](https://github.com/scalqa/samples/blob/master/src/example/data/PriceData.scala)):
+He is the definition part (available in [samples](https://github.com/scalqa/samples/blob/master/src/example/opaque/PriceData.scala)):
 ```
 type  Price = Price.TYPE.DEF
 
@@ -31,11 +31,11 @@ extension (inline x: Double) inline def Dollars : Price = Price(x.Float)
 
 object Price extends Float.Opaque.Data.Numerical[Price]("Price"):
   inline   def apply(inline v: Float): Price  = v.toOpaque
-  override def tag(v:Price)          : String =  "$"+v.roundTo(0.01.Dollars).toString
+  override def value_tag(v:Price)    : String = "$"+v.roundTo(0.01.Dollars).toString
 
-  extension (x: Price)
-    def discount(p: Percent): Price   = (x.real - p(x.real)).toOpaque
-    def isNotExpensive      : Boolean = x < 100
+  extension(x: Price)
+    inline def discount(inline p: Percent): Price   = (x.real - p(x.real)).toOpaque
+    inline def isNotExpensive             : Boolean = x < 100
 
   object TYPE:
     opaque type DEF <: Float.Opaque = Float.Opaque
@@ -57,8 +57,8 @@ Double constructor will cover all primitives.
 ```  
 object Price extends Float.Opaque.Data.Numerical[Price]("Price"):
 ```  
-Object Price extends not only `Float.Opaque.Data`, which would be sufficient to create a data element.
-Price extends `Float.Opaque.Data.Numerical`, which adds Float like behaviour with a set of 
+Object Price extends not only [Float.Opaque.Data](../../api/scalqa/lang/float/opaque/Data.html), which would be sufficient to create a data element.
+Price extends [Float.Opaque.Data.Numerical](../../api/scalqa/lang/float/opaque/data/Numerical.html), which adds Float like behaviour with a set of 
 [default methods](../../api/scalqa/lang/float/opaque/data/Numerical$$_methods.html) provided. For example:
 ```
 var p: Price = 19.99.Dollars

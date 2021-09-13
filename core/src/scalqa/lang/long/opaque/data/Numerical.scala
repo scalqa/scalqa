@@ -52,6 +52,8 @@ ___________________________________________________________________________*/
 
   See [more in guide](../../../../../guide/features/Data.html).
 
+  See [sample type definition](https://github.com/scalqa/samples/blob/master/src/example/opaque/all/NumericalLongData.scala).
+
 @trait _methods -> Default methods for all Long.Opaque.Data.Numerical defined types
 
 @def unary_-  -> Negate           \n\n  Returns negation of this value

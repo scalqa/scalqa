@@ -3,14 +3,14 @@ layout: doc-page
 title: Download and Setup
 ---
 
-A natural pre-requisite for Scalqa is the installed Scala3 environment. 
+A natural pre-requisite for Scalqa is the installed at least Scala 3.0.2 environment (lower versions do have crucial bugs).
 If in doubt, take a look at project [Samples](https://github.com/scalqa/samples), which is SBT configured for Scala3 with Scalqa. 
 
 ### Download
 
 SBT users should add following library dependency:
 
-libraryDependencies += "org.scalqa" % "scalqa_3" % "0.99"
+libraryDependencies += "org.scalqa" % "scalqa_3" % "0.991"
 
 Everyone else can download single JAR file from the [latest release](https://github.com/scalqa/scalqa/releases)
 

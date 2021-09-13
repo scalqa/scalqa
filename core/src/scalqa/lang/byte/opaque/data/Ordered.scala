@@ -32,6 +32,8 @@ ___________________________________________________________________________*/
 
   Opaque Ordered Data element is provided with default ordering and can be compared with comparison operators.
 
+  See [sample type definition](https://github.com/scalqa/samples/blob/master/src/example/opaque/all/OrderedByteData.scala).
+
 @trait _methods -> Default methods for all Byte.Opaque.Data.Ordered defined types
 
 @def <>      -> Range \n\n  Returns Range from current to given value \n\n  Note. Range uses base primitive natural ordering

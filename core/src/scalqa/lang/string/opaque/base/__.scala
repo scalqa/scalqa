@@ -29,6 +29,8 @@ ___________________________________________________________________________*/
 
   Note. Most opaque companions extend Opaque.Data, which also defines specialized containers attached to the type.
 
+  See [sample type definition](https://github.com/scalqa/samples/blob/master/src/example/opaque/all/StringOpaque.scala).
+
 @def value_tag -> Value to String
 
     Override this method to provide type custom convertion to String

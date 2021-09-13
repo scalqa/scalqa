@@ -24,6 +24,8 @@ ___________________________________________________________________________*/
 
   See [more in guide](../../../../../guide/features/Data.html).
 
+  See [sample type definition](https://github.com/scalqa/samples/blob/master/src/example/opaque/all/StringData.scala).
+
 @trait _methods -> ###
 
   _methods -> Default methods for all String.Opaque.Data defined types

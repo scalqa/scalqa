@@ -30,6 +30,8 @@ ___________________________________________________________________________*/
 
   Note. Most opaque companions extend Opaque.Data, which also defines specialized containers attached to the type.
 
+  See [sample type definition](https://github.com/scalqa/samples/blob/master/src/example/opaque/all/DoubleOpaque.scala).
+
 @trait _methods -> Default methods for all Double.Opaque.Base defined types
 
 @def value_tag -> Value to String

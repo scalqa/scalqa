@@ -80,12 +80,21 @@ Num Name              Ops/Sec %   Memory %   Last Value
 ```
 
 `Note.` Unlike streams, where specialized version extends regular, specialized options are not directly related 
-to non-specialized. This is due to their opaque nature limitations. But they can always be converted with 
-some extra cost:
+to non-specialized. This is due to their opaque nature limitations.
+To make consistent experience specialized options can be assigned to generalized (with the help of implicit conversions or explicit method ".ref").
+Generalized options have to be explicitly converted to sepcialized:
+ 
 ```
-var o:  Opt[Int] = 12
-var io: Int.Opt  = o.raw
-var oi: Opt[Int] = io.ref
+var generalOpt:  Opt[Int] = \/
+var specialOpt:  Int.Opt  = \/
+
+// generalize
+generalOpt = specialOpt
+// or
+generalOpt = specialOpt.ref
+
+// specialize
+specialOpt = generalOpt.raw
 ```
   
 

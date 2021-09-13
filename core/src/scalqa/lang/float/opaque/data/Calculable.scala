@@ -38,6 +38,8 @@ ___________________________________________________________________________*/
   ```
   Stream operation "sum" is also valid for Data.Calculable
 
+  See [sample type definition](https://github.com/scalqa/samples/blob/master/src/example/opaque/all/CalculableFloatData.scala).
+
 @trait _methods -> Default methods for all Float.Opaque.Data.Calculable defined types
 
 @def *           -> Multiply         \n\n  Returns the product of this and given value

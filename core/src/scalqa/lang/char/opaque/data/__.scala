@@ -22,6 +22,8 @@ ___________________________________________________________________________*/
 
   See [more in guide](../../../../../guide/features/Data.html).
 
+  See [sample type definition](https://github.com/scalqa/samples/blob/master/src/example/opaque/all/CharData.scala).
+
 @trait _methods -> Default methods for all Char.Opaque.Data defined types
 
 */
