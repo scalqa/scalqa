@@ -8,7 +8,7 @@ based on Java primitives. Data elements naturally inherit built-in specialized c
 
 [scalqa.Fx](https://scalqa.github.io/doc/api/scalqa/Fx$.html) provides GUI functionality, based on [JavaFx](https://openjfx.io).
 
-See also Scalqa [guide](https://scalqa.github.io/doc/docs/Guide/index.html),
-                [API](https://scalqa.github.io/doc/api/scalqa.html), and
+See also Scalqa [guide](https://scalqa.github.io/docs/Guide/index.html),
+                [API](https://scalqa.github.io/api/scalqa.html), and
                 [samples](https://github.com/scalqa/samples).
 
