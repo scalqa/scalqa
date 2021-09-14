@@ -30,8 +30,11 @@ trait _String:
            .r("Fx.Control.","Fx.").r("Fx.Scene.","Fx.").r("Fx.Base.","Fx.")
            .r("THIS_TYPE","this.type")
            .r("Array._methods.ARR","ARR").r("ARR.ARR","ARR")
+
+           .r("Double.G.Containers.Companion.Pro.","Double.Pro.")
+           .r("Boolean.G.Containers.Companion.Pro.","Boolean.Pro.")
+
            .r("Opt._methods.OPT","OPT")
-           .r("Boolean.Raw","Any.Boolean").r("Byte.Raw","Any.Byte").r("Char.Raw","Any.Char").r("Short.Raw","Any.Short").r("Int.Raw","Any.Int").r("Long.Raw","Any.Long").r("Float.Raw","Any.Float").r("Double.Raw","Any.Double")
            .r("Any.Specialized","Specialized").r("Specialized.Array","A.Array").r("Specialized.Primitive.<>","A.<>").r("Specialized.Primitive.><","A.><")
 
       if(v.endsWith(".Type.type"))  v = v.dropLast(10)
