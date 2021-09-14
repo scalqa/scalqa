@@ -6,7 +6,7 @@ Scalqa collections are fully specialized and allow processing of primitive types
 Scalqa also provides a standardized way to define [opaque data](https://scalqa.github.io/doc/guide/features/Data.html)
 based on Java primitives. Data elements naturally inherit built-in specialized collections.
 
-[scalqa.Fx](https://scalqa.github.io/doc/api/scalqa/Fx$.html) provides GUI functionality, based on [JavaFx](https://openjfx.io).
+[scalqa.Fx](https://scalqa.github.io/api/scalqa/Fx$.html) provides GUI functionality, based on [JavaFx](https://openjfx.io).
 
 See also Scalqa [guide](https://scalqa.github.io/docs/Guide/index.html),
                 [API](https://scalqa.github.io/api/scalqa.html), and
