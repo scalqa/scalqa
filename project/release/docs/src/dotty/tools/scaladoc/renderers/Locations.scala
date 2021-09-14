@@ -26,7 +26,7 @@ trait Locations(using ctx: DocContext):
     cache.get(dri) match
       case null =>
         val path = dri match
-          case `docsDRI` => List("docs", "index")
+          case `docsDRI` => List("Guide", "index")
           case `docsRootDRI` => List("index")
           case `apiPageDRI` => List("api", "index")
           case dri if dri.isStaticFile =>

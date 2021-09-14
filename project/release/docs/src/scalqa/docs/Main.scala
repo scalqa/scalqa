@@ -15,7 +15,6 @@ object Main:
        "-project-version", "0.991",
        "-siteroot",        "C:\\#DM\\_sbt\\dev\\scalqa_org\\project\\release\\docs\\static",
        "C:\\#DM\\_sbt\\dev\\scalqa_org\\project\\release\\scalqa\\target\\scala-3\\classes"
-       //"C:\\#DM\\_sbt\\dev\\scalqa_org\\fx\\target\\scala-3\\classes"
         )
 
     dotty.tools.dottydoc.Main.process(a)

@@ -3,7 +3,7 @@ layout: doc-page
 title: Containers
 ---
 
-Scalqa features a unified [value container framework](https://scalqa.org/doc/api/scalqa/Val$.html), 
+Scalqa features a unified [value container framework](../../api/scalqa/Val$.html), 
 which includes traditional collections and other value holding objects like: stream, property, option, etc. 
 
 All containers are designed with a single vision, have consistent naming, are interoperable and (in most cases) specializable for primitives. 

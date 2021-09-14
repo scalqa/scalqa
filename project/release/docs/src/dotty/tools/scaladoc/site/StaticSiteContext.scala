@@ -60,7 +60,7 @@ class StaticSiteContext(
     orphanedFiles.flatMap(p => loadTemplate(p.toFile, isBlog = false))
   }
 
-  val docsPath = root.toPath.resolve("docs")
+  val docsPath = root.toPath.resolve("Guide")
 
   private def isValidTemplate(file: File): Boolean =
     (file.isDirectory && !file.getName.startsWith("_")) ||
@@ -121,12 +121,12 @@ class StaticSiteContext(
 
     case Sidebar.Category(title, nested) =>
       // Add support for index.html/index.md files!
-      val fakeFile = new File(new File(root, "docs"), title)
+      val fakeFile = if(title=="Guide") new File(root, title) else new File(new File(root, "Guide"), title)
       LoadedTemplate(emptyTemplate(fakeFile, title), nested.map(loadSidebarContent), fakeFile)
 
   private def loadAllFiles() =
     def dir(name: String)= List(new File(root, name)).filter(_.isDirectory)
-    dir("docs").flatMap(_.listFiles()).flatMap(loadTemplate(_, isBlog = false))
+    dir("Guide").flatMap(_.listFiles()).flatMap(loadTemplate(_, isBlog = false))
       ++ dir("blog").flatMap(loadTemplate(_, isBlog = true))
 
   def driForLink(template: TemplateFile, link: String): Seq[DRI] =

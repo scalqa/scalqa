@@ -4,38 +4,38 @@ sidebar:
     - title: Introduction
       subsection:
         - title: About
-          url: guide/introduction/About.html
+          url: Guide/Introduction/About.html
         - title: Download and Setup
-          url: guide/introduction/Download_and_Setup.html
+          url: Guide/Introduction/Download_and_Setup.html
         - title: H2O Structure
-          url: guide/introduction/H2O_Structure.html
+          url: Guide/Introduction/H2O_Structure.html
         - title: Do Not Use toString
-          url: guide/introduction/Do_Not_Use_toString.html
+          url: Guide/Introduction/Do_Not_Use_toString.html
         - title: Operator Types
-          url: guide/introduction/Operator_Types.html
+          url: Guide/Introduction/Operator_Types.html
         - title: Samples
-          url: guide/introduction/Samples.html
+          url: Guide/Introduction/Samples.html
     - title: Features
       subsection:
         - title: Containers
-          url: guide/features/Containers.html
+          url: Guide/Features/Containers.html
         - title: Stream
-          url: guide/features/Stream.html
+          url: Guide/Features/Stream.html
         - title: Option
-          url: guide/features/Option.html
+          url: Guide/Features/Option.html
         - title: Pack
-          url: guide/features/Pack.html
+          url: Guide/Features/Pack.html
         - title: Specialized
-          url: guide/features/Specialized.html
+          url: Guide/Features/Specialized.html
         - title: Data
-          url: guide/features/Data.html
+          url: Guide/Features/Data.html
         - title: For-Comprehensions
-          url: guide/features/For-Comprehensions.html
+          url: Guide/Features/For-Comprehensions.html
     - title: Internals
       subsection:
         - title: SLIM Codding
-          url: guide/internals/SLIM_Coding.html
+          url: Guide/Internals/SLIM_Coding.html
         - title: Private Packages
-          url: guide/internals/Private_Packages.html
+          url: Guide/Internals/Private_Packages.html
     - title: BlogIndex
-      url: guide/blog/Index.html
+      url: Guide/Blog/Index.html

@@ -173,7 +173,7 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
       a(href := (if member.needsOwnPage then link(member.dri).getOrElse("#") else s"#${member.dri.anchor}"), cls := "documentableAnchor"),
       div(annotations(member)),
       div(cls := "header monospace")(memberSignature(member)),
-      div(cls := "docs")(
+      div(cls := "Guide")(
         span(cls := "modifiers"), // just to have padding on left
         div(
           div(cls := "originInfo")(originInfo(member):_*),
