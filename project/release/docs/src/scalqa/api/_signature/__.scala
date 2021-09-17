@@ -4,7 +4,7 @@ import _signature.*
 
 trait _Signature:
 
-  extension (x: String | Link)  def toStr      : String  = x match{ case s: String => s; case l: Link => l.dri.label}
+  extension (x: String | Link)  def toStr      : String  = x match{ case s: String => s; case l: Link => l.dri.label("") }
   extension (x: Member) private def isStreamExt: Boolean = {val l=x.dri.location;  !l.endsWith("$") & (l.startsWith("scalqa.val.stream._build") | l.startsWith("scalqa.val.stream._Build") | l.startsWith("scalqa.val.stream._use") | l.startsWith("scalqa.val.stream._Use"))}
 
   extension (x: Signature)
@@ -27,10 +27,22 @@ trait _Signature:
           s = if(s.size<=1) Seq("[A]") else s.~.flatMap[String | Link]{ case v: String => ~~(v); case v: Link => ~~(v,"[A]")}.toSeq.prepended("[A]")
 
       else
-        s = s.filter(v => !v.isInstanceOf[String] || !v.toString.contains("inline"))
+        s = s.filterNot(v => v.isInstanceOf[String] && v.toString.contains("inline"))
         s = s.dropGenericDef("THIS_OPAQUE")
         s = specialized(m,s)
         if(m.kind.isExtension && ( m.isStreamExt || m.dri.location.endsWith(".Opt$") || m.dri.location.endsWith(".array._methods"))) s = StandardExtensions(m,s)
 
-      s
+        if(m.name == "width_*" && m.dri.tag.contains("Label"))
+          ">>>****************************************************************** " + m.dri.tag tp()
+          s.~.print
+
+          s.map {
+            case v: String => v
+            case v: Link   => v.improve(m, heading)
+          }.~.print
+
+      s.map {
+        case v: String => v
+        case v: Link   => v.improve(m,heading)
+      }
 

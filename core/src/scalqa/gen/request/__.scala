@@ -31,9 +31,11 @@ object Request:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@type \/          ->  Type alias      \n\n Shortcut to [[scalqa.gen.request.VOID$       Gen.Request.\/]]
-@def  \/          ->  Singleton alias \n\n Shortcut to [[scalqa.gen.request.VOID$       Gen.Request.\/]]
+@type \/          ->  Void request type alias      \n\n Shortcut to [[scalqa.gen.request.VOID$       Gen.Request.\/]]
+@def  \/          ->  Void request singleton alias \n\n Shortcut to [[scalqa.gen.request.VOID$       Gen.Request.\/]]
 
+@type NEW         ->  Type alias      \n\n Shortcut to [[scalqa.gen.request.NEW$        Gen.Request.NEW]]
+@def  NEW         ->  Singleton alias \n\n Shortcut to [[scalqa.gen.request.NEW$        Gen.Request.NEW]]
 @type DEFAULT     ->  Type alias      \n\n Shortcut to [[scalqa.gen.request.DEFAULT$    Gen.Request.DEFAULT]]
 @def  DEFAULT     ->  Singleton alias \n\n Shortcut to [[scalqa.gen.request.DEFAULT$    Gen.Request.DEFAULT]]
 @type ALL         ->  Type alias      \n\n Shortcut to [[scalqa.gen.request.ALL$        Gen.Request.ALL]]

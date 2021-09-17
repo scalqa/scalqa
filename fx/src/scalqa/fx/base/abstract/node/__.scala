@@ -1,6 +1,6 @@
 package scalqa; package fx; package base; package `abstract`; import node.*; import language.implicitConversions
 
-trait Node extends Like with _properties with _events with _methods:
+trait Node extends Like with _properties with _Events with _methods:
 
   private[fx] override def _refPropertyOpt = real.onZoomStartedProperty.?
 
@@ -11,8 +11,8 @@ object Node:
   given FxConverter: ReversibleFunction[javafx.scene.Node, Node] = ReversibleFunction(v => Delegate.Gui.apply[Fx.Node](v.onZoomStartedProperty), _.real)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Like        = node.Like;         transparent inline def Like = node.Like
-  type _events     = node._events
+  type Like        = node.Like;          transparent inline def Like = node.Like
+  type _events     = node._Events
   type _methods    = node._methods
   type _properties = node._properties
 

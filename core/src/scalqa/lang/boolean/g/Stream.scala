@@ -13,7 +13,7 @@ abstract class Stream[A<:Raw] extends Val.~[A] with ~~.Custom.Discharge[A] with 
   /**/                    def dropOnly(v: A)                              : Stream[A]     = DROP(_ == v)
   /**/                    def dropAll(v: ~[A])                            : Stream[A]     = {val set=v.raw.toSet; if(set.isEmpty) self else DROP(set.contains)}
   /**/                    def joinAll(v: Val.~[A])                        : Stream[A]     = Z.JointStream[A](self,v.raw)
-  @tn("_joinAll")  inline def ++(inline v: Val.~[A])                      : Stream[A]     = joinAll(v)
+  @tn("joinAll")   inline def ++(inline v: Val.~[A])                      : Stream[A]     = joinAll(v)
   /**/                    def foreach[U](f: Fun.Consume[A,U])             : Unit          = FOREACH(f(_))
   /**/                    def foldAs[B](start: B)(f: Fun.FoldAs[B,A])     : B             = FOLD_AS(start)(f(_,_))
   /**/                    def fold     (start: A)(f: Fun.Fold[A])         : A             = FOLD(start)(f(_,_))
@@ -23,7 +23,7 @@ abstract class Stream[A<:Raw] extends Val.~[A] with ~~.Custom.Discharge[A] with 
   /**/                    def count(f: Fun.Filter[A])                     : Int           = {var c = 0; FOREACH(v => if(f(v)) c += 1); c}
   @tn("pack")             def ><                                          : Pack[A]       = Pack.fromStream(self)
   /**/                    def toBuffer                                    : Buffer[A]     = Buffer(self)
-  /**/                    def toSet                                       : StableSet[A]  = StableSet(self)
+  /**/                    def toSet                                       : Set[A]        = Set(self)
   /**/                    def toArray                                     : Array[A]      = {val b=Buffer.accessible(self.size_? or J.initSize).^(_ ++= self); var a=b.access; if(a.length!=b.size) a=a.copySize(b.size); a.cast[Array[A]]}
   /**/                    def dischargeTo(b: Val.Buffer[A])               : Unit          = b match{case v:Buffer[A] => v.addAllRaw(self); case v => v.addAllRef(self)}
   /**/             inline def FILTER(inline f: A=>Boolean)                : Stream[A]     = z.stream.filter.TAKE(self,f)

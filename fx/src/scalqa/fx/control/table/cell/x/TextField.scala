@@ -3,7 +3,7 @@ package scalqa; package fx; package control; package table; package cell; packag
 class TextField[ROW,V,A](c: Column[ROW,V,A], parser: String => Result[A]) extends Cell[ROW,V,A](c):
   protected type REAL = javafx.scene.control.cell.TextFieldTableCell[ROW, ITEM]
 
-  @tn("error_pro") val error_* : String.Pro.OM = String.Pro.OM("")
+  @tn("error_pro") val error_* : Pro.OM[String] = Pro.OM("")
 
   protected override def _createReal: REAL = new REAL {
     given FxConverter: ReversibleFunction[ITEM, String] = new ReversibleFunction[ITEM, String](){

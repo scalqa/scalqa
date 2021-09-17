@@ -9,22 +9,13 @@ package object scalqa:
   export scalqa.Val.{ ~ as _, * }
   @tn("Stream") val ~~ = `val`.Stream; @tn("Stream") type ~[+A] = `val`.Stream[A]
 
-//  implicit inline def implicitVoidRequestToValOpt    [A<:Any        ](v: \/): Val.Opt[A]       = ZZ.None.cast[Val.Opt[A]]
-//  implicit inline def implicitVoidRequestToBooleanOpt[A<:Any.Boolean](v: \/): Boolean.G.Opt[A] = Boolean.G.Opt.void[A]
-//  implicit inline def implicitVoidRequestToByteOpt   [A<:Any.Byte   ](v: \/): Byte.G.Opt[A]    = Byte.G.Opt.void[A]
-//  implicit inline def implicitVoidRequestToCharOpt   [A<:Any.Char   ](v: \/): Char.G.Opt[A]    = Char.G.Opt.void[A]
-//  implicit inline def implicitVoidRequestToShortOpt  [A<:Any.Short  ](v: \/): Short.G.Opt[A]   = Short.G.Opt.void[A]
-//  implicit inline def implicitVoidRequestToIntOpt    [A<:Any.Int    ](v: \/): Int.G.Opt[A]     = Int.G.Opt.void[A]
-//  implicit inline def implicitVoidRequestToLongOpt   [A<:Any.Long   ](v: \/): Long.G.Opt[A]    = Long.G.Opt.void[A]
-//  implicit inline def implicitVoidRequestToFloatOpt  [A<:Any.Float  ](v: \/): Float.G.Opt[A]   = Float.G.Opt.void[A]
-//  implicit inline def implicitVoidRequestToDoubleOpt [A<:Any.Double ](v: \/): Double.G.Opt[A]  = Double.G.Opt.void[A]
-
-
   private[scalqa] type ClassTag[A]    = scala.reflect.ClassTag[A];      private[scalqa] transparent inline def ClassTag   = scala.reflect.ClassTag
   private[scalqa] type Specialized[A] = lang.any.Specialized[A];        private[scalqa] transparent inline def Specialized= lang.any.Specialized;
   private[scalqa] type tn             = scala.annotation.targetName
   private[scalqa] type fast           = scala.annotation.threadUnsafe
-  extension[A](inline x: A) private[scalqa] inline def cast[B]:  B = x.asInstanceOf[B]
+
+  extension[A](inline x: A)
+    private[scalqa] inline def cast[B]: B = x.asInstanceOf[B]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -45,7 +36,7 @@ ___________________________________________________________________________*/
   so the types and objects defined deeper in the hierarchy can be accessed without prefixes
 
 
-@val ~~ ->  Companion operator alias \n\n Shortcut to [[scalqa.val.Stream$ Val.Stream]]
+@val ~~ ->  `Stream Companion alias \n\n Shortcut to [[scalqa.val.Stream$ Val.~]]
 
     `Note.`
 

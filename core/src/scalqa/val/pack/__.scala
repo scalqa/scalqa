@@ -1,6 +1,6 @@
 package scalqa; package `val`; import pack.*; import language.implicitConversions
 
-abstract class Pack[A] extends Idx[A]:
+abstract class Pack[A] private[scalqa]() extends Idx[A]:
   type THIS_TYPE <: Pack[A]
   /**/                     def join (v: A)                                 : THIS_TYPE
   /**/                     def joinAll(v: ~[A])                            : THIS_TYPE

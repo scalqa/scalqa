@@ -1,12 +1,13 @@
 package scalqa; package gen; package void; import language.implicitConversions
 
-abstract class Setup[T](v: T):
-  @tn("requestVoid") @fast lazy final val void : T = v match
+abstract class Setup[A](voidValue: A):
+
+  @tn("requestVoid") @fast lazy final val void : A = voidValue match
     case null                     => J.illegalArgument("null passed to " + getClass)
     case v: AnyRef if v.^.nonVoid => J.illegalArgument("nonVoid object passed as void for " + getClass + ": " + v)
     case v                        => v
 
-  implicit inline def implicitFrom(v: \/): T = void
+  implicit inline def implicitFrom(v: \/): A = void
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

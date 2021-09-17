@@ -2,7 +2,7 @@ package scalqa; package fx; package control; package text; import language.impli
 
 import InputControl.Change
 
-abstract class InputControl(initialTextO: String.Opt = \/) extends Control:
+abstract class InputControl(initialTextO: Opt[String]= \/) extends Control:
   protected type REAL <: javafx.scene.control.TextInputControl
   private var _onChange: ><[Change => Any] = \/;
   {
@@ -19,7 +19,7 @@ abstract class InputControl(initialTextO: String.Opt = \/) extends Control:
   /**/                     def editable_=(b: Boolean)      : Unit            = real.setEditable(b)
   @tn("caretPosition_Pro") def caretPosition_*             : Int.Pro.O       = Fx.JavaFx.To.pro_O(real.caretPositionProperty)
   /**/                     def caretPosition               : Int             = real.getCaretPosition
-  @tn("text_Pro")          def text_*                      : String.Pro.OM   = Fx.JavaFx.To.pro_OM(real.textProperty)
+  @tn("text_Pro")          def text_*                      : Pro.OM[String]  = Fx.JavaFx.To.pro_OM(real.textProperty)
   /**/                     def text                        : String          = real.getText
   /**/                     def text_=(v: String)           : Unit            = real.setText(v)
 

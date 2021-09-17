@@ -16,7 +16,7 @@ class CheckBox extends Button.Base:
 object CheckBox:
   def apply(s: String, p: Pro.M[Boolean])  : CheckBox = apply(s, p()).^(_.bind(p))
   def apply()                              : CheckBox = new CheckBox
-  def apply[U](text: String.Opt    = \/,
+  def apply[U](text: Opt[String]   = \/,
             checked: Opt[Boolean]  = \/,
             action : CheckBox => U = \/)   : CheckBox = new CheckBox().^(c => { text.forval(c.text= _); checked.forval(c.selected= _); action.^(a => c.onActionRun(a(c))) })
 

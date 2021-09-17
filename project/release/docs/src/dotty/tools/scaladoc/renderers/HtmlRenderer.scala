@@ -92,7 +92,7 @@ class HtmlRenderer(rootPackage: Member, val members: Map[DRI, Member])(using ctx
       def run: Unit = page.content match
         case v: Member if v.kind.isPackage && v.name != "scalqa" => ()
         case _ =>
-          val pg = page.^.reviseIf(_.link.dri.isTypeDef, p => { val d = p.link.dri; Page(Link(d.scalqaLabel().takeAfterLast("."),d),Registry.member_?(d.id) or {"\n@@@ "+d.id +"   " + d.tag tp(); ???} , Nil) })
+          val pg = page.^.reviseIf(_.link.dri.isTypeDef, p => { val d = p.link.dri; Page(Link(d.scalqaLabel().takeAfterLast("."),d),Registry.member_?(d.id) or {"\n@@@ "+d.id +"   " + d.tag tp(); throw new RuntimeException()} , Nil) })
           write(pg.link.dri, html( mkHead(pg), body( if !pg.hasFrame then renderContent(pg) else mkFrame(pg.link, newParents, renderContent(pg)))))
       (absolutePath(page.link.dri),() => run) +: page.children.flatMap(prepare(_, newParents))
     allPages.flatMap(prepare(_, Vector.empty)).~.parallel.foreach(_._2())
@@ -109,11 +109,11 @@ class HtmlRenderer(rootPackage: Member, val members: Map[DRI, Member])(using ctx
     )
     write(page.link.dri, content) +: page.children.flatMap(renderPage(_, newParents))
 
-  private def specificResources(page: Page): Set[String] =
+  private def specificResources(page: Page): collection.immutable.Set[String] =
     page.children.toSet.flatMap(specificResources) ++ (page.content match
       case r: ResolvedTemplate =>
         r.resolved.resources.toSet
-      case _ => Set.empty
+      case _ => collection.immutable.Set.empty
     )
 
   private def renderResources(): Seq[String] =

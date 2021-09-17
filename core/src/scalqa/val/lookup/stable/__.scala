@@ -4,8 +4,8 @@ abstract class Stable[A,B] private[scalqa]() extends Lookup[A,B]:
   type THIS_TYPE <: Stable[A,B]
   /**/                   def join(key: A, v: B)            : THIS_TYPE
   /**/                   def joinAll(v: ~[(A, B)])         : THIS_TYPE
-  @tn("_join")    inline def + (inline key: A, inline v: B): THIS_TYPE   = join(key,v)
-  @tn("_joinAll") inline def ++(inline v: ~[(A, B)])       : THIS_TYPE   = joinAll(v)
+  @tn("join")     inline def + (inline key: A, inline v: B): THIS_TYPE   = join(key,v)
+  @tn("joinAll")  inline def ++(inline v: ~[(A, B)])       : THIS_TYPE   = joinAll(v)
 
 object Stable :
   /**/                 def apply[A,B](v: ~[(A, B)])        : Stable[A,B] = stable.z.AnyRef(v.iterator)

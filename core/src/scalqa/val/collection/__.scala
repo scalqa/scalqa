@@ -25,7 +25,6 @@ object Collection:
   type Mutable[A]           = collection.Mutable[A];             transparent inline def Mutable           = collection.Mutable
   type Observable[A]        = collection.Observable[A];          transparent inline def Observable        = collection.Observable
   type ObservableMutable[A] = collection.ObservableMutable[A];   transparent inline def ObservableMutable = collection.ObservableMutable
-  type StableSet[A]         = collection.StableSet[A];           transparent inline def StableSet         = collection.StableSet
   type M[A]                 = collection.Mutable[A];             transparent inline def M                 = collection.Mutable
   type O[A]                 = collection.Observable[A];          transparent inline def O                 = collection.Observable
   type OM[A]                = collection.ObservableMutable[A];   transparent inline def OM                = collection.ObservableMutable
@@ -44,9 +43,9 @@ ___________________________________________________________________________*/
 
       There are 3 main subtypes:
 
-      - [[scalqa.val.Idx Idx]] - values can be accessed by Int index
+      - [[scalqa.val.Idx Idx]]       - values can be accessed by Int index
       - [[scalqa.val.Lookup Lookup]] - values can be accessed by key lookup
-      - [[scalqa.val.collection.StableSet StableSet]] - collection of unique values
+      - [[scalqa.val.Set Set]]       - collection of unique values
 
 @def ~  -> Stream elements
 

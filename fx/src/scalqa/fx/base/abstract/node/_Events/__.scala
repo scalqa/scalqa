@@ -1,11 +1,11 @@
-package scalqa; package fx; package base; package `abstract`; package node; import _Events.*
+package scalqa; package fx; package base; package `abstract`; package node; import _events.*
 
-transparent trait _events extends Like with _onMouseAndDrag with _onKey with _onRotate with _onScroll with _onSwipe with _onTouch with _onZoom with _onContextMenu:
+transparent trait _Events extends Like with _onMouseAndDrag with _onKey with _onRotate with _onScroll with _onSwipe with _onTouch with _onZoom with _onContextMenu:
   self: Fx.Node =>
 
-package object _Events:
-  private[_Events] type ObjectProperty[A]                     = javafx.beans.property.ObjectProperty[A]
-  private[_Events] type EventHandler[A <: javafx.event.Event] = javafx.event.EventHandler[A]
+package object _events:
+  private[_events] type ObjectProperty[A]                     = javafx.beans.property.ObjectProperty[A]
+  private[_events] type EventHandler[A <: javafx.event.Event] = javafx.event.EventHandler[A]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

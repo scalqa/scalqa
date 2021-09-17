@@ -1,6 +1,6 @@
 package scalqa; package fx; package control; package text; import language.implicitConversions
 
-class Area protected (text: String.Opt = \/) extends Text.InputControl(text):
+class Area protected (text: Opt[String]= \/) extends Text.InputControl(text):
   protected type REAL = javafx.scene.control.TextArea
   protected override def _createReal = new REAL
 

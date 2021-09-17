@@ -6,13 +6,13 @@ abstract class Stage(stage: Opt[javafx.stage.Stage] = \/) extends Window:
 
   /**/       lazy  val icons              : Idx.M[Image]   =  Idx.M.wrap(real.getIcons).mutableMap_^[Image]
   /**/             def show               : Unit           = real.show
-  @tn("title_Pro") def title_*            : String.Pro.OM  = Fx.JavaFx.To.pro_OM(real.titleProperty)
+  @tn("title_Pro") def title_*            : Pro.OM[String] = Fx.JavaFx.To.pro_OM(real.titleProperty)
   /**/             def title              : String         = real.getTitle
   /**/             def title_=(v: String) : Unit           = real.setTitle(v)
 
 object Stage:
 
-  def apply(titleOpt: String.Opt, w: Int, h: Int, e: Fx.Node.Like): Stage = new Stage(new javafx.stage.Stage) {
+  def apply(titleOpt: Opt[String], w: Int, h: Int, e: Fx.Node.Like): Stage = new Stage(new javafx.stage.Stage) {
     val scene = Scene(w, h, e)
     titleOpt.forval(title = _)
   }

@@ -9,7 +9,7 @@ abstract class Chart extends Abstract.Region:
   @tn("legendVisible_Pro") def legendVisible_*             : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.legendVisibleProperty)
   /**/                     def legendVisible               : Boolean         = real.isLegendVisible
   /**/                     def legendVisible_=(v: Boolean) : Unit            = real.setLegendVisible(v)
-  @tn("title_Pro")         def title_*                     : String.Pro.OM   = Fx.JavaFx.To.pro_OM(real.titleProperty)
+  @tn("title_Pro")         def title_*                     : Pro.OM[String]  = Fx.JavaFx.To.pro_OM(real.titleProperty)
   /**/                     def title                       : String          = real.getTitle
   /**/                     def title_=(v: String)          : Unit            = real.setTitle(v)
 

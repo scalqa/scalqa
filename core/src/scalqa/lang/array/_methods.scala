@@ -17,10 +17,10 @@ transparent trait _methods:
     /**/              inline def newArray(inline size: Int)             (using inline A: S[A]) : A.Array         = z.newArray(x,size)
     /**/              inline def contains(inline v: A)                  (using inline A: S[A]) : Boolean         = z.contains(x,v)
 
-    @tn("_join")      inline def + ( inline v: A)                       (using inline A: S[A]) : A.Array         = z.join(x,v)
-    @tn("_joinAll")   inline def ++( inline v: ~[A])                    (using inline A: S[A]) : A.Array         = z.joinAll(x,v)
-    @tn("_joinAt")    inline def +@( inline i: Int, inline v: A)        (using inline A: S[A]) : A.Array         = z.joinAt(x,i,v)
-    @tn("_joinAllAt") inline def ++@(inline i: Int, inline v: ~[A])     (using inline A: S[A]) : A.Array         = z.joinAllAt(x,i,v)
+    @tn("join")       inline def + ( inline v: A)                       (using inline A: S[A]) : A.Array         = z.join(x,v)
+    @tn("joinAll")    inline def ++( inline v: ~[A])                    (using inline A: S[A]) : A.Array         = z.joinAll(x,v)
+    @tn("joinAt")     inline def +@( inline i: Int, inline v: A)        (using inline A: S[A]) : A.Array         = z.joinAt(x,i,v)
+    @tn("joinAllAt")  inline def ++@(inline i: Int, inline v: ~[A])     (using inline A: S[A]) : A.Array         = z.joinAllAt(x,i,v)
     /**/              inline def copySize(inline size: Int)             (using inline A: S[A]) : A.Array         = z.copySize(x,size)
 
     /**/              inline def join(inline v: A)                      (using inline A: S[A]) : A.Array         = z.join(x,v)

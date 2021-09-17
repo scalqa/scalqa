@@ -58,7 +58,7 @@ class SourceLinkParser(revision: Option[String]) extends ArgParser[SourceLink]:
   def gitlabPrefix(org: String, repo: String) = s"https://gitlab.com/$org/$repo/-"
 
 
-  private def parseLinkDefinition(s: String): Option[SourceLink] = ???
+  private def parseLinkDefinition(s: String): Option[SourceLink] = throw new UnsupportedOperationException()
 
   def parse(string: String): Either[String, SourceLink] =
     val res = string match

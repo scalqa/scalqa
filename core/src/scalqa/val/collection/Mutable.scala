@@ -5,8 +5,8 @@ trait Mutable[A] extends Collection[A] with Able.Add[A]:
   /**/              def removeAll(v: ~[A]) : Int       = v.map(remove).sum
   /**/              def clear              : Unit
   /**/              def replaceAll(v: ~[A]): Unit      = { clear; addAll(v) }
-  @tn("_remove")    def -= (v: A)          : this.type = { this.remove(v);    this }
-  @tn("_removeAll") def --=(v: ~[A])       : this.type = { this.removeAll(v); this }
+  @tn("remove")     def -= (v: A)          : this.type = { this.remove(v);    this }
+  @tn("removeAll")  def --=(v: ~[A])       : this.type = { this.removeAll(v); this }
 
 object Mutable:
   def apply[A](initSize: Int = J.initSize)           : Collection[A] = Buffer[A](initSize)

@@ -12,7 +12,8 @@ object J:
   inline  def unsupportedOperation(inline message: String = \/)           : Nothing     = throw new UnsupportedOperationException(message)
   inline  def illegalState(        inline message: String = \/)           : Nothing     = throw new IllegalStateException(message)
   inline  def illegalArgument(     inline message: String = \/)           : Nothing     = throw new IllegalArgumentException(message)
-  /**/    def printStack(sizeLimit: Int.Opt = \/, label: String.Opt = \/) : Unit        = { new Exception().getStackTrace().~.take_<>(1 <> sizeLimit.or(5000)).zipIndex(1)
+  /**/    def printStack(sizeLimit: Int.Opt = \/, label: Opt[String]= \/) : Unit        = synchronized{ new Exception().getStackTrace().~
+    /**/                                                                                    .take_<>(1 <> sizeLimit.or(5000)).zipIndex(1)
     /**/                                                                                    .map("\t" + _.toString.padEndTo(3) + " " + _).joinAt(0,label or "J.printStack").foreach(println) }
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def File          = j.File;                          type File             = j.File.TYPE.DEF

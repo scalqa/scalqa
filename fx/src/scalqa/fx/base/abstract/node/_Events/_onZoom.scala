@@ -1,4 +1,4 @@
-package scalqa; package fx; package base; package `abstract`; package node; package _Events; import language.implicitConversions
+package scalqa; package fx; package base; package `abstract`; package node; package _events; import language.implicitConversions
 
 transparent trait _onZoom:
   self: Fx.Node =>

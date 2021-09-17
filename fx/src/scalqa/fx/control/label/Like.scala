@@ -3,7 +3,7 @@ package scalqa; package fx; package control; package label; import language.impl
 abstract class Like extends Control:
   protected type REAL <: javafx.scene.control.Labeled
 
-  @tn("text_Pro")      def text_*               : String.Pro.OM  = Fx.JavaFx.To.pro_OM(real.textProperty)
+  @tn("text_Pro")      def text_*               : Pro.OM[String] = Fx.JavaFx.To.pro_OM(real.textProperty)
   /**/                 def text                 : String         = real.getText
   /**/                 def text_=(v: String)    : Unit           = real.setText(v)
 

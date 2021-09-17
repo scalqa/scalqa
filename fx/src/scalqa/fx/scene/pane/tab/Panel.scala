@@ -17,7 +17,7 @@ class Panel extends Abstract.Delegate.Gui:
 
   @tn("selected_Pro") def selected_*                        : Boolean.Pro.O          = Fx.JavaFx.To.pro_O(real.selectedProperty);
   /**/                def selected                          : Boolean                = real.selectedProperty.get
-  @tn("text_Pro")     def text_*                            : String.Pro.OM          = Fx.JavaFx.To.pro_OM(real.textProperty);
+  @tn("text_Pro")     def text_*                            : Pro.OM[String]         = Fx.JavaFx.To.pro_OM(real.textProperty);
   /**/                def text                              : String                 = real.getText
   /**/                def text_=(v: String)                 : Unit                   = real.setText(v)
   @tn("closable_Pro") def closable_*                        : Boolean.Pro.OM         = Fx.JavaFx.To.pro_OM(real.closableProperty)

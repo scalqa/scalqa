@@ -11,7 +11,7 @@ class Item extends Action:
   @tn("graphic_Pro") def graphic_*                : Pro.OM[Fx.Node.Like] = Fx.JavaFx.To.pro_OM(real.graphicProperty).mutableMap_^[Fx.Node.Like]
   /**/               def graphic                  : Fx.Node.Like         = graphic_*()
   /**/               def graphic_=(g:Fx.Node.Like): Unit                 = real.setGraphic(g.real)
-  @tn("id_Pro")      def id_*                     : String.Pro.OM        = Fx.JavaFx.To.pro_OM(real.idProperty)
+  @tn("id_Pro")      def id_*                     : Pro.OM[String]       = Fx.JavaFx.To.pro_OM(real.idProperty)
   /**/               def id                       : String               = real.getId
   /**/               def id_=(v: String)          : Unit                 = real.setId(v)
 

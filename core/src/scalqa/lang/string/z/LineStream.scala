@@ -4,7 +4,7 @@ private[lang] class LineStream(str: String) extends ~[String]:
   private var i = 0
   private val sz = str.length
 
-  @tn("read_Opt")  def read_? : String.Opt =
+  @tn("read_Opt")  def read_? : Opt[String] =
     if(i >= sz) \/
     else
       val s = i

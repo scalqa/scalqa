@@ -12,7 +12,7 @@ object Val:
   /**/          type Pro[+A]        = `val`.Pro[A];                     transparent inline def Pro        = `val`.Pro
   /**/          type Promise[+A]    = `val`.Promise[A];                 transparent inline def Promise    = `val`.Promise
   /**/          type Result[+A]     = `val`.Result.TYPE.DEF[A];         transparent inline def Result     = `val`.Result
-  /**/          type StableSet[A]   = Collection.StableSet[A];          transparent inline def StableSet  = Collection.StableSet
+  /**/          type Set[A]         = `val`.Set[A];                     transparent inline def Set        = `val`.Set
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -25,7 +25,7 @@ ___________________________________________________________________________*/
 
     Read more in the [Guide](../../guide/features/Containers.html).
 
-    [[Val]] is fully exported to scalqa root, thus all members and aliases of [[Val]] can be called with or without "Val." prefix.
+    [[Val]] is fully exported to scalqa root, thus all members of [[Val]] can be called with or without "Val." prefix.
 
     For example:
     ```
@@ -34,29 +34,29 @@ ___________________________________________________________________________*/
     val v: ~[Int]       = ?_?_?
     ```
 
-@type Buffer      ->  Type alias      \n\n Shortcut to [[scalqa.val.Buffer  Val.Buffer]]
-@def  Buffer      ->  Companion alias \n\n Shortcut to [[scalqa.val.Buffer$ Val.Buffer]]
-@type Collection  ->  Type alias      \n\n Shortcut to [[scalqa.val.Collection  Val.Collection]]
-@def  Collection  ->  Companion alias \n\n Shortcut to [[scalqa.val.Collection$ Val.Collection]]
-@type Idx         ->  Type alias      \n\n Shortcut to [[scalqa.val.Idx  Val.Idx]]
-@def  Idx         ->  Companion alias \n\n Shortcut to [[scalqa.val.Idx$ Val.Idx]]
-@type ><          ->  Type alias      \n\n Shortcut to [[scalqa.val.Pack  pack]]
-@def  ><          ->  Companion alias \n\n Shortcut to [[scalqa.val.Pack$ pack]]
-@type Lookup      ->  Type alias      \n\n Shortcut to [[scalqa.val.Lookup  Val.Lookup]]
-@def  Lookup      ->  Companion alias \n\n Shortcut to [[scalqa.val.Lookup$ Val.Lookup]]
-@type Opt         ->  Type alias      \n\n Shortcut to [[scalqa.val.Opt  Val.Opt]]
-@def  Opt         ->  Companion alias \n\n Shortcut to [[scalqa.val.Opt$ Val.Opt]]
-@type Pro         ->  Type alias      \n\n Shortcut to [[scalqa.val.Pro  Val.Pro]]
-@def  Pro         ->  Companion alias \n\n Shortcut to [[scalqa.val.Pro$ Val.Pro]]
-@type Promise     ->  Type alias      \n\n Shortcut to [[scalqa.val.Promise  Val.Promise]]
-@def  Promise     ->  Companion alias \n\n Shortcut to [[scalqa.val.Promise$ Val.Promise]]
-@type <>          ->  Type alias      \n\n Shortcut to [[scalqa.val.Range  range]]
-@def  <>          ->  Companion alias \n\n Shortcut to [[scalqa.val.Range$ range]]
-@type Result      ->  Type alias      \n\n Shortcut to [[scalqa.val.Result  Val.Result]]
-@def  Result      ->  Companion alias \n\n Shortcut to [[scalqa.val.Result$ Val.Result]]
-@type StableSet   ->  Type alias      \n\n Shortcut to [[scalqa.val.collection.StableSet  Val.Collection.StableSet]]
-@def  StableSet   ->  Companion alias \n\n Shortcut to [[scalqa.val.collection.StableSet$ Val.Collection.StableSet]]
-@type ~           ->  Type alias      \n\n Shortcut to [[scalqa.val.Stream  Val.Stream]]
-@def  ~           ->  Companion alias \n\n Shortcut to [[scalqa.val.Stream$ Val.Stream]]
+@type Buffer      ->  Type alias             \n\n Shortcut to [[scalqa.val.Buffer  Val.Buffer]]
+@def  Buffer      ->  Type companion alias   \n\n Shortcut to [[scalqa.val.Buffer$ Val.Buffer]]
+@type Collection  ->  Type alias             \n\n Shortcut to [[scalqa.val.Collection  Val.Collection]]
+@def  Collection  ->  Type companion alias   \n\n Shortcut to [[scalqa.val.Collection$ Val.Collection]]
+@type Idx         ->  Type alias             \n\n Shortcut to [[scalqa.val.Idx  Val.Idx]]
+@def  Idx         ->  Type companion alias   \n\n Shortcut to [[scalqa.val.Idx$ Val.Idx]]
+@type ><          ->  Pack type alias        \n\n Shortcut to [[scalqa.val.Pack  value pack]]
+@def  ><          ->  Pack companion alias   \n\n Shortcut to [[scalqa.val.Pack$ value pack]]
+@type Lookup      ->  Type alias             \n\n Shortcut to [[scalqa.val.Lookup  Val.Lookup]]
+@def  Lookup      ->  Type companion alias   \n\n Shortcut to [[scalqa.val.Lookup$ Val.Lookup]]
+@type Opt         ->  Type alias             \n\n Shortcut to [[scalqa.val.Opt  Val.Opt]]
+@def  Opt         ->  Type companion alias   \n\n Shortcut to [[scalqa.val.Opt$ Val.Opt]]
+@type Pro         ->  Type alias             \n\n Shortcut to [[scalqa.val.Pro  Val.Pro]]
+@def  Pro         ->  Type companion alias   \n\n Shortcut to [[scalqa.val.Pro$ Val.Pro]]
+@type Promise     ->  Type alias             \n\n Shortcut to [[scalqa.val.Promise  Val.Promise]]
+@def  Promise     ->  Type companion alias   \n\n Shortcut to [[scalqa.val.Promise$ Val.Promise]]
+@type <>          ->  Range type alias       \n\n Shortcut to [[scalqa.val.Range  value range]]
+@def  <>          ->  Range companion alias  \n\n Shortcut to [[scalqa.val.Range$ value range]]
+@type Result      ->  Type alias             \n\n Shortcut to [[scalqa.val.Result  Val.Result]]
+@def  Result      ->  Type companion alias   \n\n Shortcut to [[scalqa.val.Result$ Val.Result]]
+@type Set         ->  Type alias             \n\n Shortcut to [[scalqa.val.Set  Val.Set]]
+@def  Set         ->  Type companion alias   \n\n Shortcut to [[scalqa.val.Set$ Val.Set]]
+@type ~           ->  Stream type alias      \n\n Shortcut to [[scalqa.val.Stream  Val.Stream]]
+@def  ~           ->  Stream companion alias \n\n Shortcut to [[scalqa.val.Stream$ Val.Stream]]
 
 */

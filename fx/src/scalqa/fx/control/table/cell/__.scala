@@ -12,7 +12,7 @@ abstract class Cell[ROW,V,A](val column: Column[ROW,V,_]) extends control.Cell.I
   @tn("rowOpt")   def row_?   : Opt[ROW]    = item_?.map(_.row)
   @tn("viewOpt")  def view_?  : Opt[V]      = row_?.map_?(i => column.table.mkViewOpt[V](i))
   @tn("valueOpt") def value_? : Opt[A]      = item_?.map_?(_.value_?)
-  @tn("textOpt")  def text_?  : String.Opt  = item_?.map_?(_.text_?)
+  @tn("textOpt")  def text_?  : Opt[String] = item_?.map_?(_.text_?)
 
   protected override def afterItemUpdated: Unit =
     super.afterItemUpdated

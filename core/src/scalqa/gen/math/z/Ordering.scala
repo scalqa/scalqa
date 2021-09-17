@@ -12,7 +12,7 @@ object Ordering:
   transparent trait _methods:
 
     extension[A](inline x: Ordering[A])
-      @tn("_join")          inline def + (inline c: Ordering[A])              : Ordering[A]      = Ordering.join(x,c)
+      @tn("join")           inline def + (inline c: Ordering[A])              : Ordering[A]      = Ordering.join(x,c)
       /**/                  inline def join(inline c: Ordering[A])            : Ordering[A]      = Ordering.join(x,c)
       @tn("rank_View")      inline def rank_^(fun: A => Int)                  : Ordering[A]      = Ordering.rank_View(x,fun)
       @tn("opt_View")       inline def opt_^(voidPosition: Int)               : Ordering[Opt[A]] = Ordering.opt_View(x,voidPosition)

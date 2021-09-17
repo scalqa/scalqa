@@ -12,7 +12,7 @@ object PrimitiveTag:
   trait Float   extends PrimitiveTag
   trait Double  extends PrimitiveTag
 
-  @tn("opt") def ?(v: AnyRef): String.Opt = v match
+  @tn("opt") def ?(v: AnyRef): Opt[String] = v match
     case v: Boolean => "Boolean"
     case v: Byte    => "Byte"
     case v: Char    => "Char"

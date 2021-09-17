@@ -48,7 +48,7 @@ object ScalaSignatureProvider:
       case Kind.RootPackage =>
         builder
       case Kind.Unknown =>
-        ???
+        throw new IllegalStateException()
 
   private def enumEntrySignature(member: Member, cls: Kind.Class, bdr: SignatureBuilder): SignatureBuilder =
     val withPrefixes: SignatureBuilder = bdr

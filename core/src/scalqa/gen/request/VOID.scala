@@ -27,10 +27,11 @@ private trait zVOIDDefaults1 extends zVOIDDefaults2:
   implicit def implicitToFunctionToOpt[A,B]    (v: \/) : A => Opt[B]       = z.VOID.Function1_Opt.cast[A => Opt[B]]
 
 private trait zVOIDDefaults2:
-  implicit def implicitToVector[A]             (v: \/) : Vector[A]         = Vector.empty[A]
-  implicit def implicitToScalaList[A]          (v: \/) : scala.List[A]     = Nil
-  implicit def implicitToScalaOption[A]        (v: \/) : scala.Option[A]   = scala.None
-  implicit def implicitToAnyFunction[A,B]      (v: \/) : A => B            = z.VOID.Function1_Any.cast[A => B]
+  implicit def implicitToVector[A]             (v: \/) : scala.collection.immutable.Vector[A] = Vector.empty[A]
+  implicit def implicitToScalaList[A]          (v: \/) : scala.collection.immutable.List[A]   = Nil
+  implicit def implicitToScalaSet[A]           (v: \/) : scala.collection.immutable.Set[A]    = scala.collection.immutable.Set.empty
+  implicit def implicitToScalaOption[A]        (v: \/) : scala.Option[A]                      = scala.None
+  implicit def implicitToAnyFunction[A,B]      (v: \/) : A => B                               = z.VOID.Function1_Any.cast[A => B]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -33,7 +33,7 @@ trait SignatureRenderer:
 
 
   def renderElementWith(e: String | (String, DRI) | Link, owner: Opt[Member] = \/, heading: Boolean = false, modifiers: AppliedAttr*) = e match
-    case (name, dri) => ??? //renderLink("!!"+dri.scalqaLabel(name), dri, modifiers *)
+    case (name, dri) => J.unsupportedOperation() //renderLink("!!"+dri.scalqaLabel(name), dri, modifiers *)
     case name: String => raw(name)
-    case Link(name, dri) =>
-      renderLink(dri.scalqaLabel(name,owner,heading), dri, modifiers *)
+    case l: Link =>
+      renderLink(l.asLabel(owner,heading), l.dri, modifiers *)

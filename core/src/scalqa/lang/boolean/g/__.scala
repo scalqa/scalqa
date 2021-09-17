@@ -1,10 +1,10 @@
 package scalqa; package lang; package boolean; import language.implicitConversions
 
 object G:
-  /**/                                                                                      transparent inline def Containers = g.Containers
+  /**/          type Containers[A<:Raw]      = g.Containers[A];                       transparent inline def Companion  = g.Companion
   @tn("Stream") type ~         [A<:Raw]      = g.Stream[A];             @tn("Stream") transparent inline def ~          = g.Stream
   @tn("Pack")   type ><        [A<:Raw]      = g.Pack[A];               @tn("Pack")   transparent inline def ><         = g.Pack
-  /**/          type Opt       [A<:Raw]      = g.Opt.TYPE.DEF[A];                  transparent inline def Opt        = g.Opt
+  /**/          type Opt       [A<:Raw]      = g.Opt.TYPE.DEF[A];                     transparent inline def Opt        = g.Opt
   /**/          type Buffer    [A<:Raw]      = g.Buffer[A];                           transparent inline def Buffer     = g.Buffer
   /**/          type Collection[A<:Raw]      = g.Collection[A];                       transparent inline def Collection = g.Collection
   /**/          type Idx       [A<:Raw]      = g.Idx[A];                              transparent inline def Idx        = g.Idx

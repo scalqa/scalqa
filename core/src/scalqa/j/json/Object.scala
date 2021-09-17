@@ -7,7 +7,7 @@ trait Object extends `val`.Lookup[String, Any] with Able.Doc:
   @tn("array_Opt")  def jArray_?( name: String) : Opt[J.Array]   = get_?(name).takeType[J.Array]
 
   /**/              def string(   name: String) : String         = string_?(name).get
-  @tn("string_Opt") def string_?( name: String) : String.Opt     = get_?(name).drop(_.isInstanceOf[Object]).drop(_.isInstanceOf[Array]).map(_.toString)
+  @tn("string_Opt") def string_?( name: String) : Opt[String]    = get_?(name).drop(_.isInstanceOf[Object]).drop(_.isInstanceOf[Array]).map(_.toString)
   /**/              def int(      name: String) : Int            = int_?(name).get
   /**/              def long(     name: String) : Long           = long_?(name).get
   /**/              def double(   name: String) : Double         = double_?(name).get

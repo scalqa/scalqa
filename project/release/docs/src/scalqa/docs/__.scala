@@ -4,8 +4,6 @@ object Docs:
 
   def fail(v: Any): Nothing = throw new RuntimeException(""+v)
 
-  def generate(v: String): Nothing = ???
-
   def isHiddenName(owner: Member, name: String): Boolean =
     name.startsWith("zz") || name == "withFilter" || name == "toString" || name.startsWith("thenComparing") || name.startsWith("THIS_TYPE") || name.startsWith("THIS_OPAQUE")
       || { owner.name match
@@ -15,7 +13,7 @@ object Docs:
                       case "Promise"                           => name == "withFilter" || name == "foreach" || name == "flatMap"
                       case "Collection"                        => name == "withFilter" || name == "foreach" || name == "flatMap" || name == "map"
                       case "ReversibleFunction"                => name == "andThen"    || name == "compose"
-                      case "Ordering" if owner.kind.isTypeLike => name.startsWith("thenComparing") || !name.in("compare","reverse","on","join","+") && !name.contains("^")
+                      case "Ordering" if owner.kind.isTypeLike => name.startsWith("thenComparing") || !name.in("compare","compare_?","reverse","on","join","+","map") && !name.contains("^")
                       case _                                   => false
     }
 
@@ -29,7 +27,7 @@ object Docs:
     case "Opaque" => false
     case _        => makerNameSet.contains(name)
 
-  private val makerNameSet = String.StableSet("Byte","Char","Short","Int","Long","Float","Double","Number",
+  private val makerNameSet = String.Set("Byte","Char","Short","Int","Long","Float","Double","Number",
       "ByteCount","Year","Big","Percent","Week","Weeks","Day","Days","Hour","Hours","Minute","Minutes","Second","Seconds","Millis","Micros","Nanos",
       "Problem")
 

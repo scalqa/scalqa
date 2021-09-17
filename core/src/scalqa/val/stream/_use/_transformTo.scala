@@ -10,7 +10,7 @@ transparent trait _transformTo:
     /**/        inline def makeString(inline sep:String= \/)
     /**/                                (using inline t :Any.Def.Doc[A]) : String              = Z.makeString(x,sep,t)
     /**/        inline def toIdx                                         : Idx[A]              = Z.toIdx(x)
-    /**/        inline def toSet                                         : StableSet[A]        = StableSet(x)
+    /**/        inline def toSet                                         : Set[A]              = Set(x)
     /**/        inline def toBuffer                                      : Buffer[A]           = new AnyRef.Buffer[A](x)
     /**/        inline def iterator                                      : Iterator[A]         = _Z.Scala.Iterator(x)
     /**/        inline def toArray          (using inline t:ClassTag[A]) : Array[A]            = _Z.Scala.Array(x)
@@ -117,7 +117,7 @@ ___________________________________________________________________________*/
 
 @def toSet -> Convert to unique collection
 
-        Returns stream elements as [[scalqa.val.collection.StableSet StableSet]]
+        Returns stream elements as [[scalqa.val.Set Set]]
 
 @def toJavaList -> Convert to Java List
 

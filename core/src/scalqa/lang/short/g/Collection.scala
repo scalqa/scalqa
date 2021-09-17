@@ -21,22 +21,6 @@ object Collection:
   object Mutable:
     implicit inline def implicitFrom[A<:Raw](inline v: NEW): Mutable[A] = new Buffer()
 
-  // ******************************************************************************************************************************************
-  import scala.collection.immutable.IntMap
-
-  class StableSet[A<:Raw] private(real: IntMap[Unit]) extends Val.StableSet[A] with Collection[A]:
-    type THIS_TYPE = StableSet[A]
-    /**/          def size               : Int          = real.size
-    /**/ override def contains(v: A)     : Boolean      = real.contains(v.real)
-    @tn("stream") def ~                  : Stream[A]    = real.keysIterator.~.raw.map(_.toShort.cast[A])
-    /**/          def join(v: A)         : StableSet[A] = new StableSet(real.updated(v.real.toInt,()))
-    /**/          def joinAll(v: ~[A])   : StableSet[A] = new StableSet(real.concat(v.map(v => (v.real.toInt,())).iterator))
-
-  object StableSet:
-    /**/            def apply[A<:Raw](v: ~[A])     : StableSet[A] = new StableSet(IntMap.from(v.map(v => (v.real.toInt,())).iterator))
-    @tn("getVoid")  def void[A<:Raw]               : StableSet[A] = zVoid.cast[StableSet[A]]; private[g] object zVoid extends StableSet(IntMap.empty) with Gen.Void
-    implicit inline def implicitFrom[A<:Raw](v: \/): StableSet[A] = void
-
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API

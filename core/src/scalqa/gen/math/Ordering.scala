@@ -4,10 +4,11 @@ object Ordering:
   inline def apply[A](using inline o: Ordering[A]): Ordering[A] = o
 
   extension[A](inline x: Ordering[A])
+    /**/                  inline def compare(v:A, w:A)                      : Int              = J.illegalState()
     @tn("compare_Opt")    inline def compare_?(v:Opt[A], w:Opt[A], none:Int): Int              = z.Ordering.compare_Opt(x,v,w,none)
     /**/                  inline def reverse                                : Ordering[A]      = z.View.ReversedOrdering[A](x)
     /**/                  inline def map[U](f: U => A)                      : Ordering[U]      = z.View.MappedOrdering[A,U](x,f)
-    @tn("_join")          inline def + (inline c: Ordering[A])              : Ordering[A]      = z.Ordering.join(x,c)
+    @tn("join")           inline def + (inline c: Ordering[A])              : Ordering[A]      = z.Ordering.join(x,c)
     /**/                  inline def join(inline c: Ordering[A])            : Ordering[A]      = z.Ordering.join(x,c)
     @tn("rank_View")      inline def rank_^(fun: A => Int)                  : Ordering[A]      = z.Ordering.rank_View(x,fun)
     @tn("opt_View")       inline def opt_^(voidPosition: Int)               : Ordering[Opt[A]] = z.Ordering.opt_View(x,voidPosition)
@@ -30,7 +31,9 @@ ___________________________________________________________________________*/
 
   Scalqa Ordering is an alias to scala.Ordering. Both can be used interchangeably.
 
-  The only difference: when creating a new Ordering class, alias cannot be extended, so use Ordering.Base instead.
+  Scalqa Ordering has a new set of methods provided as extensions.
+
+  When creating a new Ordering implementation, alias cannot be extended, so use Ordering.Base instead.
 
 @class Base  ->
 

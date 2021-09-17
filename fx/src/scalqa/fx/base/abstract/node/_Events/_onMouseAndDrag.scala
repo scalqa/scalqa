@@ -1,4 +1,4 @@
-package scalqa; package fx; package base; package `abstract`; package node; package _Events; import language.implicitConversions
+package scalqa; package fx; package base; package `abstract`; package node; package _events; import language.implicitConversions
 
 transparent trait _onMouseAndDrag:
   self: Fx.Node =>
@@ -18,7 +18,7 @@ transparent trait _onMouseAndDrag:
   def onMouseDragOver    [U](l: Fx.Event.MouseDrag => U)  : Gen.Event.Control   = onMouseDrag(l, real.onMouseDragOverProperty)
   def onMouseDragReleased[U](l: Fx.Event.MouseDrag => U)  : Gen.Event.Control   = onMouseDrag(l, real.onMouseDragReleasedProperty)
 
-  def onDragDetected     [U](l: Fx.Event.Mouse => U)      : Gen.Event.Control   = onMouse(l, real.onDragDetectedProperty)
+  def onDragDetected     [U](l: Fx.Event.Mouse => U)      : gen.event.Control   = onMouse(l, real.onDragDetectedProperty)
   def onDragDone         [U](l: Fx.Event.Drag  => U)      : Gen.Event.Control   = onDrag(l, real.onDragDoneProperty)
   def onDragDropped      [U](l: Fx.Event.Drag  => U)      : Gen.Event.Control   = onDrag(l, real.onDragDroppedProperty)
   def onDragEntered      [U](l: Fx.Event.Drag  => U)      : Gen.Event.Control   = onDrag(l, real.onDragEnteredProperty)

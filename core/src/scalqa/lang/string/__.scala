@@ -1,6 +1,6 @@
 package scalqa; package lang; import language.implicitConversions
 
-object String extends AnyRef.Containers[String]:
+object String extends AnyRef.G.Containers[String]:
   val ordering          : Ordering[String] = summon[Ordering[String]]
   val orderingIgnoreCase: Ordering[String] = string.z.Ordering.IgnoreCase
 

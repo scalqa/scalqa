@@ -29,6 +29,11 @@ object Registry:
     val id = v.dri.id
     if(!id.real.startsWith("scalqa")) return false
     members.put(id,v)
+    def put(revise: String => String) = { Id(revise(id.toString)).?.drop(_ == id).forval(members.put(_,v))}
+    put(_.replace("observable","o").replace("mutable","m"))
+    put(_.replace(".val.","."))
+    put(_.replace(".lang.","."))
+    put(_.replace(".gen.","."))
     true
 
   def register(m: Member): Member =

@@ -17,7 +17,7 @@ transparent trait _properties:
   @tn("disable_Pro")          def disable_*                      : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.disableProperty)
   /**/                        def disable                        : Boolean         = real.isDisable;
   /**/                        def disable_=(b: Boolean)          : Unit            = real.setDisable(b)
-  @tn("id_Pro")               def id_*                           : String.Pro.OM   = Fx.JavaFx.To.pro_OM(real.idProperty)
+  @tn("id_Pro")               def id_*                           : Pro.OM[String]  = Fx.JavaFx.To.pro_OM(real.idProperty)
   /**/                        def id                             : String          = real.getId;
   /**/                        def id_=(b: String)                : Unit            = real.setId(b)
   @tn("layoutX_Pro")          def layoutX_*                      : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.layoutXProperty)
@@ -61,7 +61,7 @@ transparent trait _properties:
   @tn("visible_Pro")          def visible_*                      : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.visibleProperty)
   /**/                        def visible                        : Boolean         = real.isVisible;
   /**/                        def visible_=(b: Boolean)          : Unit            = real.setVisible(b)
-  @tn("style_Pro")            def style_*                        : Style.Pro.OM    = Fx.JavaFx.To.pro_OM(real.styleProperty).mutableMap_^[Style]
+  @tn("style_Pro")            def style_*                        : Pro.OM[Style]   = Fx.JavaFx.To.pro_OM(real.styleProperty).mutableMap_^[Style]
   /**/                        def style                          : Style           = real.getStyle;
   /**/                        def style_=(s: Style)              : Unit            = real.setStyle(s.^.?.map(_.toString) or "")
 /*___________________________________________________________________________

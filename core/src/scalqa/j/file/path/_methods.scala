@@ -35,8 +35,8 @@ transparent trait _methods:
     @tn("index_Opt")            def index_?(p: Path)                     : Int.Opt     = path.Z.indexOfOpt(x.real, p)
     /**/                        def join(v: Path | String)               : Path        = path.Z.join(x, v)
     /**/                        def joinAll(v: ~[Path | String])         : Path        = v.map(Path.any(_).real).fold(x.real)(_ resolve _)
-    @tn("_join")         inline def + (inline v: Path | String)          : Path        = x.join(v)
-    @tn("_joinAll")      inline def ++(inline v: ~[Path | String])       : Path        = x.joinAll(v)
+    @tn("join")          inline def + (inline v: Path | String)          : Path        = x.join(v)
+    @tn("joinAll")       inline def ++(inline v: ~[Path | String])       : Path        = x.joinAll(v)
     @tn("take_Range")           def take_<>(start: Int, size: Int)       : Path        = if(x.root_?.isEmpty || start > 0) x.real.subpath(start, start + size)
       /**/                                                                                  else (0 <>> x.size - start - size).~.foldAs(x.real)((v, _) => v.getParent) // keeping root
     @tn("take_Range")           def take_<>(r: Int.<>)                   : Path        = x.take_<>(r.start,r.size)

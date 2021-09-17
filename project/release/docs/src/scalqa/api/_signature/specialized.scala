@@ -5,8 +5,6 @@ object specialized:
 
   def apply(m:Member, x: Signature) : Signature = if(x.isEmpty) x else adjustType(m,dropOpt(m,x))
 
-    //">>>>>>>>>>>>>>>>>" +m.dri.tag +" \n" + v.~.map(_.toStr).tag +" \n"  + s.~.map(_.toStr).tag +" \n---------------------------------" tp()
-
   def dropOpt(m:Member, x: Signature) : Signature = if(m.name.equalsIgnoreCase("map_?")) x.~.dropSequenceBy(_.toStr.trim,SPEC_OPT).toSeq else x
 
   def adjustType(m:Member, x: Signature) : Signature =

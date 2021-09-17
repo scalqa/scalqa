@@ -1,6 +1,6 @@
 package scalqa; package fx; package control; package text; package field; import language.implicitConversions
 
-class Number protected (columns: Opt[Int] = \/, value: String.Opt = \/) extends Text.Field(columns, value):
+class Number protected (columns: Opt[Int] = \/, value: Opt[String]= \/) extends Text.Field(columns, value):
   var negativeAllowed = true
   onChange(c => try { if (c.textAfter.toDouble < 0 && !negativeAllowed) c.text_=(\/) } catch { case _: Exception => c.text_=(\/) })
 
@@ -9,7 +9,7 @@ class Number protected (columns: Opt[Int] = \/, value: String.Opt = \/) extends 
 
 object Number:
   def apply(value: String)                                  : Number = new Number(\/, value)
-  def apply(columns: Opt[Int] = \/, value: String.Opt = \/) : Number = new Number(columns, value)
+  def apply(columns: Opt[Int] = \/, value: Opt[String]= \/) : Number = new Number(columns, value)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

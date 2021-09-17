@@ -8,7 +8,7 @@ transparent trait _properties:
   @tn("animated_Pro")         def animated_*                      : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.animatedProperty)
   /**/                        def animated                        : Boolean         = real.getAnimated
   /**/                        def animated_=(b: Boolean)          : Unit            = real.setAnimated(b)
-  @tn("label_Pro")            def label_*                         : String.Pro.OM   = Fx.JavaFx.To.pro_OM(real.labelProperty)
+  @tn("label_Pro")            def label_*                         : Pro.OM[String]  = Fx.JavaFx.To.pro_OM(real.labelProperty)
   /**/                        def label                           : String          = real.getLabel
   /**/                        def label_=(v: String)              : Unit            = real.setLabel(v)
   @tn("ticksGap_Pro")         def ticksGap_*                      : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.tickLabelGapProperty)

@@ -16,7 +16,7 @@ class Action(label: String = \/) extends Abstract.Delegate.Gui:
 
   /**/               def text                             : String            = real.getText
   /**/               def text_=(v: String)                : Unit              = real.setText(v)
-  @tn("text_Pro")    def text_*                           : String.Pro.OM     = Fx.JavaFx.To.pro_OM(real.textProperty)
+  @tn("text_Pro")    def text_*                           : Pro.OM[String]    = Fx.JavaFx.To.pro_OM(real.textProperty)
 
   /**/               def enable                           : Boolean           = !real.isDisable
   /**/               def enable_=(b: Boolean)             : Unit              = real.setDisable(!b)

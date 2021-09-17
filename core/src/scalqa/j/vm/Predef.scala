@@ -11,7 +11,7 @@ object Predef:
          with int._methods     with long._methods  with float._methods   with double._methods
          with scalqa.gen.math.z.Ordering._methods
 
-  given given_Lib: GlobalExtensionLibrary.type = scalqa.J.illegalState("All library methods must be inlined") // do not inline this "given"
+  given zzGlobalExtensionLibrary: GlobalExtensionLibrary.type = scalqa.J.illegalState("All library methods must be inlined") // do not inline this "given"
 
   inline given givenByteMath   : Byte  .G.Math[Byte  ] = Byte  .math
   inline given givenCharMath   : Char  .G.Math[Char  ] = Char  .math

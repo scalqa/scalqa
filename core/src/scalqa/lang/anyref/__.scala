@@ -5,7 +5,7 @@ object AnyRef:
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Buffer[A]     = anyref.Buffer[A];
-  type Containers[A] = anyref.Containers[A];   transparent inline def Containers = anyref.Containers
+  /**/                                         transparent inline def G          = anyref.G
   type Opaque        = anyref.Opaque.TYPE.DEF; transparent inline def Opaque     = anyref.Opaque;
 
 package object anyref:

@@ -1,6 +1,6 @@
 package scalqa; package lang; package int; package g; import language.implicitConversions
 
- trait Pro[A<:Raw] extends Val.Pro[A] with any.z.PrimitiveTag.Int:
+trait Pro[A<:Raw] extends Val.Pro[A] with any.z.PrimitiveTag.Int:
   def apply(): A
 
 object Pro:

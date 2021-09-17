@@ -1,15 +1,16 @@
 package scalqa; package lang; package short; import language.implicitConversions
 
 object G:
-  /**/                                                                                      transparent inline def Containers = g.Containers
+  /**/          type Containers[A<:Raw]      = g.Containers[A];                       transparent inline def Companion  = g.Companion
   @tn("Stream") type ~         [A<:Raw]      = g.Stream[A];             @tn("Stream") transparent inline def ~          = g.Stream
   @tn("Range")  type <>        [A<:Raw]      = g.Range[A];              @tn("Range")  transparent inline def <>         = Range
   @tn("Pack")   type ><        [A<:Raw]      = g.Pack[A];               @tn("Pack")   transparent inline def ><         = g.Pack
-  /**/          type Opt       [A<:Raw]      = g.Opt.TYPE.DEF[A];                  transparent inline def Opt        = g.Opt
+  /**/          type Opt       [A<:Raw]      = g.Opt.TYPE.DEF[A];                     transparent inline def Opt        = g.Opt
   /**/          type Buffer    [A<:Raw]      = g.Buffer[A];                           transparent inline def Buffer     = g.Buffer
   /**/          type Collection[A<:Raw]      = g.Collection[A];                       transparent inline def Collection = g.Collection
   /**/          type Idx       [A<:Raw]      = g.Idx[A];                              transparent inline def Idx        = g.Idx
   /**/          type Lookup    [A<:Raw,B]    = g.Lookup[A,B];                         transparent inline def Lookup     = g.Lookup
+  /**/          type Set       [A<:Raw]      = g.Set[A];                              transparent inline def Set        = g.Set
   /**/          type Pro       [A<:Raw]      = g.Pro[A];                              transparent inline def Pro        = g.Pro
   /**/                                                                                transparent inline def Fun        = g.Fun
   /**/          type Math[A<:Raw]            = g.Math[A];                             transparent inline def Math       = g.Math
