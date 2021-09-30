@@ -1,11 +1,11 @@
 package scalqa; package fx; package scene; package chart; package axis; package x; import language.implicitConversions
 
-abstract class Value[A](val map: ReversibleFunction[A, Double]) extends Chart.Axis[A]:
+abstract class Value[A](val map: TwoWayFunction[A, Double]) extends Chart.Axis[A]:
   type VALUE = Number
   override protected type REAL <: javafx.scene.chart.ValueAxis[Number]
 
-  lazy  val valueMap : ReversibleFunction[A, Number] = ReversibleFunction(map(_), n => map.undo(n.doubleValue))
-  /**/  val ordering : Ordering[A]          = Double.ordering.on(map(_))
+  lazy  val valueMap : TwoWayFunction[A, Number] = TwoWayFunction(map(_), n => map.undo(n.doubleValue))
+  /**/  val ordering : Ordering[A]               = Double.ordering.on(map(_))
 
   @tn("lowerBound_Pro")       def lowerBound_*                   : Pro.OM[A]       = Fx.JavaFx.To.pro_OM(real.lowerBoundProperty).mutableMap_^(using map.reverse)
   /**/                        def lowerBound                     : A               = map.undo(real.getLowerBound)

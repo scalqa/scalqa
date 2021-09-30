@@ -41,7 +41,7 @@ ___________________________________________________________________________*/
 
     object Foo:
       val void = new Foo with Void
-      implicit inline def implicitFrom(v: \/): Foo = void
+      implicit inline def implicitRequest(v: \/): Foo = void
 
     // Standard void assignment is:
     val v: Foo = \/

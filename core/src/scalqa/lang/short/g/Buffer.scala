@@ -1,38 +1,43 @@
 package scalqa; package lang; package short; package g; import language.implicitConversions
 
-class Buffer[A<:Raw](arrayToUse: Array[Short], sizeToStartWith: Int) extends Val.Buffer[A] with Idx.Mutable[A]:
-  protected type ARRAY_TYPE = Short
-  def this(initSize: Int) = this(new Array[Short](initSize),0)
-  def this()              = this(J.initSize)
-  def this(v: Val.~[A])   = {this(v.size_? or J.initSize); addAll(v)}
+class Buffer[A<:Raw](arrayToUse: Array[Primitive], sizeToStartWith: Int) extends Val.Buffer[A] with Idx.Mutable[A]:
+  protected type ARRAY_TYPE = Primitive
+  def this(initSize: Int)   = this(new Array[Primitive](initSize),0)
+  def this()                = this(J.initSize)
+  def this(v: Val.~[A])     = { this(v.size_? or J.initSize); addAll(v) }
 
-  private               var ar                              : Array[Short]   = arrayToUse
-  private               var sz                              : Int            = sizeToStartWith
-  protected             def array                           : Array[Short]   = ar
-  protected             def array_=(v: Array[Short])        : Unit           = ar = v
-  protected             def size_=(v:Int)                   : Unit           = sz = v
-  protected      final  def mkSpace(sz:Int)                 : Unit           = ar=ar.copySize(ar.length * 2 max sz)
-  private[scalqa]       def addAllRef(v: Val.~[A])          : Unit           = {v.size_?.forval(i=>{val s=i+sz; if(ar.length<s) mkSpace(s); for(i <- sz<>>s) ar(i)=v.read_?.cast[Short]; sz=s}); v.FOREACH(add)}
-  private[scalqa]       def addAllRaw(v: Stream[A])         : Unit           = {v.size_?.forval(i=>{val s=i+sz; if(ar.length<s) mkSpace(s); for(i <- sz<>>s) ar(i)=v.readRaw_?.cast[Short]; sz=s}); v.FOREACH(add)}
+  private               var ar                              : Array[Primitive] = arrayToUse
+  private               var sz                              : Int              = sizeToStartWith
+  protected             def array                           : Array[Primitive] = ar
+  protected             def array_=(v: Array[Primitive])    : Unit             = ar = v
+  protected             def size_=(v:Int)                   : Unit             = sz = v
+  protected      final  def mkSpace(sz:Int)                 : Unit             = ar=ar.copySize(ar.length * 2 max sz)
+  private[scalqa]       def addAllRef(v: Val.~[A])          : Unit             = {v.size_?.forval(i=>{val s=i+sz; if(ar.length<s) mkSpace(s); for(i <- sz<>>s) ar(i)=v.read_?.`val`; sz=s}); v.FOREACH(add)}
+  private[scalqa]       def addAllRaw(v: Stream[A])         : Unit             = {v.size_?.forval(i=>{val s=i+sz; if(ar.length<s) mkSpace(s); for(i <- sz<>>s) ar(i)=v.readRaw_?.`val`; sz=s}); v.FOREACH(add)}
   // ----------------------------------------------------------------------------------------------------------------------------------------------
-  /**/                  def apply(i: Int)                   : A              = ar(i).cast[A]
-  /**/                  def size                            : Int            = sz
-  @tn("stream")override def ~                               : Stream[A]      = lang.array.z.As.ShortStream(ar,sz)
-  /**/         override def add(v: A)                       : Unit           = { if(ar.length<=sz) mkSpace(sz+1); ar(sz)=v; sz+=1}
-  /**/         override def addAt(i: Int, v: A)             : Unit           = { if(ar.length<=sz) mkSpace(sz+1); ar.copyTo(ar,i+1,i,sz-i); ar(i)=v; sz+=1 }
-  /**/         override def updateAt(i: Int, v: A)          : Unit           = ar(i) = v
-  /**/         override def contains(v: A)                  : Boolean        = lang.array.z.contains.short(ar,v,sz)
-  /**/         override def sort      (using o: Ordering[A]): Unit           = ar.sort_<>(0,sz)(using o.cast[Ordering[Short]])
-  @tn("pack")  override def ><                              : Pack[A]        = Pack.fromArray(ar,sz)
+  /**/                  def apply(i: Int)                   : A                = ar(i).cast[A]
+  /**/                  def size                            : Int              = sz
+  @tn("stream")override def ~                               : Stream[A]        = Z.Stream_ofArray(ar,sz)
+  /**/         override def add(v: A)                       : Unit             = { if(ar.length<=sz) mkSpace(sz+1); ar(sz)=v; sz+=1}
+  /**/         override def addAt(i: Int, v: A)             : Unit             = { if(ar.length<=sz) mkSpace(sz+1); ar.copyTo(ar,i+1,i,sz-i); ar(i)=v; sz+=1 }
+  /**/         override def updateAt(i: Int, v: A)          : Unit             = ar(i) = v
+  /**/         override def sort      (using o: Ordering[A]): Unit             = ar.sort_<>(0,sz)(using o.cast[Ordering[Primitive]])
+  @tn("pack")  override def ><                              : Pack[A]          = Pack.fromArray(ar,sz)
+  /**/         override def contains(v: A)                  : Boolean          = lang.array.z.contains.short(ar,v,sz)
 
 object Buffer:
-  /**/            def accessible[A<:Raw](use: Array[Short], usedSize: Int) : Buffer[A] & Able.Access[Array[Short]] = zAccessible[A](use,usedSize)
-  /**/     inline def accessible[A<:Raw](inline initSize: Int = J.initSize): Buffer[A] & Able.Access[Array[Short]] = accessible(new Array[Short](initSize),0)
-  implicit inline def implicitFrom[A<:Raw](v: NEW)                         : Buffer[A]                             = new Buffer()
+  implicit inline def implicitRequest[A<:Raw](v: NEW)                      : Buffer[A]                             = new Buffer()
 
-  // ************************************************************************************************************************
-  private class zAccessible[A<:Raw](a: Array[Short], s: Int) extends Buffer[A](a,s) with Able.Access[Array[Short]]:
-    def access: Array[Short] = super.array
+  def zzStreamToArray(v: G.~[Primitive])                               : Array[Primitive] = new Buffer(v).^.map(b => b.ar.^.mapIf(_.length!=b.size, _.copySize(b.size)))
+  def zzArrayJoinAll (x:Array[Primitive],v: ~[Primitive])              : Array[Primitive] = new Buffer(x,x.length).^(_ ++= v).^.map(b => b.ar.^.mapIf(a => a.length!=b.size || (a eq x), _.copySize(b.size)))
+  def zzArrayJoinAllAt(x:Array[Primitive],i:Int,v: ~[Primitive],sz:Int): Array[Primitive] = new Buffer(new Array[Primitive](v.size_?.map(_ + sz) or i+J.initSize),i).^(_ ++= v).^.map(b => {
+      var a=b.ar
+      val s=b.size+sz-i
+      if(a.length != s) a=a.copySize(s)
+      x.copyTo(a,0,0,i)
+      x.copyTo(a,b.size,i,sz-i)
+      a
+    })
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

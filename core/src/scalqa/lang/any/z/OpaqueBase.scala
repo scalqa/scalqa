@@ -7,16 +7,16 @@ abstract class OpaqueBase[A<: Any.Opaque]private[lang](name: String, ct: ClassTa
   def value_tag(v: A)   : String
   def value_doc(v: A)   : Doc
 
-  given givenNameDef    : Any.Def.TypeName[A]       = self
-  given givenDocDef     : Any.Def.Doc[A]   = self
-  given givenClassTag   : ClassTag[A]      = ct
-  given givenCanEqual   : CanEqual[A,A]    = CanEqual.derived
+  given zzNameDef : Any.Def.TypeName[A] = self
+  given zzDoc     : Any.Def.Doc[A]      = self
+  given zzClassTag: ClassTag[A]         = ct
+  given zzCanEqual: CanEqual[A,A]       = CanEqual.derived
 
   // -------------------------------------------------------------------------------------------------------------------------------------
   private var ck = -1 // Checking if `doc` is called from `value_tag` (it may be overridden), if not, `value_tag` value is included in doc
   private[scalqa] def default_doc(v: A)   : Doc =
     if(ck<0) self.synchronized{ if(ck<0){ if(ck== -1){ ck= -2; value_tag(v); if(ck!=1) ck=0} else ck=1 }}
-    val tg = ZZ.Def.value_tag(v)
+    val tg = ZZ.Any.value_tag(v)
     Doc(typeName+"@"+v.self_^.hash)
       ++= value_isVoid(v) ? ("","Void") += ("opaque",(v:Any).^.typeName+"("+tg+")")
       ++= ((ck==0) ? value_tag(v)).dropOnly(tg).map(v=>("tag",v))
@@ -59,7 +59,7 @@ ___________________________________________________________________________*/
 
     If type supports void instances, then following inmpelentation should be added in most cases:
     ```
-      implicit inline def implicitFrom(v: \/): OPAQUE_TYPE
+      implicit inline def implicitRequest(v: \/): OPAQUE_TYPE
     ```
 @def real -> Real value
 

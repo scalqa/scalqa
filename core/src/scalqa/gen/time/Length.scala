@@ -9,7 +9,7 @@ object Length extends Long.Opaque.Data.Calculable[Length]("Time.Length") with x.
   override        def value_isVoid(v: Length) : Boolean = v.real==0L
   override        def value_tag(v: Length)    : String  = z.formatLength(v,false)
 
-  implicit inline def implicitFrom(v: \/)     : Length  = fromNanos(0L)
+  implicit inline def implicitRequest(v: \/)     : Length  = fromNanos(0L)
 
   extension(x: Length)
     /**/          def tagBrief                : String  = z.formatLength(x, true)

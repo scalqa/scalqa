@@ -1,24 +1,28 @@
 package scalqa; package `val`; package stream; package _build; import language.implicitConversions
 
-import z._build.{ _map => M }
+import z._build.{ _map => Z }
 
 transparent trait _map:
   self: Stream.type =>
 
   extension[A](inline x: ~[A])
-    /**/            inline def map     [T](inline f: A => T)              (using inline T:Specialized[T]): T.~  = M.map(x,f)
-    /**/            inline def MAP     [T](inline f: A => T)              (using inline T:Specialized[T]): T.~  = M.map.APPLY(x,f)
+    /**/            inline def map     [B](inline f: A => B)              (using inline B:Specialized[B]): B.~     = Z.map(x,f)
+    /**/            inline def MAP     [B](inline f: A => B)              (using inline B:Specialized[B]): B.~     = Z.map.APPLY(x,f)
 
-    /**/            inline def flatMap [T](inline f: A => ~[T])           (using inline T:Specialized[T]): T.~  = M.flatMap(x,f)
-    /**/            inline def FLAT_MAP[T](inline f: A => ~[T])           (using inline T:Specialized[T]): T.~  = M.flatMap.APPLY(x,f)
+    /**/            inline def mapIf(inline condition:A=>Boolean,inline fun:A=>A)                        : ~[A]    = x.map[A](v => if(condition(v)) fun(v) else v)
 
-    /**/            inline def flatten [T]   (using inline f:A=>Able.~[T])(using inline T:Specialized[T]): T.~  = M.flatMap(x,f(_).~)
-    /**/            inline def collect [T](inline f: PartialFunction[A,T])                               : ~[T] = new M.collect(x,f)
+    /**/            inline def flatMap [B](inline f: A => ~[B])           (using inline B:Specialized[B]): B.~     = Z.flatMap(x,f)
+    /**/            inline def FLAT_MAP[B](inline f: A => ~[B])           (using inline B:Specialized[B]): B.~     = Z.flatMap.APPLY(x,f)
 
-    @tn("map_Opt")  inline def map_?   [T,OPT<:Any.Opt[T]](inline f: A=>OPT)
-                                          (using inline o:Specialized.Opt[T,OPT],inline T:Specialized[T]): T.~ = M.mapOpt(x,f)
-    @tn("MAP_Opt")  inline def MAP_?   [T,OPT<:Any.Opt[T]](inline f: A=>OPT)
-                                          (using inline o:Specialized.Opt[T,OPT],inline T:Specialized[T]): T.~ = M.mapOpt.APPLY(x,f)
+    @tn("map_Opt")  inline def map_?   [B,OPT<:Any.Opt[B]](inline f: A=>OPT)
+                                          (using inline o:Specialized.Opt[B,OPT],inline B:Specialized[B]): B.~    = Z.mapOpt(x,f)
+    @tn("MAP_Opt")  inline def MAP_?   [B,OPT<:Any.Opt[B]](inline f: A=>OPT)
+                                          (using inline o:Specialized.Opt[B,OPT],inline B:Specialized[B]): B.~    = Z.mapOpt.APPLY(x,f)
+
+    /**/            inline def collect[B](inline f: PartialFunction[A,B])                                : ~[B]   = new Z.collect(x,f)
+
+    /**/            inline def flatten [B]             (using d: Any.Def.ToStream[A,B], B:Specialized[B]): B.~    = x.flatMap(d.value_toStream)
+
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -28,6 +32,16 @@ transparent trait _map:
 ___________________________________________________________________________*/
 /**
 @trait _map -> ### Stream Element Mapping Interface
+
+@def mapIf -> Conditional map
+
+     This is a synthetic oeration which is inlined as:
+
+    ```
+    map(v => if(condition(v)) fun(v) else v)
+    ```
+
+    In some cicumstances using "mapIf" does not make sense, in some it is really usefull.
 
 @def map -> Simple map
 
@@ -56,7 +70,7 @@ ___________________________________________________________________________*/
      ~(Even_2, Even_4, Even_6, Even_8, Even_10)
      ```
 
-     Pattern matching can be used, but the last void case must always be pivided explicitly:
+     Pattern matching can be used, but the last void case must always be provided explicitly:
      ```
      (0 <>> 26).~.map_?{
        case i if(i % 2 == 0) => ('a' + i).toChar
@@ -93,6 +107,8 @@ ___________________________________________________________________________*/
       [[FLAT_MAP]] is functionally equivalent to [[flatMap]], but is fully inlined. It makes compiled code larger, but guarantees the best possible performance on large streams.
 
 @def flatten -> Converts a stream of streams into a flat stream
+
+     The operation will only compile if stream elements are streams or stream convertible entities, like [[scalqa.gen.able.Stream Able.~]], Iterable, Iterator, etc.
 
      ```
       val vs: ~[~[Char]] = ~~(

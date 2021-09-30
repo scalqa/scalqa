@@ -4,9 +4,9 @@ import J.File
 import java.io.{ File as REAL}
 
 object File extends AnyRef.Opaque.Base[J.File,REAL]("File"):
-  inline          def apply(inline v: REAL)        : File      = v.toOpaque
-  override        def value_tag(v: File)           : String    = v.path.toString
-  implicit inline def implicitFrom(inline v: REAL) : File      = v.toOpaque
+  inline          def apply(inline v: REAL)          : File      = v.toOpaque
+  override        def value_tag(v: File)             : String    = v.path.toString
+  implicit inline def implicitFromReal(inline v:REAL): File      = v.toOpaque
 
   extension (inline x: File)
     inline def name                                : String    = x.real.getName

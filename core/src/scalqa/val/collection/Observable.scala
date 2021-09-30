@@ -1,9 +1,9 @@
 package scalqa; package `val`; package collection
 
 trait Observable[A] extends Collection[A] with gen.event.Observable:
-  /**/      def onAdd             [U](l: A  => U): Event.Control
-  /**/      def onRemove          [U](l: A  => U): Event.Control
-  protected def onObservableChange[U](l: () => U): Event.Control = Z.onObservableChange(this,l)
+  def onAdd             [U](l: A  => U): Event.Control
+  def onRemove          [U](l: A  => U): Event.Control
+  def onObservableChange[U](l: () => U): Event.Control = Z.onObservableChange(this,l)
 
 object Observable
 

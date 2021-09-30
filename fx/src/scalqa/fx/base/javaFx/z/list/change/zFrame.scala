@@ -7,12 +7,12 @@ private abstract class zFrame[A](l: JFX.ObservableList[A]) extends JFX.ListChang
   def change:  Idx.O.Event[A]
 
   override def wasPermutated = false
-  override def wasAdded = false
-  override def wasRemoved = false
-  override def wasReplaced = false
-  override def wasUpdated = false
+  override def wasAdded      = false
+  override def wasRemoved    = false
+  override def wasReplaced   = false
+  override def wasUpdated    = false
 
-  def getPermutation: Array[Int] = Int.emptyArray
+  def getPermutation: Array[Int] = Array.emptyInt
   def getRemoved(): java.util.List[A] = \/
 
   override lazy  val getFrom = change.range.start

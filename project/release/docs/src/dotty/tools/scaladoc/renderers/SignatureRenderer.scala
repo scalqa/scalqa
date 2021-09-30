@@ -32,8 +32,8 @@ trait SignatureRenderer:
       case _ => unresolvedLink(content, modifiers:_*)
 
 
-  def renderElementWith(e: String | (String, DRI) | Link, owner: Opt[Member] = \/, heading: Boolean = false, modifiers: AppliedAttr*) = e match
-    case (name, dri) => J.unsupportedOperation() //renderLink("!!"+dri.scalqaLabel(name), dri, modifiers *)
+  def renderElementWith(e: String | (String, DRI) | Link, short: Boolean=true, modifiers: AppliedAttr*) = e match
+    case (name, dri) => J.unsupportedOperation() //renderLink("!!"+dri.scalqaLabel(), dri, modifiers *)
     case name: String => raw(name)
     case l: Link =>
-      renderLink(l.asLabel(owner,heading), l.dri, modifiers *)
+      renderLink(l.asLabel(short), l.dri, modifiers *)

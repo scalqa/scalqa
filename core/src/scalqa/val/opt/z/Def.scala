@@ -4,9 +4,9 @@ object Def extends Any.Def.Void[Opt[Any]] with Any.Def.Empty[Opt[Any]]:
   inline def value_isVoid( v:Opt[Any]) = v.isEmpty
   inline def value_isEmpty(v:Opt[Any]) = v.isEmpty
 
-  class Doc[A :Any.Def.Doc] extends Any.Def.Doc[Opt[A]]:
-    def value_tag(v: Opt[A]) = "Opt(" + v.map(_.tag).or("\\/") + ")"
+  class Doc[A :Any.Def.Tag] extends Any.Def.Doc[Opt[A]]:
     def value_doc(v: Opt[A]) = Gen.Doc("Opt") += ("value", v.map(_.tag).or("\\/"))
+    def value_tag(v: Opt[A]) = "Opt(" + v.map(_.tag).or("\\/") + ")"
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

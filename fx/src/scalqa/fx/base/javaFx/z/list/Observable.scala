@@ -5,8 +5,8 @@ class Observable[A](val real: Idx.O[A]) extends Base[A]:
   def get(i: Int) = real(i)
   def size        = real.size
 
-  def addListener(   l: javafx.beans.InvalidationListener)             : Unit = Gen.Observable.onObservableChange(real)(Gen.Event.Id.make0(l, () => l.invalidated(Observable.this)))
-  def removeListener(l: javafx.beans.InvalidationListener)             : Unit = Gen.Observable.onObservableChange(real)(Gen.Event.Id.cancel0(l))
+  def addListener(   l: javafx.beans.InvalidationListener)             : Unit = real.onObservableChange(Gen.Event.Id.make0(l, () => l.invalidated(Observable.this)))
+  def removeListener(l: javafx.beans.InvalidationListener)             : Unit = real.onObservableChange(Gen.Event.Id.cancel0(l))
 
   def addListener(   l: javafx.collections.ListChangeListener[_ >: A]) : Unit = real.onChange(Gen.Event.Id.make1(l,Listener(l)))
   def removeListener(l: javafx.collections.ListChangeListener[_ >: A]) : Unit = real.onChange(Gen.Event.Id.cancel1(l))

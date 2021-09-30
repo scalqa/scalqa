@@ -4,14 +4,14 @@ class map[A,B](x: Stream[A], f: A=>B) extends z.x.Map      [B](x):
   @tn("read_Opt") def read_? = x.read_?.map(f(_))
 
 object map:
-  class toBoolean[A](x:Stream[A], f: Boolean.Fun.FromAny[A]) extends z.x.Map.AsBoolean(x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.map(f(_))}
-  class toByte   [A](x:Stream[A], f: Byte   .Fun.FromAny[A]) extends z.x.Map.AsByte   (x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.map(f(_))}
-  class toChar   [A](x:Stream[A], f: Char   .Fun.FromAny[A]) extends z.x.Map.AsChar   (x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.map(f(_))}
-  class toShort  [A](x:Stream[A], f: Short  .Fun.FromAny[A]) extends z.x.Map.AsShort  (x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.map(f(_))}
-  class toInt    [A](x:Stream[A], f: Int    .Fun.FromAny[A]) extends z.x.Map.AsInt    (x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.map(f(_))}
-  class toLong   [A](x:Stream[A], f: Long   .Fun.FromAny[A]) extends z.x.Map.AsLong   (x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.map(f(_))}
-  class toFloat  [A](x:Stream[A], f: Float  .Fun.FromAny[A]) extends z.x.Map.AsFloat  (x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.map(f(_))}
-  class toDouble [A](x:Stream[A], f: Double .Fun.FromAny[A]) extends z.x.Map.AsDouble (x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.map(f(_))}
+  class toBoolean[A](x:Stream[A], f: AnyRef.G.Fun.ToBoolean[A]) extends z.x.Map.AsBoolean(x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.map(f(_))}
+  class toByte   [A](x:Stream[A], f: AnyRef.G.Fun.ToByte   [A]) extends z.x.Map.AsByte   (x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.map(f(_))}
+  class toChar   [A](x:Stream[A], f: AnyRef.G.Fun.ToChar   [A]) extends z.x.Map.AsChar   (x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.map(f(_))}
+  class toShort  [A](x:Stream[A], f: AnyRef.G.Fun.ToShort  [A]) extends z.x.Map.AsShort  (x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.map(f(_))}
+  class toInt    [A](x:Stream[A], f: AnyRef.G.Fun.ToInt    [A]) extends z.x.Map.AsInt    (x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.map(f(_))}
+  class toLong   [A](x:Stream[A], f: AnyRef.G.Fun.ToLong   [A]) extends z.x.Map.AsLong   (x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.map(f(_))}
+  class toFloat  [A](x:Stream[A], f: AnyRef.G.Fun.ToFloat  [A]) extends z.x.Map.AsFloat  (x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.map(f(_))}
+  class toDouble [A](x:Stream[A], f: AnyRef.G.Fun.ToDouble [A]) extends z.x.Map.AsDouble (x){ @tn("readRaw_Opt") def readRaw_? = x.read_?.map(f(_))}
 
   inline def apply[A,B](inline x:Stream[A], inline f: A=>B)(using inline B:Specialized[B]): B.~ = inline B match
     case _ : Specialized[B & Any.Boolean] => toBoolean(x,f(_).cast[Boolean]).cast[B.~]

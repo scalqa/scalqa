@@ -12,9 +12,9 @@ object Docs:
                       case "Result"                            => name == "withFilter" || name == "foreach" || name == "flatMap"
                       case "Promise"                           => name == "withFilter" || name == "foreach" || name == "flatMap"
                       case "Collection"                        => name == "withFilter" || name == "foreach" || name == "flatMap" || name == "map"
-                      case "ReversibleFunction"                => name == "andThen"    || name == "compose"
+                      case "TwoWayFunction"                    => name == "andThen"    || name == "compose"
                       case "Ordering" if owner.kind.isTypeLike => name.startsWith("thenComparing") || !name.in("compare","compare_?","reverse","on","join","+","map") && !name.contains("^")
-                      case _                                   => false
+                      case _                                   => name == "toOpaque"
     }
 
   def isTypeLikeAlias(m: Member): Boolean =

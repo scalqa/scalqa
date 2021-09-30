@@ -1,8 +1,8 @@
 package scalqa; package `val`; package pro; import language.implicitConversions
 
 trait Observable[+A] extends Pro[A] with gen.event.Observable:
-  /**/      def onChange          [U](l: () => U): Event.Control
-  protected def onObservableChange[U](l: () => U): Event.Control = onChange(l)
+  def onChange          [U](l: () => U): Event.Control
+  def onObservableChange[U](l: () => U): Event.Control = onChange(l)
 
 object Observable:
   def apply[A](v: => A, dependencies: ~[Gen.Observable] = \/)                          : Observable[A]                            = X.Basic[A](v, dependencies)

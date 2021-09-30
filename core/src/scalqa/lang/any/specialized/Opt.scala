@@ -1,7 +1,7 @@
 package scalqa; package lang; package any; package specialized; import language.implicitConversions
 
 abstract class Opt[A,OPT<:Any.Opt[A]]:
-  inline def apply[T](inline v: T, inline f:T=>OPT): Any.Opt[A]
+  inline def apply[B](inline v: B, inline f:B=>OPT): Any.Opt[A]
 
 object Opt extends zOptDefault:
   inline given givenBooleanOpt   [A<:Any.Boolean ]: X.BooleanRaw[A] = new X.BooleanRaw[A]
@@ -24,24 +24,24 @@ object Opt extends zOptDefault:
   inline given givenValOptAnyRef [A<:scala.AnyRef]: X.AnyRef[A]     = new X.AnyRef[A]
 
   object X:
-    class BooleanRaw[A<:Any.Boolean ] extends Opt[A,Boolean.G.Opt[A]]{ inline def apply[T](inline v:T, inline f:T=>Boolean.G.Opt[A]): Boolean.G.Opt[A] = f(v) }
-    class ByteRaw   [A<:Any.Byte    ] extends Opt[A,Byte   .G.Opt[A]]{ inline def apply[T](inline v:T, inline f:T=>Byte   .G.Opt[A]): Byte   .G.Opt[A] = f(v) }
-    class CharRaw   [A<:Any.Char    ] extends Opt[A,Char   .G.Opt[A]]{ inline def apply[T](inline v:T, inline f:T=>Char   .G.Opt[A]): Char   .G.Opt[A] = f(v) }
-    class ShortRaw  [A<:Any.Short   ] extends Opt[A,Short  .G.Opt[A]]{ inline def apply[T](inline v:T, inline f:T=>Short  .G.Opt[A]): Short  .G.Opt[A] = f(v) }
-    class IntRaw    [A<:Any.Int     ] extends Opt[A,Int    .G.Opt[A]]{ inline def apply[T](inline v:T, inline f:T=>Int    .G.Opt[A]): Int    .G.Opt[A] = f(v) }
-    class LongRaw   [A<:Any.Long    ] extends Opt[A,Long   .G.Opt[A]]{ inline def apply[T](inline v:T, inline f:T=>Long   .G.Opt[A]): Long   .G.Opt[A] = f(v) }
-    class FloatRaw  [A<:Any.Float   ] extends Opt[A,Float  .G.Opt[A]]{ inline def apply[T](inline v:T, inline f:T=>Float  .G.Opt[A]): Float  .G.Opt[A] = f(v) }
-    class DoubleRaw [A<:Any.Double  ] extends Opt[A,Double .G.Opt[A]]{ inline def apply[T](inline v:T, inline f:T=>Double .G.Opt[A]): Double .G.Opt[A] = f(v) }
+    class BooleanRaw[A<:Any.Boolean ] extends Opt[A,Boolean.G.Opt[A]]{ inline def apply[B](inline v:B, inline f:B=>Boolean.G.Opt[A]): Boolean.G.Opt[A] = f(v) }
+    class ByteRaw   [A<:Any.Byte    ] extends Opt[A,Byte   .G.Opt[A]]{ inline def apply[B](inline v:B, inline f:B=>Byte   .G.Opt[A]): Byte   .G.Opt[A] = f(v) }
+    class CharRaw   [A<:Any.Char    ] extends Opt[A,Char   .G.Opt[A]]{ inline def apply[B](inline v:B, inline f:B=>Char   .G.Opt[A]): Char   .G.Opt[A] = f(v) }
+    class ShortRaw  [A<:Any.Short   ] extends Opt[A,Short  .G.Opt[A]]{ inline def apply[B](inline v:B, inline f:B=>Short  .G.Opt[A]): Short  .G.Opt[A] = f(v) }
+    class IntRaw    [A<:Any.Int     ] extends Opt[A,Int    .G.Opt[A]]{ inline def apply[B](inline v:B, inline f:B=>Int    .G.Opt[A]): Int    .G.Opt[A] = f(v) }
+    class LongRaw   [A<:Any.Long    ] extends Opt[A,Long   .G.Opt[A]]{ inline def apply[B](inline v:B, inline f:B=>Long   .G.Opt[A]): Long   .G.Opt[A] = f(v) }
+    class FloatRaw  [A<:Any.Float   ] extends Opt[A,Float  .G.Opt[A]]{ inline def apply[B](inline v:B, inline f:B=>Float  .G.Opt[A]): Float  .G.Opt[A] = f(v) }
+    class DoubleRaw [A<:Any.Double  ] extends Opt[A,Double .G.Opt[A]]{ inline def apply[B](inline v:B, inline f:B=>Double .G.Opt[A]): Double .G.Opt[A] = f(v) }
 
-    class BooleanRef[A<:Any.Boolean ] extends Opt[A,Val.Opt[A]      ]{ inline def apply[T](inline v:T, inline f:T=>Val.Opt[A]      ): Boolean.G.Opt[A] = f(v).raw }
-    class ByteRef   [A<:Any.Byte    ] extends Opt[A,Val.Opt[A]      ]{ inline def apply[T](inline v:T, inline f:T=>Val.Opt[A]      ): Byte   .G.Opt[A] = f(v).raw }
-    class CharRef   [A<:Any.Char    ] extends Opt[A,Val.Opt[A]      ]{ inline def apply[T](inline v:T, inline f:T=>Val.Opt[A]      ): Char   .G.Opt[A] = f(v).raw }
-    class ShortRef  [A<:Any.Short   ] extends Opt[A,Val.Opt[A]      ]{ inline def apply[T](inline v:T, inline f:T=>Val.Opt[A]      ): Short  .G.Opt[A] = f(v).raw }
-    class IntRef    [A<:Any.Int     ] extends Opt[A,Val.Opt[A]      ]{ inline def apply[T](inline v:T, inline f:T=>Val.Opt[A]      ): Int    .G.Opt[A] = f(v).raw }
-    class LongRef   [A<:Any.Long    ] extends Opt[A,Val.Opt[A]      ]{ inline def apply[T](inline v:T, inline f:T=>Val.Opt[A]      ): Long   .G.Opt[A] = f(v).raw }
-    class FloatRef  [A<:Any.Float   ] extends Opt[A,Val.Opt[A]      ]{ inline def apply[T](inline v:T, inline f:T=>Val.Opt[A]      ): Float  .G.Opt[A] = f(v).raw }
-    class DoubleRef [A<:Any.Double  ] extends Opt[A,Val.Opt[A]      ]{ inline def apply[T](inline v:T, inline f:T=>Val.Opt[A]      ): Double .G.Opt[A] = f(v).raw }
-    class AnyRef    [A              ] extends Opt[A,Val.Opt[A]      ]{ inline def apply[T](inline v:T, inline f:T=>Val.Opt[A]      ): Val.Opt[A]       = f(v) }
+    class BooleanRef[A<:Any.Boolean ] extends Opt[A,Val.Opt[A]      ]{ inline def apply[B](inline v:B, inline f:B=>Val.Opt[A]      ): Boolean.G.Opt[A] = f(v).raw }
+    class ByteRef   [A<:Any.Byte    ] extends Opt[A,Val.Opt[A]      ]{ inline def apply[B](inline v:B, inline f:B=>Val.Opt[A]      ): Byte   .G.Opt[A] = f(v).raw }
+    class CharRef   [A<:Any.Char    ] extends Opt[A,Val.Opt[A]      ]{ inline def apply[B](inline v:B, inline f:B=>Val.Opt[A]      ): Char   .G.Opt[A] = f(v).raw }
+    class ShortRef  [A<:Any.Short   ] extends Opt[A,Val.Opt[A]      ]{ inline def apply[B](inline v:B, inline f:B=>Val.Opt[A]      ): Short  .G.Opt[A] = f(v).raw }
+    class IntRef    [A<:Any.Int     ] extends Opt[A,Val.Opt[A]      ]{ inline def apply[B](inline v:B, inline f:B=>Val.Opt[A]      ): Int    .G.Opt[A] = f(v).raw }
+    class LongRef   [A<:Any.Long    ] extends Opt[A,Val.Opt[A]      ]{ inline def apply[B](inline v:B, inline f:B=>Val.Opt[A]      ): Long   .G.Opt[A] = f(v).raw }
+    class FloatRef  [A<:Any.Float   ] extends Opt[A,Val.Opt[A]      ]{ inline def apply[B](inline v:B, inline f:B=>Val.Opt[A]      ): Float  .G.Opt[A] = f(v).raw }
+    class DoubleRef [A<:Any.Double  ] extends Opt[A,Val.Opt[A]      ]{ inline def apply[B](inline v:B, inline f:B=>Val.Opt[A]      ): Double .G.Opt[A] = f(v).raw }
+    class AnyRef    [A              ] extends Opt[A,Val.Opt[A]      ]{ inline def apply[B](inline v:B, inline f:B=>Val.Opt[A]      ): Val.Opt[A]       = f(v) }
 
 private[any] class zOptDefault:
   inline given givenValOpt[A]: Opt.X.AnyRef[A] = new Opt.X.AnyRef[A]

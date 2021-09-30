@@ -1,6 +1,6 @@
 package scalqa; package fx; package scene; package chart; package axis; package x; import language.implicitConversions
 
-class Ints extends x.Numbers[Int](ReversibleFunction(_.toDouble, _.toInt)):
+class Ints extends x.Numbers[Int](TwoWayFunction(_.toDouble, _.toInt)):
   def this(name: String) = { this(); name.^.?.forval(label = _) }
 
 /*___________________________________________________________________________

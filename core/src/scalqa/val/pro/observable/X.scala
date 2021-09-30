@@ -24,7 +24,7 @@ object X:
   class Basic[A](source: => A) extends observable.X.Base[A]:
     def this(source: => A, dependencies: ~[Gen.Observable] = \/) =
       this(source)
-      dependencies.foreach(v => Gen.Observable.onObservableChange(v)(() => fireChange))
+      dependencies.foreach(_.onObservableChange(() => fireChange))
 
     private            var valueOpt : Opt[A] = \/
     /**/               def apply()           = valueOpt or source.^(valueOpt = _)

@@ -17,14 +17,12 @@ object Setup:
   @tn("jsonFormat_Pro")              val jsonFormat_*              : Pro.M[Json.Format]                                 = new PRO(json.z.DefaultFormat)
   @tn("bigDecimalDefaultScale_Pro")  val bigDecimalDefaultScale_*  : Pro.M[Int]                                         = new PRO(64)
   @tn("randomSource_Pro")            val randomSource_*            : Pro.M[J.Random.Source]                             = new PRO(util.Random.Z.JavaUtilSource)
-  @tn("allowListUnpacked_Pro")       val allowUncompactedPack_*    : Pro.M[Boolean]                                     = new PRO(true)
   @tn("tempPath_Pro")                val tempPath_*                : Pro.M[Opt[File.Path]]                              = new PRO(\/)
 
   @tn("tempPath_Opt")     @fast lazy val tempPath_?                : Opt[File.Path]                                     = tempPath_*()
   /**/                    @fast lazy val bigDecimalDefaultScale    : Int                                                = bigDecimalDefaultScale_*()
   /**/                    @fast lazy val arrayInitSize             : Int                                                = arrayInitSize_*()
   /**/                    @fast lazy val defaultExecutionContext   : concurrent.ExecutionContext                        = defaultExecutionContext_*()
-  /**/                    @fast lazy val allowUncompactedPack      : Boolean                                            = allowUncompactedPack_*()
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

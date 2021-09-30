@@ -114,8 +114,8 @@ final class Parser(
     val text = getInline(check("=" * inLevel))
     val outLevel = repeatJump('=', inLevel)
     if (inLevel != outLevel)
-      reportError("unbalanced or unclosed heading")
-    blockEnded("heading")
+      reportError("unbalanced or unclosed short")
+    blockEnded("short")
     Title(text, inLevel)
   }
 

@@ -25,20 +25,6 @@ object Z:
     case a: Array[Short]    => new Short  .G.Buffer(a,s).cast[Buffer[A]]
     case _                  => J.illegalState()
 
-  def accessible[A](a: Array[A], sz: Int): Buffer[A] & Able.Access[Array[A]] =
-    { a match
-      case a: Array[AnyRef]   => lang.anyref   .Buffer.accessible[A](a,sz)
-      case a: Array[Int]      => lang.int    .g.Buffer.accessible(a,sz)
-      case a: Array[Long]     => lang.long   .g.Buffer.accessible(a,sz)
-      case a: Array[Double]   => lang.double .g.Buffer.accessible(a,sz)
-      case a: Array[Boolean]  => lang.boolean.g.Buffer.accessible(a,sz)
-      case a: Array[Byte]     => lang.byte   .g.Buffer.accessible(a,sz)
-      case a: Array[Char]     => lang.char   .g.Buffer.accessible(a,sz)
-      case a: Array[Float]    => lang.float  .g.Buffer.accessible(a,sz)
-      case a: Array[Short]    => lang.short  .g.Buffer.accessible(a,sz)
-      case _                  => J.illegalState()
-    }.cast[Buffer[A] & Able.Access[Array[A]]]
-
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API

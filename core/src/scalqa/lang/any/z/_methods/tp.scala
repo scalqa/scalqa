@@ -15,14 +15,14 @@ transparent trait tp :
   extension(inline x: gen.able.Tag)     inline def tp                            : Unit   = ZZ.tp(x.tag)
   extension(inline x: Unit)             inline def tp                            : Unit   = {val v=x /*need to realize x for side effects*/; ZZ.tp(" ") /*keep one space*/}
 
-  extension[A<:Any.Boolean](inline x:A) inline def tp (using inline d:Def.Doc[A]): Unit   = ZZ.tp(x.cast[Boolean],d)
-  extension[A<:Any.Byte]   (inline x:A) inline def tp (using inline d:Def.Doc[A]): Unit   = ZZ.tp(x.cast[Byte]   ,d)
-  extension[A<:Any.Char]   (inline x:A) inline def tp (using inline d:Def.Doc[A]): Unit   = ZZ.tp(x.cast[Char]   ,d)
-  extension[A<:Any.Short]  (inline x:A) inline def tp (using inline d:Def.Doc[A]): Unit   = ZZ.tp(x.cast[Short]  ,d)
-  extension[A<:Any.Int]    (inline x:A) inline def tp (using inline d:Def.Doc[A]): Unit   = ZZ.tp(x.cast[Int]    ,d)
-  extension[A<:Any.Long]   (inline x:A) inline def tp (using inline d:Def.Doc[A]): Unit   = ZZ.tp(x.cast[Long]   ,d)
-  extension[A<:Any.Float]  (inline x:A) inline def tp (using inline d:Def.Doc[A]): Unit   = ZZ.tp(x.cast[Float]  ,d)
-  extension[A<:Any.Double] (inline x:A) inline def tp (using inline d:Def.Doc[A]): Unit   = ZZ.tp(x.cast[Double] ,d)
+  extension[A<:Any.Boolean](inline x:A) inline def tp (using inline d:Def.Tag[A]): Unit   = ZZ.tp(x.cast[Boolean],d)
+  extension[A<:Any.Byte]   (inline x:A) inline def tp (using inline d:Def.Tag[A]): Unit   = ZZ.tp(x.cast[Byte]   ,d)
+  extension[A<:Any.Char]   (inline x:A) inline def tp (using inline d:Def.Tag[A]): Unit   = ZZ.tp(x.cast[Char]   ,d)
+  extension[A<:Any.Short]  (inline x:A) inline def tp (using inline d:Def.Tag[A]): Unit   = ZZ.tp(x.cast[Short]  ,d)
+  extension[A<:Any.Int]    (inline x:A) inline def tp (using inline d:Def.Tag[A]): Unit   = ZZ.tp(x.cast[Int]    ,d)
+  extension[A<:Any.Long]   (inline x:A) inline def tp (using inline d:Def.Tag[A]): Unit   = ZZ.tp(x.cast[Long]   ,d)
+  extension[A<:Any.Float]  (inline x:A) inline def tp (using inline d:Def.Tag[A]): Unit   = ZZ.tp(x.cast[Float]  ,d)
+  extension[A<:Any.Double] (inline x:A) inline def tp (using inline d:Def.Tag[A]): Unit   = ZZ.tp(x.cast[Double] ,d)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -1,16 +1,16 @@
 package scalqa; package `val`; package collection
 
 trait Mutable[A] extends Collection[A] with Able.Add[A]:
-  /**/              def remove(v: A)       : Int
-  /**/              def removeAll(v: ~[A]) : Int       = v.map(remove).sum
-  /**/              def clear              : Unit
-  /**/              def replaceAll(v: ~[A]): Unit      = { clear; addAll(v) }
-  @tn("remove")     def -= (v: A)          : this.type = { this.remove(v);    this }
-  @tn("removeAll")  def --=(v: ~[A])       : this.type = { this.removeAll(v); this }
+  /**/              def remove(v: A)        : Int
+  /**/              def removeAll(v: ~[A])  : Int       = v.map(remove).sum
+  /**/              def clear               : Unit
+  /**/              def replaceWith(v: ~[A]): Unit      = { clear; addAll(v) }
+  @tn("remove")     def -= (v: A)           : this.type = { this.remove(v);    this }
+  @tn("removeAll")  def --=(v: ~[A])        : this.type = { this.removeAll(v); this }
 
 object Mutable:
-  def apply[A](initSize: Int = J.initSize)           : Collection[A] = Buffer[A](initSize)
-  def uniqueElementSet[A](initSize: Int = J.initSize): Collection[A] = Z.UniqueElementSet(initSize)
+  def apply[A](initSize: Int = J.initSize)       : Collection[A] = Buffer[A](initSize)
+  def noDuplicates[A](initSize: Int = J.initSize): Collection[A] = Z.UniqueElementSet(initSize)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -49,7 +49,7 @@ ___________________________________________________________________________*/
 
     Discards all elements, so the colection size will become 0
 
-@def replaceAll -> Replace everything
+@def replaceWith -> Replace everything
 
     Discards all old elements and adds all provided elements
 

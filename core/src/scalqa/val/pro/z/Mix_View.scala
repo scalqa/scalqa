@@ -2,7 +2,7 @@ package scalqa; package `val`; package pro; package z
 
 private[pro] class Mix_View[A, B, C](p1: Observable[A], p2: Observable[B], f: (A, B) => C) extends pro.X.Base[C] with Observable[C]:
   def apply()                 = f(p1(), p2())
-  def onChange[U](l: () => U) = Event.Control.join(Gen.Observable.onObservableChange(p1)(l), Gen.Observable.onObservableChange(p2)(l))
+  def onChange[U](l: () => U) = Event.Control.join(p1.onObservableChange(l), p2.onObservableChange(l))
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

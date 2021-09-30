@@ -59,7 +59,7 @@ ___________________________________________________________________________*/
         - String token
 
       ```
-         val str: String = (1 <> 40).~.makeString()
+         val str: String = (1 <> 40).~.makeString("")
          "Text to Tokenize:".TP.TP
          str.TP.TP
          ("Token", "Range", "String").TP

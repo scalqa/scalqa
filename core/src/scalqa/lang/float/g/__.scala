@@ -1,18 +1,16 @@
 package scalqa; package lang; package float; import language.implicitConversions
 
 object G:
-  /**/          type Containers[A<:Raw]      = g.Containers[A];                       transparent inline def Companion  = g.Companion
-  @tn("Stream") type ~         [A<:Raw]      = g.Stream[A];             @tn("Stream") transparent inline def ~          = g.Stream
-  @tn("Range")  type <>        [A<:Raw]      = g.Range[A];              @tn("Range")  transparent inline def <>         = Range
-  @tn("Pack")   type ><        [A<:Raw]      = g.Pack[A];               @tn("Pack")   transparent inline def ><         = g.Pack
-  /**/          type Opt       [A<:Raw]      = g.Opt.TYPE.DEF[A];                     transparent inline def Opt        = g.Opt
-  /**/          type Buffer    [A<:Raw]      = g.Buffer[A];                           transparent inline def Buffer     = g.Buffer
-  /**/          type Collection[A<:Raw]      = g.Collection[A];                       transparent inline def Collection = g.Collection
-  /**/          type Idx       [A<:Raw]      = g.Idx[A];                              transparent inline def Idx        = g.Idx
-  /**/          type Pro       [A<:Raw]      = g.Pro[A];                              transparent inline def Pro        = g.Pro
-  /**/                                                                                transparent inline def Fun        = g.Fun
-  /**/          type Math[A<:Raw]            = g.Math[A];                             transparent inline def Math       = g.Math
-  /**/          type Ordering  [A<:Raw]      = g.Math.Ordering[A]
+  @tn("Stream") transparent inline def ~          = g.Stream;       @tn("Stream")  type ~         [A<:Raw]      = g.Stream[A]
+  @tn("Range")  transparent inline def <>         = g.Range;        @tn("Range")   type <>        [A<:Raw]      = g.Range[A]
+  @tn("Pack")   transparent inline def ><         = g.Pack;         @tn("Pack")    type ><        [A<:Raw]      = g.Pack[A]
+  /**/          transparent inline def Opt        = g.Opt;                         type Opt       [A<:Raw]      = g.Opt.TYPE.DEF[A]
+  /**/          transparent inline def Buffer     = g.Buffer;                      type Buffer    [A<:Raw]      = g.Buffer[A]
+  /**/          transparent inline def Collection = g.Collection;                  type Collection[A<:Raw]      = g.Collection[A]
+  /**/          transparent inline def Idx        = g.Idx;                         type Idx       [A<:Raw]      = g.Idx[A]
+  /**/          transparent inline def Pro        = g.Pro;                         type Pro       [A<:Raw]      = g.Pro[A]
+  /**/          transparent inline def Fun        = g.Fun
+  /**/          transparent inline def Companion  = g.Companion
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

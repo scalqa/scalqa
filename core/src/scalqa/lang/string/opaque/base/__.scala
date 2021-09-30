@@ -1,13 +1,13 @@
 package scalqa; package lang; package string; package opaque; import language.implicitConversions
 
 abstract class Base[A<:Opaque](name: String) extends AnyRef.Opaque.Base[A,String](name) with base._Methods:
-  given ordering : Ordering[A] = String.ordering.cast[Ordering[A]]
+  given ordering : Ordering[A] = String.ordering.cast[Gen.Ordering[A]]
 
   override def value_isVoid(v: A)        : Boolean = v.real.length==0
-  override def value_tag(v: A)           : String  = typeName+":"+v
-  implicit inline def implicitFrom(v: \/): A       = "".cast[A]
+  override def value_tag(v: A)           : String  = v.real // Keep it simple, ops depend on this.
+  implicit inline def implicitRequest(v: \/): A    = "".cast[A]
 
-  given givenCanEqualString: CanEqual[A,String] = CanEqual.derived
+  given zzCanEqualString: CanEqual[A,String] = CanEqual.derived
 
   extension[THIS_OPAQUE<:Opaque](inline x: THIS_OPAQUE)
     @tn("realString") inline def real: String = x.cast[String]

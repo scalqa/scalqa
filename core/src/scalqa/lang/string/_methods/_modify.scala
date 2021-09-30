@@ -3,8 +3,8 @@ package scalqa; package lang; package string; package _methods; import language.
 transparent trait _modify:
 
   extension(inline x: String)
-    @tn("joinTag")        inline def ++[A](inline v: A)                (using inline d: Any.Def.Doc[A]): String = x + d.value_tag(v)
-    @tn("joinOpt")        inline def +?[A](inline v: Opt[A])           (using inline d: Any.Def.Doc[A]): String = x.^.reviseIf(_ => v.nonEmpty, _ + v.toString)
+    @tn("joinTag")        inline def ++[A](inline v: A)                (using inline d: Any.Def.Tag[A]): String = x + d.value_tag(v)
+    @tn("joinOpt")        inline def +?[A](inline v: Opt[A])           (using inline d: Any.Def.Tag[A]): String = x.^.mapIf(_ => v.nonEmpty, _ + v.toString)
     /**/                  inline def padStartTo  (inline size: Int, inline pad: String = " ")          : String = Z.padStartTo(x,size,pad)
     /**/                  inline def padEndTo    (inline size: Int, inline pad: String = " ")          : String = Z.padEndTo  (x,size,pad)
     /**/                  inline def label                                                             : String = Z.label(x)

@@ -2,7 +2,7 @@ package scalqa; package lang; package byte; package g; package companion; import
 
 class Set[A<:Raw]:
   /**/           inline def apply(inline v: A *) : G.Set[A] = apply(v)
-  /**/           inline def apply(inline v: ~[A]): G.Set[A] = G.Set(v)
+  /**/           inline def apply(inline v: ~[A]): G.Set[A] = G.Set.fromStream(v)
   @tn("getVoid") inline def void                 : G.Set[A] = G.Set.void
 
 /*___________________________________________________________________________

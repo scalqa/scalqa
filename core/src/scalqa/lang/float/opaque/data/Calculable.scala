@@ -2,7 +2,8 @@ package scalqa; package lang; package float; package opaque; package data; impor
 
 abstract class Calculable[A<:Opaque](name: String) extends Ordered[A](name) with Calculable._methods:
 
-  @fast given math: G.Math[A] = Float.math.cast[G.Math[A]]
+  @fast given givenSum    : Math.Sum[A] = z.Math.cast[Math.Sum[A]]
+  @fast given givenNumeric: Numeric[A]  = z.Math.cast[Numeric[A]]
 
 object Calculable:
 

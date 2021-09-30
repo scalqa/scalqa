@@ -12,8 +12,8 @@ abstract class Column[ROW,V,A] private[control](val voidDef: Any.Def.Void[A], va
         /**/     val value_*                      = setup.mkProOpt(row)
         /**/     def setup: Cell.Setup[ROW,V,A]   = customCellSetups.~.find_?(_.rowFilter(row)) or Column.this
         /**/     def getValue                     = cell.Item[ROW,V,A](row, setup, value_*())
-        override def afterFirstListenerAdded      = Observable.onObservableChange(value_*)(Event.Id.make0(this, () => fireInvalidated))
-        override def afterLastListenerRemoved     = Observable.onObservableChange(value_*)(Event.Id.cancel0(this))
+        override def afterFirstListenerAdded      = value_*.onObservableChange(Event.Id.make0(this, () => fireInvalidated))
+        override def afterLastListenerRemoved     = value_*.onObservableChange(Event.Id.cancel0(this))
       new ItemFactory
     })
   }

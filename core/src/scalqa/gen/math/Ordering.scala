@@ -18,8 +18,6 @@ object Ordering:
   object TYPE:
     type DEF[A] = scala.math.Ordering[A]
 
-  abstract class Base[A] extends scala.math.Ordering[A]
-
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
@@ -32,12 +30,6 @@ ___________________________________________________________________________*/
   Scalqa Ordering is an alias to scala.Ordering. Both can be used interchangeably.
 
   Scalqa Ordering has a new set of methods provided as extensions.
-
-  When creating a new Ordering implementation, alias cannot be extended, so use Ordering.Base instead.
-
-@class Base  ->
-
-  Base class to create new orderings.
 
 @def join -> Join
 

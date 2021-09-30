@@ -1,18 +1,18 @@
 package scalqa; package lang; import language.implicitConversions
 
-object Int extends int.g.Containers[Int]:
-  inline def min     : Int               = java.lang.Integer.MIN_VALUE
-  inline def max     : Int               = java.lang.Integer.MAX_VALUE
-  inline def ordering: G.Ordering[Int]   = int.z.Math
-  inline def math    : G.Math[Int]       = int.z.Math
+object Int extends int.g.companion.Containers[Int]:
+  inline def min       : Int           = java.lang.Integer.MIN_VALUE
+  inline def max       : Int           = java.lang.Integer.MAX_VALUE
+  inline def ordering  : Ordering[Int] = int.z.Math
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Opaque   = int.Opaque.TYPE.DEF;   transparent inline def Opaque = int.Opaque
   type _methods = int._methods;          transparent inline def G      = int.G
 
 package object int:
-  type Raw      = Any.Int
-  type Opaque   = int.Opaque.TYPE.DEF
+  private[lang] type Primitive = Int
+  private[lang] type Raw       = Any.Int
+  private[lang] type Opaque    = Int.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -35,9 +35,7 @@ ___________________________________________________________________________*/
         val l: Int.>< = s.><     // Holds (2,3,4,5)
     ```
 
-@def min      -> Minimum \n\n  Returns type minimal value: -2 ^ 31
-@def max      -> Maximum \n\n  Returns type maximum value: 2 ^ 31 - 1
-@def ordering -> Ordering   \n\n  Returns type natural ordering
-@def math     -> Math interface \n\n  Returns type math implementation
-
+@def min        -> Minimum     \n\n Returns type minimal value: -2 ^ 31
+@def max        -> Maximum     \n\n Returns type maximum value: 2 ^ 31 - 1
+@def ordering   -> Ordering    \n\n Returns type natural ordering
 */

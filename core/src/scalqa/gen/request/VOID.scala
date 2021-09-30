@@ -15,13 +15,13 @@ object VOID extends VOID with zVOIDDefaults:
 
   override def toString = "\\/"
 
-  inline given givenToMath    : Math[\/]                   = z.VOID.Math
-  inline given givenToAverage : ~~.Custom.Math.Average[\/] = z.VOID.Math
+  inline given givenToMath    : Numeric[\/]      = z.VOID.Math
+  inline given givenToAverage : Math.Average[\/] = z.VOID.Math
 
 private trait zVOIDDefaults extends zVOIDDefaults1:
   implicit def implicitToFunctionToOptDouble[A](v: \/) : A => Opt[Double]  = z.VOID.Function1_Opt.cast[A => Opt[Double]]
   implicit def implicitToBooleanFunction[A]    (v: \/) : A => Boolean      = z.VOID.Filter
-  //implicit inline def implicitToValOpt[A](inline v: \/): Opt[A]    = ZZ.None.cast[Opt[A]]
+  //implicit inline def implicitToValOpt[A](v: \/): Opt[A]    = ZZ.None.cast[Opt[A]]
 
 private trait zVOIDDefaults1 extends zVOIDDefaults2:
   implicit def implicitToFunctionToOpt[A,B]    (v: \/) : A => Opt[B]       = z.VOID.Function1_Opt.cast[A => Opt[B]]
@@ -56,7 +56,7 @@ ___________________________________________________________________________*/
 
     object Foo:
       val void = new Foo with Gen.Void
-      implicit inline def implicitFrom(v: \/): Foo = void
+      implicit inline def implicitRequest(v: \/): Foo = void
 
     // Standard void assignment is:
     var v: Foo = \/

@@ -1,18 +1,18 @@
 package scalqa; package lang; import language.implicitConversions
 
-object Float extends float.g.Containers[Float]:
-  inline def min     : Float               = java.lang.Float.MIN_VALUE
-  inline def max     : Float               = java.lang.Float.MAX_VALUE
-  inline def ordering: G.Ordering[Float]   = float.z.Math
-  inline def math    : G.Math[Float]       = float.z.Math
+object Float extends float.g.companion.Containers[Float]:
+  inline def min       : Float           = java.lang.Float.MIN_VALUE
+  inline def max       : Float           = java.lang.Float.MAX_VALUE
+  inline def ordering  : Ordering[Float] = float.z.Math
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Opaque   = float.Opaque.TYPE.DEF;   transparent inline def Opaque = float.Opaque
   type _methods = float._methods;          transparent inline def G      = float.G
 
 package object float:
-  type Raw      = Any.Float
-  type Opaque   = float.Opaque.TYPE.DEF
+  private[lang] type Primitive = Float
+  private[lang] type Raw       = Any.Float
+  private[lang] type Opaque    = Float.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -35,9 +35,7 @@ ___________________________________________________________________________*/
         val l: Float.><   = s.><         // Holds (2.0, 3.0, 4.0)
     ```
 
-@def min      -> Minimum \n\n  Returns type minimal value defined in java.lang.Float.MIN_VALUE
-@def max      -> Maximum \n\n  Returns type maximum value defined in java.lang.Float.MAX_VALUE
-@def ordering -> Ordering   \n\n  Returns type natural ordering
-@def math     -> Math interface \n\n  Returns type math implementation
-
+@def min        -> Minimum     \n\n Returns type minimal value defined in java.lang.Float.MIN_VALUE
+@def max        -> Maximum     \n\n Returns type maximum value defined in java.lang.Float.MAX_VALUE
+@def ordering   -> Ordering    \n\n Returns type natural ordering
 */

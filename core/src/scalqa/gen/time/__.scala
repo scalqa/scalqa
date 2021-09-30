@@ -12,8 +12,8 @@ object Time extends Long.Opaque.Data.Ordered[Time]("Time") with time.x.Base[Time
   override              def value_tag(v: Time)              : String      = v.day.tag + ' ' + v.dayTime.tag
   private        inline val voidValue                    /* : Long */     = -62167201438000L  // 0000-01-01 00:00:00
 
-  implicit       inline def implicitFrom(v: CURRENT)        : Time        = current
-  implicit       inline def implicitFrom(v: \/)             : Time        = voidValue.toOpaque
+  implicit       inline def implicitRequest(v: CURRENT)     : Time        = current
+  implicit       inline def implicitRequest(v: \/)          : Time        = voidValue.toOpaque
 
   extension(x: Time)
     protected           def genTime                         : Time        = x
@@ -22,7 +22,7 @@ object Time extends Long.Opaque.Data.Ordered[Time]("Time") with time.x.Base[Time
     /**/                def format(pattern: String)         : String      = new java.text.SimpleDateFormat(pattern).format(new java.util.Date(x.real))
     /**/                def skipTo(dt: DayTime)             : Time        = x + { val l = dt.millisTotal - x.dayTime.millisTotal; { if (l >= 0) l else l + X.Millis.InOneDay}.Millis}
     override            def day                             : Day         = Day.fromIndex(Z.zonedDateTime(x).toLocalDate.toEpochDay.toInt)
-    override            def dayTime                         : DayTime     = Z.zonedDateTime(x).^.to(dt => dt.getHour.Hours + dt.getMinute.Minutes + dt.getSecond.Seconds + dt.getNano.Nanos)
+    override            def dayTime                         : DayTime     = Z.zonedDateTime(x).^.map(dt => dt.getHour.Hours + dt.getMinute.Minutes + dt.getSecond.Seconds + dt.getNano.Nanos)
   extension(inline x: Time)
     /**/         inline def toGmt                           : Gmt         = Gmt.fromIndex(x.real)
     /**/         inline def toInstant                       : Instant     = Instant.fromNanos(x.real * 1_000_000L)

@@ -1,13 +1,11 @@
 package scalqa; package gen; package event; import language.implicitConversions
 
 trait Observable:
-  protected def onObservableChange[U](l: () => U): Event.Control
+  def onObservableChange[U](l: () => U): Event.Control
 
 object Observable:
   @tn("getVoid")  def void               : Observable = zVoid
-  implicit inline def implicitFrom(v: \/): Observable = void
-
-  def onObservableChange[U](v: Observable)(l: () => U): Event.Control = v.onObservableChange(l)
+  implicit inline def implicitRequest(v: \/): Observable = void
 
   // **************************************************************************************
   private object zVoid extends Observable with Gen.Void { def onObservableChange[U](v: () => U) = Event.Control.void }
@@ -26,12 +24,10 @@ ___________________________________________________________________________*/
 
        `General Observable` is the root interface of all observable types.
 
-       Note: Its only method is protected (because it is to be used by tools), but can be accessed through companion method
-
        ```
           val pro = Pro.OM[Int](0)
 
-          Observable.onObservableChange(pro)(() => "Change detected".TP)
+          pro.onObservableChange(() => "Change detected".TP)
 
           pro() = 1
 

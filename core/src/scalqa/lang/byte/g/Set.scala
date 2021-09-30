@@ -11,9 +11,13 @@ class Set[A<:Raw] private(real: IntMap[Unit]) extends Val.Set[A] with Collection
   /**/          def joinAll(v: ~[A])   : Set[A]    = new Set(real.concat(v.map(v => (v.real.toInt,())).iterator))
 
 object Set:
-  /**/            def apply[A<:Raw](v: ~[A])     : Set[A] = new Set(IntMap.from(v.map(v => (v.real.toInt,())).iterator))
-  @tn("getVoid")  def void[A<:Raw]               : Set[A] = zVoid.cast[Set[A]]; private[g] object zVoid extends Set(IntMap.empty) with Gen.Void
-  implicit inline def implicitFrom[A<:Raw](v: \/): Set[A] = zVoid.cast[Set[A]]
+  /**/                  def apply[A<:Raw](v: A *)       : Set[A] = new Set(IntMap.from(v.map(v => (v.real.toInt,()))))
+  /**/                  def fromStream[A<:Raw](v: ~[A]) : Set[A] = new Set(IntMap.from(v.map(v => (v.real.toInt,())).iterator))
+  @tn("getVoid") inline def void[A<:Raw]                : Set[A] = zVoid.cast[Set[A]]
+  implicit       inline def implicitRequest[A<:Raw](v: \/) : Set[A] = void
+
+  // **************************************************
+  object zVoid extends Set(IntMap.empty) with Gen.Void
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -24,6 +28,6 @@ ___________________________________________________________________________*/
 /**
 @def void  -> Get void instance
 
-@def implicitFrom    -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest   -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

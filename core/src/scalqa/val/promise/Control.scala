@@ -6,7 +6,7 @@ trait Control[A]:
   def tryComplete(expression: => Result[A]) : Boolean     = try { complete(expression) } catch { case t: Throwable => complete(Result(Result.Problem(t))) }
 
 object Control:
-  def apply[T](): Control[T] = z.Control[T]()
+  def apply[B](): Control[B] = z.Control[B]()
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -1,13 +1,13 @@
 package scalqa; package lang; package float; package g; package companion; import language.implicitConversions
 
 object Z:
-  val Stream     = new Stream[Float]
-  val Opt        = new Opt[Float]
-  val Collection = new Collection[Float]
-  val Idx        = new Idx[Float]
-  val Pack       = new Pack[Float]
-  val Pro        = new Pro[Float]
-  val Fun        = new Fun[Float]
+  val Stream     = new Stream[Primitive]
+  val Opt        = new Opt[Primitive]
+  val Collection = new Collection[Primitive]
+  val Idx        = new Idx[Primitive]
+  val Pack       = new Pack[Primitive]
+  val Pro        = new Pro[Primitive]
+  val Fun        = new Fun[Primitive]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

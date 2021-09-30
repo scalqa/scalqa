@@ -28,7 +28,7 @@ private[`val`] object Few:
     /**/                       def joinAllAt(i: Int, v: ~[A]) : ><[A]     = v.nonEmpty_?.map(v => (this.~ ++@ (i,v)).><) or this
     @tn("take_Range") override def take_<>(f:Int,sz:Int)      : ><[A]     = this.~.take_<>(f <>= sz).><
     @tn("drop_Range") override def drop_<>(f:Int,sz:Int)      : ><[A]     = this.~.drop_<>(f <>= sz).><
-    /**/                       def compact                    : this.type = this
+    @tn("compact")             def ><                         : this.type = this
     /**/                       def toBuffer                   : Buffer[A] = new AnyRef.Buffer(this.~)
 
 /*___________________________________________________________________________

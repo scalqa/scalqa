@@ -15,7 +15,7 @@ trait Selection[A] extends Idx[A] with Able.Doc:
 object Selection:
   /**/            def apply[A](targetIndex:Idx[A],idx:Idx[Int]): Selection[A]  = selection.Z.Basic(targetIndex,idx)
   @tn("getVoid")  def void[A]                                  : Selection[A]  = selection.Z.Void.cast[Selection[A]]
-  implicit inline def implicitFrom[A](v: \/)                   : Selection[A]  = void
+  implicit inline def implicitRequest[A](v: \/)                : Selection[A]  = void
 
 // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Observable[A] = selection.Observable[A]
@@ -61,6 +61,6 @@ Lists selected values for some target indexed collection
 
 @def void  -> Get void instance
 
-@def implicitFrom    -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest   -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

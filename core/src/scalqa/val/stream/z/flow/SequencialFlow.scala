@@ -25,7 +25,7 @@ class SequencialFlow[A](s: ~[A]) extends Flow[A] with Custom.Pipeline:
   @tn("reduce_Opt")  def reduce_?(f: (A,A) => A)                      : Opt[A]            = x.reduce_?(f)
   /**/               def fold(start: A)(f:(A,A)=>A)                   : A                 = x.fold(start)(f)
   /**/               def foldAs[B](s:B)(f:(B,A)=>B, v:(B,B)=>B)       : B                 = x.foldAs(s)(f)
-  /**/               def sum                      (using     Math[A]) : A                 = x.sum
+  /**/               def sum                    (using v:Math.Sum[A]) : A                 = x.sum
   /**/               def range                    (using Ordering[A]) : Range[A]          = x.range
   /**/               def min                      (using Ordering[A]) : A                 = x.min
   /**/               def max                      (using Ordering[A]) : A                 = x.max

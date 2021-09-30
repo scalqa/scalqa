@@ -12,7 +12,7 @@ private[`val`] class Tail[A](l: ><[A], off: Int) extends ><[A] :
   /**/                   def joinAllAt(i: Int, v: ~[A])  : ><[A]          = resolve.joinAllAt(i,v)
   @tn("take_Range")      def take_<>(s: Int, sz: Int)    : ><[A]          = resolve.take_<>(s,sz)
   @tn("drop_Range")      def drop_<>(s: Int, sz: Int)    : ><[A]          = resolve.drop_<>(s,sz)
-  override               def compact                     : this.type      = {l.compact; this }
+  @tn("compact")         def ><                          : this.type      = {l.><; this }
   /**/                   def toBuffer                    : Buffer[A]      = resolve.toBuffer
 
 /*___________________________________________________________________________

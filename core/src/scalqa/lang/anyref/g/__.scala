@@ -1,8 +1,8 @@
 package scalqa; package lang; package anyref; import language.implicitConversions
 
 object G:
-  /**/               type Containers[A] = g.Containers[A]
-  transparent inline def  Companion     = g.Companion
+  transparent inline def Companion = g.Companion
+  transparent inline def Fun       = g.Fun
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -15,9 +15,5 @@ ___________________________________________________________________________*/
    scala.AnyRef type is an alias for java.lang.Object, they can be used interchangebly.
 
    AnyRef object is a companion for scala.AnyRef type
-
-@val emptyArray -> Empty object array
-
-    Holds singleton Array[AnyRef] object
 
 */

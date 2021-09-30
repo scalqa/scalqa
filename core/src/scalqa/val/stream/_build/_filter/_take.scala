@@ -1,26 +1,25 @@
 package scalqa; package `val`; package stream; package _build; package _filter
 
-import z._build.{ _filter => _Z, filter => Z }
+import z._build.{ _filter => Z }
 
 transparent trait _take :
   extension[A](inline x: ~[A])
-    /**/              inline def take(inline f: A => Boolean)                : ~[A] = new _Z.take(x,f)
-    /**/              inline def takeType[B](using inline t:ClassTag[B])     : ~[B] = new _Z.takeType(x)
-    /**/              inline def takeWhile(inline f: A => Boolean)           : ~[A] = new _Z.takeWhile(x,f)
-    /**/              inline def takeFirst(n: Int)                           : ~[A] = new _Z.take_Range(x,0 <>> n)
-    @tn("take_Range") inline def take_<>(inline i: Int.<>)                   : ~[A] = new _Z.take_Range(x,i)
-    /**/              inline def takeLast(inline n: Int)                     : ~[A] = new _Z.takeLast(x,n)
-    /**/              inline def takeEvery(inline nTh: Int)                  : ~[A] = new _Z.takeEvery(x,nTh)
+    /**/              inline def take(inline f: A => Boolean)                    : ~[A] = new Z.take(x,f)
+    /**/              inline def takeType[B](using inline t:ClassTag[B])         : ~[B] = new Z.takeType(x)
+    /**/              inline def takeWhile(inline f: A => Boolean)               : ~[A] = new Z.takeWhile(x,f)
+    /**/              inline def takeFirst(n: Int)                               : ~[A] = new Z.take_Range(x,0 <>> n)
+    @tn("take_Range") inline def take_<>(inline i: Int.<>)                       : ~[A] = new Z.take_Range(x,i)
+    /**/              inline def takeLast(inline n: Int)                         : ~[A] = new Z.takeLast(x,n)
+    /**/              inline def takeEvery(inline nTh: Int)                      : ~[A] = new Z.takeEvery(x,nTh)
     /**/              inline def takeIndexed(inline f:(Int,A)=>Boolean,
-                                                          inline start:Int=0): ~[A] = new _Z.takeIndexed(x,f,start)
-    /**/              inline def takeDuplicates                              : ~[A] = new _Z.takeDuplicates(x)
-    /**/              inline def takeDuplicatesBy[B](inline f: A=>B)         : ~[A] = new _Z.takeDuplicates.By(x,f)
+                                                          inline start:Int=0)    : ~[A] = new Z.takeIndexed(x,f,start)
+    /**/              inline def takeDuplicates                                  : ~[A] = new Z.takeDuplicates(x)
+    /**/              inline def takeDuplicatesBy[B](inline f: A=>B)             : ~[A] = new Z.takeDuplicates.By(x,f)
 
-    /**/              inline def takeAll(inline v: ~[A])                     : ~[A] = Z.takeAll(x,v)
-    /**/              inline def takeAllBy[B](inline f: A=>B, inline v: ~[B]): ~[A] = Z.takeAllBy[A,B](x,f,v)
-    /**/              inline def takeOnly(inline v: A, inline vs: A*)        : ~[A] = Z.takeOnly(x,v,vs)
-    /**/              inline def takeOnlyBy[B](inline f:A=>B, inline v: B*)  : ~[A] = Z.takeOnlyBy(x,f,v)
-    /**/              inline def TAKE(inline f: A => Boolean)                : ~[A] = Z.TAKE(x,f)
+    /**/              inline def takeOnly(inline v: A)                           : ~[A] = Z.values.takeOne(x,v)
+    /**/              inline def takeValues(inline v: ~[A])                      : ~[A] = Z.values.take(x,v)
+    /**/              inline def takeValuesBy[B](inline f:A=>B,inline v: ~[B])   : ~[A] = Z.values.takeBy(x,f,v)
+    /**/              inline def TAKE(inline f: A => Boolean)                    : ~[A] = Z.take.HEAVY(x,f)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -29,6 +28,33 @@ transparent trait _take :
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
+@def takeValues -> Multi value filter
+
+    Takes only provided set of values
+
+    ```
+         ('a' <> 'z').~.takeValues('z','x','b').TP   // Prints ~('b','x','y')
+
+         ('a' <> 'z').~.takeValues('b' <> 'f').TP    // Prints ~('b','c','d','e','f')
+
+    ```
+
+    Note: [[takeValues]] is macro optimized when given value tuples sized from 2 to 5
+
+@def takeValuesBy -> Mapped multi value filter
+
+    Takes only values, which convert to provided set of values
+
+    ```
+       (0 <>> 10).~.takeValuesBy(_ % 5, (1,3) ).TP
+
+       // Output
+       ~(1, 3, 6, 8)
+    ```
+
+    Note: [[takeValuesBy]] is macro optimized when given value tuples sized from 2 to 5
+
+
 @def take -> Main filter
 
     Only takes [[scalqa.val.Stream ~]] elements satisfying the given function
@@ -60,27 +86,6 @@ ___________________________________________________________________________*/
       ```
 
       Note: Sequence indexing starts from 0
-
-@def takeAll -> Multi element filter
-
-      Only lets elements equal to the found in given stream
-
-      ```
-         ('a' <> 'z').~.takeAll(~~('z','x','b')).TP   // Prints ~('b','x','y')
-
-         ('a' <> 'z').~.takeAll('b' <> 'f') .TP       // Prints ~('b','c','d','e','f')
-      ```
-
-@def takeAllBy -> Multi element mapped filter
-
-      Only lets elements, which mapped value is found in given stream
-
-      ```
-         ('a' <> 'z').~.takeAllBy(_.toInt % 10, ~~(1,3,7)).TP
-
-         // Output
-         ~(a, e, g, k, o, q, u, y)
-      ```
 
 @def takeEvery -> Every Nth element filter
 
@@ -120,9 +125,9 @@ ___________________________________________________________________________*/
 
       Note: This method will block on unlimited streams
 
-@def takeOnly -> Enumerated values filter
+@def takeOnly -> Single value filter
 
-    Filters only specified values.
+    Filters only specified value.
 
     ```
        (0 <>> 10).~.takeOnly(5).TP
@@ -131,7 +136,7 @@ ___________________________________________________________________________*/
        ~(5)
     ```
 
-    Note: When single value is given, [[takeOnly]] is more efficient than general filter ".take(_ == value)", because there is no function involved.
+    Note: [[takeOnly]] is more efficient than general filter ".take(_ == value)", because there is no function involved.
 
 @def takeType -> Type filter
 

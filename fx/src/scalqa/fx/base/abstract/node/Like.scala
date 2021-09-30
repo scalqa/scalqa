@@ -11,7 +11,7 @@ object Like:
     case _ : delegate.Z.RefEventDispatch => Module(real)
     case _ => Node.FxConverter(real)
 
-  given FxConverter: ReversibleFunction[javafx.scene.Node, Like] = ReversibleFunction(apply, _.real)
+  given FxConverter: TwoWayFunction[javafx.scene.Node, Like] = TwoWayFunction(apply, _.real)
 
   implicit def implicitToNode(v: Like) : Fx.Node = v match { case v: Fx.Node => v; case v => Node(v.real) }
 

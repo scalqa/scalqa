@@ -1,15 +1,15 @@
 package scalqa; package `val`; package stream; package z; package _build; package _map; import language.implicitConversions;
 
-class  mapOpt  [A,B](x: ~[A], f:A => Val.Opt[B]                    ) extends z.x.Pipe[B]       (x){@tn("read_Opt")    def read_?    ={var o=x.read_?; while(o){ val r=f(o.`val`); if(r) return r; o=x.read_? }; \/}}
+class  mapOpt  [A,B](x: ~[A], f:A => Val.Opt[B]                        ) extends z.x.Pipe[B]       (x){@tn("read_Opt")    def read_?    ={var o=x.read_?; while(o){ val r=f(o.`val`); if(r) return r; o=x.read_? }; \/}}
 object mapOpt:
-  class toBoolean[A](x: ~[A], f:Byte  .G.Fun.FromAny[A,Boolean.Opt]) extends z.x.Pipe.asBoolean(x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o){ val r=f(o.`val`); if(r) return r; o=x.read_? }; \/}}
-  class toByte   [A](x: ~[A], f:Short .G.Fun.FromAny[A,Byte   .Opt]) extends z.x.Pipe.asByte   (x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o){ val r=f(o.`val`); if(r) return r; o=x.read_? }; \/}}
-  class toChar   [A](x: ~[A], f:Int   .G.Fun.FromAny[A,Char   .Opt]) extends z.x.Pipe.asChar   (x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o){ val r=f(o.`val`); if(r) return r; o=x.read_? }; \/}}
-  class toShort  [A](x: ~[A], f:Int   .G.Fun.FromAny[A,Short  .Opt]) extends z.x.Pipe.asShort  (x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o){ val r=f(o.`val`); if(r) return r; o=x.read_? }; \/}}
-  class toInt    [A](x: ~[A], f:Long  .G.Fun.FromAny[A,Int    .Opt]) extends z.x.Pipe.asInt    (x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o){ val r=f(o.`val`); if(r) return r; o=x.read_? }; \/}}
-  class toLong   [A](x: ~[A], f:Long  .G.Fun.FromAny[A,Long   .Opt]) extends z.x.Pipe.asLong   (x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o){ val r=f(o.`val`); if(r) return r; o=x.read_? }; \/}}
-  class toFloat  [A](x: ~[A], f:Float .G.Fun.FromAny[A,Float  .Opt]) extends z.x.Pipe.asFloat  (x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o){ val r=f(o.`val`); if(r) return r; o=x.read_? }; \/}}
-  class toDouble [A](x: ~[A], f:Double.G.Fun.FromAny[A,Double .Opt]) extends z.x.Pipe.asDouble (x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o){ val r=f(o.`val`); if(r) return r; o=x.read_? }; \/}}
+  class toBoolean[A](x: ~[A], f:AnyRef.G.Fun.ToAnyByte  [A,Boolean.Opt]) extends z.x.Pipe.asBoolean(x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o){ val r=f(o.`val`); if(r) return r; o=x.read_? }; \/}}
+  class toByte   [A](x: ~[A], f:AnyRef.G.Fun.ToAnyShort [A,Byte   .Opt]) extends z.x.Pipe.asByte   (x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o){ val r=f(o.`val`); if(r) return r; o=x.read_? }; \/}}
+  class toChar   [A](x: ~[A], f:AnyRef.G.Fun.ToAnyInt   [A,Char   .Opt]) extends z.x.Pipe.asChar   (x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o){ val r=f(o.`val`); if(r) return r; o=x.read_? }; \/}}
+  class toShort  [A](x: ~[A], f:AnyRef.G.Fun.ToAnyInt   [A,Short  .Opt]) extends z.x.Pipe.asShort  (x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o){ val r=f(o.`val`); if(r) return r; o=x.read_? }; \/}}
+  class toInt    [A](x: ~[A], f:AnyRef.G.Fun.ToAnyLong  [A,Int    .Opt]) extends z.x.Pipe.asInt    (x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o){ val r=f(o.`val`); if(r) return r; o=x.read_? }; \/}}
+  class toLong   [A](x: ~[A], f:AnyRef.G.Fun.ToAnyLong  [A,Long   .Opt]) extends z.x.Pipe.asLong   (x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o){ val r=f(o.`val`); if(r) return r; o=x.read_? }; \/}}
+  class toFloat  [A](x: ~[A], f:AnyRef.G.Fun.ToAnyFloat [A,Float  .Opt]) extends z.x.Pipe.asFloat  (x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o){ val r=f(o.`val`); if(r) return r; o=x.read_? }; \/}}
+  class toDouble [A](x: ~[A], f:AnyRef.G.Fun.ToAnyDouble[A,Double .Opt]) extends z.x.Pipe.asDouble (x){@tn("readRaw_Opt") def readRaw_? ={var o=x.read_?; while(o){ val r=f(o.`val`); if(r) return r; o=x.read_? }; \/}}
 
   inline def apply[A,B,OPT<:Any.Opt[B]](inline x: ~[A], inline f: A=>OPT)(using inline s:Specialized.Opt[B,OPT], inline B:Specialized[B]): B.~ =
     inline B match

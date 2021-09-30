@@ -11,8 +11,8 @@ object Input extends AnyRef.Opaque.Base[Input, REAL]("Io.Input"):
   def apply(f: File.Path)                            : Input = apply(java.io.FileInputStream(f.real.toFile))
 
   @tn("getVoid") inline def void                     : Input = Z.Void
-  implicit       inline def implicitFrom(v: \/)      : Input = void
-  implicit       inline def implicitFrom(v: REAL)    : Input = apply(v)
+  implicit       inline def implicitRequest(v: \/)   : Input = void
+  implicit       inline def implicitFromReal(v: REAL): Input = apply(v)
 
   extension (x: Input)
     def asBytes : Bytes  = Bytes(x.real)
@@ -42,6 +42,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitFrom    -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest   -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

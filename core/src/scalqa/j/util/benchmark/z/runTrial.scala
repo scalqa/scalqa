@@ -2,7 +2,7 @@ package scalqa; package j; package util; package benchmark; package z; import la
 
 private[j] object runTrial:
 
-  def apply[A](targets: ><[(String, () => A)], repeated: Int, slotCount: Int, slotLength: Time.Length)(using Opt[Math[A]]): ><[Result] =
+  def apply[A](targets: ><[(String, () => A)], repeated: Int, slotCount: Int, slotLength: Time.Length)(using Opt[Numeric[A]]): ><[Result] =
     (0 <>> (slotCount / targets.size)).~
       .flatMap(_ => (0 <>> targets.size).~.map(i => runSingleTarget[A]((i % (targets.size/repeated)) + 1,targets(i)._1,targets(i)._2,slotLength)))
       .sortBy(_.number)
@@ -11,7 +11,7 @@ private[j] object runTrial:
       .map(_.reduce(_ + _))
       .><
 
-  private def runSingleTarget[A](nbr: Int, label: String, trgt: () => A, slotLength: Time.Length)(using mathOpt: Opt[Math[A]]): Result =
+  private def runSingleTarget[A](nbr: Int, label: String, trgt: () => A, slotLength: Time.Length)(using mathOpt: Opt[Numeric[A]]): Result =
     val mem : ByteCount = J.Vm.Memory.used
     var cur : Long      = System.nanoTime
     val end : Long      = cur + slotLength.nanosTotal

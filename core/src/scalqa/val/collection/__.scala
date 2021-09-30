@@ -5,21 +5,20 @@ trait Collection[+A] extends gen.able.Stream[A] with gen.able.Size:
   override      def size : Int
 
 object Collection:
-  /**/                  def apply[A](v: A)                        : Collection[A]  = Pack(v)
-  /**/                  def apply[A](v1: A, v2: A)                : Collection[A]  = Pack(v1, v2)
-  /**/                  def apply[A](v1: A, v2: A, v3: A, vs: A*) : Collection[A]  = Pack(v1, v2, v3, vs *)
-  @tn("getVoid") inline def void[A]                               : Collection[A]  = \/ : ><[A]
-  /**/                  def unapplySeq[A](v: Collection[A])       : Option[Seq[A]] = Some(v.~.toSeq)
-  implicit       inline def implicitFrom[A](v: \/)                : Collection[A]  = void[A]
+  /**/                     def apply[A](v: A)                   : Collection[A]  = Pack(v)
+  /**/                     def apply[A](v1:A, v2:A)             : Collection[A]  = Pack(v1, v2)
+  /**/                     def apply[A](v1:A, v2:A, v3:A, vs:A*): Collection[A]  = Pack(v1, v2, v3, vs *)
+  @tn("getVoid")    inline def void[A]                          : Collection[A]  = \/ : ><[A]
+  /**/                     def unapplySeq[A](v: Collection[A])  : Option[Seq[A]] = Some(v.~.toSeq)
+  implicit          inline def implicitRequest[A](v: \/)        : Collection[A]  = void[A]
 
   extension [A] (inline x: Collection[A])
-    @tn("pack")     inline def ><                             : ><[A]         = x.~.><
-    /**/            inline def contains(inline v: A)          : Boolean       = Z.contains(x,v)
-    /**/            inline def withFilter(inline f:A=>Boolean): ~[A]          = x.~.take(f)
-    @tn("map_View") inline def map_^[B](inline f: A => B)     : Collection[B] = Z.ValueMap_View(x, f)
-    /**/            inline def map[B](inline f:A=>B)          : ~[B]          = x.~.map(f)
-    /**/            inline def flatMap[B](inline f:A=> ~[B])  : ~[B]          = x.~.flatMap(f)
-    /**/            inline def foreach[U](inline f: A=>U)     : Unit          = x.~.foreach(f)
+    /**/            inline def contains(inline v: A)            : Boolean        = Z.contains(x,v)
+    /**/            inline def withFilter(inline f: A=>Boolean) : ~[A]           = x.~.take(f)
+    @tn("map_View") inline def map_^[B](inline f: A => B)       : Collection[B]  = Z.ValueMap_View(x, f)
+    /**/            inline def map[B](inline f:A=>B)            : ~[B]           = x.~.map(f)
+    /**/            inline def flatMap[B](inline f:A=> ~[B])    : ~[B]           = x.~.flatMap(f)
+    /**/            inline def foreach[U](inline f: A=>U)       : Unit           = x.~.foreach(f)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Mutable[A]           = collection.Mutable[A];             transparent inline def Mutable           = collection.Mutable
@@ -63,6 +62,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitFrom    -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest   -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

@@ -9,7 +9,7 @@ class Range[A<:Raw](_start: A, _size: Int) extends Val.<>[A] with Able.Size with
   /**/              def endIsIn                : Boolean       = _size > 0
   /**/              def size                   : Int           = _size
   override          def isEmpty                : Boolean       = _size < 1
-  /**/              def ordering               : G.Ordering[A] = Int.ordering.cast[G.Ordering[A]]
+  /**/              def ordering               : Ordering[A] = Int.ordering.cast[Gen.Ordering[A]]
   @tn("stream")     def ~                      : Stream[A]     = new z.Range.Stream[A](_start.real,endX.real,1L)
   @tn("step_Stream")def step_~(step: Int)      : Stream[A]     = new z.Range.Stream(_start.real,endX.real,step)
   override          def contains(v: A)         : Boolean       = _start <= v && v < endX
@@ -33,7 +33,7 @@ class Range[A<:Raw](_start: A, _size: Int) extends Val.<>[A] with Able.Size with
   private    inline def _mk (f:A, inline to:A) : Range[A]      = Range(f,to-f)
 
 object Range:
-  implicit inline   def implicitFrom(v: \/)    : Range[Int]    = z.Range.Void
+  implicit inline   def implicitRequest(v: \/)    : Range[Int]    = z.Range.Void
   extension(x:Range[Int])
     @tn("moveRight")inline def >>(move: Int)    : Range[Int] = Range(x.start+move,x.size)
     @tn("moveLeft") inline def <<(move: Int)    : Range[Int] = Range(x.start-move,x.size)

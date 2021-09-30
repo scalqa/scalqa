@@ -5,22 +5,21 @@ trait _Link:
   extension (x: Link)
     def tag           : String      = "Link(name:"+x.name+", id=" + x.dri.id +")"
     def isPrivate     : Boolean     = x.dri.isPrivate
-    def asLabel(om: Opt[Member] = \/, heading: Boolean = false): String = if(x.name.contains(".")) x.name else x.dri.label(x.name,om,heading)
+    def asLabel(short: Boolean = true): String = if(x.name.contains(".")) x.name /*.simpleName(short)*/ else x.dri.label(short)
 
-    def improve(m: Member, heading: Boolean): Link =
-      var n = x.dri.label(x.name)
-      if(m.name != "M" && m.name != "O" && m.name != "OM") n = n.replace("Observable","O").replace("Mutable","M")
-      var l = x.copy(name=n)
-      val d = l.dri
-      if(d.anchor.nonEmpty)
-        def useBase(id: String, reviseLabel: String => String): Unit =
-          Registry.member_?(Id(id + "." +d.anchor.takeBefore("-").nameToId)).forval(m=> l = Link(reviseLabel(d.label("")),m.dri))
+    def lookupAnchor_? : Opt[Link]=
+      if(x.dri.anchor.isEmpty) \/
+      else
+        x.dri.location match
+          case "scalqa" if x.dri.anchor.startsWith("\\/")  => Link("\\/", Registry.member_?(Id("scalqa.gen.request.void")).get.dri)
+          case s if s=="scalqa"                            => x.lookup_?(s)
+          case s if s.endsWith("$")                        => x.lookup_?(s.dropLast(1), true)
+          case s if s.endsWith(".g.companion.Containers")  => x.copy(name = x.name.remove(".G.Companion.Containers")).lookup_?(s.dropLast(21))
+          case _ => \/
 
-        d match
-          case d if d.location == "scalqa"                          => useBase("scalqa",v => v)
-          case d if d.location.endsWith("$")                        => useBase(d.location.dropLast(1), v => v)
-          case d if d.location.endsWith(".g.Containers")            => useBase(d.location.dropLast(11), _.remove(".G.Containers"))
-//          case d if d.location.contains(".g.containers.companion.") => useBase(d.location.remove("containers.companion."), _.remove(".G.Containers.Companion"))
-          case d => l
 
-      l
+    def lookup_?(location: String, ignore:Boolean=false): Opt[Link] =
+      val id = Id(location + "." +x.dri.anchor.takeBefore("-").nameToId)
+      Registry.member_?(id)
+        .fornil{ if(!ignore) x.name+" No id: "+id +"       " + x.dri.location tp() }
+        .map(m => Link(x.name, m.dri))

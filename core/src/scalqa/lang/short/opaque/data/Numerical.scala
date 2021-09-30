@@ -2,14 +2,15 @@ package scalqa; package lang; package short; package opaque; package data; impor
 
 abstract class Numerical[A<:Opaque](name: String) extends Ordered[A](name) with Numerical._methods:
 
-  @fast given math: G.Math[A] = Lang.Short.math.cast[G.Math[A]]
+  @fast given givenSum    : Math.Sum[A] = z.Math.cast[Math.Sum[A]]
+  @fast given givenNumeric: Numeric[A]  = z.Math.cast[Numeric[A]]
 
-  given givenCanEqual_Byte  : CanEqual[A,Byte]   = CanEqual.derived
-  given givenCanEqual_Short : CanEqual[A,Short]  = CanEqual.derived
-  given givenCanEqual_Int   : CanEqual[A,Int]    = CanEqual.derived
-  given givenCanEqual_Long  : CanEqual[A,Long]   = CanEqual.derived
-  given givenCanEqual_Float : CanEqual[A,Float]  = CanEqual.derived
-  given givenCanEqual_Double: CanEqual[A,Double] = CanEqual.derived
+  given zzCanEqual_Byte  : CanEqual[A,Byte]   = CanEqual.derived
+  given zzCanEqual_Short : CanEqual[A,Short]  = CanEqual.derived
+  given zzCanEqual_Int   : CanEqual[A,Int]    = CanEqual.derived
+  given zzCanEqual_Long  : CanEqual[A,Long]   = CanEqual.derived
+  given zzCanEqual_Float : CanEqual[A,Float]  = CanEqual.derived
+  given zzCanEqual_Double: CanEqual[A,Double] = CanEqual.derived
 
 object Numerical:
 

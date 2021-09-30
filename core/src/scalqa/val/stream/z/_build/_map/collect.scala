@@ -1,7 +1,6 @@
-package scalqa; package `val`; package stream; package z; package _build; package _map; import scala.language.implicitConversions
+package scalqa; package `val`; package stream; package z; package _build; package _map; import language.implicitConversions
 
 class collect[A,B](x: ~[A], f: PartialFunction[A,B]) extends z.x.Pipe[B](x):
-
   @tn("read_Opt") def read_? =
     var o = x.read_?
     while (o)
@@ -9,6 +8,7 @@ class collect[A,B](x: ~[A], f: PartialFunction[A,B]) extends z.x.Pipe[B](x):
       if(f.isDefinedAt(v)) return f(v)
       o =  x.read_?
     \/
+
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

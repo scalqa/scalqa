@@ -1,6 +1,8 @@
 package scalqa; package lang; package char; package z; import language.implicitConversions
 
-object Math extends g.Math[Char] with math.Numeric.CharIsIntegral with ~~.Custom.Math[Char]:
+object Math extends Ordering[Char] with ~~.Custom.Ordering[Char]:
+
+  def compare(x:Char, y:Char) = java.lang.Character.compare(x,y)
 
   @tn("min_Opt")
     def min_?(s: ~[Char]): Val.Opt[Char] = s.read_?.map(v=>
@@ -23,15 +25,6 @@ object Math extends g.Math[Char] with math.Numeric.CharIsIntegral with ~~.Custom
          case s: Char.~ => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
          case s         => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
       new Char.<>(f,l-f+1)
-    })
-
-  @tn("calculateSum_Opt")
-    def calculateSum_?(s: ~[Char]): Val.Opt[Char] = s.read_?.map(first => {
-      var sum: Int = first
-      s match
-         case s: Char.~ => s.FOREACH(v => sum = sum + v)
-         case s         => s.FOREACH(v => sum = sum + v)
-      sum.toChar
     })
 
 /*___________________________________________________________________________

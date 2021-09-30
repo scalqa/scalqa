@@ -1,6 +1,8 @@
 package scalqa; package lang; package float; package z; import language.implicitConversions
 
-object Math extends g.Math[Float] with math.Numeric.FloatIsFractional with ~~.Custom.Math[Float]:
+object Math extends scala.math.Numeric.FloatIsFractional with Ordering[Float] with ~~.Custom.Ordering[Float] with Gen.Math.Sum[Float] with Gen.Math.Average[Float]:
+
+  def compare(x:Float, y:Float) = java.lang.Float.compare(x,y)
 
   @tn("min_Opt")
     def min_?(s: ~[Float]): Val.Opt[Float] = s.read_?.map(v=>
@@ -25,8 +27,8 @@ object Math extends g.Math[Float] with math.Numeric.FloatIsFractional with ~~.Cu
       new Float.<>(f,l,true)
     })
 
-  @tn("calculateSum_Opt")
-    def calculateSum_?(s: ~[Float]): Val.Opt[Float] = s.read_?.map(first => {
+  @tn("sum_Opt")
+    def sum_?(s: ~[Float]): Val.Opt[Float] = s.read_?.map(first => {
       var sum: Float = first
       s match
          case s: Float.~ => s.FOREACH(v => sum = sum + v)
@@ -34,17 +36,17 @@ object Math extends g.Math[Float] with math.Numeric.FloatIsFractional with ~~.Cu
       sum
     })
 
-  override def average   (s: ~[Float]): Float          = averageOpt(s) or 0F
-  override def averageOpt(s: ~[Float]): Val.Opt[Float] = new AverageLogic().^(l => s match{case s:Float.~ => s.FOREACH(l.add); case s => s.FOREACH(l.add)}).resultOpt
-  override def averageLogic = new AverageLogic
+  /**/               def average  (s: ~[Float]) = average_?(s) or 0F
+  @tn("average_Opt") def average_?(s: ~[Float]) = new Calculation().^(l => s match{case s:Float.~ => s.FOREACH(l.add); case s => s.FOREACH(l.add)}).averageOpt
+  /**/               def averageCalculation     = new Calculation
 
-// *******************************************************************
-private class AverageLogic extends ~~.Custom.Math.Average.Logic[Float]:
-  private var sum   : Double     = 0
-  private var cnt   : Int        = 0
-  def add(v: Float) : Unit       = {sum+=v; cnt+=1}
-  def result        : Float      = if(cnt==0) 0  else (sum / cnt).toFloat
-  def resultOpt     : Opt[Float] = if(cnt==0) \/ else (sum / cnt).toFloat
+  // *******************************************************************
+  class Calculation extends Gen.Math.Average.Calculation[Float]:
+    private var total : Double     = 0
+    private var cnt   : Int        = 0
+    def add(v: Float) : Unit       = {total += v; cnt+=1}
+    def average       : Float      = if(cnt==0) 0  else (total / cnt).toFloat
+    def averageOpt    : Opt[Float] = if(cnt==0) \/ else (total / cnt).toFloat
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

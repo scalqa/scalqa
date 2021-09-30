@@ -5,9 +5,9 @@ import Vm.Priority
 object Priority extends Int.Opaque.Base[Priority]("Vm.Priority"):
   def apply(v: Int): Priority = { assert(v in (1 <> 10), "Value " + v + " not in 1 <> 10");  v.toOpaque }
 
-  implicit inline def implicitFrom(v: MIN)     : Priority = 1.toOpaque
-  implicit inline def implicitFrom(v: MAX)     : Priority = 10.toOpaque
-  implicit inline def implicitFrom(v: DEFAULT) : Priority = 5.toOpaque
+  implicit inline def implicitRequest(v: MIN)     : Priority = 1.toOpaque
+  implicit inline def implicitRequest(v: MAX)     : Priority = 10.toOpaque
+  implicit inline def implicitRequest(v: DEFAULT) : Priority = 5.toOpaque
 
   extension(inline x: Priority)
     inline def isMin: Boolean = x.real == 1

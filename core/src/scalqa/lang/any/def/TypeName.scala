@@ -2,7 +2,7 @@ package scalqa; package lang; package any; package `def`; import language.implic
 
 abstract class TypeName[A] private[scalqa]():
   /**/                  def typeName: String
-  private[scalqa] final def isRef   : Boolean = this.isInstanceOf[`def`.z.ReferenceName[_]]
+  private[scalqa] final def isRef   : Boolean = this.isInstanceOf[`def`.z.ReferenceNameDef[_]]
 
 object TypeName extends zTypeNameDefault:
   def apply[A <: Any.Opaque](name: String): TypeName[A] = new zOpaqueTag(name);  private class zOpaqueTag[A](val typeName: String) extends TypeName[A]

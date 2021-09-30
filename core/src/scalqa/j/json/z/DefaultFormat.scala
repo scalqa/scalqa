@@ -9,7 +9,7 @@ private[scalqa] object DefaultFormat extends Format /*This should be thrown away
     def fetchNonSpace_? = stream.find_?(!_.isWhitespace).forval(cur = _)
 
     def parseStr(next: Int.Opt = \/): String =
-      var s = stream.readWhile_~({ case ':' | ',' | '}' | ']' => false; case _ => true }).makeString().trim;
+      var s = stream.readWhile_~({ case ':' | ',' | '}' | ']' => false; case _ => true }).makeString("").trim;
       fetchNonSpace_?
       if (next.nonEmpty) s = (next.get.toChar.toString + s).trim
       if ({ val l = s.length; l > 1 && s.charAt(0) == '"' && s.charAt(l - 1) == '"' }) s = s.substring(0, s.length - 1).substring(1)
@@ -40,7 +40,7 @@ private[scalqa] object DefaultFormat extends Format /*This should be thrown away
           case '\t' => "\\t"
           case c if ((c >= '\u0000' && c <= '\u001f') || (c >= '\u007f' && c <= '\u009f')) => "\\u%04x".format(c.toInt)
           case c => c
-        }).makeString() + "\""
+        }).makeString("") + "\""
       case o: J.Object => "{" + o.pair_~.map((k,v) => fAny(k) + " : " + fAny(v)).makeString(", ") + "}"
       case a: J.Array  => "[" + a.~.map(fAny).makeString(", ") + "]"
       case v           => v.toString

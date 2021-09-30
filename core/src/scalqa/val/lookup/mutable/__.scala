@@ -15,10 +15,10 @@ trait Mutable[A,B] extends Lookup[A,B]:
   @tn("removeAll")  def --=(keys: ~[A])          : this.type    = { removeAll(keys); this }
 
 object Mutable:
-  /**/              def apply[A,B]()             : Mutable[A,B] = X.Basic[A,B]
-  /**/              def apply[A,B](v: ~[(A, B)]) : Mutable[A,B] = apply().self_^(_.putAll(v))
-  /**/              def concurrent[A,B]()        : Mutable[A,B] = new X.Concurrent[A,B]()
-  implicit   inline def implicitFrom[A,B](v:NEW) : Mutable[A,B] = apply()
+  /**/              def apply[A,B]()               : Mutable[A,B] = X.Basic[A,B]
+  /**/              def apply[A,B](v: ~[(A, B)])   : Mutable[A,B] = apply().self_^(_.putAll(v))
+  /**/              def concurrent[A,B]()          : Mutable[A,B] = new X.Concurrent[A,B]()
+  implicit   inline def implicitRequest[A,B](v:NEW): Mutable[A,B] = apply()
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def X = mutable.X

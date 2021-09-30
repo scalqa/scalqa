@@ -2,7 +2,7 @@ package scalqa; package j; package util; package benchmark; package z; import la
 
 object execute:
 
-  def apply[A](targets: ><[(String, () => A)], repeated: Int=1,  trialCount: Int = 4, trialLengthOpt: Time.Length.Opt = \/, verbose: Boolean = true)(using Opt[Math[A]]) =
+  def apply[A](targets: ><[(String, () => A)], repeated: Int=1,  trialCount: Int = 4, trialLengthOpt: Time.Length.Opt = \/, verbose: Boolean = true)(using Opt[Numeric[A]]) =
 
     val setup = Setup(trialLengthOpt, targets, repeated)
 

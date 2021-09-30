@@ -9,8 +9,8 @@ object Mutable:
   def sealable[A](value: A)             : Mutable[A] & Able.Seal = new Z.Sealable(value)
 
   extension[A](x: Mutable[A])
-    @tn("mutableMap_View") def mutableMap_^[B](m: A=>B, r: B => A)                   : Mutable[B]    = mutableMap_^(using ReversibleFunction(m,r))
-    @tn("mutableMap_View") def mutableMap_^[B](using bm: ReversibleFunction[A,B])    : Mutable[B]    = new z.TwoWay_View.M(x, bm)
+    @tn("mutableMap_View") def mutableMap_^[B](m: A=>B, r: B => A)                   : Mutable[B]    = mutableMap_^(using TwoWayFunction(m,r))
+    @tn("mutableMap_View") def mutableMap_^[B](using bm: TwoWayFunction[A,B])        : Mutable[B]    = new z.TwoWay_View.M(x, bm)
     /**/                   def bindTo(v: Pro.O[_ <: A])                              : Event.Control = v.onChange(() => x() = v())
     /**/                   def bindTo[B<:A](v: Idx.Selection.Observable[B], dflt: A) : Event.Control = v.onChangeRun { x() = v.value_? or dflt }
 

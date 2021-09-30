@@ -7,7 +7,7 @@ abstract class Setup[A](voidValue: A):
     case v: AnyRef if v.^.nonVoid => J.illegalArgument("nonVoid object passed as void for " + getClass + ": " + v)
     case v                        => v
 
-  implicit inline def implicitFrom(v: \/): A = void
+  implicit inline def implicitRequest(v: \/): A = void
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

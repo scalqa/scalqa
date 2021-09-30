@@ -2,13 +2,10 @@ package scalqa; package lang; package long; package g; package companion; import
 
 class Fun[A<:Raw]:
   type Fold                         = G.Fun.Fold[A]
-  type FoldAs[T]                    = G.Fun.FoldAs[T,A]
+  type FoldAs[B]                    = G.Fun.FoldAs[B,A]
   type Consume[U]                   = G.Fun.Consume[A,U]
   type Filter                       = G.Fun.Filter[A]
-  type Revise                       = G.Fun.Revise[A]
-  type FromAny[T]                   = G.Fun.FromAny[T,A]
   type ToAny[B]                     = G.Fun.ToAny[A,B]
-  type ToMany[B]                    = G.Fun.ToMany[A,B]
   type ToAnyBoolean[B<:Any.Boolean] = G.Fun.ToAnyBoolean[A,B];     type ToBoolean = G.Fun.ToAnyBoolean[A,Boolean]
   type ToAnyByte   [B<:Any.Byte   ] = G.Fun.ToAnyByte[A,B];        type ToByte    = G.Fun.ToAnyByte   [A,Byte]
   type ToAnyChar   [B<:Any.Char   ] = G.Fun.ToAnyChar[A,B];        type ToChar    = G.Fun.ToAnyChar   [A,Char]

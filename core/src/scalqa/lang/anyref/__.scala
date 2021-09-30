@@ -1,10 +1,9 @@
 package scalqa; package lang; import language.implicitConversions
 
 object AnyRef:
-  @fast lazy val emptyArray : Array[AnyRef]  = ZZ.emptyObjectArray
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Buffer[A]     = anyref.Buffer[A];
+  type Buffer[A]     = anyref.Buffer[A];       transparent inline def Buffer     = anyref.Buffer
   /**/                                         transparent inline def G          = anyref.G
   type Opaque        = anyref.Opaque.TYPE.DEF; transparent inline def Opaque     = anyref.Opaque;
 
@@ -22,9 +21,5 @@ ___________________________________________________________________________*/
    scala.AnyRef type is an alias for java.lang.Object, they can be used interchangebly.
 
    AnyRef object is a companion for scala.AnyRef type
-
-@val emptyArray -> Empty object array
-
-    Holds singleton Array[AnyRef] object
 
 */

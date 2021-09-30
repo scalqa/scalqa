@@ -11,7 +11,7 @@ object Z:
   def takeAfterLast (x:String, v:String, d:Opt[String], s:Int.Opt): String         = x.lastIndexOf_?(v, s).map(i => x.substring(i + v.length, x.length)) or_? d or x
 
   // evaluate
-  def joinAll[A](x: String, v: ~[A])(using d: Any.Def.Doc[A])     : String         = v.map(d.value_tag).foldAs(x)(_ + _)
+  def joinAll[A](x: String, v: ~[A])(using d: Any.Def.Tag[A])     : String         = v.map(d.value_tag).foldAs(x)(_ + _)
   def charAt_Opt       (x:String, i: Int)                         : Char.Opt       = if (i < 0 || i >= x.length) \/ else x.charAt(i)
   def indexOf_Opt      (x:String, v: String, s: Int.Opt)          : Int.Opt        = x.indexOf(v, s or 0).?.take(_ >= 0)
   def indexOf_Stream   (x:String, v: String, s: Int.Opt)          : ~[Int]         = x.indexOf_?(v, s).map(i => ~~(i) ++ x.indexOf_~(v, i + v.length)) or \/
@@ -22,7 +22,7 @@ object Z:
   // modify
   def padStartTo(x:String, sz: Int, pad: String)                  : String         = { var v = x; while (v.length < sz) v = pad + v; v }
   def padEndTo  (x:String, sz: Int, pad: String)                  : String         = { var v = x; while (v.length < sz) v += pad; v }
-  def label     (x:String)                                        : String         = x.char_~.zipPrior.map(t => if (t._2.isLetter && !t._1.drop(_.isWhitespace)) t._2.toUpper else t._2).makeString()
+  def label     (x:String)                                        : String         = x.char_~.zipPrior.map(t => if (t._2.isLetter && !t._1.drop(_.isWhitespace)) t._2.toUpper else t._2).makeString("")
   def replace   (x:String, r: Int.<>, v: String)                  : String         = (x.takeFirst(r.start) + v + x.dropFirst(r.endX))
   def insertAt  (x:String, i: Int, v: String)                     : String         = (x.takeFirst(i) + v + x.dropFirst(i))
   def trimStart (x:String, f: Char => Boolean)                    : String         = x.charIndex_?(!f(_)).map(x.dropFirst(_)) or ""

@@ -1,6 +1,8 @@
 package scalqa; package lang; package int; package z; import language.implicitConversions
 
-object Math extends g.Math[Int] with math.Numeric.IntIsIntegral with ~~.Custom.Math[Int]:
+object Math extends scala.math.Numeric.IntIsIntegral with Ordering[Int] with ~~.Custom.Ordering[Int] with Gen.Math.Sum[Int]:
+
+  def compare(x:Int, y:Int) = java.lang.Integer.compare(x,y)
 
   @tn("min_Opt")
     def min_?(s: ~[Int]): Val.Opt[Int] = s.read_?.map(v=>
@@ -25,8 +27,8 @@ object Math extends g.Math[Int] with math.Numeric.IntIsIntegral with ~~.Custom.M
       new Int.<>(f,l-f+1)
     })
 
-  @tn("calculateSum_Opt")
-    def calculateSum_?(s: ~[Int]): Val.Opt[Int] = s.read_?.map(first => {
+  @tn("sum_Opt")
+    def sum_?(s: ~[Int]): Val.Opt[Int] = s.read_?.map(first => {
       var sum: Int = first
       s match
          case s: Int.~  => s.FOREACH(v => sum = sum + v)

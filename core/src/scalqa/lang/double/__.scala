@@ -1,18 +1,18 @@
 package scalqa; package lang; import language.implicitConversions
 
-object Double extends double.g.Containers[Double]:
-  inline def min     : Double               = java.lang.Double.MIN_VALUE
-  inline def max     : Double               = java.lang.Double.MAX_VALUE
-  inline def ordering: G.Ordering[Double]   = double.z.Math
-  inline def math    : G.Math[Double]       = double.z.Math
+object Double extends double.g.companion.Containers[Double]:
+  inline def min       : Double           = java.lang.Double.MIN_VALUE
+  inline def max       : Double           = java.lang.Double.MAX_VALUE
+  inline def ordering  : Ordering[Double] = double.z.Math
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Opaque   = double.Opaque.TYPE.DEF;   transparent inline def Opaque = double.Opaque
   type _methods = double._methods;          transparent inline def G      = double.G
 
 package object double:
-  type Raw      = Any.Double
-  type Opaque   = double.Opaque.TYPE.DEF
+  private[lang] type Primitive = Double
+  private[lang] type Raw       = Any.Double
+  private[lang] type Opaque    = Double.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -34,9 +34,7 @@ ___________________________________________________________________________*/
 
         val l: Double.><   = s.><        // Holds (2.0, 3.0, 4.0)
     ```
-@def min      -> Minimum \n\n  Returns type minimal value defined in java.lang.Double.MIN_VALUE
-@def max      -> Maximum \n\n  Returns type maximum value defined in java.lang.Double.MAX_VALUE
-@def ordering -> Ordering   \n\n  Returns type natural ordering
-@def math     -> Math interface \n\n  Returns type math implementation
-
+@def min        -> Minimum     \n\n Returns type minimal value defined in java.lang.Double.MIN_VALUE
+@def max        -> Maximum     \n\n Returns type maximum value defined in java.lang.Double.MAX_VALUE
+@def ordering   -> Ordering    \n\n Returns type natural ordering
 */

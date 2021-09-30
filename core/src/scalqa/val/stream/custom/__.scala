@@ -5,7 +5,7 @@ object Custom:
   type Pipeline            = custom.Pipeline;               transparent inline def Pipeline   = custom.Pipeline
   type Event               = custom.Event;                  transparent inline def Event      = custom.Event
   type Monitor             = custom.event.Monitor;          transparent inline def Monitor    = custom.event.Monitor
-  type Math[A]             = custom.Math[A];                transparent inline def Math       = custom.Math
+  type Ordering[A]         = custom.Ordering[A]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

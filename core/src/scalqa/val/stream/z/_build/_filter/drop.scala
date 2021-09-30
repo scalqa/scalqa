@@ -9,6 +9,19 @@ class drop[A](x: ~[A], f: A => Boolean) extends z.x.Pipe[A](x):
       o = x.read_?
     \/
 
+object drop:
+
+  inline def HEAVY[A](inline x: ~[A], inline f: A => Boolean): ~[A] =
+    class DROP(x: ~[A]) extends z.x.Pipe[A](x):
+      @tn("read_Opt")
+      def read_? =
+        var o=x.read_?
+        while(o)
+          if(!f(o.cast[A])) return o
+          o=x.read_?
+        o
+    new DROP(x)
+
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API

@@ -15,7 +15,7 @@ object Group:
   def apply()           : Group = new Group()
   def apply(b: Button*) : Group = apply().^(_.items ++= b)
 
-  given FxConverter: ReversibleFunction[ToggleGroup, Group] = ReversibleFunction(_.getUserData.cast[Group],_.real)
+  given FxConverter: TwoWayFunction[ToggleGroup, Group] = TwoWayFunction(_.getUserData.cast[Group],_.real)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

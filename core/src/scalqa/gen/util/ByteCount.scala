@@ -6,13 +6,10 @@ object ByteCount extends Long.Opaque.Data.Numerical[ByteCount]("ByteCount"):
   /**/     inline def apply(inline v: Long)     : ByteCount = v.toOpaque
   override        def value_isVoid(v: ByteCount): Boolean   = v.real == 0L
   override        def value_tag(v: ByteCount)   : String    = v.real.toString + ".ByteCount"
-  implicit inline def implicitFrom(v: \/)       : ByteCount = 0L.toOpaque
+  implicit inline def implicitRequest(v: \/)    : ByteCount = 0L.toOpaque
 
   extension(inline x: ByteCount)
     inline def tagBrief: String = x.real.tagBrief + 'B'
-    inline def toLongKb: Long   = x.real / 1000
-    inline def toLongMb: Long   = x.real / 1_000_000
-    inline def toLongGb: Long   = x.real / 1_000_000_000
 
   object TYPE:
     opaque type DEF <: Long.Opaque = Long.Opaque & Long

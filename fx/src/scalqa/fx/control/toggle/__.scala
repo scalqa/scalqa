@@ -15,7 +15,7 @@ trait Toggle:
 
 object Toggle:
 
-  given FxConverter: ReversibleFunction[JToggle, Toggle] with
+  given FxConverter: TwoWayFunction[JToggle, Toggle] with
     def apply(v: JToggle) = v.getUserData.cast[Toggle]
     def undo (v: Toggle)  = v.real
 

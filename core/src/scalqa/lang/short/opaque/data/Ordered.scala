@@ -2,7 +2,7 @@ package scalqa; package lang; package short; package opaque; package data; impor
 
 abstract class Ordered[A<:Opaque](name: String) extends Data[A](name) with Ordered._methods:
 
-  @fast given ordering : G.Ordering[A] = Short.ordering.cast[G.Ordering[A]]
+  @fast given ordering: Ordering[A] = z.Math.cast[Ordering[A]]
 
 object Ordered:
 

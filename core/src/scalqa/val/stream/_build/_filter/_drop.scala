@@ -1,25 +1,24 @@
 package scalqa; package `val`; package stream; package _build; package _filter
 
-import z._build.{ _filter => _Z, filter => Z }
+import z._build.{ _filter => Z }
 
 transparent trait _drop :
   extension[A](inline x: ~[A])
-    /**/              inline def drop(inline f: A => Boolean)                     : ~[A] = new _Z.drop(x, f)
-    /**/              inline def dropWhile(inline f: A => Boolean)                : ~[A] = new _Z.dropWhile(x, f)
-    /**/              inline def dropFirst(inline n: Int)                         : ~[A] = new _Z.dropFirst(x, n)
-    @tn("drop_Range") inline def drop_<>(inline i: Int.<>)                        : ~[A] = new _Z.drop_Interval(x, i)
-    /**/              inline def dropLast(n: Int)                                 : ~[A] = new _Z.dropLast(x,n)
-    /**/              inline def dropEvery(nTh: Int)                              : ~[A] = new _Z.dropEvery(x,nTh)
-    /**/              inline def dropDuplicates                                   : ~[A] = new _Z.dropDuplicates(x)
-    /**/              inline def dropDuplicatesBy[B](inline f: A=>B)              : ~[A] = new _Z.dropDuplicates.By(x,f)
+    /**/              inline def drop(inline f: A => Boolean)                     : ~[A] = new Z.drop(x, f)
+    /**/              inline def dropWhile(inline f: A => Boolean)                : ~[A] = new Z.dropWhile(x, f)
+    /**/              inline def dropFirst(inline n: Int)                         : ~[A] = new Z.dropFirst(x, n)
+    @tn("drop_Range") inline def drop_<>(inline i: Int.<>)                        : ~[A] = new Z.drop_Interval(x, i)
+    /**/              inline def dropLast(n: Int)                                 : ~[A] = new Z.dropLast(x,n)
+    /**/              inline def dropEvery(nTh: Int)                              : ~[A] = new Z.dropEvery(x,nTh)
+    /**/              inline def dropDuplicates                                   : ~[A] = new Z.dropDuplicates(x)
+    /**/              inline def dropDuplicatesBy[B](inline f: A=>B)              : ~[A] = new Z.dropDuplicates.By(x,f)
     /**/              inline def dropSequence(inline seq: ~[A])                   : ~[A] = new  z._build._mutate.replaceSequence(x,  seq.><,\/)
     /**/              inline def dropSequenceBy[B](inline f:A=>B,inline seq: ~[B]): ~[A] = new  z._build._mutate.replaceSequence(x,f,seq.><,\/)
-    /**/              inline def dropAll(inline v: ~[A])                          : ~[A] = Z.dropAll(x,v)
-    /**/              inline def dropAllBy[B](inline f:A=>B,inline v: ~[B])       : ~[A] = Z.dropAllBy(x,f,v)
-    /**/              inline def dropOnly(inline v: A, inline vs: A*)             : ~[A] = Z.dropOnly(x,v,vs)
-    /**/              inline def dropOnlyBy[B](inline f:A=>B,inline vs: B*)       : ~[A] = Z.dropOnlyBy(x,f,vs)
-    /**/              inline def dropVoid       (using inline d: Any.Def.Void[A]) : ~[A] = new _Z.dropVoid(x)
-    /**/              inline def DROP(inline f: A => Boolean)                     : ~[A] = Z.DROP(x,f)
+    /**/              inline def dropOnly(inline v: A)                            : ~[A] = Z.values.dropOne(x,v)
+    /**/              inline def dropValues(inline v: ~[A])                       : ~[A] = Z.values.drop(x,v)
+    /**/              inline def dropValuesBy[B](inline f:A=>B,inline v: ~[B])    : ~[A] = Z.values.dropBy(x,f,v)
+    /**/              inline def dropVoid       (using inline d: Any.Def.Void[A]) : ~[A] = new Z.dropVoid(x)
+    /**/              inline def DROP(inline f: A => Boolean)                     : ~[A] = Z.drop.HEAVY(x,f)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -28,6 +27,32 @@ transparent trait _drop :
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
+@def dropValues -> Multi value reversed filter
+
+    Drops only provided set of values
+
+    ```
+       (0 <>> 10).~.dropValues(8,3,5).TP
+
+       // Output
+       ~(0, 1, 2, 4, 6, 7, 9)
+    ```
+
+    Note: [[dropValues]] is macro optimized when given value tuples sized from 2 to 5
+
+@def dropValuesBy -> Mapped multi value reversed filter
+
+    Drops only values, which convert to provided set of values
+
+    ```
+       (0 <>> 10).~.dropValuesBy(_ % 5, (1,3) ).TP
+
+       // Output
+       ~(0, 2, 4, 5, 7, 9)
+    ```
+
+    Note: [[dropValuesBy]] is macro optimized when given value tuples sized from 2 to 5
+
 @def drop -> Reverse filter
 
     Disallows [[scalqa.val.Stream ~]] elements satisfying the given function
@@ -60,25 +85,6 @@ ___________________________________________________________________________*/
 
       Note: Sequence indexing starts from 0
 
-@def dropAll -> Multi element reversed filter
-
-      Only lets elements not found in given stream
-
-      ```
-         ('a' <> 'z').~.dropAll('c' <> 'x') .TP       // Prints ~(a, b, y, z)
-      ```
-
-@def dropAllBy -> Multi element mapped reversed filter
-
-      Only lets elements, which mapped value is not found in given stream
-
-      ```
-         ('a' <> 'z').~.dropAllBy(_.toInt % 10, ~~(1,3,7,4,6)).TP
-
-         // Output
-         ~(b, c, d, f, i, l, m, n, p, s, v, w, x, z)
-      ```
-
 @def dropEvery -> Every Nth element reversed filter
 
       Drops every **nTh** element
@@ -105,9 +111,9 @@ ___________________________________________________________________________*/
 
       Note: This method will block on unlimited streams
 
-@def dropOnly -> Enumerated values reversed filter
+@def dropOnly -> Single value reversed filter
 
-    Drops only specified values.
+    Drops only specified value.
 
     ```
        (1 <> 4).~.dropOnly(3).TP
@@ -116,7 +122,7 @@ ___________________________________________________________________________*/
        ~(1, 2, 4)
     ```
 
-    Note: When single value is given, [[dropOnly]] is more efficient than general filter ".drop(_ == value)", because there is no function involved.
+    Note: [[dropOnly]] is more efficient than general filter ".drop(_ == value)", because there is no function involved.
 
 @def dropWhile -> Coditional reversed head filter
 

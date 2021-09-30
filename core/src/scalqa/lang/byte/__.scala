@@ -1,18 +1,18 @@
 package scalqa; package lang; import language.implicitConversions
 
-object Byte extends byte.g.Containers[Byte]:
-  inline def min     : Byte               = java.lang.Byte.MIN_VALUE
-  inline def max     : Byte               = java.lang.Byte.MAX_VALUE
-  inline def ordering: G.Ordering[Byte]   = byte.z.Math
-  inline def math    : G.Math[Byte]       = byte.z.Math
+object Byte extends byte.g.companion.Containers[Byte]:
+  inline def min       : Byte           = java.lang.Byte.MIN_VALUE
+  inline def max       : Byte           = java.lang.Byte.MAX_VALUE
+  inline def ordering  : Ordering[Byte] = byte.z.Math
 
-  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Opaque   = byte.Opaque.TYPE.DEF;   transparent inline def Opaque = byte.Opaque
   type _methods = byte._methods;          transparent inline def G      = byte.G
 
 package object byte:
-  type Raw      = Any.Byte
-  type Opaque   = byte.Opaque.TYPE.DEF
+  private[lang] type Primitive = Byte
+  private[lang] type Raw       = Any.Byte
+  private[lang] type Opaque    = Byte.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -34,9 +34,7 @@ ___________________________________________________________________________*/
         val l: Byte.><   = s.><         // Holds (2,3,4,5)
     ```
 
-@def min      -> Minimum \n\n  Returns type minimal value: -128
-@def max      -> Maximum \n\n  Returns type maximum value: 127
-@def ordering -> Ordering   \n\n  Returns type natural ordering
-@def math     -> Math interface \n\n  Returns type math implementation
-
+@def min        -> Minimum     \n\n Returns type minimal value: -128
+@def max        -> Maximum     \n\n Returns type maximum value: 127
+@def ordering   -> Ordering    \n\n Returns type natural ordering
 */

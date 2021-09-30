@@ -2,11 +2,10 @@ package scalqa; package lang; package int; package g; import language.implicitCo
 
 trait Collection[A<:Raw] extends Val.Collection[A] with Able.Contain[A] with any.z.PrimitiveTag.Int:
   @tn("stream") def ~             : Stream[A]
-  @tn("pack")   def ><            : Pack[A]   = Pack.fromStream(this.~)
   /**/          def contains(v: A): Boolean   = this.~.takeOnly(v).readRaw_?
 
 object Collection:
-  implicit inline def implicitFrom[A<:Raw](inline v: \/): Collection[A] = Pack.void
+  implicit inline def implicitRequest[A<:Raw](v: \/): Collection[A] = Pack.void
 
   extension[A<:Raw](inline x: Collection[A])
     inline def map    [B](inline f: A=> B)   (using inline B:Specialized[B]): B.~    = x.~.map(f)
@@ -19,7 +18,7 @@ object Collection:
     def add(v: A): Unit
 
   object Mutable:
-    implicit inline def implicitFrom[A<:Raw](inline v: NEW): Mutable[A] = new Buffer()
+    implicit inline def implicitRequest[A<:Raw](inline v: NEW): Mutable[A] = new Buffer()
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -30,6 +29,6 @@ ___________________________________________________________________________*/
 /**
 @def void  -> Get void instance
 
-@def implicitFrom    -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest   -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

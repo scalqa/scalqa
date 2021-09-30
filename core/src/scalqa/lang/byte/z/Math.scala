@@ -1,6 +1,8 @@
 package scalqa; package lang; package byte; package z; import language.implicitConversions
 
-object Math extends g.Math[Byte] with math.Numeric.ByteIsIntegral with ~~.Custom.Math[Byte]:
+object Math extends scala.math.Numeric.ByteIsIntegral with ~~.Custom.Ordering[Byte] with Gen.Math.Sum[Byte]:
+
+  def compare(x:Byte, y:Byte) = java.lang.Byte.compare(x,y)
 
   @tn("min_Opt")
     def min_?(s: ~[Byte]): Val.Opt[Byte] = s.read_?.map(v=>
@@ -25,14 +27,17 @@ object Math extends g.Math[Byte] with math.Numeric.ByteIsIntegral with ~~.Custom
       new Byte.<>(f,l-f+1)
     })
 
-  @tn("calculateSum_Opt")
-    def calculateSum_?(s: ~[Byte]): Val.Opt[Byte] = s.read_?.map(first => {
+  @tn("sum_Opt")
+    def sum_?(s: ~[Byte]): Val.Opt[Byte] = s.read_?.map(first => {
       var sum: Int = first
       s match
          case s: Byte.~ => s.FOREACH(v => sum = sum + v)
          case s         => s.FOREACH(v => sum = sum + v)
       sum.toByte
     })
+
+  def sum(s: ~[Byte])     = sum_?(s) or 0
+
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

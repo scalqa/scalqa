@@ -35,7 +35,7 @@ class Panel extends Abstract.Delegate.Gui:
 object Panel:
   def apply(r: javafx.scene.control.Tab): Panel = Abstract.Delegate.Gui(r.onClosedProperty)
 
-  given FxConverter: ReversibleFunction[javafx.scene.control.Tab, Panel] = ReversibleFunction(apply, _.real)
+  given FxConverter: TwoWayFunction[javafx.scene.control.Tab, Panel] = TwoWayFunction(apply, _.real)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

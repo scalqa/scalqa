@@ -26,7 +26,7 @@ abstract class Pack[A] private[scalqa]() extends Idx[A]:
   @tn("drop_Range") inline def drop_<>(r: Int.<>)                          : THIS_TYPE  = take_<>(r.start,r.size)
   /**/                     def toBuffer                                    : Buffer[A]
   /**/              inline def raw(using inline A:Specialized.Primitive[A]): A.><       = z.raw(this)
-  /**/                     def compact                                     : THIS_TYPE
+  @tn("compact")           def ><                                          : THIS_TYPE
 
 object Pack:
   /**/                     def apply[A](v: A)                              : ><[A]      = z.Few.Pack_ofOne(v)
@@ -35,8 +35,7 @@ object Pack:
   @tn("getVoid")    inline def void[A]                                     : ><[A]      = ZZ.Void[A]
   /**/              inline def fromArray[A](a: Array[AnyRef])              : ><[A]      = fromArray(a,a.length)
   /**/                     def fromArray[A](a: Array[AnyRef], sz: Int)     : ><[A]      = new z.ArrayPack(a.copySize(sz),sz)
-  implicit          inline def implicitFrom[A](inline v: \/)               : ><[A]      = void[A]
-  implicit          inline def implicitFrom[A](inline v: ~[A])             : ><[A]      = v.><
+  implicit          inline def implicitRequest[A](v: \/)                   : ><[A]      = void[A]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -143,21 +142,23 @@ ___________________________________________________________________________*/
 
     Both Buffer and >< are mostly Array based, so the convertions between them are very efficient
 
-@def compact -> Optimize storage
+@def >< -> Optimize storage
+
+    Returns this.type
 
     Pack is mostly backed by Array. When created from an unknown size stream, Array within pack can end up with larger capacity than required.
-    Because most Packs are short lived, it is wastfull to copy by default this potentially big array to proper size, but operation [[compact]] does exactly this on reqest.
+    Because most Packs are short lived, it is wastfull to copy by default this potentially big array to proper size, but operation >< on >< type does exactly this on request.
 
-    So, when assigning >< to a longer term variable, it might be usefull to run [[compact]] if memory is a concern
+    So, when assigning type >< to a longer term variable, it might be usefull to "double pack" if memory is a concern
 
     ```
-    val pack = (1 <> 1_000_000).~.drop(_ % 100 == 0).><.compact
+    val pack = (1 <> 1_000_000).~.drop(_ % 100 == 0).><.><
     ```
 
-    Note. [[compact]] can be called multiple times, but will do anything only if >< is not compacted
+    Note. [[><]] can be called multiple times, but will do anything only if type >< is not compacted
 
 @def void  -> Get void instance
 
-@def implicitFrom    -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest   -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

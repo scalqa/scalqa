@@ -6,7 +6,7 @@ abstract class Reposition[A] extends Event[A]("Reposition"):
   /**/               def positions            : Int.><             = permutation.positions
   /**/               def convert[B](f: A => B): Reposition[B]      = this.cast[Reposition[B]]
   @tn("project_Opt") def project_?(i: Int.<>) : Opt[Reposition[A]] = i.overlap_?(range).map(v => Reposition.apply[A](Idx.Permutation(v, positions.take_<>(v))))
-  override           def doc                  : Doc                = super.doc += ("changes", permutation.pair_~.makeString())
+  override           def doc                  : Doc                = super.doc += ("changes", permutation.pair_~.makeString(""))
 
 object Reposition:
   def apply[A](v: Idx.Permutation)            : Reposition[A] = Z.Reposition[A](v)

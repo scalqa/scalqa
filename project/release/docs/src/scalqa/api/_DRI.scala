@@ -5,15 +5,17 @@ trait _DRI:
   extension (x: DRI)
     def id                : Id          = Id(x)
     def member_?          : Opt[Member] = Registry.member_?(x.id)
-    def module_?          : Opt[Module] = Registry.module_?(x.id.mid)
+    def module_?          : Opt[Module] = Registry.module_?(x.id.moduleId)
     def isTypeDef         : Boolean     = x.location.endsWith("$$TYPE$")
+    def isLangAny         : Boolean     = x.location=="scalqa.lang.Any$"
     def tag               : String      = x.location
                                            .replace("$$TYPE$","").replace("$$",".")
-                                           .^.to(l => x.anchor.^.?.map(_.takeBefore("-")).map(a => l.^.reviseIf(_.endsWith("$"),_.dropLast(1)) + "." + a) or l)
+                                           .^.map(l => x.anchor.^.?.map(_.takeBefore("-")).map(a => l.^.mapIf(_.endsWith("$"),_.dropLast(1)) + "." + a) or l)
 
-    def label(base:String, om: Opt[Member] = \/, heading: Boolean = false): String =
+    def label(shrt: Boolean = true): String =
+      val short = shrt && !x.isLangAny
       var tg = x.tag
-      if(!x.location.startsWith("scalqa.")) return tg.^.reviseIf(base.nonEmpty && !_.endsWith(base),_ + "." + base).simpleName(om,heading)
+      if(!x.location.startsWith("scalqa.")) return tg.simpleName(short)
       var v = if(tg.startsWith("scalqa.")) tg.dropFirst(7) else tg
 
       v = v.split_~('.','$').dropVoid.map(_.docLabel.nameToOp).makeString(".")
@@ -26,9 +28,9 @@ trait _DRI:
       else
         v = v.lastIndexOf_?("._").map(i => v.dropFirst(i + 1)) or v
 
-      v.simpleName(om,heading).?.drop(n => om.take(_.name == n)) or v.replace(".DEF","")
+      v.simpleName(short)
 
-    def scalqaLabel(base: Opt[String]= \/, mo: Opt[Member] = \/, heading: Boolean = false): String = label(base or "",mo,heading)
+    def scalqaLabel(short: Boolean = true): String = label(short)
 
     def isPrivate: Boolean =
       val s=(x.location+".").replace("$",".").replace("..",".").replace("..",".")

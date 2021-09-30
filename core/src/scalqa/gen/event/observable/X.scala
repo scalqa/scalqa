@@ -6,7 +6,7 @@ object X:
   abstract class Base extends Basis
 
   trait Basis extends Observable with Event.Store.Provider:
-    protected def onObservableChange[U](f: () => U): Event.Control = eventStore.onEvent0(AnyChangeEvent, f)
+    /**/      def onObservableChange[U](f: () => U): Event.Control = eventStore.onEvent0(AnyChangeEvent, f)
     protected def fireAnyChange                    : Int           = eventStore.fireEvent0(AnyChangeEvent)
 
 

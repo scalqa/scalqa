@@ -20,7 +20,7 @@ class CheckBox[ROW,V,A](c: Column[ROW,V,A]) extends Cell[ROW,V,A](c):
 
   protected type REAL = javafx.scene.control.cell.CheckBoxTableCell[ROW, ITEM]
 
-  var twoWay: ReversibleFunction[A, Boolean] = \/
+  var twoWay: TwoWayFunction[A, Boolean] = \/
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

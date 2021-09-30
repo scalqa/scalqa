@@ -36,8 +36,8 @@ object Day extends java.util.concurrent.atomic.AtomicReference[Setup.Lookup](Set
       def get_Opt(d: Day): Opt[Setup] =
         if(d.real < start || d.real >= end) return \/
         var i = d.real - start
-        val a = array(i / SZ).^.reviseIf(_ == null, _ => new Array[Setup](SZ).^(array(i / SZ) = _))
-        a(i % SZ).^.reviseIf(_ == null, _ => new Setup(d).^(a(i % SZ) = _))
+        val a = array(i / SZ).^.mapIf(_ == null, _ => new Array[Setup](SZ).^(array(i / SZ) = _))
+        a(i % SZ).^.mapIf(_ == null, _ => new Setup(d).^(a(i % SZ) = _))
 
       def cloneExtend(d: Day): Lookup =
         d.real match

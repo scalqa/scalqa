@@ -15,7 +15,7 @@ object Tooltip extends Void.Setup[Tooltip](new Tooltip(\/) with Void):
   def apply(s: Opt[String]= \/): Tooltip = new Tooltip(s)
   def apply(t: JAVA)           : Tooltip = Window(t).cast[Tooltip]
 
-  given FxConverter: ReversibleFunction[JAVA, Tooltip] = ReversibleFunction(apply, _.real)
+  given FxConverter: TwoWayFunction[JAVA, Tooltip] = TwoWayFunction(apply, _.real)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

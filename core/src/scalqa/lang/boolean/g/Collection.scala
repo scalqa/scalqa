@@ -2,17 +2,16 @@ package scalqa; package lang; package boolean; package g; import language.implic
 
 trait Collection[A<:Raw] extends Val.Collection[A] with Able.Contain[A] with any.z.PrimitiveTag.Boolean:
   @tn("stream") def ~             : Stream[A]
-  @tn("pack")   def ><            : Pack[A]   = Pack.fromStream(this.~)
   /**/          def contains(v: A): Boolean   = this.~.takeOnly(v).readRaw_?
 
 object Collection:
-  implicit inline def implicitFrom[A<:Raw](inline v: \/): Collection[A] = Pack.void
+  implicit inline def implicitRequest[A<:Raw](v: \/): Collection[A] = Pack.void
 
   trait Mutable[A<:Raw] extends Collection[A] with Val.Collection.M[A]:
     def add(v: A): Unit
 
   object Mutable:
-    implicit inline def implicitFrom[A<:Raw](inline v: NEW): Mutable[A] = new Buffer()
+    implicit inline def implicitRequest[A<:Raw](inline v: NEW): Mutable[A] = new Buffer()
 
   // ------------------------------------------------------------------------------------------------------------------------------------------
   extension[A<:Raw](inline x: Collection[A])

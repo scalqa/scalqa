@@ -8,7 +8,7 @@ trait Within[A,-CONTAINER]:
 
 object Within extends zWithinault:
 
-  given givenAbleContain[A] : Within[A,Able.Contain[A]] with { inline def value_isWithin(v:A, x: Able.Contain[A]) = x.contains(v) }
+  given givenAbleContain[A] : Within[A,Gen.Able.Contain[A]] with { inline def value_isWithin(v:A, x: Gen.Able.Contain[A]) = x.contains(v) }
 
   given givenIterableOnce[A]: Within[A,S.IterableOnce[A]] = z.Within.IterableOnce.cast[Within[A,S.IterableOnce[A]]]
   given givenJIterable   [A]: Within[A,J.Iterable[A]]     = z.Within.Iterable    .cast[Within[A,J.Iterable[A]]]

@@ -8,19 +8,19 @@ class Doc protected(owner: Any) extends AnyRef.Buffer[(String, String)] with _co
   @tn("value_Stream") def value_~                                            : ~[String] = this.~.map(_._2)
   @tn("pair_Stream")  def pair_~(sep: String = "=")                          : ~[String] = this.~.map((n,v) => if (n == null || n.length == 0) Doc.toString(v) else n + sep + Doc.toString(v))
 
-  /**/                def add[A](name:String,value:A)(using d:Any.Def.Doc[A]): Unit      = super.add((name, d.value_tag(value)))
-  /**/                def add[A](value: A)           (using d:Any.Def.Doc[A]): Unit      = add("",value)
+  /**/                def add[A](name:String,value:A)(using d:Any.Def.Tag[A]): Unit      = super.add((name, d.value_tag(value)))
+  /**/                def add[A](value: A)           (using d:Any.Def.Tag[A]): Unit      = add("",value)
   /**/                def addAt[A](pos:Int,name:String,value:A)
-                                                     (using d:Any.Def.Doc[A]): Unit      = addAt(pos,(name, d.value_tag(value)))
+                                                     (using d:Any.Def.Tag[A]): Unit      = addAt(pos,(name, d.value_tag(value)))
 
   @tn("add")   inline def +=[A] (inline name: String, inline value: A)
-                                             (using inline t: Any.Def.Doc[A]): Doc       = { add(name,value); this }
+                                             (using inline t: Any.Def.Tag[A]): Doc       = { add(name,value); this }
   @tn("add")   inline def += (inline value: String)                          : Doc       = { add(value);      this }
   @tn("addAt") inline def +@=[A](inline p:Int,inline n:String,inline v:A)
-                                             (using inline t :Any.Def.Doc[A]): Doc       = { addAt(p,n,v);    this }
+                                             (using inline t :Any.Def.Tag[A]): Doc       = { addAt(p,n,v);    this }
 
-  /**/                def update[A](name:String, v:A)(using d:Any.Def.Doc[A]): Unit      = name_~.findPosition_?(_ == name).forval(i => updateAt(i, (name,d.value_tag(v)))) or J.illegalArgument(name +- "name not found")
-  /**/                def update[A](pos: Int, v: A)  (using d:Any.Def.Doc[A]): Unit      = updateAt(pos, (apply(pos)._1,d.value_tag(v)))
+  /**/                def update[A](name:String, v:A)(using d:Any.Def.Tag[A]): Unit      = name_~.findPosition_?(_ == name).forval(i => updateAt(i, (name,d.value_tag(v)))) or J.illegalArgument(name +- "name not found")
+  /**/                def update[A](pos: Int, v: A)  (using d:Any.Def.Tag[A]): Unit      = updateAt(pos, (apply(pos)._1,d.value_tag(v)))
 
   // -------------------------- Product Base  ------------------------------------------------------------------------------
   /**/       override def productPrefix                                      : String    = id

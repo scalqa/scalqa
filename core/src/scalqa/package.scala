@@ -36,7 +36,7 @@ ___________________________________________________________________________*/
   so the types and objects defined deeper in the hierarchy can be accessed without prefixes
 
 
-@val ~~ ->  `Stream Companion alias \n\n Shortcut to [[scalqa.val.Stream$ Val.~]]
+@val ~~ ->  Stream Companion alias \n\n Shortcut to [[scalqa.val.Stream$ Val.~]]
 
     `Note.`
 

@@ -42,7 +42,7 @@ object Action:
   type Event    = action.Event;     transparent inline def Event = action.Event
   type Provider = action.Provider
 
-private object zBooleanReverse extends ReversibleFunction[Boolean,Boolean]:
+private object zBooleanReverse extends TwoWayFunction[Boolean,Boolean]:
   def apply(v: Boolean) = !v
   def undo (v: Boolean) = !v
 

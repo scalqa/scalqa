@@ -9,11 +9,11 @@ abstract class Set[A] private[scalqa]() extends Collection[A] with gen.able.Cont
   /**/                   def contains(v: A)     : Boolean
 
 object Set:
-  /**/            def apply[A](v: ~[A])         : Set[A] = Z.AnyRef(v.iterator)
   /**/            def apply[A](v: A*)           : Set[A] = Z.AnyRef(v.iterator)
+  /**/            def fromStream[A](v: ~[A])    : Set[A] = Z.AnyRef(v.iterator)
   @tn("getVoid")  def void[A]                   : Set[A] = Z.Void.cast[Set[A]]
 
-  implicit inline def implicitFrom[A](v: \/)    : Set[A] = void[A]
+  implicit inline def implicitRequest[A](v: \/) : Set[A] = void[A]
 
   // *****************************************************************************************************
   private object Z:
@@ -47,13 +47,11 @@ ___________________________________________________________________________*/
 @class Set ->
        [[Set]] is an immutable collection with no duplicate values
 
-       [[Set]] has global alias and can be called without parent prefix [[Collection.Set]]
-
        When an element is [[join]]ed to [[Set]], it is evaluated for uniqueness and the operation is ignored in case of duplicates.
 
        Note: [[scalqa.val.collection.Set Set]] is a concrete single implementation of unique collection.
-       There is no general "Set" interface, because its use is rare. If there is a need for more efficient "Set",
-       create one with [[scalqa.val.collection.Mutable$.uniqueElementSet Collection.Mutable.uniqueElementSet]]. The result is faster, but is not thread safe.
+       There is no general "Set" interface, because its use is rare. If there is a need for more efficient "Set" functionality,
+       create one with [[scalqa.val.collection.Mutable$.noDuplicates Collection.Mutable.noDuplicates]]. The result is faster, but is not thread safe.
 
 @def join -> Join element
 

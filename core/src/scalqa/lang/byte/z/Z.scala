@@ -4,8 +4,8 @@ import `val`.stream.Custom.Pipeline
 
 object  Z:
 
-  object VoidStream extends G.~[Byte] with Able.Size.Zero with Gen.Void:
-    @tn("readRaw_Opt")  def readRaw_?  : Byte.Opt = \/
+  object VoidStream extends G.~[Primitive] with Able.Size.Zero with Gen.Void:
+    @tn("readRaw_Opt")  def readRaw_? : G.Opt[Primitive] = \/
 
   class JointStream[A<:Raw](s1: G.~[A], s2: G.~[A]) extends G.~[A] with Pipeline.Tree with Able.Size.Opt.Long:
     private             var v          : Boolean     = true
@@ -20,6 +20,14 @@ object  Z:
     @tn("readRaw_Opt")  def readRaw_? = { var o:G.Opt[A] = \/; if(i<sz) { o = idx(i); i+=1 }; o}
     /**/                def size      = sz - i
 
+  class Stream_ofArray[A<:Raw](a: Array[Primitive], sz: Int) extends G.~[A] with Able.Size:
+    def this(a: Array[Primitive]) = this(a,a.length)
+    private            var i                         = 0
+    @tn("readRaw_Opt") def readRaw_?                 = { var o:G.Opt[A]= \/; if(i<sz) { o=a(i).cast[G.Opt[A]]; i+=1 }; o}
+    /**/               def size                      = sz - i
+    override           def dischargeTo(b: Buffer[A]) = if(i<sz) b.addArray_trusted(a.cast[Array[A]], i, sz-i)
+    /**/               def doc                       = this.defaultDoc += ("array",a)
+
   class Stream_ofOne[A<:Raw](v: A) extends G.~[A] with Able.Size:
     private             var used      : Boolean  = false
     @tn("readRaw_Opt")  def readRaw_? : G.Opt[A] = if(used) \/ else { used=true; v }
@@ -31,13 +39,13 @@ object  Z:
     /**/               def size      : Int      = { val sz=endX-i;  sz/step + (if(sz%step > 0) 1 else 0)}
     /**/               def doc       : Doc      = this.defaultDoc ++= (i<endX) ? ("from",i.toString) += ("step",step)
 
-  class OptDocDef[A<:Raw :Any.Def.Doc](using t:Any.Def.TypeName[A]) extends Any.Def.Doc[G.Opt[A]]:
+  class OptDocDef[A<:Raw :Any.Def.Tag](using t:Any.Def.TypeName[A]) extends Any.Def.Doc[G.Opt[A]] with Any.Def.Tag[G.Opt[A]]:
     def value_tag(v: G.Opt[A])       = t.typeName + ".Opt(" + v.map(_.tag).or("\\/") + ")"
     def value_doc(v: G.Opt[A])       = Doc(t.typeName + ".Opt") += ("value", v.map(_.tag).or("\\/"))
 
-  object OptEmptyDef extends Any.Def.Void[G.Opt[Byte]] with Any.Def.Empty[G.Opt[Byte]]:
-    def value_isVoid( v:G.Opt[Byte]) = v.isEmpty
-    def value_isEmpty(v:G.Opt[Byte]) = v.isEmpty
+  object OptEmptyDef extends Any.Def.Void[G.Opt[Primitive]] with Any.Def.Empty[G.Opt[Primitive]]:
+    def value_isVoid( v:G.Opt[Primitive]) = v.isEmpty
+    def value_isEmpty(v:G.Opt[Primitive]) = v.isEmpty
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

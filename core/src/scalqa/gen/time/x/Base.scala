@@ -16,7 +16,7 @@ transparent trait Base[A<:Any.Long]:
     /**/      def isDayStart    : Boolean   = x.genTime == x.day.start
     /**/      def isMonthStart  : Boolean   = x.genTime == x.month.start
     /**/      def isYearStart   : Boolean   = x.genTime == x.year.start
-    /**/      def tagBrief      : String    = x.genTime.^.to(t => if (t.isVoid) "\\/" else { val x = t.roundTo(1.Second)(using DOWN); if (x.day.isCurrent) x.dayTime.tag else x.tag })
+    /**/      def tagBrief      : String    = x.genTime.^.map(t => if (t.isVoid) "\\/" else { val x = t.roundTo(1.Second)(using DOWN); if (x.day.isCurrent) x.dayTime.tag else x.tag })
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

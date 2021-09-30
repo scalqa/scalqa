@@ -1,11 +1,17 @@
 package scalqa; package lang; package any; import specialized.*; import language.implicitConversions
 
 class Specialized[A]:
-  @tn("Stream") type ~     <: Any.~[A]
-  @tn("Range")  type <>    <: Any.<>[A]
-  @tn("Pack")   type ><    <: Any.><[A]
-  /**/          type Opt   <: Any.Opt[A]
-  /**/          type Array <: Any.Array[A]
+  /**/          type Array      <: Any.Array[A]
+  @tn("Stream") type ~          <: Any.~[A]
+  @tn("Range")  type <>         <: Any.<>[A]
+  @tn("Pack")   type ><         <: Any.><[A]
+  /**/          type Buffer     <: Any.Buffer[A]
+  /**/          type Collection <: Any.Collection[A]
+  /**/          type Idx        <: Any.Idx[A]
+  /**/          type Lookup[B]  <: Any.Lookup[A,B]
+  /**/          type Opt        <: Any.Opt[A]
+  /**/          type Pro        <: Any.Pro[A]
+  /**/          type Set        <: Any.Set[A]
 
 object Specialized extends zSpecializedDefault:
   inline given givenBoolean[A<:Any.Boolean ]: X.Boolean[A] = new X.Boolean[A] // Do not optimize "new",
@@ -18,15 +24,8 @@ object Specialized extends zSpecializedDefault:
   inline given givenDouble [A<:Any.Double  ]: X.Double[A]  = new X.Double[A]
   inline given givenRef    [A<:scala.AnyRef]: X.AnyRef[A]  = new X.AnyRef[A]
 
-  // **************************************************************************************
-  class Primitive[A] extends Specialized[A]:
-    @tn("Stream") type ~     <: Any.Primitive_~[A]
-    @tn("Range")  type <>    <: Any.Primitive_<>[A]
-    @tn("Pack")   type ><    <: Any.Primitive_><[A]
-    /**/          type Opt   <: Any.PrimitiveOpt[A]
-    /**/          type Array <: Any.PrimitiveArray[A]
-
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  /**/                                            type Primitive[A]           = specialized.Primitive[A]
   transparent inline def Opt = specialized.Opt;   type Opt[A,OPT<:Any.Opt[A]] = specialized.Opt[A,OPT]
   transparent inline def X  = specialized.X
 

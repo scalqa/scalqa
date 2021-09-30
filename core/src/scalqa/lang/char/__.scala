@@ -1,18 +1,18 @@
 package scalqa; package lang; import language.implicitConversions
 
-object Char extends char.g.Containers[Char]:
-  inline def min     : Char               = java.lang.Character.MIN_VALUE
-  inline def max     : Char               = java.lang.Character.MAX_VALUE
-  inline def ordering: G.Ordering[Char]   = char.z.Math
-  inline def math    : G.Math[Char]       = char.z.Math
+object Char extends char.g.companion.Containers[Char]:
+  inline def min       : Char           = java.lang.Character.MIN_VALUE
+  inline def max       : Char           = java.lang.Character.MAX_VALUE
+  inline def ordering  : Ordering[Char] = char.z.Math
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Opaque   = char.Opaque.TYPE.DEF;   transparent inline def Opaque = char.Opaque
   type _methods = char._methods;          transparent inline def G      = char.G
 
 package object char:
-  type Raw      = Any.Char
-  type Opaque   = char.Opaque.TYPE.DEF
+  private[lang] type Primitive = Char
+  private[lang] type Raw       = Any.Char
+  private[lang] type Opaque    = Char.Opaque
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -35,9 +35,7 @@ ___________________________________________________________________________*/
         val l: Char.><   = s.><         // Holds ('b','c','d')
     ```
 
-@def min      -> Minimum \n\n  Returns type minimal value: '\u0000'
-@def max      -> Maximum \n\n  Returns type maximum value: '\uFFFF'
-@def ordering -> Ordering   \n\n  Returns type natural ordering
-@def math     -> Math interface \n\n  Returns type math implementation
-
+@def min        -> Minimum     \n\n Returns type minimal value: '\u0000'
+@def max        -> Maximum     \n\n Returns type maximum value: '\uFFFF'
+@def ordering   -> Ordering    \n\n Returns type natural ordering
 */

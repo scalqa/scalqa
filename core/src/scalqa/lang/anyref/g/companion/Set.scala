@@ -2,7 +2,7 @@ package scalqa; package lang; package anyref; package g; package companion; impo
 
 class Set[A]:
   /**/           def apply(v: A *) : Val.Set[A] = apply(v)
-  /**/           def apply(v: ~[A]): Val.Set[A] = Val.Set(v)
+  /**/           def apply(v: ~[A]): Val.Set[A] = Val.Set.fromStream(v)
   @tn("getVoid") def void          : Val.Set[A] = Val.Set.void
 
 /*___________________________________________________________________________

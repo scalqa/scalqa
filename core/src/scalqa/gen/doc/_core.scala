@@ -9,16 +9,16 @@ transparent trait _core extends Able.Tag:
   @tn("value_Stream") def value_~                                                                          : ~[String]
   @tn("pair_Stream")  def pair_~(sep: String = "=")                                                        : ~[String]
 
-  /**/                def add[A](name: String, value: A)                          (using t: Any.Def.Doc[A]): Unit
-  /**/                def add[A](value: A)                                        (using t: Any.Def.Doc[A]): Unit
-  /**/                def addAt[A](pos:Int,name:String,value:A)                   (using t: Any.Def.Doc[A]): Unit
+  /**/                def add[A](name: String, value: A)                          (using t: Any.Def.Tag[A]): Unit
+  /**/                def add[A](value: A)                                        (using t: Any.Def.Tag[A]): Unit
+  /**/                def addAt[A](pos:Int,name:String,value:A)                   (using t: Any.Def.Tag[A]): Unit
 
-  @tn("add")   inline def +=[A] (inline name: String, inline value: A)     (using inline t: Any.Def.Doc[A]): Doc
+  @tn("add")   inline def +=[A] (inline name: String, inline value: A)     (using inline t: Any.Def.Tag[A]): Doc
   @tn("add")   inline def +=    (inline value: String)                                                     : Doc
-  @tn("addAt") inline def +@=[A](inline p:Int, inline n:String, inline v:A)(using inline t :Any.Def.Doc[A]): Doc
+  @tn("addAt") inline def +@=[A](inline p:Int, inline n:String, inline v:A)(using inline t :Any.Def.Tag[A]): Doc
 
-  /**/                def update[A](name: String, v: A)                           (using t :Any.Def.Doc[A]): Unit
-  /**/                def update[A](pos: Int, v: A)                               (using t :Any.Def.Doc[A]): Unit
+  /**/                def update[A](name: String, v: A)                           (using t :Any.Def.Tag[A]): Unit
+  /**/                def update[A](pos: Int, v: A)                               (using t :Any.Def.Tag[A]): Unit
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

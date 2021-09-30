@@ -1,6 +1,7 @@
 package scalqa; package lang; package anyref; package g; import language.implicitConversions
 
 object Companion:
+  /**/          type Containers[A] = companion.Containers[A]
   @tn("Stream") type ~ [A]         = companion.Stream[A]
   @tn("Pack")   type ><[A]         = companion.Pack[A]
   @tn("Range")  type <>[A]         = companion.Range[A]

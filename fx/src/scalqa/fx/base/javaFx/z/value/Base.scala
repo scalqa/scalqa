@@ -50,6 +50,7 @@ private[fx] abstract class Base[A] extends java.util.concurrent.atomic.AtomicRef
       case v => if (v == l) clear(v)
 
 private object Base
+
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API

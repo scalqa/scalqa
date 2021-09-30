@@ -4,7 +4,7 @@ object Code:
 
   def apply(code: String): String =
 
-    val l: ><[(String,Int.<>,String)] = code.tokenized_~(Tag.Ids.~.map("@" + _ + " "))
+    val l: ><[(String,Int.<>,String)] = code.tokenized_~(Tag.Ids.~.map("@" + _ + " ")).><
 
 
     if(l.size == 0)

@@ -128,7 +128,7 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
     case _ => Nil
   }
 
-  def memberSignature(member: Member, heading: Boolean = false) =
+  def memberSignature(member: Member, short: Boolean = true) =
     val depStyle = if member.deprecated.isEmpty then "" else "deprecated"
     val nameClasses = cls := s"documentableName $depStyle"
 
@@ -136,7 +136,7 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
     val inlineBuilder = rawBuilder.asInstanceOf[InlineSignatureBuilder]
     if inlineBuilder.preName.isEmpty then println(member)
     val kind :: modifiersRevered = inlineBuilder.preName
-    var signature = inlineBuilder.names.reverse.scalqaImprove(member,heading)
+    var signature = inlineBuilder.names.reverse.improveSignature(member,short)
 
     Seq(
       span(cls := "modifiers")(
@@ -144,7 +144,7 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
         span(cls := "kind")(renderElement(kind)),
       ),
       renderLink(member.name.nameToOp, member.dri, nameClasses),
-      span(cls := "signature")(signature.map(v => renderElementWith(v,member,heading))),
+      span(cls := "signature")(signature.map(v => renderElementWith(v,short))),
     )
 
   def memberIcon(member: Member) = member.kind match {
@@ -160,7 +160,7 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
   def annotations(member: Member) =
    val rawBuilder = InlineSignatureBuilder().annotationsBlock(member)
    val signatures = rawBuilder.asInstanceOf[InlineSignatureBuilder].names.reverse
-   span(cls := "annotations monospace")(signatures.map(v => renderElementWith(v,member)))
+   span(cls := "annotations monospace")(signatures.map(v => renderElementWith(v)))
 
   def member(member: Member) =
     val filterAttributes = FilterAttributes.attributesFor(member)
@@ -279,7 +279,7 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
       }.collect {
         case (Some(on), members) =>
           val sig = Signature(s"extension (${on.name}: ") ++ on.signature ++ Signature(")")
-          MGroup(span(sig.map(v => renderElementWith(v,s))), members.sortBy(_.name).toSeq, on.name)
+          MGroup(span(sig.map(v => renderElementWith(v))), members.sortBy(_.name).toSeq, on.name)
       }.toSeq
 
     // scalqa start
@@ -308,6 +308,9 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
       )),
       buildGroup("Extension", Seq(
         ("", GET.extended),
+      )),
+      buildGroup("Containers", Seq(
+        ("", GET.containers)
       )),
       buildGroup("Implicit", Seq(
         ("", rest.filter(m => m.kind.isImplicit && !m.name.startsWith("zz")))
@@ -353,7 +356,7 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
       def signatureList(list: Seq[LinkToType]): Seq[AppliedTag] =
         if list.isEmpty then Nil
         else Seq(div(cls := "symbol monospace")(list.map(link =>
-          div(link.kind.name," ", link.signature.map(v => renderElementWith(v,m)))
+          div(link.kind.name," ", link.signature.map(v => renderElementWith(v)))
         )))
 
       val supertypes = signatureList(m.parents)
@@ -392,7 +395,7 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
           ),
           div(cls := "signature monospace")(
             annotations(m),
-            memberSignature(m,true)
+            memberSignature(m,false)
           )
         )
 

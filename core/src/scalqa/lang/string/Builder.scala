@@ -8,8 +8,8 @@ object Builder extends AnyRef.Opaque.Base[Builder,REAL]("String.Builder"):
   inline def apply(inline capacity: Int): Builder = new REAL(capacity).cast[Builder]
 
   extension(inline x: Builder)
-    @tn("add")         inline def += [T,A<:T|Boolean|Byte|Char|Short|Int|Long|Float|Double|CharSequence](inline v: A)(using inline tg:Any.Def.Doc[A]): Builder = add(v)
-    @tn("addAt")       inline def +@=[T,A<:T|Boolean|Byte|Char|Short|Int|Long|Float|Double|CharSequence](inline off: Int, inline v: A)(using inline tg:Any.Def.Doc[A]): Builder = addAt(off,v)
+    @tn("add")         inline def += [B,A<:B|Boolean|Byte|Char|Short|Int|Long|Float|Double|CharSequence](inline v: A)(using inline tg:Any.Def.Doc[A]): Builder = add(v)
+    @tn("addAt")       inline def +@=[B,A<:B|Boolean|Byte|Char|Short|Int|Long|Float|Double|CharSequence](inline off: Int, inline v: A)(using inline tg:Any.Def.Doc[A]): Builder = addAt(off,v)
 
     /**/               inline def charAt(inline i: Int)  : Char    = x.real.charAt(i)
     /**/               inline def size                   : Int     = x.real.length
@@ -18,31 +18,31 @@ object Builder extends AnyRef.Opaque.Base[Builder,REAL]("String.Builder"):
     /**/               inline def removeAt(inline v: Int): Builder = x.real.deleteCharAt(v).cast[Builder]
     /**/               inline def tag                    : String  = x.real.toString
 
-    inline def add[T,A<:T|Boolean|Byte|Char|Short|Int|Long|Float|Double|CharSequence](inline v: A)(using inline tg:Any.Def.Doc[A]): Builder =
-      inline v match
-        case _ :Boolean      => x.real.append(v.cast[Boolean     ]).cast[Builder]
-        case _ :Byte         => x.real.append(v.cast[Byte        ]).cast[Builder]
-        case _ :Char         => x.real.append(v.cast[Char        ]).cast[Builder]
-        case _ :Short        => x.real.append(v.cast[Short       ]).cast[Builder]
-        case _ :Int          => x.real.append(v.cast[Int         ]).cast[Builder]
-        case _ :Long         => x.real.append(v.cast[Long        ]).cast[Builder]
-        case _ :Float        => x.real.append(v.cast[Float       ]).cast[Builder]
-        case _ :Double       => x.real.append(v.cast[Double      ]).cast[Builder]
-        case _ :CharSequence => x.real.append(v.cast[CharSequence]).cast[Builder]
-        case _               => x.real.append(tg.value_tag(v)     ).cast[Builder]
+    inline def add[B,A<:B|Boolean|Byte|Char|Short|Int|Long|Float|Double|CharSequence](inline w: A)(using inline tg:Any.Def.Tag[A]): Builder =
+      inline w match
+        case v :Boolean      => x.real.append(v).cast[Builder]
+        case v :Byte         => x.real.append(v).cast[Builder]
+        case v :Char         => x.real.append(v).cast[Builder]
+        case v :Short        => x.real.append(v).cast[Builder]
+        case v :Int          => x.real.append(v).cast[Builder]
+        case v :Long         => x.real.append(v).cast[Builder]
+        case v :Float        => x.real.append(v).cast[Builder]
+        case v :Double       => x.real.append(v).cast[Builder]
+        case v :CharSequence => x.real.append(v).cast[Builder]
+        case v               => x.real.append(tg.value_tag(v)).cast[Builder]
 
-    inline def addAt[T,A<:T|Boolean|Byte|Char|Short|Int|Long|Float|Double|CharSequence](inline off: Int, inline v: A)(using inline tg:Any.Def.Doc[A]): Builder =
-      inline v match
-        case _ :Boolean      => x.real.insert(off,v.cast[Boolean     ]).cast[Builder]
-        case _ :Byte         => x.real.insert(off,v.cast[Byte        ]).cast[Builder]
-        case _ :Char         => x.real.insert(off,v.cast[Char        ]).cast[Builder]
-        case _ :Short        => x.real.insert(off,v.cast[Short       ]).cast[Builder]
-        case _ :Int          => x.real.insert(off,v.cast[Int         ]).cast[Builder]
-        case _ :Long         => x.real.insert(off,v.cast[Long        ]).cast[Builder]
-        case _ :Float        => x.real.insert(off,v.cast[Float       ]).cast[Builder]
-        case _ :Double       => x.real.insert(off,v.cast[Double      ]).cast[Builder]
-        case _ :CharSequence => x.real.insert(off,v.cast[CharSequence]).cast[Builder]
-        case _               => x.real.insert(off,tg.value_tag(v)     ).cast[Builder]
+    inline def addAt[B,A<:B|Boolean|Byte|Char|Short|Int|Long|Float|Double|CharSequence](inline off: Int, inline w: A)(using inline tg:Any.Def.Tag[A]): Builder =
+      inline w match
+        case v :Boolean      => x.real.insert(off,v).cast[Builder]
+        case v :Byte         => x.real.insert(off,v).cast[Builder]
+        case v :Char         => x.real.insert(off,v).cast[Builder]
+        case v :Short        => x.real.insert(off,v).cast[Builder]
+        case v :Int          => x.real.insert(off,v).cast[Builder]
+        case v :Long         => x.real.insert(off,v).cast[Builder]
+        case v :Float        => x.real.insert(off,v).cast[Builder]
+        case v :Double       => x.real.insert(off,v).cast[Builder]
+        case v :CharSequence => x.real.insert(off,v).cast[Builder]
+        case v               => x.real.insert(off,tg.value_tag(v)).cast[Builder]
 
   object TYPE:
     opaque type DEF <: AnyRef.Opaque & CharSequence  = REAL & AnyRef.Opaque

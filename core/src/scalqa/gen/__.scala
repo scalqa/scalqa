@@ -3,37 +3,37 @@ package scalqa; import language.implicitConversions
 import scala.reflect.Enum
 
 object Gen:
-  transparent inline def Able               = gen.Able
+  transparent inline def Able           = gen.Able
 
-  transparent inline def Calendar           = gen.Calendar
-  transparent inline def Day                = gen.calendar.Day;               type Day                     = gen.calendar.Day.TYPE.DEF
-  transparent inline def Week               = gen.calendar.Week;              type Week                    = gen.calendar.Week.TYPE.DEF
-  transparent inline def Month              = gen.calendar.Month;             type Month                   = gen.calendar.Month.TYPE.DEF
-  transparent inline def Year               = gen.calendar.Year;              type Year                    = gen.calendar.Year.TYPE.DEF
+  transparent inline def Calendar       = gen.Calendar
+  transparent inline def Day            = gen.calendar.Day;               type Day                     = gen.calendar.Day.TYPE.DEF
+  transparent inline def Week           = gen.calendar.Week;              type Week                    = gen.calendar.Week.TYPE.DEF
+  transparent inline def Month          = gen.calendar.Month;             type Month                   = gen.calendar.Month.TYPE.DEF
+  transparent inline def Year           = gen.calendar.Year;              type Year                    = gen.calendar.Year.TYPE.DEF
 
-  transparent inline def Doc                = gen.Doc;                        type Doc                     = gen.Doc
+  transparent inline def Doc            = gen.Doc;                        type Doc                     = gen.Doc
 
-  transparent inline def Event              = gen.Event
-  transparent inline def Observable         = gen.event.Observable;           type Observable              = gen.event.Observable
+  transparent inline def Event          = gen.Event
+  transparent inline def Observable     = gen.event.Observable;           type Observable              = gen.event.Observable
 
-  transparent inline def Math               = gen.Math;                       type Math[A]                 = scala.math.Numeric[A]
-  transparent inline def Ordering           = gen.math.Ordering;              type Ordering[A]             = scala.Ordering[A]
-  transparent inline def Rounding           = gen.math.Rounding;              type Rounding                = gen.math.Rounding
-  transparent inline def BigDecimal         = gen.math.BigDecimal;            type BigDecimal              = gen.math.BigDecimal.TYPE.DEF
-  transparent inline def BigInteger         = gen.math.BigInteger;            type BigInteger              = gen.math.BigInteger.TYPE.DEF
+  transparent inline def Math           = gen.Math
+  transparent inline def Ordering       = gen.math.Ordering;              type Ordering[A]             = scala.Ordering[A]
+  transparent inline def Rounding       = gen.math.Rounding;              type Rounding                = gen.math.Rounding
+  transparent inline def BigDecimal     = gen.math.BigDecimal;            type BigDecimal              = gen.math.BigDecimal.TYPE.DEF
+  transparent inline def BigInteger     = gen.math.BigInteger;            type BigInteger              = gen.math.BigInteger.TYPE.DEF
 
-  transparent inline def Request            = gen.Request;                    type Request                 = gen.Request
+  transparent inline def Request        = gen.Request;                    type Request                 = gen.Request
 
-  transparent inline def Time               = gen.Time;                       type Time                    = gen.Time.TYPE.DEF
-  transparent inline def DayTime            = gen.time.DayTime;               type DayTime                 = gen.time.DayTime.TYPE.DEF
-  transparent inline def Period             = gen.time.Period;                type Period                  = gen.time.Period
+  transparent inline def Time           = gen.Time;                       type Time                    = gen.Time.TYPE.DEF
+  transparent inline def DayTime        = gen.time.DayTime;               type DayTime                 = gen.time.DayTime.TYPE.DEF
+  transparent inline def Period         = gen.time.Period;                type Period                  = gen.time.Period
 
-  transparent inline def Util               = gen.Util
-  transparent inline def ByteCount          = gen.util.ByteCount;             type ByteCount               = gen.util.ByteCount.TYPE.DEF
-  transparent inline def Percent            = gen.util.Percent;               type Percent                 = gen.util.Percent.TYPE.DEF
-  transparent inline def ReversibleFunction = gen.util.ReversibleFunction;    type ReversibleFunction[A,B] = gen.util.ReversibleFunction[A,B]
-  /**/                                                                        type EnumCompanion[A<:Enum]  = gen.util.EnumCompanion[A]
-  transparent inline def Void               = gen.Void;                       type Void                    = gen.Void
+  transparent inline def Util           = gen.Util
+  transparent inline def ByteCount      = gen.util.ByteCount;             type ByteCount               = gen.util.ByteCount.TYPE.DEF
+  transparent inline def Percent        = gen.util.Percent;               type Percent                 = gen.util.Percent.TYPE.DEF
+  transparent inline def TwoWayFunction = gen.util.TwoWayFunction;        type TwoWayFunction[A,B]     = gen.util.TwoWayFunction[A,B]
+  /**/                                                                    type EnumCompanion[A<:Enum]  = gen.util.EnumCompanion[A]
+  transparent inline def Void           = gen.Void;                       type Void                    = gen.Void
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -80,7 +80,6 @@ ___________________________________________________________________________*/
 @def  Month              ->  Type companion alias \n\n Shortcut to [[scalqa.gen.calendar.Month$          Gen.Calendar.Month]]
 @type Year               ->  Type alias           \n\n Shortcut to [[scalqa.gen.calendar.Year            Gen.Calendar.Year]]
 @def  Year               ->  Type companion alias \n\n Shortcut to [[scalqa.gen.calendar.Year$           Gen.Calendar.Year]]
-@type Math               ->  Type alias           \n\n Shortcut to [[scalqa.gen.Math                     Gen.Math]]
 @def  Math               ->  Type companion alias \n\n Shortcut to [[scalqa.gen.Math$                    Gen.Math]]
 @type Ordering           ->  Type alias           \n\n Shortcut to [[scalqa.gen.math.Ordering            Gen.Math.Ordering]]
 @def  Ordering           ->  Type companion alias \n\n Shortcut to [[scalqa.gen.math.Ordering$           Gen.Math.Ordering]]
@@ -95,8 +94,8 @@ ___________________________________________________________________________*/
 @def  ByteCount          ->  Type companion alias \n\n Shortcut to [[scalqa.gen.util.ByteCount$          Gen.Util.ByteCount]]
 @type Percent            ->  Type alias           \n\n Shortcut to [[scalqa.gen.util.Percent             Gen.Util.Percent]]
 @def  Percent            ->  Type companion alias \n\n Shortcut to [[scalqa.gen.util.Percent$            Gen.Util.Percent]]
-@type ReversibleFunction ->  Type alias           \n\n Shortcut to [[scalqa.gen.util.ReversibleFunction  Gen.Util.ReversibleFunction]]
-@def  ReversibleFunction ->  Type companion alias \n\n Shortcut to [[scalqa.gen.util.ReversibleFunction$ Gen.Util.ReversibleFunction]]
+@type TwoWayFunction     ->  Type alias           \n\n Shortcut to [[scalqa.gen.util.TwoWayFunction  Gen.Util.TwoWayFunction]]
+@def  TwoWayFunction     ->  Type companion alias \n\n Shortcut to [[scalqa.gen.util.TwoWayFunction$ Gen.Util.TwoWayFunction]]
 @type Void               ->  Type alias           \n\n Shortcut to [[scalqa.gen.Void                     Gen.Void]]
 @def  Void               ->  Type companion alias \n\n Shortcut to [[scalqa.gen.Void$                    Gen.Void]]
 */

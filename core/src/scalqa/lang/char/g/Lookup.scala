@@ -8,14 +8,14 @@ trait Lookup[A<:Raw,+B] extends Val.Lookup[A,B]:
   @tn("key_Stream") override def key_~         : Stream[A]   = super.key_~.raw
 
 object Lookup:
-  implicit def implicitFrom[A<:Raw,B](v: \/): Lookup[A,B] = Stable.void
+  implicit def implicitRequest[A<:Raw,B](v: \/): Lookup[A,B] = Stable.void
 
   trait Mutable[A<:Raw,B] extends Lookup[A,B] with Val.Lookup.Mutable[A,B]:
     def put(key: A, value: B) : Unit
     def remove(key: A)        : Val.Opt[B]
 
   object Mutable:
-    implicit inline def implicitFrom[A<:Raw,B](inline v: NEW): Mutable[A,B] = new X.Basic(J.initSize)
+    implicit inline def implicitRequest[A<:Raw,B](inline v: NEW): Mutable[A,B] = new X.Basic(J.initSize)
     object X:
       class Basic[A<:Raw,B](iSz: Int) extends Lookup.Mutable[A,B]:
         private val real = new collection.mutable.LongMap[B](iSz)
@@ -40,7 +40,7 @@ object Lookup:
     /**/            def apply[A<:Raw,B](v: (A,B) *)      : Stable[A,B] = apply(v.~)
     /**/            def apply[A<:Raw,B](v: ~[(A,B)])     : Stable[A,B] = new Stable(IntMap.from(v.map(v => (v._1.real.toInt,v._2)).iterator))
     @tn("getVoid")  def void[A<:Raw,B]                   : Stable[A,B] = zVoid.cast[Stable[A,B]]; private object zVoid extends Stable(IntMap.empty) with Gen.Void
-    implicit inline def implicitFrom[A<:Raw,B](v: \/)    : Stable[A,B] = void
+    implicit inline def implicitRequest[A<:Raw,B](v: \/) : Stable[A,B] = void
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -51,7 +51,7 @@ ___________________________________________________________________________*/
 /**
 @def void  -> Get void instance
 
-@def implicitFrom    -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest   -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 @object X -> ### Type Extention
 */

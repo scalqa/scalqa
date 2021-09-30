@@ -4,7 +4,7 @@ object Main extends J.Test:
 
   include(
     _aggregate.Main,
-    _convert.Main,
+    _transform.Main,
     _evaluate.Main,
     _process.Main,
     _read.Main)

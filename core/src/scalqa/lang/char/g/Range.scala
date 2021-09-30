@@ -9,7 +9,7 @@ class Range[A<:Raw](_start: A, _size: Int) extends Val.<>[A] with Able.Size with
   /**/              def endIsIn                : Boolean       = _size > 0
   /**/              def size                   : Int           = _size
   override          def isEmpty                : Boolean       = _size < 1
-  /**/              def ordering               : G.Ordering[A] = Char.ordering.cast[G.Ordering[A]]
+  /**/              def ordering               : Ordering[A]   = Char.ordering.cast[Gen.Ordering[A]]
   @tn("stream")     def ~                      : Stream[A]     = Z.Stream_fromRange(_start.cast[Int],endX.cast[Int],1)
   @tn("step_Stream")def step_~(step: Int)      : Stream[A]     = Z.Stream_fromRange(_start.cast[Int],endX.cast[Int],step)
   override          def contains(v: A)         : Boolean       = _start <= v && v < endX

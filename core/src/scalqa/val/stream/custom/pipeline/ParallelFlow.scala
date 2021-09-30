@@ -1,5 +1,7 @@
 package scalqa; package `val`; package stream; package custom; package pipeline; import language.implicitConversions
 
+import Gen.Ordering
+
 abstract class ParallelFlow[A] extends Flow[A] with Pipeline.Tree:
   /**/               def isParallel                                 : Boolean          = true
   @tn("stream")      def ~                                          : ~[A]             = z.x.Stream_fromParallelFlow(this)
@@ -15,7 +17,7 @@ abstract class ParallelFlow[A] extends Flow[A] with Pipeline.Tree:
   @tn("find_Opt")    def find_?(f: A => Boolean)                    : Opt[A]           = take(f).findAny_?
   /**/               def reduce(bf: (A,A) => A)                     : A                = reduce_?(bf).get
   /**/               def fold(start: A)(bf: (A,A) => A)             : A                = foldAs[A](start)(bf, bf)
-  /**/               def sum                 (using m: Gen.Math[A]) : A                = foldAs(m.zero)(m.plus,m.plus)
+  /**/               def sum                  (using m:Math.Sum[A]) : A                = foldAs(m.zero)(m.plus,m.plus)
   /**/               def range                (using o:Ordering[A]) : Range[A]         = range_?.get
   /**/               def min                  (using o:Ordering[A]) : A                = min_?.get
   /**/               def max                  (using o:Ordering[A]) : A                = max_?.get

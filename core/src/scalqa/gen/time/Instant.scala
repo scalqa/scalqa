@@ -8,7 +8,7 @@ object Instant extends Long.Opaque.Data.Ordered[Instant]("Time.Instant") with ti
   /**/                  def apply(i: java.time.Instant): Instant = (i.getEpochSecond * 1_000_000_000L + i.getNano).toOpaque
   override              def value_tag(v: Instant)      : String  = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new java.util.Date(v.real / 1_000_000L)) + "." + Z.pad(v.micros, 3) + "." + Z.pad(v.nanos, 3)
 
-  implicit       inline def implicitFrom(v: CURRENT)   : Instant = apply()
+  implicit       inline def implicitRequest(v: CURRENT): Instant = apply()
 
   extension(x: Instant)
     /**/                def genTime                    : Time    = Time.fromIndex(x.real / 1_000_000L)

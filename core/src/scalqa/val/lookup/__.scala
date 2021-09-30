@@ -13,7 +13,7 @@ object Lookup:
   /**/                  def apply[A,B](v: ~[(A, B)])               : Lookup[A,B] = Stable(v)
   /**/                  def apply[A,B](vs: (A, B)*)                : Lookup[A,B] = Stable(vs)
   @tn("getVoid") inline def void[A,B]                              : Lookup[A,B] = Stable.void
-  implicit       inline def implicitFrom[A,B](v: \/)               : Lookup[A,B] = void[A,B]
+  implicit       inline def implicitRequest[A,B](v: \/)            : Lookup[A,B] = void[A,B]
 
   extension[A,B] (x: Lookup[A,B])
     @tn("map_View")               def map_^[C](f: B => C) : Lookup[A,C]               = Z.Convert_View(x, f)
@@ -71,6 +71,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitFrom    -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest   -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

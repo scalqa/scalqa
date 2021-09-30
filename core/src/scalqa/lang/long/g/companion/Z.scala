@@ -1,15 +1,15 @@
 package scalqa; package lang; package long; package g; package companion; import language.implicitConversions
 
 object Z:
-  val Stream     = new Stream[Long]
-  val Opt        = new Opt[Long]
-  val Collection = new Collection[Long]
-  val Idx        = new Idx[Long]
-  val Pack       = new Pack[Long]
-  val Lookup     = new Lookup[Long]
-  val Set        = new Set[Long]
-  val Pro        = new Pro[Long]
-  val Fun        = new Fun[Long]
+  val Stream     = new Stream[Primitive]
+  val Opt        = new Opt[Primitive]
+  val Collection = new Collection[Primitive]
+  val Idx        = new Idx[Primitive]
+  val Pack       = new Pack[Primitive]
+  val Lookup     = new Lookup[Primitive]
+  val Set        = new Set[Primitive]
+  val Pro        = new Pro[Primitive]
+  val Fun        = new Fun[Primitive]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -16,14 +16,14 @@ object Lang:
 
 package object lang:
   // Allow Primitive to Primitive conversion insize "lang"
-  inline implicit def implicitFrom(inline v: Any.Boolean): Boolean = v.cast[Boolean]
-  inline implicit def implicitFrom(inline v: Any.Byte)   : Byte    = v.cast[Byte]
-  inline implicit def implicitFrom(inline v: Any.Char)   : Char    = v.cast[Char]
-  inline implicit def implicitFrom(inline v: Any.Short)  : Short   = v.cast[Short]
-  inline implicit def implicitFrom(inline v: Any.Int)    : Int     = v.cast[Int]
-  inline implicit def implicitFrom(inline v: Any.Long)   : Long    = v.cast[Long]
-  inline implicit def implicitFrom(inline v: Any.Float)  : Float   = v.cast[Float]
-  inline implicit def implicitFrom(inline v: Any.Double) : Double  = v.cast[Double]
+  inline implicit def zzFrom(inline v: Any.Boolean): Boolean = v.cast[Boolean]
+  inline implicit def zzFrom(inline v: Any.Byte)   : Byte    = v.cast[Byte]
+  inline implicit def zzFrom(inline v: Any.Char)   : Char    = v.cast[Char]
+  inline implicit def zzFrom(inline v: Any.Short)  : Short   = v.cast[Short]
+  inline implicit def zzFrom(inline v: Any.Int)    : Int     = v.cast[Int]
+  inline implicit def zzFrom(inline v: Any.Long)   : Long    = v.cast[Long]
+  inline implicit def zzFrom(inline v: Any.Float)  : Float   = v.cast[Float]
+  inline implicit def zzFrom(inline v: Any.Double) : Double  = v.cast[Double]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

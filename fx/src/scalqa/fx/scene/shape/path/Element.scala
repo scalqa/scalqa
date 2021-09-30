@@ -10,7 +10,7 @@ trait Element extends Any:
 
 object Element:
 
-  given FxConverter: ReversibleFunction[SH.PathElement, Element] = new ReversibleFunction[SH.PathElement, Element] {
+  given FxConverter: TwoWayFunction[SH.PathElement, Element] = new TwoWayFunction[SH.PathElement, Element] {
     def apply(real: SH.PathElement) = Element(real)
     def undo(e: Element) = e.real
   }

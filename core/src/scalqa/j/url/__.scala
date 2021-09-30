@@ -8,7 +8,7 @@ object Url extends AnyRef.Opaque.Base[Url,REAL]("Url"):
   /**/     inline def apply(inline v: String)              : Url    = apply(REAL(v))
   /**/            def apply(c:Class[_],resourceName:String): Url    = { val v = c.getResource(resourceName); if(v != null) apply(v) else J.illegalState("Resourse: '" + resourceName +"' is no available within class: " + c.getName)}
   override        def value_tag(v:Url)                     : String = v.real.toExternalForm
-  implicit inline def implicitFrom(inline v: REAL)         : Url    = apply(v)
+  implicit inline def implicitFromReal(inline v: REAL)     : Url    = apply(v)
 
   extension (inline x: Url)
     inline def host                            : String         = x.real.getHost

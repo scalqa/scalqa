@@ -1,27 +1,27 @@
 package scalqa; package lang; import language.implicitConversions
 
 object Any:
-  /**/                   type Boolean           = scala.Boolean  | Boolean.Opaque
-  /**/                   type Byte              = scala.Byte     | Byte.Opaque
-  /**/                   type Char              = scala.Char     | Char.Opaque
-  /**/                   type Short             = scala.Short    | Short.Opaque
-  /**/                   type Int               = scala.Int      | Int.Opaque
-  /**/                   type Long              = scala.Long     | Long.Opaque
-  /**/                   type Float             = scala.Float    | Float.Opaque
-  /**/                   type Double            = scala.Double   | Double.Opaque
+  /**/         type Boolean      = scala.Boolean     | Boolean.Opaque
+  /**/         type Byte         = scala.Byte        | Byte.Opaque
+  /**/         type Char         = scala.Char        | Char.Opaque
+  /**/         type Short        = scala.Short       | Short.Opaque
+  /**/         type Int          = scala.Int         | Int.Opaque
+  /**/         type Long         = scala.Long        | Long.Opaque
+  /**/         type Float        = scala.Float       | Float.Opaque
+  /**/         type Double       = scala.Double      | Double.Opaque
+  /**/         type Opaque       = AnyRef.Opaque     | Primitive.Opaque
 
-  /**/                   type Array[A]          = scala.Array[A] | PrimitiveArray[A]
-  @tn("Stream")          type ~[A]              = Val.~[A]       | Primitive_~[A]
-  @tn("Range")           type <>[A]             = Val.<>[A]      | Primitive_<>[A]
-  @tn("Pack")            type ><[A]             = Val.><[A]      | Primitive_><[A]
-  /**/                   type Opt[A]            = Val.Opt[A]     | PrimitiveOpt[A]
-  /**/                   type Opaque            = AnyRef.Opaque  | Boolean.Opaque | Byte.Opaque | Char.Opaque | Short.Opaque | Int.Opaque | Long.Opaque | Float.Opaque | Double.Opaque
-
-  /**/                   type PrimitiveArray[A] = scala.Array  [A&Boolean] | scala.Array[A&Byte] | scala.Array[A&Char] | scala.Array[A&Short] | scala.Array[A&Int] | scala.Array[A&Long] | scala.Array[A&Float] | scala.Array [A&Double]
-  @tn("Primitive_Stream")type Primitive_~[A]    = boolean.G.~  [A&Boolean] | byte.G.~   [A&Byte] | char.G.~[A&Char]    | short.G.~  [A&Short] | int.G.~    [A&Int] | long.G.~   [A&Long] | float.G.~  [A&Float] | double.G.~  [A&Double]
-  @tn("Primitive_Pack")  type Primitive_><[A]   = boolean.G.>< [A&Boolean] | byte.G.><  [A&Byte] | char.G.><[A&Char]   | short.G.>< [A&Short] | int.G.><   [A&Int] | long.G.><  [A&Long] | float.G.>< [A&Float] | double.G.>< [A&Double]
-  /**/                   type PrimitiveOpt[A]   = boolean.G.Opt[A&Boolean] | byte.G.Opt [A&Byte] | char.G.Opt[A&Char]  | short.G.Opt[A&Short] | int.G.Opt  [A&Int] | long.G.Opt [A&Long] | float.G.Opt[A&Float] | double.G.Opt[A&Double]
-  @tn("Primitive_Range") type Primitive_<>[A]   =                            byte.G.<>  [A&Byte] | char.G.<>[A&Char]   | short.G.<> [A&Short] | int.G.<>   [A&Int] | long.G.<>  [A&Long] | float.G.<> [A&Float] | double.G.<> [A&Double]
+  /**/         type Array[A]     = scala.Array[A]    | Primitive.Array[A]
+  @tn("Stream")type ~[A]         = Val.~[A]          | Primitive.~[A]
+  @tn("Range") type <>[A]        = Val.<>[A]         | Primitive.<>[A]
+  @tn("Pack")  type ><[A]        = Val.><[A]         | Primitive.><[A]
+  /**/         type Buffer[A]    = Val.Buffer[A]     | Primitive.Buffer[A]
+  /**/         type Collection[A]= Val.Collection[A] | Primitive.Collection[A]
+  /**/         type Lookup[A,B]  = Val.Lookup[A,B]   | Primitive.Lookup[A,B]
+  /**/         type Idx[A]       = Val.Idx[A]        | Primitive.Idx[A]
+  /**/         type Opt[A]       = Val.Opt[A]        | Primitive.Opt[A]
+  /**/         type Pro[A]       = Val.Pro[A]        | Primitive.Pro[A]
+  /**/         type Set[A]       = Val.Set[A]        | Primitive.Set[A]
 
   // Those are void resolutions for Any.Opt[A]. There is no reason to show them in docs, because same implicits are documented in each G.Opt.
   implicit inline def zzImplicitVoidRequestToValOpt    [A<:Any        ](v: \/): Val.Opt[A]       = ZZ.None.cast[Val.Opt[A]]
@@ -37,6 +37,7 @@ object Any:
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   /**/                                                  type _methods       = any._methods
   transparent inline def Specialized = any.Specialized; type Specialized[A] = any.Specialized[A]
+  transparent inline def Primitive   = any.Primitive
   transparent inline def Def         = any.Def
 
 /*___________________________________________________________________________
@@ -54,12 +55,6 @@ ___________________________________________________________________________*/
 @type ><     ->  All pack kinds   \n\n All supported pack implementations.
 @type Opt    ->  All Opt kinds    \n\n All supported Opt implementations.
 @type Opaque ->  All Opaque kinds \n\n All supported Opaque root types.
-
-@type PrimitiveArray ->  All primitive Array kinds  \n\n All possible primitive Array types supported by JVM.
-@type Primitive_~    ->  All primitive stream kinds \n\n All supported primitive stream implementations.
-@type Primitive_<>   ->  All primitive range kinds  \n\n All supported primitive range implementations.
-@type Primitive_><   ->  All primitive pack kinds   \n\n All supported primitive pack implementations.
-@type PrimitiveOpt   ->  All primitive Opt kinds    \n\n All supported primitive Opt implementations.
 
 @type Boolean ->  All Boolean-like types \n\n The type is needed for specialized Boolean based generic containers. From JVM prospective Any.Boolean is just a Boolean primitive.
 @type Byte    ->  All Byte-like    types \n\n The type is needed for specialized Byte    based generic containers. From JVM prospective Any.Byte    is just a Byte    primitive.

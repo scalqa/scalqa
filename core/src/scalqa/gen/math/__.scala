@@ -1,23 +1,19 @@
 package scalqa; package gen; import language.implicitConversions
 
-import java.lang.{ Math => Java}
-
 object Math:
-  inline def floor(inline v: Double)                 : Double = Java.floor(v)
-  inline def ceil (inline v: Double)                 : Double = Java.ceil(v)
-  inline def log10(inline v: Double)                 : Double = Java.log10(v)
-  inline def pow(inline a: Double, inline b: Double) : Double = Java.pow(a,b)
+  inline def floor(inline v: Double)                 : Double = java.lang.Math.floor(v)
+  inline def ceil (inline v: Double)                 : Double = java.lang.Math.ceil(v)
+  inline def log10(inline v: Double)                 : Double = java.lang.Math.log10(v)
+  inline def pow(inline a: Double, inline b: Double) : Double = java.lang.Math.pow(a,b)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  transparent inline def Ordering   = math.Ordering;    type Ordering[A]  = scala.Ordering[A]
-  transparent inline def Format     = math.Format;      type Format       = math.Format.TYPE.DEF
-  transparent inline def Rounding   = math.Rounding;    type Rounding     = math.Rounding
-  transparent inline def BigDecimal = math.BigDecimal;  type BigDecimal   = math.BigDecimal.TYPE.DEF
-  transparent inline def BigInteger = math.BigInteger;  type BigInteger   = math.BigInteger.TYPE.DEF
-
-  object TYPE:
-    type DEF[A] = scala.math.Numeric[A]
-
+  type Average[A]   = math.Average[A];          transparent inline def Average    = math.Average
+  type Sum[A]       = math.Sum[A]
+  type Ordering[A]  = scala.Ordering[A];        transparent inline def Ordering   = math.Ordering
+  type Format       = math.Format.TYPE.DEF;     transparent inline def Format     = math.Format
+  type Rounding     = math.Rounding;            transparent inline def Rounding   = math.Rounding
+  type BigDecimal   = math.BigDecimal.TYPE.DEF; transparent inline def BigDecimal = math.BigDecimal
+  type BigInteger   = math.BigInteger.TYPE.DEF; transparent inline def BigInteger = math.BigInteger
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

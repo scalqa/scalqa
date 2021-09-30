@@ -1,7 +1,7 @@
 package scalqa; package lang; package any; import language.implicitConversions
 
 import scala.{ Ordering as O }
-import _Methods._view
+import _Methods.Self
 
 transparent trait _Methods:
   extension[A](inline x:A)
@@ -11,17 +11,17 @@ transparent trait _Methods:
     @tn("result")    inline def ??                                                                  : Result[A]    = Result(x)
     @tn("range")     inline def <> (inline to:A)(using inline o:O[A])(using inline A:Specialized[A]): A.<>         = z.range(x,to)
     @tn("rangeX")    inline def <>>(inline to:A)(using inline o:O[A])(using inline A:Specialized[A]): A.<>         = z.range.exclusive(x,to)
-    infix            inline def in[HOLDER]   (inline c: HOLDER)(using inline t:Def.Within[A,HOLDER]): Boolean      = t.value_isWithin(x,c)
-    /**/             inline def doc                                    (using inline dd:Def.Doc[A]) : Doc          = dd.value_doc(x)
-    /**/             inline def tag                                    (using inline dd:Def.Doc[A]) : String       = dd.value_tag(x)
-    /**/             inline def tp                                     (using inline dd:Def.Doc[A]) : Unit         = ZZ.tp(x,dd)
-    @tn("addSpaced") inline def +- [B](v: B)      (using inline ta:Def.Doc[A],inline tb:Def.Doc[B]) : String       = ta.value_tag(x) + ' ' + tb.value_tag(v)
-    @tn("selfView")  inline def ^                                                                   : _view[A]     = x.cast[_view[A]]
-    @tn("self_View") inline def self_^                                                              : _view[A]     = x.cast[_view[A]]
-
+    infix            inline def in   [HOLDER](inline c: HOLDER)(using inline d:Def.Within[A,HOLDER]): Boolean      = z.inMacro(x,c,d)
+    infix            inline def notIn[HOLDER](inline c: HOLDER)(using inline d:Def.Within[A,HOLDER]): Boolean      = !in(c)
+    /**/             inline def doc                                     (using inline d:Def.Doc[A]) : Doc          = d.value_doc(x)
+    /**/             inline def tag                                     (using inline t:Def.Tag[A]) : String       = t.value_tag(x)
+    /**/             inline def tp                                      (using inline t:Def.Tag[A]) : Unit         = ZZ.tp(x,t)
+    @tn("addSpaced") inline def +- [B](v: B)      (using inline ta:Def.Tag[A],inline tb:Def.Tag[B]) : String       = ta.value_tag(x) + ' ' + tb.value_tag(v)
+    @tn("selfView")  inline def ^                                                                   : Self[A]      = x.cast[Self[A]]
+    @tn("self_View") inline def self_^                                                              : Self[A]      = x.cast[Self[A]]
 
 object _Methods:
-  transparent inline def _view = _methods._view; type _view[+A] = _methods._view.TYPE.DEF[A]
+  transparent inline def Self = _methods.Self; type Self[+A] = _methods.Self.TYPE.DEF[A]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -73,6 +73,10 @@ ___________________________________________________________________________*/
      println("Results:" +- 1 +- 2 +- 3 +- 4.Percent)
      ```
 
+@def notIn -> Is not within
+
+    Reverse "in" method
+
 @def in -> Is within
 
     Returns true if this instance is contained by given container.
@@ -87,7 +91,14 @@ ___________________________________________________________________________*/
       (5 in pack).TP    // Prints true
     ```
 
-    Note. This operation is heavily overloaded, to provide performance close to directly written efficient comparison code
+    Note. This operation is Macro optimized for Tuples from 2 to 12, so the following will be ultimatly efficent with no Tuple allocation:
+
+    ```
+      val s = "ABC"
+
+      { s in ("XYZ","BBC","CBC") }.TP    // Prints false
+    ```
+
 
 @def doc -> Get Doc
 
@@ -123,7 +134,7 @@ ___________________________________________________________________________*/
 
 @def ^ -> Self view
 
-    Returns additional ["view"](_methods/_view.html) library available to this instance
+    Returns additional ["view"](_methods/Self.html) library available to this instance
 
     The most popular feature is doing some processing within context of an anonimous function
 

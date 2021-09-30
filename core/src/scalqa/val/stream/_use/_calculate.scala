@@ -1,7 +1,7 @@
 package scalqa; package `val`; package stream; package _use; import language.implicitConversions
 
 import z._use.{ calculate as Z }
-import Custom.Math.Average
+import Gen.Math.{ Average, Sum }
 
 transparent trait _calculate:
   self: _Use =>
@@ -13,10 +13,10 @@ transparent trait _calculate:
     @tn("max_Opt")     inline def max_?                    (using inline o:Ordering[A]) : Opt[A]     = Z.max_Opt(x,o)
     @tn("range")       inline def range                    (using inline o:Ordering[A]) : Range[A]   = x.range_?.get
     @tn("range_Opt")   inline def range_?                  (using inline o:Ordering[A]) : Opt[<>[A]] = Z.range_Opt(x,o)
-    @tn("sum")         inline def sum                          (using inline n:Math[A]) : A          = x.sum_? or n.zero
-    @tn("sum_Opt")     inline def sum_?                        (using inline n:Math[A]) : Opt[A]     = z._use._calculate.sum.opt(x,n)
+    @tn("sum")         inline def sum                           (using inline v:Sum[A]) : A          = v.sum_?(x) or v.zero
+    @tn("sum_Opt")     inline def sum_?                         (using inline v:Sum[A]) : Opt[A]     = v.sum_?(x)
     @tn("average")     inline def average                   (using inline v:Average[A]) : A          = v.average(x)
-    @tn("average_Opt") inline def average_?                 (using inline v:Average[A]) : Opt[A]     = v.averageOpt(x)
+    @tn("average_Opt") inline def average_?                 (using inline v:Average[A]) : Opt[A]     = v.average_?(x)
     @tn("minBy")       inline def minBy  [B](inline f: A=>B)(using inline o:Ordering[B]): A          = x.minBy_?(f).get
     @tn("maxBy")       inline def maxBy  [B](inline f: A=>B)(using inline o:Ordering[B]): A          = x.maxBy_?(f).get
     @tn("minBy_Opt")   inline def minBy_?[B](inline f: A=>B)(using inline o:Ordering[B]): Opt[A]     = Z.minBy_Opt(x,f,o)
@@ -27,7 +27,7 @@ transparent trait _calculate:
                                                          : (B,C) | (B,C,D) | (B,C,D,E) | (B,C,D,E,F) = z._use._calculate.average.few(x,fb,fc,fd,fe,ff)
 
     inline def sumFew  [B,C,D,E,F](inline fb:A=>Opt[B], inline fc:A=>Opt[C], inline fd:A=>Opt[D]= \/, inline fe:A=>Opt[E]= \/, inline ff:A=>Opt[F]= \/)
-                                                 (using inline nb:Math[B], inline nc:Math[C], inline nd:Math[D], inline ne:Math[E], inline nf:Math[F])
+                                                 (using inline nb:Sum[B], inline nc:Sum[C], inline nd:Sum[D], inline ne:Sum[E], inline nf:Sum[F])
                                                          : (B,C) | (B,C,D) | (B,C,D,E) | (B,C,D,E,F) = z._use._calculate.sum.few(x,fb,fc,fd,fe,ff)
 
 /*___________________________________________________________________________
@@ -101,7 +101,7 @@ ___________________________________________________________________________*/
          (10 <> 15).~.map(_.toFloat).average  // Returns 12.5
      ```
 
-     Note: [[average]] is available for types providing given [[scalqa.val.stream.custom.Math.Average ~~.Custom.Math.Average]] implementations,
+     Note: [[average]] is available for types providing given [[scalqa.gen.math.Average Math.Average]] implementations,
      which are by default Double, Float and opaque numerals based on Double and Float
 
 @def average_? ->  Average option
@@ -112,7 +112,7 @@ ___________________________________________________________________________*/
          (10 <> 15).~.map(_.toFloat).average_?  // Returns Opt(12.5)
      ```
 
-     Note: [[average_?]] is available for types providing given [[scalqa.val.stream.custom.Math.Average ~~.Custom.Math.Average]] implementations,
+     Note: [[average_?]] is available for types providing given [[scalqa.gen.math.Average Math.Average]] implementations,
      which are by default Double, Float and opaque numerals based on Double and Float
 
 @def averageFew -> Multi average

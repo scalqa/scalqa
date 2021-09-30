@@ -26,7 +26,7 @@ object Void:
   inline given givenString     : Void             [String]    with {  inline def value_isVoid(v: String)    = v.length==0 }
   inline given givenList[A]    : Void             [List[A]]   with {  inline def value_isVoid(v: List[A])   = v eq Nil }
   inline given givenOption[A]  : Void             [Option[A]] with {  inline def value_isVoid(v: Option[A]) = v eq None }
-  inline given givenDefault[A] : Void             [A]                                                       = ZZ.Def()
+  inline given givenDefault[A] : Void             [A]                                                       = ZZ.Any()
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

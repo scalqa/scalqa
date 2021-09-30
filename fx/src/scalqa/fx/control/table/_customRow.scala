@@ -24,7 +24,7 @@ transparent trait _customRow[ROW]:
     override def apply(r: RowCell[ROW, VIEW]): Unit =
       super.apply(r)
       r.row_?.forval(e => {
-        if (triggers.size > 0) triggers.~.map(_(e)).foreach(o => Observable.onObservableChange(o)(() => r.table.rows.refreshAt(r.index)).cancelIf(() => !r.row_?.contains(e)))
+        if (triggers.size > 0) triggers.~.map(_(e)).foreach(_.onObservableChange(() => r.table.rows.refreshAt(r.index)).cancelIf(() => !r.row_?.contains(e)))
       })
 
 /*___________________________________________________________________________

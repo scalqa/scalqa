@@ -14,12 +14,12 @@ object ObservableMutable:
     /**/                                                                           case v:Idx.M[_]  => new X.Basic[A](v.cast[Idx.M[A]])
     /**/                                                                           case v:Idx.O[_]  => new z.Unsupported_View.O.OM[A](v.cast[Idx.O[A]])
     /**/                                                                           case v           => new z.Unsupported_View.OM[A](v)
-  implicit       inline def implicitFrom[A](inline v: \/)           : Idx.OM[A] = void
-  implicit       inline def implicitFrom[A](inline v: NEW)          : Idx.OM[A] = apply[A]()
+  implicit       inline def implicitRequest[A](v: \/)               : Idx.OM[A] = void
+  implicit       inline def implicitRequest[A](inline v: NEW)       : Idx.OM[A] = apply[A]()
 
   extension[A]  (x: ObservableMutable[A])
-    @tn("mutableMap_View") def mutableMap_^[B](m: A=>B, r: B => A)               : Idx.OM[B] = mutableMap_^(using ReversibleFunction(m,r))
-    @tn("mutableMap_View") def mutableMap_^[B](using bm: ReversibleFunction[A,B]): Idx.OM[B] = z.TwoWay_View.OM(x, bm)
+    @tn("mutableMap_View") def mutableMap_^[B](m: A=>B, r: B => A)               : Idx.OM[B] = mutableMap_^(using TwoWayFunction(m,r))
+    @tn("mutableMap_View") def mutableMap_^[B](using bm: TwoWayFunction[A,B]): Idx.OM[B] = z.TwoWay_View.OM(x, bm)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def X = observableMutable.X
@@ -55,6 +55,6 @@ ___________________________________________________________________________*/
 
             Supposedly, the elements themself are mutable and their representation has to be "refreshed"
 
-@def implicitFrom -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 */

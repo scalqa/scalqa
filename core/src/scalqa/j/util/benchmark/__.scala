@@ -4,15 +4,15 @@ object Benchmark:
 
   // The test code is physically repeated 5 times (BUNDLED) to prevent JVM from picking favorite execution path
 
-  @tn("numbered") inline def apply[A](inline targets: (() => A)*)(using Opt[Math[A]]): Unit =
+  @tn("numbered") inline def apply[A](inline targets: (() => A)*)(using Opt[Numeric[A]]): Unit =
     var s=sep1; val BUNDLE_1=targets; s=sep2; val BUNDLE_2=targets; val BUNDLE_3=targets; val BUNDLE_4=targets; val BUNDLE_5=targets
     benchmark.z.execute[A]((BUNDLE_1.~ ++ BUNDLE_2 ++ BUNDLE_3 ++ BUNDLE_4 ++ BUNDLE_5).zipIndex.map((i,f) => ((i%BUNDLE_1.size+1).tag,f)).><,5)
 
-  @tn("labeled")  inline def apply[A](inline targets: (String, () => A)*)(using Opt[Math[A]]): Unit =
+  @tn("labeled")  inline def apply[A](inline targets: (String, () => A)*)(using Opt[Numeric[A]]): Unit =
     var s=sep1; val BUNDLE_1=targets; s=sep2; val BUNDLE_2=targets; val BUNDLE_3=targets; val BUNDLE_4=targets; val BUNDLE_5=targets
     benchmark.z.execute[A]((BUNDLE_1.~ ++ BUNDLE_2 ++ BUNDLE_3 ++ BUNDLE_4 ++ BUNDLE_5).><,5)
 
-  inline def custom[A](verbose: Boolean = true, trialCount: Int = 4, eachTrial: Time.Length = 3.Seconds)(inline targets: (String, () => A)*)(using Opt[Math[A]]): Unit =
+  inline def custom[A](verbose: Boolean = true, trialCount: Int = 4, eachTrial: Time.Length = 3.Seconds)(inline targets: (String, () => A)*)(using Opt[Numeric[A]]): Unit =
     var s=sep1; val BUNDLE_1=targets; s=sep2; val BUNDLE_2=targets; val BUNDLE_3=targets; val BUNDLE_4=targets; val BUNDLE_5=targets
     benchmark.z.execute[A]((BUNDLE_1.~ ++ BUNDLE_2 ++ BUNDLE_3 ++ BUNDLE_4 ++ BUNDLE_5).><, 5, trialCount, eachTrial, verbose)
 

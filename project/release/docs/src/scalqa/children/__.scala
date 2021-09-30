@@ -1,16 +1,17 @@
 package scalqa; import children.*; import language.implicitConversions
 
 class Children private (val m: Member):
-  //">>> " + m.name +"\t\t" +m.dri.tag tp()
-  private lazy val data: Data =
-    if     (m.name == "API")    new Data(m).^(_.members = m.members.~.take(_.name=="scalqa"))
-    else if(m.name == "scalqa") new RootData(m)
-    else if(m.dri.isTypeDef)    new OpaqueData(m)
-    else                        new GeneralData(m)
+
+  private lazy val data: z.Data =
+    if     (m.name == "API")    new z.Data(m).^(_.members = m.members.~.take(_.name=="scalqa").><)
+    else if(m.name == "scalqa") new z.RootData(m)
+    else if(m.dri.isTypeDef)    new z.OpaqueData(m)
+    else                        new z.GeneralData(m)
 
   def constructors : Seq[Member]                         = m.members.~.take(_.kind.isConstructor).sort.toSeq
   def members      : Seq[Member]                         = data.members.toSeq_^
   def aliases      : Seq[Member]                         = data.aliases.toSeq_^
+  def containers   : Seq[Member]                         = data.containers.toSeq_^
   def types        : Seq[Member]                         = data.types.toSeq_^
   def defs         : Seq[Member]                         = data.defs.toSeq_^
   def makers       : Seq[Member]                         = data.makers.toSeq_^

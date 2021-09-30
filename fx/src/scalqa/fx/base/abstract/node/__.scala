@@ -8,7 +8,7 @@ object Node:
 
   def apply(v: javafx.scene.Node): Fx.Node = new Fx.Node { protected type REAL = javafx.scene.Node;  def _createReal = v }
 
-  given FxConverter: ReversibleFunction[javafx.scene.Node, Node] = ReversibleFunction(v => Delegate.Gui.apply[Fx.Node](v.onZoomStartedProperty), _.real)
+  given FxConverter: TwoWayFunction[javafx.scene.Node, Node] = TwoWayFunction(v => Delegate.Gui.apply[Fx.Node](v.onZoomStartedProperty), _.real)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Like        = node.Like;          transparent inline def Like = node.Like

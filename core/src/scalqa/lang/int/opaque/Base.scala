@@ -5,7 +5,7 @@ abstract class Base[A<:Opaque](name:String) extends any.z.OpaqueBase[A](name,Cla
   def value_tag(v: A)   : String  = default_doc(v).tag
   def value_doc(v: A)   : Doc     = default_doc(v)
 
-  given givenVoidDef: Any.Def.Void.Primitive.Int[A] = this
+  given zzVoidDef: Any.Def.Void.Primitive.Int[A] = this
 
   extension(inline x: Int)
     inline def toOpaque[THIS_OPAQUE >: A <: A]: THIS_OPAQUE = x.cast[THIS_OPAQUE]
@@ -50,7 +50,7 @@ ___________________________________________________________________________*/
 
     If type supports void instances, then following inmpelentation should be added in most cases:
     ```
-      implicit inline def implicitFrom(v: \/): OPAQUE_TYPE
+      implicit inline def implicitRequest(v: \/): OPAQUE_TYPE
     ```
 
 @def real -> Real value

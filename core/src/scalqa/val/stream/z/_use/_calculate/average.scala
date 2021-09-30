@@ -1,6 +1,6 @@
 package scalqa; package `val`; package stream; package z; package _use; package _calculate; import language.implicitConversions
 
-import Custom.Math.Average
+import Math.Average
 
 object average:
 
@@ -9,11 +9,11 @@ object average:
     : (B,C) | (B,C,D) | (B,C,D,E) | (B,C,D,E,F) =
 
       var i = 0
-      var l1 = a1.averageLogic
-      var l2 = a2.averageLogic
-      var l3 = a3.averageLogic
-      var l4 = a4.averageLogic
-      var l5 = a5.averageLogic
+      var l1 = a1.averageCalculation
+      var l2 = a2.averageCalculation
+      var l3 = a3.averageCalculation
+      var l4 = a4.averageCalculation
+      var l5 = a5.averageCalculation
 
       val is3 = f3.^.nonVoid
       val is4 = f4.^.nonVoid
@@ -27,12 +27,12 @@ object average:
         if(is5) f5(v).forval(l5.add)
       })
 
-      val v1 = l1.result
-      val v2 = l2.result
+      val v1 = l1.average
+      val v2 = l2.average
 
-      if(is5)      (v1,v2,l3.result,l4.result,l5.result)
-      else if(is4) (v1,v2,l3.result,l4.result)
-      else if(is3) (v1,v2,l3.result)
+      if(is5)      (v1,v2,l3.average,l4.average,l5.average)
+      else if(is4) (v1,v2,l3.average,l4.average)
+      else if(is3) (v1,v2,l3.average)
       else         (v1,v2)
 
 /*___________________________________________________________________________

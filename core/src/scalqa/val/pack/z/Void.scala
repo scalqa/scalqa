@@ -12,7 +12,7 @@ private[scalqa] final class Void[A] extends ><[A] with Gen.Void:
   /**/                       def joinAllAt(i: Int, v: ~[A])  : ><[A]     = v.><
   @tn("take_Range") override def take_<>(f:Int, sz:Int)      : ><[A]     = this
   @tn("drop_Range") override def drop_<>(f:Int, sz:Int)      : ><[A]     = this
-  /**/                       def compact                     : this.type = this
+  @tn("compact")             def ><                          : this.type = this
   /**/                       def toBuffer                    : Buffer[A] = new AnyRef.Buffer()
 
 /*___________________________________________________________________________

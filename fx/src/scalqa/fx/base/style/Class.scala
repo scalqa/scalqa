@@ -6,7 +6,7 @@ object Class extends String.Opaque.Data[Class]("Fx.Style.Class"):
   /**/     inline def apply(inline v: String)       : Class   = v.toOpaque
   implicit inline def implicitFrom(inline v: String): Class   = apply(v)
 
-  given FxConverter: ReversibleFunction[String,Class] = \/
+  given FxConverter: TwoWayFunction[String,Class] = \/
 
   extension (x: Class)
     @tn("join") def +(v: Style|String): Class =  {val s=v.cast[String]; if(x.isVoid) s:Class else if(s.isVoid) x else x.real + ';' + s }

@@ -10,8 +10,12 @@ transparent trait _Member:
     def module      : Module      = x.dri.module_? or Module(x)
     def children    : Children    = Children(x)
     def tag         : String      = x.name+"(ilk="+x.kind.name+", id="+x.id+", ##="+ x.## +")"
-    def companion_? : Opt[DRI]    = Opt.fromScala(x.companion) or_? Registry.module_?(id.mid).map_?(m => m.typ_?.drop(_.id == x.id) or_? m.val_?.drop(_.id == x.id)).map(_.dri)
+    def companion_? : Opt[DRI]    = Opt.fromScala(x.companion) or_? Registry.module_?(id.moduleId).map_?(m => m.typ_?.drop(_.id == x.id) or_? m.val_?.drop(_.id == x.id)).map(_.dri)
 
+
+    def label       : String      = x.dri.label()
+
+    def parent      : Member      = if(x.dri.anchor.nonEmpty) Registry.member_?(Id(x.dri.copy(anchor="")).moduleId) or J.illegalState("No member: "+x.dri.location)  else J.illegalState("No anchor")
 
     def deepDocs: Option[Comment] =
       var o = x.docs

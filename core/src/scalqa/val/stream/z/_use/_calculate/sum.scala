@@ -2,14 +2,10 @@ package scalqa; package `val`; package stream; package z; package _use; package 
 
 object sum:
 
-  def opt[A](x: ~[A], n:Math[A]) : Opt[A] = n match
-    case _ : Custom.Math[_] => n.cast[Custom.Math[A]].calculateSum_?(x)
-    case _                  => x.read_?.map(v=>{var r=v; x.FOREACH(v => r=n.plus(r,v)); r})
-
-
   def few[A,B,C,D,E,F]( x: ~[A],f1:A=>Opt[B], f2:A=>Opt[C], f3:A=>Opt[D]= \/, f4:A=>Opt[E]= \/, f5:A=>Opt[F]= \/)
-                      (using n1:Math[B], n2:Math[C], n3:Math[D], n4:Math[E], n5:Math[F])
+                      (using n1:Math.Sum[B], n2:Math.Sum[C], n3:Math.Sum[D], n4:Math.Sum[E], n5:Math.Sum[F])
     :  (B,C)  | (B,C,D) | (B,C,D,E) | (B,C,D,E,F) =
+
 
       var v1 = n1.zero
       var v2 = n2.zero

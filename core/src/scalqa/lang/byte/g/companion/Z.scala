@@ -1,15 +1,15 @@
 package scalqa; package lang; package byte; package g; package companion; import language.implicitConversions
 
 object Z:
-  val Stream     = new Stream[Byte]
-  val Opt        = new Opt[Byte]
-  val Collection = new Collection[Byte]
-  val Idx        = new Idx[Byte]
-  val Pack       = new Pack[Byte]
-  val Lookup     = new Lookup[Byte]
-  val Set        = new Set[Byte]
-  val Pro        = new Pro[Byte]
-  val Fun        = new Fun[Byte]
+  val Stream     = new Stream[Primitive]
+  val Opt        = new Opt[Primitive]
+  val Collection = new Collection[Primitive]
+  val Idx        = new Idx[Primitive]
+  val Pack       = new Pack[Primitive]
+  val Lookup     = new Lookup[Primitive]
+  val Set        = new Set[Primitive]
+  val Pro        = new Pro[Primitive]
+  val Fun        = new Fun[Primitive]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

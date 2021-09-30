@@ -17,7 +17,7 @@ transparent trait _use[A]:
   /**/               def fold(start: A)(bf: (A,A) => A)                : A
   /**/               def foldAs[B](start:B)(bf:(B,A)=>B, cf: (B,B)=>B) : B
 
-  /**/               def sum                       (using     Math[A]) : A
+  /**/               def sum                       (using Math.Sum[A]) : A
   /**/               def min                       (using Ordering[A]) : A
   /**/               def minBy[B](f: A => B)       (using Ordering[B]) : A
   /**/               def max                       (using Ordering[A]) : A

@@ -1,25 +1,30 @@
 package scalqa; package `val`; package stream; package z; package x; import language.implicitConversions
 
-import scala.{ collection as SC }
+import scala.{ collection as C }
 
 object Scala:
 
-  def mkStream[A](x: SC.IterableOnce[A]): ~[A] =
+  def Stream_fromIterableOnce[A](x: C.IterableOnce[A]): ~[A] =
     x match
-       case v: SC.IndexedSeq[A] => new Stream_fromIndexedSeq(v)
-       case v: SC.LinearSeq[A]  => new Stream_fromLinearSeq(v)
-       case v                   => new Stream_fromIterator(v.iterator)
+       case _ : C.IndexedSeq[A] => new Stream_fromIndexedSeq(x.cast[C.IndexedSeq[A]])
+       case _ : C.LinearSeq[A]  => new Stream_fromLinearSeq(x.cast[C.LinearSeq[A]])
+       case _                   => new Stream_fromIterator(x.iterator)
 
-  class Stream_fromIterator[A](v: Iterator[A]) extends Pipe[A](v) :
-    @tn("read_Opt") def read_? = v.hasNext ? v.next
-
-  class Stream_fromLinearSeq[A](ls: SC.LinearSeq[A]) extends ~[A] with custom.Discharge[A]:
+  class Stream_fromIterator[A](v: Iterator[A]) extends Pipe[A](v) with Able.Size.Opt:
+    private         val sz                        = v.knownSize;
     private         var i                         = 0;
-    private         var s: SC.LinearSeq[A]        = ls
-    @tn("read_Opt") def read_?                    = { var o: Opt[A] = \/; if(s.nonEmpty){ o = s.head; s = s.tail}; o}
+    @tn("read_Opt") def read_?                    = v.hasNext ? { i+=1; v.next }
+    @tn("size_Opt") def size_?                    = sz.?.drop(_ < 0).map(_ - i)
+
+  class Stream_fromLinearSeq[A](ls: C.LinearSeq[A]) extends ~[A] with custom.Discharge[A] with Able.Size.Opt:
+    private         val sz                        = ls.knownSize;
+    private         var i                         = 0;
+    private         var s: C.LinearSeq[A]         = ls
+    @tn("read_Opt") def read_?                    = { var o: Opt[A] = \/; if(s.nonEmpty){ o = s.head; s = s.tail; i+=1}; o}
+    @tn("size_Opt") def size_?                    = sz.?.drop(_ < 0).map(_ - i)
     override        def dischargeTo(b: Buffer[A]) = while (s.nonEmpty) { b.add(s.head); s = s.tail }
 
-  class Stream_fromIndexedSeq[A](seq: SC.IndexedSeq[A]) extends ~[A] with Able.Size with custom.Discharge[A] :
+  class Stream_fromIndexedSeq[A](seq: C.IndexedSeq[A]) extends ~[A] with Able.Size with custom.Discharge[A] :
     private         var i                         = 0
     private         val sz                        = seq.size
     @tn("read_Opt") def read_?                    = { var o:Opt[A] = \/; if(i<sz){ o=seq(i); i+=1}; o}

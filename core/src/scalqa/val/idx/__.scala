@@ -11,7 +11,7 @@ object Idx:
   /**/                 def apply[A](v1:A, v2:A, v3:A, vs:A*): Idx[A]  = Pack(v1,v2,v3,vs *)
   /**/                 def wrap[A](v: java.util.List[A])    : Idx[A]  = idx.z.as.JavaListWrap[A](v)
   @tn("getVoid")inline def void[A]                          : Idx[A]  = \/ : ><[A]
-  implicit      inline def implicitFrom[A](v: \/)           : Idx[A]  = void
+  implicit      inline def implicitRequest[A](v: \/)        : Idx[A]  = void
 
   extension[A] (x: Idx[A])
     /**/                         def contains(v:A)                 : Boolean           = {var i=0; val sz=x.size; while(i<sz){if(x(i) == v) return true; i+=1}; false}
@@ -94,7 +94,7 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitFrom    -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest   -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
 @def  M      -> Alias \n\n Shortcut to [[scalqa.val.idx.Mutable$ Idx.Mutable]]
 @type M      -> Alias \n\n Shortcut to [[scalqa.val.idx.Mutable Idx.Mutable]]

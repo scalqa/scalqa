@@ -16,7 +16,7 @@ private[request] object VOID:
   object IntFunToDouble      extends Int.Fun.ToDouble                with Gen.Void { def apply(v:Int) = 0.0 }
   object IntFunToLong        extends Int.Fun.ToLong                  with Gen.Void { def apply(v:Int) = 0L  }
 
-  object Math                extends Gen.Math[\/] with Gen.Void with ~~.Custom.Math.Average[\/]:
+  object Math                extends Numeric[\/] with Gen.Void with Gen.Math.Average[\/]:
     def compare(x: \/, y: \/)   : Int        = 0
     def fromInt(x: Int)         : \/         = \/
     def minus(x: \/, y: \/)     : \/         = \/
@@ -29,9 +29,9 @@ private[request] object VOID:
     def toInt(x: \/)            : Int        = 0
     def toLong(x: \/)           : Long       = 0
     def average(   s: ~[\/])    : \/         = \/
-    def averageOpt(s: ~[\/])    : Opt[\/]    = \/
-    def averageLogic = AverageLogic
-    object AverageLogic extends ~~.Custom.Math.Average.Logic[\/] { def add(v: \/) = (); def result= \/; def resultOpt: Opt[\/] = \/}
+    @tn("average_Opt") def average_?(s: ~[\/])     : Opt[\/]    = \/
+    def averageCalculation = AverageLogic
+    object AverageLogic extends Gen.Math.Average.Calculation[\/] { def add(v: \/) = (); def average= \/}
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -1,7 +1,7 @@
 package scalqa; package fx; package scene; package chart; package axis; package x; import language.implicitConversions
 
-class Numbers[A](m: ReversibleFunction[A, Double]) extends Value[A](m):
-  def this(name: String, m: ReversibleFunction[A, Double]) = { this(m); name.^.?.forval(label = _) }
+class Numbers[A](m: TwoWayFunction[A, Double]) extends Value[A](m):
+  def this(name: String, m: TwoWayFunction[A, Double]) = { this(m); name.^.?.forval(label = _) }
 
   protected override type REAL = javafx.scene.chart.NumberAxis
   protected override def _createReal = new REAL

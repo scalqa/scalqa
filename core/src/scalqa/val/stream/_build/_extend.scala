@@ -8,7 +8,7 @@ transparent trait _extend:
   extension[A](inline x: ~[A])
     @tn("join")      inline def +  (inline v: A)                            : ~[A] = new X.join(x, v)
     @tn("joinAll")   inline def ++ (inline v: ~[A])                         : ~[A] = new X.joinAll(x, v)
-    @tn("joinAt")    inline def +@ (inline index: Int, inline v: A)         : ~[A] = new X.joinAllAt(x, index, ~~(v))
+    @tn("joinAt")    inline def +@ (inline index: Int, inline v: A)         : ~[A] = new X.joinAllAt(x, index, v.^.~)
     @tn("joinAllAt") inline def ++@(inline index: Int, inline v: ~[A])      : ~[A] = new X.joinAllAt(x, index, v)
 
     /**/             inline def join   (inline v: A)                        : ~[A] = new X.join(x, v)

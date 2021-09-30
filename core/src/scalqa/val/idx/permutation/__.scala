@@ -7,8 +7,8 @@ trait Permutation:
   /**/               def positions                                    : Int.><
   /**/               def position(old: Int)                           : Int          = { val i = range; if (i contains old) positions(old - i.start) else old }
   @tn("pair_Stream") def pair_~                                       : ~[(Int,Int)] = { var i=range.start-1; positions.~.map_?(v =>{ i+=1; if(i!=v) (i,v) else \/})}
-  /**/               def reposition[T](l:Idx.M[T])                    : Unit         = reposition(l, l.updateAt)
-  /**/               def reposition[T](l:Idx[T],update:(Int,T)=>Unit) : Unit         = { val il = l.~.take_<>(range).><; positions.~.foreachIndexed((i, j) => update(j, il(i))) }
+  /**/               def reposition[B](l:Idx.M[B])                    : Unit         = reposition(l, l.updateAt)
+  /**/               def reposition[B](l:Idx[B],update:(Int,B)=>Unit) : Unit         = { val il = l.~.take_<>(range).><; positions.~.foreachIndexed((i, j) => update(j, il(i))) }
   /**/               def validate                                     : Unit         = Z.validate(this)
 
 object Permutation extends Gen.Void.Setup[Permutation](Z.Void):
@@ -18,9 +18,9 @@ object Permutation extends Gen.Void.Setup[Permutation](Z.Void):
   def random(r: Int.<>)                                               : Permutation  = Z.random(r)
   def sorting[A](idx:Idx[A], full:Boolean=false)(using c: Ordering[A]): Permutation  = Z.sorting(idx, full, c)
 
-  given givenDocDef: Any.Def.Doc[Permutation] with
+  given zzDoc: Any.Def.Doc[Permutation] with
     def value_tag(v: Permutation) = value_doc(v).tag
-    def value_doc(v: Permutation) = Doc("Permutation") += ("range", v.range) += v.pair_~.makeString()
+    def value_doc(v: Permutation) = Doc("Permutation") += ("range", v.range) += v.pair_~.makeString("")
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

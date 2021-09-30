@@ -1,6 +1,6 @@
 package scalqa; package lang; package anyref; package opaque; import language.implicitConversions
 
-abstract class Data[A<:Opaque,REAL<:AnyRef](name: String)(using ct: ClassTag[REAL]) extends Base[A,REAL](name) with g.Containers[A] with Data._methods[A,REAL]
+abstract class Data[A<:Opaque,REAL<:AnyRef](name: String)(using ct: ClassTag[REAL]) extends Base[A,REAL](name) with g.companion.Containers[A] with Data._methods[A,REAL]
 
 object Data:
   type Ordered[A<:Opaque, REAL<:AnyRef] = data.Ordered[A,REAL];    transparent inline def Ordered       = data.Ordered

@@ -26,9 +26,9 @@ object Range:
     @tn("stream")   def ~ (using Able.Sequence[A])                  : ~[A]          = x match{ case v:Able.~[_] => v.cast[Able.~[A]].~; case _ => x.step_~(1) }
     /**/            def convert[B](f:A=>B)(using s:Ordering[B])     : Range[B]      = Range(f(x.start),f(x.end),x.endIsIn)
 
-  given givenCanEqualRange[A,B](using CanEqual[A,B]): CanEqual[<>[A],<>[B]] = CanEqual.derived
-  given givenFor                                    : range.z.For           = new range.z.For{}
-  given givenDocDef[A]        (using Any.Def.Doc[A]): Any.Def.Doc[Range[A]] = new range.z.DocDef[A]
+  given zzCanEqualRange[A,B](using CanEqual[A,B]): CanEqual[<>[A],<>[B]] = CanEqual.derived
+  given givenFor                                 : range.z.For           = new range.z.For{}
+  given zzDoc[A]           (using Any.Def.Tag[A]): Any.Def.Doc[Range[A]] = new range.z.DocDef[A]
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def X = range.X

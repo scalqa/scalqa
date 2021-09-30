@@ -13,7 +13,7 @@ object Value:
 
     protected def apply(v: BASE) : TYPE
 
-    given FxConverter: ReversibleFunction[BASE,TYPE] = new ReversibleFunction[BASE,TYPE] {
+    given FxConverter: TwoWayFunction[BASE,TYPE] = new TwoWayFunction[BASE,TYPE] {
       def apply(v: BASE): TYPE = self(v)
       def undo(v: TYPE) : BASE = v.real
     }

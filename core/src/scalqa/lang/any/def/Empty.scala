@@ -15,7 +15,7 @@ object Empty extends zEmptyDefault:
   inline given givenString      : Empty[String]                   with { inline def value_isEmpty(v: String)        = v.length == 0 }
 
 private[`def`] class zEmptyDefault:
-  inline given givenDefault[A]: Empty[A] = ZZ.Def
+  inline given givenDefault[A]: Empty[A] = ZZ.Any
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -27,14 +27,14 @@ object Menu:
           )
 
     def renderApi(module: Module): (Boolean, AppliedTag) =
-      val isSelected = module.main.id.mid == id.mid
+      val isSelected = module.main.id.moduleId == id.moduleId
       def linkHtml(expanded: Boolean = false) =
         val attrs = if (isSelected) Seq(cls := "selected expanded") else Nil
         var dri = if(isSelected && id==module.main.id) module.dri2 else module.dri
         var str : String = l.pathToPage(link.dri, dri).replace("$$TYPE$","")
-        Seq(a(href := str, attrs)(module.name.^.reviseIf(_ == "scalqa", _ => "API").^.reviseIf(_.startsWith("_"), v => v.takeFirst(2).lower + v.dropFirst(2))))
+        Seq(a(href := str, attrs)(module.name.^.mapIf(_ == "scalqa", _ => "API").^.mapIf(_.startsWith("_"), v => v.takeFirst(2).lower + v.dropFirst(2))))
 
-      module.children.^.to(l =>
+      module.children.^.map(l =>
         if(l.isEmpty) (isSelected -> div(linkHtml()))
         else
           val nested   = l.~.map(renderApi).toList

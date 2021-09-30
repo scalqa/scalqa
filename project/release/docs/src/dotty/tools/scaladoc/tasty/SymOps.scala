@@ -81,7 +81,7 @@ class SymOps[Q <: Quotes](val q: Q) extends JavadocAnchorCreator with Scaladoc2A
         Flags.Open -> Modifier.Open,
         Flags.Override -> Modifier.Override,
         Flags.Case -> Modifier.Case,
-        ).collect { case (flag, mid) if sym.flags.is(flag) => mid }
+        ).collect { case (flag, moduleId) if sym.flags.is(flag) => moduleId }
 
     def isHiddenByVisibility: Boolean =
       import VisibilityScope._

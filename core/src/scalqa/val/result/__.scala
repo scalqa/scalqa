@@ -1,16 +1,12 @@
 package scalqa; package `val`; import language.implicitConversions;
 
-object Result extends result._givens:
-  /**/     inline def apply[A](inline v: A | Problem)          : Result[A]   = v.cast[Result[A]]
-  /**/            def fail [A](message: String)                : Result[A]   = (if(message eq null) Problem.noMessage else message.Problem).cast[Result[A]]
+object Result:
+  /**/     inline def apply[A](inline v: A | Problem)            : Result[A]   = v.cast[Result[A]]
+  /**/            def fail [A](message: String)                  : Result[A]   = (if(message eq null) Problem.noMessage else message.Problem).cast[Result[A]]
 
-  implicit inline def implicitFromAny  [A](inline v: A)        : Result[A]   = apply(v)
-  implicit inline def implicitFrom     [A](inline v: Problem)  : Result[A]   = apply(v)
-  implicit inline def implicitToBoolean[A](inline v: Result[A]): Boolean     = v.isValue
-
-  object TYPE:
-    opaque type DEF[+A]<: AnyRef.Opaque = AnyRef.Opaque
-
+  implicit inline def implicitFromAny    [A](inline v: A)        : Result[A]   = apply(v)
+  implicit inline def implicitFromProblem[A](inline v: Problem)  : Result[A]   = apply(v)
+  implicit inline def implicitToBoolean  [A](inline v: Result[A]): Boolean     = v.isValue
   // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   extension[A](inline x: Result[A])
     /**/              inline def take(inline f: A=>Boolean, inline p:A=>Problem)  : Result[A]    = {var r=x; if(r.isValue){   val v=r.cast[A]; if(!f(v)) r=p(v)}; r}
@@ -37,6 +33,15 @@ object Result extends result._givens:
     /**/              inline def forval[U](  inline f: A => U)                    : Result[A]    = {val r=x;                 if(r.isValue){ val v=r.cast[A]; f(v)         }; r}
     /**/              inline def fornil[U](  inline f: Problem => U)              : Result[A]    = {val r=x;                 if(r.isProblem){ val v=r.cast[Problem]; f(v)   }; r}
     /**/              inline def process[U,W](inline f: A=>U,inline pf:Problem=>W): Result[A]    = {if(x.isValue){ val v=x.cast[A]; f(v)} else { val v=x.cast[Problem]; pf(v)}; x}
+
+  given zzNameDef[A]                              : Any.Def.TypeName[Result[A]]    = Any.Def.TypeName("Result")
+  given zzClassTag[A]  (using t: ClassTag[A])     : ClassTag[Result[A]]            = t.cast[ClassTag[Result[A]]]
+  given zzCanEqualResult[A,B](using CanEqual[A,B]): CanEqual[Result[A], Result[B]] = CanEqual.derived
+  given zzDoc[A](using t: Any.Def.Tag[A])         : Any.Def.Doc[Result[A]]         = new result.Z.Doc
+  given givenFilter                               : result.Z.Filter                = new result.Z.Filter
+
+  object TYPE:
+    opaque type DEF[+A]<: AnyRef.Opaque = AnyRef.Opaque
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def Problem = result.Problem; type Problem = result.Problem

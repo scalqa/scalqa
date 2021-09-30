@@ -2,12 +2,9 @@ package scalqa; package lang; package boolean; package g; import language.implic
 
 object Fun:
   trait Fold        [A<:Raw]                { def apply(v:A, w:A) : A        }
-  trait FoldAs      [T, A<:Raw]             { def apply(v:T, w:A) : T        }
+  trait FoldAs      [B, A<:Raw]             { def apply(v:B, w:A) : B        }
   trait Consume     [A<:Raw, U]             { def apply(v:A)      : U        }
   trait Filter      [A<:Raw]                { def apply(v:A)      : Boolean  }
-  trait Revise      [A<:Raw]                { def apply(v:A)      : A        }
-  trait FromAny     [T, A<:Raw]             { def apply(v:T)      : A        }
-  trait ToMany      [A<:Raw, B]             { def apply(v:A)      : Val.~[B] }
   trait ToAny       [A<:Raw, B]             { def apply(v:A)      : B        }
   trait ToAnyBoolean[A<:Raw, B<:Any.Boolean]{ def apply(v:A)      : B        };       type  ToBoolean[A<:Raw] = ToAnyBoolean[A,Boolean]
   trait ToAnyByte   [A<:Raw, B<:Any.Byte   ]{ def apply(v:A)      : B        };       type  ToByte   [A<:Raw] = ToAnyByte   [A,Byte]

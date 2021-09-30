@@ -5,7 +5,7 @@ abstract class Base[A<:Opaque, REAL<:AnyRef](name: String)(using ct: ClassTag[RE
   def value_tag(v: A)   : String  = default_doc(v).tag
   def value_doc(v: A)   : Doc     = default_doc(v)
 
-  given givenVoidDef: Any.Def.Void[A] = this
+  given zzVoidDef: Any.Def.Void[A] = this
 
   extension[B>:REAL<:REAL](inline x: B)
     inline def toOpaque[THIS_OPAQUE >: A <: A]: THIS_OPAQUE = x.cast[THIS_OPAQUE]

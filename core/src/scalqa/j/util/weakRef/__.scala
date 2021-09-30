@@ -10,13 +10,12 @@ object WeakRef:
   extension[A](x: WeakRef[A])
     @tn("get_Opt") def get_? : Opt[A] = { val v = x.cast[WeakReference[A]].get; if (v == null) \/ else v }
 
-  given givenClassTag[A](using t: ClassTag[A]): ClassTag[WeakRef[A]] = t.cast[ClassTag[WeakRef[A]]]
-  given givenNameDef [A]: Any.Def.TypeName[WeakRef[A]]  = Any.Def.TypeName("WeakRef")
-  given givenVoidDef [A]: Any.Def.Void[WeakRef[A]]      with { inline def value_isVoid(v: WeakRef[A]) = false }
-
-  given givenDocDef[A](using t: Any.Def.Doc[A]) : Any.Def.Doc[WeakRef[A]] with
-    def value_tag(v: WeakRef[A]) : String   = "WeakRef("+ v.get_?.map(v => t.value_tag(v)).or("\\/") + ")"
-    def value_doc(v: WeakRef[A]) : Doc      = Doc("WeakRef@"+v.self_^.hash)
+  given zzClassTag[A](using t: ClassTag[A]): ClassTag[WeakRef[A]] = t.cast[ClassTag[WeakRef[A]]]
+  given zzNameDef [A]: Any.Def.TypeName[WeakRef[A]]  = Any.Def.TypeName("WeakRef")
+  given zzVoidDef [A]: Any.Def.Void[WeakRef[A]]  with { inline def value_isVoid(v: WeakRef[A]) = false }
+  given zzDoc     [A](using t: Any.Def.Tag[A]): Any.Def.Doc[WeakRef[A]]   with
+    def value_doc(v: WeakRef[A]): Doc      = Doc("WeakRef@"+v.self_^.hash)
+    def value_tag(v: WeakRef[A]): String   = "WeakRef("+ v.get_?.map(v => t.value_tag(v)).or("\\/") + ")"
 
   object TYPE:
     opaque type DEF[A] <: AnyRef.Opaque = WeakReference[A] & AnyRef.Opaque

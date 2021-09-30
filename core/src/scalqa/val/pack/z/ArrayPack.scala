@@ -8,22 +8,22 @@ private[`val`] class ArrayPack[A](_a: Array[AnyRef], sz: Int) extends ><[A] with
   type THIS_TYPE = Pack[A]
 
   private                var ar                          : Array[AnyRef]    = _a
-  @tn("stream") override def ~                           : ~[A] & Able.Size = lang.array.z.As.RefStream(ar,sz)
+  @tn("stream") override def ~                           : ~[A] & Able.Size = lang.anyref.Z.Stream_ofArray(ar,sz)
   /**/                   def apply(i: Int)               : A                = ar(i).cast[A]
   /**/                   def size                        : Int              = sz
   /**/                   def join(v: A)                  : ><[A]            = new ArrayPack(ar.copySize(sz+1).^(_(sz)=v.cast[AnyRef]),sz+1)
   /**/                   def joinAt(i: Int, v: A)        : ><[A]            = new ArrayPack(ar.copySize(sz+1).^(a=>{a.copyTo(a,i+1,i,a.length-i-1);a(i)=v.cast[AnyRef]}),sz+1)
-  /**/                   def joinAllAt(i: Int, v: ~[A])  : ><[A]            = new ArrayPack(lang.array.z.joinAllAt.anyref(ar,i,v.cast[~[AnyRef]],sz))
+  /**/                   def joinAllAt(i: Int, v: ~[A])  : ><[A]            = new ArrayPack(lang.anyref.Buffer.zzArrayJoinAllAt(ar,i,v.cast[~[AnyRef]],sz))
   @tn("take_Range")      def take_<>(s: Int, sz: Int)    : ><[A]            = new ArrayPack(ar.take_<>(s,sz))
   @tn("drop_Range")      def drop_<>(s: Int, sz: Int)    : ><[A]            = new ArrayPack(ar.drop_<>(s,sz))
   /**/                   def doc                         : Doc              = Doc(this) += ("size", size) ++= (ar.length != sz) ? ("","Uncompacted") += ar.tag
-  override               def compact                     : this.type        = {if(ar.length > sz) ar=ar.copySize(sz); this}
+  @tn("compact")         def ><                          : this.type        = {if(ar.length > sz) ar=ar.copySize(sz); this}
   /**/                   def toBuffer                    : Buffer[A]        = new AnyRef.Buffer(ar.copySize(sz),sz)
   /**/                   def joinAll(vs: ~[A])           : ><[A]            = vs.read_?.map(v => ArrayPack.zBuf(ar,sz+1,v,vs).mk) or this
 
 object ArrayPack:
 
-  def fromStream[A](vs: ~[A]): ><[A] = vs.read_?.map(v => zBuf(AnyRef.emptyArray,1,v,vs).mk) or \/
+  def fromStream[A](vs: ~[A]): ><[A] = vs.read_?.map(v => zBuf(Array.emptyAnyRef,1,v,vs).mk) or \/
 
   // *****************************************************************************************************
   private class zBuf[A] private (a: Array[AnyRef],s:Int) extends AnyRef.Buffer[A](a,s):
@@ -32,8 +32,8 @@ object ArrayPack:
       addAll(vs)
 
     def mk: Pack[A] =
-      val s=size; val a=array
-      if(s==0) Pack.void else if(a.length==s || J.Setup.allowUncompactedPack) new ArrayPack(a,s) else new ArrayPack(a.copySize(s),s)
+      val s=size
+      if(s==0) Pack.void else new ArrayPack(array,s)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

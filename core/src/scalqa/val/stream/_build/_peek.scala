@@ -98,7 +98,7 @@ ___________________________________________________________________________*/
         Stream is empty
       ```
 
-@def peekEvents -> Specialized events
+@def peekEvents -> Custom events
 
     Allows to setup [[scalqa.val.stream.custom.Event ~~.Custom.Events]] multiple monitoring events
 
@@ -123,7 +123,7 @@ ___________________________________________________________________________*/
       Finished in: 5.411673300 secs, Element count: 1000
     ```
 
-@def peekMonitor -> Specialized monitor
+@def peekMonitor -> Custom monitor
 
     Adds pre-build [[scalqa.val.stream.custom.event.Monitor ~~.Custom.Event.Monitor ]]
 

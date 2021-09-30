@@ -5,7 +5,7 @@ class Range[A<:Raw](_start: A, e: A, eIn: Boolean) extends Val.<>[A] with any.z.
   final             def start                           : A             = _start
   final             def end                             : A             = e
   final             def endIsIn                         : Boolean       = eIn
-  final             def ordering                        : G.Ordering[A] = Float.ordering.cast[G.Ordering[A]]
+  final             def ordering                        : Ordering[A]   = Float.ordering.cast[Gen.Ordering[A]]
   @tn("step_Stream")def step_~(step: A)                 : Stream[A]     = Z.Stream_fromRange(this, step.real)
   override          def contains(v: A)                  : Boolean       = _start <= v && v <* (true,e,eIn)
   /**/              def contains(r: Range[A])           : Boolean       = _contains(r.start,r.end,r.endIsIn)
