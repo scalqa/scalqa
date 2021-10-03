@@ -21,7 +21,7 @@ ___________________________________________________________________________*/
 /**
 @class Data -> ### Int Opaque Data Companion Object Base
 
-  Opaque Data not only defines a Int based opaque type, but also privides a framework of custom specialized containers attached to this type.
+  Opaque Data not only defines an Int based opaque type, but also privides a framework of custom specialized containers attached to this type.
 
   See [more in guide](../../../../../guide/features/Data.html).
 

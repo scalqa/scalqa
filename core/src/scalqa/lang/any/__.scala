@@ -60,7 +60,7 @@ ___________________________________________________________________________*/
 @type Byte    ->  All Byte-like    types \n\n The type is needed for specialized Byte    based generic containers. From JVM prospective Any.Byte    is just a Byte    primitive.
 @type Char    ->  All Char-like    types \n\n The type is needed for specialized Char    based generic containers. From JVM prospective Any.Char    is just a Char    primitive.
 @type Short   ->  All Short-like   types \n\n The type is needed for specialized Short   based generic containers. From JVM prospective Any.Short   is just a Short   primitive.
-@type Int     ->  All Int-like     types \n\n The type is needed for specialized Int     based generic containers. From JVM prospective Any.Int     is just a Int     primitive.
+@type Int     ->  All Int-like     types \n\n The type is needed for specialized Int     based generic containers. From JVM prospective Any.Int     is just an Int    primitive.
 @type Long    ->  All Long-like    types \n\n The type is needed for specialized Long    based generic containers. From JVM prospective Any.Long    is just a Long    primitive.
 @type Float   ->  All Float-like   types \n\n The type is needed for specialized Float   based generic containers. From JVM prospective Any.Float   is just a Float   primitive.
 @type Double  ->  All Double-like  types \n\n The type is needed for specialized Double  based generic containers. From JVM prospective Any.Double  is just a Double  primitive.

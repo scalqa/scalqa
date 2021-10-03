@@ -128,7 +128,7 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
     case _ => Nil
   }
 
-  def memberSignature(member: Member, short: Boolean = true) =
+  def memberSignature(member: Member) =
     val depStyle = if member.deprecated.isEmpty then "" else "deprecated"
     val nameClasses = cls := s"documentableName $depStyle"
 
@@ -136,15 +136,15 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
     val inlineBuilder = rawBuilder.asInstanceOf[InlineSignatureBuilder]
     if inlineBuilder.preName.isEmpty then println(member)
     val kind :: modifiersRevered = inlineBuilder.preName
-    var signature = inlineBuilder.names.reverse.improveSignature(member,short)
+    var signature = inlineBuilder.names.reverse.improveSignature(member)
 
     Seq(
       span(cls := "modifiers")(
         span(cls := "other-modifiers")(modifiersRevered.reverse.map(renderElement)),
         span(cls := "kind")(renderElement(kind)),
       ),
-      renderLink(member.name.nameToOp, member.dri, nameClasses),
-      span(cls := "signature")(signature.map(v => renderElementWith(v,short))),
+      renderLink(member.name.withOp, member.dri, nameClasses),
+      span(cls := "signature")(signature.map(v => renderElementWith(v))),
     )
 
   def memberIcon(member: Member) = member.kind match {
@@ -395,7 +395,7 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
           ),
           div(cls := "signature monospace")(
             annotations(m),
-            memberSignature(m,false)
+            memberSignature(m)
           )
         )
 

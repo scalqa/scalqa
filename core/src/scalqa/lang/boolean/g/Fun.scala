@@ -21,3 +21,9 @@ object Fun:
  __\  \/ /___/ __  |/ /__/ /_/ /_/ __  |   (c) 2021, Scalqa.org Inc
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
+/**
+@object Fun ->
+
+   Object Fun contains a set of Boolean specialized generic functions, to be used with Boolean based opaque values.
+
+*/

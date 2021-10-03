@@ -37,11 +37,11 @@ class GeneralData(m: Member) extends Data(m):
   // ---------------------------------------------------------------------------------------------------------------------------------------------------
   extension(x: String)    private def _propertyName          : String      = if(x.endsWith("_=")) x.dropLast(2) + "_*" else x + "_*"
   extension(x: String)    private def _isAliasName           : Boolean     = x.charAt(0).isUpper && (x.length==1 || x.charAt(1).isLower)
-  extension(x: ~[Member]) private def _takeIfIn(s: ~[Member]): ~[Member]   = x.takeValuesBy(_.name.nameToId, s.map(_.name.nameToId))
-  extension(x: ~[Member]) private def _dropIfIn(s: ~[Member]): ~[Member]   = x.dropValuesBy(_.name.nameToId, s.map(_.name.nameToId))
+  extension(x: ~[Member]) private def _takeIfIn(s: ~[Member]): ~[Member]   = x.takeValuesBy(_.name.lowerNoOp, s.map(_.name.lowerNoOp))
+  extension(x: ~[Member]) private def _dropIfIn(s: ~[Member]): ~[Member]   = x.dropValuesBy(_.name.lowerNoOp, s.map(_.name.lowerNoOp))
   extension(x: Member)    private def _isLocal               : Boolean     = x.inheritedFrom.filterNot(_.dri.id.startsWith(owner.id + "._")).isEmpty
   extension(x: Member)    private def _member_?              : Opt[Member] = x.signature.~.takeFirst(1).read_?.takeType[Link].map(_.dri.id.moduleId)
-                                                                              .takeOnly(Id(owner.id.moduleId.real + "." + x.name.nameToId))
+                                                                              .takeOnly(Id(owner.id.moduleId.real + "." + x.name.lowerNoOp))
                                                                               .map_?(Registry.module_?).map(_.main)
 
   if(m.name in ("Val","G","Request")) this.aliases  = aliases.~.dropValuesBy(_.name,("~","<>","><","\\/")).><

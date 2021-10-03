@@ -1,6 +1,8 @@
 package scalqa; package api
 
 import dotty.tools.scaladoc.tasty.comments.Comment
+import dotty.tools.scaladoc.translators.{ ScalaSignatureProvider, InlineSignatureBuilder}
+
 
 transparent trait _Member:
   self: Api.type =>
@@ -21,5 +23,7 @@ transparent trait _Member:
       var o = x.docs
       if(o.isEmpty) x.origin.override_?.map_?(_.overridenMembers.~.read_?).map(_.dri).map_?(Registry.member_?).map_?(_.members.~.find_?(_.name == x.name)).forval(m => o = m.deepDocs)
       o
+
+    def extendsSignature: Signature = ScalaSignatureProvider.rawSignature(x, InlineSignatureBuilder()).asInstanceOf[InlineSignatureBuilder].names.reverse.improveSignature(x)
 
 

@@ -17,7 +17,6 @@ object Def:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object Def -> ### Any Type Given Definitions
-
+@object Def -> ### Any Type Standard Given Definitions
 
 */

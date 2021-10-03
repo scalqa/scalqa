@@ -5,20 +5,20 @@ import _Methods.Self
 
 transparent trait _Methods:
   extension[A](inline x:A)
-    /**/             inline def isVoid                                (using inline d: Def.Void[A]) : Boolean      = d.value_isVoid(x)
-    /**/             inline def nonVoid                               (using inline d: Def.Void[A]) : Boolean      = !d.value_isVoid(x)
-    @tn("opt")       inline def ?                                   (using inline A:Specialized[A]) : A.Opt        = z.opt.make(x)
-    @tn("result")    inline def ??                                                                  : Result[A]    = Result(x)
-    @tn("range")     inline def <> (inline to:A)(using inline o:O[A])(using inline A:Specialized[A]): A.<>         = z.range(x,to)
-    @tn("rangeX")    inline def <>>(inline to:A)(using inline o:O[A])(using inline A:Specialized[A]): A.<>         = z.range.exclusive(x,to)
-    infix            inline def in   [HOLDER](inline c: HOLDER)(using inline d:Def.Within[A,HOLDER]): Boolean      = z.inMacro(x,c,d)
-    infix            inline def notIn[HOLDER](inline c: HOLDER)(using inline d:Def.Within[A,HOLDER]): Boolean      = !in(c)
-    /**/             inline def doc                                     (using inline d:Def.Doc[A]) : Doc          = d.value_doc(x)
-    /**/             inline def tag                                     (using inline t:Def.Tag[A]) : String       = t.value_tag(x)
-    /**/             inline def tp                                      (using inline t:Def.Tag[A]) : Unit         = ZZ.tp(x,t)
-    @tn("addSpaced") inline def +- [B](v: B)      (using inline ta:Def.Tag[A],inline tb:Def.Tag[B]) : String       = ta.value_tag(x) + ' ' + tb.value_tag(v)
-    @tn("selfView")  inline def ^                                                                   : Self[A]      = x.cast[Self[A]]
-    @tn("self_View") inline def self_^                                                              : Self[A]      = x.cast[Self[A]]
+    /**/             inline def isVoid                                 (using inline d: Def.Void[A]) : Boolean      = {val v=x; v==null ||  d.value_isVoid(v)}
+    /**/             inline def nonVoid                                (using inline d: Def.Void[A]) : Boolean      = {val v=x; v!=null && !d.value_isVoid(v)}
+    @tn("opt")       inline def ?                                    (using inline A:Specialized[A]) : A.Opt        = z.opt.make(x)
+    @tn("result")    inline def ??                                                                   : Result[A]    = Result(x)
+    @tn("range")     inline def <> (inline to:A)(using inline o:O[A])(using inline A:Specialized[A]) : A.<>         = z.range(x,to)
+    @tn("rangeX")    inline def <>>(inline to:A)(using inline o:O[A])(using inline A:Specialized[A]) : A.<>         = z.range.exclusive(x,to)
+    infix            inline def in   [HOLDER](inline c: HOLDER)(using inline d:Def.Within[A,HOLDER]) : Boolean      = z.inMacro(x,c,d)
+    infix            inline def notIn[HOLDER](inline c: HOLDER)(using inline d:Def.Within[A,HOLDER]) : Boolean      = !in(c)
+    /**/             inline def doc                                      (using inline d:Def.Doc[A]) : Doc          = d.value_doc(x)
+    /**/             inline def tag                                      (using inline t:Def.Tag[A]) : String       = t.value_tag(x)
+    /**/             inline def tp                                       (using inline t:Def.Tag[A]) : Unit         = ZZ.tp(x,t)
+    @tn("addSpaced") inline def +- [B](v: B)       (using inline ta:Def.Tag[A],inline tb:Def.Tag[B]) : String       = ta.value_tag(x) + ' ' + tb.value_tag(v)
+    @tn("selfView")  inline def ^                                                                    : Self[A]      = x.cast[Self[A]]
+    @tn("self_View") inline def self_^                                                               : Self[A]      = x.cast[Self[A]]
 
 object _Methods:
   transparent inline def Self = _methods.Self; type Self[+A] = _methods.Self.TYPE.DEF[A]
@@ -91,12 +91,12 @@ ___________________________________________________________________________*/
       (5 in pack).TP    // Prints true
     ```
 
-    Note. This operation is Macro optimized for Tuples from 2 to 12, so the following will be ultimatly efficent with no Tuple allocation:
+    Note. This operation is Macro optimized for Tuples from 2 to 12, so the following check will be ultimatly efficent with no Tuple allocation:
 
     ```
       val s = "ABC"
 
-      { s in ("XYZ","BBC","CBC") }.TP    // Prints false
+      s in ("XYZ","BBC","CBC")
     ```
 
 

@@ -13,8 +13,8 @@ object Self:
     /**/               inline def apply[U](inline f: A => U)                           : A        = {val v=x.real; f(v); v }
     /**/               inline def map[B](inline f: A => B)                             : B        = f(x.real)
     /**/               inline def mapIf(inline filter:A=>Boolean, inline f:A=>A)       : A        = {var v=x.real; if(filter(v)) v=f(v); v }
-    /**/               inline def isVoid                 (using inline d: Def.Void[A]) : Boolean  = {val v=x.real;v==null ||  d.value_isVoid(v)}
-    /**/               inline def nonVoid                (using inline d: Def.Void[A]) : Boolean  = {val v=x.real;v!=null && !d.value_isVoid(v)}
+    /**/               inline def isVoid                 (using inline d: Def.Void[A]) : Boolean  = {val v=x.real; v==null ||  d.value_isVoid(v)}
+    /**/               inline def nonVoid                (using inline d: Def.Void[A]) : Boolean  = {val v=x.real; v!=null && !d.value_isVoid(v)}
     @tn("nonEmptyOpt") inline def ?(using inline e:Def.Empty[A],inline d: Def.Void[A]) : Opt[A]   = J.illegalState() // Overtaken by root lib
     /**/               inline def isEmpty                (using inline d:Def.Empty[A]) : Boolean  = d.value_isEmpty(x.real)
     /**/               inline def nonEmpty               (using inline d:Def.Empty[A]) : Boolean  = !d.value_isEmpty(x.real)
@@ -47,13 +47,12 @@ ___________________________________________________________________________*/
 
     A common use case is to manipulate an object within expression context:
     ```
-      val a : Array[String] = new Array[String](2).^(_(0)="A").^(_(1)="B")
+      val a : Array[String] = new Array[String](1).^(_(0)="A")
     ```
     because all calls are inlined, the above expression is equivalent to:
     ```
-      val a : Array[String] = new Array[String](2)
+      val a : Array[String] = new Array[String](1)
       a(0)="A"
-      a(1)="B"
     ```
 
 @def typeName -> Type name
@@ -127,18 +126,33 @@ ___________________________________________________________________________*/
     s.?.tp    // prints: Opt(~())
     ```
 
-@def >< -> Pack
+@def >< -> Self pack
 
     Creates a pack with this sigle value
+
+@def ~ -> Self stream
+
+    Creates a stream with this sigle value
+
+    The following lines are inlined and produce same java code:
+
+    ```
+    val s1 : ~[String] = "Foo".^.~
+    // same as
+    val s2 : ~[String] = ~~("Foo")
+    ```
 
 @def isVoid -> Void check
 
     Returns `true` if value is void, `false` - otherwise
 
+    Note. This method is the same as calling 'isVoid' on base value.
+
 @def nonVoid -> Non void check
 
     Returns `true` if value is not void, `false` - otherwise
 
+    Note. This method is the same as calling 'nonVoid' on base value.
 
 @def isEmpty -> Empty check
 

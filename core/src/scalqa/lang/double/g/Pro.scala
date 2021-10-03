@@ -32,7 +32,11 @@ object Pro:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object X -> ### Type Extention
-@object X -> ### Type Extention
-@object X -> ### Type Extention
+@trait Pro -> ### Double Specialized Generic Provider/Property
+
+        To be used with Double based opaque values.
+
+@object X -> ### Implemented Type Extentions
+@object X -> ### Implemented Type Extentions
+@object X -> ### Implemented Type Extentions
 */

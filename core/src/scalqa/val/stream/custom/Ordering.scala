@@ -14,9 +14,9 @@ trait Ordering[A]:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait Math -> ###
+@trait Ordering -> ###
 
-   Custom Math implementations can provide more efficient ways for Streams to calculate `min`,`max`, and `range`.
+   This trait can be mixed with existing Ordering inplementations to provide more efficient ways for Streams to calculate `min`,`max`, and `range`.
 
    Apparently primitive based numeral data elements use it a lot
 

@@ -20,3 +20,9 @@ object Idx:
  __\  \/ /___/ __  |/ /__/ /_/ /_/ __  |   (c) 2021, Scalqa.org Inc
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
+/**
+@trait Idx -> ### Int Specialized Generic Indexed Collection
+
+        To be used with Int based opaque values.
+
+*/

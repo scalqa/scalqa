@@ -49,9 +49,13 @@ object Lookup:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
+@trait Lookup -> ### Byte Specialized Generic Lookup Collection
+
+        To be used with Byte based opaque values as lookup keys.
+
 @def void  -> Get void instance
 
 @def implicitRequest   -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 
-@object X -> ### Type Extention
+@object X -> ### Implemented Type Extentions
 */

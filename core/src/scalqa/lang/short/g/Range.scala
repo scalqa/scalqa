@@ -42,3 +42,9 @@ object Range:
  __\  \/ /___/ __  |/ /__/ /_/ /_/ __  |   (c) 2021, Scalqa.org Inc
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
+/**
+@class Range -> ### Short Specialized Generic Range
+
+  To be used with Short based opaque values.
+
+*/

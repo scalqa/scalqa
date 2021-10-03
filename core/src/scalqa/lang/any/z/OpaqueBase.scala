@@ -21,12 +21,6 @@ abstract class OpaqueBase[A<: Any.Opaque]private[lang](name: String, ct: ClassTa
       ++= value_isVoid(v) ? ("","Void") += ("opaque",(v:Any).^.typeName+"("+tg+")")
       ++= ((ck==0) ? value_tag(v)).dropOnly(tg).map(v=>("tag",v))
 
-object OpaqueBase:
-
-  transparent trait _methods:
-    extension[THIS_OPAQUE<:Any.Opaque](inline x: THIS_OPAQUE)
-      inline def real[REAL_TYPE]: REAL_TYPE
-
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
@@ -34,11 +28,6 @@ object OpaqueBase:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@class Base -> ### Any Opaque Companion Object Base
-
-    This class cannot be used directly, but rather through it's children like
-    [Int.Opaque.Base](../../int/opaque/Base.html), [Char.Opaque.Data](../../char/opaque/Data.html), etc.
-
 @val typeName -> Type name
 
     Returns defined opaque type name

@@ -2,14 +2,14 @@ package scalqa; import module.*
 
 class Module (val typ_? : Opt[Member], val val_? : Opt[Member]):
   val main               : Member  = typ_? or val_?.get
-  val name               : String  = main.name.nameToOp.^.mapIf(_ == "TYPE", v => val_?.map(_.name) or v)
+  val name               : String  = main.name.withOp.^.mapIf(_ == "TYPE", v => val_?.map(_.name) or v)
   var inner              : Boolean = false
   def prefix             : String  = if(inner) "A" else "B"
   def label              : String  = {var l=name; val i=l.lastIndexOf("."); if(i>0) l.substring(i+1); if(inner) l = "#" + l; l}
   def dri                : DRI     = typ_?.map(_.dri) or val_?.get.dri
   def dri2               : DRI     = val_?.map(_.dri) or typ_?.get.dri
   override def toString  : String  = "Module("+typ_?.map(_.tag) + ", " + val_?.map(_.tag) + ")"
-  def children: ><[Module] = (~~.void[Module]
+  def children: ><[Module] = (Val.~.void[Module]
                                .joinAll(val_?.~.flatMap(_.children.members.~.map_?(_.dri.module_?)))
                                .joinAll(typ_?.~.flatMap(_.children.members.~.map_?(_.dri.module_?).peek(_.inner=true)))
                                .toLookupBy(_.main.id.moduleId).~.sort(using if(name=="scalqa") Sorting.root else Sorting.byName)
@@ -22,26 +22,23 @@ object Module:
     if(id!=m2.id.moduleId) Docs.fail("No id match")
     if     (m1.kin.isTypeLike && m2.kin.isDefLike ) Both(m1,m2)
     else if(m1.kin.isDefLike  && m2.kin.isTypeLike) Both(m2,m1)
-    //else if(m1.name=="Fx") kin.isDefLike  && m2.kin.isDefLike)  Both(m2,m1)
     else Docs.fail("Error: "+m1.tag+" <> "+m2.tag)
 
   class Both private(v1: Member,v2: Member) extends Module(v1,v2)
   object Both:
     def apply(v1: Member,v2: Member): Both = if(!v1.dri.isTypeDef) new Both(v1,v2) else
       val t = v1.members.~.find(_.name == "DEF")
-      //v2.name +- t.signature.~.tag tp()
-      //val m = v1.copy(name=v2.name,signature=t.signature,kind=t.kind,dri=v1.dri,members=v2.members)
       val m = t.copy(name=v2.name,dri=v1.dri,members=v2.members)
       Registry.update(m)
       new Both(m,v2)
 
   // *********************************************************
-  class Typ(v: Member)            extends Module(v,\/)
-  class Val(v: Member)            extends Module(\/,v)
+  class Typ(v: Member) extends Module(v,\/)
+  class Val(v: Member) extends Module(\/,v)
 
   object Root extends Module(\/,\/):
     private def ?(v: String): Opt[Module] = Registry.module_?(Id("scalqa."+v))
-    @fast override lazy val children: ><[Module] = ~~( ?("Lang").get, ?("Gen").get, ?("J").get, ?("Val").get).joinAll(?("Fx")).sort.><
+    @fast override lazy val children: ><[Module] = scalqa.Val.~( ?("Lang").get, ?("Gen").get, ?("J").get, ?("Val").get).joinAll(?("Fx")).sort.><
 
   given ordering: Ordering[Module] = Sorting.default
 

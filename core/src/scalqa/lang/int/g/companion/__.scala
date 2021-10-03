@@ -21,5 +21,6 @@ ___________________________________________________________________________*/
 /**
 @object Companion ->
 
+    Companion object contains a set of classes, which provide companion object functionality for customized generic containers.
 
 */

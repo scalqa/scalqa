@@ -1,6 +1,6 @@
 package scalqa; package `val`; package stream; package z; package _build; package _extend; import language.implicitConversions
 
-class joinAll[A](p1: ~[A], p2: ~[A]) extends ~[A] with Custom.Pipeline.Tree with custom.Discharge[A] with Able.Size.Opt.Long:
+class joinAll[A](p1: ~[A], p2: ~[A]) extends ~[A] with custom.Pipeline.Tree with custom.Discharge[A] with Able.Size.Opt.Long:
   private var v = true
   @tn("read_Opt")     def read_?                    = if(v) p1.read_? or_? {v = false; p2.read_?}    else p2.read_?
   @tn("sizeLong_Opt") def sizeLong_?                = if(v) p1.sizeLong_?.mix(p2.sizeLong_?, _ + _ ) else p2.sizeLong_?

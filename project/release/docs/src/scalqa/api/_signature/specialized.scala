@@ -14,7 +14,7 @@ object specialized:
       .take(_ => pos_?)
       .map(l =>  x.dropRight(1).appended( x.~.dropFirst(pos_?.get).map(_.toString.trim).take(_ in ("A","B","C")).read_?.or("A") + "." + l.name)) or x
 
-    if  (m.name.equalsIgnoreCase("map_?")) s = s.~.dropSequenceBy(_.toStr.trim,OPT).toSeq
+    if  (m.name.equalsIgnoreCase("map_?")) s = s.~.dropSequenceBy(_.label.trim,OPT).toSeq
     else if(m.name.startsWith("toLookup")) s = s.~.replaceSequenceBy(v => v.?.takeType[Link].map(_.name) or v.toString, ><("Lookup"), ><("KEY.Lookup")).toSeq
 
     s

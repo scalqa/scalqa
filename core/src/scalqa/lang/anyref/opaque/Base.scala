@@ -14,7 +14,7 @@ object Base:
 
   transparent trait _methods[A<:Opaque, REAL<:AnyRef]:
     extension[THIS_OPAQUE<:A](inline x: THIS_OPAQUE)
-      inline def real[REAL_TYPE >: REAL <: REAL]: REAL_TYPE = x.cast[REAL_TYPE]
+      inline def real[THIS_REAL >: REAL <: REAL]: THIS_REAL = x.cast[THIS_REAL]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

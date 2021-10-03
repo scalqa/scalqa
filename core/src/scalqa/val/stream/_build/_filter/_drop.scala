@@ -83,7 +83,7 @@ ___________________________________________________________________________*/
          ~(a, b, e, f)
       ```
 
-      Note: Sequence indexing starts from 0
+      Note: Range indexing starts from 0
 
 @def dropEvery -> Every Nth element reversed filter
 

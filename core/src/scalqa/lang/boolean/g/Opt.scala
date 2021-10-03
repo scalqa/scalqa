@@ -57,6 +57,10 @@ object Opt:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
+@type DEF -> ### Boolean Specialized Generic Option
+
+  To be used with Boolean based opaque values.
+
 @def void      -> Get void instance
 @def implicitRequest   -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 

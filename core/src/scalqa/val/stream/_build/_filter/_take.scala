@@ -85,7 +85,7 @@ ___________________________________________________________________________*/
          ~(b, c, d, e, f, g, h)
       ```
 
-      Note: Sequence indexing starts from 0
+      Note: Range indexing starts from 0
 
 @def takeEvery -> Every Nth element filter
 

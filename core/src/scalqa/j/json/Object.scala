@@ -39,5 +39,5 @@ object Object extends Gen.Void.Setup[AnyRef](z.Void.Object):
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object X -> ### Type Extention
+@object X -> ### Implemented Type Extentions
 */

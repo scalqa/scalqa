@@ -25,5 +25,5 @@ object X:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object X -> ### Type Extention
+@object X -> ### Implemented Type Extentions
 */

@@ -12,25 +12,23 @@ trait _DRI:
                                            .replace("$$TYPE$","").replace("$$",".")
                                            .^.map(l => x.anchor.^.?.map(_.takeBefore("-")).map(a => l.^.mapIf(_.endsWith("$"),_.dropLast(1)) + "." + a) or l)
 
-    def label(shrt: Boolean = true): String =
-      val short = shrt && !x.isLangAny
+    def label(brief: Boolean = true): String =
       var tg = x.tag
-      if(!x.location.startsWith("scalqa.")) return tg.simpleName(short)
+      if(!x.location.startsWith("scalqa.")) return tg.simpleName(brief)
       var v = if(tg.startsWith("scalqa.")) tg.dropFirst(7) else tg
 
-      v = v.split_~('.','$').dropVoid.map(_.docLabel.nameToOp).makeString(".")
+      v = v.split_~('.','$').dropVoid.map(_.docLabel.withOp).makeString(".")
 
       if(!x.anchor.isEmpty)
         var a = x.anchor.takeBefore("-")
-        //if(a.length == 1) return a
         if(!v.endsWith("."+a)) v = v + "." + a
-        if(v=="~" && x.tag == "scalqa.val.Stream$") v = "~~"
+        //if(v=="~" && x.tag == "scalqa.val.Stream$") v = "~~"
       else
         v = v.lastIndexOf_?("._").map(i => v.dropFirst(i + 1)) or v
 
-      v.simpleName(short)
+      v.simpleName(brief)
 
-    def scalqaLabel(short: Boolean = true): String = label(short)
+    def scalqaLabel(brief: Boolean = true): String = label(brief)
 
     def isPrivate: Boolean =
       val s=(x.location+".").replace("$",".").replace("..",".").replace("..",".")

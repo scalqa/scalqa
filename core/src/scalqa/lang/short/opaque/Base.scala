@@ -1,11 +1,11 @@
 package scalqa;  package lang; package short; package opaque; import language.implicitConversions
 
-abstract class Base[A<:Opaque](name:String) extends any.z.OpaqueBase[A](name,ClassTag.Short.cast[ClassTag[A]]) with Base._methods with any.`def`.Void.Primitive.Short[A]:
+abstract class Base[A<:Opaque](name:String) extends any.z.OpaqueBase[A](name,ClassTag.Short.cast[ClassTag[A]]) with Base._methods with any.`def`.Void.Primitive.X.Short[A]:
   def value_isVoid(v: A): Boolean = false
   def value_tag(v: A)   : String  = default_doc(v).tag
   def value_doc(v: A)   : Doc     = default_doc(v)
 
-  given zzVoidDef: Any.Def.Void.Primitive.Short[A] = this
+  given zzVoidDef: Any.Def.Void.Primitive.X.Short[A] = this
 
   extension(inline x: Short)
     inline def toOpaque[THIS_OPAQUE >: A <: A]: THIS_OPAQUE = x.cast[THIS_OPAQUE]
