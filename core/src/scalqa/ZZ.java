@@ -23,9 +23,11 @@ public final class ZZ{
     public  static final scalqa.val.Pack<Object>            VOID                   = new scalqa.val.pack.z.Void<Object>();
     public  static <A>   scalqa.val.Pack<A>                 Void()                 { return (scalqa.val.Pack<A>)  VOID;   }
     public  static final int                                initSize               = Access.initSize();
+    public  static final Object                             result(Object v)       { return v != null ? v : NULL_VALUE; }
 
     public  static <A>   AnyDef<A>                          Any()                  { return (AnyDef<A>)AnyDef; }
     public  static       scalqa.val.result.Problem          problem(String message){ return new scalqa.val.result.z.DefaultProblem(message); }
+    public  static final scalqa.val.result.Problem          NULL_VALUE             = new scalqa.val.result.z.DefaultProblem("Null value");
 
     // *********************** Exceptions **************************
     public  static class EO extends IllegalStateException        { public EO(){ super("Method 'get' called on an empty `Opt`");                   }}

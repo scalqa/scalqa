@@ -10,7 +10,7 @@ object Double extends double.g.companion.Containers[Double]:
   type _methods = double._methods;          transparent inline def G      = double.G
 
 package object double:
-  private[lang] type Primitive = Double
+  private[lang] type Primitive = Double;        private[lang] transparent inline def Primitive = Double
   private[lang] type Raw       = Any.Double
   private[lang] type Opaque    = Double.Opaque
 

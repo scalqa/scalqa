@@ -3,8 +3,11 @@ package scalqa; package test.`val`.range
 object Main extends J.Test:
 
   include(
+    contains,
     join,
-    overlap)
+    overlap_Opt,
+    overlaps
+  )
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

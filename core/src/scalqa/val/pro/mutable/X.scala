@@ -2,7 +2,7 @@ package scalqa; package `val`; package pro; package mutable
 
 object X:
 
-  abstract class Base[A] extends pro.X.Base[A] with Mutable[A]
+  abstract class Abstract[A] extends pro.X.Abstract[A] with Mutable[A]
 
   // *************************************************************
   class Basic[A](_value: A) extends Mutable[A]:
@@ -17,5 +17,5 @@ object X:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object X -> ### Implemented Type Extentions
+@object X -> ### Type Extentions \n\n This object contains all provided base type implementations
 */

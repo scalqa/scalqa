@@ -27,10 +27,19 @@ ___________________________________________________________________________*/
 /**
 @object Primitive ->
 
-@type Array ->  All primitive Array kinds  \n\n All possible primitive Array types supported by JVM.
-@type ~     ->  All primitive stream kinds \n\n All supported primitive stream implementations.
-@type <>    ->  All primitive range kinds  \n\n All supported primitive range implementations.
-@type ><    ->  All primitive pack kinds   \n\n All supported primitive pack implementations.
-@type Opt   ->  All primitive Opt kinds    \n\n All supported primitive Opt implementations.
+@type Type        ->  All primitive types \n\n All scalqa supported primitive types, which can be handled by specialized containers.
+
+@type ~           ->  All primitive stream kinds      \n\n All supported primitive stream implementations.
+@type <>          ->  All primitive range kinds       \n\n All supported primitive range implementations.
+@type ><          ->  All primitive pack kinds        \n\n All supported primitive pack implementations.
+@type Array       ->  All primitive Array kinds       \n\n All possible primitive Array types supported by JVM.
+@type Buffer      ->  All primitive Buffer kinds      \n\n All supported primitive Buffer implementations.
+@type Collection  ->  All primitive Collection kinds  \n\n All supported primitive Collection implementations.
+@type Idx         ->  All primitive Idx kinds         \n\n All supported primitive indexed collection implementations.
+@type Lookup      ->  All primitive Lookup kinds      \n\n All supported primitive lookup colelction implementations.
+@type Opt         ->  All primitive Opt kinds         \n\n All supported primitive Opt implementations.
+@type Pro         ->  All primitive Pro kinds         \n\n All supported primitive Provider/Property implementations.
+@type Set         ->  All primitive Set kinds         \n\n All supported primitive Set implementations.
+@type Opaque      ->  All primitive Opaque kinds      \n\n All supported primitive Opaque root types.
 
 */

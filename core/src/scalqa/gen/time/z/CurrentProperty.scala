@@ -1,6 +1,6 @@
 package scalqa; package gen; package time; package z; import language.implicitConversions
 
-private class CurrentProperty(length: Time.Length) extends Long.G.Pro.Observable.X.Base[Long]:
+private class CurrentProperty(length: Time.Length) extends Long.G.Pro.Observable.X.Abstract[Long]:
   override def doc     : Doc      = Doc("Time.current_*@" + this.##) += ("length", length)
   private  val nanos   : Long     = length.nanosTotal
   private  var nextRun : Long     = { val t = System.nanoTime; t - (t % nanos) + nanos }

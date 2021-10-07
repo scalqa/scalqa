@@ -2,20 +2,20 @@ package scalqa; package `val`; package pro; package observableMutable
 
 object X:
 
-  class Base[A] extends pro.X.Base[A] with observable.X.Basis[A] with ObservableMutable[A]:
+  class Abstract[A] extends pro.X.Abstract[A] with observable.X.Base[A] with ObservableMutable[A]:
     private var value: A = _
 
     def apply()      : A    = value
     def update(v: A) : Unit = if (value != v) { value = v; fireChange }
 
   // ************************************************************************************************************
-  trait Basis[A] extends observable.X.Basis[A] with ObservableMutable[A]:
+  trait Base[A] extends observable.X.Base[A] with ObservableMutable[A]:
       private var value: A = _
       def apply()      = value
       def update(v: A) = if (value != v){ value = v; fireChange }
 
   // ************************************************************************************************************
-  class Basic[A] private() extends Base[A]:
+  class Basic[A] private() extends Abstract[A]:
     def this(v: A) = { this(); super.update(v) }
 
 /*___________________________________________________________________________
@@ -25,5 +25,5 @@ object X:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object X -> ### Implemented Type Extentions
+@object X -> ### Type Extentions \n\n This object contains all provided base type implementations
 */

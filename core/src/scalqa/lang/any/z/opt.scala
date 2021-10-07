@@ -2,7 +2,7 @@ package scalqa; package lang; package any; package z; import language.implicitCo
 
 object opt:
 
-  inline def make[A](x: A)(using inline A:Specialized[A]): A.Opt =
+  inline def make[A](inline x: A)(using inline A:Specialized[A]): A.Opt =
     inline A match
       case _ : Specialized[A & Any.Boolean] => (if(x.cast[Boolean]) Boolean.G.Opt.TRUE else Boolean.G.Opt.FALSE).cast[Boolean.Opt].cast[A.Opt]
       case _ : Specialized[A & Any.Byte   ] => x.cast[Byte  .Opt].cast[A.Opt]
@@ -12,7 +12,15 @@ object opt:
       case _ : Specialized[A & Any.Long   ] => x.cast[Long  .Opt].cast[A.Opt]
       case _ : Specialized[A & Any.Float  ] => x.cast[Float .Opt].cast[A.Opt]
       case _ : Specialized[A & Any.Double ] => x.cast[Double.Opt].cast[A.Opt]
-      case _ : Specialized[A              ] => (if(x == null) ZZ.None else x).cast[Val.Opt[A]].cast[A.Opt]
+      case _ : Specialized[A              ] => {val v=x; (if(v == null) ZZ.None else v).cast[Val.Opt[A]].cast[A.Opt]}
+
+  def nonEmpty[A](x: Any, o:Opt[Def.Empty[A]], d:Def.Void[A]): Opt[A] =
+    val v = x.cast[A]
+    if(v == null || d.value_isVoid(v) || o.take(_.value_isEmpty(v))) \/ else v.cast[Opt[A]]
+
+  def nonEmptyStream[A](x: Any): Opt[~[A]] =
+    val s = x.cast[~[A]]
+    s.sizeLong_?.take(_ > 0).map(_ => s) or_? s.enablePreview.^.map(p => p.preview_?.map[~[A]](_ => p))
 
   // *************************************************************************************************
   class NameDef[A]()(using t :Any.Def.TypeName[A]) extends Def.TypeName[A]:

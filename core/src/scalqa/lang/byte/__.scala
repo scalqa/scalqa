@@ -10,7 +10,7 @@ object Byte extends byte.g.companion.Containers[Byte]:
   type _methods = byte._methods;          transparent inline def G      = byte.G
 
 package object byte:
-  private[lang] type Primitive = Byte
+  private[lang] type Primitive = Byte;             private[lang] transparent inline def Primitive = Byte
   private[lang] type Raw       = Any.Byte
   private[lang] type Opaque    = Byte.Opaque
 

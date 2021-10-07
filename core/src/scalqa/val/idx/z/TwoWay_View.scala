@@ -2,7 +2,7 @@ package scalqa; package `val`; package idx; package z; import language.implicitC
 
 object TwoWay_View:
 
-  class M[A,B](protected val real: Idx.Mutable[A], f: TwoWayFunction[A,B]) extends Idx.Mutable.X.Base[B]:
+  class M[A,B](protected val real: Idx.Mutable[A], f: TwoWayFunction[A,B]) extends Idx.Mutable.X.Abstract[B]:
     /**/                def apply(i: Int)          : B    = f(real(i))
     /**/                def size                   : Int  = real.size
     /**/                def addAt(i: Int, e: B)    : Unit = real.addAt(i, f.undo(e))

@@ -24,6 +24,6 @@ transparent trait _Member:
       if(o.isEmpty) x.origin.override_?.map_?(_.overridenMembers.~.read_?).map(_.dri).map_?(Registry.member_?).map_?(_.members.~.find_?(_.name == x.name)).forval(m => o = m.deepDocs)
       o
 
-    def extendsSignature: Signature = ScalaSignatureProvider.rawSignature(x, InlineSignatureBuilder()).asInstanceOf[InlineSignatureBuilder].names.reverse.improveSignature(x)
+    def extendsSignature: Signature = ScalaSignatureProvider.rawSignature(x, InlineSignatureBuilder()).asInstanceOf[InlineSignatureBuilder].names.reverse.scalqaSignature(x)
 
 

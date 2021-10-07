@@ -21,10 +21,10 @@ class Test(private[j] val name: String = \/):
 
   // ----------------------------------------------------------------------------------------------------------------------------------------------------------
   // Asserting
-  /**/                      def assertTrue( v: Boolean, message: => String = \/)        : Unit = { trueCnt += 1; if (!v)    throw new z.Problem("assertTrue", trueCnt, message)}
-  /**/                      def assertFalse(v: Boolean, message: => String = \/)        : Unit = { falseCnt += 1; if (v)    throw new z.Problem("assertFalse",falseCnt, message)}
-  @tn("assertEqual_Streams")def assertEqual_~[A](s1: ~[A],s2: ~[A],ms: ~[A]*)           : Unit = { equalCnt += 1; val o=z.streamsEqual.result(s1,s2,ms);
-    /**/                                                                                           if(o.isProblem) throw new z.Problem("assertEqual_~", equalCnt, o.problem.message)}
+  /**/                      def assertTrue( v: Boolean, message: => String = \/)        : Unit = { trueCnt  += 1; if (!v) throw new z.Problem("assertTrue", trueCnt,  message)}
+  /**/                      def assertFalse(v: Boolean, message: => String = \/)        : Unit = { falseCnt += 1; if ( v) throw new z.Problem("assertFalse",falseCnt, message)}
+  @tn("assertEqual_Streams")def assertEqual_~[A](s1: ~[A],s2: ~[A],ms: ~[A]*)           : Unit = { equalCnt += 1; val r=z.streamsEqual.result(s1,s2,ms);
+    /**/                                                                                           if(r.isProblem) throw new z.Problem("assertEqual_~", equalCnt, r.problem.message)}
 
   // ----------------------------------------------------------------------------------------------------------------------------------------------------------
   // Running
@@ -44,3 +44,9 @@ class Test(private[j] val name: String = \/):
  __\  \/ /___/ __  |/ /__/ /_/ /_/ __  |   (c) 2021, Scalqa.org Inc
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
+/**
+@class Test  ->  Code Testing Utility
+
+  "Test" is extensively used in Scalqa own [test project](https://github.com/scalqa/scalqa/tree/master/test/src/scalqa/test), which is the best usage example.
+
+*/

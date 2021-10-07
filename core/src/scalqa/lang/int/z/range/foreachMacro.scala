@@ -2,19 +2,25 @@ package scalqa; package lang; package int; package z; package range; import lang
 
 import scala.quoted.*
 
-object Macro:
+object foreachMacro:
 
-  inline def foreach[A<:Raw,U](inline x: g.Range[A], inline f:A=>U): Unit = ${ foreachMacro('x,'f)}
+  inline def apply[A<:Raw,U](inline x: G.<>[A], inline f:A=>U): Unit = ${ applyMacro('x,'f)}
 
-  // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  private def foreachMacro[A<:Any.Int:Type,U:Type](r: Expr[Int.G.<>[A]] ,f: Expr[A => U])(using Quotes): Expr[Unit] =
+  // -----------------------------------------------------------------------------------------------------------------------------
+  private def applyMacro[A<:Any.Int:Type,U:Type](r: Expr[G.<>[A]] ,f: Expr[A => U])(using Quotes): Expr[Unit] =
     r match
       case '{ new G.<>[A]($s,$to,true)  } => '{ var i=$s.cast[Int]; val e=$to.cast[Int];  while(i<=e){ val r=$f(i.cast[A]); i+=1 }}
       case '{ new G.<>[A]($s,$to,false) } => '{ var i=$s.cast[Int]; val e=$to.cast[Int];  while(i< e){ val r=$f(i.cast[A]); i+=1 }}
       case '{ new G.<>[A]($s,$sz)       } => '{ var i=$s.cast[Int]; val e=i+$sz;          while(i< e){ val r=$f(i.cast[A]); i+=1 }}
-      case _                              => '{ foreachDflt($r,$f) }
+      case _                              => '{ applyDflt($r,$f) }
 
-  inline def foreachDflt[A<:Raw,U](inline x: G.<>[A], inline f:A=>U): Unit = { val v=x; var i=v.start.cast[Int]; val e=v.endX.cast[Int]; while(i<e){ val r=f(i.cast[A]); i+=1 }}
+  private inline def applyDflt[A<:Raw,U](inline x: G.<>[A], inline f:A=>U): Unit =
+    val v=x
+    var i=v.start.cast[Int]
+    val e=v.endX.cast[Int]
+    while(i<e)
+      val r = f(i.cast[A])
+      i += 1
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

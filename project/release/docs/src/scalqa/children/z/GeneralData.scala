@@ -47,4 +47,4 @@ class GeneralData(m: Member) extends Data(m):
   if(m.name in ("Val","G","Request")) this.aliases  = aliases.~.dropValuesBy(_.name,("~","<>","><","\\/")).><
 
 object GeneralData:
-  val ContainerNames = ><("~","<>","><","Buffer","Collection","Idx","Lookup","Opt","Pro","Promise","Result","Set","Fun")
+  val ContainerNames = ><("~","<>","><","Buffer","Collection","Idx","Lookup","Opt","Pro","Promise","Result","Set","Fun","Array")

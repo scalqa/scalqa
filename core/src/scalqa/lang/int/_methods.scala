@@ -2,10 +2,10 @@ package scalqa; package lang; package int; import language.implicitConversions
 
 transparent trait _methods:
   extension(inline x:Int)
-    @tn("Opt")        inline def ?                         : lang.Int.Opt      = x.cast[Long].cast[lang.Int.Opt]
-    @tn("range")      inline def <> (inline to: Int)       : lang.Int.<>       = new lang.Int.G.<>[Int](x,to,true)
-    @tn("rangeX")     inline def <>>(inline to: Int)       : lang.Int.<>       = new lang.Int.G.<>[Int](x,to,false)
-    @tn("rangeOfSize")inline def <>=(inline size: Int)     : lang.Int.<>       = new lang.Int.G.<>[Int](x,size)
+    @tn("Opt")        inline def ?                         : Int.Opt           = x.cast[Long].cast[Int.Opt]
+    @tn("range")      inline def <> (inline to: Int)       : Int.<>            = new Int.<>(x,to,true)
+    @tn("rangeX")     inline def <>>(inline to: Int)       : Int.<>            = new Int.<>(x,to,false)
+    @tn("rangeOfSize")inline def <>=(inline size: Int)     : Int.<>            = new Int.<>(x,size)
     /**/        infix inline def max(inline v: Int)        : Int               = {val y=x; val w=v; if(y.real > w.real) y else w }
     /**/        infix inline def min(inline v: Int)        : Int               = {val y=x; val w=v; if(y.real < w.real) y else w }
     /**/              inline def roundTo(inline unit:Int)

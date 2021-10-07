@@ -2,14 +2,14 @@ package scalqa; package gen; package time; import language.implicitConversions
 
 import Gen.Time
 
-final class Period private[time] (val start: Time, val end: Time, val endIsIn: Boolean = false) extends Val.<>.X.Base[Time,Period]:
+final class Period private[time] (val start: Time, val end: Time, val endIsIn: Boolean = false) extends Val.<>.X.Abstract[Time,Period]:
   def ordering : Ordering[Time]       = Time.ordering
   def length   : Time.Length          = start lengthTo end
   def lastDay  : Day                  = if(end.isDayStart && !endIsIn) end.day.prior else end.day
   def day_~    : ~[Day]               = start.day.index.self_^.map(s => (s <> lastDay.index).~.map(i => Day.fromIndex(s + i)))
 
   // -------------------------------------------------------------------------------------------------------------------------------
-  protected def make(s:Time, e:Time, in:Boolean)(using Ordering[Time]) = new Period(s,e,in)
+  protected def makeNew(s:Time, e:Time, in:Boolean) = new Period(s,e,in)
 
 object Period:
   def apply(start: Time, end: Time) : Period = new Period(start, end)

@@ -10,7 +10,7 @@ object Long extends long.g.companion.Containers[Long]:
   type _methods = long._methods;          transparent inline def G      = long.G
 
 package object long:
-  private[lang] type Primitive = Long
+  private[lang] type Primitive = Long;           private[lang] transparent inline def Primitive = Long
   private[lang] type Raw       = Any.Long
   private[lang] type Opaque    = Long.Opaque
 

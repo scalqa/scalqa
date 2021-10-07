@@ -2,9 +2,9 @@ package scalqa; package lang; package float; import language.implicitConversions
 
 transparent trait _methods:
   extension(inline x: Float)
-    @tn("Opt")   inline def ?                          : lang.Float.Opt  = x.cast[Float.Opt]
-    @tn("range") inline def <> (inline to: Float)      : lang.Float.<>   = new lang.Float.<>(x,to,true)
-    @tn("rangeX")inline def <>>(inline to: Float)      : lang.Float.<>   = new lang.Float.<>(x,to,false)
+    @tn("Opt")   inline def ?                          : Float.Opt       = x.cast[Float.Opt]
+    @tn("range") inline def <> (inline to: Float)      : Float.<>        = new Float.<>(x,to,true)
+    @tn("rangeX")inline def <>>(inline to: Float)      : Float.<>        = new Float.<>(x,to,false)
     /**/   infix inline def max(inline v: Float)       : Float           = {val y=x; val w=v; if(y.real > w.real) y else w }
     /**/   infix inline def min(inline v: Float)       : Float           = {val y=x; val w=v; if(y.real < w.real) y else w }
     /**/         inline def roundTo(inline unit:Float)

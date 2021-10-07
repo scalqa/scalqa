@@ -2,7 +2,7 @@ package scalqa; package `val`; package idx; package observable
 
 object X:
 
-  abstract class Base[A] extends Observable[A]
+  abstract class Abstract[A] extends Observable[A]
 
   trait EventsInterface[A] extends Observable[A] with Gen.Event.Store.Provider:
     /**/      def onChange[U](l: ><[Event[A]] => U) : Gen.Event.Control = eventStore.onEvent1(EventId,l)
@@ -17,5 +17,5 @@ object X:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object X -> ### Implemented Type Extentions
+@object X -> ### Type Extentions \n\n This object contains all provided base type implementations
 */

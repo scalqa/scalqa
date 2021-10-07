@@ -49,7 +49,6 @@ object Opt extends zValOptDefailts:
   implicit inline def implicitFromResult [A](inline v: Result[A])            : Opt[A]    = v.value_?
   implicit inline def implicitToBoolean  [A](inline v: Opt[A])               : Boolean   = v.nonEmpty
 
-  inline given zzSummonAnyOfAny[A[B],B]      (using inline v: A[B])                : Opt[A[B]] = v.cast[Opt[A[B]]]
   inline given zzOrderingOfByte  [A<:Any.Byte  ](using inline v: Ordering[A]): Opt[Ordering[A]] = v.cast[Opt[Ordering[A]]]
   inline given zzOrderingOfChar  [A<:Any.Char  ](using inline v: Ordering[A]): Opt[Ordering[A]] = v.cast[Opt[Ordering[A]]]
   inline given zzOrderingOfShort [A<:Any.Short ](using inline v: Ordering[A]): Opt[Ordering[A]] = v.cast[Opt[Ordering[A]]]
@@ -64,10 +63,11 @@ object Opt extends zValOptDefailts:
   given zzVoidDef [A]                            : Any.Def.Void[Opt[A]]     = opt.z.Def.cast[Any.Def.Void[Opt[A]]]
   given zzDoc[A](using t: Any.Def.Tag[A])        : Any.Def.Doc[Opt[A]]      = new opt.z.Def.Doc
 
-// ******************************************************
+  inline given zzOrdering[A](using inline d: Ordering[A]     =ZZ.None.cast[Ordering[A] & Opt[Any]])     : Opt[Ordering[A]]      = d.cast[Opt[Ordering[A]]]
+  inline given zzEmpty   [A](using inline d: Any.Def.Empty[A]=ZZ.None.cast[Any.Def.Empty[A] & Opt[Any]]): Opt[Any.Def.Empty[A]] = d.cast[Opt[Any.Def.Empty[A]]]
+
 class zValOptDefailts:
-  inline given zzNoneAnyOfAny[C<:A[B],A[B],B] : Opt[C]           = \/
-  inline given zzOrdering[B<:Comparable[B]]   : Opt[Ordering[B]] = gen.math.z.Ordering.OrderingComparable.cast[Ordering[B]]
+  inline given zzOrderingComparable[B<:Comparable[B]]      : Opt[Ordering[B]]      = gen.math.z.Ordering.OrderingComparable.cast[Ordering[B]]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

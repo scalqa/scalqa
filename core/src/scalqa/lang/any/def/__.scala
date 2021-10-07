@@ -7,7 +7,7 @@ object Def:
   type Doc[-A]        = `def`.Doc[A]
   type Void[A]        = `def`.Void[A];        transparent inline def Void     = `def`.Void
   type Empty[-A]      = `def`.Empty[A];       transparent inline def Empty    = `def`.Empty
-  type Within[A,-C]   = `def`.Within[A,C];    transparent inline def Within   = `def`.Within
+  type Contains[-C,A] = `def`.Contains[C,A];  transparent inline def Contains = `def`.Contains
   type ToStream[-A,B] = `def`.ToStream[A,B];  transparent inline def ToStream = `def`.ToStream
 
 /*___________________________________________________________________________

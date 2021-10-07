@@ -5,14 +5,15 @@ object Docs:
   def fail(v: Any): Nothing = throw new RuntimeException(""+v)
 
   def isHiddenName(owner: Member, name: String): Boolean =
-    name.startsWith("zz") || name == "withFilter" || name == "toString" || name.startsWith("thenComparing") || name.startsWith("THIS_TYPE") || name.startsWith("THIS_OPAQUE")
+    name.startsWith("zz") || name.in("withFilter","toString") || name.startsWith("thenComparing") || name.startsWith("THIS_TYPE") || name.startsWith("THIS_OPAQUE")
       || { owner.name match
                       case "Doc"            => name.startsWith("product")
-                      case "Opt"            => name == "withFilter" || name == "foreach" || name == "flatMap"
-                      case "Result"         => name == "withFilter" || name == "foreach" || name == "flatMap"
-                      case "Promise"        => name == "withFilter" || name == "foreach" || name == "flatMap"
-                      case "Collection"     => name == "withFilter" || name == "foreach" || name == "flatMap" || name == "map"
-                      case "TwoWayFunction" => name == "andThen"    || name == "compose"
+                      case "Opt"            => name in ("foreach", "flatMap")
+                      case "Result"         => name in ("foreach", "flatMap")
+                      case "Promise"        => name in ("foreach", "flatMap")
+                      case "Collection"     => name in ("foreach", "flatMap", "map")
+                      case "Range"          => name in ("foreach", "flatMap", "map")
+                      case "TwoWayFunction" => name in ("andThen","compose")
                       case "Ordering" if owner.kind.isTypeLike && !owner.dri.location.contains("stream") =>
                           name.startsWith("thenComparing") || name.notIn("compare","compare_?","reverse","on","join","+","map") && !name.contains("^")
                       case _                                   => name == "toOpaque"

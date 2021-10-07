@@ -31,7 +31,7 @@ class SeparatedTextStream(real: Input.Text, separator: Char => Boolean) extends 
     return from < to
   }
 
-private class Chars() extends Chars.Base with Char.Idx with CharSequence:
+private class Chars() extends Chars.Abstract with Char.Idx with CharSequence:
   var array = new Array[Char](256)
   var start = 0;
   var end = array.length
@@ -39,7 +39,7 @@ private class Chars() extends Chars.Base with Char.Idx with CharSequence:
 
 private object Chars:
 
-  abstract class Base extends Val.Idx[Char] with CharSequence {
+  abstract class Abstract extends Val.Idx[Char] with CharSequence {
     protected def array: Array[Char]
     protected def start: Int
     protected def end: Int
@@ -52,10 +52,10 @@ private object Chars:
 
     def range: Int.<> = start <>> end
 
-    def subSequence(from: Int, until: Int): CharSequence = new Base {
-      def array = Base.this.array
-      def start = Base.this.start + from
-      def end = Base.this.start + until
+    def subSequence(from: Int, until: Int): CharSequence = new Abstract {
+      def array = Abstract.this.array
+      def start = Abstract.this.start + from
+      def end   = Abstract.this.start + until
     }
 
     def toString(r: Int.<>) = new String(array, start + r.start, r.size)

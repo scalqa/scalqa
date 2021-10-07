@@ -2,10 +2,10 @@ package scalqa; package lang; package char; import language.implicitConversions
 
 transparent trait _methods:
   extension(inline x:Char)
-    @tn("Opt")        inline def ?                     : lang.Char.Opt       = x.toInt.cast[lang.Char.Opt]
-    @tn("range")      inline def <> (inline to: Char)  : lang.Char.<>        = {val w=x; w <>= to-w+1 }
-    @tn("rangeX")     inline def <>>(inline to: Char)  : lang.Char.<>        = {val w=x; w <>= to-w   }
-    @tn("rangeOfSize")inline def <>=(inline size: Int) : lang.Char.<>        = new lang.Char.<>(x,size)
+    @tn("Opt")        inline def ?                     : Char.Opt            = x.toInt.cast[Char.Opt]
+    @tn("range")      inline def <> (inline to: Char)  : Char.<>             = {val w=x; w <>= to-w+1 }
+    @tn("rangeX")     inline def <>>(inline to: Char)  : Char.<>             = {val w=x; w <>= to-w   }
+    @tn("rangeOfSize")inline def <>=(inline size: Int) : Char.<>             = new Char.<>(x,size)
     /**/        infix inline def max(inline v: Char)   : Char                = {val y=x; val w=v; if(y.real > w.real) y else w }
     /**/        infix inline def min(inline v: Char)   : Char                = {val y=x; val w=v; if(y.real < w.real) y else w }
     //  -------------------------------------------------------------------------------------------------------

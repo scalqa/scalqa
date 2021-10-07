@@ -38,7 +38,7 @@ object Void:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object X -> ### Implemented Type Extentions
+@object X -> ### Type Extentions \n\n This object contains all provided base type implementations
 
 @def value_isVoid -> Void check
 

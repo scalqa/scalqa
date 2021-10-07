@@ -10,7 +10,7 @@ object Char extends char.g.companion.Containers[Char]:
   type _methods = char._methods;          transparent inline def G      = char.G
 
 package object char:
-  private[lang] type Primitive = Char
+  private[lang] type Primitive = Char;            private[lang] transparent inline def Primitive = Char
   private[lang] type Raw       = Any.Char
   private[lang] type Opaque    = Char.Opaque
 

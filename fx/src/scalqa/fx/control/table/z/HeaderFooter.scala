@@ -19,7 +19,7 @@ private[fx] class HeaderFooter[A](hf: (><[A], ><[A]), override val real:  Idx.OM
 
 private object HeaderFooter:
 
-  class Base[A](val head: ><[A], val foot: ><[A], val real:  Idx.M[A]) extends Idx.M.X.Base[A]:
+  class Base[A](val head: ><[A], val foot: ><[A], val real:  Idx.M[A]) extends Idx.M.X.Abstract[A]:
     /**/                val headSize              : Int  = head.size
     /**/                val footSize              : Int  = foot.size
     /**/                def size                  : Int  = headSize + footSize + real.size

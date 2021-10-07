@@ -2,34 +2,34 @@ package scalqa; package `val`; package idx; package z; import language.implicitC
 
 private[scalqa] object Unsupported_View:
 
-  class O[A](protected val real: Idx[A]) extends J.Util.Proxy.Idx[A] with O.Basis[A]
+  class O[A](protected val real: Idx[A]) extends J.Util.Proxy.Idx[A] with O.Base[A]
 
   object O:
-    trait Basis[A] extends Idx.Observable[A]:
+    trait Base[A] extends Idx.Observable[A]:
       def onChange[U](l: ><[Observable.Event[A]] => U): Event.Control = \/
 
-    class OM[A](protected val real: Idx.Observable[A]) extends Idx.OM.X.Base[A] with J.Util.Proxy.Idx.O.Basis[A] with Unsupported_View.OM.Basis[A]:
+    class OM[A](protected val real: Idx.Observable[A]) extends Idx.OM.X.Abstract[A] with J.Util.Proxy.Idx.O.Base[A] with Unsupported_View.OM.Base[A]:
       override def onChange[U](l: ><[Observable.Event[A]] => U): Event.Control = real.onChange(l)
 
-  class M[A](protected val real: Idx[A]) extends Idx.Mutable.X.Base[A] with J.Util.Proxy.Idx.Basis[A] with M.Basis[A]
+  class M[A](protected val real: Idx[A]) extends Idx.Mutable.X.Abstract[A] with J.Util.Proxy.Idx.Base[A] with M.Base[A]
 
   object M:
-    trait Basis[A] extends Idx.Mutable[A]:
+    trait Base[A] extends Idx.Mutable[A]:
       /**/                def addAt(i: Int, e: A)    : Unit = J.unsupportedOperation()
       /**/                def updateAt(i: Int, e: A) : Unit = J.unsupportedOperation()
       @tn("remove_Range") def remove_<>(r: Int.<>)   : Unit = J.unsupportedOperation()
 
-    class OM[A](protected val real: Idx.Mutable[A]) extends J.Util.Proxy.Idx.M[A] with Unsupported_View.OM.Basis[A]:
+    class OM[A](protected val real: Idx.Mutable[A]) extends J.Util.Proxy.Idx.M[A] with Unsupported_View.OM.Base[A]:
       /**/                override def addAt(i: Int, e: A)                          : Unit          = real.addAt(i, e)
       /**/                override def updateAt(i: Int, e: A)                       : Unit          = real.update(i, e)
       @tn("remove_Range") override def remove_<>(r: Int.<>)                         : Unit          = real.remove_<>(r)
       /**/                override def modify(ch: Idx.Mutable[A] => Unit)           : Unit          = ch(this)
       /**/                override def onChange[U](l: ><[Observable.Event[A]] => U) : Event.Control = \/
 
-  class OM[A](protected val real: Idx[A]) extends Idx.OM.X.Base[A] with J.Util.Proxy.Idx.Basis[A] with OM.Basis[A]
+  class OM[A](protected val real: Idx[A]) extends Idx.OM.X.Abstract[A] with J.Util.Proxy.Idx.Base[A] with OM.Base[A]
 
   object OM:
-    trait Basis[A] extends Idx.ObservableMutable[A] with M.Basis[A] with O.Basis[A]:
+    trait Base[A] extends Idx.ObservableMutable[A] with M.Base[A] with O.Base[A]:
       @tn("refresh_Range") def refresh_<>(r: Int.<>)             : Unit = J.unsupportedOperation()
       /**/                 def modify(ch: Idx.Mutable[A] => Unit): Unit = J.unsupportedOperation()
 

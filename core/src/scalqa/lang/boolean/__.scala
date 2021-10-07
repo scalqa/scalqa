@@ -7,7 +7,7 @@ object Boolean extends boolean.g.companion.Containers[Boolean]:
   type _methods = boolean._methods;          transparent inline def G      = boolean.G
 
 package object boolean:
-  private[lang] type Primitive = Boolean
+  private[lang] type Primitive = Boolean;      private[lang] transparent inline def Primitive = Boolean
   private[lang] type Raw       = Any.Boolean
   private[lang] type Opaque    = Boolean.Opaque
 

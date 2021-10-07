@@ -2,10 +2,10 @@ package scalqa; package lang; package short; import language.implicitConversions
 
 transparent trait _methods:
   extension(inline x:Short)
-    @tn("Opt")        inline def ?                         : lang.Short.Opt  = x.cast[Short.Opt]
-    @tn("range")      inline def <> (inline to: Short)     : lang.Short.<>   = {val w=x; w <>= to-w+1 }
-    @tn("rangeX")     inline def <>>(inline to: Short)     : lang.Short.<>   = {val w=x; w <>= to-w   }
-    @tn("rangeOfSize")inline def <>=(inline size: Int)     : lang.Short.<>   = new lang.Short.<>(x,size)
+    @tn("Opt")        inline def ?                         : Short.Opt       = x.cast[Short.Opt]
+    @tn("range")      inline def <> (inline to: Short)     : Short.<>        = {val w=x; w <>= to-w+1 }
+    @tn("rangeX")     inline def <>>(inline to: Short)     : Short.<>        = {val w=x; w <>= to-w   }
+    @tn("rangeOfSize")inline def <>=(inline size: Int)     : Short.<>        = new Short.<>(x,size)
     /**/        infix inline def max(inline v: Short)      : Short           = {val y=x; val w=v; if(y.real > w.real) y else w }
     /**/        infix inline def min(inline v: Short)      : Short           = {val y=x; val w=v; if(y.real < w.real) y else w }
     /**/              inline def roundTo(inline unit:Int)

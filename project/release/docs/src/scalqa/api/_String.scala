@@ -26,7 +26,7 @@ trait _String:
            .r("THIS_TYPE","this.type")
            .r("Boolean.Raw",  "Any.Boolean").r("Byte.Raw",  "Any.Byte").r("Char.Raw",  "Any.Char").r("Short.Raw",  "Any.Short").r("Int.Raw",  "Any.Int").r("Long.Raw",  "Any.Long").r("Float.Raw",  "Any.Float").r("Double.Raw",  "Any.Double")
            .r("Boolean.Primitive","Boolean").r("Byte.Primitive","Byte").r("Char.Primitive","Char").r("Short.Primitive","Short").r("Int.Primitive","Int").r("Long.Primitive","Long").r("Float.Primitive","Float").r("Double.Primitive","Double")
-           .r("Any.Specialized","Specialized")//.r("Lang.Any","Any").r("Gen.Able","Able")
+           .r("Any.Specialized","Specialized")
 
       if(v.endsWith("$")) v=v.dropLast(1)
       if(v.startsWith("scala.")) v= v.r("scala.annotation.targetName","targetName").r("scala.Predef$.String","String").r("scala.Predef.String","String")
@@ -42,6 +42,7 @@ trait _String:
       else if(v.endsWith(".REAL"))           v = "REAL"
       else if(v.endsWith(".Containers.A"))   v = if(v.startsWith("AnyRef")) "String" else v.takeBefore(".")
       else if(v.endsWith(".KEY"))            v = "KEY"
+      else if(v.endsWith(".A"))              v = "A"
 
       v.dropDuplicateEnd
 

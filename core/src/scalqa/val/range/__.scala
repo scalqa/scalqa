@@ -1,6 +1,6 @@
 package scalqa; package `val`; import range.*; import language.implicitConversions
 
-abstract class Range[A] extends Able.Contain[A]:
+abstract class Range[A] extends gen.able.Contain[A] with gen.able.Empty:
   type THIS_TYPE <: Range[A]
   /**/              def start                                       : A
   /**/              def end                                         : A
@@ -12,9 +12,9 @@ abstract class Range[A] extends Able.Contain[A]:
   @tn("overlap_Opt")def overlap_?(r: Range[A])                      : Opt[THIS_TYPE]
   /**/              def step_~(f: A => A)                           : ~[A]          = z.StepStream(this, f)
   /**/              def step_~(step: Int)(using Able.Sequence[A])   : ~[A]          = z.StepStream(this, step)
-  /**/              def contains(v: Range[A])                       : Boolean       = z.Ops.contains(this,v)
-  /**/              def contains(v: A)                              : Boolean       = z.Ops.contains(this,v)
-  /**/              def isEmpty                                     : Boolean       = z.Ops.isEmpty(this)
+  /**/              def contains(v: Range[A])                       : Boolean       = X.contains(this,v)
+  /**/              def contains(v: A)                              : Boolean       = X.contains(this,v)
+  /**/              def isEmpty                                     : Boolean       = X.isEmpty(this)
   override          def equals(v: Any)                              : Boolean       = v.isInstanceOf[Range[_]] && {val r=v.cast[Range[A]]; this.contains(r) && r.contains(this)}
   inline            def raw(using inline A:Specialized.Primitive[A]): A.<>          = z.raw(this)
 
@@ -26,11 +26,16 @@ object Range:
     @tn("stream")   def ~ (using Able.Sequence[A])                  : ~[A]          = x match{ case v:Able.~[_] => v.cast[Able.~[A]].~; case _ => x.step_~(1) }
     /**/            def convert[B](f:A=>B)(using s:Ordering[B])     : Range[B]      = Range(f(x.start),f(x.end),x.endIsIn)
 
-  given zzCanEqualRange[A,B](using CanEqual[A,B]): CanEqual[<>[A],<>[B]] = CanEqual.derived
-  given givenFor                                 : range.z.For           = new range.z.For{}
-  given zzDoc[A]           (using Any.Def.Tag[A]): Any.Def.Doc[Range[A]] = new range.z.DocDef[A]
+  extension[A](inline x: Range[A])
+    inline def withFilter(inline f: A => Boolean)(using inline s:Able.Sequence[A]): ~[A] = x.~.take(f)
+    inline def map[B](    inline f: A => B)      (using inline s:Able.Sequence[A]): ~[B] = x.~.map(f)
+    inline def flatMap[B](inline f: A => ~[B])   (using inline s:Able.Sequence[A]): ~[B] = x.~.flatMap(f)
+    inline def foreach[U](inline f: A => U)      (using inline s:Able.Sequence[A]): Unit = x.~.foreach(f)
 
-  // Members ~~~~~~~~~~~~~~~~~~~~~~
+  given zzCanEqualRange[A,B](using CanEqual[A,B]): CanEqual[<>[A],<>[B]] = CanEqual.derived
+  given zzDoc[A]           (using Any.Def.Tag[A]): Any.Def.Doc[Range[A]] = new range.Z.DocDef[A]
+
+  // Members ~~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def X = range.X
 
 /*___________________________________________________________________________

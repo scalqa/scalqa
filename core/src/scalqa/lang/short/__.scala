@@ -10,7 +10,7 @@ object Short extends short.g.companion.Containers[Short]:
   type _methods = short._methods;          transparent inline def G      = short.G
 
 package object short:
-  private[lang] type Primitive = Short
+  private[lang] type Primitive = Short;          private[lang] transparent inline def Primitive = Short
   private[lang] type Raw       = Any.Short
   private[lang] type Opaque    = Short.Opaque
 

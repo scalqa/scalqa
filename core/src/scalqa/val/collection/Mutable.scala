@@ -1,6 +1,6 @@
 package scalqa; package `val`; package collection
 
-trait Mutable[A] extends Collection[A] with Able.Add[A]:
+trait Mutable[A] extends Collection[A] with gen.able.Add[A]:
   /**/              def remove(v: A)        : Int
   /**/              def removeAll(v: ~[A])  : Int       = v.map(remove).sum
   /**/              def clear               : Unit

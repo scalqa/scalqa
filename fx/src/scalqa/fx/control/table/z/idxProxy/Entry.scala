@@ -9,7 +9,7 @@ private[scalqa] object Entry:
 
   def indexSorting[A]: Ordering[Entry[A]] = zIndexOrdering.cast[Ordering[Entry[A]]]; private val zIndexOrdering = Int.ordering.on[Entry[Any]](_.index)
 
-  trait IndexBase[A] extends Idx.M.X.Base[A]:
+  trait IndexBase[A] extends Idx.M.X.Abstract[A]:
     /**/                def target                 : Idx.M[A]
     /**/                def entries                : Idx.M[Entry[A]]
     /**/                def apply(i: Int)          : A                = entries(i).value

@@ -7,7 +7,7 @@ abstract class Column[ROW,V,A] private[control](val voidDef: Any.Def.Void[A], va
     setUserData(Column.this)
     onEditCommitProperty.set(e => editCommitFun(e.getRowValue(), e.getNewValue.value_?.get))
     cellValueFactoryProperty.set(v => {
-      class ItemFactory extends base.javaFx.z.value.Base[cell.Item[ROW, V, A]]:
+      class ItemFactory extends base.javaFx.z.value.Abstract[cell.Item[ROW, V, A]]:
         /**/     val row  : ROW                   = v.getValue
         /**/     val value_*                      = setup.mkProOpt(row)
         /**/     def setup: Cell.Setup[ROW,V,A]   = customCellSetups.~.find_?(_.rowFilter(row)) or Column.this

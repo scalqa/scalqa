@@ -1,6 +1,6 @@
 package scalqa; package lang; package any; package z; import _methods.*; import language.implicitConversions
 
-transparent trait _Methods extends view with tag with tp with xtra with any._Methods
+transparent trait _Methods extends self with tag with tp with opt with xtra with any._Methods
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

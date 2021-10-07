@@ -5,20 +5,22 @@ import _Methods.Self
 
 transparent trait _Methods:
   extension[A](inline x:A)
-    /**/             inline def isVoid                                 (using inline d: Def.Void[A]) : Boolean      = {val v=x; v==null ||  d.value_isVoid(v)}
-    /**/             inline def nonVoid                                (using inline d: Def.Void[A]) : Boolean      = {val v=x; v!=null && !d.value_isVoid(v)}
-    @tn("opt")       inline def ?                                    (using inline A:Specialized[A]) : A.Opt        = z.opt.make(x)
-    @tn("result")    inline def ??                                                                   : Result[A]    = Result(x)
-    @tn("range")     inline def <> (inline to:A)(using inline o:O[A])(using inline A:Specialized[A]) : A.<>         = z.range(x,to)
-    @tn("rangeX")    inline def <>>(inline to:A)(using inline o:O[A])(using inline A:Specialized[A]) : A.<>         = z.range.exclusive(x,to)
-    infix            inline def in   [HOLDER](inline c: HOLDER)(using inline d:Def.Within[A,HOLDER]) : Boolean      = z.inMacro(x,c,d)
-    infix            inline def notIn[HOLDER](inline c: HOLDER)(using inline d:Def.Within[A,HOLDER]) : Boolean      = !in(c)
-    /**/             inline def doc                                      (using inline d:Def.Doc[A]) : Doc          = d.value_doc(x)
-    /**/             inline def tag                                      (using inline t:Def.Tag[A]) : String       = t.value_tag(x)
-    /**/             inline def tp                                       (using inline t:Def.Tag[A]) : Unit         = ZZ.tp(x,t)
-    @tn("addSpaced") inline def +- [B](v: B)       (using inline ta:Def.Tag[A],inline tb:Def.Tag[B]) : String       = ta.value_tag(x) + ' ' + tb.value_tag(v)
-    @tn("selfView")  inline def ^                                                                    : Self[A]      = x.cast[Self[A]]
-    @tn("self_View") inline def self_^                                                               : Self[A]      = x.cast[Self[A]]
+    /**/             inline def isVoid                                           (using inline d: Def.Void[A]) : Boolean      = d.value_isVoid(x)
+    /**/             inline def nonVoid                                          (using inline d: Def.Void[A]) : Boolean      = !x.isVoid
+    /**/             inline def isEmpty                                          (using inline d:Def.Empty[A]) : Boolean      = d.value_isEmpty(x)
+    /**/             inline def nonEmpty                                         (using inline d:Def.Empty[A]) : Boolean      = !x.isEmpty
+    @tn("opt")       inline def ?                                              (using inline A:Specialized[A]) : A.Opt        = z.opt.make(x)
+    @tn("result")    inline def ??                                                                             : Result[A]    = ZZ.result(x).cast[Result[A]]
+    @tn("range")     inline def <> (inline to:A)(using inline o:O[A])          (using inline A:Specialized[A]) : A.<>         = z.range(x,to)
+    @tn("rangeX")    inline def <>>(inline to:A)(using inline o:O[A])          (using inline A:Specialized[A]) : A.<>         = z.range.exclusive(x,to)
+    infix            inline def in   [CONTAINER](inline c: CONTAINER)(using inline d:Def.Contains[CONTAINER,A]): Boolean      = z.containsMacro(c,x,d)
+    infix            inline def notIn[CONTAINER](inline c: CONTAINER)(using inline d:Def.Contains[CONTAINER,A]): Boolean      = !in(c)
+    /**/             inline def doc                                                (using inline d:Def.Doc[A]) : Doc          = d.value_doc(x)
+    /**/             inline def tag                                                (using inline t:Def.Tag[A]) : String       = t.value_tag(x)
+    /**/             inline def tp                                                 (using inline t:Def.Tag[A]) : Unit         = ZZ.tp(x,t)
+    @tn("addSpaced") inline def +- [B](v: B)                 (using inline ta:Def.Tag[A],inline tb:Def.Tag[B]) : String       = ta.value_tag(x) + ' ' + tb.value_tag(v)
+    @tn("selfView")  inline def ^                                                                              : Self[A]      = x.cast[Self[A]]
+    @tn("self_View") inline def self_^                                                                         : Self[A]      = x.cast[Self[A]]
 
 object _Methods:
   transparent inline def Self = _methods.Self; type Self[+A] = _methods.Self.TYPE.DEF[A]
@@ -38,9 +40,33 @@ ___________________________________________________________________________*/
 
     Returns true if target is void
 
+    Note: Operation can fail for null value, use .^.isVoid if null check is required
+
 @def nonVoid -> Not void check
 
     Returns true if target is non void
+
+    Note: Operation can fail for null value, use .^.nonVoid if null check is required
+
+@def isEmpty -> Empty check
+
+    Returns `true` if value is empty, `false` - otherwise.
+
+    If a type already has an "isEmpty" method, it will be called instead.
+
+     Any.Def.Empty is available for most known types, but can be defined for new.
+
+     Note: Operation can fail for null value, use .^.isEmpty if null check is required
+
+@def nonEmpty -> Non empty check
+
+    Returns `true` if value is not empty, `false` - otherwise
+
+    If a type already has a "nonEmpty" method, it will be called instead.
+
+    Any.Def.Empty is available for most known types, but can be defined for new.
+
+    Note: Operation can fail for null value, use .^.nonEmpty if null check is required
 
 @def tp -> Tag print
 
@@ -99,7 +125,6 @@ ___________________________________________________________________________*/
       s in ("XYZ","BBC","CBC")
     ```
 
-
 @def doc -> Get Doc
 
     Returns [[scalqa.any.self.Doc Doc]] object describing current instance
@@ -155,8 +180,7 @@ ___________________________________________________________________________*/
       val o : Opt[String] = "Foo".?
     ```
 
-    Note. Option will be empty if value is 'null'
-
+    Result will be empty option if value is 'null', but non empty for void values.  Use .^.? instead if void or empty check is required.
 
 @def ?? ->  To result
 

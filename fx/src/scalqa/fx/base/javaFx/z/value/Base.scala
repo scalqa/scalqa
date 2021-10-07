@@ -3,7 +3,7 @@ package scalqa; package fx; package base; package javaFx; package z; package val
 import javafx.beans.value.ChangeListener
 import javafx.beans.InvalidationListener
 
-private[fx] abstract class Base[A] extends java.util.concurrent.atomic.AtomicReference[AnyRef](Base) with javafx.beans.value.ObservableValue[A]:
+private[fx] abstract class Abstract[A] extends java.util.concurrent.atomic.AtomicReference[AnyRef](Abstract) with javafx.beans.value.ObservableValue[A]:
 
   def addListener   (l: InvalidationListener)  : Unit = _addListener(l)
   def removeListener(l: InvalidationListener)  : Unit = _removeListener(l)
@@ -28,20 +28,20 @@ private[fx] abstract class Base[A] extends java.util.concurrent.atomic.AtomicRef
     }
     case _ => ()
 
-  protected def listenerCount = get match { case Base => 0; case v: Array[_] => v.length; case _ => 1 }
+  protected def listenerCount = get match { case Abstract => 0; case v: Array[_] => v.length; case _ => 1 }
 
   protected def afterFirstListenerAdded: Unit = ()
   protected def afterLastListenerRemoved: Unit = ()
 
   private def _addListener(l: AnyRef): Unit = get match
-    case Base             => if (!compareAndSet(Base, l)) _addListener(l) else afterFirstListenerAdded
+    case Abstract         => if (!compareAndSet(Abstract, l)) _addListener(l) else afterFirstListenerAdded
     case v: Array[AnyRef] => if (!compareAndSet(v, v + l)) _addListener(l)
     case v                => if (!compareAndSet(v, Array[AnyRef](v, l))) _addListener(l)
 
   private def _removeListener(l: AnyRef): Unit =
-    def clear(v: AnyRef) = if (!compareAndSet(v, Base)) _removeListener(l) else afterLastListenerRemoved
+    def clear(v: AnyRef) = if (!compareAndSet(v, Abstract)) _removeListener(l) else afterLastListenerRemoved
     get match
-      case Base => ()
+      case Abstract => ()
       case v: Array[AnyRef] if v.length == 1 => if (v(0) == l) clear(v)
       case v: Array[AnyRef] =>
         val a = v.~.dropOnly(l).toArray
@@ -49,7 +49,7 @@ private[fx] abstract class Base[A] extends java.util.concurrent.atomic.AtomicRef
         else if ((v ne a) && !compareAndSet(v, a)) _removeListener(l)
       case v => if (v == l) clear(v)
 
-private object Base
+private object Abstract
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

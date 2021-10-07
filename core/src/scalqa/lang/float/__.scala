@@ -10,7 +10,7 @@ object Float extends float.g.companion.Containers[Float]:
   type _methods = float._methods;          transparent inline def G      = float.G
 
 package object float:
-  private[lang] type Primitive = Float
+  private[lang] type Primitive = Float;            private[lang] transparent inline def Primitive = Float
   private[lang] type Raw       = Any.Float
   private[lang] type Opaque    = Float.Opaque
 

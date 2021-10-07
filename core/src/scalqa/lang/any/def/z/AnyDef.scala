@@ -4,25 +4,25 @@ class AnyDef[A] extends Doc[A] with Void[A] with Empty[A] :
 
   override def value_tag(v: A): String =
     v match
-       case v: Gen.Able.Tag       => v.tag
+       case v: Able.Tag       => v.tag
        case null                  => "null"
        case v                     => v.toString
 
   override def value_doc(v: A): Gen.Doc =
     v match
-       case v: Gen.Able.Doc       => v.doc
+       case v: Able.Doc       => v.doc
        case null                  => Gen.Doc("null")
        case v                     => Gen.Doc(v.^.id)
 
   override def value_isVoid(v: A): Boolean =
     v match
-       case v: Gen.Able.Void      => v.isVoid
+       case v: Able.Void      => v.isVoid
        case null                  => true
        case v                     => false
 
   override def value_isEmpty(v: A): Boolean =
     v match
-       case v: Gen.Able.Empty     => v.isEmpty
+       case v: Able.Empty     => v.isEmpty
        case v                     => false
 
 

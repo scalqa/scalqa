@@ -41,10 +41,10 @@ ___________________________________________________________________________*/
 /**
 @class Specialized ->
 
-  Specialized instance determines custom implementation of ~, <>, ><, Opt, or Array.
-  Usually it is used by inlined method and gets resolved by the compiler, so threre is zero runtime cost.
+  Specialized instance determines custom implementation of given type containers.
+  Usually it is used by inlined methods and gets resolved by the compiler, so threre is zero runtime cost.
 
-  For example, consider stream method [[scalqa.val.stream._build._map map]], which returns different types of stream:
+  For example, consider specialized stream method [[scalqa.val.stream._build._map map]], which returns different types of stream:
   ```
     val floats  : Float.~   =  (1 <> 9).~.map(_.toFloat)
 

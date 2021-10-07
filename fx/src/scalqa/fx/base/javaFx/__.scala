@@ -4,10 +4,10 @@ import javaFx.z
 
 object JavaFx:
 
-  def list[A](v: Idx.O[A])  : javafx.collections.ObservableList[A] = new z.list.Observable(v)
-  def list[A](v: Idx.OM[A]) : javafx.collections.ObservableList[A] = new z.list.ObservableMutable(v)
+  def list[A](v: Idx.O[A]) : javafx.collections.ObservableList[A] = new z.list.Observable(v)
+  def list[A](v: Idx.OM[A]): javafx.collections.ObservableList[A] = new z.list.ObservableMutable(v)
 
-  def observableValue[A](p: scalqa.Pro.O[A]): javafx.beans.value.ObservableValue[A] = new z.value.Base[A] {
+  def observableValue[A](p: scalqa.Pro.O[A]): javafx.beans.value.ObservableValue[A] = new z.value.Abstract[A] {
     private var old = p()
     protected override def afterFirstListenerAdded = p.onChange(Gen.Event.Id.make0(this, () => {
       val v = p()

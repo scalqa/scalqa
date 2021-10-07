@@ -6,7 +6,7 @@ trait Problem:
   override             def toString    : String                     = "Problem(" + message + ")"
 
 object Problem:
-  val nullValue   : Problem = new z.DefaultProblem("Null value")
+  val nullValue   : Problem = ZZ.NULL_VALUE
   val noMessage   : Problem = new z.DefaultProblem("No Message")
   val failedFilter: Problem = new z.DefaultProblem("For-Comprehension predicate is not satisfied")
 

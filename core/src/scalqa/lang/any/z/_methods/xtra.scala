@@ -13,19 +13,6 @@ transparent trait xtra:
   extension(inline x: Any.Double)    inline def real: Double           = x.cast[Double]
   extension(inline x: String.Opaque) inline def real: java.lang.String = x.cast[java.lang.String]
 
-  // ----------------------------------------------------------------------------------------------------------------
-  // The `val` methods are not a public API, but they are inlined and must be public.  Here is the best place to put them
-  extension[A             ](inline x:       Val.Opt[A]) inline def `val` : A  = {val v=x.cast[A]; v}
-  extension[A<:AnyRef     ](inline x:       Val.Opt[A]) @tn("refVal") inline def `val` : A  = {val v=x.cast[A]; v}
-  extension[A<:Any.Boolean](inline x: Boolean.G.Opt[A]) inline def `val` : A  = {val v=(x.real == Boolean.G.Opt.TRUE.real).cast[A]; v}
-  extension[A<:Any.Byte   ](inline x: Byte   .G.Opt[A]) inline def `val` : A  = {val v=x.cast[A]; v}
-  extension[A<:Any.Char   ](inline x: Char   .G.Opt[A]) inline def `val` : A  = {val v=x.cast[A]; v}
-  extension[A<:Any.Short  ](inline x: Short  .G.Opt[A]) inline def `val` : A  = {val v=x.cast[A]; v}
-  extension[A<:Any.Int    ](inline x: Int    .G.Opt[A]) inline def `val` : A  = {val v=x.cast[A]; v}
-  extension[A<:Any.Long   ](inline x: Long   .G.Opt[A]) inline def `val` : A  = {val v=x.cast[A]; v}
-  extension[A<:Any.Float  ](inline x: Float  .G.Opt[A]) inline def `val` : A  = {val v=x.cast[A]; v}
-  extension[A<:Any.Double ](inline x: Double .G.Opt[A]) inline def `val` : A  = {val v=x.cast[A]; v}
-
   // Problem ----------------------------------------------------------------------------------------------------------
   extension[A](inline x: Result.Problem)@tn("problemResult") inline def ?? : Result[A] = x.cast[Result[A]] // This has to be duplicated in global library, though publicaly defined in Problem
 

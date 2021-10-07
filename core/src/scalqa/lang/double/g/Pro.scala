@@ -16,13 +16,13 @@ object Pro:
   trait  Observable[A<:Raw] extends Pro[A] with Val.Pro.O[A]
   object Observable:
     object X:
-      abstract class Base[A<:Raw] extends Val.Pro.Observable.X.Base[A] with Observable[A]
+      abstract class Abstract[A<:Raw] extends Val.Pro.Observable.X.Abstract[A] with Observable[A]
 
   trait  ObservableMutable[A<:Raw] extends Mutable[A] with Observable[A] with Val.Pro.OM[A]
   object ObservableMutable:
     object X:
-      abstract class Base[A<:Raw] extends Observable.X.Base[A] with ObservableMutable[A]
-      class Basic[A<:Raw](v: A) extends Mutable.X.Basic[A](v) with Val.Pro.Observable.X.Basis[A] with ObservableMutable[A]:
+      abstract class Abstract[A<:Raw] extends Observable.X.Abstract[A] with ObservableMutable[A]
+      class Basic[A<:Raw](v: A) extends Mutable.X.Basic[A](v) with Val.Pro.Observable.X.Base[A] with ObservableMutable[A]:
         override def update(v: A) = if(apply() != v) { super.update(v); fireChange }
 
 /*___________________________________________________________________________
@@ -36,7 +36,7 @@ ___________________________________________________________________________*/
 
         To be used with Double based opaque values.
 
-@object X -> ### Implemented Type Extentions
-@object X -> ### Implemented Type Extentions
-@object X -> ### Implemented Type Extentions
+@object X -> ### Type Extentions \n\n This object contains all provided base type implementations
+@object X -> ### Type Extentions \n\n This object contains all provided base type implementations
+@object X -> ### Type Extentions \n\n This object contains all provided base type implementations
 */

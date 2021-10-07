@@ -19,7 +19,7 @@ private[observable] object Z:
       /**/                                                        this
       /**/                                                   }
 
-  trait Mutable[A] extends Event[A] with J.Util.Proxy.Idx.Basis[A]:
+  trait Mutable[A] extends Event[A] with J.Util.Proxy.Idx.Base[A]:
     /**/          val real          : Idx.M[A]  = NEW
     /**/          def start         : Int
     /**/          var range         : Int.<>    = start <>> start

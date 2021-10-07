@@ -11,15 +11,17 @@ object Self:
   extension[A](inline x: Self[A])
     private            inline def real                                                 : A        = x.cast[A]
     /**/               inline def apply[U](inline f: A => U)                           : A        = {val v=x.real; f(v); v }
-    /**/               inline def map[B](inline f: A => B)                             : B        = f(x.real)
+    /**/               inline def map[B](inline f: A => B)                             : B        = {val v=x.real; f(v) }
     /**/               inline def mapIf(inline filter:A=>Boolean, inline f:A=>A)       : A        = {var v=x.real; if(filter(v)) v=f(v); v }
-    /**/               inline def isVoid                 (using inline d: Def.Void[A]) : Boolean  = {val v=x.real; v==null ||  d.value_isVoid(v)}
-    /**/               inline def nonVoid                (using inline d: Def.Void[A]) : Boolean  = {val v=x.real; v!=null && !d.value_isVoid(v)}
-    @tn("nonEmptyOpt") inline def ?(using inline e:Def.Empty[A],inline d: Def.Void[A]) : Opt[A]   = J.illegalState() // Overtaken by root lib
-    /**/               inline def isEmpty                (using inline d:Def.Empty[A]) : Boolean  = d.value_isEmpty(x.real)
-    /**/               inline def nonEmpty               (using inline d:Def.Empty[A]) : Boolean  = !d.value_isEmpty(x.real)
+    /**/               inline def isVoid                 (using inline d: Def.Void[A]) : Boolean  = {val v=x.real; v==null || d.value_isVoid(v)}
+    /**/               inline def isEmpty                (using inline d:Def.Empty[A]) : Boolean  = {var v=x.real; v==null || d.value_isEmpty(v) }
+    /**/               inline def nonVoid                (using inline d: Def.Void[A]) : Boolean  = !x.isVoid
+    /**/               inline def nonEmpty               (using inline d:Def.Empty[A]) : Boolean  = !x.isEmpty
     @tn("pack")        inline def ><                                                   : ><[A]    = Val.><(x.real)
     @tn("stream")      inline def ~                                                    : ~[A]     = Val.~(x.real)
+    @tn("nonEmptyOpt") inline def ?                 (using inline e:Opt[Def.Empty[A]])
+                                                         (using inline d: Def.Void[A]) : Opt[A]   = J.illegalState() // Overtaken by root lib
+
 
   given zzTag[A](using Any.Def.Tag[A]): Any.Def.Tag[Self[A]] = new Z.TagDef
   given zzDoc[A](using Any.Def.Doc[A]): Any.Def.Doc[Self[A]] = new Z.DocDef
@@ -104,14 +106,14 @@ ___________________________________________________________________________*/
     s = if(s.length == 2) s + "C" else s
     ```
 
-@def ? -> As option
+@def ? -> Self as option
 
     Returns base value as an option.
 
     Unlike general .? method, this method will create empty option for void or empty values
 
     ```
-      val p: ><[Int] = \/
+      val p: ~[Int] = \/
 
       p.?.tp    // prints: Opt(scalqa.val.pack.z.Void)
 
@@ -120,7 +122,7 @@ ___________________________________________________________________________*/
 
     This method can even safely check ~ for emptiness, returning ~ with original values
     ```
-    def s = (0 <>> 0).~
+    def s : ~[Int] = (1 <> 3).~.dropFirst(3)
 
     s.^.?.tp  // prints: Opt(\/)
     s.?.tp    // prints: Opt(~())
@@ -134,7 +136,7 @@ ___________________________________________________________________________*/
 
     Creates a stream with this sigle value
 
-    The following lines are inlined and produce same java code:
+    The following lines are inlined and produce same JVM code:
 
     ```
     val s1 : ~[String] = "Foo".^.~
@@ -144,26 +146,30 @@ ___________________________________________________________________________*/
 
 @def isVoid -> Void check
 
-    Returns `true` if value is void, `false` - otherwise
+    Returns `true` if value is null or void, `false` - otherwise
 
-    Note. This method is the same as calling 'isVoid' on base value.
+    Note. This method includes 'null' check compared to 'isVoid' on base value.
 
 @def nonVoid -> Non void check
 
-    Returns `true` if value is not void, `false` - otherwise
+    Returns `true` if value is not null and not void, `false` - otherwise
 
-    Note. This method is the same as calling 'nonVoid' on base value.
+    Note. This method includes 'null' check compared to 'nonVoid' on base value.
 
 @def isEmpty -> Empty check
 
-    Returns `true` if value is empty, `false` - otherwise.
+    Returns `true` if value is null or empty, `false` - otherwise.
 
-    Note. Any.Def.Empty is available for most known types, but can be defined for new.
+    Any.Def.Empty is available for most known types, but can be defined for new.
+
+    Note. This method includes 'null' check compared to 'isEmpty' on base value.
 
 @def nonEmpty -> Non empty check
 
-    Returns `true` if value is not empty, `false` - otherwise
+    Returns `true` if value is not null and not empty, `false` - otherwise
 
-   Note. Any.Def.Empty is available for most known types, but can be defined for new.
+    Any.Def.Empty is available for most known types, but can be defined for new.
+
+    Note. This method includes 'null' check compared to 'nonEmpty' on base value.
 
 */

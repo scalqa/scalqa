@@ -4,19 +4,19 @@ import javafx.beans.{ value, property }
 
 private[fx] object Pro:
 
-  protected abstract class Base[A](real: javafx.beans.Observable) extends Val.Pro.O.X.ActivationBasis[A] with javafx.beans.InvalidationListener:
+  protected abstract class Abstract[A](real: javafx.beans.Observable) extends Val.Pro.O.X.ActivationBasis[A] with javafx.beans.InvalidationListener:
     def invalidated(o: javafx.beans.Observable): Unit = fireChange
     protected override def _afterFirstListenerAdded   = real.addListener(this)
     protected override def _afterLastListenerRemoved  = real.removeListener(this)
 
   object O:
     object JavaFxWrap:
-      class ObjectProO[A]( real: value.ObservableObjectValue[A]) extends Base[A](real)       with Val.Pro.O[A]       { override def apply() = real.get }
-      class StringProO(    real: value.ObservableStringValue)    extends Base[String](real)  with Val.Pro.O[String]  { override def apply() = real.get }
-      class BooleanProO(   real: value.ObservableBooleanValue)   extends Base[Boolean](real) with Boolean.Pro.O      { override def apply() = real.get }
-      class DoubleProO(    real: value.ObservableDoubleValue)    extends Base[Double](real)  with Double.Pro.O       { override def apply() = real.get }
-      class IntProO(       real: value.ObservableIntegerValue)   extends Base[Int](real)     with Int.Pro.O          { override def apply() = real.get }
-      class LongProO(      real: value.ObservableLongValue)      extends Base[Long](real)    with Long.Pro.O         { override def apply() = real.get }
+      class ObjectProO[A]( real: value.ObservableObjectValue[A]) extends Abstract[A](real)       with Val.Pro.O[A]       { override def apply() = real.get }
+      class StringProO(    real: value.ObservableStringValue)    extends Abstract[String](real)  with Val.Pro.O[String]  { override def apply() = real.get }
+      class BooleanProO(   real: value.ObservableBooleanValue)   extends Abstract[Boolean](real) with Boolean.Pro.O      { override def apply() = real.get }
+      class DoubleProO(    real: value.ObservableDoubleValue)    extends Abstract[Double](real)  with Double.Pro.O       { override def apply() = real.get }
+      class IntProO(       real: value.ObservableIntegerValue)   extends Abstract[Int](real)     with Int.Pro.O          { override def apply() = real.get }
+      class LongProO(      real: value.ObservableLongValue)      extends Abstract[Long](real)    with Long.Pro.O         { override def apply() = real.get }
 
   object OM:
     import Pro.O.{JavaFxWrap => PO}

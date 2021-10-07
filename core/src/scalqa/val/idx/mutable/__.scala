@@ -2,7 +2,7 @@ package scalqa; package `val`; package idx; import language.implicitConversions
 
 import scala.{ Ordering as O }
 
-trait Mutable[A] extends Idx[A] with Val.Collection.Mutable[A] with Able.Contain[A]:
+trait Mutable[A] extends Idx[A] with Val.Collection.Mutable[A] with gen.able.Contain[A]:
   @tn("addAt")     inline def +@= (inline position:Int, inline v: A)   : this.type  = { addAt(position, v);    this }
   @tn("atAddAll")  inline def ++@=(inline position:Int, inline v: ~[A]): this.type  = { addAllAt(position, v); this }
   /**/                    def add(v: A)                                : Unit       = addAt(size, v)

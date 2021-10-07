@@ -10,7 +10,7 @@ object Int extends int.g.companion.Containers[Int]:
   type _methods = int._methods;          transparent inline def G      = int.G
 
 package object int:
-  private[lang] type Primitive = Int
+  private[lang] type Primitive = Int;                private[lang] transparent inline def Primitive = Int
   private[lang] type Raw       = Any.Int
   private[lang] type Opaque    = Int.Opaque
 

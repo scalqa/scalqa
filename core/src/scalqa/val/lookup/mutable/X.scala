@@ -5,10 +5,10 @@ import scala.collection.immutable.{ Map as IMap, HashMap as IHash }
 
 object X:
 
-  abstract class Base[A,B] extends Mutable[A,B]
+  abstract class Abstract[A,B] extends Mutable[A,B]
 
   // ************************************************************************
-  class Concurrent[A,B](root: IMap[A,B] = IHash.empty[A,B]) extends Base[A,B] :
+  class Concurrent[A,B](root: IMap[A,B] = IHash.empty[A,B]) extends Abstract[A,B] :
     private            val cRef                  = J.Concurrent.Ref[IMap[A,B]](root)
     /**/               def size                  = cRef.get.size
     @tn("get_Opt")     def get_?(key: A): Opt[B] = cRef.get.get(key)
@@ -18,7 +18,7 @@ object X:
     /**/               def remove(k: A) : Opt[B] = { while(true){ val m=cRef.get; val o:Opt[B]=m.get(k); if(!o || cRef.tryChange(m,m.removed(k))) return o }; \/ }
 
   // ************************************************************************
-  class Basic[A,B](protected val real: HashMap[A,B]) extends Base[A,B]:
+  class Basic[A,B](protected val real: HashMap[A,B]) extends Abstract[A,B]:
     def this() = this(HashMap.empty[A,B])
 
     /**/               def size                  = real.size
@@ -35,5 +35,5 @@ object X:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object X -> ### Implemented Type Extentions
+@object X -> ### Type Extentions \n\n This object contains all provided base type implementations
 */

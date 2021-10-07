@@ -3,10 +3,10 @@ package scalqa; package lang; package byte; import language.implicitConversions
 transparent trait _methods:
 
   extension(inline x:Byte)
-    @tn("Opt")        inline def ?                        : lang.Byte.Opt  = x.cast[Byte.Opt]
-    @tn("range")      inline def <> (inline to: Byte)     : lang.Byte.<>   = {val w=x; w <>= to-w+1 }
-    @tn("rangeX")     inline def <>>(inline to: Byte)     : lang.Byte.<>   = {val w=x; w <>= to-w   }
-    @tn("rangeOfSize")inline def <>=(inline size: Int)    : lang.Byte.<>   = new lang.Byte.<>(x,size)
+    @tn("Opt")        inline def ?                        : Byte.Opt       = x.cast[Byte.Opt]
+    @tn("range")      inline def <> (inline to: Byte)     : Byte.<>        = {val w=x; w <>= to-w+1 }
+    @tn("rangeX")     inline def <>>(inline to: Byte)     : Byte.<>        = {val w=x; w <>= to-w   }
+    @tn("rangeOfSize")inline def <>=(inline size: Int)    : Byte.<>        = new Byte.<>(x,size)
     /**/        infix inline def max(inline v: Byte)      : Byte           = {val y=x; val w=v; if(y.real > w.real) y else w }
     /**/        infix inline def min(inline v: Byte)      : Byte           = {val y=x; val w=v; if(y.real < w.real) y else w }
     /**/              inline def roundTo(inline unit:Int)

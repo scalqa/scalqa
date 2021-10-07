@@ -1,6 +1,6 @@
 package scalqa; package `val`; import language.implicitConversions
 
-abstract class Buffer[A] private[scalqa]() extends Idx.Mutable[A] with Able.Contain[A]:
+abstract class Buffer[A] private[scalqa]() extends Idx.Mutable[A] with gen.able.Contain[A]:
   protected type ARRAY_TYPE
   protected                 def array                            : Array[ARRAY_TYPE]
   protected                 def array_=(v: Array[ARRAY_TYPE])    : Unit

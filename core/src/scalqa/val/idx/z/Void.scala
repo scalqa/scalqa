@@ -6,7 +6,7 @@ private[scalqa] class Void[A] extends Idx[A] with Gen.Void:
 
 object Void extends Void[Nothing]:
 
-  object OM extends Idx.OM.X.Base[Nothing] with Gen.Void:
+  object OM extends Idx.OM.X.Abstract[Nothing] with Gen.Void:
     /**/                def size                                               = 0
     /**/                def apply(i: Int)                                      = J.illegalState()
     /**/                def addAt(i: Int, e: Nothing)                          = J.unsupportedOperation()

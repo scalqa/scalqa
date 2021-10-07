@@ -8,11 +8,11 @@ trait ToStream[-A,B]:
 object ToStream:
   self =>
 
-  given givenStream      [B]: ToStream[~[B],B]             with { inline def value_toStream(v: ~           [B]): ~[B] = v   }
+  given givenSelfStream  [B]: ToStream[~[B],B]             with { inline def value_toStream(v: ~           [B]): ~[B] = v   }
   given givenAbleStream  [B]: ToStream[Able.~[B],B]        with { inline def value_toStream(v: Able.~      [B]): ~[B] = v.~ }
   given givenIterableOnce[B]: ToStream[IterableOnce[B],B]  with { inline def value_toStream(v: IterableOnce[B]): ~[B] = v.~ }
-  given givenJIterable   [B]: ToStream[J.Iterable[B],B]    with { inline def value_toStream(v: J.Iterable  [B]): ~[B] = v.~ }
-  given givenJIterator   [B]: ToStream[U.Iterator[B],B]    with { inline def value_toStream(v: U.Iterator  [B]): ~[B] = v.~ }
+  given givenJavaIterable[B]: ToStream[J.Iterable[B],B]    with { inline def value_toStream(v: J.Iterable  [B]): ~[B] = v.~ }
+  given givenJavaIterator[B]: ToStream[U.Iterator[B],B]    with { inline def value_toStream(v: U.Iterator  [B]): ~[B] = v.~ }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

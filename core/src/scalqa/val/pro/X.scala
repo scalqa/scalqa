@@ -2,10 +2,10 @@ package scalqa; package `val`; package pro; import language.implicitConversions
 
 object X:
 
-  abstract class Base[A] extends Basis[A]
+  abstract class Abstract[A] extends Base[A]
 
   // ***************************************************
-  trait Basis[A] extends Pro[A] with Able.Doc:
+  trait Base[A] extends Pro[A] with Able.Doc:
     def doc = Doc(this) ++= this.?.takeType[Able.Name].map(n => ("name", n.name)) += ("value", apply())
 
 /*___________________________________________________________________________
@@ -15,5 +15,5 @@ object X:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object X -> ### Implemented Type Extentions
+@object X -> ### Type Extentions \n\n This object contains all provided base type implementations
 */

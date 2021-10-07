@@ -3,12 +3,11 @@ package scalqa; package gen; package event; package observable; import language.
 object X:
   private object AnyChangeEvent
 
-  abstract class Base extends Basis
+  abstract class Abstract extends Base
 
-  trait Basis extends Observable with Event.Store.Provider:
+  trait Base extends Observable with Event.Store.Provider:
     /**/      def onObservableChange[U](f: () => U): Event.Control = eventStore.onEvent0(AnyChangeEvent, f)
     protected def fireAnyChange                    : Int           = eventStore.fireEvent0(AnyChangeEvent)
-
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -17,5 +16,5 @@ object X:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@object X -> ### Implemented Type Extentions
+@object X -> ### Type Extentions \n\n This object contains all provided base type implementations
 */

@@ -49,12 +49,18 @@ ___________________________________________________________________________*/
 /**
 @object Any -> Companion to scala.Any
 
-@type Array  ->  All Array kinds  \n\n All possible Array types supported by JVM.
-@type ~      ->  All stream kinds \n\n All supported stream implementations.
-@type <>     ->  All range kinds  \n\n All supported range implementations.
-@type ><     ->  All pack kinds   \n\n All supported pack implementations.
-@type Opt    ->  All Opt kinds    \n\n All supported Opt implementations.
-@type Opaque ->  All Opaque kinds \n\n All supported Opaque root types.
+@type ~           ->  All stream kinds      \n\n All supported stream implementations.
+@type <>          ->  All range kinds       \n\n All supported range implementations.
+@type ><          ->  All pack kinds        \n\n All supported pack implementations.
+@type Array       ->  All Array kinds       \n\n All possible Array types supported by JVM.
+@type Buffer      ->  All Buffer kinds      \n\n All supported Buffer implementations.
+@type Collection  ->  All Collection kinds  \n\n All supported Collection implementations.
+@type Idx         ->  All Idx kinds         \n\n All supported indexed collection implementations.
+@type Lookup      ->  All Lookup kinds      \n\n All supported lookup colelction implementations.
+@type Opt         ->  All Opt kinds         \n\n All supported Opt implementations.
+@type Pro         ->  All Pro kinds         \n\n All supported Provider/Property implementations.
+@type Set         ->  All Set kinds         \n\n All supported Set implementations.
+@type Opaque      ->  All Opaque kinds      \n\n All supported Opaque root types.
 
 @type Boolean ->  All Boolean-like types \n\n The type is needed for specialized Boolean based generic containers. From JVM prospective Any.Boolean is just a Boolean primitive.
 @type Byte    ->  All Byte-like    types \n\n The type is needed for specialized Byte    based generic containers. From JVM prospective Any.Byte    is just a Byte    primitive.

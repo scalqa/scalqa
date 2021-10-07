@@ -1,6 +1,6 @@
 package scalqa; package `val`; package idx; package z; import language.implicitConversions
 
-private[scalqa] class Convert_View[A,B](protected val real: Idx[A], map: A => B) extends idx.X.Base[B]:
+private[scalqa] class Convert_View[A,B](protected val real: Idx[A], map: A => B) extends idx.X.Abstract[B]:
   def apply(i: Int) = map(real(i))
   def size          = real.size
 

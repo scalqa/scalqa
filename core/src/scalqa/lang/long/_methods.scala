@@ -5,10 +5,10 @@ import scalqa.gen.time.x.{ Nanos => NANOS }
 transparent trait _methods:
 
   extension(inline x:Long)
-    @tn("Opt")        inline def ?                         : lang.Long.Opt  = {val v=x; if(v==g.Opt.void.cast[Long]) throw ZZ.LO(); v.cast[lang.Long.Opt]}
-    @tn("range")      inline def <> (inline to: Long)      : lang.Long.<>   = new lang.Long.<>(x,to,true)
-    @tn("rangeX")     inline def <>>(inline to: Long)      : lang.Long.<>   = new lang.Long.<>(x,to,false)
-    @tn("rangeOfSize")inline def <>=(inline size: Int)     : lang.Long.<>   = {val v=x; new lang.Long.<>(v,v+size,false)}
+    @tn("Opt")        inline def ?                         : Long.Opt       = {val v=x; if(v==g.Opt.void.cast[Long]) throw ZZ.LO(); v.cast[Long.Opt]}
+    @tn("range")      inline def <> (inline to: Long)      : Long.<>        = new Long.<>(x,to,true)
+    @tn("rangeX")     inline def <>>(inline to: Long)      : Long.<>        = new Long.<>(x,to,false)
+    @tn("rangeOfSize")inline def <>=(inline size: Int)     : Long.<>        = {val v=x; new lang.Long.<>(v,v+size,false)}
     /**/        infix inline def max(inline v: Long)       : Long           = {val y=x; val w=v; if(y.real > w.real) y else w }
     /**/        infix inline def min(inline v: Long)       : Long           = {val y=x; val w=v; if(y.real < w.real) y else w }
     /**/              inline def tagBrief                  : String         = Z.tagBrief(x)

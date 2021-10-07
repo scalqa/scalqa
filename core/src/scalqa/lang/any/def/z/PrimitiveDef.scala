@@ -1,6 +1,6 @@
 package scalqa; package lang; package any; package `def`; package z; import language.implicitConversions
 
-class PrimitiveDef[A <: AnyVal | Any.Opaque](val typeName: String) extends TypeName[A] with Doc[A] with Gen.Able.Doc:
+class PrimitiveDef[A <: AnyVal | Any.Opaque](val typeName: String) extends TypeName[A] with Doc[A] with Able.Doc:
   def value_tag(v: A): String  = v.toString
   def value_doc(v: A): Gen.Doc = Gen.Doc(typeName) += ("value",v.toString)
   def doc            : Gen.Doc = Gen.Doc(this) += ("typeName",typeName)

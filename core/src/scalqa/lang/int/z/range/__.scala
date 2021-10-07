@@ -1,23 +1,48 @@
-package scalqa; package lang; package int; package z; import language.implicitConversions
+package scalqa; package lang; package int; package z; import scala.language.implicitConversions
 
 object Range:
-  /**/  private inline def SZ = 1024
-  @fast private   lazy val BUF                  : Array[Int] = mk(0,SZ)
-  /**/  private        def mk(s:Int,sz:Int)     : Array[Int] = { val a = new Array[Int](sz); (0 <>> sz).~.foreach(i => a(i)=s+i); a}
-  /**/                 def mkArray(s:Int,sz:Int): Array[Int] = if(s>=0 && s+sz<=SZ) java.util.Arrays.copyOfRange(BUF,s,s+sz) else mk(s,sz)
 
-  // **************************************************************************************************************************
-  object Void extends G.<>[Int](0,0) with Gen.Void
+  inline def mk[A<:Raw](start:Int, endX:Int): G.<>[A] = new G.<>(start.cast[A],endX - start)
 
-  // **************************************************************************************************************************
-  class Stream[A<:Raw](s: Int, eX: Long, step: Long) extends g.Stream[A] with Able.Size with Able.Doc:
-    private              var i         : Long         = s
-    @tn("readRaw_Opt")   def readRaw_? : G.Opt[A]     = { var o:G.Opt[A]= \/; if(i<eX) { o = i.cast[G.Opt[A]]; i+=step };  o}
-    /**/                 def size      : Int          = { val sz=eX-i;  (sz/step + (if(sz%step > 0) 1 else 0)).toInt}
-    override             def toArray   : Array[A]     = if(i<eX && step==1) new G.<>(i.cast[A],(eX-i).toInt).toArray  else super.toArray
-    @tn("pack") override def ><        : G.><[A]      = if(i<eX && step==1) new G.<>(i.cast[A],(eX-i).toInt).><   else super.><
-    override             def toBuffer  : G.Buffer[A]  = if(i<eX && step==1) new G.<>(i.cast[A],(eX-i).toInt).toBuffer else super.toBuffer
-    /**/                 def doc       : Doc          = this.defaultDoc ++= (i<eX) ? ("from",i.tag) ++= step.?.drop(_ == 1).map(i=>("step",i.tag))
+  inline def ref[A<:Raw,B](inline x: <>[A], inline fun: (A,A) => B): B =
+    val r = x.cast[<>[A]]
+    val rs = r.start
+    val re = (r.end + r.endIsIn.toInt).cast[A]
+    fun(rs,re)
+
+  inline def join[A<:Raw](self: G.<>[A], inline start:A, inline end:A, inline value:A): G.<>[A] =
+    val s = start.cast[Int]
+    val e = end  .cast[Int]
+    val v = value.cast[Int]
+    if     (v<s)  mk(v,e)
+    else if(v>=e) mk(s,v+1)
+    else          self
+
+  inline def join[A<:Raw](self: G.<>[A], inline start:A, inline end:A, inline start2:A, inline end2:A): G.<>[A] =
+    val s  = start .cast[Int]; val e  = end .cast[Int]
+    val s2 = start2.cast[Int]; val e2 = end2.cast[Int]
+    if(s2<=s)
+      if(e<=e2) mk(s2,e2)
+      else      mk(s2,e)
+    else
+      if(e<=e2) mk(s,e2)
+      else      self
+
+  inline def overlaps[A<:Raw](inline start:A, inline end:A, inline start2:A, inline end2:A): Boolean =
+    val s2 = start2.cast[Int]
+    if(s2 <= start) start < end2 else s2 < end
+
+  inline def overlap_Opt[A<:Raw](self: G.<>[A], inline start:A, inline end:A, inline start2:A, inline end2:A): Opt[G.<>[A]] =
+    val s  = start .cast[Int]; val e  = end .cast[Int]
+    val s2 = start2.cast[Int]; val e2 = end2.cast[Int]
+    if(s2<=s)
+      if(e2<=s)      \/
+      else if(e2<=e) mk(s,e2)
+      else           self
+    else
+      if(s2>=e)      \/
+      else if(e2<=e) mk(s2,e2)
+      else           mk(s2,e)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
