@@ -1,8 +1,9 @@
 package scalqa; package lang; package anyref; import language.implicitConversions
 
 object G:
-  transparent inline def Companion = g.Companion
-  transparent inline def Fun       = g.Fun
+  @tn("Range")  transparent inline def <>        = g.Range;        @tn("Range")   type <>[A] = g.Range[A]
+  /**/          transparent inline def Companion = g.Companion
+  /**/          transparent inline def Fun       = g.Fun
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

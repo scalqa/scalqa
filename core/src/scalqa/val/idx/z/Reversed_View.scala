@@ -6,7 +6,7 @@ private[scalqa] class Reversed_View[A](protected val real: Idx[A]) extends Idx[A
 
 private[scalqa] object Reversed_View:
 
-  class O[A](protected override val real: Idx.Observable[A]) extends Reversed_View(real) with Idx.Observable.X.EventsInterface[A]:
+  class O[A](protected override val real: Idx.Observable[A]) extends Reversed_View(real) with Idx.Observable.X.Base[A]:
     val hardRef = real.onChange(ci => fireChange(ci.~.map(c => {
       val in = (real.size - c.range.endX) <>= c.range.size
       c match {

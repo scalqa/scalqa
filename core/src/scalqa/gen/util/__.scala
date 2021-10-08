@@ -6,7 +6,6 @@ object Util:
   transparent inline def Percent        = util.Percent;         type Percent                                = util.Percent.TYPE.DEF
   transparent inline def TwoWayFunction = util.TwoWayFunction;  type TwoWayFunction[A,B]                    = util.TwoWayFunction[A,B]
   /**/                                                          type EnumCompanion[A <: scala.reflect.Enum] = util.EnumCompanion[A]
-  transparent inline def Extension      = util.Extension
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

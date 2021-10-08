@@ -1,4 +1,4 @@
-package scalqa; package `val`; package result; import problem.*; import language.implicitConversions
+package scalqa; package `val`; package result; import language.implicitConversions
 
 trait Problem:
   /**/                 def message     : String
@@ -16,9 +16,20 @@ object Problem:
   implicit inline def implicitToThrowable(inline v: Problem): Throwable      = Z.ExceptionProblem.Wrap(v)
   /**/            def unapply(v: Problem)                   : Option[String] = Some(v.message)
 
-  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Timeout  = problem.Timeout
-  type NotValid = problem.NotValid
+  // ************************************************************************************************
+  object X:
+
+    class NotValid(val message: String = \/) extends Problem:
+      @tn("exception_Opt") def exception_? : Opt[Exception] = \/
+    object NotValid:
+      def unapply(v: NotValid): Option[String] = Some(v.message)
+
+    // ******************************************************************
+    class Timeout(val message: String = \/) extends Problem:
+      @tn("exception_Opt") def exception_? : Opt[Exception] = \/
+
+    object Timeout:
+      def unapply(v: Timeout): Option[String] = Some(v.message)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -38,5 +49,15 @@ ___________________________________________________________________________*/
 @def exception_? -> Optional exception
 
     A problem may or may not be triggered by an exception, which can be optionally retrieved.
+
+@object X -> ### Type Extentions \n\n This object contains all provided base type implementations
+
+@class NotValid -> ###
+
+    A standard problem indicating not valid state
+
+@class Timeout -> ###
+
+       A standard problem indicating failure related to insufficient time
 
 */

@@ -12,9 +12,9 @@ abstract class Range[A] extends gen.able.Contain[A] with gen.able.Empty:
   @tn("overlap_Opt")def overlap_?(r: Range[A])                      : Opt[THIS_TYPE]
   /**/              def step_~(f: A => A)                           : ~[A]          = z.StepStream(this, f)
   /**/              def step_~(step: Int)(using Able.Sequence[A])   : ~[A]          = z.StepStream(this, step)
-  /**/              def contains(v: Range[A])                       : Boolean       = X.contains(this,v)
-  /**/              def contains(v: A)                              : Boolean       = X.contains(this,v)
-  /**/              def isEmpty                                     : Boolean       = X.isEmpty(this)
+  /**/              def contains(v: Range[A])                       : Boolean       = z.ops.contains(this,v)
+  /**/              def contains(v: A)                              : Boolean       = z.ops.contains(this,v)
+  /**/              def isEmpty                                     : Boolean       = z.ops.isEmpty(this)
   override          def equals(v: Any)                              : Boolean       = v.isInstanceOf[Range[_]] && {val r=v.cast[Range[A]]; this.contains(r) && r.contains(this)}
   inline            def raw(using inline A:Specialized.Primitive[A]): A.<>          = z.raw(this)
 
@@ -34,9 +34,6 @@ object Range:
 
   given zzCanEqualRange[A,B](using CanEqual[A,B]): CanEqual[<>[A],<>[B]] = CanEqual.derived
   given zzDoc[A]           (using Any.Def.Tag[A]): Any.Def.Doc[Range[A]] = new range.Z.DocDef[A]
-
-  // Members ~~~~~~~~~~~~~~~~~~~~~~~
-  transparent inline def X = range.X
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -62,7 +59,7 @@ ___________________________________________________________________________*/
 
      Returns primitive specialized range implementation.
 
-     The method would not compile for a non specializable range.
+     The method will not compile for reference types.
 
 @def ordering -> Ordering
 

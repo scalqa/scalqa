@@ -4,7 +4,7 @@ import javafx.beans.{ value, property }
 
 private[fx] object Pro:
 
-  protected abstract class Abstract[A](real: javafx.beans.Observable) extends Val.Pro.O.X.ActivationBasis[A] with javafx.beans.InvalidationListener:
+  protected abstract class Abstract[A](real: javafx.beans.Observable) extends Val.Pro.O.X.ActivationBase[A] with javafx.beans.InvalidationListener:
     def invalidated(o: javafx.beans.Observable): Unit = fireChange
     protected override def _afterFirstListenerAdded   = real.addListener(this)
     protected override def _afterLastListenerRemoved  = real.removeListener(this)

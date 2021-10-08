@@ -12,7 +12,7 @@ class Module (val typ_? : Opt[Member], val val_? : Opt[Member]):
   def children: ><[Module] = (Val.~.void[Module]
                                .joinAll(val_?.~.flatMap(_.children.members.~.map_?(_.dri.module_?)))
                                .joinAll(typ_?.~.flatMap(_.children.members.~.map_?(_.dri.module_?).peek(_.inner=true)))
-                               .toLookupBy(_.main.id.moduleId).~.sort(using if(name=="scalqa") Sorting.root else Sorting.byName)
+                               .toLookupBy(_.main.id.moduleId).~.sort(using if(name=="scalqa") Sorting.root else if(name=="Lang") Sorting.lang else Sorting.byName)
                               ).drop(_.dri.isPrivate).><
 object Module:
   def apply(m: Member)           : Module = if(m.kin.isDefLike) new Val(m) else if(m.kin.isTypeLike) new Typ(m) else Docs.fail(m.kin)

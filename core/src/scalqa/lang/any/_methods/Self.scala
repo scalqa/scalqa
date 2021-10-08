@@ -4,24 +4,23 @@ import _Methods.Self
 
 object Self:
   extension[A](x: Self[A])
-    /**/                      def typeName                  (using d: Def.TypeName[A]) : String   = if(d.isRef) Z.name(x) else d.typeName
-    /**/                      def id                        (using d: Def.TypeName[A]) : String   = if(x == null) "null" else { var n = x.typeName; if(!n.endsWith("$")) n += "@" + x.hash; n }
-    /**/                      def hash                                                 : String   = if(x == null) "null" else Z.Hash(x.hashCode)
+    /**/                      def typeName            (using d: Def.TypeName[A]) : String   = if(d.isInstanceOf[`def`.z.ReferenceNameDef[_]]) Z.refName(x) else d.typeName
+    /**/                      def id                  (using d: Def.TypeName[A]) : String   = if(x == null) "null" else x.typeName.^.mapIf(!_.endsWith("$"), _ + "@" + x.hash)
+    /**/                      def hash                                           : String   = if(x == null) "null" else Z.Hash(x.hashCode)
 
   extension[A](inline x: Self[A])
-    private            inline def real                                                 : A        = x.cast[A]
-    /**/               inline def apply[U](inline f: A => U)                           : A        = {val v=x.real; f(v); v }
-    /**/               inline def map[B](inline f: A => B)                             : B        = {val v=x.real; f(v) }
-    /**/               inline def mapIf(inline filter:A=>Boolean, inline f:A=>A)       : A        = {var v=x.real; if(filter(v)) v=f(v); v }
-    /**/               inline def isVoid                 (using inline d: Def.Void[A]) : Boolean  = {val v=x.real; v==null || d.value_isVoid(v)}
-    /**/               inline def isEmpty                (using inline d:Def.Empty[A]) : Boolean  = {var v=x.real; v==null || d.value_isEmpty(v) }
-    /**/               inline def nonVoid                (using inline d: Def.Void[A]) : Boolean  = !x.isVoid
-    /**/               inline def nonEmpty               (using inline d:Def.Empty[A]) : Boolean  = !x.isEmpty
-    @tn("pack")        inline def ><                                                   : ><[A]    = Val.><(x.real)
-    @tn("stream")      inline def ~                                                    : ~[A]     = Val.~(x.real)
-    @tn("nonEmptyOpt") inline def ?                 (using inline e:Opt[Def.Empty[A]])
-                                                         (using inline d: Def.Void[A]) : Opt[A]   = J.illegalState() // Overtaken by root lib
-
+    private            inline def real                                           : A        = x.cast[A]
+    /**/               inline def apply[U](inline f: A => U)                     : A        = {val v=x.real; f(v); v }
+    /**/               inline def map[B](inline f: A => B)                       : B        = {val v=x.real; f(v) }
+    /**/               inline def mapIf(inline filter:A=>Boolean, inline f:A=>A) : A        = {var v=x.real; if(filter(v)) v=f(v); v }
+    /**/               inline def isVoid           (using inline d: Def.Void[A]) : Boolean  = {val v=x.real; v==null || d.value_isVoid(v)}
+    /**/               inline def nonVoid          (using inline d: Def.Void[A]) : Boolean  = !x.isVoid
+    /**/               inline def isEmpty          (using inline d:Def.Empty[A]) : Boolean  = d.value_isEmpty(x.real)
+    /**/               inline def nonEmpty         (using inline d:Def.Empty[A]) : Boolean  = !x.isEmpty
+    @tn("pack")        inline def ><                                             : ><[A]    = Val.><(x.real)
+    @tn("stream")      inline def ~                                              : ~[A]     = Val.~(x.real)
+    @tn("nonEmptyOpt") inline def ?           (using inline e:Opt[Def.Empty[A]])
+                                                   (using inline d: Def.Void[A]) : Opt[A]   = J.illegalState() // Overtaken by root lib
 
   given zzTag[A](using Any.Def.Tag[A]): Any.Def.Tag[Self[A]] = new Z.TagDef
   given zzDoc[A](using Any.Def.Doc[A]): Any.Def.Doc[Self[A]] = new Z.DocDef
@@ -158,18 +157,14 @@ ___________________________________________________________________________*/
 
 @def isEmpty -> Empty check
 
-    Returns `true` if value is null or empty, `false` - otherwise.
+    Returns `true` if value is empty, `false` - otherwise.
 
     Any.Def.Empty is available for most known types, but can be defined for new.
-
-    Note. This method includes 'null' check compared to 'isEmpty' on base value.
 
 @def nonEmpty -> Non empty check
 
-    Returns `true` if value is not null and not empty, `false` - otherwise
+    Returns `true` if value is not not empty, `false` - otherwise
 
     Any.Def.Empty is available for most known types, but can be defined for new.
-
-    Note. This method includes 'null' check compared to 'nonEmpty' on base value.
 
 */

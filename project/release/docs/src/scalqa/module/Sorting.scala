@@ -8,6 +8,12 @@ object Sorting:
   object byName extends Ordering[Module]:
     def compare(x:Module,y:Module): Int = Ordering[String].compare(x.name,y.name)
 
+  object lang extends Ordering[Module]:
+    def compare(x:Module,y:Module): Int = Ordering[String].rank_^{
+      case "More" => 1
+      case _      => 0
+    }.compare(x.name,y.name)
+
   object root extends Ordering[Module]:
     def compare(x:Module,y:Module): Int = Ordering[String].rank_^{
       case "Lang" => 1

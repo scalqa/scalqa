@@ -7,8 +7,6 @@ transparent trait _Methods:
   extension[A](inline x:A)
     /**/             inline def isVoid                                           (using inline d: Def.Void[A]) : Boolean      = d.value_isVoid(x)
     /**/             inline def nonVoid                                          (using inline d: Def.Void[A]) : Boolean      = !x.isVoid
-    /**/             inline def isEmpty                                          (using inline d:Def.Empty[A]) : Boolean      = d.value_isEmpty(x)
-    /**/             inline def nonEmpty                                         (using inline d:Def.Empty[A]) : Boolean      = !x.isEmpty
     @tn("opt")       inline def ?                                              (using inline A:Specialized[A]) : A.Opt        = z.opt.make(x)
     @tn("result")    inline def ??                                                                             : Result[A]    = ZZ.result(x).cast[Result[A]]
     @tn("range")     inline def <> (inline to:A)(using inline o:O[A])          (using inline A:Specialized[A]) : A.<>         = z.range(x,to)
@@ -47,26 +45,6 @@ ___________________________________________________________________________*/
     Returns true if target is non void
 
     Note: Operation can fail for null value, use .^.nonVoid if null check is required
-
-@def isEmpty -> Empty check
-
-    Returns `true` if value is empty, `false` - otherwise.
-
-    If a type already has an "isEmpty" method, it will be called instead.
-
-     Any.Def.Empty is available for most known types, but can be defined for new.
-
-     Note: Operation can fail for null value, use .^.isEmpty if null check is required
-
-@def nonEmpty -> Non empty check
-
-    Returns `true` if value is not empty, `false` - otherwise
-
-    If a type already has a "nonEmpty" method, it will be called instead.
-
-    Any.Def.Empty is available for most known types, but can be defined for new.
-
-    Note: Operation can fail for null value, use .^.nonEmpty if null check is required
 
 @def tp -> Tag print
 

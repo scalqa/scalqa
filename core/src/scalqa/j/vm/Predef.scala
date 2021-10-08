@@ -7,7 +7,7 @@ import scalqa.gen.math.{Average, Sum}
 object Predef:
 
   object GlobalExtensionLibrary
-      extends any.z._Methods   with array._methods with string._Methods  with scalqa.gen.util.Extension.zMethods
+      extends any.z._Methods   with array._methods with string._Methods  with More.zMethods
          with boolean._methods with byte._methods  with char._methods    with short._methods
          with int._methods     with long._methods  with float._methods   with double._methods
          with scalqa.gen.math.z.Ordering._methods

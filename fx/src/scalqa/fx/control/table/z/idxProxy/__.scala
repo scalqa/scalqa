@@ -1,6 +1,6 @@
 package scalqa; package fx; package control; package table; package z; import idxProxy.*; import language.implicitConversions
 
-private[fx] class IdxProxy[A] private (private var order: Ordering[A], private var real:  Idx.OM[A]) extends Entry.IndexBase[A] with Idx.O.X.EventsInterface[A] with Idx.OM[A] with _Listener[A]:
+private[fx] class IdxProxy[A] private (private var order: Ordering[A], private var real:  Idx.OM[A]) extends Entry.IndexBase[A] with Idx.O.X.Base[A] with Idx.OM[A] with _Listener[A]:
   def this(real: Idx.OM[A] = Idx.OM.void)(using o: Ordering[A] = \/) = { this(o, real); _prepareTarget(real) }
   val entries = Idx.M[Entry[A]]()
 

@@ -13,10 +13,10 @@ ___________________________________________________________________________*/
 /**
 @trait Tag -> Explicit tag
 
+   This type will be recognized by Any.Def.Tag, as the main way for toString conversion
+
 @def tag -> String tag
 
    [[tag]] substitutes [[toString]]
-
-   The only benefit, [[tag]] is shorter to define
 
 */

@@ -12,7 +12,7 @@ object X:
     protected           def fireChange: Int           = eventStore.fireEvent0(ChangeEvent)
 
   // *****************************************************************************************************************
-  trait ActivationBasis[A] extends Base[A]:
+  trait ActivationBase[A] extends Base[A]:
     private             var active                    = false
     private             def cnhg(v: Boolean): Unit    = { active = v; if (v) _afterFirstListenerAdded else _afterLastListenerRemoved }
     override            def onChange[U](f: () => U)   = super.onChange(f).^(_ => if (f.isInstanceOf[Event.Id.Cancel]) { if (active && count == 0) cnhg(false) } else if (!active && count > 0) cnhg(true))

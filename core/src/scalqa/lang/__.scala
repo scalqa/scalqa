@@ -13,6 +13,7 @@ object Lang:
   transparent inline def Float      = lang.Float
   transparent inline def Double     = lang.Double
   transparent inline def String     = lang.String
+  transparent inline def More       = lang.More
 
 package object lang:
   // Allow Primitive to Primitive conversion insize "lang"

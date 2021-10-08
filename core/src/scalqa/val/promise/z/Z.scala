@@ -29,7 +29,7 @@ object Z:
       concurrent.Await.result(c.future, concurrent.duration.Duration(d.nanosTotal, concurrent.duration.NANOSECONDS))
       p.result_?.get
     catch
-      case _: concurrent.TimeoutException => Result[A](new Result.Problem.Timeout(d.tag))
+      case _: concurrent.TimeoutException => Result[A](new Result.Problem.X.Timeout(d.tag))
       case t: Throwable                   => Result[A](Result.Problem(t))
 
   // **********************************************************************************************************

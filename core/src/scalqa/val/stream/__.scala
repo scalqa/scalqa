@@ -38,7 +38,6 @@ class zStreamDefaults:
   implicit inline def implicitFromArray       [A](inline v: Array[A])                           : ~[A] = v.~
   implicit inline def implicitFromOpt         [A](inline v: Opt[A])                             : ~[A] = {val o=v; o.~ }
   implicit inline def implicitFromResult      [A](inline v: Result[A])                          : ~[A] = {val o=v; o.~ }
-  //implicit inline def implicitFromValue       [A](inline v: A)                                  : ~[A] = z.x.VarArg.Stream_ofOne[A](v)
   implicit inline def implicitFromTupleOfFew  [A](inline v: (A,A)|(A,A,A)|(A,A,A,A)|(A,A,A,A,A)): ~[A] = stream.z.util.tupleOfFewMacro(v)
 
 /*___________________________________________________________________________
@@ -56,14 +55,12 @@ ___________________________________________________________________________*/
 
       Stream has just one method to be implemented, but it has large attached libraries for:
         - [building stream pipeline](stream/_Build.html)
-        - [using stream data](stream/_Use.html) stream data
+        - [using stream data](stream/_Use.html)
 
       By Scalqa convention, method names, which return [[~]], are ended with '_~'
 
       ```
-      val s: ~[Char] = "ABCD".char_~
-
-      s.TP  // Prints ~(A, B, C, D)
+      "ABCD".char_~.TP  // Prints ~(A, B, C, D)
       ```
 
 @def fromIterator     -> Explicit constructor from Iterator     \n\n Note: There is also global implicit conversion from `Iterator` to `Stream`

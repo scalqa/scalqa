@@ -2,16 +2,13 @@ package scalqa; package `val`; package range
 
 object Z:
 
-  abstract class Abstract[A] extends X.Abstract[A,Range[A]]:
-    def makeNew(s:A, e:A, in:Boolean): Range[A] = if(in) new EndInclsive(s,e)(using this.ordering) else new EndExclusive(s,e)(using this.ordering)
-
-  class EndInclsive[A] (val start:A, val end:A)(using val ordering:Ordering[A]) extends Abstract[A]{ def endIsIn = true }
-  class EndExclusive[A](val start:A, val end:A)(using val ordering:Ordering[A]) extends Abstract[A]{ def endIsIn = false}
-  class SingleValueInclusive[A](val start:A)   (using val ordering:Ordering[A]) extends Abstract[A]{ def endIsIn = true;  def end = start; override def contains(v:A) = start.equals(v)}
-  class SingleValueExclusive[A](val start:A)   (using val ordering:Ordering[A]) extends Abstract[A]{ def endIsIn = false; def end = start; override def contains(v:A) = false          }
+  class EndInclsive[A] (val start:A, val end:A)(using val ordering:Ordering[A]) extends AnyRef.G.<>.X.Abstract[A]{ def endIsIn = true }
+  class EndExclusive[A](val start:A, val end:A)(using val ordering:Ordering[A]) extends AnyRef.G.<>.X.Abstract[A]{ def endIsIn = false}
+  class SingleValueInclusive[A](val start:A)   (using val ordering:Ordering[A]) extends AnyRef.G.<>.X.Abstract[A]{ def endIsIn = true;  def end = start; override def contains(v:A) = start.equals(v)}
+  class SingleValueExclusive[A](val start:A)   (using val ordering:Ordering[A]) extends AnyRef.G.<>.X.Abstract[A]{ def endIsIn = false; def end = start; override def contains(v:A) = false          }
 
   // **********************************************************************************************************************
-  class Void[A](using val ordering: Ordering  [A]) extends Abstract[A] with Gen.Void:
+  class Void[A](using val ordering: Ordering[A]) extends AnyRef.G.<>.X.Abstract[A] with Gen.Void:
     override def start                   : A       = J.unsupportedOperation("Void range does not have a start")
     override def end                     : A       = J.unsupportedOperation("Void range does not have an end")
     override def endIsIn                 : Boolean = false

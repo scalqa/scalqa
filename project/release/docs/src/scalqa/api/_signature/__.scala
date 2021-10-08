@@ -6,7 +6,7 @@ trait _Signature:
 
   extension (x: Member)
     private def isStreamExt: Boolean = {val l=x.dri.location;  l.startsWith("scalqa.val.stream") && !l.endsWith("$") && (l.startsWith("scalqa.val.stream._build") | l.startsWith("scalqa.val.stream._Build") | l.startsWith("scalqa.val.stream._use") | l.startsWith("scalqa.val.stream._Use"))}
-    private def thisOpaque : String | Link = x.parent.?.drop(_.name=="_methods").map(v => Link(v.label,v.dri)) or "THIS_OPAQUE"
+    private def thisOpaque : String | Link = x.parent.?.drop(_.name.startsWith("_")).map(v => Link(v.label,v.dri)) or "THIS_OPAQUE"
     private def thisReal   : String        = Registry.member_?(Id(x.dri.copy(anchor=""))).drop(_.name=="_methods").map_?(_.extendsSignature.~.map(_.label).dropWhile(!_.contains("AnyRef.Opaque")).dropFirst(4).read_?) or "THIS_REAL"
 
   extension (x: Signature)

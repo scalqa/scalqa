@@ -1,6 +1,6 @@
-package scalqa; package `val`; package range; import language.implicitConversions
+package scalqa; package `val`; package range; package z; import language.implicitConversions
 
-object X:
+object ops:
   inline def isEmpty [A](inline x: Range[A])             : Boolean  = x.start.>(x)
   inline def contains[A](inline x: Range[A], v: A)       : Boolean  = !v.<(x) && !v.>(x)
   inline def contains[A](inline x: Range[A], r: Range[A]): Boolean  = !r.start.<(x) && !r.end.>(r.endIsIn,x)
@@ -31,15 +31,12 @@ object X:
 
   // Helpers
   extension[A](inline x: A)
-    private inline def < (r:Range[A])                    : Boolean = r.ordering.compare(x,r.start) < 0
-    private inline def > (inline r:Range[A])             : Boolean = x.>(true,r)
-    private inline def > (inline xIn: Boolean,r:Range[A]): Boolean = {val i=r.ordering.compare(x,r.end); i>0 || i==0 && (xIn && !r.endIsIn)}
+    private inline def < (r:Range[A])                               : Boolean = r.ordering.compare(x,r.start) < 0
+    private inline def > (inline r:Range[A])                        : Boolean = x.>(true,r)
+    private inline def > (inline xIn: Boolean,r:Range[A])           : Boolean = {val i=r.ordering.compare(x,r.end); i>0 || i==0 && (xIn && !r.endIsIn)}
 
   extension[RNG<:Range[A],A](inline f: (A,A,Boolean) => RNG)
-    private inline def mk(inline _s:A,inline _e:A,inline _i:Boolean): RNG = { val s = _s; val e = _e; val i = _i; f(s,e,i) }
-
-  // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Abstract[A, THIS <: Range[A]] = x.Abstract[A,THIS]
+    private inline def mk(inline _s:A,inline _e:A,inline _i:Boolean): RNG     = { val s = _s; val e = _e; val i = _i; f(s,e,i) }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

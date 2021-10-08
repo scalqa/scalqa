@@ -1,6 +1,7 @@
 package scalqa; package lang; package any; import language.implicitConversions
 
 object Def:
+
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type TypeName[A]    = `def`.TypeName[A];    transparent inline def TypeName = `def`.TypeName
   type Tag[-A]        = `def`.Tag[A];         transparent inline def Tag      = `def`.Tag
