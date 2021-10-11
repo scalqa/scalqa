@@ -11,6 +11,8 @@ class Data(val owner: Member):
       defs,
       extended,
       exports,
+      implicits,
+      givens,
       makers    : ><[Member] = \/
 
   var extensions: ><[(ExtensionTarget,List[Member])] = \/

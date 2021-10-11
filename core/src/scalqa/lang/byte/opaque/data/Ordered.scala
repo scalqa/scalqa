@@ -6,14 +6,14 @@ abstract class Ordered[A<:Opaque](name: String) extends Data[A](name) with Order
 
 object Ordered:
 
-  transparent trait _methods extends Data._methods with zMethodsBase:
+  transparent trait _methods extends Data._methods with z_MethodsBase:
     extension[THIS_OPAQUE <: Opaque](inline x: THIS_OPAQUE)
       @tn("less")           inline def <  (inline v: THIS_OPAQUE)    : Boolean           = x.real <  v.real
       @tn("lessOrEqual")    inline def <= (inline v: THIS_OPAQUE)    : Boolean           = x.real <= v.real
       @tn("greater")        inline def >  (inline v: THIS_OPAQUE)    : Boolean           = x.real >  v.real
       @tn("greaterOrEqual") inline def >= (inline v: THIS_OPAQUE)    : Boolean           = x.real >= v.real
 
-  transparent trait zMethodsBase:
+  transparent trait z_MethodsBase:
     extension[THIS_OPAQUE <: Opaque](inline x: THIS_OPAQUE)
       @tn("range")          inline def <> (inline to: THIS_OPAQUE)   : G.<>[THIS_OPAQUE] = new G.<>[THIS_OPAQUE](x,to,true)
       @tn("rangeX")         inline def <>>(inline to: THIS_OPAQUE)   : G.<>[THIS_OPAQUE] = new G.<>[THIS_OPAQUE](x,to,false)

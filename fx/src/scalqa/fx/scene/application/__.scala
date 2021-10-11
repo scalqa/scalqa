@@ -21,7 +21,7 @@ abstract class Application(width: Int.Opt, height: Int.Opt, private val title: S
   def main(sa: Array[String]) =
     Application.self = this
     stage.args       = sa.~.><
-    javafx.application.Application.launch(classOf[zStarter], sa.toSeq *)
+    javafx.application.Application.launch(classOf[z_Starter], sa.toSeq *)
 
   // *************************************************************************************
   protected class Stage extends Fx.Stage():
@@ -45,7 +45,7 @@ object Application:
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def Thread = application.Thread
 
-private class zStarter extends javafx.application.Application:
+private class z_Starter extends javafx.application.Application:
   override def start(s: JStage) = Application.self.stage.start(s)
   override def stop()           = Application.self.stage.stop
 

@@ -3,19 +3,19 @@ package scalqa; package j; package vm; package z
 private[scalqa] object Schedule:
 
   def everyIn[U](period: Time.Length, initDelay: Time.Length, job: () => U): Event.Control =
-    val c = zEventControl(job)
+    val c = z_EventControl(job)
     c.future = Setup.schedular_*().scheduleAtFixedRate(c, initDelay.nanosTotal.toLong, period.nanosTotal.toLong, java.util.concurrent.TimeUnit.NANOSECONDS)
     c
 
   def in[U](delay: Time.Length, job: () => U): Event.Control =
-    val c = zEventControl(job)
+    val c = z_EventControl(job)
     c.future = Setup.schedular_*().schedule(c, delay.nanosTotal.toLong, java.util.concurrent.TimeUnit.NANOSECONDS)
     c
 
   def apply(r: Runnable): Unit = Setup.defaultExecutionContext.execute(r)
 
   // ********************************************************************************************************************
-  private class zEventControl(l: () => Any) extends Event.Control.X.Basic(l) with Runnable:
+  private class z_EventControl(l: () => Any) extends Event.Control.X.Basic(l) with Runnable:
     var future: java.util.concurrent.Future[_] = null
 
     protected override def fireOnCancel =

@@ -16,20 +16,20 @@ object Year extends Int.Opaque.Data.Sequential[Year]("Year"):
     /**/   inline def isLeap                    : Boolean   = java.time.Year.isLeap(x.real)
     /**/          def start                     : Time      = Day(x.number,1,1).start
     /**/   inline def period                    : Period    = Period(x.start,  x.next.start)
-    /**/          def months                    : Month.Idx = zMonths(x)
-    /**/          def days                      : Day.Idx   = zDays(x)
+    /**/          def months                    : Month.Idx = z_Months(x)
+    /**/          def days                      : Day.Idx   = z_Days(x)
     /**/          def isCurrent                 : Boolean   = x == Year.current
 
   object TYPE:
     opaque type DEF <: Int.Opaque = Int.Opaque
 
   // ****************************************************************************************************
-  private class zDays(v: Year) extends Day.Idx:
+  private class z_Days(v: Year) extends Day.Idx:
     val from          = Day(v.number, 1, 1)
     val size          = if (v.isLeap) 366 else 365
     def apply(i: Int) = from + i
 
-  private class zMonths(v: Year) extends Month.Idx:
+  private class z_Months(v: Year) extends Month.Idx:
     def size          = 12;
     def apply(i: Int) = Month(v.number, i + 1)
 

@@ -38,7 +38,7 @@ object Buffer:
 
   implicit inline def implicitRequest[A](v: NEW)                    : Buffer[A]                         = apply[A]()
 
-  given zzDoc[A](using t: Any.Def.Doc[A]) : Any.Def.Doc[Buffer[A]] with
+  given z_Doc[A](using t: Any.Def.Doc[A]) : Any.Def.Doc[Buffer[A]] with
     def value_tag(v: Buffer[A]) = value_doc(v).tag
     def value_doc(v: Buffer[A]) = Doc(v) += ("size", v.size) += v.array.tag
 

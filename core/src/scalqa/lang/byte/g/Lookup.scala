@@ -39,7 +39,7 @@ object Lookup:
   object Stable:
     /**/            def apply[A<:Raw,B](v: (A,B) *)      : Stable[A,B] = apply(v.~)
     /**/            def apply[A<:Raw,B](v: ~[(A,B)])     : Stable[A,B] = new Stable(IntMap.from(v.map(v => (v._1.real.toInt,v._2)).iterator))
-    @tn("getVoid")  def void[A<:Raw,B]                   : Stable[A,B] = zVoid.cast[Stable[A,B]]; private object zVoid extends Stable(IntMap.empty) with Gen.Void
+    @tn("getVoid")  def void[A<:Raw,B]                   : Stable[A,B] = z_Void.cast[Stable[A,B]]; private object z_Void extends Stable(IntMap.empty) with Gen.Void
     implicit inline def implicitRequest[A<:Raw,B](v: \/) : Stable[A,B] = void
 
 /*___________________________________________________________________________

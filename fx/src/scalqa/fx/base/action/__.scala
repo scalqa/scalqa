@@ -20,7 +20,7 @@ class Action(label: String = \/) extends Abstract.Delegate.Gui:
 
   /**/               def enable                           : Boolean           = !real.isDisable
   /**/               def enable_=(b: Boolean)             : Unit              = real.setDisable(!b)
-  @tn("enable_Pro")  def enable_*                         : Pro.OM[Boolean]   = Fx.JavaFx.To.pro_OM(real.disableProperty).mutableMap_^(using zBooleanReverse)
+  @tn("enable_Pro")  def enable_*                         : Pro.OM[Boolean]   = Fx.JavaFx.To.pro_OM(real.disableProperty).mutableMap_^(using z_BooleanReverse)
 
   @tn("scene_Opt")   def scene_?                          : Opt[Scene]        = \/
 
@@ -42,7 +42,7 @@ object Action:
   type Event    = action.Event;     transparent inline def Event = action.Event
   type Provider = action.Provider
 
-private object zBooleanReverse extends TwoWayFunction[Boolean,Boolean]:
+private object z_BooleanReverse extends TwoWayFunction[Boolean,Boolean]:
   def apply(v: Boolean) = !v
   def undo (v: Boolean) = !v
 

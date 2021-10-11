@@ -18,4 +18,6 @@ ___________________________________________________________________________*/
 
   Float.Opaque is the supertype for all opaques based on Float
 
+  See [sample type definition](https://github.com/scalqa/samples/blob/master/src/example/opaque/all/OpaqueFloat.scala).
+
 */

@@ -13,11 +13,11 @@ class Set[A<:Raw] private(real: LongMap[Unit]) extends Val.Set[A] with Collectio
 object Set:
   /**/                  def apply[A<:Raw](v: A *)       : Set[A] = new Set(LongMap.from(v.map(v => (v.real,()))))
   /**/                  def fromStream[A<:Raw](v: ~[A]) : Set[A] = new Set(LongMap.from(v.map(v => (v.real,())).iterator))
-  @tn("getVoid") inline def void[A<:Raw]                : Set[A] = zVoid.cast[Set[A]]
+  @tn("getVoid") inline def void[A<:Raw]                : Set[A] = z_Void.cast[Set[A]]
   implicit       inline def implicitRequest[A<:Raw](v: \/) : Set[A] = void
 
   // **************************************************
-  object zVoid extends Set(LongMap.empty) with Gen.Void
+  object z_Void extends Set(LongMap.empty) with Gen.Void
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

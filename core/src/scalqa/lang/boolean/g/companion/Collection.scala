@@ -1,6 +1,6 @@
 package scalqa; package lang; package boolean; package g; package companion; import language.implicitConversions
 
-class Collection[A<:Raw] extends zPack[A,G.Collection[A]]:
+class Collection[A<:Raw] extends z_Pack[A,G.Collection[A]]:
   type Mutable = G.Collection.Mutable[A];                     val Mutable = new Collection.Mutable[A]
   type M       = G.Collection.Mutable[A];  transparent inline def M       = Mutable
 

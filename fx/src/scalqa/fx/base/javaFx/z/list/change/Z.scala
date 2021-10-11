@@ -4,22 +4,22 @@ import javafx.{ collections as JFX }
 
 private object Z:
 
-  class InsertFrame[A](val change:  Idx.Event.Add[A], l: JFX.ObservableList[A]) extends zFrame[A](l):
+  class InsertFrame[A](val change:  Idx.Event.Add[A], l: JFX.ObservableList[A]) extends z_Frame[A](l):
     override lazy  val getAddedSubList: java.util.List[A] = change.items.toJavaList_^
     override       def wasAdded = true
 
-  class DeleteFrame[A](val change:  Idx.Event.Remove[A], l: JFX.ObservableList[A]) extends zFrame[A](l):
+  class DeleteFrame[A](val change:  Idx.Event.Remove[A], l: JFX.ObservableList[A]) extends z_Frame[A](l):
     override lazy  val getRemoved: java.util.List[A] = change.items.toJavaList_^
     override       def wasRemoved = true
 
-  class ReplaceFrame[A](val change:  Idx.Event.Update[A], l: JFX.ObservableList[A]) extends zFrame[A](l):
+  class ReplaceFrame[A](val change:  Idx.Event.Update[A], l: JFX.ObservableList[A]) extends z_Frame[A](l):
     override lazy  val getAddedSubList: java.util.List[A] = change.items.toJavaList_^
     override lazy  val getRemoved: java.util.List[A] = change.oldItems.toJavaList_^
     override       def wasAdded = true
     override       def wasRemoved = true
     override       def wasReplaced = true
 
-  class ReorderFrame[A](val change:  Idx.Event.Reposition[A], l: JFX.ObservableList[A]) extends zFrame[A](l):
+  class ReorderFrame[A](val change:  Idx.Event.Reposition[A], l: JFX.ObservableList[A]) extends z_Frame[A](l):
     override       def wasPermutated = true
     override       val getPermutation: Array[Int] = change.positions.~.toArray
 

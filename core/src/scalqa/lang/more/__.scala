@@ -21,7 +21,7 @@ object More:
                                                   @tn("pack")   inline def >< (using A:Specialized[A]) : A.>< = x.~.><
 
   // *****************************************************************************************
-  transparent trait zMethods extends IterableOnce_methods with Iterable_methods with Iterator_methods:
+  transparent trait z_Methods extends IterableOnce_methods with Iterable_methods with Iterator_methods:
     // Efficiency extras
     extension   (inline x: Product)                 @tn("stream") inline def ~ : ~[(String,Any)] = S.Stream_fromProduct(x)
     extension[A](inline x: C.immutable.ArraySeq[A]) @tn("stream") inline def ~ : ~[A]            = x.unsafeArray.~.cast[~[A]]
@@ -39,13 +39,13 @@ ___________________________________________________________________________*/
 
     These are extension methods universally available for scala.collections.IterableOnce.
 
-    IterableOnce is the root of Scala collections, thus those methods will be avalable on most collections like: Seq, List, Vector, etc.
+    IterableOnce is the root of Scala collections, thus those methods will be avalable on all extensions like: Seq, List, Vector, etc.
 
 @trait Iterable_methods -> ### Java Collections Root Extension.
 
     These are extension methods universally available for java.lang.Iterable.
 
-    Iterable is the root of Java collections, thus those methods will be avalable on most collections like: List, Vector, Set, etc.
+    Iterable is the root of Java collections, thus those methods will be avalable on all extensions like: List, Vector, Set, etc.
 
 @trait Iterator_methods -> ### Java Iterator Extension Methods.
 

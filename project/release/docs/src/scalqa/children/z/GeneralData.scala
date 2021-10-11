@@ -26,6 +26,9 @@ class GeneralData(m: Member) extends Data(m):
 
   this.exports  = all.~.take(_.kind.isExported).sort.><
 
+  this.implicits= all.~.take(m => m.kind.isImplicit && m.name.startsWith("implicit")).><
+  this.givens   = all.~.take(m => m.kind.isGiven && m.name.startsWith("given")).><
+
   aliases.~.partition(_.name in GeneralData.ContainerNames).^(s => { this.containers=s.read.><; this.aliases = s.read.>< })
 
   extensions = all.~

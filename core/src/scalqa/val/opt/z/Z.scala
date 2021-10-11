@@ -2,54 +2,24 @@ package scalqa; package `val`; package opt; import language.implicitConversions;
 
 object Z:
 
-  inline def map[A,B](x:Opt[A], inline f: A=>B)(using inline B: Specialized[B]): B.Opt =
-    inline B match
-      case _ : Specialized[B & Any.Boolean] => { var o: Boolean.Opt= \/; if(x) o=f(x.`val`).cast[Boolean]; o.cast[B.Opt] }
-      case _ : Specialized[B & Any.Byte   ] => { var o: Byte   .Opt= \/; if(x) o=f(x.`val`).cast[Byte   ]; o.cast[B.Opt] }
-      case _ : Specialized[B & Any.Char   ] => { var o: Char   .Opt= \/; if(x) o=f(x.`val`).cast[Char   ]; o.cast[B.Opt] }
-      case _ : Specialized[B & Any.Short  ] => { var o: Short  .Opt= \/; if(x) o=f(x.`val`).cast[Short  ]; o.cast[B.Opt] }
-      case _ : Specialized[B & Any.Int    ] => { var o: Int    .Opt= \/; if(x) o=f(x.`val`).cast[Int    ]; o.cast[B.Opt] }
-      case _ : Specialized[B & Any.Long   ] => { var o: Long   .Opt= \/; if(x) o=f(x.`val`).cast[Long   ]; o.cast[B.Opt] }
-      case _ : Specialized[B & Any.Float  ] => { var o: Float  .Opt= \/; if(x) o=f(x.`val`).cast[Float  ]; o.cast[B.Opt] }
-      case _ : Specialized[B & Any.Double ] => { var o: Double .Opt= \/; if(x) o=f(x.`val`).cast[Double ]; o.cast[B.Opt] }
-      case _                                => { var o:  Val.Opt[B]= \/; if(x) o=f(x.`val`).cast[B      ]; o.cast[B.Opt] }
+  def collect[A,B](x:Opt[A],f:PartialFunction[A,B]): Opt[B]                = {var o:Opt[B]= \/; if(x.nonEmpty){val w=x.`val`; if(f.isDefinedAt(w)) o=f(w)}; o}
+  def stream [A]  (x:Opt[A])                       : ~[A]                  = if(x.nonEmpty) ~~(x.`val`) else Stream.void
+  def get    [A]  (x:Opt[A])                       : A                     = {if(x.isEmpty) throw new ZZ.EO(); x.cast[A]}
+  def toScala[A]  (x:Opt[A])                       : scala.Option[A]       = if(x.nonEmpty) scala.Some(x.`val`) else scala.None
+  def toJava [A]  (x:Opt[A])                       : java.util.Optional[A] = if(x.nonEmpty) java.util.Optional.of(x.`val`) else java.util.Optional.empty
 
-  inline def mapOpt[A,B,OPT<:Any.Opt[B]](x:Opt[A], inline f: A=>OPT)(using inline s:Specialized.Opt[B,OPT], inline B:Specialized[B]): B.Opt =
-    inline B match
-      case _ : Specialized[B & Any.Boolean] => { var o: Boolean.Opt= \/; if(x) o=s(x.`val`,f).cast[Boolean.Opt]; o.cast[B.Opt] }
-      case _ : Specialized[B & Any.Byte   ] => { var o: Byte   .Opt= \/; if(x) o=s(x.`val`,f).cast[Byte   .Opt]; o.cast[B.Opt] }
-      case _ : Specialized[B & Any.Char   ] => { var o: Char   .Opt= \/; if(x) o=s(x.`val`,f).cast[Char   .Opt]; o.cast[B.Opt] }
-      case _ : Specialized[B & Any.Short  ] => { var o: Short  .Opt= \/; if(x) o=s(x.`val`,f).cast[Short  .Opt]; o.cast[B.Opt] }
-      case _ : Specialized[B & Any.Int    ] => { var o: Int    .Opt= \/; if(x) o=s(x.`val`,f).cast[Int    .Opt]; o.cast[B.Opt] }
-      case _ : Specialized[B & Any.Long   ] => { var o: Long   .Opt= \/; if(x) o=s(x.`val`,f).cast[Long   .Opt]; o.cast[B.Opt] }
-      case _ : Specialized[B & Any.Float  ] => { var o: Float  .Opt= \/; if(x) o=s(x.`val`,f).cast[Float  .Opt]; o.cast[B.Opt] }
-      case _ : Specialized[B & Any.Double ] => { var o: Double .Opt= \/; if(x) o=s(x.`val`,f).cast[Double .Opt]; o.cast[B.Opt] }
-      case _                                => { var o:  Val.Opt[B]= \/; if(x) o=s(x.`val`,f).cast[Val .Opt[B]]; o.cast[B.Opt] }
+  // ***********************************************************************************
+  object None:
+    override def equals(v:Any) = false
+    override def toString      = "Opt.\\/"
 
-  inline def mix[A,B,C](x:Opt[A], bo: Any.Opt[B], inline f: (A,B) => C)(using inline C:Specialized[C]): C.Opt =
-    import lang.any.z.opt.Ops.{SOME, VAL}
-    inline C match
-      case _ : Specialized[C & Any.Boolean] => { var o: Boolean.Opt= \/; if(x && bo.SOME) o=f(x.`val`,bo.VAL).cast[Boolean]; o.cast[C.Opt]}
-      case _ : Specialized[C & Any.Byte   ] => { var o: Byte   .Opt= \/; if(x && bo.SOME) o=f(x.`val`,bo.VAL).cast[Byte   ]; o.cast[C.Opt]}
-      case _ : Specialized[C & Any.Char   ] => { var o: Char   .Opt= \/; if(x && bo.SOME) o=f(x.`val`,bo.VAL).cast[Char   ]; o.cast[C.Opt]}
-      case _ : Specialized[C & Any.Short  ] => { var o: Short  .Opt= \/; if(x && bo.SOME) o=f(x.`val`,bo.VAL).cast[Short  ]; o.cast[C.Opt]}
-      case _ : Specialized[C & Any.Int    ] => { var o: Int    .Opt= \/; if(x && bo.SOME) o=f(x.`val`,bo.VAL).cast[Int    ]; o.cast[C.Opt]}
-      case _ : Specialized[C & Any.Long   ] => { var o: Long   .Opt= \/; if(x && bo.SOME) o=f(x.`val`,bo.VAL).cast[Long   ]; o.cast[C.Opt]}
-      case _ : Specialized[C & Any.Float  ] => { var o: Float  .Opt= \/; if(x && bo.SOME) o=f(x.`val`,bo.VAL).cast[Float  ]; o.cast[C.Opt]}
-      case _ : Specialized[C & Any.Double ] => { var o: Double .Opt= \/; if(x && bo.SOME) o=f(x.`val`,bo.VAL).cast[Double ]; o.cast[C.Opt]}
-      case _                                => { var o:  Val.Opt[C]= \/; if(x && bo.SOME) o=f(x.`val`,bo.VAL)              ; o.cast[C.Opt]}
+  object Def extends Any.Def.Void[Opt[Any]] with Any.Def.Empty[Opt[Any]]:
+    inline def value_isVoid( v:Opt[Any]) = v.isEmpty
+    inline def value_isEmpty(v:Opt[Any]) = v.isEmpty
 
-  inline def raw[A](x:Opt[A])(using inline A:Specialized.Primitive[A]): A.Opt =
-    inline A match
-      case _ : Specialized.Primitive[A & Any.Boolean] => {var o: Boolean.Opt= \/; if(x) o=x.cast[java.lang.Boolean  ].booleanValue; o.cast[A.Opt]}
-      case _ : Specialized.Primitive[A & Any.Byte   ] => {var o: Byte   .Opt= \/; if(x) o=x.cast[java.lang.Byte     ].byteValue;    o.cast[A.Opt]}
-      case _ : Specialized.Primitive[A & Any.Char   ] => {var o: Char   .Opt= \/; if(x) o=x.cast[java.lang.Character].charValue;    o.cast[A.Opt]}
-      case _ : Specialized.Primitive[A & Any.Short  ] => {var o: Short  .Opt= \/; if(x) o=x.cast[java.lang.Short    ].shortValue;   o.cast[A.Opt]}
-      case _ : Specialized.Primitive[A & Any.Int    ] => {var o: Int    .Opt= \/; if(x) o=x.cast[java.lang.Integer  ].intValue;     o.cast[A.Opt]}
-      case _ : Specialized.Primitive[A & Any.Long   ] => {var o: Long   .Opt= \/; if(x) o=x.cast[java.lang.Long     ].longValue;    o.cast[A.Opt]}
-      case _ : Specialized.Primitive[A & Any.Float  ] => {var o: Float  .Opt= \/; if(x) o=x.cast[java.lang.Float    ].floatValue;   o.cast[A.Opt]}
-      case _ : Specialized.Primitive[A & Any.Double ] => {var o: Double .Opt= \/; if(x) o=x.cast[java.lang.Double   ].doubleValue;  o.cast[A.Opt]}
-      case _                                          => J.illegalState()
+  class Doc[A :Any.Def.Tag] extends Any.Def.Doc[Opt[A]]:
+    def value_doc(v: Opt[A]) = Gen.Doc("Opt") += ("value", v.map(_.tag).or("\\/"))
+    def value_tag(v: Opt[A]) = "Opt(" + v.map(_.tag).or("\\/") + ")"
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

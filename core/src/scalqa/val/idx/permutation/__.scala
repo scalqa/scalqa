@@ -18,7 +18,7 @@ object Permutation extends Gen.Void.Setup[Permutation](Z.Void):
   def random(r: Int.<>)                                               : Permutation  = Z.random(r)
   def sorting[A](idx:Idx[A], full:Boolean=false)(using c: Ordering[A]): Permutation  = Z.sorting(idx, full, c)
 
-  given zzDoc: Any.Def.Doc[Permutation] with
+  given z_Doc: Any.Def.Doc[Permutation] with
     def value_tag(v: Permutation) = value_doc(v).tag
     def value_doc(v: Permutation) = Doc("Permutation") += ("range", v.range) += v.pair_~.makeString("")
 

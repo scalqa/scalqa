@@ -13,20 +13,20 @@ private[`val`] class ArrayPack[A](_a: Array[AnyRef], sz: Int) extends ><[A] with
   /**/                   def size                        : Int              = sz
   /**/                   def join(v: A)                  : ><[A]            = new ArrayPack(ar.copySize(sz+1).^(_(sz)=v.cast[AnyRef]),sz+1)
   /**/                   def joinAt(i: Int, v: A)        : ><[A]            = new ArrayPack(ar.copySize(sz+1).^(a=>{a.copyTo(a,i+1,i,a.length-i-1);a(i)=v.cast[AnyRef]}),sz+1)
-  /**/                   def joinAllAt(i: Int, v: ~[A])  : ><[A]            = new ArrayPack(lang.anyref.Buffer.zzArrayJoinAllAt(ar,i,v.cast[~[AnyRef]],sz))
+  /**/                   def joinAllAt(i: Int, v: ~[A])  : ><[A]            = new ArrayPack(lang.anyref.Buffer.z_ArrayJoinAllAt(ar,i,v.cast[~[AnyRef]],sz))
   @tn("take_Range")      def take_<>(s: Int, sz: Int)    : ><[A]            = new ArrayPack(ar.take_<>(s,sz))
   @tn("drop_Range")      def drop_<>(s: Int, sz: Int)    : ><[A]            = new ArrayPack(ar.drop_<>(s,sz))
   /**/                   def doc                         : Doc              = Doc(this) += ("size", size) ++= (ar.length != sz) ? ("","Uncompacted") += ar.tag
   @tn("compact")         def ><                          : this.type        = {if(ar.length > sz) ar=ar.copySize(sz); this}
   /**/                   def toBuffer                    : Buffer[A]        = new AnyRef.Buffer(ar.copySize(sz),sz)
-  /**/                   def joinAll(vs: ~[A])           : ><[A]            = vs.read_?.map(v => ArrayPack.zBuf(ar,sz+1,v,vs).mk) or this
+  /**/                   def joinAll(vs: ~[A])           : ><[A]            = vs.read_?.map(v => ArrayPack.z_Buf(ar,sz+1,v,vs).mk) or this
 
 object ArrayPack:
 
-  def fromStream[A](vs: ~[A]): ><[A] = vs.read_?.map(v => zBuf(Array.emptyAnyRef,1,v,vs).mk) or \/
+  def fromStream[A](vs: ~[A]): ><[A] = vs.read_?.map(v => z_Buf(Array.emptyAnyRef,1,v,vs).mk) or \/
 
   // *****************************************************************************************************
-  private class zBuf[A] private (a: Array[AnyRef],s:Int) extends AnyRef.Buffer[A](a,s):
+  private class z_Buf[A] private (a: Array[AnyRef],s:Int) extends AnyRef.Buffer[A](a,s):
     def this(a: Array[AnyRef], sz: Int, v: A, vs: ~[A]) =
       this(a.copySize(vs.size_?.map(sz + _) or sz + J.initSize).^(_(sz-1)=v.cast[AnyRef]), sz)
       addAll(vs)

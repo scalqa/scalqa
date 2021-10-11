@@ -2,7 +2,7 @@ package scalqa; package fx; package base; package javaFx; package z; package lis
 
 import javafx.{ collections as JFX }
 
-private abstract class zFrame[A](l: JFX.ObservableList[A]) extends JFX.ListChangeListener.Change[A](l) with Able.Doc:
+private abstract class z_Frame[A](l: JFX.ObservableList[A]) extends JFX.ListChangeListener.Change[A](l) with Able.Doc:
 
   def change:  Idx.O.Event[A]
 
@@ -23,14 +23,14 @@ private abstract class zFrame[A](l: JFX.ObservableList[A]) extends JFX.ListChang
 
   def doc = List.singleChangeDoc(this)
 
-object zFrame:
+object z_Frame:
 
-  object Void extends zFrame[Nothing](null) with Gen.Void:
+  object Void extends z_Frame[Nothing](null) with Gen.Void:
     def change = J.unsupportedOperation()
     override lazy  val getFrom = 0
     override lazy  val getTo = 0
 
-  object BeforeFirst extends zFrame[Nothing](null) with Gen.Void:
+  object BeforeFirst extends z_Frame[Nothing](null) with Gen.Void:
     def fail = J.illegalState("Was not fetched")
     def change = fail
     override lazy  val getFrom = fail

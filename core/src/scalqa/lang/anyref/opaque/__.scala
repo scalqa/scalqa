@@ -18,4 +18,6 @@ ___________________________________________________________________________*/
 
   AnyRef.Opaque is the supertype for all reference based opaque types
 
+  As an example look into [J.File.Store](../../../j/file/Store$.html)  with source code [available](https://github.com/scalqa/scalqa/blob/master/core/src/scalqa/j/file/Store.scala).
+
 */

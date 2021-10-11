@@ -7,10 +7,10 @@ abstract class OpaqueBase[A<: Any.Opaque]private[lang](name: String, ct: ClassTa
   def value_tag(v: A)   : String
   def value_doc(v: A)   : Doc
 
-  given zzNameDef : Any.Def.TypeName[A] = self
-  given zzDoc     : Any.Def.Doc[A]      = self
-  given zzClassTag: ClassTag[A]         = ct
-  given zzCanEqual: CanEqual[A,A]       = CanEqual.derived
+  given z_NameDef : Any.Def.TypeName[A] = self
+  given z_Doc     : Any.Def.Doc[A]      = self
+  given z_ClassTag: ClassTag[A]         = ct
+  given z_CanEqual: CanEqual[A,A]       = CanEqual.derived
 
   // -------------------------------------------------------------------------------------------------------------------------------------
   private var ck = -1 // Checking if `doc` is called from `value_tag` (it may be overridden), if not, `value_tag` value is included in doc

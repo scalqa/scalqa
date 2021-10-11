@@ -22,8 +22,8 @@ object Self:
     @tn("nonEmptyOpt") inline def ?           (using inline e:Opt[Def.Empty[A]])
                                                    (using inline d: Def.Void[A]) : Opt[A]   = J.illegalState() // Overtaken by root lib
 
-  given zzTag[A](using Any.Def.Tag[A]): Any.Def.Tag[Self[A]] = new Z.TagDef
-  given zzDoc[A](using Any.Def.Doc[A]): Any.Def.Doc[Self[A]] = new Z.DocDef
+  given z_Tag[A](using Any.Def.Tag[A]): Any.Def.Tag[Self[A]] = new Z.TagDef
+  given z_Doc[A](using Any.Def.Doc[A]): Any.Def.Doc[Self[A]] = new Z.DocDef
 
   object TYPE:
     opaque type DEF[+A] <: AnyRef = AnyRef

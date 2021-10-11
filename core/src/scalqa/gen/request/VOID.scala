@@ -2,7 +2,7 @@ package scalqa; package gen; package request; import language.implicitConversion
 
 class VOID private() extends Request
 
-object VOID extends VOID with zVOIDDefaults:
+object VOID extends VOID with z_VOIDDefaults:
   implicit def implicitToString                (v: \/) : String            = ""
   implicit def implicitToException             (v: \/) : Exception         = z.VOID.Exception
   implicit def implicitToJavaList[A]           (v: \/) : java.util.List[A] = z.VOID.JavaList.cast[java.util.List[A]]
@@ -18,15 +18,15 @@ object VOID extends VOID with zVOIDDefaults:
   inline given givenToMath    : Numeric[\/]      = z.VOID.Math
   inline given givenToAverage : Math.Average[\/] = z.VOID.Math
 
-private trait zVOIDDefaults extends zVOIDDefaults1:
+private trait z_VOIDDefaults extends z_VOIDDefaults1:
   implicit def implicitToFunctionToOptDouble[A](v: \/) : A => Opt[Double]  = z.VOID.Function1_Opt.cast[A => Opt[Double]]
   implicit def implicitToBooleanFunction[A]    (v: \/) : A => Boolean      = z.VOID.Filter
   //implicit inline def implicitToValOpt[A](v: \/): Opt[A]    = ZZ.None.cast[Opt[A]]
 
-private trait zVOIDDefaults1 extends zVOIDDefaults2:
+private trait z_VOIDDefaults1 extends z_VOIDDefaults2:
   implicit def implicitToFunctionToOpt[A,B]    (v: \/) : A => Opt[B]       = z.VOID.Function1_Opt.cast[A => Opt[B]]
 
-private trait zVOIDDefaults2:
+private trait z_VOIDDefaults2:
   implicit def implicitToVector[A]             (v: \/) : scala.collection.immutable.Vector[A] = Vector.empty[A]
   implicit def implicitToScalaList[A]          (v: \/) : scala.collection.immutable.List[A]   = Nil
   implicit def implicitToScalaSet[A]           (v: \/) : scala.collection.immutable.Set[A]    = scala.collection.immutable.Set.empty

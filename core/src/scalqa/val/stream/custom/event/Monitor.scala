@@ -12,18 +12,18 @@ object Monitor:
   private[stream] inline def runOnAfterLast(l: Monitor, cnt: Int, tm: Time.Length) : Unit    = l.runOnAfterLast(cnt, tm)
   private[stream] inline def runOnEmpty(l: Monitor)                                : Unit    = l.runOnEmpty
 
-  implicit def implicitRequest(v: \/)     : Monitor = zVoid
-  implicit def implicitRequest(v: DEFAULT): Monitor = new zDefault
+  implicit def implicitRequest(v: \/)     : Monitor = z_Void
+  implicit def implicitRequest(v: DEFAULT): Monitor = new z_Default
 
 // *******************************************************************************
-private object zVoid extends Monitor with Gen.Void:
+private object z_Void extends Monitor with Gen.Void:
   def runOnBeforeFirst                          = ()
   def runOnEvery(    cnt: Int, tm: Time.Length) = ()
   def runOnAfterLast(cnt: Int, tm: Time.Length) = ()
   def runOnEmpty                                = ()
 
 // *******************************************************************************
-private class zDefault extends Event:
+private class z_Default extends Event:
   onBeforeFirst(         t => println("Stream Started at: " +- t))
   onAfterLast(      (c, l) => println("Stream Ended, processed: " +- c + " in " +- l))
   onEvery(1.Second, (x, y) => println(x +- " " +- y))

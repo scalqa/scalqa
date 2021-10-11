@@ -6,20 +6,20 @@ import scala.{ collection as S }
 trait Contains[-CONTAINER,A]:
   def contains(c: CONTAINER, v: A): Boolean
 
-object Contains extends zContains:
+object Contains extends z_Contains:
   given givenAbleContain [A]: Contains[Able.Contain[A]  ,A] with { inline def contains(x: Able.Contain[A],v:A) = x.contains(v) }
-  given givenIterableOnce[A]: Contains[S.IterableOnce[A],A] = zContains.IterableOnce.cast[Contains[S.IterableOnce[A],A]]
-  given givenJavaIterable[A]: Contains[J.Iterable[A]    ,A] = zContains.Iterable    .cast[Contains[J.Iterable[A],A]]
-  given givenJavaIterator[A]: Contains[U.Iterator[A]    ,A] = zContains.Iterator    .cast[Contains[U.Iterator[A],A]]
-  given givenProduct     [A]: Contains[Product          ,A] = zContains.Product     .cast[Contains[Product,A]]
+  given givenIterableOnce[A]: Contains[S.IterableOnce[A],A] = z_Contains.IterableOnce.cast[Contains[S.IterableOnce[A],A]]
+  given givenJavaIterable[A]: Contains[J.Iterable[A]    ,A] = z_Contains.Iterable    .cast[Contains[J.Iterable[A],A]]
+  given givenJavaIterator[A]: Contains[U.Iterator[A]    ,A] = z_Contains.Iterator    .cast[Contains[U.Iterator[A],A]]
+  given givenProduct     [A]: Contains[Product          ,A] = z_Contains.Product     .cast[Contains[Product,A]]
 
-private class zContains:
+private class z_Contains:
   given givenStringInString[A<:String | String.Opaque]: Contains[A,A]             with { inline def contains(x:A,v:A)    = x.asInstanceOf[String].contains(v.asInstanceOf[String])}
   given givenCharInString  [A<:String | String.Opaque]: Contains[A,Char]          with { inline def contains(x:A,v:Char) = x.asInstanceOf[String].indexOf(v)>=0 }
-  given givenCollection[A]                            : Contains[Collection[A],A] = zContains.Collection.cast[Contains[Collection[A],A]]
+  given givenCollection[A]                            : Contains[Collection[A],A] = z_Contains.Collection.cast[Contains[Collection[A],A]]
 
 // ******************************************************************************************************************************************************************************
-object zContains:
+object z_Contains:
   object IterableOnce extends Contains[S.IterableOnce[AnyRef],AnyRef]:
     def contains(x:S.IterableOnce[AnyRef], v:AnyRef) = x match
                                                           case x: S.SeqOps[_,_,_] => x.contains(v)

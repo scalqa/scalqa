@@ -313,10 +313,10 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
         ("", GET.containers)
       )),
       buildGroup("Implicit", Seq(
-        ("", rest.filter(m => m.kind.isImplicit && !m.name.startsWith("zz")))
+        ("", GET.implicits)
       )),
       buildGroup("Given", Seq(
-        ("", rest.filter(m => m.kind.isGiven && !m.name.startsWith("zz")))
+        ("", GET.givens)
       )),
       buildGroup("Export", Seq(
         ("Defined exports", GET.exports),

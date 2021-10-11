@@ -7,7 +7,7 @@ abstract class Base[A<:Opaque](name: String) extends AnyRef.Opaque.Base[A,String
   override def value_tag(v: A)           : String  = v.real // Keep it simple, ops depend on this.
   implicit inline def implicitRequest(v: \/): A    = "".cast[A]
 
-  given zzCanEqualString: CanEqual[A,String] = CanEqual.derived
+  given z_CanEqualString: CanEqual[A,String] = CanEqual.derived
 
   extension[THIS_OPAQUE<:Opaque](inline x: THIS_OPAQUE)
     @tn("realString") inline def real: String = x.cast[String]
@@ -29,7 +29,7 @@ ___________________________________________________________________________*/
 
   Note. Most opaque companions extend Opaque.Data, which also defines specialized containers attached to the type.
 
-  See [sample type definition](https://github.com/scalqa/samples/blob/master/src/example/opaque/all/StringOpaque.scala).
+  See [sample type definition](https://github.com/scalqa/samples/blob/master/src/example/opaque/all/OpaqueString.scala).
 
 @def value_tag -> Value to String
 

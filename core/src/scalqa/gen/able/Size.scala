@@ -6,6 +6,22 @@ trait Size extends Empty:
 
 object Size:
 
+  @tn("size_Opt")  def size_?(v: AnyRef) : Int.Opt  =
+    v match
+       case v: Size     => v.size.?
+       case v: Opt      => v.size_?
+       case v: Long     => v.sizeLong.?.map_?(v => if(v <= Int.max) v.toInt else \/ :Int.Opt)
+       case v: Opt.Long => v.sizeLong_?.map_?(v => if(v <= Int.max) v.toInt else \/ :Int.Opt)
+       case _           => \/
+
+  @tn("sizeLong_Opt") def sizeLong_?(v: AnyRef): Long.Opt =
+    v match
+       case v: Long     => v.sizeLong.?
+       case v: Opt.Long => v.sizeLong_?
+       case v: Size     => v.size.toLong.?
+       case v: Opt      => v.size_?.map(_.toLong)
+       case _           => \/
+
   // ************************************************************************************
   trait Long extends Empty:
     /**/     def sizeLong: scala.Long
@@ -24,21 +40,6 @@ object Size:
     trait Long:
       @tn("sizeLong_Opt") def sizeLong_? : Long.Opt
 
-  // ------------------------------------------------------------------------------------
-  @tn("size_Opt")  def size_?(v: AnyRef) : Int.Opt  = v match
-    case v: Size     => v.size.?
-    case v: Opt      => v.size_?
-    case v: Long     => v.sizeLong.?.map_?(v => if(v <= Int.max) v.toInt else \/ :Int.Opt)
-    case v: Opt.Long => v.sizeLong_?.map_?(v => if(v <= Int.max) v.toInt else \/ :Int.Opt)
-    case _           => \/
-
-  @tn("sizeLong_Opt") def sizeLong_?(v: AnyRef): Long.Opt = v match
-    case v: Long     => v.sizeLong.?
-    case v: Opt.Long => v.sizeLong_?
-    case v: Size     => v.size.toLong.?
-    case v: Opt      => v.size_?.map(_.toLong)
-    case _           => \/
-
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
@@ -51,5 +52,9 @@ ___________________________________________________________________________*/
 @def size -> Element count
 
    Retuns element count
+
+@trait Zero -> Able of providing size hardcodded as 0
+
+@def size -> Returns 0
 
 */

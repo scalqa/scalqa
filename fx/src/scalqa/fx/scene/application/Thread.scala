@@ -2,17 +2,17 @@ package scalqa; package fx; package scene; package application; import language.
 
 object Thread extends concurrent.ExecutionContext:
   def is                                                                    : Boolean       = javafx.application.Platform.isFxApplicationThread
-  def apply(fun: => Unit)                                                   : Unit          = if (is) fun else execute(zDelayedJob(fun))
+  def apply(fun: => Unit)                                                   : Unit          = if (is) fun else execute(z_DelayedJob(fun))
   def execute(v: Runnable)                                                  : Unit          = if (is) v.run else javafx.application.Platform.runLater(v)
   def reportFailure(cause: Throwable)                                       : Unit          = J.Vm.Setup.defaultExecutionContext.reportFailure(cause)
-  def scheduleIn(delay: Time.Length, f: => Unit)                            : Event.Control = J.scheduleIn(delay, execute(new zDelayedJob(f)))
+  def scheduleIn(delay: Time.Length, f: => Unit)                            : Event.Control = J.scheduleIn(delay, execute(new z_DelayedJob(f)))
   def scheduleEvery(period: Time.Length, f: => Unit)                        : Event.Control = scheduleEveryIn(period, period, f)
-  def scheduleEveryIn(delay: Time.Length, period: Time.Length, f: => Unit)  : Event.Control = { val j = zScheduledJob(f); J.scheduleEveryIn(delay, period, j.runJob) }
+  def scheduleEveryIn(delay: Time.Length, period: Time.Length, f: => Unit)  : Event.Control = { val j = z_ScheduledJob(f); J.scheduleEveryIn(delay, period, j.runJob) }
 
   // ***********************************************************************
-  private class zDelayedJob(fun: => Unit) extends Runnable { def run = fun }
+  private class z_DelayedJob(fun: => Unit) extends Runnable { def run = fun }
 
-  private class zScheduledJob(fun: => Unit) extends Runnable:
+  private class z_ScheduledJob(fun: => Unit) extends Runnable:
     var problem : Opt[Throwable] = \/
     var waiting  = true
     def runJob   = if(problem) throw problem.get; else if(waiting) { waiting = false; execute(this) }

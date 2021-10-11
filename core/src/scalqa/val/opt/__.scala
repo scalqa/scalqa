@@ -1,6 +1,6 @@
 package scalqa; package `val`; import language.implicitConversions;
 
-object Opt extends zValOptDefailts:
+object Opt extends z_ValOptDefailts:
   def apply[A](v: A)                        : Opt[A] = v.cast[AnyRef].cast[Opt[A]]
   def fromScala[A](v: scala.Option[A])      : Opt[A] = if (v.isEmpty) \/ else v.get
   def fromJava [A](v: java.util.Optional[A]): Opt[A] = if (v.isPresent) v.get else \/
@@ -26,48 +26,40 @@ object Opt extends zValOptDefailts:
     /**/               inline def process[U,W](inline f:A=>U,inline fNil: =>W): Opt[A]     = {val X=x; if(X.isEmpty){ val w:W=fNil} else f(X.`val`); X}
     /**/               inline def filter( inline f: A => Boolean)             : Opt[A]     = x.take(f)
     /**/               inline def withFilter(inline f: A => Boolean)          : Opt[A]     = x.take(f)
-    /**/               inline def mapIf(inline f:A=>Boolean,inline m:A=>A)    : Opt[A]     = x.map[A](v => if(f(v)) m(v) else v)
-    /**/               inline def map[B](inline f:A=>B)                                                       (using inline B:Specialized[B]): B.Opt = opt.Z.map(x,f)
-    @tn("map_Opt")     inline def map_?  [B,OPT<:Any.Opt[B]](inline f: A=>OPT)(using inline o:Specialized.Opt[B,OPT],inline B:Specialized[B]): B.Opt = opt.Z.mapOpt(x,f)
-    /**/               inline def flatMap[B,OPT<:Any.Opt[B]](inline f: A=>OPT)(using inline o:Specialized.Opt[B,OPT],inline B:Specialized[B]): B.Opt = opt.Z.mapOpt(x,f)
-    /**/               inline def mix[B,C](inline o:Any.Opt[B],inline f:(A,B)=>C)                             (using inline C:Specialized[C]): C.Opt = opt.Z.mix(x,o,f)
-    /**/               inline def raw                                                               (using inline A:Specialized.Primitive[A]): A.Opt = opt.Z.raw(x)
-  extension[A](x:Opt[A])
-    /**/                      def collect[B](f: PartialFunction[A,B])         : Opt[B]     = {var o:Opt[B]= \/; if(x.nonEmpty){val w=x.`val`; if(f.isDefinedAt(w)) o=f(w)}; o}
-    @tn("stream")             def ~                                           : ~[A]       = if(x.nonEmpty) ~~(x.`val`) else Stream.void
-    /**/                      def get                                         : A          = {if(x.isEmpty) throw new ZZ.EO(); x.cast[A]}
-    /**/                      def toScala                                : scala.Option[A] = if(x.nonEmpty) scala.Some(x.`val`) else scala.None
-    /**/                      def toJava                           : java.util.Optional[A] = if(x.nonEmpty) java.util.Optional.of(x.`val`) else java.util.Optional.empty
+    /**/               inline def collect[B](inline f: PartialFunction[A,B])  : Opt[B]     = opt.Z.collect(x,f)
+    @tn("stream")      inline def ~                                           : ~[A]       = opt.Z.stream(x)
+    /**/               inline def get                                         : A          = opt.Z.get(x)
+    /**/               inline def toScala                                     : Option[A]  = opt.Z.toScala(x)
+    /**/               inline def toJava                           : java.util.Optional[A] = opt.Z.toJava(x)
+    /**/               inline def mapIf(inline f:A=>Boolean,inline m:A=>A)                                                                   : Opt[A] = x.map[A](v => if(f(v)) m(v) else v)
+    /**/               inline def map[B](inline f:A=>B)                                                       (using inline B:Specialized[B]): B.Opt  = opt.z.specialized.map(x,f)
+    @tn("map_Opt")     inline def map_?  [B,OPT<:Any.Opt[B]](inline f: A=>OPT)(using inline o:Specialized.Opt[B,OPT],inline B:Specialized[B]): B.Opt  = opt.z.specialized.mapOpt(x,f)
+    /**/               inline def flatMap[B,OPT<:Any.Opt[B]](inline f: A=>OPT)(using inline o:Specialized.Opt[B,OPT],inline B:Specialized[B]): B.Opt  = opt.z.specialized.mapOpt(x,f)
+    /**/               inline def mix[B,C](inline o:Any.Opt[B],inline f:(A,B)=>C)                             (using inline C:Specialized[C]): C.Opt  = opt.z.specialized.mix(x,o,f)
+    /**/               inline def raw                                                               (using inline A:Specialized.Primitive[A]): A.Opt  = opt.z.specialized.raw(x)
 
   object TYPE:
     opaque type DEF[+A] <: AnyRef.Opaque = AnyRef.Opaque
 
   implicit inline def implicitFromAny    [A](inline v: A)                    : Opt[A]    = v.cast[Opt[A]]
-  implicit inline def implicitRequest    [A](v: \/)                          : Opt[A]    = ZZ.None.cast[Opt[A]]
   implicit inline def implicitFromScala  [A](inline v: scala.Option[A])      : Opt[A]    = fromScala[A](v)
   implicit inline def implicitFromJava   [A](inline v: java.util.Optional[A]): Opt[A]    = fromJava[A](v)
   implicit inline def implicitFromResult [A](inline v: Result[A])            : Opt[A]    = v.value_?
+  implicit inline def implicitRequest    [A](v: \/)                          : Opt[A]    = ZZ.None.cast[Opt[A]]
   implicit inline def implicitToBoolean  [A](inline v: Opt[A])               : Boolean   = v.nonEmpty
 
-  inline given zzOrderingOfByte  [A<:Any.Byte  ](using inline v: Ordering[A]): Opt[Ordering[A]] = v.cast[Opt[Ordering[A]]]
-  inline given zzOrderingOfChar  [A<:Any.Char  ](using inline v: Ordering[A]): Opt[Ordering[A]] = v.cast[Opt[Ordering[A]]]
-  inline given zzOrderingOfShort [A<:Any.Short ](using inline v: Ordering[A]): Opt[Ordering[A]] = v.cast[Opt[Ordering[A]]]
-  inline given zzOrderingOfInt   [A<:Any.Int   ](using inline v: Ordering[A]): Opt[Ordering[A]] = v.cast[Opt[Ordering[A]]]
-  inline given zzOrderingOfLong  [A<:Any.Long  ](using inline v: Ordering[A]): Opt[Ordering[A]] = v.cast[Opt[Ordering[A]]]
-  inline given zzOrderingOfFloat [A<:Any.Float ](using inline v: Ordering[A]): Opt[Ordering[A]] = v.cast[Opt[Ordering[A]]]
-  inline given zzOrderingOfDouble[A<:Any.Double](using inline v: Ordering[A]): Opt[Ordering[A]] = v.cast[Opt[Ordering[A]]]
+  given z_CanEqualOpt[A,B](using CanEqual[A,B])  : CanEqual[Opt[A], Opt[B]] = CanEqual.derived
+  given z_ClassTag[A]     (using t: ClassTag[A]) : ClassTag[Opt[A]]         = t.cast[ClassTag[Opt[A]]]
+  given z_NameDef [A]                            : Any.Def.TypeName[Opt[A]] = Any.Def.TypeName("Opt")
+  given z_VoidDef [A]                            : Any.Def.Void[Opt[A]]     = opt.Z.Def.cast[Any.Def.Void[Opt[A]]]
+  given z_Doc[A](using t: Any.Def.Tag[A])        : Any.Def.Doc[Opt[A]]      = new opt.Z.Doc
 
-  given zzCanEqualOpt[A,B](using CanEqual[A,B])  : CanEqual[Opt[A], Opt[B]] = CanEqual.derived
-  given zzClassTag[A]     (using t: ClassTag[A]) : ClassTag[Opt[A]]         = t.cast[ClassTag[Opt[A]]]
-  given zzNameDef [A]                            : Any.Def.TypeName[Opt[A]] = Any.Def.TypeName("Opt")
-  given zzVoidDef [A]                            : Any.Def.Void[Opt[A]]     = opt.z.Def.cast[Any.Def.Void[Opt[A]]]
-  given zzDoc[A](using t: Any.Def.Tag[A])        : Any.Def.Doc[Opt[A]]      = new opt.z.Def.Doc
+  inline given z_GivenAnyOfAnyOpt[A[B],B](using inline v: A[B]) : Opt[A[B]] = v.cast[Opt[A[B]]] // allowing optional Ordering[A], Numeric[A], etc., like (using o: Opt[Ordering[A]])
+  inline given z_GivenAnyDefEmptyOpt[A](using inline d: Any.Def.Empty[A]=ZZ.None.cast[Any.Def.Empty[A] & Opt[Any]]): Opt[Any.Def.Empty[A]] = d.cast[Opt[Any.Def.Empty[A]]] // Contra-varient Empty has be dealt explicitly
 
-  inline given zzOrdering[A](using inline d: Ordering[A]     =ZZ.None.cast[Ordering[A] & Opt[Any]])     : Opt[Ordering[A]]      = d.cast[Opt[Ordering[A]]]
-  inline given zzEmpty   [A](using inline d: Any.Def.Empty[A]=ZZ.None.cast[Any.Def.Empty[A] & Opt[Any]]): Opt[Any.Def.Empty[A]] = d.cast[Opt[Any.Def.Empty[A]]]
-
-class zValOptDefailts:
-  inline given zzOrderingComparable[B<:Comparable[B]]      : Opt[Ordering[B]]      = gen.math.z.Ordering.OrderingComparable.cast[Ordering[B]]
+class z_ValOptDefailts:
+  inline given z_OrderingComparable[B<:Comparable[B]] : Opt[Ordering[B]] = gen.math.z.Ordering.OrderingComparable.cast[Ordering[B]]
+  inline given z_GivenAnyOfAnyNone[C<:A[B],A[B],B]    : Opt[C]           = \/
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

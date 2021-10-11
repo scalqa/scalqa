@@ -18,4 +18,6 @@ ___________________________________________________________________________*/
 
   Int.Opaque is the supertype for all opaques based on Int
 
+  See [sample type definition](https://github.com/scalqa/samples/blob/master/src/example/opaque/all/OpaqueInt.scala).
+
 */

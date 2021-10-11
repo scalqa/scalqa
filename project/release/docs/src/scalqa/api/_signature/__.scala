@@ -40,10 +40,10 @@ trait _Signature:
         case l: Link  =>
           if(!l.dri.location.startsWith("scalqa")) l.dri.tag.simpleName().^.mapIf(v => m.name.startsWith(v), _ => l.dri.tag)
           else l.name match
-            case "THIS_OPAQUE"                            => m.thisOpaque
-            case "Ordering"                               => l.copy(dri=Registry.member_?(Id("scalqa.gen.math.ordering")).get.dri)
-            case n if n.length==1 && n.notIn("J","O","M") => n
-            case _                                        =>
+            case "THIS_OPAQUE"                                => m.thisOpaque
+            case "Ordering"                                   => l.copy(dri=Registry.member_?(Id("scalqa.gen.math.ordering")).get.dri)
+            case n if n.length==1 && n.notIn("J","O","M","~") => n
+            case _                                            =>
               l.copy(
                 name= l.dri.label()
                       .^.mapIf(v => m.name.withOp.startsWith(v), _ => l.dri.label(false))

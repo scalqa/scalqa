@@ -14,11 +14,13 @@ object Opaque:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
- type DEF  ->
+@type DEF  ->
 
   String.Opaque is a supertype for all String based opaque types
 
   The reason to have String.Opaque vs. AnyRef.Opaque based types, is that String.Opaque will inherit a large library of methods, same a String itself does.
   String.Opaque will behave like a regular String, but be different from a String.  If this behaviour is not desirable, use AnyRef.Opaque.Base even with String opaques.
+
+  See [sample type definition](https://github.com/scalqa/samples/blob/master/src/example/opaque/all/OpaqueString.scala).
 
 */

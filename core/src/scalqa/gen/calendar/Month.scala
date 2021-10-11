@@ -19,13 +19,13 @@ object Month extends Int.Opaque.Data.Sequential[Month]("Month"):
     /**/          def start                      : Time     = Day(x,1).start
     /**/   inline def period                     : Period   = Period(x.start, x.next.start)
     /**/          def isCurrent                  : Boolean  = x == Month.current
-    /**/          def days                       : Day.Idx  = new zDays(x)
+    /**/          def days                       : Day.Idx  = new z_Days(x)
 
   object TYPE:
     opaque type DEF <: Int.Opaque = Int.Opaque
 
   // ***************************************************************************************************************
-  private class zDays(v: Month) extends Day.Idx:
+  private class z_Days(v: Month) extends Day.Idx:
     def apply(i: Int) = Day(v.year.number, v.number, i + 1);
     val size          = v.number match { case 2 => if (v.year.isLeap) 29 else 28; case 4 | 6 | 9 | 11 => 30; case _ => 31 }
 

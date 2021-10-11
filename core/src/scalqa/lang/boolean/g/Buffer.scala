@@ -28,9 +28,9 @@ class Buffer[A<:Raw](arrayToUse: Array[Primitive], sizeToStartWith: Int) extends
 object Buffer:
   implicit inline def implicitRequest[A<:Raw](inline v: NEW)                : Buffer[A]                               = new Buffer()
 
-  def zzStreamToArray(v: G.~[Primitive])                               : Array[Primitive] = new Buffer(v).^.map(b => b.ar.^.mapIf(_.length!=b.size, _.copySize(b.size)))
-  def zzArrayJoinAll (x:Array[Primitive],v: ~[Primitive])              : Array[Primitive] = new Buffer(x,x.length).^(_ ++= v).^.map(b => b.ar.^.mapIf(a => a.length!=b.size || (a eq x), _.copySize(b.size)))
-  def zzArrayJoinAllAt(x:Array[Primitive],i:Int,v: ~[Primitive],sz:Int): Array[Primitive] = new Buffer(new Array[Primitive](v.size_?.map(_ + sz) or i+J.initSize),i).^(_ ++= v).^.map(b => {
+  def z_StreamToArray(v: G.~[Primitive])                               : Array[Primitive] = new Buffer(v).^.map(b => b.ar.^.mapIf(_.length!=b.size, _.copySize(b.size)))
+  def z_ArrayJoinAll (x:Array[Primitive],v: ~[Primitive])              : Array[Primitive] = new Buffer(x,x.length).^(_ ++= v).^.map(b => b.ar.^.mapIf(a => a.length!=b.size || (a eq x), _.copySize(b.size)))
+  def z_ArrayJoinAllAt(x:Array[Primitive],i:Int,v: ~[Primitive],sz:Int): Array[Primitive] = new Buffer(new Array[Primitive](v.size_?.map(_ + sz) or i+J.initSize),i).^(_ ++= v).^.map(b => {
       var a=b.ar
       val s=b.size+sz-i
       if(a.length != s) a=a.copySize(s)

@@ -6,7 +6,7 @@ object Change:
 
   def apply[A](in: Idx[Idx.O.Event[A]], o: JFX.ObservableList[A]): JFX.ListChangeListener.Change[A] & Able.Doc =
 
-    val frames: Idx[zFrame[A]] = in.~.map[zFrame[A]]{
+    val frames: Idx[z_Frame[A]] = in.~.map[z_Frame[A]]{
       case v:  Idx.Event.Add[A]        => new Z.InsertFrame[A](v, o)
       case v:  Idx.Event.Remove[A]     => new Z.DeleteFrame[A](v, o)
       case v:  Idx.Event.Update[A]     => new Z.ReplaceFrame[A](v, o)
@@ -16,14 +16,14 @@ object Change:
 
     new JFX.ListChangeListener.Change[A](o) with Able.Doc {
       private var i = -1
-      private var current: zFrame[A] = zFrame.BeforeFirst.cast[zFrame[A]]
+      private var current: z_Frame[A] = z_Frame.BeforeFirst.cast[z_Frame[A]]
 
-      def reset: Unit = { i = -1; current = zFrame.BeforeFirst.cast[zFrame[A]] }
+      def reset: Unit = { i = -1; current = z_Frame.BeforeFirst.cast[z_Frame[A]] }
 
       def next: Boolean = {
         i += 1;
-        current = if (i < frames.size) frames(i) else zFrame.Void.cast[zFrame[A]]
-        current != zFrame.Void
+        current = if (i < frames.size) frames(i) else z_Frame.Void.cast[z_Frame[A]]
+        current != z_Frame.Void
       }
 
       override def getFrom         = current.getFrom

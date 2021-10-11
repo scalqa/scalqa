@@ -30,10 +30,10 @@ object Result:
     /**/                  inline def flatMap[B](  inline f: A=>Result[B])             : Result[B]    = x.map_??(f)
     /**/                  inline def process[U,W](inline f: A=>U,inline pf:Problem=>W): Result[A]    = {val r=x; if(r.isValue){ val v=r.cast[A]; f(v)} else { val v=r.cast[Problem]; pf(v)}; r}
 
-  given zzNameDef[A]                              : Any.Def.TypeName[Result[A]]    = Any.Def.TypeName("Result")
-  given zzClassTag[A]  (using t: ClassTag[A])     : ClassTag[Result[A]]            = t.cast[ClassTag[Result[A]]]
-  given zzCanEqualResult[A,B](using CanEqual[A,B]): CanEqual[Result[A], Result[B]] = CanEqual.derived
-  given zzDoc[A](using t: Any.Def.Tag[A])         : Any.Def.Doc[Result[A]]         = new result.Z.Doc
+  given z_NameDef[A]                              : Any.Def.TypeName[Result[A]]    = Any.Def.TypeName("Result")
+  given z_ClassTag[A]  (using t: ClassTag[A])     : ClassTag[Result[A]]            = t.cast[ClassTag[Result[A]]]
+  given z_CanEqualResult[A,B](using CanEqual[A,B]): CanEqual[Result[A], Result[B]] = CanEqual.derived
+  given z_Doc[A](using t: Any.Def.Tag[A])         : Any.Def.Doc[Result[A]]         = new result.Z.Doc
   given givenFilter                               : result.Z.Filter                = new result.Z.Filter
 
   object TYPE:

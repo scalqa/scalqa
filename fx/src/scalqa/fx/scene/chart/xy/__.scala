@@ -14,15 +14,15 @@ abstract class XY[X, Y] protected (val axisX: Chart.Axis[X], val axisY: Chart.Ax
 
   // **************************************************************************************************************
   class SeriesBase protected (nameO: Opt[String]= \/, private var _items:  Idx.O[ITEM] = \/):
-    protected[chart] val real : self.REAL_SERIES = new self.REAL_SERIES(zObservableList()).^(s => nameO.forval(s.setName))
+    protected[chart] val real : self.REAL_SERIES = new self.REAL_SERIES(z_ObservableList()).^(s => nameO.forval(s.setName))
     /**/             def chart: Chart.XY[X, Y]   = self
     /**/             def name : String           = real.getName; def name_=(v: String) = real.setName(v)
-    /**/             def items: Idx.O[ITEM]      = _items;       def items_=(l:  Idx.O[ITEM]): Unit = { _items = l; real.setData(zObservableList()) }
+    /**/             def items: Idx.O[ITEM]      = _items;       def items_=(l:  Idx.O[ITEM]): Unit = { _items = l; real.setData(z_ObservableList()) }
     // ***************************
-    private class zObservableList extends base.javaFx.z.list.Observable[self.REAL_ITEM](items.map_^(_.real.cast[self.REAL_ITEM])){ def series = SeriesBase.this}
+    private class z_ObservableList extends base.javaFx.z.list.Observable[self.REAL_ITEM](items.map_^(_.real.cast[self.REAL_ITEM])){ def series = SeriesBase.this}
 
   object SeriesBase:
-    def apply(s: J.XYChart.Series[_, _]): SERIES = s.getData.cast[SeriesBase#zObservableList].series.cast[SERIES]
+    def apply(s: J.XYChart.Series[_, _]): SERIES = s.getData.cast[SeriesBase#z_ObservableList].series.cast[SERIES]
 
   // **************************************************************************************************************
   class ItemBase extends Able.Doc:

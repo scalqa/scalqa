@@ -26,12 +26,12 @@ object Item:
   def apply(real: JItem)                                             : Item  = real.getUserData.cast[Item]
   def separator                                                      : Item  = new z.Separator
 
-  given FxConverter: TwoWayFunction[JItem,Item] = zTwoWay;
+  given FxConverter: TwoWayFunction[JItem,Item] = z_TwoWay;
 
   implicit inline def implicitFrom(v: SEPARATOR): Item = separator
 
   // *************************************************************
-  private object zTwoWay extends TwoWayFunction[JItem,Item] { def apply(real: JItem) = Item.apply(real); def undo(i: Item): JItem = i.real }
+  private object z_TwoWay extends TwoWayFunction[JItem,Item] { def apply(real: JItem) = Item.apply(real); def undo(i: Item): JItem = i.real }
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API

@@ -18,4 +18,6 @@ ___________________________________________________________________________*/
 
   Double.Opaque is the supertype for all opaques based on Double
 
+  See [sample type definition](https://github.com/scalqa/samples/blob/master/src/example/opaque/all/OpaqueDouble.scala).
+
 */

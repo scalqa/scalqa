@@ -17,6 +17,8 @@ class Children private (val m: Member):
   def makers       : Seq[Member]                         = data.makers.toSeq_^
   def extended     : Seq[Member]                         = data.extended.toSeq_^
   def exports      : Seq[Member]                         = data.exports.toSeq_^
+  def implicits    : Seq[Member]                         = data.implicits.toSeq_^
+  def givens       : Seq[Member]                         = data.givens.toSeq_^
   def extensions   : Seq[(ExtensionTarget,List[Member])] = data.extensions.toSeq_^
 
 private object Children:

@@ -32,8 +32,8 @@ object Range:
     inline def flatMap[B](inline f: A => ~[B])   (using inline s:Able.Sequence[A]): ~[B] = x.~.flatMap(f)
     inline def foreach[U](inline f: A => U)      (using inline s:Able.Sequence[A]): Unit = x.~.foreach(f)
 
-  given zzCanEqualRange[A,B](using CanEqual[A,B]): CanEqual[<>[A],<>[B]] = CanEqual.derived
-  given zzDoc[A]           (using Any.Def.Tag[A]): Any.Def.Doc[Range[A]] = new range.Z.DocDef[A]
+  given z_CanEqualRange[A,B](using CanEqual[A,B]): CanEqual[<>[A],<>[B]] = CanEqual.derived
+  given z_Doc[A]           (using Any.Def.Tag[A]): Any.Def.Doc[Range[A]] = new range.Z.DocDef[A]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

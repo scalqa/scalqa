@@ -4,10 +4,10 @@ import Output.Buffer
 import java.io.{ ByteArrayOutputStream as REAL }
 
 object Buffer extends AnyRef.Opaque.Base[Buffer, REAL]("Io.Output.Buffer"):
-  def apply(initSize: Int = 512): Buffer = new zByteArrayOutputStream(initSize).toOpaque
+  def apply(initSize: Int = 512): Buffer = new z_ByteArrayOutputStream(initSize).toOpaque
 
   extension(inline x: Buffer)
-    inline def size    : Int         = x.real.cast[zByteArrayOutputStream]._count
+    inline def size    : Int         = x.real.cast[z_ByteArrayOutputStream]._count
     inline def bytes   : Array[Byte] = x.real.toByteArray
     inline def clear   : Unit        = x.real.reset
     inline def toInput : Io.Input    = Input(x.bytes)
@@ -17,7 +17,7 @@ object Buffer extends AnyRef.Opaque.Base[Buffer, REAL]("Io.Output.Buffer"):
 
 
   // **************************************************************************************************************
-  private class zByteArrayOutputStream(isz: Int) extends REAL(isz):
+  private class z_ByteArrayOutputStream(isz: Int) extends REAL(isz):
     def _count: Int = count
 
 

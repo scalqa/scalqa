@@ -5,13 +5,13 @@ transparent trait _entries:
 
   def add(typ:AnyRef, v:Any)          : Event.Control
   def find_?(typ: AnyRef)             : Opt[Entry]    = top.find(typ).?.drop(_.isVoid)
-  def ~(typ: AnyRef)                  : ~[Entry]      = new zStream().TAKE(_.`type` == typ)
+  def ~(typ: AnyRef)                  : ~[Entry]      = new z_Stream().TAKE(_.`type` == typ)
   def isEmpty                         : Boolean       = top.isVoid
-  def count                           : Int           = new zStream().count
-  def toText(label: Opt[String] = \/) : String        = new zStream().nonEmpty_?.map(_.zipIndex.makeString("\n")).or("empty").indent((label or "Event.Store")+": ")
+  def count                           : Int           = new z_Stream().count
+  def toText(label: Opt[String] = \/) : String        = new z_Stream().nonEmpty_?.map(_.zipIndex.makeString("\n")).or("empty").indent((label or "Event.Store")+": ")
 
   // *******************************************************************
-  private class zStream extends ~[Entry]:
+  private class z_Stream extends ~[Entry]:
     private var e: z.Entry = top
     @tn("read_Opt") def read_?  = !e.isVoid ? { val v=e; e=e.child; v }
 

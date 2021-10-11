@@ -5,16 +5,16 @@ abstract class Numerical[A<:Opaque](name: String) extends Ordered[A](name) with 
   @fast given givenSum    : Math.Sum[A] = z.Math.cast[Math.Sum[A]]
   @fast given givenNumeric: Numeric[A]  = z.Math.cast[Numeric[A]]
 
-  given zzCanEqual_Byte  : CanEqual[A,Byte]   = CanEqual.derived
-  given zzCanEqual_Short : CanEqual[A,Short]  = CanEqual.derived
-  given zzCanEqual_Int   : CanEqual[A,Int]    = CanEqual.derived
-  given zzCanEqual_Long  : CanEqual[A,Long]   = CanEqual.derived
-  given zzCanEqual_Float : CanEqual[A,Float]  = CanEqual.derived
-  given zzCanEqual_Double: CanEqual[A,Double] = CanEqual.derived
+  given z_CanEqual_Byte  : CanEqual[A,Byte]   = CanEqual.derived
+  given z_CanEqual_Short : CanEqual[A,Short]  = CanEqual.derived
+  given z_CanEqual_Int   : CanEqual[A,Int]    = CanEqual.derived
+  given z_CanEqual_Long  : CanEqual[A,Long]   = CanEqual.derived
+  given z_CanEqual_Float : CanEqual[A,Float]  = CanEqual.derived
+  given z_CanEqual_Double: CanEqual[A,Double] = CanEqual.derived
 
 object Numerical:
 
-  transparent trait _methods extends Data._methods with Ordered.zMethodsBase:
+  transparent trait _methods extends Data._methods with Ordered.z_MethodsBase:
     extension[THIS_OPAQUE <: Opaque](inline x: THIS_OPAQUE)
       /**/                  inline def abs                                                       : THIS_OPAQUE     = {val v=x; if(v.real >= 0) v else (-v.real).cast[THIS_OPAQUE]}
       /**/                  inline def unary_-                                                   : THIS_OPAQUE     = (- x.real).cast[THIS_OPAQUE]

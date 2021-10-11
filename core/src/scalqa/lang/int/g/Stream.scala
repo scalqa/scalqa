@@ -22,7 +22,7 @@ abstract class Stream[A<:Raw] extends Val.~[A] with ~~.Custom.Discharge[A] with 
   @tn("pack")             def ><                                          : Pack[A]       = Pack.fromStream(self)
   /**/                    def toBuffer                                    : Buffer[A]     = Buffer(self)
   /**/                    def toSet                                       : Set[A]        = Set.fromStream(self)
-  /**/                    def toArray                                     : Array[A]      = Buffer.zzStreamToArray(self.cast[Stream[Primitive]]).cast[Array[A]]
+  /**/                    def toArray                                     : Array[A]      = Buffer.z_StreamToArray(self.cast[Stream[Primitive]]).cast[Array[A]]
   /**/                    def dischargeTo(b: Val.Buffer[A])               : Unit          = b match{case v:Buffer[A] => v.addAllRaw(self); case v => v.addAllRef(self)}
   /**/             inline def FILTER(inline f: A=>Boolean)                : Stream[A]     = z.stream.filter.TAKE(self,f)
   /**/             inline def TAKE(  inline f: A=>Boolean)                : Stream[A]     = z.stream.filter.TAKE(self,f)

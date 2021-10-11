@@ -18,4 +18,6 @@ ___________________________________________________________________________*/
 
   Long.Opaque is the supertype for all opaques based on Long
 
+  See [sample type definition](https://github.com/scalqa/samples/blob/master/src/example/opaque/all/OpaqueLong.scala).
+
 */

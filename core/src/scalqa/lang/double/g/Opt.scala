@@ -40,11 +40,11 @@ object Opt:
   object TYPE:
     opaque type DEF[+A<:Raw] <: Double.Opaque = Double.Opaque
 
-  given zzCanEqualOpt[A<:Raw,B<:Raw](using CanEqual[A,B]): CanEqual[Opt[A],Opt[B]]  = CanEqual.derived
-  given zzNameDef [A<:Raw :Any.Def.TypeName]             : Any.Def.TypeName[Opt[A]] = new any.z.opt.NameDef()
-  given zzVoidDef [A<:Raw]                               : Any.Def.Void[Opt[A]]     = Z.OptEmptyDef.cast[Any.Def.Void[Opt[A]]]
-  given zzEmptyDef[A<:Raw]                               : Any.Def.Empty[Opt[A]]    = Z.OptEmptyDef.cast[Any.Def.Empty[Opt[A]]]
-  given zzDoc[A<:Raw :Any.Def.TypeName :Any.Def.Tag]     : Any.Def.Doc[Opt[A]]      = new Z.OptDocDef()
+  given z_CanEqualOpt[A<:Raw,B<:Raw](using CanEqual[A,B]): CanEqual[Opt[A],Opt[B]]  = CanEqual.derived
+  given z_NameDef [A<:Raw :Any.Def.TypeName]             : Any.Def.TypeName[Opt[A]] = new any.z.opt.NameDef()
+  given z_VoidDef [A<:Raw]                               : Any.Def.Void[Opt[A]]     = Z.OptEmptyDef.cast[Any.Def.Void[Opt[A]]]
+  given z_EmptyDef[A<:Raw]                               : Any.Def.Empty[Opt[A]]    = Z.OptEmptyDef.cast[Any.Def.Empty[Opt[A]]]
+  given z_Doc[A<:Raw :Any.Def.TypeName :Any.Def.Tag]     : Any.Def.Doc[Opt[A]]      = new Z.OptDocDef()
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

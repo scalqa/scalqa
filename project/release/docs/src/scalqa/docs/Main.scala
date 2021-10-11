@@ -12,7 +12,7 @@ object Main:
        "-project",         "Scalqa",
                            "-source-links:github://scalqa/scalqa",
        "-revision",        "master",
-       "-project-version", "0.993",
+       "-project-version", "0.994",
        "-siteroot",        "C:\\#DM\\_sbt\\dev\\scalqa_org\\project\\release\\docs\\static",
        "C:\\#DM\\_sbt\\dev\\scalqa_org\\project\\release\\scalqa\\target\\scala-3\\classes"
         )

@@ -12,7 +12,7 @@ abstract class InputControl(initialTextO: Opt[String]= \/) extends Control:
   /**/                     def size                        : Int             = real.getLength
   /**/                     def end                         : Unit            = real.end
   /**/                     def +=(s: String)               : Unit            = real.appendText(s)
-  /**/                     def onChange[U](l: Change => U) : Unit            = { _onChange += l; if (!real.getTextFormatter.isInstanceOf[zFormatter[_]]) real.setTextFormatter(new zFormatter) }
+  /**/                     def onChange[U](l: Change => U) : Unit            = { _onChange += l; if (!real.getTextFormatter.isInstanceOf[z_Formatter[_]]) real.setTextFormatter(new z_Formatter) }
 
   @tn("editable_Pro")      def editable_*                  : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.editableProperty)
   /**/                     def editable                    : Boolean         = real.isEditable
@@ -25,7 +25,7 @@ abstract class InputControl(initialTextO: Opt[String]= \/) extends Control:
 
   // ***********************************************************************************
   import javafx.scene.control.TextFormatter.{ Change => FXC }
-  private class zFormatter[A] extends javafx.scene.control.TextFormatter[A](new java.util.function.UnaryOperator[FXC] { def apply(c: FXC) = { _onChange.~.foreach(_(Change(c))); c } })
+  private class z_Formatter[A] extends javafx.scene.control.TextFormatter[A](new java.util.function.UnaryOperator[FXC] { def apply(c: FXC) = { _onChange.~.foreach(_(Change(c))); c } })
 
 object InputControl:
   type Change = inputControl.Change.TYPE.DEF; transparent inline def Change = inputControl.Change

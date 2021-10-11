@@ -18,4 +18,6 @@ ___________________________________________________________________________*/
 
   Boolean.Opaque is the supertype for all opaques based on Boolean
 
+  See [sample type definition](https://github.com/scalqa/samples/blob/master/src/example/opaque/all/OpaqueBoolean.scala).
+
 */

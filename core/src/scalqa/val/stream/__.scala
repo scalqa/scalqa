@@ -3,7 +3,7 @@ package scalqa; package `val`; import stream.*; import language.implicitConversi
 trait Stream[+A]:
   @tn("read_Opt") def read_? : Opt[A]
 
-object Stream extends zStreamDefaults with _Build with _Use:
+object Stream extends z_StreamDefaults with _Build with _Use:
   /**/          inline def apply[A](inline v: A)                                  : ~[A]             = z.x.VarArg.Stream_ofOne[A](v)
   /**/          inline def apply[A](inline v1: A, inline v2: A)                   : ~[A]             = z.x.VarArg.Stream_ofTwo[A](v1, v2)
   /**/                 def apply[A](v1: A, v2: A, v3: A, vs: A*)                  : ~[A]             = if (vs.isEmpty) z.x.VarArg.Stream_ofThree[A](v1,v2,v3) else z.x.VarArg.Stream_ofMany[A](v1,v2,v3,vs)
@@ -20,8 +20,8 @@ object Stream extends zStreamDefaults with _Build with _Use:
   implicit      inline def implicitRequest       [A](v: EMPTY)                    : ~[A] & Able.Size = void.cast[~[A] & Able.Size]
   implicit      inline def implicitFromAbleStream[A](inline v:Able.~[A])          : ~[A]             = v.~
 
-  /**/   given zzCanEqualStream[A,B] (using CanEqual[A,B]): CanEqual[~[A],~[B]] = CanEqual.derived
-  inline given zzDoc[A   ](using inline v: Any.Def.Tag[A]): Any.Def.Doc[~[A]]   = ZZ.streamDoc(v)
+  /**/   given z_CanEqualStream[A,B] (using CanEqual[A,B]): CanEqual[~[A],~[B]] = CanEqual.derived
+  inline given z_Doc[A   ](using inline v: Any.Def.Tag[A]): Any.Def.Doc[~[A]]   = ZZ.streamDoc(v)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def _build  = stream._Build;   type _build     = stream._Build
@@ -30,7 +30,7 @@ object Stream extends zStreamDefaults with _Build with _Use:
   transparent inline def Preview = stream.Preview;  type Preview[A] = stream.Preview[A]
   transparent inline def Custom  = stream.Custom
 
-class zStreamDefaults:
+class z_StreamDefaults:
   implicit inline def implicitFromRange       [A](inline v: Range[A])(using Able.Sequence[A])   : ~[A] = v.~
   implicit inline def implicitFromIterable    [A](inline v: java.lang.Iterable[A])              : ~[A] = z.x.Java.Stream_fromIterable(v)
   implicit inline def implicitFromIterator    [A](inline v: java.util.Iterator[A])              : ~[A] = new z.x.Java.Stream_fromIterator(v)

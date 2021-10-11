@@ -18,4 +18,6 @@ ___________________________________________________________________________*/
 
   Short.Opaque is the supertype for all opaques based on Short
 
+  See [sample type definition](https://github.com/scalqa/samples/blob/master/src/example/opaque/all/OpaqueShort.scala).
+
 */

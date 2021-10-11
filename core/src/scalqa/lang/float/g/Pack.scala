@@ -13,7 +13,7 @@ class Pack[A<:Raw] private(_a: Array[Primitive], sz: Int) extends ><[A] with Idx
   @tn("drop_Range")      def drop_<>(from:Int, sz:Int): Pack[A]          = new Pack(ar.drop_<>(from,sz),sz)
   /**/                   def join(v: A)               : Pack[A]          = new Pack(ar.copySize(sz+1).^(_(sz)=v), sz+1)
   /**/                   def joinAt( i: Int, v: A)    : Pack[A]          = new Pack(ar.copySize(sz+1).^(a=>{a.copyTo(a,i+1,i,a.length-i-1);a(i)=v}),sz+1)
-  /**/                   def joinAllAt(i:Int,vs: ~[A]): Pack[A]          = new Pack(Buffer.zzArrayJoinAllAt(ar,i,vs.cast[~[Primitive]],sz))
+  /**/                   def joinAllAt(i:Int,vs: ~[A]): Pack[A]          = new Pack(Buffer.z_ArrayJoinAllAt(ar,i,vs.cast[~[Primitive]],sz))
   /**/                   def joinAll(vs: ~[A])        : Pack[A]          = vs.read_?.map(v => Pack.Buf(ar,sz+1,v,vs).mk) or this
   /**/          override def contains(v: A)           : Boolean          = lang.array.z.contains.float(ar,v,sz)
 
@@ -22,7 +22,7 @@ object Pack:
   /**/            inline def fromArray [A<:Raw](v: Array[Primitive])       : Pack[A] = fromArray(v,v.length)
   /**/                   def fromArray [A<:Raw](v: Array[Primitive],sz:Int): Pack[A] = new Pack(v.copySize(sz),sz)
   /**/                   def fromStream[A<:Raw](v: ~[A])                   : Pack[A] = void[A].joinAll(v)
-  @tn("getVoid")  inline def void      [A<:Raw]                            : Pack[A] = zVoid.cast[Pack[A]]; object zVoid extends Pack(Array.emptyFloat) with Gen.Void
+  @tn("getVoid")  inline def void      [A<:Raw]                            : Pack[A] = z_Void.cast[Pack[A]]; object z_Void extends Pack(Array.emptyFloat) with Gen.Void
 
   implicit        inline def implicitRequest[A<:Raw](v: \/)                : Pack[A] = void[A]
   implicit        inline def implicitFromStream[A<:Raw](inline v: G.~[A])  : Pack[A] = v.><

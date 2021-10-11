@@ -3,8 +3,8 @@ package scalqa; package lang; package any; package `def`; import language.implic
 abstract class TypeName[A] private[scalqa]():
   def typeName: String
 
-object TypeName extends zTypeNameDefault:
-  def apply[A <: Any.Opaque](name: String): TypeName[A] = new zOpaqueTag(name);  private class zOpaqueTag[A](val typeName: String) extends TypeName[A]
+object TypeName extends z_TypeNameDefault:
+  def apply[A <: Any.Opaque](name: String): TypeName[A] = new z_OpaqueTag(name);  private class z_OpaqueTag[A](val typeName: String) extends TypeName[A]
 
   inline given givenBoolean : TypeName[Boolean] = ZZ.BooleanName.cast[TypeName[Boolean]]
   inline given givenByte    : TypeName[Byte]    = ZZ.ByteName   .cast[TypeName[Byte]]
@@ -15,7 +15,7 @@ object TypeName extends zTypeNameDefault:
   inline given givenFloat   : TypeName[Float]   = ZZ.FloatName  .cast[TypeName[Float]]
   inline given givenDouble  : TypeName[Double]  = ZZ.DoubleName .cast[TypeName[Double]]
 
-private[any] abstract class zTypeNameDefault:
+private[any] abstract class z_TypeNameDefault:
   inline given givenAny[A]  : TypeName[A]       = ZZ.RefName.cast[TypeName[A]]
 
 /*___________________________________________________________________________

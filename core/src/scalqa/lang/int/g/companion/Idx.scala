@@ -1,6 +1,6 @@
 package scalqa; package lang; package int; package g; package companion; import language.implicitConversions
 
-class Idx[A<:Raw] extends zPack[A,G.Idx[A]]:
+class Idx[A<:Raw] extends z_Pack[A,G.Idx[A]]:
   type Mutable = G.Idx.Mutable[A];                    val Mutable = new Idx.Mutable[A]
   type M       = G.Idx.Mutable[A]; transparent inline def M       = Mutable
 

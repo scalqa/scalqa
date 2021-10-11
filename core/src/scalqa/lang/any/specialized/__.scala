@@ -13,7 +13,7 @@ class Specialized[A]:
   /**/          type Pro        <: Any.Pro[A]
   /**/          type Set        <: Any.Set[A]
 
-object Specialized extends zSpecializedDefault:
+object Specialized extends z_SpecializedDefault:
   inline given givenBoolean[A<:Any.Boolean ]: X.Boolean[A] = new X.Boolean[A] // Do not optimize "new",
   inline given givenByte   [A<:Any.Byte    ]: X.Byte[A]    = new X.Byte[A]    // when inlined and not used,
   inline given givenChar   [A<:Any.Char    ]: X.Char[A]    = new X.Char[A]    // it disappears.
@@ -29,7 +29,7 @@ object Specialized extends zSpecializedDefault:
   transparent inline def Opt = specialized.Opt;   type Opt[A,OPT<:Any.Opt[A]] = specialized.Opt[A,OPT]
   transparent inline def X  = specialized.X
 
-private[any] class zSpecializedDefault:
+private[any] class z_SpecializedDefault:
   inline given givenAny[A]: X.AnyRef[A] = new X.AnyRef[A]
 
 /*___________________________________________________________________________

@@ -5,7 +5,7 @@ transparent trait _modify:
   extension[THIS_OPAQUE <: Opaque](inline x: THIS_OPAQUE)
     @tn("join")    inline def + (inline v: THIS_OPAQUE|String)                           : THIS_OPAQUE  = (x.cast[String] + v.cast[String]).cast[THIS_OPAQUE]
     @tn("joinOpt") inline def +?[A](inline v: Opt[THIS_OPAQUE|String])
-                                                         (using inline d: Any.Def.Doc[A]): THIS_OPAQUE  = x.^.mapIf(_ => v.nonEmpty, _ + v.toString)
+                                                         (using inline d: Any.Def.Tag[A]): THIS_OPAQUE  = x.^.mapIf(_ => v.nonEmpty, _ + v.toString)
     /**/           inline def padStartTo(inline size:Int, inline pad:String=" ")         : THIS_OPAQUE  = x.cast[String].padStartTo  (size,pad)                          .cast[THIS_OPAQUE]
     /**/           inline def padEndTo  (inline size:Int, inline pad:String=" ")         : THIS_OPAQUE  = x.cast[String].padEndTo    (size,pad)                          .cast[THIS_OPAQUE]
     /**/           inline def label                                                      : THIS_OPAQUE  = x.cast[String].label                                           .cast[THIS_OPAQUE]

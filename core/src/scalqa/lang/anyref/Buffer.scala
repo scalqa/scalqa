@@ -27,13 +27,13 @@ class Buffer[A](arrayToUse: Array[AnyRef], sizeToStartWith: Int) extends Val.Buf
 object Buffer:
   implicit inline def implicitRequest[A](inline v: NEW): Buffer[A] = new Buffer()
 
-  def zzStreamToArray[A](v: ~[A])(using t: ClassTag[A]): Array[A] =
+  def z_StreamToArray[A](v: ~[A])(using t: ClassTag[A]): Array[A] =
     val b = new Buffer[A](new Array[A](v.size_? or J.initSize).cast[Array[AnyRef]],0)
     b.addAll(v)
     b.ar.^.mapIf(_.length!=b.size, _.copySize(b.size)).cast[Array[A]]
 
-  def zzArrayJoinAll [A](x:Array[A],v: ~[A]): Array[A] = new Buffer(x.cast[Array[AnyRef]],x.length).^(_ ++= v).^.map(b => b.ar.^.mapIf(a => a.length!=b.size || (a eq x), _.copySize(b.size))).cast[Array[A]]
-  def zzArrayJoinAllAt(x:Array[AnyRef],i:Int,v: ~[AnyRef],sz:Int): Array[AnyRef] = new Buffer(new Array[AnyRef](v.size_?.map(_ + sz) or i+J.initSize),i).^(_ ++= v).^.map(b => {
+  def z_ArrayJoinAll [A](x:Array[A],v: ~[A]): Array[A] = new Buffer(x.cast[Array[AnyRef]],x.length).^(_ ++= v).^.map(b => b.ar.^.mapIf(a => a.length!=b.size || (a eq x), _.copySize(b.size))).cast[Array[A]]
+  def z_ArrayJoinAllAt(x:Array[AnyRef],i:Int,v: ~[AnyRef],sz:Int): Array[AnyRef] = new Buffer(new Array[AnyRef](v.size_?.map(_ + sz) or i+J.initSize),i).^(_ ++= v).^.map(b => {
       var a=b.ar
       val s=b.size+sz-i
       if(a.length != s) a=a.copySize(s)
