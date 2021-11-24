@@ -2,9 +2,9 @@ package scalqa; package test.`val`.stream._build._filter; import language.implic
 
 object dropLast extends J.Test:
 
-  testEqual_~(
+  testEqualStream(
     1 to 50,
-    (1 <> 100).~.dropLast(50))
+    (1 <> 100).stream.dropLast(50))
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

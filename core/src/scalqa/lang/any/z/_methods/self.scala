@@ -5,16 +5,8 @@ import any._Methods.Self
 transparent trait self:
 
   extension[A](inline x: Self[A])
-    @tn("selfIsVoid")   inline def isVoid   (using inline d:Def.Void[A]) : Boolean     = {val v=x.cast[A]; v==null ||  d.value_isVoid(v) }
-    @tn("selfNonVoid")  inline def nonVoid  (using inline d:Def.Void[A]) : Boolean     = !x.isVoid
-    @tn("nonEmpty_Opt") inline def ?  (using inline o:Opt[Def.Empty[A]])
-                                            (using inline d:Def.Void[A]) : Opt[A]      = z.opt.nonEmpty(x,o,d)
-
-  extension(inline x: Self[String])
-    @tn("nonEmpty_Opt") inline def ?                                     : Opt[String] = x.cast[String].^.map(v => (v != null && v.length > 0) ? v )
-
-  extension[A](inline x: Self[~[A]])
-    @tn("nonEmpty_Opt") inline def ?                                     : Opt[~[A]]   = z.opt.nonEmptyStream(x)
+    @tn("selfIsVoid")  inline def isVoid   (using inline d:Def.Void[A]) : Boolean     = {val v=x.cast[A]; v==null ||  d.value_isVoid(v) }
+    @tn("selfNonVoid") inline def nonVoid  (using inline d:Def.Void[A]) : Boolean     = !x.isVoid
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

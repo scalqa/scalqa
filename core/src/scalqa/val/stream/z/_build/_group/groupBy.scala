@@ -1,7 +1,7 @@
 package scalqa; package `val`; package stream; package z; package _build; package _group; import language.implicitConversions
 
-class groupBy[A](x: ~[A], g: (A,A) => Boolean) extends group[A,Unit](x,g):
-  def this(x: ~[A], f: A => Any, more: Seq[A => Any]) =
+class groupBy[A](x: Stream[A], g: (A,A) => Boolean) extends group[A,Unit](x,g):
+  def this(x: Stream[A], f: A => Any, more: Seq[A => Any]) =
     this(
       x,
       if(more.isEmpty)

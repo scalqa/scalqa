@@ -52,7 +52,7 @@ ___________________________________________________________________________*/
      Index of all [[Day]]s for the month.
 
      ```
-        Month(2018, 1).days.~.range.TP
+        Month(2018, 1).days.stream.range.TP
         // Output
         2018-01-01 <> 2018-01-31
      ```

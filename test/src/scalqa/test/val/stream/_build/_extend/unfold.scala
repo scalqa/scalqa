@@ -2,12 +2,12 @@ package scalqa; package test.`val`.stream._build._extend; import language.implic
 
 object unfold extends J.Test:
 
-  testEqual_~(
-    (0L <> 1L).~.unfold(_.takeLast(2).sum).takeFirst(50), // Fibonacci
+  testEqualStream(
+    (0L <> 1L).stream.unfold(_.takeLast(2).sum).takeFirst(50), // Fibonacci
     {
       var l = scala.List(1L, 0L)
-      (1 <> 48).~.foreach(_ => l = (l.head + l.tail.head) :: l)
-      l.reverse.~
+      (1 <> 48).stream.foreach(_ => l = (l.head + l.tail.head) :: l)
+      l.reverse.stream
     }
   )
 

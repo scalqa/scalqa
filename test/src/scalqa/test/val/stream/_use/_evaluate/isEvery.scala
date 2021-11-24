@@ -2,7 +2,7 @@ package scalqa; package test.`val`.stream._use._evaluate; import language.implic
 
 object isEvery extends J.Test:
 
-  def all = (1 <> 100).~.reverseEvery(25)
+  def all = (1 <> 100).stream.reverseEvery(25)
 
   test{
     assertFalse(all.isEvery(_ > 50))

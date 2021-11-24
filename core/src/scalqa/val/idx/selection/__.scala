@@ -2,15 +2,15 @@ package scalqa; package `val`; package idx; import language.implicitConversions
 
 trait Selection[A] extends Idx[A] with Able.Doc:
   self =>
-  /**/                   def target            : Idx[A]
-  /**/                   def indexes           : Idx[Int]
-  /**/                   def size              : Int       = indexes.size
-  /**/                   def apply(i: Int)     : A         = target(indexes(i))
-  @tn("value_Opt")       def value_?           : Opt[A]    = indexes.head_?.map_?(target.at_?(_))
-  /**/            inline def value             : A         = value_?.get
-  @tn("stream") override def ~                 : ~[A]      = indexes.~.map_?(target.at_?(_))
-  /**/                   def property(dflt: A) : Pro[A]    = new Pro[A] { def apply() = value_? or dflt }
-  /**/                   def doc               : Doc       = Doc(this) += ("indexes", indexes.~.makeString(","))
+  /**/     def target            : Idx[A]
+  /**/     def indexes           : Idx[Int]
+  /**/     def size              : Int       = indexes.size
+  /**/     def apply(i: Int)     : A         = target(indexes(i))
+  /**/     def valueOpt          : Opt[A]    = indexes.headOpt.mapOpt(target.applyOpt(_))
+  inline   def value             : A         = valueOpt.get
+  override def stream            : Stream[A] = indexes.stream.mapOpt(target.applyOpt(_))
+  /**/     def property(dflt: A) : Pro[A]    = new Pro[A] { def apply() = valueOpt or dflt }
+  /**/     def doc               : Doc       = Doc(this) += ("indexes", indexes.stream.makeString(","))
 
 object Selection:
   /**/            def apply[A](targetIndex:Idx[A],idx:Idx[Int]): Selection[A]  = selection.Z.Basic(targetIndex,idx)
@@ -40,7 +40,7 @@ Lists selected values for some target indexed collection
 
        Get selected value at given index
 
-@def value_? -> Optional selected value
+@def valueOpt -> Optional selected value
 
        Returns first selected value or void option, if selection is empty
 

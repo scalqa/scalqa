@@ -8,7 +8,7 @@ object ScalaSignatureProvider:
 
     documentable.origin match // Derived extension methods lose parameters, so we get the original definition
       case v: Origin.ExtensionFrom =>
-        val o: Opt[Kind.Def] = Registry.member_?(v.dri).map_?(_.members.find(_.dri == documentable.dri)).map(_.kind).takeType[Kind.Extension].map(_.m)
+        val o: Opt[Kind.Def] = Registry.memberOpt(v.dri).mapOpt(_.members.find(_.dri == documentable.dri)).map(_.kind).takeType[Kind.Extension].map(_.m)
         if(o) return methodSignature(documentable, o.get, builder)
       case _                       => ()
 

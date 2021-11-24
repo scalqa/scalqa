@@ -18,9 +18,9 @@ object opt:
     val v = x.cast[A]
     if(v == null || d.value_isVoid(v) || o.take(_.value_isEmpty(v))) \/ else v.cast[Opt[A]]
 
-  def nonEmptyStream[A](x: Any): Opt[~[A]] =
-    val s = x.cast[~[A]]
-    s.sizeLong_?.take(_ > 0).map(_ => s) or_? s.enablePreview.^.map(p => p.preview_?.map[~[A]](_ => p))
+  def nonEmptyStream[A](x: Any): Opt[Stream[A]] =
+    val s = x.cast[Stream[A]]
+    s.sizeLongOpt.take(_ > 0).map(_ => s) orOpt s.enablePreview.self.map(p => p.previewOpt.map[Stream[A]](_ => p))
 
   // *************************************************************************************************
   class NameDef[A]()(using t :Any.Def.TypeName[A]) extends Def.TypeName[A]:
@@ -31,25 +31,25 @@ object opt:
 
     extension[A](x: Any.Opt[A])
       inline def SOME: Boolean = inline x match
-        case _: boolean.G.Opt[A] => x.cast[boolean.G.Opt[A & Any.Boolean]].nonEmpty
-        case _: byte   .G.Opt[A] => x.cast[byte   .G.Opt[A & Any.Byte   ]].nonEmpty
-        case _: char   .G.Opt[A] => x.cast[char   .G.Opt[A & Any.Char   ]].nonEmpty
-        case _: short  .G.Opt[A] => x.cast[short  .G.Opt[A & Any.Short  ]].nonEmpty
-        case _: int    .G.Opt[A] => x.cast[int    .G.Opt[A & Any.Int    ]].nonEmpty
-        case _: long   .G.Opt[A] => x.cast[long   .G.Opt[A & Any.Long   ]].nonEmpty
-        case _: float  .G.Opt[A] => x.cast[float  .G.Opt[A & Any.Float  ]].nonEmpty
-        case _: double .G.Opt[A] => x.cast[double .G.Opt[A & Any.Double ]].nonEmpty
-        case _: Val.Opt[A]       => x.cast[Val.Opt[A]].nonEmpty
+        case _ : boolean.G.Opt[A] => x.cast[boolean.G.Opt[A & Any.Boolean]].nonEmpty
+        case _ : byte   .G.Opt[A] => x.cast[byte   .G.Opt[A & Any.Byte   ]].nonEmpty
+        case _ : char   .G.Opt[A] => x.cast[char   .G.Opt[A & Any.Char   ]].nonEmpty
+        case _ : short  .G.Opt[A] => x.cast[short  .G.Opt[A & Any.Short  ]].nonEmpty
+        case _ : int    .G.Opt[A] => x.cast[int    .G.Opt[A & Any.Int    ]].nonEmpty
+        case _ : long   .G.Opt[A] => x.cast[long   .G.Opt[A & Any.Long   ]].nonEmpty
+        case _ : float  .G.Opt[A] => x.cast[float  .G.Opt[A & Any.Float  ]].nonEmpty
+        case _ : double .G.Opt[A] => x.cast[double .G.Opt[A & Any.Double ]].nonEmpty
+        case _ : Val.Opt[A]       => x.cast[Val.Opt[A]].nonEmpty
 
       inline def VAL: A = inline x match
-        case _: boolean.G.Opt[A] => x.cast[boolean.G.Opt[A & Any.Boolean]].`val`
-        case _: byte   .G.Opt[A] => x.cast[byte   .G.Opt[A & Any.Byte   ]].`val`
-        case _: char   .G.Opt[A] => x.cast[char   .G.Opt[A & Any.Char   ]].`val`
-        case _: short  .G.Opt[A] => x.cast[short  .G.Opt[A & Any.Short  ]].`val`
-        case _: int    .G.Opt[A] => x.cast[int    .G.Opt[A & Any.Int    ]].`val`
-        case _: long   .G.Opt[A] => x.cast[long   .G.Opt[A & Any.Long   ]].`val`
-        case _: float  .G.Opt[A] => x.cast[float  .G.Opt[A & Any.Float  ]].`val`
-        case _: double .G.Opt[A] => x.cast[double .G.Opt[A & Any.Double ]].`val`
+        case _ : boolean.G.Opt[A] => x.cast[boolean.G.Opt[A & Any.Boolean]].`val`
+        case _ : byte   .G.Opt[A] => x.cast[byte   .G.Opt[A & Any.Byte   ]].`val`
+        case _ : char   .G.Opt[A] => x.cast[char   .G.Opt[A & Any.Char   ]].`val`
+        case _ : short  .G.Opt[A] => x.cast[short  .G.Opt[A & Any.Short  ]].`val`
+        case _ : int    .G.Opt[A] => x.cast[int    .G.Opt[A & Any.Int    ]].`val`
+        case _ : long   .G.Opt[A] => x.cast[long   .G.Opt[A & Any.Long   ]].`val`
+        case _ : float  .G.Opt[A] => x.cast[float  .G.Opt[A & Any.Float  ]].`val`
+        case _ : double .G.Opt[A] => x.cast[double .G.Opt[A & Any.Double ]].`val`
         case v:       Val.Opt[A] => x.cast[      Val.Opt[A              ]].`val`
 
 /*___________________________________________________________________________

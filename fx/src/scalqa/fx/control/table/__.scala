@@ -8,29 +8,29 @@ abstract class Table[ROW] extends Control with _properties[ROW] with _Column[ROW
   private[fx]    val columnData : Idx.M[Table.Column[ROW,_,_]] & Able.Seal = Idx.M.sealable()
   private[fx]    val rowData    : z.RowData[ROW]                           = new z.RowData[ROW](this)
   // ----------------------------------------------------------------------------------------------------------------------------------------
-  def columns                      : Idx[Table.Column[ROW,_,_]] = columnData
-  def rows                         : Idx.OM[ROW]                = rowData
-  lazy val selection               : Fx.Selection[ROW]          = Fx.Selection[ROW](rows, real.getSelectionModel)
-  def sortOrder                    : ><[Column[_]]              = real.getSortOrder.~.map(_.getUserData.cast[Column[_]]).><
-  def sortOrder_=(a: ~[Column[_]]) : Unit                       = real.getSortOrder.setAll(a.map(_.real).toJavaList)
-  def scrollTo(i: Int)             : Unit                       = real.scrollTo(i)
+  def columns                         : Idx[Table.Column[ROW,_,_]] = columnData
+  def rows                            : Idx.OM[ROW]                = rowData
+  lazy val selection                  : Fx.Selection[ROW]          = Fx.Selection[ROW](rows, real.getSelectionModel)
+  def sortOrder                       : Pack[Column[_]]            = real.getSortOrder.valStream.map(_.getUserData.cast[Column[_]]).pack
+  def sortOrder_=(a:Stream[Column[_]]): Unit                       = real.getSortOrder.setAll(a.map(_.real).toJavaList)
+  def scrollTo(i: Int)                : Unit                       = real.scrollTo(i)
 
   ({
-    _createRealOverride(new REAL().^(r => { r.setEditable(true); r.setItems(Fx.JavaFx.list(rowData))}))
+    _createRealOverride(new REAL().self(r => { r.setEditable(true); r.setItems(Fx.JavaFx.list(rowData))}))
     _onRealCreated(real => {
-      columnData.seal.~.foreach(c => { real.getColumns.add(c.real); c.sortable = c.ordering.nonVoid && sortMode.nonVoid})
+      columnData.seal.stream.foreach(c => { real.getColumns.add(c.real); c.sortable = c.ordering.nonVoid && sortMode.nonVoid})
       onCreateRowCell(new RowCell[ROW, VIEW](this))
       z.SortEventHandler(this)
     })
   })
 
-  /**/                 private[fx] def mkViewOpt[VIEW](v: ROW)     : Opt[VIEW] = viewOptFun(v).cast[Opt[VIEW]]; private var viewOptFun: ROW => Opt[VIEW] = v => if(v == null) \/ else v.cast[VIEW]
-  @tn("view_Setup")    protected   def view_: (f: ROW => VIEW)     : Unit      = view_:?(f(_))
-  @tn("view_SetupOpt") protected   def view_:?(f: ROW => Opt[VIEW]): Unit      = viewOptFun = f
+  private[fx] def mkViewOpt[VIEW](v: ROW)       : Opt[VIEW] = viewOptFun(v).cast[Opt[VIEW]]; private var viewOptFun: ROW => Opt[VIEW] = v => if(v == null) \/ else v.cast[VIEW]
+  protected   def useView (f: ROW => VIEW)       : Unit      = useViewOpt(f(_))
+  protected   def useViewOpt(f: ROW => Opt[VIEW]): Unit      = viewOptFun = f
 
-  // This will move to _properties when dotty issue 13358 is fixed
-  @tn("ordering_Pro")   @fast lazy val ordering_*    : Pro.OM[Ordering[ROW]]          = Pro.OM.X.Basic[Ordering[ROW]](\/)
-  @tn("sortingBase_Pro")@fast lazy val sortingBase_* : Pro.OM[Ordering[ROW]]          = Pro.OM.X.Basic[Ordering[ROW]](\/)
+  //??? This will move to _properties when dotty issue 13358 is fixed
+  @fast lazy val orderingPro   : Pro.OM[Ordering[ROW]]          = Pro.OM.X.Basic[Ordering[ROW]](\/)
+  @fast lazy val sortingBasePro: Pro.OM[Ordering[ROW]]          = Pro.OM.X.Basic[Ordering[ROW]](\/)
 
 object Table:
   private[fx] type Column[ROW,V,A] = table.Column[ROW,V,A]

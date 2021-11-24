@@ -74,9 +74,9 @@ ___________________________________________________________________________*/
 
        Returns new [[File]]
        ```
-         val p: J.Path = ~~("C:", "Temp", "Test.txt")
+         val p: J.Path = Stream("C:", "Temp", "Test.txt")
 
-         val f1: J.File = p.fileMake.^(_.writeString("Foo"))
+         val f1: J.File = p.fileMake.self(_.writeString("Foo"))
 
          val f2: J.File = f1.copy(p.parent + "Test2.txt")
 
@@ -158,7 +158,7 @@ ___________________________________________________________________________*/
        ```
          val p = J.Path("C:", "Temp", "Test.txt")
 
-         val f1: J.File = p.fileMake.^(_.writeString("Foo"))
+         val f1: J.File = p.fileMake.self(_.writeString("Foo"))
 
          val f2: J.File = f1.move(p.parent + "Test2.txt")
 
@@ -172,7 +172,7 @@ ___________________________________________________________________________*/
 
        Creates new temporary file with `this` file as base
 
-       if App._^.TempPath_? is available, this will be the directory, otherwise `this` file directory will be used
+       if App.View.TempPathOpt is available, this will be the directory, otherwise `this` file directory will be used
 
        Temporary file name will be `this.name' plus '.temp' or '.temp1' or '.temp2' or '.temp3' or etc. if exists
        ```

@@ -3,9 +3,9 @@ package scalqa; package j; package io; package input; import language.implicitCo
 object Z:
 
   // ***************************************************************
-  class CharStream(r: java.io.Reader) extends Char.~ :
+  class CharStream(r: java.io.Reader) extends Char.Stream :
 
-    @tn("readRaw_Opt") def readRaw_? =
+    def readRawOpt =
       var o: Char.Opt = \/
       val v = r.read
       if(v >= 0) o = v.toChar

@@ -2,22 +2,22 @@ package scalqa; package test.`val`.buffer; import language.implicitConversions
 
 object add extends J.Test:
 
-  def stream                : ~[Int]      = 1 <> 10
-  def buffer(initSize: Int) : Buffer[Int] = Buffer[Int](initSize).^(_ ++= stream)
+  def stream                : Stream[Int]      = 1 <> 10
+  def buffer(initSize: Int) : Buffer[Int] = Buffer[Int](initSize).self(_ ++= stream)
 
-  testEqual_~("1")(
+  testEqualStream("1")(
     buffer(25) ++@= (8, 20 <> 24),
     stream     ++@  (8, 20 <> 24))
 
-  testEqual_~("2")(
+  testEqualStream("2")(
     buffer(15) ++@= (8, 20 <> 24),
     stream     ++@  (8, 20 <> 24))
 
-  testEqual_~("3")(
+  testEqualStream("3")(
     buffer(25) ++@= (2, 20 <> 24),
     stream     ++@  (2, 20 <> 24))
 
-  testEqual_~("4")(
+  testEqualStream("4")(
     buffer(15) ++@= (2, 20 <> 24),
     stream     ++@  (2, 20 <> 24))
 

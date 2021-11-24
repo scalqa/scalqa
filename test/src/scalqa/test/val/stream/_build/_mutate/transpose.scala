@@ -2,9 +2,9 @@ package scalqa; package test.`val`.stream._build._mutate; import language.implic
 
 object transpose extends J.Test:
 
-  testEqual_~(
-    ~~(~~(1, 2, 3), ~~(4, 5, 6), ~~(7, 8, 9)).transpose.flatten,
-    ~~(~~(1, 4, 7), ~~(2, 5, 8), ~~(3, 6, 9)).flatten)
+  testEqualStream(
+    Stream(Stream(1, 2, 3), Stream(4, 5, 6), Stream(7, 8, 9)).transpose.flatten,
+    Stream(Stream(1, 4, 7), Stream(2, 5, 8), Stream(3, 6, 9)).flatten)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

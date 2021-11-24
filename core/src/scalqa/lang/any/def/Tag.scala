@@ -59,8 +59,4 @@ ___________________________________________________________________________*/
 
       Returns String tag describing provided value
 
-@def value_doc -> Instance Tag
-
-      Returns Tag describing provided value
-
 */

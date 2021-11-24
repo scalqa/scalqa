@@ -4,17 +4,17 @@ class HorizontalBox extends Pane:
   protected type REAL = javafx.scene.layout.HBox
   protected override def _createReal = new REAL
 
-  @tn("spacing_Pro")   def spacing_*            : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.spacingProperty)
-  /**/                 def spacing              : Double         = real.getSpacing
-  /**/                 def spacing_=(b: Double) : Unit           = real.setSpacing(b)
-  @tn("alignment_Pro") def alignment_*          : Pro.OM[Pos]    = Fx.JavaFx.To.pro_OM(real.alignmentProperty).mutableMap_^[Pos]
-  /**/                 def alignment            : Pos            = real.getAlignment
-  /**/                 def alignment_=(v: Pos)  : Unit           = real.setAlignment(v)
+  def spacingPro           : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.spacingProperty)
+  def spacing              : Double         = real.getSpacing
+  def spacing_=(b: Double) : Unit           = real.setSpacing(b)
+  def alignmentPro         : Pro.OM[Pos]    = Fx.JavaFx.To.pro_OM(real.alignmentProperty).mutableMapView[Pos]
+  def alignment            : Pos            = real.getAlignment
+  def alignment_=(v: Pos)  : Unit           = real.setAlignment(v)
 
 object HorizontalBox:
-  def apply(a: ~[Fx.Node.Like]) : HorizontalBox = new HorizontalBox().^(_.children ++= a)
-  def apply(a: Fx.Node.Like*)   : HorizontalBox = new HorizontalBox().^(_.children ++= a)
-  def apply(spacing: Double)    : HorizontalBox = new HorizontalBox().^(_.spacing = spacing)
+  def apply(a: Stream[Fx.Node.Like]): HorizontalBox = new HorizontalBox().self(_.children ++= a)
+  def apply(a: Fx.Node.Like*)       : HorizontalBox = new HorizontalBox().self(_.children ++= a)
+  def apply(spacing: Double)        : HorizontalBox = new HorizontalBox().self(_.spacing = spacing)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

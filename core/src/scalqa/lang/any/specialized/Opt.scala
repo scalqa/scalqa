@@ -3,7 +3,7 @@ package scalqa; package lang; package any; package specialized; import language.
 abstract class Opt[A,OPT<:Any.Opt[A]]:
   inline def apply[B](inline v: B, inline f:B=>OPT): Any.Opt[A]
 
-object Opt extends z_OptDefault:
+object Opt extends zOptDefault:
   inline given givenBooleanOpt   [A<:Any.Boolean ]: X.BooleanRaw[A] = new X.BooleanRaw[A]
   inline given givenByteOpt      [A<:Any.Byte    ]: X.ByteRaw[A]    = new X.ByteRaw[A]
   inline given givenCharOpt      [A<:Any.Char    ]: X.CharRaw[A]    = new X.CharRaw[A]
@@ -43,7 +43,7 @@ object Opt extends z_OptDefault:
     class DoubleRef [A<:Any.Double  ] extends Opt[A,Val.Opt[A]      ]{ inline def apply[B](inline v:B, inline f:B=>Val.Opt[A]      ): Double .G.Opt[A] = f(v).raw }
     class AnyRef    [A              ] extends Opt[A,Val.Opt[A]      ]{ inline def apply[B](inline v:B, inline f:B=>Val.Opt[A]      ): Val.Opt[A]       = f(v) }
 
-private[any] class z_OptDefault:
+private[any] class zOptDefault:
   inline given givenValOpt[A]: Opt.X.AnyRef[A] = new Opt.X.AnyRef[A]
 
 /*___________________________________________________________________________

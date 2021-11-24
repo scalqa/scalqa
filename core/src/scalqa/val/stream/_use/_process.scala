@@ -2,7 +2,7 @@ package scalqa; package `val`; package stream; package _use; import language.imp
 
 transparent trait _process:
 
-  extension[A](inline x: ~[A])
+  extension[A](inline x: Stream[A])
     inline def drain                                                        : Unit   = z._use.process.drain(x)
     inline def fornil[U](inline f:  =>U)                                    : Unit   = z._use.process.fornil(x,f)
     inline def process[U,W](inline foreachFun: A=>U, inline fornilFun: => W): Unit   = z._use.process(x,foreachFun,fornilFun)
@@ -26,7 +26,7 @@ ___________________________________________________________________________*/
             This operation can be usefull for side effects built into streaming pipeline
 
             ```
-              ('A' <> 'C').~.peek(_.TP).drain
+              ('A' <> 'C').stream.peek(_.TP).drain
 
               // Output
               A
@@ -39,7 +39,7 @@ ___________________________________________________________________________*/
             Applies given function to each stream element
 
             ```
-              ('A' <> 'C').~.foreach(_.TP)
+              ('A' <> 'C').stream.foreach(_.TP)
 
               // Output
               A
@@ -58,7 +58,7 @@ ___________________________________________________________________________*/
             Calls given function with counter
 
             ```
-              ('A' <> 'C').~.foreachIndexed((i,v) => "Element " + i + " = " + v TP(), 1)
+              ('A' <> 'C').stream.foreachIndexed((i,v) => "Element " + i + " = " + v TP(), 1)
 
               // Output
               Element 1 = A
@@ -81,7 +81,7 @@ ___________________________________________________________________________*/
             Applies given function to each stream element or runs second function when stream is empty
 
              ```
-              ('A' <>> 'A').~.process(_.TP, "Empty".TP)
+              ('A' <>> 'A').stream.process(_.TP, "Empty".TP)
 
               // Output
               Empty

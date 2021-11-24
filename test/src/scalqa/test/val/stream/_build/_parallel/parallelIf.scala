@@ -3,8 +3,8 @@ package scalqa; package test.`val`.stream._build._parallel; import language.impl
 object parallelIf extends J.Test:
 
   test{
-    assertTrue((1 <> 100).~.parallelIf(true).peek(_ => J.sleep(1.Millis)).countAndTime._2 < 100.Millis)
-    assertTrue((1 <> 100).~.parallelIf(false).peek(_ => J.sleep(1.Millis)).countAndTime._2 >= 100.Millis)
+    assertTrue((1 <> 100).stream.parallelIf(true).peek(_ => J.sleep(1.Millis)).countAndTime._2 < 100.Millis)
+    assertTrue((1 <> 100).stream.parallelIf(false).peek(_ => J.sleep(1.Millis)).countAndTime._2 >= 100.Millis)
   }
 
 /*___________________________________________________________________________

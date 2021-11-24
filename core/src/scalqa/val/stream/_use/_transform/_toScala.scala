@@ -4,7 +4,7 @@ import z._use.{ _transform as _Z, transform as Z }
 
 transparent trait _toScala:
 
-  extension[A] (inline x: ~[A])
+  extension[A](inline x: Stream[A])
     inline def iterator                                                     : Iterator[A]   = _Z.toScala.Iterator(x)
     inline def toList                                                       : List[A]       = _Z.toScala.List(x)
     inline def toVector                                                     : Vector[A]     = _Z.toScala.Vector(x)
@@ -13,7 +13,7 @@ transparent trait _toScala:
     inline def toProduct                                                    : Product       = _Z.toScala.Product(x)
     inline def toArray (using inline t:ClassTag[A],inline A:Specialized[A]) : A.Array
 
-  extension[KEY,VALUE](inline x: ~[(KEY,VALUE)])
+  extension[KEY,VALUE](inline x: Stream[(KEY,VALUE)])
     inline def toMap                                                        : Map[KEY,VALUE]= scala.collection.immutable.Map.from(x.iterator)
 
 /*___________________________________________________________________________
@@ -59,7 +59,7 @@ ___________________________________________________________________________*/
         Returns stream elements as Array
 
         ```
-          val a : Array[Int] =  (1 <> 10).~.toArray
+          val a : Array[Int] =  (1 <> 10).stream.toArray
         ```
 
 */

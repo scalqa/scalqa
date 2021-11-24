@@ -1,15 +1,15 @@
 package scalqa; package `val`; package stream; package z; package _build; import language.implicitConversions
 
-class peek[A,U](x: ~[A], f: A => U) extends z.x.Pipe.Sized[A](x):
-  @tn("read_Opt") def read_? = x.read_?.forval(f)
+class peek[A,U](x: Stream[A], f: A => U) extends z.x.Pipe.Sized[A](x):
+  def readOpt = x.readOpt.forval(f)
 
 object peek:
 
-  def start [A,U](x: ~[A], f: Time=>U)              : ~[A]  = events(x,_.onBeforeFirst(f))
-  def end   [A,U](x: ~[A], f: (Int,Time.Length)=>U) : ~[A]  = events(x,_.onAfterLast(f))
-  def empty [A,U](x: ~[A], f: => U)                 : ~[A]  = events(x,_.onEmpty(() => f))
-  def events[A,U](x: ~[A], f: Custom.Event => U)    : ~[A]  = new _peek.monitor(x, new Custom.Event().^(f(_)))
-  def monitor[A] (x: ~[A], v: Custom.Event.Monitor) : ~[A]  = if (v.^.isVoid) x else new _peek.monitor(x, v)
+  def start [A,U](x: Stream[A], f: Time=>U)              : Stream[A]  = events(x,_.onBeforeFirst(f))
+  def end   [A,U](x: Stream[A], f: (Int,Time.Length)=>U) : Stream[A]  = events(x,_.onAfterLast(f))
+  def empty [A,U](x: Stream[A], f: => U)                 : Stream[A]  = events(x,_.onEmpty(() => f))
+  def events[A,U](x: Stream[A], f: Custom.Event => U)    : Stream[A]  = new _peek.monitor(x, new Custom.Event().self(f(_)))
+  def monitor[A] (x: Stream[A], v: Custom.Event.Monitor) : Stream[A]  = if (v.self.isVoid) x else new _peek.monitor(x, v)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -5,8 +5,8 @@ object X:
   abstract class Abstract[A] extends Observable[A]
 
   trait Base[A] extends Observable[A] with Gen.Event.Store.Provider:
-    /**/      def onChange[U](l: ><[Event[A]] => U) : Gen.Event.Control = eventStore.onEvent1(EventId,l)
-    protected def fireChange(v:  ><[Event[A]])      : Unit              = if (!v.isEmpty) eventStore.fireEvent1(EventId,v)
+    /**/      def onChange[U](l: Pack[Event[A]] => U) : Gen.Event.Control = eventStore.onEvent1(EventId,l)
+    protected def fireChange(v:  Pack[Event[A]])      : Unit              = if (!v.isEmpty) eventStore.fireEvent1(EventId,v)
 
   private object EventId
 

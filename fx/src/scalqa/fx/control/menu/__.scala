@@ -7,15 +7,15 @@ class Menu extends Menu.Item with Able.Add[base.Action]:
   protected type REAL <: FxMenu
   protected override def _createReal: REAL = new FxMenu().cast[REAL]
 
-  lazy val items               : Idx.M[Menu.Item] = Idx.M.wrap(real.getItems).mutableMap_^[Menu.Item]
+  lazy val items               : Idx.M[Menu.Item] = Idx.M.wrap(real.getItems).mutableMapView[Menu.Item]
   /**/ def add(a: base.Action) : Unit             = items += Menu.Item(a)
 
 
 object Menu:
-  def apply()                                           : Menu = new Menu()
-  def apply(text: String, enabled: Boolean = true)      : Menu = new Menu(text, enabled)
-  def apply(text: String, n: Fx.Node.Like)              : Menu = this(text).^(_.graphic_*() = n)
-  def apply(text: String, n: Fx.Node.Like, its: ~[Item]): Menu = this(text, n).^(_.items ++= its)
+  def apply()                                                : Menu = new Menu()
+  def apply(text: String, enabled: Boolean = true)           : Menu = new Menu(text, enabled)
+  def apply(text: String, n: Fx.Node.Like)                   : Menu = this(text).self(_.graphicPro() = n)
+  def apply(text: String, n: Fx.Node.Like, its: Stream[Item]): Menu = this(text, n).self(_.items ++= its)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Item   = menu.Item;     transparent inline def Item   = menu.Item

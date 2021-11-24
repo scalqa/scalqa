@@ -3,7 +3,7 @@ package scalqa; package test.`val`.stream._use._aggregate; import language.impli
 object foldAs extends J.Test:
 
   testTrue{
-    (1 to 100).foldLeft(0D)(_ + _) == (1 <> 100).~.foldAs(0D)(_ + _)
+    (1 to 100).foldLeft(0D)(_ + _) == (1 <> 100).stream.foldAs(0D)(_ + _)
   }
 
 /*___________________________________________________________________________

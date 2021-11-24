@@ -1,12 +1,12 @@
 package scalqa; package `val`; package stream; package z; package _build; package _filter; import scala.language.implicitConversions
 
-class dropVoid[A :Any.Def.Void](x: ~[A]) extends z.x.Pipe[A](x):
+class dropVoid[A :Any.Def.Void](x: Stream[A]) extends z.x.Pipe[A](x):
 
-  @tn("read_Opt") def read_? =
-    var o = x.read_?
+  def readOpt =
+    var o = x.readOpt
     while (o)
-      if(o.cast[A].^.nonVoid) return o
-      o = x.read_?
+      if(o.cast[A].self.nonVoid) return o
+      o = x.readOpt
     \/
 
 /*___________________________________________________________________________

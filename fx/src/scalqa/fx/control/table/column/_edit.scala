@@ -5,8 +5,8 @@ transparent trait _edit[ROW,V,A]:
   private[table] var editEnabledFun : ROW => Boolean   = \/
   private[table] var editCommitFun  : (ROW, A) => Unit = \/
 
-  @tn("edit_Setup") def edit_:(e: => Editor, commit: (ROW, A) => Unit, enabled: ROW => Boolean = \/): Unit = {
-    createCell_:(e)
+  def useEditor(e: => Editor, commit: (ROW, A) => Unit, enabled: ROW => Boolean = \/): Unit = {
+    useCell(e)
     editEnabledFun = enabled
     editCommitFun = commit
   }
@@ -16,7 +16,7 @@ transparent trait _edit[ROW,V,A]:
   class CheckBox extends Cell.X.CheckBox[ROW,V,A](self) with Editor
 
   class ComboBox extends Cell.X.ComboBox[ROW,V,A](self) with Editor:
-    def this(initItems: ~[A]) = { this(); items ++= initItems }
+    def this(initItems: Stream[A]) = { this(); items ++= initItems }
 
   class TextField(parser: String => Result[A]) extends Cell.X.TextField[ROW,V,A](self, parser) with Editor
 

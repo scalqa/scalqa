@@ -4,9 +4,9 @@ transparent trait _methods:
 
   extension(inline x:Byte)
     @tn("Opt")        inline def ?                        : Byte.Opt       = x.cast[Byte.Opt]
-    @tn("range")      inline def <> (inline to: Byte)     : Byte.<>        = {val w=x; w <>= to-w+1 }
-    @tn("rangeX")     inline def <>>(inline to: Byte)     : Byte.<>        = {val w=x; w <>= to-w   }
-    @tn("rangeOfSize")inline def <>=(inline size: Int)    : Byte.<>        = new Byte.<>(x,size)
+    @tn("range")      inline def <> (inline to: Byte)     : Byte.Range     = {val w=x; w <>= to-w+1 }
+    @tn("rangeX")     inline def <>>(inline to: Byte)     : Byte.Range     = {val w=x; w <>= to-w   }
+    @tn("rangeOfSize")inline def <>=(inline size: Int)    : Byte.Range     = new Byte.Range(x,size)
     /**/        infix inline def max(inline v: Byte)      : Byte           = {val y=x; val w=v; if(y.real > w.real) y else w }
     /**/        infix inline def min(inline v: Byte)      : Byte           = {val y=x; val w=v; if(y.real < w.real) y else w }
     /**/              inline def roundTo(inline unit:Int)
@@ -39,7 +39,7 @@ ___________________________________________________________________________*/
 
 @def <> ->  Range
 
-    Returns Byte.<> from current to given value
+    Returns Byte.Range from current to given value
     ```
       (1.Byte <> 10.Byte).TP  // Prints  1 <> 10
     ```
@@ -47,7 +47,7 @@ ___________________________________________________________________________*/
 
 @def <>> ->  Exclusive end range
 
-    Returns Byte.<> from current to given value exclusive
+    Returns Byte.Range from current to given value exclusive
     ```
       (1.Byte <>> 10.Byte).TP  // Prints  1 <> 9
     ```

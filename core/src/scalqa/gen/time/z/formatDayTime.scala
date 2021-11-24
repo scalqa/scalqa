@@ -2,7 +2,7 @@ package scalqa; package gen; package time; package z; import language.implicitCo
 
 private[time] object formatDayTime:
 
-  def apply(t: DayTime, fullSize: Boolean, separator: Char = ':'): String = String.Builder(25).^(b =>{
+  def apply(t: DayTime, fullSize: Boolean, separator: Char = ':'): String = String.Builder(25).self(b =>{
     b += Z.pad(t.hours,2) += separator += Z.pad(t.minutes,2) += separator += Z.pad(t.seconds,2)
     val ms = t.millis
     if (fullSize && ms > 0) b += '.' += Z.pad(ms,3)

@@ -1,10 +1,10 @@
 package scalqa; package `val`; package stream; package z; package _build; package _filter; import language.implicitConversions
 
-class takeEvery[A](x: ~[A], n: Int) extends z.x.Pipe[A](x) with Able.Size.Opt.Long:
+class takeEvery[A](x: Stream[A], n: Int) extends z.x.Pipe[A](x) with Able.Size.Opt.Long:
   private var i = 0
-  @tn("read_Opt")     def read_?     = {var o = x.read_?; i += 1; while(o && i % n != 0){ i+=1; o = x.read_?}; o}
-  @tn("sizeLong_Opt") def sizeLong_? = x.sizeLong_?.map(_ / n )
-  override            def doc        = super.doc += ("every",n)
+  /**/     def readOpt     = {var o = x.readOpt; i += 1; while(o && i % n != 0){ i+=1; o = x.readOpt}; o}
+  /**/     def sizeLongOpt = x.sizeLongOpt.map(_ / n )
+  override def doc         = super.doc += ("every",n)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -7,14 +7,14 @@ object Text extends AnyRef.Opaque.Base[Text, REAL]("Io.Input.Text"):
   inline def apply(inline v: Io.Input): Text = new java.io.InputStreamReader(v.real).toOpaque
 
   extension(inline x: Text)
-    inline def read                                    : Int                         = x.real.read
-    inline def read(size: Int)                         : String                      = Z.readString(x,size)
-    inline def read(inline ca: Array[Char])            : Int                         = x.real.read(ca)
-    inline def read(inline ca: Array[Char], i: Int.<>) : Int                         = x.real.read(ca, i.start, i.size)
-    inline def readAll                                 : String                      = read(MAX)
-    inline def readAllAndClose                         : String                      = { val v = x.readAll; x.close; v }
-    inline def separated_~(separator: Char => Boolean) : ~[Char.Idx & CharSequence]  = new z.SeparatedTextStream(x, separator)
-    inline def ~                                       : Char.~                      = new Z.CharStream(x.real)
+    inline def read                                      : Int                             = x.real.read
+    inline def read(size: Int)                           : String                          = Z.readString(x,size)
+    inline def read(inline ca: Array[Char])              : Int                             = x.real.read(ca)
+    inline def read(inline ca: Array[Char], i: Int.Range): Int                             = x.real.read(ca, i.start, i.size)
+    inline def readAll                                   : String                          = read(MAX)
+    inline def readAllAndClose                           : String                          = { val v = x.readAll; x.close; v }
+    inline def separatedStream(separator: Char => Boolean)   : Stream[Char.Idx & CharSequence] = new z.SeparatedTextStream(x, separator)
+    inline def stream                                         : Char.Stream                     = new Z.CharStream(x.real)
 
   object TYPE:
     opaque type DEF <: java.io.Closeable & AnyRef.Opaque = REAL & AnyRef.Opaque

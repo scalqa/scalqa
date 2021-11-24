@@ -32,12 +32,12 @@ object Menu:
         val attrs = if (isSelected) Seq(cls := "selected expanded") else Nil
         var dri = if(isSelected && id==module.main.id) module.dri2 else module.dri
         var str : String = l.pathToPage(link.dri, dri).replace("$$TYPE$","")
-        Seq(a(href := str, attrs)(module.name.^.mapIf(_ == "scalqa", _ => "API").^.mapIf(_.startsWith("_"), v => v.takeFirst(2).lower + v.dropFirst(2))))
+        Seq(a(href := str, attrs)(module.name.self.mapIf(_ == "scalqa", _ => "API").self.mapIf(_.startsWith("_"), v => v.takeFirst(2).lower + v.dropFirst(2))))
 
-      module.children.^.map(l =>
+      module.children.self.map(l =>
         if(l.isEmpty) (isSelected -> div(linkHtml()))
         else
-          val nested   = l.~.map(renderApi).toList
+          val nested   = l.stream.map(renderApi).toList
           val expanded = nested.exists(_._1) || module.dri == link.dri
           val attr = if expanded || isSelected then Seq(cls := "expanded") else Nil
           (isSelected || expanded) -> div(attr)( linkHtml(expanded), span(cls := "ar"), nested.map(_._2) )

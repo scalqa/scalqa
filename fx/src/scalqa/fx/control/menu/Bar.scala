@@ -5,8 +5,8 @@ class Bar extends Control:
   protected override def _createReal = new REAL
 
 object Bar:
-  def apply()           : Bar = Bar()
-  def apply(s: ~[Menu]) : Bar = Bar().^(b => s.foreach(m => b.real.getMenus.add(m.real)))
+  def apply()               : Bar = Bar()
+  def apply(s: Stream[Menu]): Bar = Bar().self(b => s.foreach(m => b.real.getMenus.add(m.real)))
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

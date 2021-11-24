@@ -13,7 +13,7 @@ private[j] class Result(
   ) extends Able.Doc:
 
   def +(that: Result): Result     = new Result(number, label, count + that.count, time + that.time, totalMemory + that.totalMemory, that.lastOpt, sumOpt.mix(that.sumOpt, _ + _))
-  def opsPerSec      : Long       = time.^.?.map(count * 1_000_000_000L / _.nanosTotal) or 0L
+  def opsPerSec      : Long       = time.??.map(count * 1_000_000_000L / _.nanosTotal) or 0L
   def memoryAverage  : ByteCount  = if (count == 0) \/ else totalMemory / count
 
   def doc =
@@ -25,7 +25,7 @@ private[j] class Result(
       +=  ("%",        percent(opsPerSec, maxOpsPerSec))
       +=  ("Memory",   memoryAverage.tagBrief)
       +=  ("%",        percent(memoryAverage.toLong, maxMemoryAverage.toLong))
-      ++= ( sumOpt.drop(_ => count == 0).map(v => ("Avg Value",(v / count).tag)) or_? lastOpt.map(v => ("Last Value" , v.tag)))
+      ++= ( sumOpt.drop(_ => count == 0).map(v => ("Avg Value",(v / count).tag)) orOpt lastOpt.map(v => ("Last Value" , v.tag)))
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API

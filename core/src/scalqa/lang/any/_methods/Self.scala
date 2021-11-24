@@ -5,7 +5,7 @@ import _Methods.Self
 object Self:
   extension[A](x: Self[A])
     /**/                      def typeName            (using d: Def.TypeName[A]) : String   = if(d.isInstanceOf[`def`.z.ReferenceNameDef[_]]) Z.refName(x) else d.typeName
-    /**/                      def id                  (using d: Def.TypeName[A]) : String   = if(x == null) "null" else x.typeName.^.mapIf(!_.endsWith("$"), _ + "@" + x.hash)
+    /**/                      def id                  (using d: Def.TypeName[A]) : String   = if(x == null) "null" else x.typeName.self.mapIf(!_.endsWith("$"), _ + "@" + x.hash)
     /**/                      def hash                                           : String   = if(x == null) "null" else Z.Hash(x.hashCode)
 
   extension[A](inline x: Self[A])
@@ -17,10 +17,8 @@ object Self:
     /**/               inline def nonVoid          (using inline d: Def.Void[A]) : Boolean  = !x.isVoid
     /**/               inline def isEmpty          (using inline d:Def.Empty[A]) : Boolean  = d.value_isEmpty(x.real)
     /**/               inline def nonEmpty         (using inline d:Def.Empty[A]) : Boolean  = !x.isEmpty
-    @tn("pack")        inline def ><                                             : ><[A]    = Val.><(x.real)
-    @tn("stream")      inline def ~                                              : ~[A]     = Val.~(x.real)
-    @tn("nonEmptyOpt") inline def ?           (using inline e:Opt[Def.Empty[A]])
-                                                   (using inline d: Def.Void[A]) : Opt[A]   = J.illegalState() // Overtaken by root lib
+    /**/               inline def pack                                           : Pack[A]  = Val.Pack(x.real)
+    /**/               inline def stream                                              : Stream[A]= Val.Pack(x.real)
 
   given z_Tag[A](using Any.Def.Tag[A]): Any.Def.Tag[Self[A]] = new Z.TagDef
   given z_Doc[A](using Any.Def.Doc[A]): Any.Def.Doc[Self[A]] = new Z.DocDef
@@ -38,17 +36,17 @@ ___________________________________________________________________________*/
 /**
 @type DEF  -> ### Self View Methods
 
-    Self view is another library available for all types, but it has to be activated by calling a universal ".^" or (".self_^") method on original value.
+    Self view is another library available for all types, but it has to be activated by calling a universal ".^" or (".self") method on original value.
 
     For example:
     ```
-      val pack: ><[String] = "FOO".^.><
+      val pack: Pack[String] = "FOO".self.pack
     ```
     Due to opaque implementation, calling self view methods incures no overhead as if they were called directly on base value.
 
     A common use case is to manipulate an object within expression context:
     ```
-      val a : Array[String] = new Array[String](1).^(_(0)="A")
+      val a : Array[String] = new Array[String](1).self(_(0)="A")
     ```
     because all calls are inlined, the above expression is equivalent to:
     ```
@@ -79,7 +77,7 @@ ___________________________________________________________________________*/
     Returns the base value itself
 
     ```
-      val a : Array[String] = new Array[String](2).^(a => { a(0)="A"; a(1)="B" })
+      val a : Array[String] = new Array[String](2).self(a => { a(0)="A"; a(1)="B" })
     ```
 
 @def map -> Convert To
@@ -98,49 +96,27 @@ ___________________________________________________________________________*/
     ````
     var s = "AB"
 
-    s = s.^.mapIf(_.length == 2, _ + "C")
+    s = s.self.mapIf(_.length == 2, _ + "C")
 
     // gets compiled into
 
     s = if(s.length == 2) s + "C" else s
     ```
 
-@def ? -> Self as option
-
-    Returns base value as an option.
-
-    Unlike general .? method, this method will create empty option for void or empty values
-
-    ```
-      val p: ~[Int] = \/
-
-      p.?.tp    // prints: Opt(scalqa.val.pack.z.Void)
-
-      p.^.?.tp  // prints: Opt(\/)
-    ```
-
-    This method can even safely check ~ for emptiness, returning ~ with original values
-    ```
-    def s : ~[Int] = (1 <> 3).~.dropFirst(3)
-
-    s.^.?.tp  // prints: Opt(\/)
-    s.?.tp    // prints: Opt(~())
-    ```
-
-@def >< -> Self pack
+@def pack -> Self pack
 
     Creates a pack with this sigle value
 
-@def ~ -> Self stream
+@def stream -> Self stream
 
     Creates a stream with this sigle value
 
     The following lines are inlined and produce same JVM code:
 
     ```
-    val s1 : ~[String] = "Foo".^.~
+    val s1 : Stream[String] = "Foo".self.stream
     // same as
-    val s2 : ~[String] = ~~("Foo")
+    val s2 : Stream[String] = Stream("Foo")
     ```
 
 @def isVoid -> Void check

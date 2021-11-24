@@ -5,24 +5,24 @@ import javafx.event.ActionEvent;
 
 class Action(label: String = \/) extends Abstract.Delegate.Gui:
   protected type REAL <: MenuItem
-  protected          def _createReal                      : REAL              = new MenuItem(label.^.? or null) { setUserData(Action.this) }.cast[REAL]
-  /**/               def onAction[U](l: Event => U)       : Gen.Event.Control = _onFxEvent[ActionEvent,U](real.onActionProperty, Gen.Event.Id.map1(l,(e: ActionEvent) => l(Event(e))))
-  /**/               def onActionRun[U](run: => U)        : Gen.Event.Control = onAction(e => run)
-  /**/               def toMenuItem                       : Menu.Item         = this match { case v: Menu.Item => v; case _ => Menu.Item(this) }
+  protected  def _createReal                      : REAL              = new MenuItem(label.?? or null) { setUserData(Action.this) }.cast[REAL]
+  /**/       def onAction[U](l: Event => U)       : Gen.Event.Control = _onFxEvent[ActionEvent,U](real.onActionProperty, Gen.Event.Id.map1(l,(e: ActionEvent) => l(Event(e))))
+  /**/       def onActionRun[U](run: => U)        : Gen.Event.Control = onAction(e => run)
+  /**/       def toMenuItem                       : Menu.Item         = this match { case v: Menu.Item => v; case _ => Menu.Item(this) }
 
-  /**/               def visible                          : Boolean           = real.isVisible
-  /**/               def visible_=(b: Boolean)            : Unit              = real.setVisible(b)
-  @tn("visible_Pro") def visible_*                        : Boolean.Pro.OM    = Fx.JavaFx.To.pro_OM(real.visibleProperty)
+  /**/       def visible                          : Boolean           = real.isVisible
+  /**/       def visible_=(b: Boolean)            : Unit              = real.setVisible(b)
+  /**/       def visiblePro                       : Boolean.Pro.OM    = Fx.JavaFx.To.pro_OM(real.visibleProperty)
 
-  /**/               def text                             : String            = real.getText
-  /**/               def text_=(v: String)                : Unit              = real.setText(v)
-  @tn("text_Pro")    def text_*                           : Pro.OM[String]    = Fx.JavaFx.To.pro_OM(real.textProperty)
+  /**/       def text                             : String            = real.getText
+  /**/       def text_=(v: String)                : Unit              = real.setText(v)
+  /**/       def textPro                          : Pro.OM[String]    = Fx.JavaFx.To.pro_OM(real.textProperty)
 
-  /**/               def enable                           : Boolean           = !real.isDisable
-  /**/               def enable_=(b: Boolean)             : Unit              = real.setDisable(!b)
-  @tn("enable_Pro")  def enable_*                         : Pro.OM[Boolean]   = Fx.JavaFx.To.pro_OM(real.disableProperty).mutableMap_^(using z_BooleanReverse)
+  /**/       def enable                           : Boolean           = !real.isDisable
+  /**/       def enable_=(b: Boolean)             : Unit              = real.setDisable(!b)
+  /**/       def enablePro                        : Pro.OM[Boolean]   = Fx.JavaFx.To.pro_OM(real.disableProperty).mutableMapView(using z_BooleanReverse)
 
-  @tn("scene_Opt")   def scene_?                          : Opt[Scene]        = \/
+  /**/       def sceneOpt                         : Opt[Scene]        = \/
 
 
 object Action:

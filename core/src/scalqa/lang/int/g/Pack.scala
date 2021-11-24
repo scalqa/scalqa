@@ -1,34 +1,36 @@
 package scalqa; package lang; package int; package g; import language.implicitConversions
 
-class Pack[A<:Raw] private(_a: Array[Primitive], sz: Int) extends ><[A] with Idx[A]:
+class Pack[A<:Raw] private(_a: Array[Primitive], sz: Int) extends Val.Pack[A] with Idx[A]:
   private def this(a: Array[Primitive]) = this(a,a.length)
   type THIS_TYPE = Pack[A]
-  private                var ar                       : Array[Primitive] = _a
-  /**/                   def size                     : Int              = sz
-  /**/                   def apply(i: Int)            : A                = ar(i).cast[A]
-  @tn("stream") override def ~                        : Stream[A]        = ar.~(sz).cast[Stream[A]]
-  @tn("compact")         def ><                       : Pack[A]          = {if(ar.length>sz) {ar=new Array[Primitive](sz).^(ar.copyTo(_,0,0,sz))}; this}
-  /**/                   def toBuffer                 : Buffer[A]        = Buffer(ar.copySize(sz),sz)
-  @tn("take_Range")      def take_<>(from:Int, sz:Int): Pack[A]          = new Pack(ar.take_<>(from,sz),sz)
-  @tn("drop_Range")      def drop_<>(from:Int, sz:Int): Pack[A]          = new Pack(ar.drop_<>(from,sz),sz)
-  /**/                   def join(v: A)               : Pack[A]          = new Pack(ar.copySize(sz+1).^(_(sz)=v), sz+1)
-  /**/                   def joinAt( i: Int, v: A)    : Pack[A]          = new Pack(ar.copySize(sz+1).^(a=>{a.copyTo(a,i+1,i,a.length-i-1);a(i)=v}),sz+1)
-  /**/                   def joinAllAt(i:Int,vs: ~[A]): Pack[A]          = new Pack(Buffer.z_ArrayJoinAllAt(ar,i,vs.cast[~[Primitive]],sz))
-  /**/                   def joinAll(vs: ~[A])        : Pack[A]          = vs.read_?.map(v => Pack.Buf(ar,sz+1,v,vs).mk) or this
-  /**/          override def contains(v: A)           : Boolean          = lang.array.z.contains.int(ar,v,sz)
+  private  var ar                                  : Array[Primitive] = _a
+  /**/     def size                                : Int              = sz
+  /**/     def apply(i: Int)                       : A                = ar(i).cast[A]
+  override def stream                              : Stream[A]        = ar.stream(sz).cast[Stream[A]]
+  /**/     def pack                                : Pack[A]          = {if(ar.length>sz) {ar=new Array[Primitive](sz).self(ar.copyTo(_,0,0,sz))}; this}
+  /**/     def toBuffer                            : Buffer[A]        = Buffer(ar.copySize(sz),sz)
+  /**/     def takeRange(from:Int, sz:Int)         : Pack[A]          = new Pack(ar.takeRange(from,sz),sz)
+  /**/     def dropRange(from:Int, sz:Int)         : Pack[A]          = new Pack(ar.dropRange(from,sz),sz)
+  /**/     def join(v: A)                          : Pack[A]          = new Pack(ar.copySize(sz+1).self(_(sz)=v), sz+1)
+  /**/     def joinAt( i: Int, v: A)               : Pack[A]          = new Pack(ar.copySize(sz+1).self(a=>{a.copyTo(a,i+1,i,a.length-i-1);a(i)=v}),sz+1)
+  /**/     def joinAllAt(i:Int,vs: Val.Stream[A])  : Pack[A]          = new Pack(Buffer.z_ArrayJoinAllAt(ar,i,vs.cast[Stream[Primitive]],sz))
+  /**/     def joinAll(vs: Val.Stream[A])          : Pack[A]          = vs.readOpt.map(v => Pack.Buf(ar,sz+1,v,vs).mk) or this
+  /**/     def z_foreachRaw[U](f: Fun.Consume[A,U]): Unit             = {var i=0; while(i<sz){ f(ar(i).cast[A]); i+=1 }}
+  /**/     def z_foreach[U](f: A=>U)               : Unit             = {var i=0; while(i<sz){ f(ar(i).cast[A]); i+=1 }}
+  override def contains(v: A)                      : Boolean          = lang.array.z.contains.int(ar,v,sz)
 
 object Pack:
-  /**/                   def fromVarArg[A<:Raw](v: A, vs: Seq[A])          : Pack[A] = new Pack(Array(v.real,vs.cast[Seq[Primitive]] *))
-  /**/            inline def fromArray [A<:Raw](v: Array[Primitive])       : Pack[A] = fromArray(v,v.length)
-  /**/                   def fromArray [A<:Raw](v: Array[Primitive],sz:Int): Pack[A] = new Pack(v.copySize(sz),sz)
-  /**/                   def fromStream[A<:Raw](v: ~[A])                   : Pack[A] = void[A].joinAll(v)
+  /**/                   def fromVarArg[A<:Raw](v: A, vs: Seq[A])            : Pack[A] = new Pack(Array(v.real,vs.cast[Seq[Primitive]] *))
+  /**/            inline def fromArray [A<:Raw](v: Array[Primitive])         : Pack[A] = fromArray(v,v.length)
+  /**/                   def fromArray [A<:Raw](v: Array[Primitive],sz: Int) : Pack[A] = new Pack(v.copySize(sz),sz)
+  /**/                   def fromStream[A<:Raw](v: Val.Stream[A])            : Pack[A] = void[A].joinAll(v)
   @tn("getVoid")         def void      [A<:Raw]                            : Pack[A] = z_Void.cast[Pack[A]]; private object z_Void extends Pack(Array.emptyInt) with Gen.Void
 
-  implicit        inline def implicitRequest[A<:Raw](v: \/)                : Pack[A] = void[A]
-  implicit        inline def implicitFromStream[A<:Raw](inline v: G.~[A])  : Pack[A] = v.><
+  implicit        inline def implicitRequest[A<:Raw](v: \/)                  : Pack[A] = void[A]
+  implicit        inline def implicitFromStream[A<:Raw](inline v:G.Stream[A]): Pack[A] = v.pack
 
   private class Buf[A<:Raw] private(a: Array[Primitive],sz:Int) extends Buffer[A](a,sz):
-    def this(a: Array[Primitive], sz: Int, v: A, vs: ~[A]) = { this(a.copySize(vs.size_?.map(sz + _) or sz + J.initSize).^(_(sz-1)=v), sz); addAll(vs) }
+    def this(a: Array[Primitive], sz: Int, v: A, vs: Val.Stream[A]) = { this(a.copySize(vs.sizeOpt.map(sz + _) or sz + J.initSize).self(_(sz-1)=v), sz); addAll(vs) }
     def mk: Pack[A] = { val s=size; if(s==0) \/ else new Pack(array,s) }
 
 /*___________________________________________________________________________

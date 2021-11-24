@@ -4,28 +4,27 @@ trait _DRI:
 
   extension (x: DRI)
     def id                : Id          = Id(x)
-    def member_?          : Opt[Member] = Registry.member_?(x.id)
-    def module_?          : Opt[Module] = Registry.module_?(x.id.moduleId)
+    def memberOpt         : Opt[Member] = Registry.memberOpt(x.id)
+    def moduleOpt         : Opt[Module] = Registry.moduleOpt(x.id.moduleId)
     def isTypeDef         : Boolean     = x.location.endsWith("$$TYPE$")
     def isLangAny         : Boolean     = x.location=="scalqa.lang.Any$"
-    def isPrivate         : Boolean     = (x.location+"."+x.anchor).replace("$",".").replace("..",".").replace("..",".").^.map(s => s.contains(".z.") || s.contains(".Z.") || s.contains(".z_"))
+    def isPrivate         : Boolean     = (x.location+"."+x.anchor).replace("$",".").replace("..",".").replace("..",".").self.map(s => s.contains(".z.") || s.contains(".Z.") || s.contains(".z_"))
     def tag               : String      = x.location
                                            .replace("$$TYPE$","").replace("$$",".")
-                                           .^.map(l => x.anchor.^.?.map(_.takeBefore("-")).map(a => l.^.mapIf(_.endsWith("$"),_.dropLast(1)) + "." + a) or l)
+                                           .self.map(l => x.anchor.??.map(_.takeBefore("-")).map(a => l.self.mapIf(_.endsWith("$"),_.dropLast(1)) + "." + a) or l)
 
     def label(brief: Boolean = true): String =
       var tg = x.tag
       if(!x.location.startsWith("scalqa.")) return tg.simpleName(brief)
       var v = if(tg.startsWith("scalqa.")) tg.dropFirst(7) else tg
 
-      v = v.split_~('.','$').dropVoid.map(_.docLabel.withOp).makeString(".")
+      v = v.splitStream('.','$').dropVoid.map(_.docLabel.withOp).makeString(".")
 
       if(!x.anchor.isEmpty)
         var a = x.anchor.takeBefore("-")
         if(!v.endsWith("."+a)) v = v + "." + a
-        //if(v=="~" && x.tag == "scalqa.val.Stream$") v = "~~"
       else
-        v = v.lastIndexOf_?("._").map(i => v.dropFirst(i + 1)) or v
+        v = v.lastIndexOfOpt("._").map(i => v.dropFirst(i + 1)) or v
 
       v.simpleName(brief)
 

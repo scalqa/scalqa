@@ -28,11 +28,11 @@ ___________________________________________________________________________*/
 
     ```
 
-        val s: Double.~    = (1.0 <> 5.0).step_~(1)
+        val s: Double.Stream = (1.0 <> 5.0).streamStep(1)
 
-        val o: Double.Opt  = s.readRaw_?  // Holds Double.Opt(1.0)
+        val o: Double.Opt    = s.readRawOpt  // Holds Double.Opt(1.0)
 
-        val l: Double.><   = s.><        // Holds (2.0, 3.0, 4.0)
+        val l: Double.Pack   = s.pack       // Holds (2.0, 3.0, 4.0)
     ```
 @def min        -> Minimum     \n\n Returns type minimal value defined in java.lang.Double.MIN_VALUE
 @def max        -> Maximum     \n\n Returns type maximum value defined in java.lang.Double.MAX_VALUE

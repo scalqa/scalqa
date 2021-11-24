@@ -22,10 +22,6 @@ object Math:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@type DEF  -> ### General Math
-
-   Math type in Scalqa is an alias to scala.math.Numeric, with which they can be used interchangeably.
-
 @object Math  ->
 
    Math object contains few shortcuts to java.lang.Math static methods.

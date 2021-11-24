@@ -17,8 +17,8 @@ abstract class OpaqueBase[A<: Any.Opaque]private[lang](name: String, ct: ClassTa
   private[scalqa] def default_doc(v: A)   : Doc =
     if(ck<0) self.synchronized{ if(ck<0){ if(ck== -1){ ck= -2; value_tag(v); if(ck!=1) ck=0} else ck=1 }}
     val tg = ZZ.Any.value_tag(v)
-    Doc(typeName+"@"+v.self_^.hash)
-      ++= value_isVoid(v) ? ("","Void") += ("opaque",(v:Any).^.typeName+"("+tg+")")
+    Doc(typeName+"@"+v.self.hash)
+      ++= value_isVoid(v) ? ("","Void") += ("opaque",(v:Any).self.typeName+"("+tg+")")
       ++= ((ck==0) ? value_tag(v)).dropOnly(tg).map(v=>("tag",v))
 
 /*___________________________________________________________________________
@@ -50,9 +50,4 @@ ___________________________________________________________________________*/
     ```
       implicit inline def implicitRequest(v: \/): OPAQUE_TYPE
     ```
-@def real -> Real value
-
-     All Scalqa opaque types have a method to return underlying value.
-
-     This is a zero cost call.
 */

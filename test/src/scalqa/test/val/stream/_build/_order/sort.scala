@@ -2,9 +2,9 @@ package scalqa; package test.`val`.stream._build._order; import language.implici
 
 object sort extends J.Test:
 
-  testEqual_~(
+  testEqualStream(
     1  to 1000,
-    (1 <> 1000).~.reverseEvery(3).reverse.sort)
+    (1 <> 1000).stream.reverseEvery(3).reverse.sort)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

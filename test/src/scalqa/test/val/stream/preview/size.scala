@@ -3,13 +3,13 @@ package scalqa; package test.`val`.stream.Preview; import language.implicitConve
 object size extends J.Test:
 
   test{
-    val s = (1 <> 100).~.hideSizeData.enablePreview
-    val i = (1 <> 100).~.enablePreview
+    val s = (1 <> 100).stream.hideSizeData.enablePreview
+    val i = (1 <> 100).stream.enablePreview
     assertTrue (s.previewSize >= 100)
     assertTrue (i.previewSize >= 100)
     assertFalse(s.previewSize >= 101)
     assertFalse(i.previewSize >= 101)
-    assertEqual_~(1 <> 100, s, i)
+    assertEqualStream(1 <> 100, s, i)
   }
 
 /*___________________________________________________________________________

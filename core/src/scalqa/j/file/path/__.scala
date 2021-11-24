@@ -7,7 +7,7 @@ object Path extends AnyRef.Opaque.Base[Path,REAL]("J.Path") with path._methods:
   inline          def apply(v: REAL)                 : Path    = v.toOpaque
   /**/            def current                        : Path    = void.real.toAbsolutePath.toOpaque
   /**/            def apply(s:String, more:String*)  : Path    = File.System().path(s, more *)
-  /**/            def apply(names: ~[String])        : Path    = File.System().path(names)
+  /**/            def apply(names: Stream[String])   : Path    = File.System().path(names)
   @tn("getVoid")  def void                           : Path    = File.System().real.getPath("")
   private[j]      def any(v: Any)                    : Path    = v match { case v: REAL => apply(v); case v => apply(v.toString) }
   override        def value_isVoid(v: Path)          : Boolean = v.real.startsWith("")

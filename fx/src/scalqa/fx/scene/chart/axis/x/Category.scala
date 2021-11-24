@@ -1,7 +1,7 @@
 package scalqa; package fx; package scene; package chart; package axis; package x; import language.implicitConversions
 
 class Category extends Chart.Axis[String]:
-  def this(name: String) = { this(); name.^.?.forval(label = _) }
+  def this(name: String) = { this(); name.??.forval(label = _) }
   type VALUE = String
   protected type REAL = javafx.scene.chart.CategoryAxis; override def _createReal = new REAL
 

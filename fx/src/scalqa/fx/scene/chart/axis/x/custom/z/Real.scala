@@ -7,8 +7,8 @@ class Real[A](axis: X.Custom[A]) extends javafx.scene.chart.ValueAxis[Number]:
   private       var animationId: AnyRef = null
   private lazy  val animator            = new Animator(this);
 
-  def calculateTickValues(length: Double, s: Any) : java.util.List[Number] = axis.setup.tick_~(s.cast[Range[A]]).map(axis.valueMap).toJavaList
-  def calculateMinorTickMarks                     : java.util.List[Number] = axis.setup.minorTick_~(getRange, getMinorTickCount).map(axis.valueMap).toJavaList
+  def calculateTickValues(length: Double, s: Any) : java.util.List[Number] = axis.setup.tickStream(s.cast[Range[A]]).map(axis.valueMap).toJavaList
+  def calculateMinorTickMarks                     : java.util.List[Number] = axis.setup.minorTickStream(getRange, getMinorTickCount).map(axis.valueMap).toJavaList
   def getTickMarkLabel(v: Number)                 : String                 = axis.setup.label(axis.valueMap.undo(v))
   def getRange                                    : Range[A]               = new Range[A](axis.map.undo(getLowerBound), axis.map.undo(getUpperBound), axis.setup.unit, axis.setup.formatPattern, getScale)
 

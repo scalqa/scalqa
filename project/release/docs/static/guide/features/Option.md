@@ -59,7 +59,7 @@ each primitive type has a generic option implementation:
 Let's benchmark option processing for regular, specialized and Scala options:
 ```
 val CNT = 100000
-val array: Array[Int] = (0 <> CNT).~.toArray
+val array: Array[Int] = (0 <> CNT).stream.toArray
 
 J.Benchmark(
   ("Opt[Int]",          () => { var sum=0.Percent; for(i <- 0<>CNT){ val o: Opt[Int]    = array(i);       o.filter(_ % 2 == 0).map(_.Percent).foreach(sum += _)}; sum}),

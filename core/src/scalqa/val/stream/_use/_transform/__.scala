@@ -2,7 +2,7 @@ package scalqa; package `val`; package stream; package _use; import language.imp
 
 import _transform.*
 
-transparent trait _Transform extends _toCollections, _toString, _toJava, _toScala
+transparent trait _Transform extends _toCollections, _toString, _toJava, _toScala, _toTuple
 
 object _Transform:
 
@@ -10,6 +10,7 @@ object _Transform:
   type _toString      = _transform._toString
   type _toJava        = _transform._toJava
   type _toScala       = _transform._toScala
+  type _toTuple       = _transform._toTuple
 
 
 /*___________________________________________________________________________

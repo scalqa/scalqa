@@ -6,7 +6,7 @@ private[request] object VOID:
   object ToStringFunction    extends (Any => String)                 with Gen.Void { def apply(v: Any) = "" }
   object Function0           extends (() => Unit)                    with Gen.Void { def apply = () }
   object Function1           extends ((Any) => Unit)                 with Gen.Void { def apply(a: Any) = () }
-  object Function1_Opt       extends ((Any) => Opt[Any])             with Gen.Void { def apply(a: Any) : Opt[Any] = \/ }
+  object Function1Opt       extends ((Any) => Opt[Any])             with Gen.Void { def apply(a: Any) : Opt[Any] = \/ }
   object Function1_Any       extends ((Any) => Any)                  with Gen.Void { def apply(a: Any) = J.unsupportedOperation() }
   object Function2           extends ((Any, Any) => Unit)            with Gen.Void { def apply(a: Any, b: Any) = () }
   object Function3           extends ((Any, Any, Any) => Unit)       with Gen.Void { def apply(a: Any, b: Any, c: Any) = () }
@@ -17,19 +17,19 @@ private[request] object VOID:
   object IntFunToLong        extends Int.Fun.ToLong                  with Gen.Void { def apply(v:Int) = 0L  }
 
   object Math                extends Numeric[\/] with Gen.Void with Gen.Math.Average[\/]:
-    def compare(x: \/, y: \/)   : Int        = 0
-    def fromInt(x: Int)         : \/         = \/
-    def minus(x: \/, y: \/)     : \/         = \/
-    def negate(x: \/)           : \/         = \/
-    def parseString(str: String): Option[\/] = None
-    def plus(x: \/, y: \/)      : \/         = \/
-    def times(x: \/, y: \/)     : \/         = \/
-    def toDouble(x: \/)         : Double     = 0
-    def toFloat(x: \/)          : Float      = 0
-    def toInt(x: \/)            : Int        = 0
-    def toLong(x: \/)           : Long       = 0
-    def average(   s: ~[\/])    : \/         = \/
-    @tn("average_Opt") def average_?(s: ~[\/])     : Opt[\/]    = \/
+    def compare(x: \/, y: \/)    : Int        = 0
+    def fromInt(x: Int)          : \/         = \/
+    def minus(x: \/, y: \/)      : \/         = \/
+    def negate(x: \/)            : \/         = \/
+    def parseString(str: String) : Option[\/] = None
+    def plus(x: \/, y: \/)       : \/         = \/
+    def times(x: \/, y: \/)      : \/         = \/
+    def toDouble(x: \/)          : Double     = 0
+    def toFloat(x: \/)           : Float      = 0
+    def toInt(x: \/)             : Int        = 0
+    def toLong(x: \/)            : Long       = 0
+    def average(s: Stream[\/])   : \/         = \/
+    def averageOpt(s: Stream[\/]): Opt[\/]    = \/
     def averageCalculation = AverageLogic
     object AverageLogic extends Gen.Math.Average.Calculation[\/] { def add(v: \/) = (); def average= \/}
 

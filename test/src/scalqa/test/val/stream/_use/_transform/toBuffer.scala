@@ -2,9 +2,9 @@ package scalqa; package test.`val`.stream._use._transform; import language.impli
 
 object toBuffer extends J.Test:
 
-  testEqual_~("collection.mutable.Buffer")(
+  testEqualStream("collection.mutable.Buffer")(
     (1 to 100).toBuffer,
-    (1 <> 100).~.iterator.toBuffer)
+    (1 <> 100).stream.iterator.toBuffer)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

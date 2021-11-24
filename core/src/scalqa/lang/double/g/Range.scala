@@ -2,23 +2,23 @@ package scalqa; package lang; package double; package g; import language.implici
 
 import z.{ range as OPS }
 
-class Range[A<:Raw](_start: A, _end: A, endIn: Boolean) extends Val.<>[A] with any.z.PrimitiveTag.Double:
+class Range[A<:Raw](_start: A, _end: A, endIn: Boolean) extends Val.Range[A] with any.z.PrimitiveTag.Double:
   type THIS_TYPE = Range[A]
-  final             def start                  : A               = _start
-  final             def end                    : A               = _end
-  final             def endIsIn                : Boolean         = endIn
-  final             def ordering               : Ordering[A]     = Primitive.ordering.cast[Ordering[A]]
-  override          def contains(v: A)         : Boolean         = _start <= v && OPS.<=(v,true)(_end,endIn)
-  /**/              def contains(r: Range[A])  : Boolean         = OPS.contains(_start,_end,endIn)(r.start,r.end,r.endIsIn)
-  override          def contains(r: Val.<>[A]) : Boolean         = OPS.ref(r,OPS.contains(_start,_end,endIn)(_,_,_))
-  /**/              def join(v: A)             : THIS_TYPE       = OPS.join(this,_start,_end,endIn,v)
-  /**/              def join(r: Range[A])      : THIS_TYPE       = OPS.join(this,_start,_end,endIn)(r.start,r.end,r.endIsIn)
-  /**/              def join(r: Val.<>[A])     : THIS_TYPE       = OPS.ref(r,OPS.join(this,_start,_end,endIn)(_,_,_))
-  /**/              def overlaps(r: Range[A])  : Boolean         = OPS.overlaps(_start,_end,endIn)(r.start,r.end,r.endIsIn)
-  /**/              def overlaps(r: Val.<>[A]) : Boolean         = OPS.ref(r,OPS.overlaps(_start,_end,endIn)(_,_,_))
-  @tn("overlap_Opt")def overlap_?(r: Range[A]) : Opt[THIS_TYPE]  = OPS.overlap_Opt(this,_start,_end,endIn)(r.start,r.end,r.endIsIn)
-  @tn("overlap_Opt")def overlap_?(r: Val.<>[A]): Opt[THIS_TYPE]  = OPS.ref(r,OPS.overlap_Opt(this,_start,_end,endIn)(_,_,_))
-  @tn("step_Stream")def step_~(step: A)        : Stream[A]       = Z.Stream_fromRange(this,step.real)
+  final    def start                     : A               = _start
+  final    def end                       : A               = _end
+  final    def endIsIn                   : Boolean         = endIn
+  final    def ordering                  : Ordering[A]     = Primitive.ordering.cast[Ordering[A]]
+  override def contains(v: A)            : Boolean         = _start <= v && OPS.<=(v,true)(_end,endIn)
+  /**/     def contains(r: Range[A])     : Boolean         = OPS.contains(_start,_end,endIn)(r.start,r.end,r.endIsIn)
+  override def contains(r: Val.Range[A]) : Boolean         = OPS.ref(r,OPS.contains(_start,_end,endIn)(_,_,_))
+  /**/     def join(v: A)                : THIS_TYPE       = OPS.join(this,_start,_end,endIn,v)
+  /**/     def join(r: Range[A])         : THIS_TYPE       = OPS.join(this,_start,_end,endIn)(r.start,r.end,r.endIsIn)
+  /**/     def join(r: Val.Range[A])     : THIS_TYPE       = OPS.ref(r,OPS.join(this,_start,_end,endIn)(_,_,_))
+  /**/     def overlaps(r: Range[A])     : Boolean         = OPS.overlaps(_start,_end,endIn)(r.start,r.end,r.endIsIn)
+  /**/     def overlaps(r: Val.Range[A]) : Boolean         = OPS.ref(r,OPS.overlaps(_start,_end,endIn)(_,_,_))
+  /**/     def overlapOpt(r: Range[A])   : Opt[THIS_TYPE]  = OPS.overlapOpt(this,_start,_end,endIn)(r.start,r.end,r.endIsIn)
+  /**/     def overlapOpt(r:Val.Range[A]): Opt[THIS_TYPE]  = OPS.ref(r,OPS.overlapOpt(this,_start,_end,endIn)(_,_,_))
+  /**/     def streamStep(step: A)       : Stream[A]       = Z.Stream_fromRange(this,step.real)
 
 object Range
 

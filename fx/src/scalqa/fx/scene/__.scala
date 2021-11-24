@@ -8,13 +8,13 @@ class Scene(width: Int.Opt = \/, height: Int.Opt = \/, e: Opt[Fx.Node.Like] = \/
   protected def _createReal = new JFX.Scene(e.map(_.real.cast[JFX.Parent]) or control.Label("No Root").real, width or -1, height or -1)
   private[fx] override def _refPropertyOpt = real.onZoomFinishedProperty
 
-  @tn("scene_Opt") def scene_?               : Opt[Scene]      = this
+  def sceneOpt                               : Opt[Scene]      = this
   def window                                 : Window          = Window(real.getWindow)
   def root                                   : Parent          = Fx.Node.FxConverter(real.getRoot).cast[Parent]; def root_=(p: Parent) = real.setRoot(p.real)
   def onKeyPressed [U](l: Fx.Event.Key => U) : Unit            = Fx.Event.Key.subscribe(this, l, real.onKeyPressedProperty)
   def onKeyReleased[U](l: Fx.Event.Key => U) : Unit            = Fx.Event.Key.subscribe(this, l, real.onKeyReleasedProperty)
   def onKeyTyped   [U](l: Fx.Event.Key => U) : Unit            = Fx.Event.Key.subscribe(this, l, real.onKeyTypedProperty)
-  val styleSheets                            : Idx.OM[J.Url]   = Fx.JavaFx.To.idx_OM(real.getStylesheets).mutableMap_^(J.Url(_), _.toString)
+  val styleSheets                            : Idx.OM[J.Url]   = Fx.JavaFx.To.idx_OM(real.getStylesheets).mutableMapView(J.Url(_), _.toString)
 
 object Scene extends Gen.Void.Setup[Scene](new Scene(\/, \/, Control.Label("void")) with Gen.Void):
   def apply(r: JFX.Scene)                                                       : Scene = Abstract.Delegate.Gui(r.onZoomFinishedProperty)

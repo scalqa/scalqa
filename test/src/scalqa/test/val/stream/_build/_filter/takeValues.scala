@@ -2,12 +2,12 @@ package scalqa; package test.`val`.stream._build._filter; import language.implic
 
 object takeValues extends J.Test("takeValues"):
 
-  testEqual_~(
+  testEqualStream(
     20 to 30,
-    (1 <> 100).~.takeValues(20 <> 30),
-    (1 <> 100).~.reverseEvery(10).takeValues(20 <> 30).sort,
-    (1 <> 100).~.takeValues((20 <> 30).~.reverseEvery(3)),
-    (1 <> 100).~.reverseEvery(10).takeValues((20 <> 30).~.reverseEvery(4)).sort)
+    (1 <> 100).stream.takeValues(20 <> 30),
+    (1 <> 100).stream.reverseEvery(10).takeValues(20 <> 30).sort,
+    (1 <> 100).stream.takeValues((20 <> 30).stream.reverseEvery(3)),
+    (1 <> 100).stream.reverseEvery(10).takeValues((20 <> 30).stream.reverseEvery(4)).sort)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

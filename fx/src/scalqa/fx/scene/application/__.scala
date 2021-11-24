@@ -9,7 +9,7 @@ abstract class Application(width: Int.Opt, height: Int.Opt, private val title: S
   def this(title: String)                                   = this(title,true)
   def this()                                                = this("")
   protected       val eventStore            : Event.Store   = new Event.Store()
-  protected       def arguments             : String.><     = stage.args
+  protected       def arguments             : String.Pack   = stage.args
   protected       def lazySetup[U](f: => U) : Event.Control = eventStore.onEvent0(UiReadyEvent, () => f)
   protected       def onStop[U](l: () => U) : Event.Control = eventStore.onEvent0(StopEvent, l)
   /**/            def isStopped             : Boolean       = stage.stopped
@@ -20,13 +20,13 @@ abstract class Application(width: Int.Opt, height: Int.Opt, private val title: S
 
   def main(sa: Array[String]) =
     Application.self = this
-    stage.args       = sa.~.><
+    stage.args       = sa.stream.pack
     javafx.application.Application.launch(classOf[z_Starter], sa.toSeq *)
 
   // *************************************************************************************
   protected class Stage extends Fx.Stage():
     /**/                 def scene              : Fx.Scene     = self.scene
-    private[Application] var args               : ><[String]   = null
+    private[Application] var args               : Pack[String] = null
     private[Application] var stopped            : Boolean      = false
     private[fx]          def stop               : Unit         = { stopped = true; self.eventStore.fireEvent0(StopEvent) }
     private[fx]          def start(s: JStage)   : Unit         = {

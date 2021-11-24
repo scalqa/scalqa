@@ -3,17 +3,17 @@ package scalqa; package `val`; package stream; package flow; import language.imp
 transparent trait _build[A]:
   self: Flow[A] =>
 
-  @tn("stream")       def ~                                          : ~[A]
+  def stream                                     : Stream[A]
 
-  /**/                def takeType[B:ClassTag]                       : Flow[B]
-  @tn("map_Opt")      def map_?[B](f: A => Opt[B])                   : Flow[B]
-  /**/                def collect[B](f: PartialFunction[A,B])        : Flow[B]
-  /**/                def take  (f: A => Boolean)                    : Flow[A]
-  /**/                def drop  (f: A => Boolean)                    : Flow[A]
-  /**/                def map[B](f: A => B)                          : Flow[B]
-  /**/                def flatMap[B](f: A => ~[B])                   : Flow[B]
-  /**/                def peek(c: A => Unit)                         : Flow[A]
-  /**/                def peekIndexed[U](c: (Int,A)=>U, start:Int=0) : Flow[A]
+  def takeType[B:ClassTag]                       : Flow[B]
+  def mapOpt[B](f: A => Opt[B])                  : Flow[B]
+  def collect[B](f: PartialFunction[A,B])        : Flow[B]
+  def take  (f: A => Boolean)                    : Flow[A]
+  def drop  (f: A => Boolean)                    : Flow[A]
+  def map[B](f: A => B)                          : Flow[B]
+  def flatMap[B](f: A => Stream[B])              : Flow[B]
+  def peek(c: A => Unit)                         : Flow[A]
+  def peekIndexed[U](c: (Int,A)=>U, start:Int=0) : Flow[A]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -24,16 +24,16 @@ ___________________________________________________________________________*/
 /**
 @trait _build -> ### Build Interface
 
-@def ~ -> Convert to stream
+@def stream -> Convert to stream
 
-    Wraps [[scalqa.val.stream.Flow ~~.Flow]] into regular [[scalqa.val.Stream stream]].
+    Wraps [[scalqa.val.stream.Flow Stream.Flow]] into regular [[scalqa.val.Stream stream]].
 
-    If [[scalqa.val.stream.Flow ~~.Flow]] is parallel, then this convertion can be very costly,
-    and it is always prefferable to consume [[scalqa.val.stream.Flow ~~.Flow]] without going back to [[scalqa.val.Stream ~]]
+    If [[scalqa.val.stream.Flow Stream.Flow]] is parallel, then this convertion can be very costly,
+    and it is always prefferable to consume [[scalqa.val.stream.Flow Stream.Flow]] without going back to [[scalqa.val.Stream Stream]]
 
 @def take -> Filter
 
-    Only allow [[scalqa.val.stream.Flow ~~.Flow]] elements satisfying the given function
+    Only allow [[scalqa.val.stream.Flow Stream.Flow]] elements satisfying the given function
 
 @def takeType -> Type filter
 
@@ -41,26 +41,26 @@ ___________________________________________________________________________*/
 
 @def drop -> Reverse filter
 
-    Disallows [[scalqa.val.stream.Flow ~~.Flow]] elements satisfying the given function
+    Disallows [[scalqa.val.stream.Flow Stream.Flow]] elements satisfying the given function
 
 
 @def map -> Simple map
 
-      Creates a new [[scalqa.val.stream.Flow ~~.Flow]] where each element is a result of applying given function to current [[scalqa.val.stream.Flow ~~.Flow]] elements
+      Creates a new [[scalqa.val.stream.Flow Stream.Flow]] where each element is a result of applying given function to current [[scalqa.val.stream.Flow Stream.Flow]] elements
 
-@def map_? -> Optional map
+@def mapOpt -> Optional map
 
-      Creates a new [[scalqa.val.stream.Flow ~~.Flow]] where each element is a result of applying given function to current [[scalqa.val.stream.Flow ~~.Flow]] elements
+      Creates a new [[scalqa.val.stream.Flow Stream.Flow]] where each element is a result of applying given function to current [[scalqa.val.stream.Flow Stream.Flow]] elements
 
       It the function returns void option, the elements are dropped
 
 @def flatMap -> Flat map
 
-      Creates a new [[scalqa.val.stream.Flow ~~.Flow]] by applying given function to all elements of current [[scalqa.val.stream.Flow ~~.Flow]] and concatenating the results
+      Creates a new [[scalqa.val.stream.Flow Stream.Flow]] by applying given function to all elements of current [[scalqa.val.stream.Flow Stream.Flow]] and concatenating the results
 
 @def collect -> Partial map
 
-    Creates a new [[scalqa.val.stream.Flow ~~.Flow]] by applying a partial function to all elements of current [[scalqa.val.stream.Flow ~~.Flow]] on which the function is defined.
+    Creates a new [[scalqa.val.stream.Flow Stream.Flow]] by applying a partial function to all elements of current [[scalqa.val.stream.Flow Stream.Flow]] on which the function is defined.
 
 @def peek -> Inspect
 

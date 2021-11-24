@@ -1,9 +1,9 @@
 package scalqa; package lang; package anyref; package g; package companion; import language.implicitConversions
 
 class Pack[A]:
-  def apply(v: A)                        : ><[A] = ><(v)
-  def apply(v1: A, v2: A)                : ><[A] = ><(v1, v2)
-  def apply(v1: A, v2: A, v3: A, vs: A*) : ><[A] = ><(v1, v2, v3, vs *)
+  def apply(v: A)                        : Val.Pack[A] = Val.Pack(v)
+  def apply(v1: A, v2: A)                : Val.Pack[A] = Val.Pack(v1, v2)
+  def apply(v1: A, v2: A, v3: A, vs: A*) : Val.Pack[A] = Val.Pack(v1, v2, v3, vs *)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

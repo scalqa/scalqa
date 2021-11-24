@@ -3,10 +3,10 @@ package scalqa; package fx; package scene; package shape; package path
 import javafx.scene.shape.{ VLineTo => JVLineTo }
 
 class VLineTo(val real: JVLineTo) extends AnyVal with Z.Base[VLineTo,JVLineTo]:
-  protected    def setup                             = VLineTo
-  @tn("y_Pro") def y_*            : Double.Pro.OM    = Fx.JavaFx.To.pro_OM(real.yProperty)
-  /**/         def y              : Double           = real.getY
-  /**/         def y_=(v: Double) : Unit             = real.setY(v)
+  protected def setup                             = VLineTo
+  /**/      def yPro           : Double.Pro.OM    = Fx.JavaFx.To.pro_OM(real.yProperty)
+  /**/      def y              : Double           = real.getY
+  /**/      def y_=(v: Double) : Unit             = real.setY(v)
 
 object VLineTo extends Z.Setup[VLineTo,JVLineTo]:
   def apply(v: JVLineTo) : VLineTo = new VLineTo(v)

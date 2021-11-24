@@ -6,7 +6,7 @@ class Lines[X, Y](xParam: Chart.Axis[X], yParam: Chart.Axis[Y]) extends Chart.XY
   type SERIES = Line
 
   class Line(nameO: Opt[String]= \/, override val items:  Idx.OM[ITEM] = Idx.OM.void) extends SeriesBase(nameO, items) with Able.Add[(X, Y)]:
-    def this(name: String, s: ~[(X, Y)]) = { this(name.?,  Idx.OM[ITEM](100)); items ++= s.map(new ItemBase(_)) }
+    def this(name: String, s: Stream[(X, Y)]) = { this(name.?,  Idx.OM[ITEM](100)); items ++= s.map(new ItemBase(_)) }
 
     def add(t: (X, Y)) = items += new ItemBase(t)
 

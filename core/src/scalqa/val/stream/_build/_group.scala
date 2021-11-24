@@ -4,16 +4,16 @@ import z._build.{ _group => G }
 
 transparent trait _group:
 
-  extension[A](inline x: ~[A])
-    inline def group                                                             : ~[~[A]]     = new G.group(x, _ == _)
-    inline def group[U](inline f:(A,A)=>Boolean, inline peek:(A,Boolean)=>U= \/) : ~[~[A]]     = new G.group(x, f, peek)
-    inline def groupWith[B](f: A => B)                                           : ~[(B,~[A])] = new G.groupBy(x, f, Nil).map(_.enablePreview).map(v => (f(v.preview), v))
-    inline def groupEvery(inline cnt: Int)                                       : ~[~[A]]     = new G.groupEvery(x, cnt)
-    inline def groupBy(inline f: A => Any, inline more: A => Any*)               : ~[~[A]]     = new G.groupBy(x, f, more)
+  extension[A](inline x: Stream[A])
+    inline def group                                                             : Stream[Stream[A]]     = new G.group(x, _ == _)
+    inline def group[U](inline f:(A,A)=>Boolean, inline peek:(A,Boolean)=>U= \/) : Stream[Stream[A]]     = new G.group(x, f, peek)
+    inline def groupWith[B](f: A => B)                                           : Stream[(B,Stream[A])] = new G.groupBy(x, f, Nil).map(_.enablePreview).map(v => (f(v.preview), v))
+    inline def groupEvery(inline cnt: Int)                                       : Stream[Stream[A]]     = new G.groupEvery(x, cnt)
+    inline def groupBy(inline f: A => Any, inline more: A => Any*)               : Stream[Stream[A]]     = new G.groupBy(x, f, more)
 
-    inline def partition(inline p: A => Boolean, inline more: A => Boolean*)     : ~[~[A]]     = new G.partition(x, p, more)
-    inline def sliding(inline size: Int, inline step: Int = 1)                   : ~[~[A]]     = new G.sliding(x.cast[~[AnyRef]], size, step).cast[~[~[A]]]
-    inline def splitAt(inline positions: Int*)                                   : ~[~[A]]     = new G.splitAt(x, positions)
+    inline def partition(inline p: A => Boolean, inline more: A => Boolean*)     : Stream[Stream[A]]     = new G.partition(x, p, more)
+    inline def sliding(inline size: Int, inline step: Int = 1)                   : Stream[Stream[A]]     = new G.sliding(x.cast[Stream[AnyRef]], size, step).cast[Stream[Stream[A]]]
+    inline def splitAt(inline positions: Int*)                                   : Stream[Stream[A]]     = new G.splitAt(x, positions)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -29,16 +29,16 @@ ___________________________________________________________________________*/
      Puts consecutive elements in the same group if they are `equal`
 
      ```
-         def stream =  ~~(1, 2, 3).repeat(3)
+         def stream =  Stream(1, 2, 3).repeat(3)
 
-         stream.TP           // Prints ~(1, 1, 1, 2, 2, 2, 3, 3, 3)
+         stream.TP           // Prints Stream(1, 1, 1, 2, 2, 2, 3, 3, 3)
 
          stream.group.print  // Prints  ------------
                                       ?
                                       ------------
-                                      ~(1, 1, 1)
-                                      ~(2, 2, 2)
-                                      ~(3, 3, 3)
+                                      Stream(1, 1, 1)
+                                      Stream(2, 2, 2)
+                                      Stream(3, 3, 3)
                                       ------------
      ```
 
@@ -51,19 +51,19 @@ ___________________________________________________________________________*/
      ```
         // Putting Ints into groups of 3
 
-        (0 <> 20).~.group(_ / 3 == _ / 3).print
+        (0 <> 20).stream.group(_ / 3 == _ / 3).print
 
         // Output
         ---------------
         ?
         ---------------
-        ~(0, 1, 2)
-        ~(3, 4, 5)
-        ~(6, 7, 8)
-        ~(9, 10, 11)
-        ~(12, 13, 14)
-        ~(15, 16, 17)
-        ~(18, 19, 20)
+        Stream(0, 1, 2)
+        Stream(3, 4, 5)
+        Stream(6, 7, 8)
+        Stream(9, 10, 11)
+        Stream(12, 13, 14)
+        Stream(15, 16, 17)
+        Stream(18, 19, 20)
         ---------------
      ```
 
@@ -77,19 +77,19 @@ ___________________________________________________________________________*/
      When properties change, a new group is started
 
      ```
-          ('#' <> '|').~.groupBy(_.isLetter, _.isDigit).print
+          ('#' <> '|').stream.groupBy(_.isLetter, _.isDigit).print
 
          // Output
          ---------------------------------------------------------------------------------
          ?
          ---------------------------------------------------------------------------------
-         ~(#, $, %, &, ', (, ), *, +, ,, -, ., /)
-         ~(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
-         ~(:, ;, <, =, >, ?, @)
-         ~(A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, B, U, V, W, X, Y, Z)
-         ~([, \, ], /\, _, `)
-         ~(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, p, t, u, v, w, x, y, z)
-         ~({, ~)
+         Stream(#, $, %, &, ', (, ), *, +, ,, -, ., /)
+         Stream(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+         Stream(:, ;, <, =, >, ?, @)
+         Stream(A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, B, U, V, W, X, Y, Z)
+         Stream([, \, ], /\, _, `)
+         Stream(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, p, t, u, v, w, x, y, z)
+         Stream({, |)
          ---------------------------------------------------------------------------------
      ```
 
@@ -101,19 +101,19 @@ ___________________________________________________________________________*/
      Puts consecutive elements in the same group if their properties are equal
 
      ```
-        (0 <> 20).~.groupWith(_ / 3).print
+        (0 <> 20).stream.groupWith(_ / 3).print
 
         // Output
         -- -------------
         _1 _2
         -- -------------
-        0  ~(0, 1, 2)
-        1  ~(3, 4, 5)
-        2  ~(6, 7, 8)
-        3  ~(9, 10, 11)
-        4  ~(12, 13, 14)
-        5  ~(15, 16, 17)
-        6  ~(18, 19, 20)
+        0  Stream(0, 1, 2)
+        1  Stream(3, 4, 5)
+        2  Stream(6, 7, 8)
+        3  Stream(9, 10, 11)
+        4  Stream(12, 13, 14)
+        5  Stream(15, 16, 17)
+        6  Stream(18, 19, 20)
         -- -------------
      ```
 
@@ -127,68 +127,68 @@ ___________________________________________________________________________*/
      Puts consecutive elements into fixed size groups
 
      ```
-     ('a' <> 'z').~.groupEvery(8).print
+     ('a' <> 'z').stream.groupEvery(8).print
 
      // Output
      -------------------------
      ?
      -------------------------
-     ~(a, b, c, d, e, f, g, h)
-     ~(i, j, k, l, m, n, o, p)
-     ~(q, r, p, t, u, v, w, x)
-     ~(y, z)
+     Stream(a, b, c, d, e, f, g, h)
+     Stream(i, j, k, l, m, n, o, p)
+     Stream(q, r, p, t, u, v, w, x)
+     Stream(y, z)
      -------------------------
      ```
 
 @def splitAt -> Positional split
 
-      Splits [[scalqa.val.Stream ~]] at specified positions
+      Splits [[scalqa.val.Stream Stream]] at specified positions
 
       ```
-      val ~~(s1, s2, s3) = (0 <> 20).~.splitAt(5, 15)
+      val (s1,s2,s3) = (0 <> 20).stream.splitAt(5, 15).tuple3
 
-      s1.TP   // Prints ~(0, 1, 2, 3, 4)
-      s2.TP   // Prints ~(5, 6, 7, 8, 9, 10, 11, 12, 13, 14)
-      s3.TP   // Prints ~(15, 16, 17, 18, 19, 20)
+      s1.TP   // Prints Stream(0, 1, 2, 3, 4)
+      s2.TP   // Prints Stream(5, 6, 7, 8, 9, 10, 11, 12, 13, 14)
+      s3.TP   // Prints Stream(15, 16, 17, 18, 19, 20)
       ```
 
-       Note. The same could be accomplished with [[read_~]]
+      Note. The same could be accomplished with [[readStream]]
 
-   		```
-      val s3 = (0 <> 20).~
-      val s1 = s3.read_~(5)
-      val s2 = s3.read_~(10)
+      ```
+      val s3 = (0 <> 20).stream
+      val s1 = s3.readStream(5)
+      val s2 = s3.readStream(10)
    		```
 
 @def sliding -> Sliding group view
 
      Example: group size 3 with step 1
      ```
-       ('a' <> 'g').~.sliding(3).print
+       ('a' <> 'g').stream.sliding(3).print
 
        // Output
        ----------
        ?
        ----------
-       ~(a, b, c)
-       ~(b, c, d)
-       ~(c, d, e)
-       ~(d, e, f)
-       ~(e, f, g)
+       Stream(a, b, c)
+       Stream(b, c, d)
+       Stream(c, d, e)
+       Stream(d, e, f)
+       Stream(e, f, g)
        ----------
      ```
 
      Example: group size 4 with step 2
      ```
-       ('a' <> 'g').~.sliding(4,2).print
+       ('a' <> 'g').stream.sliding(4,2).print
 
        // Output
        -------------
        ?
        -------------
-       ~(a, b, c, d)
-       ~(c, d, e, f)
-       ~(e, f, g)
+       Stream(a, b, c, d)
+       Stream(c, d, e, f)
+       Stream(e, f, g)
        -------------
      ```
 
@@ -199,29 +199,31 @@ ___________________________________________________________________________*/
      The resulting stream size will be equal to the number of predicates plus one. The last group will hold spill over elements, not accepted by any predicate. Groups can be empty.
 
      ```
-     val ~~(odd,even) = (1 <> 10).~.partition(_ % 2 == 1)
+     val (odd,even) = (1 <> 10).stream.partition(_ % 2 == 1).tuple2
 
      odd.TP
      even.TP
 
-     // Age groups
-     (1 <> 80).~.partition(_ <= 12, _ in 13 <> 19, _ < 30, _ in 30 <> 40, _ < 50, _ < 65).print
-     ```
-     ```
      // Output
-     ~(1, 3, 5, 7, 9)
-     ~(2, 4, 6, 8, 10)
+     Stream(1, 3, 5, 7, 9)
+     Stream(2, 4, 6, 8, 10)
+
+
+     // Age groups
+     (1 <> 80).stream.partition(_ <= 12, _ in 13 <> 19, _ < 30, _ in 30 <> 40, _ < 50, _ < 65).print
+     ```
+     ```
 
       -------------------------------------------------------------------
       ?
       -------------------------------------------------------------------
-      ~(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
-      ~(13, 14, 15, 16, 17, 18, 19)
-      ~(20, 21, 22, 23, 24, 25, 26, 27, 28, 29)
-      ~(30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40)
-      ~(41, 42, 43, 44, 45, 46, 47, 48, 49)
-      ~(50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64)
-      ~(65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80)
+      Stream(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
+      Stream(13, 14, 15, 16, 17, 18, 19)
+      Stream(20, 21, 22, 23, 24, 25, 26, 27, 28, 29)
+      Stream(30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40)
+      Stream(41, 42, 43, 44, 45, 46, 47, 48, 49)
+      Stream(50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64)
+      Stream(65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80)
       -------------------------------------------------------------------
      ```
 */

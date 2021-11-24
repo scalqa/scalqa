@@ -4,28 +4,28 @@ import InputControl.Change
 
 abstract class InputControl(initialTextO: Opt[String]= \/) extends Control:
   protected type REAL <: javafx.scene.control.TextInputControl
-  private var _onChange: ><[Change => Any] = \/;
+  private var _onChange: Pack[Change => Any] = \/;
   {
     initialTextO.forval(t => _onRealCreated(_ => text = t))
   }
 
-  /**/                     def size                        : Int             = real.getLength
-  /**/                     def end                         : Unit            = real.end
-  /**/                     def +=(s: String)               : Unit            = real.appendText(s)
-  /**/                     def onChange[U](l: Change => U) : Unit            = { _onChange += l; if (!real.getTextFormatter.isInstanceOf[z_Formatter[_]]) real.setTextFormatter(new z_Formatter) }
+  def size                        : Int             = real.getLength
+  def end                         : Unit            = real.end
+  def +=(s: String)               : Unit            = real.appendText(s)
+  def onChange[U](l: Change => U) : Unit            = { _onChange += l; if (!real.getTextFormatter.isInstanceOf[z_Formatter[_]]) real.setTextFormatter(new z_Formatter) }
 
-  @tn("editable_Pro")      def editable_*                  : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.editableProperty)
-  /**/                     def editable                    : Boolean         = real.isEditable
-  /**/                     def editable_=(b: Boolean)      : Unit            = real.setEditable(b)
-  @tn("caretPosition_Pro") def caretPosition_*             : Int.Pro.O       = Fx.JavaFx.To.pro_O(real.caretPositionProperty)
-  /**/                     def caretPosition               : Int             = real.getCaretPosition
-  @tn("text_Pro")          def text_*                      : Pro.OM[String]  = Fx.JavaFx.To.pro_OM(real.textProperty)
-  /**/                     def text                        : String          = real.getText
-  /**/                     def text_=(v: String)           : Unit            = real.setText(v)
+  def editablePro                 : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.editableProperty)
+  def editable                    : Boolean         = real.isEditable
+  def editable_=(b: Boolean)      : Unit            = real.setEditable(b)
+  def caretPositionPro            : Int.Pro.O       = Fx.JavaFx.To.pro_O(real.caretPositionProperty)
+  def caretPosition               : Int             = real.getCaretPosition
+  def textPro                     : Pro.OM[String]  = Fx.JavaFx.To.pro_OM(real.textProperty)
+  def text                        : String          = real.getText
+  def text_=(v: String)           : Unit            = real.setText(v)
 
   // ***********************************************************************************
   import javafx.scene.control.TextFormatter.{ Change => FXC }
-  private class z_Formatter[A] extends javafx.scene.control.TextFormatter[A](new java.util.function.UnaryOperator[FXC] { def apply(c: FXC) = { _onChange.~.foreach(_(Change(c))); c } })
+  private class z_Formatter[A] extends javafx.scene.control.TextFormatter[A](new java.util.function.UnaryOperator[FXC] { def apply(c: FXC) = { _onChange.stream.foreach(_(Change(c))); c } })
 
 object InputControl:
   type Change = inputControl.Change.TYPE.DEF; transparent inline def Change = inputControl.Change

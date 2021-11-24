@@ -1,9 +1,9 @@
 package scalqa; package `val`; package result; import language.implicitConversions
 
 trait Problem:
-  /**/                 def message     : String
-  @tn("exception_Opt") def exception_? : Opt[java.lang.Exception]
-  override             def toString    : String                     = "Problem(" + message + ")"
+  /**/     def message      : String
+  /**/     def exceptionOpt : Opt[java.lang.Exception]
+  override def toString     : String                     = "Problem(" + message + ")"
 
 object Problem:
   val nullValue   : Problem = ZZ.NULL_VALUE
@@ -20,13 +20,13 @@ object Problem:
   object X:
 
     class NotValid(val message: String = \/) extends Problem:
-      @tn("exception_Opt") def exception_? : Opt[Exception] = \/
+      def exceptionOpt : Opt[Exception] = \/
     object NotValid:
       def unapply(v: NotValid): Option[String] = Some(v.message)
 
     // ******************************************************************
     class Timeout(val message: String = \/) extends Problem:
-      @tn("exception_Opt") def exception_? : Opt[Exception] = \/
+      def exceptionOpt : Opt[Exception] = \/
 
     object Timeout:
       def unapply(v: Timeout): Option[String] = Some(v.message)
@@ -46,7 +46,7 @@ ___________________________________________________________________________*/
 
     Returns the problem description
 
-@def exception_? -> Optional exception
+@def exceptionOpt -> Optional exception
 
     A problem may or may not be triggered by an exception, which can be optionally retrieved.
 

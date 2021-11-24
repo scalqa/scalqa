@@ -6,16 +6,16 @@ abstract class Cell extends Label.Like:
   // --------------------------------------------------------------------------------------------------
   private[fx]         var currentSetup                  : cell.Setup[_]    = null
   protected  override def _createReal                   : REAL             = new javafx.scene.control.Cell[ITEM].cast[REAL]
-  protected           def afterItemUpdated              : Unit             = { text = \/; style = \/; alignment = \/; style_*() = \/ }
+  protected           def afterItemUpdated              : Unit             = { text = \/; style = \/; alignment = \/; stylePro() = \/ }
 
   // --------------------------------------------------------------------------------------------------
-  /**/                def item                          : ITEM             = item_?.get
-  @tn("itemOpt")      def item_?                        : Opt[ITEM]        = if (real.isEmpty) \/ else real.getItem
-  @tn("empty_Pro")    def empty_*                       : Boolean.Pro.O    = Fx.JavaFx.To.pro_O(real.emptyProperty)
+  /**/                def item                          : ITEM             = itemOpt.get
+  /**/               def itemOpt                        : Opt[ITEM]        = if (real.isEmpty) \/ else real.getItem
+  /**/                def emptyPro                      : Boolean.Pro.O    = Fx.JavaFx.To.pro_O(real.emptyProperty)
   /**/                def empty                         : Boolean          = real.isEmpty
-  @tn("editing_Pro")  def editing_*                     : Boolean.Pro.O    = Fx.JavaFx.To.pro_O(real.editingProperty)
+  /**/                def editingPro                    : Boolean.Pro.O    = Fx.JavaFx.To.pro_O(real.editingProperty)
   /**/                def editing                       : Boolean          = real.isEditing
-  @tn("editable_Pro") def editable_*                    : Boolean.Pro.OM   = Fx.JavaFx.To.pro_OM(real.editableProperty)
+  /**/                def editablePro                   : Boolean.Pro.OM   = Fx.JavaFx.To.pro_OM(real.editableProperty)
   /**/                def editable                      : Boolean          = real.isEditable
   /**/                def editable_=(b: Boolean)        : Unit             = real.setEditable(b)
 
@@ -25,7 +25,7 @@ abstract class Cell extends Label.Like:
   /**/                def styleClass_=(sc: Style.Class) : Unit             = if (_styleClass != sc) {
   /**/                                                                             val list = styleClasses
   /**/                                                                             val c = _styleClass
-  /**/                                                                             if (list.last_?.contains(c)) list.removeAt(list.size - 1) else list.remove(c)
+  /**/                                                                             if (list.lastOpt.contains(c)) list.removeAt(list.size - 1) else list.remove(c)
   /**/                                                                             _styleClass = sc
   /**/                                                                             list.add(sc)
   /**/                                                                        }

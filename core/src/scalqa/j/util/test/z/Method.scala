@@ -2,7 +2,7 @@ package scalqa; package j; package util; package test; package z; import languag
 
 private[j] class Method(val name: String, code: () => Unit):
 
-  @tn("run_Result") def run_?? : Result[true] =
+  def runResult : Result[true] =
     try
       code()
     catch

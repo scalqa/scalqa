@@ -2,15 +2,15 @@ package scalqa; package lang; package short; package z; import language.implicit
 
 object range:
 
-  inline def mk[A<:Raw](start:Int, endX:Int): G.<>[A] = new G.<>(start.cast[A],endX - start)
+  inline def mk[A<:Raw](start:Int, endX:Int): G.Range[A] = new G.Range(start.cast[A],endX - start)
 
-  inline def ref[A<:Raw,B](inline x: <>[A], inline fun: (A,A) => B): B =
-    val r = x.cast[<>[A]]
+  inline def ref[A<:Raw,B](inline x: Range[A], inline fun: (A,A) => B): B =
+    val r = x.cast[Range[A]]
     val rs = r.start
     val re = (r.end + r.endIsIn.toInt).cast[A]
     fun(rs,re)
 
-  inline def join[A<:Raw](self: G.<>[A], inline start:A, inline end:A, inline value:A): G.<>[A] =
+  inline def join[A<:Raw](self: G.Range[A], inline start:A, inline end:A, inline value:A): G.Range[A] =
     val s = start.cast[Int]
     val e = end  .cast[Int]
     val v = value.cast[Int]
@@ -18,7 +18,7 @@ object range:
     else if(v>=e) mk(s,v+1)
     else          self
 
-  inline def join[A<:Raw](self: G.<>[A], inline start:A, inline end:A, inline start2:A, inline end2:A): G.<>[A] =
+  inline def join[A<:Raw](self: G.Range[A], inline start:A, inline end:A, inline start2:A, inline end2:A): G.Range[A] =
     val s  = start .cast[Int]; val e  = end .cast[Int]
     val s2 = start2.cast[Int]; val e2 = end2.cast[Int]
     if(s2<=s)
@@ -32,7 +32,7 @@ object range:
     val s2 = start2.cast[Int]
     if(s2 <= start) start < end2 else s2 < end
 
-  inline def overlap_Opt[A<:Raw](self: G.<>[A], inline start:A, inline end:A, inline start2:A, inline end2:A): Opt[G.<>[A]] =
+  inline def overlapOpt[A<:Raw](self: G.Range[A], inline start:A, inline end:A, inline start2:A, inline end2:A): Opt[G.Range[A]] =
     val s  = start .cast[Int]; val e  = end .cast[Int]
     val s2 = start2.cast[Int]; val e2 = end2.cast[Int]
     if(s2<=s)

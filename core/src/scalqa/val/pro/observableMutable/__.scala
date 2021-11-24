@@ -7,8 +7,8 @@ object ObservableMutable:
   def named[A](pName: String, v: A) : ObservableMutable[A] & Able.Name = new X.Basic(v) with Able.Name { def name = pName }
 
   extension[A](x: ObservableMutable[A])
-    @tn("mutableMap_View") def mutableMap_^[B](m: A=>B, r: B => A)          : Pro.OM[B] = mutableMap_^(using TwoWayFunction(m,r))
-    @tn("mutableMap_View") def mutableMap_^[B](using m: TwoWayFunction[A,B]): Pro.OM[B] = z.TwoWay_View.ObservableMutable[A,B](x, m)
+    def mutableMapView[B](m: A=>B, r: B => A)          : Pro.OM[B] = mutableMapView(using TwoWayFunction(m,r))
+    def mutableMapView[B](using m: TwoWayFunction[A,B]): Pro.OM[B] = z.TwoWay_View.ObservableMutable[A,B](x, m)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def X = observableMutable.X
@@ -25,11 +25,11 @@ ___________________________________________________________________________*/
        The usual implementation looks like:
        ```
        class Foo:
-          val name_*          : Pro.OM[String] = String.Pro.OM("")
-          def name            : String         = name_*()
-          def name_=(v:String): Unit           = name_*() = v
-          val bar_*           : Int.Pro.OM     = Int.Pro.OM(0)
-          def bar             : Int            = value_*()
-          def bar_=(v:Int)    : Unit           = value_*() = v
+          val namePro          : Pro.OM[String] = String.Pro.OM("")
+          def name            : String         = namePro()
+          def name_=(v:String): Unit           = namePro() = v
+          val barPro           : Int.Pro.OM     = Int.Pro.OM(0)
+          def bar             : Int            = valuePro()
+          def bar_=(v:Int)    : Unit           = valuePro() = v
        ```
 */

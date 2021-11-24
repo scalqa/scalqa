@@ -4,8 +4,8 @@ object process extends J.Test:
 
   testTrue{
     var i = 0
-    (0 <>> 9).~.process(v => i += 1, {i = -1})
-    (0 <>> 0).~.process(v => i += 1, {i *= 10})
+    (0 <>> 9).stream.process(v => i += 1, {i = -1})
+    (0 <>> 0).stream.process(v => i += 1, {i *= 10})
     i == 90
   }
 

@@ -3,8 +3,8 @@ package scalqa; package lang; package float; import language.implicitConversions
 transparent trait _methods:
   extension(inline x: Float)
     @tn("Opt")   inline def ?                          : Float.Opt       = x.cast[Float.Opt]
-    @tn("range") inline def <> (inline to: Float)      : Float.<>        = new Float.<>(x,to,true)
-    @tn("rangeX")inline def <>>(inline to: Float)      : Float.<>        = new Float.<>(x,to,false)
+    @tn("range") inline def <> (inline to: Float)      : Float.Range     = new Float.Range(x,to,true)
+    @tn("rangeX")inline def <>>(inline to: Float)      : Float.Range     = new Float.Range(x,to,false)
     /**/   infix inline def max(inline v: Float)       : Float           = {val y=x; val w=v; if(y.real > w.real) y else w }
     /**/   infix inline def min(inline v: Float)       : Float           = {val y=x; val w=v; if(y.real < w.real) y else w }
     /**/         inline def roundTo(inline unit:Float)
@@ -55,7 +55,7 @@ ___________________________________________________________________________*/
 
 @def <> ->  Range
 
-    Returns Float.<> from current to given value
+    Returns Float.Range from current to given value
     ```
       (1F <> 10F).TP  // Prints  1.0 <> 10.0
     ```
@@ -63,7 +63,7 @@ ___________________________________________________________________________*/
 
 @def <>> ->  Exclusive end range
 
-    Returns Float.<> from current to given value exclusive
+    Returns Float.Range from current to given value exclusive
     ```
       (1F <>> 10F).TP  // Prints  1.0 <>> 10.0
     ```

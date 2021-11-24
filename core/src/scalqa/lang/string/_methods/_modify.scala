@@ -3,25 +3,25 @@ package scalqa; package lang; package string; package _methods; import language.
 transparent trait _modify:
 
   extension(inline x: String)
-    @tn("joinTag")        inline def ++[A](inline v: A)                (using inline d: Any.Def.Tag[A]): String = x + d.value_tag(v)
-    @tn("joinOpt")        inline def +?[A](inline v: Opt[A])           (using inline d: Any.Def.Tag[A]): String = x.^.mapIf(_ => v.nonEmpty, _ + v.toString)
-    /**/                  inline def padStartTo  (inline size: Int, inline pad: String = " ")          : String = Z.padStartTo(x,size,pad)
-    /**/                  inline def padEndTo    (inline size: Int, inline pad: String = " ")          : String = Z.padEndTo  (x,size,pad)
-    /**/                  inline def label                                                             : String = Z.label(x)
-    /**/                  inline def replace     (inline r: Int.<>, inline v: String)                  : String = Z.replace(x,r,v)
-    /**/                  inline def replace     (inline v: String, inline target: String)             : String = x.replace(v, target)
-    /**/                  inline def replaceFirst(inline v: String, inline v2:String,inline cnt: Int=1): String = z.replace.first(x,v,v2,cnt)
-    /**/                  inline def replaceLast (inline v: String, inline v2:String,inline cnt: Int=1): String = z.replace.last (x,v,v2,cnt)
-    /**/                  inline def insertAt(inline i: Int, inline v: String)                         : String = Z.insertAt(x,i,v)
-    /**/                  inline def remove(inline v: String)                                          : String = x.replace(v, \/)
-    /**/                  inline def lower                                                             : String = x.toLowerCase
-    /**/                  inline def upper                                                             : String = x.toUpperCase
-    /**/                  inline def trimStart                                                         : String = Z.trimStart(x,_.isSpaceChar)
-    /**/                  inline def trimStart(inline f: Char => Boolean)                              : String = Z.trimStart(x,f)
-    /**/                  inline def trimEnd                                                           : String = Z.trimEnd(x,_.isSpaceChar)
-    /**/                  inline def trimEnd  (inline f: Char => Boolean)                              : String = Z.trimEnd(x,f)
-    /**/                  inline def trim                                                              : String = x.trim
-    /**/                  inline def trimBoth (inline f: Char => Boolean)                              : String = Z.trimBoth(x,f)
+    @tn("joinTag") inline def ++[A](inline v: A)                (using inline d: Any.Def.Tag[A]): String = x + d.value_tag(v)
+    @tn("joinOpt") inline def +?[A](inline v: Opt[A])           (using inline d: Any.Def.Tag[A]): String = x.self.mapIf(_ => v.nonEmpty, _ + v.toString)
+    /**/           inline def padStartTo  (inline size: Int, inline pad: String = " ")          : String = Z.padStartTo(x,size,pad)
+    /**/           inline def padEndTo    (inline size: Int, inline pad: String = " ")          : String = Z.padEndTo  (x,size,pad)
+    /**/           inline def label                                                             : String = Z.label(x)
+    /**/           inline def replace     (inline r: Int.Range, inline v: String)               : String = Z.replace(x,r,v)
+    /**/           inline def replace     (inline v: String, inline target: String)             : String = x.replace(v, target)
+    /**/           inline def replaceFirst(inline v: String, inline v2:String,inline cnt: Int=1): String = z.replace.first(x,v,v2,cnt)
+    /**/           inline def replaceLast (inline v: String, inline v2:String,inline cnt: Int=1): String = z.replace.last (x,v,v2,cnt)
+    /**/           inline def insertAt(inline i: Int, inline v: String)                         : String = Z.insertAt(x,i,v)
+    /**/           inline def remove(inline v: String)                                          : String = x.replace(v, \/)
+    /**/           inline def lower                                                             : String = x.toLowerCase
+    /**/           inline def upper                                                             : String = x.toUpperCase
+    /**/           inline def trimStart                                                         : String = Z.trimStart(x,_.isSpaceChar)
+    /**/           inline def trimStart(inline f: Char => Boolean)                              : String = Z.trimStart(x,f)
+    /**/           inline def trimEnd                                                           : String = Z.trimEnd(x,_.isSpaceChar)
+    /**/           inline def trimEnd  (inline f: Char => Boolean)                              : String = Z.trimEnd(x,f)
+    /**/           inline def trim                                                              : String = x.trim
+    /**/           inline def trimBoth (inline f: Char => Boolean)                              : String = Z.trimBoth(x,f)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

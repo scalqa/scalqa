@@ -4,8 +4,8 @@ object peek extends J.Test:
 
   testTrue{
     var sum = 0
-    (1 <> 100).~.peek(sum += _).drain
-    sum == (1 <> 100).~.sum
+    (1 <> 100).stream.peek(sum += _).drain
+    sum == (1 <> 100).stream.sum
   }
 
 /*___________________________________________________________________________

@@ -2,7 +2,7 @@ package scalqa; package gen; package event; package store; import language.impli
 
 trait Entry extends Able.Doc with Able.Void:
   def `type`      : Any
-  def next_?      : Opt[Entry]
+  def nextOpt      : Opt[Entry]
   def value       : Any
   def cancel      : Boolean
   def isCancelled : Boolean

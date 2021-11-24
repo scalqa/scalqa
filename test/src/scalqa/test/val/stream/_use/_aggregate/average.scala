@@ -2,11 +2,11 @@ package scalqa; package test.`val`.stream._use._aggregate; import language.impli
 
 object average extends J.Test:
 
-  @fast lazy val l = (1 <> 100).~.map(_.toDouble).reverseEvery(10).><
+  @fast lazy val l = (1 <> 100).stream.map(_.toDouble).reverseEvery(10).pack
 
   testTrue{
     var i = 0D
-    val a = l.~.peek(i += _).average
+    val a = l.stream.peek(i += _).average
     a == i / l.size
   }
 

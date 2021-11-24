@@ -1,40 +1,36 @@
 package scalqa; package lang; package long; package z; import language.implicitConversions
 
-object Math extends scala.math.Numeric.LongIsIntegral with Ordering[Long] with ~~.Custom.Ordering[Long] with Gen.Math.Sum[Long]:
+object Math extends scala.math.Numeric.LongIsIntegral with Ordering[Long] with Stream.Custom.Ordering[Long] with Gen.Math.Sum[Long]:
 
   def compare(x:Long, y:Long) = java.lang.Long.compare(x,y)
 
-  @tn("min_Opt")
-    def min_?(s: ~[Long]): Val.Opt[Long] = s.read_?.map(v=>
-      s match
-         case s: Long.~ => s.FOLD(v)((v,w) => if(v<w) v else w)
-         case s         => s.FOLD(v)((v,w) => if(v<w) v else w)
-    )
+  def minOpt(s: Stream[Long]): Val.Opt[Long] = s.readOpt.map(v=>
+    s match
+       case s: Long.Stream => s.FOLD(v)((v,w) => if(v<w) v else w)
+       case s              => s.FOLD(v)((v,w) => if(v<w) v else w)
+  )
 
-  @tn("max_Opt")
-    def max_?(s: ~[Long]): Val.Opt[Long] = s.read_?.map(v=>
-      s match
-         case s: Long.~ => s.FOLD(v)((v,w) => if(v>w) v else w)
-         case s         => s.FOLD(v)((v,w) => if(v>w) v else w)
-    )
+  def maxOpt(s: Stream[Long]): Val.Opt[Long] = s.readOpt.map(v=>
+    s match
+       case s: Long.Stream => s.FOLD(v)((v,w) => if(v>w) v else w)
+       case s              => s.FOLD(v)((v,w) => if(v>w) v else w)
+  )
 
-  @tn("range_Opt")
-    def range_?(s: ~[Long]): Val.Opt[Long.<>] = s.read_?.map(v => {
-      var f,l=v
-      s match
-         case s: Long.~ => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
-         case s         => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
-      new Long.<>(f,l,true)
-    })
+  def rangeOpt(s: Stream[Long]): Val.Opt[Long.Range] = s.readOpt.map(v => {
+    var f,l=v
+    s match
+       case s: Long.Stream => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
+       case s              => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
+    new Long.Range(f,l,true)
+  })
 
-  @tn("sum_Opt")
-    def sum_?(s: ~[Long]): Val.Opt[Long] = s.read_?.map(first => {
-      var sum: Long = first
-      s match
-         case s: Long.~ => s.FOREACH(v => sum = sum + v)
-         case s         => s.FOREACH(v => sum = sum + v)
-      sum
-    })
+  def sumOpt(s: Stream[Long]): Val.Opt[Long] = s.readOpt.map(first => {
+    var sum: Long = first
+    s match
+       case s: Long.Stream => s.FOREACH(v => sum = sum + v)
+       case s              => s.FOREACH(v => sum = sum + v)
+    sum
+  })
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

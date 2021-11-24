@@ -9,10 +9,10 @@ object View:
     def compare(x: A, y: A) = { val i = o1.compare(x, y); if (i == 0) o2.compare(x, y) else i }
 
   class VoidPositionFirstOrdering[A :Any.Def.Void](val real: Ordering[A]) extends Ordering[A]:
-    def compare(x: A, y: A): Int = if (x.^.isVoid) { if (y.^.isVoid) 0 else 1 } else if (y.^.isVoid) -1 else real.compare(x, y)
+    def compare(x: A, y: A): Int = if (x.self.isVoid) { if (y.self.isVoid) 0 else 1 } else if (y.self.isVoid) -1 else real.compare(x, y)
 
   class VoidPositionLastOrdering[A :Any.Def.Void](val real: Ordering[A]) extends Ordering[A]:
-    def compare(x: A, y: A): Int = if (x.^.isVoid) { if (y.^.isVoid) 0 else -1 } else if (y.^.isVoid) 1 else real.compare(x, y)
+    def compare(x: A, y: A): Int = if (x.self.isVoid) { if (y.self.isVoid) 0 else -1 } else if (y.self.isVoid) 1 else real.compare(x, y)
 
   class OptionOrdering[A](c: Ordering[A], nonePosition: Int) extends Ordering[Opt[A]]  /*Compiler issues if defined as Opt[A]*/ :
     assert(nonePosition != 0, "nonePosition cannot be 0");

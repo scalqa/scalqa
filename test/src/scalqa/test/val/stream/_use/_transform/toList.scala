@@ -2,17 +2,17 @@ package scalqa; package test.`val`.stream._use._transform; import language.impli
 
 object toList extends J.Test:
 
-  testEqual_~(
+  testEqualStream(
     (1 to 100).toList,
-    (1 <> 100).~.iterator.toList)
+    (1 <> 100).stream.iterator.toList)
 
-  testEqual_~(
+  testEqualStream(
     (1 to 100).toList,
-    (1 <> 100).~.iterator.toList)
+    (1 <> 100).stream.iterator.toList)
 
-  testEqual_~(
+  testEqualStream(
     (1 to 100).toList,
-    (1 <> 100).~.iterator.toList)
+    (1 <> 100).stream.iterator.toList)
 
 
 /*___________________________________________________________________________

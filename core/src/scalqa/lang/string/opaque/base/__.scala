@@ -4,7 +4,7 @@ abstract class Base[A<:Opaque](name: String) extends AnyRef.Opaque.Base[A,String
   given ordering : Ordering[A] = String.ordering.cast[Gen.Ordering[A]]
 
   override def value_isVoid(v: A)        : Boolean = v.real.length==0
-  override def value_tag(v: A)           : String  = v.real // Keep it simple, ops depend on this.
+  override def value_tag(v: A)           : String  = v.real // Keep it simple
   implicit inline def implicitRequest(v: \/): A    = "".cast[A]
 
   given z_CanEqualString: CanEqual[A,String] = CanEqual.derived
@@ -34,10 +34,6 @@ ___________________________________________________________________________*/
 @def value_tag -> Value to String
 
     Override this method to provide type custom convertion to String
-
-@def value_doc -> Value to Doc
-
-    Override this method to provide type custom [[scalqa.gen.Doc Doc]] implementation
 
 @def value_isVoid -> Void check
 

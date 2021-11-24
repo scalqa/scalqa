@@ -3,7 +3,7 @@ package scalqa; package test.`val`.stream._build._mutate; import language.implic
 object shuffle extends J.Test:
 
   testFalse{
-    (0 <> 100).~.shuffle.equalsSequence(0 <> 100)
+    (0 <> 100).stream.shuffle.equalsSequence(0 <> 100)
   }
 
 /*___________________________________________________________________________

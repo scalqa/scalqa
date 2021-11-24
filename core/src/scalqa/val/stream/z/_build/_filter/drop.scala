@@ -1,24 +1,23 @@
 package scalqa; package `val`; package stream; package z; package _build; package _filter; import scala.language.implicitConversions
 
-class drop[A](x: ~[A], f: A => Boolean) extends z.x.Pipe[A](x):
+class drop[A](x: Stream[A], f: A => Boolean) extends z.x.Pipe[A](x):
 
-  @tn("read_Opt") def read_? =
-    var o = x.read_?
+  def readOpt =
+    var o = x.readOpt
     while(o)
       if(!f(o.cast[A])) return o
-      o = x.read_?
+      o = x.readOpt
     \/
 
 object drop:
 
-  inline def HEAVY[A](inline x: ~[A], inline f: A => Boolean): ~[A] =
-    class DROP(x: ~[A]) extends z.x.Pipe[A](x):
-      @tn("read_Opt")
-      def read_? =
-        var o=x.read_?
+  inline def HEAVY[A](inline x: Stream[A], inline f: A => Boolean): Stream[A] =
+    class DROP(x: Stream[A]) extends z.x.Pipe[A](x):
+      def readOpt =
+        var o=x.readOpt
         while(o)
           if(!f(o.cast[A])) return o
-          o=x.read_?
+          o=x.readOpt
         o
     new DROP(x)
 

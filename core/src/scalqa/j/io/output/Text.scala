@@ -16,10 +16,10 @@ object Text extends AnyRef.Opaque.Base[Text, REAL]("Io.Output.Text"):
     inline def int   (inline v: Int)                                            : Text = { x.real.write(S.valueOf(v)); x }
     inline def char  (inline v: Char)                                           : Text = { x.real.write(S.valueOf(v)); x }
     inline def string(inline v: String)                                         : Text = { x.real.write(v); x }
-    inline def string(inline v: String, r: Int.<>)                              : Text = { x.real.write(v, r.start, r.size); x }
+    inline def string(inline v: String, r: Int.Range)                           : Text = { x.real.write(v, r.start, r.size); x }
     inline def string(inline v: String, inline start:Int, inline size:Int)      : Text = { x.real.write(v, start, size); x }
     inline def array( inline a: Array[Char])                                    : Text = { x.real.write(a); x }
-    inline def array( inline a: Array[Char], r: Int.<>)                         : Text = { x.real.write(a, r.start, r.size); x }
+    inline def array( inline a: Array[Char], r: Int.Range)                      : Text = { x.real.write(a, r.start, r.size); x }
     inline def array( inline a: Array[Char], inline start:Int, inline size:Int) : Text = { x.real.write(a, start, size); x }
     inline def flush                                                            : Text = { x.real.flush; x }
     inline def writeAllAndClose(inline v: String)                               : Unit = { x.real.write(v); x.close }

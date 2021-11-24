@@ -2,13 +2,13 @@ package scalqa; package fx; package control; package text; import language.impli
 
 class Field(columnsO: Opt[Int] = \/, value: Opt[String]= \/) extends Text.InputControl(value):
   protected type REAL = javafx.scene.control.TextField
-  protected override def _createReal = new REAL().^(f => columnsO.forval(f.setPrefColumnCount))
+  protected override def _createReal = new REAL().self(f => columnsO.forval(f.setPrefColumnCount))
 
-  /**/                   def onAction[U](l: () => U) : Event.Control = _onFxEvent[javafx.event.ActionEvent,U](real.onActionProperty(), Event.Id.map1(l,(ae: javafx.event.ActionEvent) => l()))
-  /**/                   def onActionRun[U](l: => U) : Event.Control = onAction(() => l)
-  @tn("columnCount_Pro") def columnCount_*           : Int.Pro.OM    = Fx.JavaFx.To.pro_OM(real.prefColumnCountProperty)
-  /**/                   def columnCount             : Int           = real.getPrefColumnCount
-  /**/                   def columnCount_=(b: Int)   : Unit          = real.setPrefColumnCount(b)
+  def onAction[U](l: () => U) : Event.Control = _onFxEvent[javafx.event.ActionEvent,U](real.onActionProperty(), Event.Id.map1(l,(ae: javafx.event.ActionEvent) => l()))
+  def onActionRun[U](l: => U) : Event.Control = onAction(() => l)
+  def columnCountPro          : Int.Pro.OM    = Fx.JavaFx.To.pro_OM(real.prefColumnCountProperty)
+  def columnCount             : Int           = real.getPrefColumnCount
+  def columnCount_=(b: Int)   : Unit          = real.setPrefColumnCount(b)
 
 object Field:
   def apply(value: String)                                  : Text.Field = new Text.Field(\/, value)

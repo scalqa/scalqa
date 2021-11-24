@@ -6,7 +6,7 @@ object StandardExtensions:
       var s: Signature = x.dropGenericDef("A")
       m.name match
         case "map"|"MAP"|"flatten"|"flatMap"|"FLAT_MAP"|"collect"     => s.prepended("[B]")
-        case "map_?" | "MAP_?"                                        => s.prepended("[B,OPT<:Any.Opt[B]]")
+        case "mapOpt" | "MAPOpt"                                        => s.prepended("[B,OPT<:Any.Opt[B]]")
         case "mix"                                                    => s.prepended("[B,C]")
         case "groupWith"                                              => s.prepended("[B]")
         case "groupBy"                                                => s

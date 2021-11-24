@@ -21,9 +21,9 @@ What is novel, is the generic specialized frameworks for all primitive based typ
 Members of these frameworks are never called directly, they always have parameterized aliases in type 
 companion objects.  For example:     
 ```   
-val v: Int.G.~[Int] = ???
+val v: Int.G.Stream[Int] = ???
 // usually written as 
-val v: Int.~        = ???
+val v: Int.Stream        = ???
 
 val p: Double.G.Pro.Mutable[Percent] = ???
 // usually written as 

@@ -2,9 +2,9 @@ package scalqa; package test.`val`.stream._build._filter; import language.implic
 
 object takeIndexed extends J.Test("takeIndexed"):
 
-  testEqual_~(
+  testEqualStream(
     50 <> 100,
-    (0 <> 100).~.takeIndexed((i, _) => i >= 150, 100))
+    (0 <> 100).stream.takeIndexed((i, _) => i >= 150, 100))
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

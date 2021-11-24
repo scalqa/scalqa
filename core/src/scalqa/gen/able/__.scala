@@ -1,9 +1,7 @@
 package scalqa; package gen
 
 object Able:
-
-  @tn("Stream") type ~[+A] = able.Stream[A]; @tn("Stream") val ~ = able.Stream
-
+  type Stream[+A]  = able.Stream[A];                       val Stream     = able.Stream
   type Access[A]   = able.Access[A];    transparent inline def Access     = able.Access
   type Add[A]      = able.Add[A]
   type Close       = able.Close

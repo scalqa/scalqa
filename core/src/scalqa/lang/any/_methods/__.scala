@@ -5,20 +5,20 @@ import _Methods.Self
 
 transparent trait _Methods:
   extension[A](inline x:A)
-    /**/             inline def isVoid                                           (using inline d: Def.Void[A]) : Boolean      = d.value_isVoid(x)
-    /**/             inline def nonVoid                                          (using inline d: Def.Void[A]) : Boolean      = !x.isVoid
-    @tn("opt")       inline def ?                                              (using inline A:Specialized[A]) : A.Opt        = z.opt.make(x)
-    @tn("result")    inline def ??                                                                             : Result[A]    = ZZ.result(x).cast[Result[A]]
-    @tn("range")     inline def <> (inline to:A)(using inline o:O[A])          (using inline A:Specialized[A]) : A.<>         = z.range(x,to)
-    @tn("rangeX")    inline def <>>(inline to:A)(using inline o:O[A])          (using inline A:Specialized[A]) : A.<>         = z.range.exclusive(x,to)
-    infix            inline def in   [CONTAINER](inline c: CONTAINER)(using inline d:Def.Contains[CONTAINER,A]): Boolean      = z.containsMacro(c,x,d)
-    infix            inline def notIn[CONTAINER](inline c: CONTAINER)(using inline d:Def.Contains[CONTAINER,A]): Boolean      = !in(c)
-    /**/             inline def doc                                                (using inline d:Def.Doc[A]) : Doc          = d.value_doc(x)
-    /**/             inline def tag                                                (using inline t:Def.Tag[A]) : String       = t.value_tag(x)
-    /**/             inline def tp                                                 (using inline t:Def.Tag[A]) : Unit         = ZZ.tp(x,t)
-    @tn("addSpaced") inline def +- [B](v: B)                 (using inline ta:Def.Tag[A],inline tb:Def.Tag[B]) : String       = ta.value_tag(x) + ' ' + tb.value_tag(v)
-    @tn("selfView")  inline def ^                                                                              : Self[A]      = x.cast[Self[A]]
-    @tn("self_View") inline def self_^                                                                         : Self[A]      = x.cast[Self[A]]
+    /**/              inline def isVoid                                           (using inline d: Def.Void[A]) : Boolean      = d.value_isVoid(x)
+    /**/              inline def nonVoid                                          (using inline d: Def.Void[A]) : Boolean      = !x.isVoid
+    @tn("opt")        inline def ?                                              (using inline A:Specialized[A]) : A.Opt        = z.opt.make(x)
+    @tn("nonEmptyOpt")inline def ??             (using inline e:Opt[Def.Empty[A]])(using inline d: Def.Void[A]) : Opt[A]       = z.opt.nonEmpty(x,e,d)
+
+    @tn("range")      inline def <> (inline to:A)(using inline o:O[A])          (using inline A:Specialized[A]) : A.Range      = z.range(x,to)
+    @tn("rangeX")     inline def <>>(inline to:A)(using inline o:O[A])          (using inline A:Specialized[A]) : A.Range      = z.range.exclusive(x,to)
+    infix             inline def in   [CONTAINER](inline c: CONTAINER)(using inline d:Def.Contains[CONTAINER,A]): Boolean      = z.containsMacro(c,x,d)
+    infix             inline def notIn[CONTAINER](inline c: CONTAINER)(using inline d:Def.Contains[CONTAINER,A]): Boolean      = !in(c)
+    /**/              inline def doc                                                (using inline d:Def.Doc[A]) : Doc          = d.value_doc(x)
+    /**/              inline def tag                                                (using inline t:Def.Tag[A]) : String       = t.value_tag(x)
+    /**/              inline def tp                                                 (using inline t:Def.Tag[A]) : Unit         = ZZ.tp(x,t)
+    @tn("addSpaced")  inline def +- [B](v: B)                 (using inline ta:Def.Tag[A],inline tb:Def.Tag[B]) : String       = ta.value_tag(x) + ' ' + tb.value_tag(v)
+    /**/              inline def self                                                                           : Self[A]      = x.cast[Self[A]]
 
 object _Methods:
   transparent inline def Self = _methods.Self; type Self[+A] = _methods.Self.TYPE.DEF[A]
@@ -38,13 +38,13 @@ ___________________________________________________________________________*/
 
     Returns true if target is void
 
-    Note: Operation can fail for null value, use .^.isVoid if null check is required
+    Note: Operation can fail for null value, use .self.isVoid if null check is required
 
 @def nonVoid -> Not void check
 
     Returns true if target is non void
 
-    Note: Operation can fail for null value, use .^.nonVoid if null check is required
+    Note: Operation can fail for null value, use .self.nonVoid if null check is required
 
 @def tp -> Tag print
 
@@ -61,9 +61,9 @@ ___________________________________________________________________________*/
      // vs.
      println(1.tag)
 
-     (1 <> 10).~.TP
+     (1 <> 10).stream.TP
      // vs.
-     println((1 <> 10).~.tag)
+     println((1 <> 10).stream.tag)
 
      100.Seconds.TP
      // vs.
@@ -90,7 +90,7 @@ ___________________________________________________________________________*/
 
       (5 in range).TP   // Prints true
 
-      val pack = (1 <> 10).~.><
+      val pack = (1 <> 10).stream.pack
 
       (5 in pack).TP    // Prints true
     ```
@@ -129,20 +129,14 @@ ___________________________________________________________________________*/
     v.toString.TP  // Prints 100000000000
     ```
 
-@def self_^ -> Self view
+@def self -> Self view
 
-    `self_^` is functionally identical to `^`, and should be used when `^` struggles
-
-     `^` occasionally does not work, because it is locally overridden with other functionality (for example on Int, Long it does some bit ops)
-
-@def ^ -> Self view
-
-    Returns additional ["view"](_methods/Self.html) library available to this instance
+    Returns additional ["self"](_methods/Self.html) library available to this instance
 
     The most popular feature is doing some processing within context of an anonimous function
 
     ```
-    val a: Array[Int] = new Array[Int](3).^(_.fill(5))
+    val a: Array[Int] = new Array[Int](3).self(_.fill(5))
 
     // Compare to
 
@@ -158,15 +152,29 @@ ___________________________________________________________________________*/
       val o : Opt[String] = "Foo".?
     ```
 
-    Result will be empty option if value is 'null', but non empty for void values.  Use .^.? instead if void or empty check is required.
+    Result will be empty option if value is 'null', but non empty for void values.  Use .?? instead if void or empty check is required.
 
-@def ?? ->  To result
+@def ?? -> To non-empty value option
 
-    Returns [[scalqa.val.Result Result]] for current value
+    Returns base value as an option.
+
+    Unlike general .? method, this method will create empty option for void or empty values
+
     ```
-      val o : Result[String] = "Foo".??
+      val p: Stream[Int] = \/
+
+      p.?.tp    // prints: Opt(scalqa.val.pack.z.Void)
+
+      p.??.tp  // prints: Opt(\/)
     ```
 
+    This method can even safely check Stream for emptiness, returning Stream with original values
+    ```
+    def s : Stream[Int] = (1 <> 3).stream.dropFirst(3)
+
+    s.??.tp  // prints: Opt(\/)
+    s.?.tp   // prints: Opt(Stream())
+    ```
 @def <> ->  Range
 
     Returns Range from current to given value

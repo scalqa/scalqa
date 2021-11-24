@@ -4,7 +4,7 @@ abstract class Setup[A](voidValue: A):
 
   @tn("requestVoid") @fast lazy final val void : A = voidValue match
     case null                     => J.illegalArgument("null passed to " + getClass)
-    case v: AnyRef if v.^.nonVoid => J.illegalArgument("nonVoid object passed as void for " + getClass + ": " + v)
+    case v: AnyRef if v.self.nonVoid => J.illegalArgument("nonVoid object passed as void for " + getClass + ": " + v)
     case v                        => v
 
   implicit inline def implicitRequest(v: \/): A = void

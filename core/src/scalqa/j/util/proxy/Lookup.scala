@@ -5,9 +5,9 @@ abstract class Lookup[A,B] extends Lookup.Base[A,B]
 object Lookup:
 
   trait Base[A,B] extends Val.Lookup[A,B] with J.Util.Proxy[Val.Lookup[A,B]]:
-    override                    def size          = real.size
-    @tn("get_Opt")     override def get_?(key: A) = real.get_?(key)
-    @tn("pair_Stream") override def pair_~        = real.pair_~
+    override def size           = real.size
+    override def getOpt(key: A) = real.getOpt(key)
+    override def pairStream     = real.pairStream
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

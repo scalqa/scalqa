@@ -2,27 +2,27 @@ package scalqa; package `val`; package stream; package z; package _use; package 
 
 object find:
 
-  def opt[A](x: ~[A], f: A => Boolean): Opt[A] =
-    var o = x.read_?
+  def opt[A](x: Stream[A], f: A => Boolean): Opt[A] =
+    var o = x.readOpt
     var b = true
     while(b && o)
       if(f(o.cast[A])) b = false
-      else o = x.read_?
+      else o = x.readOpt
     o
 
-  def position_Opt[A](x: ~[A], f: A => Boolean): Int.Opt =
+  def positionOpt[A](x: Stream[A], f: A => Boolean): Int.Opt =
     var i = 0
-    var o = x.read_?
+    var o = x.readOpt
     while(o)
       if(f(o.`val`)) return i
-      o = x.read_?
+      o = x.readOpt
       i += 1
     \/
 
-  def sequencePosition_Opt[A](x: ~[A], v: ~[A]): Int.Opt =
-    val pk = v.><
+  def sequencePositionOpt[A](x: Stream[A], v: Stream[A]): Int.Opt =
+    val pk = v.pack
     var i,j,p = 0
-    var o = x.read_?
+    var o = x.readOpt
     while(o)
       if(o.`val` == pk(i))
         if(i==0) p = j
@@ -30,7 +30,7 @@ object find:
         if(i==pk.size) return p
       else i = 0
       j += 1
-      o = x.read_?
+      o = x.readOpt
     \/
 
 /*___________________________________________________________________________

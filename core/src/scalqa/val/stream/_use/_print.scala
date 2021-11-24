@@ -2,7 +2,7 @@ package scalqa; package `val`; package stream; package _use; import language.imp
 
 transparent trait _print:
 
-  extension[A](inline x: ~[A])
+  extension[A](inline x: Stream[A])
     /**/                inline def print   (using inline t:Any.Def.Tag[A]): Unit = z._use._print(x)
     /**/                inline def printId (using inline t:Any.Def.Tag[A]): Unit = z._use._print.id(x)
     @tn("print_Number") inline def print_# (using inline t:Any.Def.Tag[A]): Unit = z._use._print.numbers(x)
@@ -24,7 +24,7 @@ ___________________________________________________________________________*/
 
     ```
 
-    ('A' <> 'F').~.map(v => (v.Int, v)).print
+    ('A' <> 'F').stream.map(v => (v.Int, v)).print
 
     // Output
     -- --
@@ -42,7 +42,7 @@ ___________________________________________________________________________*/
     case class Case(int: Int, name: String, odd: Boolean):
         def this(i: Int) = this(i, "Name"+i, i%2==0)
 
-    (1 <> 10).~.map(new Case(_)).print
+    (1 <> 10).stream.map(new Case(_)).print
 
     // Output
     --- ------ -----
@@ -67,7 +67,7 @@ ___________________________________________________________________________*/
 
     ```
 
-    ('A' <> 'F').~.map(v => (v.Int, v)).print
+    ('A' <> 'F').stream.map(v => (v.Int, v)).print
 
     // Output
     ----------------- -- --
@@ -87,7 +87,7 @@ ___________________________________________________________________________*/
     Same as regular [[print]], but with added row number as first column
 
     ```
-    ('A' <> 'F').~.map(v => (v.Int, v)).print_#
+    ('A' <> 'F').stream.map(v => (v.Int, v)).print_#
 
     // Output
     -- -- --

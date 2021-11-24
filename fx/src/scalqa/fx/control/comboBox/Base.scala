@@ -6,12 +6,12 @@ import javafx.event.ActionEvent;
 abstract class Base[A] extends Control:
   protected type REAL <: ComboBoxBase[A]
 
-  @tn("value_Pro") def value_*                           : Pro.OM[A]     = Fx.JavaFx.To.pro_OM(real.valueProperty)
-  /**/             def value                             : A             = real.getValue
-  /**/             def value_=(v: A)                     : Unit          = real.setValue(v)
+  def valuePro                          : Pro.OM[A]     = Fx.JavaFx.To.pro_OM(real.valueProperty)
+  def value                             : A             = real.getValue
+  def value_=(v: A)                     : Unit          = real.setValue(v)
 
-  /**/             def onAction[U](l: Action.Event => U) : Event.Control = _onFxEvent[ActionEvent, Action.Event, U](real.onActionProperty, Action.Event(_), l)
-  /**/             def onActionRun[U](l: => U)           : Event.Control = onAction(e => l)
+  def onAction[U](l: Action.Event => U) : Event.Control = _onFxEvent[ActionEvent, Action.Event, U](real.onActionProperty, Action.Event(_), l)
+  def onActionRun[U](l: => U)           : Event.Control = onAction(e => l)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

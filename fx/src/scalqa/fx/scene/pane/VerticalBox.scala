@@ -4,18 +4,18 @@ class VerticalBox extends Pane:
   protected type REAL = javafx.scene.layout.VBox
   protected override def _createReal = new REAL
 
-  @tn("spacing_Pro")   def spacing_*            : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.spacingProperty)
-  /**/                 def spacing              : Double         = real.getSpacing
-  /**/                 def spacing_=(b: Double) : Unit           = real.setSpacing(b)
-  @tn("alignment_Pro") def alignment_*          : Pro.OM[Pos]    = Fx.JavaFx.To.pro_OM(real.alignmentProperty).mutableMap_^[Pos]
-  /**/                 def alignment            : Pos            = real.getAlignment
-  /**/                 def alignment_=(v: Pos)  : Unit           = real.setAlignment(v)
+  def spacingPro           : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.spacingProperty)
+  def spacing              : Double         = real.getSpacing
+  def spacing_=(b: Double) : Unit           = real.setSpacing(b)
+  def alignmentPro         : Pro.OM[Pos]    = Fx.JavaFx.To.pro_OM(real.alignmentProperty).mutableMapView[Pos]
+  def alignment            : Pos            = real.getAlignment
+  def alignment_=(v: Pos)  : Unit           = real.setAlignment(v)
 
 object VerticalBox:
 
-  def apply(a: ~[Fx.Node.Like]) : VerticalBox = VerticalBox().^(_.children ++= a)
-  def apply(a: Fx.Node.Like*)   : VerticalBox = VerticalBox().^(_.children ++= a)
-  def apply(spacing: Double)    : VerticalBox = VerticalBox().^(_.spacing = spacing)
+  def apply(a: Stream[Fx.Node.Like]): VerticalBox = VerticalBox().self(_.children ++= a)
+  def apply(a: Fx.Node.Like*)       : VerticalBox = VerticalBox().self(_.children ++= a)
+  def apply(spacing: Double)        : VerticalBox = VerticalBox().self(_.spacing = spacing)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

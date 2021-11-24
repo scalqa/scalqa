@@ -2,17 +2,17 @@ package scalqa; package test.`val`.stream._build._zip; import language.implicitC
 
 object zipAll extends J.Test:
 
-  testEqual_~(
+  testEqualStream(
     (1 to 10).zipAll(1 to 10, -1, -2),
-    (1 <> 10).~.zipAll(1 <> 10, -1, -2))
+    (1 <> 10).stream.zipAll(1 <> 10, -1, -2))
 
-  testEqual_~("short one")(
+  testEqualStream("short one")(
     (1 to 5).zipAll(1 to 10, -1, -2),
-    (1 <> 5).~.zipAll(1 <> 10, -1, -2))
+    (1 <> 5).stream.zipAll(1 <> 10, -1, -2))
 
-  testEqual_~("short two")(
+  testEqualStream("short two")(
     (1 to 10).zipAll(1 to 5, -1, -2),
-    (1 <> 10).~.zipAll(1 <> 5, -1, -2))
+    (1 <> 10).stream.zipAll(1 <> 5, -1, -2))
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

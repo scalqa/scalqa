@@ -1,44 +1,49 @@
 package scalqa; package gen; package able; import language.implicitConversions
 
-trait Size extends Empty:
-  /**/     def size   : Int
-  override def isEmpty: Boolean = size == 0
+trait Size:
+  def size: Int
 
 object Size:
 
-  @tn("size_Opt")  def size_?(v: AnyRef) : Int.Opt  =
+  extension(inline x: Size)
+    inline def isEmpty : Boolean = x.size == 0
+    inline def nonEmpty: Boolean = x.size != 0
+
+  def sizeOpt(v: AnyRef) : Int.Opt  =
     v match
        case v: Size     => v.size.?
-       case v: Opt      => v.size_?
-       case v: Long     => v.sizeLong.?.map_?(v => if(v <= Int.max) v.toInt else \/ :Int.Opt)
-       case v: Opt.Long => v.sizeLong_?.map_?(v => if(v <= Int.max) v.toInt else \/ :Int.Opt)
+       case v: Opt      => v.sizeOpt
+       case v: Long     => v.sizeLong.?.mapOpt(v => if(v <= Int.max) v.toInt else \/ :Int.Opt)
+       case v: Opt.Long => v.sizeLongOpt.mapOpt(v => if(v <= Int.max) v.toInt else \/ :Int.Opt)
        case _           => \/
 
-  @tn("sizeLong_Opt") def sizeLong_?(v: AnyRef): Long.Opt =
+  def sizeLongOpt(v: AnyRef): Long.Opt =
     v match
        case v: Long     => v.sizeLong.?
-       case v: Opt.Long => v.sizeLong_?
+       case v: Opt.Long => v.sizeLongOpt
        case v: Size     => v.size.toLong.?
-       case v: Opt      => v.size_?.map(_.toLong)
+       case v: Opt      => v.sizeOpt.map(_.toLong)
        case _           => \/
 
   // ************************************************************************************
-  trait Long extends Empty:
-    /**/     def sizeLong: scala.Long
-    override def isEmpty : Boolean      = sizeLong == 0L
+  trait Long:
+    def sizeLong: scala.Long
+
+  extension(inline x: Long)
+    inline def isEmpty : Boolean = x.sizeLong == 0L
+    inline def nonEmpty: Boolean = x.sizeLong != 0L
 
   // ************************************************************************************
   trait Zero extends Size:
     final override def size    = 0
-    final override def isEmpty = true
 
   // ************************************************************************************
   trait Opt:
-    @tn("size_Opt") def size_? : Int.Opt
+    def sizeOpt : Int.Opt
 
   object Opt:
     trait Long:
-      @tn("sizeLong_Opt") def sizeLong_? : Long.Opt
+      def sizeLongOpt : Long.Opt
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

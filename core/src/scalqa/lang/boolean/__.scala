@@ -25,10 +25,10 @@ ___________________________________________________________________________*/
 
     ```
 
-        val s: Boolean.~    = Boolean.~(true,true,false,false)
+        val s: Boolean.Stream = Boolean.Stream(true,true,false,false)
 
-        val o: Boolean.Opt  = s.readRaw_? // Holds Boolean.Opt(true)
+        val o: Boolean.Opt    = s.readRawOpt // Holds Boolean.Opt(true)
 
-        val l: Boolean.><   = s.><       // Holds (true,false,false)
+        val l: Boolean.Pack   = s.pack      // Holds (true,false,false)
     ```
 */

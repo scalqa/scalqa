@@ -24,11 +24,3 @@ private[any] abstract class z_TypeNameDefault:
  __\  \/ /___/ __  |/ /__/ /_/ /_/ __  |   (c) 2021, Scalqa.org Inc
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
-/**
-@object Given -> ### Implicit TypeNameinitions
-
-    Contains a set of "TypeName" interfaces, which can be given (implicitly) for any type.
-
-    Also contains "Shape" interfaces for some containers.
-
-*/

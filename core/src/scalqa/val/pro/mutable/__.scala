@@ -9,10 +9,10 @@ object Mutable:
   def sealable[A](value: A)             : Mutable[A] & Able.Seal = new Z.Sealable(value)
 
   extension[A](x: Mutable[A])
-    @tn("mutableMap_View") def mutableMap_^[B](m: A=>B, r: B => A)                   : Mutable[B]    = mutableMap_^(using TwoWayFunction(m,r))
-    @tn("mutableMap_View") def mutableMap_^[B](using bm: TwoWayFunction[A,B])        : Mutable[B]    = new z.TwoWay_View.M(x, bm)
-    /**/                   def bindTo(v: Pro.O[_ <: A])                              : Event.Control = v.onChange(() => x() = v())
-    /**/                   def bindTo[B<:A](v: Idx.Selection.Observable[B], dflt: A) : Event.Control = v.onChangeRun { x() = v.value_? or dflt }
+    def mutableMapView[B](m: A=>B, r: B => A)                 : Mutable[B]    = mutableMapView(using TwoWayFunction(m,r))
+    def mutableMapView[B](using bm: TwoWayFunction[A,B])      : Mutable[B]    = new z.TwoWay_View.M(x, bm)
+    def bindTo(v: Pro.O[_ <: A])                              : Event.Control = v.onChange(() => x() = v())
+    def bindTo[B<:A](v: Idx.Selection.Observable[B], dflt: A) : Event.Control = v.onChangeRun { x() = v.valueOpt or dflt }
 
   // Members ~~~~~~~~~~~~~~~~~~~~~
   transparent inline def X = mutable.X
@@ -29,12 +29,12 @@ ___________________________________________________________________________*/
        The usual implementation looks like:
        ```
        class Foo:
-         val name_*           : Pro.M[String] = Pro.M[String]("")
-         def name             : String        = name_*()
-         def name_=(v :String): Unit          = name_*() = v
-         val bar_*            : Int.Pro.M     = Int.Pro.M(0)
-         def bar              : Int           = value_*()
-         def bar_=(v :Int)    : Unit          = value_*() = v
+         val namePro           : Pro.M[String] = Pro.M[String]("")
+         def name             : String        = namePro()
+         def name_=(v :String): Unit          = namePro() = v
+         val barPro            : Int.Pro.M     = Int.Pro.M(0)
+         def bar              : Int           = valuePro()
+         def bar_=(v :Int)    : Unit          = valuePro() = v
        ```
 
 @def update -> Updates value

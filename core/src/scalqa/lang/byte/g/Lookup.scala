@@ -3,9 +3,9 @@ package scalqa; package lang; package byte; package g; import language.implicitC
 import scala.collection.immutable.IntMap
 
 trait Lookup[A<:Raw,+B] extends Val.Lookup[A,B]:
-  @tn("get_Opt")             def get_?(key: A) : Val.Opt[B]
-  /**/              override def get(v: A)     : B           = get_?(v) or (throw ZZ.ME(v.tag))
-  @tn("key_Stream") override def key_~         : Stream[A]   = super.key_~.raw
+  override def getOpt(key: A): Val.Opt[B]
+  override def get(v: A)     : B           = getOpt(v) or (throw ZZ.ME(v.tag))
+  override def keyStream     : Stream[A]   = super.keyStream.raw
 
 object Lookup:
   implicit def implicitRequest[A<:Raw,B](v: \/): Lookup[A,B] = Stable.void
@@ -19,28 +19,28 @@ object Lookup:
     object X:
       class Basic[A<:Raw,B](iSz: Int) extends Lookup.Mutable[A,B]:
         private val real = new collection.mutable.LongMap[B](iSz)
-        /**/               def size           : Int          = real.size
-        @tn("get_Opt")     def get_?(key: A)  : Val.Opt[B]   = Val.Opt.fromScala(real.get(key.real))
-        @tn("pair_Stream") def pair_~         : ~[(A, B)]    = real.iterator.~.map((k,v)=>(k.cast[A],v))
-        /**/               def put(k: A, v: B): Unit         = real.update(k.real,v)
-        /**/               def clear          : Unit         = real.clear
-        /**/               def remove(k: A)   : Val.Opt[B]   = Val.Opt.fromScala(real.remove(k.real))
+        def size           : Int               = real.size
+        def getOpt(key: A) : Val.Opt[B]        = Val.Opt.fromScala(real.get(key.real))
+        def pairStream     : Val.Stream[(A,B)] = real.iterator.stream.map((k,v)=>(k.cast[A],v))
+        def put(k: A, v: B): Unit              = real.update(k.real,v)
+        def clear          : Unit              = real.clear
+        def remove(k: A)   : Val.Opt[B]        = Val.Opt.fromScala(real.remove(k.real))
 
   // ************************************************************************************************************
   class Stable[A<:Raw,B] private(real: IntMap[B]) extends Val.Lookup.Stable[A,B] with Lookup[A,B]:
     type THIS_TYPE = Stable[A,B]
-    /**/                       def size                  : Int            = real.size
-    @tn("get_Opt")             def get_?(key: A)         : Val.Opt[B]     = Val.Opt.fromScala(real.get(key.real))
-    @tn("key_Stream") override def key_~                 : Stream[A]      = real.keysIterator.~.raw.map(_.toByte.cast[A])
-    @tn("pair_Stream")         def pair_~                : ~[(A, B)]      = real.~.map(v => (v._1.toByte.cast[A],v._2))
-    /**/                       def join(k: A, v: B)      : Stable[A,B] = new Stable(real.updated(k.real.toInt, v))
-    /**/                       def joinAll(v: ~[(A, B)]) : Stable[A,B] = new Stable(real.concat(v.map(v => (v._1.real.toInt,v._2)).iterator))
+    override def size                        : Int                = real.size
+    override def getOpt(key: A)              : Val.Opt[B]         = Val.Opt.fromScala(real.get(key.real))
+    override def keyStream                   : Stream[A]          = real.keysIterator.stream.raw.map(_.toByte.cast[A])
+    override def pairStream                  : Val.Stream[(A,B)]  = real.stream.map(v => (v._1.toByte.cast[A],v._2))
+    override def join(k: A, v: B)            : Stable[A,B]        = new Stable(real.updated(k.real.toInt, v))
+    override def joinAll(v:Val.Stream[(A,B)]): Stable[A,B]        = new Stable(real.concat(v.map(v => (v._1.real.toInt,v._2)).iterator))
 
   object Stable:
-    /**/            def apply[A<:Raw,B](v: (A,B) *)      : Stable[A,B] = apply(v.~)
-    /**/            def apply[A<:Raw,B](v: ~[(A,B)])     : Stable[A,B] = new Stable(IntMap.from(v.map(v => (v._1.real.toInt,v._2)).iterator))
-    @tn("getVoid")  def void[A<:Raw,B]                   : Stable[A,B] = z_Void.cast[Stable[A,B]]; private object z_Void extends Stable(IntMap.empty) with Gen.Void
-    implicit inline def implicitRequest[A<:Raw,B](v: \/) : Stable[A,B] = void
+    /**/            def apply[A<:Raw,B](v: (A,B) *)         : Stable[A,B] = apply(v.stream)
+    /**/            def apply[A<:Raw,B](v:Val.Stream[(A,B)]): Stable[A,B] = new Stable(IntMap.from(v.map(v => (v._1.real.toInt,v._2)).iterator))
+    @tn("getVoid")  def void[A<:Raw,B]                      : Stable[A,B] = z_Void.cast[Stable[A,B]]; private object z_Void extends Stable(IntMap.empty) with Gen.Void
+    implicit inline def implicitRequest[A<:Raw,B](v: \/)    : Stable[A,B] = void
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

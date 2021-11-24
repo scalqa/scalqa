@@ -4,12 +4,12 @@ private[scalqa] object Schedule:
 
   def everyIn[U](period: Time.Length, initDelay: Time.Length, job: () => U): Event.Control =
     val c = z_EventControl(job)
-    c.future = Setup.schedular_*().scheduleAtFixedRate(c, initDelay.nanosTotal.toLong, period.nanosTotal.toLong, java.util.concurrent.TimeUnit.NANOSECONDS)
+    c.future = Setup.schedularPro().scheduleAtFixedRate(c, initDelay.nanosTotal.toLong, period.nanosTotal.toLong, java.util.concurrent.TimeUnit.NANOSECONDS)
     c
 
   def in[U](delay: Time.Length, job: () => U): Event.Control =
     val c = z_EventControl(job)
-    c.future = Setup.schedular_*().schedule(c, delay.nanosTotal.toLong, java.util.concurrent.TimeUnit.NANOSECONDS)
+    c.future = Setup.schedularPro().schedule(c, delay.nanosTotal.toLong, java.util.concurrent.TimeUnit.NANOSECONDS)
     c
 
   def apply(r: Runnable): Unit = Setup.defaultExecutionContext.execute(r)
@@ -24,7 +24,7 @@ private[scalqa] object Schedule:
 
     override def run: Unit =
       try
-        target_?.forval(_())
+        targetOpt.forval(_())
       catch
       case t: Throwable =>
         if (t != Event.CancelRequest) t.printStackTrace();

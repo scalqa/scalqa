@@ -14,7 +14,7 @@ transparent trait xtra:
   extension(inline x: String.Opaque) inline def real: java.lang.String = x.cast[java.lang.String]
 
   // Problem ----------------------------------------------------------------------------------------------------------
-  extension[A](inline x: Result.Problem)@tn("problemResult") inline def ?? : Result[A] = x.cast[Result[A]] // This has to be duplicated in global library, though publicaly defined in Problem
+  extension[A](inline x: Result.Problem) inline def ?? : Result[A] = x.cast[Result[A]] // This has to be duplicated in global library, though publicaly defined in Problem
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

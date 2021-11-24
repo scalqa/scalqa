@@ -1,12 +1,12 @@
 package scalqa; package gen; package able; import language.implicitConversions
 
 trait Add[A]:
-  /**/                  def add(v: A)            : Unit
-  /**/                  def addAll(v: ~[A])      : Unit      = v.foreach(add)
+  /**/   def add(v: A)                   : Unit
+  /**/   def addAll(v: Val.Stream[A])    : Unit      = v.foreach(add)
 
-  @tn("add")     inline def += (inline v: A)     : this.type = { add(v);        this }
-  @tn("addAll")  inline def ++=(inline v: ~[A])  : this.type = { addAll(v);     this }
-  @tn("addOpt")  inline def ++=(inline v: Opt[A]): this.type = { v.forval(add); this }
+  inline def += (inline v: A)            : this.type = { add(v);        this }
+  inline def ++=(inline v: Val.Stream[A]): this.type = { addAll(v);     this }
+  inline def ++=(inline v: Opt[A])       : this.type = { v.forval(add); this }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -30,7 +30,7 @@ ___________________________________________________________________________*/
          x.add(5)
          x.add(6)
 
-         x.~.TP // Prints ~(1, 2, 3, 4, 5, 6)
+         x.stream.TP // Prints Stream(1, 2, 3, 4, 5, 6)
       ```
 
 @def += -> Alias for [[add]]
@@ -42,7 +42,7 @@ ___________________________________________________________________________*/
 
          x += 4 += 5 += 6
 
-         x.~.TP // Prints ~(1, 2, 3, 4, 5, 6)
+         x.stream.TP // Prints Stream(1, 2, 3, 4, 5, 6)
       ```
 
 @def addAll -> Add many
@@ -53,9 +53,9 @@ ___________________________________________________________________________*/
         val x =  Idx.M(1, 2, 3)
 
          x.addAll(4 <> 6)
-         x.addAll( ~~(7,8,9))
+         x.addAll( Stream(7,8,9))
 
-         x.~.TP // ~(1, 2, 3, 4, 5, 6, 7, 8, 9)
+         x.stream.TP // Stream(1, 2, 3, 4, 5, 6, 7, 8, 9)
       ```
 
 @def ++= -> Alias for [[addAll]]
@@ -65,9 +65,9 @@ ___________________________________________________________________________*/
         // Generic example
         val x =  Idx.M(1, 2, 3)
 
-        x ++= (4 <> 6) ++= ~~(7, 8, 9)
+        x ++= (4 <> 6) ++= Stream(7, 8, 9)
 
-        x.~.TP // ~(1, 2, 3, 4, 5, 6, 7, 8, 9)
+        x.stream.TP // Stream(1, 2, 3, 4, 5, 6, 7, 8, 9)
       ```
 
 @def ++= -> Alias for [[addAll]]

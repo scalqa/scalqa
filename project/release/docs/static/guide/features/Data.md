@@ -96,11 +96,11 @@ To see what they are, look at [Float](../../api/scalqa/lang/Float$.html), the 'A
   
 Here are some usage examples:
 ```
-val stream: Price.~          = (1 <> 10).~.map(_.Dollars)
-val opt   : Price.Opt        = stream.readRaw_?
-val pack  : Price.><         = stream.><
-val idx   : Price.Idx        = pack
-val col   : Price.Collection = pack
+val s: Price.Stream     = (1 <> 10).stream.map(_.Dollars)
+val o: Price.Opt        = stream.readRawOpt
+val p: Price.Pack       = stream.pack
+val i: Price.Idx        = pack
+val c: Price.Collection = pack
 ```
 
 Let's find out how efficient those specialized containers are. 
@@ -108,8 +108,8 @@ To do so, we will benchmark them to Scala non-specialized collections:
 ```
 J.Benchmark(
   ("Scala ",      () => (1 to 1000).iterator.map(v => (v % 200 + 0.99).Dollars).filter(_.isNotExpensive).map(_.discount(5.Percent)).sum),
-  ("Scalqa",      () => (1 <> 1000).~       .map(v => (v % 200 + 0.99).Dollars).filter(_.isNotExpensive).map(_.discount(5.Percent)).sum),
-  ("Scalqa Heavy",() => (1 <> 1000).~       .MAP(v => (v % 200 + 0.99).Dollars).FILTER(_.isNotExpensive).MAP(_.discount(5.Percent)).sum),
+  ("Scalqa",      () => (1 <> 1000).stream  .map(v => (v % 200 + 0.99).Dollars).filter(_.isNotExpensive).map(_.discount(5.Percent)).sum),
+  ("Scalqa Heavy",() => (1 <> 1000).stream  .MAP(v => (v % 200 + 0.99).Dollars).FILTER(_.isNotExpensive).MAP(_.discount(5.Percent)).sum),
 )
 ```
 ```

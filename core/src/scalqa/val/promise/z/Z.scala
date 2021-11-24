@@ -9,7 +9,7 @@ object Z:
     val run: A=>Unit = v =>
       try{ val
         fp = f(v);
-        fp.result_?.forval(c.complete) or {if(fp.isInstanceOf[z.Control.Promise[_]]) fp.cast[z.Control.Promise[B]].linkTo(c) else fp.onResult(c.complete)}}
+        fp.resultOpt.forval(c.complete) or {if(fp.isInstanceOf[z.Control.Promise[_]]) fp.cast[z.Control.Promise[B]].linkTo(c) else fp.onResult(c.complete)}}
       catch { case scala.util.control.NonFatal(t) => c.complete(Result.Problem(t)) }
     p.process(run,c.complete(_))
     c.promise
@@ -17,8 +17,8 @@ object Z:
   // -------------------------------------------------------------------------------------------------------------------------
   def zip[A,B](fa: Promise[A], fb: Promise[B])(using ec: Context): Promise[(A, B)] =
     val c = Control[(A, B)]()
-    fa.process( va => fb.result_?.forval(_.forval(vb => c.complete((va, vb)))), c.complete(_))
-    fb.process( vb => fa.result_?.forval(_.forval(va => c.complete((va, vb)))), c.complete(_))
+    fa.process( va => fb.resultOpt.forval(_.forval(vb => c.complete((va, vb)))), c.complete(_))
+    fb.process( vb => fa.resultOpt.forval(_.forval(va => c.complete((va, vb)))), c.complete(_))
     c.promise
 
     // -------------------------------------------------------------------------------------------------------------------------
@@ -27,22 +27,22 @@ object Z:
     p.onResult(_ => c.trySuccess(()))
     try
       concurrent.Await.result(c.future, concurrent.duration.Duration(d.nanosTotal, concurrent.duration.NANOSECONDS))
-      p.result_?.get
+      p.resultOpt.get
     catch
-      case _: concurrent.TimeoutException => Result[A](new Result.Problem.X.Timeout(d.tag))
+      case _ : concurrent.TimeoutException => Result[A](new Result.Problem.X.Timeout(d.tag))
       case t: Throwable                   => Result[A](Result.Problem(t))
 
   // **********************************************************************************************************
   class Completed[A](v: A) extends Promise[A]:
-    @tn("result_Opt") def result_?                                          : Opt[Result[A]]  = v.??
-    override          def mapAll[B](f: Result[A]=>Result[B])(using Context) : Promise[B]      = { val r=f(v.??); if (r.isValue) Completed(r.value) else Failed(r.problem)}
-    /**/              def onResult[U]( f: Result[A] => U)   (using Context) : Unit            = f(v.??)
+    /**/     def resultOpt                                         : Opt[Result[A]]  = Result(v)
+    override def mapAll[B](f: Result[A]=>Result[B])(using Context) : Promise[B]      = { val r=f(Result(v)); if (r.isValue) Completed(r.value) else Failed(r.problem)}
+    /**/     def onResult[U]( f: Result[A] => U)   (using Context) : Unit            = f(Result(v))
 
   // **********************************************************************************************************
   class Failed[A](v: Result.Problem) extends Promise[A]:
-    @tn("result_Opt") def result_?                                          : Opt[Result[A]]  = v : Result[A]
-    override          def mapAll[B](f: Result[A]=>Result[B])(using Context) : Promise[B]      = { val r=f(v.??); if (r.isValue) Completed(r.value) else Failed(r.problem)}
-    /**/              def onResult[U]( f: Result[A] => U)   (using Context) : Unit            = f(v.??)
+    /**/     def resultOpt                                         : Opt[Result[A]]  = v : Result[A]
+    override def mapAll[B](f: Result[A]=>Result[B])(using Context) : Promise[B]      = { val r=f(Result(v)); if (r.isValue) Completed(r.value) else Failed(r.problem)}
+    /**/     def onResult[U]( f: Result[A] => U)   (using Context) : Unit            = f(Result(v))
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

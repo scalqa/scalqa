@@ -2,12 +2,12 @@ package scalqa; package j; package vm; package z; import language.implicitConver
 
 object ClassLoader:
 
-  def reload(className: String, path_~ : ~[J.Path]): Class[_] = new ClassLoader {
-    val paths = path_~.><
+  def reload(className: String, ps : Stream[J.Path]): Class[_] = new ClassLoader {
+    val paths = ps.pack
     override def loadClass(cn: String): Class[_] = {
       if (!cn.startsWith(className)) return super.loadClass(cn)
       val name = cn.replace(".", "/") + ".class"
-      val file = paths.~.map_?(v => (v + name).file_?).find_?(_.exists) or (J.illegalState("Not found " + name + " in: \n" + paths.~.makeString("\n")))
+      val file = paths.stream.mapOpt(v => (v + name).fileOpt).findOpt(_.exists) or (J.illegalState("Not found " + name + " in: \n" + paths.stream.makeString("\n")))
       //("Loading: " + file).TP
       val ba = new Array[Byte](file.size.toInt)
       val s  = new java.io.DataInputStream(new java.io.FileInputStream(file.real))

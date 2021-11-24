@@ -2,7 +2,7 @@ package scalqa; package test.`val`.stream._use._evaluate; import language.implic
 
 object exists extends J.Test:
 
-  def all = (1 <> 100).~.reverseEvery(25)
+  def all = (1 <> 100).stream.reverseEvery(25)
 
   test{
     assertTrue(all.exists(_ > 50))

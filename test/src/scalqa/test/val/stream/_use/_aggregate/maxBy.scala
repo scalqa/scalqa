@@ -3,15 +3,15 @@ package scalqa; package test.`val`.stream._use._aggregate; import language.impli
 object maxBy extends J.Test:
 
   testTrue{
-    val l = (1 <> 100).~.reverseEvery(10).><
-    val max = l.~.maxBy(_ * -1)
-    l.~.isEvery(_ * -1 <= max * -1)
+    val l = (1 <> 100).stream.reverseEvery(10).pack
+    val max = l.stream.maxBy(_ * -1)
+    l.stream.isEvery(_ * -1 <= max * -1)
   }
 
   testTrue("calls") {
-    val l = (1 <> 100).~.reverseEvery(10).><
+    val l = (1 <> 100).stream.reverseEvery(10).pack
     var cnt = 0
-    val v = l.~.maxBy(x => { cnt += 1; x * 10 })
+    val v = l.stream.maxBy(x => { cnt += 1; x * 10 })
     cnt == l.size
   }
 

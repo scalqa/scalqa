@@ -1,23 +1,23 @@
 package scalqa; package j; package util; package test; package z; import language.implicitConversions
 
 private[j] class Group(test: Test):
-  private var children : ><[Group | Method]  = \/
+  private var children : Pack[Group | Method]  = \/
 
   val name =
     def get(s: String): String = s.takeAfterLast(".").replace("$", "").?.dropOnly("Main") or get(s.takeBeforeLast("."))
-    test.name.^.? or get(test.getClass.getName)
+    test.name.?? or get(test.getClass.getName)
 
   def add(v : Group | Method) = children += v
 
-  @tn("run_Result") def run_??(lvl: Int): Result[true] =
+  def runResult(lvl: Int): Result[true] =
     var first          = true
     def prn(v: String) = { System.out.print(v); System.out.flush }
     def prnFirst       = if(first) { first = false; prn("  " * lvl + " " + name + "\n") }
 
-    children.~.map[Result[true]]{
+    children.stream.map[Result[true]]{
       case v: Group =>
         prnFirst
-        v.run_?? (lvl + 1)
+        v.runResult (lvl + 1)
       case m: Method =>
         if(first && m.name.isEmpty)
           first = false
@@ -26,9 +26,9 @@ private[j] class Group(test: Test):
           prnFirst
           prn(("  " * lvl + "   ." + m.name + " ").padEndTo(60))
         test.resetCounters
-        m.run_??.^(r => prn(r.problem_?.map("FAILED: " + _.message).or("Ok") + "\n"))
+        m.runResult.self(r => prn(r.problemOpt.map("FAILED: " + _.message).or("Ok") + "\n"))
     }
-    .take(_.isProblem).read_? or Result(true)
+    .take(_.isProblem).readOpt or Result(true)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

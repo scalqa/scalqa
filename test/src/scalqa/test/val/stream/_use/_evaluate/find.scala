@@ -2,11 +2,11 @@ package scalqa; package test.`val`.stream._use._evaluate; import language.implic
 
 object find extends J.Test:
 
-  def all = (1 <> 100).~.reverseEvery(25)
+  def all = (1 <> 100).stream.reverseEvery(25)
 
-  test("_?") {
-    assertTrue(all.find_?(_ > 50))
-    assertFalse(all.find_?(_ > 550))
+  test("Opt") {
+    assertTrue(all.findOpt(_ > 50))
+    assertFalse(all.findOpt(_ > 550))
   }
 
 /*___________________________________________________________________________

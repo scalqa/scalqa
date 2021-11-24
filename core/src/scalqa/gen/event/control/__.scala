@@ -73,7 +73,7 @@ ___________________________________________________________________________*/
     ```
     val idx = Idx.OM[Int]()
 
-    var hardRef = idx.onChange(_.~.print).removeHardReference
+    var hardRef = idx.onChange(_.stream.print).removeHardReference
 
     System.gc
 

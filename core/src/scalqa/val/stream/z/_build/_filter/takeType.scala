@@ -1,10 +1,10 @@
 package scalqa; package `val`; package stream; package z; package _build; package _filter; import language.implicitConversions
 
-class takeType[B](x: ~[Any])(implicit t: ClassTag[B]) extends z.x.Pipe[B](x):
+class takeType[B](x: Stream[Any])(implicit t: ClassTag[B]) extends z.x.Pipe[B](x):
 
-  @tn("read_Opt") def read_? =
-    var o = x.read_?
-    while(o){ if(o.takeType[B]) return o.cast[Opt[B]];  o = x.read_? }
+  def readOpt =
+    var o = x.readOpt
+    while(o){ if(o.takeType[B]) return o.cast[Opt[B]];  o = x.readOpt }
     o.cast[Opt[B]]
 
 /*___________________________________________________________________________

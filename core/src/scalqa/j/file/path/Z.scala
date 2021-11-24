@@ -20,7 +20,7 @@ object Z:
   def join(p: File.Path, a: File.Path | String): File.Path =
     val v = File.Path.any(a)
     if (p.isEmpty) v
-    else if (v.root_?) J.illegalState("Cannot extend with root: " + v)
+    else if (v.rootOpt) J.illegalState("Cannot extend with root: " + v)
     else p.real.resolve(v.real)
 
   // **********************************************************************************

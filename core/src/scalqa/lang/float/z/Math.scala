@@ -1,44 +1,40 @@
 package scalqa; package lang; package float; package z; import language.implicitConversions
 
-object Math extends scala.math.Numeric.FloatIsFractional with Ordering[Float] with ~~.Custom.Ordering[Float] with Gen.Math.Sum[Float] with Gen.Math.Average[Float]:
+object Math extends scala.math.Numeric.FloatIsFractional with Ordering[Float] with Stream.Custom.Ordering[Float] with Gen.Math.Sum[Float] with Gen.Math.Average[Float]:
 
   def compare(x:Float, y:Float) = java.lang.Float.compare(x,y)
 
-  @tn("min_Opt")
-    def min_?(s: ~[Float]): Val.Opt[Float] = s.read_?.map(v=>
-      s match
-         case s: Float.~ => s.FOLD(v)((v,w) => if(v<w) v else w)
-         case s          => s.FOLD(v)((v,w) => if(v<w) v else w)
-    )
+  def minOpt(s: Stream[Float]): Val.Opt[Float] = s.readOpt.map(v=>
+    s match
+       case s: Float.Stream => s.FOLD(v)((v,w) => if(v<w) v else w)
+       case s               => s.FOLD(v)((v,w) => if(v<w) v else w)
+  )
 
-  @tn("max_Opt")
-    def max_?(s: ~[Float]): Val.Opt[Float] = s.read_?.map(v=>
-      s match
-         case s: Float.~ => s.FOLD(v)((v,w) => if(v>w) v else w)
-         case s          => s.FOLD(v)((v,w) => if(v>w) v else w)
-    )
+  def maxOpt(s: Stream[Float]): Val.Opt[Float] = s.readOpt.map(v=>
+    s match
+       case s: Float.Stream => s.FOLD(v)((v,w) => if(v>w) v else w)
+       case s               => s.FOLD(v)((v,w) => if(v>w) v else w)
+  )
 
-  @tn("range_Opt")
-    def range_?(s: ~[Float]): Val.Opt[Float.<>] = s.read_?.map(v => {
-      var f,l=v
-      s match
-         case s: Float.~ => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
-         case s          => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
-      new Float.<>(f,l,true)
-    })
+  def rangeOpt(s: Stream[Float]): Val.Opt[Float.Range] = s.readOpt.map(v => {
+    var f,l=v
+    s match
+       case s: Float.Stream => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
+       case s               => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
+    new Float.Range(f,l,true)
+  })
 
-  @tn("sum_Opt")
-    def sum_?(s: ~[Float]): Val.Opt[Float] = s.read_?.map(first => {
-      var sum: Float = first
-      s match
-         case s: Float.~ => s.FOREACH(v => sum = sum + v)
-         case s          => s.FOREACH(v => sum = sum + v)
-      sum
-    })
+  def sumOpt(s: Stream[Float]): Val.Opt[Float] = s.readOpt.map(first => {
+    var sum: Float = first
+    s match
+       case s: Float.Stream => s.FOREACH(v => sum = sum + v)
+       case s               => s.FOREACH(v => sum = sum + v)
+    sum
+  })
 
-  /**/               def average  (s: ~[Float]) = average_?(s) or 0F
-  @tn("average_Opt") def average_?(s: ~[Float]) = new Calculation().^(l => s match{case s:Float.~ => s.FOREACH(l.add); case s => s.FOREACH(l.add)}).averageOpt
-  /**/               def averageCalculation     = new Calculation
+  def average   (s: Stream[Float]) = averageOpt(s) or 0F
+  def averageOpt(s: Stream[Float]) = new Calculation().self(l => s match{case s:Float.Stream => s.FOREACH(l.add); case s => s.FOREACH(l.add)}).averageOpt
+  def averageCalculation           = new Calculation
 
   // *******************************************************************
   class Calculation extends Gen.Math.Average.Calculation[Float]:

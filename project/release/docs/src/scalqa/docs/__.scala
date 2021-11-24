@@ -15,7 +15,7 @@ object Docs:
                       case "Range"          => name in ("foreach", "flatMap", "map")
                       case "TwoWayFunction" => name in ("andThen","compose")
                       case "Ordering" if owner.kind.isTypeLike && !owner.dri.location.contains("stream") =>
-                          name.startsWith("thenComparing") || name.notIn("compare","compare_?","reverse","on","join","+","map") && !name.contains("^")
+                          name.startsWith("thenComparing") || name.notIn("compare","compareOpt","reverse","on","join","+","map") && !name.contains("^")
                       case _                                   => name == "toOpaque"
     }
 

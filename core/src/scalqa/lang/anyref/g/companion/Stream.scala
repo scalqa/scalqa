@@ -1,10 +1,10 @@
 package scalqa; package lang; package anyref; package g; package companion; import language.implicitConversions
 
 class Stream[A]:
-  def apply                              : ~[A] = \/
-  def apply(v: A)                        : ~[A] = ~~(v)
-  def apply(v1: A, v2: A)                : ~[A] = ~~(v1, v2)
-  def apply(v1: A, v2: A, v3: A, vs: A*) : ~[A] = ~~(v1, v2, v3, vs *)
+  def apply                              : Val.Stream[A] = \/
+  def apply(v: A)                        : Val.Stream[A] = Val.Stream(v)
+  def apply(v1: A, v2: A)                : Val.Stream[A] = Val.Stream(v1, v2)
+  def apply(v1: A, v2: A, v3: A, vs: A*) : Val.Stream[A] = Val.Stream(v1, v2, v3, vs *)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

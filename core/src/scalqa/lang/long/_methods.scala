@@ -6,9 +6,9 @@ transparent trait _methods:
 
   extension(inline x:Long)
     @tn("Opt")        inline def ?                         : Long.Opt       = {val v=x; if(v==g.Opt.void.cast[Long]) throw ZZ.LO(); v.cast[Long.Opt]}
-    @tn("range")      inline def <> (inline to: Long)      : Long.<>        = new Long.<>(x,to,true)
-    @tn("rangeX")     inline def <>>(inline to: Long)      : Long.<>        = new Long.<>(x,to,false)
-    @tn("rangeOfSize")inline def <>=(inline size: Int)     : Long.<>        = {val v=x; new lang.Long.<>(v,v+size,false)}
+    @tn("range")      inline def <> (inline to: Long)      : Long.Range     = new Long.Range(x,to,true)
+    @tn("rangeX")     inline def <>>(inline to: Long)      : Long.Range     = new Long.Range(x,to,false)
+    @tn("rangeOfSize")inline def <>=(inline size: Int)     : Long.Range     = {val v=x; new Long.Range(v,v+size,false)}
     /**/        infix inline def max(inline v: Long)       : Long           = {val y=x; val w=v; if(y.real > w.real) y else w }
     /**/        infix inline def min(inline v: Long)       : Long           = {val y=x; val w=v; if(y.real < w.real) y else w }
     /**/              inline def tagBrief                  : String         = Z.tagBrief(x)
@@ -60,7 +60,7 @@ ___________________________________________________________________________*/
 
 @def <> ->  Range
 
-    Returns Long.<> from current to given value
+    Returns Long.Range from current to given value
     ```
       (1L <> 10L).TP  // Prints  1 <> 10
     ```
@@ -68,7 +68,7 @@ ___________________________________________________________________________*/
 
 @def <>> ->  Exclusive end range
 
-    Returns Long.<> from current to given value exclusive
+    Returns Long.Range from current to given value exclusive
     ```
       (1L <>> 10L).TP  // Prints  1 <> 9
     ```

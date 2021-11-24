@@ -1,9 +1,9 @@
 package scalqa; package lang; package short; package g; import language.implicitConversions
 
 trait Idx[A<:Raw] extends Val.Idx[A] with Collection[A]:
-  /**/                   def apply(i: Int) : A
-  @tn("stream") override def ~             : Stream[A] = Z.Stream_ofIdx(this)
-  /**/          override def contains(v: A): Boolean   = {var i=0; val sz=size; while(i<sz){if(apply(i).real==v.real) return true; i+=1}; false}
+  /**/     def apply(i: Int) : A
+  override def stream        : Stream[A] = Z.Stream_ofIdx(this)
+  override def contains(v: A): Boolean   = {var i=0; val sz=size; while(i<sz){if(apply(i).real==v.real) return true; i+=1}; false}
 
 object Idx:
   implicit inline def implicitRequest[A<:Raw](v: \/): Idx[A] = Pack.void

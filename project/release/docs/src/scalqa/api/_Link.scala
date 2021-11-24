@@ -10,19 +10,19 @@ trait _Link:
     def isPrivate : Boolean  = x.dri.isPrivate
     def label     : String   = if(x.name.contains(".")) x.name else x.dri.label()
 
-    def lookupAnchor_? : Opt[Link]=
+    def lookupAnchorOpt : Opt[Link]=
       if(x.dri.anchor.isEmpty) \/
       else
         x.dri.location match
-          case "scalqa" if x.dri.anchor.startsWith("\\/")  => Link("\\/", Registry.member_?(Id("scalqa.gen.request.void")).get.dri)
-          case s if s=="scalqa"                            => x.lookup_?(s)
-          case s if s.endsWith("$")                        => x.lookup_?(s.dropLast(1), true)
-          case s if s.endsWith(".g.companion.Containers")  => x.copy(name = x.name.remove(".G.Companion.Containers")).lookup_?(s.remove(".companion.Containers"))
-          case s if s.contains(".g.companion.")            => x.copy(name = x.name.remove(".G.Companion")).lookup_?(s.remove(".companion"))
+          case "scalqa" if x.dri.anchor.startsWith("\\/")  => Link("\\/", Registry.memberOpt(Id("scalqa.gen.request.void")).get.dri)
+          case s if s=="scalqa"                            => x.lookupOpt(s)
+          case s if s.endsWith("$")                        => x.lookupOpt(s.dropLast(1), true)
+          case s if s.endsWith(".g.companion.Containers")  => x.copy(name = x.name.remove(".G.Companion.Containers")).lookupOpt(s.remove(".companion.Containers"))
+          case s if s.contains(".g.companion.")            => x.copy(name = x.name.remove(".G.Companion")).lookupOpt(s.remove(".companion"))
           case _ => \/
 
-    def lookup_?(location: String, ignore:Boolean=false): Opt[Link] =
+    def lookupOpt(location: String, ignore:Boolean=false): Opt[Link] =
       val id = Id(location + "." +x.dri.anchor.takeBefore("-").lowerNoOp)
-      Registry.member_?(id)
+      Registry.memberOpt(id)
         .fornil{ if(!ignore) x.name+" No id: "+id +"       " + x.dri.location tp() }
         .map(m => Link(x.name, m.dri))

@@ -12,7 +12,7 @@ private[fx] abstract class Abstract[A] extends java.util.concurrent.atomic.Atomi
 
   protected def fireInvalidated: Unit = get match
     case l: InvalidationListener => l.invalidated(this)
-    case a: Array[AnyRef] => a.~.foreach {
+    case a: Array[AnyRef] => a.stream.foreach {
       case l: InvalidationListener => l.invalidated(this)
       case _                       => ()
     }
@@ -21,7 +21,7 @@ private[fx] abstract class Abstract[A] extends java.util.concurrent.atomic.Atomi
   protected def fireChanged(v: A, old: A): Unit = get match
     case l: ChangeListener[_]    => l.cast[ChangeListener[A]].changed(this, old, v)
     case l: InvalidationListener => l.invalidated(this)
-    case a: Array[AnyRef] => a.~.foreach {
+    case a: Array[AnyRef] => a.stream.foreach {
       case l: ChangeListener[_]    => l.cast[ChangeListener[A]].changed(this, old, v)
       case l: InvalidationListener => l.invalidated(this)
       case _                       => ()
@@ -44,7 +44,7 @@ private[fx] abstract class Abstract[A] extends java.util.concurrent.atomic.Atomi
       case Abstract => ()
       case v: Array[AnyRef] if v.length == 1 => if (v(0) == l) clear(v)
       case v: Array[AnyRef] =>
-        val a = v.~.dropOnly(l).toArray
+        val a = v.stream.dropOnly(l).toArray
         if (a.length == 0) clear(v)
         else if ((v ne a) && !compareAndSet(v, a)) _removeListener(l)
       case v => if (v == l) clear(v)

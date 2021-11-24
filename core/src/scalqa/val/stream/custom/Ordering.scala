@@ -3,9 +3,9 @@ package scalqa; package `val`; package stream; package custom; import language.i
 trait Ordering[A]:
   self: Math.Ordering[A] =>
 
-  @tn("min_Opt")   def min_?  (s: ~[A]): Opt[A]
-  @tn("max_Opt")   def max_?  (s: ~[A]): Opt[A]
-  @tn("range_Opt") def range_?(s: ~[A]): Opt[<>[A]]
+  def minOpt  (s: Stream[A]): Opt[A]
+  def maxOpt  (s: Stream[A]): Opt[A]
+  def rangeOpt(s: Stream[A]): Opt[Range[A]]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

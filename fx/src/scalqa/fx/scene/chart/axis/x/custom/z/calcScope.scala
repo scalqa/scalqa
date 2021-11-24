@@ -2,7 +2,7 @@ package scalqa; package fx; package scene; package chart; package axis; package 
 
 object calcScope:
 
-  def apply[A](axis: X.Custom[A], r: <>[Double], scale: Double, labelSize: Double): Range[Double] =
+  def apply[A](axis: X.Custom[A], r: Val.Range[Double], scale: Double, labelSize: Double): Range[Double] =
     val xr = if (axis.setup.forceZeroInRange && !r.contains(0)) r join 0 else r
     val range = xr.end - xr.start; if (range <= 0) return new Range(0, 100, 10, "0")
 
@@ -43,7 +43,7 @@ object calcScope:
       var maxReqTickGap = 0d
       var last = 0d
       count = 0;
-      (min <> max).step_~(_ + unit).foreach(d => {
+      (min <> max).streamStep(_ + unit).foreach(d => {
         val sz = {
           val v = axis.setup.labelSize(axis.setup.label(axis.map.undo(d)), axis.real.getTickLabelRotation)
           if (axis.setup.side.isVertical) v.getHeight / 2 else v.getWidth / 2

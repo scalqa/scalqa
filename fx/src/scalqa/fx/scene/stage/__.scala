@@ -2,13 +2,13 @@ package scalqa; package fx; package scene; import language.implicitConversions
 
 abstract class Stage(stage: Opt[javafx.stage.Stage] = \/) extends Window:
   protected type REAL = javafx.stage.Stage;
-  protected override def _createReal = stage.or(new javafx.stage.Stage).^(_.setScene(scene.real))
+  protected override def _createReal = stage.or(new javafx.stage.Stage).self(_.setScene(scene.real))
 
-  /**/       lazy  val icons              : Idx.M[Image]   =  Idx.M.wrap(real.getIcons).mutableMap_^[Image]
-  /**/             def show               : Unit           = real.show
-  @tn("title_Pro") def title_*            : Pro.OM[String] = Fx.JavaFx.To.pro_OM(real.titleProperty)
-  /**/             def title              : String         = real.getTitle
-  /**/             def title_=(v: String) : Unit           = real.setTitle(v)
+  lazy val icons              : Idx.M[Image]   =  Idx.M.wrap(real.getIcons).mutableMapView[Image]
+  /**/ def show               : Unit           = real.show
+  /**/ def titlePro           : Pro.OM[String] = Fx.JavaFx.To.pro_OM(real.titleProperty)
+  /**/ def title              : String         = real.getTitle
+  /**/ def title_=(v: String) : Unit           = real.setTitle(v)
 
 object Stage:
 

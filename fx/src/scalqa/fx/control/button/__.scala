@@ -5,8 +5,8 @@ class Button extends button.Base:
   protected override def _createReal = new REAL
 
 object Button:
-  def apply(s: String)                  : Button = new Button().^(b => s.^.?.forval(b.text= _))
-  def apply(s: String, action: => Unit) : Button = apply(s).^(_.onActionRun(action))
+  def apply(s: String)                  : Button = new Button().self(b => s.??.forval(b.text= _))
+  def apply(s: String, action: => Unit) : Button = apply(s).self(_.onActionRun(action))
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Base = button.Base

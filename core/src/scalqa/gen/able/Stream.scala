@@ -1,13 +1,12 @@
 package scalqa; package gen; package able; import language.implicitConversions
 
 trait Stream[+A]:
-
-  @tn("stream") def ~ : ~[A]
+  def stream : Val.Stream[A]
 
 object Stream:
 
   extension [A](inline x: able.Stream[A])
-    @tn("pack") inline def ><(using inline A:Specialized[A]): A.><  = `val`.pack.z.StreamAble(x)
+     inline def pack(using inline A:Specialized[A]): A.Pack  = `val`.pack.z.StreamAble(x)
 
 
 /*___________________________________________________________________________
@@ -19,7 +18,7 @@ ___________________________________________________________________________*/
 /**
 @trait Stream -> Able of providing stream of elements
 
-@def ~ -> Stream elements
+@def stream -> Stream elements
 
    Returns stream of all alements
 

@@ -15,13 +15,13 @@ private[`val`] object Observable_View:
       def apply() = real()
 
     class One[A](p: Pro[A], d: Gen.Observable) extends Abstract[A](p) with Observable[A]:
-      def onChange[U](l: () => U): Event.Control = d.onObservableChange(l) //.^(ref += _.removeHardReference)
+      def onChange[U](l: () => U): Event.Control = d.onObservableChange(l) //.self(ref += _.removeHardReference)
 
     class Two[A](p: Pro[A], d1: Gen.Observable, d2: Gen.Observable) extends Abstract[A](p) with Observable[A]:
-      def onChange[U](l: () => U): Event.Control = Event.Control.join(d1.onObservableChange(l), d2.onObservableChange(l)) //.^(ref += _.removeHardReference)
+      def onChange[U](l: () => U): Event.Control = Event.Control.join(d1.onObservableChange(l), d2.onObservableChange(l)) //.self(ref += _.removeHardReference)
 
     class Three[A](p: Pro[A], d1: Gen.Observable, d2: Gen.Observable, d3: Gen.Observable) extends Abstract[A](p) with Observable[A]:
-      def onChange[U](l: () => U): Event.Control = Event.Control.join(d1.onObservableChange(l), d2.onObservableChange(l), d3.onObservableChange(l)) //.^(ref += _.removeHardReference)
+      def onChange[U](l: () => U): Event.Control = Event.Control.join(d1.onObservableChange(l), d2.onObservableChange(l), d3.onObservableChange(l)) //.self(ref += _.removeHardReference)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

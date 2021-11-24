@@ -2,6 +2,7 @@ package scalqa.j.vm; import language.implicitConversions
 
 import scalqa.lang.*
 import scalqa.Val.Opt
+import scalqa.Val.Stream
 import scalqa.gen.math.{Average, Sum}
 
 object Predef:
@@ -35,6 +36,10 @@ object Predef:
   inline given z_DoubleNumeric: Numeric[Double] = double.z.Math
   inline given z_DoubleSum    : Sum[Double]     = double.z.Math
   inline given z_DoubleAverage: Average[Double] = double.z.Math
+
+
+
+
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

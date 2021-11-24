@@ -1,13 +1,13 @@
 package scalqa; package `val`; package stream; package custom; import language.implicitConversions
 
 class Event extends event.Monitor:
-  private   var beforeFirst, empty : ><[() => Any]                 = \/
-  private   var each, afterLast    : ><[(Int, Time.Length) => Any] = \/
+  private   var beforeFirst, empty : Pack[() => Any]                 = \/
+  private   var each, afterLast    : Pack[(Int, Time.Length) => Any] = \/
 
-  protected def runOnBeforeFirst                                       : Unit = beforeFirst.~.foreach(_())
-  protected def runOnEvery(cnt: Int, tm: Time.Length)                  : Unit = each.~.foreach(_(cnt, tm))
-  protected def runOnAfterLast(cnt: Int, tm: Time.Length)              : Unit = afterLast.~.foreach(_(cnt, tm))
-  protected def runOnEmpty                                             : Unit = empty.~.foreach(_())
+  protected def runOnBeforeFirst                                       : Unit = beforeFirst.stream.foreach(_())
+  protected def runOnEvery(cnt: Int, tm: Time.Length)                  : Unit = each.stream.foreach(_(cnt, tm))
+  protected def runOnAfterLast(cnt: Int, tm: Time.Length)              : Unit = afterLast.stream.foreach(_(cnt, tm))
+  protected def runOnEmpty                                             : Unit = empty.stream.foreach(_())
 
   /**/      def onBeforeFirst[U](l: Time => U)                         : Unit = beforeFirst += { () => l(Time.current) }
   /**/      def onEvery[U](c: Int, l: (Int, Time.Length) => U)         : Unit = each = each.join{ var next = c; (cnt, tm) => if (cnt == next) { next += c; l(cnt, tm) }}

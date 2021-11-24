@@ -2,9 +2,9 @@ package scalqa; package test.`val`.stream._build._map; import language.implicitC
 
 object flatMap extends J.Test:
 
-  testEqual_~(
+  testEqualStream(
     (1 to 100)  .flatMap(v => (1 to 100)  .map(_ * v)),
-    (1 <> 100).~.flatMap(v => (1 <> 100).~.map(_ * v)))
+    (1 <> 100).stream.flatMap(v => (1 <> 100).stream.map(_ * v)))
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

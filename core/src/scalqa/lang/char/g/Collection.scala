@@ -1,17 +1,17 @@
 package scalqa; package lang; package char; package g; import language.implicitConversions
 
 trait Collection[A<:Raw] extends Val.Collection[A] with Able.Contain[A] with any.z.PrimitiveTag.Char:
-  @tn("stream") def ~             : Stream[A]
-  /**/          def contains(v: A): Boolean   = this.~.takeOnly(v).readRaw_?
+  def stream        : Stream[A]
+  def contains(v: A): Boolean   = this.stream.takeOnly(v).readRawOpt
 
 object Collection:
   implicit inline def implicitRequest[A<:Raw](v: \/): Collection[A] = Pack.void
 
   extension[A<:Raw](inline x: Collection[A])
-    inline def map    [B](inline f: A=> B)   (using inline B:Specialized[B]): B.~    = x.~.map(f)
-    inline def flatMap[B](inline f: A=> ~[B])(using inline B:Specialized[B]): B.~    = x.~.flatMap(f)
-    inline def withFilter(inline f: Fun.Filter[A])                          : G.~[A] = x.~.filter(f)
-    inline def foreach[U](inline f: Fun.Consume[A,U])                       : Unit   = x.~.foreach(f)
+    inline def map    [B](inline f: A=> B)           (using inline B:Specialized[B]): B.Stream    = x.stream.map(f)
+    inline def flatMap[B](inline f: A=>Val.Stream[B])(using inline B:Specialized[B]): B.Stream    = x.stream.flatMap(f)
+    inline def withFilter(inline f: Fun.Filter[A])                                  : G.Stream[A] = x.stream.filter(f)
+    inline def foreach[U](inline f: Fun.Consume[A,U])                               : Unit   = x.stream.foreach(f)
 
   // ******************************************************************************************************************************************
   trait Mutable[A<:Raw] extends Collection[A] with Val.Collection.M[A]:
@@ -30,8 +30,6 @@ ___________________________________________________________________________*/
 @trait Collection -> ### Char Specialized Generic Collection
 
     To be used with Char based opaque values.
-
-@def void  -> Get void instance
 
 @def implicitRequest   -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
 

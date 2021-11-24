@@ -2,9 +2,9 @@ package scalqa; package test.`val`.stream._build._mutate; import language.implic
 
 object load extends J.Test:
 
-  testEqual_~(
+  testEqualStream(
     1 <> 100,
-    { var ok = true; (1 <> 100).~.take(_ => ok).load.peek(_ => ok = false) }
+    { var ok = true; (1 <> 100).stream.take(_ => ok).load.peek(_ => ok = false) }
   )
 
 /*___________________________________________________________________________

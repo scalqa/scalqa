@@ -2,10 +2,10 @@ package scalqa; package `val`; package stream; package _use; import language.imp
 
 transparent trait _read:
 
-  extension[A](inline x: ~[A])
-    /**/               inline def read                    : A                = x.read_?.get
-    @tn("read_Opt")    inline def read_?                  : Opt[A]           = x.read_?
-    @tn("read_Stream") inline def read_~(inline cnt: Int) : ~[A] & Able.Size = z._use._read.stream(x,cnt)
+  extension[A](inline x: Stream[A])
+    inline def read                    : A                     = x.readOpt.get
+    inline def readOpt                 : Opt[A]                = x.readOpt
+    inline def readStream(inline cnt: Int) : Stream[A] & Able.Size = z._use._read.stream(x,cnt)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -23,38 +23,38 @@ ___________________________________________________________________________*/
     Delivers next stream element
 
     ```
-      val s : ~[Char] = 'A' <> 'Z'
+      val s : Stream[Char] = 'A' <> 'Z'
 
       s.read.TP  // Prints A
       s.read.TP  // Prints B
       s.read.TP  // Prints C
     ```
-    Note: If stream is empty, [[read]] will fail.  So, use a safer [[read_?]] in most cases
+    Note: If stream is empty, [[read]] will fail.  So, use a safer [[readOpt]] in most cases
 
-@def read_? -> Next optional element
+@def readOpt -> Next optional element
 
     Delivers next stream element or void option if stream is empty
 
     ```
-      val s : ~[Char] = 'A' <> 'C'
+      val s : Stream[Char] = 'A' <> 'C'
 
-      s.read_?.TP  // Prints Opt(A)
-      s.read_?.TP  // Prints Opt(B)
-      s.read_?.TP  // Prints Opt(C)
-      s.read_?.TP  // Prints Opt(\/)
+      s.readOpt.TP  // Prints Opt(A)
+      s.readOpt.TP  // Prints Opt(B)
+      s.readOpt.TP  // Prints Opt(C)
+      s.readOpt.TP  // Prints Opt(\/)
     ```
 
-@def read_~ -> Read many elements
+@def readStream -> Read many elements
 
     Immediatelly removes given number of elements from current stream and returns them as a new stream
 
     ```
-      val s : ~[Int] = 1 <> 12
+      val s : Stream[Int] = 1 <> 12
 
-      s.read_~(3).TP  // Prints ~(1, 2, 3)
-      s.read_~(4).TP  // Prints ~(4, 5, 6, 7)
-      s.read_~(7).TP  // Prints ~(8, 9, 10, 11, 12)
-      s.read_~(8).TP  // Prints ~()
+      s.readStream(3).TP  // Prints Stream(1, 2, 3)
+      s.readStream(4).TP  // Prints Stream(4, 5, 6, 7)
+      s.readStream(7).TP  // Prints Stream(8, 9, 10, 11, 12)
+      s.readStream(8).TP  // Prints Stream()
     ```
     Note: If requested number of elements is not available, the number returned is less (0 if empty)
 */

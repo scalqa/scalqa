@@ -4,7 +4,7 @@ object peekIndexed extends J.Test:
 
   testTrue{
     var sum = 0
-    (0 <> 100).~.peekIndexed((i, v) => sum += i, 100).drain
+    (0 <> 100).stream.peekIndexed((i, v) => sum += i, 100).drain
     sum == (100 to 200).sum
   }
 

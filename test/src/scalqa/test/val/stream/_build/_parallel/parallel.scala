@@ -3,7 +3,7 @@ package scalqa; package test.`val`.stream._build._parallel; import language.impl
 object parallel extends J.Test:
 
   testTrue{
-    (1 <> 100).~.parallel.peek(_ => J.sleep(1.Millis)).countAndTime._2 < 100.Millis
+    (1 <> 100).stream.parallel.peek(_ => J.sleep(1.Millis)).countAndTime._2 < 100.Millis
   }
 
 /*___________________________________________________________________________

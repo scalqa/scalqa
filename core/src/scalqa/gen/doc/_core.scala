@@ -2,23 +2,23 @@ package scalqa; package gen; package doc; import doc.*; import language.implicit
 
 transparent trait _core extends Able.Tag:
   self: Doc =>
-  /**/                var id                                                                               : String
-  /**/                def tag                                                                              : String
-  /**/                def text                                                                             : String
-  @tn("name_Stream")  def name_~                                                                           : ~[String]
-  @tn("value_Stream") def value_~                                                                          : ~[String]
-  @tn("pair_Stream")  def pair_~(sep: String = "=")                                                        : ~[String]
+  /**/   var id                                                                               : String
+  /**/   def tag                                                                              : String
+  /**/   def text                                                                             : String
+  /**/   def nameStream                                                                           : Stream[String]
+  /**/   def valueStream                                                                          : Stream[String]
+  /**/   def pairStream(sep: String = "=")                                                        : Stream[String]
 
-  /**/                def add[A](name: String, value: A)                          (using t: Any.Def.Tag[A]): Unit
-  /**/                def add[A](value: A)                                        (using t: Any.Def.Tag[A]): Unit
-  /**/                def addAt[A](pos:Int,name:String,value:A)                   (using t: Any.Def.Tag[A]): Unit
+  /**/   def add[A](name: String, value: A)                          (using t: Any.Def.Tag[A]): Unit
+  /**/   def add[A](value: A)                                        (using t: Any.Def.Tag[A]): Unit
+  /**/   def addAt[A](pos:Int,name:String,value:A)                   (using t: Any.Def.Tag[A]): Unit
 
-  @tn("add")   inline def +=[A] (inline name: String, inline value: A)     (using inline t: Any.Def.Tag[A]): Doc
-  @tn("add")   inline def +=    (inline value: String)                                                     : Doc
-  @tn("addAt") inline def +@=[A](inline p:Int, inline n:String, inline v:A)(using inline t :Any.Def.Tag[A]): Doc
+  inline def +=[A] (inline name: String, inline value: A)     (using inline t: Any.Def.Tag[A]): Doc
+  inline def +=    (inline value: String)                                                     : Doc
+  inline def +@=[A](inline p:Int, inline n:String, inline v:A)(using inline t :Any.Def.Tag[A]): Doc
 
-  /**/                def update[A](name: String, v: A)                           (using t :Any.Def.Tag[A]): Unit
-  /**/                def update[A](pos: Int, v: A)                               (using t :Any.Def.Tag[A]): Unit
+  /**/   def update[A](name: String, v: A)                           (using t :Any.Def.Tag[A]): Unit
+  /**/   def update[A](pos: Int, v: A)                               (using t :Any.Def.Tag[A]): Unit
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -42,9 +42,9 @@ ___________________________________________________________________________*/
 @def add     ->  Add value          \n\n Adds value with empty name
 @def addAt   ->  Add name/value at position \n\n Adds name and value at given position
 
-@def name_~  ->  Stream of names
-@def value_~ ->  Stream of values
-@def pair_~  ->  Stream of name/value pairs
+@def nameStream  ->  Stream of names
+@def valueStream ->  Stream of values
+@def pairStream  ->  Stream of name/value pairs
 
 @def update  ->  Update value by name
 

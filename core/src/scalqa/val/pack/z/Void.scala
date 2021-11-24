@@ -1,19 +1,19 @@
 package scalqa; package `val`; package pack; package z; import language.implicitConversions
 
-private[scalqa] final class Void[A] extends ><[A] with Gen.Void:
-  type THIS_TYPE = ><[A]
-  @tn("stream")     override def ~                           : ~[A]      = \/
-  /**/              override def head                        : A         = J.illegalState("Empty")
-  /**/                       def apply(i: Int)               : A         = J.illegalState("Empty")
-  /**/                       def size                        : Int       = 0
-  /**/                       def join(v: A)                  : ><[A]     = Few.Pack_ofOne(v)
-  /**/                       def joinAt(i: Int, v: A)        : ><[A]     = Few.Pack_ofOne(v)
-  /**/                       def joinAll(v: ~[A])            : ><[A]     = v.><
-  /**/                       def joinAllAt(i: Int, v: ~[A])  : ><[A]     = v.><
-  @tn("take_Range") override def take_<>(f:Int, sz:Int)      : ><[A]     = this
-  @tn("drop_Range") override def drop_<>(f:Int, sz:Int)      : ><[A]     = this
-  @tn("compact")             def ><                          : this.type = this
-  /**/                       def toBuffer                    : Buffer[A] = new AnyRef.Buffer()
+private[scalqa] final class Void[A] extends Pack[A] with Gen.Void:
+  type THIS_TYPE = Pack[A]
+  override def stream                      : Stream[A] = \/
+  /**/     def apply(i: Int)               : A         = J.illegalState("Empty")
+  /**/     def size                        : Int       = 0
+  /**/     def join(v: A)                  : Pack[A]   = Few.Pack_ofOne(v)
+  /**/     def joinAt(i: Int, v: A)        : Pack[A]   = Few.Pack_ofOne(v)
+  /**/     def joinAll(v: Stream[A])       : Pack[A]   = v.pack
+  /**/     def joinAllAt(i:Int,v:Stream[A]): Pack[A]   = v.pack
+  override def takeRange(f:Int, sz:Int)    : Pack[A]   = this
+  override def dropRange(f:Int, sz:Int)    : Pack[A]   = this
+  /**/     def pack                        : this.type = this
+  /**/     def toBuffer                    : Buffer[A] = new AnyRef.Buffer()
+  override def z_foreach[U](f: A=>U)       : Unit      = ()
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

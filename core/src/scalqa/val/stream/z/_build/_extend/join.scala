@@ -1,9 +1,9 @@
 package scalqa; package `val`; package stream; package z; package _build; package _extend; import language.implicitConversions
 
-class join[A](x: ~[A], value: A) extends z.x.Pipe[A](x) with Able.Size.Opt.Long:
+class join[A](x: Stream[A], value: A) extends z.x.Pipe[A](x) with Able.Size.Opt.Long:
   private var v = true
-  @tn("read_Opt")     def read_?     : Opt[A]   = if(v) x.read_? or_? {v = false; value} else \/
-  @tn("sizeLong_Opt") def sizeLong_? : Long.Opt = if(v) x.sizeLong_?.map(_ + 1) else 0L
+  def readOpt     : Opt[A]   = if(v) x.readOpt orOpt {v = false; value} else \/
+  def sizeLongOpt : Long.Opt = if(v) x.sizeLongOpt.map(_ + 1) else 0L
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -33,12 +33,12 @@ private[promise] class Control[A] extends java.util.concurrent.atomic.AtomicRefe
 private[promise] object Control:
 
   class Promise[A](pc:Control[A]) extends Val.Promise[A]:
-    /**/              def onResult[U](f: Result[A] => U)(using x: Val.Promise.Context) = pc.onResult(f,x)
-    /**/              def linkTo(c: Control[A]): Unit           = pc.linkTo(c.get match { case v: Control[_] => c.root(v.of[A]); case _ => c })
-    @tn("result_Opt") def result_?             : Opt[Result[A]] = pc.get match
-      /**/                                                                case c: Control[_] => pc.root(c.of[A]).promise.result_?
-      /**/                                                                case e: Event[_]   => \/
-      /**/                                                                case r/*Result*/   => r.cast[Result[A]]
+    def onResult[U](f: Result[A] => U)(using x: Val.Promise.Context) = pc.onResult(f,x)
+    def linkTo(c: Control[A]): Unit           = pc.linkTo(c.get match { case v: Control[_] => c.root(v.of[A]); case _ => c })
+    def resultOpt            : Opt[Result[A]] = pc.get match
+      /**/                                             case c: Control[_] => pc.root(c.of[A]).promise.resultOpt
+      /**/                                             case e: Event[_]   => \/
+      /**/                                             case r/*Result*/   => r.cast[Result[A]]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

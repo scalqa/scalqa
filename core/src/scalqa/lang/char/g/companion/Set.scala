@@ -1,9 +1,9 @@
 package scalqa; package lang; package char; package g; package companion; import language.implicitConversions
 
 class Set[A<:Raw]:
-  /**/           inline def apply(inline v: A *) : G.Set[A] = apply(v)
-  /**/           inline def apply(inline v: ~[A]): G.Set[A] = G.Set.fromStream(v)
-  @tn("getVoid") inline def void                 : G.Set[A] = G.Set.void
+  /**/           inline def apply(inline v: A *)          : G.Set[A] = apply(v)
+  /**/           inline def apply(inline v: Val.Stream[A]): G.Set[A] = G.Set.fromStream(v)
+  @tn("getVoid") inline def void                          : G.Set[A] = G.Set.void
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

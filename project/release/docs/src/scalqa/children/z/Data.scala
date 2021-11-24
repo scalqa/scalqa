@@ -2,7 +2,7 @@ package scalqa; package children; package z; import language.implicitConversions
 
 class Data(val owner: Member):
 
-  val all: ><[Member] = owner.members.~.drop(m => Docs.isHiddenName(owner,m.name)).><
+  val all: Pack[Member] = owner.members.valStream.drop(m => Docs.isHiddenName(owner,m.name)).pack
 
   var members,
       aliases,
@@ -13,9 +13,9 @@ class Data(val owner: Member):
       exports,
       implicits,
       givens,
-      makers    : ><[Member] = \/
+      makers    : Pack[Member] = \/
 
-  var extensions: ><[(ExtensionTarget,List[Member])] = \/
+  var extensions: Pack[(ExtensionTarget,List[Member])] = \/
 
   // -------------------------------------------------------------------------------------------------------
   given ordering: Ordering[Member] with

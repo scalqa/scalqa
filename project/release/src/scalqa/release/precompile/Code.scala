@@ -4,7 +4,7 @@ object Code:
 
   def apply(code: String): String =
 
-    val l: ><[(String,Int.<>,String)] = code.tokenized_~(Tag.Ids.~.map("@" + _ + " ")).><
+    val l: Pack[(String,Int.Range,String)] = code.tokenizedStream(Tag.Ids.stream.map("@" + _ + " ")).pack
 
 
     if(l.size == 0)
@@ -13,19 +13,19 @@ object Code:
     var txt = l.head._3.trim
     if(txt.endsWith("/**")) txt = txt.dropLast(3)
 
-    val tags: ><[Tag] =
+    val tags: Pack[Tag] =
       val iMap : Lookup.M[String,Int] =  Lookup.M()
 
-      l.~.dropFirst(1).map(v => {
+      l.stream.dropFirst(1).map(v => {
           val (t, r, str) = v
           val j = str.indexOf(" ->");
           if (j > 0) print(".") else J.illegalState("Tag end ' ->' not found : '" + t + "' in: \n" + "=" * 75 + "\n" + str + "\n" + "=" * 75 + "\n")
           val id = t.dropFirst(1) + str.takeFirst(j).trimEnd
-          val i = iMap.get_?(id).forval(i => iMap.put(id,i+1)) or {iMap.put(id,1); 0}
+          val i = iMap.getOpt(id).forval(i => iMap.put(id,i+1)) or {iMap.put(id,1); 0}
           new Tag(id.replace("\t"," ").replace("  "," "), i, str.dropFirst(j +  3).replace("\\n","\n"))
-       }).><
+       }).pack
 
-    txt = tags.~.foldAs(txt)((s, tg) => tg.insertInto(s))
+    txt = tags.stream.foldAs(txt)((s, tg) => tg.insertInto(s))
 
     txt
 

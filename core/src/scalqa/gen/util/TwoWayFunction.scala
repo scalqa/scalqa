@@ -44,16 +44,16 @@ ___________________________________________________________________________*/
     ```
        val intToChar: TwoWayFunction[Int,Char] = TwoWayFunction(i => ('A' + i).toChar, _ - 'A')
 
-       val list:  Idx.M[Int] = ~~(0, 2, 4).toBuffer
-       val view:  Idx.M[Char] = list.mutableMap_^(intToChar)
+       val list:  Idx.M[Int] = Stream(0, 2, 4).toBuffer
+       val view:  Idx.M[Char] = list.mutableMapView(intToChar)
 
-       list.~.TP     // Prints ~(0, 2, 4)
-       view.~.TP     // Prints ~(A, C, E)
+       list.stream.TP     // Prints Stream(0, 2, 4)
+       view.stream.TP     // Prints Stream(A, C, E)
 
        view(1) = 'Z' // Note, only second collection is updated, but both are changed
 
-       list.~.TP     // Prints ~(0, 25, 4)
-       view.~.TP     // Prints ~(A, Z, E)
+       list.stream.TP     // Prints Stream(0, 25, 4)
+       view.stream.TP     // Prints Stream(A, Z, E)
      ```
 
 @def reverse -> Reverses two functions

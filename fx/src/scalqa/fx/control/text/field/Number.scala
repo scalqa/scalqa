@@ -2,10 +2,10 @@ package scalqa; package fx; package control; package text; package field; import
 
 class Number protected (columns: Opt[Int] = \/, value: Opt[String]= \/) extends Text.Field(columns, value):
   var negativeAllowed = true
-  onChange(c => try { if (c.textAfter.toDouble < 0 && !negativeAllowed) c.text_=(\/) } catch { case _: Exception => c.text_=(\/) })
+  onChange(c => try { if (c.textAfter.toDouble < 0 && !negativeAllowed) c.text_=(\/) } catch { case _ : Exception => c.text_=(\/) })
 
-  @tn("int_Result")     def int_??    : Result[Int]    = text.trim.toInt_??
-  @tn("double_Result")  def double_?? : Result[Double] = text.trim.toDouble_??
+  def intResult    : Result[Int]    = text.trim.toIntResult
+  def doubleResult : Result[Double] = text.trim.toDoubleResult
 
 object Number:
   def apply(value: String)                                  : Number = new Number(\/, value)

@@ -1,15 +1,15 @@
 package scalqa; package `val`; package idx; package observable; package event; import language.implicitConversions
 
 object Z:
-  class Add[A]( val range: Int.<>, val items: Idx[A])                          extends Event.Add[A]
-  class Remove[A]( val range: Int.<>, val items: Idx[A])                       extends Event.Remove[A]
-  class Update[A]( val range: Int.<>, val items: Idx[A], val oldItems: Idx[A]) extends Event.Update[A] { def isRefresh = items == oldItems }
-  class Reposition[A](val permutation: Idx.Permutation)                        extends Event.Reposition[A]
+  class Add[A]( val range: Int.Range, val items: Idx[A])                          extends Event.Add[A]
+  class Remove[A]( val range: Int.Range, val items: Idx[A])                       extends Event.Remove[A]
+  class Update[A]( val range: Int.Range, val items: Idx[A], val oldItems: Idx[A]) extends Event.Update[A] { def isRefresh = items == oldItems }
+  class Reposition[A](val permutation: Idx.Permutation)                           extends Event.Reposition[A]
 
   trait Single[A] extends Event[A] with Idx[A]:
     def index         : Int
     def item          : A
-    def range      : Int.<>        = index <> index
+    def range      : Int.Range     = index <> index
     def size          : Int       = 1
     def apply(i: Int) : A         = item
     def items         : Idx[A]    = this

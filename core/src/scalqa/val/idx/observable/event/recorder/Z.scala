@@ -8,10 +8,11 @@ private[observable] object Z:
 
   class Update[A](val start: Int)  extends Event.Update[A] with Mutable[A]:
     private       val olds                     : Idx.M[A]  =  NEW
-    /**/          def oldItems                 : Idx[A]    = olds.readOnly_^
+    /**/          def oldItems                 : Idx[A]    = olds.readOnlyView
     /**/          def isRefresh                : Boolean   = false
     @tn("add")    def +=(itm: A, old: A)       : this.type = { range += 1; olds += old; real += itm; this }
-    @tn("addAll") def ++=(itm: ~[A], old: ~[A]): this.type = { val sz = size
+
+    @tn("addAll") def ++=(itm: Stream[A], old: Stream[A]): this.type = { val sz = size
       /**/                                                        olds ++= old
       /**/                                                        real ++= itm
       /**/                                                        range += (size - sz)
@@ -20,12 +21,12 @@ private[observable] object Z:
       /**/                                                   }
 
   trait Mutable[A] extends Event[A] with J.Util.Proxy.Idx.Base[A]:
-    /**/          val real          : Idx.M[A]  = NEW
-    /**/          def start         : Int
-    /**/          var range         : Int.<>    = start <>> start
-    /**/          def items         : Idx[A]    = this
-    @tn("add")    def +=(v: A)      : this.type = { range += 1; real += v; this }
-    @tn("addAll") def ++=(v: ~[A])  : this.type = { val sz = size; real ++= v; range += (size - sz); this }
+    /**/          val real            : Idx.M[A]  = NEW
+    /**/          def start           : Int
+    /**/          var range           : Int.Range = start <>> start
+    /**/          def items           : Idx[A]    = this
+    @tn("add")    def +=(v: A)        : this.type = { range += 1; real += v; this }
+    @tn("addAll") def ++=(v:Stream[A]): this.type = { val sz = size; real ++= v; range += (size - sz); this }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -1,13 +1,13 @@
 package scalqa; package `val`; package stream; package z; package _build; package _mutate; import language.implicitConversions
 
-class shuffle[A](x: ~[A]) extends z.x.Pipe.Calc[A](x):
+class shuffle[A](x: Stream[A]) extends z.x.Pipe.Calc[A](x):
   def calc = new Calc
 
-  class Calc extends ~[A]:
+  class Calc extends Stream[A]:
     private         val b      = x.toBuffer
     private         var i      = b.size
     private         val perm   = Idx.Permutation.random(0 <>> i)
-    @tn("read_Opt") def read_? = if(i==0) \/ else {i-=1; b(perm.position(i)) }
+    def readOpt = if(i==0) \/ else {i-=1; b(perm.position(i)) }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

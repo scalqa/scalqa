@@ -5,15 +5,15 @@ trait Format[A]:
   protected def read(name: String, i: J.Input)        : A
   protected def write(name: String, o: J.Output, v: A): Unit
 
-  def load(file: J.File, entryNamefilter: String => Boolean = \/): ~[A] =
+  def load(file: J.File, entryNamefilter: String => Boolean = \/): Stream[A] =
     val tracer = activityTrace(100)
     Zip.load(file)
       .peek(_ => tracer())
       .parallel
       .map((n,in) => read(n, in()))
-      .~
+      .stream
 
-  def save(file: J.File, entries: ~[A]): Unit =
+  def save(file: J.File, entries: Stream[A]): Unit =
     val tracer = activityTrace(100)
     Zip.save(file, entries
       .peek(_ => tracer())
@@ -25,7 +25,7 @@ trait Format[A]:
         buf.flush
         (name, Pro(J.Input(buf.bytes)))
       })
-      .~)
+      .stream)
 
   private def activityTrace(showEveryNth: Int): () => Any =
     var i = 0

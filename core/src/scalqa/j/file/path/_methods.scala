@@ -7,48 +7,48 @@ transparent trait _methods:
   self: lang.any.z.OpaqueBase[Path] =>
 
   extension(inline x: Path)
-    /**/                 inline def names                                : Idx[String] = new Z.Names(x)
-    /**/                 inline def isEmpty                              : Boolean     = x.size == 0
-    /**/                 inline def parent                               : Path        = x.real.getParent
-    /**/                 inline def lastName                             : String      = x.real.getFileName.toString
-    /**/                 inline def normalize                            : Path        = x.real.normalize
-    /**/                 inline def delete                               : Boolean     = x.real.toFile.delete
-    /**/                 inline def isFile                               : Boolean     = x.real.toFile.isFile
-    /**/                 inline def isDirectory                          : Boolean     = x.real.toFile.isDirectory
-    /**/                 inline def exists                               : Boolean     = x.real.toFile.exists
-    /**/                 inline def endsWith  (p: Path)                  : Boolean     = x.real.endsWith(p.real)
-    /**/                 inline def startsWith(p: Path)                  : Boolean     = x.real.startsWith(p.real)
+    inline def names                                : Idx[String] = new Z.Names(x)
+    inline def isEmpty                              : Boolean     = x.size == 0
+    inline def parent                               : Path        = x.real.getParent
+    inline def lastName                             : String      = x.real.getFileName.toString
+    inline def normalize                            : Path        = x.real.normalize
+    inline def delete                               : Boolean     = x.real.toFile.delete
+    inline def isFile                               : Boolean     = x.real.toFile.isFile
+    inline def isDirectory                          : Boolean     = x.real.toFile.isDirectory
+    inline def exists                               : Boolean     = x.real.toFile.exists
+    inline def endsWith  (p: Path)                  : Boolean     = x.real.endsWith(p.real)
+    inline def startsWith(p: Path)                  : Boolean     = x.real.startsWith(p.real)
   extension(x: Path)
-    /**/                        def name(idx: Int)                       : String      = x.real.getName(idx).toString
-    /**/                        def contains(v: Path)                    : Boolean     = index_?(v)
-    /**/                        def contains(name:String, more:String*)  : Boolean     = contains(Path(name,more *))
-    /**/                        def size                                 : Int         = {val v=x; val i=v.real.getNameCount; if (i == 1 && v.real.startsWith("")) 0 else i }
-    @tn("root_Opt")             def root_?                               : Opt[Path]   = x.real.getRoot.^.?.map(Path(_))
-    /**/                        def root                                 : Path        = x.root_?.get
-    /**/                        def rootMake                             : Path        = x.root_? or Path.current.root + x
-    /**/                        def rootDrop                             : Path        = x.root_?.map(_ => Path(x.real.subpath(0, x.real.getNameCount))) or x
-    @tn("child_Stream")         def child_~                              : ~[Path]     = { val v = x.real.toFile; if (v.isDirectory) v.listFiles.~.map(f => Path(f.toPath)) else \/ }
-    @tn("childRecursive_Stream")def childRecursive_~                     : ~[Path]     = x.child_~.flatMap(v => v.childRecursive_~ +@ (0, v))
-    @tn("file_Opt")             def file_?                               : Opt[J.File] = x.real.toFile.?.drop(_.isDirectory).map(J.File(_))
-    /**/                        def file                                 : J.File      = x.file_?.get
-    /**/                        def make                                 : Unit        = if (!x.exists) x.real.toFile.mkdirs
-    @tn("index_Opt")            def index_?(p: Path)                     : Int.Opt     = path.Z.indexOfOpt(x.real, p)
-    /**/                        def join(v: Path | String)               : Path        = path.Z.join(x, v)
-    /**/                        def joinAll(v: ~[Path | String])         : Path        = v.map(Path.any(_).real).fold(x.real)(_ resolve _)
-    @tn("join")          inline def + (inline v: Path | String)          : Path        = x.join(v)
-    @tn("joinAll")       inline def ++(inline v: ~[Path | String])       : Path        = x.joinAll(v)
-    @tn("take_Range")           def take_<>(start: Int, size: Int)       : Path        = if(x.root_?.isEmpty || start > 0) x.real.subpath(start, start + size)
-      /**/                                                                                  else (0 <>> x.size - start - size).~.foldAs(x.real)((v, _) => v.getParent) // keeping root
-    @tn("take_Range")           def take_<>(r: Int.<>)                   : Path        = x.take_<>(r.start,r.size)
-    /**/                        def takeFirst(cnt: Int)                  : Path        = x.take_<>(0,cnt)
-    /**/                        def takeLast (cnt: Int)                  : Path        = x.take_<>(x.size - cnt, cnt)
-    /**/                        def takeFrom  (p:Path, dflt:Path = \/)   : Path        = x.index_?(p).map(x.dropFirst(_)) or_? dflt.^.? or x
-    /**/                        def takeAfter (p:Path, dflt:Path = \/)   : Path        = x.index_?(p).map(_ + p.size).map(x.dropFirst(_)) or_? dflt.^.? or x
-    /**/                        def takeBefore(p:Path, dflt:Path = \/)   : Path        = x.index_?(p).map(x.takeFirst(_)) or_? dflt.^.? or x
-    @tn("drop_Range")           def drop_<>(f: Int, sz: Int)             : Path        = x.takeFirst(f) + x.dropFirst(f + sz)
-    @tn("drop_Range")           def drop_<>(r: Int.<>)                   : Path        = x.takeFirst(r.start) + x.dropFirst(r.endX)
-    /**/                        def dropFirst(cnt: Int)                  : Path        = x.take_<>(cnt,x.size - cnt)
-    /**/                        def dropLast( cnt: Int)                  : Path        = x.take_<>(0,x.size - cnt)
+    /**/   def name(idx: Int)                       : String      = x.real.getName(idx).toString
+    /**/   def contains(v: Path)                    : Boolean     = indexOpt(v)
+    /**/   def contains(name:String, more:String*)  : Boolean     = contains(Path(name,more *))
+    /**/   def size                                 : Int         = {val v=x; val i=v.real.getNameCount; if (i == 1 && v.real.startsWith("")) 0 else i }
+    /**/   def rootOpt                              : Opt[Path]   = x.real.getRoot.??.map(Path(_))
+    /**/   def root                                 : Path        = x.rootOpt.get
+    /**/   def rootMake                             : Path        = x.rootOpt or Path.current.root + x
+    /**/   def rootDrop                             : Path        = x.rootOpt.map(_ => Path(x.real.subpath(0, x.real.getNameCount))) or x
+    /**/   def childStream                          : Stream[Path]= { val v = x.real.toFile; if (v.isDirectory) v.listFiles.stream.map(f => Path(f.toPath)) else \/ }
+    /**/   def childRecursiveStream                 : Stream[Path]= x.childStream.flatMap(v => v.childRecursiveStream +@ (0, v))
+    /**/   def fileOpt                              : Opt[J.File] = x.real.toFile.?.drop(_.isDirectory).map(J.File(_))
+    /**/   def file                                 : J.File      = x.fileOpt.get
+    /**/   def make                                 : Unit        = if (!x.exists) x.real.toFile.mkdirs
+    /**/   def indexOpt(p: Path)                    : Int.Opt     = path.Z.indexOfOpt(x.real, p)
+    /**/   def join(v: Path | String)               : Path        = path.Z.join(x, v)
+    /**/   def joinAll(v: Stream[Path | String])    : Path        = v.map(Path.any(_).real).fold(x.real)(_ resolve _)
+    inline def + (inline v: Path | String)          : Path        = x.join(v)
+    inline def ++(inline v: Stream[Path | String])  : Path        = x.joinAll(v)
+    /**/   def takeRange(start: Int, size: Int)     : Path        = if(x.rootOpt.isEmpty || start > 0) x.real.subpath(start, start + size)
+      /**/                                                          else (0 <>> x.size - start - size).stream.foldAs(x.real)((v, _) => v.getParent) // keeping root
+    /**/   def takeRange(r: Int.Range)              : Path        = x.takeRange(r.start,r.size)
+    /**/   def takeFirst(cnt: Int)                  : Path        = x.takeRange(0,cnt)
+    /**/   def takeLast (cnt: Int)                  : Path        = x.takeRange(x.size - cnt, cnt)
+    /**/   def takeFrom  (p:Path, dflt:Path = \/)   : Path        = x.indexOpt(p).map(x.dropFirst(_)) orOpt dflt.?? or x
+    /**/   def takeAfter (p:Path, dflt:Path = \/)   : Path        = x.indexOpt(p).map(_ + p.size).map(x.dropFirst(_)) orOpt dflt.?? or x
+    /**/   def takeBefore(p:Path, dflt:Path = \/)   : Path        = x.indexOpt(p).map(x.takeFirst(_)) orOpt dflt.?? or x
+    /**/   def dropRange(f: Int, sz: Int)           : Path        = x.takeFirst(f) + x.dropFirst(f + sz)
+    /**/   def dropRange(r: Int.Range)              : Path        = x.takeFirst(r.start) + x.dropFirst(r.endX)
+    /**/   def dropFirst(cnt: Int)                  : Path        = x.takeRange(cnt,x.size - cnt)
+    /**/   def dropLast( cnt: Int)                  : Path        = x.takeRange(0,x.size - cnt)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -64,7 +64,7 @@ ___________________________________________________________________________*/
 
      [[Path]] implements [[Idx[String]]], representing directory names hierarchy. The last name may be a name of file, if [[Path]] is for file
 
-     [[Path]] may or may not have root (like C:\). This may be checked with [[_package.root_? root_?]]
+     [[Path]] may or may not have root (like C:\). This may be checked with [[_package.rootOpt rootOpt]]
 
      A void [[Path]] has no root and zero directories
 
@@ -87,15 +87,15 @@ ___________________________________________________________________________*/
      ```
 
 
-@def root_? -> Optional root
+@def rootOpt -> Optional root
 
        Optionally returns root [[Path]] if available
        ```
          val p = J.Path("aaa" , "bbb").rootMake
 
-         p.root_? TP           // May print: Opt(C:\)
+         p.rootOpt TP           // May print: Opt(C:\)
 
-         p.rootDrop.root_?.TP //     prints: Opt(\/)
+         p.rootDrop.rootOpt.TP //     prints: Opt(\/)
        ```
 
 
@@ -149,15 +149,15 @@ ___________________________________________________________________________*/
           path.lastName TP  // Prints: Test.txt
       ```
 
-@def index_? -> Sub-path index
+@def indexOpt -> Sub-path index
 
       Optionally returns matching sub-path start index
       ```
          val path: J.Path = "aaa" , "bbb" + "ccc" + "ddd" + "eee"
 
-         path index_? "ccc" , "ddd" TP  // Prints: Opt(2)
+         path indexOpt "ccc" , "ddd" TP  // Prints: Opt(2)
 
-         path index_? "ddd" , "ccc" TP  // Prints: Opt(\/)
+         path indexOpt "ddd" , "ccc" TP  // Prints: Opt(\/)
       ```
 
 

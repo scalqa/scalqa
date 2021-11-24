@@ -2,17 +2,17 @@ package scalqa; package `val`; package stream; package z; package _use; import l
 
 object _read:
 
-  private class stream[A](val base: ~[A], v: Array[AnyRef], sz: Int) extends lang.anyref.Z.Stream_ofArray[A](v,sz)
+  private class stream[A](val base: Stream[A], v: Array[AnyRef], sz: Int) extends lang.anyref.Z.Stream_ofArray[A](v,sz)
 
-  def stream[A](s: ~[A], cnt: Int): ~[A] & Able.Size = if (cnt <= 0) EMPTY else
-    var o = s.read_?
+  def stream[A](s: Stream[A], cnt: Int): Stream[A] & Able.Size = if (cnt <= 0) EMPTY else
+    var o = s.readOpt
     if (!o) EMPTY
     else
       val a = new Array[AnyRef](cnt)
       a(0) = o.get.cast[AnyRef]
       var i = 1
       while (i < cnt)
-        o = s.read_?
+        o = s.readOpt
         if (!o) return new stream(s,a,i)
         a(i) = o.get.cast[AnyRef]
         i += 1

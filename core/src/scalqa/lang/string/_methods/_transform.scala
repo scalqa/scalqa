@@ -3,20 +3,20 @@ package scalqa; package lang; package string; package _methods; import language.
 transparent trait _transform:
 
   extension(inline x: String)
-    @tn("char_Stream")      inline def char_~                                   : Char.~                    = Z.char_Stream( x)
-    @tn("split_Stream")     inline def split_~(inline sep: Char, more: Char *)  : ~[String]                 = Z.split_Stream(x,sep,more)
-    @tn("line_Stream")      inline def line_~                                   : ~[String]                 = Z.line_Stream( x)
-    /**/                    inline def indent(inline tag: String)               : String                    = Z.indent(x, tag)
-    @tn("tokenized_Stream") inline def tokenized_~(inline separators: ~[String]): ~[(String,Int.<>,String)] = z.tokenizedStream(x,separators)
-    @tn("toDouble_Opt")     inline def toDouble_?                               : Double.Opt                = Z.toDouble_Opt(    x)
-    @tn("toDouble_Result")  inline def toDouble_??                              : Result[Double]            = Z.toDouble_Result( x)
-    @tn("toInt_Opt")        inline def toInt_?                                  : Int.Opt                   = Z.toInt_Opt(       x)
-    @tn("toInt_Result")     inline def toInt_??                                 : Result[Int]               = Z.toInt_Result(    x)
-    @tn("toLong_Opt")       inline def toLong_?                                 : Long.Opt                  = Z.toLong_Opt(      x)
-    @tn("toLong_Result")    inline def toLong_??                                : Result[Long]              = Z.toLong_Result(   x)
-    @tn("toBoolean_Opt")    inline def toBoolean_?                              : Boolean.Opt               = Z.toBoolean_Opt(   x)
-    @tn("toBoolean_Result") inline def toBoolean_??                             : Result[Boolean]           = Z.toBoolean_Result(x)
-    /**/                    inline def Problem                                  : Result.Problem            = Result.Problem(x)
+    inline def charStream                                       : Char.Stream                       = Z.char_Stream( x)
+    inline def splitStream(inline sep: Char, more: Char *)      : Stream[String]                    = Z.split_Stream(x,sep,more)
+    inline def lineStream                                       : Stream[String]                    = Z.line_Stream( x)
+    inline def indent(inline tag: String)                       : String                            = Z.indent(x, tag)
+    inline def tokenizedStream(inline separators:Stream[String]): Stream[(String,Int.Range,String)] = z.tokenizedStream(x,separators)
+    inline def toDoubleOpt                                      : Double.Opt                        = Z.toDoubleOpt(    x)
+    inline def toDoubleResult                                   : Result[Double]                    = Z.toDoubleResult( x)
+    inline def toIntOpt                                         : Int.Opt                           = Z.toIntOpt(       x)
+    inline def toIntResult                                      : Result[Int]                       = Z.toIntResult(    x)
+    inline def toLongOpt                                        : Long.Opt                          = Z.toLongOpt(      x)
+    inline def toLongResult                                     : Result[Long]                      = Z.toLongResult(   x)
+    inline def toBooleanOpt                                     : Boolean.Opt                       = Z.toBooleanOpt(   x)
+    inline def toBooleanResult                                  : Result[Boolean]                   = Z.toBooleanResult(x)
+    inline def Problem                                          : Result.Problem                    = Result.Problem(x)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -40,15 +40,15 @@ ___________________________________________________________________________*/
      ```
 
 
-@def line_~ -> Stream of lines
+@def lineStream -> Stream of lines
 
      Creates a [[Stream]] of Strings representing lines (delimited by '\n') of this text
 
      ```
-     "abc\\n def\\n xyz".line_~.TP // Prints ~(abc,  def,  xyz)
+     "abc\\n def\\n xyz".lineStream.TP // Prints Stream(abc,  def,  xyz)
      ```
 
-@def tokenized_~ -> Stream of tokens
+@def tokenizedStream -> Stream of tokens
 
       Multi token tokenizetion
 
@@ -59,11 +59,11 @@ ___________________________________________________________________________*/
         - String token
 
       ```
-         val str: String = (1 <> 40).~.makeString("")
+         val str: String = (1 <> 40).stream.makeString("")
          "Text to Tokenize:".TP.TP
          str.TP.TP
          ("Token", "Range", "String").TP
-         str.tokenized_~(~~("000","111","222","333","444")).print
+         str.tokenizedStream(Stream("000","111","222","333","444")).print
 
          // Output
 
@@ -86,35 +86,35 @@ ___________________________________________________________________________*/
 
 
 
-@def char_~ -> Stream of Chars
+@def charStream -> Stream of Chars
 
       Returns String as a [[Stream]] of [Char]]
       ```
-      "abcd".char_~.TP // Prints ~(a, x, c, d)
+      "abcd".charStream.TP // Prints Stream(a, x, c, d)
       ```
 
-@def toBoolean_?? -> Boolean result conversion
+@def toBooleanResult -> Boolean result conversion
 
        Converts String to Boolean result
 
        ```
-         "true".toBoolean_??.TP
+         "true".toBooleanResult.TP
 
-         "abc".toBoolean_??.TP
+         "abc".toBooleanResult.TP
 
          // Output
          Result(true)
          Result(Problem(For input string: "abc"))
        ```
 
-@def toBoolean_? -> Boolean option conversion
+@def toBooleanOpt -> Boolean option conversion
 
        Converts String to Boolean option
 
        ```
-         "true".toBoolean_?.TP
+         "true".toBooleanOpt.TP
 
-         "abc".toBoolean_?.TP
+         "abc".toBooleanOpt.TP
 
          // Output
          Boolean.Opt(true)
@@ -122,84 +122,84 @@ ___________________________________________________________________________*/
        ```
 
 
-@def toDouble_?? -> Double result conversion
+@def toDoubleResult -> Double result conversion
 
        Converts String to Double result
 
        ```
-         "123.45".toDouble_??.TP
+         "123.45".toDoubleResult.TP
 
-         "abc".toDouble_??.TP
+         "abc".toDoubleResult.TP
 
          // Output
          Result(123.45)
          Result(Problem(For input string: "abc"))
        ```
 
-@def toDouble_? -> Double option conversion
+@def toDoubleOpt -> Double option conversion
 
        Converts String to Double option
 
        ```
-         "123.45".toDouble_?.TP
+         "123.45".toDoubleOpt.TP
 
-         "abc".toDouble_?.TP
+         "abc".toDoubleOpt.TP
 
          // Output
          Double.Opt(123.45)
          Double.Opt(\/)
        ```
 
-@def toLong_?? -> Long result conversion
+@def toLongResult -> Long result conversion
 
        Converts String to Long result
 
        ```
-         "123".toLong_??.TP
+         "123".toLongResult.TP
 
-         "abc".toLong_??.TP
+         "abc".toLongResult.TP
 
          // Output
          Result(123)
          Result(Problem(For input string: "abc"))
       ```
 
-@def toLong_? -> Long option conversion
+@def toLongOpt -> Long option conversion
 
        Converts String to Long option
 
        ```
-         "123".toLong_?.TP
+         "123".toLongOpt.TP
 
-         "abc".toLong_?.TP
+         "abc".toLongOpt.TP
 
          // Output
          Long.Opt(123)
          Long.Opt(\/)
       ```
 
-@def toInt_?? -> Int result conversion
+@def toIntResult -> Int result conversion
 
        Converts String to Int result
 
        ```
-         "123".toInt_??.TP
+         "123".toIntResult.TP
 
-         "abc".toInt_??.TP
+         "abc".toIntResult.TP
 
          // Output
          Result(123)
          Result(Problem(For input string: "abc"))
        ```
 
-@def toInt_? -> Int opt conversion
+@def toIntOpt -> Int opt conversion
 
        Converts String to Int option
 
        ```
-         "123".toInt_?.TP
+         "123".toIntOpt.TP
 
-         "abc".toInt_?.TP
+         "abc".toIntOpt.TP
 
          // Output
          Int.Opt(123)

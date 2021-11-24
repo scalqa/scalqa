@@ -1,10 +1,10 @@
 package scalqa; package `val`; package stream; package z; package _build; package _zip; import language.implicitConversions
 
-class zip[A,B](one: ~[A], two: ~[B]) extends ~[(A, B)] with Custom.Pipeline.Tree with Able.Size.Opt.Long:
+class zip[A,B](one: Stream[A], two: Stream[B]) extends Stream[(A, B)] with Custom.Pipeline.Tree with Able.Size.Opt.Long:
 
-  @tn("read_Opt")     def read_?     = one.read_?.map_?(v => two.read_?.map(w => (v,w)))
-  @tn("sizeLong_Opt") def sizeLong_? = one.sizeLong_?.mix(two.sizeLong_?, _ min _)
-  /**/                def docTree    = Doc.Tree(this.doc, Custom.Pipeline.docTree(one), Custom.Pipeline.docTree(two))
+  def readOpt     = one.readOpt.mapOpt(v => two.readOpt.map(w => (v,w)))
+  def sizeLongOpt = one.sizeLongOpt.mix(two.sizeLongOpt, _ min _)
+  def docTree     = Doc.Tree(this.doc, Custom.Pipeline.docTree(one), Custom.Pipeline.docTree(two))
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

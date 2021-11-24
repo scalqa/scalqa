@@ -1,31 +1,28 @@
 package scalqa; package lang; package char; package z; import language.implicitConversions
 
-object Math extends Ordering[Char] with ~~.Custom.Ordering[Char]:
+object Math extends Ordering[Char] with Stream.Custom.Ordering[Char]:
 
   def compare(x:Char, y:Char) = java.lang.Character.compare(x,y)
 
-  @tn("min_Opt")
-    def min_?(s: ~[Char]): Val.Opt[Char] = s.read_?.map(v=>
-      s match
-         case s: Char.~ => s.FOLD(v)((v,w) => if(v<w) v else w)
-         case s         => s.FOLD(v)((v,w) => if(v<w) v else w)
-    )
+  def minOpt(s: Stream[Char]): Val.Opt[Char] = s.readOpt.map(v=>
+    s match
+       case s: Char.Stream => s.FOLD(v)((v,w) => if(v<w) v else w)
+       case s              => s.FOLD(v)((v,w) => if(v<w) v else w)
+  )
 
-  @tn("max_Opt")
-    def max_?(s: ~[Char]): Val.Opt[Char] = s.read_?.map(v=>
-      s match
-         case s: Char.~ => s.FOLD(v)((v,w) => if(v>w) v else w)
-         case s         => s.FOLD(v)((v,w) => if(v>w) v else w)
-    )
+  def maxOpt(s: Stream[Char]): Val.Opt[Char] = s.readOpt.map(v=>
+    s match
+       case s: Char.Stream => s.FOLD(v)((v,w) => if(v>w) v else w)
+       case s              => s.FOLD(v)((v,w) => if(v>w) v else w)
+  )
 
-  @tn("range_Opt")
-    def range_?(s: ~[Char]): Val.Opt[Char.<>] = s.read_?.map(v => {
-      var f,l=v
-      s match
-         case s: Char.~ => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
-         case s         => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
-      new Char.<>(f,l-f+1)
-    })
+  def rangeOpt(s: Stream[Char]): Val.Opt[Char.Range] = s.readOpt.map(v => {
+    var f,l=v
+    s match
+       case s: Char.Stream => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
+       case s              => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
+    new Char.Range(f,l-f+1)
+  })
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

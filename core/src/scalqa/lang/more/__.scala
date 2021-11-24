@@ -7,26 +7,37 @@ object More:
 
   transparent trait IterableOnce_methods:
     extension[A](inline x: C.IterableOnce[A])
-                                                  @tn("stream") inline def ~                           : ~[A] = S.Stream_fromIterableOnce(x)
-                                                  @tn("pack")   inline def >< (using A:Specialized[A]) : A.>< = x.~.><
+                                                  inline def valStream                   : Stream[A] = S.Stream_fromIterableOnce(x)
+                                                  inline def stream                      : Stream[A] = S.Stream_fromIterableOnce(x)
+                                                  inline def pack(using A:Specialized[A]): A.Pack    = x.stream.pack
 
   transparent trait Iterable_methods:
     extension[A](inline x: java.lang.Iterable[A])
-                                                  @tn("stream") inline def ~                           : ~[A] = J.Stream_fromIterable[A](x)
-                                                  @tn("pack")   inline def >< (using A:Specialized[A]) : A.>< = x.~.><
+                                                  inline def valStream                   : Stream[A] = J.Stream_fromIterable[A](x)
+                                                  inline def stream                      : Stream[A] = J.Stream_fromIterable[A](x)
+                                                  inline def pack(using A:Specialized[A]): A.Pack    = x.stream.pack
 
   transparent trait Iterator_methods:
     extension[A](inline x: java.util.Iterator[A])
-                                                  @tn("stream") inline def ~                           : ~[A] = J.Stream_fromIterator[A](x)
-                                                  @tn("pack")   inline def >< (using A:Specialized[A]) : A.>< = x.~.><
+                                                  inline def valStream                   : Stream[A] = J.Stream_fromIterator[A](x)
+                                                  inline def stream                      : Stream[A] = J.Stream_fromIterator[A](x)
+                                                  inline def pack(using A:Specialized[A]): A.Pack    = x.stream.pack
 
   // *****************************************************************************************
   transparent trait z_Methods extends IterableOnce_methods with Iterable_methods with Iterator_methods:
     // Efficiency extras
-    extension   (inline x: Product)                 @tn("stream") inline def ~ : ~[(String,Any)] = S.Stream_fromProduct(x)
-    extension[A](inline x: C.immutable.ArraySeq[A]) @tn("stream") inline def ~ : ~[A]            = x.unsafeArray.~.cast[~[A]]
-    extension[A](inline x: C.IndexedSeq[A])         @tn("stream") inline def ~ : ~[A]            = new S.Stream_fromIndexedSeq[A](x)
-    extension[A](inline x: C.LinearSeq[A])          @tn("stream") inline def ~ : ~[A]            = new S.Stream_fromLinearSeq[A](x)
+    extension   (inline x: Product)
+                                                  inline def stream                      : Stream[(String,Any)] = S.Stream_fromProduct(x)
+                                                  inline def valStream                   : Stream[(String,Any)] = S.Stream_fromProduct(x)
+    extension[A](inline x: C.immutable.ArraySeq[A])
+                                                  inline def stream                      : Stream[A]            = x.unsafeArray.stream.cast[Stream[A]]
+                                                  inline def valStream                   : Stream[A]            = x.unsafeArray.stream.cast[Stream[A]]
+    extension[A](inline x: C.IndexedSeq[A])
+                                                  inline def stream                      : Stream[A]            = new S.Stream_fromIndexedSeq[A](x)
+                                                  inline def valStream                   : Stream[A]            = new S.Stream_fromIndexedSeq[A](x)
+    extension[A](inline x: C.LinearSeq[A])
+                                                  inline def stream                      : Stream[A]            = new S.Stream_fromLinearSeq[A](x)
+                                                  inline def valStream                   : Stream[A]            = new S.Stream_fromLinearSeq[A](x)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

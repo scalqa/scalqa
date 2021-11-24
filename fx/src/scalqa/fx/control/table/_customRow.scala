@@ -4,11 +4,11 @@ transparent trait _customRow[ROW]:
   self: Table[ROW] =>
 
   private var emptyRowSetup  : Fx.Cell.Setup[Fx.Cell] = \/
-  private var customRowSetups: ><[CustomRow]        = \/
+  private var customRowSetups: Pack[CustomRow]        = \/
 
   private[table] def rowSetup(v: RowCell[ROW, VIEW], empty: Boolean ): control.Cell.Setup[control.Cell] =
     if(empty) emptyRowSetup
-    else customRowSetups.~.find_?(_.filter(v)).cast[Opt[control.Cell.Setup[control.Cell]]] or \/
+    else customRowSetups.stream.findOpt(_.filter(v)).cast[Opt[control.Cell.Setup[control.Cell]]] or \/
 
   // *****************************************************************************************************************************************************
   class CustomRow private(private[table] val filter: RowCell[ROW, VIEW] => Boolean, empty: Boolean) extends control.Cell.Setup[RowCell[ROW, VIEW]]:
@@ -19,12 +19,12 @@ transparent trait _customRow[ROW]:
     def this(filter: RowCell[ROW, VIEW] => Boolean) = this(filter,false)
     def this(v: EMPTY) = this(null,true)
 
-    private var triggers: ><[ROW => Observable] = \/
-    def updateTrigger_:(f: ROW => Observable): Unit = triggers += f
+    private var triggers: Pack[ROW => Observable] = \/
+    def refreshOn(f: ROW => Observable): Unit = triggers += f
     override def apply(r: RowCell[ROW, VIEW]): Unit =
       super.apply(r)
-      r.row_?.forval(e => {
-        if (triggers.size > 0) triggers.~.map(_(e)).foreach(_.onObservableChange(() => r.table.rows.refreshAt(r.index)).cancelIf(() => !r.row_?.contains(e)))
+      r.rowOpt.forval(e => {
+        if (triggers.size > 0) triggers.stream.map(_(e)).foreach(_.onObservableChange(() => r.table.rows.refreshAt(r.index)).cancelIf(() => !r.rowOpt.contains(e)))
       })
 
 /*___________________________________________________________________________

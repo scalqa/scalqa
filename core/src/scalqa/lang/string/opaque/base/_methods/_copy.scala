@@ -3,22 +3,22 @@ package scalqa; package lang; package string; package opaque; package base; pack
 transparent trait _copy:
 
   extension[THIS_OPAQUE<:Opaque](inline x: THIS_OPAQUE)
-    /**/              inline def takeBefore    (inline v:THIS_OPAQUE|String, inline dflt:Opt[THIS_OPAQUE]= \/, inline from:Int.Opt = \/): THIS_OPAQUE   = x.cast[String].takeBefore    (v.cast[String],dflt.cast[Opt[String]],from).cast[THIS_OPAQUE]
-    /**/              inline def takeBeforeLast(inline v:THIS_OPAQUE|String, inline dflt:Opt[THIS_OPAQUE]= \/, inline from:Int.Opt = \/): THIS_OPAQUE   = x.cast[String].takeBeforeLast(v.cast[String],dflt.cast[Opt[String]],from).cast[THIS_OPAQUE]
-    /**/              inline def takeFrom      (inline v:THIS_OPAQUE|String, inline dflt:Opt[THIS_OPAQUE]= \/, inline from:Int.Opt = \/): THIS_OPAQUE   = x.cast[String].takeFrom      (v.cast[String],dflt.cast[Opt[String]],from).cast[THIS_OPAQUE]
-    /**/              inline def takeFromLast  (inline v:THIS_OPAQUE|String, inline dflt:Opt[THIS_OPAQUE]= \/, inline from:Int.Opt = \/): THIS_OPAQUE   = x.cast[String].takeFromLast  (v.cast[String],dflt.cast[Opt[String]],from).cast[THIS_OPAQUE]
-    /**/              inline def takeAfter     (inline v:THIS_OPAQUE|String, inline dflt:Opt[THIS_OPAQUE]= \/, inline from:Int.Opt = \/): THIS_OPAQUE   = x.cast[String].takeAfter     (v.cast[String],dflt.cast[Opt[String]],from).cast[THIS_OPAQUE]
-    /**/              inline def takeAfterLast (inline v:THIS_OPAQUE|String, inline dflt:Opt[THIS_OPAQUE]= \/, inline from:Int.Opt = \/): THIS_OPAQUE   = x.cast[String].takeAfterLast (v.cast[String],dflt.cast[Opt[String]],from).cast[THIS_OPAQUE]
-    @tn("take_Range") inline def take_<>(start:Int, inline size:Int)                                                                    : THIS_OPAQUE   = x.cast[String].take_<>       (start,size)                                .cast[THIS_OPAQUE]
-    @tn("take_Range") inline def take_<>(r: Int.<>)                                                                                     : THIS_OPAQUE   = x.cast[String].take_<>       (r)                                         .cast[THIS_OPAQUE]
-    /**/              inline def takeFirst(inline cnt: Int)                                                                             : THIS_OPAQUE   = x.cast[String].takeFirst     (cnt)                                       .cast[THIS_OPAQUE]
-    /**/              inline def dropFirst(inline cnt: Int)                                                                             : THIS_OPAQUE   = x.cast[String].dropFirst     (cnt)                                       .cast[THIS_OPAQUE]
+    inline def takeBefore    (inline v:THIS_OPAQUE|String, inline dflt:Opt[THIS_OPAQUE]= \/, inline from:Int.Opt = \/): THIS_OPAQUE   = x.cast[String].takeBefore    (v.cast[String],dflt.cast[Opt[String]],from).cast[THIS_OPAQUE]
+    inline def takeBeforeLast(inline v:THIS_OPAQUE|String, inline dflt:Opt[THIS_OPAQUE]= \/, inline from:Int.Opt = \/): THIS_OPAQUE   = x.cast[String].takeBeforeLast(v.cast[String],dflt.cast[Opt[String]],from).cast[THIS_OPAQUE]
+    inline def takeFrom      (inline v:THIS_OPAQUE|String, inline dflt:Opt[THIS_OPAQUE]= \/, inline from:Int.Opt = \/): THIS_OPAQUE   = x.cast[String].takeFrom      (v.cast[String],dflt.cast[Opt[String]],from).cast[THIS_OPAQUE]
+    inline def takeFromLast  (inline v:THIS_OPAQUE|String, inline dflt:Opt[THIS_OPAQUE]= \/, inline from:Int.Opt = \/): THIS_OPAQUE   = x.cast[String].takeFromLast  (v.cast[String],dflt.cast[Opt[String]],from).cast[THIS_OPAQUE]
+    inline def takeAfter     (inline v:THIS_OPAQUE|String, inline dflt:Opt[THIS_OPAQUE]= \/, inline from:Int.Opt = \/): THIS_OPAQUE   = x.cast[String].takeAfter     (v.cast[String],dflt.cast[Opt[String]],from).cast[THIS_OPAQUE]
+    inline def takeAfterLast (inline v:THIS_OPAQUE|String, inline dflt:Opt[THIS_OPAQUE]= \/, inline from:Int.Opt = \/): THIS_OPAQUE   = x.cast[String].takeAfterLast (v.cast[String],dflt.cast[Opt[String]],from).cast[THIS_OPAQUE]
+    inline def takeRange(start:Int, inline size:Int)                                                                  : THIS_OPAQUE   = x.cast[String].takeRange     (start,size)                                .cast[THIS_OPAQUE]
+    inline def takeRange(r: Int.Range)                                                                                : THIS_OPAQUE   = x.cast[String].takeRange     (r)                                         .cast[THIS_OPAQUE]
+    inline def takeFirst(inline cnt: Int)                                                                             : THIS_OPAQUE   = x.cast[String].takeFirst     (cnt)                                       .cast[THIS_OPAQUE]
+    inline def dropFirst(inline cnt: Int)                                                                             : THIS_OPAQUE   = x.cast[String].dropFirst     (cnt)                                       .cast[THIS_OPAQUE]
 
   extension[THIS_OPAQUE<:Opaque](x: THIS_OPAQUE)
-    /**/              inline def takeLast(inline cnt: Int)                                                                              : THIS_OPAQUE   = x.cast[String].takeLast      (cnt)                                       .cast[THIS_OPAQUE]
-    @tn("drop_Range") inline def drop_<>(start:Int, inline size:Int)                                                                    : THIS_OPAQUE   = x.cast[String].drop_<>       (start,size)                                .cast[THIS_OPAQUE]
-    @tn("drop_Range") inline def drop_<>(r: Int.<>)                                                                                     : THIS_OPAQUE   = x.cast[String].drop_<>       (r)                                         .cast[THIS_OPAQUE]
-    /**/              inline def dropLast (inline cnt: Int)                                                                             : THIS_OPAQUE   = x.cast[String].dropLast      (cnt)                                       .cast[THIS_OPAQUE]
+    inline def takeLast(inline cnt: Int)                                                                              : THIS_OPAQUE   = x.cast[String].takeLast      (cnt)                                       .cast[THIS_OPAQUE]
+    inline def dropRange(start:Int, inline size:Int)                                                                  : THIS_OPAQUE   = x.cast[String].dropRange     (start,size)                                .cast[THIS_OPAQUE]
+    inline def dropRange(r: Int.Range)                                                                                : THIS_OPAQUE   = x.cast[String].dropRange     (r)                                         .cast[THIS_OPAQUE]
+    inline def dropLast (inline cnt: Int)                                                                             : THIS_OPAQUE   = x.cast[String].dropLast      (cnt)                                       .cast[THIS_OPAQUE]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -41,11 +41,11 @@ ___________________________________________________________________________*/
 
        The method call is inlined as Java ```x.substring(x.length - cnt, x.length)```
 
-@def take_<> -> Copy range
+@def takeRange -> Copy range
 
       Copies only range of characters specified
 
-@def take_<> -> Copy range
+@def takeRange -> Copy range
 
       Copies only range of characters specified
 
@@ -61,11 +61,11 @@ ___________________________________________________________________________*/
 
        The method call is inlined as Java ```x.substring(0, x.length - cnt)```
 
-@def drop_<> -> Copy without range
+@def dropRange -> Copy without range
 
        Copies without range of characters specified
 
-@def drop_<> -> Copy without range
+@def dropRange -> Copy without range
 
        Copies without range of characters specified
 

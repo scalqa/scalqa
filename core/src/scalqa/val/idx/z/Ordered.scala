@@ -9,8 +9,8 @@ private[scalqa] object Ordered:
       if (c < 0) fun(start, i) else if (c > 0) fun(i + 1, to) else true
     fun(0, l.size)
 
-  def search[A](l: Idx[A], v: A, trgtSize: Int)(using o: Ordering[A]): Int.<> =
-    def bs(start: Int, to: Int): Int.<> =
+  def search[A](l: Idx[A], v: A, trgtSize: Int)(using o: Ordering[A]): Int.Range =
+    def bs(start: Int, to: Int): Int.Range =
       if (to == start) start <>> start else
         val i = start + (to - start - 1) / 2
         val c = o.compare(v, l(i))
@@ -24,8 +24,8 @@ private[scalqa] object Ordered:
         while (j - i < trgtSize && j < l.size && o.compare(v, l(j)) == 0) j += 1
         i <>= ((j - i) min trgtSize)
 
-  def searchBy[A,B](l: Idx[A], v: B, mp: A => B, trgtSize: Int = 1, extraFilter: A => Boolean)(using o: Ordering[B]): Int.<> =
-    val r = search(l.map_^(mp), v, 1)
+  def searchBy[A,B](l: Idx[A], v: B, mp: A => B, trgtSize: Int = 1, extraFilter: A => Boolean)(using o: Ordering[B]): Int.Range =
+    val r = search(l.mapView(mp), v, 1)
     if (r.size == 0) r else
       var i = r.start
       var ok = true

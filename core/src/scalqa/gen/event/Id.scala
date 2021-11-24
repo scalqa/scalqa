@@ -2,7 +2,7 @@ package scalqa; package gen; package event
 
 abstract class Id:
   def id : AnyRef
-  private[event] def tag : String = "Id=" + id.^.id + ", target=" + fun.^.id
+  private[event] def tag : String = "Id=" + id.self.id + ", target=" + fun.self.id
   private[Id]    def fun : AnyRef = null
 
 object Id:
@@ -27,7 +27,7 @@ object Id:
 
   // ***************************************************************************************************************************************************************
   private[scalqa] abstract class Cancel extends Id:
-    override  def toString = "Event.IdCancel(id=" + id.^.id + ")"
+    override  def toString = "Event.IdCancel(id=" + id.self.id + ")"
     protected def error    = J.illegalState("Event cancel request was not mapped corectly somewhere in the stack trace below. Cancel id= " + id)
 
   private[event] object Z:

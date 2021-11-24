@@ -2,9 +2,9 @@ package scalqa; package test.`val`.stream._use._transform; import language.impli
 
 object toIterator extends J.Test:
 
-  testEqual_~(
+  testEqualStream(
     (1 to 100).iterator,
-    (1 <> 100).~.iterator)
+    (1 <> 100).stream.iterator)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -23,6 +23,6 @@ ___________________________________________________________________________*/
    Flow is usually created from stream with ".parallel" method.
 
    ```
-      val flow: ~~.Flow[Int] = (1 <> 10).~.parallel
+      val flow: Stream.Flow[Int] = (1 <> 10).stream.parallel
    ```
 */

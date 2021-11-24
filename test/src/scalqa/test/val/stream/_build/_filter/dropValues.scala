@@ -2,12 +2,12 @@ package scalqa; package test.`val`.stream._build._filter; import language.implic
 
 object dropValues extends J.Test("dropValues"):
 
-  testEqual_~(
-    (1 <> 49).~ ++ (81 <> 100),
-    (1 <> 100).~.dropValues(50 <> 80),
-    (1 <> 100).~.reverseEvery(5).dropValues(50 <> 80).sort,
-    (1 <> 100).~.dropValues((50 <> 80).~.reverseEvery(5)),
-    (1 <> 100).~.reverseEvery(10).dropValues((50 <> 80).~.reverseEvery(5)).sort,
+  testEqualStream(
+    (1 <> 49).stream ++ (81 <> 100),
+    (1 <> 100).stream.dropValues(50 <> 80),
+    (1 <> 100).stream.reverseEvery(5).dropValues(50 <> 80).sort,
+    (1 <> 100).stream.dropValues((50 <> 80).stream.reverseEvery(5)),
+    (1 <> 100).stream.reverseEvery(10).dropValues((50 <> 80).stream.reverseEvery(5)).sort,
   )
 
 /*___________________________________________________________________________

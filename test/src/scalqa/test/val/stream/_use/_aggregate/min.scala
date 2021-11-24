@@ -3,9 +3,9 @@ package scalqa; package test.`val`.stream._use._aggregate; import language.impli
 object min extends J.Test:
 
   testTrue{
-    val l = (1 <> 100).~.reverseEvery(10).><
-    val min = l.~.min
-    l.~.isEvery(_ >= min)
+    val l = (1 <> 100).stream.reverseEvery(10).pack
+    val min = l.stream.min
+    l.stream.isEvery(_ >= min)
   }
 
 /*___________________________________________________________________________

@@ -1,10 +1,10 @@
 package scalqa; package `val`; package idx; import language.implicitConversions
 
 trait ObservableMutable[A] extends Observable[A] with Mutable[A] with Collection.ObservableMutable[A]:
-  @tn("refresh_Range")  def refresh_<>(r: Int.<>)                   : Unit
-  /**/                  def refreshAt( i: Int)                      : Unit      = refresh_<>(i <>= 1)
-  /**/                  def modify(multiChangeFun: Idx.M[A] => Unit): Unit
-  /**/         override def removeAll(v: ~[A])                      : Int       = z.observable.removeAll(this,v)
+  /**/     def refreshRange(r: Int.Range)              : Unit
+  /**/     def refreshAt( i: Int)                      : Unit      = refreshRange(i <>= 1)
+  /**/     def modify(multiChangeFun: Idx.M[A] => Unit): Unit
+  override def removeAll(v: Stream[A])                 : Int       = z.observable.removeAll(this,v)
 
 object ObservableMutable:
   /**/           inline def apply[A](inline initSize:Int=J.initSize): Idx.OM[A] = new X.Basic[A](initSize)
@@ -18,8 +18,8 @@ object ObservableMutable:
   implicit       inline def implicitRequest[A](inline v: NEW)       : Idx.OM[A] = apply[A]()
 
   extension[A]  (x: ObservableMutable[A])
-    @tn("mutableMap_View") def mutableMap_^[B](m: A=>B, r: B => A)               : Idx.OM[B] = mutableMap_^(using TwoWayFunction(m,r))
-    @tn("mutableMap_View") def mutableMap_^[B](using bm: TwoWayFunction[A,B]): Idx.OM[B] = z.TwoWay_View.OM(x, bm)
+    def mutableMapView[B](m: A=>B, r: B => A)               : Idx.OM[B] = mutableMapView(using TwoWayFunction(m,r))
+    def mutableMapView[B](using bm: TwoWayFunction[A,B]): Idx.OM[B] = z.TwoWay_View.OM(x, bm)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def X = observableMutable.X
@@ -49,7 +49,7 @@ ___________________________________________________________________________*/
 
             Supposedly, the elements themself are mutable and their representation has to be "refreshed"
 
-@def refresh_<> -> Creates a refresh event for range of elements
+@def refreshRange -> Creates a refresh event for range of elements
 
             Refresh event is an Update event for specified elements, where old and new values are the same.
 

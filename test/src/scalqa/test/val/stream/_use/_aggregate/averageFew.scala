@@ -2,11 +2,11 @@ package scalqa; package test.`val`.stream._use._aggregate; import language.impli
 
 object averageFew extends J.Test:
 
-  @fast lazy val l = (1 <> 100).~.map(_.toFloat).reverseEvery(10).><
+  @fast lazy val l = (1 <> 100).stream.map(_.toFloat).reverseEvery(10).pack
 
   test{
     var i1, i2 = 0F
-    val (j1, j2) = l.~.peek(v => { i1 += v; i2 += v * 10 }).averageFew(v => v, _ * 10)
+    val (j1, j2) = l.stream.peek(v => { i1 += v; i2 += v * 10 }).averageFew(v => v, _ * 10)
     assertTrue(j1 == i1 / l.size)
     assertTrue(j2 == i2 / l.size)
   }

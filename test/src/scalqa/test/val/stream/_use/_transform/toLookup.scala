@@ -2,10 +2,10 @@ package scalqa; package test.`val`.stream._use._transform; import language.impli
 
 object toLookup extends J.Test:
 
-  testEqual_~(
-    Lookup(0 -> 'A', 1 -> 'B', 2 -> 'C').pair_~.sort,
-    ('A' <> 'C').~.zipKey(_ - 'A').toLookup.pair_~.sort,
-    ('A' <> 'C').~.toLookupBy(_ - 'A').pair_~.sort
+  testEqualStream(
+    Lookup(0 -> 'A', 1 -> 'B', 2 -> 'C').pairStream.sort,
+    ('A' <> 'C').stream.zipKey(_ - 'A').toLookup.pairStream.sort,
+    ('A' <> 'C').stream.toLookupBy(_ - 'A').pairStream.sort
    )
 
 /*___________________________________________________________________________

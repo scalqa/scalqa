@@ -7,11 +7,11 @@ private[scalqa] class JavaListWrap[A](val real: java.util.List[A]) extends idx.X
 private[scalqa] object JavaListWrap:
 
   class Mutable[A](val real: java.util.List[A]) extends Idx.Mutable.X.Abstract[A]:
-    /**/                def size                  : Int  = real.size
-    /**/                def apply(i: Int)         : A    = real.get(i)
-    /**/                def addAt(i: Int, e: A)   : Unit = real.add(i, e)
-    /**/                def updateAt(i: Int, e: A): Unit = real.set(i, e)
-    @tn("remove_Range") def remove_<>(r: Int.<>)  : Unit = r.~.reverse.foreach(real.remove)
+    def size                     : Int  = real.size
+    def apply(i: Int)            : A    = real.get(i)
+    def addAt(i: Int, e: A)      : Unit = real.add(i, e)
+    def updateAt(i: Int, e: A)   : Unit = real.set(i, e)
+    def removeRange(r: Int.Range): Unit = r.stream.reverse.foreach(real.remove)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -3,13 +3,13 @@ package scalqa; package fx; package scene; package shape; package path
 import javafx.scene.shape.{ MoveTo => JMoveTo }
 
 class MoveTo(val real: JMoveTo) extends AnyVal with Z.Base[MoveTo,JMoveTo]:
-  protected    def setup                           = MoveTo
-  @tn("x_Pro") def x_*            : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.xProperty)
-  /**/         def x              : Double         = real.getX
-  /**/         def x_=(v: Double) : Unit           = real.setX(v)
-  @tn("y_Pro") def y_*            : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.yProperty)
-  /**/         def y              : Double         = real.getY
-  /**/         def y_=(v: Double) : Unit           = real.setY(v)
+  protected def setup                           = MoveTo
+  /**/      def xPro           : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.xProperty)
+  /**/      def x              : Double         = real.getX
+  /**/      def x_=(v: Double) : Unit           = real.setX(v)
+  /**/      def yPro           : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.yProperty)
+  /**/      def y              : Double         = real.getY
+  /**/      def y_=(v: Double) : Unit           = real.setY(v)
 
 object MoveTo extends Z.Setup[MoveTo,JMoveTo]:
   def apply(v: JMoveTo)           : MoveTo = new MoveTo(v)

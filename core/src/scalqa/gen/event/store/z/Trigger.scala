@@ -16,7 +16,7 @@ private[z] object Trigger:
 
   class WeakRef private (e: Entry, val cargo: J.WeakRef[Any]) extends Trigger:
     def this(e: Entry, v: Any) = this(e,J.WeakRef(v))
-    override def value           : Any  = cargo.get_?.fornil(e.cancel) or null
+    override def value           : Any  = cargo.getOpt.fornil(e.cancel) or null
     /**/     def cargo_=(v: Any) : Unit = J.unsupportedOperation()
 
 /*___________________________________________________________________________

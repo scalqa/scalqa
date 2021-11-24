@@ -4,7 +4,7 @@ object foreach extends J.Test:
 
   testTrue{
     var i = 0
-    (1 <> 1000).~.foreach(_ => i += 1)
+    (1 <> 1000).stream.foreach(_ => i += 1)
     i == 1000
   }
 

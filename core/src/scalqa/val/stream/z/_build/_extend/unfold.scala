@@ -1,11 +1,11 @@
 package scalqa; package `val`; package stream; package z; package _build; package _extend; import language.implicitConversions
 
-class unfold[A](x: ~[A], fun: ~[A] => Opt[A]) extends z.x.Pipe[A](x):
+class unfold[A](x: Stream[A], fun: Stream[A] => Opt[A]) extends z.x.Pipe[A](x):
   private val b = Val.Buffer[A]()
   private var pass, make = true
 
-  @tn("read_Opt") def read_? =
-    if(pass)      x.read_?.forval(b.add) or_? { pass=false; read_? }
+  def readOpt =
+    if(pass)      x.readOpt.forval(b.add) orOpt { pass=false; readOpt }
     else if(make) fun(b).process(b.add, { make = false })
     else          \/
 

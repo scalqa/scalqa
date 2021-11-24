@@ -9,22 +9,22 @@ class Test(private[j] val name: String = \/):
 
   // ----------------------------------------------------------------------------------------------------------------------------------------------------------
   // Defining
-  /**/                      def include(t: Test *)                                      : Unit = t.~.map(_.group).foreach(group.add)
-  /**/                      def test[U]  (name:String)(code: => U)                      : Unit = group.add(z.Method(name,() => code))
-  /**/                      def test[U]               (code: => U)                      : Unit = test[U](\/)(code)
-  /**/                      def testTrue (name:String)(code: => Boolean)                : Unit = test(name){assertTrue(code)}
-  /**/                      def testTrue              (code: => Boolean)                : Unit = test      {assertTrue(code)}
-  /**/                      def testFalse(name:String)(code: => Boolean)                : Unit = test(name){assertFalse(code)}
-  /**/                      def testFalse             (code: => Boolean)                : Unit = test      {assertFalse(code)}
-  @tn("testEqual_Streams")  def testEqual_~[A](name:String)(s1: ~[A],s2: ~[A],ms: ~[A]*): Unit = test(name){assertEqual_~(s1,s2,ms *)}
-  @tn("testEqual_Streams")  def testEqual_~[A]             (s1: ~[A],s2: ~[A],ms: ~[A]*): Unit = test      {assertEqual_~(s1,s2,ms *)}
+  def include(t: Test *)                                                        : Unit = t.stream.map(_.group).foreach(group.add)
+  def test[U]  (name:String)(code: => U)                                        : Unit = group.add(z.Method(name,() => code))
+  def test[U]               (code: => U)                                        : Unit = test[U](\/)(code)
+  def testTrue (name:String)(code: => Boolean)                                  : Unit = test(name){assertTrue(code)}
+  def testTrue              (code: => Boolean)                                  : Unit = test      {assertTrue(code)}
+  def testFalse(name:String)(code: => Boolean)                                  : Unit = test(name){assertFalse(code)}
+  def testFalse             (code: => Boolean)                                  : Unit = test      {assertFalse(code)}
+  def testEqualStream[A](name:String)(s1:Stream[A],s2: Stream[A],ms: Stream[A]*): Unit = test(name){assertEqualStream(s1,s2,ms *)}
+  def testEqualStream[A]             (s1:Stream[A],s2: Stream[A],ms: Stream[A]*): Unit = test      {assertEqualStream(s1,s2,ms *)}
 
   // ----------------------------------------------------------------------------------------------------------------------------------------------------------
   // Asserting
-  /**/                      def assertTrue( v: Boolean, message: => String = \/)        : Unit = { trueCnt  += 1; if (!v) throw new z.Problem("assertTrue", trueCnt,  message)}
-  /**/                      def assertFalse(v: Boolean, message: => String = \/)        : Unit = { falseCnt += 1; if ( v) throw new z.Problem("assertFalse",falseCnt, message)}
-  @tn("assertEqual_Streams")def assertEqual_~[A](s1: ~[A],s2: ~[A],ms: ~[A]*)           : Unit = { equalCnt += 1; val r=z.streamsEqual.result(s1,s2,ms);
-    /**/                                                                                           if(r.isProblem) throw new z.Problem("assertEqual_~", equalCnt, r.problem.message)}
+  def assertTrue( v: Boolean, message: => String = \/)                          : Unit = { trueCnt  += 1; if (!v) throw new z.Problem("assertTrue", trueCnt,  message)}
+  def assertFalse(v: Boolean, message: => String = \/)                          : Unit = { falseCnt += 1; if ( v) throw new z.Problem("assertFalse",falseCnt, message)}
+  def assertEqualStream[A](s1: Stream[A],s2: Stream[A],ms: Stream[A]*)          : Unit = { equalCnt += 1; val r=z.streamsEqual.result(s1,s2,ms);
+    /**/                                                                                   if(r.isProblem) throw new z.Problem("assertEqualStream", equalCnt, r.problem.message)}
 
   // ----------------------------------------------------------------------------------------------------------------------------------------------------------
   // Running
@@ -34,9 +34,9 @@ class Test(private[j] val name: String = \/):
     val t = Time.current
     val s = "Started at " +- t.roundTo(1.Second)
     println(s + "\n" + "-" * s.length)
-    val o = group.run_??(0)
+    val o = group.runResult(0)
     println("-" * s.length)
-    println(o.value_?.map(_ => "Succesfully Finished").or("Stopped on problem") + " in " + t.age.tag)
+    println(o.valueOpt.map(_ => "Succesfully Finished").or("Stopped on problem") + " in " + t.age.tag)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

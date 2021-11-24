@@ -1,24 +1,23 @@
 package scalqa; package `val`; package stream; package z; package _build; package _filter; import scala.language.implicitConversions
 
-class take[A](x: ~[A], f: A => Boolean) extends z.x.Pipe[A](x):
+class take[A](x: Stream[A], f: A => Boolean) extends z.x.Pipe[A](x):
 
-  @tn("read_Opt") def read_? =
-    var o = x.read_?
+  def readOpt =
+    var o = x.readOpt
     while (o)
       if(f(o.cast[A])) return o
-      o = x.read_?
+      o = x.readOpt
     \/
 
 
 object take:
-  inline def HEAVY[A](inline x: ~[A], inline f: A => Boolean): ~[A] =
-    class TAKE(x: ~[A]) extends z.x.Pipe[A](x):
-      @tn("read_Opt")
-      def read_? =
-        var o=x.read_?
+  inline def HEAVY[A](inline x: Stream[A], inline f: A => Boolean): Stream[A] =
+    class TAKE(x: Stream[A]) extends z.x.Pipe[A](x):
+      def readOpt =
+        var o=x.readOpt
         while(o)
           if(f(o.cast[A])) return o
-          o=x.read_?
+          o=x.readOpt
         o
     new TAKE(x)
 

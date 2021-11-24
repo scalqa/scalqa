@@ -3,8 +3,8 @@ package scalqa; package test.`val`.stream._build._extend; import language.implic
 object default extends J.Test:
 
   test{
-    assertTrue((1 <> 3).~.drop(_ => true).default(333).sum == 333)
-    assertTrue((1 <> 3).~.default(333).sum == 6)
+    assertTrue((1 <> 3).stream.drop(_ => true).default(333).sum == 333)
+    assertTrue((1 <> 3).stream.default(333).sum == 6)
   }
 
 /*___________________________________________________________________________

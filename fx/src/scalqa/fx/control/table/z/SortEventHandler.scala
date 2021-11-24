@@ -2,13 +2,13 @@ package scalqa; package fx; package control; package table; package z; import la
 
 private[fx] class SortEventHandler[ROW](t: Table[ROW]):
   private var listening = true
-  private var oldSortOrder: ><[t.Column[_]] = \/
+  private var oldSortOrder: Pack[t.Column[_]] = \/
 
   private def doSort : Unit = t.rows.sort(using t.sortingBase + t.ordering)
 
   t.real.setSortPolicy(_ => true)
-  t.sortingBase_*.onChangeRun{doSort}
-  t.ordering_* .onChangeRun{
+  t.sortingBasePro.onChangeRun{doSort}
+  t.orderingPro.onChangeRun{
     doSort
     if (listening)
       // programmatic change, clear UI sort order
@@ -19,7 +19,7 @@ private[fx] class SortEventHandler[ROW](t: Table[ROW]):
     def invalidated(v: javafx.beans.Observable) : Unit =
       if (listening)
         val so = t.sortOrder
-        if (so.isEmpty && !t.sortMode_*().isProxyWithUnsorted && !oldSortOrder.isEmpty)
+        if (so.isEmpty && !t.sortModePro().isProxyWithUnsorted && !oldSortOrder.isEmpty)
           val c = oldSortOrder.head
           import javafx.scene.control.TableColumn.SortType.*
           c.real.setSortType((c.real.getSortType == DESCENDING) ? ASCENDING or DESCENDING)
@@ -27,7 +27,7 @@ private[fx] class SortEventHandler[ROW](t: Table[ROW]):
         else
           oldSortOrder = so
           listening = false
-          t.ordering_*() = so.~.map(_.rowOrdering).foldAs(\/ :Ordering[ROW])(_ + _)
+          t.orderingPro() = so.stream.map(_.rowOrdering).foldAs(\/ :Ordering[ROW])(_ + _)
           listening = true
   })
 

@@ -28,11 +28,11 @@ ___________________________________________________________________________*/
 
     ```
 
-        val s: Int.~    = 1 <> 5
+        val s: Int.Stream = 1 <> 5
 
-        val o: Int.Opt  = s.readRaw_?  // Holds Int.Opt(1)
+        val o: Int.Opt    = s.readRawOpt  // Holds Int.Opt(1)
 
-        val l: Int.>< = s.><     // Holds (2,3,4,5)
+        val l: Int.Pack   = s.pack       // Holds (2,3,4,5)
     ```
 
 @def min        -> Minimum     \n\n Returns type minimal value: -2 ^ 31

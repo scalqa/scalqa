@@ -1,9 +1,9 @@
 package scalqa; package lang; import language.implicitConversions
 
 object Long extends long.g.companion.Containers[Long]:
-  inline def min     : Long               = java.lang.Long.MIN_VALUE
-  inline def max     : Long               = java.lang.Long.MAX_VALUE
-  inline def ordering: Gen.Ordering[Long]   = long.z.Math
+  inline def min     : Long           = java.lang.Long.MIN_VALUE
+  inline def max     : Long           = java.lang.Long.MAX_VALUE
+  inline def ordering: Ordering[Long] = long.z.Math
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Opaque   = long.Opaque.TYPE.DEF;   transparent inline def Opaque = long.Opaque
@@ -27,16 +27,14 @@ ___________________________________________________________________________*/
     so the following code can run without boxing:
 
     ```
-        val s: Long.~    = 1L <> 5L
+        val s: Long.Stream = 1L <> 5L
 
-        val o: Long.Opt  = s.readRaw_?  // Holds Long.Opt(1)
+        val o: Long.Opt    = s.readRawOpt  // Holds Long.Opt(1)
 
-        val l: Long.><   = s.><         // Holds (2,3,4,5)
+        val l: Long.Pack   = s.pack       // Holds (2,3,4,5)
     ```
 
 @def min      -> Minimum \n\n  Returns type minimal value: -2 ^ 63
 @def max      -> Maximum \n\n  Returns type maximum value: 2 ^ 63 - 1
 @def ordering -> Ordering   \n\n  Returns type natural ordering
-@def math     -> Math interface \n\n  Returns type math implementation
-
 */

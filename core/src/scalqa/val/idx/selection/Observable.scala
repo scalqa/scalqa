@@ -6,7 +6,7 @@ trait Observable[A] extends Selection[A] with gen.event.Observable:
   /**/      def onChange[U](f: THIS_TYPE => U)   : Event.Control
   /**/      def onChangeRun[U](f: => U)          : Event.Control  = onChange(_ => f)
   /**/      def onObservableChange[U](l: () => U): Event.Control  = onChange(Event.Id.map1(l,_ => l()))
-  override  def property(dflt: A)                : Pro.O[A]       = new Pro.O[A] { def apply() = indexes.at_?(0).map(self.apply) or dflt; def onChange[U](l: () => U) = self.onChange(_ => l()) }
+  override  def property(dflt: A)                : Pro.O[A]       = new Pro.O[A] { def apply() = indexes.applyOpt(0).map(self.apply) or dflt; def onChange[U](l: () => U) = self.onChange(_ => l()) }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

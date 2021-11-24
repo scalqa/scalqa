@@ -1,7 +1,7 @@
 package scalqa; package `val`; package stream; package custom; import language.implicitConversions
 
 trait Discharge[A]:
-  self: ~[A] =>
+  self: Stream[A] =>
 
   def dischargeTo(v: Buffer[A]): Unit
 

@@ -2,7 +2,7 @@ package scalqa; package lang; package anyref; package g; package companion; impo
 
 class Range[A]:
 
-  def apply(start: A, end: A, endIsIn: Boolean = true)(using Ordering  [A]) : <>[A] = Val.<>(start, end, endIsIn)
+  def apply(start: A, end: A, endIsIn: Boolean = true)(using Ordering[A]): Val.Range[A] = Val.Range(start, end, endIsIn)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

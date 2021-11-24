@@ -13,15 +13,15 @@ All containers are designed with a single vision, have consistent naming, are in
 Top level collections include:
 
 - [Collection](../../api/scalqa/val/Collection.html) is the framework root trait
-- [Idx](../../api/scalqa/val/Idx.html) is index accessible collection of values (trait)
-- [Lookup](../../api/scalqa/val/Lookup.html) is key accessible collection of values (trait) 
+- [Idx](../../api/scalqa/val/Idx.html) is an index accessible collection of values (trait)
+- [Lookup](../../api/scalqa/val/Lookup.html) is a key accessible collection of values (trait) 
 - [Buffer](../../api/scalqa/val/Buffer.html) is growable indexed collection (class)
-- [><](../../api/scalqa/val/Pack.html) is immutable pack of values, indexed collection (class)
+- [Pack](../../api/scalqa/val/Pack.html) is an immutable pack of values, indexed collection (class)
 
 Top level non-collections include:
 
-- [~](../../api/scalqa/val/Stream.html) - stream of values interface
-- [<>](../../api/scalqa/val/Range.html) - abstract range of values 
+- [Stream](../../api/scalqa/val/Stream.html) - stream of values interface
+- [Range](../../api/scalqa/val/Range.html) - abstract range of values 
 - [Pro](../../api/scalqa/val/Pro.html) - value provider (holds a single value)  
 - [Opt](../../api/scalqa/val/Opt.html) - value option  (holds value or is empty)
 - [Result](../../api/scalqa/val/Result.html) - value result (holds value or problem) 

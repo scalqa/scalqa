@@ -48,7 +48,7 @@ ___________________________________________________________________________*/
       [[BigInteger]] is used for really large integer calculations
 
       ```
-      val max: BigInteger = ~~(58).repeat(35).foldAs(1.Big)(_ * _)
+      val max: BigInteger = Stream(58).repeat(35).foldAs(1.Big)(_ * _)
 
       "Largest Bitcoin address= " + max + ", digits=" + max.toString.length TP()
 

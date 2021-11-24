@@ -4,12 +4,12 @@ abstract class Pane extends Abstract.Region:
   protected type REAL <: javafx.scene.layout.Pane
   protected override def _createReal: REAL = new javafx.scene.layout.Pane().cast[REAL]
 
-  val children            : Idx.M[Fx.Node.Like] = Idx.M.wrap(real.getChildren).mutableMap_^[Fx.Node.Like]
+  val children            : Idx.M[Fx.Node.Like] = Idx.M.wrap(real.getChildren).mutableMapView[Fx.Node.Like]
   def add(n: Fx.Node.Like): Unit                = children += n
 
 object Pane:
   def apply(e1: String, e2: Fx.Node.Like)       : Pane = Pane(Label(e1), e2)
-  def apply(e1: Fx.Node.Like, e2: Fx.Node.Like) : Pane = Pane.Grid().^(v => { v.add(0,0,e1); v.add(0,1,e2) })
+  def apply(e1: Fx.Node.Like, e2: Fx.Node.Like) : Pane = Pane.Grid().self(v => { v.add(0,0,e1); v.add(0,1,e2) })
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Split         = pane.Split;          transparent inline def Split         = pane.Split

@@ -8,9 +8,9 @@ object Pro:
   implicit inline def implicitToFunction[A](v: Pro[A]): () => A  = () => v()
 
   extension[A]  (x: Pro[A])
-    @tn("map_View")        def map_^[B](f: A => B)                                            : Pro[B]   = new z.Convert_View(x, f)
-    @tn("observable_View") def observable_^(v1: Gen.Observable, v2: Opt[Gen.Observable] = \/) : Pro.O[A] = z.Observable_View(x, v1, v2)
-    /**/            inline def contains(inline v: A)                                          : Boolean  = x() == v
+    /**/   def mapView[B](f: A => B)                                            : Pro[B]   = new z.Convert_View(x, f)
+    /**/   def observableView(v1: Gen.Observable, v2: Opt[Gen.Observable] = \/) : Pro.O[A] = z.Observable_View(x, v1, v2)
+    inline def contains(inline v: A)                                            : Boolean  = x() == v
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def Mutable           = pro.Mutable;           type Mutable[A]           = pro.Mutable[A]
@@ -54,18 +54,18 @@ ___________________________________________________________________________*/
        Here is an example of 'name' property definition hierarchy:
        ```
                trait Foo:                                   // 'name' is read only
-                 def name_*          : Pro[String]
-                 def name            : String = name_*()    // required shortcut
+                 def namePro          : Pro[String]
+                 def name            : String = namePro()    // required shortcut
 
                trait Foo_M extends Foo:                     // 'name' is read/write
-                 def name_*          : Pro.M[String]
-                 def name_=(v:String): Unit = name_*() = v  // required shortcut
+                 def namePro          : Pro.M[String]
+                 def name_=(v:String): Unit = namePro() = v  // required shortcut
 
                trait Foo_O extends Foo:                     // 'name' is read/listenTo
-                 def name_*          : Pro.O[String]
+                 def namePro          : Pro.O[String]
 
                trait Foo_OM extends Foo_O with Foo_M:       // 'name' is read/write/listenTo
-                 def name_*          : Pro.OM[String]
+                 def namePro          : Pro.OM[String]
        ```
 
        Note. The 'required shortcuts' must be implemented. They will not even show up in documentation, because they are assumed to be there

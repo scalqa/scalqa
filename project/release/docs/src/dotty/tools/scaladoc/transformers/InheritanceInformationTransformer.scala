@@ -15,8 +15,8 @@ class InheritanceInformationTransformer(using DocContext) extends (Module => Mod
     st.flatMap(s => Seq(s -> ltt) ++ getEdges(s, subtypes))
 
   private def bareClasslikeKind(kind: Kind): Kind = kind match
-    case _: Kind.Trait => Kind.Trait(Nil, Nil)
-    case _: Kind.Class => Kind.Class(Nil, Nil)
+    case _ : Kind.Trait => Kind.Trait(Nil, Nil)
+    case _ : Kind.Class => Kind.Class(Nil, Nil)
     case e if e.isInstanceOf[Kind.Enum] => Kind.Enum(Nil, Nil)
     case ec if ec.isInstanceOf[Kind.EnumCase] => Kind.EnumCase(Kind.Object)
     case o => o

@@ -3,7 +3,7 @@ package scalqa; package fx; package scene; package chart; package axis; package 
 import javafx.geometry.Dimension2D
 
 class Custom[A](m: TwoWayFunction[A, Double]) extends Value[A](m):
-  def this(name: String, m: TwoWayFunction[A, Double]) = { this(m); name.^.?.forval(label = _) }
+  def this(name: String, m: TwoWayFunction[A, Double]) = { this(m); name.??.forval(label = _) }
 
   override protected type REAL = z.Real[A]; protected override def _createReal = new REAL(this)
 
@@ -14,9 +14,9 @@ class Custom[A](m: TwoWayFunction[A, Double]) extends Value[A](m):
     var forceZeroInRange                                         : Boolean     = false
     var formatPattern                                            : String      = "0"
     def label(v: A)                                              : String      = v.toString
-    def tick_~(r: Range[A])                                      : ~[A]        = z.calcTick.stream(r.transform(map)).map(map.undo)
-    def minorTick_~(r: Range[A], minorTickCount: Int)            : ~[A]        = z.calcTick.minorStream(r.transform(map), minorTickCount).map(map.undo)
-    def scope(r: <>[A], totalSize: Double, labelSize: Double)    : Range[A]    = z.calcScope(Custom.this, r.convert(map), totalSize, labelSize).transform(map.undo _)
+    def tickStream(r: Range[A])                                  : Stream[A]   = z.calcTick.stream(r.transform(map)).map(map.undo)
+    def minorTickStream(r: Range[A], minorTickCount: Int)        : Stream[A]   = z.calcTick.minorStream(r.transform(map), minorTickCount).map(map.undo)
+    def scope(r: Val.Range[A],totalSize: Double,labelSize:Double): Range[A]    = z.calcScope(Custom.this, r.convert(map), totalSize, labelSize).transform(map.undo _)
     def labelSize(labelText: String, rotation: Double)           : Dimension2D = real._measureTickMarkLabelSize(labelText, rotation)
     def side                                                     : Side        = real.getSide
 

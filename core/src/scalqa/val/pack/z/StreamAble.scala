@@ -2,26 +2,26 @@ package scalqa; package `val`; package pack; package z; import language.implicit
 
 object StreamAble:
 
-  inline def apply[A](inline x:Able.~[A])(using inline A: Specialized[A]): A.>< =
+  inline def apply[A](inline x:Able.Stream[A])(using inline A: Specialized[A]): A.Pack =
     inline x match
-      case _ : Boolean.G.Collection[A & Any.Boolean] => x.~.><.cast[A.><]
-      case _ : Byte   .G.Collection[A & Any.Byte]    => x.~.><.cast[A.><]
-      case _ : Char   .G.Collection[A & Any.Char]    => x.~.><.cast[A.><]
-      case _ : Short  .G.Collection[A & Any.Short]   => x.~.><.cast[A.><]
-      case _ : Int    .G.Collection[A & Any.Int]     => x.~.><.cast[A.><]
-      case _ : Long   .G.Collection[A & Any.Long]    => x.~.><.cast[A.><]
-      case _ : Float  .G.Collection[A & Any.Float]   => x.~.><.cast[A.><]
-      case _ : Double .G.Collection[A & Any.Double]  => x.~.><.cast[A.><]
+      case _ : Boolean.G.Collection[A & Any.Boolean] => x.stream.pack.cast[A.Pack]
+      case _ : Byte   .G.Collection[A & Any.Byte]    => x.stream.pack.cast[A.Pack]
+      case _ : Char   .G.Collection[A & Any.Char]    => x.stream.pack.cast[A.Pack]
+      case _ : Short  .G.Collection[A & Any.Short]   => x.stream.pack.cast[A.Pack]
+      case _ : Int    .G.Collection[A & Any.Int]     => x.stream.pack.cast[A.Pack]
+      case _ : Long   .G.Collection[A & Any.Long]    => x.stream.pack.cast[A.Pack]
+      case _ : Float  .G.Collection[A & Any.Float]   => x.stream.pack.cast[A.Pack]
+      case _ : Double .G.Collection[A & Any.Double]  => x.stream.pack.cast[A.Pack]
       case _  => inline A match
-        case _ : Specialized[A & Any.Boolean] => x.~.cast[~[Boolean]].><.cast[A.><]
-        case _ : Specialized[A & Any.Byte   ] => x.~.cast[~[Byte   ]].><.cast[A.><]
-        case _ : Specialized[A & Any.Char   ] => x.~.cast[~[Char   ]].><.cast[A.><]
-        case _ : Specialized[A & Any.Short  ] => x.~.cast[~[Short  ]].><.cast[A.><]
-        case _ : Specialized[A & Any.Int    ] => x.~.cast[~[Int    ]].><.cast[A.><]
-        case _ : Specialized[A & Any.Long   ] => x.~.cast[~[Long   ]].><.cast[A.><]
-        case _ : Specialized[A & Any.Float  ] => x.~.cast[~[Float  ]].><.cast[A.><]
-        case _ : Specialized[A & Any.Double ] => x.~.cast[~[Double ]].><.cast[A.><]
-        case _                                => x.~.><.cast[A.><]
+        case _ : Specialized[A & Any.Boolean] => x.stream.cast[Stream[Boolean]].pack.cast[A.Pack]
+        case _ : Specialized[A & Any.Byte   ] => x.stream.cast[Stream[Byte   ]].pack.cast[A.Pack]
+        case _ : Specialized[A & Any.Char   ] => x.stream.cast[Stream[Char   ]].pack.cast[A.Pack]
+        case _ : Specialized[A & Any.Short  ] => x.stream.cast[Stream[Short  ]].pack.cast[A.Pack]
+        case _ : Specialized[A & Any.Int    ] => x.stream.cast[Stream[Int    ]].pack.cast[A.Pack]
+        case _ : Specialized[A & Any.Long   ] => x.stream.cast[Stream[Long   ]].pack.cast[A.Pack]
+        case _ : Specialized[A & Any.Float  ] => x.stream.cast[Stream[Float  ]].pack.cast[A.Pack]
+        case _ : Specialized[A & Any.Double ] => x.stream.cast[Stream[Double ]].pack.cast[A.Pack]
+        case _                                => x.stream.pack.cast[A.Pack]
 
 
 /*___________________________________________________________________________

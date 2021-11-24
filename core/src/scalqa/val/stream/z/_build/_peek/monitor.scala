@@ -2,13 +2,13 @@ package scalqa; package `val`; package stream; package z; package _build; packag
 
 import Custom.Event.Monitor
 
-class monitor[A](x: ~[A], monitor: Monitor) extends z.x.Pipe.Sized[A](x):
+class monitor[A](x: Stream[A], monitor: Monitor) extends z.x.Pipe.Sized[A](x):
   private var nanoStart = 0L
   private var cnt = 0
 
   private inline def len = Time.Length.fromNanos(System.nanoTime - nanoStart)
 
-  @tn("read_Opt") def read_? = x.read_?.process(
+  def readOpt = x.readOpt.process(
     v => {
       if (cnt == 0)
         nanoStart = System.nanoTime

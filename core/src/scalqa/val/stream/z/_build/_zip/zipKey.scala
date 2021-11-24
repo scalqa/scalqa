@@ -1,7 +1,7 @@
 package scalqa; package `val`; package stream; package z; package _build; package _zip
 
-class zipKey[A,B](x: ~[A], f: A => B) extends z.x.Pipe.Sized[(B,A)](x):
-  @tn("read_Opt") def read_? = x.read_?.map(v => (f(v),v))
+class zipKey[A,B](x: Stream[A], f: A => B) extends z.x.Pipe.Sized[(B,A)](x):
+  def readOpt = x.readOpt.map(v => (f(v),v))
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -1,19 +1,19 @@
 package scalqa; package `val`; package stream; package z; package _build; package _extend; import language.implicitConversions
 
-class joinAllAt[A](p1: ~[A], pos: Int, p2: ~[A]) extends ~[A] with Custom.Pipeline.Tree with Able.Size.Opt.Long:
+class joinAllAt[A](p1: Stream[A], pos: Int, p2: Stream[A]) extends Stream[A] with Custom.Pipeline.Tree with Able.Size.Opt.Long:
   private var i = 0
   private var end = false
 
-  @tn("read_Opt") def read_? =
-    if (end) p1.read_?
+  def readOpt =
+    if (end) p1.readOpt
     else if (i < pos)
       i += 1
-      p1.read_? or_? { i = pos; read_? }
+      p1.readOpt orOpt { i = pos; readOpt }
     else
-      p2.read_? or_? { end = true; read_? }
+      p2.readOpt orOpt { end = true; readOpt }
 
   override            def doc        = super.doc += ("position", pos)
-  @tn("sizeLong_Opt") def sizeLong_? = p1.sizeLong_?.mix(p2.sizeLong_?, _ + _)
+  def sizeLongOpt = p1.sizeLongOpt.mix(p2.sizeLongOpt, _ + _)
   /**/                def docTree    = Doc.Tree(this.doc, Custom.Pipeline.docTree(p1), Custom.Pipeline.docTree(p2))
 
 /*___________________________________________________________________________

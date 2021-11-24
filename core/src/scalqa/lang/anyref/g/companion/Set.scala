@@ -1,9 +1,9 @@
 package scalqa; package lang; package anyref; package g; package companion; import language.implicitConversions
 
 class Set[A]:
-  /**/           def apply(v: A *) : Val.Set[A] = apply(v)
-  /**/           def apply(v: ~[A]): Val.Set[A] = Val.Set.fromStream(v)
-  @tn("getVoid") def void          : Val.Set[A] = Val.Set.void
+  /**/           def apply(v: A *)          : Val.Set[A] = apply(v)
+  /**/           def apply(v: Val.Stream[A]): Val.Set[A] = Val.Set.fromStream(v)
+  @tn("getVoid") def void                   : Val.Set[A] = Val.Set.void
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

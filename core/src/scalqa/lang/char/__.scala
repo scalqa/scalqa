@@ -28,11 +28,11 @@ ___________________________________________________________________________*/
 
     ```
 
-        val s: Char.~    = 'a' <> 'd'
+        val s: Char.Stream = 'a' <> 'd'
 
-        val o: Char.Opt  = s.readRaw_?  // Holds Char.Opt('a')
+        val o: Char.Opt    = s.readRawOpt  // Holds Char.Opt('a')
 
-        val l: Char.><   = s.><         // Holds ('b','c','d')
+        val l: Char.Pack   = s.pack       // Holds ('b','c','d')
     ```
 
 @def min        -> Minimum     \n\n Returns type minimal value: '\u0000'

@@ -3,40 +3,40 @@ package scalqa; package fx; package control; package table; package z; package i
 private[z] transparent trait _Listener[A]:
   self: IdxProxy[A] =>
 
-  protected val listener: ><[Idx.O.Event[A]] => Any = cc => synchronized {
-    def cnvrt(v:  Idx.O.Event[A]): ~[Idx.O.Event[A]] = {
+  protected val listener: Pack[Idx.O.Event[A]] => Any = cc => synchronized {
+    def cnvrt(v:  Idx.O.Event[A]): Stream[Idx.O.Event[A]] = {
       val r = v.range
-      def reindex(dif: Int): Unit = entries.~.take(_.index >= r.start).foreach(_.index += dif)
-      def row_?(items: ~[A]): ~[(Entry[A], Int)] = {var i=r.start-1; items.map(v => new Entry({i+=1; i}, v)).zipValue(e => if (ordered) entries.orderedSearch(e)(using _rowOrdering).start else e.index) }
+      def reindex(dif: Int): Unit = entries.stream.take(_.index >= r.start).foreach(_.index += dif)
+      def rowOpt(items: Stream[A]): Stream[(Entry[A], Int)] = {var i=r.start-1; items.map(v => new Entry({i+=1; i}, v)).zipValue(e => if (ordered) entries.orderedSearch(e)(using _rowOrdering).start else e.index) }
       v match
         case c: Idx.Event.Reposition[A] =>
-          entries.~.take(v => c.range.contains(v.index)).foreach(e => e.index = c.permutation.position(e.index))
+          entries.stream.take(v => c.range.contains(v.index)).foreach(e => e.index = c.permutation.position(e.index))
           \/
         case c: Idx.Event.Add[A] =>
           reindex(c.range.size);
-          row_?(c.items).map(t => {
+          rowOpt(c.items).map(t => {
             val (row, pos) = t
             entries.addAt(pos, row);
             Idx.Event.Add(pos, row.value)
           })
         case c: Idx.Event.Remove[A] =>
-          if (r == 0 <>> entries.size) { val v =  Idx.Event.Remove(r, entries.~.map(_.value).><); entries.clear; ~~(v) }
-          else if (!ordered) { entries.remove_<>(r); ~~(c) }
+          if (r == 0 <>> entries.size) { val v =  Idx.Event.Remove(r, entries.stream.map(_.value).pack); entries.clear; v.self.stream }
+          else if (!ordered) { entries.removeRange(r); c.self.stream }
           else
-            val s = row_?(c.items)
+            val s = rowOpt(c.items)
               .map(t => {
                 val (e, i) = t
-                if (entries.at_?(i).contains(e)) i else entries.~.findPosition_?(_ == e).or(J.illegalState("Could not find: " + e))
+                if (entries.applyOpt(i).contains(e)) i else entries.stream.findPositionOpt(_ == e).or(J.illegalState("Could not find: " + e))
               })
               .sort
               .reverse
-              .map(i => { val c =  Idx.Event.Remove(i, entries(i).value); entries.remove_<>(c.range); c })
-              .><
+              .map(i => { val c =  Idx.Event.Remove(i, entries(i).value); entries.removeRange(c.range); c })
+              .pack
             reindex(-r.size)
             s
         case _ => J.illegalState()
     }
-    fireChange(cc.~.flatMap(cnvrt).><)
+    fireChange(cc.stream.flatMap(cnvrt).pack)
   }
 
 /*___________________________________________________________________________

@@ -1,8 +1,8 @@
 package scalqa; package lang; package anyref; package g; package companion; import language.implicitConversions
 
 class Lookup[A]:
-  def apply[B](v: ~[(A, B)]) : Val.Lookup[A,B] = Val.Lookup(v)
-  def apply[B](v: (A, B)*)   : Val.Lookup[A,B] = Val.Lookup(v.~)
+  def apply[B](v: Val.Stream[(A, B)]) : Val.Lookup[A,B] = Val.Lookup(v)
+  def apply[B](v: (A, B)*)            : Val.Lookup[A,B] = Val.Lookup(v.stream)
 
   type Stable[B]  = Val.Lookup.Stable[A,B];                      val Stable  = new Lookup.Stable[A]
   type Mutable[B] = Val.Lookup.Mutable[A,B];                     val Mutable = new Lookup.Mutable[A]
@@ -11,15 +11,15 @@ class Lookup[A]:
 object Lookup:
 
   class Stable[A]:
-    /**/           inline def apply[B](inline v: ~[(A, B)]) : Val.Lookup.Stable[A,B]  = Val.Lookup.Stable(v)
-    /**/           inline def apply[B](inline v: (A, B)*)   : Val.Lookup.Stable[A,B]  = Val.Lookup.Stable(v)
-    @tn("getVoid") inline def void[B]                       : Val.Lookup.Stable[A,B]  = Val.Lookup.Stable.void
+    /**/           inline def apply[B](inline v: Val.Stream[(A,B)]) : Val.Lookup.Stable[A,B]  = Val.Lookup.Stable(v)
+    /**/           inline def apply[B](inline v: (A, B)*)           : Val.Lookup.Stable[A,B]  = Val.Lookup.Stable(v)
+    @tn("getVoid") inline def void[B]                               : Val.Lookup.Stable[A,B]  = Val.Lookup.Stable.void
 
 
   class Mutable[A]:
-    /**/           inline def apply[B]()                    : Val.Lookup.Mutable[A,B] = Val.Lookup.Mutable()
-    /**/           inline def apply[B](inline v: ~[(A, B)]) : Val.Lookup.Mutable[A,B] = Val.Lookup.Mutable(v)
-    /**/           inline def concurrent[B]()               : Val.Lookup.Mutable[A,B] = Val.Lookup.Mutable.concurrent()
+    /**/           inline def apply[B]()                            : Val.Lookup.Mutable[A,B] = Val.Lookup.Mutable()
+    /**/           inline def apply[B](inline v: Val.Stream[(A,B)]) : Val.Lookup.Mutable[A,B] = Val.Lookup.Mutable(v)
+    /**/           inline def concurrent[B]()                       : Val.Lookup.Mutable[A,B] = Val.Lookup.Mutable.concurrent()
 
 
 

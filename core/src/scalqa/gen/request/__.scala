@@ -121,7 +121,7 @@ ___________________________________________________________________________*/
      By far the most common request is `\/`, which is request for void instance
 
      ```
-     var s: ~[Int]       = \/     // Assigning empty stream of Ints
+     var s: Stream[Int]  = \/     // Assigning empty stream of Ints
      var o: Opt[String]  = \/     // Assigning empty optional value of String
      var i: Long.Idx     = \/     // Assigning empty indexed collection of Long
      ```

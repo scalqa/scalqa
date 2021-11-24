@@ -9,11 +9,11 @@ object Image extends Abstract.Delegate.Opaque[Image, REAL]("Fx.Image"):
   override def value_doc(v: Image)      : Doc   = Doc(typeName) += ("width", v.width) += ("height", v.height)
 
   extension (x: Image)
-    @tn("width_Pro")  def width_*  : Double.Pro.O  = Fx.JavaFx.To.pro_O(x.real.widthProperty)
-    /**/              def width    : Double        = x.real.getWidth
-    @tn("height_Pro") def height_* : Double.Pro.O  = Fx.JavaFx.To.pro_O(x.real.heightProperty)
-    /**/              def height   : Double        = x.real.getHeight
-    /**/              def isError  : Boolean       = x.real.isError
+    def widthPro : Double.Pro.O  = Fx.JavaFx.To.pro_O(x.real.widthProperty)
+    def width    : Double        = x.real.getWidth
+    def heightPro: Double.Pro.O  = Fx.JavaFx.To.pro_O(x.real.heightProperty)
+    def height   : Double        = x.real.getHeight
+    def isError  : Boolean       = x.real.isError
 
   object TYPE:
     opaque type DEF <: AnyRef.Opaque = REAL & AnyRef.Opaque

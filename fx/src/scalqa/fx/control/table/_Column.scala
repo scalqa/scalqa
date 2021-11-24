@@ -10,13 +10,13 @@ transparent trait _Column[ROW]:
       this(t,d)
       if (self.columnData.isSealed) J.illegalState("Table already used, all the columns must be defined before rows or properties")
       self.columnData += this
-      createCell_:(cell.x.Label[ROW, VIEW, A](this))
+      useCell(cell.x.Label[ROW, VIEW, A](this))
       oo.forval(v => ordering = v)
     }
     def this(label: String, widthOpt:Int.Opt, f:ROW=>A) (using o: Opt[Ordering[A]])(using t:Def.Void[A],d:Def.Doc[A]) = {
       this()(using o)(using t,d)
-      label.^.?.forval(this.label= _)
-      if (f != null) value_:(f)
+      label.??.forval(this.label= _)
+      if (f != null) useValue(f)
       widthOpt.forval(prefWidth = _)
     }
     def this(label: String, f: ROW => A)(using o: Opt[Ordering[A]])(using t:Def.Void[A],d:Def.Doc[A]) = this(label, \/, f)(using o)(using t,d)

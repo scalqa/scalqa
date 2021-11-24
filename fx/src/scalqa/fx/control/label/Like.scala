@@ -3,21 +3,21 @@ package scalqa; package fx; package control; package label; import language.impl
 abstract class Like extends Control:
   protected type REAL <: javafx.scene.control.Labeled
 
-  @tn("text_Pro")      def text_*               : Pro.OM[String] = Fx.JavaFx.To.pro_OM(real.textProperty)
-  /**/                 def text                 : String         = real.getText
-  /**/                 def text_=(v: String)    : Unit           = real.setText(v)
+  def textPro              : Pro.OM[String] = Fx.JavaFx.To.pro_OM(real.textProperty)
+  def text                 : String         = real.getText
+  def text_=(v: String)    : Unit           = real.setText(v)
 
-  @tn("alignment_Pro") def alignment_*          : Pro.OM[Pos]    = Fx.JavaFx.To.pro_OM(real.alignmentProperty).mutableMap_^[Pos]
-  /**/                 def alignment            : Pos            = real.getAlignment
-  /**/                 def alignment_=(v: Pos)  : Unit           = real.setAlignment(v)
+  def alignmentPro         : Pro.OM[Pos]    = Fx.JavaFx.To.pro_OM(real.alignmentProperty).mutableMapView[Pos]
+  def alignment            : Pos            = real.getAlignment
+  def alignment_=(v: Pos)  : Unit           = real.setAlignment(v)
 
-  @tn("font_Pro")      def font_*               : Pro.OM[Fx.Font]= Fx.JavaFx.To.pro_OM(real.fontProperty).mutableMap_^[Fx.Font]
-  /**/                 def font                 : Fx.Font        = Fx.Font(real.getFont)
-  /**/                 def font_=(v: Fx.Font)   : Unit           = real.setFont(v.real)
+  def fontPro              : Pro.OM[Fx.Font]= Fx.JavaFx.To.pro_OM(real.fontProperty).mutableMapView[Fx.Font]
+  def font                 : Fx.Font        = Fx.Font(real.getFont)
+  def font_=(v: Fx.Font)   : Unit           = real.setFont(v.real)
 
-  @tn("textFill_Pro")  def textFill_*           : Pro.OM[Paint]  = Fx.JavaFx.To.pro_OM(real.textFillProperty).mutableMap_^[Paint]
-  /**/                 def textFill             : Paint          = Paint(real.getTextFill)
-  /**/                 def textFill_=(v: Paint) : Unit           = real.setTextFill(v.real)
+  def textFillPro          : Pro.OM[Paint]  = Fx.JavaFx.To.pro_OM(real.textFillProperty).mutableMapView[Paint]
+  def textFill             : Paint          = Paint(real.getTextFill)
+  def textFill_=(v: Paint) : Unit           = real.setTextFill(v.real)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -27,19 +27,19 @@ abstract class Like extends Control:
 ___________________________________________________________________________*/
 /**
 
-@def text_* -> Display text
+@def textPro -> Display text
 
      The text to display in the label
 
      The text may be null.
 
 
-@def alignment_* -> Alignment
+@def alignmentPro -> Alignment
 
      Specifies how the text and graphic within the Labeled should be aligned when there is empty space within the [[Label.Like]]
 
 
-@def font_* -> Font
+@def fontPro -> Font
 
      The default font to use for text
 
@@ -47,7 +47,7 @@ ___________________________________________________________________________*/
      but in any case where a default font is required, this font will be used
 
 
-@def textFill_* -> [[Paint]] used
+@def textFillPro -> [[Paint]] used
 
      The [[Paint]] used to fill the text
 

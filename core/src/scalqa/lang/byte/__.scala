@@ -27,11 +27,11 @@ ___________________________________________________________________________*/
     so the following code can run without boxing:
 
     ```
-        val s: Byte.~    = 1.Byte <> 5.Byte
+        val s: Byte.Stream = 1.Byte <> 5.Byte
 
-        val o: Byte.Opt  = s.readRaw_?  // Holds Byte.Opt(1)
+        val o: Byte.Opt    = s.readRawOpt  // Holds Byte.Opt(1)
 
-        val l: Byte.><   = s.><         // Holds (2,3,4,5)
+        val l: Byte.Pack   = s.pack       // Holds (2,3,4,5)
     ```
 
 @def min        -> Minimum     \n\n Returns type minimal value: -128

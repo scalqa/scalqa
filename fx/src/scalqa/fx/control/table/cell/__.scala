@@ -4,27 +4,27 @@ abstract class Cell[ROW,V,A](val column: Column[ROW,V,_]) extends control.Cell.I
   protected type ITEM = Cell.Item[ROW,V,A]
   protected type REAL <: javafx.scene.control.TableCell[ROW, Cell.Item[ROW, V, A]]
 
-  /**/            def table   : Table[ROW]  = column.table
-  /**/            def row     : ROW         = row_?.get
-  /**/            def view    : V           = view_?.get
-  /**/            def value   : A           = value_?.get
+  def table   : Table[ROW]  = column.table
+  def row     : ROW         = rowOpt.get
+  def view    : V           = viewOpt.get
+  def value   : A           = valueOpt.get
 
-  @tn("rowOpt")   def row_?   : Opt[ROW]    = item_?.map(_.row)
-  @tn("viewOpt")  def view_?  : Opt[V]      = row_?.map_?(i => column.table.mkViewOpt[V](i))
-  @tn("valueOpt") def value_? : Opt[A]      = item_?.map_?(_.value_?)
-  @tn("textOpt")  def text_?  : Opt[String] = item_?.map_?(_.text_?)
+  def rowOpt  : Opt[ROW]    = itemOpt.map(_.row)
+  def viewOpt : Opt[V]      = rowOpt.mapOpt(i => column.table.mkViewOpt[V](i))
+  def valueOpt: Opt[A]      = itemOpt.mapOpt(_.valueOpt)
+  def textOpt : Opt[String] = itemOpt.mapOpt(_.textOpt)
 
   protected override def afterItemUpdated: Unit =
     super.afterItemUpdated
     psedoClasses.clear
-    item_?.process(i => {
+    itemOpt.process(i => {
         i.setup(this);
-        i.text_?.forval(text = _)
+        i.textOpt.forval(text = _)
       },{
         column.emptyCellSetup(this)
       })
-    editable = row_?.map(e => column.editEnabledFun(e)).or(false)
-    tooltip  = item_?.map_?(_.setup.funTooltipOpt.map(_(value_?))) or \/ : Tooltip
+    editable = rowOpt.map(e => column.editEnabledFun(e)).or(false)
+    tooltip  = itemOpt.mapOpt(_.setup.funTooltipOpt.map(_(valueOpt))) or \/ : Tooltip
 
 object Cell:
   transparent inline def X = cell.X

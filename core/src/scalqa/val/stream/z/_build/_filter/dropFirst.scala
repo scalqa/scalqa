@@ -1,9 +1,9 @@
 package scalqa; package `val`; package stream; package z; package _build; package _filter; import language.implicitConversions
 
-class dropFirst[A](x: ~[A], sz: Int) extends z.x.Pipe[A](x) with Able.Size.Opt.Long:
-  private             var i          = if (sz < 0) 0 else sz
-  @tn("read_Opt")     def read_?     = { while (i > 0 && x.read_?.nonEmpty) i -= 1; x.read_?}
-  @tn("sizeLong_Opt") def sizeLong_? = x.sizeLong_?.map(v => (v - i) max 0)
+class dropFirst[A](x: Stream[A], sz: Int) extends z.x.Pipe[A](x) with Able.Size.Opt.Long:
+  private var i   = if (sz < 0) 0 else sz
+  def readOpt     = { while (i > 0 && x.readOpt.nonEmpty) i -= 1; x.readOpt}
+  def sizeLongOpt = x.sizeLongOpt.map(v => (v - i) max 0)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

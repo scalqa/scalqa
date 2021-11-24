@@ -9,26 +9,26 @@ object Result:
   implicit inline def implicitToBoolean  [A](inline v: Result[A]): Boolean     = v.isValue
   // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   extension[A](inline x: Result[A])
-    /**/                  inline def take(inline f: A=>Boolean, inline p:A=>Problem)  : Result[A]    = {var r=x; if(r.isValue){   val v=r.cast[A]; if(!f(v)) r=p(v)}; r}
-    /**/                  inline def drop(inline f: A=>Boolean, inline p:A=>Problem)  : Result[A]    = {var r=x; if(r.isValue){   val v=r.cast[A]; if( f(v)) r=p(v)}; r}
-    /**/                  inline def recover(inline f: Problem => Opt[A])             : Result[A]    = {var r=x; if(r.isProblem){ val v=r.cast[Problem]; val o=f(v); if(o) r=o.`val`}; r}
-    @tn("or_Result")infix inline def or_??(inline default: => Result[A])              : Result[A]    = {val r=x; if(r.isValue) r         else default }
-    /**/            infix inline def or(inline default: => A)                         : A            = {val r=x; if(r.isValue) r.cast[A] else default }
-    /**/                  inline def isProblem                                        : Boolean      = x.isInstanceOf[Problem]
-    /**/                  inline def isValue                                          : Boolean      = !x.isProblem
-    /**/                  inline def contains(v: A)                                   : Boolean      = result.Z.contains(x,v)
-    /**/                  inline def value                                            : A            = result.Z.value(x)
-    /**/                  inline def problem                                          : Problem      = result.Z.problem(x)
-    @tn("value_Opt")      inline def value_?                                          : Opt[A]       = {val r=x; if(r.isValue)   r.cast[A]       else \/ }
-    @tn("problem_Opt")    inline def problem_?                                        : Opt[Problem] = {val r=x; if(r.isProblem) r.cast[Problem] else \/ }
-    @tn("stream")         inline def ~                                                : ~[A]         = result.Z.stream(x)
-    /**/                  inline def toTry                                            : util.Try[A]  = result.Z.toTry(x)
-    /**/                  inline def map[B](      inline f: A => B)                   : Result[B]    = {var r=x.cast[Result[B]]; if(r.isValue)  { val v=r.cast[A]; r=f(v)       }; r}
-    @tn("map_Result")     inline def map_??[B](   inline f: A => Result[B])           : Result[B]    = {var r=x.cast[Result[B]]; if(r.isValue)  { val v=r.cast[A]; r=f(v)       }; r}
-    /**/                  inline def forval[U](   inline f: A => U)                   : Result[A]    = {val r=x;                 if(r.isValue)  { val v=r.cast[A]; f(v)         }; r}
-    /**/                  inline def fornil[U](   inline f: Problem => U)             : Result[A]    = {val r=x;                 if(r.isProblem){ val v=r.cast[Problem]; f(v)   }; r}
-    /**/                  inline def flatMap[B](  inline f: A=>Result[B])             : Result[B]    = x.map_??(f)
-    /**/                  inline def process[U,W](inline f: A=>U,inline pf:Problem=>W): Result[A]    = {val r=x; if(r.isValue){ val v=r.cast[A]; f(v)} else { val v=r.cast[Problem]; pf(v)}; r}
+    /**/  inline def take(inline f: A=>Boolean, inline p:A=>Problem)  : Result[A]    = {var r=x; if(r.isValue){   val v=r.cast[A]; if(!f(v)) r=p(v)}; r}
+    /**/  inline def drop(inline f: A=>Boolean, inline p:A=>Problem)  : Result[A]    = {var r=x; if(r.isValue){   val v=r.cast[A]; if( f(v)) r=p(v)}; r}
+    /**/  inline def recover(inline f: Problem => Opt[A])             : Result[A]    = {var r=x; if(r.isProblem){ val v=r.cast[Problem]; val o=f(v); if(o) r=o.`val`}; r}
+    infix inline def orResult(inline default: => Result[A])           : Result[A]    = {val r=x; if(r.isValue) r         else default }
+    infix inline def or(inline default: => A)                         : A            = {val r=x; if(r.isValue) r.cast[A] else default }
+    /**/  inline def isProblem                                        : Boolean      = x.isInstanceOf[Problem]
+    /**/  inline def isValue                                          : Boolean      = !x.isProblem
+    /**/  inline def contains(v: A)                                   : Boolean      = result.Z.contains(x,v)
+    /**/  inline def value                                            : A            = result.Z.value(x)
+    /**/  inline def problem                                          : Problem      = result.Z.problem(x)
+    /**/  inline def valueOpt                                         : Opt[A]       = {val r=x; if(r.isValue)   r.cast[A]       else \/ }
+    /**/  inline def problemOpt                                       : Opt[Problem] = {val r=x; if(r.isProblem) r.cast[Problem] else \/ }
+    /**/  inline def stream                                           : Stream[A]    = result.Z.stream(x)
+    /**/  inline def toTry                                            : util.Try[A]  = result.Z.toTry(x)
+    /**/  inline def map[B](      inline f: A => B)                   : Result[B]    = {var r=x.cast[Result[B]]; if(r.isValue)  { val v=r.cast[A]; r=f(v)       }; r}
+    /**/  inline def mapResult[B](inline f: A => Result[B])           : Result[B]    = {var r=x.cast[Result[B]]; if(r.isValue)  { val v=r.cast[A]; r=f(v)       }; r}
+    /**/  inline def forval[U](   inline f: A => U)                   : Result[A]    = {val r=x;                 if(r.isValue)  { val v=r.cast[A]; f(v)         }; r}
+    /**/  inline def fornil[U](   inline f: Problem => U)             : Result[A]    = {val r=x;                 if(r.isProblem){ val v=r.cast[Problem]; f(v)   }; r}
+    /**/  inline def flatMap[B](  inline f: A=>Result[B])             : Result[B]    = x.mapResult(f)
+    /**/  inline def process[U,W](inline f: A=>U,inline pf:Problem=>W): Result[A]    = {val r=x; if(r.isValue){ val v=r.cast[A]; f(v)} else { val v=r.cast[Problem]; pf(v)}; r}
 
   given z_NameDef[A]                              : Any.Def.TypeName[Result[A]]    = Any.Def.TypeName("Result")
   given z_ClassTag[A]  (using t: ClassTag[A])     : ClassTag[Result[A]]            = t.cast[ClassTag[Result[A]]]
@@ -55,21 +55,21 @@ ___________________________________________________________________________*/
 
     Unlike [[scalqa.val.Opt Opt]], Result is never void, even if there is no value, then, there must be a problem.
 
-    By Scalqa convention, method names, which return [[Result]] type, are ended with '_??' instead of word 'Result'
+    By Scalqa convention, method names, which return [[Result]] type, are ended with 'Result' instead of word 'Result'
 
     ```
-    val r1: Result[Int] = "123".toInt_??
+    val r1: Result[Int] = "123".toIntResult
 
     r1.TP   // Prints Result(123)
 
-    val r2: Result[Int] = "ABC".toInt_??
+    val r2: Result[Int] = "ABC".toIntResult
 
     r2.TP   // Prints Result(Problem(For input string: "ABC"))
     ```
 @type Problem ->  Type alias      \n\n Shortcut to [[scalqa.val.result.Problem  Result.Problem]]
 @def  Problem ->  Companion alias \n\n Shortcut to [[scalqa.val.result.Problem$ Result.Problem]]
 
-@def ~ ->  Stream
+@def stream ->  Stream
 
      Returns single value stream or empty stream, if there is a problem
 
@@ -143,9 +143,9 @@ ___________________________________________________________________________*/
 
      Returns result value, fails if there is a problem
 
-     Generally use [[value_?]] instead
+     Generally use [[valueOpt]] instead
 
-@def value_? -> Optional value
+@def valueOpt -> Optional value
 
      Returns value option, which is void if there is a problem
 
@@ -157,9 +157,9 @@ ___________________________________________________________________________*/
 
      Returns problem, fails if there is a value
 
-     Generally use [[problem_?]] instead
+     Generally use [[problemOpt]] instead
 
-@def problem_? -> Optional problem
+@def problemOpt -> Optional problem
 
      Returns problem option, which is void if there is a value
 
@@ -170,9 +170,9 @@ ___________________________________________________________________________*/
       Results with problem are cast to a new type without change
 
       ```
-         "Abc".??.map(_.length).TP  // Prints: Result(3)
+         Result("Abc").map(_.length).TP  // Prints: Result(3)
       ```
-@def map_?? -> Map result
+@def mapResult -> Map result
 
      Results with problem are cast to a new type without change
 
@@ -192,7 +192,7 @@ ___________________________________________________________________________*/
 
      Returns result value, or if there is a problem, then given default value
 
-@def or_?? ->  Default result
+@def orResult ->  Default result
 
      Returns this result if it has value or given result otherwise
 */

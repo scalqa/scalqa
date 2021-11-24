@@ -2,11 +2,11 @@ package scalqa; package test.`val`.stream._use._aggregate; import language.impli
 
 object sumFew extends J.Test:
 
-  def all = (1 <> 100).~
+  def all = (1 <> 100).stream
 
-  testEqual_~(
-    ~~(all.map(_ * 10).sum, all.map(_ % 10).sum, all.sum),
-    {val (x,y,z) = all.sumFew(_ * 10, _ % 10, v => v); ~~(x,y,z) })
+  testEqualStream(
+    Stream(all.map(_ * 10).sum, all.map(_ % 10).sum, all.sum),
+    {val (x,y,z) = all.sumFew(_ * 10, _ % 10, v => v); Stream(x,y,z) })
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

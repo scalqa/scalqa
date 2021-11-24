@@ -7,12 +7,11 @@ object System extends AnyRef.Opaque.Base[System,REAL]("File.System"):
   def apply(): System = java.nio.file.FileSystems.getDefault.toOpaque
 
   extension (inline x: System)
-    @tn("store_Stream") inline def store_~                    : ~[Store] = x.real.getFileStores.iterator.~.map(Store(_))
-    @tn("root_Stream")  inline def root_~                     : ~[Path]  = x.real.getRootDirectories.iterator.~.map(Path(_))
-    /**/                inline def separator                  : String   = x.real.getSeparator
-    /**/                inline def path(inline first: String,
-      /**/                              inline more: String*) : Path     = x.real.getPath(first, more *)
-    /**/                inline def path(inline a: ~[String])  : Path     = {val p=x; a.read_?.map(p.path(_, a.toSeq *)) or p.path("") }
+    inline def storeStream                                   : Stream[Store] = x.real.getFileStores.iterator.stream.map(Store(_))
+    inline def rootStream                                    : Stream[Path]  = x.real.getRootDirectories.iterator.stream.map(Path(_))
+    inline def separator                                     : String        = x.real.getSeparator
+    inline def path(inline first:String, inline more:String*): Path          = x.real.getPath(first, more *)
+    inline def path(inline a: Stream[String])                : Path          = {val p=x; a.readOpt.map(p.path(_, a.toSeq *)) or p.path("") }
 
   object TYPE:
     opaque type DEF <: AnyRef.Opaque = REAL & AnyRef.Opaque

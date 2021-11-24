@@ -4,7 +4,7 @@ object toIndexedSeq extends J.Test
 
 //  test()(
 //    (1 to 100).toVector,
-//    (1 <> 100).~.toIndexedSeq)
+//    (1 <> 100).stream.toIndexedSeq)
 
 
 /*___________________________________________________________________________

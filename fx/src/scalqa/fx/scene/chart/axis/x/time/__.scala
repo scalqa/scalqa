@@ -10,9 +10,9 @@ class Time protected (name: String, bm: TwoWayFunction[Gen.Time, Double]) extend
     /**/     var timeGauge        : Gauge  = \/
     override def label(t: Gen.Time) : String = timeGauge.label(t, start == t)
 
-    override def scope(timeRange: <>[Gen.Time], totalSize: Double, labelSize: Double): X.Custom.Range[Gen.Time] = {
+    override def scope(timeRange: Range[Gen.Time], totalSize: Double, labelSize: Double): X.Custom.Range[Gen.Time] = {
       var p = Gen.Time.Period(timeRange)
-      timeGauge = Gauge.standard_~.find_?(u => p.length.millisTotal / u.length.millisTotal < (totalSize / u.labelSize)) or new z.Gauge.Month(6, 6)
+      timeGauge = Gauge.standardStream.findOpt(u => p.length.millisTotal / u.length.millisTotal < (totalSize / u.labelSize)) or new z.Gauge.Month(6, 6)
       p = timeGauge.roundPeriod(p)
       start = p.start
       minorTickCount = timeGauge.minorCount

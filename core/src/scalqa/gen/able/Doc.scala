@@ -5,15 +5,15 @@ trait Doc extends Tag:
   def doc : Gen.Doc
 
 object Doc:
-  @tn("doc_Opt") def doc_?(v: Any): Opt[Gen.Doc] = v match{ case v: Able.Doc => v.doc; case _ => \/ }
+  def docOpt(v: Any): Opt[Gen.Doc] = v match{ case v: Able.Doc => v.doc; case _ => \/ }
 
   // ***************************************************************************************************************************************
   trait Product extends Doc:
     self: scala.Product =>
 
-    /**/     def doc     : Gen.Doc = Gen.Doc(self).^(d => for(i <- 0 <>> productArity) d += (productElementName(i), productElement(i).toString))
+    /**/     def doc     : Gen.Doc = Gen.Doc(self).self(d => for(i <- 0 <>> productArity) d += (productElementName(i), productElement(i).toString))
 
-    override def toString: String  = String.Builder().^(_ += productPrefix += "(" += doc.value_~.makeString(",") += ")").tag
+    override def toString: String  = String.Builder().self(_ += productPrefix += "(" += doc.valueStream.makeString(",") += ")").tag
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

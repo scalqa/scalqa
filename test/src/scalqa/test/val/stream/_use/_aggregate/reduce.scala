@@ -3,7 +3,7 @@ package scalqa; package test.`val`.stream._use._aggregate; import language.impli
 object reduce extends J.Test:
 
   testTrue{
-    (1 to 100).reduce(_ + _) ==  (1 <> 100).~.reduce(_ + _)
+    (1 to 100).reduce(_ + _) ==  (1 <> 100).stream.reduce(_ + _)
   }
 
 /*___________________________________________________________________________

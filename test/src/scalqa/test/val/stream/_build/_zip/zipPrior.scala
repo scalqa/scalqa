@@ -2,9 +2,9 @@ package scalqa; package test.`val`.stream._build._zip; import language.implicitC
 
 object zipPrior extends J.Test:
 
-  testEqual_~(
+  testEqualStream(
     0 to 99,
-    (0 <> 100).~.zipPrior.map_?(_._1))
+    (0 <> 100).stream.zipPrior.mapOpt(_._1))
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

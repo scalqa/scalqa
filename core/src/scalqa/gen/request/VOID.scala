@@ -19,12 +19,12 @@ object VOID extends VOID with z_VOIDDefaults:
   inline given givenToAverage : Math.Average[\/] = z.VOID.Math
 
 private trait z_VOIDDefaults extends z_VOIDDefaults1:
-  implicit def implicitToFunctionToOptDouble[A](v: \/) : A => Opt[Double]  = z.VOID.Function1_Opt.cast[A => Opt[Double]]
+  implicit def implicitToFunctionToOptDouble[A](v: \/) : A => Opt[Double]  = z.VOID.Function1Opt.cast[A => Opt[Double]]
   implicit def implicitToBooleanFunction[A]    (v: \/) : A => Boolean      = z.VOID.Filter
   //implicit inline def implicitToValOpt[A](v: \/): Opt[A]    = ZZ.None.cast[Opt[A]]
 
 private trait z_VOIDDefaults1 extends z_VOIDDefaults2:
-  implicit def implicitToFunctionToOpt[A,B]    (v: \/) : A => Opt[B]       = z.VOID.Function1_Opt.cast[A => Opt[B]]
+  implicit def implicitToFunctionToOpt[A,B]    (v: \/) : A => Opt[B]       = z.VOID.Function1Opt.cast[A => Opt[B]]
 
 private trait z_VOIDDefaults2:
   implicit def implicitToVector[A]             (v: \/) : scala.collection.immutable.Vector[A] = Vector.empty[A]
@@ -65,7 +65,7 @@ ___________________________________________________________________________*/
     \\/ is a shortcut to assign void instances for many types
 
     ```
-    var s: ~[Int]       = \/     // Assigning empty stream of Ints
+    var s: Stream[Int]  = \/     // Assigning empty stream of Ints
     var o: Opt[String]  = \/     // Assigning empty optional value of String
     var i: Long.Idx     = \/     // Assigning empty indexed collection of Long
     ```

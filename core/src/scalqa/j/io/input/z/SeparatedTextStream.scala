@@ -1,11 +1,11 @@
 package scalqa; package j; package io; package input; package z; import language.implicitConversions
 
-class SeparatedTextStream(real: Input.Text, separator: Char => Boolean) extends ~[Char.Idx & CharSequence]:
+class SeparatedTextStream(real: Input.Text, separator: Char => Boolean) extends Stream[Char.Idx & CharSequence]:
   var open = true
   var from, to, end = 0
   val char = new Chars()
 
-  @tn("read_Opt") def read_? = has ? { char.start = from; char.end = to; from = to; char }
+  def readOpt = has ? { char.start = from; char.end = to; from = to; char }
 
   private def has : Boolean = from < to || open && {
     def locate: Boolean =
@@ -50,7 +50,7 @@ private object Chars:
     def size = end - start
     def length = end - start
 
-    def range: Int.<> = start <>> end
+    def range: Int.Range = start <>> end
 
     def subSequence(from: Int, until: Int): CharSequence = new Abstract {
       def array = Abstract.this.array
@@ -58,7 +58,7 @@ private object Chars:
       def end   = Abstract.this.start + until
     }
 
-    def toString(r: Int.<>) = new String(array, start + r.start, r.size)
+    def toString(r: Int.Range) = new String(array, start + r.start, r.size)
 
     override def toString = new String(array, start, size)
   }

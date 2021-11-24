@@ -2,16 +2,16 @@ package scalqa; package `val`; package stream; package custom; import language.i
 
 trait Pipeline extends Pipeline.Tree:
   protected def base    : AnyRef
-  /**/      def docTree : Doc.Tree = Doc.Tree.apply(doc, base.?.takeType[Pipeline.Tree].map(_.docTree) or Doc.Tree(Able.Doc.doc_?(base) or z.util.MultiDoc(base)))
+  /**/      def docTree : Doc.Tree = Doc.Tree.apply(doc, base.?.takeType[Pipeline.Tree].map(_.docTree) or Doc.Tree(Able.Doc.docOpt(base) or z.util.MultiDoc(base)))
 
 object Pipeline:
-  def docTree[A](v: Pipeline.Tree | ~[A] | Flow[A]) : Doc.Tree =
+  def docTree[A](v: Pipeline.Tree | Stream[A] | Flow[A]) : Doc.Tree =
     v match
-      case v: Tree    => v.docTree
-      case v: ~[_]    => Doc.Tree(z.util.MultiDoc(v))
-      case v: Flow[_] => Doc.Tree(z.util.MultiDoc(v))
+      case v: Tree      => v.docTree
+      case v: Stream[_] => Doc.Tree(z.util.MultiDoc(v))
+      case v: Flow[_]   => Doc.Tree(z.util.MultiDoc(v))
 
-  private[stream] def baseDoc_?(v: Pipeline): Opt[Gen.Doc] = Able.Doc.doc_?(v.base) // needed by z.util.MultiDoc only
+  private[stream] def baseDocOpt(v: Pipeline): Opt[Gen.Doc] = Able.Doc.docOpt(v.base) // needed by z.util.MultiDoc only
 
   // ************************************************************************************************************
   trait Tree extends gen.able.Doc :

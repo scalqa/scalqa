@@ -2,68 +2,69 @@ package scalqa; package fx; package base; package `abstract`; package node; impo
 
 transparent trait _properties:
   self: Fx.Node =>
-  @tn("cache_Pro")            def cache_*                        : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.cacheProperty)
-  /**/                        def cache                          : Boolean         = real.isCache;
-  /**/                        def cache_=(b: Boolean)            : Unit            = real.setCache(b)
-  @tn("focused_Pro")          def focused_*                      : Boolean.Pro.O   = Fx.JavaFx.To.pro_O(real.focusedProperty)
-  /**/                        def focused                        : Boolean         = real.isFocused
-  @tn("focusTraversable_Pro") def focusTraversable_*             : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.focusTraversableProperty)
-  /**/                        def focusTraversable               : Boolean         = real.isFocusTraversable;
-  /**/                        def focusTraversable_=(b: Boolean) : Unit            = real.setFocusTraversable(b)
-  @tn("hover_Pro")            def hover_*                        : Boolean.Pro.O   = Fx.JavaFx.To.pro_O(real.hoverProperty)
-  /**/                        def hover                          : Boolean         = real.isHover
-  @tn("disabled_Pro")         def disabled_*                     : Boolean.Pro.O   = Fx.JavaFx.To.pro_O(real.disabledProperty)
-  /**/                        def disabled                       : Boolean         = real.isDisabled
-  @tn("disable_Pro")          def disable_*                      : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.disableProperty)
-  /**/                        def disable                        : Boolean         = real.isDisable;
-  /**/                        def disable_=(b: Boolean)          : Unit            = real.setDisable(b)
-  @tn("id_Pro")               def id_*                           : Pro.OM[String]  = Fx.JavaFx.To.pro_OM(real.idProperty)
-  /**/                        def id                             : String          = real.getId;
-  /**/                        def id_=(b: String)                : Unit            = real.setId(b)
-  @tn("layoutX_Pro")          def layoutX_*                      : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.layoutXProperty)
-  /**/                        def layoutX                        : Double          = real.getLayoutX;
-  /**/                        def layoutX_=(b: Double)           : Unit            = real.setLayoutX(b)
-  @tn("layoutY_Pro")          def layoutY_*                      : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.layoutYProperty)
-  /**/                        def layoutY                        : Double          = real.getLayoutY;
-  /**/                        def layoutY_=(b: Double)           : Unit            = real.setLayoutY(b)
-  @tn("managed_Pro")          def managed_*                      : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.managedProperty)
-  /**/                        def managed                        : Boolean         = real.isManaged;
-  /**/                        def managed_=(b: Boolean)          : Unit            = real.setManaged(b)
-  @tn("mouseTransparent_Pro") def mouseTransparent_*             : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.mouseTransparentProperty)
-  /**/                        def mouseTransparent               : Boolean         = real.isMouseTransparent;
-  /**/                        def mouseTransparent_=(b: Boolean) : Unit            = real.setMouseTransparent(b)
-  @tn("opacity_Pro")          def opacity_*                      : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.opacityProperty)
-  /**/                        def opacity                        : Double          = real.getOpacity;
-  /**/                        def opacity_=(b: Double)           : Unit            = real.setOpacity(b)
-  @tn("pressed_Pro")          def pressed_*                      : Boolean.Pro.O   = Fx.JavaFx.To.pro_O(real.pressedProperty)
-  /**/                        def pressed                        : Boolean         = real.isPressed
-  @tn("rotate_Pro")           def rotate_*                       : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.rotateProperty)
-  /**/                        def rotate                         : Double          = real.getRotate;
-  /**/                        def rotate_=(b: Double)            : Unit            = real.setRotate(b)
-  @tn("scaleX_Pro")           def scaleX_*                       : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.scaleXProperty)
-  /**/                        def scaleX                         : Double          = real.getScaleX;
-  /**/                        def scaleX_=(b: Double)            : Unit            = real.setScaleX(b)
-  @tn("scaleY_Pro")           def scaleY_*                       : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.scaleYProperty)
-  /**/                        def scaleY                         : Double          = real.getScaleY;
-  /**/                        def scaleY_=(b: Double)            : Unit            = real.setScaleY(b)
-  @tn("scaleZ_Pro")           def scaleZ_*                       : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.scaleZProperty)
-  /**/                        def scaleZ                         : Double          = real.getScaleZ;
-  /**/                        def scaleZ_=(b: Double)            : Unit            = real.setScaleZ(b)
-  @tn("translateX_Pro")       def translateX_*                   : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.translateXProperty)
-  /**/                        def translateX                     : Double          = real.getTranslateX;
-  /**/                        def translateX_=(b: Double)        : Unit            = real.setTranslateX(b)
-  @tn("translateY_Pro")       def translateY_*                   : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.translateYProperty)
-  /**/                        def translateY                     : Double          = real.getTranslateY;
-  /**/                        def translateY_=(b: Double)        : Unit            = real.setTranslateY(b)
-  @tn("translateZ_Pro")       def translateZ_*                   : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.translateZProperty)
-  /**/                        def translateZ                     : Double          = real.getTranslateZ;
-  /**/                        def translateZ_=(b: Double)        : Unit            = real.setTranslateZ(b)
-  @tn("visible_Pro")          def visible_*                      : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.visibleProperty)
-  /**/                        def visible                        : Boolean         = real.isVisible;
-  /**/                        def visible_=(b: Boolean)          : Unit            = real.setVisible(b)
-  @tn("style_Pro")            def style_*                        : Pro.OM[Style]   = Fx.JavaFx.To.pro_OM(real.styleProperty).mutableMap_^[Style]
-  /**/                        def style                          : Style           = real.getStyle;
-  /**/                        def style_=(s: Style)              : Unit            = real.setStyle(s.^.?.map(_.toString) or "")
+  def cachePro                       : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.cacheProperty)
+  def cache                          : Boolean         = real.isCache;
+  def cache_=(b: Boolean)            : Unit            = real.setCache(b)
+  def focusedPro                     : Boolean.Pro.O   = Fx.JavaFx.To.pro_O(real.focusedProperty)
+  def focused                        : Boolean         = real.isFocused
+  def focusTraversablePro            : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.focusTraversableProperty)
+  def focusTraversable               : Boolean         = real.isFocusTraversable;
+  def focusTraversable_=(b: Boolean) : Unit            = real.setFocusTraversable(b)
+  def hoverPro                       : Boolean.Pro.O   = Fx.JavaFx.To.pro_O(real.hoverProperty)
+  def hover                          : Boolean         = real.isHover
+  def disabledPro                    : Boolean.Pro.O   = Fx.JavaFx.To.pro_O(real.disabledProperty)
+  def disabled                       : Boolean         = real.isDisabled
+  def disablePro                     : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.disableProperty)
+  def disable                        : Boolean         = real.isDisable;
+  def disable_=(b: Boolean)          : Unit            = real.setDisable(b)
+  def idPro                          : Pro.OM[String]  = Fx.JavaFx.To.pro_OM(real.idProperty)
+  def id                             : String          = real.getId;
+  def id_=(b: String)                : Unit            = real.setId(b)
+  def layoutXPro                     : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.layoutXProperty)
+  def layoutX                        : Double          = real.getLayoutX;
+  def layoutX_=(b: Double)           : Unit            = real.setLayoutX(b)
+  def layoutYPro                     : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.layoutYProperty)
+  def layoutY                        : Double          = real.getLayoutY;
+  def layoutY_=(b: Double)           : Unit            = real.setLayoutY(b)
+  def managedPro                     : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.managedProperty)
+  def managed                        : Boolean         = real.isManaged;
+  def managed_=(b: Boolean)          : Unit            = real.setManaged(b)
+  def mouseTransparentPro            : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.mouseTransparentProperty)
+  def mouseTransparent               : Boolean         = real.isMouseTransparent;
+  def mouseTransparent_=(b: Boolean) : Unit            = real.setMouseTransparent(b)
+  def opacityPro                     : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.opacityProperty)
+  def opacity                        : Double          = real.getOpacity;
+  def opacity_=(b: Double)           : Unit            = real.setOpacity(b)
+  def pressedPro                     : Boolean.Pro.O   = Fx.JavaFx.To.pro_O(real.pressedProperty)
+  def pressed                        : Boolean         = real.isPressed
+  def rotatePro                      : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.rotateProperty)
+  def rotate                         : Double          = real.getRotate;
+  def rotate_=(b: Double)            : Unit            = real.setRotate(b)
+  def scaleXPro                      : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.scaleXProperty)
+  def scaleX                         : Double          = real.getScaleX;
+  def scaleX_=(b: Double)            : Unit            = real.setScaleX(b)
+  def scaleYPro                      : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.scaleYProperty)
+  def scaleY                         : Double          = real.getScaleY;
+  def scaleY_=(b: Double)            : Unit            = real.setScaleY(b)
+  def scaleZPro                      : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.scaleZProperty)
+  def scaleZ                         : Double          = real.getScaleZ;
+  def scaleZ_=(b: Double)            : Unit            = real.setScaleZ(b)
+  def translateXPro                  : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.translateXProperty)
+  def translateX                     : Double          = real.getTranslateX;
+  def translateX_=(b: Double)        : Unit            = real.setTranslateX(b)
+  def translateYPro                  : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.translateYProperty)
+  def translateY                     : Double          = real.getTranslateY;
+  def translateY_=(b: Double)        : Unit            = real.setTranslateY(b)
+  def translateZPro                  : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.translateZProperty)
+  def translateZ                     : Double          = real.getTranslateZ;
+  def translateZ_=(b: Double)        : Unit            = real.setTranslateZ(b)
+  def visiblePro                     : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.visibleProperty)
+  def visible                        : Boolean         = real.isVisible;
+  def visible_=(b: Boolean)          : Unit            = real.setVisible(b)
+  def stylePro                       : Pro.OM[Style]   = Fx.JavaFx.To.pro_OM(real.styleProperty).mutableMapView[Style]
+  def style                          : Style           = real.getStyle;
+  def style_=(s: Style)              : Unit            = real.setStyle(s.??.map(_.toString) or "")
+
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
@@ -72,7 +73,7 @@ transparent trait _properties:
 ___________________________________________________________________________*/
 /**
 
-@def cache_* -> Performance hint
+@def cachePro -> Performance hint
 
        A performance hint to the system to indicate that this Node should be cached as a bitmap
 
@@ -87,7 +88,7 @@ ___________________________________________________________________________*/
        Caching may be disabled for any node that has a 3D transform on itself, any of its ancestors, or any of its descendants
 
 
-@def focused_* -> Check focused
+@def focusedPro -> Check focused
 
        Indicates whether this Node currently has the input focus
 
@@ -96,7 +97,7 @@ ___________________________________________________________________________*/
        See requestFocus() for more information
 
 
-@def focusTraversable_* -> Check focus traversable
+@def focusTraversablePro -> Check focus traversable
 
        Specifies whether this Node should be a part of focus traversal cycle
 
@@ -108,7 +109,7 @@ ___________________________________________________________________________*/
        to receive the focus, unless the focus had been set explicitly via a call to requestFocus()
 
 
-@def hover_* -> Check hover
+@def hoverPro -> Check hover
 
        Whether or not this Node is being hovered over
 
@@ -120,7 +121,7 @@ ___________________________________________________________________________*/
        Future implementations may provide alternative means of supporting hover.
 
 
-@def disabled_* -> Check disabled
+@def disabledPro -> Check disabled
 
        Indicates whether or not this Node is disabled. A Node will become disabled if disable is set to true on either itself or one of its ancestors in the scene graph
 
@@ -134,7 +135,7 @@ ___________________________________________________________________________*/
        A disabled Node does not receive mouse or key events.
 
 
-@def disable_* -> Disable
+@def disablePro -> Disable
 
        Sets the individual disabled state of this Node
 
@@ -146,7 +147,7 @@ ___________________________________________________________________________*/
        since it is possible that a Node was disabled as a result of an ancestor being disabled even if the individual disable state on this Node is false
 
 
-@def id_* -> Node id
+@def idPro -> Node id
 
        The id of this Node.
 
@@ -157,18 +158,18 @@ ___________________________________________________________________________*/
        For example, if a Node is given the id of "myId", then the map method can be used to find this node as follows: scene.map("#myId");
 
 
-@def layoutX_* -> Layout x
+@def layoutXPro -> Layout x
 
        Defines the x coordinate of the translation that is added to this Node's transform for the purpose of layout
 
 
 
-@def layoutY_* -> Layout y
+@def layoutYPro -> Layout y
 
        Defines the y coordinate of the translation that is added to this Node's transform for the purpose of layout
 
 
-@def managed_* -> Managed switch
+@def managedPro -> Managed switch
 
        Defines whether or not this node's layout will be managed by it's parent
 
@@ -185,14 +186,14 @@ ___________________________________________________________________________*/
        By default all nodes are managed.
 
 
-@def mouseTransparent_* -> Mouse transparent
+@def mouseTransparentPro -> Mouse transparent
 
        If true, this node (together with all its children) is completely transparent to mouse events
 
        When choosing target for mouse event, nodes with mouseTransparent set to true and their subtrees won't be taken into account.
 
 
-@def opacity_* -> Opacity
+@def opacityPro -> Opacity
 
        Specifies how opaque (that is, solid) the Node appears
 
@@ -218,14 +219,14 @@ ___________________________________________________________________________*/
        The result of an opacity < 1.0 set on a Idx node with 3D transformed children will cause its children to be rendered in order without Z-buffering applied between those children
 
 
-@def pressed_* -> Pressed
+@def pressedPro -> Pressed
 
        Whether or not the Node is pressed
 
        Typically this is true when the primary mouse button is down, though subclasses may define other mouse button state or key state to cause the node to be "pressed"
 
 
-@def rotate_* -> Rotate
+@def rotatePro -> Rotate
 
        Defines the angle of rotation about the Node's center, measured in degrees. This is used to rotate the Node
 
@@ -242,7 +243,7 @@ ___________________________________________________________________________*/
        If this movement of the pivot point is not desired, applications should instead use the Node's transforms ObservableList, and add a Rotate transform, which has a user-specifiable pivot point
 
 
-@def scaleX_* -> Scale x
+@def scaleXPro -> Scale x
 
        Defines the factor by which coordinates are scaled about the center of the object along the X axis of this Node
 
@@ -253,7 +254,7 @@ ___________________________________________________________________________*/
        The pivot point about which the scale occurs is the center of the untransformed layoutBounds
 
 
-@def scaleY_* -> Scale y
+@def scaleYPro -> Scale y
 
        Defines the factor by which coordinates are scaled about the center of the object along the Y axis of this Node
 
@@ -264,7 +265,7 @@ ___________________________________________________________________________*/
        The pivot point about which the scale occurs is the center of the untransformed layoutBounds
 
 
-@def scaleZ_* -> Scale z
+@def scaleZPro -> Scale z
 
        Defines the factor by which coordinates are scaled about the center of the object along the Z axis of this Node
 
@@ -277,7 +278,7 @@ ___________________________________________________________________________*/
        Note that this is a conditional feature. See ConditionalFeature.SCENE3D for more information.
 
 
-@def translateX_* -> Translate x
+@def translateXPro -> Translate x
 
        Defines the x coordinate of the translation that is added to this Node's transform
 
@@ -286,7 +287,7 @@ ___________________________________________________________________________*/
        This variable can be used to alter the location of a node without disturbing its layoutBounds, which makes it useful for animating a node's location
 
 
-@def translateY_* -> Translate y
+@def translateYPro -> Translate y
 
        Defines the y coordinate of the translation that is added to this Node's transform
 
@@ -295,7 +296,7 @@ ___________________________________________________________________________*/
        This variable can be used to alter the location of a node without disturbing its layoutBounds, which makes it useful for animating a node's location
 
 
-@def translateZ_* -> Translate z
+@def translateZPro -> Translate z
 
        Defines the Z coordinate of the translation that is added to the transformed coordinates of this Node. This value will be added to any translation defined by the transforms ObservableList and layoutZ
 
@@ -304,7 +305,7 @@ ___________________________________________________________________________*/
        Note that this is a conditional feature. See ConditionalFeature.SCENE3D for more information
 
 
-@def visible_* -> Visible
+@def visiblePro -> Visible
 
        Specifies whether this Node and any subnodes should be rendered as part of the scene graph
 
@@ -313,7 +314,7 @@ ___________________________________________________________________________*/
        Invisible nodes never receive mouse events or keyboard focus and never maintain keyboard focus when they become invisible
 
 
-@def style_* -> Style
+@def stylePro -> Style
 
        A string representation of the CSS style associated with this specific Node
 

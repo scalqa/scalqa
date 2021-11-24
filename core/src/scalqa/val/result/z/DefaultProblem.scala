@@ -1,7 +1,7 @@
 package scalqa; package `val`; package result; package z; import language.implicitConversions
 
 class DefaultProblem(val message: String) extends Problem:  // Accessed from ZZ.java,  must be a simple class
-  @tn("exception_Opt") def exception_? = \/
+  def exceptionOpt = \/
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

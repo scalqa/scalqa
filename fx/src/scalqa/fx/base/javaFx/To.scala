@@ -9,7 +9,7 @@ object To:
   def idx_O [A](v: javafx.collections.ObservableList[A]): Idx.O[A]   = new z.IdxO[A](v)
   def idx_OM[A](v: javafx.collections.ObservableList[A]): Idx.OM[A]  = new z.IdxOM[A](v)
 
-  def parseChanges[A](v: javafx.collections.ListChangeListener.Change[_ <: A]) : ><[Idx.O.Event[A]] = javaFx.z.list.List.parseChanges(v)
+  def parseChanges[A](v: javafx.collections.ListChangeListener.Change[_ <: A]) : Pack[Idx.O.Event[A]] = javaFx.z.list.List.parseChanges(v)
 
   def pro_O[A] (v: value.ObservableObjectValue[A]) : Val.Pro.O[A]    = new PO.ObjectProO(v)
   def pro_O    (v: value.ObservableBooleanValue)   : Boolean.Pro.O   = new PO.BooleanProO(v)

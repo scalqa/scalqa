@@ -3,9 +3,9 @@ package scalqa; package lang; package int; import language.implicitConversions
 transparent trait _methods:
   extension(inline x:Int)
     @tn("Opt")        inline def ?                         : Int.Opt           = x.cast[Long].cast[Int.Opt]
-    @tn("range")      inline def <> (inline to: Int)       : Int.<>            = new Int.<>(x,to,true)
-    @tn("rangeX")     inline def <>>(inline to: Int)       : Int.<>            = new Int.<>(x,to,false)
-    @tn("rangeOfSize")inline def <>=(inline size: Int)     : Int.<>            = new Int.<>(x,size)
+    @tn("range")      inline def <> (inline to: Int)       : Int.Range         = new Int.Range(x,to,true)
+    @tn("rangeX")     inline def <>>(inline to: Int)       : Int.Range         = new Int.Range(x,to,false)
+    @tn("rangeOfSize")inline def <>=(inline size: Int)     : Int.Range         = new Int.Range(x,size)
     /**/        infix inline def max(inline v: Int)        : Int               = {val y=x; val w=v; if(y.real > w.real) y else w }
     /**/        infix inline def min(inline v: Int)        : Int               = {val y=x; val w=v; if(y.real < w.real) y else w }
     /**/              inline def roundTo(inline unit:Int)
@@ -59,7 +59,7 @@ ___________________________________________________________________________*/
 
 @def <> ->  Range
 
-    Returns Int.<> from current to given value
+    Returns Int.Range from current to given value
     ```
       (1 <> 10).TP  // Prints  1 <> 10
     ```
@@ -67,14 +67,14 @@ ___________________________________________________________________________*/
 
 @def <>> ->  Exclusive end range
 
-    Returns Int.<> from current to given value exclusive
+    Returns Int.Range from current to given value exclusive
     ```
       (1 <>> 10).TP  // Prints  1 <> 9
     ```
 
 @def <>= ->  Range by size
 
-    Returns Int.<> starting at current value and with given size
+    Returns Int.Range starting at current value and with given size
     ```
       (5 <>= 10).TP  // Prints 5 <> 14
     ```

@@ -4,14 +4,14 @@ import javafx.scene.control.{ MultipleSelectionModel => MSM, SelectionModel, Sel
 
 sealed class Selection[A](val target: Idx[A], val real: SelectionModel[_ <: Any]) extends Idx.Selection.Observable[A]:
   type THIS_TYPE = Selection[A]
-  /**/     lazy  val indexes                    : Idx[Int]          = real match { case v: MSM[_] => Idx.wrap(v.getSelectedIndices).map_^(_.intValue); case v => z_TwoWay}
+  /**/     lazy  val indexes                    : Idx[Int]          = real match { case v: MSM[_] => Idx.wrap(v.getSelectedIndices).mapView(_.intValue); case v => z_TwoWay}
   /**/           def mode                       : Selection.Mode    = real match { case v: MSM[_] if v.getSelectionMode == SelectionMode.MULTIPLE => Selection.Mode.Multiple; case _ => Selection.Mode.Single}
   /**/           def mode_=(v: Selection.Mode)  : Unit              = real match { case m: MSM[_] => m.setSelectionMode(v.real); case _ => () }
   /**/           def onChange[U](f:THIS_TYPE=>U): Gen.Event.Control = z_Event(f)
   /**/           def clear                      : Unit              = real.clearSelection
   /**/           def selectAt(i: Int)           : Unit              = real.select(i)
-  /**/           def select(a: A)               : Unit              = target.~.foreachIndexed((i,v) => if(v==a) selectAt(i))
-  @tn("map_View")def map_^[B](f: A => B)        : Selection[B]      = new Selection[B](target.map_^(f), real)
+  /**/           def select(a: A)               : Unit              = target.stream.foreachIndexed((i,v) => if(v==a) selectAt(i))
+  @tn("map_View")def mapView[B](f: A => B)        : Selection[B]      = new Selection[B](target.mapView(f), real)
 
   // *********************************************************************************************************************************
   private object z_TwoWay extends Idx[Int]:
@@ -19,7 +19,7 @@ sealed class Selection[A](val target: Idx[A], val real: SelectionModel[_ <: Any]
     def apply(i: Int) = { assert(i == 0); real.getSelectedIndex }
 
   private class z_Event[U](f: Selection[A] => U) extends Gen.Event.Control.X.Basic(f) with javafx.beans.InvalidationListener:
-    def invalidated(o: javafx.beans.Observable) = target_?.forval(_(Selection.this))
+    def invalidated(o: javafx.beans.Observable) = targetOpt.forval(_(Selection.this))
     onCancel(() => real.selectedIndexProperty.removeListener(this))
     real.selectedIndexProperty.addListener(this)
 

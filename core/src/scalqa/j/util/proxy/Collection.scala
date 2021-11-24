@@ -5,8 +5,8 @@ abstract class Collection[A] extends Collection.Base[A]
 object Collection:
 
   trait Base[A] extends Val.Collection[A] with J.Util.Proxy[Val.Collection[A]]:
-    override               def size = real.size
-    @tn("stream") override def ~    = real.~
+    override def size   = real.size
+    override def stream = real.stream
 
   // *********************************************************************************************************************
   abstract class O[A] extends Collection[A] with O.Base[A]
@@ -21,11 +21,11 @@ object Collection:
 
   object M:
     trait Base[A] extends Collection.Base[A] with Val.Collection.Mutable[A] with J.Util.Proxy[Val.Collection.Mutable[A]]:
-      override def add(v: A)         : Unit    = real.add(v)
-      override def addAll(s: ~[A])   : Unit    = real.addAll(s)
-      override def remove(v: A)      : Int     = real.remove(v)
-      override def removeAll(s: ~[A]): Int     = real.removeAll(s)
-      override def clear             : Unit    = real.clear
+      override def add(v: A)             : Unit    = real.add(v)
+      override def addAll(s:Stream[A])   : Unit    = real.addAll(s)
+      override def remove(v: A)          : Int     = real.remove(v)
+      override def removeAll(s:Stream[A]): Int     = real.removeAll(s)
+      override def clear                 : Unit    = real.clear
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

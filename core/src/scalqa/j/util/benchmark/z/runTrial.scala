@@ -2,14 +2,14 @@ package scalqa; package j; package util; package benchmark; package z; import la
 
 private[j] object runTrial:
 
-  def apply[A](targets: ><[(String, () => A)], repeated: Int, slotCount: Int, slotLength: Time.Length)(using Opt[Numeric[A]]): ><[Result] =
-    (0 <>> (slotCount / targets.size)).~
-      .flatMap(_ => (0 <>> targets.size).~.map(i => runSingleTarget[A]((i % (targets.size/repeated)) + 1,targets(i)._1,targets(i)._2,slotLength)))
+  def apply[A](targets: Pack[(String, () => A)], repeated: Int, slotCount: Int, slotLength: Time.Length)(using Opt[Numeric[A]]): Pack[Result] =
+    (0 <>> (slotCount / targets.size)).stream
+      .flatMap(_ => (0 <>> targets.size).stream.map(i => runSingleTarget[A]((i % (targets.size/repeated)) + 1,targets(i)._1,targets(i)._2,slotLength)))
       .sortBy(_.number)
       .groupBy(_.number)
-      .map(v => { val l=v.sortBy(_.opsPerSec).><; val fivePersent=l.size/20; l.dropFirst(fivePersent).dropLast(fivePersent).~}) // get rid of outliers
+      .map(v => { val l=v.sortBy(_.opsPerSec).pack; val fivePersent=l.size/20; l.dropFirst(fivePersent).dropLast(fivePersent).stream}) // get rid of outliers
       .map(_.reduce(_ + _))
-      .><
+      .pack
 
   private def runSingleTarget[A](nbr: Int, label: String, trgt: () => A, slotLength: Time.Length)(using mathOpt: Opt[Numeric[A]]): Result =
     val mem : ByteCount = J.Vm.Memory.used

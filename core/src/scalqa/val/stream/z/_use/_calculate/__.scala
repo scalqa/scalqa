@@ -4,20 +4,20 @@ import Custom.{ Ordering as CO }
 
 object calculate:
 
-  def min_Opt[A](x: ~[A], c:Ordering[A]): Opt[A] = c match
-    case _ : CO[_] => c.cast[CO[A]].min_?(x)
-    case _         => x.read_?.map(u => { var v=u; x.FOREACH(w => if(c.compare(v,w)>0) v = w); v})
+  def minOpt[A](x: Stream[A], c:Ordering[A]): Opt[A] = c match
+    case _ : CO[_] => c.cast[CO[A]].minOpt(x)
+    case _         => x.readOpt.map(u => { var v=u; x.FOREACH(w => if(c.compare(v,w)>0) v = w); v})
 
-  def max_Opt[A](x: ~[A], c:Ordering[A]): Opt[A] = c match
-    case _ : CO[_] => c.cast[CO[A]].max_?(x)
-    case _         => x.read_?.map(u => { var v=u; x.FOREACH(w => if(c.compare(v,w)<0) v = w); v})
+  def maxOpt[A](x: Stream[A], c:Ordering[A]): Opt[A] = c match
+    case _ : CO[_] => c.cast[CO[A]].maxOpt(x)
+    case _         => x.readOpt.map(u => { var v=u; x.FOREACH(w => if(c.compare(v,w)<0) v = w); v})
 
-  def range_Opt[A](x: ~[A], c:Ordering[A]) : Opt[<>[A]]    =c match
-    case _ : CO[_] => c.cast[CO[A]].range_?(x)
-    case _         => x.read_?.map(u=>{var f,l=u; x.FOREACH(v => {if(c.compare(v,f)<0) f=v; if(c.compare(v,l)>0) l=v}); Val.<>(f,l,true)(using c)})
+  def rangeOpt[A](x: Stream[A], c:Ordering[A]) : Opt[Range[A]]    =c match
+    case _ : CO[_] => c.cast[CO[A]].rangeOpt(x)
+    case _         => x.readOpt.map(u=>{var f,l=u; x.FOREACH(v => {if(c.compare(v,f)<0) f=v; if(c.compare(v,l)>0) l=v}); Val.Range(f,l,true)(using c)})
 
-  def minBy_Opt[A,B](x: ~[A],f: A=>B, o:Ordering[B]) : Opt[A] =
-    x.read_?.map(u => {
+  def minByOpt[A,B](x: Stream[A],f: A=>B, o:Ordering[B]) : Opt[A] =
+    x.readOpt.map(u => {
       var v, w = u
       var vf = f(u);
       var wf = vf;
@@ -28,8 +28,8 @@ object calculate:
       v
     })
 
-  def maxBy_Opt[A,B](x: ~[A],f: A=>B, o:Ordering[B]) : Opt[A] =
-    x.read_?.map(u => {
+  def maxByOpt[A,B](x: Stream[A],f: A=>B, o:Ordering[B]) : Opt[A] =
+    x.readOpt.map(u => {
       var v, w = u
       var vf = f(u)
       var wf = vf

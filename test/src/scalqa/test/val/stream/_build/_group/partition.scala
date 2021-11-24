@@ -6,11 +6,11 @@ object partition extends J.Test:
     val (t1, t2) = (1 to 100).partition(_ < 50)
     val (p1, p2) = t1.partition(_ < 25)
     val (p3, p4) = t2.partition(_ < 75)
-    val ~~(v1, v2, v3, v4) = (1 <> 100).~.partition(_ < 25, _ < 50, _ < 75)
-    assertEqual_~(p1, v1)
-    assertEqual_~(p2, v2)
-    assertEqual_~(p3, v3)
-    assertEqual_~(p4, v4)
+    val (v1, v2, v3, v4) = (1 <> 100).stream.partition(_ < 25, _ < 50, _ < 75).tuple4
+    assertEqualStream(p1, v1)
+    assertEqualStream(p2, v2)
+    assertEqualStream(p3, v3)
+    assertEqualStream(p4, v4)
   }
 
 /*___________________________________________________________________________

@@ -3,9 +3,9 @@ package scalqa; package `val`; package idx; package mutable; import language.imp
 object X:
 
   abstract class Abstract[A] extends idx.X.Abstract[A] with Mutable[A]:
-    override def add(v: A)                : Unit = addAt(size, v)
-    override def addAll(stream: ~[A])     : Unit = addAllAt(size, stream)
-    override def addAllAt(i: Int, p: ~[A]): Unit = p.zipIndex(i).foreach(v => addAt(v._1, v._2))
+    override def add(v: A)                     : Unit = addAt(size, v)
+    override def addAll(stream: Stream[A])     : Unit = addAllAt(size, stream)
+    override def addAllAt(i: Int, p: Stream[A]): Unit = p.zipIndex(i).foreach(v => addAt(v._1, v._2))
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

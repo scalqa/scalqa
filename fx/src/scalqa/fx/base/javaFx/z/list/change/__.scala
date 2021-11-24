@@ -6,7 +6,7 @@ object Change:
 
   def apply[A](in: Idx[Idx.O.Event[A]], o: JFX.ObservableList[A]): JFX.ListChangeListener.Change[A] & Able.Doc =
 
-    val frames: Idx[z_Frame[A]] = in.~.map[z_Frame[A]]{
+    val frames: Idx[z_Frame[A]] = in.stream.map[z_Frame[A]]{
       case v:  Idx.Event.Add[A]        => new Z.InsertFrame[A](v, o)
       case v:  Idx.Event.Remove[A]     => new Z.DeleteFrame[A](v, o)
       case v:  Idx.Event.Update[A]     => new Z.ReplaceFrame[A](v, o)
@@ -37,7 +37,7 @@ object Change:
       override def wasUpdated      = current.wasUpdated
       override def wasReplaced     = current.wasReplaced
 
-      def doc = new Doc(this){ override def text = frames.~.toText }
+      def doc = new Doc(this){ override def text = frames.stream.toText }
     }
 
 /*___________________________________________________________________________

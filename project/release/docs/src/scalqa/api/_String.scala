@@ -9,8 +9,8 @@ trait _String:
       else if(x.length>1) x.takeFirst(1).toUpperCase + x.dropFirst(1)
       else x.toUpperCase
 
-    def lowerNoOp        : String = x match{case "~"=>"stream"; case "~~"=>"stream";  case "<>"=>"range";   case "><"=>"pack";   case "\\/"=>"void";   case v => v.toLowerCase }
-    def withOp           : String = x match{case "Stream"=>"~";                       case "Range" => "<>"; case "Pack" => "><"; case "VOID" => "\\/"; case _ => x }
+    def lowerNoOp        : String = x match{case "~"=>"stream"; case "\\/"=>"void";   case v => v.toLowerCase }
+    def withOp           : String = x match{case "VOID" => "\\/"; case _ => x }
 
     def simpleName(brief: Boolean = true): String =
       var v = x
@@ -46,13 +46,13 @@ trait _String:
 
       v.dropDuplicateEnd
 
-    @tn("dropFirst") private def d(v: String)          : String = if(x.startsWith(v)) x.dropFirst(v.length) else x
-    @tn("dropFirst") private def d(v: String,len:Int)  : String = if(x.startsWith(v)) x.dropFirst(len) else x
-    @tn("dropFirst") private def d(v: String,r: Int.<>): String = if(x.startsWith(v)) x.drop_<>(r) else x
-    @tn("replace")   private def r(v: String,w: String): String = x.replace(v,w)
-    @tn("remove")    private def r(v : String)         : String = x.remove(v)
+    @tn("dropFirst") private def d(v: String)             : String = if(x.startsWith(v)) x.dropFirst(v.length) else x
+    @tn("dropFirst") private def d(v: String,len:Int)     : String = if(x.startsWith(v)) x.dropFirst(len) else x
+    @tn("dropFirst") private def d(v: String,r: Int.Range): String = if(x.startsWith(v)) x.dropRange(r) else x
+    @tn("replace")   private def r(v: String,w: String)   : String = x.replace(v,w)
+    @tn("remove")    private def r(v : String)            : String = x.remove(v)
 
-    def dropDuplicateEnd : String = x.lastIndexOf_?(".").map_?(i => {
+    def dropDuplicateEnd : String = x.lastIndexOfOpt(".").mapOpt(i => {
       val len = x.length - i - 1
-      x.lastIndexOf_?(".",i-1).default(-1).take(j => i - j - 1 == len && x.take_<>(i+1,len) == x.take_<>(j+1,len)).map(_ => len+1)
+      x.lastIndexOfOpt(".",i-1).default(-1).take(j => i - j - 1 == len && x.takeRange(i+1,len) == x.takeRange(j+1,len)).map(_ => len+1)
     }).map(x.dropLast(_)) or x

@@ -7,13 +7,13 @@ private[scalqa] class Entry(chld: Entry, val `type`: AnyRef, protected[z] var ca
   def isCancelled             : Boolean          = cargo == null
   def child                   : Entry            = { val e = get; if (e.cargo != null) e else { val c = e.child; if (compareAndSet(e, c)) c else child }}
   def next                    : Entry            = child.find(`type`)
-  def next_?                  : Opt[Store.Entry] = child.find(`type`).?.drop(_.isVoid)
+  def nextOpt                  : Opt[Store.Entry] = child.find(`type`).?.drop(_.isVoid)
   def find(typ: AnyRef)       : Entry            = { var e = this; while (e.nonVoid && (typ != e.`type` || e.cargo == null)) e = e.child; e }
   def cancel                  : Boolean          = if (isCancelled) false else { var b = false; var v = cargo; synchronized{if(!isCancelled){ b=true; cargo=null}}; if (b) fire(v); b}
   def cancelIf(b: ()=>Boolean): this.type        = { if (!isCancelled) synchronized { cargo = Trigger.CancelIf(this, cargo, b)}; this }
   def onCancel[U](l: () => U) : this.type        = { if (!isCancelled) synchronized { cargo = Trigger.OnCancel(cargo, l);     }; this }
-  def removeHardReference     : AnyRef           = if (isCancelled) null else synchronized { cargo.cast[AnyRef].^(r => cargo = Trigger.WeakRef(this,r)) }
-  def doc                     : Doc              = Doc("Entry") += ("type", `type`.^.id ) += ("value", value.?.takeType[Event.Id].map(_.tag) or value.^.id ) ++= (isCancelled ? (("", "isCancelled")))
+  def removeHardReference     : AnyRef           = if (isCancelled) null else synchronized { cargo.cast[AnyRef].self(r => cargo = Trigger.WeakRef(this,r)) }
+  def doc                     : Doc              = Doc("Entry") += ("type", `type`.self.id ) += ("value", value.?.takeType[Event.Id].map(_.tag) or value.self.id ) ++= (isCancelled ? (("", "isCancelled")))
 
   private def fire(v: Any)    : Unit             = v match { case v: Trigger.OnCancel => v.code(); fire(v.cargo); case v: Trigger => fire(v.cargo); case _ => () }
 

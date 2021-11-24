@@ -3,7 +3,7 @@ package scalqa; package `val`; package opt; import language.implicitConversions;
 object Z:
 
   def collect[A,B](x:Opt[A],f:PartialFunction[A,B]): Opt[B]                = {var o:Opt[B]= \/; if(x.nonEmpty){val w=x.`val`; if(f.isDefinedAt(w)) o=f(w)}; o}
-  def stream [A]  (x:Opt[A])                       : ~[A]                  = if(x.nonEmpty) ~~(x.`val`) else Stream.void
+  def stream [A]  (x:Opt[A])                       : Stream[A]             = if(x.nonEmpty) Stream(x.`val`) else Stream.void
   def get    [A]  (x:Opt[A])                       : A                     = {if(x.isEmpty) throw new ZZ.EO(); x.cast[A]}
   def toScala[A]  (x:Opt[A])                       : scala.Option[A]       = if(x.nonEmpty) scala.Some(x.`val`) else scala.None
   def toJava [A]  (x:Opt[A])                       : java.util.Optional[A] = if(x.nonEmpty) java.util.Optional.of(x.`val`) else java.util.Optional.empty

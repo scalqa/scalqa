@@ -2,10 +2,10 @@ package scalqa; package test.`val`.stream._build._filter; import language.implic
 
 object takeValuesBy extends J.Test("takeValuesBy"):
 
-  testEqual_~(
+  testEqualStream(
     30 to 50,
-    (1 <> 100).~.takeValuesBy(_ * 10, 300 <> 500),
-    (1 <> 100).~.takeValuesBy(_ * 10, (300 <> 500).~.reverseEvery(4)))
+    (1 <> 100).stream.takeValuesBy(_ * 10, 300 <> 500),
+    (1 <> 100).stream.takeValuesBy(_ * 10, (300 <> 500).stream.reverseEvery(4)))
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

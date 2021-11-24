@@ -4,14 +4,14 @@ class Path extends Shape:
   protected type REAL = javafx.scene.shape.Path
   protected def _createReal: REAL = new REAL
 
-  /**/                val elements                     : Idx.OM[Path.Element]  = Fx.JavaFx.To.idx_OM(real.getElements).mutableMap_^[Path.Element]
-  @tn("fillRule_Pro") def fillRule_*                   : Pro.OM[Path.FillRule] = Fx.JavaFx.To.pro_OM(real.fillRuleProperty).mutableMap_^[Path.FillRule]
-  /**/                def fillRule                     : Path.FillRule         = real.getFillRule
-  /**/                def fillRule_=(v: Path.FillRule) : Unit                  = real.setFillRule(v)
+  val elements                     : Idx.OM[Path.Element]  = Fx.JavaFx.To.idx_OM(real.getElements).mutableMapView[Path.Element]
+  def fillRulePro                  : Pro.OM[Path.FillRule] = Fx.JavaFx.To.pro_OM(real.fillRuleProperty).mutableMapView[Path.FillRule]
+  def fillRule                     : Path.FillRule         = real.getFillRule
+  def fillRule_=(v: Path.FillRule) : Unit                  = real.setFillRule(v)
 
 object Path:
   def apply()             : Shape.Path = new Shape.Path
-  def apply(v: Element *) : Shape.Path = apply().^(_.elements ++= v)
+  def apply(v: Element *) : Shape.Path = apply().self(_.elements ++= v)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Element      = path.Element;        transparent inline def Element      = path.Element

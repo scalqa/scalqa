@@ -33,6 +33,10 @@ transparent trait opt:
   extension[A<:Any.Float  ](inline x: Float  .G.Opt[A]) @tn("FON") inline def nonVoid: Boolean  = !x.isEmpty
   extension[A<:Any.Double ](inline x: Double .G.Opt[A]) @tn("DON") inline def nonVoid: Boolean  = !x.isEmpty
 
+  extension                (inline x: String)   @tn("nonEmptyOpt") inline def ??     : Opt[String]    = x.self.map(v => (v != null && v.length > 0) ? v )
+  extension[A]             (inline x: Stream[A])@tn("nonEmptyOpt") inline def ??     : Opt[Stream[A]] = z.opt.nonEmptyStream(x)
+
+
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API

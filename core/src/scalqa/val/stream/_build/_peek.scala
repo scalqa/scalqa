@@ -6,14 +6,14 @@ import Z.{ _peek => _Z }
 transparent trait _peek:
   self: Stream.type =>
 
-  extension[A](x: ~[A])
-    inline def peek[U](inline f: A => U)                                : ~[A]  = new Z.peek(x,f)
-    inline def peekIndexed[U](inline f: (Int,A)=>U, inline start:Int=0) : ~[A]  = new _Z.peekIndexed(x, f, start)
-    inline def peekStart[U] (inline f: Time=>U)                         : ~[A]  = Z.peek.start(x,f)
-    inline def peekEnd[U]   (inline f: (Int,Time.Length)=>U)            : ~[A]  = Z.peek.end(x,f)
-    inline def peekEmpty[U] (inline f: => U)                            : ~[A]  = Z.peek.empty(x,f)
-    inline def peekEvents[U](inline f: Custom.Event => U)               : ~[A]  = Z.peek.events(x,f)
-    inline def peekMonitor  (inline v: Custom.Event.Monitor)            : ~[A]  = Z.peek.monitor(x,v)
+  extension[A](x: Stream[A])
+    inline def peek[U](inline f: A => U)                                : Stream[A]  = new Z.peek(x,f)
+    inline def peekIndexed[U](inline f: (Int,A)=>U, inline start:Int=0) : Stream[A]  = new _Z.peekIndexed(x, f, start)
+    inline def peekStart[U] (inline f: Time=>U)                         : Stream[A]  = Z.peek.start(x,f)
+    inline def peekEnd[U]   (inline f: (Int,Time.Length)=>U)            : Stream[A]  = Z.peek.end(x,f)
+    inline def peekEmpty[U] (inline f: => U)                            : Stream[A]  = Z.peek.empty(x,f)
+    inline def peekEvents[U](inline f: Custom.Event => U)               : Stream[A]  = Z.peek.events(x,f)
+    inline def peekMonitor  (inline v: Custom.Event.Monitor)            : Stream[A]  = Z.peek.monitor(x,v)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -31,7 +31,7 @@ ___________________________________________________________________________*/
       The given function will be run with every passing stream element.
 
      ```
-        (1 <> 5).~.peek(_.TP).drain
+        (1 <> 5).stream.peek(_.TP).drain
 
         // Output
         1
@@ -46,7 +46,7 @@ ___________________________________________________________________________*/
      The given function will be executed with every passing element and its index.
 
      ```
-        ('a' <> 'f').~.peekIndexed((i,c) => (""+i+" : "+c).TP, 1).drain
+        ('a' <> 'f').stream.peekIndexed((i,c) => (""+i+" : "+c).TP, 1).drain
 
         // Output
         1 : a
@@ -64,7 +64,7 @@ ___________________________________________________________________________*/
      The given function is executed once, just before the first elements is about to pass.
 
      ```
-        ('a' <> 'f').~.peekStart(time => "Started at: "+time).drain
+        ('a' <> 'f').stream.peekStart(time => "Started at: "+time).drain
      ```
 
      Note: This will not run for empty streams
@@ -76,7 +76,7 @@ ___________________________________________________________________________*/
      The function receives total element count and Time.Length, it took for all elements to pass
 
      ```
-        (1 <> 10).~
+        (1 <> 10).stream
           .peek(_ => J.sleep(100.Millis))
           .peekEnd((cnt,time) => "Elements: "+cnt+"  total time: "+time.tag TP())
           .drain
@@ -92,7 +92,7 @@ ___________________________________________________________________________*/
     The given function is executed once, only if stream is empty
 
       ```
-        (1 <> 10).~.drop(_ > 0).peekEmpty("Stream is empty".TP).drain
+        (1 <> 10).stream.drop(_ > 0).peekEmpty("Stream is empty".TP).drain
 
         // Output
         Stream is empty
@@ -100,10 +100,10 @@ ___________________________________________________________________________*/
 
 @def peekEvents -> Custom events
 
-    Allows to setup [[scalqa.val.stream.custom.Event ~~.Custom.Events]] multiple monitoring events
+    Allows to setup [[scalqa.val.stream.custom.Event Stream.Custom.Events]] multiple monitoring events
 
     ```
-      (1 <> 1000).~
+      (1 <> 1000).stream
         .peek(_ => J.sleep(5.Millis))
         .peekEvents(e => {
           e.onBeforeFirst(t   => "Started at: "+ t.dayTime.tag TP())
@@ -125,7 +125,7 @@ ___________________________________________________________________________*/
 
 @def peekMonitor -> Custom monitor
 
-    Adds pre-build [[scalqa.val.stream.custom.event.Monitor ~~.Custom.Event.Monitor ]]
+    Adds pre-build [[scalqa.val.stream.custom.event.Monitor Stream.Custom.Event.Monitor ]]
 
   	If passed monitor tests to be void (`.isEmpty`), the operation is ignored
 */

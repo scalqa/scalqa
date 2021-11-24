@@ -2,38 +2,38 @@ package scalqa; package `val`; import range.*; import language.implicitConversio
 
 abstract class Range[A] extends gen.able.Contain[A] with gen.able.Empty:
   type THIS_TYPE <: Range[A]
-  /**/              def start                                       : A
-  /**/              def end                                         : A
-  /**/              def endIsIn                                     : Boolean
-  /**/              def ordering                                    : Ordering[A]
-  /**/              def join(v: A)                                  : THIS_TYPE
-  /**/              def join(v: Range[A])                           : THIS_TYPE
-  /**/              def overlaps( r: Range[A])                      : Boolean
-  @tn("overlap_Opt")def overlap_?(r: Range[A])                      : Opt[THIS_TYPE]
-  /**/              def step_~(f: A => A)                           : ~[A]          = z.StepStream(this, f)
-  /**/              def step_~(step: Int)(using Able.Sequence[A])   : ~[A]          = z.StepStream(this, step)
-  /**/              def contains(v: Range[A])                       : Boolean       = z.ops.contains(this,v)
-  /**/              def contains(v: A)                              : Boolean       = z.ops.contains(this,v)
-  /**/              def isEmpty                                     : Boolean       = z.ops.isEmpty(this)
-  override          def equals(v: Any)                              : Boolean       = v.isInstanceOf[Range[_]] && {val r=v.cast[Range[A]]; this.contains(r) && r.contains(this)}
-  inline            def raw(using inline A:Specialized.Primitive[A]): A.<>          = z.raw(this)
+  /**/     def start                                        : A
+  /**/     def end                                          : A
+  /**/     def endIsIn                                      : Boolean
+  /**/     def ordering                                     : Ordering[A]
+  /**/     def join(v: A)                                   : THIS_TYPE
+  /**/     def join(v: Range[A])                            : THIS_TYPE
+  /**/     def overlaps( r: Range[A])                       : Boolean
+  /**/     def overlapOpt(r: Range[A])                      : Opt[THIS_TYPE]
+  /**/     def streamStep(f: A => A)                        : Stream[A]     = z.StepStream(this, f)
+  /**/     def streamStep(step: Int)(using Able.Sequence[A]): Stream[A]     = z.StepStream(this, step)
+  /**/     def contains(v: Range[A])                        : Boolean       = z.ops.contains(this,v)
+  /**/     def contains(v: A)                               : Boolean       = z.ops.contains(this,v)
+  /**/     def isEmpty                                      : Boolean       = z.ops.isEmpty(this)
+  override def equals(v: Any)                               : Boolean       = v.isInstanceOf[Range[_]] && {val r=v.cast[Range[A]]; this.contains(r) && r.contains(this)}
+  inline   def raw(using inline A:Specialized.Primitive[A]) : A.Range       = z.raw(this)
 
 object Range:
-  def apply[A](start:A,end:A, endIn:Boolean=true)(using Ordering[A]): Range[A]      = if(endIn) Z.EndInclsive(start,end)  else Z.EndExclusive(start,end)
-  def singleValue[A](v:A,  endIn: Boolean = true)(using Ordering[A]): Range[A]      = if(endIn) Z.SingleValueInclusive(v) else Z.SingleValueExclusive(v)
+  def apply[A](start:A,end:A, endIn:Boolean=true)(using Ordering[A]): Range[A] = if(endIn) Z.EndInclsive(start,end)  else Z.EndExclusive(start,end)
+  def singleValue[A](v:A,  endIn: Boolean = true)(using Ordering[A]): Range[A] = if(endIn) Z.SingleValueInclusive(v) else Z.SingleValueExclusive(v)
 
   extension[A](x: Range[A])
-    @tn("stream")   def ~ (using Able.Sequence[A])                  : ~[A]          = x match{ case v:Able.~[_] => v.cast[Able.~[A]].~; case _ => x.step_~(1) }
-    /**/            def convert[B](f:A=>B)(using s:Ordering[B])     : Range[B]      = Range(f(x.start),f(x.end),x.endIsIn)
+    def stream         (using Able.Sequence[A]) : Stream[A]     = x match{ case v:Able.Stream[_] => v.cast[Able.Stream[A]].stream; case _ => x.streamStep(1) }
+    def convert[B](f:A=>B)(using s:Ordering[B]) : Range[B]      = Range(f(x.start),f(x.end),x.endIsIn)
 
   extension[A](inline x: Range[A])
-    inline def withFilter(inline f: A => Boolean)(using inline s:Able.Sequence[A]): ~[A] = x.~.take(f)
-    inline def map[B](    inline f: A => B)      (using inline s:Able.Sequence[A]): ~[B] = x.~.map(f)
-    inline def flatMap[B](inline f: A => ~[B])   (using inline s:Able.Sequence[A]): ~[B] = x.~.flatMap(f)
-    inline def foreach[U](inline f: A => U)      (using inline s:Able.Sequence[A]): Unit = x.~.foreach(f)
+    inline def withFilter(inline f: A => Boolean)(using inline s:Able.Sequence[A]): Stream[A] = x.stream.take(f)
+    inline def map[B](    inline f: A => B)      (using inline s:Able.Sequence[A]): Stream[B] = x.stream.map(f)
+    inline def flatMap[B](inline f: A=>Stream[B])(using inline s:Able.Sequence[A]): Stream[B] = x.stream.flatMap(f)
+    inline def foreach[U](inline f: A => U)      (using inline s:Able.Sequence[A]): Unit      = x.stream.foreach(f)
 
-  given z_CanEqualRange[A,B](using CanEqual[A,B]): CanEqual[<>[A],<>[B]] = CanEqual.derived
-  given z_Doc[A]           (using Any.Def.Tag[A]): Any.Def.Doc[Range[A]] = new range.Z.DocDef[A]
+  given z_CanEqualRange[A,B](using CanEqual[A,B]): CanEqual[Range[A],Range[B]] = CanEqual.derived
+  given z_Doc[A]           (using Any.Def.Tag[A]): Any.Def.Doc[Range[A]]       = new range.Z.DocDef[A]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -109,13 +109,13 @@ ___________________________________________________________________________*/
 
     Returns true if two ranges overlap
 
-@def overlap_? -> Optional intersection
+@def overlapOpt -> Optional intersection
 
     Optionally returns common intersection of `this` and `that`
     ```
-      1 <> 6 overlap_? 3 <> 9  // Returns: Opt(3 <> 6)
+      1 <> 6 overlapOpt 3 <> 9  // Returns: Opt(3 <> 6)
 
-      1 <> 3 overlap_? 6 <> 9  // Returns: Opt(\/)
+      1 <> 3 overlapOpt 6 <> 9  // Returns: Opt(\/)
     ```
 
 
@@ -136,21 +136,21 @@ ___________________________________________________________________________*/
       'A' <> 'C' extendTo 'B' // Returns: A <> C
     ```
 
-@def step_~ -> Mapped stream
+@def streamStep -> Mapped stream
 
     Returns a stream containing the first range value and the result of applying given function to this value and the produced results.
     The stream ends when the function result is no longer within range.
 
     ```
-      (1 <> 10).step_~( _ + 3).TP  // Prints: ~(1, 4, 7, 10)
+      (1 <> 10).streamStep( _ + 3).TP  // Prints: Stream(1, 4, 7, 10)
     ```
 
-@def step_~ -> Stepped stream
+@def streamStep -> Stepped stream
 
     For sequential types, the method returns a stream of values with given step.
 
     ```
-      (1 <> 10).step_~(2).TP  // Prints: ~(1, 3, 5, 7, 9)
+      (1 <> 10).streamStep(2).TP  // Prints: Stream(1, 3, 5, 7, 9)
     ```
 
 @def isEmpty -> Empty check

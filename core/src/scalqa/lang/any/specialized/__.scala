@@ -1,17 +1,17 @@
 package scalqa; package lang; package any; import specialized.*; import language.implicitConversions
 
 class Specialized[A]:
-  /**/          type Array      <: Any.Array[A]
-  @tn("Stream") type ~          <: Any.~[A]
-  @tn("Range")  type <>         <: Any.<>[A]
-  @tn("Pack")   type ><         <: Any.><[A]
-  /**/          type Buffer     <: Any.Buffer[A]
-  /**/          type Collection <: Any.Collection[A]
-  /**/          type Idx        <: Any.Idx[A]
-  /**/          type Lookup[B]  <: Any.Lookup[A,B]
-  /**/          type Opt        <: Any.Opt[A]
-  /**/          type Pro        <: Any.Pro[A]
-  /**/          type Set        <: Any.Set[A]
+  type Array      <: Any.Array[A]
+  type Stream     <: Any.Stream[A]
+  type Range      <: Any.Range[A]
+  type Pack       <: Any.Pack[A]
+  type Buffer     <: Any.Buffer[A]
+  type Collection <: Any.Collection[A]
+  type Idx        <: Any.Idx[A]
+  type Lookup[B]  <: Any.Lookup[A,B]
+  type Opt        <: Any.Opt[A]
+  type Pro        <: Any.Pro[A]
+  type Set        <: Any.Set[A]
 
 object Specialized extends z_SpecializedDefault:
   inline given givenBoolean[A<:Any.Boolean ]: X.Boolean[A] = new X.Boolean[A] // Do not optimize "new",
@@ -46,10 +46,10 @@ ___________________________________________________________________________*/
 
   For example, consider specialized stream method [[scalqa.val.stream._build._map map]], which returns different types of stream:
   ```
-    val floats  : Float.~   =  (1 <> 9).~.map(_.toFloat)
+    val floats  : Float.Stream   =  (1 <> 9).stream.map(_.toFloat)
 
-    val longs   : Long.~    =  (1 <> 9).~.map(_.toLong)
+    val longs   : Long.Stream    =  (1 <> 9).stream.map(_.toLong)
 
-    val strings : ~[String] =  (1 <> 9).~.map(_.toString)
+    val strings : Stream[String] =  (1 <> 9).stream.map(_.toString)
   ```
 */

@@ -4,7 +4,7 @@ import javafx.scene.input.ContextMenuEvent
 
 class ContextMenu(e: ContextMenuEvent, node: Fx.Node) extends Input(e, node):
   protected type REAL <: ContextMenuEvent
-  private var onClosed: ><[() => Unit] = \/
+  private var onClosed: Pack[() => Unit] = \/
 
   val actions                     : Idx.M[Action] = Idx.M()
   def x                           : Double        = real.getX
@@ -15,7 +15,7 @@ class ContextMenu(e: ContextMenuEvent, node: Fx.Node) extends Input(e, node):
   def onMenuClosedRun(l: => Unit) : Unit          = onClosed += (() => l);
 
 object ContextMenu:
-  private var currentMenus: ><[ContextMenu] = \/
+  private var currentMenus: Pack[ContextMenu] = \/
 
   def show(e: ContextMenu): Unit = synchronized {
     currentMenus += e
@@ -25,11 +25,11 @@ object ContextMenu:
   private def showCurrent = synchronized {
     val menu = Popup.Menu()
     menu.items ++= {
-      val a = currentMenus.~.flatMap(_.actions).group.map(_.read).takeIndexed((i, v) => i > 0 || !v.isInstanceOf[action.z.Separator]).><
-      if (a.last_?.isInstanceOf[action.z.Separator]) a.~.dropLast(1) else a.~
+      val a = currentMenus.stream.flatMap(_.actions).group.map(_.read).takeIndexed((i, v) => i > 0 || !v.isInstanceOf[action.z.Separator]).pack
+      if (a.lastOpt.isInstanceOf[action.z.Separator]) a.stream.dropLast(1) else a.stream
     }.map(_.toMenuItem)
-    currentMenus.~.flatMap(_.onClosed).><.^(l => if (l.size > 0) menu.onHidden(() => l.~.foreach(_())))
-    currentMenus.last.^(e => e.node.scene_?.forval(s => menu.show(s.window, e.screenX, e.screenY)))
+    currentMenus.stream.flatMap(_.onClosed).pack.self(l => if (l.size > 0) menu.onHidden(() => l.stream.foreach(_())))
+    currentMenus.last.self(e => e.node.sceneOpt.forval(s => menu.show(s.window, e.screenX, e.screenY)))
     currentMenus = \/
   }
 

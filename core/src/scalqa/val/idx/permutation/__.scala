@@ -3,24 +3,24 @@ package scalqa; package `val`; package idx; import language.implicitConversions
 import permutation.Z
 
 trait Permutation:
-  /**/               def range                                        : Int.<>
-  /**/               def positions                                    : Int.><
-  /**/               def position(old: Int)                           : Int          = { val i = range; if (i contains old) positions(old - i.start) else old }
-  @tn("pair_Stream") def pair_~                                       : ~[(Int,Int)] = { var i=range.start-1; positions.~.map_?(v =>{ i+=1; if(i!=v) (i,v) else \/})}
-  /**/               def reposition[B](l:Idx.M[B])                    : Unit         = reposition(l, l.updateAt)
-  /**/               def reposition[B](l:Idx[B],update:(Int,B)=>Unit) : Unit         = { val il = l.~.take_<>(range).><; positions.~.foreachIndexed((i, j) => update(j, il(i))) }
-  /**/               def validate                                     : Unit         = Z.validate(this)
+  def range                                        : Int.Range
+  def positions                                    : Int.Pack
+  def position(old: Int)                           : Int              = { val i = range; if (i contains old) positions(old - i.start) else old }
+  def pairStream                                   : Stream[(Int,Int)]= { var i=range.start-1; positions.stream.mapOpt(v =>{ i+=1; if(i!=v) (i,v) else \/})}
+  def reposition[B](l:Idx.M[B])                    : Unit             = reposition(l, l.updateAt)
+  def reposition[B](l:Idx[B],update:(Int,B)=>Unit) : Unit             = { val il = l.stream.takeRange(range).pack; positions.stream.foreachIndexed((i, j) => update(j, il(i))) }
+  def validate                                     : Unit             = Z.validate(this)
 
 object Permutation extends Gen.Void.Setup[Permutation](Z.Void):
-  def apply(r: Int.<>, positions: Int.><)                             : Permutation  = Z.Basic(r, positions)
-  def empty(i: Int.<>)                                                : Permutation  = apply(i, i.><)
-  def pairs(s: (Int, Int)*)                                           : Permutation  = Z.pairs(s.~.><)
-  def random(r: Int.<>)                                               : Permutation  = Z.random(r)
+  def apply(r: Int.Range, positions: Int.Pack)                        : Permutation  = Z.Basic(r, positions)
+  def empty(i: Int.Range)                                             : Permutation  = apply(i, i.pack)
+  def pairs(s: (Int, Int)*)                                           : Permutation  = Z.pairs(s.stream.pack)
+  def random(r: Int.Range)                                            : Permutation  = Z.random(r)
   def sorting[A](idx:Idx[A], full:Boolean=false)(using c: Ordering[A]): Permutation  = Z.sorting(idx, full, c)
 
   given z_Doc: Any.Def.Doc[Permutation] with
     def value_tag(v: Permutation) = value_doc(v).tag
-    def value_doc(v: Permutation) = Doc("Permutation") += ("range", v.range) += v.pair_~.makeString("")
+    def value_doc(v: Permutation) = Doc("Permutation") += ("range", v.range) += v.pairStream.makeString("")
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -39,9 +39,9 @@ ___________________________________________________________________________*/
         2. Apply permutation to the buffer
 
      ```
-        val buf = ~~(0, 3, 1, 2, 4).toBuffer
+        val buf = Stream(0, 3, 1, 2, 4).toBuffer
 
-        buf.~.TP // Prints:  ~(0, 3, 1, 2, 4)
+        buf.stream.TP // Prints:  Stream(0, 3, 1, 2, 4)
 
         // Creating permutation based on given ordering
         val p = Idx.Permutation.sorting(buffer)
@@ -50,14 +50,14 @@ ___________________________________________________________________________*/
 
         p.reposition(buf)  // Applying permutation
 
-        buf.~.TP           // Prints ~(0, 1, 2, 3, 4)
+        buf.stream.TP           // Prints Stream(0, 1, 2, 3, 4)
       ```
 
 @def position -> New index
 
        Given current position, returns new position
 
-@def pair_~ -> All changes
+@def pairStream -> All changes
 
        Returns a stream of all changed positions as a tuple: ('old position','new position')
 
@@ -79,7 +79,7 @@ ___________________________________________________________________________*/
         ```
           // Repositioning range from 3 to 6 r reverse indexes = 6,5,4,3
 
-          val p = Idx.Permutation(3 <> 6, ><(6, 5, 4, 3))
+          val p = Idx.Permutation(3 <> 6, Pack(6, 5, 4, 3))
 
           p.TP  // Prints: Permutation{range=3 <>> 7,(3,6)(4,5)(5,4)(6,3)}
         ```
@@ -115,7 +115,7 @@ ___________________________________________________________________________*/
 
          - Sizes must be equal = range.size == indexes.size
          - Interval must not repeat
-         - Interval must be within range = indexes.~.isEvery(range.contains)
+         - Interval must be within range = indexes.stream.isEvery(range.contains)
 
        ```
          Idx.Permutation(3 <> 6, Ints(6, 5, 4, 3)).TP
@@ -128,7 +128,7 @@ ___________________________________________________________________________*/
 
       Creates a [[Permutation]] by specifying a stream of mappings
       ```
-         Idx.Permutation.^(Stream((5, 7),(7, 5))).TP
+         Idx.Permutation.self(Stream((5, 7),(7, 5))).TP
          // Output
          Permutation{range=5 <>> 8,(5,7)(7,5)}
       ```

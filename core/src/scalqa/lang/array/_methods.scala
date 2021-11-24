@@ -5,44 +5,44 @@ import any.{ Specialized as S }
 transparent trait _methods:
 
   extension[A](inline x:Array[A])
-    @tn("stream")     inline def ~                                        (using inline A:S[A]) : A.~ & Able.Size = z.Stream(x)
-    @tn("stream")     inline def ~(inline sz:Int)                         (using inline A:S[A]) : A.~ & Able.Size = z.Stream(x,sz)
+    inline def stream                                          (using inline A:S[A]) : A.Stream & Able.Size = z.Stream(x)
+    inline def stream(inline sz:Int)                           (using inline A:S[A]) : A.Stream & Able.Size = z.Stream(x,sz)
 
-    @tn("pack")       inline def ><                                       (using inline A:S[A]) : A.><            = z.pack(x)
+    inline def pack                                       (using inline A:S[A]) : A.Pack               = z.pack(x)
 
-    /**/              inline def copyTo(a:Array[A])                                             : Unit            = {val v=x; val sz= v.length min  a.length;        v.copyTo(a,0,  0,sz)}
-    /**/              inline def copyTo(a:Array[A], pos: Int)                                   : Unit            = {val v=x; val sz= v.length min (a.length - pos); v.copyTo(a,pos,0,sz)}
-    /**/              inline def copyTo(inline a:Array[A], inline pos:Int,
-                                                           inline from:Int, inline size:Int)    : Unit            = System.arraycopy(x,from,a,pos,size)
-    /**/              inline def newArray(inline size: Int)               (using inline A:S[A]) : A.Array         = z.newArray(x,size)
-    /**/              inline def contains(inline v: A)                    (using inline A:S[A]) : Boolean         = z.contains(x,v)
+    inline def copyTo(a:Array[A])                                               : Unit                 = {val v=x; val sz= v.length min  a.length;        v.copyTo(a,0,  0,sz)}
+    inline def copyTo(a:Array[A], pos: Int)                                     : Unit                 = {val v=x; val sz= v.length min (a.length - pos); v.copyTo(a,pos,0,sz)}
+    inline def copyTo(inline a:Array[A], inline pos:Int,
+                                           inline from:Int, inline size:Int)    : Unit                 = System.arraycopy(x,from,a,pos,size)
+    inline def newArray(inline size: Int)                 (using inline A:S[A]) : A.Array              = z.newArray(x,size)
+    inline def contains(inline v: A)                      (using inline A:S[A]) : Boolean              = z.contains(x,v)
 
-    @tn("join")       inline def + ( inline v: A)                         (using inline A:S[A]) : A.Array         = z.join(x,v)
-    @tn("joinAll")    inline def ++( inline v: ~[A])                      (using inline A:S[A]) : A.Array         = z.joinAll(x,v)
-    @tn("joinAt")     inline def +@( inline i: Int, inline v: A)          (using inline A:S[A]) : A.Array         = z.joinAt(x,i,v)
-    @tn("joinAllAt")  inline def ++@(inline i: Int, inline v: ~[A])       (using inline A:S[A]) : A.Array         = z.joinAllAt(x,i,v)
-    /**/              inline def copySize(inline size: Int)               (using inline A:S[A]) : A.Array         = z.copySize(x,size)
+    inline def + ( inline v: A)                           (using inline A:S[A]) : A.Array              = z.join(x,v)
+    inline def ++( inline v: Stream[A])                   (using inline A:S[A]) : A.Array              = z.joinAll(x,v)
+    inline def +@( inline i: Int, inline v: A)            (using inline A:S[A]) : A.Array              = z.joinAt(x,i,v)
+    inline def ++@(inline i: Int, inline v: Stream[A])    (using inline A:S[A]) : A.Array              = z.joinAllAt(x,i,v)
+    inline def copySize(inline size: Int)                 (using inline A:S[A]) : A.Array              = z.copySize(x,size)
 
-    /**/              inline def join(inline v: A)                        (using inline A:S[A]) : A.Array         = z.join(x,v)
-    /**/              inline def joinAll(inline v: ~[A])                  (using inline A:S[A]) : A.Array         = z.joinAll(x,v)
-    /**/              inline def joinAt(inline i:Int, inline v: A)        (using inline A:S[A]) : A.Array         = z.joinAt(x,i,v)
-    /**/              inline def joinAllAt(inline i:Int,inline v: ~[A])   (using inline A:S[A]) : A.Array         = z.joinAllAt(x,i,v)
+    inline def join(inline v: A)                          (using inline A:S[A]) : A.Array              = z.join(x,v)
+    inline def joinAll(inline v: Stream[A])               (using inline A:S[A]) : A.Array              = z.joinAll(x,v)
+    inline def joinAt(inline i:Int, inline v: A)          (using inline A:S[A]) : A.Array              = z.joinAt(x,i,v)
+    inline def joinAllAt(inline i:Int,inline v: Stream[A])(using inline A:S[A]) : A.Array              = z.joinAllAt(x,i,v)
 
-    /**/              inline def fill(inline v: A)                        (using inline A:S[A]) : Unit            = {val a=x; z.fill(a,0,a.length,v)}
-    @tn("fill_Range") inline def fill_<>(inline start:Int,inline size:Int,inline v:A)
-                                                                          (using inline A:S[A]) : Unit            = z.fill(x,start,size,v)
-    @tn("fill_Range") inline def fill_<>(r: Int.<>, inline v: A)          (using inline A:S[A]) : Unit            = z.fill(x,r.start,r.size,v)
+    inline def fill(inline v: A)                          (using inline A:S[A]) : Unit                 = {val a=x; z.fill(a,0,a.length,v)}
+    inline def fillRange(inline start:Int,inline size:Int,inline v:A)
+                                                          (using inline A:S[A]) : Unit                 = z.fill(x,start,size,v)
+    inline def fillRange(r: Int.Range, inline v: A)       (using inline A:S[A]) : Unit                 = z.fill(x,r.start,r.size,v)
 
-    @tn("take_Range") inline def take_<>(inline start:Int,inline size:Int)(using inline A:S[A]) : A.Array         = z.range.take(x,start,size)
-    @tn("take_Range") inline def take_<>(r: Int.<>)                       (using inline A:S[A]) : A.Array         = z.range.take(x,r.start,r.size)
-    @tn("drop_Range") inline def drop_<>(inline start:Int,inline size:Int)(using inline A:S[A]) : A.Array         = z.range.drop(x,start,size)
-    @tn("drop_Range") inline def drop_<>(r: Int.<>)                       (using inline A:S[A]) : A.Array         = z.range.drop(x,r.start,r.size)
+    inline def takeRange(inline start:Int,inline size:Int)(using inline A:S[A]) : A.Array              = z.range.take(x,start,size)
+    inline def takeRange(r: Int.Range)                    (using inline A:S[A]) : A.Array              = z.range.take(x,r.start,r.size)
+    inline def dropRange(inline start:Int,inline size:Int)(using inline A:S[A]) : A.Array              = z.range.drop(x,start,size)
+    inline def dropRange(r: Int.Range)                    (using inline A:S[A]) : A.Array              = z.range.drop(x,r.start,r.size)
 
-    /**/              inline def sort       (using inline c:Ordering[A])  (using inline A:S[A]) : Unit            = z.sort(x,c)
-    @tn("sort_Range") inline def sort_<>(inline start:Int, inline size: Int)
-                                            (using inline c:Ordering[A])  (using inline A:S[A]) : Unit            = z.sortRange(x,start,size,c)
-    @tn("sort_Range") inline def sort_<>(r :Int.<>)
-                                            (using inline c:Ordering[A])  (using inline A:S[A]) : Unit            = z.sortRange(x,r.start,r.size,c)
+    inline def sort         (using inline c:Ordering[A])  (using inline A:S[A]) : Unit                 = z.sort(x,c)
+    inline def sortRange(inline start:Int, inline size: Int)
+                            (using inline c:Ordering[A])  (using inline A:S[A]) : Unit                 = z.sortRange(x,start,size,c)
+    inline def sortRange(r :Int.Range)
+                            (using inline c:Ordering[A])  (using inline A:S[A]) : Unit                 = z.sortRange(x,r.start,r.size,c)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -55,11 +55,11 @@ ___________________________________________________________________________*/
 
     Extension methods are universaly avaialble for all Array types.
 
-@def ~  -> Elements stream
+@def stream  -> Elements stream
 
     Returns stream of array elements
 
-@def ~  -> Sized stream
+@def stream  -> Sized stream
 
     Returns stream of array elements limited to given size
 
@@ -127,19 +127,19 @@ ___________________________________________________________________________*/
 
     Returns `true` if array contains equal value, `false - otherwise
 
-@def drop_<> -> Drop range
+@def dropRange -> Drop range
 
     Copies base array to a new array without elements of specified range
 
-@def drop_<> -> Drop range
+@def dropRange -> Drop range
 
     Copies base array to a new array without elements of specified range
 
-@def take_<> -> Take range
+@def takeRange -> Take range
 
     Copies given range of elements a new array
 
-@def take_<> -> Take range
+@def takeRange -> Take range
 
     Copies given range of elements a new array
 
@@ -147,11 +147,11 @@ ___________________________________________________________________________*/
 
     Assigns given value to all base array positions
 
-@def fill_<> -> Fill range with value
+@def fillRange -> Fill range with value
 
     Assigns given value to base array positions within given range
 
-@def fill_<> -> Fill range with value
+@def fillRange -> Fill range with value
 
     Assigns given value to base array positions within given range
 
@@ -159,11 +159,11 @@ ___________________________________________________________________________*/
 
     Sorts array elements
 
-@def sort_<> -> Sort array range
+@def sortRange -> Sort array range
 
     Sorts array elements within given range
 
-@def sort_<> -> Sort array range
+@def sortRange -> Sort array range
 
     Sorts array elements within given range
 

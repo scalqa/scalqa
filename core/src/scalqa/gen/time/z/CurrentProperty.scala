@@ -1,7 +1,7 @@
 package scalqa; package gen; package time; package z; import language.implicitConversions
 
 private class CurrentProperty(length: Time.Length) extends Long.G.Pro.Observable.X.Abstract[Long]:
-  override def doc     : Doc      = Doc("Time.current_*@" + this.##) += ("length", length)
+  override def doc     : Doc      = Doc("Time.currentPro@" + this.##) += ("length", length)
   private  val nanos   : Long     = length.nanosTotal
   private  var nextRun : Long     = { val t = System.nanoTime; t - (t % nanos) + nanos }
   private  var emptyRun: Int      = 0
@@ -21,10 +21,10 @@ private[gen] object CurrentProperty:
   private def runJobs =
     val nt  = System.nanoTime
     val tm  = System.currentTimeMillis
-    theMap.~.load.foreach(_.update(tm,nt))
+    theMap.stream.load.foreach(_.update(tm,nt))
 
   def apply(changeEvery: Time.Length): Time.Pro.O = {
-    theMap.get_?(changeEvery) or {
+    theMap.getOpt(changeEvery) or {
       val p = new CurrentProperty(changeEvery)
       theMap.put(changeEvery,p)
       if (theMap.size == 1) J.scheduleEvery(50.Millis, runJobs).cancelIfTrue(theMap.isEmpty)

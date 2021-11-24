@@ -2,14 +2,14 @@ package scalqa; package `val`; package stream; package z; package _use; package 
 
 object equals:
 
-  def sequence[A](s1: ~[A], s2: ~[A], all: Boolean): Result[true] =
+  def sequence[A](s1: Stream[A], s2: Stream[A], all: Boolean): Result[true] =
     var i = 0
-    var o1 = s1.read_?
-    var o2 = s2.read_?
+    var o1 = s1.readOpt
+    var o2 = s2.readOpt
     while(o1.nonEmpty && o2.nonEmpty)
       if (o1.`val` != o2.`val`) return Result.Problem("Fail at index " + i + ": " + o1.`val`.tag + " != " + o2.`val`.tag)
-      o1 = s1.read_?
-      o2 = s2.read_?
+      o1 = s1.readOpt
+      o2 = s2.readOpt
       i += 1
     if(all)
       if(o1.nonEmpty)  return "Second stream has less elements".Problem

@@ -6,12 +6,12 @@ trait Toggle:
   real.setUserData(this)
   def real: JToggle
 
-  @tn("selected_Pro")    def selected_*                    : Boolean.Pro.OM       = Fx.JavaFx.To.pro_OM(real.selectedProperty)
-  /**/                   def selected                      : Boolean              = real.isSelected
-  /**/                   def selected_=(b: Boolean)        : Unit                 = real.setSelected(b)
-  @tn("toggleGroup_Pro") def toggleGroup_*                 : Pro.OM[Toggle.Group] = Fx.JavaFx.To.pro_OM(real.toggleGroupProperty).mutableMap_^[Toggle.Group]
-  /**/                   def toggleGroup                   : Toggle.Group         = Toggle.Group.FxConverter(real.getToggleGroup)
-  /**/                   def toggleGroup_=(v:Toggle.Group) : Unit                 = real.setToggleGroup(v.real)
+  def selectedPro                   : Boolean.Pro.OM       = Fx.JavaFx.To.pro_OM(real.selectedProperty)
+  def selected                      : Boolean              = real.isSelected
+  def selected_=(b: Boolean)        : Unit                 = real.setSelected(b)
+  def toggleGroupPro                : Pro.OM[Toggle.Group] = Fx.JavaFx.To.pro_OM(real.toggleGroupProperty).mutableMapView[Toggle.Group]
+  def toggleGroup                   : Toggle.Group         = Toggle.Group.FxConverter(real.getToggleGroup)
+  def toggleGroup_=(v:Toggle.Group) : Unit                 = real.setToggleGroup(v.real)
 
 object Toggle:
 

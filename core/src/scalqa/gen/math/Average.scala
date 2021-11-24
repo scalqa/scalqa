@@ -1,9 +1,9 @@
 package scalqa; package gen; package math; import language.implicitConversions
 
 trait Average[A]:
-  /**/               def average  (s: ~[A]): A
-  @tn("average_Opt") def average_?(s: ~[A]): Opt[A]
-  /**/               def averageCalculation: Average.Calculation[A]
+  def average   (s: Stream[A]): A
+  def averageOpt(s: Stream[A]): Opt[A]
+  def averageCalculation      : Average.Calculation[A]
 
 object Average:
 

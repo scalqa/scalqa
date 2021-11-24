@@ -5,12 +5,12 @@ class Basic[X, Y, XA <: Chart.Axis[X], YA <: Chart.Axis[Y]](override val axisX: 
   type ITEM <: Item
   type SERIES <: Series
 
-  def item_~ : ~[ITEM] = data.~.flatMap(_.items).dropVoid
+  def itemStream: Stream[ITEM] = data.stream.flatMap(_.items).dropVoid
 
   protected[x] object Setup:
-    var updateLegendJobs: ><[() => Unit] = \/
-    var calcXRange_:? : () => Opt[<>[X]] = () => item_~.map(_.x).range_?(using axisX.ordering)
-    var calcYRange_:? : () => Opt[<>[Y]] = () => item_~.map(_.y).range_?(using axisY.ordering)
+    var updateLegendJobs: Pack[() => Unit]  = \/
+    var calcXRangeAsOpt : () => Opt[Range[X]] = () => itemStream.map(_.x).rangeOpt(using axisX.ordering)
+    var calcYRangeAsOpt : () => Opt[Range[Y]] = () => itemStream.map(_.y).rangeOpt(using axisY.ordering)
 
   class Item(xPar: X, yPar: Y) extends ItemBase:
     def this(p: (X, Y)) = { this(p._1, p._2) }

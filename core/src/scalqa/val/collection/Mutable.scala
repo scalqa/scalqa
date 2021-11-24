@@ -1,12 +1,12 @@
 package scalqa; package `val`; package collection
 
 trait Mutable[A] extends Collection[A] with gen.able.Add[A]:
-  /**/              def remove(v: A)        : Int
-  /**/              def removeAll(v: ~[A])  : Int       = v.map(remove).sum
-  /**/              def clear               : Unit
-  /**/              def replaceWith(v: ~[A]): Unit      = { clear; addAll(v) }
-  @tn("remove")     def -= (v: A)           : this.type = { this.remove(v);    this }
-  @tn("removeAll")  def --=(v: ~[A])        : this.type = { this.removeAll(v); this }
+  def remove(v: A)             : Int
+  def removeAll(v: Stream[A])  : Int       = v.map(remove).sum
+  def clear                    : Unit
+  def replaceWith(v: Stream[A]): Unit      = { clear; addAll(v) }
+  def -= (v: A)                : this.type = { this.remove(v);    this }
+  def --=(v: Stream[A])        : this.type = { this.removeAll(v); this }
 
 object Mutable:
   def apply[A](initSize: Int = J.initSize)       : Collection[A] = Buffer[A](initSize)

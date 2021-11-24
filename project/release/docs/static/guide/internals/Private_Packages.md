@@ -17,7 +17,7 @@ they can change in future releases.
 immediately clear which classes and packages are private implementations.   
 
 ```
-(1 <> 10).~.peek(_ => ???).filter(_ < 100).map(_.Long).flatMap(i => ~~(i,i,i)).foreach(_.tp)
+(1 <> 10).stream.peek(_ => ???).filter(_ < 100).map(_.Long).flatMap(i => Stream(i,i,i)).foreach(_.tp)
 
 at scala.Predef$.$qmark$qmark$qmark(Predef.scala:345)
 at scalqa.Test0$.main$$anonfun$3(Test0.scala:8)

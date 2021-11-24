@@ -3,9 +3,9 @@ package scalqa; package test.`val`.stream._use._aggregate; import language.impli
 object max extends J.Test:
 
   testTrue{
-    val l = (1 <> 100).~.reverseEvery(10).><
-    val max = l.~.max
-    l.~.isEvery(_ <= max)
+    val l = (1 <> 100).stream.reverseEvery(10).pack
+    val max = l.stream.max
+    l.stream.isEvery(_ <= max)
   }
 
 /*___________________________________________________________________________

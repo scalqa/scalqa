@@ -2,9 +2,9 @@ package scalqa; package test.`val`.stream._build._map; import language.implicitC
 
 object collect extends J.Test:
 
-  testEqual_~(
+  testEqualStream(
     (1 to 100)  .collect    { case v if v % 10 != 0 => v * 2D },
-    (1 <> 100).~.collect { case v if v % 10 != 0 => v * 2D })
+    (1 <> 100).stream.collect { case v if v % 10 != 0 => v * 2D })
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

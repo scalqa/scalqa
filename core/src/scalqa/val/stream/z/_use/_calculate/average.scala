@@ -4,7 +4,7 @@ import Math.Average
 
 object average:
 
-  def few[A,B,C,D,E,F](x: ~[A], f1:A=>Opt[B], f2:A=>Opt[C], f3:A=>Opt[D]= \/, f4:A=>Opt[E]= \/, f5:A=>Opt[F]= \/)
+  def few[A,B,C,D,E,F](x: Stream[A], f1:A=>Opt[B], f2:A=>Opt[C], f3:A=>Opt[D]= \/, f4:A=>Opt[E]= \/, f5:A=>Opt[F]= \/)
                       (using a1:Average[B], a2:Average[C], a3:Average[D], a4:Average[E], a5:Average[F])
     : (B,C) | (B,C,D) | (B,C,D,E) | (B,C,D,E,F) =
 
@@ -15,9 +15,9 @@ object average:
       var l4 = a4.averageCalculation
       var l5 = a5.averageCalculation
 
-      val is3 = f3.^.nonVoid
-      val is4 = f4.^.nonVoid
-      val is5 = f5.^.nonVoid
+      val is3 = f3.self.nonVoid
+      val is4 = f4.self.nonVoid
+      val is5 = f5.self.nonVoid
 
       x.FOREACH(v => {
         /**/    f1(v).forval(l1.add)

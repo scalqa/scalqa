@@ -15,11 +15,11 @@ object Ordered:
 
   transparent trait z_MethodsBase:
     extension[THIS_OPAQUE <: Opaque](inline x: THIS_OPAQUE)
-      @tn("range")          inline def <> (inline to: THIS_OPAQUE)   : G.<>[THIS_OPAQUE] = new G.<>[THIS_OPAQUE](x,to,true)
-      @tn("rangeX")         inline def <>>(inline to: THIS_OPAQUE)   : G.<>[THIS_OPAQUE] = new G.<>[THIS_OPAQUE](x,to,false)
-      @tn("rangeOfSize")    inline def <>=(inline sz:Int)            : G.<>[THIS_OPAQUE] = new G.<>[THIS_OPAQUE](x,sz)
-      /**/            infix inline def max(inline v: THIS_OPAQUE)    : THIS_OPAQUE       = {val y=x; val w=v; if(y.real > w.real) y else w }
-      /**/            infix inline def min(inline v: THIS_OPAQUE)    : THIS_OPAQUE       = {val y=x; val w=v; if(y.real < w.real) y else w }
+      @tn("range")          inline def <> (inline to: THIS_OPAQUE)   : G.Range[THIS_OPAQUE] = new G.Range[THIS_OPAQUE](x,to,true)
+      @tn("rangeX")         inline def <>>(inline to: THIS_OPAQUE)   : G.Range[THIS_OPAQUE] = new G.Range[THIS_OPAQUE](x,to,false)
+      @tn("rangeOfSize")    inline def <>=(inline sz:Int)            : G.Range[THIS_OPAQUE] = new G.Range[THIS_OPAQUE](x,sz)
+      /**/            infix inline def max(inline v: THIS_OPAQUE)    : THIS_OPAQUE          = {val y=x; val w=v; if(y.real > w.real) y else w }
+      /**/            infix inline def min(inline v: THIS_OPAQUE)    : THIS_OPAQUE          = {val y=x; val w=v; if(y.real < w.real) y else w }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

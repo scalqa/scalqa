@@ -13,7 +13,7 @@ object Day extends java.util.concurrent.atomic.AtomicReference[Setup.Lookup](Set
 
   def setup(d: Day): Setup = if (d.isVoid) Setup.Void else
       var l = this.get
-      l.get_Opt(d) or {
+      l.getOpt(d) or {
         while(!compareAndSet(l,l.cloneExtend(d))) l = this.get
         setup(d)
       }
@@ -33,18 +33,18 @@ object Day extends java.util.concurrent.atomic.AtomicReference[Setup.Lookup](Set
       private inline val SZ = 1000
       private        val end = start + array.length * SZ
 
-      def get_Opt(d: Day): Opt[Setup] =
+      def getOpt(d: Day): Opt[Setup] =
         if(d.real < start || d.real >= end) return \/
         var i = d.real - start
-        val a = array(i / SZ).^.mapIf(_ == null, _ => new Array[Setup](SZ).^(array(i / SZ) = _))
-        a(i % SZ).^.mapIf(_ == null, _ => new Setup(d).^(a(i % SZ) = _))
+        val a = array(i / SZ).self.mapIf(_ == null, _ => new Array[Setup](SZ).self(array(i / SZ) = _))
+        a(i % SZ).self.mapIf(_ == null, _ => new Setup(d).self(a(i % SZ) = _))
 
       def cloneExtend(d: Day): Lookup =
         d.real match
                 case i if (i < start) => val d = (start - i) / SZ + 1
-                                         new Lookup(array.newArray(array.length + d).^(a => array.copyTo(a, d)), start - d * SZ)
+                                         new Lookup(array.newArray(array.length + d).self(a => array.copyTo(a, d)), start - d * SZ)
                 case i if (i >= end)  => val d = (i - end) / SZ + 1
-                                         new Lookup(array.newArray(array.length + d).^(a => array.copyTo(a)), start)
+                                         new Lookup(array.newArray(array.length + d).self(a => array.copyTo(a)), start)
                 case _                => this // can happen with concurrent access
 
 /*___________________________________________________________________________

@@ -1,8 +1,8 @@
 package scalqa; package `val`; package stream; package z; package _build; package _zip
 
-class zipFoldAs[A,B](x: ~[A], v: B, f: (B,A) => B) extends z.x.Pipe.Sized[(A, B)](x):
+class zipFoldAs[A,B](x: Stream[A], v: B, f: (B,A) => B) extends z.x.Pipe.Sized[(A, B)](x):
   private         var b      = v
-  @tn("read_Opt") def read_? = x.read_?.map(v => { b = f(b, v); (v, b) })
+  def readOpt = x.readOpt.map(v => { b = f(b, v); (v, b) })
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

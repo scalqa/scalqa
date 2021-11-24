@@ -1,9 +1,9 @@
 package scalqa; package gen; package math; import language.implicitConversions
 
 trait Sum[A]:
-  @tn("sum_Opt") def sum_?(s: ~[A]): Opt[A]
-  /**/           def zero          : A
-  /**/           def plus(x: A,y:A): A
+  def sumOpt(s: Stream[A]): Opt[A]
+  def zero                : A
+  def plus(x: A,y:A)      : A
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

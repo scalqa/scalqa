@@ -9,7 +9,7 @@ private[x] trait Real_Base:
     if (jobs.size == 0 && Fx.Thread.is) job
     else
       jobs += (() => job);
-      if (jobs.size == 1) Application.Thread(chart.synchronized { val v = jobs; jobs =  Idx.M[() => Unit](); v.~.foreach(_()) })
+      if (jobs.size == 1) Application.Thread(chart.synchronized { val v = jobs; jobs =  Idx.M[() => Unit](); v.stream.foreach(_()) })
   }
 
 /*___________________________________________________________________________

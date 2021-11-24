@@ -26,7 +26,7 @@ class Gauge(tu: Time.Length, mc: Int) extends X.Time.Gauge(tu, mc):
         if (f || t.isYearStart) b += t.year
       }
     })
-    (t, dt, f, b) => j.~.foreach(_(t, dt, f, b))
+    (t, dt, f, b) => j.stream.foreach(_(t, dt, f, b))
   }
 
 

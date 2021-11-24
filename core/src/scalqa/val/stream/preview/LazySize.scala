@@ -22,8 +22,8 @@ ___________________________________________________________________________*/
    When evaluated with comparison operators, [LazySize] preloads just enough stream elements to answer the questions
 
    ```
-   def s  : ~[String]          = ?_?_?
-   def ps : ~~.Preview[String] = s.preview
+   def s  : Stream[String]         = ?_?_?
+   def ps : Stream.Preview[String] = s.preview
 
    ps.previewSize >= 10 // This will pre-load no more than 10 elements
 

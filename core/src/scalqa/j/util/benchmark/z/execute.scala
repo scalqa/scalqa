@@ -2,24 +2,24 @@ package scalqa; package j; package util; package benchmark; package z; import la
 
 object execute:
 
-  def apply[A](targets: ><[(String, () => A)], repeated: Int=1,  trialCount: Int = 4, trialLengthOpt: Time.Length.Opt = \/, verbose: Boolean = true)(using Opt[Numeric[A]]) =
+  def apply[A](targets: Pack[(String, () => A)], repeated: Int=1,  trialCount: Int = 4, trialLengthOpt: Time.Length.Opt = \/, verbose: Boolean = true)(using Opt[Numeric[A]]) =
 
     val setup = Setup(trialLengthOpt, targets, repeated)
 
-    def printResults(l: ><[Result]) =
-      l.~.map(_.opsPerSec    ).max.self_^(v => l.~.foreach(_.maxOpsPerSec     = v))
-      l.~.map(_.memoryAverage).max.self_^(v => l.~.foreach(_.maxMemoryAverage = v))
-      println(l.~.toText)
+    def printResults(l: Pack[Result]) =
+      l.stream.map(_.opsPerSec    ).max.self(v => l.stream.foreach(_.maxOpsPerSec     = v))
+      l.stream.map(_.memoryAverage).max.self(v => l.stream.foreach(_.maxMemoryAverage = v))
+      println(l.stream.toText)
 
-    def run(tag: String, tag2: Opt[String] = \/): ><[Result] =
+    def run(tag: String, tag2: Opt[String] = \/): Pack[Result] =
       if (verbose) println(tag + " Time length is about " + setup.totalLength.tag +? tag2)
-      runTrial(targets, repeated, setup.slotCount, setup.slotLength).^(l => if (verbose) printResults(l))
+      runTrial(targets, repeated, setup.slotCount, setup.slotLength).self(l => if (verbose) printResults(l))
 
     run("Warm Up Run.", "\n(Run in " + setup.slotCount + " time slots of" +- setup.slotLength + " each)")
 
-    val rslt = (1 <> trialCount).~
+    val rslt = (1 <> trialCount).stream
       .map(v => run("\nTrial: " + v + " (of " + trialCount + ")."))
-      .reduce(_.~.zip(_).map(_ + _).><)
+      .reduce(_.stream.zip(_).map(_ + _).pack)
 
     if (verbose) println("\n" + "*" * 50 + "\nFinal Result. Total length is about" +- setup.totalLength * trialCount)
 

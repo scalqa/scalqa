@@ -5,8 +5,8 @@ import scalqa.gen.time.x.{ Nanos => NANOS }
 transparent trait _methods:
   extension(inline x:Double)
     @tn("Opt")   inline def ?                          : Double.Opt       = x.cast[Double.Opt]
-    @tn("range") inline def <> (inline to: Double)     : Double.<>        = new Double.<>(x,to,true)
-    @tn("rangeX")inline def <>>(inline to: Double)     : Double.<>        = new Double.<>(x,to,false)
+    @tn("range") inline def <> (inline to: Double)     : Double.Range     = new Double.Range(x,to,true)
+    @tn("rangeX")inline def <>>(inline to: Double)     : Double.Range     = new Double.Range(x,to,false)
     /**/   infix inline def max(inline v: Double)      : Double           = {val y=x; val w=v; if(y.real > w.real) y else w }
     /**/   infix inline def min(inline v: Double)      : Double           = {val y=x; val w=v; if(y.real < w.real) y else w }
     /**/         inline def roundTo(inline unit:Double)
@@ -60,7 +60,7 @@ ___________________________________________________________________________*/
 
 @def <> ->  Range
 
-    Returns Double.<> from current to given value
+    Returns Double.Range from current to given value
     ```
       (1.0 <> 10.0).TP  // Prints  1.0 <> 10.0
     ```
@@ -68,7 +68,7 @@ ___________________________________________________________________________*/
 
 @def <>> ->  Exclusive end range
 
-    Returns Double.<> from current to given value exclusive
+    Returns Double.Range from current to given value exclusive
     ```
       (1.0 <>> 10.0).TP  // Prints  1.0 <>> 10.0
     ```

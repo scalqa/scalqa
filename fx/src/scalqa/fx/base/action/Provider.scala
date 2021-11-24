@@ -2,7 +2,7 @@ package scalqa; package fx; package base; package action
 
 trait Provider:
 
-  def action_~ : ~[Action]
+  def actionStream : Stream[Action]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -1,9 +1,9 @@
 package scalqa; package lang; package string; package z; import language.implicitConversions
 
-class CharStream(s: CharSequence) extends Char.~ with Able.Size:
+class CharStream(s: CharSequence) extends Char.Stream with Able.Size:
   private            var i         = 0
   private            val sz        = s.length
-  @tn("readRaw_Opt") def readRaw_? = { var o: Char.Opt = \/; if(i<sz) { o = s.charAt(i); i+=1 };  o}
+  def readRawOpt = { var o: Char.Opt = \/; if(i<sz) { o = s.charAt(i); i+=1 };  o}
   /**/               def size      = sz - i
 
 /*___________________________________________________________________________

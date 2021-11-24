@@ -9,6 +9,6 @@ trait _Origin:
     def isImplicit    : Boolean     = x.isInstanceOf[Origin.ImplicitlyAddedBy]
     def isDefined     : Boolean     = x == Origin.RegularlyDefined
 
-    def override_?    : Opt[Origin.Overrides] = x.isOverride ? x.asInstanceOf[Origin.Overrides]
+    def overrideOpt    : Opt[Origin.Overrides] = x.isOverride ? x.asInstanceOf[Origin.Overrides]
 
 

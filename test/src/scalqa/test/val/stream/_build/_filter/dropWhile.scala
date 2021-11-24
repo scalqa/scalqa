@@ -2,9 +2,9 @@ package scalqa; package test.`val`.stream._build._filter; import language.implic
 
 object dropWhile extends J.Test:
 
-  testEqual_~(
+  testEqualStream(
     ((0 to 100)   ++ (0 to 100)).dropWhile(_ < 50),
-    ((0 <> 100).~ ++ (0 <> 100)).dropWhile(_ < 50))
+    ((0 <> 100).stream ++ (0 <> 100)).dropWhile(_ < 50))
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

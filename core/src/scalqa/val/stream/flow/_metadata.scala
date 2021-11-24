@@ -3,10 +3,10 @@ package scalqa; package `val`; package stream; package flow; import language.imp
 transparent trait _metadata[A]:
   self: Flow[A] =>
 
-  /**/                 def isParallel : Boolean
-  /**/                 def docTree    : Doc.Tree
-  @tn("size_Opt")      def size_?     : Int.Opt     = sizeLong_?.take(v => v>=0 && v<=Int.max).map(_.toInt)
-  @tn("sizeLong_Opt")  def sizeLong_? : Long.Opt
+  def isParallel  : Boolean
+  def docTree     : Doc.Tree
+  def sizeOpt     : Int.Opt     = sizeLongOpt.take(v => v>=0 && v<=Int.max).map(_.toInt)
+  def sizeLongOpt : Long.Opt
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -32,7 +32,7 @@ ___________________________________________________________________________*/
       Returns a tree describing all flow trasformations
 
      ```
-       ('a' <> 'z').~
+       ('a' <> 'z').stream
           .take(_ > 'X')
           .map(_.toUpper)
           .parallel
@@ -45,33 +45,33 @@ ___________________________________________________________________________*/
               scalqa.lang.char.g.stream.Z$Stream_fromRange@cq06{raw=Char,size=26,from=a,step=1}
      ```
 
-@def size_? -> Optional size
+@def sizeOpt -> Optional size
 
      Many streams can return their current element count.  If the information is not available, void option is returned
 
-     Note: If size is known, but exceeds integer range, void option is returned. For theses cases use [[sizeLong_?]]
+     Note: If size is known, but exceeds integer range, void option is returned. For theses cases use [[sizeLongOpt]]
 
      ```
-       var s = ('a' <> 'z').~
+       var s = ('a' <> 'z').stream
 
-       s.size_?.TP         // Prints Int.Opt(26)
+       s.sizeOpt.TP         // Prints Int.Opt(26)
 
        s = s.take(_ > 10)  // static sizing is lost
 
-       s.size_?.TP         // Prints Int.Opt(\/)
+       s.sizeOpt.TP         // Prints Int.Opt(\/)
      ```
 
-@def sizeLong_? -> Optional long size
+@def sizeLongOpt -> Optional long size
 
      Many streams can return their current element count.  If the information is not available, void option is returned
 
      ```
-      var s = (Int.min.Long <> Int.max.toLong).~
+      var s = (Int.min.Long <> Int.max.toLong).stream
 
-      s.sizeLong_?.TP    // Prints Long.Opt(4294967296)
+      s.sizeLongOpt.TP    // Prints Long.Opt(4294967296)
 
       s = s.take(_ > 10) // static sizing is lost
 
-      s.sizeLong_?.TP    // Prints Long.Opt(\/)
+      s.sizeLongOpt.TP    // Prints Long.Opt(\/)
      ```
  */

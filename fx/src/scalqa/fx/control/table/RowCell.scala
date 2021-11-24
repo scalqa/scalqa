@@ -15,10 +15,10 @@ class RowCell[ROW, VIEW](val table: Table[ROW]) extends control.Cell.Indexed:
         case e: RuntimeException => { throw e; }
   }
 
-  @tn("rowOpt")  def row_?  : Opt[ROW]  = item_?
-  /**/           def row    : ROW       = row_?.get
-  @tn("viewOpt") def view_? : Opt[VIEW] = row_?.map_?(table.mkViewOpt[VIEW](_))
-  /**/           def view   : VIEW      = view_?.get
+  def rowOpt  : Opt[ROW]  = itemOpt
+  def row     : ROW       = rowOpt.get
+  def viewOpt : Opt[VIEW] = rowOpt.mapOpt(table.mkViewOpt[VIEW](_))
+  def view    : VIEW      = viewOpt.get
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

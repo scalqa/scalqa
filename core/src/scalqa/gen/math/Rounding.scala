@@ -25,7 +25,7 @@ object Rounding:
   implicit inline def implicitRequest(v: UP)     : Rounding = Up
   implicit inline def implicitRequest(v: DOWN)   : Rounding = Down
 
-  private val Multiplier: Array[Int] = ~~(1).unfold(_.last * 10).takeFirst(12).toArray
+  private val Multiplier: Array[Int] = Stream(1).unfold(_.last * 10).takeFirst(12).toArray
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API

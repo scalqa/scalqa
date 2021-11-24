@@ -8,15 +8,15 @@ object Builder extends AnyRef.Opaque.Base[Builder,REAL]("String.Builder"):
   inline def apply(inline capacity: Int): Builder = new REAL(capacity).cast[Builder]
 
   extension(inline x: Builder)
-    @tn("add")         inline def += [B,A<:B|Boolean|Byte|Char|Short|Int|Long|Float|Double|CharSequence](inline v: A)(using inline tg:Any.Def.Doc[A]): Builder = add(v)
-    @tn("addAt")       inline def +@=[B,A<:B|Boolean|Byte|Char|Short|Int|Long|Float|Double|CharSequence](inline off: Int, inline v: A)(using inline tg:Any.Def.Doc[A]): Builder = addAt(off,v)
+    inline def += [B,A<:B|Boolean|Byte|Char|Short|Int|Long|Float|Double|CharSequence](inline v: A)(using inline tg:Any.Def.Doc[A]): Builder = add(v)
+    inline def +@=[B,A<:B|Boolean|Byte|Char|Short|Int|Long|Float|Double|CharSequence](inline off: Int, inline v: A)(using inline tg:Any.Def.Doc[A]): Builder = addAt(off,v)
 
-    /**/               inline def charAt(inline i: Int)  : Char    = x.real.charAt(i)
-    /**/               inline def size                   : Int     = x.real.length
-    /**/               inline def isEmpty                : Boolean = x.real.length == 0
-    @tn("remove_Range")inline def remove_<>(v: Int.<>)   : Builder = x.real.delete(v.start,v.endX).cast[Builder]
-    /**/               inline def removeAt(inline v: Int): Builder = x.real.deleteCharAt(v).cast[Builder]
-    /**/               inline def tag                    : String  = x.real.toString
+    inline def charAt(inline i: Int)  : Char    = x.real.charAt(i)
+    inline def size                   : Int     = x.real.length
+    inline def isEmpty                : Boolean = x.real.length == 0
+    inline def removeRange(v: Int.Range): Builder = x.real.delete(v.start,v.endX).cast[Builder]
+    inline def removeAt(inline v: Int): Builder = x.real.deleteCharAt(v).cast[Builder]
+    inline def tag                    : String  = x.real.toString
 
     inline def add[B,A<:B|Boolean|Byte|Char|Short|Int|Long|Float|Double|CharSequence](inline w: A)(using inline tg:Any.Def.Tag[A]): Builder =
       inline w match
@@ -63,7 +63,7 @@ ___________________________________________________________________________*/
 @def add        -> Append
 @def addAt      -> Insert at position
 @def charAt     -> Char at position
-@def remove_<>  -> Remove range
+@def removeRange  -> Remove range
 @def removeAt   -> Remove at position
 @def size       -> Added char count
 @def isEmpty    -> Zero size check

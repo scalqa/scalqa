@@ -1,6 +1,6 @@
 package scalqa; package `val`; package stream; package z; package util; import language.implicitConversions
 
-class MultiDoc private(target: AnyRef/* expected Custom.Pipeline | ~[_] | Flow[_]*/, v: \/) extends Doc(target.^.id):
+class MultiDoc private(target: AnyRef/* expected Custom.Pipeline | Stream[_] | Flow[_]*/, v: \/) extends Doc(target.self.id):
   def this(v: AnyRef) =
     this(v,\/)
     v.?.takeType[custom.pipeline.ParallelFlow[_]].map(_.name).dropVoid.forval(v => this.id = this.id.replaceLast("@", "." + v + "@"))
@@ -9,10 +9,10 @@ class MultiDoc private(target: AnyRef/* expected Custom.Pipeline | ~[_] | Flow[_
 
     lang.any.z.PrimitiveTag.?(v).forval(name => {
       this +=  ("raw",name)
-      this ++= v.?.takeType[Custom.Pipeline].map_?(Custom.Pipeline.baseDoc_?).map_?(_.~.find_?(_._1 == "raw").map(_._2)).drop(_ == name).map(n => ("fromRaw",n))
+      this ++= v.?.takeType[Custom.Pipeline].mapOpt(Custom.Pipeline.baseDocOpt).mapOpt(_.stream.findOpt(_._1 == "raw").map(_._2)).drop(_ == name).map(n => ("fromRaw",n))
     })
 
-    this ++= v.?.map_?(Able.Size.sizeLong_?).map(s => ("size", s.toString))
+    this ++= v.?.mapOpt(Able.Size.sizeLongOpt).map(s => ("size", s.toString))
 
 
 /*___________________________________________________________________________

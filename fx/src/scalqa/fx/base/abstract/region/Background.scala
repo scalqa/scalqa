@@ -8,8 +8,8 @@ object Background extends Delegate.Opaque[Background, JBackground]("Fx.Abstract.
   implicit def implicitTo  (v: Background) : JBackground = apply(v)
 
   extension(x: Background)
-    def images : Idx[Fx.Image] = Val.Idx.wrap(x.getImages).map_^(bi => Fx.Image(bi.getImage))
-    def fills  : Idx[Fill]     = Val.Idx.wrap(x.getFills).map_^(Fill(_))
+    def images : Idx[Fx.Image] = Val.Idx.wrap(x.getImages).mapView(bi => Fx.Image(bi.getImage))
+    def fills  : Idx[Fill]     = Val.Idx.wrap(x.getFills).mapView(Fill(_))
 
   object TYPE:
     opaque type DEF <: AnyRef.Opaque = JBackground & AnyRef.Opaque

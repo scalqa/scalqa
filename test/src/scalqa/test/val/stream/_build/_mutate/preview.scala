@@ -3,10 +3,10 @@ package scalqa; package test.`val`.stream._build._mutate; import language.implic
 object preview extends J.Test:
 
   test{
-    def s = (1 <> 100).~.hideSizeData.enablePreview
-    def i = (1 <> 100).~.enablePreview
-    assertEqual_~(1 <> 10, s.preview_~(10), i.preview_~(10))
-    assertEqual_~(1 <> 100, s, i)
+    def s = (1 <> 100).stream.hideSizeData.enablePreview
+    def i = (1 <> 100).stream.enablePreview
+    assertEqualStream(1 <> 10, s.previewStream(10), i.previewStream(10))
+    assertEqualStream(1 <> 100, s, i)
   }
 
 /*___________________________________________________________________________

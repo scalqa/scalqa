@@ -30,7 +30,7 @@ final class Animator(private var nodeToLayout: Parent) extends AnimationTimer wi
     val t = new Timeline()
     t.setAutoReverse(false)
     t.setCycleCount(1)
-    t.getKeyFrames().addAll(keyFrames.~.toJavaList)
+    t.getKeyFrames().addAll(keyFrames.stream.toJavaList)
     t.setOnFinished(this)
     // start animation timer if needed
     if (activeTimeIdxs.isEmpty()) start()

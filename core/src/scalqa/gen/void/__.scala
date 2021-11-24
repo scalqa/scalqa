@@ -25,7 +25,7 @@ ___________________________________________________________________________*/
 
     Examples:
 
-      - Void ~ is a singleton object of empty stream, which can be re-used for any type
+      - Void Stream is a singleton object of empty stream, which can be re-used for any type
       - Void Opt, is a singleton optional value with no value, which can be re-used for any type
       - Void String, is a string of zero length, which can be re-used for String type instead of null
       - scala.Nil is a void instance, re-used for all parameterized scala.List types

@@ -17,12 +17,12 @@ object Merge:
 
     root.tp
     to.tp
-    to.names.~.tp
+    to.names.stream.tp
 
-    ~~(root + "core" + "src" + "scalqa", root + "fx" + "src" + "scalqa")
-      .flatMap(_.childRecursive_~)
+    Stream(root + "core" + "src" + "scalqa", root + "fx" + "src" + "scalqa")
+      .flatMap(_.childRecursiveStream)
       .take(acceptable)
-      .map_?(_.file_?)
+      .mapOpt(_.fileOpt)
       .foreach(f => {
         val dest = to + f.path.takeAfter("src")
         print(dest)

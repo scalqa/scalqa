@@ -4,8 +4,8 @@ import java.{ util as J }
 
 transparent trait _toJava:
 
-  extension[A] (inline x: ~[A])
-    inline def toJavaList                                    : J.List[A]           = x.toBuffer.toJavaList_^
+  extension[A](inline x: Stream[A])
+    inline def toJavaList                                    : J.List[A]           = x.toBuffer.toJavaListView
     inline def toJavaIterator                                : J.Iterator[A]       = z._use._transform.toJava.Iterator(x)
     inline def toJavaSpliterator(inline splitSize: Int)      : J.Spliterator[A]    = z._use._transform.toJava.Spliterator(x,splitSize)
     inline def toJavaStream(inline parallel: Boolean = false): J.stream.Stream[A]  = J.stream.StreamSupport.stream(x.toJavaSpliterator(1), parallel)

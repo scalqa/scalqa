@@ -6,21 +6,21 @@ import Gen.Math.{ Average, Sum }
 transparent trait _calculate:
   self: _Use =>
 
-  extension[A](inline x: ~[A])
-    @tn("min")         inline def min                      (using inline o:Ordering[A]) : A          = x.min_?.get
-    @tn("min_Opt")     inline def min_?                    (using inline o:Ordering[A]) : Opt[A]     = Z.min_Opt(x,o)
-    @tn("max")         inline def max                      (using inline o:Ordering[A]) : A          = x.max_?.get
-    @tn("max_Opt")     inline def max_?                    (using inline o:Ordering[A]) : Opt[A]     = Z.max_Opt(x,o)
-    @tn("range")       inline def range                    (using inline o:Ordering[A]) : Range[A]   = x.range_?.get
-    @tn("range_Opt")   inline def range_?                  (using inline o:Ordering[A]) : Opt[<>[A]] = Z.range_Opt(x,o)
-    @tn("sum")         inline def sum                           (using inline v:Sum[A]) : A          = v.sum_?(x) or v.zero
-    @tn("sum_Opt")     inline def sum_?                         (using inline v:Sum[A]) : Opt[A]     = v.sum_?(x)
-    @tn("average")     inline def average                   (using inline v:Average[A]) : A          = v.average(x)
-    @tn("average_Opt") inline def average_?                 (using inline v:Average[A]) : Opt[A]     = v.average_?(x)
-    @tn("minBy")       inline def minBy  [B](inline f: A=>B)(using inline o:Ordering[B]): A          = x.minBy_?(f).get
-    @tn("maxBy")       inline def maxBy  [B](inline f: A=>B)(using inline o:Ordering[B]): A          = x.maxBy_?(f).get
-    @tn("minBy_Opt")   inline def minBy_?[B](inline f: A=>B)(using inline o:Ordering[B]): Opt[A]     = Z.minBy_Opt(x,f,o)
-    @tn("maxBy_Opt")   inline def maxBy_?[B](inline f: A=>B)(using inline o:Ordering[B]): Opt[A]     = Z.maxBy_Opt(x,f,o)
+  extension[A](inline x: Stream[A])
+    inline def min                       (using inline o:Ordering[A]) : A             = x.minOpt.get
+    inline def minOpt                    (using inline o:Ordering[A]) : Opt[A]        = Z.minOpt(x,o)
+    inline def max                       (using inline o:Ordering[A]) : A             = x.maxOpt.get
+    inline def maxOpt                    (using inline o:Ordering[A]) : Opt[A]        = Z.maxOpt(x,o)
+    inline def range                     (using inline o:Ordering[A]) : Range[A]      = x.rangeOpt.get
+    inline def rangeOpt                  (using inline o:Ordering[A]) : Opt[Range[A]] = Z.rangeOpt(x,o)
+    inline def sum                            (using inline v:Sum[A]) : A             = v.sumOpt(x) or v.zero
+    inline def sumOpt                         (using inline v:Sum[A]) : Opt[A]        = v.sumOpt(x)
+    inline def average                    (using inline v:Average[A]) : A             = v.average(x)
+    inline def averageOpt                 (using inline v:Average[A]) : Opt[A]        = v.averageOpt(x)
+    inline def minBy   [B](inline f: A=>B)(using inline o:Ordering[B]): A             = x.minByOpt(f).get
+    inline def maxBy   [B](inline f: A=>B)(using inline o:Ordering[B]): A             = x.maxByOpt(f).get
+    inline def minByOpt[B](inline f: A=>B)(using inline o:Ordering[B]): Opt[A]        = Z.minByOpt(x,f,o)
+    inline def maxByOpt[B](inline f: A=>B)(using inline o:Ordering[B]): Opt[A]        = Z.maxByOpt(x,f,o)
 
     inline def averageFew[B,C,D,E,F](inline fb:A=>Opt[B], inline fc:A=>Opt[C], inline fd:A=>Opt[D]= \/, inline fe:A=>Opt[E]= \/, inline ff:A=>Opt[F]= \/)
                                   (using inline nb:Average[B], inline nc:Average[C], inline nd:Average[D], inline ne:Average[E], inline nf:Average[F])
@@ -46,7 +46,7 @@ ___________________________________________________________________________*/
 
      Fails for empty streams
 
-@def min_? -> Optional minimum
+@def minOpt -> Optional minimum
 
      Computes minimum value or returns void option for empty streams
 
@@ -56,7 +56,7 @@ ___________________________________________________________________________*/
 
      Fails for empty streams
 
-@def minBy_? -> Optional minimum by property
+@def minByOpt -> Optional minimum by property
 
      Computes minimum value based on given function or returns void option for empty streams
 
@@ -66,7 +66,7 @@ ___________________________________________________________________________*/
 
      Fails for empty streams
 
-@def max_? -> Optional maximum
+@def maxOpt -> Optional maximum
 
      Computes maximum value or returns void option for empty streams
 
@@ -76,7 +76,7 @@ ___________________________________________________________________________*/
 
      Fails for empty streams
 
-@def maxBy_? -> Optional maximum by property
+@def maxByOpt -> Optional maximum by property
 
      Computes maximum value based on given function or returns void option for empty streams
 
@@ -86,7 +86,7 @@ ___________________________________________________________________________*/
 
      Fails for empty streams
 
-@def range_? -> Optional range
+@def rangeOpt -> Optional range
 
      Computes value value or returns void option for empty streams
 
@@ -98,21 +98,21 @@ ___________________________________________________________________________*/
      For empty Stream returns zero value
 
      ```
-         (10 <> 15).~.map(_.toFloat).average  // Returns 12.5
+         (10 <> 15).stream.map(_.toFloat).average  // Returns 12.5
      ```
 
      Note: [[average]] is available for types providing given [[scalqa.gen.math.Average Math.Average]] implementations,
      which are by default Double, Float and opaque numerals based on Double and Float
 
-@def average_? ->  Average option
+@def averageOpt ->  Average option
 
      Computes average or returns void option for empty stream
 
      ```
-         (10 <> 15).~.map(_.toFloat).average_?  // Returns Opt(12.5)
+         (10 <> 15).stream.map(_.toFloat).averageOpt  // Returns Opt(12.5)
      ```
 
-     Note: [[average_?]] is available for types providing given [[scalqa.gen.math.Average Math.Average]] implementations,
+     Note: [[averageOpt]] is available for types providing given [[scalqa.gen.math.Average Math.Average]] implementations,
      which are by default Double, Float and opaque numerals based on Double and Float
 
 @def averageFew -> Multi average
@@ -124,15 +124,15 @@ ___________________________________________________________________________*/
      For empty Stream returned tuple will hold zeros
 
      ```
-         (1 <> 1000).~.averageFew(_ * 10F, _ * 100F).TP  // Prints (5005, 50050)
+         (1 <> 1000).stream.averageFew(_ * 10F, _ * 100F).TP  // Prints (5005, 50050)
 
-          val (first, second, third) = (1 <> 1000).~.averageFew(v => v.toDouble, _ * 10.0, _ * 100.0)
+          val (first, second, third) = (1 <> 1000).stream.averageFew(v => v.toDouble, _ * 10.0, _ * 100.0)
 
           first.TP     // Prints 5005
           second.TP    // Prints 5005
           third.TP     // Prints 5005
      ```
-     Note: Averages areavailable for types providing given [[scalqa.val.stream.custom.Average ~~.Custom.Average]] implementations,
+     Note: Averages areavailable for types providing given [[scalqa.val.stream.custom.Average Stream.Custom.Average]] implementations,
      which are by default Double, Float and opaque numerals based on Double and Float
 
 @def sum -> Sum
@@ -142,15 +142,15 @@ ___________________________________________________________________________*/
     For empty stream returns zero
 
      ```
-         (1 <> 1000).~.sum.TP // Prints 500500
+         (1 <> 1000).stream.sum.TP // Prints 500500
      ```
 
-@def sum_? -> Optional sum
+@def sumOpt -> Optional sum
 
     Calculates sum of all values or returns void option for empty streams
 
      ```
-         (1 <> 1000).~.sum_?.TP // Prints Opt(500500)
+         (1 <> 1000).stream.sumOpt.TP // Prints Opt(500500)
      ```
 
 @def sumFew -> Multi sum
@@ -162,9 +162,9 @@ ___________________________________________________________________________*/
      For empty Stream returned tuple will hold zeros
 
      ```
-       (1 <> 1000).~.sumFew(_ * 10, _ * 100).TP  // Prints (5005000, 50050000)
+       (1 <> 1000).stream.sumFew(_ * 10, _ * 100).TP  // Prints (5005000, 50050000)
 
-       val (first, second, third) = (1 <> 1000).~.sumFew(v => v, _ * 10, _ * 100)
+       val (first, second, third) = (1 <> 1000).stream.sumFew(v => v, _ * 10, _ * 100)
 
        first.TP     // Prints 500500
        second.TP    // Prints 5005000

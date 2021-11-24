@@ -4,12 +4,12 @@ import javafx.event.ActionEvent
 
 abstract class Base extends Label.Like:
   protected type REAL <: javafx.scene.control.ButtonBase
-  /**/             def arm                               : Unit           = real.arm
-  /**/             def disarm                            : Unit           = real.disarm
-  @tn("armed_Pro") def armed_*                           : Boolean.Pro.O  = Fx.JavaFx.To.pro_O(real.armedProperty)
-  /**/             def armed                             : Unit           = real.isArmed
-  /**/             def onAction[U](l: Action.Event => U) : Event.Control  = _onFxEvent[ActionEvent, Action.Event, U](real.onActionProperty, Action.Event(_), l)
-  /**/             def onActionRun[U](run: => U)         : Event.Control  = onAction(e => run)
+  def arm                               : Unit           = real.arm
+  def disarm                            : Unit           = real.disarm
+  def armedPro                          : Boolean.Pro.O  = Fx.JavaFx.To.pro_O(real.armedProperty)
+  def armed                             : Unit           = real.isArmed
+  def onAction[U](l: Action.Event => U) : Event.Control  = _onFxEvent[ActionEvent, Action.Event, U](real.onActionProperty, Action.Event(_), l)
+  def onActionRun[U](run: => U)         : Event.Control  = onAction(e => run)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -29,7 +29,7 @@ ___________________________________________________________________________*/
       Disarms the button
 
 
-@def armed_* -> Armed
+@def armedPro -> Armed
 
        Indicates that the button has been "armed" such that a mouse release will cause the button's action to be invoked
 

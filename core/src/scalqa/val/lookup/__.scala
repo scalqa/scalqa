@@ -1,24 +1,24 @@
 package scalqa; package `val`; import lookup.*; import language.implicitConversions
 
 trait Lookup[A, +B] extends Collection[B]:
-  @tn("get_Opt")        def get_?(key: A)     : Opt[B]
-  @tn("get_Stream")     def get_~(keys: ~[A]) : ~[B]       = keys.map_?(k => get_?(k))
-  /**/                  def get(v: A)         : B          = get_?(v) or (throw ZZ.ME(v.tag))
-  @tn("pair_Stream")    def pair_~            : ~[(A, B)]
-  @tn("key_Stream")     def key_~             : ~[A]       = pair_~.map(_._1)
-  @tn("stream")         def ~                 : ~[B]       = pair_~.map(_._2)
+  def getOpt(key: A)            : Opt[B]
+  def getStream(keys: Stream[A]): Stream[B]       = keys.mapOpt(k => getOpt(k))
+  def get(v: A)                 : B               = getOpt(v) or (throw ZZ.ME(v.tag))
+  def pairStream                : Stream[(A, B)]
+  def keyStream                 : Stream[A]       = pairStream.map(_._1)
+  def stream                    : Stream[B]       = pairStream.map(_._2)
 
 object Lookup:
   /**/                  def lazySource[A,B](createFunOpt:A=>Opt[B]): Lookup[A,B] = Z.Basic(createFunOpt)
-  /**/                  def apply[A,B](v: ~[(A, B)])               : Lookup[A,B] = Stable(v)
+  /**/                  def apply[A,B](v: Stream[(A, B)])          : Lookup[A,B] = Stable(v)
   /**/                  def apply[A,B](vs: (A, B)*)                : Lookup[A,B] = Stable(vs)
   @tn("getVoid") inline def void[A,B]                              : Lookup[A,B] = Stable.void
   implicit       inline def implicitRequest[A,B](v: \/)            : Lookup[A,B] = void[A,B]
 
   extension[A,B] (x: Lookup[A,B])
-    @tn("map_View")               def map_^[C](f: B => C) : Lookup[A,C]               = Z.Convert_View(x, f)
-    @tn("toMap_View")             def toMap_^             : scala.collection.Map[A,B] = Z.ScalaMap_View(x)
-    @tn("toPartialFunction_View") def toPartialFunction_^ : PartialFunction[A,B]      = Z.PartialFunction_View(x)
+    def mapView[C](f: B => C) : Lookup[A,C]               = Z.Convert_View(x, f)
+    def toMapView             : scala.collection.Map[A,B] = Z.ScalaMap_View(x)
+    def toPartialFunctionView : PartialFunction[A,B]      = Z.PartialFunction_View(x)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def Stable  = lookup.Stable;   type Stable[A,B]  = lookup.Stable[A,B]
@@ -43,29 +43,29 @@ ___________________________________________________________________________*/
 
       Returns element associated with the given `key`
 
-      Note. This operation will fail, if value is not found. Thus, use safer [[get_?]] in most cases
+      Note. This operation will fail, if value is not found. Thus, use safer [[getOpt]] in most cases
 
-@def get_? -> Optional element by key
+@def getOpt -> Optional element by key
 
       Optionally returns element associated with the given `key`
 
-@def get_~ -> Multi key lookup
+@def getStream -> Multi key lookup
 
       Returns a stream of values for given stream of keys.
 
       Note: There may be less values, than keys. Keys with no assosiated values are ignored.
 
-@def pair_~  -> Key/value pair stream
+@def pairStream  -> Key/value pair stream
 
       Returns a [[Stream]] of all key/value pairs for this [[Lookup]]
 
 
-@def key_~ -> Key stream
+@def keyStream -> Key stream
 
       Returns a [[Stream]] of all keys for this [[Lookup]]
 
 
-@def ~ -> Value stream
+@def stream -> Value stream
 
       Returns a [[Stream]] of all values for this [[Lookup]]
 

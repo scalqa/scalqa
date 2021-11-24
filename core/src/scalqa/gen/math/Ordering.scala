@@ -4,16 +4,16 @@ object Ordering:
   inline def apply[A](using inline o: Ordering[A]): Ordering[A] = o
 
   extension[A](inline x: Ordering[A])
-    /**/                  inline def compare(v:A, w:A)                      : Int              = J.illegalState()
-    @tn("compare_Opt")    inline def compare_?(v:Opt[A], w:Opt[A], none:Int): Int              = z.Ordering.compare_Opt(x,v,w,none)
-    /**/                  inline def reverse                                : Ordering[A]      = z.View.ReversedOrdering[A](x)
-    /**/                  inline def map[U](f: U => A)                      : Ordering[U]      = z.View.MappedOrdering[A,U](x,f)
-    @tn("join")           inline def + (inline c: Ordering[A])              : Ordering[A]      = z.Ordering.join(x,c)
-    /**/                  inline def join(inline c: Ordering[A])            : Ordering[A]      = z.Ordering.join(x,c)
-    @tn("rank_View")      inline def rank_^(fun: A => Int)                  : Ordering[A]      = z.Ordering.rank_View(x,fun)
-    @tn("opt_View")       inline def opt_^(voidPosition: Int)               : Ordering[Opt[A]] = z.Ordering.opt_View(x,voidPosition)
-    @tn("voidFirst_View") inline def voidFirst_^    (using Any.Def.Void[A]) : Ordering[A]      = z.Ordering.voidFirst_View(x)
-    @tn("voidLast_View")  inline def voidLast_^     (using Any.Def.Void[A]) : Ordering[A]      = z.Ordering.voidLast_View(x)
+    /**/        inline def compare(v:A, w:A)                      : Int              = J.illegalState()
+    /**/        inline def compareOpt(v:Opt[A],w:Opt[A], none:Int): Int              = z.Ordering.compareOpt(x,v,w,none)
+    /**/        inline def reverse                                : Ordering[A]      = z.View.ReversedOrdering[A](x)
+    /**/        inline def map[U](f: U => A)                      : Ordering[U]      = z.View.MappedOrdering[A,U](x,f)
+    @tn("join") inline def + (inline c: Ordering[A])              : Ordering[A]      = z.Ordering.join(x,c)
+    /**/        inline def join(inline c: Ordering[A])            : Ordering[A]      = z.Ordering.join(x,c)
+    /**/        inline def rankView(fun: A => Int)                : Ordering[A]      = z.Ordering.rank_View(x,fun)
+    /**/        inline def optView(voidPosition: Int)             : Ordering[Opt[A]] = z.Ordering.opt_View(x,voidPosition)
+    /**/        inline def voidFirstView  (using Any.Def.Void[A]) : Ordering[A]      = z.Ordering.voidFirst_View(x)
+    /**/        inline def voidLastView   (using Any.Def.Void[A]) : Ordering[A]      = z.Ordering.voidLast_View(x)
 
   object TYPE:
     type DEF[A] = scala.math.Ordering[A]
@@ -49,19 +49,19 @@ ___________________________________________________________________________*/
 
     Returns Int value of 0, if two elements are equal.
 
-@def opt_^ -> Opt view
+@def optView -> Opt view
 
     Creates an ordering to sort Opt values of current type.
 
-@def voidFirst_^ -> Void first view
+@def voidFirstView -> Void first view
 
     Creates an ordering, where all void elements will come first.
 
-@def voidLast_^ -> Void last view
+@def voidLastView -> Void last view
 
     Creates an ordering, where all void elements will come last.
 
-@def rank_^ -> Ranked view
+@def rankView -> Ranked view
 
     Creates an ordering, where all elements are first ordered on rank (defined with given function) and than on merit.
 

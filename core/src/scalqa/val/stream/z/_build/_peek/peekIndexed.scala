@@ -1,8 +1,8 @@
 package scalqa; package `val`; package stream; package z; package _build; package _peek
 
-class peekIndexed[A,U](x: ~[A], f: (Int, A) => U, start: Int) extends z.x.Pipe.Sized[A](x):
+class peekIndexed[A,U](x: Stream[A], f: (Int, A) => U, start: Int) extends z.x.Pipe.Sized[A](x):
   private         var i      = start
-  @tn("read_Opt") def read_? = x.read_?.forval(v => { f(i, v); i += 1 })
+  def readOpt = x.readOpt.forval(v => { f(i, v); i += 1 })
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -2,18 +2,18 @@ package scalqa; package j; package util; package test; package z; import languag
 
 object streamsEqual:
 
-  def result[A](s1: ~[A], s2: ~[A], ms: ~[~[A]]): Result[true] =
-    val firstPack = s1.><
-    val restPack  = ms.><
-    (~~(s2) ++ restPack.~)
+  def result[A](s1: Stream[A], s2: Stream[A], ms: Stream[Stream[A]]): Result[true] =
+    val firstPack = s1.pack
+    val restPack  = ms.pack
+    (Stream(s2) ++ restPack.stream)
       .zipIndex(2)
       .map(t => {
-        var v: Result[true] = firstPack.~.equalsSequence_??(t._2)
+        var v: Result[true] = firstPack.stream.equalsSequenceResult(t._2)
         if(v.isProblem) v = new Problem((if(restPack.isEmpty) "Streams" else "1 and "+t._1+" streams") + " are not equal. " + v.problem.message)
         v
       })
       .take(_.isProblem)
-      .read_? or Result(true)
+      .readOpt or Result(true)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -3,8 +3,8 @@ package scalqa; package fx; package base; package `abstract`; import language.im
 trait Parent extends Node:
   protected type REAL <: javafx.scene.Parent
 
-  @tn("needsLayout_Pro") def needsLayout_* : Boolean.Pro.O  = Fx.JavaFx.To.pro_O(real.needsLayoutProperty)
-  /**/                   def needsLayout   : Boolean        = real.isNeedsLayout
+  def needsLayoutPro: Boolean.Pro.O  = Fx.JavaFx.To.pro_O(real.needsLayoutProperty)
+  def needsLayout   : Boolean        = real.isNeedsLayout
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -14,7 +14,7 @@ trait Parent extends Node:
 ___________________________________________________________________________*/
 /**
 
-@def needsLayout_* -> Needs layout check
+@def needsLayoutPro -> Needs layout check
 
    		Indicates that this Node and its subnodes requires a layout pass on the next pulse
 

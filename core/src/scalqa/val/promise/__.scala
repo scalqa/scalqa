@@ -3,24 +3,24 @@ package scalqa; package `val`; import promise.*; import language.implicitConvers
 import Promise.Context
 
 trait Promise[+A]:
-  @tn("result_Opt") def result_?                                                 : Opt[Result[A]]
+  def resultOpt                                                 : Opt[Result[A]]
   // ------------------------------------------------------------------------------------------------------------------------------------------
-  /**/              def take(f:A=>Boolean,p:A=>Result.Problem)  (using c:Context): Promise[A]     = {val c=Control[A](); onResult(r => c.complete(r.take(f,p)));  c.promise}
-  /**/              def drop(f:A=>Boolean,p:A=>Result.Problem)  (using c:Context): Promise[A]     = {val c=Control[A](); onResult(r => c.complete(r.drop(f,p))); c.promise}
-  /**/              def map[B](f: A => B)                       (using c:Context): Promise[B]     = mapAll(_.map(f))
-  @tn("map_Result") def map_??[B](f: A => Result[B])            (using c:Context): Promise[B]     = mapWith(v => Promise.ready(f(v).cast[B | Result.Problem]))
-  /**/              def mapWith[B](f: A => Promise[B])          (using c:Context): Promise[B]     = Z.flatMap(this,f)
-  /**/              def mapAll[B](f:Result[A]=>Result[B])       (using c:Context): Promise[B]     = {val c=Control[B](); onResult(v => c.tryComplete(f(v))); c.promise}
-  /**/              def zip[B](v: Promise[B])                   (using c:Context): Promise[(A,B)] = Z.zip(this, v)
+  def take(f:A=>Boolean,p:A=>Result.Problem)  (using c:Context): Promise[A]     = {val c=Control[A](); onResult(r => c.complete(r.take(f,p)));  c.promise}
+  def drop(f:A=>Boolean,p:A=>Result.Problem)  (using c:Context): Promise[A]     = {val c=Control[A](); onResult(r => c.complete(r.drop(f,p))); c.promise}
+  def map[B](f: A => B)                       (using c:Context): Promise[B]     = mapAll(_.map(f))
+  def mapResult[B](f: A => Result[B])         (using c:Context): Promise[B]     = mapWith(v => Promise.ready(f(v).cast[B | Result.Problem]))
+  def mapWith[B](f: A => Promise[B])          (using c:Context): Promise[B]     = Z.flatMap(this,f)
+  def mapAll[B](f:Result[A]=>Result[B])       (using c:Context): Promise[B]     = {val c=Control[B](); onResult(v => c.tryComplete(f(v))); c.promise}
+  def zip[B](v: Promise[B])                   (using c:Context): Promise[(A,B)] = Z.zip(this, v)
   // ------------------------------------------------------------------------------------------------------------------------------------------
-  /**/              def onResult[U](f: Result[A] => U)          (using c:Context): Unit
-  /**/              def forval[U](f: A => U)                    (using c:Context): Promise[A]     = { onResult(_.forval(f));   this }
-  /**/              def fornil[U](p: Result.Problem => U)       (using c:Context): Promise[A]     = { onResult(_.fornil(p));   this }
-  /**/              def process[U,W](f:A=>U,p:Result.Problem=>W)(using c:Context): Promise[A]     = { onResult(_.process(f,p)); this }
-  /**/              def await(v: Time.Length)                   (using c:Context): Result[A]      = Z.await(this, v)
+  def onResult[U](f: Result[A] => U)          (using c:Context): Unit
+  def forval[U](f: A => U)                    (using c:Context): Promise[A]     = { onResult(_.forval(f));   this }
+  def fornil[U](p: Result.Problem => U)       (using c:Context): Promise[A]     = { onResult(_.fornil(p));   this }
+  def process[U,W](f:A=>U,p:Result.Problem=>W)(using c:Context): Promise[A]     = { onResult(_.process(f,p)); this }
+  def await(v: Time.Length)                   (using c:Context): Result[A]      = Z.await(this, v)
 
 object Promise:
-  def apply[A](calc: => A)(using c:Context) : Promise[A] = { val pc=Control[A](); c.execute(new Runnable{def run:Unit=pc.tryComplete(calc.??)}); pc.promise }
+  def apply[A](calc: => A)(using c:Context) : Promise[A] = { val pc=Control[A](); c.execute(new Runnable{def run:Unit=pc.tryComplete(Result(calc))}); pc.promise }
   def ready[A](v: A | Result.Problem)       : Promise[A] = v match {case p:Result.Problem => Z.Failed(p); case v => Z.Completed(v.cast[A])}
 
   extension[A](x: Promise[A])
@@ -28,7 +28,7 @@ object Promise:
     inline def flatMap[B](f: A => Promise[B])  (using inline c:Context): Promise[B] = Z.flatMap(x,f)
     inline def foreach[U](inline f: A=>U)      (using inline c:Context): Unit       = x.onResult(_.forval(f))
 
-  given z_TagDef[A](using t: Any.Def.Tag[A]): Any.Def.Tag[Promise[A]] with { def value_tag(v: Promise[A]): String = v.result_?.map(v => "Promise("+v.tag+")") or "Promise(NOT_READY)"}
+  given z_TagDef[A](using t: Any.Def.Tag[A]): Any.Def.Tag[Promise[A]] with { def value_tag(v: Promise[A]): String = v.resultOpt.map(v => "Promise("+v.tag+")") or "Promise(NOT_READY)"}
   given z_CanEqualPromise[A,B](using CanEqual[A,B]) : CanEqual[Promise[A], Promise[B]] = CanEqual.derived
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -52,7 +52,7 @@ ___________________________________________________________________________*/
 
       val v: Promise[String] = Promise(s + " Concurrent Promise!")
 
-      v.result_?.TP    // Value is likely not available yet
+      v.resultOpt.TP    // Value is likely not available yet
 
       v.onResult(_.TP) // Will run when value is available
 
@@ -67,7 +67,7 @@ ___________________________________________________________________________*/
 
      The result with problem will not be affected
 
-@def map_?? -> Map result
+@def mapResult -> Map result
 
      Creates a new promise where future value will be converted to given function result
 
@@ -95,18 +95,18 @@ ___________________________________________________________________________*/
 
      The result with problem will not be affected
 
-@def result_?  -> Optional result
+@def resultOpt  -> Optional result
 
        Returns calculation result if it is available
 
        ```
          val v = Promise{ 2 * 2 }
 
-         v.result_?.TP        // Likely prints: \/
+         v.resultOpt.TP        // Likely prints: \/
 
          J.sleep(1.Second)
 
-         v.result_?.TP        // Likely prints: Opt(Result(4))
+         v.resultOpt.TP        // Likely prints: Opt(Result(4))
        ```
 @def onResult -> Run when ready
 
@@ -117,7 +117,7 @@ ___________________________________________________________________________*/
 
         v.onResult("onResult: " + _.tag TP())
 
-        "Immediate Result: " + v.result_? TP()
+        "Immediate Result: " + v.resultOpt TP()
 
          // Output
         Immediate Result: Opt(\/)

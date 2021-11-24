@@ -2,13 +2,13 @@ package scalqa; package test.`val`.stream._build._zip; import language.implicitC
 
 object zipIndex extends J.Test("zipIndex"):
 
-  testEqual_~(
+  testEqualStream(
     0 to 100,
-    (0 <> 100).~.zipIndex.map(_._1))
+    (0 <> 100).stream.zipIndex.map(_._1))
 
-  testEqual_~("started")(
+  testEqualStream("started")(
     100 to 200,
-    (0 <> 100).~.zipIndex(100).map(_._1))
+    (0 <> 100).stream.zipIndex(100).map(_._1))
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

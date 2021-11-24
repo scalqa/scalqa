@@ -1,6 +1,6 @@
 package scalqa; package `val`; package stream; package z; package _build; package _filter; import language.implicitConversions
 
-class takeLast[A](x: ~[A], cnt: Int) extends z.x.Pipe.Calc[A](x):
+class takeLast[A](x: Stream[A], cnt: Int) extends z.x.Pipe.Calc[A](x):
   def calc = new Calc
 
   class Calc extends z.x.Pipe[A](x) with Able.Size:
@@ -10,7 +10,7 @@ class takeLast[A](x: ~[A], cnt: Int) extends z.x.Pipe.Calc[A](x):
     private         val sz     = i min a.length;
     private         val off    = i - sz - 1
     private         var j      = 0
-    @tn("read_Opt") def read_? = {var o:Opt[A]= \/; if(j<sz){ j+=1; o = a((off + j) % a.length).cast[A]}; o}
+    def readOpt = {var o:Opt[A]= \/; if(j<sz){ j+=1; o = a((off + j) % a.length).cast[A]}; o}
     /**/            def size   = sz - j
 
 /*___________________________________________________________________________

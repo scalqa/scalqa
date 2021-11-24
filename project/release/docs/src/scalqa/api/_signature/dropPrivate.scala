@@ -5,7 +5,7 @@ object dropPrivate:
   def apply(x: Signature) : Signature   =
     var p   = false
     var in  = 0
-    var sig = x.~.drop {
+    var sig = x.stream.drop {
                   case s: String => { if(p) s.trim match{case "[" => in+=1; case "]" => in-=1; case _ => ()}; p }
                   case v: Link   => { if(in==0) p = v.isPrivate; p}
                 }.toSeq

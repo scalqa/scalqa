@@ -2,12 +2,10 @@ import language.implicitConversions
 
 package object scalqa:
   export scalqa.Lang.*
+  export scalqa.Val.*
   export scalqa.Gen.*
   export scalqa.gen.Request.*
   export scalqa.j.vm.Predef.{ given }
-
-  export scalqa.Val.{ ~ as _, * }
-  @tn("Stream") val ~~ = `val`.Stream; @tn("Stream") type ~[+A] = `val`.Stream[A]
 
   private[scalqa] type ClassTag[A]    = scala.reflect.ClassTag[A];      private[scalqa] transparent inline def ClassTag   = scala.reflect.ClassTag
   private[scalqa] type Specialized[A] = lang.any.Specialized[A];        private[scalqa] transparent inline def Specialized= lang.any.Specialized;
@@ -35,19 +33,4 @@ ___________________________________________________________________________*/
   [[scalqa]] also contains many aliases,
   so the types and objects defined deeper in the hierarchy can be accessed without prefixes
 
-
-@val ~~ ->  Stream Companion alias \n\n Shortcut to [[scalqa.val.Stream$ Val.~]]
-
-    `Note.`
-
-    The stream companion alias is a double tilde (`~~`) instead of a single (`~`).
-    This exception is made only for root object scalqa.~~ , `scalqa.Val.~` companion is stil single tilde.
-    ```
-    val s1 : ~[String] = ~~("a","b","c")
-    val s2 : ~[String] = Val.~("a","b","c")
-    ```
-    The reason for the exception is twofold:
-
-      1. `~` is universally used as a method name, which would conflict with unprefixed companion inside some classes
-      2. Simple expression ~("a","b","c") compiles in Scala as a prefix method on Tuple3, but ~~("a","b","c") works fine as ~~.apply("a","b","c")
 */

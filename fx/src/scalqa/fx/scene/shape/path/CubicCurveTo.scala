@@ -3,25 +3,25 @@ package scalqa; package fx; package scene; package shape; package path
 import javafx.scene.shape.{ CubicCurveTo => JCubicCurveTo }
 
 class CubicCurveTo(val real: JCubicCurveTo) extends AnyVal with Z.Base[CubicCurveTo,JCubicCurveTo]:
-  protected            def setup                                   = CubicCurveTo
-  @tn("x_Pro")         def x_*                    : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.xProperty)
-  /**/                 def x                      : Double         = real.getX
-  /**/                 def x_=(v: Double)         : Unit           = real.setX(v)
-  @tn("y_Pro")         def y_*                    : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.yProperty)
-  /**/                 def y                      : Double         = real.getY
-  /**/                 def y_=(v: Double)         : Unit           = real.setY(v)
-  @tn("controlX1_Pro") def controlX1_*            : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.controlX1Property)
-  /**/                 def controlX1              : Double         = real.getControlX1
-  /**/                 def controlX1_=(v: Double) : Unit           = real.setControlX1(v)
-  @tn("controlX2_Pro") def controlX2_*            : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.controlX2Property)
-  /**/                 def controlX2              : Double         = real.getControlX2
-  /**/                 def controlX2_=(v: Double) : Unit           = real.setControlX2(v)
-  @tn("controlY1_Pro") def controlY1_*            : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.controlY1Property)
-  /**/                 def controlY1              : Double         = real.getControlY1
-  /**/                 def controlY1_=(v: Double) : Unit           = real.setControlY1(v)
-  @tn("controlY2_Pro") def controlY2_*            : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.controlY2Property)
-  /**/                 def controlY2              : Double         = real.getControlY2
-  /**/                 def controlY2_=(v: Double) : Unit           = real.setControlY2(v)
+  protected def setup                                   = CubicCurveTo
+  /**/      def xPro                   : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.xProperty)
+  /**/      def x                      : Double         = real.getX
+  /**/      def x_=(v: Double)         : Unit           = real.setX(v)
+  /**/      def yPro                   : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.yProperty)
+  /**/      def y                      : Double         = real.getY
+  /**/      def y_=(v: Double)         : Unit           = real.setY(v)
+  /**/      def controlX1Pro           : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.controlX1Property)
+  /**/      def controlX1              : Double         = real.getControlX1
+  /**/      def controlX1_=(v: Double) : Unit           = real.setControlX1(v)
+  /**/      def controlX2Pro           : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.controlX2Property)
+  /**/      def controlX2              : Double         = real.getControlX2
+  /**/      def controlX2_=(v: Double) : Unit           = real.setControlX2(v)
+  /**/      def controlY1Pro           : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.controlY1Property)
+  /**/      def controlY1              : Double         = real.getControlY1
+  /**/      def controlY1_=(v: Double) : Unit           = real.setControlY1(v)
+  /**/      def controlY2Pro           : Double.Pro.OM  = Fx.JavaFx.To.pro_OM(real.controlY2Property)
+  /**/      def controlY2              : Double         = real.getControlY2
+  /**/      def controlY2_=(v: Double) : Unit           = real.setControlY2(v)
 
 object CubicCurveTo extends Z.Setup[CubicCurveTo,JCubicCurveTo]:
   def apply(v: JCubicCurveTo)                                        : CubicCurveTo = new CubicCurveTo(v)

@@ -1,36 +1,36 @@
 package scalqa; package `val`; import language.implicitConversions
 
 trait Idx[+A] extends Collection[A]:
-  /**/          def apply(i: Int) : A
-  override      def size          : Int
-  @tn("stream") def ~             : ~[A] = idx.z.DefaultStream(this)
+  def apply(i: Int) : A
+  def size          : Int
+  def stream        : Stream[A] = idx.z.DefaultStream(this)
 
 object Idx:
   /**/                 def apply[A](v: A)                   : Idx[A]  = Pack(v)
   /**/                 def apply[A](v1:A, v2:A)             : Idx[A]  = Pack(v1,v2)
   /**/                 def apply[A](v1:A, v2:A, v3:A, vs:A*): Idx[A]  = Pack(v1,v2,v3,vs *)
   /**/                 def wrap[A](v: java.util.List[A])    : Idx[A]  = idx.z.as.JavaListWrap[A](v)
-  @tn("getVoid")inline def void[A]                          : Idx[A]  = \/ : ><[A]
+  @tn("getVoid")inline def void[A]                          : Idx[A]  = \/ : Pack[A]
   implicit      inline def implicitRequest[A](v: \/)        : Idx[A]  = void
 
   extension[A] (x: Idx[A])
-    /**/                         def contains(v:A)                 : Boolean           = {var i=0; val sz=x.size; while(i<sz){if(x(i) == v) return true; i+=1}; false}
-    /**/                         def head                          : A                 = x.at_?(0).get
-    @tn("head_Opt")              def head_?                        : Opt[A]            = x.at_?(0)
-    /**/                         def tail                          : Idx[A]            = {import idx.z.{Tail_View as V}; if(x.isInstanceOf[V[_]]) x.cast[V[A]].tail else if(x.size<=1) \/ else new V(x,1)}
-    @tn("at_Opt")                def at_?(position: Int)           : Opt[A]            = if (position < 0 || position >= x.size) \/ else x(position)
-    /**/                         def last                          : A                 = x.last_?.get
-    @tn("last_Opt")              def last_?                        : Opt[A]            = x.at_?(x.size - 1)
-    @tn("range_View")            def range_^(r: Int.<>)            : Idx[A]            = idx.z.View.Range(x, r.start, r.size)
-    @tn("reversed_View")         def reversed_^                    : Idx[A]            = idx.z.Reversed_View(x)
-    @tn("map_View")              def map_^[B](f: A => B)           : Idx[B]            = idx.z.Convert_View(x, f)
-    @tn("toJavaList_View")       def toJavaList_^                  : java.util.List[A] = idx.z.JavaList_View(x)
-    @tn("toSeq_View")            def toSeq_^ :scala.collection.immutable.IndexedSeq[A] = idx.z.View.IndexedSeq(x)
-    @tn("toProduct_View")        def toProduct_^                   : Product           = idx.z.Product_View(x)
-    def orderedContains(v: A)                  (using Ordering[A]) : Boolean           = idx.z.Ordered.contains[A](x,v)
-    def orderedSearch(v:A,max:Int=1)           (using Ordering[A]) : Int.<>            = idx.z.Ordered.search(x,v,max)
+    def applyOpt(position: Int)                         : Opt[A]            = if (position < 0 || position >= x.size) \/ else x(position)
+    def contains(v:A)                                   : Boolean           = {var i=0; val sz=x.size; while(i<sz){if(x(i) == v) return true; i+=1}; false}
+    def head                                            : A                 = x.applyOpt(0).get
+    def headOpt                                         : Opt[A]            = x.applyOpt(0)
+    def tail                                            : Idx[A]            = {import idx.z.{Tail_View as V}; if(x.isInstanceOf[V[_]]) x.cast[V[A]].tail else if(x.size<=1) \/ else new V(x,1)}
+    def last                                            : A                 = x.lastOpt.get
+    def lastOpt                                         : Opt[A]            = x.applyOpt(x.size - 1)
+    def rangeView(r: Int.Range)                         : Idx[A]            = idx.z.View.Range(x, r.start, r.size)
+    def reversedView                                    : Idx[A]            = idx.z.Reversed_View(x)
+    def mapView[B](f: A => B)                           : Idx[B]            = idx.z.Convert_View(x, f)
+    def toJavaListView                                  : java.util.List[A] = idx.z.JavaList_View(x)
+    def toProductView                                   : Product           = idx.z.Product_View(x)
+    def toSeqView                 :scala.collection.immutable.IndexedSeq[A] = idx.z.View.IndexedSeq(x)
+    def orderedContains(v: A)       (using Ordering[A]) : Boolean           = idx.z.Ordered.contains[A](x,v)
+    def orderedSearch(v:A,max:Int=1)(using Ordering[A]) : Int.Range         = idx.z.Ordered.search(x,v,max)
     def orderedSearchBy[B](map:A=>B,v:B,max:Int=1,
-                   extraFilter: A=>Boolean= \/)(using Ordering[B]) : Int.<>            = idx.z.Ordered.searchBy(x,v,map,max,extraFilter)
+        extraFilter: A=>Boolean= \/)(using Ordering[B]) : Int.Range         = idx.z.Ordered.searchBy(x,v,map,max,extraFilter)
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def Mutable           = idx.Mutable;              type Mutable[A]           = idx.Mutable[A]
   transparent inline def M                 = Mutable;                  type M[A]                 = Mutable[A]
@@ -42,6 +42,7 @@ object Idx:
   transparent inline def Event             = idx.observable.Event;     type Event[A]             = idx.observable.Event[A]
   transparent inline def Permutation       = idx.Permutation;          type Permutation          = idx.Permutation
   transparent inline def X                 = idx.X
+
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
@@ -53,12 +54,12 @@ ___________________________________________________________________________*/
 
    Elements in [[scalqa.val.Idx Idx]] can be efficiently accessed with Int index starting from 0
 
-   The immutable implementation of [[scalqa.val.Idx Idx]] is [[scalqa.val.Pack >< (pack)]]
+   The immutable implementation of [[scalqa.val.Idx Idx]] is [[scalqa.val.Pack Pack]]
 
 @def apply -> Returns element at specified position
 
       ```
-        val idx: Idx[Char] = ('A' <> 'Z').~.><
+        val idx: Idx[Char] = ('A' <> 'Z').stream.pack
 
         idx(1).TP // Prints: B
 
@@ -66,23 +67,23 @@ ___________________________________________________________________________*/
       ```
 
 
-@def ~  -> Returns a [[Stream]] of all elements
+@def stream  -> Returns a [[Stream]] of all elements
 
       The element order is same as in the Idx itself
 
       ```
-         val l: Idx[Char] = ('a' <> 'g').~.><
+         val l: Idx[Char] = ('a' <> 'g').stream.pack
 
-         l.~.TP  // Prints ~(a, b, c, d, e, f, g)
+         l.stream.TP  // Prints Stream(a, b, c, d, e, f, g)
       ```
 
 @def head -> First element
 
     Returns first elements or fails for empty Idx
 
-    Use [[head_?]] for safer access
+    Use [[headOpt]] for safer access
 
-@def head_? -> First optional element
+@def headOpt -> First optional element
 
     Returns first elements or empty option for empty Idx
 

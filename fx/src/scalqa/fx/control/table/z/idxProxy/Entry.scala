@@ -10,13 +10,13 @@ private[scalqa] object Entry:
   def indexSorting[A]: Ordering[Entry[A]] = zIndexOrdering.cast[Ordering[Entry[A]]]; private val zIndexOrdering = Int.ordering.on[Entry[Any]](_.index)
 
   trait IndexBase[A] extends Idx.M.X.Abstract[A]:
-    /**/                def target                 : Idx.M[A]
-    /**/                def entries                : Idx.M[Entry[A]]
-    /**/                def apply(i: Int)          : A                = entries(i).value
-    /**/                def size                   : Int              = entries.size
-    /**/                def addAt(i: Int, a: A)    : Unit             = target.synchronized(target.add(a))
-    /**/                def updateAt(i: Int, e: A) : Unit             = target.synchronized(target.update(entries(i).index, e))
-    @tn("remove_Range") def remove_<>(r: Int.<>)   : Unit             = target.synchronized(entries.~.take_<>(r).map(_.index).sort.reverse.foreach(target removeAt _))
+    def target                   : Idx.M[A]
+    def entries                  : Idx.M[Entry[A]]
+    def apply(i: Int)            : A                = entries(i).value
+    def size                     : Int              = entries.size
+    def addAt(i: Int, a: A)      : Unit             = target.synchronized(target.add(a))
+    def updateAt(i: Int, e: A)   : Unit             = target.synchronized(target.update(entries(i).index, e))
+    def removeRange(r: Int.Range): Unit             = target.synchronized(entries.stream.takeRange(r).map(_.index).sort.reverse.foreach(target removeAt _))
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

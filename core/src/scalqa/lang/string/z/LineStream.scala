@@ -1,10 +1,10 @@
 package scalqa; package lang; package string; package z; import language.implicitConversions
 
-private[lang] class LineStream(str: String) extends ~[String]:
+private[lang] class LineStream(str: String) extends Stream[String]:
   private var i = 0
   private val sz = str.length
 
-  @tn("read_Opt")  def read_? : Opt[String] =
+  def readOpt : Opt[String] =
     if(i >= sz) \/
     else
       val s = i

@@ -55,7 +55,7 @@ ___________________________________________________________________________*/
      ```
        // Calculate number Pi using Nilakantha series
 
-       ~~(2.0.Big)
+       Stream(2.0.Big)
          .unfold(_.last + 4)
          .takeFirst(1000) // the more - the better
          .map(v => (4.0.Big / (v * (v + 1) * (v + 2)) - 4.0.Big / ((v + 2) * (v + 3) * (v + 4))))

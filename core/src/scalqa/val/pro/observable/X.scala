@@ -15,19 +15,19 @@ object X:
   trait ActivationBase[A] extends Base[A]:
     private             var active                    = false
     private             def cnhg(v: Boolean): Unit    = { active = v; if (v) _afterFirstListenerAdded else _afterLastListenerRemoved }
-    override            def onChange[U](f: () => U)   = super.onChange(f).^(_ => if (f.isInstanceOf[Event.Id.Cancel]) { if (active && count == 0) cnhg(false) } else if (!active && count > 0) cnhg(true))
-    protected override  def fireChange: Int           = super.fireChange.self_^(v => if (active && v == 0) cnhg(false))
+    override            def onChange[U](f: () => U)   = super.onChange(f).self(_ => if (f.isInstanceOf[Event.Id.Cancel]) { if (active && count == 0) cnhg(false) } else if (!active && count > 0) cnhg(true))
+    protected override  def fireChange: Int           = super.fireChange.self(v => if (active && v == 0) cnhg(false))
     protected           def _afterFirstListenerAdded  = ()
     protected           def _afterLastListenerRemoved = ()
 
   // *****************************************************************************************************************
   class Basic[A](source: => A) extends observable.X.Abstract[A]:
-    def this(source: => A, dependencies: ~[Gen.Observable] = \/) =
+    def this(source: => A, dependencies: Stream[Gen.Observable] = \/) =
       this(source)
       dependencies.foreach(_.onObservableChange(() => fireChange))
 
     private            var valueOpt : Opt[A] = \/
-    /**/               def apply()           = valueOpt or source.^(valueOpt = _)
+    /**/               def apply()           = valueOpt or source.self(valueOpt = _)
     protected override def fireChange: Int   = { valueOpt = \/;  super.fireChange }
 
 /*___________________________________________________________________________

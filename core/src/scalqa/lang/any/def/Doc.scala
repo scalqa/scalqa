@@ -17,10 +17,6 @@ ___________________________________________________________________________*/
 
   Defining Any.Def.Doc is usefull for third-party existing types, one has no control over.
 
-@def value_tag -> Instance tag
-
-      Returns String tag describing provided value
-
 @def value_doc -> Instance Doc
 
       Returns Doc describing provided value

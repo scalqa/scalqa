@@ -11,8 +11,6 @@ sidebar:
           url: Guide/Introduction/H2O_Structure.html
         - title: Do Not Use toString
           url: Guide/Introduction/Do_Not_Use_toString.html
-        - title: Operator Types
-          url: Guide/Introduction/Operator_Types.html
         - title: Samples
           url: Guide/Introduction/Samples.html
     - title: Features

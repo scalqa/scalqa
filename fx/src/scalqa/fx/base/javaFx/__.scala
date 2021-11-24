@@ -20,7 +20,7 @@ object JavaFx:
 
   def booleanPropertry(p: scalqa.Boolean.Pro.OM ): javafx.beans.property.BooleanProperty = new javafx.beans.property.BooleanPropertyBase {
     {
-      bind(observableValue(p.map_^((b: Boolean) => b: java.lang.Boolean)))
+      bind(observableValue(p.mapView((b: Boolean) => b: java.lang.Boolean)))
     }
     def getBean(): AnyRef = "NoBean"
     def getName: String = "NoName"

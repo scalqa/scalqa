@@ -6,15 +6,15 @@ object Benchmark:
 
   @tn("numbered") inline def apply[A](inline targets: (() => A)*)(using Opt[Numeric[A]]): Unit =
     var s=sep1; val BUNDLE_1=targets; s=sep2; val BUNDLE_2=targets; val BUNDLE_3=targets; val BUNDLE_4=targets; val BUNDLE_5=targets
-    benchmark.z.execute[A]((BUNDLE_1.~ ++ BUNDLE_2 ++ BUNDLE_3 ++ BUNDLE_4 ++ BUNDLE_5).zipIndex.map((i,f) => ((i%BUNDLE_1.size+1).tag,f)).><,5)
+    benchmark.z.execute[A]((BUNDLE_1.stream ++ BUNDLE_2 ++ BUNDLE_3 ++ BUNDLE_4 ++ BUNDLE_5).zipIndex.map((i,f) => ((i%BUNDLE_1.size+1).tag,f)).pack,5)
 
   @tn("labeled")  inline def apply[A](inline targets: (String, () => A)*)(using Opt[Numeric[A]]): Unit =
     var s=sep1; val BUNDLE_1=targets; s=sep2; val BUNDLE_2=targets; val BUNDLE_3=targets; val BUNDLE_4=targets; val BUNDLE_5=targets
-    benchmark.z.execute[A]((BUNDLE_1.~ ++ BUNDLE_2 ++ BUNDLE_3 ++ BUNDLE_4 ++ BUNDLE_5).><,5)
+    benchmark.z.execute[A]((BUNDLE_1.stream ++ BUNDLE_2 ++ BUNDLE_3 ++ BUNDLE_4 ++ BUNDLE_5).pack,5)
 
   inline def custom[A](verbose: Boolean = true, trialCount: Int = 4, eachTrial: Time.Length = 3.Seconds)(inline targets: (String, () => A)*)(using Opt[Numeric[A]]): Unit =
     var s=sep1; val BUNDLE_1=targets; s=sep2; val BUNDLE_2=targets; val BUNDLE_3=targets; val BUNDLE_4=targets; val BUNDLE_5=targets
-    benchmark.z.execute[A]((BUNDLE_1.~ ++ BUNDLE_2 ++ BUNDLE_3 ++ BUNDLE_4 ++ BUNDLE_5).><, 5, trialCount, eachTrial, verbose)
+    benchmark.z.execute[A]((BUNDLE_1.stream ++ BUNDLE_2 ++ BUNDLE_3 ++ BUNDLE_4 ++ BUNDLE_5).pack, 5, trialCount, eachTrial, verbose)
 
   private inline val sep1 = "@@@@@@@ Start Benchmark Definition @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
   private inline val sep2 = "@@@@@@@ End. Below is just repetition (4 more times) @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"

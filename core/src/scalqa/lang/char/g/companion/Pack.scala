@@ -1,11 +1,11 @@
 package scalqa; package lang; package char; package g; package companion; import language.implicitConversions
 
-class Pack[A<:Raw] private[lang]() extends z_Pack[A,G.><[A]]
+class Pack[A<:Raw] private[lang]() extends z_Pack[A,G.Pack[A]]
 
 class z_Pack[A<:Raw, PACK]:
-  /**/           inline def apply(inline v:A, inline vs: A*): PACK = G.><.fromVarArg(v,vs).cast[PACK]
-  /**/           inline def apply(inline v: ~[A])           : PACK = G.><.fromStream(v).cast[PACK]
-  @tn("getVoid") inline def void                            : PACK = G.><.void.cast[PACK]
+  /**/           inline def apply(inline v:A, inline vs: A*): PACK = G.Pack.fromVarArg(v,vs).cast[PACK]
+  /**/           inline def apply(inline v: Val.Stream[A])  : PACK = G.Pack.fromStream(v).cast[PACK]
+  @tn("getVoid") inline def void                            : PACK = G.Pack.void.cast[PACK]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

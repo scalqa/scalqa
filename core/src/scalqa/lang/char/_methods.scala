@@ -3,9 +3,9 @@ package scalqa; package lang; package char; import language.implicitConversions
 transparent trait _methods:
   extension(inline x:Char)
     @tn("Opt")        inline def ?                     : Char.Opt            = x.toInt.cast[Char.Opt]
-    @tn("range")      inline def <> (inline to: Char)  : Char.<>             = {val w=x; w <>= to-w+1 }
-    @tn("rangeX")     inline def <>>(inline to: Char)  : Char.<>             = {val w=x; w <>= to-w   }
-    @tn("rangeOfSize")inline def <>=(inline size: Int) : Char.<>             = new Char.<>(x,size)
+    @tn("range")      inline def <> (inline to: Char)  : Char.Range          = {val w=x; w <>= to-w+1 }
+    @tn("rangeX")     inline def <>>(inline to: Char)  : Char.Range          = {val w=x; w <>= to-w   }
+    @tn("rangeOfSize")inline def <>=(inline size: Int) : Char.Range          = new Char.Range(x,size)
     /**/        infix inline def max(inline v: Char)   : Char                = {val y=x; val w=v; if(y.real > w.real) y else w }
     /**/        infix inline def min(inline v: Char)   : Char                = {val y=x; val w=v; if(y.real < w.real) y else w }
     //  -------------------------------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ ___________________________________________________________________________*/
 
 @def <> ->  Range
 
-    Returns Char.<> from current to given value
+    Returns Char.Range from current to given value
     ```
       ('a' <> 'd').TP  // Prints  a <> d
     ```
@@ -55,7 +55,7 @@ ___________________________________________________________________________*/
 
 @def <>> ->  Exclusive end range
 
-    Returns Char.<> from current to given value exclusive
+    Returns Char.Range from current to given value exclusive
     ```
       ('a' <>> 'd').TP  // Prints  a <> c
     ```

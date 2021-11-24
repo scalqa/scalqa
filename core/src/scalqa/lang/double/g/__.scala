@@ -1,16 +1,16 @@
 package scalqa; package lang; package double; import language.implicitConversions
 
 object G:
-  @tn("Stream") transparent inline def ~          = g.Stream;       @tn("Stream")  type ~         [A<:Raw]      = g.Stream[A]
-  @tn("Range")  transparent inline def <>         = g.Range;        @tn("Range")   type <>        [A<:Raw]      = g.Range[A]
-  @tn("Pack")   transparent inline def ><         = g.Pack;         @tn("Pack")    type ><        [A<:Raw]      = g.Pack[A]
-  /**/          transparent inline def Opt        = g.Opt;                         type Opt       [A<:Raw]      = g.Opt.TYPE.DEF[A]
-  /**/          transparent inline def Buffer     = g.Buffer;                      type Buffer    [A<:Raw]      = g.Buffer[A]
-  /**/          transparent inline def Collection = g.Collection;                  type Collection[A<:Raw]      = g.Collection[A]
-  /**/          transparent inline def Idx        = g.Idx;                         type Idx       [A<:Raw]      = g.Idx[A]
-  /**/          transparent inline def Pro        = g.Pro;                         type Pro       [A<:Raw]      = g.Pro[A]
-  /**/          transparent inline def Fun        = g.Fun
-  /**/          transparent inline def Companion  = g.Companion
+  transparent inline def Stream     = g.Stream;       type Stream    [A<:Raw]      = g.Stream[A]
+  transparent inline def Range      = g.Range;        type Range     [A<:Raw]      = g.Range[A]
+  transparent inline def Pack       = g.Pack;         type Pack      [A<:Raw]      = g.Pack[A]
+  transparent inline def Opt        = g.Opt;          type Opt       [A<:Raw]      = g.Opt.TYPE.DEF[A]
+  transparent inline def Buffer     = g.Buffer;       type Buffer    [A<:Raw]      = g.Buffer[A]
+  transparent inline def Collection = g.Collection;   type Collection[A<:Raw]      = g.Collection[A]
+  transparent inline def Idx        = g.Idx;          type Idx       [A<:Raw]      = g.Idx[A]
+  transparent inline def Pro        = g.Pro;          type Pro       [A<:Raw]      = g.Pro[A]
+  transparent inline def Fun        = g.Fun
+  transparent inline def Companion  = g.Companion
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -25,7 +25,7 @@ ___________________________________________________________________________*/
 
    For example:
 
-      - `Double.G.><[Double]`     usually called as `Double.><`
+      - `Double.G.Pack[Double]`   usually called as `Double.Pack`
       - `Double.G.Idx[Percent]`   usually called as `Percent.Idx`
       - `Int.G.Pro.Mutable[Day]`  usually called as `Day.Pro.Mutable`
       - `Long.G.Collection[Time]` usually called as `Time.Collection`

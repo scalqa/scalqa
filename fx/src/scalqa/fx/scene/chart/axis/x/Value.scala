@@ -7,24 +7,24 @@ abstract class Value[A](val map: TwoWayFunction[A, Double]) extends Chart.Axis[A
   lazy  val valueMap : TwoWayFunction[A, Number] = TwoWayFunction(map(_), n => map.undo(n.doubleValue))
   /**/  val ordering : Ordering[A]               = Double.ordering.on(map(_))
 
-  @tn("lowerBound_Pro")       def lowerBound_*                   : Pro.OM[A]       = Fx.JavaFx.To.pro_OM(real.lowerBoundProperty).mutableMap_^(using map.reverse)
-  /**/                        def lowerBound                     : A               = map.undo(real.getLowerBound)
-  /**/                        def lowerBound_=(v: A)             : Unit            = real.setLowerBound(map(v))
-  @tn("upperBound_Pro")       def upperBound_*                   : Pro.OM[A]       = Fx.JavaFx.To.pro_OM(real.upperBoundProperty).mutableMap_^(using map.reverse)
-  /**/                        def upperBound                     : A               = map.undo(real.getUpperBound)
-  /**/                        def upperBound_=(v: A)             : Unit            = real.setUpperBound(map(v))
-  @tn("minorTickCount_Pro")   def minorTickCount_*               : Int.Pro.OM      = Fx.JavaFx.To.pro_OM(real.minorTickCountProperty)
-  /**/                        def minorTickCount                 : Int             = real.getMinorTickCount
-  /**/                        def minorTickCount_=(v: Int)       : Unit            = real.setMinorTickCount(v)
-  @tn("minorTickLength_Pro")  def minorTickLength_*              : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.minorTickLengthProperty)
-  /**/                        def minorTickLength                : Double          = real.getMinorTickLength
-  /**/                        def minorTickLength_=(v: Double)   : Unit            = real.setMinorTickLength(v)
-  @tn("minorTickVisible_Pro") def minorTickVisible_*             : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.minorTickVisibleProperty)
-  /**/                        def minorTickVisible               : Boolean         = real.isMinorTickVisible
-  /**/                        def minorTickVisible_=(v: Boolean) : Unit            = real.setMinorTickVisible(v)
-  @tn("scale_Pro")            def scale_*                        : Double.Pro.O    = Fx.JavaFx.To.pro_O(real.scaleProperty)
-  /**/                        def scale                          : Double          = real.getScale
-  /**/              protected def scale_=(v: Double)             : Unit            = real.setScaleX(v)
+  /**/      def lowerBoundPro                  : Pro.OM[A]       = Fx.JavaFx.To.pro_OM(real.lowerBoundProperty).mutableMapView(using map.reverse)
+  /**/      def lowerBound                     : A               = map.undo(real.getLowerBound)
+  /**/      def lowerBound_=(v: A)             : Unit            = real.setLowerBound(map(v))
+  /**/      def upperBoundPro                  : Pro.OM[A]       = Fx.JavaFx.To.pro_OM(real.upperBoundProperty).mutableMapView(using map.reverse)
+  /**/      def upperBound                     : A               = map.undo(real.getUpperBound)
+  /**/      def upperBound_=(v: A)             : Unit            = real.setUpperBound(map(v))
+  /**/      def minorTickCountPro              : Int.Pro.OM      = Fx.JavaFx.To.pro_OM(real.minorTickCountProperty)
+  /**/      def minorTickCount                 : Int             = real.getMinorTickCount
+  /**/      def minorTickCount_=(v: Int)       : Unit            = real.setMinorTickCount(v)
+  /**/      def minorTickLengthPro             : Double.Pro.OM   = Fx.JavaFx.To.pro_OM(real.minorTickLengthProperty)
+  /**/      def minorTickLength                : Double          = real.getMinorTickLength
+  /**/      def minorTickLength_=(v: Double)   : Unit            = real.setMinorTickLength(v)
+  /**/      def minorTickVisiblePro            : Boolean.Pro.OM  = Fx.JavaFx.To.pro_OM(real.minorTickVisibleProperty)
+  /**/      def minorTickVisible               : Boolean         = real.isMinorTickVisible
+  /**/      def minorTickVisible_=(v: Boolean) : Unit            = real.setMinorTickVisible(v)
+  /**/      def scalePro                       : Double.Pro.O    = Fx.JavaFx.To.pro_O(real.scaleProperty)
+  /**/      def scale                          : Double          = real.getScale
+  protected def scale_=(v: Double)             : Unit            = real.setScaleX(v)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

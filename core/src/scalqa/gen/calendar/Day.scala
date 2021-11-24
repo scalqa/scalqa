@@ -20,7 +20,7 @@ object Day extends Int.Opaque.Data.Sequential[Day]("Day"):
     /**/             def week                             : Week                  = Week.fromIndex(x.real / 7)
     /**/             def month                            : Month                 = z.Day.setup(x).month
     /**/             def year                             : Year                  = z.Day.setup(x).year
-    /**/             def weekDay                          : Week.Day              = Week.Day.><(((Int.max - 5L + x.real) % 7).toInt)
+    /**/             def weekDay                          : Week.Day              = Week.Day(((Int.max - 5L + x.real) % 7).toInt)
     /**/             def isCurrent                        : Boolean               = x == Day.current
     /**/      inline def period                           : Period                = Period(x.start, x.next.start)
     @tn("and")inline def &(inline l: Time.Length)         : Time                  = Time(x, l)
@@ -42,10 +42,10 @@ ___________________________________________________________________________*/
 
        ```
          // Find all Fridays the 13th for this century
-         (2000 <>> 2100).~.map(_.Year).flatMap(_.days)
+         (2000 <>> 2100).stream.map(_.Year).flatMap(_.days)
             .take(d => d.number == 13 && d.weekDay.isFri)
             .peek(_.TP)
-            .count.self_^("Total Count: " + _ tp())
+            .count.self("Total Count: " + _ tp())
 
          // Output
          2001-04-13
@@ -70,10 +70,10 @@ ___________________________________________________________________________*/
 
       ```
          // Calculate number of each WeakDay in the year 2000
-         2000.Year.days.~.map(_.weekDay)
-             .countFew(_.isSun, _.isMon, _.isTue, _.isWed, _.isThu, _.isFri, _.isSat).~.TP
+         2000.Year.days.stream.map(_.weekDay)
+             .countFew(_.isSun, _.isMon, _.isTue, _.isWed, _.isThu, _.isFri, _.isSat).stream.TP
          // Output
-         ~(53, 52, 52, 52, 52, 52, 53)
+         Stream(53, 52, 52, 52, 52, 52, 53)
       ```
 
 

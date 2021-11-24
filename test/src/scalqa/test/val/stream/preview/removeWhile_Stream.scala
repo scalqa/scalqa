@@ -1,15 +1,15 @@
 package scalqa; package test.`val`.stream.Preview; import language.implicitConversions
 
-object readWhile_Stream extends J.Test("readWhile_~"):
+object readWhile_Stream extends J.Test("readWhileStream"):
 
   test{
-    val s = (1 <> 100).~.hideSizeData.enablePreview
-    val i = (1 <> 100).~.enablePreview
-    assertEqual_~(
+    val s = (1 <> 100).stream.hideSizeData.enablePreview
+    val i = (1 <> 100).stream.enablePreview
+    assertEqualStream(
       1 to 49,
-      s.readWhile_~(_ < 50),
-      i.readWhile_~(_ < 50))
-    assertEqual_~(
+      s.readWhileStream(_ < 50),
+      i.readWhileStream(_ < 50))
+    assertEqualStream(
       50 to 100,
       s,
       i)

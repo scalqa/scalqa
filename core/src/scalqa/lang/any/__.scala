@@ -1,27 +1,27 @@
 package scalqa; package lang; import language.implicitConversions
 
 object Any:
-  /**/         type Boolean      = scala.Boolean     | Boolean.Opaque
-  /**/         type Byte         = scala.Byte        | Byte.Opaque
-  /**/         type Char         = scala.Char        | Char.Opaque
-  /**/         type Short        = scala.Short       | Short.Opaque
-  /**/         type Int          = scala.Int         | Int.Opaque
-  /**/         type Long         = scala.Long        | Long.Opaque
-  /**/         type Float        = scala.Float       | Float.Opaque
-  /**/         type Double       = scala.Double      | Double.Opaque
-  /**/         type Opaque       = AnyRef.Opaque     | Primitive.Opaque
+  type Boolean      = scala.Boolean     | Boolean.Opaque
+  type Byte         = scala.Byte        | Byte.Opaque
+  type Char         = scala.Char        | Char.Opaque
+  type Short        = scala.Short       | Short.Opaque
+  type Int          = scala.Int         | Int.Opaque
+  type Long         = scala.Long        | Long.Opaque
+  type Float        = scala.Float       | Float.Opaque
+  type Double       = scala.Double      | Double.Opaque
+  type Opaque       = AnyRef.Opaque     | Primitive.Opaque
 
-  /**/         type Array[A]     = scala.Array[A]    | Primitive.Array[A]
-  @tn("Stream")type ~[A]         = Val.~[A]          | Primitive.~[A]
-  @tn("Range") type <>[A]        = Val.<>[A]         | Primitive.<>[A]
-  @tn("Pack")  type ><[A]        = Val.><[A]         | Primitive.><[A]
-  /**/         type Buffer[A]    = Val.Buffer[A]     | Primitive.Buffer[A]
-  /**/         type Collection[A]= Val.Collection[A] | Primitive.Collection[A]
-  /**/         type Lookup[A,B]  = Val.Lookup[A,B]   | Primitive.Lookup[A,B]
-  /**/         type Idx[A]       = Val.Idx[A]        | Primitive.Idx[A]
-  /**/         type Opt[A]       = Val.Opt[A]        | Primitive.Opt[A]
-  /**/         type Pro[A]       = Val.Pro[A]        | Primitive.Pro[A]
-  /**/         type Set[A]       = Val.Set[A]        | Primitive.Set[A]
+  type Array[A]     = scala.Array[A]    | Primitive.Array[A]
+  type Stream[A]    = Val.Stream[A]     | Primitive.Stream[A]
+  type Range[A]     = Val.Range[A]      | Primitive.Range[A]
+  type Pack[A]      = Val.Pack[A]       | Primitive.Pack[A]
+  type Buffer[A]    = Val.Buffer[A]     | Primitive.Buffer[A]
+  type Collection[A]= Val.Collection[A] | Primitive.Collection[A]
+  type Lookup[A,B]  = Val.Lookup[A,B]   | Primitive.Lookup[A,B]
+  type Idx[A]       = Val.Idx[A]        | Primitive.Idx[A]
+  type Opt[A]       = Val.Opt[A]        | Primitive.Opt[A]
+  type Pro[A]       = Val.Pro[A]        | Primitive.Pro[A]
+  type Set[A]       = Val.Set[A]        | Primitive.Set[A]
 
   // Those are void resolutions for Any.Opt[A]. There is no reason to show them in docs, because same implicits are documented in each G.Opt.
   implicit inline def z_ImplicitVoidRequestToValOpt    [A<:Any        ](v: \/): Val.Opt[A]       = ZZ.None.cast[Val.Opt[A]]
@@ -49,9 +49,9 @@ ___________________________________________________________________________*/
 /**
 @object Any -> Companion to scala.Any
 
-@type ~           ->  All stream kinds      \n\n All supported stream implementations.
-@type <>          ->  All range kinds       \n\n All supported range implementations.
-@type ><          ->  All pack kinds        \n\n All supported pack implementations.
+@type Stream      ->  All stream kinds      \n\n All supported stream implementations.
+@type Range       ->  All range kinds       \n\n All supported range implementations.
+@type Pack        ->  All pack kinds        \n\n All supported pack implementations.
 @type Array       ->  All Array kinds       \n\n All possible Array types supported by JVM.
 @type Buffer      ->  All Buffer kinds      \n\n All supported Buffer implementations.
 @type Collection  ->  All Collection kinds  \n\n All supported Collection implementations.

@@ -1,8 +1,8 @@
 package scalqa; package `val`; package stream; package z; package flow
 
-private[scalqa] object ParallelSetup extends ((~[Any], Opt[(J.Vm.Priority, Int)]) => Flow[Any]):
+private[scalqa] object ParallelSetup extends ((Stream[Any], Opt[(J.Vm.Priority, Int)]) => Flow[Any]):
 
-  def apply(x: ~[Any], customPoolOpt: Opt[(J.Vm.Priority,Int)]): Flow[Any] =
+  def apply(x: Stream[Any], customPoolOpt: Opt[(J.Vm.Priority,Int)]): Flow[Any] =
     val js = new JavaStreamParallelFlow(x)
     customPoolOpt.map(t => new CustomThreadPoolParallelFlow(t._1, t._2, js)) or js
 

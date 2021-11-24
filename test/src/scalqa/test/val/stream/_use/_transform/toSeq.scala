@@ -2,9 +2,9 @@ package scalqa; package test.`val`.stream._use._transform; import language.impli
 
 object toSeq extends J.Test:
 
-  testEqual_~(
+  testEqualStream(
     (1 to 100).toSeq,
-    (1 <> 100).~.toSeq)
+    (1 <> 100).stream.toSeq)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

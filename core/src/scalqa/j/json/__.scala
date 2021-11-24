@@ -5,10 +5,10 @@ object Json:
   type Array  = json.Array;   inline def Array  = json.Array
   type Object = json.Object;  inline def Object = json.Object
 
-  /**/                      def format(v: Object | Array) : String                 = Vm.Setup.jsonFormat_*().format(v)
-  @tn("parse_Result")       def parse_??(s: String)       : Result[Object | Array] = Vm.Setup.jsonFormat_*().parse_??(s)
-  @tn("parseObject_Result") def parseObject_??(s: String) : Result[Object]         = parse_??(s).map_??{ case v: Object => v; case v: Array  => Result.Problem("Not a JSON Object")}
-  @tn("parseArray_Result")  def parseArray_??(s: String)  : Result[Array]          = parse_??(s).map_??{ case v: Array  => v; case v: Object => Result.Problem("Not a JSON Array" )}
+  def format(v: Object | Array)   : String                 = Vm.Setup.jsonFormatPro().format(v)
+  def parseResult(s: String)      : Result[Object | Array] = Vm.Setup.jsonFormatPro().parseResult(s)
+  def parseObjectResult(s: String): Result[Object]         = parseResult(s).mapResult{ case v: Object => v; case v: Array  => Result.Problem("Not a JSON Object")}
+  def parseArrayResult(s: String) : Result[Array]          = parseResult(s).mapResult{ case v: Array  => v; case v: Object => Result.Problem("Not a JSON Array" )}
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

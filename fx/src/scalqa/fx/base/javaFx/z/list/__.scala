@@ -7,12 +7,12 @@ object List:
   def createChange[A](in: Idx[Idx.O.Event[A]], o: JFX.ObservableList[A]): JFX.ListChangeListener.Change[A] & Able.Doc = change.Change(in, o)
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-  def parseChanges[A](v: javafx.collections.ListChangeListener.Change[_ <: A]): ><[Idx.O.Event[A]] =
-    var l : ><[Idx.O.Event[A]] = \/
+  def parseChanges[A](v: javafx.collections.ListChangeListener.Change[_ <: A]): Pack[Idx.O.Event[A]] =
+    var l : Pack[Idx.O.Event[A]] = \/
     val fx = v.cast[javafx.collections.ListChangeListener.Change[A]]
     fx.reset
     while (fx.next)
-      if (fx.wasPermutated)   l += Idx.Event.Reposition.apply { val r = fx.getFrom <>> fx.getTo; Idx.Permutation(r, r.~.raw.map(fx.getPermutation(_)).><) }
+      if (fx.wasPermutated)   l += Idx.Event.Reposition.apply { val r = fx.getFrom <>> fx.getTo; Idx.Permutation(r, r.stream.raw.map(fx.getPermutation(_)).pack) }
       else if (fx.wasUpdated) l += Idx.Event.Update(fx.getFrom, Idx.wrap[A](fx.getRemoved), Idx.wrap[A](fx.getAddedSubList))
       else
         if (fx.wasRemoved) l +=  Idx.Event.Remove(fx.getFrom, Idx.wrap[A](fx.getRemoved))
@@ -21,13 +21,13 @@ object List:
 
   // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
   def singleChangeDoc[A](c: JFX.ListChangeListener.Change[A]): Doc      =
-    def fun(a: ~[Any]) = a.nonEmpty_?.map(_.makeString(",")) or "empty"
+    def fun(a: Stream[Any]) = a.nonEmptyOpt.map(_.makeString(",")) or "empty"
     Doc(c)
       += ("was", "" ++ c.wasPermutated ? "permutated " ++ c.wasAdded ? "added " ++ c.wasRemoved ? "removed " ++ c.wasUpdated ? "updated " ++ c.wasReplaced ? "replaced")
       += ("interval", (c.getFrom <>> c.getTo).tag)
       += ("getRemoved", fun(c.getRemoved))
       += ("getAddedSubList", fun(c.getAddedSubList))
-      += ("getPermutation", c.wasPermutated ? fun((c.getFrom <>> c.getTo).~.zipValue(c.getPermutation).drop(t => t._1 == t._2)) or "")
+      += ("getPermutation", c.wasPermutated ? fun((c.getFrom <>> c.getTo).stream.zipValue(c.getPermutation).drop(t => t._1 == t._2)) or "")
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

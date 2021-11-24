@@ -10,16 +10,16 @@ abstract class XY[X, Y] protected (val axisX: Chart.Axis[X], val axisY: Chart.Ax
   /**/           type SERIES     <: SeriesBase
   /**/           type ITEM       <: ItemBase
 
-  val data:  Idx.M[SERIES] =  Idx.M.wrap(real.getData).mutableMap_^(SeriesBase.apply, _.real.cast[REAL_SERIES])
+  val data:  Idx.M[SERIES] =  Idx.M.wrap(real.getData).mutableMapView(SeriesBase.apply, _.real.cast[REAL_SERIES])
 
   // **************************************************************************************************************
   class SeriesBase protected (nameO: Opt[String]= \/, private var _items:  Idx.O[ITEM] = \/):
-    protected[chart] val real : self.REAL_SERIES = new self.REAL_SERIES(z_ObservableList()).^(s => nameO.forval(s.setName))
+    protected[chart] val real : self.REAL_SERIES = new self.REAL_SERIES(z_ObservableList()).self(s => nameO.forval(s.setName))
     /**/             def chart: Chart.XY[X, Y]   = self
     /**/             def name : String           = real.getName; def name_=(v: String) = real.setName(v)
     /**/             def items: Idx.O[ITEM]      = _items;       def items_=(l:  Idx.O[ITEM]): Unit = { _items = l; real.setData(z_ObservableList()) }
     // ***************************
-    private class z_ObservableList extends base.javaFx.z.list.Observable[self.REAL_ITEM](items.map_^(_.real.cast[self.REAL_ITEM])){ def series = SeriesBase.this}
+    private class z_ObservableList extends base.javaFx.z.list.Observable[self.REAL_ITEM](items.mapView(_.real.cast[self.REAL_ITEM])){ def series = SeriesBase.this}
 
   object SeriesBase:
     def apply(s: J.XYChart.Series[_, _]): SERIES = s.getData.cast[SeriesBase#z_ObservableList].series.cast[SERIES]
@@ -28,7 +28,7 @@ abstract class XY[X, Y] protected (val axisX: Chart.Axis[X], val axisY: Chart.Ax
   class ItemBase extends Able.Doc:
     def this(xPar: X, yPar: Y) = { this(); x = xPar; y = yPar }
     def this(p: (X, Y))        = { this(p._1, p._2) }
-    protected[chart] val real       : self.REAL_ITEM  = new self.REAL_ITEM().^(_.setExtraValue(this))
+    protected[chart] val real       : self.REAL_ITEM  = new self.REAL_ITEM().self(_.setExtraValue(this))
     /**/             def chart      : Chart.XY[X, Y]  = self
     /**/             def x          : X               = self.axisX.valueMap.undo(real.getXValue); def x_=(v: X) = real.setXValue(self.axisX.valueMap(v))
     /**/             def y          : Y               = self.axisY.valueMap.undo(real.getYValue); def y_=(v: Y) = real.setYValue(self.axisY.valueMap(v))

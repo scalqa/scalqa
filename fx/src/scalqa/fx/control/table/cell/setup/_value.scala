@@ -4,37 +4,37 @@ transparent trait _value[ROW, VIEW, A]:
   //self :cell.Setup[ROW, VIEW, A] =>
   private inline def self = this.cast[cell.Setup[ROW, VIEW, A]]
 
-  private                      var proSetup         : ROW => Pro.O[Opt[A]]                           = Z.voidFun
-  private                      var enhance          : ><[(ROW, Pro.O[Opt[A]]) => Pro.O[Opt[A]]]      = \/
-  private[table]               def mkProOpt(e: ROW) : Pro.O[Opt[A]]                                  = enhance.~.foldAs(proSetup(e):Pro.O[Opt[A]])((p,pe) => pe(e,p))
-  private[table]               var funFormat        : A => Opt[String]                               = v => v.tag(using self.docDef)
-  private[table]               var funFormatVoid    : ROW => Opt[String]                             = v => \/
-  private[table]               var funTooltipOpt    : Opt[Opt[A] => Tooltip]                         = \/
+  private        var proSetup         : ROW => Pro.O[Opt[A]]                           = Z.voidFun
+  private        var upgrade          : Pack[(ROW, Pro.O[Opt[A]]) => Pro.O[Opt[A]]]    = \/
+  private[table] def mkProOpt(e: ROW) : Pro.O[Opt[A]]                                  = upgrade.stream.foldAs(proSetup(e):Pro.O[Opt[A]])((p,pe) => pe(e,p))
+  private[table] var funFormat        : A => Opt[String]                               = v => v.tag(using self.docDef)
+  private[table] var funFormatVoid    : ROW => Opt[String]                             = v => \/
+  private[table] var funTooltipOpt    : Opt[Opt[A] => Tooltip]                         = \/
+  def voidDef                                                   : Any.Def.Void[A]
+  def docDef                                                    : Any.Def.Doc[A]
 
-  @tn("value_Setup")           def value_:    (f: ROW => A)                                 : Unit   = value_:?(f(_))
-  @tn("value_SetupOpt")        def value_:?   (f: ROW => Opt[A])                            : Unit   = value_:*?(r => Pro.O.constant(f(r)))
-  @tn("value_SetupPro")        def value_:*   (f: ROW => Pro.O[A])                          : Unit   = value_:*?(f(_).map_^(Opt(_)))
-  @tn("value_SetupOptPro")     def value_:?*  (f: ROW => Opt[Pro.O[A]])                     : Unit   = value_:*?(f(_).map(_.map_^(Opt(_))) or Z.voidPro)
-  @tn("value_SetupProOpt")     def value_:*?  (f: ROW => Pro.O[Opt[A]])                     : Unit   = proSetup = f
-  @tn("enhance_SetupProOpt")   def enhance_:*?(f: (ROW, Pro.O[Opt[A]]) => Pro.O[Opt[A]])    : Unit   = enhance += f
+  def useValue      (f: ROW => A)                               : Unit   = useValueOpt(f(_))
+  def useValueOpt   (f: ROW => Opt[A])                          : Unit   = useValueProOpt(r => Pro.O.constant(f(r)))
+  def useValuePro   (f: ROW => Pro.O[A])                        : Unit   = useValueProOpt(f(_).mapView(Opt(_)))
+  def useValueOptPro (f: ROW => Opt[Pro.O[A]])                  : Unit   = useValueProOpt(f(_).map(_.mapView(Opt(_))) or Z.voidPro)
+  def useValueProOpt (f: ROW => Pro.O[Opt[A]])                  : Unit   = proSetup = f
 
-  @tn("valueView_Setup")       def valueView_:  (f: VIEW => A)                              : Unit   = valueView_:?(f(_))
-  @tn("valueView_SetupOpt")    def valueView_:? (f: VIEW => Opt[A])                         : Unit   = valueView_:*?(v => Pro.O.constant(f(v)))
-  @tn("valueView_SetupPro")    def valueView_:* (f: VIEW => Pro.O[A])                       : Unit   = valueView_:*?(f(_).map_^(Opt(_)))
-  @tn("valueView_SetupOptPro") def valueView_:?*(f: VIEW => Opt[Pro.O[A]])                  : Unit   = self.valueView_:*?(f(_).map(_.map_^(Opt(_))) or Z.voidPro)
-  @tn("valueView_SetupProOpt") def valueView_:*?(f: VIEW => Pro.O[Opt[A]])                  : Unit   = value_:*?(ZValueView(f))
+  def useValueFromView      (f: VIEW => A)                      : Unit   = useValueFromViewOpt(f(_))
+  def useValueFromViewOpt   (f: VIEW => Opt[A])                 : Unit   = useValueFromViewProOpt(v => Pro.O.constant(f(v)))
+  def useValueFromViewPro   (f: VIEW => Pro.O[A])               : Unit   = useValueFromViewProOpt(f(_).mapView(Opt(_)))
+  def useValueFromViewOptPro(f: VIEW => Opt[Pro.O[A]])          : Unit   = self.useValueFromViewProOpt(f(_).map(_.mapView(Opt(_))) or Z.voidPro)
+  def useValueFromViewProOpt(f: VIEW => Pro.O[Opt[A]])          : Unit   = useValueProOpt(ZValueView(f))
 
-  /**/                         def voidDef                                                  : Any.Def.Void[A]
-  /**/                         def docDef                                                   : Any.Def.Doc[A]
-  @tn("format_Setup")          def format_:(f: A => Opt[String])                            : Unit   = funFormat = f
-  @tn("format_Setup")          def format_:(f: A => Opt[String],voidVal: ROW => Opt[String]): Unit   = { funFormat = f; funFormatVoid = voidVal }
-  @tn("tooltip_Setup")         def tooltip_:(f: Opt[A] => Any)                              : Unit   = funTooltipOpt = f.?.map(f => (v:Opt[A]) => f(v) match { case v: Tooltip => v; case _ => Tooltip(v.toString) })
+  def useProUpgrade(f: (ROW, Pro.O[Opt[A]]) => Pro.O[Opt[A]])   : Unit   = upgrade += f
 
+  def useFormat(f: A => Opt[String])                            : Unit   = funFormat = f
+  def useFormat(f: A => Opt[String],voidVal: ROW => Opt[String]): Unit   = { funFormat = f; funFormatVoid = voidVal }
+  def useTooltip(f: Opt[A] => Any)                              : Unit   = funTooltipOpt = f.?.map(f => (v:Opt[A]) => f(v) match { case v: Tooltip => v; case _ => Tooltip(v.toString) })
 
   // ************************************************************************************************************************************
   private class ZValueView(f: VIEW => Pro.O[Opt[A]]) extends (ROW => Pro.O[Opt[A]]):
     def apply(v: ROW) : Pro.O[Opt[A]] = try self.column.table.mkViewOpt[VIEW](v).map(f(_)) or Z.voidPro
-                                        catch case v: ClassCastException => J.illegalState("Table 'view_:' is (most likely) not specified for table: " + self.column.table.^.typeName)
+                                        catch case v: ClassCastException => J.illegalState("Table 'useView' is (most likely) not specified for table: " + self.column.table.self.typeName)
 
 
 /*___________________________________________________________________________

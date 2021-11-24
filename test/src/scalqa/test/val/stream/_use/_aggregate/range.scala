@@ -3,7 +3,7 @@ package scalqa; package test.`val`.stream._use._aggregate; import language.impli
 object range extends J.Test:
 
   testTrue{
-    val r = (1 <> 100).~.reverseEvery(3).range
+    val r = (1 <> 100).stream.reverseEvery(3).range
     r.start == 1 && r.end == 100
   }
 

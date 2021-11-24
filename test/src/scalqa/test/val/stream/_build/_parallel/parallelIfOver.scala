@@ -3,10 +3,10 @@ package scalqa; package test.`val`.stream._build._parallel; import language.impl
 object parallelIfOver extends J.Test:
 
   test{
-    assertTrue((1 <> 101).~.parallelIfOver(100).isParallel)
-    assertTrue((1 <> 101).~.hideSizeData.parallelIfOver(100).isParallel)
-    assertTrue((1 <> 100).~.parallelIfOver(100).isParallel.not)
-    assertTrue((1 <> 100).~.hideSizeData.parallelIfOver(100).isParallel.not)
+    assertTrue((1 <> 101).stream.parallelIfOver(100).isParallel)
+    assertTrue((1 <> 101).stream.hideSizeData.parallelIfOver(100).isParallel)
+    assertTrue((1 <> 100).stream.parallelIfOver(100).isParallel.not)
+    assertTrue((1 <> 100).stream.hideSizeData.parallelIfOver(100).isParallel.not)
   }
 
 /*___________________________________________________________________________

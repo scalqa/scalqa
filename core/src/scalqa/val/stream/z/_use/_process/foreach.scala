@@ -2,39 +2,39 @@ package scalqa; package `val`; package stream; package z; package _use; package 
 
 object foreach:
 
-  inline def heavy[A,U](x: ~[A], inline f: A=>U): Unit  = inline x match
-    case _ : ~[A & Any.Boolean] => x match {case _ : Boolean.G.~[_] => x.cast[Boolean.~].FOREACH(v => f(v.cast[A])); case _ => { var o=x.read_?; while(o){f(o.`val`); o=x.read_?}}}
-    case _ : ~[A & Any.Byte]    => x match {case _ : Byte.G.~[_]    => x.cast[Byte.~   ].FOREACH(v => f(v.cast[A])); case _ => { var o=x.read_?; while(o){f(o.`val`); o=x.read_?}}}
-    case _ : ~[A & Any.Short]   => x match {case _ : Short.G.~[_]   => x.cast[Short.~  ].FOREACH(v => f(v.cast[A])); case _ => { var o=x.read_?; while(o){f(o.`val`); o=x.read_?}}}
-    case _ : ~[A & Any.Char]    => x match {case _ : Char.G.~[_]    => x.cast[Char.~   ].FOREACH(v => f(v.cast[A])); case _ => { var o=x.read_?; while(o){f(o.`val`); o=x.read_?}}}
-    case _ : ~[A & Any.Int]     => x match {case _ : Int.G.~[_]     => x.cast[Int.~    ].FOREACH(v => f(v.cast[A])); case _ => { var o=x.read_?; while(o){f(o.`val`); o=x.read_?}}}
-    case _ : ~[A & Any.Long]    => x match {case _ : Long.G.~[_]    => x.cast[Long.~   ].FOREACH(v => f(v.cast[A])); case _ => { var o=x.read_?; while(o){f(o.`val`); o=x.read_?}}}
-    case _ : ~[A & Any.Float]   => x match {case _ : Float.G.~[_]   => x.cast[Float.~  ].FOREACH(v => f(v.cast[A])); case _ => { var o=x.read_?; while(o){f(o.`val`); o=x.read_?}}}
-    case _ : ~[A & Any.Double]  => x match {case _ : Double.G.~[_]  => x.cast[Double.~ ].FOREACH(v => f(v.cast[A])); case _ => { var o=x.read_?; while(o){f(o.`val`); o=x.read_?}}}
-    case _                      => {var o=x.read_?; while(o){ f(o.cast[A]); o=x.read_?}}
+  inline def heavy[A,U](x: Stream[A], inline f: A=>U): Unit  = inline x match
+    case _ : Stream[A & Any.Boolean] => x match {case _ : Boolean.G.Stream[_] => x.cast[Boolean.Stream].FOREACH(v => f(v.cast[A])); case _ => { var o=x.readOpt; while(o){f(o.`val`); o=x.readOpt}}}
+    case _ : Stream[A & Any.Byte]    => x match {case _ : Byte.G.Stream[_]    => x.cast[Byte.Stream   ].FOREACH(v => f(v.cast[A])); case _ => { var o=x.readOpt; while(o){f(o.`val`); o=x.readOpt}}}
+    case _ : Stream[A & Any.Short]   => x match {case _ : Short.G.Stream[_]   => x.cast[Short.Stream  ].FOREACH(v => f(v.cast[A])); case _ => { var o=x.readOpt; while(o){f(o.`val`); o=x.readOpt}}}
+    case _ : Stream[A & Any.Char]    => x match {case _ : Char.G.Stream[_]    => x.cast[Char.Stream   ].FOREACH(v => f(v.cast[A])); case _ => { var o=x.readOpt; while(o){f(o.`val`); o=x.readOpt}}}
+    case _ : Stream[A & Any.Int]     => x match {case _ : Int.G.Stream[_]     => x.cast[Int.Stream    ].FOREACH(v => f(v.cast[A])); case _ => { var o=x.readOpt; while(o){f(o.`val`); o=x.readOpt}}}
+    case _ : Stream[A & Any.Long]    => x match {case _ : Long.G.Stream[_]    => x.cast[Long.Stream   ].FOREACH(v => f(v.cast[A])); case _ => { var o=x.readOpt; while(o){f(o.`val`); o=x.readOpt}}}
+    case _ : Stream[A & Any.Float]   => x match {case _ : Float.G.Stream[_]   => x.cast[Float.Stream  ].FOREACH(v => f(v.cast[A])); case _ => { var o=x.readOpt; while(o){f(o.`val`); o=x.readOpt}}}
+    case _ : Stream[A & Any.Double]  => x match {case _ : Double.G.Stream[_]  => x.cast[Double.Stream ].FOREACH(v => f(v.cast[A])); case _ => { var o=x.readOpt; while(o){f(o.`val`); o=x.readOpt}}}
+    case _                      => {var o=x.readOpt; while(o){ f(o.cast[A]); o=x.readOpt}}
 
-  inline def any[A,U](x: ~[A], inline f: A=>U): Unit  = inline x match
-    case _ : ~[A & Any.Boolean] => boolean(x.cast[~[Boolean]],v => f(v.cast[A]))
-    case _ : ~[A & Any.Byte]    => byte(   x.cast[~[Byte]],   v => f(v.cast[A]))
-    case _ : ~[A & Any.Short]   => short(  x.cast[~[Short]],  v => f(v.cast[A]))
-    case _ : ~[A & Any.Char]    => char(   x.cast[~[Char]],   v => f(v.cast[A]))
-    case _ : ~[A & Any.Int]     => int(    x.cast[~[Int]],    v => f(v.cast[A]))
-    case _ : ~[A & Any.Long]    => long(   x.cast[~[Long]],   v => f(v.cast[A]))
-    case _ : ~[A & Any.Float]   => float(  x.cast[~[Float]],  v => f(v.cast[A]))
-    case _ : ~[A & Any.Double]  => double( x.cast[~[Double]], v => f(v.cast[A]))
+  inline def any[A,U](x: Stream[A], inline f: A=>U): Unit  = inline x match
+    case _ : Stream[A & Any.Boolean] => boolean(x.cast[Stream[Boolean]],v => f(v.cast[A]))
+    case _ : Stream[A & Any.Byte]    => byte(   x.cast[Stream[Byte]],   v => f(v.cast[A]))
+    case _ : Stream[A & Any.Short]   => short(  x.cast[Stream[Short]],  v => f(v.cast[A]))
+    case _ : Stream[A & Any.Char]    => char(   x.cast[Stream[Char]],   v => f(v.cast[A]))
+    case _ : Stream[A & Any.Int]     => int(    x.cast[Stream[Int]],    v => f(v.cast[A]))
+    case _ : Stream[A & Any.Long]    => long(   x.cast[Stream[Long]],   v => f(v.cast[A]))
+    case _ : Stream[A & Any.Float]   => float(  x.cast[Stream[Float]],  v => f(v.cast[A]))
+    case _ : Stream[A & Any.Double]  => double( x.cast[Stream[Double]], v => f(v.cast[A]))
     case _                      => apply(  x,f)
 
-  def apply[A,U](x: ~[A],      f: A=>U                  ): Unit = {var o=x.read_?; while(o){ f(o.`val`); o=x.read_?}}
-  def boolean[U](x: ~[Boolean],f: Boolean.Fun.Consume[U]): Unit = x match {case x: Boolean.~ => x.foreach(f); case _ => { var o=x.read_?; while(o){f(o.`val`); o=x.read_?}}}
-  def byte   [U](x: ~[Byte],   f: Byte.Fun.Consume[U]   ): Unit = x match {case x: Byte.~    => x.foreach(f); case _ => { var o=x.read_?; while(o){f(o.`val`); o=x.read_?}}}
-  def char   [U](x: ~[Char],   f: Char.Fun.Consume[U]   ): Unit = x match {case x: Char.~    => x.foreach(f); case _ => { var o=x.read_?; while(o){f(o.`val`); o=x.read_?}}}
-  def short  [U](x: ~[Short],  f: Short.Fun.Consume[U]  ): Unit = x match {case x: Short.~   => x.foreach(f); case _ => { var o=x.read_?; while(o){f(o.`val`); o=x.read_?}}}
-  def int    [U](x: ~[Int],    f: Int.Fun.Consume[U]    ): Unit = x match {case x: Int.~     => x.foreach(f); case _ => { var o=x.read_?; while(o){f(o.`val`); o=x.read_?}}}
-  def long   [U](x: ~[Long],   f: Long.Fun.Consume[U]   ): Unit = x match {case x: Long.~    => x.foreach(f); case _ => { var o=x.read_?; while(o){f(o.`val`); o=x.read_?}}}
-  def float  [U](x: ~[Float],  f: Float.Fun.Consume[U]  ): Unit = x match {case x: Float.~   => x.foreach(f); case _ => { var o=x.read_?; while(o){f(o.`val`); o=x.read_?}}}
-  def double [U](x: ~[Double], f: Double.Fun.Consume[U] ): Unit = x match {case x: Double.~  => x.foreach(f); case _ => { var o=x.read_?; while(o){f(o.`val`); o=x.read_?}}}
+  def apply[A,U](x: Stream[A],      f: A=>U                  ): Unit = {var o=x.readOpt; while(o){ f(o.`val`); o=x.readOpt}}
+  def boolean[U](x: Stream[Boolean],f: Boolean.Fun.Consume[U]): Unit = x match {case x: Boolean.Stream => x.foreach(f); case _ => { var o=x.readOpt; while(o){f(o.`val`); o=x.readOpt}}}
+  def byte   [U](x: Stream[Byte],   f: Byte.Fun.Consume[U]   ): Unit = x match {case x: Byte.Stream    => x.foreach(f); case _ => { var o=x.readOpt; while(o){f(o.`val`); o=x.readOpt}}}
+  def char   [U](x: Stream[Char],   f: Char.Fun.Consume[U]   ): Unit = x match {case x: Char.Stream    => x.foreach(f); case _ => { var o=x.readOpt; while(o){f(o.`val`); o=x.readOpt}}}
+  def short  [U](x: Stream[Short],  f: Short.Fun.Consume[U]  ): Unit = x match {case x: Short.Stream   => x.foreach(f); case _ => { var o=x.readOpt; while(o){f(o.`val`); o=x.readOpt}}}
+  def int    [U](x: Stream[Int],    f: Int.Fun.Consume[U]    ): Unit = x match {case x: Int.Stream     => x.foreach(f); case _ => { var o=x.readOpt; while(o){f(o.`val`); o=x.readOpt}}}
+  def long   [U](x: Stream[Long],   f: Long.Fun.Consume[U]   ): Unit = x match {case x: Long.Stream    => x.foreach(f); case _ => { var o=x.readOpt; while(o){f(o.`val`); o=x.readOpt}}}
+  def float  [U](x: Stream[Float],  f: Float.Fun.Consume[U]  ): Unit = x match {case x: Float.Stream   => x.foreach(f); case _ => { var o=x.readOpt; while(o){f(o.`val`); o=x.readOpt}}}
+  def double [U](x: Stream[Double], f: Double.Fun.Consume[U] ): Unit = x match {case x: Double.Stream  => x.foreach(f); case _ => { var o=x.readOpt; while(o){f(o.`val`); o=x.readOpt}}}
 
-  def indexed[A,U](x: ~[A],f: (Int,A) => U, start: Int=0): Unit = {var i=start; x.FOREACH(v => {f(i,v); i+=1})}
+  def indexed[A,U](x: Stream[A],f: (Int,A) => U, start: Int=0): Unit = {var i=start; x.FOREACH(v => {f(i,v); i+=1})}
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

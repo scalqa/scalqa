@@ -3,7 +3,7 @@ package scalqa; package j; import language.implicitConversions
 object Z:
 
   def readString(x: J.Url, timeOut: Time.Length): String =
-    x.openConnection.^(c => {
+    x.openConnection.self(c => {
       c.connectTimeout = timeOut
       c.readTimeout    = timeOut
       c.doOutput       = true

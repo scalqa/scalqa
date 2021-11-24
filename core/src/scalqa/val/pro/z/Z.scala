@@ -4,11 +4,11 @@ private[`val`] object Z:
 
   class Function0[A](source: => A) extends pro.X.Abstract[A] { def apply() = source }
 
-  class Named[A](val name: String, source: => A, dependencies: ~[Gen.Observable]) extends observable.X.Basic(source, dependencies) with Able.Name
+  class Named[A](val name: String, source: => A, dependencies: Stream[Gen.Observable]) extends observable.X.Basic(source, dependencies) with Able.Name
 
-  class NamedRefreshable[A](name: String, source: => A, dependencies: ~[Gen.Observable]) extends Named[A](name, source, dependencies) with Able.Refresh { def refresh = fireChange }
+  class NamedRefreshable[A](name: String, source: => A, dependencies: Stream[Gen.Observable]) extends Named[A](name, source, dependencies) with Able.Refresh { def refresh = fireChange }
 
-  class Refreshable[A](source: => A, dependencies: ~[Gen.Observable]) extends observable.X.Basic(source, dependencies) with Able.Refresh { def refresh = fireChange }
+  class Refreshable[A](source: => A, dependencies: Stream[Gen.Observable]) extends observable.X.Basic(source, dependencies) with Able.Refresh { def refresh = fireChange }
 
   class NoEventsWrap[A](value: A) extends Observable[A]:
     def apply()                = value

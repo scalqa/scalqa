@@ -22,11 +22,11 @@ trait TypesSupport:
       case AppliedType(tpe, _) => inner(tpe)
       case tp @ TermRef(qual, typeName) =>
         qual match
-        case _: TypeRepr | _: NoPrefix => Some(tp.termSymbol)
+        case _ : TypeRepr | _: NoPrefix => Some(tp.termSymbol)
         case other => None
       case tp @ TypeRef(qual, typeName) =>
         qual match
-        case _: TypeRepr | _: NoPrefix => Some(tp.typeSymbol)
+        case _ : TypeRepr | _: NoPrefix => Some(tp.typeSymbol)
         case other => None
 
     val typeSymbol = extractTypeSymbol(method.returnTpt)
@@ -186,14 +186,14 @@ trait TypesSupport:
             case args =>
               texts("(") ++ commas(args.map(inner)) ++ texts(")")
         else inner(tpe) ++ texts("[") ++ commas(typeList.map { t => t match
-          case _: TypeBounds => texts("_") ++ inner(t)
+          case _ : TypeBounds => texts("_") ++ inner(t)
           case _ => inner(t)
         }) ++ texts("]")
 
       case tp @ TypeRef(qual, typeName) =>
         qual match {
           case r: RecursiveThis => texts(s"this.$typeName")
-          case _: TypeRepr | _: NoPrefix => link(tp.typeSymbol)
+          case _ : TypeRepr | _: NoPrefix => link(tp.typeSymbol)
           case other => noSupported(s"TypeRepr: $tp")
         }
         // convertTypeOrBoundsToReference(reflect)(qual) match {

@@ -3,9 +3,9 @@ package scalqa; package lang; package short; import language.implicitConversions
 transparent trait _methods:
   extension(inline x:Short)
     @tn("Opt")        inline def ?                         : Short.Opt       = x.cast[Short.Opt]
-    @tn("range")      inline def <> (inline to: Short)     : Short.<>        = {val w=x; w <>= to-w+1 }
-    @tn("rangeX")     inline def <>>(inline to: Short)     : Short.<>        = {val w=x; w <>= to-w   }
-    @tn("rangeOfSize")inline def <>=(inline size: Int)     : Short.<>        = new Short.<>(x,size)
+    @tn("range")      inline def <> (inline to: Short)     : Short.Range     = {val w=x; w <>= to-w+1 }
+    @tn("rangeX")     inline def <>>(inline to: Short)     : Short.Range     = {val w=x; w <>= to-w   }
+    @tn("rangeOfSize")inline def <>=(inline size: Int)     : Short.Range     = new Short.Range(x,size)
     /**/        infix inline def max(inline v: Short)      : Short           = {val y=x; val w=v; if(y.real > w.real) y else w }
     /**/        infix inline def min(inline v: Short)      : Short           = {val y=x; val w=v; if(y.real < w.real) y else w }
     /**/              inline def roundTo(inline unit:Int)
@@ -39,7 +39,7 @@ ___________________________________________________________________________*/
 
 @def <> ->  Range
 
-    Returns Short.<> from current to given value
+    Returns Short.Range from current to given value
     ```
       (1.Short <> 10.Short).TP  // Prints  1 <> 10
     ```
@@ -47,7 +47,7 @@ ___________________________________________________________________________*/
 
 @def <>> ->  Exclusive end range
 
-    Returns Short.<> from current to given value exclusive
+    Returns Short.Range from current to given value exclusive
     ```
       (1.Short <>> 10.Short).TP  // Prints  1 <> 9
     ```

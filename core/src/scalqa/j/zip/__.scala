@@ -4,9 +4,9 @@ import java.util.zip.{ Deflater, Inflater}
 
 object Zip:
 
-  def load(file: J.File, entryNamefilter: String => Boolean = \/): ~[(String, Pro[J.Input])] = zip.Z.loadFromFile(file, entryNamefilter)
+  def load(file: J.File, entryNamefilter: String => Boolean = \/): Stream[(String, Pro[J.Input])] = zip.Z.loadFromFile(file, entryNamefilter)
 
-  def save(file: J.File, entries: ~[(String, Pro[J.Input])], level: Int = 1, writeEmptyFile: Boolean = true): Unit  =
+  def save(file: J.File, entries: Stream[(String, Pro[J.Input])], level: Int = 1, writeEmptyFile: Boolean = true): Unit  =
     val stream = entries.enablePreview
     if(stream.nonEmpty || writeEmptyFile)
       val tempFile = file.temp

@@ -3,23 +3,23 @@ package scalqa; import children.*; import language.implicitConversions
 class Children private (val m: Member):
 
   private lazy val data: z.Data =
-    if     (m.name == "API")    new z.Data(m).^(_.members = m.members.~.take(_.name=="scalqa").><)
+    if     (m.name == "API")    new z.Data(m).self(_.members = m.members.valStream.take(_.name=="scalqa").pack)
     else if(m.name == "scalqa") new z.RootData(m)
     else if(m.dri.isTypeDef)    new z.OpaqueData(m)
     else                        new z.GeneralData(m)
 
-  def constructors : Seq[Member]                         = m.members.~.take(_.kind.isConstructor).sort.toSeq
-  def members      : Seq[Member]                         = data.members.toSeq_^
-  def aliases      : Seq[Member]                         = data.aliases.toSeq_^
-  def containers   : Seq[Member]                         = data.containers.toSeq_^
-  def types        : Seq[Member]                         = data.types.toSeq_^
-  def defs         : Seq[Member]                         = data.defs.toSeq_^
-  def makers       : Seq[Member]                         = data.makers.toSeq_^
-  def extended     : Seq[Member]                         = data.extended.toSeq_^
-  def exports      : Seq[Member]                         = data.exports.toSeq_^
-  def implicits    : Seq[Member]                         = data.implicits.toSeq_^
-  def givens       : Seq[Member]                         = data.givens.toSeq_^
-  def extensions   : Seq[(ExtensionTarget,List[Member])] = data.extensions.toSeq_^
+  def constructors : Seq[Member]                         = m.members.valStream.take(_.kind.isConstructor).sort.toSeq
+  def members      : Seq[Member]                         = data.members.toSeqView
+  def aliases      : Seq[Member]                         = data.aliases.toSeqView
+  def containers   : Seq[Member]                         = data.containers.toSeqView
+  def types        : Seq[Member]                         = data.types.toSeqView
+  def defs         : Seq[Member]                         = data.defs.toSeqView
+  def makers       : Seq[Member]                         = data.makers.toSeqView
+  def extended     : Seq[Member]                         = data.extended.toSeqView
+  def exports      : Seq[Member]                         = data.exports.toSeqView
+  def implicits    : Seq[Member]                         = data.implicits.toSeqView
+  def givens       : Seq[Member]                         = data.givens.toSeqView
+  def extensions   : Seq[(ExtensionTarget,List[Member])] = data.extensions.toSeqView
 
 private object Children:
   private val lookup: Lookup.M[Member,Children] = Lookup.M.concurrent()

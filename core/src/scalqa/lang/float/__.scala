@@ -28,11 +28,11 @@ ___________________________________________________________________________*/
 
     ```
 
-        val s: Float.~    = (1F <> 5F).step_~(1)
+        val s: Float.Stream = (1F <> 5F).streamStep(1)
 
-        val o: Float.Opt  = s.readRaw_?  // Holds Float.Opt(1.0)
+        val o: Float.Opt    = s.readRawOpt  // Holds Float.Opt(1.0)
 
-        val l: Float.><   = s.><         // Holds (2.0, 3.0, 4.0)
+        val l: Float.Pack   = s.pack       // Holds (2.0, 3.0, 4.0)
     ```
 
 @def min        -> Minimum     \n\n Returns type minimal value defined in java.lang.Float.MIN_VALUE

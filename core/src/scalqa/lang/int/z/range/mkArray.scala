@@ -3,7 +3,7 @@ package scalqa; package lang; package int; package z; package range; import lang
 object mkArray:
   /**/  private inline def SZ = 1024
   @fast private   lazy val BUF                  : Array[Int] = mk(0,SZ)
-  /**/  private        def mk(s:Int,sz:Int)     : Array[Int] = new Array[Int](sz).^(a => (0 <>> sz).~.foreach(i => a(i)=s+i))
+  /**/  private        def mk(s:Int,sz:Int)     : Array[Int] = new Array[Int](sz).self(a => (0 <>> sz).stream.foreach(i => a(i)=s+i))
 
   def apply(s:Int,sz:Int): Array[Int] = if(s >= 0 && s+sz <= SZ) java.util.Arrays.copyOfRange(BUF,s,s+sz) else mk(s,sz)
 

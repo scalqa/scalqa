@@ -13,11 +13,11 @@ object Range:
     abstract class Base[A, THIS <: RANGE[A]] extends RANGE[A]:
       self : THIS =>
       type THIS_TYPE  = THIS
-      @tn("join")       def join(v: A)                 : THIS_TYPE      = ops.join(self,v,self.makeNew(_,_,_))
-      @tn("join")       def join(r: RANGE[A])          : THIS_TYPE      = ops.join(self,r,self.makeNew(_,_,_))
-      /**/              def overlaps (r: RANGE[A])     : Boolean        = ops.overlaps(self,r)
-      @tn("overlap_Opt")def overlap_?(r: RANGE[A])     : Opt[THIS_TYPE] = ops.overlap_?(self,r,self.makeNew(_,_,_))
-      protected         def makeNew(s:A,e:A,in:Boolean): THIS_TYPE
+      /**/      def join(v: A)                 : THIS_TYPE      = ops.join(self,v,self.makeNew(_,_,_))
+      /**/      def join(r: RANGE[A])          : THIS_TYPE      = ops.join(self,r,self.makeNew(_,_,_))
+      /**/      def overlaps  (r: RANGE[A])    : Boolean        = ops.overlaps(self,r)
+      /**/      def overlapOpt(r: RANGE[A])    : Opt[THIS_TYPE] = ops.overlapOpt(self,r,self.makeNew(_,_,_))
+      protected def makeNew(s:A,e:A,in:Boolean): THIS_TYPE
 
     // *************************************************************************************************************
     abstract class Abstract[A] extends X.Base[A,RANGE[A]]:

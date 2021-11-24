@@ -1,8 +1,8 @@
 package scalqa; package `val`; package stream; package z; package x; import language.implicitConversions
 
-class Void[A] extends ~[A] with Able.~[A] with Able.Size.Zero with Gen.Void:
-  @tn("stream")   def ~      : ~[A]   = this
-  @tn("read_Opt") def read_? : Opt[A] = \/
+class Void[A] extends Stream[A] with Able.Stream[A] with Able.Size.Zero with Gen.Void:
+  def stream  : Stream[A] = this
+  def readOpt : Opt[A]    = \/
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

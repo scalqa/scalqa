@@ -3,21 +3,21 @@ package scalqa; package fx; package base; package `abstract`; package node; impo
 transparent trait _methods:
   self: Fx.Node =>
 
-  @tn("parent_Opt") def parent_?                                    : Opt[Parent]                           = real.getParent.?.map(Node.FxConverter(_).cast[Parent])
-  /**/              def scene                                       : Scene                                 = Scene(real.getScene)
-  /**/              def styleClasses                                : Idx.M[Style.Class]                    = Idx.M.wrap(real.getStyleClass).mutableMap_^[Style.Class]
-  /**/              def psedoClasses                                : Collection.Mutable[Style.PseudoClass] = PseudoCollection
-  /**/              def resizeRelocate(x: Double, y: Double,
-                                     width: Double, height: Double) : Unit                                  = real.resizeRelocate(x, y, width, height)
+  def parentOpt                                   : Opt[Parent]                           = real.getParent.?.map(Node.FxConverter(_).cast[Parent])
+  def scene                                       : Scene                                 = Scene(real.getScene)
+  def styleClasses                                : Idx.M[Style.Class]                    = Idx.M.wrap(real.getStyleClass).mutableMapView[Style.Class]
+  def psedoClasses                                : Collection.Mutable[Style.PseudoClass] = PseudoCollection
+  def resizeRelocate(x: Double, y: Double,
+                   width: Double, height: Double) : Unit                                  = real.resizeRelocate(x, y, width, height)
 
   // ***********************************************************************************************************
   private object PseudoCollection extends Val.Collection.Mutable[Style.PseudoClass]:
-    /**/          val fxSet                                              = real.getPseudoClassStates
-    @tn("stream") def ~                           : ~[Style.PseudoClass] = real.getPseudoClassStates.~.map(Style.PseudoClass.apply)
-    /**/          def size                        : Int                  = fxSet.size
-    /**/          def add(c: Style.PseudoClass)   : Unit                 = real.pseudoClassStateChanged(c.real, true)
-    /**/          def clear                       : Unit                 = fxSet.~.foreach(real.pseudoClassStateChanged(_, false))
-    /**/          def remove(c: Style.PseudoClass): Int                  = { real.pseudoClassStateChanged(c.real, false); 0 }
+    val fxSet                                                   = real.getPseudoClassStates
+    def stream                      : Stream[Style.PseudoClass] = real.getPseudoClassStates.valStream.map(Style.PseudoClass.apply)
+    def size                        : Int                       = fxSet.size
+    def add(c: Style.PseudoClass)   : Unit                      = real.pseudoClassStateChanged(c.real, true)
+    def clear                       : Unit                      = fxSet.valStream.foreach(real.pseudoClassStateChanged(_, false))
+    def remove(c: Style.PseudoClass): Int                       = { real.pseudoClassStateChanged(c.real, false); 0 }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -27,7 +27,7 @@ transparent trait _methods:
 ___________________________________________________________________________*/
 /**
 
-@def parent_? -> Parent
+@def parentOpt -> Parent
 
        Returns node [[Parent]]
 

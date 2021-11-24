@@ -3,7 +3,7 @@ package scalqa; package j; package util; package test; package z; import languag
 class Problem(val message: String) extends Exception(message) with Result.Problem:
   def this(context:String, count: Int, message: String) = this(context +? (count > 1) ? ("(" + count + ")") + ": " + message)
 
-  @tn("exception_Opt") def exception_? = this
+  def exceptionOpt = this
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -3,7 +3,7 @@ package scalqa; package lang; package any; package `def`; package z; import lang
 import `def`.{ Doc as Y }
 
 abstract class ProductDoc[P <: Product] extends Doc[P]:
-  def value_tag(v: P) : String = "(" + value_doc(v).value_~.makeString(",") + ")"
+  def value_tag(v: P) : String = "(" + value_doc(v).valueStream.makeString(",") + ")"
   extension[A](x:Gen.Doc) @tn("add") def +(v:A)(using t:Tag[A]): Gen.Doc = { x += ("_"+(x.size + 1), t.value_tag(v)); x }
 
 object ProductDoc:

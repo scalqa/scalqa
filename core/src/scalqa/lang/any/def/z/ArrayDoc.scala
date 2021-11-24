@@ -19,7 +19,7 @@ class ArrayDoc extends Doc[Object]:
           (s.startsWith("[Ljava.lang.Object") ? "Array[Object]" or "Array[" + s.dropFirst(2).takeBefore(";@") + "]", v eq ZZ.emptyObjectArray, v.length)
       case v                 => return Gen.Doc(v.toString)
     if(b) Gen.Doc(name) += "emptySingleton"
-    else  Gen.Doc(name + "@" + v.^.hash) += ("size",len)
+    else  Gen.Doc(name + "@" + v.self.hash) += ("size",len)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

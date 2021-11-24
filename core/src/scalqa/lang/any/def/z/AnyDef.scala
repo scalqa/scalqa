@@ -12,7 +12,7 @@ class AnyDef[A] extends Doc[A] with Void[A] with Empty[A] :
     v match
        case v: Able.Doc       => v.doc
        case null              => Gen.Doc("null")
-       case v                 => Gen.Doc(v.^.id)
+       case v                 => Gen.Doc(v.self.id)
 
   override def value_isVoid(v: A): Boolean =
     v match

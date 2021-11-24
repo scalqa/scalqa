@@ -1,42 +1,38 @@
 package scalqa; package lang; package byte; package z; import language.implicitConversions
 
-object Math extends scala.math.Numeric.ByteIsIntegral with ~~.Custom.Ordering[Byte] with Gen.Math.Sum[Byte]:
+object Math extends scala.math.Numeric.ByteIsIntegral with Stream.Custom.Ordering[Byte] with Gen.Math.Sum[Byte]:
 
   def compare(x:Byte, y:Byte) = java.lang.Byte.compare(x,y)
 
-  @tn("min_Opt")
-    def min_?(s: ~[Byte]): Val.Opt[Byte] = s.read_?.map(v=>
-      s match
-         case s: Byte.~ => s.FOLD(v)((v,w) => if(v<w) v else w)
-         case s         => s.FOLD(v)((v,w) => if(v<w) v else w)
-    )
+  def minOpt(s: Stream[Byte]): Val.Opt[Byte] = s.readOpt.map(v=>
+    s match
+       case s: Byte.Stream => s.FOLD(v)((v,w) => if(v<w) v else w)
+       case s              => s.FOLD(v)((v,w) => if(v<w) v else w)
+  )
 
-  @tn("max_Opt")
-    def max_?(s: ~[Byte]): Val.Opt[Byte] = s.read_?.map(v=>
-      s match
-         case s: Byte.~ => s.FOLD(v)((v,w) => if(v>w) v else w)
-         case s         => s.FOLD(v)((v,w) => if(v>w) v else w)
-    )
+  def maxOpt(s: Stream[Byte]): Val.Opt[Byte] = s.readOpt.map(v=>
+    s match
+       case s: Byte.Stream => s.FOLD(v)((v,w) => if(v>w) v else w)
+       case s              => s.FOLD(v)((v,w) => if(v>w) v else w)
+  )
 
-  @tn("range_Opt")
-    def range_?(s: ~[Byte]): Val.Opt[Byte.<>] = s.read_?.map(v => {
-      var f,l=v
-      s match
-         case s: Byte.~ => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
-         case s         => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
-      new Byte.<>(f,l-f+1)
-    })
+  def rangeOpt(s: Stream[Byte]): Val.Opt[Byte.Range] = s.readOpt.map(v => {
+    var f,l=v
+    s match
+       case s: Byte.Stream => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
+       case s              => s.FOREACH(v => if(v<f) f=v else if(v>l) l=v)
+    new Byte.Range(f,l-f+1)
+  })
 
-  @tn("sum_Opt")
-    def sum_?(s: ~[Byte]): Val.Opt[Byte] = s.read_?.map(first => {
-      var sum: Int = first
-      s match
-         case s: Byte.~ => s.FOREACH(v => sum = sum + v)
-         case s         => s.FOREACH(v => sum = sum + v)
-      sum.toByte
-    })
+  def sumOpt(s: Stream[Byte]): Val.Opt[Byte] = s.readOpt.map(first => {
+    var sum: Int = first
+    s match
+       case s: Byte.Stream => s.FOREACH(v => sum = sum + v)
+       case s              => s.FOREACH(v => sum = sum + v)
+    sum.toByte
+  })
 
-  def sum(s: ~[Byte])     = sum_?(s) or 0
+  def sum(s: Stream[Byte]) = sumOpt(s) or 0
 
 
 /*___________________________________________________________________________

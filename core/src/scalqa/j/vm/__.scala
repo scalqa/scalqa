@@ -2,13 +2,13 @@ package scalqa; package j
 
 object Vm:
 
-  inline def host                                       : String   = java.net.InetAddress.getLocalHost.getHostName()
-  inline def address                                    : String   = java.net.InetAddress.getLocalHost.getHostAddress()
+  inline def host                                         : String   = java.net.InetAddress.getLocalHost.getHostName()
+  inline def address                                      : String   = java.net.InetAddress.getLocalHost.getHostAddress()
 
-  inline def availableProcessors                        : Int      = Runtime.getRuntime().availableProcessors()
-  inline def exit                                       : Unit     = { println("J.Vm.exit requested"); System.exit(0) }
+  inline def availableProcessors                          : Int      = Runtime.getRuntime().availableProcessors()
+  inline def exit                                         : Unit     = { println("J.Vm.exit requested"); System.exit(0) }
 
-  /**/   def reload(className: String, paths: ~[J.Path]): Class[_] = vm.z.ClassLoader.reload(className, paths)
+  /**/   def reload(className:String,paths:Stream[J.Path]): Class[_] = vm.z.ClassLoader.reload(className, paths)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def Priority     = vm.Priority;     type Priority = vm.Priority.TYPE.DEF

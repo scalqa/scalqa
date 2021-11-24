@@ -1,10 +1,11 @@
 package scalqa; package gen; package util; import language.implicitConversions
 
-abstract class EnumCompanion[A <: scala.reflect.Enum] extends Able.~[A]:
-  protected def values: Array[A]
-
-  @tn("pack") @fast lazy val >< : ><[A] = values.~.sortBy(_.ordinal).><
-  @tn("stream")   inline def ~  : ~[A]  = this.><.~
+abstract class EnumCompanion[A <: scala.reflect.Enum] extends Idx[A]:
+  protected  def values      : Array[A]
+  @fast lazy val pack        : Pack[A]   = values.stream.sortBy(_.ordinal).pack
+  override   def stream      : Stream[A] = pack.stream
+  /**/       def apply(i:Int): A         = pack(i)
+  /**/       def size        : Int       = pack.size
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -25,17 +26,17 @@ ___________________________________________________________________________*/
 
     object Direction extends EnumCompanion[Direction]
 
-    Direction.~.TP
+    Direction.stream.TP
 
     // Output
-    ~(Up, Down, Left, Right)
+    Stream(Up, Down, Left, Right)
   ```
 
-@val >< -> Packed
+@val pack -> All values
 
         Packed values
 
-@def ~ -> Stream
+@def stream -> Stream
 
         Enum values as a stream, ordered by `ordinal` property
 */

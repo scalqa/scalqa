@@ -2,21 +2,21 @@ package scalqa; package `val`; package stream; package z; package _use; package 
 
 object count:
 
-  def all[A](x: ~[A]): Int =
+  def all[A](x: Stream[A]): Int =
     var c=0
     x.FOREACH(_ => c+=1)
     c
 
-  def conditional[A](x: ~[A],f: A => Boolean): Int =
+  def conditional[A](x: Stream[A],f: A => Boolean): Int =
     var c = 0
     x.FOREACH(v => if(f(v)) c += 1)
     c
 
-  def andTime[A](x: ~[A]): (Int,Time.Length) =
+  def andTime[A](x: Stream[A]): (Int,Time.Length) =
     val v = System.nanoTime
     (x.count, (System.nanoTime - v).Nanos)
 
-  def few[A](x: ~[A], f1: A => Boolean, f2: A => Boolean, f3: A => Boolean = \/, f4: A => Boolean = \/, f5: A => Boolean = \/)
+  def few[A](x: Stream[A], f1: A => Boolean, f2: A => Boolean, f3: A => Boolean = \/, f4: A => Boolean = \/, f5: A => Boolean = \/)
     : (Int,Int) | (Int,Int,Int) | (Int,Int,Int,Int) | (Int,Int,Int,Int,Int) =
 
       var v1 = 0
@@ -25,9 +25,9 @@ object count:
       var v4 = 0
       var v5 = 0
 
-      val is3 = f3.^.nonVoid
-      val is4 = f4.^.nonVoid
-      val is5 = f5.^.nonVoid
+      val is3 = f3.self.nonVoid
+      val is4 = f4.self.nonVoid
+      val is5 = f5.self.nonVoid
 
       x.FOREACH(v => {
         if(f1(v)) v1+=1;

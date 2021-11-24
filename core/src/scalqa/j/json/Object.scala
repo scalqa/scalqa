@@ -1,23 +1,23 @@
 package scalqa; package j; package json; import language.implicitConversions
 
 trait Object extends `val`.Lookup[String, Any] with Able.Doc:
-  /**/              def jObject  (name: String) : J.Object       = jObject_?(name).get
-  @tn("object_Opt") def jObject_?(name: String) : Opt[J.Object]  = get_?(name).takeType[J.Object]
-  /**/              def jArray(   name: String) : J.Array        = jArray_?(name).get
-  @tn("array_Opt")  def jArray_?( name: String) : Opt[J.Array]   = get_?(name).takeType[J.Array]
+  def jObject   (name: String) : J.Object       = jObjectOpt(name).get
+  def jObjectOpt(name: String) : Opt[J.Object]  = getOpt(name).takeType[J.Object]
+  def jArray(    name: String) : J.Array        = jArrayOpt(name).get
+  def jArrayOpt( name: String) : Opt[J.Array]   = getOpt(name).takeType[J.Array]
 
-  /**/              def string(   name: String) : String         = string_?(name).get
-  @tn("string_Opt") def string_?( name: String) : Opt[String]    = get_?(name).drop(_.isInstanceOf[Object]).drop(_.isInstanceOf[Array]).map(_.toString)
-  /**/              def int(      name: String) : Int            = int_?(name).get
-  /**/              def long(     name: String) : Long           = long_?(name).get
-  /**/              def double(   name: String) : Double         = double_?(name).get
-  @tn("int_Opt")    def int_?(    name: String) : Int.Opt        = get_?(name).map_?{case v:Int   => v; case s:String => s.toInt_?;    case v:Number => v.intValue;    case _ => \/ :Int.Opt}
-  @tn("long_Opt")   def long_?(   name: String) : Long.Opt       = get_?(name).map_?{case v:Long  => v; case s:String => s.toLong_?;   case v:Number => v.longValue;   case _ => \/ :Long.Opt}
-  @tn("double_Opt") def double_?( name: String) : Double.Opt     = get_?(name).map_?{case v:Double=> v; case s:String => s.toDouble_?; case v:Number => v.doubleValue; case _ => \/ :Double.Opt}
-  /**/              def boolean(  name: String) : Boolean        = string(name).toBoolean
+  def string(    name: String) : String         = stringOpt(name).get
+  def stringOpt( name: String) : Opt[String]    = getOpt(name).drop(_.isInstanceOf[Object]).drop(_.isInstanceOf[Array]).map(_.toString)
+  def int(       name: String) : Int            = intOpt(name).get
+  def long(      name: String) : Long           = longOpt(name).get
+  def double(    name: String) : Double         = doubleOpt(name).get
+  def intOpt(    name: String) : Int.Opt        = getOpt(name).mapOpt{case v:Int   => v; case s:String => s.toIntOpt;    case v:Number => v.intValue;    case _ => \/ :Int.Opt}
+  def longOpt(   name: String) : Long.Opt       = getOpt(name).mapOpt{case v:Long  => v; case s:String => s.toLongOpt;   case v:Number => v.longValue;   case _ => \/ :Long.Opt}
+  def doubleOpt( name: String) : Double.Opt     = getOpt(name).mapOpt{case v:Double=> v; case s:String => s.toDoubleOpt; case v:Number => v.doubleValue; case _ => \/ :Double.Opt}
+  def boolean(   name: String) : Boolean        = string(name).toBoolean
 
-  /**/              def doc                     : Doc            = Doc(this) ++= pair_~.map(t => (t._1,t._2.tag))
-  override          def tag                     : String         = Json.format(this)
+  def doc                      : Doc            = Doc(this) ++= pairStream.map(t => (t._1,t._2.tag))
+  override def tag             : String         = Json.format(this)
 
 object Object extends Gen.Void.Setup[AnyRef](z.Void.Object):
   type M = Mutable; inline def M = Mutable

@@ -5,9 +5,9 @@ import x.VarArg.*
 
 object tupleOfFewMacro:
 
-  inline def apply[A](inline t: (A,A)|(A,A,A)|(A,A,A,A)|(A,A,A,A,A)): ~[A]  = ${ applyMacro('t) }
+  inline def apply[A](inline t: (A,A)|(A,A,A)|(A,A,A,A)|(A,A,A,A,A)): Stream[A]  = ${ applyMacro('t) }
 
-  private def applyMacro[A:Type](t: Expr[(A,A)|(A,A,A)|(A,A,A,A)|(A,A,A,A,A)])(using Quotes): Expr[~[A]] =
+  private def applyMacro[A:Type](t: Expr[(A,A)|(A,A,A)|(A,A,A,A)|(A,A,A,A,A)])(using Quotes): Expr[Stream[A]] =
     t match
        //case '{ ($v1:A)                         } => '{ new Stream_ofOne  ($v1) }
        case '{ ($v1:A,$v2:A)                   } => '{ new Stream_ofTwo  ($v1,$v2) }
@@ -16,10 +16,10 @@ object tupleOfFewMacro:
        case '{ ($v1:A,$v2:A,$v3:A,$v4:A,$v5:A) } => '{ new Stream_ofFive ($v1,$v2,$v3,$v4,$v5) }
        case _                                    => '{ new Stream_fromTuple($t) }
 
-class Stream_fromTuple[A](v: Product) extends ~[A] with Able.Size:
+class Stream_fromTuple[A](v: Product) extends Stream[A] with Able.Size:
   private         var i               = 0
   private         val sz              = v.productArity
-  @tn("read_Opt") def read_? : Opt[A] = {var o:Opt[A]= \/; if(i<sz){ o=v.productElement(i).cast[A]; i+=1}; o }
+  def readOpt : Opt[A] = {var o:Opt[A]= \/; if(i<sz){ o=v.productElement(i).cast[A]; i+=1}; o }
   /**/            def size   : Int    = sz - i
 
 /*___________________________________________________________________________

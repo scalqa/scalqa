@@ -1,12 +1,12 @@
 package scalqa; package `val`; package stream; package z; package _build; package _mutate; import language.implicitConversions
 
-class reverse[A](x: ~[A]) extends z.x.Pipe.Calc[A](x):
+class reverse[A](x: Stream[A]) extends z.x.Pipe.Calc[A](x):
   def calc = new Calc
 
-  class Calc extends ~[A]:
+  class Calc extends Stream[A]:
     private         val b      = x.toBuffer
     private         var i      = b.size
-    @tn("read_Opt") def read_? = if(i==0) \/ else {i-=1; b(i) }
+    def readOpt = if(i==0) \/ else {i-=1; b(i) }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

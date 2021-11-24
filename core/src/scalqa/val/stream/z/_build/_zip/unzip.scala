@@ -2,11 +2,11 @@ package scalqa; package `val`; package stream; package z; package _build; packag
 
 object unzip:
 
-  def apply[A, B, C](x: ~[A], f: A => (B, C)): (~[B],~[C]) =
+  def apply[A, B, C](x: Stream[A], f: A => (B, C)): (Stream[B],Stream[C]) =
 
-    abstract class Stacked[T] extends ~[T]:
+    abstract class Stacked[T] extends Stream[T]:
       /**/            val queue  = new java.util.ArrayDeque[T]
-      @tn("read_Opt") def read_? = if(queue.size > 0) queue.pop else x.read_?.map(v => get(f(v)))
+      def readOpt = if(queue.size > 0) queue.pop else x.readOpt.map(v => get(f(v)))
       /**/            def get(v: (B,C)): T
 
     object Left extends Stacked[B]:

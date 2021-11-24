@@ -6,7 +6,7 @@ class Label extends Label.Like:
 
 object Label:
   def apply()              : Label = new Label
-  def apply[A](txt: String): Label = apply().^(_.text = txt)
+  def apply[A](txt: String): Label = apply().self(_.text = txt)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~
   type Like = label.Like

@@ -1,8 +1,8 @@
 package scalqa; package `val`; package stream; package z; package _build; package _order; import language.implicitConversions
 
-class sortBy[A,B](x: ~[A], f: A => B)(using c: Ordering[B]) extends z.x.Pipe.Calc[A](x):
+class sortBy[A,B](x: Stream[A], f: A => B)(using c: Ordering[B]) extends z.x.Pipe.Calc[A](x):
 
-  def calc = x.toBuffer.^(_.sortBy(f)).~
+  def calc = x.toBuffer.self(_.sortBy(f)).stream
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

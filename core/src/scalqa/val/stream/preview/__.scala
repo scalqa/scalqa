@@ -1,12 +1,12 @@
 package scalqa; package `val`; package stream
 
-trait Preview[A] extends ~[A] with Able.Empty:
-  /**/                    def preview                     : A
-  @tn("preview_Opt")      def preview_?                   : Opt[A]
-  @tn("preview_Stream")   def preview_~(cnt: Int)         : ~[A] & Able.Size
-  /**/                    def previewSize                 : Preview.LazySize
-  @tn("readWhile_Stream") def readWhile_~(f: A => Boolean): ~[A] & Able.Size
-  /**/             inline def isEmpty                     : Boolean            = preview_?.isEmpty
+trait Preview[A] extends Stream[A] with Able.Empty:
+  /**/   def preview                      : A
+  /**/   def previewOpt                   : Opt[A]
+  /**/   def previewStream(cnt: Int)      : Stream[A] & Able.Size
+  /**/   def previewSize                  : Preview.LazySize
+  /**/   def readWhileStream(f:A=>Boolean): Stream[A] & Able.Size
+  inline def isEmpty                      : Boolean                 = previewOpt.isEmpty
 
 
 object Preview:
@@ -26,19 +26,19 @@ ___________________________________________________________________________*/
     It allows to pre-load and inspect elements before they are read from the stream
 
     ```
-    val s  : ~[Int]          = 1 <> 10
-    val ps : ~~.Preview[Int] = s.enablePreview
+    val s  : Stream[Int]         = 1 <> 10
+    val ps : Stream.Preview[Int] = s.enablePreview
 
     ps.preview.TP            // Prints  1
 
-    ps.preview_~(5).TP       // Prints  ~(1, 2, 3, 4, 5)
+    ps.previewStream(5).TP       // Prints  Stream(1, 2, 3, 4, 5)
 
-    ps.preview_~(3).TP       // Prints  ~(1, 2, 3)
+    ps.previewStream(3).TP       // Prints  Stream(1, 2, 3)
 
     (ps.previewSize > 12).TP // Prints false
 
-    ps.TP                    // Prints ~(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-    ps.TP                    // Prints ~()
+    ps.TP                    // Prints Stream(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    ps.TP                    // Prints Stream()
     ```
 
 @def preview -> Preview next element
@@ -47,11 +47,11 @@ ___________________________________________________________________________*/
 
       Operation will fail if stream is empty
 
-@def preview_? -> Preview next optional element
+@def previewOpt -> Preview next optional element
 
       Optionally returns element, waiting in the pipeline to be next or empty option if there is none
 
-@def preview_~ ->  Preview multiple elements
+@def previewStream ->  Preview multiple elements
 
        Returns a [[Stream]] of elements waiting in the pipeline to be fetched next
 
@@ -62,16 +62,16 @@ ___________________________________________________________________________*/
        Returns a lazily evaluated size object, which preloads just enough elements to answer sizing requests
 
        ```
-       def s : ~[String] = ?_?_?
+       def s: Stream[String] = ?_?_?
 
-       def p : ~~.Preview[String] = s.preview
+       def p: Stream.Preview[String] = s.preview
 
        p.previewSize >= 10 // This will pre-load no more than 10 elements
 
        p.previewSize < 100 // This will pre-load no more than 100 elements
       ```
 
-@def readWhile_~ -> Read many elements with condition
+@def readWhileStream -> Read many elements with condition
 
       Immediatelly removes all consequtive stream elements which satisfy the given predicate.
 

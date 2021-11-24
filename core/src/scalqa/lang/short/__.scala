@@ -1,9 +1,9 @@
 package scalqa; package lang; import language.implicitConversions
 
 object Short extends short.g.companion.Containers[Short]:
-  inline def min     : Short               = java.lang.Short.MIN_VALUE
-  inline def max     : Short               = java.lang.Short.MAX_VALUE
-  inline def ordering: Gen.Ordering[Short]   = short.z.Math
+  inline def min     : Short           = java.lang.Short.MIN_VALUE
+  inline def max     : Short           = java.lang.Short.MAX_VALUE
+  inline def ordering: Ordering[Short] = short.z.Math
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Opaque   = short.Opaque.TYPE.DEF;   transparent inline def Opaque = short.Opaque
@@ -28,16 +28,15 @@ ___________________________________________________________________________*/
 
     ```
 
-        val s: Short.~   = 1.Short <> 5.Short
+        val s: Short.Stream = 1.Short <> 5.Short
 
-        val o: Short.Opt = s.readRaw_?  // Holds Short.Opt(1)
+        val o: Short.Opt    = s.readRawOpt  // Holds Short.Opt(1)
 
-        val l: Short.><  = s.><     // Holds (2,3,4,5)
+        val l: Short.Pack   = s.pack       // Holds (2,3,4,5)
     ```
 
 @def min      -> Minimum \n\n  Returns type minimal value: -2 ^ 15
 @def max      -> Maximum \n\n  Returns type maximum value: 2 ^ 15 - 1
 @def ordering -> Ordering   \n\n  Returns type natural ordering
-@def math     -> Math interface \n\n  Returns type math implementation
 
 */

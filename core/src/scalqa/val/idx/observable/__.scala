@@ -1,9 +1,9 @@
 package scalqa; package `val`; package idx; import observable.*; import language.implicitConversions
 
 trait Observable[A] extends Idx[A] with Val.Collection.Observable[A]:
-  /**/           def onChange[U](l: ><[Event[A]] => U) : Gen.Event.Control
-  final override def onAdd   [U](l: A => U)            : Gen.Event.Control = z.observable.onAdd(this, l)
-  final override def onRemove[U](l: A => U)            : Gen.Event.Control = z.observable.onRemove(this, l)
+  /**/           def onChange[U](l: Pack[Event[A]] => U): Gen.Event.Control
+  final override def onAdd   [U](l: A => U)             : Gen.Event.Control = z.observable.onAdd(this, l)
+  final override def onRemove[U](l: A => U)             : Gen.Event.Control = z.observable.onRemove(this, l)
 
 object Observable:
   @tn("getVoid")inline def void[A]                  : Observable[A] = z.Void.OM.cast[Observable[A]]
@@ -11,9 +11,9 @@ object Observable:
   implicit      inline def implicitRequest[A](v: \/): Observable[A] = void[A]
 
   extension[A]  (x: Observable[A])
-    @tn("reversed_View")     def reversed_^                 : Idx.O[A] = z.Reversed_View.O(x)
-    @tn("statefulMap_View")  def statefulMap_^[B](f: A => B): Idx.O[B] = z.Convert_View.O.Stateful(x, f)
-    @tn("map_View")          def map_^[B](f: A => B)        : Idx.O[B] = z.Convert_View.O(x, f)
+    def reversedView                 : Idx.O[A] = z.Reversed_View.O(x)
+    def statefulMapView[B](f: A => B): Idx.O[B] = z.Convert_View.O.Stateful(x, f)
+    def mapView[B](f: A => B)        : Idx.O[B] = z.Convert_View.O(x, f)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def Event = observable.Event;  type Event[A] = observable.Event[A]
@@ -37,21 +37,21 @@ ___________________________________________________________________________*/
     ```
     val idx: Idx.OM[Int] = Idx.OM[Int]()
 
-    idx.onChange(_.~.TP)
+    idx.onChange(_.stream.TP)
 
     idx ++= 1 <> 5
 
     idx(2) = 22
 
-    idx.remove_<>(3 <> 4)
+    idx.removeRange(3 <> 4)
 
-    idx.~.TP
+    idx.stream.TP
 
     // Output
-    ~(IdxChange{type=Add,range=0 <> 4,items=[1,2,3,4,5]})
-    ~(IdxChange{type=Update,range=2 <> 2,items=22,oldItems=3})
-    ~(IdxChange{type=Remove,range=3 <> 4,items=[4,5]})
-    ~(1, 2, 22)
+    Stream(IdxChange{type=Add,range=0 <> 4,items=[1,2,3,4,5]})
+    Stream(IdxChange{type=Update,range=2 <> 2,items=22,oldItems=3})
+    Stream(IdxChange{type=Remove,range=3 <> 4,items=[4,5]})
+    Stream(1, 2, 22)
     ```
 
 

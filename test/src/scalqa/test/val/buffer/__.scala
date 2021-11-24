@@ -2,8 +2,8 @@ package scalqa; package test.`val`.buffer; import language.implicitConversions
 
 object Main extends J.Test:
 
-  testEqual_~(
-    Buffer[Int]().^(_ ++= 1 <> 50),
+  testEqualStream(
+    Buffer[Int]().self(_ ++= 1 <> 50),
     1 <> 50
   )
 

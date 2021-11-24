@@ -5,14 +5,14 @@ import java.util.zip.{ ZipOutputStream, ZipEntry, ZipFile}
 object Z:
   val NoZipEntries = "NoZipEntries"
 
-  def loadFromFile(file: J.File, entryNamefilter: String => Boolean = \/): ~[(String, Pro[J.Input])] =
+  def loadFromFile(file: J.File, entryNamefilter: String => Boolean = \/): Stream[(String, Pro[J.Input])] =
     val zf = new ZipFile(file.real)
-    ~~.fromEnumeration(zf.entries)
+    Stream.fromEnumeration(zf.entries)
       .take(e => e.getName != NoZipEntries && entryNamefilter(e.getName))
       .map(e => (e.getName, Pro(J.Input(zf.getInputStream(e)))))
 
   // ------------------------------------------------------------------------------------------------------------------
-  def saveToFile(f: J.File, entries: ~[(String, Pro[J.Input])], level: Int): Unit =
+  def saveToFile(f: J.File, entries: Stream[(String, Pro[J.Input])], level: Int): Unit =
     val zos = new ZipOutputStream(f.openOutput.real)
     zos.setLevel(level)
     val out = J.Output(zos).asBytes

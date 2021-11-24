@@ -2,14 +2,14 @@ package scalqa; package `val`; package lookup; import language.implicitConversio
 
 abstract class Stable[A,B] private[scalqa]() extends Lookup[A,B]:
   type THIS_TYPE <: Stable[A,B]
-  /**/                   def join(key: A, v: B)            : THIS_TYPE
-  /**/                   def joinAll(v: ~[(A, B)])         : THIS_TYPE
-  @tn("join")     inline def + (inline key: A, inline v: B): THIS_TYPE   = join(key,v)
-  @tn("joinAll")  inline def ++(inline v: ~[(A, B)])       : THIS_TYPE   = joinAll(v)
+  /**/   def join(key: A, v: B)            : THIS_TYPE
+  /**/   def joinAll(v: Stream[(A, B)])    : THIS_TYPE
+  inline def + (inline key: A, inline v: B): THIS_TYPE   = join(key,v)
+  inline def ++(inline v: Stream[(A, B)])  : THIS_TYPE   = joinAll(v)
 
 object Stable :
-  /**/                 def apply[A,B](v: ~[(A, B)])        : Stable[A,B] = stable.z.AnyRef(v.iterator)
-  /**/                 def apply[A,B](v: (A, B)*)          : Stable[A,B] = stable.z.AnyRef(v.iterator)
+  /**/                 def apply[A,B](v: Stream[(A,B)])    : Stable[A,B] = stable.z.AnyRef(v.iterator)
+  /**/                 def apply[A,B](v: (A,B)*)           : Stable[A,B] = stable.z.AnyRef(v.iterator)
   @tn("getVoid")inline def void[A,B]                       : Stable[A,B] = stable.z.Void.cast[Stable[A,B]]
   implicit      inline def implicitRequest[A,B](v: \/)     : Stable[A,B] = void[A,B]
 

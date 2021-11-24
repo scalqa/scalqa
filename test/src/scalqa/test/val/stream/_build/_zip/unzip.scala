@@ -2,10 +2,10 @@ package scalqa; package test.`val`.stream._build._zip; import language.implicitC
 
 object unzip extends J.Test:
 
-  testEqual_~(
+  testEqualStream(
     1 to 100,
     {
-      val (first, second) = (1 <> 100).~.zip(51 <> 100).unzip;
+      val (first, second) = (1 <> 100).stream.zip(51 <> 100).unzip;
       first ++ second
     })
 

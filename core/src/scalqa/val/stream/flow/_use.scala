@@ -3,34 +3,34 @@ package scalqa; package `val`; package stream; package flow; import language.imp
 transparent trait _use[A]:
   self: Flow[A] =>
 
-  @tn("findAny_Opt") def findAny_?                                     : Opt[A]
-  @tn("find_Opt")    def find_?( f: A => Boolean)                      : Opt[A]
-  /**/               def find(   f: A => Boolean)                      : A
-  /**/               def isEvery(f: A => Boolean)                      : Boolean
-  /**/               def exists(  f: A => Boolean)                     : Boolean
-  /**/               def contains[B >: A](value: B)                    : Boolean
-  /**/               def count                                         : Int
-  /**/               def countAndTime                                  : (Int, Time.Length)
+  def findAnyOpt                                    : Opt[A]
+  def findOpt( f: A => Boolean)                     : Opt[A]
+  def find(   f: A => Boolean)                      : A
+  def isEvery(f: A => Boolean)                      : Boolean
+  def exists(  f: A => Boolean)                     : Boolean
+  def contains[B >: A](value: B)                    : Boolean
+  def count                                         : Int
+  def countAndTime                                  : (Int, Time.Length)
 
-  /**/               def reduce(bf: (A,A) => A)                        : A
-  @tn("reduce_Opt")  def reduce_?(bf: (A,A) => A)                      : Opt[A]
-  /**/               def fold(start: A)(bf: (A,A) => A)                : A
-  /**/               def foldAs[B](start:B)(bf:(B,A)=>B, cf: (B,B)=>B) : B
+  def reduce(bf: (A,A) => A)                        : A
+  def reduceOpt(bf: (A,A) => A)                     : Opt[A]
+  def fold(start: A)(bf: (A,A) => A)                : A
+  def foldAs[B](start:B)(bf:(B,A)=>B, cf: (B,B)=>B) : B
 
-  /**/               def sum                       (using Math.Sum[A]) : A
-  /**/               def min                       (using Ordering[A]) : A
-  /**/               def minBy[B](f: A => B)       (using Ordering[B]) : A
-  /**/               def max                       (using Ordering[A]) : A
-  /**/               def maxBy[B](f: A => B)       (using Ordering[B]) : A
-  /**/               def range                     (using Ordering[A]) : Range[A]
-  @tn("min_Opt")     def min_?                     (using Ordering[A]) : Opt[A]
-  @tn("minBy_Opt")   def minBy_?[B](f: A => B)     (using Ordering[B]) : Opt[A]
-  @tn("max_Opt")     def max_?                     (using Ordering[A]) : Opt[A]
-  @tn("maxBy_Opt")   def maxBy_?[B](f: A => B)     (using Ordering[B]) : Opt[A]
-  @tn("range_Opt")   def range_?                   (using Ordering[A]) : Opt[Range[A]]
+  def sum                       (using Math.Sum[A]) : A
+  def min                       (using Ordering[A]) : A
+  def minBy[B](f: A => B)       (using Ordering[B]) : A
+  def max                       (using Ordering[A]) : A
+  def maxBy[B](f: A => B)       (using Ordering[B]) : A
+  def range                     (using Ordering[A]) : Range[A]
+  def minOpt                    (using Ordering[A]) : Opt[A]
+  def minByOpt[B](f: A => B)    (using Ordering[B]) : Opt[A]
+  def maxOpt                    (using Ordering[A]) : Opt[A]
+  def maxByOpt[B](f: A => B)    (using Ordering[B]) : Opt[A]
+  def rangeOpt                  (using Ordering[A]) : Opt[Range[A]]
 
-  /**/               def foreach[U](f: A => U)                         : Unit
-  /**/               def drain                                         : Unit
+  def foreach[U](f: A => U)                         : Unit
+  def drain                                         : Unit
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -45,13 +45,13 @@ ___________________________________________________________________________*/
 
     Finds value accepted by given predicate
 
-    Note: If value is not found operation fails, use  [[find_?]] in most cases
+    Note: If value is not found operation fails, use  [[findOpt]] in most cases
 
-@def find_? -> Find optional value
+@def findOpt -> Find optional value
 
     Finds value accepted by given predicate or returns void option if not found
 
-@def findAny_? -> Find optional any value
+@def findAnyOpt -> Find optional any value
 
     Finds any value or returns void option if not found
 
@@ -76,7 +76,7 @@ ___________________________________________________________________________*/
     Returns all elements count and Time.Length it took to pump the flow
 
     ```
-       val (cnt,time) = (1 <> 1000).~.parallel.peek(_ => J.sleep(1.Millis)).countAndTime
+       val (cnt,time) = (1 <> 1000).stream.parallel.peek(_ => J.sleep(1.Millis)).countAndTime
 
        ("" + cnt + " elements processed in " + time.tag).TP
 
@@ -89,11 +89,11 @@ ___________________________________________________________________________*/
 
      Folds elements with a binary function
 
-     Note. Threre is no default value, and if flow is empty, operation fails. Use [[reduce_?]] as a safer option
+     Note. Threre is no default value, and if flow is empty, operation fails. Use [[reduceOpt]] as a safer option
 
      @param f binary function to fold elements with
 
-@def reduce_? -> Optional reduce
+@def reduceOpt -> Optional reduce
 
      Folds elements with a binary function or returns empty option when stream is empty
 
@@ -120,7 +120,7 @@ ___________________________________________________________________________*/
 
      Fails for empty streams
 
-@def min_? -> Optional minimum
+@def minOpt -> Optional minimum
 
      Computes minimum value or returns void option for empty streams
 
@@ -130,7 +130,7 @@ ___________________________________________________________________________*/
 
      Fails for empty streams
 
-@def minBy_? -> Optional minimum by property
+@def minByOpt -> Optional minimum by property
 
      Computes minimum value based on given function or returns void option for empty streams
 
@@ -140,7 +140,7 @@ ___________________________________________________________________________*/
 
      Fails for empty streams
 
-@def max_? -> Optional maximum
+@def maxOpt -> Optional maximum
 
      Computes maximum value or returns void option for empty streams
 
@@ -150,7 +150,7 @@ ___________________________________________________________________________*/
 
      Fails for empty streams
 
-@def maxBy_? -> Optional maximum by property
+@def maxByOpt -> Optional maximum by property
 
      Computes maximum value based on given function or returns void option for empty streams
 
@@ -160,7 +160,7 @@ ___________________________________________________________________________*/
 
      Fails for empty streams
 
-@def range_? -> Optional range
+@def rangeOpt -> Optional range
 
      Computes value value or returns void option for empty streams
 

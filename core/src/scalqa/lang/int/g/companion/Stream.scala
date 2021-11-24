@@ -1,9 +1,9 @@
 package scalqa; package lang; package int; package g; package companion; import language.implicitConversions
 
 class Stream[A<:Raw]:
-  /**/           inline def apply(inline v: A): G.~[A] = G.~(v)
-  /**/           inline def apply(v: A*)      : G.~[A] = G.~(v *)
-  @tn("getVoid") inline def void              : G.~[A] = G.~.void
+  /**/           inline def apply(inline v: A): G.Stream[A] = G.Stream(v)
+  /**/           inline def apply(v: A*)      : G.Stream[A] = G.Stream(v *)
+  @tn("getVoid") inline def void              : G.Stream[A] = G.Stream.void
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

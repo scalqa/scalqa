@@ -8,12 +8,12 @@ abstract class Gauge(val length: Time.Length, val minorCount: Int) extends Able.
   def labelSize                      : Int           = 30
 
 object Gauge extends Gen.Void.Setup[Gauge](new z.Gauge(1.Day, 4) with Gen.Void):
-  def apply(tl: Time.Length, minorCount: Int) : Gauge    = new z.Gauge(tl, minorCount)
-  def months(months: Int, minorCount: Int)    : Gauge    = new z.Gauge.Month(months, minorCount)
-  def years(years: Int, minorCount: Int)      : Gauge    = new z.Gauge.Year(years, minorCount)
-  def standard_~                              : ~[Gauge] = standards.~
+  def apply(tl: Time.Length, minorCount: Int) : Gauge         = new z.Gauge(tl, minorCount)
+  def months(months: Int, minorCount: Int)    : Gauge         = new z.Gauge.Month(months, minorCount)
+  def years(years: Int, minorCount: Int)      : Gauge         = new z.Gauge.Year(years, minorCount)
+  def standardStream                          : Stream[Gauge] = standards.stream
 
-  private lazy  val standards: ><[Gauge] = ><(
+  private lazy  val standards: Pack[Gauge] = Pack(
     Gauge(1.Millis, 10), Gauge(5.Millis, 5),  Gauge(25.Millis, 5), Gauge(100.Millis, 10), Gauge(250.Millis, 5), Gauge(500.Millis, 5),
     Gauge(1.Second, 10), Gauge(2.Seconds, 2), Gauge(5.Seconds, 5), Gauge(10.Seconds, 10), Gauge(15.Seconds, 3), Gauge(30.Seconds, 6),
     Gauge(1.Minute, 6),  Gauge(2.Minutes, 2), Gauge(5.Minutes, 5), Gauge(10.Minutes, 10), Gauge(15.Minutes, 3), Gauge(30.Minutes, 6),

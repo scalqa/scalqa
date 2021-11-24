@@ -19,7 +19,7 @@ object ops:
       if(r.end.>(r.endIsIn,x)) f.mk(x.start,r.end,r.endIsIn)
       else                      x
 
-  @tn("overlap_Opt") inline def overlap_?[RNG<:Range[A],A](x: RNG, r: Range[A],inline f: (A,A,Boolean) => RNG): Opt[RNG] =
+  inline def overlapOpt[RNG<:Range[A],A](x: RNG, r: Range[A],inline f: (A,A,Boolean) => RNG): Opt[RNG] =
     if(r.start.<(x))
       if(r.end.>(r.endIsIn,x)) x
       else if(x.start.>(r))     \/
@@ -44,6 +44,3 @@ object ops:
  __\  \/ /___/ __  |/ /__/ /_/ /_/ __  |   (c) 2021, Scalqa.org Inc
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
-/**
-@object X -> ### Type Extentions \n\n This object contains all provided base type implementations
-*/

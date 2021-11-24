@@ -3,9 +3,9 @@ package scalqa; package gen; package event; package store; import language.impli
 transparent trait _properties:
   self : Store =>
 
-  def setProperty_?[B]   (id: AnyRef, value: B)          : Opt[B] = { val o=removeProperty_?(id); add(id,value); o }
-  def getProperty_?[B]   (id: AnyRef, dfltOpt: =>Opt[B]) : Opt[B] = get(id).?.dropVoid.map(_.value.cast[B]) or_? dfltOpt.forval(v => add(id,v))
-  def removeProperty_?[B](id: AnyRef)                    : Opt[B] = get(id).?.dropVoid.map(e => { val v=e.value.cast[B]; e.cancel; v})
+  def setPropertyOpt[B]   (id: AnyRef, value: B)          : Opt[B] = { val o=removePropertyOpt(id); add(id,value); o }
+  def getPropertyOpt[B]   (id: AnyRef, dfltOpt: =>Opt[B]) : Opt[B] = get(id).?.dropVoid.map(_.value.cast[B]) orOpt dfltOpt.forval(v => add(id,v))
+  def removePropertyOpt[B](id: AnyRef)                    : Opt[B] = get(id).?.dropVoid.map(e => { val v=e.value.cast[B]; e.cancel; v})
 
 
 /*___________________________________________________________________________

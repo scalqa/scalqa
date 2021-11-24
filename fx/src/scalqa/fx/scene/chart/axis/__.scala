@@ -7,7 +7,7 @@ abstract class Axis[A] extends Abstract.Region with _properties:
   def valueMap    : TwoWayFunction[A, VALUE]
   val ordering    : Ordering[A]
   def apply(v: A) : Double            = real.getDisplayPosition(valueMap(v))
-  def ticks       : Idx[Tick[A]]      = Idx.wrap(real.getTickMarks).map_^(axis.Tick(_, valueMap))
+  def ticks       : Idx[Tick[A]]      = Idx.wrap(real.getTickMarks).mapView(axis.Tick(_, valueMap))
 
 object Axis:
   transparent inline def X = axis.X

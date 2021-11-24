@@ -4,12 +4,12 @@ import z._build.{ _order as Z }
 
 transparent trait _order:
 
-  extension[A](inline x: ~[A])
-    inline def sort                                                   (using inline o:Ordering[A]): ~[A] = new Z.sort(x)
-    inline def sortReversed                                           (using inline o:Ordering[A]): ~[A] = new Z.sortReversed(x)
-    inline def sortBy[B]    (inline f: A=>B)                          (using inline o:Ordering[B]): ~[A] = new Z.sortBy(x, f)
-    inline def sortBy[B,C]  (f1:A=>B,f2:A=>C)                    (using  Ordering[B], Ordering[C]): ~[A] = new Z.sortBy(x, v => (f1(v), f2(v)))
-    inline def sortBy[B,C,D](f1:A=>B,f2:A=>C,f3:A=>D)(using Ordering[B], Ordering[C], Ordering[D]): ~[A] = new Z.sortBy(x, v => (f1(v), f2(v), f3(v)))
+  extension[A](inline x: Stream[A])
+    inline def sort                                                   (using inline o:Ordering[A]): Stream[A] = new Z.sort(x)
+    inline def sortReversed                                           (using inline o:Ordering[A]): Stream[A] = new Z.sortReversed(x)
+    inline def sortBy[B]    (inline f: A=>B)                          (using inline o:Ordering[B]): Stream[A] = new Z.sortBy(x, f)
+    inline def sortBy[B,C]  (f1:A=>B,f2:A=>C)                    (using  Ordering[B], Ordering[C]): Stream[A] = new Z.sortBy(x, v => (f1(v), f2(v)))
+    inline def sortBy[B,C,D](f1:A=>B,f2:A=>C,f3:A=>D)(using Ordering[B], Ordering[C], Ordering[D]): Stream[A] = new Z.sortBy(x, v => (f1(v), f2(v), f3(v)))
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -25,7 +25,7 @@ ___________________________________________________________________________*/
      Sorts stream elements with given Ordering
 
      ```
-        ~~(5, 1, 4, 2, 3).sort.TP  // Prints ~(1, 2, 3, 4, 5)
+        Stream(5, 1, 4, 2, 3).sort.TP  // Prints Stream(1, 2, 3, 4, 5)
      ```
 
 @def sortBy -> Sort by property
@@ -33,10 +33,10 @@ ___________________________________________________________________________*/
      Sorts stream of elements based on a single property
 
      ```
-        ~~("aaaa", "bb", "ccc", "d").sortBy(_.length).TP
+        Stream("aaaa", "bb", "ccc", "d").sortBy(_.length).TP
 
         // Output
-        ~(d, bb, ccc, aaaa)
+        Stream(d, bb, ccc, aaaa)
      ```
 
 @def sortBy -> Sort by two properties
@@ -53,7 +53,7 @@ ___________________________________________________________________________*/
      Reverse sorts stream elements with given Ordering
 
      ```
-        ~~(5, 1, 4, 2, 3).sortReversed.TP  // Prints ~(5, 4, 3, 2, 1)
+        Stream(5, 1, 4, 2, 3).sortReversed.TP  // Prints Stream(5, 4, 3, 2, 1)
      ```
  */
 

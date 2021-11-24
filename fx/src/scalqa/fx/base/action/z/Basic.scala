@@ -3,7 +3,7 @@ package scalqa; package fx; package base; package action; package z; import lang
 private[fx] class Basic(n: Fx.Node.Like) extends Action():
   protected type REAL = javafx.scene.control.CustomMenuItem
 
-  protected override def _createReal: REAL = new REAL(n.real).^(_.setUserData(this))
+  protected override def _createReal: REAL = new REAL(n.real).self(_.setUserData(this))
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -4,26 +4,26 @@ import _mutate.*
 
 object mutate:
 
-  def load[A](x: ~[A]): ~[A] & Able.Size =
-    x.toBuffer.~.enableSize
+  def load[A](x: Stream[A]): Stream[A] & Able.Size =
+    x.toBuffer.stream.enableSize
 
-  def hideSizeData[A](x: ~[A]): ~[A] =
-    if(x.sizeLong_?) new hideSizeData(x) else x
+  def hideSizeData[A](x: Stream[A]): Stream[A] =
+    if(x.sizeLongOpt) new hideSizeData(x) else x
 
-  def enablePreview[A](x: ~[A]): ~[A] & Preview[A] =
+  def enablePreview[A](x: Stream[A]): Stream[A] & Preview[A] =
     x match
        case v: Preview[_] => v.cast[Preview[A]]
        case v             => new preview(v)
 
-  def enableSize[A](x: ~[A]): ~[A] & Able.Size =
+  def enableSize[A](x: Stream[A]): Stream[A] & Able.Size =
     x match
-       case v: Able.Size => x.cast[~[A] & Able.Size]
+       case v: Able.Size => x.cast[Stream[A] & Able.Size]
        case v            => new enableSize(v)
 
-  def nonEmpty_Opt[A](x: ~[A]): Opt[~[A]] =
-    x.sizeLong_? match
+  def nonEmptyOpt[A](x: Stream[A]): Opt[Stream[A]] =
+    x.sizeLongOpt match
         case o if o => o.take(_ > 0).map(_ => x)
-        case _      => { val b=x.enablePreview; if(b.preview_?) b.? else \/ }
+        case _      => { val b=x.enablePreview; if(b.previewOpt) b.? else \/ }
 
 
 /*___________________________________________________________________________

@@ -6,10 +6,10 @@ class Tooltip(so: Opt[String]= \/) extends Popup.Control:
   protected override def _createReal: REAL = so.map(new REAL(_)) or new REAL
   protected type REAL = JAVA
 
-  @tn("graphic_Pro") def graphic_*             : Pro.OM[Fx.Node] = Fx.JavaFx.To.pro_OM(real.graphicProperty).mutableMap_^[Fx.Node]
-  /**/               def graphic               : Fx.Node         = graphic_*()
-  /**/               def graphic_=(n: Fx.Node) : Unit            = graphic_*() = n
-  /**/               def attachTo(n: Fx.Node)  : Unit            = JAVA.install(n.real, real)
+  def graphicPro            : Pro.OM[Fx.Node] = Fx.JavaFx.To.pro_OM(real.graphicProperty).mutableMapView[Fx.Node]
+  def graphic               : Fx.Node         = graphicPro()
+  def graphic_=(n: Fx.Node) : Unit            = graphicPro() = n
+  def attachTo(n: Fx.Node)  : Unit            = JAVA.install(n.real, real)
 
 object Tooltip extends Void.Setup[Tooltip](new Tooltip(\/) with Void):
   def apply(s: Opt[String]= \/): Tooltip = new Tooltip(s)

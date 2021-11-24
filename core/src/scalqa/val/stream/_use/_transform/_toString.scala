@@ -2,7 +2,7 @@ package scalqa; package `val`; package stream; package _use; package _transform;
 
 transparent trait _toString:
 
-  extension[A] (inline x: ~[A])
+  extension[A](inline x: Stream[A])
     inline def toText                             (using inline t: Any.Def.Tag[A]): String = z._use._print.toText(x,false)
     inline def makeString(inline separator:String)(using inline t: Any.Def.Tag[A]): String = z._use.transform.makeString(x,separator)
 
@@ -15,14 +15,14 @@ transparent trait _toString:
 ___________________________________________________________________________*/
 /**
 
-@def makeString -> Convert ot String
+@def makeString -> Convert to String
 
      The result is a concatenation of all elements with given separator
 
      ```
-         ('a' <> 'j').~.makeString("")            // Returns abcdefghij
+         ('a' <> 'j').stream.makeString("")            // Returns abcdefghij
 
-         ('a' <> 'j').~.makeString("|")           // Returns a|b|c|d|e|f|g|h|i|j
+         ('a' <> 'j').stream.makeString("|")           // Returns a|b|c|d|e|f|g|h|i|j
 
      ```
 @def toText -> Elements as multi-line String
@@ -34,7 +34,7 @@ ___________________________________________________________________________*/
       If elements implement `scala.Product` (like all Tuples), each Product element is placed in a different column
 
       ```
-         ('a' <> 'e').~.map(v => (v + "1", v + "2", v + "3", v + "4", v + "5")).toText.TP
+         ('a' <> 'e').stream.map(v => (v + "1", v + "2", v + "3", v + "4", v + "5")).toText.TP
 
          // Output
          -- -- -- -- --
