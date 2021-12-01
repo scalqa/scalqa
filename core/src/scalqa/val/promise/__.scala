@@ -22,6 +22,7 @@ trait Promise[+A]:
 object Promise:
   def apply[A](calc: => A)(using c:Context) : Promise[A] = { val pc=Control[A](); c.execute(new Runnable{def run:Unit=pc.tryComplete(Result(calc))}); pc.promise }
   def ready[A](v: A | Result.Problem)       : Promise[A] = v match {case p:Result.Problem => Z.Failed(p); case v => Z.Completed(v.cast[A])}
+  def unapply[A](v: Promise[A])             : Option[A]  = v.resultOpt.mapOpt(_.valueOpt).toScala
 
   extension[A](x: Promise[A])
     inline def withFilter(inline f: A=>Boolean)(using inline c:Context): Promise[A] = x.take(f,_ => Result.Problem.failedFilter)

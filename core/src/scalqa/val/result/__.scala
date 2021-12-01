@@ -7,6 +7,7 @@ object Result:
   implicit inline def implicitFromAny    [A](inline v: A)        : Result[A]   = apply(v)
   implicit inline def implicitFromProblem[A](inline v: Problem)  : Result[A]   = apply(v)
   implicit inline def implicitToBoolean  [A](inline v: Result[A]): Boolean     = v.isValue
+  /**/            def unapply[A](v: Result[A])                   : Option[A]   = v.valueOpt.toScala
   // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   extension[A](inline x: Result[A])
     /**/  inline def take(inline f: A=>Boolean, inline p:A=>Problem)  : Result[A]    = {var r=x; if(r.isValue){   val v=r.cast[A]; if(!f(v)) r=p(v)}; r}

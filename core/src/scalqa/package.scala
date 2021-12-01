@@ -2,16 +2,29 @@ import language.implicitConversions
 
 package object scalqa:
   export scalqa.Lang.*
-  export scalqa.Val.*
   export scalqa.Gen.*
   export scalqa.gen.Request.*
   export scalqa.j.vm.Predef.{ given }
 
+  // cannot simply export scalqa.Val.*, when pattern matching on containers is desired.
+  type Stream[+A]     = `val`.Stream[A];          val Stream     = `val`.Stream
+  type Range[A]       = `val`.Range[A];           val Range      = `val`.Range
+  type Pack[A]        = `val`.Pack[A];            val Pack       = `val`.Pack
+  type Buffer[A]      = `val`.Buffer[A];          val Buffer     = `val`.Buffer
+  type Collection[+A] = `val`.Collection[A];      val Collection = `val`.Collection
+  type Idx[+A]        = `val`.Idx[A];             val Idx        = `val`.Idx
+  type Lookup[A,+B]   = `val`.Lookup[A,B];        val Lookup     = `val`.Lookup
+  type Opt[+A]        = `val`.Opt.TYPE.DEF[A];    val Opt        = `val`.Opt
+  type Pro[+A]        = `val`.Pro[A];             val Pro        = `val`.Pro
+  type Promise[+A]    = `val`.Promise[A];         val Promise    = `val`.Promise
+  type Result[+A]     = `val`.Result.TYPE.DEF[A]; val Result     = `val`.Result
+  type Set[A]         = `val`.Set[A];             val Set        = `val`.Set
+
+  // Scalqa privates --------------------------------------------------------------------------------------------------------------------------------
   private[scalqa] type ClassTag[A]    = scala.reflect.ClassTag[A];      private[scalqa] transparent inline def ClassTag   = scala.reflect.ClassTag
   private[scalqa] type Specialized[A] = lang.any.Specialized[A];        private[scalqa] transparent inline def Specialized= lang.any.Specialized;
   private[scalqa] type tn             = scala.annotation.targetName
   private[scalqa] type fast           = scala.annotation.threadUnsafe
-
   extension[A](inline x: A)
     private[scalqa] inline def cast[B]: B = x.asInstanceOf[B]
 

@@ -4,8 +4,9 @@ trait Pro[+A]:
   def apply(): A
 
 object Pro:
-  /**/            def apply[A](source: => A)          : Pro[A]   = Z.Function0(source)
-  implicit inline def implicitToFunction[A](v: Pro[A]): () => A  = () => v()
+  /**/            def apply[A](source: => A)          : Pro[A]    = Z.Function0(source)
+  /**/            def unapply[A](v: Pro[A])           : Option[A] = Some(v())
+  implicit inline def implicitToFunction[A](v: Pro[A]): () => A   = () => v()
 
   extension[A]  (x: Pro[A])
     /**/   def mapView[B](f: A => B)                                            : Pro[B]   = new z.Convert_View(x, f)

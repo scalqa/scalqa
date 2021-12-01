@@ -6,12 +6,13 @@ trait Idx[+A] extends Collection[A]:
   def stream        : Stream[A] = idx.z.DefaultStream(this)
 
 object Idx:
-  /**/                 def apply[A](v: A)                   : Idx[A]  = Pack(v)
-  /**/                 def apply[A](v1:A, v2:A)             : Idx[A]  = Pack(v1,v2)
-  /**/                 def apply[A](v1:A, v2:A, v3:A, vs:A*): Idx[A]  = Pack(v1,v2,v3,vs *)
-  /**/                 def wrap[A](v: java.util.List[A])    : Idx[A]  = idx.z.as.JavaListWrap[A](v)
-  @tn("getVoid")inline def void[A]                          : Idx[A]  = \/ : Pack[A]
-  implicit      inline def implicitRequest[A](v: \/)        : Idx[A]  = void
+  /**/                 def apply[A](v: A)                   : Idx[A]         = Pack(v)
+  /**/                 def apply[A](v1:A, v2:A)             : Idx[A]         = Pack(v1,v2)
+  /**/                 def apply[A](v1:A, v2:A, v3:A, vs:A*): Idx[A]         = Pack(v1,v2,v3,vs *)
+  /**/                 def wrap[A](v: java.util.List[A])    : Idx[A]         = idx.z.as.JavaListWrap[A](v)
+  @tn("getVoid")inline def void[A]                          : Idx[A]         = \/ : Pack[A]
+  /**/                 def unapplySeq[A](v: Idx[A])         : Option[Seq[A]] = Some(v.toSeqView)
+  implicit      inline def implicitRequest[A](v: \/)        : Idx[A]         = void
 
   extension[A] (x: Idx[A])
     def applyOpt(position: Int)                         : Opt[A]            = if (position < 0 || position >= x.size) \/ else x(position)

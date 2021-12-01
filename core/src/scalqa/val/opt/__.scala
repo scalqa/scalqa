@@ -1,10 +1,11 @@
 package scalqa; package `val`; import language.implicitConversions;
 
 object Opt extends z_ValOptDefailts:
-  def apply[A](v: A)                        : Opt[A] = v.cast[AnyRef].cast[Opt[A]]
-  def fromScala[A](v: scala.Option[A])      : Opt[A] = if (v.isEmpty) \/ else v.get
-  def fromJava [A](v: java.util.Optional[A]): Opt[A] = if (v.isPresent) v.get else \/
-  @tn("getVoid") def void[A]                : Opt[A] = ZZ.None.cast[Opt[A]]
+  def apply[A](v: A)                            : Opt[A]    = v.cast[AnyRef].cast[Opt[A]]
+  def fromScala[A](v: scala.Option[A])          : Opt[A]    = if (v.isEmpty) \/ else v.get
+  def fromJava [A](v: java.util.Optional[A])    : Opt[A]    = if (v.isPresent) v.get else \/
+  @tn("getVoid") def void[A]                    : Opt[A]    = ZZ.None.cast[Opt[A]]
+  /**/    inline def unapply[A](inline v:Opt[A]): Option[A] = v.toScala
 
   extension[A](inline x:Opt[A])
     /**/  inline def isEmpty                                     : Boolean    = x eq ZZ.None

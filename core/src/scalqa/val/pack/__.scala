@@ -27,13 +27,14 @@ abstract class Pack[A] private[scalqa]() extends Idx[A]:
   /**/                     def z_foreach[U](f: A=>U)                       : Unit
 
 object Pack:
-  /**/                     def apply[A](v: A)                              : Pack[A]    = z.Few.Pack_ofOne(v)
-  /**/                     def apply[A](v1: A, v2: A)                      : Pack[A]    = z.Few.Pack_ofTwo(v1, v2)
-  /**/                     def apply[A](v1: A, v2: A, v3: A, vs: A*)       : Pack[A]    = if (vs.isEmpty) z.Few.Pack_ofThree(v1, v2, v3) else z.ArrayPack(v1, v2, v3, vs)
-  @tn("getVoid")    inline def void[A]                                     : Pack[A]    = ZZ.Void[A]
-  /**/              inline def fromArray[A](a: Array[AnyRef])              : Pack[A]    = fromArray(a,a.length)
-  /**/                     def fromArray[A](a: Array[AnyRef], sz: Int)     : Pack[A]    = new z.ArrayPack(a.copySize(sz),sz)
-  implicit          inline def implicitRequest[A](v: \/)                   : Pack[A]    = void[A]
+  /**/                     def apply[A](v: A)                       : Pack[A]       = z.Few.Pack_ofOne(v)
+  /**/                     def apply[A](v1: A, v2: A)               : Pack[A]       = z.Few.Pack_ofTwo(v1, v2)
+  /**/                     def apply[A](v1: A, v2: A, v3: A, vs: A*): Pack[A]       = if (vs.isEmpty) z.Few.Pack_ofThree(v1, v2, v3) else z.ArrayPack(v1, v2, v3, vs)
+  @tn("getVoid")    inline def void[A]                              : Pack[A]       = ZZ.Void[A]
+  /**/              inline def fromArray[A](a: Array[AnyRef])       : Pack[A]       = fromArray(a,a.length)
+  /**/                     def fromArray[A](a: Array[AnyRef],sz:Int): Pack[A]       = new z.ArrayPack(a.copySize(sz),sz)
+  /**/                     def unapplySeq[A](v: Pack[A])            : Option[Seq[A]]= Some(v.toSeqView)
+  implicit          inline def implicitRequest[A](v: \/)            : Pack[A]       = void[A]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
