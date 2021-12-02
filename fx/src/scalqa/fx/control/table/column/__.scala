@@ -30,7 +30,7 @@ abstract class Column[ROW,V,A] private[control](val voidDef: Any.Def.Void[A], va
   private[table] def rowOrdering                  : Ordering[ROW]      = { val o = ordering.optView(1).on[ROW](e => mkProOpt(e)()); if (real.getSortType == javafx.scene.control.TableColumn.SortType.DESCENDING) o.reverse else o }
 
   // ??? This will move to _properties when dotty issue 13358 is fixed
-  @fast lazy val orderingPro: Pro.OM[Ordering[A]] = Pro.OM(\/)
+  @fast lazy val orderingPro: Pro.OM[Ordering[A]] = Pro.OM(VOID)
   @fast lazy val sortablePro: Boolean.Pro.OM      = Fx.JavaFx.To.pro_OM(real.sortableProperty)
 
 /*___________________________________________________________________________

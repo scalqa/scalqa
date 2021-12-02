@@ -10,7 +10,7 @@ object evaluate:
 
   def containsSequence[A](x: Stream[A],v: Stream[A]): Boolean  = _evaluate.find.sequencePositionOpt(x,v)
 
-  def lastOpt[A](x: Stream[A])                     : Opt[A]   = {var o: Opt[A] = \/; x.FOREACH(o = _); o}
+  def lastOpt[A](x: Stream[A])                     : Opt[A]   = {var o: Opt[A]=VOID; x.FOREACH(o = _); o}
 
 
 /*___________________________________________________________________________

@@ -12,11 +12,11 @@ private[`val`] object Z:
 
   class NoEventsWrap[A](value: A) extends Observable[A]:
     def apply()                = value
-    def onChange[U](f: () => U) = \/
+    def onChange[U](f: () => U)=VOID
 
   class Constant[A](v: A) extends Observable[A]:
     def apply(): A = v
-    def onChange[U](f: () => U) = \/
+    def onChange[U](f: () => U)=VOID
 
   class Sealable[A](v: A) extends mutable.X.Basic[A](v) with Able.Seal:
     private var _sealed = false

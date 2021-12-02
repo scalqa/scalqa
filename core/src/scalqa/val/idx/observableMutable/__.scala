@@ -14,7 +14,7 @@ object ObservableMutable:
     /**/                                                                           case v:Idx.M[_]  => new X.Basic[A](v.cast[Idx.M[A]])
     /**/                                                                           case v:Idx.O[_]  => new z.Unsupported_View.O.OM[A](v.cast[Idx.O[A]])
     /**/                                                                           case v           => new z.Unsupported_View.OM[A](v)
-  implicit       inline def implicitRequest[A](v: \/)               : Idx.OM[A] = void
+  implicit       inline def implicitRequest[A](v:VOID)              : Idx.OM[A] = void
   implicit       inline def implicitRequest[A](inline v: NEW)       : Idx.OM[A] = apply[A]()
 
   extension[A]  (x: ObservableMutable[A])
@@ -55,6 +55,6 @@ ___________________________________________________________________________*/
 
             Supposedly, the elements themself are mutable and their representation has to be "refreshed"
 
-@def implicitRequest -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest -> General void instance request \n\n It is possible to use general request VOID to get void instance of this type, thanks to this implicit conversion.
 
 */

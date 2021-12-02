@@ -2,9 +2,9 @@ package scalqa; package fx; package scene; import Application.*; import language
 
 import javafx.stage.{ Stage => JStage }
 
-abstract class Application(width: Int.Opt, height: Int.Opt, private val title: String = \/, private val show: Boolean = true, verbose: Boolean = true) :
+abstract class Application(width: Int.Opt, height: Int.Opt, private val title: String=VOID, private val show: Boolean = true, verbose: Boolean = true) :
   self =>
-  def this(title: String, show: Boolean, verbose: Boolean)  = this(\/,\/,title,show,verbose)
+  def this(title: String, show: Boolean, verbose: Boolean)  = this(VOID,VOID,title,show,verbose)
   def this(title: String, show: Boolean)                    = this(title,show,true)
   def this(title: String)                                   = this(title,true)
   def this()                                                = this("")

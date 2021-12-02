@@ -6,7 +6,7 @@ trait Idx[A<:Raw] extends Val.Idx[A] with Collection[A]:
   override def contains(v: A): Boolean   = {var i=0; val sz=size; while(i<sz){if(apply(i).real==v.real) return true; i+=1}; false}
 
 object Idx:
-  implicit inline def implicitRequest[A<:Raw](v: \/): Idx[A] = Pack.void
+  implicit inline def implicitRequest[A<:Raw](v:VOID): Idx[A] = Pack.void
 
   trait Mutable[A<:Raw] extends Idx[A] with Collection.Mutable[A] with Val.Idx.M[A]:
     def addAt   (i: Int, v: A): Unit

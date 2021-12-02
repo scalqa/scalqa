@@ -17,7 +17,7 @@ object find:
       if(f(o.`val`)) return i
       o = x.readOpt
       i += 1
-    \/
+    VOID
 
   def sequencePositionOpt[A](x: Stream[A], v: Stream[A]): Int.Opt =
     val pk = v.pack
@@ -31,7 +31,7 @@ object find:
       else i = 0
       j += 1
       o = x.readOpt
-    \/
+    VOID
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

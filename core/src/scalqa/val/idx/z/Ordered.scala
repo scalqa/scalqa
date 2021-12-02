@@ -15,7 +15,7 @@ private[scalqa] object Ordered:
         val i = start + (to - start - 1) / 2
         val c = o.compare(v, l(i))
         if (c < 0) bs(start, i) else if (c > 0) bs(i + 1, to) else i <> i
-    if (l.isEmpty) \/ else
+    if (l.isEmpty) VOID else
       val r = bs(0, l.size)
       if (r.size == 0) r else
         var i = r.start

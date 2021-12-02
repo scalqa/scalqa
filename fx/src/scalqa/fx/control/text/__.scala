@@ -2,7 +2,7 @@ package scalqa; package fx; package control; import language.implicitConversions
 
 import Text.Font
 
-class Text(s: Opt[String]= \/) extends Shape:
+class Text(s: Opt[String]=VOID) extends Scene.Shape:
   protected def _createReal: REAL = s.map(new REAL(_)) or new REAL
   protected type REAL = javafx.scene.text.Text
 

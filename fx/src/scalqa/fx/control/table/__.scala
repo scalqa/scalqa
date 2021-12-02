@@ -24,13 +24,13 @@ abstract class Table[ROW] extends Control with _properties[ROW] with _Column[ROW
     })
   })
 
-  private[fx] def mkViewOpt[VIEW](v: ROW)       : Opt[VIEW] = viewOptFun(v).cast[Opt[VIEW]]; private var viewOptFun: ROW => Opt[VIEW] = v => if(v == null) \/ else v.cast[VIEW]
+  private[fx] def mkViewOpt[VIEW](v: ROW)       : Opt[VIEW] = viewOptFun(v).cast[Opt[VIEW]]; private var viewOptFun: ROW => Opt[VIEW] = v => if(v == null) VOID else v.cast[VIEW]
   protected   def useView (f: ROW => VIEW)       : Unit      = useViewOpt(f(_))
   protected   def useViewOpt(f: ROW => Opt[VIEW]): Unit      = viewOptFun = f
 
   //??? This will move to _properties when dotty issue 13358 is fixed
-  @fast lazy val orderingPro   : Pro.OM[Ordering[ROW]]          = Pro.OM.X.Basic[Ordering[ROW]](\/)
-  @fast lazy val sortingBasePro: Pro.OM[Ordering[ROW]]          = Pro.OM.X.Basic[Ordering[ROW]](\/)
+  @fast lazy val orderingPro   : Pro.OM[Ordering[ROW]]          = Pro.OM.X.Basic[Ordering[ROW]](VOID)
+  @fast lazy val sortingBasePro: Pro.OM[Ordering[ROW]]          = Pro.OM.X.Basic[Ordering[ROW]](VOID)
 
 object Table:
   private[fx] type Column[ROW,V,A] = table.Column[ROW,V,A]

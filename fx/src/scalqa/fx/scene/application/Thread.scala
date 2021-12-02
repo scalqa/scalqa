@@ -13,7 +13,7 @@ object Thread extends concurrent.ExecutionContext:
   private class z_DelayedJob(fun: => Unit) extends Runnable { def run = fun }
 
   private class z_ScheduledJob(fun: => Unit) extends Runnable:
-    var problem : Opt[Throwable] = \/
+    var problem : Opt[Throwable]=VOID
     var waiting  = true
     def runJob   = if(problem) throw problem.get; else if(waiting) { waiting = false; execute(this) }
     def run      = try{ fun; waiting = true } catch{ case v: Throwable => problem = v}

@@ -4,7 +4,7 @@ import javafx.scene.input.ContextMenuEvent
 
 class ContextMenu(e: ContextMenuEvent, node: Fx.Node) extends Input(e, node):
   protected type REAL <: ContextMenuEvent
-  private var onClosed: Pack[() => Unit] = \/
+  private var onClosed: Pack[() => Unit]=VOID
 
   val actions                     : Idx.M[Action] = Idx.M()
   def x                           : Double        = real.getX
@@ -15,7 +15,7 @@ class ContextMenu(e: ContextMenuEvent, node: Fx.Node) extends Input(e, node):
   def onMenuClosedRun(l: => Unit) : Unit          = onClosed += (() => l);
 
 object ContextMenu:
-  private var currentMenus: Pack[ContextMenu] = \/
+  private var currentMenus: Pack[ContextMenu]=VOID
 
   def show(e: ContextMenu): Unit = synchronized {
     currentMenus += e
@@ -30,7 +30,7 @@ object ContextMenu:
     }.map(_.toMenuItem)
     currentMenus.stream.flatMap(_.onClosed).pack.self(l => if (l.size > 0) menu.onHidden(() => l.stream.foreach(_())))
     currentMenus.last.self(e => e.node.sceneOpt.forval(s => menu.show(s.window, e.screenX, e.screenY)))
-    currentMenus = \/
+    currentMenus=VOID
   }
 
 /*___________________________________________________________________________

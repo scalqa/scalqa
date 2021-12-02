@@ -19,10 +19,10 @@ transparent trait _Column[ROW]:
       if (f != null) useValue(f)
       widthOpt.forval(prefWidth = _)
     }
-    def this(label: String, f: ROW => A)(using o: Opt[Ordering[A]])(using t:Def.Void[A],d:Def.Doc[A]) = this(label, \/, f)(using o)(using t,d)
+    def this(label: String, f: ROW => A)(using o: Opt[Ordering[A]])(using t:Def.Void[A],d:Def.Doc[A]) = this(label,VOID, f)(using o)(using t,d)
     def this(label: String, width : Int)(using o: Opt[Ordering[A]])(using t:Def.Void[A],d:Def.Doc[A]) = this(label, width, null)(using o)(using t,d)
-    def this(label: String)             (using o: Opt[Ordering[A]])(using t:Def.Void[A],d:Def.Doc[A]) = this(label, \/, null)(using o)(using t,d)
-    def this(f: ROW => A)               (using o: Opt[Ordering[A]])(using t:Def.Void[A],d:Def.Doc[A]) = this("", \/, f)(using o)(using t,d)
+    def this(label: String)             (using o: Opt[Ordering[A]])(using t:Def.Void[A],d:Def.Doc[A]) = this(label,VOID, null)(using o)(using t,d)
+    def this(f: ROW => A)               (using o: Opt[Ordering[A]])(using t:Def.Void[A],d:Def.Doc[A]) = this("",VOID, f)(using o)(using t,d)
 
     def table = self
 

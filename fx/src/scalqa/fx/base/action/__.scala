@@ -3,7 +3,7 @@ package scalqa; package fx; package base; import action.*; import language.impli
 import javafx.scene.control.MenuItem;
 import javafx.event.ActionEvent;
 
-class Action(label: String = \/) extends Abstract.Delegate.Gui:
+class Action(label: String=VOID) extends Abstract.Delegate.Gui:
   protected type REAL <: MenuItem
   protected  def _createReal                      : REAL              = new MenuItem(label.?? or null) { setUserData(Action.this) }.cast[REAL]
   /**/       def onAction[U](l: Event => U)       : Gen.Event.Control = _onFxEvent[ActionEvent,U](real.onActionProperty, Gen.Event.Id.map1(l,(e: ActionEvent) => l(Event(e))))
@@ -22,7 +22,7 @@ class Action(label: String = \/) extends Abstract.Delegate.Gui:
   /**/       def enable_=(b: Boolean)             : Unit              = real.setDisable(!b)
   /**/       def enablePro                        : Pro.OM[Boolean]   = Fx.JavaFx.To.pro_OM(real.disableProperty).mutableMapView(using z_BooleanReverse)
 
-  /**/       def sceneOpt                         : Opt[Scene]        = \/
+  /**/       def sceneOpt                         : Opt[Scene]       =VOID
 
 
 object Action:

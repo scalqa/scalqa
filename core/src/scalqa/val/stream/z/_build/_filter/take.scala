@@ -7,7 +7,7 @@ class take[A](x: Stream[A], f: A => Boolean) extends z.x.Pipe[A](x):
     while (o)
       if(f(o.cast[A])) return o
       o = x.readOpt
-    \/
+    VOID
 
 
 object take:

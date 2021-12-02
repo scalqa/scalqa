@@ -14,7 +14,7 @@ object Path extends AnyRef.Opaque.Base[Path,REAL]("J.Path") with path._methods:
   override        def value_tag(v: Path)             : String  = v.real.toString
   override        def value_doc(v: Path)             : Doc     = super.value_doc(v) += ("size",v.size)
 
-  implicit inline def implicitRequest(v: \/)              : Path    = void
+  implicit inline def implicitRequest(v:VOID)             : Path    = void
   implicit inline def implicitFromReal(inline v:REAL)     : Path    = v.toOpaque
   implicit inline def implicitFromString(inline v: String): Path    = apply(v)
   implicit inline def implicitFromFile(inline v: J.File)  : Path    = v.path
@@ -35,6 +35,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitRequest    -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest    -> General void instance request \n\n It is possible to use general request VOID to get void instance of this type, thanks to this implicit conversion.
 
 */

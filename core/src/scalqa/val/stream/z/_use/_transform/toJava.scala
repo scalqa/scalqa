@@ -5,14 +5,14 @@ import java.{ util as J }
 object toJava:
 
   class Iterator[A](v: Stream[A]) extends J.Iterator[A]:
-    private var o: Opt[A] = \/
+    private var o: Opt[A]=VOID
     def hasNext           = o || { o = v.readOpt; o }
-    def next              = if (hasNext) { val v = o.get; o = \/; v } else throw ZZ.EO()
+    def next              = if (hasNext) { val v = o.get; o=VOID; v } else throw ZZ.EO()
 
   class Enumeration[A](v: Stream[A]) extends J.Enumeration[A]:
-    private var o: Opt[A] = \/
+    private var o: Opt[A]=VOID
     def hasMoreElements   = o || { o = v.readOpt; o}
-    def nextElement       = if (hasMoreElements) { val v = o.get; o = \/; v} else throw ZZ.EO()
+    def nextElement       = if (hasMoreElements) { val v = o.get; o=VOID; v} else throw ZZ.EO()
 
   class Spliterator[A](s: Stream[A], protected val splitSize: Int) extends J.Spliterator[A]:
     def characteristics                            : Int              = J.Spliterator.SUBSIZED | s.sizeLongOpt.map(_ => J.Spliterator.SIZED).or(0)

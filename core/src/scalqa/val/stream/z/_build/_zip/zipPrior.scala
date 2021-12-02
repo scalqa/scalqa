@@ -1,7 +1,7 @@
 package scalqa; package `val`; package stream; package z; package _build; package _zip; import language.implicitConversions
 
 class zipPrior[A](x: Stream[A]) extends z.x.Pipe.Sized[(Opt[A], A)](x):
-  private         var o: Opt[A] = \/
+  private         var o: Opt[A]=VOID
   def readOpt    = x.readOpt.map(v => (o, v).self(v => o = v._2))
 
 /*___________________________________________________________________________

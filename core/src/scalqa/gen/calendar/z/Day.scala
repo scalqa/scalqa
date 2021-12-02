@@ -25,7 +25,7 @@ object Day extends java.util.concurrent.atomic.AtomicReference[Setup.Lookup](Set
 
   // ***********************************************************************************
   private[z] object Setup:
-    object Void extends Setup(\/, \/, 0, \/) with Gen.Void
+    object Void extends Setup(VOID,VOID, 0, VOID) with Gen.Void
 
     // *******************************************************************************************************************
     class Lookup private (array : Array[Array[Setup]], start: Int):
@@ -34,7 +34,7 @@ object Day extends java.util.concurrent.atomic.AtomicReference[Setup.Lookup](Set
       private        val end = start + array.length * SZ
 
       def getOpt(d: Day): Opt[Setup] =
-        if(d.real < start || d.real >= end) return \/
+        if(d.real < start || d.real >= end) return VOID
         var i = d.real - start
         val a = array(i / SZ).self.mapIf(_ == null, _ => new Array[Setup](SZ).self(array(i / SZ) = _))
         a(i % SZ).self.mapIf(_ == null, _ => new Setup(d).self(a(i % SZ) = _))

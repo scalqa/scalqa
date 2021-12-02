@@ -16,7 +16,7 @@ object count:
     val v = System.nanoTime
     (x.count, (System.nanoTime - v).Nanos)
 
-  def few[A](x: Stream[A], f1: A => Boolean, f2: A => Boolean, f3: A => Boolean = \/, f4: A => Boolean = \/, f5: A => Boolean = \/)
+  def few[A](x: Stream[A], f1: A => Boolean, f2: A => Boolean, f3: A => Boolean=VOID, f4: A => Boolean=VOID, f5: A => Boolean=VOID)
     : (Int,Int) | (Int,Int,Int) | (Int,Int,Int,Int) | (Int,Int,Int,Int,Int) =
 
       var v1 = 0

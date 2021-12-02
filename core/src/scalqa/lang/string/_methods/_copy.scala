@@ -3,12 +3,12 @@ package scalqa; package lang; package string; package _methods; import language.
 transparent trait _copy:
 
   extension(inline x: String)
-    inline def takeBefore    (inline v:String, inline dflt:Opt[String]= \/, inline fromPosition:Int.Opt = \/): String   = Z.takeBefore    (x,v,dflt,fromPosition)
-    inline def takeBeforeLast(inline v:String, inline dflt:Opt[String]= \/, inline fromPosition:Int.Opt = \/): String   = Z.takeBeforeLast(x,v,dflt,fromPosition)
-    inline def takeFrom      (inline v:String, inline dflt:Opt[String]= \/, inline fromPosition:Int.Opt = \/): String   = Z.takeFrom(      x,v,dflt,fromPosition)
-    inline def takeFromLast  (inline v:String, inline dflt:Opt[String]= \/, inline fromPosition:Int.Opt = \/): String   = Z.takeFromLast(  x,v,dflt,fromPosition)
-    inline def takeAfter     (inline v:String, inline dflt:Opt[String]= \/, inline fromPosition:Int.Opt = \/): String   = Z.takeAfter(     x,v,dflt,fromPosition)
-    inline def takeAfterLast (inline v:String, inline dflt:Opt[String]= \/, inline fromPosition:Int.Opt = \/): String   = Z.takeAfterLast( x,v,dflt,fromPosition)
+    inline def takeBefore    (inline v:String, inline dflt:Opt[String]=VOID,inline fromPosition:Int.Opt=VOID): String   = Z.takeBefore    (x,v,dflt,fromPosition)
+    inline def takeBeforeLast(inline v:String, inline dflt:Opt[String]=VOID,inline fromPosition:Int.Opt=VOID): String   = Z.takeBeforeLast(x,v,dflt,fromPosition)
+    inline def takeFrom      (inline v:String, inline dflt:Opt[String]=VOID,inline fromPosition:Int.Opt=VOID): String   = Z.takeFrom(      x,v,dflt,fromPosition)
+    inline def takeFromLast  (inline v:String, inline dflt:Opt[String]=VOID,inline fromPosition:Int.Opt=VOID): String   = Z.takeFromLast(  x,v,dflt,fromPosition)
+    inline def takeAfter     (inline v:String, inline dflt:Opt[String]=VOID,inline fromPosition:Int.Opt=VOID): String   = Z.takeAfter(     x,v,dflt,fromPosition)
+    inline def takeAfterLast (inline v:String, inline dflt:Opt[String]=VOID,inline fromPosition:Int.Opt=VOID): String   = Z.takeAfterLast( x,v,dflt,fromPosition)
     inline def takeRange(start:Int, inline size:Int)                                                         : String   = x.substring(start,start+size)
     inline def takeRange(r: Int.Range)                                                                       : String   = x.substring(r.start, r.endX)
     inline def takeFirst(inline cnt: Int)                                                                    : String   = x.substring(0, cnt)

@@ -20,7 +20,7 @@ abstract class _events:
        case v: Event.Id.Cancel =>
           val id=v.id; var e=get(typ);
           while(!e.isVoid){ e.value match { case v: Event.Id if id == v.id => e.cancel; case _ => () }; e=e.next};
-          \/
+          VOID
        case v => add(typ,v)
 
   // ---------------------------------------------------------------------

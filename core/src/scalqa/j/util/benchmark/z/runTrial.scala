@@ -18,7 +18,7 @@ private[j] object runTrial:
     var len : Long      = 0
     var cnt : Int       = 0
     var sum : Double    = 0
-    var last: Opt[A]    = \/
+    var last: Opt[A]   =VOID
 
     while(cur < end)
       cnt += 1
@@ -33,7 +33,7 @@ private[j] object runTrial:
             label,
             cnt,
             len.Nanos,
-            (J.Vm.Memory.used - mem).?.take(_ > 0) or \/,
+            (J.Vm.Memory.used - mem).?.take(_ > 0) or VOID,
             last.drop(_.isInstanceOf[Unit]),
             sum.?.drop(_ == 0.0))
 

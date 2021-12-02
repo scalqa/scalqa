@@ -13,7 +13,7 @@ private abstract class z_Frame[A](l: JFX.ObservableList[A]) extends JFX.ListChan
   override def wasUpdated    = false
 
   def getPermutation: Array[Int] = Array.emptyInt
-  def getRemoved(): java.util.List[A] = \/
+  def getRemoved(): java.util.List[A]=VOID
 
   override lazy  val getFrom = change.range.start
   override lazy  val getTo = if (!wasReplaced && wasRemoved) getFrom else change.range.endX

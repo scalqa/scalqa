@@ -1,9 +1,9 @@
 package scalqa; package fx; package control; package cell; import language.implicitConversions
 
 trait Setup[CELL <: control.Cell] extends Able.Doc:
-  private var setupJobs                                       : Pack[CELL => Unit]                         = \/
-  private var clickJobs                                       : Pack[(Fx.Event.Mouse, CELL) => Unit]       = \/
-  private var menuJobs                                        : Pack[(Fx.Event.ContextMenu, CELL) => Unit] = \/
+  private var setupJobs                                       : Pack[CELL => Unit]                        =VOID
+  private var clickJobs                                       : Pack[(Fx.Event.Mouse, CELL) => Unit]      =VOID
+  private var menuJobs                                        : Pack[(Fx.Event.ContextMenu, CELL) => Unit]=VOID
 
   def useCellSetup    (f: CELL => Unit)                       : Unit        = setupJobs += f
   def useMouseClicked (f: (Fx.Event.Mouse, CELL) => Unit)     : Unit        = clickJobs += f
@@ -36,7 +36,7 @@ trait Setup[CELL <: control.Cell] extends Able.Doc:
   def doc = Doc(this) += ("setupJobs", setupJobs.size) ++= clickJobs.??.map(_.tag).map(("MouseClickedJobs", _)) ++= menuJobs.??.map(_.tag).map(("contextMenuJobs", _))
 
 object Setup:
-  implicit def implicitFrom[CELL <: control.Cell](v: \/) : Setup[CELL] = Z.Void.cast[Setup[CELL]]
+  implicit def implicitFrom[CELL <: control.Cell](v:VOID) : Setup[CELL] = Z.Void.cast[Setup[CELL]]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

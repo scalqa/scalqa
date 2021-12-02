@@ -2,8 +2,8 @@ package scalqa; package fx; package control; package table; package column; impo
 
 transparent trait _customCell[ROW,V,A]:
   self: Column[ROW,V,A] =>
-  private[table] var emptyCellSetup   : control.Cell.Setup[control.Cell] = \/
-  private[table] var customCellSetups : Pack[Cell.Setup[ROW, V, A]]      = \/
+  private[table] var emptyCellSetup   : control.Cell.Setup[control.Cell]=VOID
+  private[table] var customCellSetups : Pack[Cell.Setup[ROW, V, A]]     =VOID
 
   class CustomCell[T]private (override val rowFilter: ROW => Boolean, empty: Boolean, val voidDef: Any.Def.Void[T], val docDef: Any.Def.Doc[T]) extends Cell.Setup[ROW, V, T]:
     def this(rowFilter: ROW => Boolean)(using voidDef: Any.Def.Void[T], docDef: Any.Def.Doc[T]) = this(rowFilter,false,voidDef,docDef)

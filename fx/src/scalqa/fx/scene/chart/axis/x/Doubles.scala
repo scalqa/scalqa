@@ -1,6 +1,6 @@
 package scalqa; package fx; package scene; package chart; package axis; package x; import language.implicitConversions
 
-class Doubles extends x.Numbers[Double](\/):
+class Doubles extends x.Numbers[Double](VOID):
   def this(name: String) = { this(); name.??.forval(label = _) }
 
 /*___________________________________________________________________________

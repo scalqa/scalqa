@@ -6,7 +6,7 @@ object Style extends String.Opaque.Data[Style]("Fx.Style"):
   /**/     inline def apply(inline v: String)       : Style   = v.toOpaque
   implicit inline def implicitFrom(inline v: String): Style   = apply(v)
 
-  given FxConverter: TwoWayFunction[String,Style] = \/
+  given FxConverter: TwoWayFunction[String,Style]=VOID
 
   extension(x: Style)
     @tn("join") def +(v: Style|String): Style = {val s=v.cast[String]; if(x.isVoid) s:Style else if(s.isVoid) x else x.real + ';' + s }

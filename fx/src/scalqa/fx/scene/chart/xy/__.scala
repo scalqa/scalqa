@@ -13,7 +13,7 @@ abstract class XY[X, Y] protected (val axisX: Chart.Axis[X], val axisY: Chart.Ax
   val data:  Idx.M[SERIES] =  Idx.M.wrap(real.getData).mutableMapView(SeriesBase.apply, _.real.cast[REAL_SERIES])
 
   // **************************************************************************************************************
-  class SeriesBase protected (nameO: Opt[String]= \/, private var _items:  Idx.O[ITEM] = \/):
+  class SeriesBase protected (nameO: Opt[String]=VOID,private var _items:  Idx.O[ITEM]=VOID):
     protected[chart] val real : self.REAL_SERIES = new self.REAL_SERIES(z_ObservableList()).self(s => nameO.forval(s.setName))
     /**/             def chart: Chart.XY[X, Y]   = self
     /**/             def name : String           = real.getName; def name_=(v: String) = real.setName(v)

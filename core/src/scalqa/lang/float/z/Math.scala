@@ -42,7 +42,7 @@ object Math extends scala.math.Numeric.FloatIsFractional with Ordering[Float] wi
     private var cnt   : Int        = 0
     def add(v: Float) : Unit       = {total += v; cnt+=1}
     def average       : Float      = if(cnt==0) 0  else (total / cnt).toFloat
-    def averageOpt    : Opt[Float] = if(cnt==0) \/ else (total / cnt).toFloat
+    def averageOpt    : Opt[Float] = if(cnt==0) VOID else (total / cnt).toFloat
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

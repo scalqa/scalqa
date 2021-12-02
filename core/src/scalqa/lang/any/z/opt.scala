@@ -16,7 +16,7 @@ object opt:
 
   def nonEmpty[A](x: Any, o:Opt[Def.Empty[A]], d:Def.Void[A]): Opt[A] =
     val v = x.cast[A]
-    if(v == null || d.value_isVoid(v) || o.take(_.value_isEmpty(v))) \/ else v.cast[Opt[A]]
+    if(v == null || d.value_isVoid(v) || o.take(_.value_isEmpty(v))) VOID else v.cast[Opt[A]]
 
   def nonEmptyStream[A](x: Any): Opt[Stream[A]] =
     val s = x.cast[Stream[A]]

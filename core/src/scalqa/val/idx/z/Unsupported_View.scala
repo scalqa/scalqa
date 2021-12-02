@@ -6,7 +6,7 @@ private[scalqa] object Unsupported_View:
 
   object O:
     trait Base[A] extends Idx.Observable[A]:
-      def onChange[U](l: Pack[Observable.Event[A]] => U): Event.Control = \/
+      def onChange[U](l: Pack[Observable.Event[A]] => U): Event.Control=VOID
 
     class OM[A](protected val real: Idx.Observable[A]) extends Idx.OM.X.Abstract[A] with J.Util.Proxy.Idx.O.Base[A] with Unsupported_View.OM.Base[A]:
       override def onChange[U](l: Pack[Observable.Event[A]] => U): Event.Control = real.onChange(l)
@@ -24,7 +24,7 @@ private[scalqa] object Unsupported_View:
       override def updateAt(i: Int, e: A)                         : Unit          = real.update(i, e)
       override def removeRange(r: Int.Range)                      : Unit          = real.removeRange(r)
       override def modify(ch: Idx.Mutable[A] => Unit)             : Unit          = ch(this)
-      override def onChange[U](l: Pack[Observable.Event[A]] => U) : Event.Control = \/
+      override def onChange[U](l: Pack[Observable.Event[A]] => U) : Event.Control=VOID
 
   class OM[A](protected val real: Idx[A]) extends Idx.OM.X.Abstract[A] with J.Util.Proxy.Idx.Base[A] with OM.Base[A]
 

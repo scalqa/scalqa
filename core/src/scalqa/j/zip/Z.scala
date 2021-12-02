@@ -5,7 +5,7 @@ import java.util.zip.{ ZipOutputStream, ZipEntry, ZipFile}
 object Z:
   val NoZipEntries = "NoZipEntries"
 
-  def loadFromFile(file: J.File, entryNamefilter: String => Boolean = \/): Stream[(String, Pro[J.Input])] =
+  def loadFromFile(file: J.File, entryNamefilter: String => Boolean=VOID): Stream[(String, Pro[J.Input])] =
     val zf = new ZipFile(file.real)
     Stream.fromEnumeration(zf.entries)
       .take(e => e.getName != NoZipEntries && entryNamefilter(e.getName))

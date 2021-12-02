@@ -16,7 +16,7 @@ class Circle(radiusO: Opt[Double]) extends Shape:
 
 object Circle:
 
-  def apply(radius: Opt[Double] = \/) : Circle = new Circle(radius)
+  def apply(radius: Opt[Double]=VOID) : Circle = new Circle(radius)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

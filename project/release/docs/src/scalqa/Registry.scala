@@ -5,7 +5,7 @@ import dotty.tools.scaladoc.renderers.HtmlRenderer
 object Registry:
   private var i = 0
   private var htmlRenderer: HtmlRenderer = null
-  private var rootIdOpt : Opt[Id] = \/
+  private var rootIdOpt : Opt[Id]=VOID
   private val modules = Lookup.M[Id,Module]()
   private val members = Lookup.M[Id,Member]()
 

@@ -24,7 +24,7 @@ private[`val`] class ArrayPack[A](_a: Array[AnyRef], sz: Int) extends Pack[A] wi
 
 object ArrayPack:
 
-  def fromStream[A](vs: Stream[A]): Pack[A] = vs.readOpt.map(v => z_Buf(Array.emptyAnyRef,1,v,vs).mk) or \/
+  def fromStream[A](vs: Stream[A]): Pack[A] = vs.readOpt.map(v => z_Buf(Array.emptyAnyRef,1,v,vs).mk) or VOID
 
   // *****************************************************************************************************
   private class z_Buf[A] private (a: Array[AnyRef],s:Int) extends AnyRef.Buffer[A](a,s):

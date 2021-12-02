@@ -6,7 +6,7 @@ object Z:
   class CharStream(r: java.io.Reader) extends Char.Stream :
 
     def readRawOpt =
-      var o: Char.Opt = \/
+      var o: Char.Opt=VOID
       val v = r.read
       if(v >= 0) o = v.toChar
       o

@@ -115,7 +115,7 @@ ___________________________________________________________________________*/
     ```
       1 <> 6 overlapOpt 3 <> 9  // Returns: Opt(3 <> 6)
 
-      1 <> 3 overlapOpt 6 <> 9  // Returns: Opt(\/)
+      1 <> 3 overlapOpt 6 <> 9  // Returns: Opt(VOID)
     ```
 
 

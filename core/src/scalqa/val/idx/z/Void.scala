@@ -13,7 +13,7 @@ object Void extends Void[Nothing]:
     /**/     def updateAt(i: Int, e: Nothing)                         = J.unsupportedOperation()
     /**/     def removeRange(r: Int.Range)                            = J.unsupportedOperation()
     /**/     def refreshRange(r: Int.Range)                           = ()
-    /**/     def onChange[U](l: Pack[Observable.Event[Nothing]] => U) = \/
+    /**/     def onChange[U](l: Pack[Observable.Event[Nothing]] => U)=VOID
     /**/     def modify(ch: Mutable[Nothing] => Unit)                 = J.unsupportedOperation()
     override def sort(using c: Ordering[Nothing] = null)              = ()
 

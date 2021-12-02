@@ -5,7 +5,7 @@ trait Doc extends Tag:
   def doc : Gen.Doc
 
 object Doc:
-  def docOpt(v: Any): Opt[Gen.Doc] = v match{ case v: Able.Doc => v.doc; case _ => \/ }
+  def docOpt(v: Any): Opt[Gen.Doc] = v match{ case v: Able.Doc => v.doc; case _ => VOID }
 
   // ***************************************************************************************************************************************
   trait Product extends Doc:

@@ -85,8 +85,8 @@ To make consistent experience specialized options can be assigned to generalized
 Generalized options have to be explicitly converted to sepcialized:
  
 ```
-var generalOpt:  Opt[Int] = \/
-var specialOpt:  Int.Opt  = \/
+var generalOpt:  Opt[Int] = VOID
+var specialOpt:  Int.Opt  = VOID
 
 // generalize
 generalOpt = specialOpt

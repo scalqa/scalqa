@@ -14,7 +14,7 @@ object DayTime extends Long.Opaque.Data.Ordered[DayTime]("DayTime") with x.Nanos
   override              def value_isVoid(v: DayTime)           : Boolean = v.real == 0L
   override              def value_tag(v: DayTime)              : String  = z.formatDayTime(v, true)
   implicit       inline def implicitFromLength(inline v:Length): DayTime = v.nanosTotal.toOpaque
-  implicit       inline def implicitRequest(v: \/)             : DayTime = 0L.toOpaque
+  implicit       inline def implicitRequest(v:VOID)            : DayTime = 0L.toOpaque
   implicit       inline def implicitRequest(v: CURRENT)        : DayTime = current
 
   extension(x: DayTime)

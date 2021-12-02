@@ -8,7 +8,7 @@ object List:
 
 // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
   def parseChanges[A](v: javafx.collections.ListChangeListener.Change[_ <: A]): Pack[Idx.O.Event[A]] =
-    var l : Pack[Idx.O.Event[A]] = \/
+    var l : Pack[Idx.O.Event[A]]=VOID
     val fx = v.cast[javafx.collections.ListChangeListener.Change[A]]
     fx.reset
     while (fx.next)

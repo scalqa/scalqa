@@ -5,11 +5,11 @@ transparent trait _value[ROW, VIEW, A]:
   private inline def self = this.cast[cell.Setup[ROW, VIEW, A]]
 
   private        var proSetup         : ROW => Pro.O[Opt[A]]                           = Z.voidFun
-  private        var upgrade          : Pack[(ROW, Pro.O[Opt[A]]) => Pro.O[Opt[A]]]    = \/
+  private        var upgrade          : Pack[(ROW, Pro.O[Opt[A]]) => Pro.O[Opt[A]]]   =VOID
   private[table] def mkProOpt(e: ROW) : Pro.O[Opt[A]]                                  = upgrade.stream.foldAs(proSetup(e):Pro.O[Opt[A]])((p,pe) => pe(e,p))
   private[table] var funFormat        : A => Opt[String]                               = v => v.tag(using self.docDef)
-  private[table] var funFormatVoid    : ROW => Opt[String]                             = v => \/
-  private[table] var funTooltipOpt    : Opt[Opt[A] => Tooltip]                         = \/
+  private[table] var funFormatVoid    : ROW => Opt[String]                             = v => VOID
+  private[table] var funTooltipOpt    : Opt[Opt[A] => Tooltip]                        =VOID
   def voidDef                                                   : Any.Def.Void[A]
   def docDef                                                    : Any.Def.Doc[A]
 

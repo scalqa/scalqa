@@ -12,7 +12,7 @@ object Monitor:
   private[stream] inline def runOnAfterLast(l: Monitor, cnt: Int, tm: Time.Length) : Unit    = l.runOnAfterLast(cnt, tm)
   private[stream] inline def runOnEmpty(l: Monitor)                                : Unit    = l.runOnEmpty
 
-  implicit def implicitRequest(v: \/)     : Monitor = z_Void
+  implicit def implicitRequest(v:VOID)    : Monitor = z_Void
   implicit def implicitRequest(v: DEFAULT): Monitor = new z_Default
 
 // *******************************************************************************

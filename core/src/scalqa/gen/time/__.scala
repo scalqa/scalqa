@@ -13,11 +13,11 @@ object Time extends Long.Opaque.Data.Ordered[Time]("Time") with time.x.Base[Time
   private inline val voidValue                    /* : Long */     = -62167201438000L  // 0000-01-01 00:00:00
 
   implicit       inline def implicitRequest(v: CURRENT)     : Time        = current
-  implicit       inline def implicitRequest(v: \/)          : Time        = voidValue.toOpaque
+  implicit       inline def implicitRequest(v:VOID)         : Time        = voidValue.toOpaque
 
   extension(x: Time)
     protected           def genTime                         : Time        = x
-    /**/                def age                             : Length      = { val cm = System.currentTimeMillis; val m = x.real; if (cm <= m) \/ else (cm - m).Millis }
+    /**/                def age                             : Length      = { val cm = System.currentTimeMillis; val m = x.real; if (cm <= m) VOID else (cm - m).Millis }
     /**/                def lengthTo(that: Time)            : Length      = (that.real - x.real).abs.Millis
     /**/                def format(pattern: String)         : String      = new java.text.SimpleDateFormat(pattern).format(new java.util.Date(x.real))
     /**/                def skipTo(dt: DayTime)             : Time        = x + { val l = dt.millisTotal - x.dayTime.millisTotal; { if (l >= 0) l else l + X.Millis.InOneDay}.Millis}
@@ -58,7 +58,7 @@ ___________________________________________________________________________*/
 
      See [[https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html java.text.SimpleDateFormat]] for details
      ```
-       val t: Time = \/
+       val t: Time=VOID
 
        t.format("hh 'o`clock' a, z z z z").TP      // Prints: 07 o'clock PM, Eastern Standard Time
 

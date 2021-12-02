@@ -27,7 +27,7 @@ transparent trait _methods:
     /**/   def root                                 : Path        = x.rootOpt.get
     /**/   def rootMake                             : Path        = x.rootOpt or Path.current.root + x
     /**/   def rootDrop                             : Path        = x.rootOpt.map(_ => Path(x.real.subpath(0, x.real.getNameCount))) or x
-    /**/   def childStream                          : Stream[Path]= { val v = x.real.toFile; if (v.isDirectory) v.listFiles.stream.map(f => Path(f.toPath)) else \/ }
+    /**/   def childStream                          : Stream[Path]= { val v = x.real.toFile; if (v.isDirectory) v.listFiles.stream.map(f => Path(f.toPath)) else VOID }
     /**/   def childRecursiveStream                 : Stream[Path]= x.childStream.flatMap(v => v.childRecursiveStream +@ (0, v))
     /**/   def fileOpt                              : Opt[J.File] = x.real.toFile.?.drop(_.isDirectory).map(J.File(_))
     /**/   def file                                 : J.File      = x.fileOpt.get
@@ -42,9 +42,9 @@ transparent trait _methods:
     /**/   def takeRange(r: Int.Range)              : Path        = x.takeRange(r.start,r.size)
     /**/   def takeFirst(cnt: Int)                  : Path        = x.takeRange(0,cnt)
     /**/   def takeLast (cnt: Int)                  : Path        = x.takeRange(x.size - cnt, cnt)
-    /**/   def takeFrom  (p:Path, dflt:Path = \/)   : Path        = x.indexOpt(p).map(x.dropFirst(_)) orOpt dflt.?? or x
-    /**/   def takeAfter (p:Path, dflt:Path = \/)   : Path        = x.indexOpt(p).map(_ + p.size).map(x.dropFirst(_)) orOpt dflt.?? or x
-    /**/   def takeBefore(p:Path, dflt:Path = \/)   : Path        = x.indexOpt(p).map(x.takeFirst(_)) orOpt dflt.?? or x
+    /**/   def takeFrom  (p:Path, dflt:Path =VOID)  : Path        = x.indexOpt(p).map(x.dropFirst(_)) orOpt dflt.?? or x
+    /**/   def takeAfter (p:Path, dflt:Path =VOID)  : Path        = x.indexOpt(p).map(_ + p.size).map(x.dropFirst(_)) orOpt dflt.?? or x
+    /**/   def takeBefore(p:Path, dflt:Path =VOID)  : Path        = x.indexOpt(p).map(x.takeFirst(_)) orOpt dflt.?? or x
     /**/   def dropRange(f: Int, sz: Int)           : Path        = x.takeFirst(f) + x.dropFirst(f + sz)
     /**/   def dropRange(r: Int.Range)              : Path        = x.takeFirst(r.start) + x.dropFirst(r.endX)
     /**/   def dropFirst(cnt: Int)                  : Path        = x.takeRange(cnt,x.size - cnt)
@@ -95,7 +95,7 @@ ___________________________________________________________________________*/
 
          p.rootOpt TP           // May print: Opt(C:\)
 
-         p.rootDrop.rootOpt.TP //     prints: Opt(\/)
+         p.rootDrop.rootOpt.TP //     prints: Opt(VOID)
        ```
 
 
@@ -157,7 +157,7 @@ ___________________________________________________________________________*/
 
          path indexOpt "ccc" , "ddd" TP  // Prints: Opt(2)
 
-         path indexOpt "ddd" , "ccc" TP  // Prints: Opt(\/)
+         path indexOpt "ddd" , "ccc" TP  // Prints: Opt(VOID)
       ```
 
 

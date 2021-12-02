@@ -6,8 +6,8 @@ class Time protected (name: String, bm: TwoWayFunction[Gen.Time, Double]) extend
   override lazy  val setup: TimeSetup = new TimeSetup
 
   class TimeSetup extends Setup:
-    private  var start            : Gen.Time = \/
-    /**/     var timeGauge        : Gauge  = \/
+    private  var start            : Gen.Time=VOID
+    /**/     var timeGauge        : Gauge =VOID
     override def label(t: Gen.Time) : String = timeGauge.label(t, start == t)
 
     override def scope(timeRange: Range[Gen.Time], totalSize: Double, labelSize: Double): X.Custom.Range[Gen.Time] = {

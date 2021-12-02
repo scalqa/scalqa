@@ -10,7 +10,7 @@ object Pro:
 
   extension[A]  (x: Pro[A])
     /**/   def mapView[B](f: A => B)                                            : Pro[B]   = new z.Convert_View(x, f)
-    /**/   def observableView(v1: Gen.Observable, v2: Opt[Gen.Observable] = \/) : Pro.O[A] = z.Observable_View(x, v1, v2)
+    /**/   def observableView(v1: Gen.Observable, v2: Opt[Gen.Observable] =VOID): Pro.O[A] = z.Observable_View(x, v1, v2)
     inline def contains(inline v: A)                                            : Boolean  = x() == v
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

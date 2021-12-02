@@ -3,8 +3,8 @@ package scalqa; package j; package json; package z; import language.implicitConv
 private[json] object Void:
 
   object Object extends Json.Object with Gen.Void:
-    def pairStream = \/
-    def getOpt(key: String): Opt[Any] = \/
+    def pairStream=VOID
+    def getOpt(key: String): Opt[Any]=VOID
     def size = 0
 
   object Array extends Array with Gen.Void:

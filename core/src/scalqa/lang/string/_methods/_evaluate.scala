@@ -11,11 +11,11 @@ transparent trait _evaluate:
     inline def compareTo        (inline v: String)                                  : Int       = x.compareTo(v)
     inline def charAt           (inline i: Int)                                     : Char      = x.charAt(i)
     inline def charAtOpt        (i: Int)                                            : Char.Opt  = Z.charAtOpt(x,i)
-    inline def indexOfOpt       (inline v: String,        inline from: Int.Opt = \/): Int.Opt   = Z.indexOfOpt      (x,v,from)
-    inline def indexOfStream    (inline v: String,        inline from: Int.Opt = \/): Int.Stream= Z.indexOf_Stream  (x,v,from)
-    inline def lastIndexOfOpt   (inline v: String,        inline from: Int.Opt = \/): Int.Opt   = Z.lastIndexOfOpt  (x,v,from)
-    inline def charIndexOpt     (inline f: Char=>Boolean, inline from: Int.Opt = \/): Int.Opt   = Z.charIndexOpt    (x,f,from)
-    inline def lastCharIndexOpt (inline f: Char=>Boolean, inline from: Int.Opt = \/): Int.Opt   = Z.lastCharIndexOpt(x,f,from)
+    inline def indexOfOpt       (inline v: String,        inline from: Int.Opt=VOID): Int.Opt   = Z.indexOfOpt      (x,v,from)
+    inline def indexOfStream    (inline v: String,        inline from: Int.Opt=VOID): Int.Stream= Z.indexOf_Stream  (x,v,from)
+    inline def lastIndexOfOpt   (inline v: String,        inline from: Int.Opt=VOID): Int.Opt   = Z.lastIndexOfOpt  (x,v,from)
+    inline def charIndexOpt     (inline f: Char=>Boolean, inline from: Int.Opt=VOID): Int.Opt   = Z.charIndexOpt    (x,f,from)
+    inline def lastCharIndexOpt (inline f: Char=>Boolean, inline from: Int.Opt=VOID): Int.Opt   = Z.lastCharIndexOpt(x,f,from)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -62,7 +62,7 @@ ___________________________________________________________________________*/
 
        Optionally Returns Char at the specified position
 
-       \/ is returned if specified position is out of String range
+       VOID is returned if specified position is out of String range
        ```
        if(<name>.charAtOpt(2).take(_.isUpper)) ()
        // is equivalent
@@ -93,7 +93,7 @@ ___________________________________________________________________________*/
      Optionally returns index of the first Char passing the let function
      ```
          "abcd_abcd_".charIndexOpt(_ >= 'd', 4).TP // Prints: Opt(8)
-         "abcd_abcd_".charIndexOpt('x' <> 'z') TP  // Prints: Opt(\/)
+         "abcd_abcd_".charIndexOpt('x' <> 'z') TP  // Prints: Opt(VOID)
      ```
      @param from position to start looking from
 
@@ -103,7 +103,7 @@ ___________________________________________________________________________*/
      Optionally returns index of the last Char passing the let function
      ```
          "abcd_abcd_".lastCharIndexOpt(_ >= 'd', 4).TP // Prints: Opt(3)
-         "abcd_abcd_".lastCharIndexOpt('x' <> 'z') TP  // Prints: Opt(\/)
+         "abcd_abcd_".lastCharIndexOpt('x' <> 'z') TP  // Prints: Opt(VOID)
      ```
      @param from last position to start looking from end to start
 

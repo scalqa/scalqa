@@ -1,6 +1,6 @@
 package scalqa; package lang; package string; package z; import language.implicitConversions
 
-private[scalqa] class Table(val name: String = \/):
+private[scalqa] class Table(val name: String=VOID):
   /**/     def newRow            : Row         = new Row(Rows.size).self( Rows += _ )
   /**/     def +=(v: Stream[Any]): Unit        = newRow.fill(v)
   /**/     def separator         : String      = Header.cells.stream.map(c => "".padEndTo(c.column.width, "-")).makeString(" ")

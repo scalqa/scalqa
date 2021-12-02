@@ -2,9 +2,9 @@ package scalqa; package `val`; package lookup; import language.implicitConversio
 
 object Z:
 
-  class Basic[A,B] protected (protected val createFunOpt : Opt[A => Opt[B]]= \/, protected val real: Mutable[A,B]) extends J.Util.Proxy.Lookup[A,B]:
+  class Basic[A,B] protected (protected val createFunOpt : Opt[A => Opt[B]]=VOID,protected val real: Mutable[A,B]) extends J.Util.Proxy.Lookup[A,B]:
     def this(createFunOpt : A => Opt[B]) = this(createFunOpt.?, Mutable[A,B]())
-    def this(s: Stream[(A, B)])          = { this(\/, Mutable()); real.putAll(s) }
+    def this(s: Stream[(A, B)])          = { this(VOID, Mutable()); real.putAll(s) }
 
     override  def getOpt(key: A)        : Opt[B]   = real.getOpt(key) orOpt createFunOpt.mapOpt(_(key).forval(v => real.put(key, v)))
     protected def put(s: Stream[(A, B)]): Unit     = real.putAll(s)

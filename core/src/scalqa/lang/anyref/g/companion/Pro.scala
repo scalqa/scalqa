@@ -17,12 +17,12 @@ object Pro:
     def named(name: String, v: A) : Val.Pro.Mutable[A] & Able.Name = Val.Pro.M.named(name, v)
 
   class Observable[A]:
-    def apply(v: => A, dependencies: Val.Stream[Gen.Observable] = \/)                     : Val.Pro.O[A]                            = Val.Pro.O(v, dependencies)
+    def apply(v: => A, dependencies: Val.Stream[Gen.Observable] =VOID)                    : Val.Pro.O[A]                            = Val.Pro.O(v, dependencies)
     def apply(v: => A, dependencies: Gen.Observable*)                                     : Val.Pro.O[A]                            = Val.Pro.O(v, dependencies.stream)
     def constant(v: A)                                                                    : Val.Pro.O[A]                            = Val.Pro.O.constant(v)
-    def named(name: String, v: => A, dependencies: Val.Stream[Gen.Observable] = \/)       : Val.Pro.O[A] & Able.Name                = Val.Pro.O.named[A](name, v, dependencies)
-    def refreshable(v: => A, dependencies: Val.Stream[Gen.Observable] = \/)               : Val.Pro.O[A] & Able.Refresh             = Val.Pro.O.refreshable[A](v, dependencies)
-    def namedRefreshable(name:String, v: =>A, dependencies:Val.Stream[Gen.Observable]= \/): Val.Pro.O[A] & Able.Name & Able.Refresh = Val.Pro.O.namedRefreshable[A](name, v, dependencies)
+    def named(name: String, v: => A, dependencies: Val.Stream[Gen.Observable] =VOID)      : Val.Pro.O[A] & Able.Name                = Val.Pro.O.named[A](name, v, dependencies)
+    def refreshable(v: => A, dependencies: Val.Stream[Gen.Observable] =VOID)              : Val.Pro.O[A] & Able.Refresh             = Val.Pro.O.refreshable[A](v, dependencies)
+    def namedRefreshable(name:String, v: =>A, dependencies:Val.Stream[Gen.Observable]=VOID): Val.Pro.O[A] & Able.Name & Able.Refresh = Val.Pro.O.namedRefreshable[A](name, v, dependencies)
 
   class ObservableMutable[A]:
     def apply(v: A)               : Val.Pro.ObservableMutable[A]             = Val.Pro.OM(v)

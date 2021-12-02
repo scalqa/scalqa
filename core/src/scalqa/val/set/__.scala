@@ -13,7 +13,7 @@ object Set:
   /**/            def fromStream[A](v:Stream[A])   : Set[A] = Z.AnyRef(v.iterator)
   @tn("getVoid")  def void[A]                      : Set[A] = Z.Void.cast[Set[A]]
 
-  implicit inline def implicitRequest[A](v: \/)    : Set[A] = void[A]
+  implicit inline def implicitRequest[A](v:VOID)   : Set[A] = void[A]
 
   // *****************************************************************************************************
   private object Z:
@@ -32,7 +32,7 @@ object Set:
       type THIS_TYPE = Set[Any]
       def contains(v: Any)      : Boolean     = false
       def size                  : Int         = 0
-      def stream                     : Stream[Any] = \/
+      def stream                     : Stream[Any]=VOID
       def join(v: Any)          : Set[Any]    = Set(v)
       def joinAll(v:Stream[Any]): Set[Any]    = Set(v)
 
@@ -57,7 +57,7 @@ ___________________________________________________________________________*/
     If given value does not exist in current collection, a new [[Set]] is created with this value
 
     ```
-      var set: Set[Int] = \/
+      var set: Set[Int]=VOID
 
       set = set.join(1).join(1).join(2).join(2).join(3).join(3)
 
@@ -69,7 +69,7 @@ ___________________________________________________________________________*/
     If given value does not exist in current collection, a new [[Set]] is created with this value
 
     ```
-      var set: Set[Int] = \/
+      var set: Set[Int]=VOID
 
       set = set + 1 + 2 + 3 + 1 + 2 + 3
 
@@ -81,7 +81,7 @@ ___________________________________________________________________________*/
     Creates a [[Set]] with a stream of only unique elements joined in
 
     ```
-      var set: Set[Int] = \/
+      var set: Set[Int]=VOID
 
       set = set.joinAll(1 <> 5).joinAll(3 <> 8).joinAll(5 <> 10)
 
@@ -93,7 +93,7 @@ ___________________________________________________________________________*/
     Creates a [[Set]] with a stream of only unique elements joined in
 
     ```
-      var set: Set[Int] = \/
+      var set: Set[Int]=VOID
 
       set = set ++ (1 <> 5) ++ (3 <> 8) ++ (5 <> 10)
 

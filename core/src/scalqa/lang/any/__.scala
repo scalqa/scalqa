@@ -24,15 +24,15 @@ object Any:
   type Set[A]       = Val.Set[A]        | Primitive.Set[A]
 
   // Those are void resolutions for Any.Opt[A]. There is no reason to show them in docs, because same implicits are documented in each G.Opt.
-  implicit inline def z_ImplicitVoidRequestToValOpt    [A<:Any        ](v: \/): Val.Opt[A]       = ZZ.None.cast[Val.Opt[A]]
-  implicit inline def z_ImplicitVoidRequestToBooleanOpt[A<:Any.Boolean](v: \/): Boolean.G.Opt[A] = Boolean.G.Opt.void[A]
-  implicit inline def z_ImplicitVoidRequestToByteOpt   [A<:Any.Byte   ](v: \/): Byte.G.Opt[A]    = Byte.G.Opt.void[A]
-  implicit inline def z_ImplicitVoidRequestToCharOpt   [A<:Any.Char   ](v: \/): Char.G.Opt[A]    = Char.G.Opt.void[A]
-  implicit inline def z_ImplicitVoidRequestToShortOpt  [A<:Any.Short  ](v: \/): Short.G.Opt[A]   = Short.G.Opt.void[A]
-  implicit inline def z_ImplicitVoidRequestToIntOpt    [A<:Any.Int    ](v: \/): Int.G.Opt[A]     = Int.G.Opt.void[A]
-  implicit inline def z_ImplicitVoidRequestToLongOpt   [A<:Any.Long   ](v: \/): Long.G.Opt[A]    = Long.G.Opt.void[A]
-  implicit inline def z_ImplicitVoidRequestToFloatOpt  [A<:Any.Float  ](v: \/): Float.G.Opt[A]   = Float.G.Opt.void[A]
-  implicit inline def z_ImplicitVoidRequestToDoubleOpt [A<:Any.Double ](v: \/): Double.G.Opt[A]  = Double.G.Opt.void[A]
+  implicit inline def z_ImplicitVoidRequestToValOpt    [A<:Any        ](v:VOID): Val.Opt[A]       = ZZ.None.cast[Val.Opt[A]]
+  implicit inline def z_ImplicitVoidRequestToBooleanOpt[A<:Any.Boolean](v:VOID): Boolean.G.Opt[A] = Boolean.G.Opt.void[A]
+  implicit inline def z_ImplicitVoidRequestToByteOpt   [A<:Any.Byte   ](v:VOID): Byte.G.Opt[A]    = Byte.G.Opt.void[A]
+  implicit inline def z_ImplicitVoidRequestToCharOpt   [A<:Any.Char   ](v:VOID): Char.G.Opt[A]    = Char.G.Opt.void[A]
+  implicit inline def z_ImplicitVoidRequestToShortOpt  [A<:Any.Short  ](v:VOID): Short.G.Opt[A]   = Short.G.Opt.void[A]
+  implicit inline def z_ImplicitVoidRequestToIntOpt    [A<:Any.Int    ](v:VOID): Int.G.Opt[A]     = Int.G.Opt.void[A]
+  implicit inline def z_ImplicitVoidRequestToLongOpt   [A<:Any.Long   ](v:VOID): Long.G.Opt[A]    = Long.G.Opt.void[A]
+  implicit inline def z_ImplicitVoidRequestToFloatOpt  [A<:Any.Float  ](v:VOID): Float.G.Opt[A]   = Float.G.Opt.void[A]
+  implicit inline def z_ImplicitVoidRequestToDoubleOpt [A<:Any.Double ](v:VOID): Double.G.Opt[A]  = Double.G.Opt.void[A]
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   /**/                                                  type _methods       = any._methods

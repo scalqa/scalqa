@@ -3,12 +3,12 @@ package scalqa; package lang; package string; package opaque; package base; pack
 transparent trait _copy:
 
   extension[THIS_OPAQUE<:Opaque](inline x: THIS_OPAQUE)
-    inline def takeBefore    (inline v:THIS_OPAQUE|String, inline dflt:Opt[THIS_OPAQUE]= \/, inline from:Int.Opt = \/): THIS_OPAQUE   = x.cast[String].takeBefore    (v.cast[String],dflt.cast[Opt[String]],from).cast[THIS_OPAQUE]
-    inline def takeBeforeLast(inline v:THIS_OPAQUE|String, inline dflt:Opt[THIS_OPAQUE]= \/, inline from:Int.Opt = \/): THIS_OPAQUE   = x.cast[String].takeBeforeLast(v.cast[String],dflt.cast[Opt[String]],from).cast[THIS_OPAQUE]
-    inline def takeFrom      (inline v:THIS_OPAQUE|String, inline dflt:Opt[THIS_OPAQUE]= \/, inline from:Int.Opt = \/): THIS_OPAQUE   = x.cast[String].takeFrom      (v.cast[String],dflt.cast[Opt[String]],from).cast[THIS_OPAQUE]
-    inline def takeFromLast  (inline v:THIS_OPAQUE|String, inline dflt:Opt[THIS_OPAQUE]= \/, inline from:Int.Opt = \/): THIS_OPAQUE   = x.cast[String].takeFromLast  (v.cast[String],dflt.cast[Opt[String]],from).cast[THIS_OPAQUE]
-    inline def takeAfter     (inline v:THIS_OPAQUE|String, inline dflt:Opt[THIS_OPAQUE]= \/, inline from:Int.Opt = \/): THIS_OPAQUE   = x.cast[String].takeAfter     (v.cast[String],dflt.cast[Opt[String]],from).cast[THIS_OPAQUE]
-    inline def takeAfterLast (inline v:THIS_OPAQUE|String, inline dflt:Opt[THIS_OPAQUE]= \/, inline from:Int.Opt = \/): THIS_OPAQUE   = x.cast[String].takeAfterLast (v.cast[String],dflt.cast[Opt[String]],from).cast[THIS_OPAQUE]
+    inline def takeBefore    (inline v:THIS_OPAQUE|String, inline dflt:Opt[THIS_OPAQUE]=VOID,inline from:Int.Opt=VOID): THIS_OPAQUE   = x.cast[String].takeBefore    (v.cast[String],dflt.cast[Opt[String]],from).cast[THIS_OPAQUE]
+    inline def takeBeforeLast(inline v:THIS_OPAQUE|String, inline dflt:Opt[THIS_OPAQUE]=VOID,inline from:Int.Opt=VOID): THIS_OPAQUE   = x.cast[String].takeBeforeLast(v.cast[String],dflt.cast[Opt[String]],from).cast[THIS_OPAQUE]
+    inline def takeFrom      (inline v:THIS_OPAQUE|String, inline dflt:Opt[THIS_OPAQUE]=VOID,inline from:Int.Opt=VOID): THIS_OPAQUE   = x.cast[String].takeFrom      (v.cast[String],dflt.cast[Opt[String]],from).cast[THIS_OPAQUE]
+    inline def takeFromLast  (inline v:THIS_OPAQUE|String, inline dflt:Opt[THIS_OPAQUE]=VOID,inline from:Int.Opt=VOID): THIS_OPAQUE   = x.cast[String].takeFromLast  (v.cast[String],dflt.cast[Opt[String]],from).cast[THIS_OPAQUE]
+    inline def takeAfter     (inline v:THIS_OPAQUE|String, inline dflt:Opt[THIS_OPAQUE]=VOID,inline from:Int.Opt=VOID): THIS_OPAQUE   = x.cast[String].takeAfter     (v.cast[String],dflt.cast[Opt[String]],from).cast[THIS_OPAQUE]
+    inline def takeAfterLast (inline v:THIS_OPAQUE|String, inline dflt:Opt[THIS_OPAQUE]=VOID,inline from:Int.Opt=VOID): THIS_OPAQUE   = x.cast[String].takeAfterLast (v.cast[String],dflt.cast[Opt[String]],from).cast[THIS_OPAQUE]
     inline def takeRange(start:Int, inline size:Int)                                                                  : THIS_OPAQUE   = x.cast[String].takeRange     (start,size)                                .cast[THIS_OPAQUE]
     inline def takeRange(r: Int.Range)                                                                                : THIS_OPAQUE   = x.cast[String].takeRange     (r)                                         .cast[THIS_OPAQUE]
     inline def takeFirst(inline cnt: Int)                                                                             : THIS_OPAQUE   = x.cast[String].takeFirst     (cnt)                                       .cast[THIS_OPAQUE]

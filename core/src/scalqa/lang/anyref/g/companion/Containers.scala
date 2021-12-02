@@ -32,12 +32,12 @@ ___________________________________________________________________________*/
      There is no performance difference when using customized vs. generic containers, just better readability.  For example:
 
     ```
-      val s: Stream[String] = \/
+      val s: Stream[String]=VOID
       // is equivalent to
-      val s: String.stream  = \/
+      val s: String.stream =VOID
 
-      val o: Opt[String] = \/
+      val o: Opt[String]=VOID
       // is equivalent to
-      val o: String.Opt  = \/
+      val o: String.Opt =VOID
     ```
 */

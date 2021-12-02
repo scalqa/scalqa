@@ -20,9 +20,9 @@ object toScala:
     val length = b.size
 
   class Iterator[A](s: Stream[A]) extends scala.collection.AbstractIterator[A]:
-    private  var cv : Opt[A] = \/
+    private  var cv : Opt[A]=VOID
     /**/     def hasNext                                  = cv.nonEmpty || { cv = s.readOpt; cv.nonEmpty}
-    /**/     def next                                     = if (hasNext) { val v = cv.get; cv = \/; v} else throw ZZ.EO()
+    /**/     def next                                     = if (hasNext) { val v = cv.get; cv=VOID; v} else throw ZZ.EO()
     override def knownSize                                = s.sizeOpt or -1
     override def toList                                   = {var l: scala.List[A] = Nil; s.foreach(v => l = l :+ v); l }
     override def toArray[B >: A]   (using t: ClassTag[B]) = s.cast[Stream[B]].toArray

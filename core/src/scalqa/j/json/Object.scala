@@ -11,9 +11,9 @@ trait Object extends `val`.Lookup[String, Any] with Able.Doc:
   def int(       name: String) : Int            = intOpt(name).get
   def long(      name: String) : Long           = longOpt(name).get
   def double(    name: String) : Double         = doubleOpt(name).get
-  def intOpt(    name: String) : Int.Opt        = getOpt(name).mapOpt{case v:Int   => v; case s:String => s.toIntOpt;    case v:Number => v.intValue;    case _ => \/ :Int.Opt}
-  def longOpt(   name: String) : Long.Opt       = getOpt(name).mapOpt{case v:Long  => v; case s:String => s.toLongOpt;   case v:Number => v.longValue;   case _ => \/ :Long.Opt}
-  def doubleOpt( name: String) : Double.Opt     = getOpt(name).mapOpt{case v:Double=> v; case s:String => s.toDoubleOpt; case v:Number => v.doubleValue; case _ => \/ :Double.Opt}
+  def intOpt(    name: String) : Int.Opt        = getOpt(name).mapOpt{case v:Int   => v; case s:String => s.toIntOpt;    case v:Number => v.intValue;    case _ => VOID :Int.Opt}
+  def longOpt(   name: String) : Long.Opt       = getOpt(name).mapOpt{case v:Long  => v; case s:String => s.toLongOpt;   case v:Number => v.longValue;   case _ => VOID :Long.Opt}
+  def doubleOpt( name: String) : Double.Opt     = getOpt(name).mapOpt{case v:Double=> v; case s:String => s.toDoubleOpt; case v:Number => v.doubleValue; case _ => VOID :Double.Opt}
   def boolean(   name: String) : Boolean        = string(name).toBoolean
 
   def doc                      : Doc            = Doc(this) ++= pairStream.map(t => (t._1,t._2.tag))

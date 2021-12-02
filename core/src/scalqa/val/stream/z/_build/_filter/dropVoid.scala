@@ -7,7 +7,7 @@ class dropVoid[A :Any.Def.Void](x: Stream[A]) extends z.x.Pipe[A](x):
     while (o)
       if(o.cast[A].self.nonVoid) return o
       o = x.readOpt
-    \/
+    VOID
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

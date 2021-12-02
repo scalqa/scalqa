@@ -8,14 +8,14 @@ object WeakRef:
   implicit inline def implicitToBoolean[A](inline v: WeakRef[A]): Boolean    = v.getOpt
 
   extension[A](x: WeakRef[A])
-    def getOpt : Opt[A] = { val v = x.cast[WeakReference[A]].get; if (v == null) \/ else v }
+    def getOpt : Opt[A] = { val v = x.cast[WeakReference[A]].get; if (v == null) VOID else v }
 
   given z_ClassTag[A](using t: ClassTag[A]): ClassTag[WeakRef[A]] = t.cast[ClassTag[WeakRef[A]]]
   given z_NameDef [A]: Any.Def.TypeName[WeakRef[A]]  = Any.Def.TypeName("WeakRef")
   given z_VoidDef [A]: Any.Def.Void[WeakRef[A]]  with { inline def value_isVoid(v: WeakRef[A]) = false }
   given z_Doc     [A](using t: Any.Def.Tag[A]): Any.Def.Doc[WeakRef[A]]   with
     def value_doc(v: WeakRef[A]): Doc      = Doc("WeakRef@"+v.self.hash)
-    def value_tag(v: WeakRef[A]): String   = "WeakRef("+ v.getOpt.map(v => t.value_tag(v)).or("\\/") + ")"
+    def value_tag(v: WeakRef[A]): String   = "WeakRef("+ v.getOpt.map(v => t.value_tag(v)).or( "VOID") + ")"
 
   object TYPE:
     opaque type DEF[A] <: AnyRef.Opaque = WeakReference[A] & AnyRef.Opaque

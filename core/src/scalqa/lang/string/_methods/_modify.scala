@@ -13,7 +13,7 @@ transparent trait _modify:
     /**/           inline def replaceFirst(inline v: String, inline v2:String,inline cnt: Int=1): String = z.replace.first(x,v,v2,cnt)
     /**/           inline def replaceLast (inline v: String, inline v2:String,inline cnt: Int=1): String = z.replace.last (x,v,v2,cnt)
     /**/           inline def insertAt(inline i: Int, inline v: String)                         : String = Z.insertAt(x,i,v)
-    /**/           inline def remove(inline v: String)                                          : String = x.replace(v, \/)
+    /**/           inline def remove(inline v: String)                                          : String = x.replace(v, VOID)
     /**/           inline def lower                                                             : String = x.toLowerCase
     /**/           inline def upper                                                             : String = x.toUpperCase
     /**/           inline def trimStart                                                         : String = Z.trimStart(x,_.isSpaceChar)

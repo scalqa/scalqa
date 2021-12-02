@@ -8,7 +8,7 @@ class replaceSequence[A,B](x: Stream[A], f: A=>B, seq: Pack[B], to: Pack[A] ) ex
   private var i,j = 0
 
   def readOpt =
-    var o: Opt[A] = \/
+    var o: Opt[A]=VOID
     if(i<j)
       o = a(i).cast[Opt[A]]
       i += 1

@@ -1,7 +1,7 @@
 package scalqa; package `val`; package stream; package z; package flow; import language.implicitConversions
 
 private[flow] class CustomThreadPoolParallelFlow[A](priority: J.Vm.Priority, parallelism: Int, val base: JavaStreamParallelFlow[A]) extends custom.pipeline.ParallelFlow[A] with Custom.Pipeline:
-  def name                                      : String                          = \/
+  def name                                      : String                         =VOID
   def sizeLongOpt                               : Long.Opt                        = base.sizeLongOpt
   def take( f: A => Boolean)                    : CustomThreadPoolParallelFlow[A] = CustomThreadPoolParallelFlow(priority, parallelism, base.take(f))
   def drop(f: A => Boolean)                     : CustomThreadPoolParallelFlow[A] = CustomThreadPoolParallelFlow(priority, parallelism, base.drop(f))

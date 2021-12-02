@@ -161,18 +161,18 @@ ___________________________________________________________________________*/
     Unlike general .? method, this method will create empty option for void or empty values
 
     ```
-      val p: Stream[Int] = \/
+      val p: Stream[Int]=VOID
 
       p.?.tp    // prints: Opt(scalqa.val.pack.z.Void)
 
-      p.??.tp  // prints: Opt(\/)
+      p.??.tp  // prints: Opt(VOID)
     ```
 
     This method can even safely check Stream for emptiness, returning Stream with original values
     ```
     def s : Stream[Int] = (1 <> 3).stream.dropFirst(3)
 
-    s.??.tp  // prints: Opt(\/)
+    s.??.tp  // prints: Opt(VOID)
     s.?.tp   // prints: Opt(Stream())
     ```
 @def <> ->  Range

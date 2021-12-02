@@ -5,7 +5,7 @@ trait Format[A]:
   protected def read(name: String, i: J.Input)        : A
   protected def write(name: String, o: J.Output, v: A): Unit
 
-  def load(file: J.File, entryNamefilter: String => Boolean = \/): Stream[A] =
+  def load(file: J.File, entryNamefilter: String => Boolean=VOID): Stream[A] =
     val tracer = activityTrace(100)
     Zip.load(file)
       .peek(_ => tracer())

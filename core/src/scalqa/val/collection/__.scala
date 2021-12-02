@@ -8,9 +8,9 @@ object Collection:
   /**/                  def apply[A](v: A)                   : Collection[A]  = Pack(v)
   /**/                  def apply[A](v1:A, v2:A)             : Collection[A]  = Pack(v1, v2)
   /**/                  def apply[A](v1:A, v2:A, v3:A, vs:A*): Collection[A]  = Pack(v1, v2, v3, vs *)
-  @tn("getVoid") inline def void[A]                          : Collection[A]  = \/ : Pack[A]
+  @tn("getVoid") inline def void[A]                          : Collection[A]  = VOID : Pack[A]
   /**/                  def unapplySeq[A](v: Collection[A])  : Option[Seq[A]] = Some(v.stream.toSeq)
-  implicit       inline def implicitRequest[A](v: \/)        : Collection[A]  = void[A]
+  implicit       inline def implicitRequest[A](v:VOID)       : Collection[A]  = void[A]
 
   extension [A] (inline x: Collection[A])
     inline def contains(inline v: A)            : Boolean        = Z.contains(x,v)
@@ -62,6 +62,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitRequest   -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest   -> General void instance request \n\n It is possible to use general request VOID to get void instance of this type, thanks to this implicit conversion.
 
 */

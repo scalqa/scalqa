@@ -2,7 +2,7 @@ package scalqa; package `val`; package stream; package z; package _build; packag
 
 class join[A](x: Stream[A], value: A) extends z.x.Pipe[A](x) with Able.Size.Opt.Long:
   private var v = true
-  def readOpt     : Opt[A]   = if(v) x.readOpt orOpt {v = false; value} else \/
+  def readOpt     : Opt[A]   = if(v) x.readOpt orOpt {v = false; value} else VOID
   def sizeLongOpt : Long.Opt = if(v) x.sizeLongOpt.map(_ + 1) else 0L
 
 /*___________________________________________________________________________

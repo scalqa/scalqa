@@ -58,7 +58,7 @@ ___________________________________________________________________________*/
       v.onResult(_.TP) // Will run when value is available
 
       // Output
-      Opt(\/)
+      Opt(VOID)
       Result(Hello Concurrent Promise!)
      ```
 
@@ -121,7 +121,7 @@ ___________________________________________________________________________*/
         "Immediate Result: " + v.resultOpt TP()
 
          // Output
-        Immediate Result: Opt(\/)
+        Immediate Result: Opt(VOID)
         onResult: Result(4)
        ```
 @def forval -> Process value

@@ -34,7 +34,7 @@ object Pack:
   /**/              inline def fromArray[A](a: Array[AnyRef])       : Pack[A]       = fromArray(a,a.length)
   /**/                     def fromArray[A](a: Array[AnyRef],sz:Int): Pack[A]       = new z.ArrayPack(a.copySize(sz),sz)
   /**/                     def unapplySeq[A](v: Pack[A])            : Option[Seq[A]]= Some(v.toSeqView)
-  implicit          inline def implicitRequest[A](v: \/)            : Pack[A]       = void[A]
+  implicit          inline def implicitRequest[A](v:VOID)           : Pack[A]       = void[A]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -150,6 +150,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitRequest   -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest   -> General void instance request \n\n It is possible to use general request VOID to get void instance of this type, thanks to this implicit conversion.
 
 */

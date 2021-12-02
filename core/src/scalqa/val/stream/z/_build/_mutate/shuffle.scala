@@ -7,7 +7,7 @@ class shuffle[A](x: Stream[A]) extends z.x.Pipe.Calc[A](x):
     private         val b      = x.toBuffer
     private         var i      = b.size
     private         val perm   = Idx.Permutation.random(0 <>> i)
-    def readOpt = if(i==0) \/ else {i-=1; b(perm.position(i)) }
+    def readOpt = if(i==0) VOID else {i-=1; b(perm.position(i)) }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

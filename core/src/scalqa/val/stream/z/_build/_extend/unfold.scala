@@ -7,7 +7,7 @@ class unfold[A](x: Stream[A], fun: Stream[A] => Opt[A]) extends z.x.Pipe[A](x):
   def readOpt =
     if(pass)      x.readOpt.forval(b.add) orOpt { pass=false; readOpt }
     else if(make) fun(b).process(b.add, { make = false })
-    else          \/
+    else          VOID
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

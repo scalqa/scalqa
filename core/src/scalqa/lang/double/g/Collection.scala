@@ -5,7 +5,7 @@ trait Collection[A<:Raw] extends Val.Collection[A] with Able.Contain[A] with any
   def contains(v: A): Boolean   = this.stream.takeOnly(v).readRawOpt
 
 object Collection:
-  implicit inline def implicitRequest[A<:Raw](v: \/): Collection[A] = Pack.void
+  implicit inline def implicitRequest[A<:Raw](v:VOID): Collection[A] = Pack.void
 
   trait Mutable[A<:Raw] extends Collection[A] with Val.Collection.M[A]:
     def add(v: A): Unit

@@ -27,7 +27,7 @@ transparent trait _properties[ROW,V,A]:
   /**/       def graphicPro                  : Pro.OM[Fx.Node.Like]= Fx.JavaFx.To.pro_OM(real.graphicProperty).mutableMapView[Fx.Node.Like]
   /**/       def graphic                     : Fx.Node.Like        = Fx.Node.Like(real.getGraphic)
   /**/       def graphic_=(g: Fx.Node.Like)  : Unit                = real.setGraphic(g.real)
-  @fast lazy val orderingPro                 : Pro.OM[Ordering[A]] // = Pro.OM(\/)
+  @fast lazy val orderingPro                 : Pro.OM[Ordering[A]] // = Pro.OM(VOID)
   /**/       def ordering                    : Ordering[A]         = self.orderingPro()
   /**/       def ordering_=(o: Ordering[A])  : Unit                = self.orderingPro() = o
   @fast lazy val sortablePro                 : Boolean.Pro.OM      // = Fx.JavaFx.To.pro_OM(real.sortableProperty)

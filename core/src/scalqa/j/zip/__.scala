@@ -4,7 +4,7 @@ import java.util.zip.{ Deflater, Inflater}
 
 object Zip:
 
-  def load(file: J.File, entryNamefilter: String => Boolean = \/): Stream[(String, Pro[J.Input])] = zip.Z.loadFromFile(file, entryNamefilter)
+  def load(file: J.File, entryNamefilter: String => Boolean=VOID): Stream[(String, Pro[J.Input])] = zip.Z.loadFromFile(file, entryNamefilter)
 
   def save(file: J.File, entries: Stream[(String, Pro[J.Input])], level: Int = 1, writeEmptyFile: Boolean = true): Unit  =
     val stream = entries.enablePreview

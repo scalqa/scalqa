@@ -22,11 +22,11 @@ transparent trait _calculate:
     inline def minByOpt[B](inline f: A=>B)(using inline o:Ordering[B]): Opt[A]        = Z.minByOpt(x,f,o)
     inline def maxByOpt[B](inline f: A=>B)(using inline o:Ordering[B]): Opt[A]        = Z.maxByOpt(x,f,o)
 
-    inline def averageFew[B,C,D,E,F](inline fb:A=>Opt[B], inline fc:A=>Opt[C], inline fd:A=>Opt[D]= \/, inline fe:A=>Opt[E]= \/, inline ff:A=>Opt[F]= \/)
+    inline def averageFew[B,C,D,E,F](inline fb:A=>Opt[B], inline fc:A=>Opt[C], inline fd:A=>Opt[D]=VOID,inline fe:A=>Opt[E]=VOID,inline ff:A=>Opt[F]=VOID)
                                   (using inline nb:Average[B], inline nc:Average[C], inline nd:Average[D], inline ne:Average[E], inline nf:Average[F])
                                                          : (B,C) | (B,C,D) | (B,C,D,E) | (B,C,D,E,F) = z._use._calculate.average.few(x,fb,fc,fd,fe,ff)
 
-    inline def sumFew  [B,C,D,E,F](inline fb:A=>Opt[B], inline fc:A=>Opt[C], inline fd:A=>Opt[D]= \/, inline fe:A=>Opt[E]= \/, inline ff:A=>Opt[F]= \/)
+    inline def sumFew  [B,C,D,E,F](inline fb:A=>Opt[B], inline fc:A=>Opt[C], inline fd:A=>Opt[D]=VOID,inline fe:A=>Opt[E]=VOID,inline ff:A=>Opt[F]=VOID)
                                                  (using inline nb:Sum[B], inline nc:Sum[C], inline nd:Sum[D], inline ne:Sum[E], inline nf:Sum[F])
                                                          : (B,C) | (B,C,D) | (B,C,D,E) | (B,C,D,E,F) = z._use._calculate.sum.few(x,fb,fc,fd,fe,ff)
 

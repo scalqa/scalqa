@@ -45,7 +45,7 @@ object Stream:
   /**/                    def apply    [A<:Raw](v: A*)                       : Stream[A] = v match{ case v: scala.collection.immutable.ArraySeq.ofChar => v.unsafeArray.stream.cast[Stream[A]]; case v => v.stream.raw}
   @tn("getVoid")          def void     [A<:Raw]                              : Stream[A] = Z.VoidStream.cast[Stream[A]]
 
-  implicit         inline def implicitRequest       [A<:Raw](v: \/)                    : Stream[A] = void
+  implicit         inline def implicitRequest       [A<:Raw](v:VOID)                   : Stream[A] = void
   implicit         inline def implicitFromArray     [A<:Raw](inline v: Array[A])       : Stream[A] = v.stream
   implicit         inline def implicitFromOpt       [A<:Raw](inline v: G.Opt[A])       : Stream[A] = v.stream
   implicit         inline def implicitFromCollection[A<:Raw](inline v: g.Collection[A]): Stream[A] = v.stream
@@ -64,7 +64,7 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitRequest   -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest   -> General void instance request \n\n It is possible to use general request VOID to get void instance of this type, thanks to this implicit conversion.
 
 @def readRawOpt -> Read primitive              \n\n  Main specialized stream method to be implemented.
 @def readOpt    -> Read boxed                  \n\n  Implementation of stream "readOpt" method

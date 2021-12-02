@@ -10,16 +10,16 @@ object Idx:
   /**/                 def apply[A](v1:A, v2:A)             : Idx[A]         = Pack(v1,v2)
   /**/                 def apply[A](v1:A, v2:A, v3:A, vs:A*): Idx[A]         = Pack(v1,v2,v3,vs *)
   /**/                 def wrap[A](v: java.util.List[A])    : Idx[A]         = idx.z.as.JavaListWrap[A](v)
-  @tn("getVoid")inline def void[A]                          : Idx[A]         = \/ : Pack[A]
+  @tn("getVoid")inline def void[A]                          : Idx[A]         = VOID : Pack[A]
   /**/                 def unapplySeq[A](v: Idx[A])         : Option[Seq[A]] = Some(v.toSeqView)
-  implicit      inline def implicitRequest[A](v: \/)        : Idx[A]         = void
+  implicit      inline def implicitRequest[A](v:VOID)       : Idx[A]         = void
 
   extension[A] (x: Idx[A])
-    def applyOpt(position: Int)                         : Opt[A]            = if (position < 0 || position >= x.size) \/ else x(position)
+    def applyOpt(position: Int)                         : Opt[A]            = if (position < 0 || position >= x.size) VOID else x(position)
     def contains(v:A)                                   : Boolean           = {var i=0; val sz=x.size; while(i<sz){if(x(i) == v) return true; i+=1}; false}
     def head                                            : A                 = x.applyOpt(0).get
     def headOpt                                         : Opt[A]            = x.applyOpt(0)
-    def tail                                            : Idx[A]            = {import idx.z.{Tail_View as V}; if(x.isInstanceOf[V[_]]) x.cast[V[A]].tail else if(x.size<=1) \/ else new V(x,1)}
+    def tail                                            : Idx[A]            = {import idx.z.{Tail_View as V}; if(x.isInstanceOf[V[_]]) x.cast[V[A]].tail else if(x.size<=1) VOID else new V(x,1)}
     def last                                            : A                 = x.lastOpt.get
     def lastOpt                                         : Opt[A]            = x.applyOpt(x.size - 1)
     def rangeView(r: Int.Range)                         : Idx[A]            = idx.z.View.Range(x, r.start, r.size)
@@ -31,7 +31,7 @@ object Idx:
     def orderedContains(v: A)       (using Ordering[A]) : Boolean           = idx.z.Ordered.contains[A](x,v)
     def orderedSearch(v:A,max:Int=1)(using Ordering[A]) : Int.Range         = idx.z.Ordered.search(x,v,max)
     def orderedSearchBy[B](map:A=>B,v:B,max:Int=1,
-        extraFilter: A=>Boolean= \/)(using Ordering[B]) : Int.Range         = idx.z.Ordered.searchBy(x,v,map,max,extraFilter)
+        extraFilter: A=>Boolean=VOID)(using Ordering[B]) : Int.Range         = idx.z.Ordered.searchBy(x,v,map,max,extraFilter)
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def Mutable           = idx.Mutable;              type Mutable[A]           = idx.Mutable[A]
   transparent inline def M                 = Mutable;                  type M[A]                 = Mutable[A]
@@ -96,7 +96,7 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitRequest   -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest   -> General void instance request \n\n It is possible to use general request VOID to get void instance of this type, thanks to this implicit conversion.
 
 @def  M      -> Alias \n\n Shortcut to [[scalqa.val.idx.Mutable$ Idx.Mutable]]
 @type M      -> Alias \n\n Shortcut to [[scalqa.val.idx.Mutable Idx.Mutable]]

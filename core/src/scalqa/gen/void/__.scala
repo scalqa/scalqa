@@ -4,7 +4,7 @@ trait Void extends gen.able.Void:
   final def isVoid = true
 
 object Void:
-  val ordering: Ordering  [Any] = \/
+  val ordering: Ordering  [Any]=VOID
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Setup[A] = void.Setup[A]
@@ -41,10 +41,10 @@ ___________________________________________________________________________*/
 
     object Foo:
       val void = new Foo with Void
-      implicit inline def implicitRequest(v: \/): Foo = void
+      implicit inline def implicitRequest(v:VOID): Foo = void
 
     // Standard void assignment is:
-    val v: Foo = \/
+    val v: Foo=VOID
     ```
 
     A standard way to test for voidness is universal `.isVoid` method available for [[scalqa.lang.any._Methods all types]] (including opaque).

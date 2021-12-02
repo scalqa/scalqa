@@ -15,7 +15,7 @@ object X:
     def pairStream :Stream[(A,B)] = cRef.get.iterator.stream
     def clear                     = cRef.change(_.mapFactory.empty)
     def put(key: A, value: B)     = cRef.change(_.updated(key,value))
-    def remove(k: A) : Opt[B]     = { while(true){ val m=cRef.get; val o:Opt[B]=m.get(k); if(!o || cRef.tryChange(m,m.removed(k))) return o }; \/ }
+    def remove(k: A) : Opt[B]     = { while(true){ val m=cRef.get; val o:Opt[B]=m.get(k); if(!o || cRef.tryChange(m,m.removed(k))) return o }; VOID }
 
   // ************************************************************************
   class Basic[A,B](protected val real: HashMap[A,B]) extends Abstract[A,B]:

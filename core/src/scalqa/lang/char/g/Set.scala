@@ -14,7 +14,7 @@ object Set:
   /**/                  def apply[A<:Raw](v: A *)                : Set[A] = new Set(IntMap.from(v.map(v => (v.real.toInt,()))))
   /**/                  def fromStream[A<:Raw](v: Val.Stream[A]) : Set[A] = new Set(IntMap.from(v.map(v => (v.real.toInt,())).iterator))
   @tn("getVoid") inline def void[A<:Raw]                         : Set[A] = z_Void.cast[Set[A]]
-  implicit       inline def implicitRequest[A<:Raw](v: \/)       : Set[A] = void
+  implicit       inline def implicitRequest[A<:Raw](v:VOID)      : Set[A] = void
 
   // **************************************************
   object z_Void extends Set(IntMap.empty) with Gen.Void
@@ -32,6 +32,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitRequest   -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest   -> General void instance request \n\n It is possible to use general request VOID to get void instance of this type, thanks to this implicit conversion.
 
 */

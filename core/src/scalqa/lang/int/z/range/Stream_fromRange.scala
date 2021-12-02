@@ -2,7 +2,7 @@ package scalqa; package lang; package int; package z; package range; import lang
 
 class Stream_fromRange[A<:Raw](s: Int, eX: Long, step: Long) extends g.Stream[A] with Able.Size with Able.Doc:
   private  var i         : Long         = s
-  /**/     def readRawOpt: G.Opt[A]     = { var o:G.Opt[A]= \/; if(i<eX) { o = i.cast[G.Opt[A]]; i+=step };  o}
+  /**/     def readRawOpt: G.Opt[A]     = { var o:G.Opt[A]=VOID;if(i<eX) { o = i.cast[G.Opt[A]]; i+=step };  o}
   /**/     def size      : Int          = { val sz=eX-i;  (sz/step + (if(sz%step > 0) 1 else 0)).toInt}
   override def toArray   : Array[A]     = if(i<eX && step==1) new G.Range(i.cast[A],(eX-i).toInt).toArray  else super.toArray
   override def pack      : G.Pack[A]    = if(i<eX && step==1) new G.Range(i.cast[A],(eX-i).toInt).pack     else super.pack

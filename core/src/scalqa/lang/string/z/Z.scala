@@ -12,12 +12,12 @@ object Z:
 
   // evaluate
   def joinAll[A](x: String, v: Stream[A])(using d: Any.Def.Tag[A])     : String         = v.map(d.value_tag).foldAs(x)(_ + _)
-  def charAtOpt       (x:String, i: Int)                         : Char.Opt       = if (i < 0 || i >= x.length) \/ else x.charAt(i)
+  def charAtOpt       (x:String, i: Int)                         : Char.Opt       = if (i < 0 || i >= x.length) VOID else x.charAt(i)
   def indexOfOpt      (x:String, v: String, s: Int.Opt)          : Int.Opt        = x.indexOf(v, s or 0).?.take(_ >= 0)
-  def indexOf_Stream   (x:String, v: String, s: Int.Opt)          : Int.Stream     = x.indexOfOpt(v, s).map(i => Int.Stream(i) ++ x.indexOfStream(v, i + v.length)) or \/
+  def indexOf_Stream   (x:String, v: String, s: Int.Opt)          : Int.Stream     = x.indexOfOpt(v, s).map(i => Int.Stream(i) ++ x.indexOfStream(v, i + v.length)) or VOID
   def lastIndexOfOpt  (x:String, v: String, s: Int.Opt)          : Int.Opt        = x.lastIndexOf(v, s or x.length).?.take(_ >= 0)
-  def charIndexOpt    (x:String, f: Char => Boolean, s: Int.Opt) : Int.Opt        = { var i = s or 0; while (i < x.length) { if (f(x.charAt(i))) return i; i += 1 }; \/ }
-  def lastCharIndexOpt(x:String, f: Char => Boolean, s: Int.Opt) : Int.Opt        = { var i = s or x.length - 1; while (i >= 0) { if (f(x.charAt(i))) return i; i -= 1 }; \/ }
+  def charIndexOpt    (x:String, f: Char => Boolean, s: Int.Opt) : Int.Opt        = { var i = s or 0; while (i < x.length) { if (f(x.charAt(i))) return i; i += 1 }; VOID }
+  def lastCharIndexOpt(x:String, f: Char => Boolean, s: Int.Opt) : Int.Opt        = { var i = s or x.length - 1; while (i >= 0) { if (f(x.charAt(i))) return i; i -= 1 }; VOID }
 
   // modify
   def padStartTo(x:String, sz: Int, pad: String)                  : String         = { var v = x; while (v.length < sz) v = pad + v; v }
@@ -33,15 +33,15 @@ object Z:
   def char_Stream     (x:String)                                  : Char.Stream    = z.CharStream(x)
   def split_Stream    (x:String, sep: Char, more: Seq[Char])      : Stream[String] = if(more.size==0) x.split(sep).stream else x.split(more.prepended(sep).toArray).stream
   def line_Stream     (x:String)                                  : Stream[String] = z.LineStream(x)
-  def toDoubleOpt    (x:String)                                  : Double.Opt     = try{x.toDouble } catch{ case _ => \/}
+  def toDoubleOpt    (x:String)                                  : Double.Opt     = try{x.toDouble } catch{ case _ => VOID}
   def toDoubleResult (x:String)                                  : Result[Double] = try{x.toDouble } catch{ case v:Throwable => Result.Problem(v) }
-  def toIntOpt       (x:String)                                  : Int.Opt        = try{x.toInt    } catch{ case _ => \/}
+  def toIntOpt       (x:String)                                  : Int.Opt        = try{x.toInt    } catch{ case _ => VOID}
   def toIntResult    (x:String)                                  : Result[Int]    = try{x.toInt    } catch{ case v:Throwable => Result.Problem(v) }
-  def toLongOpt      (x:String)                                  : Long.Opt       = try{x.toLong   } catch{ case _ => \/}
+  def toLongOpt      (x:String)                                  : Long.Opt       = try{x.toLong   } catch{ case _ => VOID}
   def toLongResult   (x:String)                                  : Result[Long]   = try{x.toLong   } catch{ case v:Throwable => Result.Problem(v) }
-  def toBooleanOpt   (x:String)                                  : Boolean.Opt    = try{x.toBoolean} catch{ case _ => \/}
+  def toBooleanOpt   (x:String)                                  : Boolean.Opt    = try{x.toBoolean} catch{ case _ => VOID}
   def toBooleanResult(x:String)                                  : Result[Boolean]= try{x.toBoolean} catch{ case v:Throwable => Result.Problem(v) }
-  def nonEmptyOpt    (x:String)                                  : Opt[String]    = if (x != null && x.trim.length > 0) x else \/
+  def nonEmptyOpt    (x:String)                                  : Opt[String]    = if (x != null && x.trim.length > 0) x else VOID
   def indent          (x:String, tag: String)                     : String         = if (tag == null || tag.length == 0) x else { val sep = "\n" + " " * tag.length; tag + x.lineStream.makeString(sep)}
 
 /*___________________________________________________________________________

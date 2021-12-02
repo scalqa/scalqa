@@ -1,7 +1,7 @@
 package scalqa; package j; package util; package test; package z; import language.implicitConversions
 
 private[j] class Group(test: Test):
-  private var children : Pack[Group | Method]  = \/
+  private var children : Pack[Group | Method] =VOID
 
   val name =
     def get(s: String): String = s.takeAfterLast(".").replace("$", "").?.dropOnly("Main") or get(s.takeBeforeLast("."))

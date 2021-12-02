@@ -31,14 +31,14 @@ object values:
   def takeThree  [A,B](x: Stream[A],          v1: B, v2: B, v3: B)              : Stream[A] = x.TAKE(_ in (v1,v2,v3))
   def takeFour   [A,B](x: Stream[A],          v1: B, v2: B, v3: B, v4: B)       : Stream[A] = x.TAKE(_ in (v1,v2,v3,v4))
   def takeFive   [A,B](x: Stream[A],          v1: B, v2: B, v3: B, v4: B, v5: B): Stream[A] = x.TAKE(_ in (v1,v2,v3,v4,v5))
-  def takeMany   [A,B](x: Stream[A],          vs: Stream[B])                    : Stream[A] = {val s=vs.toSet; if(s.isEmpty) \/ else x.TAKE(s.contains) }
+  def takeMany   [A,B](x: Stream[A],          vs: Stream[B])                    : Stream[A] = {val s=vs.toSet; if(s.isEmpty) VOID else x.TAKE(s.contains) }
 
   def takeOneBy  [A,B](x: Stream[A], f: A=>B, v1: B)                            : Stream[A] = x.TAKE(f(_) == v1)
   def takeTwoBy  [A,B](x: Stream[A], f: A=>B, v1: B, v2: B)                     : Stream[A] = x.TAKE(f(_) in (v1,v2))
   def takeThreeBy[A,B](x: Stream[A], f: A=>B, v1: B, v2: B, v3: B)              : Stream[A] = x.TAKE(f(_) in (v1,v2,v3))
   def takeFourBy [A,B](x: Stream[A], f: A=>B, v1: B, v2: B, v3: B, v4: B)       : Stream[A] = x.TAKE(f(_) in (v1,v2,v3,v4))
   def takeFiveBy [A,B](x: Stream[A], f: A=>B, v1: B, v2: B, v3: B, v4: B, v5: B): Stream[A] = x.TAKE(f(_) in (v1,v2,v3,v4,v5))
-  def takeManyBy [A,B](x: Stream[A], f: A=>B, vs: Stream[B])                    : Stream[A] = {val s=vs.toSet; if(s.isEmpty) \/ else x.TAKE(v=>s.contains(f(v))) }
+  def takeManyBy [A,B](x: Stream[A], f: A=>B, vs: Stream[B])                    : Stream[A] = {val s=vs.toSet; if(s.isEmpty) VOID else x.TAKE(v=>s.contains(f(v))) }
 
   def dropOne    [A,B](x: Stream[A],          v1: B)                            : Stream[A] = x.DROP(_ == v1)
   def dropTwo    [A,B](x: Stream[A],          v1: B, v2: B)                     : Stream[A] = x.DROP(_ in (v1,v2))

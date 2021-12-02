@@ -58,7 +58,7 @@ ___________________________________________________________________________*/
 
        s = s.take(_ > 10)  // static sizing is lost
 
-       s.sizeOpt.TP         // Prints Int.Opt(\/)
+       s.sizeOpt.TP         // Prints Int.Opt(VOID)
      ```
 
 @def sizeLongOpt -> Optional long size
@@ -72,6 +72,6 @@ ___________________________________________________________________________*/
 
       s = s.take(_ > 10) // static sizing is lost
 
-      s.sizeLongOpt.TP    // Prints Long.Opt(\/)
+      s.sizeLongOpt.TP    // Prints Long.Opt(VOID)
      ```
  */

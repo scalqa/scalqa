@@ -6,7 +6,7 @@ trait Permutation:
   def range                                        : Int.Range
   def positions                                    : Int.Pack
   def position(old: Int)                           : Int              = { val i = range; if (i contains old) positions(old - i.start) else old }
-  def pairStream                                   : Stream[(Int,Int)]= { var i=range.start-1; positions.stream.mapOpt(v =>{ i+=1; if(i!=v) (i,v) else \/})}
+  def pairStream                                   : Stream[(Int,Int)]= { var i=range.start-1; positions.stream.mapOpt(v =>{ i+=1; if(i!=v) (i,v) else VOID})}
   def reposition[B](l:Idx.M[B])                    : Unit             = reposition(l, l.updateAt)
   def reposition[B](l:Idx[B],update:(Int,B)=>Unit) : Unit             = { val il = l.stream.takeRange(range).pack; positions.stream.foreachIndexed((i, j) => update(j, il(i))) }
   def validate                                     : Unit             = Z.validate(this)

@@ -2,20 +2,20 @@ package scalqa; package `val`; import language.implicitConversions;
 
 object Opt extends z_ValOptDefailts:
   def apply[A](v: A)                            : Opt[A]    = v.cast[AnyRef].cast[Opt[A]]
-  def fromScala[A](v: scala.Option[A])          : Opt[A]    = if (v.isEmpty) \/ else v.get
-  def fromJava [A](v: java.util.Optional[A])    : Opt[A]    = if (v.isPresent) v.get else \/
+  def fromScala[A](v: scala.Option[A])          : Opt[A]    = if (v.isEmpty) VOID else v.get
+  def fromJava [A](v: java.util.Optional[A])    : Opt[A]    = if (v.isPresent) v.get else VOID
   @tn("getVoid") def void[A]                    : Opt[A]    = ZZ.None.cast[Opt[A]]
   /**/    inline def unapply[A](inline v:Opt[A]): Option[A] = v.toScala
 
   extension[A](inline x:Opt[A])
     /**/  inline def isEmpty                                     : Boolean    = x eq ZZ.None
     /**/  inline def nonEmpty                                    : Boolean    = x ne ZZ.None
-    /**/  inline def take( inline f: A => Boolean)               : Opt[A]     = {var o=x; if(o.nonEmpty && !f(o.`val`)) o= \/; o}
-    /**/  inline def takeOnly(inline v: A)                       : Opt[A]     = {val o=x; if(o == v.?) x else \/ }
-    /**/  inline def takeType[B](using inline t:ClassTag[B])     : Opt[B]     = {var o:Opt[B]= \/; if(t.unapply(x).isEmpty.not) o=x.cast[Opt[B]]; o}
-    /**/  inline def drop(inline f: A => Boolean)                : Opt[A]     = {var o=x; if(o.nonEmpty &&  f(o.`val`)) o= \/; o}
-    /**/  inline def dropOnly(inline v: A)                       : Opt[A]     = {val o=x; if(o == v.?) \/ else x }
-    /**/  inline def dropVoid (using inline d: Any.Def.Void[A])  : Opt[A]     = {var o=x; if(o != null && o.nonEmpty && d.value_isVoid(o.`val`)) o= \/; o}
+    /**/  inline def take( inline f: A => Boolean)               : Opt[A]     = {var o=x; if(o.nonEmpty && !f(o.`val`)) o=VOID;o}
+    /**/  inline def takeOnly(inline v: A)                       : Opt[A]     = {val o=x; if(o == v.?) x else VOID }
+    /**/  inline def takeType[B](using inline t:ClassTag[B])     : Opt[B]     = {var o:Opt[B]=VOID;if(t.unapply(x).isEmpty.not) o=x.cast[Opt[B]]; o}
+    /**/  inline def drop(inline f: A => Boolean)                : Opt[A]     = {var o=x; if(o.nonEmpty &&  f(o.`val`)) o=VOID;o}
+    /**/  inline def dropOnly(inline v: A)                       : Opt[A]     = {val o=x; if(o == v.?) VOID else x }
+    /**/  inline def dropVoid (using inline d: Any.Def.Void[A])  : Opt[A]     = {var o=x; if(o != null && o.nonEmpty && d.value_isVoid(o.`val`)) o=VOID;o}
     /**/  inline def default(inline dv: => A)                    : Opt[A]     = {val o=x; if(o.isEmpty)  dv  else o}
     /**/  inline def contains(value: A)                          : Boolean    = x == value.?
     /**/  inline def foldAs[B](inline v: =>B)(inline f: A=>B)    : B          = x.map(f) or v
@@ -46,7 +46,7 @@ object Opt extends z_ValOptDefailts:
   implicit inline def implicitFromScala  [A](inline v: scala.Option[A])      : Opt[A]    = fromScala[A](v)
   implicit inline def implicitFromJava   [A](inline v: java.util.Optional[A]): Opt[A]    = fromJava[A](v)
   implicit inline def implicitFromResult [A](inline v: Result[A])            : Opt[A]    = v.valueOpt
-  implicit inline def implicitRequest    [A](v: \/)                          : Opt[A]    = ZZ.None.cast[Opt[A]]
+  implicit inline def implicitRequest    [A](v:VOID)                         : Opt[A]    = ZZ.None.cast[Opt[A]]
   implicit inline def implicitToBoolean  [A](inline v: Opt[A])               : Boolean   = v.nonEmpty
 
   given z_CanEqualOpt[A,B](using CanEqual[A,B])  : CanEqual[Opt[A], Opt[B]] = CanEqual.derived
@@ -60,7 +60,7 @@ object Opt extends z_ValOptDefailts:
 
 class z_ValOptDefailts:
   inline given z_OrderingComparable[B<:Comparable[B]] : Opt[Ordering[B]] = gen.math.z.Ordering.OrderingComparable.cast[Ordering[B]]
-  inline given z_GivenAnyOfAnyNone[C<:A[B],A[B],B]    : Opt[C]           = \/
+  inline given z_GivenAnyOfAnyNone[C<:A[B],A[B],B]    : Opt[C]          =VOID
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -98,7 +98,7 @@ ___________________________________________________________________________*/
 
      This is a synthetic operation:
      ```
-      val o: Opt[String] = \/
+      val o: Opt[String]=VOID
 
       o.foldAs(0)(_.length)
 
@@ -151,7 +151,7 @@ ___________________________________________________________________________*/
 
          o.default("bar").TP // Prints: Opt(foo)
 
-         o = \/
+         o=VOID
 
          o.default("bar").TP // Prints: Opt(bar)
       ```
@@ -163,7 +163,7 @@ ___________________________________________________________________________*/
       ```
         val o : Opt[String] = "foo"
 
-        o.take(_.length < 2).TP  // Prints: Opt(\/)
+        o.take(_.length < 2).TP  // Prints: Opt(VOID)
 
         o.take(_.length > 2).TP  // Prints: Opt(foo)
       ```
@@ -175,7 +175,7 @@ ___________________________________________________________________________*/
       ```
         val o : Opt[String] = "foo"
 
-        o.drop(_.length > 2).TP  // Prints: Opt(\/)
+        o.drop(_.length > 2).TP  // Prints: Opt(VOID)
 
         o.drop(_.length > 3).TP  // Prints: Opt(foo)
       ```
@@ -189,7 +189,7 @@ ___________________________________________________________________________*/
 
         o.takeOnly("foo").TP  // Prints: Opt(foo)
 
-        o.takeOnly("bar").TP  // Prints: Opt(\/)
+        o.takeOnly("bar").TP  // Prints: Opt(VOID)
       ```
 
 @def dropOnly ->  Reversed value filter
@@ -199,7 +199,7 @@ ___________________________________________________________________________*/
       ```
         val o : Opt[String] = "foo"
 
-        o.dropOnly("foo").TP  // Prints: Opt(\/)
+        o.dropOnly("foo").TP  // Prints: Opt(VOID)
 
         o.dropOnly("bar").TP  // Prints: Opt(foo)
       ```
@@ -209,7 +209,7 @@ ___________________________________________________________________________*/
       Discards value if it is void, so the option itself becomes void
 
       ```
-        val s : Stream[String]      = \/
+        val s : Stream[String]     =VOID
 
         var o : Opt[Stream[String]] = s
 
@@ -217,7 +217,7 @@ ___________________________________________________________________________*/
 
         o = o.dropVoid
 
-        o.TP  // Prints: Opt(\/)
+        o.TP  // Prints: Opt(VOID)
       ```
 
 @def filter ->  Legacy filter
@@ -276,17 +276,17 @@ ___________________________________________________________________________*/
       Void option allways yeilds void option
 
       ```
-      "a"  .?.mapOpt(s => if(s.length > 2) s.toUpperCase else \/).TP      // Prints Opt(\/)
-      "abc".?.mapOpt(s => if(s.length > 2) s.toUpperCase else \/).TP      // Prints Opt(ABC)
+      "a"  .?.mapOpt(s => if(s.length > 2) s.toUpperCase else VOID).TP      // Prints Opt(VOID)
+      "abc".?.mapOpt(s => if(s.length > 2) s.toUpperCase else VOID).TP      // Prints Opt(ABC)
 
-      "a"  .?.mapOpt(s => if(s.length > 2) s.length else \/).TP           // Prints Int.Opt(\/)
-      "abc".?.mapOpt(s => if(s.length > 2) s.length else \/).TP           // Prints Int.Opt(3)
+      "a"  .?.mapOpt(s => if(s.length > 2) s.length else VOID).TP           // Prints Int.Opt(VOID)
+      "abc".?.mapOpt(s => if(s.length > 2) s.length else VOID).TP           // Prints Int.Opt(3)
       ```
 
      ```
      "abc".?.mapOpt{
         case s if s.length > 2 => s.toUpperCase
-        case _                 => \/
+        case _                 => VOID
      }.TP
      ```
      Note. In case of matching, the last default case must be given, so it becomes regular (not a partial) function
@@ -300,10 +300,10 @@ ___________________________________________________________________________*/
       ```
         val io: Int.Opt = 4
 
-        var so: Opt[String] = \/
+        var so: Opt[String]=VOID
 
 
-        so.mix(io, _ * _).TP  // Prints Opt(\/)
+        so.mix(io, _ * _).TP  // Prints Opt(VOID)
 
         so = "abc_"
 
@@ -350,7 +350,7 @@ ___________________________________________________________________________*/
 
        (o or "bar").TP     // Prints foo
 
-       o = \/
+       o=VOID
 
        (o or "bar").TP     // Prints bar
        ```
@@ -365,7 +365,7 @@ ___________________________________________________________________________*/
 
        (o orOpt o2).TP     // Prints Opt(foo)
 
-       o = \/
+       o=VOID
 
        (o orOpt o2).TP     // Prints Opt(bar)
        ```

@@ -8,7 +8,7 @@ private[scalqa] object DefaultFormat extends Format /*This should be thrown away
 
     def fetchNonSpaceOpt = stream.findOpt(!_.isWhitespace).forval(cur = _)
 
-    def parseStr(next: Int.Opt = \/): String =
+    def parseStr(next: Int.Opt=VOID): String =
       var s = stream.readWhileStream({ case ':' | ',' | '}' | ']' => false; case _ => true }).makeString("").trim;
       fetchNonSpaceOpt
       if (next.nonEmpty) s = (next.get.toChar.toString + s).trim
@@ -32,7 +32,7 @@ private[scalqa] object DefaultFormat extends Format /*This should be thrown away
         "\"" + s.charStream.map({
           case '"' => "\\\""
           case '\\' => "\\\\"
-          case '/' => "\\/"
+          case '/' =>  "VOID"
           case '\b' => "\\b"
           case '\f' => "\\f"
           case '\n' => "\\n"

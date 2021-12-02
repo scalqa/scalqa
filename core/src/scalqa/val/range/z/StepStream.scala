@@ -2,7 +2,7 @@ package scalqa; package `val`; package range; package z; import language.implici
 
 private class StepStream[A](r: Range[A], start: A, step: A => A) extends Stream[A]:
   private         var cur    : A      = start
-  def readOpt : Opt[A] = if(r.contains(cur)){ val v=cur; cur=step(v); v } else \/
+  def readOpt : Opt[A] = if(r.contains(cur)){ val v=cur; cur=step(v); v } else VOID
 
 object StepStream:
 

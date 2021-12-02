@@ -13,7 +13,7 @@ object pack :
       case _ : Specialized[A&Any.Float  ] => Float  .G.Pack.fromArray(x.cast[Array[Float  ]]).cast[A.Pack]
       case _ : Specialized[A&Any.Double ] => Double .G.Pack.fromArray(x.cast[Array[Double ]]).cast[A.Pack]
       case _ : Specialized[A&AnyRef     ] =>       Val.Pack.fromArray(x.cast[Array[AnyRef ]]).cast[A.Pack]
-      case _                              => any(x,\/).cast[A.Pack]
+      case _                              => any(x,VOID).cast[A.Pack]
 
   def any[A](x:Array[A], sz: Int.Opt) : Pack[A] =
     x match

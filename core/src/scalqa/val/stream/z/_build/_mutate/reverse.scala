@@ -6,7 +6,7 @@ class reverse[A](x: Stream[A]) extends z.x.Pipe.Calc[A](x):
   class Calc extends Stream[A]:
     private         val b      = x.toBuffer
     private         var i      = b.size
-    def readOpt = if(i==0) \/ else {i-=1; b(i) }
+    def readOpt = if(i==0) VOID else {i-=1; b(i) }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

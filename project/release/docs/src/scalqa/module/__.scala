@@ -33,10 +33,10 @@ object Module:
       new Both(m,v2)
 
   // *********************************************************
-  class Typ(v: Member) extends Module(v,\/)
-  class Val(v: Member) extends Module(\/,v)
+  class Typ(v: Member) extends Module(v,VOID)
+  class Val(v: Member) extends Module(VOID,v)
 
-  object Root extends Module(\/,\/):
+  object Root extends Module(VOID,VOID):
     private def ?(v: String): Opt[Module] = Registry.moduleOpt(Id("scalqa."+v))
     @fast override lazy val children: Pack[Module] = scalqa.Val.Stream( ?("Lang").get, ?("Gen").get, ?("J").get, ?("Val").get).joinAll(?("Fx")).sort.pack
 

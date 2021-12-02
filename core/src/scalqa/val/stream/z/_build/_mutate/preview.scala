@@ -22,9 +22,9 @@ class preview[A](src: Stream[A]) extends z.x.Pipe[A](src) with Stream.Preview[A]
   private class readWhile_Stream(f: A => Boolean) extends z.x.Pipe[A](src) with Able.Size:
     private val s = self.stack.self(s => {
         self.stack = new ArrayDeque[A](J.initSize)
-        var o = src.readOpt; while (o) { val v=o.cast[A]; if (f(v)) { s.add(v); o=src.readOpt.fornil{allIn=true} } else { stack.add(v); o = \/ }}
+        var o = src.readOpt; while (o) { val v=o.cast[A]; if (f(v)) { s.add(v); o=src.readOpt.fornil{allIn=true} } else { stack.add(v); o=VOID }}
     })
-    def readOpt = if(s.size>0) s.pop else \/
+    def readOpt = if(s.size>0) s.pop else VOID
     /**/            def size   = s.size
 
   // **********************************************************************************************************

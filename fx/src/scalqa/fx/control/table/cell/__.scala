@@ -24,7 +24,7 @@ abstract class Cell[ROW,V,A](val column: Column[ROW,V,_]) extends control.Cell.I
         column.emptyCellSetup(this)
       })
     editable = rowOpt.map(e => column.editEnabledFun(e)).or(false)
-    tooltip  = itemOpt.mapOpt(_.setup.funTooltipOpt.map(_(valueOpt))) or \/ : Tooltip
+    tooltip  = itemOpt.mapOpt(_.setup.funTooltipOpt.map(_(valueOpt))) or VOID : Tooltip
 
 object Cell:
   transparent inline def X = cell.X

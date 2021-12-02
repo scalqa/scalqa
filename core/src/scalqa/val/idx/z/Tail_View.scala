@@ -3,7 +3,7 @@ package scalqa; package `val`; package idx; package z; import language.implicitC
 private[`val`] class Tail_View[A](idx: Idx[A], off: Int) extends Idx[A] :
   def apply(i: Int) : A      = idx(i + off)
   def size          : Int    = idx.size - off
-  def tail          : Idx[A] = if(size<=1) \/ else new Tail_View[A](idx,off+1)
+  def tail          : Idx[A] = if(size<=1) VOID else new Tail_View[A](idx,off+1)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

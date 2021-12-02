@@ -36,11 +36,11 @@ object range:
   inline def overlapOpt[A<:Raw](self: G.Range[A], inline start:A, inline end:A, inline endIn:Boolean)(inline start2:A, inline end2:A, inline endIn2:Boolean): Opt[G.Range[A]] =
     val s2 = start2; val e2 = end2; val i2 = endIn2
     if(s2<=start)
-      if(     <=(e2,i2)(start,true))  \/
+      if(     <=(e2,i2)(start,true))  VOID
       else if(<=(e2,i2)(end, endIn))  G.Range(start,e2,i2)
       else                            self
     else
-      if(     >=(s2,true)(end,endIn)) \/
+      if(     >=(s2,true)(end,endIn)) VOID
       else if(<=(e2,i2)  (end,endIn)) G.Range(s2,e2,i2)
       else                            G.Range(s2,end,endIn)
 

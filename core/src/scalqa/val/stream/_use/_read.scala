@@ -41,7 +41,7 @@ ___________________________________________________________________________*/
       s.readOpt.TP  // Prints Opt(A)
       s.readOpt.TP  // Prints Opt(B)
       s.readOpt.TP  // Prints Opt(C)
-      s.readOpt.TP  // Prints Opt(\/)
+      s.readOpt.TP  // Prints Opt(VOID)
     ```
 
 @def readStream -> Read many elements

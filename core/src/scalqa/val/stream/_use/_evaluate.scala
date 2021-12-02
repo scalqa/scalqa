@@ -24,7 +24,7 @@ transparent trait _evaluate:
     inline def last                                          : A                 = Z.lastOpt(x).get
     inline def lastOpt                                       : Opt[A]            = Z.lastOpt(x)
 
-    inline def countFew(inline f1:A=>Boolean, inline f2:A=>Boolean, inline f3:A=>Boolean= \/, inline f4:A=>Boolean= \/, inline f5:A=>Boolean= \/)
+    inline def countFew(inline f1:A=>Boolean, inline f2:A=>Boolean, inline f3:A=>Boolean=VOID,inline f4:A=>Boolean=VOID,inline f5:A=>Boolean=VOID)
       : (Int,Int) | (Int,Int,Int) | (Int,Int,Int,Int) | (Int,Int,Int,Int,Int) = _Z.count.few(x,f1,f2,f3,f4,f5)
 
 /*___________________________________________________________________________
@@ -53,12 +53,12 @@ ___________________________________________________________________________*/
     ```
     (1 <> 1000).stream.findOpt(_ > 100).TP   // Prints Opt(101)
 
-    (1 <> 10).stream.findOpt(_ > 100).TP     // Prints Opt(\/)
+    (1 <> 10).stream.findOpt(_ > 100).TP     // Prints Opt(VOID)
     ```
 
 @def findPositionOpt -> Find index
 
-       Optionally returns index for the first element satisfying the predicate or Int.Opt(\/) if none found
+       Optionally returns index for the first element satisfying the predicate or Int.Opt(VOID) if none found
 
        ```
           (50 <> 500).stream.findPositionOpt(_ == 400)  // Retuns Int.Opt(350)
@@ -123,7 +123,7 @@ ___________________________________________________________________________*/
 
 @def lastOpt -> Last element
 
-       Optionally returns the last element or Opt(\/)
+       Optionally returns the last element or Opt(VOID)
 
 
 @def last ->  Last element

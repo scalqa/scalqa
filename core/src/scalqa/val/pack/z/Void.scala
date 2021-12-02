@@ -2,7 +2,7 @@ package scalqa; package `val`; package pack; package z; import language.implicit
 
 private[scalqa] final class Void[A] extends Pack[A] with Gen.Void:
   type THIS_TYPE = Pack[A]
-  override def stream                      : Stream[A] = \/
+  override def stream                      : Stream[A]=VOID
   /**/     def apply(i: Int)               : A         = J.illegalState("Empty")
   /**/     def size                        : Int       = 0
   /**/     def join(v: A)                  : Pack[A]   = Few.Pack_ofOne(v)

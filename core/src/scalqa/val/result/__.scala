@@ -20,8 +20,8 @@ object Result:
     /**/  inline def contains(v: A)                                   : Boolean      = result.Z.contains(x,v)
     /**/  inline def value                                            : A            = result.Z.value(x)
     /**/  inline def problem                                          : Problem      = result.Z.problem(x)
-    /**/  inline def valueOpt                                         : Opt[A]       = {val r=x; if(r.isValue)   r.cast[A]       else \/ }
-    /**/  inline def problemOpt                                       : Opt[Problem] = {val r=x; if(r.isProblem) r.cast[Problem] else \/ }
+    /**/  inline def valueOpt                                         : Opt[A]       = {val r=x; if(r.isValue)   r.cast[A]       else VOID }
+    /**/  inline def problemOpt                                       : Opt[Problem] = {val r=x; if(r.isProblem) r.cast[Problem] else VOID }
     /**/  inline def stream                                           : Stream[A]    = result.Z.stream(x)
     /**/  inline def toTry                                            : util.Try[A]  = result.Z.toTry(x)
     /**/  inline def map[B](      inline f: A => B)                   : Result[B]    = {var r=x.cast[Result[B]]; if(r.isValue)  { val v=r.cast[A]; r=f(v)       }; r}

@@ -42,7 +42,7 @@ object Math extends scala.math.Numeric.DoubleIsFractional with Ordering[Double] 
     private var cnt   : Int         = 0
     def add(v: Double): Unit        = {total += v; cnt+=1}
     def average       : Double      = if(cnt==0) 0  else (total / cnt)
-    def averageOpt    : Opt[Double] = if(cnt==0) \/ else (total / cnt)
+    def averageOpt    : Opt[Double] = if(cnt==0) VOID else (total / cnt)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

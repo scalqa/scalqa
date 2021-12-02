@@ -6,7 +6,7 @@ transparent trait _group:
 
   extension[A](inline x: Stream[A])
     inline def group                                                             : Stream[Stream[A]]     = new G.group(x, _ == _)
-    inline def group[U](inline f:(A,A)=>Boolean, inline peek:(A,Boolean)=>U= \/) : Stream[Stream[A]]     = new G.group(x, f, peek)
+    inline def group[U](inline f:(A,A)=>Boolean, inline peek:(A,Boolean)=>U=VOID): Stream[Stream[A]]     = new G.group(x, f, peek)
     inline def groupWith[B](f: A => B)                                           : Stream[(B,Stream[A])] = new G.groupBy(x, f, Nil).map(_.enablePreview).map(v => (f(v.preview), v))
     inline def groupEvery(inline cnt: Int)                                       : Stream[Stream[A]]     = new G.groupEvery(x, cnt)
     inline def groupBy(inline f: A => Any, inline more: A => Any*)               : Stream[Stream[A]]     = new G.groupBy(x, f, more)

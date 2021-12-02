@@ -16,7 +16,7 @@ object Stream extends z_StreamDefaults with _Build with _Use:
                                        (inline v:scala.collection.IterableOnce[A]): Stream[A]             = z.x.Scala.Stream_fromIterableOnce[A](v)
   /**/                 def unapplySeq[A](v: Stream[A])                            : Option[Seq[A]]        = Some(v.toSeq)
   @tn("getVoid")inline def void[A]                                                : Stream[A]             = ZZ.VoidStream[A]
-  implicit      inline def implicitRequest       [A](v: \/)                       : Stream[A]             = void
+  implicit      inline def implicitRequest       [A](v:VOID)                      : Stream[A]             = void
   implicit      inline def implicitRequest       [A](v: EMPTY)                    : Stream[A] & Able.Size = void.cast[Stream[A] & Able.Size]
   implicit      inline def implicitFromAbleStream[A](inline v:Able.Stream[A])     : Stream[A]             = v.stream
 

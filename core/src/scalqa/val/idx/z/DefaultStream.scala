@@ -3,7 +3,7 @@ package scalqa; package `val`; package idx; package z; import language.implicitC
 private[scalqa] class DefaultStream[A](v: Idx[A]) extends Stream[A] with Able.Size:
   private         var i      = 0
   private         val sz     = v.size
-  def readOpt = { var o:Opt[A] = \/; if(i<sz){ o=v(i); i+=1}; o}
+  def readOpt = { var o:Opt[A]=VOID; if(i<sz){ o=v(i); i+=1}; o}
   /**/            def size   = sz - i
 
 /*___________________________________________________________________________

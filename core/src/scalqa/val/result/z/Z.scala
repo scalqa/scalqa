@@ -4,7 +4,7 @@ object Z:
 
   def value   [A](x: Result[A])    : A            = { if(x.isProblem) throw Problem("Method 'value' is called on 'Result' with problem"); x.cast[A] }
   def problem [A](x: Result[A])    : Problem      = { if(x.isValue)   throw Problem("Method 'problem' is called on 'Result' with value"); x.cast[Problem]}
-  def stream  [A](x: Result[A])    : Stream[A]    = if(x.isValue) x.cast[A].self.stream  else \/
+  def stream  [A](x: Result[A])    : Stream[A]    = if(x.isValue) x.cast[A].self.stream  else VOID
   def contains[A](x: Result[A],v:A): Boolean      = {val r=x.cast[AnyRef]; r!=null && r.equals(v)}
   def toTry   [A](x: Result[A])    : util.Try[A]  = x.problemOpt.map(p => util.Failure(p.exceptionOpt or new Exception(p.message))) or util.Success(x.cast[A])
 

@@ -10,7 +10,7 @@ object Bytes extends AnyRef.Opaque.Base[Bytes, REAL]("Io.Input.Bytes"):
     inline def read                                                        : Int         = x.real.read
     inline def read(inline ba: Array[Byte])                                : Int         = x.real.read(ba)
     inline def read(inline ba: Array[Byte], inline from:Int,inline sz:Int) : Int         = x.real.read(ba, from, sz)
-    inline def readOpt                                                     : Byte.Opt    = { val i = x.read; if (i < 0) \/ else (i - Byte.min).toByte }
+    inline def readOpt                                                     : Byte.Opt    = { val i = x.read; if (i < 0) VOID else (i - Byte.min).toByte }
     inline def readAll                                                     : Array[Byte] = Z.toByteArray(x)
     inline def readAllAndClose                                             : Array[Byte] = x.readAll.self(_ => x.close)
 
@@ -39,7 +39,7 @@ ___________________________________________________________________________*/
 
        Optionally returns next short from input
 
-       If no more data, \/ is returned
+       If no more data, VOID is returned
 
 
 @def read ->  To array

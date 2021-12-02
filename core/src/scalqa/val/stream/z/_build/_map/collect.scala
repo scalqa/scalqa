@@ -7,7 +7,7 @@ class collect[A,B](x: Stream[A], f: PartialFunction[A,B]) extends z.x.Pipe[B](x)
       val v = o.cast[A]
       if(f.isDefinedAt(v)) return f(v)
       o =  x.readOpt
-    \/
+    VOID
 
 
 /*___________________________________________________________________________

@@ -11,10 +11,10 @@ class sliding(x: Stream[AnyRef], size: Int, step: Int) extends z.x.Pipe[Stream[A
       while (i > 0) { a(pos - i) = pa(size - i); i -= 1 }
     else if(pos < 0)
       while (pos < 0 && x.readOpt) pos += 1
-      if (pos < 0) return \/
+      if (pos < 0) return VOID
     pa = a
     val sz = read(a, pos)
-    if (sz == pos) return \/
+    if (sz == pos) return VOID
     pos = size - step
     (sz > 0) ? a.stream(sz)
 

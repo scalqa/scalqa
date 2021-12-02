@@ -19,7 +19,7 @@ class Deque[A] extends Collection[A]:
       val e=tail.get
       val v= if(e.ok) e else head.get.last
       if(tail.tryChange(e,v.prior)) return v.popOpt[A]
-    \/
+    VOID
 
 private object Deque:
 
@@ -39,7 +39,7 @@ private object Deque:
       override def ok                = false
       override def last              = this
       override def size              = 0
-      override def popOpt[A]: Opt[A] = \/
+      override def popOpt[A]: Opt[A]=VOID
       override def doc               = Doc("Entry:Void")
 
     class Stream[A](v: Entry) extends Val.Stream[A]:

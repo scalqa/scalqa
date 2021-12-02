@@ -4,7 +4,7 @@ private[fx] class RowData[A](table: Table[A]) extends J.Util.Proxy.Idx.OM[A] wit
   protected var real =  Idx.OM[A]().self(_.onChange(Event.Id.make1(this, this)))
 
   lazy  val itemsPro       : Pro.OM[Idx.OM[A]]          = Pro.OM.X.Basic(real).self(_.onChangeRun(resetRows))
-  lazy  val headerFooterPro: Pro.OM[(Pack[A], Pack[A])] = Pro.OM.X.Basic[(Pack[A], Pack[A])]((\/, \/)).self(_.onChangeRun(resetRows))
+  lazy  val headerFooterPro: Pro.OM[(Pack[A], Pack[A])] = Pro.OM.X.Basic[(Pack[A], Pack[A])]((VOID, VOID)).self(_.onChangeRun(resetRows))
   lazy  val sortModePro    : Pro.OM[SortMode]           = Pro.OM(SortMode.Direct).self(p => p.onChangeRun({resetRows; table.columns.stream.foreach(c => c.sortable = p().nonVoid && c.ordering.nonVoid) }))
 
   override def onChange[U](l: Pack[Idx.O.Event[A]] => U) = eventStore.onEvent1(RowData.ChangeEvent, l)
@@ -14,7 +14,7 @@ private[fx] class RowData[A](table: Table[A]) extends J.Util.Proxy.Idx.OM[A] wit
   private def resetRows: Unit =
     val old = real
     real = itemsPro()
-    if (sortModePro().isProxy) real = IdxProxy(real)(using \/)
+    if (sortModePro().isProxy) real = IdxProxy(real)(using VOID)
     if ({ val v = headerFooterPro(); !v._1.isEmpty || !v._2.isEmpty }) real = new HeaderFooter(headerFooterPro(), real)
     if (old != real)
       old.onChange(Event.Id.cancel1(this))

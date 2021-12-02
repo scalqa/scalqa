@@ -11,7 +11,7 @@ private[z] transparent trait _Listener[A]:
       v match
         case c: Idx.Event.Reposition[A] =>
           entries.stream.take(v => c.range.contains(v.index)).foreach(e => e.index = c.permutation.position(e.index))
-          \/
+          VOID
         case c: Idx.Event.Add[A] =>
           reindex(c.range.size);
           rowOpt(c.items).map(t => {

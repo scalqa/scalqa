@@ -1,7 +1,7 @@
 package scalqa; package `val`; package stream; package z; package _build; package _filter; import scala.language.implicitConversions
 
 class dropDuplicates[A](x: Stream[A]) extends z.x.Pipe[A](x):
-  private var lastOpt: Opt[A] = \/
+  private var lastOpt: Opt[A]=VOID
 
   def readOpt =
     var o = x.readOpt
@@ -13,7 +13,7 @@ class dropDuplicates[A](x: Stream[A]) extends z.x.Pipe[A](x):
 object dropDuplicates:
 
   class By[A,B](x: Stream[A], f: A => B) extends z.x.Pipe[A](x):
-    private var lastOpt: Opt[B] = \/
+    private var lastOpt: Opt[B]=VOID
 
     def readOpt =
       var o = x.readOpt

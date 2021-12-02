@@ -13,7 +13,7 @@ object Stream:
       case _ : Specialized[A&Any.Float  ] => float  .Z.Stream_ofArray(x.cast[Array[Float  ]]).cast[A.Stream & Able.Size]
       case _ : Specialized[A&Any.Double ] => double .Z.Stream_ofArray(x.cast[Array[Double ]]).cast[A.Stream & Able.Size]
       case _ : Specialized[A&AnyRef     ] => anyref .Z.Stream_ofArray(x.cast[Array[AnyRef ]]).cast[A.Stream & Able.Size]
-      case _                              => any(x,\/).cast[A.Stream & Able.Size]
+      case _                              => any(x,VOID).cast[A.Stream & Able.Size]
 
   inline def apply[A](inline x:Array[A], sz: Int)(using inline A: Specialized[A]): A.Stream & Able.Size =
     inline A match

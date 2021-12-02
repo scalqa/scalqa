@@ -1,8 +1,8 @@
 package scalqa; package `val`; package stream; package z; package util; import language.implicitConversions
 
-class MultiDoc private(target: AnyRef/* expected Custom.Pipeline | Stream[_] | Flow[_]*/, v: \/) extends Doc(target.self.id):
+class MultiDoc private(target: AnyRef/* expected Custom.Pipeline | Stream[_] | Flow[_]*/, v: VOID) extends Doc(target.self.id):
   def this(v: AnyRef) =
-    this(v,\/)
+    this(v,VOID)
     v.?.takeType[custom.pipeline.ParallelFlow[_]].map(_.name).dropVoid.forval(v => this.id = this.id.replaceLast("@", "." + v + "@"))
 
     if(id.lower.contains("stream").not) this += "Stream"

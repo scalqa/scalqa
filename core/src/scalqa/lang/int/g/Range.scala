@@ -36,7 +36,7 @@ object Range:
     inline def withFilter(inline f: Fun.Filter[A])                                 : G.Stream[A] = x.stream.take(f)
     inline def foreach[U](inline f: A=>U)                                          : Unit   = z.range.foreachMacro(x,f)
   // ------------------------------------------------------------------------------------------------------------------------------------------
-  implicit inline def implicitRequest(v: \/)    : Int.Range  = z_Void;  object z_Void extends G.Range[Int](0,0) with Gen.Void
+  implicit inline def implicitRequest(v:VOID)   : Int.Range  = z_Void;  object z_Void extends G.Range[Int](0,0) with Gen.Void
   extension(x:Int.Range)
     @tn("moveRight")inline def >>(move: Int)    : Int.Range  = Range(x.start+move,x.size)
     @tn("moveLeft") inline def <<(move: Int)    : Int.Range  = Range(x.start-move,x.size)

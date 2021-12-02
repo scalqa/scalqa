@@ -1,6 +1,6 @@
 package scalqa; package fx; package scene; import language.implicitConversions
 
-abstract class Stage(stage: Opt[javafx.stage.Stage] = \/) extends Window:
+abstract class Stage(stage: Opt[javafx.stage.Stage]=VOID) extends Window:
   protected type REAL = javafx.stage.Stage;
   protected override def _createReal = stage.or(new javafx.stage.Stage).self(_.setScene(scene.real))
 

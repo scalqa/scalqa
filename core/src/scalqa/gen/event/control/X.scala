@@ -8,12 +8,12 @@ object X:
   abstract class Basic[A<:AnyRef](_target: A) extends Control:
     private   val ref                                        = J.Concurrent.Ref[Pack[() => Boolean]](Pack.void)
     private   var target                     : AnyRef        = _target
-    private   var onCancelPack               : Pack[()=>Any] = \/
+    private   var onCancelPack               : Pack[()=>Any]=VOID
     /**/      def isCancelled                : Boolean       = ref.get == Cancelled
     /**/      def onCancel[U](f: () => U)    : this.type     = { onCancelPack += f; this }
     /**/      def cancelIf(f: () => Boolean) : this.type     = { ref.change(_ + f); this }
     /**/      def cancel                     : Boolean       = if(isCancelled) false else { ref.change(_ => Cancelled); fireOnCancel; true }
-    protected def fireOnCancel               : Unit          = { onCancelPack.stream.foreach(_.apply()); onCancelPack = \/ }
+    protected def fireOnCancel               : Unit          = { onCancelPack.stream.foreach(_.apply()); onCancelPack=VOID }
 
     def removeHardReference: AnyRef = target match
       case v: WEAK[_]   => v.cast[WEAK[A]].get
@@ -21,11 +21,11 @@ object X:
 
     protected def targetOpt : Opt[A] =
       val p : Pack[() => Boolean] = ref.get
-      if(p eq Cancelled) return \/
-      else if(p.stream.exists(_())){cancel; return \/ }
+      if(p eq Cancelled) return VOID
+      else if(p.stream.exists(_())){cancel; return VOID }
 
       target match
-        case r: WEAK[_] => { val v = r.get; if (v != null) v.cast[A] else { if (!isCancelled) cancel; \/ }}
+        case r: WEAK[_] => { val v = r.get; if (v != null) v.cast[A] else { if (!isCancelled) cancel; VOID }}
         case v          => v.cast[A]
 
 /*___________________________________________________________________________

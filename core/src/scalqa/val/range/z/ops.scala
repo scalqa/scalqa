@@ -22,11 +22,11 @@ object ops:
   inline def overlapOpt[RNG<:Range[A],A](x: RNG, r: Range[A],inline f: (A,A,Boolean) => RNG): Opt[RNG] =
     if(r.start.<(x))
       if(r.end.>(r.endIsIn,x)) x
-      else if(x.start.>(r))     \/
+      else if(x.start.>(r))     VOID
       else                      f.mk(x.start,r.end,r.endIsIn)
     else
       if(x.end.>(x.endIsIn,r)) f.mk(r.start,r.end,r.endIsIn)
-      else if(r.start.>(x))     \/
+      else if(r.start.>(x))     VOID
       else                      f.mk(r.start,x.end,x.endIsIn)
 
   // Helpers

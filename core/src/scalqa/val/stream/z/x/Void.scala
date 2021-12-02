@@ -2,7 +2,7 @@ package scalqa; package `val`; package stream; package z; package x; import lang
 
 class Void[A] extends Stream[A] with Able.Stream[A] with Able.Size.Zero with Gen.Void:
   def stream  : Stream[A] = this
-  def readOpt : Opt[A]    = \/
+  def readOpt : Opt[A]   =VOID
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

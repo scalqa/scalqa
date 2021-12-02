@@ -13,7 +13,7 @@ private object Z:
   // ******************************************************************
   private object VoidPro extends Pro.O[Any] with Gen.Void:
     def apply()                  = Opt.void
-    def onChange[U](el: () => U) = \/
+    def onChange[U](el: () => U)=VOID
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

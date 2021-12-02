@@ -10,7 +10,7 @@ object Problem:
   val noMessage   : Problem = new z.DefaultProblem("No Message")
   val failedFilter: Problem = new z.DefaultProblem("For-Comprehension predicate is not satisfied")
 
-  /**/     inline def apply(inline message: String = \/)    : Problem        = ZZ.problem(message)
+  /**/     inline def apply(inline message: String =VOID)   : Problem        = ZZ.problem(message)
   /**/            def apply(t: Throwable)                   : Problem        = t match{ case v: Problem => v; case v: Z.ExceptionProblem.Wrap => v.deficiency; case v => Z.ExceptionProblem(v)}
   implicit inline def implicitFromString(inline v: String)  : Problem        = ZZ.problem(v)
   implicit inline def implicitToThrowable(inline v: Problem): Throwable      = Z.ExceptionProblem.Wrap(v)
@@ -19,14 +19,14 @@ object Problem:
   // ************************************************************************************************
   object X:
 
-    class NotValid(val message: String = \/) extends Problem:
-      def exceptionOpt : Opt[Exception] = \/
+    class NotValid(val message: String =VOID)extends Problem:
+      def exceptionOpt : Opt[Exception]=VOID
     object NotValid:
       def unapply(v: NotValid): Option[String] = Some(v.message)
 
     // ******************************************************************
-    class Timeout(val message: String = \/) extends Problem:
-      def exceptionOpt : Opt[Exception] = \/
+    class Timeout(val message: String =VOID)extends Problem:
+      def exceptionOpt : Opt[Exception]=VOID
 
     object Timeout:
       def unapply(v: Timeout): Option[String] = Some(v.message)

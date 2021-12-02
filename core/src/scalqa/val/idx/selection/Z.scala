@@ -7,8 +7,8 @@ private[idx] object Z:
     def indexes = idx
 
   object Void extends Selection[Any] with Gen.Void:
-    def target  = \/
-    def indexes = \/
+    def target =VOID
+    def indexes=VOID
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

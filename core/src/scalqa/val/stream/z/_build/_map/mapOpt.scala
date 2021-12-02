@@ -1,15 +1,15 @@
 package scalqa; package `val`; package stream; package z; package _build; package _map; import language.implicitConversions;
 
-class  mapOpt  [A,B](x: Stream[A], f:A => Val.Opt[B]                        ) extends z.x.Pipe[B]       (x){def readOpt    ={var o=x.readOpt; while(o){ val r=f(o.`val`); if(r) return r; o=x.readOpt }; \/}}
+class  mapOpt  [A,B](x: Stream[A], f:A => Val.Opt[B]                        ) extends z.x.Pipe[B]       (x){def readOpt    ={var o=x.readOpt; while(o){ val r=f(o.`val`); if(r) return r; o=x.readOpt }; VOID}}
 object mapOpt:
-  class toBoolean[A](x: Stream[A], f:AnyRef.G.Fun.ToAnyByte  [A,Boolean.Opt]) extends z.x.Pipe.asBoolean(x){def readRawOpt ={var o=x.readOpt; while(o){ val r=f(o.`val`); if(r) return r; o=x.readOpt }; \/}}
-  class toByte   [A](x: Stream[A], f:AnyRef.G.Fun.ToAnyShort [A,Byte   .Opt]) extends z.x.Pipe.asByte   (x){def readRawOpt ={var o=x.readOpt; while(o){ val r=f(o.`val`); if(r) return r; o=x.readOpt }; \/}}
-  class toChar   [A](x: Stream[A], f:AnyRef.G.Fun.ToAnyInt   [A,Char   .Opt]) extends z.x.Pipe.asChar   (x){def readRawOpt ={var o=x.readOpt; while(o){ val r=f(o.`val`); if(r) return r; o=x.readOpt }; \/}}
-  class toShort  [A](x: Stream[A], f:AnyRef.G.Fun.ToAnyInt   [A,Short  .Opt]) extends z.x.Pipe.asShort  (x){def readRawOpt ={var o=x.readOpt; while(o){ val r=f(o.`val`); if(r) return r; o=x.readOpt }; \/}}
-  class toInt    [A](x: Stream[A], f:AnyRef.G.Fun.ToAnyLong  [A,Int    .Opt]) extends z.x.Pipe.asInt    (x){def readRawOpt ={var o=x.readOpt; while(o){ val r=f(o.`val`); if(r) return r; o=x.readOpt }; \/}}
-  class toLong   [A](x: Stream[A], f:AnyRef.G.Fun.ToAnyLong  [A,Long   .Opt]) extends z.x.Pipe.asLong   (x){def readRawOpt ={var o=x.readOpt; while(o){ val r=f(o.`val`); if(r) return r; o=x.readOpt }; \/}}
-  class toFloat  [A](x: Stream[A], f:AnyRef.G.Fun.ToAnyFloat [A,Float  .Opt]) extends z.x.Pipe.asFloat  (x){def readRawOpt ={var o=x.readOpt; while(o){ val r=f(o.`val`); if(r) return r; o=x.readOpt }; \/}}
-  class toDouble [A](x: Stream[A], f:AnyRef.G.Fun.ToAnyDouble[A,Double .Opt]) extends z.x.Pipe.asDouble (x){def readRawOpt ={var o=x.readOpt; while(o){ val r=f(o.`val`); if(r) return r; o=x.readOpt }; \/}}
+  class toBoolean[A](x: Stream[A], f:AnyRef.G.Fun.ToAnyByte  [A,Boolean.Opt]) extends z.x.Pipe.asBoolean(x){def readRawOpt ={var o=x.readOpt; while(o){ val r=f(o.`val`); if(r) return r; o=x.readOpt }; VOID}}
+  class toByte   [A](x: Stream[A], f:AnyRef.G.Fun.ToAnyShort [A,Byte   .Opt]) extends z.x.Pipe.asByte   (x){def readRawOpt ={var o=x.readOpt; while(o){ val r=f(o.`val`); if(r) return r; o=x.readOpt }; VOID}}
+  class toChar   [A](x: Stream[A], f:AnyRef.G.Fun.ToAnyInt   [A,Char   .Opt]) extends z.x.Pipe.asChar   (x){def readRawOpt ={var o=x.readOpt; while(o){ val r=f(o.`val`); if(r) return r; o=x.readOpt }; VOID}}
+  class toShort  [A](x: Stream[A], f:AnyRef.G.Fun.ToAnyInt   [A,Short  .Opt]) extends z.x.Pipe.asShort  (x){def readRawOpt ={var o=x.readOpt; while(o){ val r=f(o.`val`); if(r) return r; o=x.readOpt }; VOID}}
+  class toInt    [A](x: Stream[A], f:AnyRef.G.Fun.ToAnyLong  [A,Int    .Opt]) extends z.x.Pipe.asInt    (x){def readRawOpt ={var o=x.readOpt; while(o){ val r=f(o.`val`); if(r) return r; o=x.readOpt }; VOID}}
+  class toLong   [A](x: Stream[A], f:AnyRef.G.Fun.ToAnyLong  [A,Long   .Opt]) extends z.x.Pipe.asLong   (x){def readRawOpt ={var o=x.readOpt; while(o){ val r=f(o.`val`); if(r) return r; o=x.readOpt }; VOID}}
+  class toFloat  [A](x: Stream[A], f:AnyRef.G.Fun.ToAnyFloat [A,Float  .Opt]) extends z.x.Pipe.asFloat  (x){def readRawOpt ={var o=x.readOpt; while(o){ val r=f(o.`val`); if(r) return r; o=x.readOpt }; VOID}}
+  class toDouble [A](x: Stream[A], f:AnyRef.G.Fun.ToAnyDouble[A,Double .Opt]) extends z.x.Pipe.asDouble (x){def readRawOpt ={var o=x.readOpt; while(o){ val r=f(o.`val`); if(r) return r; o=x.readOpt }; VOID}}
 
   inline def apply[A,B,OPT<:Any.Opt[B]](inline x: Stream[A], inline f: A=>OPT)(using inline s:Specialized.Opt[B,OPT], inline B:Specialized[B]): B.Stream =
     inline B match
@@ -25,15 +25,15 @@ object mapOpt:
 
   inline def APPLY[A,B,OPT<:Any.Opt[B]](inline x: Stream[A], inline f: A=>OPT)(using inline s:Specialized.Opt[B,OPT], inline B:Specialized[B]): B.Stream =
     inline B match
-      case _ : Specialized[B & Any.Boolean] => {class mapOptToBoolean(x: Stream[A]) extends z.x.Pipe.asBoolean(x){def readRawOpt ={var o=x.readOpt; while(o){val r= s(o.`val`,f).cast[Boolean.Opt]; if(r) return r; o=x.readOpt }; \/}}; new mapOptToBoolean(x).cast[B.Stream] }
-      case _ : Specialized[B & Any.Byte   ] => {class mapOptToByte   (x: Stream[A]) extends z.x.Pipe.asByte   (x){def readRawOpt ={var o=x.readOpt; while(o){val r= s(o.`val`,f).cast[Byte   .Opt]; if(r) return r; o=x.readOpt }; \/}}; new mapOptToByte   (x).cast[B.Stream] }
-      case _ : Specialized[B & Any.Char   ] => {class mapOptToChar   (x: Stream[A]) extends z.x.Pipe.asChar   (x){def readRawOpt ={var o=x.readOpt; while(o){val r= s(o.`val`,f).cast[Char   .Opt]; if(r) return r; o=x.readOpt }; \/}}; new mapOptToChar   (x).cast[B.Stream] }
-      case _ : Specialized[B & Any.Short  ] => {class mapOptToShort  (x: Stream[A]) extends z.x.Pipe.asShort  (x){def readRawOpt ={var o=x.readOpt; while(o){val r= s(o.`val`,f).cast[Short  .Opt]; if(r) return r; o=x.readOpt }; \/}}; new mapOptToShort  (x).cast[B.Stream] }
-      case _ : Specialized[B & Any.Int    ] => {class mapOptToInt    (x: Stream[A]) extends z.x.Pipe.asInt    (x){def readRawOpt ={var o=x.readOpt; while(o){val r= s(o.`val`,f).cast[Int    .Opt]; if(r) return r; o=x.readOpt }; \/}}; new mapOptToInt    (x).cast[B.Stream] }
-      case _ : Specialized[B & Any.Long   ] => {class mapOptToLong   (x: Stream[A]) extends z.x.Pipe.asLong   (x){def readRawOpt ={var o=x.readOpt; while(o){val r= s(o.`val`,f).cast[Long   .Opt]; if(r) return r; o=x.readOpt }; \/}}; new mapOptToLong   (x).cast[B.Stream] }
-      case _ : Specialized[B & Any.Float  ] => {class mapOptToFloat  (x: Stream[A]) extends z.x.Pipe.asFloat  (x){def readRawOpt ={var o=x.readOpt; while(o){val r= s(o.`val`,f).cast[Float  .Opt]; if(r) return r; o=x.readOpt }; \/}}; new mapOptToFloat  (x).cast[B.Stream] }
-      case _ : Specialized[B & Any.Double ] => {class mapOptToDouble (x: Stream[A]) extends z.x.Pipe.asDouble (x){def readRawOpt ={var o=x.readOpt; while(o){val r= s(o.`val`,f).cast[Double .Opt]; if(r) return r; o=x.readOpt }; \/}}; new mapOptToDouble (x).cast[B.Stream] }
-      case _                                => {class mapOpt         (x: Stream[A]) extends z.x.Pipe      [B ](x){def readOpt    ={var o=x.readOpt; while(o){val r= s(o.`val`,f).cast[Val .Opt[B]]; if(r) return r; o=x.readOpt }; \/}}; new mapOpt         (x).cast[B.Stream] }
+      case _ : Specialized[B & Any.Boolean] => {class mapOptToBoolean(x: Stream[A]) extends z.x.Pipe.asBoolean(x){def readRawOpt ={var o=x.readOpt; while(o){val r= s(o.`val`,f).cast[Boolean.Opt]; if(r) return r; o=x.readOpt }; VOID}}; new mapOptToBoolean(x).cast[B.Stream] }
+      case _ : Specialized[B & Any.Byte   ] => {class mapOptToByte   (x: Stream[A]) extends z.x.Pipe.asByte   (x){def readRawOpt ={var o=x.readOpt; while(o){val r= s(o.`val`,f).cast[Byte   .Opt]; if(r) return r; o=x.readOpt }; VOID}}; new mapOptToByte   (x).cast[B.Stream] }
+      case _ : Specialized[B & Any.Char   ] => {class mapOptToChar   (x: Stream[A]) extends z.x.Pipe.asChar   (x){def readRawOpt ={var o=x.readOpt; while(o){val r= s(o.`val`,f).cast[Char   .Opt]; if(r) return r; o=x.readOpt }; VOID}}; new mapOptToChar   (x).cast[B.Stream] }
+      case _ : Specialized[B & Any.Short  ] => {class mapOptToShort  (x: Stream[A]) extends z.x.Pipe.asShort  (x){def readRawOpt ={var o=x.readOpt; while(o){val r= s(o.`val`,f).cast[Short  .Opt]; if(r) return r; o=x.readOpt }; VOID}}; new mapOptToShort  (x).cast[B.Stream] }
+      case _ : Specialized[B & Any.Int    ] => {class mapOptToInt    (x: Stream[A]) extends z.x.Pipe.asInt    (x){def readRawOpt ={var o=x.readOpt; while(o){val r= s(o.`val`,f).cast[Int    .Opt]; if(r) return r; o=x.readOpt }; VOID}}; new mapOptToInt    (x).cast[B.Stream] }
+      case _ : Specialized[B & Any.Long   ] => {class mapOptToLong   (x: Stream[A]) extends z.x.Pipe.asLong   (x){def readRawOpt ={var o=x.readOpt; while(o){val r= s(o.`val`,f).cast[Long   .Opt]; if(r) return r; o=x.readOpt }; VOID}}; new mapOptToLong   (x).cast[B.Stream] }
+      case _ : Specialized[B & Any.Float  ] => {class mapOptToFloat  (x: Stream[A]) extends z.x.Pipe.asFloat  (x){def readRawOpt ={var o=x.readOpt; while(o){val r= s(o.`val`,f).cast[Float  .Opt]; if(r) return r; o=x.readOpt }; VOID}}; new mapOptToFloat  (x).cast[B.Stream] }
+      case _ : Specialized[B & Any.Double ] => {class mapOptToDouble (x: Stream[A]) extends z.x.Pipe.asDouble (x){def readRawOpt ={var o=x.readOpt; while(o){val r= s(o.`val`,f).cast[Double .Opt]; if(r) return r; o=x.readOpt }; VOID}}; new mapOptToDouble (x).cast[B.Stream] }
+      case _                                => {class mapOpt         (x: Stream[A]) extends z.x.Pipe      [B ](x){def readOpt    ={var o=x.readOpt; while(o){val r= s(o.`val`,f).cast[Val .Opt[B]]; if(r) return r; o=x.readOpt }; VOID}}; new mapOpt         (x).cast[B.Stream] }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

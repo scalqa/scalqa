@@ -2,7 +2,7 @@ package scalqa; package j; package util; package benchmark; package z; import la
 
 object execute:
 
-  def apply[A](targets: Pack[(String, () => A)], repeated: Int=1,  trialCount: Int = 4, trialLengthOpt: Time.Length.Opt = \/, verbose: Boolean = true)(using Opt[Numeric[A]]) =
+  def apply[A](targets: Pack[(String, () => A)], repeated: Int=1,  trialCount: Int = 4, trialLengthOpt: Time.Length.Opt=VOID, verbose: Boolean = true)(using Opt[Numeric[A]]) =
 
     val setup = Setup(trialLengthOpt, targets, repeated)
 
@@ -11,7 +11,7 @@ object execute:
       l.stream.map(_.memoryAverage).max.self(v => l.stream.foreach(_.maxMemoryAverage = v))
       println(l.stream.toText)
 
-    def run(tag: String, tag2: Opt[String] = \/): Pack[Result] =
+    def run(tag: String, tag2: Opt[String]=VOID): Pack[Result] =
       if (verbose) println(tag + " Time length is about " + setup.totalLength.tag +? tag2)
       runTrial(targets, repeated, setup.slotCount, setup.slotLength).self(l => if (verbose) printResults(l))
 

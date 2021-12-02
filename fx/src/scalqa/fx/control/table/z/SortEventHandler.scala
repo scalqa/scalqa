@@ -2,7 +2,7 @@ package scalqa; package fx; package control; package table; package z; import la
 
 private[fx] class SortEventHandler[ROW](t: Table[ROW]):
   private var listening = true
-  private var oldSortOrder: Pack[t.Column[_]] = \/
+  private var oldSortOrder: Pack[t.Column[_]]=VOID
 
   private def doSort : Unit = t.rows.sort(using t.sortingBase + t.ordering)
 
@@ -27,7 +27,7 @@ private[fx] class SortEventHandler[ROW](t: Table[ROW]):
         else
           oldSortOrder = so
           listening = false
-          t.orderingPro() = so.stream.map(_.rowOrdering).foldAs(\/ :Ordering[ROW])(_ + _)
+          t.orderingPro() = so.stream.map(_.rowOrdering).foldAs(VOID:Ordering[ROW])(_ + _)
           listening = true
   })
 

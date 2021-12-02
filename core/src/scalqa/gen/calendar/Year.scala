@@ -8,7 +8,7 @@ object Year extends Int.Opaque.Data.Sequential[Year]("Year"):
   override        def value_tag(v: Year)        : String    = v.toString
   override        def value_isVoid(v: Year)     : Boolean   = v.real == Int.min
 
-  implicit inline def implicitRequest(v: \/)    : Year      = Int.min.toOpaque
+  implicit inline def implicitRequest(v:VOID)   : Year      = Int.min.toOpaque
   implicit inline def implicitRequest(v:CURRENT): Year      = current
 
   extension (x: Year)

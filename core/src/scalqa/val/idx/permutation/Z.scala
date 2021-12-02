@@ -14,15 +14,15 @@ object Z:
     ar.sort(using o.on(_._2))
     val r: Int.Range =
       if (fullRange) 0 <>> ar.length
-      else ar.stream.zipIndex.findOpt(t => t._1 != t._2._1).map(t => t._1 <> (0 <>> ar.length).stream.reverse.findOpt(i => i != ar(i)._1).get) or \/
-    if(r.isEmpty) \/  // No change
+      else ar.stream.zipIndex.findOpt(t => t._1 != t._2._1).map(t => t._1 <> (0 <>> ar.length).stream.reverse.findOpt(i => i != ar(i)._1).get) or VOID
+    if(r.isEmpty) VOID // No change
     else
       val a = new Array[Int](r.size)
       ar.stream.takeRange(r).map(_._1 - r.start).foreachIndexed((i, v) => a(v) = i, r.start)
       Permutation(r, a.stream.pack)
 
   // --------------------------------------------------------------------------------------------------
-  def pairs(lst: Idx[(Int, Int)]): Permutation = if (lst.size == 0) \/ else
+  def pairs(lst: Idx[(Int, Int)]): Permutation = if (lst.size == 0) VOID else
     val r: Int.Range = lst.stream.flatMap(t => Int.Stream(t._1,t._2)).range.raw
     Permutation(r, r.toArray.self(a => lst.stream.foreach(t => a(t._1 - r.start) = t._2)).stream.pack)
 
@@ -43,7 +43,7 @@ object Z:
 
   object Void extends Permutation with Gen.Void:
     def range               = 0 <>> 0;
-    def positions: Int.Pack = \/
+    def positions: Int.Pack=VOID
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

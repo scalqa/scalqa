@@ -118,7 +118,7 @@ ___________________________________________________________________________*/
 
          // Output
          Boolean.Opt(true)
-         Boolean.Opt(\/)
+         Boolean.Opt(VOID)
        ```
 
 
@@ -147,7 +147,7 @@ ___________________________________________________________________________*/
 
          // Output
          Double.Opt(123.45)
-         Double.Opt(\/)
+         Double.Opt(VOID)
        ```
 
 @def toLongResult -> Long result conversion
@@ -175,7 +175,7 @@ ___________________________________________________________________________*/
 
          // Output
          Long.Opt(123)
-         Long.Opt(\/)
+         Long.Opt(VOID)
       ```
 
 @def toIntResult -> Int result conversion
@@ -203,7 +203,7 @@ ___________________________________________________________________________*/
 
          // Output
          Int.Opt(123)
-         Int.Opt(\/)
+         Int.Opt(VOID)
        ```
 
 @def Problem -> To Problem

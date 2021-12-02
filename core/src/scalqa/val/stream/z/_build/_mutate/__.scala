@@ -23,7 +23,7 @@ object mutate:
   def nonEmptyOpt[A](x: Stream[A]): Opt[Stream[A]] =
     x.sizeLongOpt match
         case o if o => o.take(_ > 0).map(_ => x)
-        case _      => { val b=x.enablePreview; if(b.previewOpt) b.? else \/ }
+        case _      => { val b=x.enablePreview; if(b.previewOpt) b.? else VOID }
 
 
 /*___________________________________________________________________________

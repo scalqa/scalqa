@@ -4,7 +4,7 @@ class splitAt[A](x: Stream[A], pos: Stream[Int]) extends z.x.Pipe[Stream[A]](x):
   private var i     = 0
   private var ended = false
 
-  def readOpt = pos.readOpt.map(j => x.readStream({val v = j - i; i = j; v})) orOpt (if(ended) \/ else {ended=true; x })
+  def readOpt = pos.readOpt.map(j => x.readStream({val v = j - i; i = j; v})) orOpt (if(ended) VOID else {ended=true; x })
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

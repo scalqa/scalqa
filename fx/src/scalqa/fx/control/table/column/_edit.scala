@@ -2,10 +2,10 @@ package scalqa; package fx; package control; package table; package column; impo
 
 transparent trait _edit[ROW,V,A]:
   self: Column[ROW,V,A] =>
-  private[table] var editEnabledFun : ROW => Boolean   = \/
-  private[table] var editCommitFun  : (ROW, A) => Unit = \/
+  private[table] var editEnabledFun : ROW => Boolean  =VOID
+  private[table] var editCommitFun  : (ROW, A) => Unit=VOID
 
-  def useEditor(e: => Editor, commit: (ROW, A) => Unit, enabled: ROW => Boolean = \/): Unit = {
+  def useEditor(e: => Editor, commit: (ROW, A) => Unit, enabled: ROW => Boolean=VOID): Unit = {
     useCell(e)
     editEnabledFun = enabled
     editCommitFun = commit

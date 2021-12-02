@@ -5,7 +5,7 @@ abstract class Base[A<:Opaque](name: String) extends AnyRef.Opaque.Base[A,String
 
   override def value_isVoid(v: A)        : Boolean = v.real.length==0
   override def value_tag(v: A)           : String  = v.real // Keep it simple
-  implicit inline def implicitRequest(v: \/): A    = "".cast[A]
+  implicit inline def implicitRequest(v:VOID): A    = "".cast[A]
 
   given z_CanEqualString: CanEqual[A,String] = CanEqual.derived
 

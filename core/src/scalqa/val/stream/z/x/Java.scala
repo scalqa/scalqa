@@ -13,7 +13,7 @@ object Java:
   class Stream_fromList[A](l: J.List[A]) extends Stream[A] with Able.Size:
     private         var i      = 0
     private         val sz     = l.size
-    def readOpt = { var o:Opt[A] = \/; if(i<sz){ o=l.get(i); i+=1}; o}
+    def readOpt = { var o:Opt[A]=VOID; if(i<sz){ o=l.get(i); i+=1}; o}
     /**/            def size   = sz - i
 
   class Stream_fromIterator[A](it: J.Iterator[A]) extends Stream[A]:

@@ -8,7 +8,7 @@ class Basic[X, Y, XA <: Chart.Axis[X], YA <: Chart.Axis[Y]](override val axisX: 
   def itemStream: Stream[ITEM] = data.stream.flatMap(_.items).dropVoid
 
   protected[x] object Setup:
-    var updateLegendJobs: Pack[() => Unit]  = \/
+    var updateLegendJobs: Pack[() => Unit] =VOID
     var calcXRangeAsOpt : () => Opt[Range[X]] = () => itemStream.map(_.x).rangeOpt(using axisX.ordering)
     var calcYRangeAsOpt : () => Opt[Range[Y]] = () => itemStream.map(_.y).rangeOpt(using axisY.ordering)
 
@@ -18,12 +18,12 @@ class Basic[X, Y, XA <: Chart.Axis[X], YA <: Chart.Axis[Y]](override val axisX: 
     y = yPar
     lazy  val node: Fx.Node = null
     def isVisible = true
-    protected[x] var layoutJob: () => Unit = \/
+    protected[x] var layoutJob: () => Unit=VOID
 
   class Series(name: String, l:  Idx.O[ITEM]) extends SeriesBase(name, l):
-    def this() = this("", \/)
+    def this() = this("", VOID)
     lazy  val node: Fx.Node = null
-    protected[x] var layoutJob: () => Unit = \/
+    protected[x] var layoutJob: () => Unit=VOID
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

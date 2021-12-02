@@ -2,9 +2,9 @@ package scalqa; package fx; package control; package text; import language.impli
 
 import InputControl.Change
 
-abstract class InputControl(initialTextO: Opt[String]= \/) extends Control:
+abstract class InputControl(initialTextO: Opt[String]=VOID) extends Control:
   protected type REAL <: javafx.scene.control.TextInputControl
-  private var _onChange: Pack[Change => Any] = \/;
+  private var _onChange: Pack[Change => Any]=VOID;
   {
     initialTextO.forval(t => _onRealCreated(_ => text = t))
   }

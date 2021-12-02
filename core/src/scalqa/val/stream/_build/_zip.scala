@@ -142,7 +142,7 @@ ___________________________________________________________________________*/
      Creates new [[scalqa.val.Stream Stream]] with elements paired with the optional prior element
 
      ```
-        (1 <> 5).stream.zipPrior.TP  // Prints Stream((Opt(\/),1), (Opt(1),2), (Opt(2),3), (Opt(3),4), (Opt(4),5))
+        (1 <> 5).stream.zipPrior.TP  // Prints Stream((Opt(VOID),1), (Opt(1),2), (Opt(2),3), (Opt(3),4), (Opt(4),5))
      ```
 
 
@@ -151,6 +151,6 @@ ___________________________________________________________________________*/
      Creates new [[scalqa.val.Stream Stream]] with elements paired with the optional next element
 
      ```
-        (1 <> 5).stream.zipNext.TP  // Prints Stream((1,Opt(2)), (2,Opt(3)), (3,Opt(4)), (4,Opt(5)), (5,Opt(\/)))
+        (1 <> 5).stream.zipNext.TP  // Prints Stream((1,Opt(2)), (2,Opt(3)), (3,Opt(4)), (4,Opt(5)), (5,Opt(VOID)))
      ```
 */

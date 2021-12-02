@@ -8,7 +8,7 @@ object TwoWayFunction:
   /**/            def apply [A,B](af: A => B, bf:B => A): TwoWayFunction[A,B] = new Z.Basic(af,bf)
   /**/            def wrap[A,B](f:  A => B)             : TwoWayFunction[A,B] = new TwoWayFunction[A,B] { def apply(a: A) = f(a); def undo(b: B) = J.unsupportedOperation() }
   @tn("getVoid")  def void[A,B]                         : TwoWayFunction[A,B] = Z.Void.cast[TwoWayFunction[A,B]]
-  implicit inline def implicitRequest[A,B](v: \/)       : TwoWayFunction[A,B] = void[A,B]
+  implicit inline def implicitRequest[A,B](v:VOID)      : TwoWayFunction[A,B] = void[A,B]
 
   extension[A,B](x: TwoWayFunction[A,B])
     def reverse: TwoWayFunction[B, A] = new Z.Reversed(x)
@@ -67,6 +67,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitRequest    -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest    -> General void instance request \n\n It is possible to use general request VOID to get void instance of this type, thanks to this implicit conversion.
 
 */

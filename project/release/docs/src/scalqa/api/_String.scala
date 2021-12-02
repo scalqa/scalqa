@@ -9,8 +9,8 @@ trait _String:
       else if(x.length>1) x.takeFirst(1).toUpperCase + x.dropFirst(1)
       else x.toUpperCase
 
-    def lowerNoOp        : String = x match{case "~"=>"stream"; case "\\/"=>"void";   case v => v.toLowerCase }
-    def withOp           : String = x match{case "VOID" => "\\/"; case _ => x }
+    def lowerNoOp        : String = x match{case "~"=>"stream"; case  "VOID"=>"void";   case v => v.toLowerCase }
+    def withOp           : String = x match{case "VOID" =>  "VOID"; case _ => x }
 
     def simpleName(brief: Boolean = true): String =
       var v = x

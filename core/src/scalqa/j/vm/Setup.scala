@@ -17,7 +17,7 @@ object Setup:
   val jsonFormatPro                     : Pro.M[Json.Format]                                      = new PRO(json.z.DefaultFormat)
   val bigDecimalDefaultScalePro         : Pro.M[Int]                                              = new PRO(64)
   val randomSourcePro                   : Pro.M[J.Random.Source]                                  = new PRO(util.Random.Z.JavaUtilSource)
-  val tempPathPro                       : Pro.M[Opt[File.Path]]                                   = new PRO(\/)
+  val tempPathPro                       : Pro.M[Opt[File.Path]]                                   = new PRO(VOID)
 
   @fast lazy val tempPathOpt            : Opt[File.Path]                                          = tempPathPro()
   @fast lazy val bigDecimalDefaultScale : Int                                                     = bigDecimalDefaultScalePro()

@@ -1,8 +1,8 @@
 package scalqa; package `val`; package stream; package custom; import language.implicitConversions
 
 class Event extends event.Monitor:
-  private   var beforeFirst, empty : Pack[() => Any]                 = \/
-  private   var each, afterLast    : Pack[(Int, Time.Length) => Any] = \/
+  private   var beforeFirst, empty : Pack[() => Any]                =VOID
+  private   var each, afterLast    : Pack[(Int, Time.Length) => Any]=VOID
 
   protected def runOnBeforeFirst                                       : Unit = beforeFirst.stream.foreach(_())
   protected def runOnEvery(cnt: Int, tm: Time.Length)                  : Unit = each.stream.foreach(_(cnt, tm))

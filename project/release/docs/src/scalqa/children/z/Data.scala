@@ -13,9 +13,9 @@ class Data(val owner: Member):
       exports,
       implicits,
       givens,
-      makers    : Pack[Member] = \/
+      makers    : Pack[Member]=VOID
 
-  var extensions: Pack[(ExtensionTarget,List[Member])] = \/
+  var extensions: Pack[(ExtensionTarget,List[Member])]=VOID
 
   // -------------------------------------------------------------------------------------------------------
   given ordering: Ordering[Member] with

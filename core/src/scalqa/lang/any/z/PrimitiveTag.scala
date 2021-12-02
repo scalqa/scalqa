@@ -21,7 +21,7 @@ object PrimitiveTag:
     case v: Long    => "Long"
     case v: Float   => "Float"
     case v: Double  => "Double"
-    case _          => \/
+    case _          => VOID
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -4,7 +4,7 @@ import recorder.Z
 import observable.{ event as C }
 
 class Recorder[A](protected val real: Idx.Mutable[A]) extends Idx.M.X.Abstract[A] with J.Util.Proxy.Idx.Base[A]:
-  protected   var list                           : Pack[Event[A]]  = \/
+  protected   var list                           : Pack[Event[A]] =VOID
   protected   var last                           : Event[A]        = null
   protected   def add(v: Event[A])               : Unit            = { if(last != null) list += last; last = v}
   private     def strm(r: Int.Range)             : Stream[A]       = real.stream.takeRange(r)

@@ -2,7 +2,7 @@ package scalqa; package j; package file; package path; import language.implicitC
 
 object Z:
 
-  def indexOfOpt(main: File.Path, p: File.Path): Int.Opt = if (main.isEmpty) \/ else if (p.isEmpty) 0 else
+  def indexOfOpt(main: File.Path, p: File.Path): Int.Opt = if (main.isEmpty) VOID else if (p.isEmpty) 0 else
     var i, j = 0
     val mSz = main.size
     val pSz = p.size
@@ -13,7 +13,7 @@ object Z:
         j += 1
         if (j == pSz) return i - j + 1
       i += 1
-    \/
+    VOID
 
   // ---------------------------------------------------------------------------------
 

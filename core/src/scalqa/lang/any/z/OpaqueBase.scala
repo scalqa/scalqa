@@ -48,6 +48,6 @@ ___________________________________________________________________________*/
 
     If type supports void instances, then following inmpelentation should be added in most cases:
     ```
-      implicit inline def implicitRequest(v: \/): OPAQUE_TYPE
+      implicit inline def implicitRequest(v:VOID): OPAQUE_TYPE
     ```
 */

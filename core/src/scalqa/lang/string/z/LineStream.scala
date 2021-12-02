@@ -5,7 +5,7 @@ private[lang] class LineStream(str: String) extends Stream[String]:
   private val sz = str.length
 
   def readOpt : Opt[String] =
-    if(i >= sz) \/
+    if(i >= sz) VOID
     else
       val s = i
       while (i < sz && str.charAt(i) != '\n') i += 1

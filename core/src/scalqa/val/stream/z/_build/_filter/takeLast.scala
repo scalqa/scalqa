@@ -10,7 +10,7 @@ class takeLast[A](x: Stream[A], cnt: Int) extends z.x.Pipe.Calc[A](x):
     private         val sz     = i min a.length;
     private         val off    = i - sz - 1
     private         var j      = 0
-    def readOpt = {var o:Opt[A]= \/; if(j<sz){ j+=1; o = a((off + j) % a.length).cast[A]}; o}
+    def readOpt = {var o:Opt[A]=VOID;if(j<sz){ j+=1; o = a((off + j) % a.length).cast[A]}; o}
     /**/            def size   = sz - j
 
 /*___________________________________________________________________________

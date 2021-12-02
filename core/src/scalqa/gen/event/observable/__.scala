@@ -4,8 +4,8 @@ trait Observable:
   def onObservableChange[U](l: () => U): Event.Control
 
 object Observable:
-  @tn("getVoid")  def void               : Observable = z_Void
-  implicit inline def implicitRequest(v: \/): Observable = void
+  @tn("getVoid")  def void                   : Observable = z_Void
+  implicit inline def implicitRequest(v:VOID): Observable = void
 
   // **************************************************************************************
   private object z_Void extends Observable with Gen.Void { def onObservableChange[U](v: () => U) = Event.Control.void }

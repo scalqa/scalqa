@@ -12,7 +12,7 @@ object Range extends J.Test:
   }
 
   testTrue("Void") {
-    val v: Int.Range = \/
+    val v: Int.Range=VOID
     assertTrue(v.isVoid)
     val z = 0 <>> 0
     assertFalse(z.isVoid)

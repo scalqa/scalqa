@@ -5,24 +5,24 @@ class Request:
   override def toString = super.toString.takeBefore("$").takeAfterLast(".")
 
 object Request:
-  @tn("VOID")    type \/         = request.VOID;     @tn("VOID") inline def \/          = request.VOID
-  /**/           type DEFAULT    = request.DEFAULT;              inline def DEFAULT     = request.DEFAULT
-  /**/           type ALL        = request.ALL;                  inline def ALL         = request.ALL
-  /**/           type NEW        = request.NEW;                  inline def NEW         = request.NEW
-  /**/           type EMPTY      = request.EMPTY;                inline def EMPTY       = request.EMPTY
-  /**/           type CURRENT    = request.CURRENT;              inline def CURRENT     = request.CURRENT
-  /**/           type LEFT       = request.LEFT;                 inline def LEFT        = request.LEFT
-  /**/           type RIGHT      = request.RIGHT;                inline def RIGHT       = request.RIGHT
-  /**/           type CENTER     = request.CENTER;               inline def CENTER      = request.CENTER
-  /**/           type TOP        = request.TOP;                  inline def TOP         = request.TOP
-  /**/           type BOTTOM     = request.BOTTOM;               inline def BOTTOM      = request.BOTTOM
-  /**/           type HORIZONTAL = request.HORIZONTAL;           inline def HORIZONTAL  = request.HORIZONTAL
-  /**/           type VERTICAL   = request.VERTICAL;             inline def VERTICAL    = request.VERTICAL
-  /**/           type UP         = request.UP;                   inline def UP          = request.UP
-  /**/           type DOWN       = request.DOWN;                 inline def DOWN        = request.DOWN
-  /**/           type SEPARATOR  = request.SEPARATOR;            inline def SEPARATOR   = request.SEPARATOR
-  /**/           type MAX        = request.MAX;                  inline def MAX         = request.MAX
-  /**/           type MIN        = request.MIN;                  inline def MIN         = request.MIN
+  type DEFAULT    = request.DEFAULT;              inline def DEFAULT     = request.DEFAULT
+  type ALL        = request.ALL;                  inline def ALL         = request.ALL
+  type NEW        = request.NEW;                  inline def NEW         = request.NEW
+  type EMPTY      = request.EMPTY;                inline def EMPTY       = request.EMPTY
+  type CURRENT    = request.CURRENT;              inline def CURRENT     = request.CURRENT
+  type LEFT       = request.LEFT;                 inline def LEFT        = request.LEFT
+  type RIGHT      = request.RIGHT;                inline def RIGHT       = request.RIGHT
+  type CENTER     = request.CENTER;               inline def CENTER      = request.CENTER
+  type TOP        = request.TOP;                  inline def TOP         = request.TOP
+  type BOTTOM     = request.BOTTOM;               inline def BOTTOM      = request.BOTTOM
+  type HORIZONTAL = request.HORIZONTAL;           inline def HORIZONTAL  = request.HORIZONTAL
+  type VERTICAL   = request.VERTICAL;             inline def VERTICAL    = request.VERTICAL
+  type UP         = request.UP;                   inline def UP          = request.UP
+  type DOWN       = request.DOWN;                 inline def DOWN        = request.DOWN
+  type SEPARATOR  = request.SEPARATOR;            inline def SEPARATOR   = request.SEPARATOR
+  type MAX        = request.MAX;                  inline def MAX         = request.MAX
+  type MIN        = request.MIN;                  inline def MIN         = request.MIN
+  type VOID       = request.VOID;                 inline def VOID        = request.VOID
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -31,9 +31,8 @@ object Request:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@type \/          ->  Void request type alias      \n\n Shortcut to [[scalqa.gen.request.VOID$       Gen.Request.\/]]
-@def  \/          ->  Void request singleton alias \n\n Shortcut to [[scalqa.gen.request.VOID$       Gen.Request.\/]]
-
+@type VOID        ->  Type alias      \n\n Shortcut to [[scalqa.gen.request.VOID$       Gen.Request.VOID]]
+@def  VOID        ->  Singleton alias \n\n Shortcut to [[scalqa.gen.request.VOID$       Gen.Request.VOID]]
 @type NEW         ->  Type alias      \n\n Shortcut to [[scalqa.gen.request.NEW$        Gen.Request.NEW]]
 @def  NEW         ->  Singleton alias \n\n Shortcut to [[scalqa.gen.request.NEW$        Gen.Request.NEW]]
 @type DEFAULT     ->  Type alias      \n\n Shortcut to [[scalqa.gen.request.DEFAULT$    Gen.Request.DEFAULT]]
@@ -118,11 +117,11 @@ ___________________________________________________________________________*/
          }
      ```
 
-     By far the most common request is `\/`, which is request for void instance
+     By far the most common request is VOID, which is a request for a void instance
 
      ```
-     var s: Stream[Int]  = \/     // Assigning empty stream of Ints
-     var o: Opt[String]  = \/     // Assigning empty optional value of String
-     var i: Long.Idx     = \/     // Assigning empty indexed collection of Long
+     var s: Stream[Int]  = VOID     // Assigning empty stream of Ints
+     var o: Opt[String]  = VOID     // Assigning empty optional value of String
+     var i: Long.Idx     = VOID     // Assigning empty indexed collection of Long
      ```
 */

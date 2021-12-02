@@ -11,7 +11,7 @@ object Stable :
   /**/                 def apply[A,B](v: Stream[(A,B)])    : Stable[A,B] = stable.z.AnyRef(v.iterator)
   /**/                 def apply[A,B](v: (A,B)*)           : Stable[A,B] = stable.z.AnyRef(v.iterator)
   @tn("getVoid")inline def void[A,B]                       : Stable[A,B] = stable.z.Void.cast[Stable[A,B]]
-  implicit      inline def implicitRequest[A,B](v: \/)     : Stable[A,B] = void[A,B]
+  implicit      inline def implicitRequest[A,B](v:VOID)    : Stable[A,B] = void[A,B]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -25,7 +25,7 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitRequest   -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest   -> General void instance request \n\n It is possible to use general request VOID to get void instance of this type, thanks to this implicit conversion.
 
 @def join -> Join key/value association
 

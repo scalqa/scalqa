@@ -74,6 +74,6 @@ ___________________________________________________________________________*/
 
       Generally Opt could be added as a stream.
 
-      This overload is sligtly more efficient, but it also required for mapped Opt expressions, where Opt type is harder to resolve and it would not compile.
+      This overload is sligtly more efficient, but it is also required for mapped Opt expressions, where Opt type is harder to resolve and it would not compile.
 
 */

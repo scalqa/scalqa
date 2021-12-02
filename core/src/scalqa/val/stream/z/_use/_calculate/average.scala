@@ -4,7 +4,7 @@ import Math.Average
 
 object average:
 
-  def few[A,B,C,D,E,F](x: Stream[A], f1:A=>Opt[B], f2:A=>Opt[C], f3:A=>Opt[D]= \/, f4:A=>Opt[E]= \/, f5:A=>Opt[F]= \/)
+  def few[A,B,C,D,E,F](x: Stream[A], f1:A=>Opt[B], f2:A=>Opt[C], f3:A=>Opt[D]=VOID,f4:A=>Opt[E]=VOID,f5:A=>Opt[F]=VOID)
                       (using a1:Average[B], a2:Average[C], a3:Average[D], a4:Average[E], a5:Average[F])
     : (B,C) | (B,C,D) | (B,C,D,E) | (B,C,D,E,F) =
 

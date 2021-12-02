@@ -19,7 +19,7 @@ On smaller element count Pack is still competitive:
     J.Benchmark(
       ("List",   () => {var l: List[String]   = Nil;          for(i <- 0 <>> 12) l = array(i) :: l; l.size}),
       ("Vector", () => {var v: Vector[String] = Vector.empty; for(i <- 0 <>> 12) v = v :+ array(i); v.size}),
-      ("Pack",   () => {var p: Pack[String]   = \/;           for(i <- 0 <>> 12) p = p + array(i);  p.size}),
+      ("Pack",   () => {var p: Pack[String]   = VOID;         for(i <- 0 <>> 12) p = p + array(i);  p.size}),
     )
 
     // Output
@@ -42,7 +42,7 @@ When adding multiple elements Pack provides Buffer like performance.
     J.Benchmark(
         ("List",   () => {var l: List[String]   = Nil;          l = l :++ many; l.size}),
         ("Vector", () => {var v: Vector[String] = Vector.empty; v = v :++ many; v.size}),
-        ("Pack",   () => {var p: Pack[String]   = \/;           p = p ++ many;  p.size}),
+        ("Pack",   () => {var p: Pack[String]   = VOID;         p = p ++ many;  p.size}),
     )
 
 

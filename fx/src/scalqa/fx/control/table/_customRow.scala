@@ -3,12 +3,12 @@ package scalqa; package fx; package control; package table; import language.impl
 transparent trait _customRow[ROW]:
   self: Table[ROW] =>
 
-  private var emptyRowSetup  : Fx.Cell.Setup[Fx.Cell] = \/
-  private var customRowSetups: Pack[CustomRow]        = \/
+  private var emptyRowSetup  : Fx.Cell.Setup[Fx.Cell]=VOID
+  private var customRowSetups: Pack[CustomRow]       =VOID
 
   private[table] def rowSetup(v: RowCell[ROW, VIEW], empty: Boolean ): control.Cell.Setup[control.Cell] =
     if(empty) emptyRowSetup
-    else customRowSetups.stream.findOpt(_.filter(v)).cast[Opt[control.Cell.Setup[control.Cell]]] or \/
+    else customRowSetups.stream.findOpt(_.filter(v)).cast[Opt[control.Cell.Setup[control.Cell]]] or VOID
 
   // *****************************************************************************************************************************************************
   class CustomRow private(private[table] val filter: RowCell[ROW, VIEW] => Boolean, empty: Boolean) extends control.Cell.Setup[RowCell[ROW, VIEW]]:
@@ -19,7 +19,7 @@ transparent trait _customRow[ROW]:
     def this(filter: RowCell[ROW, VIEW] => Boolean) = this(filter,false)
     def this(v: EMPTY) = this(null,true)
 
-    private var triggers: Pack[ROW => Observable] = \/
+    private var triggers: Pack[ROW => Observable]=VOID
     def refreshOn(f: ROW => Observable): Unit = triggers += f
     override def apply(r: RowCell[ROW, VIEW]): Unit =
       super.apply(r)

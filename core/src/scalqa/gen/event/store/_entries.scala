@@ -8,7 +8,7 @@ transparent trait _entries:
   def stream(typ: AnyRef)             : Stream[Entry] = new z_Stream().TAKE(_.`type` == typ)
   def isEmpty                         : Boolean       = top.isVoid
   def count                           : Int           = new z_Stream().count
-  def toText(label: Opt[String] = \/) : String        = new z_Stream().nonEmptyOpt.map(_.zipIndex.makeString("\n")).or("empty").indent((label or "Event.Store")+": ")
+  def toText(label: Opt[String] =VOID): String        = new z_Stream().nonEmptyOpt.map(_.zipIndex.makeString("\n")).or("empty").indent((label or "Event.Store")+": ")
 
   // *******************************************************************
   private class z_Stream extends Stream[Entry]:

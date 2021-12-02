@@ -14,14 +14,14 @@ private[j] class Result(
 
   def +(that: Result): Result     = new Result(number, label, count + that.count, time + that.time, totalMemory + that.totalMemory, that.lastOpt, sumOpt.mix(that.sumOpt, _ + _))
   def opsPerSec      : Long       = time.??.map(count * 1_000_000_000L / _.nanosTotal) or 0L
-  def memoryAverage  : ByteCount  = if (count == 0) \/ else totalMemory / count
+  def memoryAverage  : ByteCount  = if (count == 0) VOID else totalMemory / count
 
   def doc =
     def percent(v: Long, t: Long) = if (t == 0) 0 else (v * 100D / t).toInt
     Doc(this)
       +=  ("Num", number)
       ++= (label != number.toString) ? ("Name", label)
-      +=  ("Ops/Sec", if (time <= \/) "Too many" else opsPerSec.tagBrief)
+      +=  ("Ops/Sec", if (time <=VOID)"Too many" else opsPerSec.tagBrief)
       +=  ("%",        percent(opsPerSec, maxOpsPerSec))
       +=  ("Memory",   memoryAverage.tagBrief)
       +=  ("%",        percent(memoryAverage.toLong, maxMemoryAverage.toLong))

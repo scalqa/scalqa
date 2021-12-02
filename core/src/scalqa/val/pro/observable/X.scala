@@ -22,13 +22,13 @@ object X:
 
   // *****************************************************************************************************************
   class Basic[A](source: => A) extends observable.X.Abstract[A]:
-    def this(source: => A, dependencies: Stream[Gen.Observable] = \/) =
+    def this(source: => A, dependencies: Stream[Gen.Observable] =VOID)=
       this(source)
       dependencies.foreach(_.onObservableChange(() => fireChange))
 
-    private            var valueOpt : Opt[A] = \/
+    private            var valueOpt : Opt[A]=VOID
     /**/               def apply()           = valueOpt or source.self(valueOpt = _)
-    protected override def fireChange: Int   = { valueOpt = \/;  super.fireChange }
+    protected override def fireChange: Int   = { valueOpt=VOID;  super.fireChange }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -26,12 +26,12 @@ object Pack:
   /**/                   def fromStream[A<:Raw](v: Val.Stream[A])            : Pack[A] = void[A].joinAll(v)
   @tn("getVoid")  inline def void      [A<:Raw]                              : Pack[A] = z_Void.cast[Pack[A]]; object z_Void extends Pack(Array.emptyDouble) with Gen.Void
 
-  implicit        inline def implicitRequest[A<:Raw](v: \/)                  : Pack[A] = void[A]
+  implicit        inline def implicitRequest[A<:Raw](v:VOID)                 : Pack[A] = void[A]
   implicit        inline def implicitFromStream[A<:Raw](inline v:G.Stream[A]): Pack[A] = v.pack
 
   private class Buf[A<:Raw] private(a: Array[Primitive],sz:Int) extends Buffer[A](a,sz):
     def this(a: Array[Primitive], sz: Int, v: A, vs: Val.Stream[A]) = { this(a.copySize(vs.sizeOpt.map(sz + _) or sz + J.initSize).self(_(sz-1)=v), sz); addAll(vs) }
-    def mk: Pack[A] = { val s=size; if(s==0) \/ else new Pack(array,s) }
+    def mk: Pack[A] = { val s=size; if(s==0) VOID else new Pack(array,s) }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -46,6 +46,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitRequest   -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest   -> General void instance request \n\n It is possible to use general request VOID to get void instance of this type, thanks to this implicit conversion.
 
 */

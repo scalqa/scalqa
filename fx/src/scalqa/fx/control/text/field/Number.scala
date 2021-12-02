@@ -1,15 +1,15 @@
 package scalqa; package fx; package control; package text; package field; import language.implicitConversions
 
-class Number protected (columns: Opt[Int] = \/, value: Opt[String]= \/) extends Text.Field(columns, value):
+class Number protected (columns: Opt[Int]=VOID, value: Opt[String]=VOID) extends Text.Field(columns, value):
   var negativeAllowed = true
-  onChange(c => try { if (c.textAfter.toDouble < 0 && !negativeAllowed) c.text_=(\/) } catch { case _ : Exception => c.text_=(\/) })
+  onChange(c => try { if (c.textAfter.toDouble < 0 && !negativeAllowed) c.text_=(VOID) } catch { case _ : Exception => c.text_=(VOID) })
 
   def intResult    : Result[Int]    = text.trim.toIntResult
   def doubleResult : Result[Double] = text.trim.toDoubleResult
 
 object Number:
-  def apply(value: String)                                  : Number = new Number(\/, value)
-  def apply(columns: Opt[Int] = \/, value: Opt[String]= \/) : Number = new Number(columns, value)
+  def apply(value: String)                                  : Number = new Number(VOID, value)
+  def apply(columns: Opt[Int]=VOID, value: Opt[String]=VOID) : Number = new Number(columns, value)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

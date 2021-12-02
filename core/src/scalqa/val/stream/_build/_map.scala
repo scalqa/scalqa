@@ -64,7 +64,7 @@ ___________________________________________________________________________*/
      If the function returns void option, the element is dropped.
 
      ```
-     (1 <> 10).stream.mapOpt(i => if(i % 2 == 0) "Even_"+i else \/).TP
+     (1 <> 10).stream.mapOpt(i => if(i % 2 == 0) "Even_"+i else VOID).TP
 
      // Output
      Stream(Even_2, Even_4, Even_6, Even_8, Even_10)
@@ -74,7 +74,7 @@ ___________________________________________________________________________*/
      ```
      (0 <>> 26).stream.mapOpt{
        case i if(i % 2 == 0) => ('a' + i).toChar
-       case _                => \/
+       case _                => VOID
      }.TP
 
      // Output

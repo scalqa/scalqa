@@ -35,7 +35,7 @@ ___________________________________________________________________________*/
 
       b = false
 
-      (b ? "Foo").TP  // Prints   Opt(\/)
+      (b ? "Foo").TP  // Prints   Opt(VOID)
     ```
 
     Note: This operation can be used as a conditional function

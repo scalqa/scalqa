@@ -1,6 +1,6 @@
 package scalqa; package fx; package control; package text; import language.implicitConversions
 
-class Field(columnsO: Opt[Int] = \/, value: Opt[String]= \/) extends Text.InputControl(value):
+class Field(columnsO: Opt[Int]=VOID, value: Opt[String]=VOID) extends Text.InputControl(value):
   protected type REAL = javafx.scene.control.TextField
   protected override def _createReal = new REAL().self(f => columnsO.forval(f.setPrefColumnCount))
 
@@ -11,8 +11,8 @@ class Field(columnsO: Opt[Int] = \/, value: Opt[String]= \/) extends Text.InputC
   def columnCount_=(b: Int)   : Unit          = real.setPrefColumnCount(b)
 
 object Field:
-  def apply(value: String)                                  : Text.Field = new Text.Field(\/, value)
-  def apply(columns: Opt[Int] = \/, value: Opt[String]= \/) : Text.Field = new Text.Field(columns, value)
+  def apply(value: String)                                  : Text.Field = new Text.Field(VOID, value)
+  def apply(columns: Opt[Int]=VOID, value: Opt[String]=VOID) : Text.Field = new Text.Field(columns, value)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   type Number   = field.Number;    transparent inline def Number   = field.Number

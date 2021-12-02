@@ -21,7 +21,7 @@ enum Pos(val real: JPos) extends Fx.JavaFx.Enum[JPos]:
   def horizontal : HPos = HPos(real.getHpos)
 
 object Pos extends Fx.JavaFx.Enum.Companion[Pos, JPos]:
-  implicit inline def implicitFrom(v: \/)    : Pos = Void
+  implicit inline def implicitFrom(v: VOID)  : Pos = Void
   implicit inline def implicitFrom(v: CENTER): Pos = Center
   implicit inline def implicitFrom(v: TOP)   : Pos = TopCenter
   implicit inline def implicitFrom(v: BOTTOM): Pos = BottomCenter

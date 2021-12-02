@@ -15,13 +15,13 @@ class Split extends Control:
   /**/  def orientation_=(o: Orientation) : Unit                = orientationPro() = o
 
   /**dividerPercent is a percent of entire space allocated to the added section, last section gets the rest*/
-  def add(e: Fx.Node.Like, dividerPercentOpt : Opt[Percent] = \/): this.type =
+  def add(e: Fx.Node.Like, dividerPercentOpt : Opt[Percent]=VOID): this.type =
     items += e
     priorPercentOpt.forval(p => real.setDividerPosition(items.size - 2, real.getDividers.valStream.map(_.getPosition).dropLast(1).lastOpt.or(0D) + p.toDouble / 100d))
     priorPercentOpt = dividerPercentOpt
     this
 
-  private var priorPercentOpt : Opt[Percent] = \/
+  private var priorPercentOpt : Opt[Percent]=VOID
 
 object Split:
   type Divider = split.Divider

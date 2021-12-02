@@ -8,11 +8,11 @@ object J:
   /**/    def sleep(tl: Time.Length)                                                : Unit          = java.lang.Thread.sleep(tl.millisTotal, (tl.micros * 1000 + tl.nanos).toInt)
 
   inline  def initSize                                                    : Int         = ZZ.initSize
-  inline  def toDo(                inline message: String = \/)           : Nothing     = throw new UnsupportedOperationException("J.toDo. "+message)
-  inline  def unsupportedOperation(inline message: String = \/)           : Nothing     = throw new UnsupportedOperationException(message)
-  inline  def illegalState(        inline message: String = \/)           : Nothing     = throw new IllegalStateException(message)
-  inline  def illegalArgument(     inline message: String = \/)           : Nothing     = throw new IllegalArgumentException(message)
-  /**/    def printStack(sizeLimit: Int.Opt = \/, label: Opt[String]= \/) : Unit        = synchronized{ new Exception().getStackTrace().stream
+  inline  def toDo(                inline message: String =VOID)          : Nothing     = throw new UnsupportedOperationException("J.toDo. "+message)
+  inline  def unsupportedOperation(inline message: String =VOID)          : Nothing     = throw new UnsupportedOperationException(message)
+  inline  def illegalState(        inline message: String =VOID)          : Nothing     = throw new IllegalStateException(message)
+  inline  def illegalArgument(     inline message: String =VOID)          : Nothing     = throw new IllegalArgumentException(message)
+  /**/    def printStack(sizeLimit: Int.Opt=VOID, label: Opt[String]=VOID): Unit        = synchronized{ new Exception().getStackTrace().stream
     /**/                                                                                    .takeRange(1 <> sizeLimit.or(5000)).zipIndex(1)
     /**/                                                                                    .map("\t" + _.toString.padEndTo(3) + " " + _).joinAt(0,label or "J.printStack").foreach(println) }
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

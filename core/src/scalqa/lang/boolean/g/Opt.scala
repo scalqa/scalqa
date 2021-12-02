@@ -5,7 +5,7 @@ object Opt:
   @tn("getVoid") inline def void[A<:Raw]                                      : Opt[A]     = -1.toByte.cast[Opt[A]]
   /**/           inline def TRUE      [A<:Raw]                                : Opt[A]     =  1.toByte.cast[Opt[A]]
   /**/           inline def FALSE     [A<:Raw]                                : Opt[A]     =  0.toByte.cast[Opt[A]]
-  implicit       inline def implicitRequest         [A<:Raw](v: \/)           : Opt[A]     = void[A]
+  implicit       inline def implicitRequest         [A<:Raw](v:VOID)          : Opt[A]     = void[A]
   implicit       inline def implicitFromBooleanTrue [A<:Raw](inline v: true)  : Opt[A]     = TRUE[A]
   implicit       inline def implicitFromBooleanFalse[A<:Raw](inline v: false) : Opt[A]     = FALSE[A]
   implicit       inline def implicitFromBooleanRaw  [A<:Raw](inline v: A)     : Opt[A]     = apply(v)
@@ -16,9 +16,9 @@ object Opt:
     /**/  inline def ref                                         : Val.Opt[A] = {val X=x; if(X.isEmpty) ZZ.None else java.lang.Boolean.valueOf(X.real == TRUE[A].real)}.cast[Val.Opt[A]]
     /**/  inline def isEmpty                                     : Boolean    = x.real == void.real
     /**/  inline def nonEmpty                                    : Boolean    = x.real != void.real
-    /**/  inline def take(  inline f: A => Boolean)              : Opt[A]     = {val X=x; var o:Opt[A]= \/; if(X!=o &&  f(X.`val`)) o=X; o}
+    /**/  inline def take(  inline f: A => Boolean)              : Opt[A]     = {val X=x; var o:Opt[A]=VOID;if(X!=o &&  f(X.`val`)) o=X; o}
     /**/  inline def takeOnly(inline v: A)                       : Opt[A]     = x.take(_.real == v.real)
-    /**/  inline def drop(  inline f: A => Boolean)              : Opt[A]     = {val X=x; var o:Opt[A]= \/; if(X!=o && !f(X.`val`)) o=X; o}
+    /**/  inline def drop(  inline f: A => Boolean)              : Opt[A]     = {val X=x; var o:Opt[A]=VOID;if(X!=o && !f(X.`val`)) o=X; o}
     /**/  inline def dropOnly(inline v: A)                       : Opt[A]     = x.drop(_.real == v.real)
     /**/  inline def default(inline v: => A)                     : Opt[A]     = {val X=x; if(X.isEmpty) v       else X      }
     infix inline def orOpt(inline that: => Opt[A])               : Opt[A]     = {val X=x; if(X.isEmpty) that    else X      }
@@ -37,7 +37,7 @@ object Opt:
     /**/  inline def flatMap[B,OPT<:Any.Opt[B]](inline f: A=>OPT)(using inline o:Specialized.Opt[B,OPT], inline B:Specialized[B]): B.Opt = z.opt.mapOpt(x,f)
     /**/  inline def mix[B,C](inline o:Any.Opt[B],inline f:(A,B)=>C)                              (using inline C:Specialized[C]): C.Opt = z.opt.mix(x,o,f)
   extension[A<:Raw](x: Opt[A])
-    /**/         def dropVoid         (using d: Any.Def.Void[A]) : Opt[A]     = if(x.nonEmpty && d.value_isVoid(x.`val`)) \/ else x
+    /**/         def dropVoid         (using d: Any.Def.Void[A]) : Opt[A]     = if(x.nonEmpty && d.value_isVoid(x.`val`)) VOID else x
     /**/         def get                                         : A          = { if(x.isEmpty) throw ZZ.EO(); x.`val` }
     /**/         def stream                                      : G.Stream[A]= if(x.isEmpty) G.Stream.void else G.Stream(x.`val`)
 
@@ -62,6 +62,6 @@ ___________________________________________________________________________*/
   To be used with Boolean based opaque values.
 
 @def void      -> Get void instance
-@def implicitRequest   -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest   -> General void instance request \n\n It is possible to use general request VOID to get void instance of this type, thanks to this implicit conversion.
 
 */

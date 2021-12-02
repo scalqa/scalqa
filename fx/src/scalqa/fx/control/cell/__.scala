@@ -6,11 +6,11 @@ abstract class Cell extends Label.Like:
   // --------------------------------------------------------------------------------------------------
   private[fx]         var currentSetup                  : cell.Setup[_]    = null
   protected  override def _createReal                   : REAL             = new javafx.scene.control.Cell[ITEM].cast[REAL]
-  protected           def afterItemUpdated              : Unit             = { text = \/; style = \/; alignment = \/; stylePro() = \/ }
+  protected           def afterItemUpdated              : Unit             = { text=VOID; style=VOID; alignment=VOID; stylePro()=VOID }
 
   // --------------------------------------------------------------------------------------------------
   /**/                def item                          : ITEM             = itemOpt.get
-  /**/               def itemOpt                        : Opt[ITEM]        = if (real.isEmpty) \/ else real.getItem
+  /**/               def itemOpt                        : Opt[ITEM]        = if (real.isEmpty) VOID else real.getItem
   /**/                def emptyPro                      : Boolean.Pro.O    = Fx.JavaFx.To.pro_O(real.emptyProperty)
   /**/                def empty                         : Boolean          = real.isEmpty
   /**/                def editingPro                    : Boolean.Pro.O    = Fx.JavaFx.To.pro_O(real.editingProperty)
@@ -20,7 +20,7 @@ abstract class Cell extends Label.Like:
   /**/                def editable_=(b: Boolean)        : Unit             = real.setEditable(b)
 
   // --------------------------------------------------------------------------------------------------
-  protected           var _styleClass                   : Style.Class      = \/
+  protected           var _styleClass                   : Style.Class     =VOID
   /**/                def styleClass                    : Style.Class      = _styleClass
   /**/                def styleClass_=(sc: Style.Class) : Unit             = if (_styleClass != sc) {
   /**/                                                                             val list = styleClasses

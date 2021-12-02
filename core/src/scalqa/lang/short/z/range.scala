@@ -36,11 +36,11 @@ object range:
     val s  = start .cast[Int]; val e  = end .cast[Int]
     val s2 = start2.cast[Int]; val e2 = end2.cast[Int]
     if(s2<=s)
-      if(e2<=s)      \/
+      if(e2<=s)      VOID
       else if(e2<=e) mk(s,e2)
       else           self
     else
-      if(s2>=e)      \/
+      if(s2>=e)      VOID
       else if(e2<=e) mk(s2,e2)
       else           mk(s2,e)
 

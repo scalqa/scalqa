@@ -13,9 +13,9 @@ object Size:
     v match
        case v: Size     => v.size.?
        case v: Opt      => v.sizeOpt
-       case v: Long     => v.sizeLong.?.mapOpt(v => if(v <= Int.max) v.toInt else \/ :Int.Opt)
-       case v: Opt.Long => v.sizeLongOpt.mapOpt(v => if(v <= Int.max) v.toInt else \/ :Int.Opt)
-       case _           => \/
+       case v: Long     => v.sizeLong.?.mapOpt(v => if(v <= Int.max) v.toInt else VOID :Int.Opt)
+       case v: Opt.Long => v.sizeLongOpt.mapOpt(v => if(v <= Int.max) v.toInt else VOID :Int.Opt)
+       case _           => VOID
 
   def sizeLongOpt(v: AnyRef): Long.Opt =
     v match
@@ -23,7 +23,7 @@ object Size:
        case v: Opt.Long => v.sizeLongOpt
        case v: Size     => v.size.toLong.?
        case v: Opt      => v.sizeOpt.map(_.toLong)
-       case _           => \/
+       case _           => VOID
 
   // ************************************************************************************
   trait Long:

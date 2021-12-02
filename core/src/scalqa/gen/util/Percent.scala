@@ -8,7 +8,7 @@ object Percent extends Double.Opaque.Data.Numerical[Percent]("Percent"):
   /**/     inline def apply(value: Number, base: Number): Percent = apply(value.doubleValue, base.doubleValue)
   override        def value_isVoid(v: Percent)          : Boolean = v.real == 0.0
   override        def value_tag(v: Percent)             : String  = {val l = v.toLong; if(v.real==l) l.toString + "%" else v.toString + "%"}
-  implicit inline def implicitRequest(v: \/)            : Percent = 0.0.toOpaque
+  implicit inline def implicitRequest(v:VOID)           : Percent = 0.0.toOpaque
 
   extension(inline x: Percent)
     /**/               inline def apply(inline nv: Int)                                           : Int    = (x.real * nv / 100.0).toInt

@@ -37,7 +37,7 @@ private[promise] object Control:
     def linkTo(c: Control[A]): Unit           = pc.linkTo(c.get match { case v: Control[_] => c.root(v.of[A]); case _ => c })
     def resultOpt            : Opt[Result[A]] = pc.get match
       /**/                                             case c: Control[_] => pc.root(c.of[A]).promise.resultOpt
-      /**/                                             case e: Event[_]   => \/
+      /**/                                             case e: Event[_]   => VOID
       /**/                                             case r/*Result*/   => r.cast[Result[A]]
 
 /*___________________________________________________________________________

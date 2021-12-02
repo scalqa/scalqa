@@ -128,7 +128,7 @@ extension (s: Signature)
 
 case class LinkToType(signature: Signature, dri: DRI, kind: Kind)
 
-case class HierarchyGraph(edges: Seq[(LinkToType, LinkToType)], sealedNodes: Set[LinkToType] = scalqa.\/):
+case class HierarchyGraph(edges: Seq[(LinkToType, LinkToType)], sealedNodes: Set[LinkToType] = scalqa.VOID):
   def vertecies: Seq[LinkToType] = edges.flatten((a, b) => Seq(a, b)).distinct
   def verteciesWithId: Map[LinkToType, Int] = vertecies.zipWithIndex.toMap
   def +(edge: (LinkToType, LinkToType)): HierarchyGraph = HierarchyGraph((edges :+ edge).distinct)

@@ -3,7 +3,7 @@ package scalqa; package fx; import language.implicitConversions
 import javafx.{ scene as JFX}
 import base.`abstract`.Parent
 
-class Scene(width: Int.Opt = \/, height: Int.Opt = \/, e: Opt[Fx.Node.Like] = \/) extends Abstract.Delegate.Gui:
+class Scene(width: Int.Opt=VOID, height: Int.Opt=VOID, e: Opt[Fx.Node.Like]=VOID) extends Abstract.Delegate.Gui:
   protected type REAL = JFX.Scene
   protected def _createReal = new JFX.Scene(e.map(_.real.cast[JFX.Parent]) or control.Label("No Root").real, width or -1, height or -1)
   private[fx] override def _refPropertyOpt = real.onZoomFinishedProperty
@@ -16,10 +16,10 @@ class Scene(width: Int.Opt = \/, height: Int.Opt = \/, e: Opt[Fx.Node.Like] = \/
   def onKeyTyped   [U](l: Fx.Event.Key => U) : Unit            = Fx.Event.Key.subscribe(this, l, real.onKeyTypedProperty)
   val styleSheets                            : Idx.OM[J.Url]   = Fx.JavaFx.To.idx_OM(real.getStylesheets).mutableMapView(J.Url(_), _.toString)
 
-object Scene extends Gen.Void.Setup[Scene](new Scene(\/, \/, Control.Label("void")) with Gen.Void):
+object Scene extends Gen.Void.Setup[Scene](new Scene(VOID,VOID, Control.Label("void")) with Gen.Void):
   def apply(r: JFX.Scene)                                                       : Scene = Abstract.Delegate.Gui(r.onZoomFinishedProperty)
-  def apply(width: Int.Opt = \/, height: Int.Opt = \/, e: Opt[Fx.Node.Like]= \/): Scene = new Scene(width, height, e)
-  def apply(e: Opt[Fx.Node.Like])                                               : Scene = apply(\/,\/, e)
+  def apply(width: Int.Opt=VOID, height: Int.Opt=VOID, e: Opt[Fx.Node.Like]=VOID): Scene = new Scene(width, height, e)
+  def apply(e: Opt[Fx.Node.Like])                                               : Scene = apply(VOID,VOID, e)
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   transparent inline def Application = scene.Application;          type Application  = scene.Application

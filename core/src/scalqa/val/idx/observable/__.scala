@@ -8,7 +8,7 @@ trait Observable[A] extends Idx[A] with Val.Collection.Observable[A]:
 object Observable:
   @tn("getVoid")inline def void[A]                  : Observable[A] = z.Void.OM.cast[Observable[A]]
   /**/                 def wrap[A](v: Idx[A])       : Observable[A] = v match{ case v:Idx.O[_] => v.cast[Idx.O[A]]; case v  => new z.Unsupported_View.O[A](v) }
-  implicit      inline def implicitRequest[A](v: \/): Observable[A] = void[A]
+  implicit      inline def implicitRequest[A](v:VOID): Observable[A] = void[A]
 
   extension[A]  (x: Observable[A])
     def reversedView                 : Idx.O[A] = z.Reversed_View.O(x)
@@ -57,6 +57,6 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitRequest   -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest   -> General void instance request \n\n It is possible to use general request VOID to get void instance of this type, thanks to this implicit conversion.
 
 */

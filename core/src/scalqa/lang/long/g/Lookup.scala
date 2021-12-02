@@ -8,7 +8,7 @@ trait Lookup[A<:Raw,+B] extends Val.Lookup[A,B]:
   override def keyStream     : Stream[A]   = super.keyStream.raw
 
 object Lookup:
-  implicit def implicitRequest[A<:Raw,B](v: \/): Lookup[A,B] = Stable.void
+  implicit def implicitRequest[A<:Raw,B](v:VOID): Lookup[A,B] = Stable.void
 
   trait Mutable[A<:Raw,B] extends Lookup[A,B] with Val.Lookup.Mutable[A,B]:
     def put(key: A, value: B) : Unit
@@ -40,7 +40,7 @@ object Lookup:
     /**/            def apply[A<:Raw,B](v: (A,B) *)         : Stable[A,B] = apply(v.stream)
     /**/            def apply[A<:Raw,B](v:Val.Stream[(A,B)]): Stable[A,B] = new Stable(LongMap.from(v.map(v => (v._1.real,v._2)).iterator))
     @tn("getVoid")  def void[A<:Raw,B]                      : Stable[A,B] = z_Void.cast[Stable[A,B]]; private object z_Void extends Stable(LongMap.empty) with Gen.Void
-    implicit inline def implicitRequest[A<:Raw,B](v: \/)    : Stable[A,B] = void
+    implicit inline def implicitRequest[A<:Raw,B](v:VOID)   : Stable[A,B] = void
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
@@ -55,7 +55,7 @@ ___________________________________________________________________________*/
 
 @def void  -> Get void instance
 
-@def implicitRequest -> General void instance request \n\n It is possible to use general request \\/ to get void instance of this type, thanks to this implicit conversion.
+@def implicitRequest -> General void instance request \n\n It is possible to use general request VOID to get void instance of this type, thanks to this implicit conversion.
 
 @object X -> ### Type Extentions \n\n This object contains all provided base type implementations
 */

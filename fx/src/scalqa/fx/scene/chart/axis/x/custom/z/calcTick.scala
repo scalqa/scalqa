@@ -20,11 +20,11 @@ object calcTick:
 
   def minorStream(r: Range[Double], minorTickCount: Int): Stream[Double] =
     import r.*
-    if (unit <= 0) return \/
+    if (unit <= 0) return VOID
     val size = end - start
     val minorUnit = unit / (minorTickCount max 1)
     if (size / minorUnit > 10000) J.illegalState("Warning we tried to create more than 10000 minor tick marks: " + r)
-    Stream.void[Double] ++ { if (!unit.isWhole) \/ else ((Math.floor(start) + minorUnit <>> Math.ceil(start)).streamStep(_ + minorUnit).take(_ > start)) } ++
+    Stream.void[Double] ++ { if (!unit.isWhole) VOID else ((Math.floor(start) + minorUnit <>> Math.ceil(start)).streamStep(_ + minorUnit).take(_ > start)) } ++
                     Val.Range(unit.isWhole ? Math.ceil(start) or start, end, false).streamStep(_ + unit).flatMap(u => Val.Range(u + minorUnit, end min u + unit).streamStep(_ + minorUnit))
 
 /*___________________________________________________________________________
