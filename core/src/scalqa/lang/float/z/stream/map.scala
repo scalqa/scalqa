@@ -13,27 +13,27 @@ object map:
   class toFloat  [A<:Raw](x: G.Stream[A], f: G.Fun.ToFloat[A]  ) extends Map.AsFloat  (x){ def readRawOpt = x.readRawOpt.map(f(_))}
   class toDouble [A<:Raw](x: G.Stream[A], f: G.Fun.ToDouble[A] ) extends Map.AsDouble (x){ def readRawOpt = x.readRawOpt.map(f(_))}
 
-  inline def apply[A<:Raw,B](inline x: G.Stream[A], inline f: A=>B)(using inline B:Specialized[B]): B.Stream = inline B match
-    case _ : Specialized[B & Any.Boolean] => new toBoolean(x,f(_).cast[Boolean]).cast[B.Stream]
-    case _ : Specialized[B & Any.Byte   ] => new toByte   (x,f(_).cast[Byte   ]).cast[B.Stream]
-    case _ : Specialized[B & Any.Char   ] => new toChar   (x,f(_).cast[Char   ]).cast[B.Stream]
-    case _ : Specialized[B & Any.Short  ] => new toShort  (x,f(_).cast[Short  ]).cast[B.Stream]
-    case _ : Specialized[B & Any.Int    ] => new toInt    (x,f(_).cast[Int    ]).cast[B.Stream]
-    case _ : Specialized[B & Any.Long   ] => new toLong   (x,f(_).cast[Long   ]).cast[B.Stream]
-    case _ : Specialized[B & Any.Float  ] => new toFloat  (x,f(_).cast[Float  ]).cast[B.Stream]
-    case _ : Specialized[B & Any.Double ] => new toDouble (x,f(_).cast[Double ]).cast[B.Stream]
-    case _                                => new map      (x,f(_)              ).cast[B.Stream]
+  inline def apply[A<:Raw,B](inline x: G.Stream[A], inline f: A=>B)(using inline s:Specialized[B]): s.Stream = inline s match
+    case _ : Specialized[B & Any.Boolean] => new toBoolean(x,f(_).cast[Boolean]).cast[s.Stream]
+    case _ : Specialized[B & Any.Byte   ] => new toByte   (x,f(_).cast[Byte   ]).cast[s.Stream]
+    case _ : Specialized[B & Any.Char   ] => new toChar   (x,f(_).cast[Char   ]).cast[s.Stream]
+    case _ : Specialized[B & Any.Short  ] => new toShort  (x,f(_).cast[Short  ]).cast[s.Stream]
+    case _ : Specialized[B & Any.Int    ] => new toInt    (x,f(_).cast[Int    ]).cast[s.Stream]
+    case _ : Specialized[B & Any.Long   ] => new toLong   (x,f(_).cast[Long   ]).cast[s.Stream]
+    case _ : Specialized[B & Any.Float  ] => new toFloat  (x,f(_).cast[Float  ]).cast[s.Stream]
+    case _ : Specialized[B & Any.Double ] => new toDouble (x,f(_).cast[Double ]).cast[s.Stream]
+    case _                                => new map      (x,f(_)              ).cast[s.Stream]
 
-  inline def APPLY[A<:Raw,B](inline x: G.Stream[A], inline f: A=>B)(using inline B:Specialized[B]): B.Stream = inline B match
-    case _ : Specialized[B & Any.Boolean] => {class mapToBoolean(x: G.Stream[A]) extends Map.AsBoolean(x){ def readRawOpt =x.readRawOpt.map(f(_).cast[Boolean])}; new mapToBoolean(x).cast[B.Stream] }
-    case _ : Specialized[B & Any.Byte   ] => {class mapToByte   (x: G.Stream[A]) extends Map.AsByte   (x){ def readRawOpt =x.readRawOpt.map(f(_).cast[Byte   ])}; new mapToByte(x)   .cast[B.Stream] }
-    case _ : Specialized[B & Any.Char   ] => {class mapToChar   (x: G.Stream[A]) extends Map.AsChar   (x){ def readRawOpt =x.readRawOpt.map(f(_).cast[Char   ])}; new mapToChar(x)   .cast[B.Stream] }
-    case _ : Specialized[B & Any.Short  ] => {class mapToShort  (x: G.Stream[A]) extends Map.AsShort  (x){ def readRawOpt =x.readRawOpt.map(f(_).cast[Short  ])}; new mapToShort(x)  .cast[B.Stream] }
-    case _ : Specialized[B & Any.Int    ] => {class mapToInt    (x: G.Stream[A]) extends Map.AsInt    (x){ def readRawOpt =x.readRawOpt.map(f(_).cast[Int    ])}; new mapToInt(x)    .cast[B.Stream] }
-    case _ : Specialized[B & Any.Long   ] => {class mapToLong   (x: G.Stream[A]) extends Map.AsLong   (x){ def readRawOpt =x.readRawOpt.map(f(_).cast[Long   ])}; new mapToLong(x)   .cast[B.Stream] }
-    case _ : Specialized[B & Any.Float  ] => {class mapToFloat  (x: G.Stream[A]) extends Map.AsFloat  (x){ def readRawOpt =x.readRawOpt.map(f(_).cast[Float  ])}; new mapToFloat(x)  .cast[B.Stream] }
-    case _ : Specialized[B & Any.Double ] => {class mapToDouble (x: G.Stream[A]) extends Map.AsDouble (x){ def readRawOpt =x.readRawOpt.map(f(_).cast[Double ])}; new mapToDouble(x) .cast[B.Stream] }
-    case _                                => {class map         (x: G.Stream[A]) extends Map      [B] (x){ def readOpt    =x.readRawOpt.map(f(_)).cast[Opt[B]] }; new map(x)         .cast[B.Stream] }
+  inline def APPLY[A<:Raw,B](inline x: G.Stream[A], inline f: A=>B)(using inline s:Specialized[B]): s.Stream = inline s match
+    case _ : Specialized[B & Any.Boolean] => {class mapToBoolean(x: G.Stream[A]) extends Map.AsBoolean(x){ def readRawOpt =x.readRawOpt.map(f(_).cast[Boolean])}; new mapToBoolean(x).cast[s.Stream] }
+    case _ : Specialized[B & Any.Byte   ] => {class mapToByte   (x: G.Stream[A]) extends Map.AsByte   (x){ def readRawOpt =x.readRawOpt.map(f(_).cast[Byte   ])}; new mapToByte(x)   .cast[s.Stream] }
+    case _ : Specialized[B & Any.Char   ] => {class mapToChar   (x: G.Stream[A]) extends Map.AsChar   (x){ def readRawOpt =x.readRawOpt.map(f(_).cast[Char   ])}; new mapToChar(x)   .cast[s.Stream] }
+    case _ : Specialized[B & Any.Short  ] => {class mapToShort  (x: G.Stream[A]) extends Map.AsShort  (x){ def readRawOpt =x.readRawOpt.map(f(_).cast[Short  ])}; new mapToShort(x)  .cast[s.Stream] }
+    case _ : Specialized[B & Any.Int    ] => {class mapToInt    (x: G.Stream[A]) extends Map.AsInt    (x){ def readRawOpt =x.readRawOpt.map(f(_).cast[Int    ])}; new mapToInt(x)    .cast[s.Stream] }
+    case _ : Specialized[B & Any.Long   ] => {class mapToLong   (x: G.Stream[A]) extends Map.AsLong   (x){ def readRawOpt =x.readRawOpt.map(f(_).cast[Long   ])}; new mapToLong(x)   .cast[s.Stream] }
+    case _ : Specialized[B & Any.Float  ] => {class mapToFloat  (x: G.Stream[A]) extends Map.AsFloat  (x){ def readRawOpt =x.readRawOpt.map(f(_).cast[Float  ])}; new mapToFloat(x)  .cast[s.Stream] }
+    case _ : Specialized[B & Any.Double ] => {class mapToDouble (x: G.Stream[A]) extends Map.AsDouble (x){ def readRawOpt =x.readRawOpt.map(f(_).cast[Double ])}; new mapToDouble(x) .cast[s.Stream] }
+    case _                                => {class map         (x: G.Stream[A]) extends Map      [B] (x){ def readOpt    =x.readRawOpt.map(f(_)).cast[Opt[B]] }; new map(x)         .cast[s.Stream] }
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

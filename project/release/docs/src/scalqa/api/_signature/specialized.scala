@@ -12,7 +12,7 @@ object specialized:
       .takeType[Link]
       .take(_.name in NAMES)
       .take(_ => posOpt)
-      .map(l =>  x.dropRight(1).appended( x.stream.dropFirst(posOpt.get).map(_.toString.trim).take(_ in ("A","B","C")).readOpt.or("A") + "." + l.name)) or x
+      .map(l =>  x.dropRight(1).appended( "s." + l.name)) or x
 
     if  (m.name.equalsIgnoreCase("mapOpt")) s = s.stream.dropSequenceBy(_.label.trim,OPT).toSeq
     else if(m.name.startsWith("toLookup")) s = s.stream.replaceSequenceBy(v => v.?.takeType[Link].map(_.name) or v.toString, "Lookup".self.pack, Pack("KEY.Lookup")).toSeq

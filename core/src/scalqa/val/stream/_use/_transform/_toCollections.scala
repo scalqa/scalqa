@@ -5,11 +5,11 @@ import z._use.{ _transform as _Z, transform as Z }
 transparent trait _toCollections:
 
   extension[A](inline x: Stream[A])
-    inline def pack                                 (using inline A:Specialized[A]): A.Pack            = Z.toPack(x)
-    inline def toIdx                                (using inline A:Specialized[A]): A.Idx             = Z.toIdx(x)
-    inline def toSet                                (using inline A:Specialized[A]): A.Set             = Z.toSet(x)
-    inline def toBuffer                             (using inline A:Specialized[A]): A.Buffer          = Z.toBuffer(x)
-    inline def toArray         (using inline t:ClassTag[A],inline A:Specialized[A]): A.Array           = _Z.toArray(x)
+    inline def pack                                 (using inline s:Specialized[A]): s.Pack            = Z.toPack(x)
+    inline def toIdx                                (using inline s:Specialized[A]): s.Idx             = Z.toIdx(x)
+    inline def toSet                                (using inline s:Specialized[A]): s.Set             = Z.toSet(x)
+    inline def toBuffer                             (using inline s:Specialized[A]): s.Buffer          = Z.toBuffer(x)
+    inline def toArray         (using inline t:ClassTag[A],inline s:Specialized[A]): s.Array           = _Z.toArray(x)
     inline def toLookupBy[KEY](inline f: A=>KEY)(using inline KEY:Specialized[KEY]): KEY.Lookup[A]     = _Z.toLookup(x,f)
 
   extension[KEY,VALUE] (inline x: Stream[(KEY,VALUE)])

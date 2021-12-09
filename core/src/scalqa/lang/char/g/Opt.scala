@@ -29,10 +29,10 @@ object Opt:
     /**/  inline def withFilter(inline f: A=>Boolean)            : Opt[A]     = x.take(f)
     /**/  inline def raw                                         : Opt[A]     = x
     /**/  inline def mapIf(inline f:A=>Boolean,inline m:A=>A)    : Opt[A]     = x.map[A](v => if(f(v)) m(v) else v)
-    /**/  inline def map[B](inline f:A=>B)                                                        (using inline B:Specialized[B]): B.Opt = z.opt.map(x,f)
-    /**/  inline def mapOpt [B,OPT<:Any.Opt[B]](inline f: A=>OPT)(using inline o:Specialized.Opt[B,OPT], inline B:Specialized[B]): B.Opt = z.opt.mapOpt(x,f)
-    /**/  inline def flatMap[B,OPT<:Any.Opt[B]](inline f: A=>OPT)(using inline o:Specialized.Opt[B,OPT], inline B:Specialized[B]): B.Opt = z.opt.mapOpt(x,f)
-    /**/  inline def mix[B,C](inline o:Any.Opt[B],inline f:(A,B)=>C)                              (using inline C:Specialized[C]): C.Opt = z.opt.mix(x,o,f)
+    /**/  inline def map[B](inline f:A=>B)                                                        (using inline s:Specialized[B]): s.Opt = z.opt.map(x,f)
+    /**/  inline def mapOpt [B,OPT<:Any.Opt[B]](inline f: A=>OPT)(using inline o:Specialized.Opt[B,OPT], inline s:Specialized[B]): s.Opt = z.opt.mapOpt(x,f)
+    /**/  inline def flatMap[B,OPT<:Any.Opt[B]](inline f: A=>OPT)(using inline o:Specialized.Opt[B,OPT], inline s:Specialized[B]): s.Opt = z.opt.mapOpt(x,f)
+    /**/  inline def mix[B,C](inline o:Any.Opt[B],inline f:(A,B)=>C)                              (using inline s:Specialized[C]): s.Opt = z.opt.mix(x,o,f)
   extension[A<:Raw](x: Opt[A])
     /**/         def dropVoid         (using d: Any.Def.Void[A]) : Opt[A]     = if(x.nonEmpty && d.value_isVoid(x.`val`)) VOID else x
     /**/         def get                                         : A          = { if(x.isEmpty) throw ZZ.EO(); x.`val` }

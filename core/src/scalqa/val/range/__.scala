@@ -16,7 +16,7 @@ abstract class Range[A] extends gen.able.Contain[A] with gen.able.Empty:
   /**/     def contains(v: A)                               : Boolean       = z.ops.contains(this,v)
   /**/     def isEmpty                                      : Boolean       = z.ops.isEmpty(this)
   override def equals(v: Any)                               : Boolean       = v.isInstanceOf[Range[_]] && {val r=v.cast[Range[A]]; this.contains(r) && r.contains(this)}
-  inline   def raw(using inline A:Specialized.Primitive[A]) : A.Range       = z.raw(this)
+  inline   def raw(using inline s:Specialized.Primitive[A]) : s.Range       = z.raw(this)
 
 object Range:
   def apply[A](start:A,end:A, endIn:Boolean=true)(using Ordering[A]): Range[A] = if(endIn) Z.EndInclsive(start,end)  else Z.EndExclusive(start,end)

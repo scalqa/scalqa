@@ -2,18 +2,18 @@ package scalqa; package lang; package array; package z; import language.implicit
 
 object pack :
 
-  inline def apply[A](inline x:Array[A])(using inline A: Specialized[A]): A.Pack =
-    inline A match
-      case _ : Specialized[A&Any.Boolean] => Boolean.G.Pack.fromArray(x.cast[Array[Boolean]]).cast[A.Pack]
-      case _ : Specialized[A&Any.Byte   ] => Byte   .G.Pack.fromArray(x.cast[Array[Byte   ]]).cast[A.Pack]
-      case _ : Specialized[A&Any.Char   ] => Char   .G.Pack.fromArray(x.cast[Array[Char   ]]).cast[A.Pack]
-      case _ : Specialized[A&Any.Short  ] => Short  .G.Pack.fromArray(x.cast[Array[Short  ]]).cast[A.Pack]
-      case _ : Specialized[A&Any.Int    ] => Int    .G.Pack.fromArray(x.cast[Array[Int    ]]).cast[A.Pack]
-      case _ : Specialized[A&Any.Long   ] => Long   .G.Pack.fromArray(x.cast[Array[Long   ]]).cast[A.Pack]
-      case _ : Specialized[A&Any.Float  ] => Float  .G.Pack.fromArray(x.cast[Array[Float  ]]).cast[A.Pack]
-      case _ : Specialized[A&Any.Double ] => Double .G.Pack.fromArray(x.cast[Array[Double ]]).cast[A.Pack]
-      case _ : Specialized[A&AnyRef     ] =>       Val.Pack.fromArray(x.cast[Array[AnyRef ]]).cast[A.Pack]
-      case _                              => any(x,VOID).cast[A.Pack]
+  inline def apply[A](inline x:Array[A])(using inline s: Specialized[A]): s.Pack =
+    inline s match
+      case _ : Specialized[A&Any.Boolean] => Boolean.G.Pack.fromArray(x.cast[Array[Boolean]]).cast[s.Pack]
+      case _ : Specialized[A&Any.Byte   ] => Byte   .G.Pack.fromArray(x.cast[Array[Byte   ]]).cast[s.Pack]
+      case _ : Specialized[A&Any.Char   ] => Char   .G.Pack.fromArray(x.cast[Array[Char   ]]).cast[s.Pack]
+      case _ : Specialized[A&Any.Short  ] => Short  .G.Pack.fromArray(x.cast[Array[Short  ]]).cast[s.Pack]
+      case _ : Specialized[A&Any.Int    ] => Int    .G.Pack.fromArray(x.cast[Array[Int    ]]).cast[s.Pack]
+      case _ : Specialized[A&Any.Long   ] => Long   .G.Pack.fromArray(x.cast[Array[Long   ]]).cast[s.Pack]
+      case _ : Specialized[A&Any.Float  ] => Float  .G.Pack.fromArray(x.cast[Array[Float  ]]).cast[s.Pack]
+      case _ : Specialized[A&Any.Double ] => Double .G.Pack.fromArray(x.cast[Array[Double ]]).cast[s.Pack]
+      case _ : Specialized[A&AnyRef     ] =>       Val.Pack.fromArray(x.cast[Array[AnyRef ]]).cast[s.Pack]
+      case _                              => any(x,VOID).cast[s.Pack]
 
   def any[A](x:Array[A], sz: Int.Opt) : Pack[A] =
     x match

@@ -7,11 +7,11 @@ transparent trait _Methods:
   extension[A](inline x:A)
     /**/              inline def isVoid                                           (using inline d: Def.Void[A]) : Boolean      = d.value_isVoid(x)
     /**/              inline def nonVoid                                          (using inline d: Def.Void[A]) : Boolean      = !x.isVoid
-    @tn("opt")        inline def ?                                              (using inline A:Specialized[A]) : A.Opt        = z.opt.make(x)
+    @tn("opt")        inline def ?                                              (using inline s:Specialized[A]) : s.Opt        = z.opt.make(x)
     @tn("nonEmptyOpt")inline def ??             (using inline e:Opt[Def.Empty[A]])(using inline d: Def.Void[A]) : Opt[A]       = z.opt.nonEmpty(x,e,d)
 
-    @tn("range")      inline def <> (inline to:A)(using inline o:O[A])          (using inline A:Specialized[A]) : A.Range      = z.range(x,to)
-    @tn("rangeX")     inline def <>>(inline to:A)(using inline o:O[A])          (using inline A:Specialized[A]) : A.Range      = z.range.exclusive(x,to)
+    @tn("range")      inline def <> (inline to:A)(using inline o:O[A])          (using inline s:Specialized[A]) : s.Range      = z.range(x,to)
+    @tn("rangeX")     inline def <>>(inline to:A)(using inline o:O[A])          (using inline s:Specialized[A]) : s.Range      = z.range.exclusive(x,to)
     infix             inline def in   [CONTAINER](inline c: CONTAINER)(using inline d:Def.Contains[CONTAINER,A]): Boolean      = z.containsMacro(c,x,d)
     infix             inline def notIn[CONTAINER](inline c: CONTAINER)(using inline d:Def.Contains[CONTAINER,A]): Boolean      = !in(c)
     /**/              inline def doc                                                (using inline d:Def.Doc[A]) : Doc          = d.value_doc(x)

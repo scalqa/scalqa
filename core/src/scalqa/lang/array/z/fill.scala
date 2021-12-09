@@ -2,8 +2,8 @@ package scalqa; package lang; package array; package z; import language.implicit
 
 object fill:
 
-  inline def apply[A](inline x: Array[A], inline p: Int, inline sz: Int, inline v: A)(using inline A: Specialized[A]): Unit =
-    inline A match
+  inline def apply[A](inline x: Array[A], inline p: Int, inline sz: Int, inline v: A)(using inline s: Specialized[A]): Unit =
+    inline s match
               case _ : Specialized[A&Any.Boolean] => boolean(x.cast[Array[Boolean]],p, sz, v.cast[Boolean])
               case _ : Specialized[A&Any.Byte   ] => byte   (x.cast[Array[Byte]],   p, sz, v.cast[Byte])
               case _ : Specialized[A&Any.Char   ] => char   (x.cast[Array[Char]],   p, sz, v.cast[Char])

@@ -2,18 +2,18 @@ package scalqa; package lang; package array; package z; import language.implicit
 
 object joinAt:
 
-  inline def apply[A](inline x: Array[A], inline i: Int, inline v: A)(using inline A: Specialized[A]): A.Array =
-    inline A match
-      case _ : Specialized[A&Any.Boolean] => boolean(x.cast[Array[Boolean]],i,v.cast[Boolean]).cast[A.Array]
-      case _ : Specialized[A&Any.Byte   ] => byte   (x.cast[Array[Byte   ]],i,v.cast[Byte   ]).cast[A.Array]
-      case _ : Specialized[A&Any.Char   ] => char   (x.cast[Array[Char   ]],i,v.cast[Char   ]).cast[A.Array]
-      case _ : Specialized[A&Any.Short  ] => short  (x.cast[Array[Short  ]],i,v.cast[Short  ]).cast[A.Array]
-      case _ : Specialized[A&Any.Int    ] => int    (x.cast[Array[Int    ]],i,v.cast[Int    ]).cast[A.Array]
-      case _ : Specialized[A&Any.Long   ] => long   (x.cast[Array[Long   ]],i,v.cast[Long   ]).cast[A.Array]
-      case _ : Specialized[A&Any.Float  ] => float  (x.cast[Array[Float  ]],i,v.cast[Float  ]).cast[A.Array]
-      case _ : Specialized[A&Any.Double ] => double (x.cast[Array[Double ]],i,v.cast[Double ]).cast[A.Array]
-      case _ : Specialized[A&AnyRef     ] => anyref (x.cast[Array[AnyRef ]],i,v.cast[AnyRef ]).cast[A.Array]
-      case _                              => any    (x.cast[Array[A      ]],i,v              ).cast[A.Array]
+  inline def apply[A](inline x: Array[A], inline i: Int, inline v: A)(using inline s: Specialized[A]): s.Array =
+    inline s match
+      case _ : Specialized[A&Any.Boolean] => boolean(x.cast[Array[Boolean]],i,v.cast[Boolean]).cast[s.Array]
+      case _ : Specialized[A&Any.Byte   ] => byte   (x.cast[Array[Byte   ]],i,v.cast[Byte   ]).cast[s.Array]
+      case _ : Specialized[A&Any.Char   ] => char   (x.cast[Array[Char   ]],i,v.cast[Char   ]).cast[s.Array]
+      case _ : Specialized[A&Any.Short  ] => short  (x.cast[Array[Short  ]],i,v.cast[Short  ]).cast[s.Array]
+      case _ : Specialized[A&Any.Int    ] => int    (x.cast[Array[Int    ]],i,v.cast[Int    ]).cast[s.Array]
+      case _ : Specialized[A&Any.Long   ] => long   (x.cast[Array[Long   ]],i,v.cast[Long   ]).cast[s.Array]
+      case _ : Specialized[A&Any.Float  ] => float  (x.cast[Array[Float  ]],i,v.cast[Float  ]).cast[s.Array]
+      case _ : Specialized[A&Any.Double ] => double (x.cast[Array[Double ]],i,v.cast[Double ]).cast[s.Array]
+      case _ : Specialized[A&AnyRef     ] => anyref (x.cast[Array[AnyRef ]],i,v.cast[AnyRef ]).cast[s.Array]
+      case _                              => any    (x.cast[Array[A      ]],i,v              ).cast[s.Array]
 
   def any[A](x: Array[A], i: Int, v: A): Array[A] =
     x match

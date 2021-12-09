@@ -6,22 +6,22 @@ transparent trait _map:
   self: Stream.type =>
 
   extension[A](inline x: Stream[A])
-    inline def map     [B](inline f: A => B)              (using inline B:Specialized[B]): B.Stream  = Z.map(x,f)
-    inline def MAP     [B](inline f: A => B)              (using inline B:Specialized[B]): B.Stream  = Z.map.APPLY(x,f)
+    inline def map     [B](inline f: A => B)              (using inline s:Specialized[B]): s.Stream  = Z.map(x,f)
+    inline def MAP     [B](inline f: A => B)              (using inline s:Specialized[B]): s.Stream  = Z.map.APPLY(x,f)
 
     inline def mapIf(inline condition:A=>Boolean,inline fun:A=>A)                        : Stream[A] = x.map[A](v => if(condition(v)) fun(v) else v)
 
-    inline def flatMap [B](inline f: A => Stream[B])      (using inline B:Specialized[B]): B.Stream  = Z.flatMap(x,f)
-    inline def FLAT_MAP[B](inline f: A => Stream[B])      (using inline B:Specialized[B]): B.Stream  = Z.flatMap.APPLY(x,f)
+    inline def flatMap [B](inline f: A => Stream[B])      (using inline s:Specialized[B]): s.Stream  = Z.flatMap(x,f)
+    inline def FLAT_MAP[B](inline f: A => Stream[B])      (using inline s:Specialized[B]): s.Stream  = Z.flatMap.APPLY(x,f)
 
     inline def mapOpt   [B,OPT<:Any.Opt[B]](inline f: A=>OPT)
-                          (using inline o:Specialized.Opt[B,OPT],inline B:Specialized[B]): B.Stream  = Z.mapOpt(x,f)
+                          (using inline o:Specialized.Opt[B,OPT],inline s:Specialized[B]): s.Stream  = Z.mapOpt(x,f)
     inline def MAP_OPT   [B,OPT<:Any.Opt[B]](inline f: A=>OPT)
-                          (using inline o:Specialized.Opt[B,OPT],inline B:Specialized[B]): B.Stream  = Z.mapOpt.APPLY(x,f)
+                          (using inline o:Specialized.Opt[B,OPT],inline s:Specialized[B]): s.Stream  = Z.mapOpt.APPLY(x,f)
 
     inline def collect[B](inline f: PartialFunction[A,B])                                : Stream[B] = new Z.collect(x,f)
 
-    inline def flatten [B]             (using d: Any.Def.ToStream[A,B], B:Specialized[B]): B.Stream  = x.flatMap(d.value_toStream)
+    inline def flatten [B]             (using d: Any.Def.ToStream[A,B], s:Specialized[B]): s.Stream  = x.flatMap(d.value_toStream)
 
 
 /*___________________________________________________________________________

@@ -11,7 +11,7 @@ transparent trait _toScala:
     inline def toSeq                                                        : IndexedSeq[A] = _Z.toScala.Seq(x)
     inline def toMapBy[B](inline f: A => B)                                 : Map[B,A]      = x.zipKey(f).toMap
     inline def toProduct                                                    : Product       = _Z.toScala.Product(x)
-    inline def toArray (using inline t:ClassTag[A],inline A:Specialized[A]) : A.Array
+    inline def toArray (using inline t:ClassTag[A],inline s:Specialized[A]) : s.Array
 
   extension[KEY,VALUE](inline x: Stream[(KEY,VALUE)])
     inline def toMap                                                        : Map[KEY,VALUE]= scala.collection.immutable.Map.from(x.iterator)

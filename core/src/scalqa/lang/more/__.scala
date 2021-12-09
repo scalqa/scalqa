@@ -5,26 +5,26 @@ import `val`.stream.z.x.{ Java as J, Scala as S }
 
 object More:
 
-  transparent trait IterableOnce_methods:
+  transparent trait ScalaCollections:
     extension[A](inline x: C.IterableOnce[A])
                                                   inline def valStream                   : Stream[A] = S.Stream_fromIterableOnce(x)
                                                   inline def stream                      : Stream[A] = S.Stream_fromIterableOnce(x)
-                                                  inline def pack(using A:Specialized[A]): A.Pack    = x.stream.pack
+                                                  inline def pack(using s:Specialized[A]): s.Pack    = x.stream.pack
 
-  transparent trait Iterable_methods:
+  transparent trait JavaCollections:
     extension[A](inline x: java.lang.Iterable[A])
                                                   inline def valStream                   : Stream[A] = J.Stream_fromIterable[A](x)
                                                   inline def stream                      : Stream[A] = J.Stream_fromIterable[A](x)
-                                                  inline def pack(using A:Specialized[A]): A.Pack    = x.stream.pack
-
-  transparent trait Iterator_methods:
-    extension[A](inline x: java.util.Iterator[A])
-                                                  inline def valStream                   : Stream[A] = J.Stream_fromIterator[A](x)
-                                                  inline def stream                      : Stream[A] = J.Stream_fromIterator[A](x)
-                                                  inline def pack(using A:Specialized[A]): A.Pack    = x.stream.pack
+                                                  inline def pack(using s:Specialized[A]): s.Pack    = x.stream.pack
 
   // *****************************************************************************************
-  transparent trait z_Methods extends IterableOnce_methods with Iterable_methods with Iterator_methods:
+  transparent trait z_Methods extends ScalaCollections with JavaCollections:
+
+    extension[A](inline x: java.util.Iterator[A])
+      inline def valStream                   : Stream[A] = J.Stream_fromIterator[A](x)
+      inline def stream                      : Stream[A] = J.Stream_fromIterator[A](x)
+      inline def pack(using s:Specialized[A]): s.Pack    = x.stream.pack
+
     // Efficiency extras
     extension   (inline x: Product)
                                                   inline def stream                      : Stream[(String,Any)] = S.Stream_fromProduct(x)
@@ -46,20 +46,36 @@ object More:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait IterableOnce_methods -> ### Scala Collections Root Extension.
+@trait ScalaCollections -> ### Scala Collections Extension
 
-    These are extension methods universally available for scala.collections.IterableOnce.
+    These are extension methods universally available for all Scala Collections, which extend scala.collections.IterableOnce.
 
-    IterableOnce is the root of Scala collections, thus those methods will be avalable on all extensions like: Seq, List, Vector, etc.
+    Scala Seq, List, Vector, and the likes are covered.
 
-@trait Iterable_methods -> ### Java Collections Root Extension.
+    Also note that all Scala collections are implicitly convertibe to Stream, thus they can be used directly everywhere where Stream is required:
 
-    These are extension methods universally available for java.lang.Iterable.
+    ```
+      val buf: Buffer[String] = NEW
 
-    Iterable is the root of Java collections, thus those methods will be avalable on all extensions like: List, Vector, Set, etc.
+      buf ++= Stream("A","B") ++= List("C","D") ++= Vector("E","F") ++= Seq("X","Y","Z")
 
-@trait Iterator_methods -> ### Java Iterator Extension Methods.
+    ```
 
-    These are extension methods universally available for java.util.Iterator.
+@trait JavaCollections -> ### Java Collections Extension
+
+    These are extension methods universally available for all Java Collections, which extend java.lang.Iterable.
+
+    Java List, Vector, Set, Iterator, etc. have those methods.
+
+    Also note that all Java collections are implicitly convertibe to Stream, thus they can be used directly everywhere where Stream is required.
+
+@def stream -> Stream of elements \n\n Returns Stream of collection elements
+@def stream -> Stream of elements \n\n Returns Stream of collection elements
+
+@def pack -> Pack of elements \n\n Returns Pack of collection elements
+@def pack -> Pack of elements \n\n Returns Pack of collection elements
+
+@def valStream -> Stream of elements \n\n Returns Stream of collection elements \n\n This is an overload method for cases when method "stream" is reserved for other purposes.
+@def valStream -> Stream of elements \n\n Returns Stream of collection elements \n\n This is an overload method for cases when method "stream" is reserved for other purposes.
 
 */

@@ -2,17 +2,17 @@ package scalqa; package lang; package any; package z; import language.implicitCo
 
 object opt:
 
-  inline def make[A](inline x: A)(using inline A:Specialized[A]): A.Opt =
-    inline A match
-      case _ : Specialized[A & Any.Boolean] => (if(x.cast[Boolean]) Boolean.G.Opt.TRUE else Boolean.G.Opt.FALSE).cast[Boolean.Opt].cast[A.Opt]
-      case _ : Specialized[A & Any.Byte   ] => x.cast[Byte  .Opt].cast[A.Opt]
-      case _ : Specialized[A & Any.Char   ] => x.cast[Char  .Opt].cast[A.Opt]
-      case _ : Specialized[A & Any.Short  ] => x.cast[Short .Opt].cast[A.Opt]
-      case _ : Specialized[A & Any.Int    ] => x.cast[Int   .Opt].cast[A.Opt]
-      case _ : Specialized[A & Any.Long   ] => x.cast[Long  .Opt].cast[A.Opt]
-      case _ : Specialized[A & Any.Float  ] => x.cast[Float .Opt].cast[A.Opt]
-      case _ : Specialized[A & Any.Double ] => x.cast[Double.Opt].cast[A.Opt]
-      case _ : Specialized[A              ] => {val v=x; (if(v == null) ZZ.None else v).cast[Val.Opt[A]].cast[A.Opt]}
+  inline def make[A](inline x: A)(using inline s:Specialized[A]): s.Opt =
+    inline s match
+      case _ : Specialized[A & Any.Boolean] => (if(x.cast[Boolean]) Boolean.G.Opt.TRUE else Boolean.G.Opt.FALSE).cast[Boolean.Opt].cast[s.Opt]
+      case _ : Specialized[A & Any.Byte   ] => x.cast[Byte  .Opt].cast[s.Opt]
+      case _ : Specialized[A & Any.Char   ] => x.cast[Char  .Opt].cast[s.Opt]
+      case _ : Specialized[A & Any.Short  ] => x.cast[Short .Opt].cast[s.Opt]
+      case _ : Specialized[A & Any.Int    ] => x.cast[Int   .Opt].cast[s.Opt]
+      case _ : Specialized[A & Any.Long   ] => x.cast[Long  .Opt].cast[s.Opt]
+      case _ : Specialized[A & Any.Float  ] => x.cast[Float .Opt].cast[s.Opt]
+      case _ : Specialized[A & Any.Double ] => x.cast[Double.Opt].cast[s.Opt]
+      case _ : Specialized[A              ] => {val v=x; (if(v == null) ZZ.None else v).cast[Val.Opt[A]].cast[s.Opt]}
 
   def nonEmpty[A](x: Any, o:Opt[Def.Empty[A]], d:Def.Void[A]): Opt[A] =
     val v = x.cast[A]

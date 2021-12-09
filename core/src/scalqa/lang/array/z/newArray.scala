@@ -2,17 +2,17 @@ package scalqa; package lang; package array; package z; import language.implicit
 
 object newArray:
 
-  inline def apply[A](inline x: Array[A], inline sz: Int)(using inline A: Specialized[A]): A.Array =
-    inline A match
-              case _ : Specialized[A&Any.Boolean] => new Array[Boolean](sz).cast[A.Array]
-              case _ : Specialized[A&Any.Byte   ] => new Array[Byte   ](sz).cast[A.Array]
-              case _ : Specialized[A&Any.Char   ] => new Array[Char   ](sz).cast[A.Array]
-              case _ : Specialized[A&Any.Short  ] => new Array[Short  ](sz).cast[A.Array]
-              case _ : Specialized[A&Any.Int    ] => new Array[Int    ](sz).cast[A.Array]
-              case _ : Specialized[A&Any.Long   ] => new Array[Long   ](sz).cast[A.Array]
-              case _ : Specialized[A&Any.Float  ] => new Array[Float  ](sz).cast[A.Array]
-              case _ : Specialized[A&Any.Double ] => new Array[Double ](sz).cast[A.Array]
-              case _                              => java.lang.reflect.Array.newInstance(x.getClass().getComponentType(), sz).cast[A.Array]
+  inline def apply[A](inline x: Array[A], inline sz: Int)(using inline s: Specialized[A]): s.Array =
+    inline s match
+              case _ : Specialized[A&Any.Boolean] => new Array[Boolean](sz).cast[s.Array]
+              case _ : Specialized[A&Any.Byte   ] => new Array[Byte   ](sz).cast[s.Array]
+              case _ : Specialized[A&Any.Char   ] => new Array[Char   ](sz).cast[s.Array]
+              case _ : Specialized[A&Any.Short  ] => new Array[Short  ](sz).cast[s.Array]
+              case _ : Specialized[A&Any.Int    ] => new Array[Int    ](sz).cast[s.Array]
+              case _ : Specialized[A&Any.Long   ] => new Array[Long   ](sz).cast[s.Array]
+              case _ : Specialized[A&Any.Float  ] => new Array[Float  ](sz).cast[s.Array]
+              case _ : Specialized[A&Any.Double ] => new Array[Double ](sz).cast[s.Array]
+              case _                              => java.lang.reflect.Array.newInstance(x.getClass().getComponentType(), sz).cast[s.Array]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

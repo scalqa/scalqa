@@ -14,29 +14,29 @@ object flatMap:
   class toFloat  [A](x:Stream[A], f: A => Float.Stream)   extends FM.AsFloat  (x){ def fewOpt = x.readOpt.map(f(_)) }
   class toDouble [A](x:Stream[A], f: A => Double.Stream)  extends FM.AsDouble (x){ def fewOpt = x.readOpt.map(f(_)) }
 
-  inline def apply[A,B](inline x: Stream[A], inline f: A => Stream[B])(using inline B:Specialized[B]): B.Stream =
-    inline B match
-      case _ : Specialized[B & Any.Boolean] => toBoolean(x,f(_).cast[Stream[Boolean]].raw).cast[B.Stream]
-      case _ : Specialized[B & Any.Byte   ] => toByte   (x,f(_).cast[Stream[Byte   ]].raw).cast[B.Stream]
-      case _ : Specialized[B & Any.Char   ] => toChar   (x,f(_).cast[Stream[Char   ]].raw).cast[B.Stream]
-      case _ : Specialized[B & Any.Short  ] => toShort  (x,f(_).cast[Stream[Short  ]].raw).cast[B.Stream]
-      case _ : Specialized[B & Any.Int    ] => toInt    (x,f(_).cast[Stream[Int    ]].raw).cast[B.Stream]
-      case _ : Specialized[B & Any.Long   ] => toLong   (x,f(_).cast[Stream[Long   ]].raw).cast[B.Stream]
-      case _ : Specialized[B & Any.Float  ] => toFloat  (x,f(_).cast[Stream[Float  ]].raw).cast[B.Stream]
-      case _ : Specialized[B & Any.Double ] => toDouble (x,f(_).cast[Stream[Double ]].raw).cast[B.Stream]
-      case _                                => new flatMap(x,f(_))                   .cast[B.Stream]
+  inline def apply[A,B](inline x: Stream[A], inline f: A => Stream[B])(using inline s:Specialized[B]): s.Stream =
+    inline s match
+      case _ : Specialized[B & Any.Boolean] => toBoolean(x,f(_).cast[Stream[Boolean]].raw).cast[s.Stream]
+      case _ : Specialized[B & Any.Byte   ] => toByte   (x,f(_).cast[Stream[Byte   ]].raw).cast[s.Stream]
+      case _ : Specialized[B & Any.Char   ] => toChar   (x,f(_).cast[Stream[Char   ]].raw).cast[s.Stream]
+      case _ : Specialized[B & Any.Short  ] => toShort  (x,f(_).cast[Stream[Short  ]].raw).cast[s.Stream]
+      case _ : Specialized[B & Any.Int    ] => toInt    (x,f(_).cast[Stream[Int    ]].raw).cast[s.Stream]
+      case _ : Specialized[B & Any.Long   ] => toLong   (x,f(_).cast[Stream[Long   ]].raw).cast[s.Stream]
+      case _ : Specialized[B & Any.Float  ] => toFloat  (x,f(_).cast[Stream[Float  ]].raw).cast[s.Stream]
+      case _ : Specialized[B & Any.Double ] => toDouble (x,f(_).cast[Stream[Double ]].raw).cast[s.Stream]
+      case _                                => new flatMap(x,f(_))                   .cast[s.Stream]
 
-  inline def APPLY[A,B](x: Stream[A], inline f: A => Stream[B]) (using inline B:Specialized[B]): B.Stream =
-    inline B match
-      case _ : Specialized[B & Any.Boolean] =>{ class flatMapToBoolean(x: Stream[A]) extends FM.AsBoolean(x){ def fewOpt=x.readOpt.map(f(_).cast[Stream[Boolean]].raw)}; flatMapToBoolean(x).cast[B.Stream]}
-      case _ : Specialized[B & Any.Byte   ] =>{ class flatMapToByte   (x: Stream[A]) extends FM.AsByte   (x){ def fewOpt=x.readOpt.map(f(_).cast[Stream[Byte   ]].raw)}; flatMapToByte   (x).cast[B.Stream]}
-      case _ : Specialized[B & Any.Char   ] =>{ class flatMapToChar   (x: Stream[A]) extends FM.AsChar   (x){ def fewOpt=x.readOpt.map(f(_).cast[Stream[Char   ]].raw)}; flatMapToChar   (x).cast[B.Stream]}
-      case _ : Specialized[B & Any.Short  ] =>{ class flatMapToShort  (x: Stream[A]) extends FM.AsShort  (x){ def fewOpt=x.readOpt.map(f(_).cast[Stream[Short  ]].raw)}; flatMapToShort  (x).cast[B.Stream]}
-      case _ : Specialized[B & Any.Int    ] =>{ class flatMapToInt    (x: Stream[A]) extends FM.AsInt    (x){ def fewOpt=x.readOpt.map(f(_).cast[Stream[Int    ]].raw)}; flatMapToInt    (x).cast[B.Stream]}
-      case _ : Specialized[B & Any.Long   ] =>{ class flatMapToLong   (x: Stream[A]) extends FM.AsLong   (x){ def fewOpt=x.readOpt.map(f(_).cast[Stream[Long   ]].raw)}; flatMapToLong   (x).cast[B.Stream]}
-      case _ : Specialized[B & Any.Float  ] =>{ class flatMapToFloat  (x: Stream[A]) extends FM.AsFloat  (x){ def fewOpt=x.readOpt.map(f(_).cast[Stream[Float  ]].raw)}; flatMapToFloat  (x).cast[B.Stream]}
-      case _ : Specialized[B & Any.Double ] =>{ class flatMapToDouble (x: Stream[A]) extends FM.AsDouble (x){ def fewOpt=x.readOpt.map(f(_).cast[Stream[Double ]].raw)}; flatMapToDouble (x).cast[B.Stream]}
-      case _                                =>{ class flatMap         (x: Stream[A]) extends FM [B](x){ def fewOpt=x.readOpt.map(f(_))};                      new flatMap     (x).cast[B.Stream]}
+  inline def APPLY[A,B](x: Stream[A], inline f: A => Stream[B]) (using inline s:Specialized[B]): s.Stream =
+    inline s match
+      case _ : Specialized[B & Any.Boolean] =>{ class flatMapToBoolean(x: Stream[A]) extends FM.AsBoolean(x){ def fewOpt=x.readOpt.map(f(_).cast[Stream[Boolean]].raw)}; flatMapToBoolean(x).cast[s.Stream]}
+      case _ : Specialized[B & Any.Byte   ] =>{ class flatMapToByte   (x: Stream[A]) extends FM.AsByte   (x){ def fewOpt=x.readOpt.map(f(_).cast[Stream[Byte   ]].raw)}; flatMapToByte   (x).cast[s.Stream]}
+      case _ : Specialized[B & Any.Char   ] =>{ class flatMapToChar   (x: Stream[A]) extends FM.AsChar   (x){ def fewOpt=x.readOpt.map(f(_).cast[Stream[Char   ]].raw)}; flatMapToChar   (x).cast[s.Stream]}
+      case _ : Specialized[B & Any.Short  ] =>{ class flatMapToShort  (x: Stream[A]) extends FM.AsShort  (x){ def fewOpt=x.readOpt.map(f(_).cast[Stream[Short  ]].raw)}; flatMapToShort  (x).cast[s.Stream]}
+      case _ : Specialized[B & Any.Int    ] =>{ class flatMapToInt    (x: Stream[A]) extends FM.AsInt    (x){ def fewOpt=x.readOpt.map(f(_).cast[Stream[Int    ]].raw)}; flatMapToInt    (x).cast[s.Stream]}
+      case _ : Specialized[B & Any.Long   ] =>{ class flatMapToLong   (x: Stream[A]) extends FM.AsLong   (x){ def fewOpt=x.readOpt.map(f(_).cast[Stream[Long   ]].raw)}; flatMapToLong   (x).cast[s.Stream]}
+      case _ : Specialized[B & Any.Float  ] =>{ class flatMapToFloat  (x: Stream[A]) extends FM.AsFloat  (x){ def fewOpt=x.readOpt.map(f(_).cast[Stream[Float  ]].raw)}; flatMapToFloat  (x).cast[s.Stream]}
+      case _ : Specialized[B & Any.Double ] =>{ class flatMapToDouble (x: Stream[A]) extends FM.AsDouble (x){ def fewOpt=x.readOpt.map(f(_).cast[Stream[Double ]].raw)}; flatMapToDouble (x).cast[s.Stream]}
+      case _                                =>{ class flatMap         (x: Stream[A]) extends FM [B](x){ def fewOpt=x.readOpt.map(f(_))};                      new flatMap     (x).cast[s.Stream]}
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -6,7 +6,7 @@ trait Stream[+A]:
 object Stream:
 
   extension [A](inline x: able.Stream[A])
-     inline def pack(using inline A:Specialized[A]): A.Pack  = `val`.pack.z.StreamAble(x)
+     inline def pack(using inline s:Specialized[A]): s.Pack  = `val`.pack.z.StreamAble(x)
 
 
 /*___________________________________________________________________________

@@ -33,12 +33,12 @@ abstract class Stream[A<:Raw] extends Val.Stream[A] with Val.Stream.Custom.Disch
   inline def REDUCE(    inline f: (A,A) => A)            : A             = FOLD(readRawOpt.get)(f)
   inline def REDUCE_OPT(inline f: (A,A) => A)            : G.Opt[A]      = { var o = readRawOpt; if(o) o=FOLD(o.`val`)(f); o}
   inline def mapIf(inline f:A=>Boolean,inline m:A=>A)    : Stream[A]     = map[A](v => if(f(v)) m(v) else v)
-  inline def map     [B](inline f:A => B)                                                (using inline B:Specialized[B]): B.Stream  = z.stream.map(self,f)
-  inline def MAP     [B](inline f:A => B)                                                (using inline B:Specialized[B]): B.Stream  = z.stream.map.APPLY(self,f)
-  inline def flatMap [B](inline f:A=> Val.Stream[B])                                     (using inline B:Specialized[B]): B.Stream  = z.stream.flatMap(self,f)
-  inline def FLAT_MAP[B](inline f:A=> Val.Stream[B])                                     (using inline B:Specialized[B]): B.Stream  = z.stream.flatMap.APPLY(self,f)
-  inline def mapOpt  [B,OPT<:Any.Opt[B]](inline f:A=>OPT)(using inline o:Specialized.Opt[B,OPT],inline B:Specialized[B]): B.Stream  = z.stream.mapOpt(self,f)
-  inline def MAP_OPT  [B,OPT<:Any.Opt[B]](inline f:A=>OPT)(using inline o:Specialized.Opt[B,OPT],inline B:Specialized[B]): B.Stream  = z.stream.mapOpt.APPLY(self,f)
+  inline def map     [B](inline f:A => B)                                                (using inline s:Specialized[B]): s.Stream  = z.stream.map(self,f)
+  inline def MAP     [B](inline f:A => B)                                                (using inline s:Specialized[B]): s.Stream  = z.stream.map.APPLY(self,f)
+  inline def flatMap [B](inline f:A=> Val.Stream[B])                                     (using inline s:Specialized[B]): s.Stream  = z.stream.flatMap(self,f)
+  inline def FLAT_MAP[B](inline f:A=> Val.Stream[B])                                     (using inline s:Specialized[B]): s.Stream  = z.stream.flatMap.APPLY(self,f)
+  inline def mapOpt  [B,OPT<:Any.Opt[B]](inline f:A=>OPT)(using inline o:Specialized.Opt[B,OPT],inline s:Specialized[B]): s.Stream  = z.stream.mapOpt(self,f)
+  inline def MAP_OPT  [B,OPT<:Any.Opt[B]](inline f:A=>OPT)(using inline o:Specialized.Opt[B,OPT],inline s:Specialized[B]): s.Stream  = z.stream.mapOpt.APPLY(self,f)
 
 object Stream:
   /**/             inline def apply    [A<:Raw](inline v:A)                  : Stream[A] = Z.Stream_ofOne(v)

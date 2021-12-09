@@ -7,7 +7,7 @@ transparent trait _mutate:
 
   extension[A](inline x: Stream[A])
     inline def ref                                                        : Stream[A]              = x
-    inline def raw               (using inline A:Specialized.Primitive[A]): A.Stream               = _Z.raw(x)
+    inline def raw               (using inline s:Specialized.Primitive[A]): s.Stream               = _Z.raw(x)
     inline def reverse                                                    : Stream[A]              = new _Z.reverse(x)
     inline def reverseEvery(inline size: Int)                             : Stream[A]              = new _Z.reverseEvery(x, size)
     inline def shuffle                                                    : Stream[A]              = new _Z.shuffle(x)

@@ -4,8 +4,8 @@ import java.util.{ Arrays, Collections}
 
 object sortRange:
 
-  inline def apply[A](inline x: Array[A], inline p: Int, inline sz: Int, inline c:Ordering[A])(using inline A: Specialized[A]): Unit =
-    inline A match
+  inline def apply[A](inline x: Array[A], inline p: Int, inline sz: Int, inline c:Ordering[A])(using inline s: Specialized[A]): Unit =
+    inline s match
               case _ : Specialized[A&Any.Boolean] => boolean(x.cast[Array[Boolean]],p,sz,c.cast[Ordering[Boolean]])
               case _ : Specialized[A&Any.Byte   ] => byte   (x.cast[Array[Byte   ]],p,sz,c.cast[Ordering[Byte   ]])
               case _ : Specialized[A&Any.Char   ] => char   (x.cast[Array[Char   ]],p,sz,c.cast[Ordering[Char   ]])

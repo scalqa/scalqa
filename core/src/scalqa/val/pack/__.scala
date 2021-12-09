@@ -21,7 +21,7 @@ abstract class Pack[A] private[scalqa]() extends Idx[A]:
   /**/                     def dropRange(from: Int, size: Int)             : THIS_TYPE
   /**/              inline def dropRange(r: Int.Range)                     : THIS_TYPE  = takeRange(r.start,r.size)
   /**/                     def toBuffer                                    : Buffer[A]
-  /**/              inline def raw(using inline A:Specialized.Primitive[A]): A.Pack     = z.raw(this)
+  /**/              inline def raw(using inline s:Specialized.Primitive[A]): s.Pack     = z.raw(this)
   /**/                     def pack                                        : THIS_TYPE
   /**/              inline def foreach[U](inline f: A=>U)                  : Unit       = z.foreach(this,f)
   /**/                     def z_foreach[U](f: A=>U)                       : Unit

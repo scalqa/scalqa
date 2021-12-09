@@ -11,25 +11,25 @@ object raw:
   def float  [A<:Any.Float  ](x: Pack[A]): Float  .G.Pack[A] = x match{case v: Float  .G.Pack[A] => v; case v => Float  .G.Pack.fromStream(x)}
   def double [A<:Any.Double ](x: Pack[A]): Double .G.Pack[A] = x match{case v: Double .G.Pack[A] => v; case v => Double .G.Pack.fromStream(x)}
 
-  inline def apply[A](inline x: Pack[A])(using inline A:Specialized.Primitive[A]): A.Pack =
+  inline def apply[A](inline x: Pack[A])(using inline s:Specialized.Primitive[A]): s.Pack =
     inline x match
-      case _ : Boolean.G.Pack[A] => x.cast[A.Pack]
-      case _ : Byte   .G.Pack[A] => x.cast[A.Pack]
-      case _ : Char   .G.Pack[A] => x.cast[A.Pack]
-      case _ : Short  .G.Pack[A] => x.cast[A.Pack]
-      case _ : Int    .G.Pack[A] => x.cast[A.Pack]
-      case _ : Long   .G.Pack[A] => x.cast[A.Pack]
-      case _ : Float  .G.Pack[A] => x.cast[A.Pack]
-      case _ : Double .G.Pack[A] => x.cast[A.Pack]
-      case _ => inline A match
-          case _ : Specialized.Primitive[A & Any.Boolean] => boolean[A & Any.Boolean](x.cast[Pack[A & Any.Boolean]]).cast[A.Pack]
-          case _ : Specialized.Primitive[A & Any.Byte   ] => byte   [A & Any.Byte   ](x.cast[Pack[A & Any.Byte   ]]).cast[A.Pack]
-          case _ : Specialized.Primitive[A & Any.Char   ] => char   [A & Any.Char   ](x.cast[Pack[A & Any.Char   ]]).cast[A.Pack]
-          case _ : Specialized.Primitive[A & Any.Short  ] => short  [A & Any.Short  ](x.cast[Pack[A & Any.Short  ]]).cast[A.Pack]
-          case _ : Specialized.Primitive[A & Any.Int    ] => int    [A & Any.Int    ](x.cast[Pack[A & Any.Int    ]]).cast[A.Pack]
-          case _ : Specialized.Primitive[A & Any.Long   ] => long   [A & Any.Long   ](x.cast[Pack[A & Any.Long   ]]).cast[A.Pack]
-          case _ : Specialized.Primitive[A & Any.Float  ] => float  [A & Any.Float  ](x.cast[Pack[A & Any.Float  ]]).cast[A.Pack]
-          case _ : Specialized.Primitive[A & Any.Double ] => double [A & Any.Double ](x.cast[Pack[A & Any.Double ]]).cast[A.Pack]
+      case _ : Boolean.G.Pack[A] => x.cast[s.Pack]
+      case _ : Byte   .G.Pack[A] => x.cast[s.Pack]
+      case _ : Char   .G.Pack[A] => x.cast[s.Pack]
+      case _ : Short  .G.Pack[A] => x.cast[s.Pack]
+      case _ : Int    .G.Pack[A] => x.cast[s.Pack]
+      case _ : Long   .G.Pack[A] => x.cast[s.Pack]
+      case _ : Float  .G.Pack[A] => x.cast[s.Pack]
+      case _ : Double .G.Pack[A] => x.cast[s.Pack]
+      case _ => inline s match
+          case _ : Specialized.Primitive[A & Any.Boolean] => boolean[A & Any.Boolean](x.cast[Pack[A & Any.Boolean]]).cast[s.Pack]
+          case _ : Specialized.Primitive[A & Any.Byte   ] => byte   [A & Any.Byte   ](x.cast[Pack[A & Any.Byte   ]]).cast[s.Pack]
+          case _ : Specialized.Primitive[A & Any.Char   ] => char   [A & Any.Char   ](x.cast[Pack[A & Any.Char   ]]).cast[s.Pack]
+          case _ : Specialized.Primitive[A & Any.Short  ] => short  [A & Any.Short  ](x.cast[Pack[A & Any.Short  ]]).cast[s.Pack]
+          case _ : Specialized.Primitive[A & Any.Int    ] => int    [A & Any.Int    ](x.cast[Pack[A & Any.Int    ]]).cast[s.Pack]
+          case _ : Specialized.Primitive[A & Any.Long   ] => long   [A & Any.Long   ](x.cast[Pack[A & Any.Long   ]]).cast[s.Pack]
+          case _ : Specialized.Primitive[A & Any.Float  ] => float  [A & Any.Float  ](x.cast[Pack[A & Any.Float  ]]).cast[s.Pack]
+          case _ : Specialized.Primitive[A & Any.Double ] => double [A & Any.Double ](x.cast[Pack[A & Any.Double ]]).cast[s.Pack]
           case _                                          => J.illegalState()
 
 /*___________________________________________________________________________

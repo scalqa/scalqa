@@ -4,18 +4,18 @@ import java.util.Arrays
 
 object copySize:
 
-  inline def apply[A](inline x: Array[A], inline sz: Int)(using inline A: Specialized[A]): A.Array =
-    inline A match
-              case _ : Specialized[A&Any.Boolean] => Arrays.copyOf(x.cast[Array[Boolean]],sz).cast[A.Array]
-              case _ : Specialized[A&Any.Byte   ] => Arrays.copyOf(x.cast[Array[Byte   ]],sz).cast[A.Array]
-              case _ : Specialized[A&Any.Char   ] => Arrays.copyOf(x.cast[Array[Char   ]],sz).cast[A.Array]
-              case _ : Specialized[A&Any.Short  ] => Arrays.copyOf(x.cast[Array[Short  ]],sz).cast[A.Array]
-              case _ : Specialized[A&Any.Int    ] => Arrays.copyOf(x.cast[Array[Int    ]],sz).cast[A.Array]
-              case _ : Specialized[A&Any.Long   ] => Arrays.copyOf(x.cast[Array[Long   ]],sz).cast[A.Array]
-              case _ : Specialized[A&Any.Float  ] => Arrays.copyOf(x.cast[Array[Float  ]],sz).cast[A.Array]
-              case _ : Specialized[A&Any.Double ] => Arrays.copyOf(x.cast[Array[Double ]],sz).cast[A.Array]
-              case _ : Specialized[A&AnyRef     ] => Arrays.copyOf(x.cast[Array[AnyRef ]],sz).cast[A.Array]
-              case _                              =>           any(x.cast[Array[A      ]],sz).cast[A.Array]
+  inline def apply[A](inline x: Array[A], inline sz: Int)(using inline s: Specialized[A]): s.Array =
+    inline s match
+              case _ : Specialized[A&Any.Boolean] => Arrays.copyOf(x.cast[Array[Boolean]],sz).cast[s.Array]
+              case _ : Specialized[A&Any.Byte   ] => Arrays.copyOf(x.cast[Array[Byte   ]],sz).cast[s.Array]
+              case _ : Specialized[A&Any.Char   ] => Arrays.copyOf(x.cast[Array[Char   ]],sz).cast[s.Array]
+              case _ : Specialized[A&Any.Short  ] => Arrays.copyOf(x.cast[Array[Short  ]],sz).cast[s.Array]
+              case _ : Specialized[A&Any.Int    ] => Arrays.copyOf(x.cast[Array[Int    ]],sz).cast[s.Array]
+              case _ : Specialized[A&Any.Long   ] => Arrays.copyOf(x.cast[Array[Long   ]],sz).cast[s.Array]
+              case _ : Specialized[A&Any.Float  ] => Arrays.copyOf(x.cast[Array[Float  ]],sz).cast[s.Array]
+              case _ : Specialized[A&Any.Double ] => Arrays.copyOf(x.cast[Array[Double ]],sz).cast[s.Array]
+              case _ : Specialized[A&AnyRef     ] => Arrays.copyOf(x.cast[Array[AnyRef ]],sz).cast[s.Array]
+              case _                              =>           any(x.cast[Array[A      ]],sz).cast[s.Array]
 
   def any[A](x: Array[A], sz:Int): Array[A] =
     x match

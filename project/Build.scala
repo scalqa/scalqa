@@ -7,7 +7,7 @@ object Build {
 
   lazy val commonSettings = Seq(
     //scalaVersion           := "3.1.0",       // Supported
-    scalaVersion           := "3.0.2",       // Supported by "docs"
+    scalaVersion           := "3.0.2",       // "docs" project cannot go higher (for now)
     version                := "0.995",
     organization           := "org.scalqa",
     scalaSource in Compile := baseDirectory.value / "src",

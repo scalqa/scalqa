@@ -13,16 +13,16 @@ object map:
   class toFloat  [A](x:Stream[A], f: AnyRef.G.Fun.ToFloat  [A]) extends z.x.Map.AsFloat  (x){ def readRawOpt = x.readOpt.map(f(_))}
   class toDouble [A](x:Stream[A], f: AnyRef.G.Fun.ToDouble [A]) extends z.x.Map.AsDouble (x){ def readRawOpt = x.readOpt.map(f(_))}
 
-  inline def apply[A,B](inline x:Stream[A], inline f: A=>B)(using inline B:Specialized[B]): B.Stream = inline B match
-    case _ : Specialized[B & Any.Boolean] => toBoolean(x,f(_).cast[Boolean]).cast[B.Stream]
-    case _ : Specialized[B & Any.Byte   ] => toByte   (x,f(_).cast[Byte   ]).cast[B.Stream]
-    case _ : Specialized[B & Any.Char   ] => toChar   (x,f(_).cast[Char   ]).cast[B.Stream]
-    case _ : Specialized[B & Any.Short  ] => toShort  (x,f(_).cast[Short  ]).cast[B.Stream]
-    case _ : Specialized[B & Any.Int    ] => toInt    (x,f(_).cast[Int    ]).cast[B.Stream]
-    case _ : Specialized[B & Any.Long   ] => toLong   (x,f(_).cast[Long   ]).cast[B.Stream]
-    case _ : Specialized[B & Any.Float  ] => toFloat  (x,f(_).cast[Float  ]).cast[B.Stream]
-    case _ : Specialized[B & Any.Double ] => toDouble (x,f(_).cast[Double ]).cast[B.Stream]
-    case _                                => new map  (x,f(_)              ).cast[B.Stream]
+  inline def apply[A,B](inline x:Stream[A], inline f: A=>B)(using inline s:Specialized[B]): s.Stream = inline s match
+    case _ : Specialized[B & Any.Boolean] => toBoolean(x,f(_).cast[Boolean]).cast[s.Stream]
+    case _ : Specialized[B & Any.Byte   ] => toByte   (x,f(_).cast[Byte   ]).cast[s.Stream]
+    case _ : Specialized[B & Any.Char   ] => toChar   (x,f(_).cast[Char   ]).cast[s.Stream]
+    case _ : Specialized[B & Any.Short  ] => toShort  (x,f(_).cast[Short  ]).cast[s.Stream]
+    case _ : Specialized[B & Any.Int    ] => toInt    (x,f(_).cast[Int    ]).cast[s.Stream]
+    case _ : Specialized[B & Any.Long   ] => toLong   (x,f(_).cast[Long   ]).cast[s.Stream]
+    case _ : Specialized[B & Any.Float  ] => toFloat  (x,f(_).cast[Float  ]).cast[s.Stream]
+    case _ : Specialized[B & Any.Double ] => toDouble (x,f(_).cast[Double ]).cast[s.Stream]
+    case _                                => new map  (x,f(_)              ).cast[s.Stream]
 
   inline def APPLY[A,B](inline x: Stream[A], inline f: A=>B)(using inline SB:Specialized[B]): SB.Stream = inline SB match
     case _ : Specialized[B & Any.Boolean] => {class mapToBoolean(x: Stream[A]) extends z.x.Map.AsBoolean(x){ def readRawOpt =x.readOpt.map(f(_).cast[Boolean])}; mapToBoolean(x).cast[SB.Stream]}

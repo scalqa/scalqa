@@ -25,8 +25,8 @@ object Range:
   implicit inline def implicitToStream[A<:Raw](inline v: Range[A]) : Val.Stream[A] = v.stream
   // ------------------------------------------------------------------------------------------------------------------------------------------
   extension[A<:Raw](inline x: Range[A])
-    inline def map    [B](inline f: A=>B)           (using inline B:Specialized[B]): B.Stream    = x.stream.map(f)
-    inline def flatMap[B](inline f:A=>Val.Stream[B])(using inline B:Specialized[B]): B.Stream    = x.stream.flatMap(f)
+    inline def map    [B](inline f: A=>B)           (using inline s:Specialized[B]): s.Stream    = x.stream.map(f)
+    inline def flatMap[B](inline f:A=>Val.Stream[B])(using inline s:Specialized[B]): s.Stream    = x.stream.flatMap(f)
     inline def withFilter(inline f: Fun.Filter[A])                                 : G.Stream[A] = x.stream.take(f)
     inline def foreach[U](inline f: A=>U)                                          : Unit   = {var i=x.start.real; val _end=x.end.real+x.endIsIn.toInt; while(i<_end){f(i.cast[A]); i+=1L}}
 

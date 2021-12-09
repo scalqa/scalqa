@@ -9,29 +9,29 @@ object toLookup:
   def keyLong [A](x: Stream[A],f: AnyRef.G.Fun.ToLong [A]): Long .Lookup.Stable[A]   = {var l: Long .Lookup.Stable[A]  =VOID; x.FOREACH(v => l = l.join(f(v),v)); l}
   def ref   [B,A](x: Stream[A],f: A=>B                   ): Val  .Lookup.Stable[B,A] = {var l: Val  .Lookup.Stable[B,A]=VOID; x.FOREACH(v => l = l.join(f(v),v)); l}
 
-  inline def apply[A,B](inline x: Stream[B], inline f: B=>A)(using inline A: Specialized[A]): A.Lookup[B] =
-    inline A match
-      case _ : Specialized[A&Any.Boolean] => ref     (x,f               ).cast[A.Lookup[B]]
-      case _ : Specialized[A&Any.Byte   ] => keyByte (x,f(_).cast[Byte ]).cast[A.Lookup[B]]
-      case _ : Specialized[A&Any.Char   ] => keyChar (x,f(_).cast[Char ]).cast[A.Lookup[B]]
-      case _ : Specialized[A&Any.Short  ] => keyShort(x,f(_).cast[Short]).cast[A.Lookup[B]]
-      case _ : Specialized[A&Any.Int    ] => keyInt  (x,f(_).cast[Int  ]).cast[A.Lookup[B]]
-      case _ : Specialized[A&Any.Long   ] => keyLong (x,f(_).cast[Long ]).cast[A.Lookup[B]]
-      case _ : Specialized[A&Any.Float  ] => ref     (x,f               ).cast[A.Lookup[B]]
-      case _ : Specialized[A&Any.Double ] => ref     (x,f               ).cast[A.Lookup[B]]
-      case _                              => ref     (x,f               ).cast[A.Lookup[B]]
+  inline def apply[A,B](inline x: Stream[B], inline f: B=>A)(using inline s: Specialized[A]): s.Lookup[B] =
+    inline s match
+      case _ : Specialized[A&Any.Boolean] => ref     (x,f               ).cast[s.Lookup[B]]
+      case _ : Specialized[A&Any.Byte   ] => keyByte (x,f(_).cast[Byte ]).cast[s.Lookup[B]]
+      case _ : Specialized[A&Any.Char   ] => keyChar (x,f(_).cast[Char ]).cast[s.Lookup[B]]
+      case _ : Specialized[A&Any.Short  ] => keyShort(x,f(_).cast[Short]).cast[s.Lookup[B]]
+      case _ : Specialized[A&Any.Int    ] => keyInt  (x,f(_).cast[Int  ]).cast[s.Lookup[B]]
+      case _ : Specialized[A&Any.Long   ] => keyLong (x,f(_).cast[Long ]).cast[s.Lookup[B]]
+      case _ : Specialized[A&Any.Float  ] => ref     (x,f               ).cast[s.Lookup[B]]
+      case _ : Specialized[A&Any.Double ] => ref     (x,f               ).cast[s.Lookup[B]]
+      case _                              => ref     (x,f               ).cast[s.Lookup[B]]
 
-  inline def apply[A,B](inline x: Stream[(A,B)])(using inline A: Specialized[A]): A.Lookup[B] =
-    inline A match
-      case _ : Specialized[A&Any.Boolean] => Val  .Lookup.Stable[A,B](x).cast[A.Lookup[B]]
-      case _ : Specialized[A&Any.Byte   ] => Byte .Lookup.Stable(x.cast[Stream[(Byte ,B)]]).cast[A.Lookup[B]]
-      case _ : Specialized[A&Any.Char   ] => Char .Lookup.Stable(x.cast[Stream[(Char ,B)]]).cast[A.Lookup[B]]
-      case _ : Specialized[A&Any.Short  ] => Short.Lookup.Stable(x.cast[Stream[(Short,B)]]).cast[A.Lookup[B]]
-      case _ : Specialized[A&Any.Int    ] => Int  .Lookup.Stable(x.cast[Stream[(Int  ,B)]]).cast[A.Lookup[B]]
-      case _ : Specialized[A&Any.Long   ] => Long .Lookup.Stable(x.cast[Stream[(Long ,B)]]).cast[A.Lookup[B]]
-      case _ : Specialized[A&Any.Float  ] => Val  .Lookup.Stable[A,B](x).cast[A.Lookup[B]]
-      case _ : Specialized[A&Any.Double ] => Val  .Lookup.Stable[A,B](x).cast[A.Lookup[B]]
-      case _                              => Val  .Lookup.Stable[A,B](x).cast[A.Lookup[B]]
+  inline def apply[A,B](inline x: Stream[(A,B)])(using inline s: Specialized[A]): s.Lookup[B] =
+    inline s match
+      case _ : Specialized[A&Any.Boolean] => Val  .Lookup.Stable[A,B](x).cast[s.Lookup[B]]
+      case _ : Specialized[A&Any.Byte   ] => Byte .Lookup.Stable(x.cast[Stream[(Byte ,B)]]).cast[s.Lookup[B]]
+      case _ : Specialized[A&Any.Char   ] => Char .Lookup.Stable(x.cast[Stream[(Char ,B)]]).cast[s.Lookup[B]]
+      case _ : Specialized[A&Any.Short  ] => Short.Lookup.Stable(x.cast[Stream[(Short,B)]]).cast[s.Lookup[B]]
+      case _ : Specialized[A&Any.Int    ] => Int  .Lookup.Stable(x.cast[Stream[(Int  ,B)]]).cast[s.Lookup[B]]
+      case _ : Specialized[A&Any.Long   ] => Long .Lookup.Stable(x.cast[Stream[(Long ,B)]]).cast[s.Lookup[B]]
+      case _ : Specialized[A&Any.Float  ] => Val  .Lookup.Stable[A,B](x).cast[s.Lookup[B]]
+      case _ : Specialized[A&Any.Double ] => Val  .Lookup.Stable[A,B](x).cast[s.Lookup[B]]
+      case _                              => Val  .Lookup.Stable[A,B](x).cast[s.Lookup[B]]
 
 
 /*___________________________________________________________________________

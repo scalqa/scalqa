@@ -33,11 +33,11 @@ object Opt extends z_ValOptDefailts:
     /**/  inline def toScala                                     : Option[A]  = opt.Z.toScala(x)
     /**/  inline def toJava                           : java.util.Optional[A] = opt.Z.toJava(x)
     /**/  inline def mapIf(inline f:A=>Boolean,inline m:A=>A)                                                                   : Opt[A] = x.map[A](v => if(f(v)) m(v) else v)
-    /**/  inline def map[B](inline f:A=>B)                                                       (using inline B:Specialized[B]): B.Opt  = opt.z.specialized.map(x,f)
-    /**/  inline def mapOpt [B,OPT<:Any.Opt[B]](inline f: A=>OPT)(using inline o:Specialized.Opt[B,OPT],inline B:Specialized[B]): B.Opt  = opt.z.specialized.mapOpt(x,f)
-    /**/  inline def flatMap[B,OPT<:Any.Opt[B]](inline f: A=>OPT)(using inline o:Specialized.Opt[B,OPT],inline B:Specialized[B]): B.Opt  = opt.z.specialized.mapOpt(x,f)
-    /**/  inline def mix[B,C](inline o:Any.Opt[B],inline f:(A,B)=>C)                             (using inline C:Specialized[C]): C.Opt  = opt.z.specialized.mix(x,o,f)
-    /**/  inline def raw                                                               (using inline A:Specialized.Primitive[A]): A.Opt  = opt.z.specialized.raw(x)
+    /**/  inline def map[B](inline f:A=>B)                                                       (using inline s:Specialized[B]): s.Opt  = opt.z.specialized.map(x,f)
+    /**/  inline def mapOpt [B,OPT<:Any.Opt[B]](inline f: A=>OPT)(using inline o:Specialized.Opt[B,OPT],inline s:Specialized[B]): s.Opt  = opt.z.specialized.mapOpt(x,f)
+    /**/  inline def flatMap[B,OPT<:Any.Opt[B]](inline f: A=>OPT)(using inline o:Specialized.Opt[B,OPT],inline s:Specialized[B]): s.Opt  = opt.z.specialized.mapOpt(x,f)
+    /**/  inline def mix[B,C](inline o:Any.Opt[B],inline f:(A,B)=>C)                             (using inline s:Specialized[C]): s.Opt  = opt.z.specialized.mix(x,o,f)
+    /**/  inline def raw                                                               (using inline s:Specialized.Primitive[A]): s.Opt  = opt.z.specialized.raw(x)
 
   object TYPE:
     opaque type DEF[+A] <: AnyRef.Opaque = AnyRef.Opaque

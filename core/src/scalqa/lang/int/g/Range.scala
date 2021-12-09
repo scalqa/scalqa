@@ -31,8 +31,8 @@ class Range[A<:Raw](_start: A, _size: Int) extends Val.Range[A] with Able.Size w
 
 object Range:
   extension[A<:Raw](inline x: Range[A])
-    inline def map    [B](inline f: A=>B)           (using inline B:Specialized[B]): B.Stream    = x.stream.map(f)
-    inline def flatMap[B](inline f:A=>Val.Stream[B])(using inline B:Specialized[B]): B.Stream    = x.stream.flatMap(f)
+    inline def map    [B](inline f: A=>B)           (using inline s:Specialized[B]): s.Stream    = x.stream.map(f)
+    inline def flatMap[B](inline f:A=>Val.Stream[B])(using inline s:Specialized[B]): s.Stream    = x.stream.flatMap(f)
     inline def withFilter(inline f: Fun.Filter[A])                                 : G.Stream[A] = x.stream.take(f)
     inline def foreach[U](inline f: A=>U)                                          : Unit   = z.range.foreachMacro(x,f)
   // ------------------------------------------------------------------------------------------------------------------------------------------

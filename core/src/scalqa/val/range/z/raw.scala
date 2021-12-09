@@ -2,23 +2,23 @@ package scalqa; package `val`; package range; package z; import language.implici
 
 object raw:
 
-  inline def apply[A](inline x: Range[A])(using inline A:Specialized.Primitive[A]): A.Range =
+  inline def apply[A](inline x: Range[A])(using inline s:Specialized.Primitive[A]): s.Range =
     inline x match
-      case _ : Byte   .G.Range[A] => x.cast[A.Range]
-      case _ : Char   .G.Range[A] => x.cast[A.Range]
-      case _ : Short  .G.Range[A] => x.cast[A.Range]
-      case _ : Int    .G.Range[A] => x.cast[A.Range]
-      case _ : Long   .G.Range[A] => x.cast[A.Range]
-      case _ : Float  .G.Range[A] => x.cast[A.Range]
-      case _ : Double .G.Range[A] => x.cast[A.Range]
-      case _ => inline A match
-          case _ : Specialized.Primitive[A & Any.Byte  ] => byte  (x.cast[Range[Byte  ]]).cast[A.Range]
-          case _ : Specialized.Primitive[A & Any.Char  ] => char  (x.cast[Range[Char  ]]).cast[A.Range]
-          case _ : Specialized.Primitive[A & Any.Short ] => short (x.cast[Range[Short ]]).cast[A.Range]
-          case _ : Specialized.Primitive[A & Any.Int   ] => int   (x.cast[Range[Int   ]]).cast[A.Range]
-          case _ : Specialized.Primitive[A & Any.Long  ] => long  (x.cast[Range[Long  ]]).cast[A.Range]
-          case _ : Specialized.Primitive[A & Any.Float ] => float (x.cast[Range[Float ]]).cast[A.Range]
-          case _ : Specialized.Primitive[A & Any.Double] => double(x.cast[Range[Double]]).cast[A.Range]
+      case _ : Byte   .G.Range[A] => x.cast[s.Range]
+      case _ : Char   .G.Range[A] => x.cast[s.Range]
+      case _ : Short  .G.Range[A] => x.cast[s.Range]
+      case _ : Int    .G.Range[A] => x.cast[s.Range]
+      case _ : Long   .G.Range[A] => x.cast[s.Range]
+      case _ : Float  .G.Range[A] => x.cast[s.Range]
+      case _ : Double .G.Range[A] => x.cast[s.Range]
+      case _ => inline s match
+          case _ : Specialized.Primitive[A & Any.Byte  ] => byte  (x.cast[Range[Byte  ]]).cast[s.Range]
+          case _ : Specialized.Primitive[A & Any.Char  ] => char  (x.cast[Range[Char  ]]).cast[s.Range]
+          case _ : Specialized.Primitive[A & Any.Short ] => short (x.cast[Range[Short ]]).cast[s.Range]
+          case _ : Specialized.Primitive[A & Any.Int   ] => int   (x.cast[Range[Int   ]]).cast[s.Range]
+          case _ : Specialized.Primitive[A & Any.Long  ] => long  (x.cast[Range[Long  ]]).cast[s.Range]
+          case _ : Specialized.Primitive[A & Any.Float ] => float (x.cast[Range[Float ]]).cast[s.Range]
+          case _ : Specialized.Primitive[A & Any.Double] => double(x.cast[Range[Double]]).cast[s.Range]
           case _                                         => J.illegalState()
 
   def byte   [A<:Any.Byte   ](x: Range[A]): Byte   .G.Range[A] = x match{case v: Byte   .G.Range[A] => v; case v if(v ne lang.byte  .z.Math) => fail(v); case v => (if(v.endIsIn) v.start.cast[Byte]  <> v.end.cast[Byte]   else v.start.cast[Byte]  <>> v.end.cast[Byte]  ).cast}

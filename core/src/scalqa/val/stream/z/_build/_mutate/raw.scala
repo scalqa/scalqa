@@ -19,26 +19,26 @@ object raw:
   def asFloat  (x: Stream[Float  ]): Float  .Stream = x match{ case x: Float.Stream   => x; case x => new asFloat(x)  }
   def asDouble (x: Stream[Double ]): Double .Stream = x match{ case x: Double.Stream  => x; case x => new asDouble(x) }
 
-  inline def apply[A](inline x:Stream[A])(using inline A: Specialized.Primitive[A]): A.Stream =
+  inline def apply[A](inline x:Stream[A])(using inline s: Specialized.Primitive[A]): s.Stream =
     inline x match
-      case _ : Boolean.G.Stream[A] => x.cast[A.Stream]
-      case _ : Byte   .G.Stream[A] => x.cast[A.Stream]
-      case _ : Char   .G.Stream[A] => x.cast[A.Stream]
-      case _ : Short  .G.Stream[A] => x.cast[A.Stream]
-      case _ : Int    .G.Stream[A] => x.cast[A.Stream]
-      case _ : Long   .G.Stream[A] => x.cast[A.Stream]
-      case _ : Float  .G.Stream[A] => x.cast[A.Stream]
-      case _ : Double .G.Stream[A] => x.cast[A.Stream]
+      case _ : Boolean.G.Stream[A] => x.cast[s.Stream]
+      case _ : Byte   .G.Stream[A] => x.cast[s.Stream]
+      case _ : Char   .G.Stream[A] => x.cast[s.Stream]
+      case _ : Short  .G.Stream[A] => x.cast[s.Stream]
+      case _ : Int    .G.Stream[A] => x.cast[s.Stream]
+      case _ : Long   .G.Stream[A] => x.cast[s.Stream]
+      case _ : Float  .G.Stream[A] => x.cast[s.Stream]
+      case _ : Double .G.Stream[A] => x.cast[s.Stream]
       case _ =>
-        inline A  match
-          case _ : Specialized.Primitive[A & Any.Boolean] => asBoolean(x.cast[Stream[Boolean]]).cast[A.Stream]
-          case _ : Specialized.Primitive[A & Any.Byte   ] => asByte   (x.cast[Stream[Byte   ]]).cast[A.Stream]
-          case _ : Specialized.Primitive[A & Any.Char   ] => asChar   (x.cast[Stream[Char   ]]).cast[A.Stream]
-          case _ : Specialized.Primitive[A & Any.Short  ] => asShort  (x.cast[Stream[Short  ]]).cast[A.Stream]
-          case _ : Specialized.Primitive[A & Any.Int    ] => asInt    (x.cast[Stream[Int    ]]).cast[A.Stream]
-          case _ : Specialized.Primitive[A & Any.Long   ] => asLong   (x.cast[Stream[Long   ]]).cast[A.Stream]
-          case _ : Specialized.Primitive[A & Any.Float  ] => asFloat  (x.cast[Stream[Float  ]]).cast[A.Stream]
-          case _ : Specialized.Primitive[A & Any.Double ] => asDouble (x.cast[Stream[Double ]]).cast[A.Stream]
+        inline s match
+          case _ : Specialized.Primitive[A & Any.Boolean] => asBoolean(x.cast[Stream[Boolean]]).cast[s.Stream]
+          case _ : Specialized.Primitive[A & Any.Byte   ] => asByte   (x.cast[Stream[Byte   ]]).cast[s.Stream]
+          case _ : Specialized.Primitive[A & Any.Char   ] => asChar   (x.cast[Stream[Char   ]]).cast[s.Stream]
+          case _ : Specialized.Primitive[A & Any.Short  ] => asShort  (x.cast[Stream[Short  ]]).cast[s.Stream]
+          case _ : Specialized.Primitive[A & Any.Int    ] => asInt    (x.cast[Stream[Int    ]]).cast[s.Stream]
+          case _ : Specialized.Primitive[A & Any.Long   ] => asLong   (x.cast[Stream[Long   ]]).cast[s.Stream]
+          case _ : Specialized.Primitive[A & Any.Float  ] => asFloat  (x.cast[Stream[Float  ]]).cast[s.Stream]
+          case _ : Specialized.Primitive[A & Any.Double ] => asDouble (x.cast[Stream[Double ]]).cast[s.Stream]
           case _                                          => J.illegalState()
 
 /*___________________________________________________________________________
