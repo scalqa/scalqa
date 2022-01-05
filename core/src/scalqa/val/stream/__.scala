@@ -49,7 +49,7 @@ ___________________________________________________________________________*/
 /**
 @trait Stream -> ### Value Stream
 
-      Read about Stream in the [Guide](../../../guide/features/Stream.html).
+      Read about Stream in the [Guide](../../../Guide/Features/Stream.html).
 
       Stream has just one method to be implemented, but it has large attached libraries for:
         - [building stream pipeline](stream/_Build.html)

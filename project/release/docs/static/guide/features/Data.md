@@ -23,7 +23,7 @@ Defining data elements is quite easy, one just needs to select one of the follow
 
 Let's create an example of data element 'Price', which would be based on a Float, behave like a Float, but be distinct from a Float.
 
-He is the definition part (available in [samples](https://github.com/scalqa/samples/blob/master/src/example/opaque/PriceData.scala)):
+Here is the definition part (available in [samples](https://github.com/scalqa/samples/blob/master/src/example/opaque/PriceData.scala)):
 ```
 type  Price = Price.TYPE.DEF
 

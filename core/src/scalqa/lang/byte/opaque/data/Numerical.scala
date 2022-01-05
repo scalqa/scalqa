@@ -50,7 +50,7 @@ ___________________________________________________________________________*/
 
   Opaque Numerical Data  element is provided with similar operations, which are available on base primitive without any loss of performance.
 
-  See [more in guide](../../../../../guide/features/Data.html).
+  See [more in the guide](../../../../../Guide/Features/Data.html).
 
   See [sample type definition](https://github.com/scalqa/samples/blob/master/src/example/opaque/all/NumericalByteData.scala).
 

@@ -20,7 +20,7 @@ ___________________________________________________________________________*/
 
   Opaque Data not only defines a Char based opaque type, but also privides a framework of custom specialized containers attached to this type.
 
-  See [more in guide](../../../../../guide/features/Data.html).
+  See [more in the guide](../../../../../Guide/Features/Data.html).
 
   See [sample type definition](https://github.com/scalqa/samples/blob/master/src/example/opaque/all/CharData.scala).
 
