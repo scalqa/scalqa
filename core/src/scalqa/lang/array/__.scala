@@ -2,16 +2,16 @@ package scalqa; package lang; import language.implicitConversions
 
 object Array:
 
-  inline def apply[A<:Any.Primitive.Type](inline v: A, inline vs: A*)(using inline s:Specialized.Primitive[A]): s.Array =
-    inline s match
-      case _ : Specialized.Primitive[A&Any.Boolean] => scala.Array(v.cast[Boolean],vs.cast[Seq[Boolean]]: _*).cast[s.Array]
-      case _ : Specialized.Primitive[A&Any.Byte   ] => scala.Array(v.cast[Byte],   vs.cast[Seq[Byte]]   : _*).cast[s.Array]
-      case _ : Specialized.Primitive[A&Any.Char   ] => scala.Array(v.cast[Char],   vs.cast[Seq[Char]]   : _*).cast[s.Array]
-      case _ : Specialized.Primitive[A&Any.Short  ] => scala.Array(v.cast[Short],  vs.cast[Seq[Short]]  : _*).cast[s.Array]
-      case _ : Specialized.Primitive[A&Any.Int    ] => scala.Array(v.cast[Int],    vs.cast[Seq[Int]]    : _*).cast[s.Array]
-      case _ : Specialized.Primitive[A&Any.Long   ] => scala.Array(v.cast[Long],   vs.cast[Seq[Long]]   : _*).cast[s.Array]
-      case _ : Specialized.Primitive[A&Any.Float  ] => scala.Array(v.cast[Float],  vs.cast[Seq[Float]]  : _*).cast[s.Array]
-      case _ : Specialized.Primitive[A&Any.Double ] => scala.Array(v.cast[Double], vs.cast[Seq[Double]] : _*).cast[s.Array]
+  inline def apply[A<:Any.Primitive.Type](inline v: A, inline vs: A*)(using inline sp:Specialized.Primitive[A]): sp.Array =
+    inline sp match
+      case _ : Specialized.Primitive[A&Any.Boolean] => scala.Array(v.cast[Boolean],vs.cast[Seq[Boolean]]: _*).cast[sp.Array]
+      case _ : Specialized.Primitive[A&Any.Byte   ] => scala.Array(v.cast[Byte],   vs.cast[Seq[Byte]]   : _*).cast[sp.Array]
+      case _ : Specialized.Primitive[A&Any.Char   ] => scala.Array(v.cast[Char],   vs.cast[Seq[Char]]   : _*).cast[sp.Array]
+      case _ : Specialized.Primitive[A&Any.Short  ] => scala.Array(v.cast[Short],  vs.cast[Seq[Short]]  : _*).cast[sp.Array]
+      case _ : Specialized.Primitive[A&Any.Int    ] => scala.Array(v.cast[Int],    vs.cast[Seq[Int]]    : _*).cast[sp.Array]
+      case _ : Specialized.Primitive[A&Any.Long   ] => scala.Array(v.cast[Long],   vs.cast[Seq[Long]]   : _*).cast[sp.Array]
+      case _ : Specialized.Primitive[A&Any.Float  ] => scala.Array(v.cast[Float],  vs.cast[Seq[Float]]  : _*).cast[sp.Array]
+      case _ : Specialized.Primitive[A&Any.Double ] => scala.Array(v.cast[Double], vs.cast[Seq[Double]] : _*).cast[sp.Array]
       case _                                        => J.illegalState()
 
   inline def apply[A](inline xs: A*)(using inline t: ClassTag[A]) : Array[A] = scala.Array(xs *)

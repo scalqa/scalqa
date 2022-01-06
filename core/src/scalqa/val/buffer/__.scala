@@ -34,8 +34,8 @@ abstract class Buffer[A] private[scalqa]() extends Idx.Mutable[A] with gen.able.
     size = sz+len
 
 object Buffer:
-  /**/     inline def apply[A]()                               : Buffer[A]  = new AnyRef.Buffer(J.initSize)
-  /**/     inline def apply[A](inline initSize: Int)           : Buffer[A]  = new AnyRef.Buffer(initSize)
+  /**/     inline def apply[A]()                               : Buffer[A]  = new AnyRef.G.Buffer(J.initSize)
+  /**/     inline def apply[A](inline initSize: Int)           : Buffer[A]  = new AnyRef.G.Buffer(initSize)
   /**/     inline def apply[A](inline a:Array[A], inline s:Int): Buffer[A]  = buffer.Z.create(a,s)
   implicit inline def implicitRequest[A](v: NEW)               : Buffer[A]  = apply[A]()
 
@@ -56,7 +56,7 @@ ___________________________________________________________________________*/
       [[Buffer]] is the default implementation of [[scalqa.val.idx.Mutable Mutable Indexed Collection]]
 
       Buffer is an abstract class with concrete implementations:
-      [[scalqa.lang.anyref.Buffer AnyRef.Buffer]],
+      [[scalqa.lang.anyref.g.Buffer AnyRef.G.Buffer]],
       [[scalqa.lang.byte.g.Buffer Byte.G.Buffer]],
       [[scalqa.lang.int.g.Buffer Int.G.Buffer]],
       etc.

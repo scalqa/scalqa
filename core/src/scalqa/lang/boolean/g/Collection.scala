@@ -7,6 +7,9 @@ trait Collection[A<:Raw] extends Val.Collection[A] with Able.Contain[A] with any
 object Collection:
   implicit inline def implicitRequest[A<:Raw](v:VOID): Collection[A] = Pack.void
 
+  extension[A<:Raw](inline x: Collection[A])
+    inline def ~~ : Stream[A]   = x.stream
+
   trait Mutable[A<:Raw] extends Collection[A] with Val.Collection.M[A]:
     def add(v: A): Unit
 
@@ -30,5 +33,7 @@ ___________________________________________________________________________*/
 @trait Collection -> ### Boolean Specialized Generic Collection
 
     To be used with Boolean based opaque values.
+
+@def ~~ -> Shortcut to .stream method \n\n Call is inlined and is equivalent to calling method "stream" itself.
 
 */

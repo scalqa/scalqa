@@ -13,12 +13,12 @@ private[`val`] class ArrayPack[A](_a: Array[AnyRef], sz: Int) extends Pack[A] wi
   /**/     def size                        : Int              = sz
   /**/     def join(v: A)                  : Pack[A]          = new ArrayPack(ar.copySize(sz+1).self(_(sz)=v.cast[AnyRef]),sz+1)
   /**/     def joinAt(i: Int, v: A)        : Pack[A]          = new ArrayPack(ar.copySize(sz+1).self(a=>{a.copyTo(a,i+1,i,a.length-i-1);a(i)=v.cast[AnyRef]}),sz+1)
-  /**/     def joinAllAt(i:Int,v:Stream[A]): Pack[A]          = new ArrayPack(lang.anyref.Buffer.z_ArrayJoinAllAt(ar,i,v.cast[Stream[AnyRef]],sz))
+  /**/     def joinAllAt(i:Int,v:Stream[A]): Pack[A]          = new ArrayPack(lang.anyref.g.Buffer.z_ArrayJoinAllAt(ar,i,v.cast[Stream[AnyRef]],sz))
   /**/     def takeRange(s: Int, sz: Int)  : Pack[A]          = new ArrayPack(ar.takeRange(s,sz))
   /**/     def dropRange(s: Int, sz: Int)  : Pack[A]          = new ArrayPack(ar.dropRange(s,sz))
   /**/     def doc                         : Doc              = Doc(this) += ("size", size) ++= (ar.length != sz) ? ("","Uncompacted") += ar.tag
   /**/     def pack                        : this.type        = {if(ar.length > sz) ar=ar.copySize(sz); this}
-  /**/     def toBuffer                    : Buffer[A]        = new AnyRef.Buffer(ar.copySize(sz),sz)
+  /**/     def toBuffer                    : Buffer[A]        = new AnyRef.G.Buffer(ar.copySize(sz),sz)
   /**/     def joinAll(vs: Stream[A])      : Pack[A]          = vs.readOpt.map(v => ArrayPack.z_Buf(ar,sz+1,v,vs).mk) or this
   /**/     def z_foreach[U](f: A=>U)       : Unit             = {var i=0; while(i<sz){ f(ar(i).cast[A]); i+=1 }}
 
@@ -27,7 +27,7 @@ object ArrayPack:
   def fromStream[A](vs: Stream[A]): Pack[A] = vs.readOpt.map(v => z_Buf(Array.emptyAnyRef,1,v,vs).mk) or VOID
 
   // *****************************************************************************************************
-  private class z_Buf[A] private (a: Array[AnyRef],s:Int) extends AnyRef.Buffer[A](a,s):
+  private class z_Buf[A] private (a: Array[AnyRef],s:Int) extends AnyRef.G.Buffer[A](a,s):
     def this(a: Array[AnyRef], sz: Int, v: A, vs: Stream[A]) =
       this(a.copySize(vs.sizeOpt.map(sz + _) or sz + J.initSize).self(_(sz-1)=v.cast[AnyRef]), sz)
       addAll(vs)

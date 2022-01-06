@@ -1,7 +1,8 @@
 package scalqa; package lang; package anyref; import language.implicitConversions
 
 object G:
-  transparent inline def Range     = g.Range;        type Range[A] = g.Range[A]
+  transparent inline def Buffer    = g.Buffer;       type Buffer[A] = g.Buffer[A]
+  transparent inline def Range     = g.Range;        type Range[A]  = g.Range[A]
   transparent inline def Companion = g.Companion
   transparent inline def Fun       = g.Fun
 

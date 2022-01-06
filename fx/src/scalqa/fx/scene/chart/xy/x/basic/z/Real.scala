@@ -11,7 +11,7 @@ private[x] class Real[X, Y, XA <: Chart.Axis[X], YA <: Chart.Axis[Y], XV, YV](va
     if (n != null)
       s.setNode(n.real);
       getPlotChildren.add(n.real)
-    s.getData.valStream.foreach(it => {
+    s.getData.~~.foreach(it => {
       val n = chart.ItemBase(it).node
       it.setNode(n.real)
       getPlotChildren.add(n.real)
@@ -28,7 +28,7 @@ private[x] class Real[X, Y, XA <: Chart.Axis[X], YA <: Chart.Axis[Y], XV, YV](va
     })
 
   protected def seriesRemoved(s: JSeries[XV, YV]) = runFx {
-    s.getData.valStream.foreach(it => { it.getNode.?.forval(getPlotChildren.remove(_)); removeDataItemFromDisplay(s, it) })
+    s.getData.~~.foreach(it => { it.getNode.?.forval(getPlotChildren.remove(_)); removeDataItemFromDisplay(s, it) })
     removeSeriesFromDisplay(s)
   }
 

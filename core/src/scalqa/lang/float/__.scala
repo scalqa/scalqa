@@ -28,7 +28,7 @@ ___________________________________________________________________________*/
 
     ```
 
-        val s: Float.Stream = (1F <> 5F).streamStep(1)
+        val s: Float.Stream = (1F <> 5F).stepStream(_ + 1)
 
         val o: Float.Opt    = s.readRawOpt  // Holds Float.Opt(1.0)
 

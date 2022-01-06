@@ -12,7 +12,7 @@ private[scalqa] final class Void[A] extends Pack[A] with Gen.Void:
   override def takeRange(f:Int, sz:Int)    : Pack[A]   = this
   override def dropRange(f:Int, sz:Int)    : Pack[A]   = this
   /**/     def pack                        : this.type = this
-  /**/     def toBuffer                    : Buffer[A] = new AnyRef.Buffer()
+  /**/     def toBuffer                    : Buffer[A] = new AnyRef.G.Buffer()
   override def z_foreach[U](f: A=>U)       : Unit      = ()
 
 /*___________________________________________________________________________

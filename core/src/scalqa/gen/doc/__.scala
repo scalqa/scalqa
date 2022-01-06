@@ -1,6 +1,6 @@
 package scalqa; package gen; import doc.*; import language.implicitConversions
 
-class Doc protected(owner: Any) extends AnyRef.Buffer[(String, String)] with _core with Product:
+class Doc protected(owner: Any) extends AnyRef.G.Buffer[(String, String)] with _core with Product:
   /**/     var id                                                 : String         = owner match{case null => "null"; case s:String => s; case v => v.self.id}
   /**/     def tag                                                : String         = id + '{' + pairStream().makeString(",") + '}'
   /**/     def text                                               : String         = (pairStream().makeString(",\n") + '}').indent(id + "{")

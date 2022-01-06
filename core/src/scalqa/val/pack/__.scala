@@ -2,29 +2,29 @@ package scalqa; package `val`; import pack.*; import language.implicitConversion
 
 abstract class Pack[A] private[scalqa]() extends Idx[A]:
   type THIS_TYPE <: Pack[A]
-  /**/                     def join (v: A)                                 : THIS_TYPE
-  /**/                     def joinAll(v: Stream[A])                       : THIS_TYPE
-  /**/                     def joinAt(i: Int, v: A)                        : THIS_TYPE
-  /**/                     def joinAllAt(i: Int, v: Stream[A])             : THIS_TYPE
-  @tn("join")       inline def + (inline v: A)                             : THIS_TYPE  = join(v)
-  @tn("joinAll")    inline def ++(inline v: Stream[A])                     : THIS_TYPE  = joinAll(v)
-  @tn("join")       inline def +@ (inline i: Int, inline v: A)             : THIS_TYPE  = joinAt(i,v)
-  @tn("joinAllAt")  inline def ++@(inline i: Int, inline v: Stream[A])     : THIS_TYPE  = joinAllAt(i,v)
+  /**/                     def join (v: A)                                  : THIS_TYPE
+  /**/                     def joinAll(v: Stream[A])                        : THIS_TYPE
+  /**/                     def joinAt(i: Int, v: A)                         : THIS_TYPE
+  /**/                     def joinAllAt(i: Int, v: Stream[A])              : THIS_TYPE
+  @tn("join")       inline def + (inline v: A)                              : THIS_TYPE  = join(v)
+  @tn("joinAll")    inline def ++(inline v: Stream[A])                      : THIS_TYPE  = joinAll(v)
+  @tn("join")       inline def +@ (inline i: Int, inline v: A)              : THIS_TYPE  = joinAt(i,v)
+  @tn("joinAllAt")  inline def ++@(inline i: Int, inline v: Stream[A])      : THIS_TYPE  = joinAllAt(i,v)
   // -------------------------
-  /**/              inline def takeFirst(cnt: Int)                         : THIS_TYPE  = takeRange(0,cnt)
-  /**/              inline def takeLast (cnt: Int)                         : THIS_TYPE  = takeRange(cnt,size - cnt)
-  /**/                     def takeRange(from: Int, size: Int)             : THIS_TYPE
-  /**/              inline def takeRange(r: Int.Range)                     : THIS_TYPE  = takeRange(r.start,r.size)
+  /**/              inline def takeFirst(cnt: Int)                          : THIS_TYPE  = takeRange(0,cnt)
+  /**/              inline def takeLast (cnt: Int)                          : THIS_TYPE  = takeRange(cnt,size - cnt)
+  /**/                     def takeRange(from: Int, size: Int)              : THIS_TYPE
+  /**/              inline def takeRange(r: Int.Range)                      : THIS_TYPE  = takeRange(r.start,r.size)
   // -------------------------
-  /**/              inline def dropFirst(cnt: Int)                         : THIS_TYPE  = takeRange(cnt,size - cnt)
-  /**/              inline def dropLast (cnt: Int)                         : THIS_TYPE  = takeRange(0,size - cnt)
-  /**/                     def dropRange(from: Int, size: Int)             : THIS_TYPE
-  /**/              inline def dropRange(r: Int.Range)                     : THIS_TYPE  = takeRange(r.start,r.size)
-  /**/                     def toBuffer                                    : Buffer[A]
-  /**/              inline def raw(using inline s:Specialized.Primitive[A]): s.Pack     = z.raw(this)
-  /**/                     def pack                                        : THIS_TYPE
-  /**/              inline def foreach[U](inline f: A=>U)                  : Unit       = z.foreach(this,f)
-  /**/                     def z_foreach[U](f: A=>U)                       : Unit
+  /**/              inline def dropFirst(cnt: Int)                          : THIS_TYPE  = takeRange(cnt,size - cnt)
+  /**/              inline def dropLast (cnt: Int)                          : THIS_TYPE  = takeRange(0,size - cnt)
+  /**/                     def dropRange(from: Int, size: Int)              : THIS_TYPE
+  /**/              inline def dropRange(r: Int.Range)                      : THIS_TYPE  = takeRange(r.start,r.size)
+  /**/                     def toBuffer                                     : Buffer[A]
+  /**/              inline def raw(using inline sp:Specialized.Primitive[A]): sp.Pack    = z.raw(this)
+  /**/                     def pack                                         : THIS_TYPE
+  /**/              inline def foreach[U](inline f: A=>U)                   : Unit       = z.foreach(this,f)
+  /**/                     def z_foreach[U](f: A=>U)                        : Unit
 
 object Pack:
   /**/                     def apply[A](v: A)                       : Pack[A]       = z.Few.Pack_ofOne(v)

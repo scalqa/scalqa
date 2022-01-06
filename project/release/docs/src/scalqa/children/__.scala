@@ -3,12 +3,12 @@ package scalqa; import children.*; import language.implicitConversions
 class Children private (val m: Member):
 
   private lazy val data: z.Data =
-    if     (m.name == "API")    new z.Data(m).self(_.members = m.members.valStream.take(_.name=="scalqa").pack)
+    if     (m.name == "API")    new z.Data(m).self(_.members = m.members.~~.take(_.name=="scalqa").pack)
     else if(m.name == "scalqa") new z.RootData(m)
     else if(m.dri.isTypeDef)    new z.OpaqueData(m)
     else                        new z.GeneralData(m)
 
-  def constructors : Seq[Member]                         = m.members.valStream.take(_.kind.isConstructor).sort.toSeq
+  def constructors : Seq[Member]                         = m.members.~~.take(_.kind.isConstructor).sort.toSeq
   def members      : Seq[Member]                         = data.members.toSeqView
   def aliases      : Seq[Member]                         = data.aliases.toSeqView
   def containers   : Seq[Member]                         = data.containers.toSeqView

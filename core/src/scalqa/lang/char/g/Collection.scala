@@ -8,10 +8,11 @@ object Collection:
   implicit inline def implicitRequest[A<:Raw](v:VOID): Collection[A] = Pack.void
 
   extension[A<:Raw](inline x: Collection[A])
+    inline def ~~                                                                   : Stream[A]   = x.stream
     inline def map    [B](inline f: A=> B)           (using inline s:Specialized[B]): s.Stream    = x.stream.map(f)
     inline def flatMap[B](inline f: A=>Val.Stream[B])(using inline s:Specialized[B]): s.Stream    = x.stream.flatMap(f)
     inline def withFilter(inline f: Fun.Filter[A])                                  : G.Stream[A] = x.stream.filter(f)
-    inline def foreach[U](inline f: Fun.Consume[A,U])                               : Unit   = x.stream.foreach(f)
+    inline def foreach[U](inline f: Fun.Consume[A,U])                               : Unit        = x.stream.foreach(f)
 
   // ******************************************************************************************************************************************
   trait Mutable[A<:Raw] extends Collection[A] with Val.Collection.M[A]:
@@ -32,5 +33,7 @@ ___________________________________________________________________________*/
     To be used with Char based opaque values.
 
 @def implicitRequest   -> General void instance request \n\n It is possible to use general request VOID to get void instance of this type, thanks to this implicit conversion.
+
+@def ~~ -> Shortcut to .stream method \n\n Call is inlined and is equivalent to calling method "stream" itself.
 
 */

@@ -1,4 +1,4 @@
-package scalqa; package lang; package anyref; import language.implicitConversions
+package scalqa; package lang; package anyref; package g; import language.implicitConversions
 
 class Buffer[A](arrayToUse: Array[AnyRef], sizeToStartWith: Int) extends Val.Buffer[A]:
   protected type ARRAY_TYPE  = AnyRef

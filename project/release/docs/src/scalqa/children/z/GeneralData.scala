@@ -43,7 +43,7 @@ class GeneralData(m: Member) extends Data(m):
   extension(x: Stream[Member]) private def _takeIfIn(s:Stream[Member]): Stream[Member]= x.takeValuesBy(_.name.lowerNoOp, s.map(_.name.lowerNoOp))
   extension(x: Stream[Member]) private def _dropIfIn(s:Stream[Member]): Stream[Member]= x.dropValuesBy(_.name.lowerNoOp, s.map(_.name.lowerNoOp))
   extension(x: Member)         private def _isLocal                   : Boolean       = x.inheritedFrom.filterNot(_.dri.id.startsWith(owner.id + "._")).isEmpty
-  extension(x: Member)         private def _memberOpt                 : Opt[Member]   = x.signature.valStream.takeFirst(1).readOpt.takeType[Link].map(_.dri.id.moduleId)
+  extension(x: Member)         private def _memberOpt                 : Opt[Member]   = x.signature.~~.takeFirst(1).readOpt.takeType[Link].map(_.dri.id.moduleId)
                                                                                          .takeOnly(Id(owner.id.moduleId.real + "." + x.name.lowerNoOp))
                                                                                          .mapOpt(Registry.moduleOpt).map(_.main)
 object GeneralData:

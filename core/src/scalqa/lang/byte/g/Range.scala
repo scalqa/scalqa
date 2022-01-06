@@ -23,8 +23,8 @@ class Range[A<:Raw](_start: A, _size: Int) extends Val.Range[A] with Able.Size w
   /**/     def overlapOpt(r: Range[A])   : Opt[THIS_TYPE]  = OPS.overlapOpt(this,_start,endX,r.start,r.endX)
   /**/     def overlapOpt(r:Val.Range[A]): Opt[THIS_TYPE]  = OPS.ref(r,OPS.overlapOpt(this,_start,endX,_,_))
   // -----------------------------------------------------------------------------------------------------------------------------
+  inline   def ~~                        : Stream[A]       = stream
   /**/     def stream                    : Stream[A]       = Z.Stream_fromRange(_start.cast[Int],endX.cast[Int],1)
-  /**/     def streamStep(step: Int)     : Stream[A]       = Z.Stream_fromRange(_start.cast[Int],endX.cast[Int],step)
 
 object Range:
   extension[A<:Raw](inline x: Range[A])
@@ -43,5 +43,7 @@ ___________________________________________________________________________*/
 @class Range -> ### Byte Specialized Generic Range
 
   To be used with Byte based opaque values.
+
+@def ~~ -> Alias to "stream"
 
 */

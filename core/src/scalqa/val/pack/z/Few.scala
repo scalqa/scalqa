@@ -32,7 +32,7 @@ private[`val`] object Few:
     override def takeRange(f:Int,sz:Int)     : Pack[A]   = this.stream.takeRange(f <>= sz).pack
     override def dropRange(f:Int,sz:Int)     : Pack[A]   = this.stream.dropRange(f <>= sz).pack
     /**/     def pack                        : this.type = this
-    /**/     def toBuffer                    : Buffer[A] = new AnyRef.Buffer(this.stream)
+    /**/     def toBuffer                    : Buffer[A] = new AnyRef.G.Buffer(this.stream)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

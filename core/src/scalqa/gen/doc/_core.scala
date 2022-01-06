@@ -29,7 +29,7 @@ ___________________________________________________________________________*/
 /**
 @trait _core -> ### Non buffer methods
 
-    This is the full list of Doc methods, with the exception of ones inherited from [[AnyRef.Buffer]] and scala.Product
+    This is the full list of Doc methods, with the exception of ones inherited from [[AnyRef.G.Buffer]] and scala.Product
 
 @var id      -> Instance id    \n\n  Id used to identify the instance \n\n It usually includes class name and hash code
 @def tag     -> Generates tag  description \n\n  Tag  contains a single line Doc representation

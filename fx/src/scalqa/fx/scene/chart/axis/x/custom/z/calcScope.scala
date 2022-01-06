@@ -43,7 +43,7 @@ object calcScope:
       var maxReqTickGap = 0d
       var last = 0d
       count = 0;
-      (min <> max).streamStep(_ + unit).foreach(d => {
+      (min <> max).stepStream(_ + unit).foreach(d => {
         val sz = {
           val v = axis.setup.labelSize(axis.setup.label(axis.map.undo(d)), axis.real.getTickLabelRotation)
           if (axis.setup.side.isVertical) v.getHeight / 2 else v.getWidth / 2

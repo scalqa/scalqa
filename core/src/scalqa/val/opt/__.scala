@@ -28,6 +28,7 @@ object Opt extends z_ValOptDefailts:
     /**/  inline def filter( inline f: A => Boolean)             : Opt[A]     = x.take(f)
     /**/  inline def withFilter(inline f: A => Boolean)          : Opt[A]     = x.take(f)
     /**/  inline def collect[B](inline f: PartialFunction[A,B])  : Opt[B]     = opt.Z.collect(x,f)
+    /**/  inline def ~~                                          : Stream[A]  = opt.Z.stream(x)
     /**/  inline def stream                                      : Stream[A]  = opt.Z.stream(x)
     /**/  inline def get                                         : A          = opt.Z.get(x)
     /**/  inline def toScala                                     : Option[A]  = opt.Z.toScala(x)
@@ -37,7 +38,7 @@ object Opt extends z_ValOptDefailts:
     /**/  inline def mapOpt [B,OPT<:Any.Opt[B]](inline f: A=>OPT)(using inline o:Specialized.Opt[B,OPT],inline s:Specialized[B]): s.Opt  = opt.z.specialized.mapOpt(x,f)
     /**/  inline def flatMap[B,OPT<:Any.Opt[B]](inline f: A=>OPT)(using inline o:Specialized.Opt[B,OPT],inline s:Specialized[B]): s.Opt  = opt.z.specialized.mapOpt(x,f)
     /**/  inline def mix[B,C](inline o:Any.Opt[B],inline f:(A,B)=>C)                             (using inline s:Specialized[C]): s.Opt  = opt.z.specialized.mix(x,o,f)
-    /**/  inline def raw                                                               (using inline s:Specialized.Primitive[A]): s.Opt  = opt.z.specialized.raw(x)
+    /**/  inline def raw                                                              (using inline sp:Specialized.Primitive[A]): sp.Opt = opt.z.specialized.raw(x)
 
   object TYPE:
     opaque type DEF[+A] <: AnyRef.Opaque = AnyRef.Opaque
@@ -93,6 +94,8 @@ ___________________________________________________________________________*/
 @def stream ->  Stream
 
            Returns single value stream or empty stream, if option is void
+
+@def ~~ -> Alias to "stream"
 
 @def foldAs -> Convert or default
 

@@ -12,12 +12,12 @@ object joinAllAt:
       case _ : Specialized[A&Any.Long   ] => {val a=x.cast[Array[Long   ]]; long   .g.Buffer.z_ArrayJoinAllAt(a,i,v.cast[Stream[Long   ]],a.length).cast[s.Array] }
       case _ : Specialized[A&Any.Float  ] => {val a=x.cast[Array[Float  ]]; float  .g.Buffer.z_ArrayJoinAllAt(a,i,v.cast[Stream[Float  ]],a.length).cast[s.Array] }
       case _ : Specialized[A&Any.Double ] => {val a=x.cast[Array[Double ]]; double .g.Buffer.z_ArrayJoinAllAt(a,i,v.cast[Stream[Double ]],a.length).cast[s.Array] }
-      case _ : Specialized[A&AnyRef     ] => {val a=x.cast[Array[AnyRef ]]; anyref   .Buffer.z_ArrayJoinAllAt(a,i,v.cast[Stream[AnyRef ]],a.length).cast[s.Array] }
+      case _ : Specialized[A&AnyRef     ] => {val a=x.cast[Array[AnyRef ]]; anyref .g.Buffer.z_ArrayJoinAllAt(a,i,v.cast[Stream[AnyRef ]],a.length).cast[s.Array] }
       case _                              => any(x,i,v).cast[s.Array]
 
   def any[A](x: Array[A], i:Int, v: Stream[A]): Array[A] =
     x match
-       case x: Array[AnyRef]     => anyref   .Buffer.z_ArrayJoinAllAt(x,i,v,x.length)
+       case x: Array[AnyRef]     => anyref .g.Buffer.z_ArrayJoinAllAt(x,i,v,x.length)
        case x: Array[Int]        => int    .g.Buffer.z_ArrayJoinAllAt(x,i,v,x.length)
        case x: Array[Double]     => double .g.Buffer.z_ArrayJoinAllAt(x,i,v,x.length)
        case x: Array[Long]       => long   .g.Buffer.z_ArrayJoinAllAt(x,i,v,x.length)

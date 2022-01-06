@@ -21,7 +21,7 @@ transparent trait _Member:
 
     def deepDocs: Option[Comment] =
       var o = x.docs
-      if(o.isEmpty) x.origin.overrideOpt.mapOpt(_.overridenMembers.stream.readOpt).map(_.dri).mapOpt(Registry.memberOpt).mapOpt(_.members.valStream.findOpt(_.name == x.name)).forval(m => o = m.deepDocs)
+      if(o.isEmpty) x.origin.overrideOpt.mapOpt(_.overridenMembers.stream.readOpt).map(_.dri).mapOpt(Registry.memberOpt).mapOpt(_.members.~~.findOpt(_.name == x.name)).forval(m => o = m.deepDocs)
       o
 
     def extendsSignature: Signature = ScalaSignatureProvider.rawSignature(x, InlineSignatureBuilder()).asInstanceOf[InlineSignatureBuilder].names.reverse.scalqaSignature(x)

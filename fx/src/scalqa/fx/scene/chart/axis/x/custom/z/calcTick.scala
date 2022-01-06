@@ -13,7 +13,7 @@ object calcTick:
       if (unitCount > 2000)   System.err.println("Warning we tried to create " + unitCount + " major tick marks for Scale = " + r)
       else
         val v = if (r.unit.isWhole) Math.ceil(r.start) else r.start + r.unit
-        (v <>> r.end).streamStep(_ + r.unit).drop(l.stream contains _).foreach(l add _)
+        (v <>> r.end).stepStream(_ + r.unit).drop(l.stream contains _).foreach(l add _)
       l += r.end
       l
     }
@@ -24,8 +24,8 @@ object calcTick:
     val size = end - start
     val minorUnit = unit / (minorTickCount max 1)
     if (size / minorUnit > 10000) J.illegalState("Warning we tried to create more than 10000 minor tick marks: " + r)
-    Stream.void[Double] ++ { if (!unit.isWhole) VOID else ((Math.floor(start) + minorUnit <>> Math.ceil(start)).streamStep(_ + minorUnit).take(_ > start)) } ++
-                    Val.Range(unit.isWhole ? Math.ceil(start) or start, end, false).streamStep(_ + unit).flatMap(u => Val.Range(u + minorUnit, end min u + unit).streamStep(_ + minorUnit))
+    Stream.void[Double] ++ { if (!unit.isWhole) VOID else ((Math.floor(start) + minorUnit <>> Math.ceil(start)).stepStream(_ + minorUnit).take(_ > start)) } ++
+                    Val.Range(unit.isWhole ? Math.ceil(start) or start, end, false).stepStream(_ + unit).flatMap(u => Val.Range(u + minorUnit, end min u + unit).stepStream(_ + minorUnit))
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

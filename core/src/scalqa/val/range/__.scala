@@ -10,21 +10,21 @@ abstract class Range[A] extends gen.able.Contain[A] with gen.able.Empty:
   /**/     def join(v: Range[A])                            : THIS_TYPE
   /**/     def overlaps( r: Range[A])                       : Boolean
   /**/     def overlapOpt(r: Range[A])                      : Opt[THIS_TYPE]
-  /**/     def streamStep(f: A => A)                        : Stream[A]     = z.StepStream(this, f)
-  /**/     def streamStep(step: Int)(using Able.Sequence[A]): Stream[A]     = z.StepStream(this, step)
+  /**/     def stepStream(f: A => A)                        : Stream[A]     = z.StepStream(this, f)
   /**/     def contains(v: Range[A])                        : Boolean       = z.ops.contains(this,v)
   /**/     def contains(v: A)                               : Boolean       = z.ops.contains(this,v)
   /**/     def isEmpty                                      : Boolean       = z.ops.isEmpty(this)
   override def equals(v: Any)                               : Boolean       = v.isInstanceOf[Range[_]] && {val r=v.cast[Range[A]]; this.contains(r) && r.contains(this)}
-  inline   def raw(using inline s:Specialized.Primitive[A]) : s.Range       = z.raw(this)
+  inline   def raw(using inline sp:Specialized.Primitive[A]): sp.Range      = z.raw(this)
 
 object Range:
   def apply[A](start:A,end:A, endIn:Boolean=true)(using Ordering[A]): Range[A] = if(endIn) Z.EndInclsive(start,end)  else Z.EndExclusive(start,end)
   def singleValue[A](v:A,  endIn: Boolean = true)(using Ordering[A]): Range[A] = if(endIn) Z.SingleValueInclusive(v) else Z.SingleValueExclusive(v)
 
   extension[A](x: Range[A])
-    def stream         (using Able.Sequence[A]) : Stream[A]     = x match{ case v:Able.Stream[_] => v.cast[Able.Stream[A]].stream; case _ => x.streamStep(1) }
-    def convert[B](f:A=>B)(using s:Ordering[B]) : Range[B]      = Range(f(x.start),f(x.end),x.endIsIn)
+    inline def ~~     (using inline s:Able.Sequence[A]): Stream[A] = x.stream
+    /**/   def stream (using        s:Able.Sequence[A]): Stream[A] = x match{ case v:Able.Stream[_] => v.cast[Able.Stream[A]].stream; case _ => x.stepStream(v => s.step(v,1)) }
+    /**/   def convert[B](f:A=>B)(using o:Ordering[B]) : Range[B]  = Range(f(x.start),f(x.end),x.endIsIn)
 
   extension[A](inline x: Range[A])
     inline def withFilter(inline f: A => Boolean)(using inline s:Able.Sequence[A]): Stream[A] = x.stream.take(f)
@@ -54,6 +54,7 @@ ___________________________________________________________________________*/
 
       Note. Scala provided range structures (Range and NumericRange) are implemented more as collections and this class is designed to close this void focusing on generic range operations
 
+@def ~~ -> Alias to "stream"
 
 @def raw -> Primitive range
 
@@ -136,21 +137,13 @@ ___________________________________________________________________________*/
       'A' <> 'C' extendTo 'B' // Returns: A <> C
     ```
 
-@def streamStep -> Mapped stream
+@def stepStream -> Stream of steps
 
     Returns a stream containing the first range value and the result of applying given function to this value and the produced results.
     The stream ends when the function result is no longer within range.
 
     ```
-      (1 <> 10).streamStep( _ + 3).TP  // Prints: Stream(1, 4, 7, 10)
-    ```
-
-@def streamStep -> Stepped stream
-
-    For sequential types, the method returns a stream of values with given step.
-
-    ```
-      (1 <> 10).streamStep(2).TP  // Prints: Stream(1, 3, 5, 7, 9)
+      (1 <> 10).stepStream( _ + 3).TP  // Prints: Stream(1, 4, 7, 10)
     ```
 
 @def isEmpty -> Empty check

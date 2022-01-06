@@ -13,10 +13,10 @@ transparent trait _methods:
   // ***********************************************************************************************************
   private object PseudoCollection extends Val.Collection.Mutable[Style.PseudoClass]:
     val fxSet                                                   = real.getPseudoClassStates
-    def stream                      : Stream[Style.PseudoClass] = real.getPseudoClassStates.valStream.map(Style.PseudoClass.apply)
+    def stream                      : Stream[Style.PseudoClass] = real.getPseudoClassStates.~~.map(Style.PseudoClass.apply)
     def size                        : Int                       = fxSet.size
     def add(c: Style.PseudoClass)   : Unit                      = real.pseudoClassStateChanged(c.real, true)
-    def clear                       : Unit                      = fxSet.valStream.foreach(real.pseudoClassStateChanged(_, false))
+    def clear                       : Unit                      = fxSet.~~.foreach(real.pseudoClassStateChanged(_, false))
     def remove(c: Style.PseudoClass): Int                       = { real.pseudoClassStateChanged(c.real, false); 0 }
 
 /*___________________________________________________________________________

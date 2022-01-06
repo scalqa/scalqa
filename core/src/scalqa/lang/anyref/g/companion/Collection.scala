@@ -11,7 +11,7 @@ class Collection[A]:
 object Collection:
 
   class Mutable[A]:
-    def apply(initSize: Int = J.initSize): Val.Collection.Mutable[A] = new AnyRef.Buffer(initSize)
+    def apply(initSize: Int = J.initSize): Val.Collection.Mutable[A] = new AnyRef.G.Buffer(initSize)
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -6,7 +6,8 @@ trait Stream[+A]:
 object Stream:
 
   extension [A](inline x: able.Stream[A])
-     inline def pack(using inline s:Specialized[A]): s.Pack  = `val`.pack.z.StreamAble(x)
+    inline def ~~                                 : Val.Stream[A] = x.stream
+    inline def pack(using inline s:Specialized[A]): s.Pack        = `val`.pack.z.StreamAble(x)
 
 
 /*___________________________________________________________________________
@@ -21,5 +22,9 @@ ___________________________________________________________________________*/
 @def stream -> Stream elements
 
    Returns stream of all alements
+
+@def ~~ -> Shortcut to .stream method
+
+   Call is inlined and is equivalent to calling method "stream" itself.
 
 */

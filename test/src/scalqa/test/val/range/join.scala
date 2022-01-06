@@ -26,14 +26,14 @@ object join extends J.Test:
     1L <> 8L join 3L <> 5L,
     5L <> 8L join 1L <> 3L)
 
-  implicit def toStream(v: Float.Range): Stream[Float] = v.streamStep(_ + 1)
+  implicit def toStream(v: Float.Range): Stream[Float] = v.stepStream(_ + 1)
   testEqualStream("Float")(
     3F <> 5F join 1F join 8F,
     3F <> 5F join 1F <> 8F,
     1F <> 8F join 3F <> 5F,
     5F <> 8F join 1F <> 3F)
 
-  implicit def toStream(v: Range[String]): Stream[String] = v.streamStep(v => (v.toInt + 1).toString)
+  implicit def toStream(v: Range[String]): Stream[String] = v.stepStream(v => (v.toInt + 1).toString)
   testEqualStream("String")(
     "3" <> "5" join "1" join "8",
     "3" <> "5" join "1" <> "8"  ,

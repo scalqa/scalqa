@@ -11,7 +11,7 @@ abstract class Table[ROW] extends Control with _properties[ROW] with _Column[ROW
   def columns                         : Idx[Table.Column[ROW,_,_]] = columnData
   def rows                            : Idx.OM[ROW]                = rowData
   lazy val selection                  : Fx.Selection[ROW]          = Fx.Selection[ROW](rows, real.getSelectionModel)
-  def sortOrder                       : Pack[Column[_]]            = real.getSortOrder.valStream.map(_.getUserData.cast[Column[_]]).pack
+  def sortOrder                       : Pack[Column[_]]            = real.getSortOrder.~~.map(_.getUserData.cast[Column[_]]).pack
   def sortOrder_=(a:Stream[Column[_]]): Unit                       = real.getSortOrder.setAll(a.map(_.real).toJavaList)
   def scrollTo(i: Int)                : Unit                       = real.scrollTo(i)
 

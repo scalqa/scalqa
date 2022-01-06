@@ -18,7 +18,6 @@ class Range[A<:Raw](_start: A, _end: A, endIn: Boolean) extends Val.Range[A] wit
   /**/     def overlaps(r: Val.Range[A]) : Boolean         = OPS.ref(r,OPS.overlaps(_start,_end,endIn)(_,_,_))
   /**/     def overlapOpt(r: Range[A])   : Opt[THIS_TYPE]  = OPS.overlapOpt(this,_start,_end,endIn)(r.start,r.end,r.endIsIn)
   /**/     def overlapOpt(r:Val.Range[A]): Opt[THIS_TYPE]  = OPS.ref(r,OPS.overlapOpt(this,_start,_end,endIn)(_,_,_))
-  /**/     def streamStep(step: A)       : Stream[A]       = Z.Stream_fromRange(this,step.real)
 
 object Range
 

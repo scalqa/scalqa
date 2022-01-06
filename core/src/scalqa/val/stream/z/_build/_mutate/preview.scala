@@ -13,10 +13,10 @@ class preview[A](src: Stream[A]) extends z.x.Pipe[A](src) with Stream.Preview[A]
   // ---------------------------------------------------------------------------------------------------------------------------
   /**/     def readOpt                      : Opt[A]                = if (!stack.isEmpty) stack.pop else src.readOpt
   /**/     def sizeOpt                      : Int.Opt               = src.sizeOpt.map(_ + stack.size)
-  /**/     def previewStream(cnt: Int)      : Stream[A] & Able.Size = if (load(cnt) == 0) EMPTY else stack.valStream.readStream(cnt)
+  /**/     def previewStream(cnt: Int)      : Stream[A] & Able.Size = if (load(cnt) == 0) EMPTY else stack.~~.readStream(cnt)
   /**/     def previewOpt                   : Opt[A]                = (load(1) > 0) ? stack.peek
   /**/     def preview                      : A                     = previewOpt.get
-  /**/     def readWhileStream(f:A=>Boolean): Stream[A] & Able.Size = stack.valStream.findPositionOpt(!f(_)).map(i => (0 <>> i).stream.map(_ => stack.pop).load) or new readWhile_Stream(f)
+  /**/     def readWhileStream(f:A=>Boolean): Stream[A] & Able.Size = stack.~~.findPositionOpt(!f(_)).map(i => (0 <>> i).stream.map(_ => stack.pop).load) or new readWhile_Stream(f)
 
   // **********************************************************************************************************
   private class readWhile_Stream(f: A => Boolean) extends z.x.Pipe[A](src) with Able.Size:

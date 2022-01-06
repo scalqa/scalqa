@@ -20,7 +20,7 @@ class Observable[A](val real: Idx.O[A]) extends Base[A]:
       catch
       case t: Throwable =>
         System.err.println(fxChange.self.doc.text.indent("FxListChange"))
-        System.err.println(Observable.this.valStream.zipIndex.toText.indent("Observable.List"))
+        System.err.println(Observable.this.~~.zipIndex.toText.indent("Observable.List"))
         throw t
 
 /*___________________________________________________________________________

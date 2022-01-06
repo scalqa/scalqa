@@ -36,7 +36,7 @@ ___________________________________________________________________________*/
 /**
 @type DEF  -> ### Self View Methods
 
-    Self view is another library available for all types, but it has to be activated by calling a universal ".^" or (".self") method on original value.
+    Self view is another library available for all types, but it has to be activated by calling a universal ".self" method on original value.
 
     For example:
     ```

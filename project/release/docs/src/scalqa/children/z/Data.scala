@@ -2,7 +2,7 @@ package scalqa; package children; package z; import language.implicitConversions
 
 class Data(val owner: Member):
 
-  val all: Pack[Member] = owner.members.valStream.drop(m => Docs.isHiddenName(owner,m.name)).pack
+  val all: Pack[Member] = owner.members.~~.drop(m => Docs.isHiddenName(owner,m.name)).pack
 
   var members,
       aliases,

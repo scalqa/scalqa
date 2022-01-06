@@ -28,7 +28,7 @@ ___________________________________________________________________________*/
 
     ```
 
-        val s: Double.Stream = (1.0 <> 5.0).streamStep(1)
+        val s: Double.Stream = (1.0 <> 5.0).stepStream(_ + 1)
 
         val o: Double.Opt    = s.readRawOpt  // Holds Double.Opt(1.0)
 

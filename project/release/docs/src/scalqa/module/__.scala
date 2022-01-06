@@ -10,8 +10,8 @@ class Module (val typOpt : Opt[Member], val valOpt : Opt[Member]):
   def dri2               : DRI     = valOpt.map(_.dri) or typOpt.get.dri
   override def toString  : String  = "Module("+typOpt.map(_.tag) + ", " + valOpt.map(_.tag) + ")"
   def children: Pack[Module] = (Val.Stream.void[Module]
-                               .joinAll(valOpt.stream.flatMap(_.children.members.valStream.mapOpt(_.dri.moduleOpt)))
-                               .joinAll(typOpt.stream.flatMap(_.children.members.valStream.mapOpt(_.dri.moduleOpt).peek(_.inner=true)))
+                               .joinAll(valOpt.stream.flatMap(_.children.members.~~.mapOpt(_.dri.moduleOpt)))
+                               .joinAll(typOpt.stream.flatMap(_.children.members.~~.mapOpt(_.dri.moduleOpt).peek(_.inner=true)))
                                .toLookupBy(_.main.id.moduleId).stream.sort(using if(name=="scalqa") Sorting.root else if(name=="Lang") Sorting.lang else Sorting.byName)
                               ).drop(_.dri.isPrivate).pack
 object Module:
@@ -27,7 +27,7 @@ object Module:
   class Both private(v1: Member,v2: Member) extends Module(v1,v2)
   object Both:
     def apply(v1: Member,v2: Member): Both = if(!v1.dri.isTypeDef) new Both(v1,v2) else
-      val t = v1.members.valStream.find(_.name == "DEF")
+      val t = v1.members.~~.find(_.name == "DEF")
       val m = t.copy(name=v2.name,dri=v1.dri,members=v2.members)
       Registry.update(m)
       new Both(m,v2)

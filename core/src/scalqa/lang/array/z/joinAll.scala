@@ -12,12 +12,12 @@ object joinAll:
       case _ : Specialized[A&Any.Long   ] => long   .g.Buffer.z_ArrayJoinAll(x.cast[Array[Long   ]],v.cast[Stream[Long   ]]).cast[s.Array]
       case _ : Specialized[A&Any.Float  ] => float  .g.Buffer.z_ArrayJoinAll(x.cast[Array[Float  ]],v.cast[Stream[Float  ]]).cast[s.Array]
       case _ : Specialized[A&Any.Double ] => double .g.Buffer.z_ArrayJoinAll(x.cast[Array[Double ]],v.cast[Stream[Double ]]).cast[s.Array]
-      case _ : Specialized[A&AnyRef     ] => anyref   .Buffer.z_ArrayJoinAll(x.cast[Array[AnyRef ]],v.cast[Stream[AnyRef ]]).cast[s.Array]
+      case _ : Specialized[A&AnyRef     ] => anyref .g.Buffer.z_ArrayJoinAll(x.cast[Array[AnyRef ]],v.cast[Stream[AnyRef ]]).cast[s.Array]
       case _                              => any(x,v).cast[s.Array]
 
   def any[A](x: Array[A], v: Stream[A]): Array[A] =
     x match
-       case x: Array[AnyRef]     => anyref   .Buffer.z_ArrayJoinAll(x,v)
+       case x: Array[AnyRef]     => anyref .g.Buffer.z_ArrayJoinAll(x,v)
        case x: Array[Int]        => int    .g.Buffer.z_ArrayJoinAll(x,v)
        case x: Array[Double]     => double .g.Buffer.z_ArrayJoinAll(x,v)
        case x: Array[Long]       => long   .g.Buffer.z_ArrayJoinAll(x,v)

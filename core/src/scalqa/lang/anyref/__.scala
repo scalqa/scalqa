@@ -3,7 +3,6 @@ package scalqa; package lang; import language.implicitConversions
 object AnyRef:
 
   // Members ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  type Buffer[A]     = anyref.Buffer[A];       transparent inline def Buffer     = anyref.Buffer
   /**/                                         transparent inline def G          = anyref.G
   type Opaque        = anyref.Opaque.TYPE.DEF; transparent inline def Opaque     = anyref.Opaque;
 

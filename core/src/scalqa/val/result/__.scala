@@ -23,6 +23,7 @@ object Result:
     /**/  inline def valueOpt                                         : Opt[A]       = {val r=x; if(r.isValue)   r.cast[A]       else VOID }
     /**/  inline def problemOpt                                       : Opt[Problem] = {val r=x; if(r.isProblem) r.cast[Problem] else VOID }
     /**/  inline def stream                                           : Stream[A]    = result.Z.stream(x)
+    /**/  inline def ~~                                               : Stream[A]    = result.Z.stream(x)
     /**/  inline def toTry                                            : util.Try[A]  = result.Z.toTry(x)
     /**/  inline def map[B](      inline f: A => B)                   : Result[B]    = {var r=x.cast[Result[B]]; if(r.isValue)  { val v=r.cast[A]; r=f(v)       }; r}
     /**/  inline def mapResult[B](inline f: A => Result[B])           : Result[B]    = {var r=x.cast[Result[B]]; if(r.isValue)  { val v=r.cast[A]; r=f(v)       }; r}
@@ -73,6 +74,8 @@ ___________________________________________________________________________*/
 @def stream ->  Stream
 
      Returns single value stream or empty stream, if there is a problem
+
+@def ~~ -> Alias to "stream"
 
 @def forval -> Process value
 

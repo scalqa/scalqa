@@ -38,15 +38,15 @@ object transform:
 
   inline def toBuffer[A](inline x:Stream[A])(using inline s:Specialized[A]): s.Buffer =
     inline s match
-      case _ : Specialized[A & Any.Boolean] => new Boolean.Buffer(x.cast[Stream[Boolean]]).cast[s.Buffer]
-      case _ : Specialized[A & Any.Byte   ] => new Byte   .Buffer(x.cast[Stream[Byte   ]]).cast[s.Buffer]
-      case _ : Specialized[A & Any.Char   ] => new Char   .Buffer(x.cast[Stream[Char   ]]).cast[s.Buffer]
-      case _ : Specialized[A & Any.Short  ] => new Short  .Buffer(x.cast[Stream[Short  ]]).cast[s.Buffer]
-      case _ : Specialized[A & Any.Int    ] => new Int    .Buffer(x.cast[Stream[Int    ]]).cast[s.Buffer]
-      case _ : Specialized[A & Any.Long   ] => new Long   .Buffer(x.cast[Stream[Long   ]]).cast[s.Buffer]
-      case _ : Specialized[A & Any.Float  ] => new Float  .Buffer(x.cast[Stream[Float  ]]).cast[s.Buffer]
-      case _ : Specialized[A & Any.Double ] => new Double .Buffer(x.cast[Stream[Double ]]).cast[s.Buffer]
-      case _                                => new AnyRef .Buffer[A](x).cast[s.Buffer]
+      case _ : Specialized[A & Any.Boolean] => new Boolean .Buffer(x.cast[Stream[Boolean]]).cast[s.Buffer]
+      case _ : Specialized[A & Any.Byte   ] => new Byte    .Buffer(x.cast[Stream[Byte   ]]).cast[s.Buffer]
+      case _ : Specialized[A & Any.Char   ] => new Char    .Buffer(x.cast[Stream[Char   ]]).cast[s.Buffer]
+      case _ : Specialized[A & Any.Short  ] => new Short   .Buffer(x.cast[Stream[Short  ]]).cast[s.Buffer]
+      case _ : Specialized[A & Any.Int    ] => new Int     .Buffer(x.cast[Stream[Int    ]]).cast[s.Buffer]
+      case _ : Specialized[A & Any.Long   ] => new Long    .Buffer(x.cast[Stream[Long   ]]).cast[s.Buffer]
+      case _ : Specialized[A & Any.Float  ] => new Float   .Buffer(x.cast[Stream[Float  ]]).cast[s.Buffer]
+      case _ : Specialized[A & Any.Double ] => new Double  .Buffer(x.cast[Stream[Double ]]).cast[s.Buffer]
+      case _                                => new AnyRef.G.Buffer[A](x).cast[s.Buffer]
 
 
 /*___________________________________________________________________________

@@ -12,7 +12,7 @@ object toArray:
       case _ : Specialized[A&Any.Long   ] => x.cast[Stream[Long   ]].raw.toArray.cast[s.Array]
       case _ : Specialized[A&Any.Float  ] => x.cast[Stream[Float  ]].raw.toArray.cast[s.Array]
       case _ : Specialized[A&Any.Double ] => x.cast[Stream[Double ]].raw.toArray.cast[s.Array]
-      case _                              => AnyRef.Buffer.z_StreamToArray(x).cast[s.Array]
+      case _                              => AnyRef.G.Buffer.z_StreamToArray(x).cast[s.Array]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

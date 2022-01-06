@@ -6,7 +6,7 @@ transparent trait Containers[A]:
   type Stream         = Val.Stream[A];              def Stream     = GC.Z.Stream    .cast[GC.Stream[A]];
   type Range          = Val.Range[A];               def Range      = GC.Z.Range     .cast[GC.Range[A]];
   type Pack           = Val.Pack[A];                def Pack       = GC.Z.Pack      .cast[GC.Pack[A]]
-  type Buffer         = AnyRef.Buffer[A]
+  type Buffer         = AnyRef.G.Buffer[A]
   type Collection     = Val.Collection[A];          val Collection = GC.Z.Collection.cast[GC.Collection[A]]
   type Idx            = Val.Idx[A];                 val Idx        = GC.Z.Idx       .cast[GC.Idx[A]]
   type Lookup[B]      = Val.Lookup[A,B];            val Lookup     = GC.Z.Lookup    .cast[GC.Lookup[A]]

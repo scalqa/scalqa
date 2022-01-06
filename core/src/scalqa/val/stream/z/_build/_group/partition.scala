@@ -11,7 +11,7 @@ class partition[A](x: Stream[A], p: A => Boolean, seq: Seq[A=>Boolean]) extends 
       Stream(one.stream,two.stream)
     else
       val pa = new Array[A =>Boolean](cnt).self(a =>{a(0)=p; for(i <- 1 <>> cnt) a(i) = seq(i-1) })
-      val ra = new Array[Buffer[A]](cnt+1).self(a => for(i <- 0 <> cnt) a(i) = new AnyRef.Buffer[A](init))
+      val ra = new Array[Buffer[A]](cnt+1).self(a => for(i <- 0 <> cnt) a(i) = new AnyRef.G.Buffer[A](init))
 
       x.FOREACH(v => {
         var i = 0

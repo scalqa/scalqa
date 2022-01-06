@@ -12,12 +12,6 @@ object StepStream:
       case i if i > 0 => new StepStream[A](r, if (r.endIsIn) r.end else step(r.end), step)
       case _          => J.illegalArgument("Invalid step")
 
-  def apply[A](r: Range[A], step: Int)(using q: Able.Sequence[A]): Stream[A] =
-    step.sign match
-      case 1  => new StepStream[A](r, r.start, q.step(_, step))
-      case -1 => new StepStream[A](r, if (r.endIsIn) r.end else q.step(r.end, -1), q.step(_, step))
-      case _  => J.illegalArgument("Invalid step: " + step)
-
 /*___________________________________________________________________________
     __________ ____   __   ______  ____
    /  __/ ___// _  | / /  / __  / / _  |             Scala Quick API
