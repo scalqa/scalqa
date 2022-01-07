@@ -42,17 +42,18 @@ object Range:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@class Range -> ### <> is Value Range
+@class Range -> ### Value Range
 
-      <> is defined with the following defs:
+      Range is logically defined with the following defs:
 
           - `start`
           - `end`,
           - and `ordering`, which makes the above meaningful
 
-      <> has a notion that an element can be within the range, i.e. between start and end, or outside
+      Range has a notion that an element can be within the range, i.e. between start and end, or outside
 
-      Note. Scala provided range structures (Range and NumericRange) are implemented more as collections and this class is designed to close this void focusing on generic range operations
+      Note. Scala provided range structures (scala.collection.immutable.Range and scala.collection.immutable.NumericRange)
+            are implemented more as collections and this class is designed to close this void focusing on basic range features.
 
 @def ~~ -> Alias to "stream"
 
@@ -137,9 +138,10 @@ ___________________________________________________________________________*/
       'A' <> 'C' extendTo 'B' // Returns: A <> C
     ```
 
-@def stepStream -> Stream of steps
+@def stepStream -> Stream of calculated values
 
-    Returns a stream containing the first range value and the result of applying given function to this value and the produced results.
+    Returns a stream starting with the first range value.
+    Every next value is calculated by applying the given function to the prior value.
     The stream ends when the function result is no longer within range.
 
     ```
