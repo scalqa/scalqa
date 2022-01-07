@@ -40,11 +40,11 @@ class GeneralData(m: Member) extends Data(m):
   // ---------------------------------------------------------------------------------------------------------------------------------------------------
   extension(x: String)         private def _propertyName              : String        = if(x.endsWith("_=")) x.dropLast(2) + "Pro" else x + "Pro"
   extension(x: String)         private def _isAliasName               : Boolean       = x.charAt(0).isUpper && (x.length==1 || x.charAt(1).isLower)
-  extension(x: Stream[Member]) private def _takeIfIn(s:Stream[Member]): Stream[Member]= x.takeValuesBy(_.name.lowerNoOp, s.map(_.name.lowerNoOp))
-  extension(x: Stream[Member]) private def _dropIfIn(s:Stream[Member]): Stream[Member]= x.dropValuesBy(_.name.lowerNoOp, s.map(_.name.lowerNoOp))
+  extension(x: Stream[Member]) private def _takeIfIn(s:Stream[Member]): Stream[Member]= x.takeValuesBy(_.name.lower, s.map(_.name.lower))
+  extension(x: Stream[Member]) private def _dropIfIn(s:Stream[Member]): Stream[Member]= x.dropValuesBy(_.name.lower, s.map(_.name.lower))
   extension(x: Member)         private def _isLocal                   : Boolean       = x.inheritedFrom.filterNot(_.dri.id.startsWith(owner.id + "._")).isEmpty
   extension(x: Member)         private def _memberOpt                 : Opt[Member]   = x.signature.~~.takeFirst(1).readOpt.takeType[Link].map(_.dri.id.moduleId)
-                                                                                         .takeOnly(Id(owner.id.moduleId.real + "." + x.name.lowerNoOp))
+                                                                                         .takeOnly(Id(owner.id.moduleId.real + "." + x.name.lower))
                                                                                          .mapOpt(Registry.moduleOpt).map(_.main)
 object GeneralData:
   val ContainerNames = Pack("Stream","Range","Pack","Buffer","Collection","Idx","Lookup","Opt","Pro","Promise","Result","Set","Fun","Array")

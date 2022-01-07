@@ -6,8 +6,8 @@ trait _Signature:
 
   extension (x: Member)
     private def isStreamExt: Boolean = {val l=x.dri.location;  l.startsWith("scalqa.val.stream") && !l.endsWith("$") && (l.startsWith("scalqa.val.stream._build") | l.startsWith("scalqa.val.stream._Build") | l.startsWith("scalqa.val.stream._use") | l.startsWith("scalqa.val.stream._Use"))}
-    private def thisOpaque : String | Link = x.parent.?.drop(_.name.startsWith("_")).map(v => Link(v.label,v.dri)) or "THIS_OPAQUE"
-    private def thisReal   : String        = Registry.memberOpt(Id(x.dri.copy(anchor=""))).drop(_.name=="_methods").mapOpt(_.extendsSignature.stream.map(_.label).dropWhile(!_.contains("AnyRef.Opaque")).dropFirst(4).readOpt) or "THIS_REAL"
+    private def thisReal   : String  = Registry.memberOpt(Id(x.dri.copy(anchor=""))).drop(_.name=="_methods").mapOpt(_.extendsSignature.stream.map(_.label).dropWhile(!_.contains("AnyRef.Opaque")).dropFirst(4).readOpt) or "THIS_REAL"
+    private def parentOr(s:String): String | Link = x.parentOpt.drop(_.name.startsWith("_")).map(v => Link(v.label,v.dri)) or s
 
   extension (x: Signature)
     def tag : String = x.stream.map(_.label).makeString("")
@@ -28,25 +28,27 @@ trait _Signature:
         s = specialized(m,s)
         if(m.kind.isExtension && ( m.isStreamExt || m.dri.location.self.map(l=> l.endsWith(".Opt$") || l.endsWith(".Result$") || l.endsWith(".array._methods")))) s = StandardExtensions(m,s)
 
-//        if(m.name == "real" && m.dri.tag.contains("File"))
+//        if(/**m.name == "real" &&*/ m.dri.tag.contains("DayTime"))
 //          ">>>****************************************************************** " + m.dri.tag tp()
 //          m.dri.tp
 //          s.stream.print
 
       s.map{
-        case v: String if v=="THIS_OPAQUE"       => m.thisOpaque
-        case v: String if v=="THIS_REAL"         => m.thisReal
-        case v: String                           => v
-        case l: Link  =>
-          if(!l.dri.location.startsWith("scalqa")) l.dri.tag.simpleName().self.mapIf(v => m.name.startsWith(v), _ => l.dri.tag)
-          else l.name match
-            case "THIS_OPAQUE"                                => m.thisOpaque
+        case v: String =>
+          v match
+            case "BASE_TYPE" | "THIS_OPAQUE"                  => m.parentOr(v)
+            case "THIS_REAL"                                  => m.thisReal
+            case _                                            => v
+        case l: Link if(!l.dri.location.startsWith("scalqa")) => l.dri.tag.simpleName().self.mapIf(v => m.name.startsWith(v), _ => l.dri.tag)
+        case l: Link =>
+          l.name match
+            case "BASE_TYPE" | "THIS_OPAQUE"                  => m.parentOr(l.name)
             case "Ordering"                                   => l.copy(dri=Registry.memberOpt(Id("scalqa.gen.math.ordering")).get.dri)
-            case n if n.length==1 && n.notIn("J","O","M","~") => n
+            case n if n.length==1 && n.notIn("J","O","M")     => n
             case _                                            =>
               l.copy(
                 name= l.dri.label()
-                      .self.mapIf(v => m.name.withOp.startsWith(v), _ => l.dri.label(false))
+                      .self.mapIf(v => m.name.startsWith(v), _ => l.dri.label(false))
                       .self.mapIf(_ => m.name.notIn("M","O","OM") && !l.dri.location.contains("Event"),_.replace("Observable","O").replace("Mutable","M"))
               ).self.map(l => l.lookupAnchorOpt or l)
       }

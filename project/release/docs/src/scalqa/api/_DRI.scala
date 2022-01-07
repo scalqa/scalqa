@@ -18,7 +18,7 @@ trait _DRI:
       if(!x.location.startsWith("scalqa.")) return tg.simpleName(brief)
       var v = if(tg.startsWith("scalqa.")) tg.dropFirst(7) else tg
 
-      v = v.splitStream('.','$').dropVoid.map(_.docLabel.withOp).makeString(".")
+      v = v.splitStream('.','$').dropVoid.map(_.docLabel).makeString(".")
 
       if(!x.anchor.isEmpty)
         var a = x.anchor.takeBefore("-")

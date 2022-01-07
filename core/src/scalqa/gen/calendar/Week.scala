@@ -10,13 +10,12 @@ object Week extends Int.Opaque.Data.Sequential[Week]("Calendar.Week"):
   implicit inline def implicitRequest(v:CURRENT): Week         = current
 
   extension (x: Week)
-    /**/          def index                     : Int          = x.real
-    /**/          def start                     : Time         = x.startDay.start
-    /**/          def startDay                  : Calendar.Day = Calendar.Day.fromIndex(x.real * 7)
-    /**/          def year                      : Year         = x.startDay.year
-    /**/          def month                     : Month        = x.startDay.month
-    /**/          def isCurrent                 : Boolean      = x == Calendar.Week.current
-    /**/          def period                    : Period       = Period(x.start, x.next.start)
+    def startDay   : Gen.Day     = Calendar.Day.fromIndex(x.real * 7 - 4)
+    def start      : Time        = x.startDay.start
+    def index      : Int         = x.real
+    def isCurrent  : Boolean     = x == Calendar.Week.current
+    def period     : Period      = Period(x.start, x.next.start)
+    def days       : Gen.Day.Idx = new Gen.Day.Idx{ private val sd=x.startDay; val size=7; def apply(i:Int)=sd+i }
 
   object TYPE:
     opaque type DEF <: Int.Opaque = Int.Opaque

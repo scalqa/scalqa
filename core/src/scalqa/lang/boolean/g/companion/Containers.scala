@@ -3,17 +3,17 @@ package scalqa; package lang; package boolean; package g; package companion; imp
 import anyref.g.{ companion as REF }
 import g.{ companion as RAW }
 
-transparent trait Containers[A<:Raw]:
-  type Stream       = g.Stream[A];        def Stream     = RAW.Z.Stream    .cast[RAW.Stream[A]]
-  type Opt          = G.Opt[A];           def Opt        = RAW.Z.Opt       .cast[RAW.Opt[A]]
-  type Buffer       = G.Buffer[A]
-  type Collection   = G.Collection[A];    val Collection = RAW.Z.Collection.cast[RAW.Collection[A]]
-  type Idx          = G.Idx[A];           val Idx        = RAW.Z.Idx       .cast[RAW.Idx[A]]
-  type Pack         = G.Pack[A];          def Pack       = RAW.Z.Pack      .cast[RAW.Pack[A]]
-  type Pro          = G.Pro[A];           val Pro        = RAW.Z.Pro       .cast[RAW.Pro[A]]
-  type Promise      = Val.Promise[A];     def Promise    = REF.Z.Promise   .cast[REF.Promise[A]]
-  type Result       = Val.Result[A];      def Result     = REF.Z.Result    .cast[REF.Result[A]]
-                                          val Fun        = RAW.Z.Fun       .cast[RAW.Fun[A]]
+transparent trait Containers[BASE_TYPE<:Raw]:
+  type Stream       = g.Stream[BASE_TYPE];        def Stream     = RAW.Z.Stream    .cast[RAW.Stream[BASE_TYPE]]
+  type Opt          = G.Opt[BASE_TYPE];           def Opt        = RAW.Z.Opt       .cast[RAW.Opt[BASE_TYPE]]
+  type Buffer       = G.Buffer[BASE_TYPE]
+  type Collection   = G.Collection[BASE_TYPE];    val Collection = RAW.Z.Collection.cast[RAW.Collection[BASE_TYPE]]
+  type Idx          = G.Idx[BASE_TYPE];           val Idx        = RAW.Z.Idx       .cast[RAW.Idx[BASE_TYPE]]
+  type Pack         = G.Pack[BASE_TYPE];          def Pack       = RAW.Z.Pack      .cast[RAW.Pack[BASE_TYPE]]
+  type Pro          = G.Pro[BASE_TYPE];           val Pro        = RAW.Z.Pro       .cast[RAW.Pro[BASE_TYPE]]
+  type Promise      = Val.Promise[BASE_TYPE];     def Promise    = REF.Z.Promise   .cast[REF.Promise[BASE_TYPE]]
+  type Result       = Val.Result[BASE_TYPE];      def Result     = REF.Z.Result    .cast[REF.Result[BASE_TYPE]]
+  /**/                                            val Fun        = RAW.Z.Fun       .cast[RAW.Fun[BASE_TYPE]]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

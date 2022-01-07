@@ -2,7 +2,7 @@ package scalqa; import module.*
 
 class Module (val typOpt : Opt[Member], val valOpt : Opt[Member]):
   val main               : Member  = typOpt or valOpt.get
-  val name               : String  = main.name.withOp.self.mapIf(_ == "TYPE", v => valOpt.map(_.name) or v)
+  val name               : String  = main.name.self.mapIf(_ == "TYPE", v => valOpt.map(_.name) or v)
   var inner              : Boolean = false
   def prefix             : String  = if(inner) "A" else "B"
   def label              : String  = {var l=name; val i=l.lastIndexOf("."); if(i>0) l.substring(i+1); if(inner) l = "#" + l; l}

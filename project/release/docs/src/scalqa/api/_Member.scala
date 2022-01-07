@@ -19,6 +19,8 @@ transparent trait _Member:
 
     def parent      : Member      = if(x.dri.anchor.nonEmpty) Registry.memberOpt(Id(x.dri.copy(anchor="")).moduleId) or J.illegalState("No member: "+x.dri.location)  else J.illegalState("No anchor")
 
+    def parentOpt   : Opt[Member] = if(x.dri.anchor.nonEmpty) Registry.memberOpt(Id(x.dri.copy(anchor="")).moduleId) else VOID
+
     def deepDocs: Option[Comment] =
       var o = x.docs
       if(o.isEmpty) x.origin.overrideOpt.mapOpt(_.overridenMembers.stream.readOpt).map(_.dri).mapOpt(Registry.memberOpt).mapOpt(_.members.~~.findOpt(_.name == x.name)).forval(m => o = m.deepDocs)

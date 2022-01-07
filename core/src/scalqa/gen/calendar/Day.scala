@@ -17,7 +17,7 @@ object Day extends Int.Opaque.Data.Sequential[Day]("Day"):
   extension (x: Day)
     /**/      inline def index                            : Int                   = x.real
     /**/             def number                           : Int                   = z.Day.setup(x).number
-    /**/             def week                             : Week                  = Week.fromIndex(x.real / 7)
+    /**/             def week                             : Week                  = Week.fromIndex((x.real + 4) / 7)
     /**/             def month                            : Month                 = z.Day.setup(x).month
     /**/             def year                             : Year                  = z.Day.setup(x).year
     /**/             def weekDay                          : Week.Day              = Week.Day(((Int.max - 5L + x.real) % 7).toInt)

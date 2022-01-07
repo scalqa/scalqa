@@ -9,9 +9,6 @@ trait _String:
       else if(x.length>1) x.takeFirst(1).toUpperCase + x.dropFirst(1)
       else x.toUpperCase
 
-    def lowerNoOp        : String = x match{case "~"=>"stream"; case  "VOID"=>"void";   case v => v.toLowerCase }
-    def withOp           : String = x match{case "VOID" =>  "VOID"; case _ => x }
-
     def simpleName(brief: Boolean = true): String =
       var v = x
       if(brief) v = v.d("Val.").d("Gen.").d("Lang.",5)
@@ -34,15 +31,14 @@ trait _String:
         .r("scala.Any","Any").r("scala.AnyRef","AnyRef").r("scala.Array" ,"Array")
         .r("scala.Boolean","Boolean").r("scala.Byte","Byte") .r("scala.Char","Char").r("scala.Short","Short").r("scala.Int","Int").r("scala.Long","Long").r("scala.Float","Float").r("scala.Double","Double")
 
-      v = v.withOp
-      if(v.startsWith("~."))                 v = "Val." + v
       if(v.endsWith(".DEF"))                 v = v.dropLast(4)
       else if(v.endsWith(".this.type"))      v = "this.type"
       else if(v.endsWith(".THIS_OPAQUE"))    v = "THIS_OPAQUE"
+      else if(v.endsWith(".BASE_TYPE"))      v = "BASE_TYPE"
       else if(v.endsWith(".REAL"))           v = "REAL"
-      else if(v.endsWith(".Containers.A"))   v = if(v.startsWith("AnyRef")) "String" else v.takeBefore(".")
+      //else if(v.endsWith(".Containers.A"))   v = if(v.startsWith("AnyRef")) "String" else v.takeBefore(".")
       else if(v.endsWith(".KEY"))            v = "KEY"
-      else if(v.endsWith(".A"))              v = "A"
+      //else if(v.endsWith(".A"))              v = "A"
 
       v.dropDuplicateEnd
 

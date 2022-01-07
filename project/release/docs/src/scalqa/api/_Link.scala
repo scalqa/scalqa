@@ -22,7 +22,7 @@ trait _Link:
           case _ => VOID
 
     def lookupOpt(location: String, ignore:Boolean=false): Opt[Link] =
-      val id = Id(location + "." +x.dri.anchor.takeBefore("-").lowerNoOp)
+      val id = Id(location + "." +x.dri.anchor.takeBefore("-").lower)
       Registry.memberOpt(id)
         .fornil{ if(!ignore) x.name+" No id: "+id +"       " + x.dri.location tp() }
         .map(m => Link(x.name, m.dri))

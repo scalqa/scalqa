@@ -2,19 +2,19 @@ package scalqa; package lang; package anyref; package g; package companion; impo
 
 import anyref.g.{ companion as GC }
 
-transparent trait Containers[A]:
-  type Stream         = Val.Stream[A];              def Stream     = GC.Z.Stream    .cast[GC.Stream[A]];
-  type Range          = Val.Range[A];               def Range      = GC.Z.Range     .cast[GC.Range[A]];
-  type Pack           = Val.Pack[A];                def Pack       = GC.Z.Pack      .cast[GC.Pack[A]]
-  type Buffer         = AnyRef.G.Buffer[A]
-  type Collection     = Val.Collection[A];          val Collection = GC.Z.Collection.cast[GC.Collection[A]]
-  type Idx            = Val.Idx[A];                 val Idx        = GC.Z.Idx       .cast[GC.Idx[A]]
-  type Lookup[B]      = Val.Lookup[A,B];            val Lookup     = GC.Z.Lookup    .cast[GC.Lookup[A]]
-  type Opt            = Val.Opt.TYPE.DEF[A];        def Opt        = GC.Z.Opt       .cast[GC.Opt[A]]
-  type Result         = Val.Result.TYPE.DEF[A];     def Result     = GC.Z.Result    .cast[GC.Result[A]]
-  type Pro            = Val.Pro[A];                 val Pro        = GC.Z.Pro       .cast[GC.Pro[A]]
-  type Promise        = Val.Promise[A];             def Promise    = GC.Z.Promise   .cast[GC.Promise[A]]
-  type Set            = Val.Set[A];                 def Set        = GC.Z.Set       .cast[GC.Set[A]]
+transparent trait Containers[BASE_TYPE]:
+  type Stream         = Val.Stream[BASE_TYPE];              def Stream     = GC.Z.Stream    .cast[GC.Stream[BASE_TYPE]];
+  type Range          = Val.Range[BASE_TYPE];               def Range      = GC.Z.Range     .cast[GC.Range[BASE_TYPE]];
+  type Pack           = Val.Pack[BASE_TYPE];                def Pack       = GC.Z.Pack      .cast[GC.Pack[BASE_TYPE]]
+  type Buffer         = AnyRef.G.Buffer[BASE_TYPE]
+  type Collection     = Val.Collection[BASE_TYPE];          val Collection = GC.Z.Collection.cast[GC.Collection[BASE_TYPE]]
+  type Idx            = Val.Idx[BASE_TYPE];                 val Idx        = GC.Z.Idx       .cast[GC.Idx[BASE_TYPE]]
+  type Lookup[B]      = Val.Lookup[BASE_TYPE,B];            val Lookup     = GC.Z.Lookup    .cast[GC.Lookup[BASE_TYPE]]
+  type Opt            = Val.Opt.TYPE.DEF[BASE_TYPE];        def Opt        = GC.Z.Opt       .cast[GC.Opt[BASE_TYPE]]
+  type Result         = Val.Result.TYPE.DEF[BASE_TYPE];     def Result     = GC.Z.Result    .cast[GC.Result[BASE_TYPE]]
+  type Pro            = Val.Pro[BASE_TYPE];                 val Pro        = GC.Z.Pro       .cast[GC.Pro[BASE_TYPE]]
+  type Promise        = Val.Promise[BASE_TYPE];             def Promise    = GC.Z.Promise   .cast[GC.Promise[BASE_TYPE]]
+  type Set            = Val.Set[BASE_TYPE];                 def Set        = GC.Z.Set       .cast[GC.Set[BASE_TYPE]]
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

@@ -19,7 +19,7 @@ object tupleOfFewMacro:
 class Stream_fromTuple[A](v: Product) extends Stream[A] with Able.Size:
   private         var i               = 0
   private         val sz              = v.productArity
-  def readOpt : Opt[A] = {var o:Opt[A]=VOID;if(i<sz){ o=v.productElement(i).cast[A]; i+=1}; o }
+  /**/            def readOpt: Opt[A] = {var o:Opt[A]=VOID;if(i<sz){ o=v.productElement(i).cast[A]; i+=1}; o }
   /**/            def size   : Int    = sz - i
 
 /*___________________________________________________________________________
