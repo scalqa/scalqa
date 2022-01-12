@@ -4,12 +4,14 @@ enum SortMode:
   case Void extends SortMode with Gen.Void
   case Direct, ProxyWithUnsorted, ProxyNoUnsorted
 
-  def isDirect            : Boolean = this == SortMode.Direct
-  def isProxyWithUnsorted : Boolean = this == SortMode.ProxyWithUnsorted
-  def isProxyNoUnsorted   : Boolean = this == SortMode.ProxyNoUnsorted
-  def isProxy             : Boolean = isProxyWithUnsorted || isProxyNoUnsorted
-
 object SortMode extends EnumCompanion[SortMode]:
+
+  extension (inline x: SortMode)
+    inline def isDirect            : Boolean = x == SortMode.Direct
+    inline def isProxyWithUnsorted : Boolean = x == SortMode.ProxyWithUnsorted
+    inline def isProxyNoUnsorted   : Boolean = x == SortMode.ProxyNoUnsorted
+    inline def isProxy             : Boolean = {val v=x; v.isProxyWithUnsorted || v.isProxyNoUnsorted}
+
   implicit inline def implicitFrom(v:VOID): SortMode = SortMode.Void
 
 /*___________________________________________________________________________

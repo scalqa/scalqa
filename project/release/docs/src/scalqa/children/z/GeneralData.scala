@@ -29,6 +29,9 @@ class GeneralData(m: Member) extends Data(m):
   this.implicits= all.stream.take(m => m.kind.isImplicit && m.name.startsWith("implicit")).pack
   this.givens   = all.stream.take(m => m.kind.isGiven && m.name.startsWith("given")).pack
 
+  if(m.kind.isEnum)
+    this.cases = all.stream.take(_.kind.name == "case").sort.pack
+
   aliases.stream.partition(_.name in GeneralData.ContainerNames).self(s => { this.containers=s.read.pack; this.aliases = s.read.pack })
 
   extensions = all.stream

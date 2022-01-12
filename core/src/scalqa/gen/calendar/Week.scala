@@ -24,17 +24,17 @@ object Week extends Int.Opaque.Data.Sequential[Week]("Calendar.Week"):
   enum Day:
     case Mon, Tue, Wed, Thu, Fri, Sat, Sun
 
-    def isWeekend = isSun || isSat
-    def isWorkday = !isWeekend
-    def isSun = this eq Day.Sun
-    def isMon = this eq Day.Mon
-    def isTue = this eq Day.Tue
-    def isWed = this eq Day.Wed
-    def isThu = this eq Day.Thu
-    def isFri = this eq Day.Fri
-    def isSat = this eq Day.Sat
-
-  object Day extends EnumCompanion[Day]
+  object Day extends EnumCompanion[Day]:
+    extension (inline x: Day)
+      inline def isWeekend = {val v=x; v.isSun || v.isSat}
+      inline def isWorkday = !x.isWeekend
+      inline def isSun = x eq Day.Sun
+      inline def isMon = x eq Day.Mon
+      inline def isTue = x eq Day.Tue
+      inline def isWed = x eq Day.Wed
+      inline def isThu = x eq Day.Thu
+      inline def isFri = x eq Day.Fri
+      inline def isSat = x eq Day.Sat
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

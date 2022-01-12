@@ -11,6 +11,7 @@ class Children private (val m: Member):
   def constructors : Seq[Member]                         = m.members.~~.take(_.kind.isConstructor).sort.toSeq
   def members      : Seq[Member]                         = data.members.toSeqView
   def aliases      : Seq[Member]                         = data.aliases.toSeqView
+  def cases        : Seq[Member]                         = data.cases.toSeqView
   def containers   : Seq[Member]                         = data.containers.toSeqView
   def types        : Seq[Member]                         = data.types.toSeqView
   def defs         : Seq[Member]                         = data.defs.toSeqView

@@ -299,6 +299,9 @@ class MemberRenderer(signatureRenderer: SignatureRenderer)(using DocContext) ext
       buildGroup("Alias", Seq(
         ("", GET.aliases)
       )),
+      buildGroup("Cases", Seq(
+        ("", GET.cases)
+      )),
       buildGroup("Def", Seq(
         ("Constructor", GET.constructors),
         (if(GET.constructors.isEmpty) "" else "Body", GET.defs)

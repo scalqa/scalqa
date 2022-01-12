@@ -8,12 +8,13 @@ class Data(val owner: Member):
       aliases,
       containers,
       types,
+      cases,
       defs,
       extended,
       exports,
       implicits,
       givens,
-      makers    : Pack[Member]=VOID
+      makers : Pack[Member]=VOID
 
   var extensions: Pack[(ExtensionTarget,List[Member])]=VOID
 

@@ -17,10 +17,12 @@ enum Pos(val real: JPos) extends Fx.JavaFx.Enum[JPos]:
   case BaselineCenter extends Pos(JPos.BASELINE_CENTER)
   case BaselineRight  extends Pos(JPos.BASELINE_RIGHT)
 
-  def vertical   : VPos = VPos(real.getVpos)
-  def horizontal : HPos = HPos(real.getHpos)
-
 object Pos extends Fx.JavaFx.Enum.Companion[Pos, JPos]:
+
+  extension (inline x: Pos)
+    inline def vertical   : VPos = VPos(x.real.getVpos)
+    inline def horizontal : HPos = HPos(x.real.getHpos)
+
   implicit inline def implicitFrom(v: VOID)  : Pos = Void
   implicit inline def implicitFrom(v: CENTER): Pos = Center
   implicit inline def implicitFrom(v: TOP)   : Pos = TopCenter

@@ -6,10 +6,11 @@ enum Mode(val real: JMode) extends Fx.JavaFx.Enum[JMode]:
   case Single   extends Mode(JMode.SINGLE)
   case Multiple extends Mode(JMode.MULTIPLE)
 
-  def isSingle   : Boolean = this == Mode.Single
-  def isMultiple : Boolean = this == Mode.Multiple
+object Mode extends Fx.JavaFx.Enum.Companion[Mode, JMode]:
 
-object Mode extends Fx.JavaFx.Enum.Companion[Mode, JMode]
+  extension (inline x: Mode)
+    inline def isSingle   : Boolean = x == Mode.Single
+    inline def isMultiple : Boolean = x == Mode.Multiple
 
 /*___________________________________________________________________________
     __________ ____   __   ______  ____

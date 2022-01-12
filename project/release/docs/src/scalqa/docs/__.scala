@@ -5,7 +5,7 @@ object Docs:
   def fail(v: Any): Nothing = throw new RuntimeException(""+v)
 
   def isHiddenName(owner: Member, name: String): Boolean =
-    name.startsWith("z_") || name.in("withFilter","toString","THIS_TYPE","THIS_OPAQUE") || name.startsWith("thenComparing")
+    name.startsWith("z_") || name.in("withFilter","toString","THIS_TYPE","THIS_OPAQUE") || name.startsWith("thenComparing") || name.startsWith("Mirrored")
       || { owner.name match
                       case "Doc"            => name.startsWith("product")
                       case "Opt"            => name in ("foreach", "flatMap")

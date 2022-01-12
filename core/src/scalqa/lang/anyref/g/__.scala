@@ -12,4 +12,10 @@ object G:
  __\  \/ /___/ __  |/ /__/ /_/ /_/ __  |   (c) 2021, Scalqa.org Inc
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
+/**
+@object G -> ### AnyRef Generic Container Implementations
 
+Generally containers in the [Val](../../Val$.html) framework by default handle AnyRef values, though some implementations are abstract.
+Thus, AnyRef.G provides missing container implementations and definitions relevant to AnyRef types.
+
+*/
