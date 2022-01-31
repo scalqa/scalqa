@@ -21,7 +21,7 @@ a collection is included in "for-comprehension" it is automatically converted to
 
 ```
 
-The usage is different from Scala is when one needs to yield the result as a collection,
+The usage is different from Scala, when one needs to yield the result as a collection,
 the [Stream](../../api/scalqa/val/Stream.html) has to be converted explicitly:  
   
 ```
@@ -59,9 +59,9 @@ Memory consumption clearly indicates unboxed processing.
 
 ## Perfect Int Loop
 
-[Int.Range](../../api/scalqa/lang/int/_methods.html) (range) is special.
+[Int.Range](../../api/scalqa/lang/int/_methods.html) is special.
 When used in simple "for-comprehension" with foreach logic, a direct Java for-loop is produced.
-Some [macro magic](https://github.com/scalqa/scalqa/blob/master/core/src/scalqa/lang/int/z/range/Macro.scala) is obviously involved.
+Some [macro magic](https://github.com/scalqa/scalqa/blob/master/core/src/scalqa/lang/int/z/range/foreachMacro.scala) is obviously involved.
 
 ```
     var a = new Array[Int](1000)

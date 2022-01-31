@@ -49,7 +49,7 @@ ___________________________________________________________________________*/
 
        s.sizeOpt.TP         // Prints Int.Opt(26)
 
-       s = s.take(_ > 10)  // static sizing is lost
+       s = s.take(_ > 10)   // static sizing is lost
 
        s.sizeOpt.TP         // Prints Int.Opt(VOID)
      ```
@@ -63,7 +63,7 @@ ___________________________________________________________________________*/
 
       s.sizeLongOpt.TP    // Prints Long.Opt(4294967296)
 
-      s = s.take(_ > 10) // static sizing is lost
+      s = s.take(_ > 10)  // static sizing is lost
 
       s.sizeLongOpt.TP    // Prints Long.Opt(VOID)
      ```

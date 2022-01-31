@@ -78,8 +78,6 @@ ___________________________________________________________________________*/
 
       Option is often used as Boolean, where ''Option'' with value is converted to 'true' and empty option is converted to 'false'
 
-      By Scalqa convention, method names, which return [[Opt]] type, are ended with 'Opt' instead of word 'Option'
-
       ```
       val l: Lookup[Int,String] = ?_?_?
 

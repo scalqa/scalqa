@@ -33,7 +33,7 @@ for any abstract source of values, making this abstract data compatible with the
 
 ## Data Processing
 
-Scalqa collections have few methods and are easy to understand, [Idx](../../api/scalqa/val/Idx.html) has just 4 core methods.
+Scalqa collections have few methods and are easy to understand, [Idx](../../api/scalqa/val/Idx.html) has just 3 core methods.
 This is possible because all data processing functionality is removed to [Stream](../../api/scalqa/val/Stream.html). 
 A collection can create a Stream of its elements and do all the manipulations required. If needed the Stream can be converted back 
 to a collection.

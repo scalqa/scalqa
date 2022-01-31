@@ -3,16 +3,17 @@ layout: doc-page
 title: Download and Setup
 ---
 
-A natural pre-requisite for Scalqa is the installed at least Scala 3.1.0 environment.
-If in doubt, take a look at project [Samples](https://github.com/scalqa/samples), which is SBT configured for Scala3 with Scalqa. 
+A natural pre-requisite for Scalqa is the installed Scala 3.1.0 or above.
+If in doubt, take a look at project [Samples](https://github.com/scalqa/samples/blob/master/build.sbt), 
+which is SBT configured for Scalqa. 
 
 ### Download
 
 SBT users should add following library dependency:
 
-libraryDependencies += "org.scalqa" % "scalqa_3" % "0.995"
+libraryDependencies += "org.scalqa" % "scalqa_3" % "1.0"
 
-Everyone else can download single JAR file from the [latest release](https://github.com/scalqa/scalqa/releases)
+Everyone else can download single JAR file from the [latest release](https://github.com/scalqa/scalqa/releases).
 
 Note. If GUI is to be used on JDK11 and above, the javaFx has to be provided manually. 
 Take a look at ["samplesFx" configuration](https://github.com/scalqa/samplesFx/blob/master/build.sbt). 

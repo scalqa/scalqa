@@ -13,6 +13,7 @@ object Collection:
   implicit       inline def implicitRequest[A](v:VOID)       : Collection[A]  = void[A]
 
   extension [A] (inline x: Collection[A])
+    inline def ~~                               : Stream[A]      = x.stream  // For documentation benefit, same extension is inherited
     inline def contains(inline v: A)            : Boolean        = Z.contains(x,v)
     inline def withFilter(inline f: A=>Boolean) : Stream[A]      = x.stream.take(f)
     inline def mapView[B](inline f: A => B)     : Collection[B]  = Z.ValueMap_View(x, f)
@@ -59,6 +60,10 @@ ___________________________________________________________________________*/
         // Output
         Stream(1, 3, 5, 7)
       ```
+
+@def ~~ -> Shortcut to .stream method
+
+   Call is inlined and is equivalent to calling method "stream" itself.
 
 @def void  -> Get void instance
 

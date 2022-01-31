@@ -91,7 +91,7 @@ The extension section is where custom Price methods are defined.
 ## Use
 
 The Price object already contains specialized collections. 
-To see what they are, look at [Float](../../api/scalqa/lang/Float$.html), the 'Alias' section contains same containers 
+To see what they are, look at [Float](../../api/scalqa/lang/Float$.html), the 'Containers' section has the same collections 
 (but parameterized for Float)
   
 Here are some usage examples:

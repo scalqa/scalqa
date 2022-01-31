@@ -46,7 +46,7 @@ ___________________________________________________________________________*/
 
    [[J.File]] is an opaque value, backed by java.io.File
 
-   [[J.File]] does not have direct constructors. To create [[File]] one needs to start with [[J.Path]]
+   [[J.File]] does not have direct constructors. To create [[File]] one needs to start with [[J.File.Path]]
 
 @def name -> Name
 

@@ -75,7 +75,7 @@ ___________________________________________________________________________*/
      Application classes and traits can have implicit conversions from General Request type to a local definition
      ([for example](https://github.com/scalqa/scalqa/blob/master/fx/src/scalqa/fx/base/Side.scala)).
 
-     Using general request singleton objects can make code more readable. There is no overhead, if conversions are inlined.
+     Using general request singleton objects can make code more readable. There is no overhead because conversions are inlined.
 
      ```
          Time.current.roundTo(1.Second)(using UP)

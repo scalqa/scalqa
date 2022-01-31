@@ -18,6 +18,6 @@ ___________________________________________________________________________*/
 /**
 @trait Proxy -> ### Standard Proxy Base
 
-  [[Proxy]] is the root of all proxy implementations.
+  [[Proxy]] is the root of all provided proxy implementations.  These are used be Scalqa itself and not be usefull for most users.
 
 */

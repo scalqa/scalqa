@@ -57,8 +57,6 @@ ___________________________________________________________________________*/
 
     Unlike [[scalqa.val.Opt Opt]], Result is never void, even if there is no value, then, there must be a problem.
 
-    By Scalqa convention, method names, which return [[Result]] type, are ended with 'Result' instead of word 'Result'
-
     ```
     val r1: Result[Int] = "123".toIntResult
 

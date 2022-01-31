@@ -55,12 +55,6 @@ ___________________________________________________________________________*/
         - [building stream pipeline](stream/_Build.html)
         - [using stream data](stream/_Use.html)
 
-      By Scalqa convention, method names, which return [[Stream]], are ended with 'Stream'
-
-      ```
-      "ABCD".charStream.TP  // Prints Stream(A, B, C, D)
-      ```
-
 @def fromIterator     -> Explicit constructor from Iterator     \n\n Note: There is also global implicit conversion from `Iterator` to `Stream`
 @def fromSpliterator  -> Constructor from Spliterator
 @def fromEnumeration  -> Constructor from Enumeration
