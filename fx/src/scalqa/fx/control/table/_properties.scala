@@ -5,14 +5,14 @@ transparent trait _properties[ROW]:
 
   /**/       def itemsPro                        : Pro.OM[Idx.OM[ROW]]            = rowData.itemsPro
   /**/       def items                           : Idx.OM[ROW]                    = itemsPro()
-  /**/       def items_=(l: Idx[ROW])            : Unit = itemsPro()               = Idx.OM.wrap(l)
+  /**/       def items_=(l: Idx[ROW])            : Unit = itemsPro()              = Idx.OM.wrap(l)
   /**/       def sortModePro                     : Pro.OM[SortMode]               = rowData.sortModePro
   /**/       def sortMode                        : SortMode                       = sortModePro()
   /**/       def sortMode_=(v: SortMode)         : Unit                           = sortModePro() = v
-  @fast lazy val orderingPro                     : Pro.OM[Ordering[ROW]]          // = Pro.OM.X.Basic[Ordering[ROW]](VOID)
+  @fast lazy val orderingPro                     : Pro.OM[Ordering[ROW]]          = Pro.OM.X.Basic[Ordering[ROW]](VOID)
   /**/       def ordering                        : Ordering[ROW]                  = self.orderingPro()
   /**/       def ordering_=(v: Ordering[ROW])    : Unit                           = self.orderingPro() = v
-  @fast lazy val sortingBasePro                  : Pro.OM[Ordering[ROW]]          // = Pro.OM.X.Basic[Ordering[ROW]](VOID)
+  @fast lazy val sortingBasePro                  : Pro.OM[Ordering[ROW]]          = Pro.OM.X.Basic[Ordering[ROW]](VOID)
   /**/       def sortingBase                     : Ordering[ROW]                  = self.sortingBasePro()
   /**/       def sortingBase_=(v: Ordering[ROW]) : Unit                           = self.sortingBasePro() = v
   /**/       def headerFooterPro                 : Pro.OM[(Pack[ROW], Pack[ROW])] = rowData.headerFooterPro
