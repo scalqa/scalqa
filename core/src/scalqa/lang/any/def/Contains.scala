@@ -41,7 +41,7 @@ object z_Contains:
 /_____/\____/_/  |_/____/\______/_/  |_|             github.com/scalqa
 ___________________________________________________________________________*/
 /**
-@trait Contains -> A given Any.Def.Contains instance for a specific type determines if universal method [[scalqa.lang.any._Methods in]] can be applied.
+@trait Contains -> A given Any.Def.Contains instance for a specific type determines if universal method "[[scalqa.lang.any._Methods in]]" can be applied.
 
     ```
       val range = 1 <> 10

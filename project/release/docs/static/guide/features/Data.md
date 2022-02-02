@@ -74,8 +74,8 @@ All the above operations are inlined and are as efficient, as if they were perfo
 ```
 inline   def apply(inline v: Float): Price  = v.toOpaque
 ```
-This is a standard constructor, which is inlined and does not have any overhead. The method `.toOpaque` is attached 
-to base type within Data definition scope. 
+This is a standard constructor, which is inlined and does not have any overhead. `v.toOpaque` is a zero cost method call, available on 
+base type within Data definition scope. 
 
 ```
 override def value_tag(v:Price)           : String =  "$"+v.roundTo(0.01.Dollars).toString
@@ -87,6 +87,11 @@ not overridden, the default behavior would convert Float toString.
 extension (x: Price)    
 ```
 The extension section is where custom Price methods are defined. 
+
+```
+ inline def discount(inline p: Percent): Price   = (x.real - p(x.real)).toOpaque
+```
+Calling method ".real" on a standard opaque value is a zero cost call, which returns base (in this case Float) value.
 
 ## Use
 

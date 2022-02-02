@@ -1,7 +1,7 @@
 package scalqa; package j; package file; import language.implicitConversions
 
 import java.nio.file.{ FileStore => REAL }
-import File.Store
+type Store = Store.TYPE.DEF
 
 object Store extends AnyRef.Opaque.Base[Store,REAL]("File.Store"):
   /**/     def apply(v: REAL)     : Store = v.toOpaque
