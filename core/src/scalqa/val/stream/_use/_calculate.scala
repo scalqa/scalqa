@@ -128,9 +128,9 @@ ___________________________________________________________________________*/
 
           val (first, second, third) = (1 <> 1000).stream.averageFew(v => v.toDouble, _ * 10.0, _ * 100.0)
 
-          first.TP     // Prints 5005
-          second.TP    // Prints 5005
-          third.TP     // Prints 5005
+          first.TP     // Prints 500.5
+          second.TP    // Prints 5005.0
+          third.TP     // Prints 50050.0
      ```
      Note: Averages areavailable for types providing given [[scalqa.val.stream.custom.Average Stream.Custom.Average]] implementations,
      which are by default Double, Float and opaque numerals based on Double and Float

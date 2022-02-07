@@ -22,7 +22,7 @@ class GeneralData(m: Member) extends Data(m):
 
   this.extended = DefValVar.stream.take(_.origin.isExtension).pack
 
-  this.defs     = DefValVar.stream._dropIfIn(aliases ++ extended).drop(_.name.startsWith("given")).drop(_.name.startsWith("implicit")).drop(v => DefValVar.stream.exists(_.name == v.name._propertyName)).pack
+  this.defs     = DefValVar.stream.drop(_.origin.isExtension)._dropIfIn(aliases).drop(_.name.startsWith("given")).drop(_.name.startsWith("implicit")).drop(v => DefValVar.stream.exists(_.name == v.name._propertyName)).pack
 
   this.exports  = all.stream.take(_.kind.isExported).sort.pack
 

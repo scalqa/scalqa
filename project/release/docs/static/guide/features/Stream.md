@@ -16,7 +16,7 @@ Let's consider [Buffer](../../api/scalqa/val/Buffer.html) method `++=` (alias fo
 which takes [Stream](../../api/scalqa/val/Stream.html) as an input. The following example is a valid code:
 
 ```
-val buf: Buffer[Int] = Buffer()
+val buf: Buffer[Int] = NEW
 
 buf ++= (1 <> 100) ++= idx ++= array ++= scalaSeq ++= scalaVector ++= javaList ++= javaIterator
 
