@@ -5,7 +5,7 @@ title: For-Comprehensions
 
 All containers fully support Scala language ["for-comprehensions"](https://docs.scala-lang.org/tour/for-comprehensions.html) notation.
 There is one twist though, which must be kept in mind. Collections delegate functional processing to the
-[Stream](../../api/scalqa/val/Stream.html) (stream), thus whenever
+[Stream](../../api/scalqa/val/Stream.html), thus whenever
 a collection is included in "for-comprehension" it is automatically converted to [Stream](../../api/scalqa/val/Stream.html).
 
 ```

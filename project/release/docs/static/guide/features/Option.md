@@ -82,7 +82,7 @@ Num Name              Ops/Sec %   Memory %   Last Value
 `Note.` Unlike streams, where specialized version extends regular, specialized options are not directly related 
 to non-specialized. This is due to their opaque nature limitations.
 To make consistent experience specialized options can be assigned to generalized (with the help of implicit conversions or explicit method ".ref").
-Generalized options have to be explicitly converted to sepcialized:
+Generalized options have to be explicitly converted to specialized:
  
 ```
 var generalOpt:  Opt[Int] = VOID

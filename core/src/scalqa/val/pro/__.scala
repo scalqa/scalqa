@@ -50,17 +50,15 @@ ___________________________________________________________________________*/
              \     /
               Pro.M
        ```
-       By Scalqa convention, method names, which return [[Pro]] type, are ended with '_*' instead of word 'Property'
-
        Here is an example of 'name' property definition hierarchy:
        ```
                trait Foo:                                   // 'name' is read only
                  def namePro          : Pro[String]
-                 def name            : String = namePro()    // required shortcut
+                 def name             : String = namePro()    // required shortcut
 
                trait Foo_M extends Foo:                     // 'name' is read/write
                  def namePro          : Pro.M[String]
-                 def name_=(v:String): Unit = namePro() = v  // required shortcut
+                 def name_=(v:String) : Unit = namePro() = v  // required shortcut
 
                trait Foo_O extends Foo:                     // 'name' is read/listenTo
                  def namePro          : Pro.O[String]
