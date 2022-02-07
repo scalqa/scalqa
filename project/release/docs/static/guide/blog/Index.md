@@ -2,6 +2,9 @@
 layout: doc-page
 title: Blog
 ---
+### [Creating New Numerical Types](https://www.reddit.com/r/scala/comments/q7caoe/scalqa_creating_new_numerical_types/)
+Reddit 2021-10-13 by [edolgy](https://github.com/edolgy)
+
 ### [GUI Could Be Easy](https://www.reddit.com/r/scala/comments/pnfyre/scalqa_gui_could_be_easy/)
 Reddit 2021-09-13 by [edolgy](https://github.com/edolgy)
 
