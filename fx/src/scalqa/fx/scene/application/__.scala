@@ -9,14 +9,14 @@ abstract class Application(width: Int.Opt, height: Int.Opt, private val title: S
   def this(title: String)                                   = this(title,true)
   def this()                                                = this("")
   protected       val eventStore            : Event.Store   = new Event.Store()
-  protected       def arguments             : String.Pack   = stage.args
+  protected       def arguments             : Pack[String]  = stage.args
   protected       def lazySetup[U](f: => U) : Event.Control = eventStore.onEvent0(UiReadyEvent, () => f)
   protected       def onStop[U](l: () => U) : Event.Control = eventStore.onEvent0(StopEvent, l)
   /**/            def isStopped             : Boolean       = stage.stopped
 
   /**/      lazy  val stage                 : Stage         = new Stage()
   /**/      lazy  val scene                 : Fx.Scene      = Fx.Scene(width,height,View)
-  protected lazy  val View                  : Fx.Node.Like
+  /**/      lazy  val View                  : Fx.Node.Like
 
   def main(sa: Array[String]) =
     Application.self = this
@@ -60,43 +60,22 @@ ___________________________________________________________________________*/
 @class Application -> A convenient way to create GUI main executable class
 
      ```
-       object MyApp extends fx.Application {
-
-         scene = "Hello World"
-
-       }
+       object MyApp extends Fx.Application:
+          lazy val  View = Fx.Label("Hello")
      ```
+
      @param title application window title
      @param show  if `true`, `stage.show` will auto run
      @param verbose if true, console prints application name, start, and end time
 
+@val View -> Application view
 
-
-@val` stage -> Stage
-
-       Current [[fx.Stage]]
-
-
-@def scene -> Scene to create
-
-     The `scene` must be assigned within [[fx.Application]] code
-
-     Generally [[fx.Scene]] is expected
-
-     However for simple cases anything can be assigned with default scene auto created
+     Usually this "lazy val" is implemented as an object
 
      ```
-       {
-         scene = "Hello World"
+     object MyApp extends Fx.Application:
 
-         // gets translated to
-
-         scene = fx.Label("Hello World")
-
-         // gets translated to
-
-         scene = fx.Scene(600, 400, fx.Pane.Border.withCenter(Fx.Label("Hello World")))
-       }
+       object View extends Fx.Pane.Flow:
+         children += Fx.Label("Hello")
      ```
-
 */

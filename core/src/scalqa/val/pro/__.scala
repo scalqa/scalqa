@@ -52,18 +52,18 @@ ___________________________________________________________________________*/
        ```
        Here is an example of 'name' property definition hierarchy:
        ```
-               trait Foo:                                   // 'name' is read only
+               trait Foo:                                     // 'name' is read only
                  def namePro          : Pro[String]
                  def name             : String = namePro()    // required shortcut
 
-               trait Foo_M extends Foo:                     // 'name' is read/write
+               trait Foo_M extends Foo:                       // 'name' is read/write
                  def namePro          : Pro.M[String]
                  def name_=(v:String) : Unit = namePro() = v  // required shortcut
 
-               trait Foo_O extends Foo:                     // 'name' is read/listenTo
+               trait Foo_O extends Foo:                       // 'name' is read/listenTo
                  def namePro          : Pro.O[String]
 
-               trait Foo_OM extends Foo_O with Foo_M:       // 'name' is read/write/listenTo
+               trait Foo_OM extends Foo_O with Foo_M:         // 'name' is read/write/listenTo
                  def namePro          : Pro.OM[String]
        ```
 

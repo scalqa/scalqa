@@ -19,7 +19,6 @@ class GeneralData(m: Member) extends Data(m):
 
   this.aliases  = aliases.stream._dropIfIn(types).pack
 
-
   this.extended = DefValVar.stream.take(_.origin.isExtension).pack
 
   this.defs     = DefValVar.stream.drop(_.origin.isExtension)._dropIfIn(aliases).drop(_.name.startsWith("given")).drop(_.name.startsWith("implicit")).drop(v => DefValVar.stream.exists(_.name == v.name._propertyName)).pack
@@ -42,7 +41,7 @@ class GeneralData(m: Member) extends Data(m):
 
   // ---------------------------------------------------------------------------------------------------------------------------------------------------
   extension(x: String)         private def _propertyName              : String        = if(x.endsWith("_=")) x.dropLast(2) + "Pro" else x + "Pro"
-  extension(x: String)         private def _isAliasName               : Boolean       = x.charAt(0).isUpper && (x.length==1 || x.charAt(1).isLower)
+  extension(x: String)         private def _isAliasName               : Boolean       = x.charAt(0).isUpper && (x.length==1 || x.charAt(1).isLower) && x != "View"
   extension(x: Stream[Member]) private def _takeIfIn(s:Stream[Member]): Stream[Member]= x.takeValuesBy(_.name.lower, s.map(_.name.lower))
   extension(x: Stream[Member]) private def _dropIfIn(s:Stream[Member]): Stream[Member]= x.dropValuesBy(_.name.lower, s.map(_.name.lower))
   extension(x: Member)         private def _isLocal                   : Boolean       = x.inheritedFrom.filterNot(_.dri.id.startsWith(owner.id + "._")).isEmpty
