@@ -25,8 +25,9 @@ object ContextMenu:
   private def showCurrent = synchronized {
     val menu = Popup.Menu()
     menu.items ++= {
-      val a = currentMenus.stream.flatMap(_.actions).group.map(_.read).takeIndexed((i, v) => i > 0 || !v.isInstanceOf[action.z.Separator]).pack
-      if (a.lastOpt.isInstanceOf[action.z.Separator]) a.stream.dropLast(1) else a.stream
+      val s = currentMenus.stream.flatMap(_.actions).group.map(_.read)
+      val p = s.takeIndexed((i, v) => i > 0 || !v.isInstanceOf[action.z.Separator]).pack
+      if (p.lastOpt.isInstanceOf[action.z.Separator]) p.stream.dropLast(1) else p.stream
     }.map(_.toMenuItem)
     currentMenus.stream.flatMap(_.onClosed).pack.self(l => if (l.size > 0) menu.onHidden(() => l.stream.foreach(_())))
     currentMenus.last.self(e => e.node.sceneOpt.forval(s => menu.show(s.window, e.screenX, e.screenY)))
