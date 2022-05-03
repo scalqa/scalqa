@@ -23,7 +23,7 @@ object opt:
     s.sizeLongOpt.take(_ > 0).map(_ => s) orOpt s.enablePreview.self.map(p => p.previewOpt.map[Stream[A]](_ => p))
 
   // *************************************************************************************************
-  class NameDef[A]()(using t :Any.Def.TypeName[A]) extends Def.TypeName[A]:
+  class NameDef[A,B]()(using t :Any.Def.TypeName[A]) extends Def.TypeName[B]:
     def typeName = t.typeName + ".Opt"
 
   // *************************************************************************************************
